@@ -937,8 +937,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             right: 16,
                                           ),
                                           child: DataTable2(
-                                            headingRowHeight: 40,
-                                            dataRowHeight: 35,
+                                            headingRowHeight: 45,
+                                            dataRowHeight: 40,
                                             columnSpacing: 12,
                                             // horizontalMargin: 5,
                                             headingRowColor:
@@ -1470,7 +1470,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                           child: Container(
                                             margin: EdgeInsets.only(left: 20),
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 10),
+                                                left: 20, top: 20),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -1485,138 +1485,110 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             height: 150,
                                             child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Align(
-                                                          alignment:
-                                                              Alignment.topLeft,
-                                                          child: Container(
-                                                            height: 100,
-                                                            width: 150,
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
+                                                      Container(
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
                                                               children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .red),
                                                                 SizedBox(
-                                                                    height: 25),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.red),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
+                                                                    width: 10),
 
-                                                                    Text(
-                                                                      "WO on-time",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woOnTimeSum.value}'),
-                                                                  ],
+                                                                Text(
+                                                                  "WO on-time",
+                                                                  style: Styles
+                                                                      .black13,
                                                                 ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.blue),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
 
-                                                                    Text(
-                                                                      "WO delay",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxWidth37,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woDelaySum.value}'),
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.green),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
-                                                                    Text(
-                                                                      "WO backlog",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woBacklogSum.value}'),
-                                                                  ],
+                                                                Dimens
+                                                                    .boxWidth20,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woOnTimeSum.value}',
+                                                                  style: Styles
+                                                                      .black13,
                                                                 ),
                                                               ],
                                                             ),
-                                                          )),
-                                                    ]),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .blue),
+                                                                SizedBox(
+                                                                    width: 10),
+
+                                                                Text(
+                                                                  "WO delay",
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                                Dimens
+                                                                    .boxWidth37,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woDelaySum.value}',
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .green),
+                                                                SizedBox(
+                                                                    width: 10),
+                                                                Text(
+                                                                  "WO backlog",
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+
+                                                                Dimens
+                                                                    .boxWidth20,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woBacklogSum.value}',
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                            ]),
                                                 // Dimens.boxHeight20,
                                               ],
                                             ),
                                           ),
                                         ),
-
                                         Expanded(
                                           flex: 2,
                                           child: Container(
@@ -1751,8 +1723,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             right: 16,
                                           ),
                                           child: DataTable2(
-                                            headingRowHeight: 40,
-                                            dataRowHeight: 35,
+                                            headingRowHeight: 45,
+                                            dataRowHeight: 40,
                                             columnSpacing: 12,
                                             // horizontalMargin: 5,
                                             headingRowColor:
@@ -2168,7 +2140,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                           child: Container(
                                             margin: EdgeInsets.only(left: 20),
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 10),
+                                                left: 20, top: 20),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -2183,132 +2155,105 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             height: 150,
                                             child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Align(
-                                                          alignment:
-                                                              Alignment.topLeft,
-                                                          child: Container(
-                                                            height: 100,
-                                                            width: 150,
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
+                                                      Container(
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
                                                               children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .red),
                                                                 SizedBox(
-                                                                    height: 25),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.red),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
+                                                                    width: 10),
 
-                                                                    Text(
-                                                                      "WO on-time",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woOnTimeSum.value}'),
-                                                                  ],
+                                                                Text(
+                                                                  "WO on-time",
+                                                                  style: Styles
+                                                                      .black13,
                                                                 ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.blue),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
 
-                                                                    Text(
-                                                                      "WO delay",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxWidth37,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woDelaySum.value}'),
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.green),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
-                                                                    Text(
-                                                                      "WO backlog",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woBacklogSum.value}'),
-                                                                  ],
+                                                                Dimens
+                                                                    .boxWidth20,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woOnTimeSum.value}',
+                                                                  style: Styles
+                                                                      .black13,
                                                                 ),
                                                               ],
                                                             ),
-                                                          )),
-                                                    ]),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .blue),
+                                                                SizedBox(
+                                                                    width: 10),
+
+                                                                Text(
+                                                                  "WO delay",
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                                Dimens
+                                                                    .boxWidth37,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woDelaySum.value}',
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .green),
+                                                                SizedBox(
+                                                                    width: 10),
+                                                                Text(
+                                                                  "WO backlog",
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+
+                                                                Dimens
+                                                                    .boxWidth20,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woBacklogSum.value}',
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                            ]),
                                                 // Dimens.boxHeight20,
                                               ],
                                             ),
@@ -2445,8 +2390,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(16),
                                           child: DataTable2(
-                                            headingRowHeight: 40,
-                                            dataRowHeight: 35,
+                                            headingRowHeight: 45,
+                                            dataRowHeight: 40,
                                             columnSpacing: 12,
                                             // horizontalMargin: 5,
                                             headingRowColor:
@@ -3024,12 +2969,12 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //     ),
                                         //   ),
                                         // ),
-                                        Expanded(
+                                       Expanded(
                                           flex: 2,
                                           child: Container(
                                             margin: EdgeInsets.only(left: 20),
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 10),
+                                                left: 20, top: 20),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -3044,132 +2989,105 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             height: 150,
                                             child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Align(
-                                                          alignment:
-                                                              Alignment.topLeft,
-                                                          child: Container(
-                                                            height: 100,
-                                                            width: 150,
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
+                                                      Container(
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
                                                               children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .red),
                                                                 SizedBox(
-                                                                    height: 25),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.red),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
+                                                                    width: 10),
 
-                                                                    Text(
-                                                                      "WO on-time",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woOnTimeSum.value}'),
-                                                                  ],
+                                                                Text(
+                                                                  "WO on-time",
+                                                                  style: Styles
+                                                                      .black13,
                                                                 ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.blue),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
 
-                                                                    Text(
-                                                                      "WO delay",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxWidth37,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woDelaySum.value}'),
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.green),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
-                                                                    Text(
-                                                                      "WO backlog",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woBacklogSum.value}'),
-                                                                  ],
+                                                                Dimens
+                                                                    .boxWidth20,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woOnTimeSum.value}',
+                                                                  style: Styles
+                                                                      .black13,
                                                                 ),
                                                               ],
                                                             ),
-                                                          )),
-                                                    ]),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .blue),
+                                                                SizedBox(
+                                                                    width: 10),
+
+                                                                Text(
+                                                                  "WO delay",
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                                Dimens
+                                                                    .boxWidth37,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woDelaySum.value}',
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .green),
+                                                                SizedBox(
+                                                                    width: 10),
+                                                                Text(
+                                                                  "WO backlog",
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+
+                                                                Dimens
+                                                                    .boxWidth20,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woBacklogSum.value}',
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                            ]),
                                                 // Dimens.boxHeight20,
                                               ],
                                             ),
@@ -3306,8 +3224,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(16),
                                           child: DataTable2(
-                                            headingRowHeight: 40,
-                                            dataRowHeight: 35,
+                                            headingRowHeight: 45,
+                                            dataRowHeight: 40,
                                             columnSpacing: 12,
                                             // horizontalMargin: 5,
                                             headingRowColor:
@@ -3885,12 +3803,12 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //     ),
                                         //   ),
                                         // ),
-                                        Expanded(
+                                       Expanded(
                                           flex: 2,
                                           child: Container(
                                             margin: EdgeInsets.only(left: 20),
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 10),
+                                                left: 20, top: 20),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -3905,132 +3823,105 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             height: 150,
                                             child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Align(
-                                                          alignment:
-                                                              Alignment.topLeft,
-                                                          child: Container(
-                                                            height: 100,
-                                                            width: 150,
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
+                                                      Container(
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
                                                               children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .red),
                                                                 SizedBox(
-                                                                    height: 25),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.red),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
+                                                                    width: 10),
 
-                                                                    Text(
-                                                                      "WO on-time",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woOnTimeSum.value}'),
-                                                                  ],
+                                                                Text(
+                                                                  "WO on-time",
+                                                                  style: Styles
+                                                                      .black13,
                                                                 ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.blue),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
 
-                                                                    Text(
-                                                                      "WO delay",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxWidth37,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woDelaySum.value}'),
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.green),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
-                                                                    Text(
-                                                                      "WO backlog",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woBacklogSum.value}'),
-                                                                  ],
+                                                                Dimens
+                                                                    .boxWidth20,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woOnTimeSum.value}',
+                                                                  style: Styles
+                                                                      .black13,
                                                                 ),
                                                               ],
                                                             ),
-                                                          )),
-                                                    ]),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .blue),
+                                                                SizedBox(
+                                                                    width: 10),
+
+                                                                Text(
+                                                                  "WO delay",
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                                Dimens
+                                                                    .boxWidth37,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woDelaySum.value}',
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .green),
+                                                                SizedBox(
+                                                                    width: 10),
+                                                                Text(
+                                                                  "WO backlog",
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+
+                                                                Dimens
+                                                                    .boxWidth20,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woBacklogSum.value}',
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                            ]),
                                                 // Dimens.boxHeight20,
                                               ],
                                             ),
@@ -4167,8 +4058,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(16),
                                           child: DataTable2(
-                                            headingRowHeight: 40,
-                                            dataRowHeight: 35,
+                                            headingRowHeight: 45,
+                                            dataRowHeight: 40,
                                             columnSpacing: 12,
                                             // horizontalMargin: 5,
                                             headingRowColor:
@@ -4750,7 +4641,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                           child: Container(
                                             margin: EdgeInsets.only(left: 20),
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 10),
+                                                left: 20, top: 20),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -4765,132 +4656,105 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             height: 150,
                                             child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Align(
-                                                          alignment:
-                                                              Alignment.topLeft,
-                                                          child: Container(
-                                                            height: 100,
-                                                            width: 150,
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
+                                                      Container(
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
                                                               children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .red),
                                                                 SizedBox(
-                                                                    height: 25),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.red),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
+                                                                    width: 10),
 
-                                                                    Text(
-                                                                      "WO on-time",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woOnTimeSum.value}'),
-                                                                  ],
+                                                                Text(
+                                                                  "WO on-time",
+                                                                  style: Styles
+                                                                      .black13,
                                                                 ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.blue),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
 
-                                                                    Text(
-                                                                      "WO delay",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxWidth37,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woDelaySum.value}'),
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topLeft,
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .pie_chart,
-                                                                          size:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.green),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width:
-                                                                            10),
-                                                                    Text(
-                                                                      "WO backlog",
-                                                                      style: Styles
-                                                                          .black13,
-                                                                    ),
-
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    // Spacer(),
-                                                                    Text(
-                                                                        '${controller.woBacklogSum.value}'),
-                                                                  ],
+                                                                Dimens
+                                                                    .boxWidth20,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woOnTimeSum.value}',
+                                                                  style: Styles
+                                                                      .black13,
                                                                 ),
                                                               ],
                                                             ),
-                                                          )),
-                                                    ]),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .blue),
+                                                                SizedBox(
+                                                                    width: 10),
+
+                                                                Text(
+                                                                  "WO delay",
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                                Dimens
+                                                                    .boxWidth37,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woDelaySum.value}',
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                    Icons
+                                                                        .pie_chart,
+                                                                    size: 30,
+                                                                    color: Colors
+                                                                        .green),
+                                                                SizedBox(
+                                                                    width: 10),
+                                                                Text(
+                                                                  "WO backlog",
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+
+                                                                Dimens
+                                                                    .boxWidth20,
+                                                                // Spacer(),
+                                                                Text(
+                                                                  '${controller.woBacklogSum.value}',
+                                                                  style: Styles
+                                                                      .black13,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                            ]),
                                                 // Dimens.boxHeight20,
                                               ],
                                             ),
@@ -5027,8 +4891,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(16),
                                           child: DataTable2(
-                                            headingRowHeight: 40,
-                                            dataRowHeight: 35,
+                                            headingRowHeight: 45,
+                                            dataRowHeight: 40,
                                             columnSpacing: 12,
                                             // horizontalMargin: 5,
                                             headingRowColor:
