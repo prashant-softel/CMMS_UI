@@ -122,7 +122,8 @@ class JobCardApproveDialog extends GetView {
                     onPressed: () {
                       _controller.approvecloseJob();
                       print('PermitStatus:$ptwStatus');
-                      Get.toNamed(Routes.goToJobCardList);
+                      Get.back();
+                      // Get.toNamed(Routes.goToJobCardList);
                     },
                     child: Text('Approve Job Card'),
                   )

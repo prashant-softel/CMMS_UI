@@ -4529,7 +4529,7 @@ class ConnectHelper {
     Get.dialog<void>(ApproveJcJobDialog(
       message: firstItem['message'],
       jobId: idList, // parsedJson['id'],
-      tittle: "JOb close approved",
+      tittle: "Job close approved",
     ));
     return responseModel;
   }
