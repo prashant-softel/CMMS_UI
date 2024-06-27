@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cmms/app/return_mrs/return_mrs_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/get_return_mrs_list.dart';
 import '../home/home_controller.dart';
@@ -26,11 +27,11 @@ class ReturnMrsListController extends GetxController {
   ReturnMrsListModel? returnMrsListModel;
   // ReturnMrsListModel? selectedItem;
   RxList<String> mrsTableColumns = <String>[].obs;
-  // Rx<DateTime> fromDate = DateTime.now().obs;
-  // Rx<DateTime> toDate = DateTime.now().obs;
-  // String get formattedFromdate =>
-  //     DateFormat('yyyy-MM-dd').format(fromDate.value);
-  // String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
+  Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
 
   ///
   RxString idFilterText = ''.obs;
@@ -76,14 +77,17 @@ class ReturnMrsListController extends GetxController {
       facilityId = event;
       if (facilityId > 0) {
         Future.delayed(Duration(seconds: 2), () {
-          getReturnMrsList(facilityId, false);
+          getReturnMrsList(facilityId, formattedTodate, formattedFromdate, false);
         });
       }
     });
     super.onInit();
   }
+   void getReturnMrsListByDate() {
+    getReturnMrsList(facilityId, formattedTodate, formattedFromdate, false);
+  }
 
-  Future<void> getReturnMrsList(int facilityId, bool isExport) async {
+  Future<void> getReturnMrsList(int facilityId, dynamic startDate, dynamic endDate,bool isExport) async {
     mrsList.value = <ReturnMrsListModel>[];
     final _mrsList = await returnmrsListPresenter.getReturnMrsList(
         facilityId: facilityId, isLoading: isLoading.value, isExport: isExport);
@@ -157,6 +161,6 @@ class ReturnMrsListController extends GetxController {
   }
 
   void export() {
-    getReturnMrsList(facilityId, true);
+    getReturnMrsList(facilityId, formattedTodate, formattedFromdate, true);
   }
 }

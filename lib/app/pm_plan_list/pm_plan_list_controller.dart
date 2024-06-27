@@ -151,7 +151,7 @@ class PmPlanListController extends GetxController {
     pmPlanList.value = filteredList;
   }
 
-  Future<void> getPmPlanList(int facilityId, dynamic startDate, dynamic endDate,
+  Future<void>getPmPlanList(int facilityId, dynamic startDate, dynamic endDate,
       bool? isExport) async {
     pmPlanList.value = <PmPlanListModel>[];
     filteredData.value = <PmPlanListModel>[];
