@@ -246,7 +246,7 @@ class JobCardDetailsController extends GetxController {
 
       responsibilityCtrlrs.add(TextEditingController());
       currentIndex.value = -1;
-      addEmployeesDeployed();
+      // addEmployeesDeployed();
       super.onInit();
     } catch (e) {
       print(e);

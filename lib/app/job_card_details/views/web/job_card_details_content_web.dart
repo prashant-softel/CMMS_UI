@@ -107,7 +107,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                 onTap: () {
                   Get.offNamed(Routes.goToJobCardList);
                 },
-                child: Text(" / JOB CARD LIST".toUpperCase(),
+                child: Text(" / JOB CARD LIST",
                     style: Styles.greyMediumLight12),
               ),
               Text(" / JOB CARD DETAILS ", style: Styles.greyMediumLight12)
