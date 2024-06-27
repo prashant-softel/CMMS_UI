@@ -31,7 +31,7 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                           onPressed: () {
                             controller.openFromDateToStartDatePicker =
                                 !controller.openFromDateToStartDatePicker;
-                            controller.update(['PreventiveMaintenanceTask']);
+                            controller.update(['stock_Mangement_Date']);
                           },
                         ),
                         Expanded(
@@ -383,7 +383,7 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                             controller.toDate.value = dropDate;
                             controller.getIncidentReportListByDate();
                             controller.openFromDateToStartDatePicker = false;
-                            controller.update(['PreventiveMaintenanceTask']);
+                            controller.update(['stock_Mangement_Date']);
                           }
                         },
                       ),
