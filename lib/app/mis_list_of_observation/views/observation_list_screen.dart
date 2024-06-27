@@ -1,4 +1,7 @@
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
+import 'package:cmms/app/home/widgets/mobile_drawer.dart';
+import 'package:cmms/app/mis_list_of_observation/views/mobile/observation_list_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
@@ -10,58 +13,57 @@ import 'web/observation_list_web.dart';
 class ObservationListScreen extends GetView<ObservationListController> {
   ObservationListScreen({super.key});
   final controller = Get.find<ObservationListController>();
-  final HomeController homecontroller = Get.find();
+  final homecontroller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Responsive.isMobile(context)
           ? AppBar(
-              centerTitle: true,
-              elevation: 0,
+              title: HeadingProfileAppBar(
+                title: "List Of Observation",
+              ),
             )
           : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer()
+              ? HomeDrawerMobile()
               : null,
-      body: Obx(
-        () => Stack(
-          children: [
-            AnimatedContainer(
-                duration: Duration(milliseconds: 450),
-                margin: EdgeInsets.only(
-                    left: homecontroller.menuButton.value ? 250.0 : 70.0),
-                width: Get.width,
-                height: Get.height,
-                child: Row(
-                  children: [
-                    (Responsive.isMobile(context) ||
-                            Responsive.isTablet(context))
-                        ? Dimens.box0
-                        : Container(),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          if (Responsive.isMobile(context))
-                            Expanded(
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text("Data Coming Soon......")),
-                            ),
-                          if (Responsive.isDesktop(context))
-                            Expanded(
-                              child: ObservationListWeb(),
-                            )
-                        ],
-                      ),
+      body: Stack(
+        children: [
+          AnimatedContainer(
+              duration: Duration(milliseconds: 450),
+              margin: EdgeInsets.only(
+                left: Responsive.isDesktop(context)
+                    ? homecontroller.menuButton.value
+                        ? 250.0
+                        : 70.0
+                    : 0,
+              ),
+              width: Get.width,
+              height: Get.height,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        if (Responsive.isMobile(context))
+                          Expanded(child: ObservationListMobile()),
+                        if (Responsive.isDesktop(context))
+                          Expanded(
+                            child: ObservationListWeb(),
+                          )
+                      ],
                     ),
-                  ],
-                )),
-            AnimatedPositioned(
-                child: HomeDrawer(), duration: Duration(milliseconds: 450))
-          ],
-        ),
+                  ),
+                ],
+              )),
+          Responsive.isDesktop(context)
+              ? AnimatedPositioned(
+                  child: HomeDrawer(), duration: Duration(milliseconds: 450))
+              : Dimens.box0
+        ],
+        //  ),
       ),
     );
   }
