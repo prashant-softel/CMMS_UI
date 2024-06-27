@@ -95,6 +95,7 @@ class EditMrsReturnController extends GetxController {
           {
             "key": "Drop_down",
             "value": '${element.name}',
+            "item_id": '${element.mrs_item_id}'
           },
           {'key': "Sr_No", "value": ''},
           {'key': "code", "value": ''},
@@ -163,7 +164,7 @@ class EditMrsReturnController extends GetxController {
 
   void addRowItem() {
     rowItem.add([
-      {"key": "Drop_down", "value": 'Please Select'},
+      {"key": "Drop_down", "value": 'Please Select', 'item_id': ''},
       {'key': "Sr_No", "value": ''},
       {'key': "code", "value": ''},
       {'key': "Material_Type", "value": ''},
@@ -195,7 +196,7 @@ class EditMrsReturnController extends GetxController {
     List<FaultyItemsCmms> faultyItems = [];
     rowItem.forEach((element) {
       CmmsItem item = CmmsItem(
-        mrs_item_ID: dropdownMapperData[element[0]["value"]]?.mrs_item_id,
+        mrs_item_ID: int.tryParse(element[0]["item_id"] ?? ''),
         returned_qty: dropdownMapperData[element[0]["value"]].issued_qty -
             dropdownMapperData[element[0]["value"]]
                 .consumed_qty, //double.tryParse(element[3]["value"] ?? '0'),

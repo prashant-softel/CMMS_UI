@@ -150,6 +150,9 @@ class CreateMrsController extends GetxController {
         issued_qty:
             0, // dropdownMapperData[element[0]["value"]]?.available_qty,
         asset_code: dropdownMapperData.value[element[0]["value"]]?.asset_code,
+        serial_number:
+            dropdownMapperData.value[element[0]["value"]]?.serial_number,
+
         equipmentID: dropdownMapperData.value[element[0]["value"]]?.asset_ID,
         asset_type_ID:
             dropdownMapperData.value[element[0]["value"]]?.asset_type_ID,

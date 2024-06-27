@@ -280,7 +280,7 @@ class IncidentReportDetailsModel {
             ? List<DetailsOfInjuredPersonUpdate>.from(json["injured_person"]
                 ?.map((x) => DetailsOfInjuredPersonUpdate.fromJson(x)))
             : [],
-             Otherinjured_person: json['other_injured'] != null
+        Otherinjured_person: json['other_injured'] != null
             ? List<DetailsOfOtherInjuredPersonUpdate>.from(json["other_injured"]
                 ?.map((x) => DetailsOfOtherInjuredPersonUpdate.fromJson(x)))
             : [],
@@ -368,7 +368,8 @@ class IncidentReportDetailsModel {
         "investigation_team":
             List<dynamic>.from(investigation_team!.map((x) => x)),
         "injured_person": List<dynamic>.from(injured_person!.map((x) => x)),
-        "Otherinjured_person": List<dynamic>.from(Otherinjured_person!.map((x) => x)),
+        "Otherinjured_person":
+            List<dynamic>.from(Otherinjured_person!.map((x) => x)),
         "file_list": List<dynamic>.from(fileList!.map((x) => x)),
 
         // "externalEmails": List<dynamic>.from(externalEmails!.map((x) => x)),
@@ -457,6 +458,7 @@ class DetailsOfOtherInjuredPersonUpdate {
       this.gender,
       this.designation,
       this.address,
+      this.injured_item_id,
       this.name_contractor,
       this.body_part_and_nature_of_injury,
       this.work_experience_years,
@@ -476,12 +478,13 @@ class DetailsOfOtherInjuredPersonUpdate {
   int? work_experience_years;
   String? plant_equipment_involved;
   String? location_of_incident;
-
+  int? injured_item_id;
   factory DetailsOfOtherInjuredPersonUpdate.fromJson(
           Map<String, dynamic> json) =>
       DetailsOfOtherInjuredPersonUpdate(
         incidents_id: json['incidents_id'],
         name: json['name'],
+        injured_item_id: json['injured_item_id'],
         person_type: json['person_type'],
         age: json['age'],
         sex: json['sex'],
@@ -498,6 +501,7 @@ class DetailsOfOtherInjuredPersonUpdate {
   Map<String, dynamic> toJson() => {
         "incidents_id": incidents_id,
         "name": name,
+        "injured_item_id": injured_item_id,
         "person_type": person_type,
         "age": age,
         "sex": sex,

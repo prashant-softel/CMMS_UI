@@ -298,7 +298,7 @@ class DetailsOfInjuredPerson {
 class DetailsOfOtherInjuredPerson {
   DetailsOfOtherInjuredPerson({
     this.injured_item_id,
-    this.Otherinjured_item_id,
+    // this.Otherinjured_item_id,
     this.incidents_id,
     this.name,
     this.person_type,
@@ -315,7 +315,7 @@ class DetailsOfOtherInjuredPerson {
   });
 
   int? injured_item_id;
-  int? Otherinjured_item_id;
+  // int? Otherinjured_item_id;
   int? incidents_id;
   int? other_injured;
   String? name;

@@ -950,6 +950,7 @@ class AddIncidentReportController extends GetxController {
           {
             "key": "Name of Injured Person ",
             "value": '${element?.name}',
+            "injured_item_id": "${element?.injured_item_id}",
           },
           {
             "key": "Gender ",
@@ -977,10 +978,6 @@ class AddIncidentReportController extends GetxController {
             'key': "Exact Location ",
             "value": '${element?.location_of_incident}'
           },
-          {
-            'key': "injured_item_id",
-            "value": "${element?.injured_item_id}",
-          },
           {'key': "Action ", "value": ''},
         ]);
         dropdownVictimNameMapperData[element!.name ?? ""] =
@@ -998,6 +995,7 @@ class AddIncidentReportController extends GetxController {
         {
           "key": "Name of Injured Person ",
           "value": '${element?.name}',
+          "otherinjured_item_id": "${element?.injured_item_id}",
         },
         {
           "key": "Gender ",
@@ -1277,6 +1275,7 @@ class AddIncidentReportController extends GetxController {
       {
         "key": "Name of Injured Person ",
         "value": 'Please Select',
+        "injured_item_id": ''
       },
       {
         "key": "Gender ",
@@ -1298,10 +1297,6 @@ class AddIncidentReportController extends GetxController {
         "value": 'Please Select',
       },
       {'key': "Exact Location ", "value": ''},
-      {
-        'key': "injured_item_id",
-        "value": "",
-      },
       {'key': "Action ", "value": ''},
     ]);
   }
@@ -1312,6 +1307,7 @@ class AddIncidentReportController extends GetxController {
       {
         "key": "Name of Injured Person ",
         "value": '',
+        "otherinjured_item_id": ''
       },
       {
         "key": "Gender ",
@@ -1739,7 +1735,7 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
       rowOtherInjuredPersonItem.forEach((element) {
         DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
-          Otherinjured_item_id: 0,
+          // Otherinjured_item_id: 0,
           incidents_id: 0,
           name: element[0]["value"] ?? '0',
           person_type: 1,
@@ -1976,7 +1972,9 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
-          injured_item_id: int.tryParse('${element[9]["value"] ?? '0'}'),
+          injured_item_id: element[0]["injured_item_id"] == null
+              ? 0
+              : int.tryParse('${element[0]["injured_item_id"] ?? '0'}'),
           incidents_id: irId.value,
           name: element[0]["value"],
           person_type: 1,
@@ -1998,8 +1996,9 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
       rowOtherInjuredPersonItem.forEach((element) {
         DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
-          Otherinjured_item_id:
-              dropdownVictimNameMapperData[element[0]["value"]]?.id,
+          injured_item_id: element[0]["otherinjured_item_id"] == null
+              ? 0
+              : int.tryParse('${element[0]["otherinjured_item_id"] ?? '0'}'),
           incidents_id: irId.value,
           name: element[0]["value"],
           person_type: 1,
@@ -2207,7 +2206,11 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
-          injured_item_id: int.tryParse('${element[9]["value"] ?? '0'}'),
+          injured_item_id: element[0]["injured_item_id"] == null
+              ? 0
+              : int.tryParse('${element[0]["injured_item_id"] ?? '0'}'),
+
+          // injured_item_id: int.tryParse('${element[9]["value"] ?? '0'}'),
           incidents_id: irId.value,
           name: element[0]["value"],
           person_type: 1,
@@ -2229,8 +2232,9 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
       rowOtherInjuredPersonItem.forEach((element) {
         DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
-          Otherinjured_item_id:
-              dropdownVictimNameMapperData[element[0]["value"]]?.id,
+          injured_item_id: element[0]["otherinjured_item_id"] == null
+              ? 0
+              : int.tryParse('${element[0]["otherinjured_item_id"] ?? '0'}'),
           incidents_id: irId.value,
           name: element[0]["value"],
           person_type: 1,
