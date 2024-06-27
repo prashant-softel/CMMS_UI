@@ -533,10 +533,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               FontWeight.bold,
                                                           fontSize: 20.0),
                                                     ), //center text, you can set Icon as well
-                                                    footer: Text(
-                                                      "Order this Month",
-                                                      style: Styles.black13,
-                                                    ), //footer text
+                                                    // footer: Text(
+                                                    //   "Order this Month",
+                                                    //   style: Styles.black13,
+                                                    // ), //footer text
                                                     backgroundColor: Colors
                                                         .redAccent, //backround of progress bar
                                                     circularStrokeCap:
@@ -571,6 +571,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
+                                                Text("Schedule Compliance",
+                                                    style: Styles.black15),
+                                                Dimens.boxHeight10,
                                                 Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -1102,23 +1105,47 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         onPress: () {
                                                           controller
                                                               .clearStoreJobData();
-                                                          // controller
-                                                          //     .clearStoreDatatype();
-
-                                                          int jobId = controller
-                                                                  .dashboardBmList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.item_list?[
+                                                          controller
+                                                              .clearStorePmData();
+                                                          String Id = controller
+                                                                  .allItems[
                                                                       index]
-                                                                  .wo_number ??
-                                                              0;
-                                                          if (jobId != 0) {
+                                                                  ?.wo_number ??
+                                                              "";
+                                                          String prefix =
+                                                              Id.replaceAll(
+                                                                  RegExp(
+                                                                      r'\d+$'),
+                                                                  '');
+
+                                                          String jobId =
+                                                              Id.substring(
+                                                                  Id.indexOf(
+                                                                          "BM") +
+                                                                      2);
+                                                          String taskId =
+                                                              Id.substring(
+                                                                  Id.indexOf(
+                                                                          "PM") +
+                                                                      2);
+                                                          if (prefix == 'BM') {
                                                             Get.toNamed(
                                                                 Routes
                                                                     .jobDetails,
                                                                 arguments: {
-                                                                  'jobId': jobId
+                                                                  'jobId': int
+                                                                      .tryParse(
+                                                                          jobId)
+                                                                });
+                                                          } else if (prefix ==
+                                                              'PM') {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .pmTaskView,
+                                                                arguments: {
+                                                                  'pmTaskId': int
+                                                                      .tryParse(
+                                                                          taskId)
                                                                 });
                                                           }
                                                         },
@@ -1284,10 +1311,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               FontWeight.bold,
                                                           fontSize: 20.0),
                                                     ), //center text, you can set Icon as well
-                                                    footer: Text(
-                                                      "Order this Month",
-                                                      style: Styles.black13,
-                                                    ), //footer text
+                                                    // footer: Text(
+                                                    //   "Order this Month",
+                                                    //   style: Styles.black13,
+                                                    // ), //footer text
                                                     backgroundColor: ColorValues
                                                         .addNewColor, //backround of progress bar
                                                     circularStrokeCap:
@@ -1488,6 +1515,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
+                                                Text("Schedule Compliance",
+                                                    style: Styles.black15),
+                                                Dimens.boxHeight10,
+
                                                 Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -1583,7 +1614,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                           ],
                                                         ),
                                                       ),
-                                            ]),
+                                                    ]),
                                                 // Dimens.boxHeight20,
                                               ],
                                             ),
@@ -1826,7 +1857,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .toString() ??
                                                     '')),
                                                 DataCell(Text(
-                                                    'BM${controller.dashboardBmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                    '${controller.dashboardBmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
                                                 DataCell(Text(controller
                                                         .dashboardBmList
                                                         .value
@@ -1937,23 +1968,28 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         onPress: () {
                                                           controller
                                                               .clearStoreJobData();
-                                                          // controller
-                                                          //     .clearStoreDatatype();
-
-                                                          int jobId = controller
+                                                          String Id = controller
                                                                   .dashboardBmList
                                                                   .value
                                                                   ?.cmDashboadDetails
                                                                   ?.item_list?[
                                                                       index]
                                                                   .wo_number ??
-                                                              0;
-                                                          if (jobId != 0) {
+                                                              "";
+                                                          String jobId =
+                                                              Id.substring(
+                                                                  Id.indexOf(
+                                                                          "BM") +
+                                                                      2);
+
+                                                          if (jobId != null) {
                                                             Get.toNamed(
                                                                 Routes
                                                                     .jobDetails,
                                                                 arguments: {
-                                                                  'jobId': jobId
+                                                                  'jobId': int
+                                                                      .tryParse(
+                                                                          jobId)
                                                                 });
                                                           }
                                                         },
@@ -2120,10 +2156,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               FontWeight.bold,
                                                           fontSize: 20.0),
                                                     ), //center text, you can set Icon as well
-                                                    footer: Text(
-                                                      "Order this Month",
-                                                      style: Styles.black13,
-                                                    ), //footer text
+                                                    // footer: Text(
+                                                    //   "Order this Month",
+                                                    //   style: Styles.black13,
+                                                    // ), //footer text
                                                     backgroundColor: ColorValues
                                                         .addNewColor, //backround of progress bar
                                                     circularStrokeCap:
@@ -2158,6 +2194,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
+                                                Text("Schedule Compliance",
+                                                    style: Styles.black15),
+                                                Dimens.boxHeight10,
+
                                                 Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -2253,7 +2293,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                           ],
                                                         ),
                                                       ),
-                                            ]),
+                                                    ]),
                                                 // Dimens.boxHeight20,
                                               ],
                                             ),
@@ -2493,7 +2533,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .toString() ??
                                                     '')),
                                                 DataCell(Text(
-                                                    'PM${controller.dashboardPmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                    '${controller.dashboardPmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
                                                 DataCell(Text(controller
                                                         .dashboardPmList
                                                         .value
@@ -2607,21 +2647,51 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                           // controller
                                                           //     .clearStoreDatatype();
 
-                                                          int pmTaskId = controller
+                                                          // int pmTaskId = controller
+                                                          //         .dashboardPmList
+                                                          //         .value
+                                                          //         ?.cmDashboadDetails
+                                                          //         ?.item_list?[
+                                                          //             index]
+                                                          //         .wo_number ??
+                                                          //     0;
+                                                          // if (pmTaskId != 0) {
+                                                          //   Get.toNamed(
+                                                          //       Routes
+                                                          //           .pmTaskView,
+                                                          //       arguments: {
+                                                          //         'pmTaskId':
+                                                          //             pmTaskId
+                                                          //       });
+                                                          // }
+                                                          String Id = controller
                                                                   .dashboardPmList
                                                                   .value
                                                                   ?.cmDashboadDetails
                                                                   ?.item_list?[
                                                                       index]
                                                                   .wo_number ??
-                                                              0;
-                                                          if (pmTaskId != 0) {
+                                                              "";
+                                                          String pmTaskId =
+                                                              Id.substring(
+                                                                  Id.indexOf(
+                                                                          "PM") +
+                                                                      2);
+
+                                                          print({
+                                                            'objeeerre':
+                                                                pmTaskId
+                                                          });
+
+                                                          if (pmTaskId !=
+                                                              null) {
                                                             Get.toNamed(
                                                                 Routes
                                                                     .pmTaskView,
                                                                 arguments: {
-                                                                  'pmTaskId':
-                                                                      pmTaskId
+                                                                  'pmTaskId': int
+                                                                      .tryParse(
+                                                                          pmTaskId)
                                                                 });
                                                           }
                                                         },
@@ -2788,10 +2858,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               FontWeight.bold,
                                                           fontSize: 20.0),
                                                     ), //center text, you can set Icon as well
-                                                    footer: Text(
-                                                      "Order this Month",
-                                                      style: Styles.black13,
-                                                    ), //footer text
+                                                    // footer: Text(
+                                                    //   "Order this Month",
+                                                    //   style: Styles.black13,
+                                                    // ), //footer text
                                                     backgroundColor: ColorValues
                                                         .addNewColor, //backround of progress bar
                                                     circularStrokeCap:
@@ -2969,7 +3039,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //     ),
                                         //   ),
                                         // ),
-                                       Expanded(
+                                        Expanded(
                                           flex: 2,
                                           child: Container(
                                             margin: EdgeInsets.only(left: 10),
@@ -2992,6 +3062,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
+                                                Text("Schedule Compliance",
+                                                    style: Styles.black15),
+                                                Dimens.boxHeight10,
+
                                                 Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -3087,7 +3161,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                           ],
                                                         ),
                                                       ),
-                                            ]),
+                                                    ]),
                                                 // Dimens.boxHeight20,
                                               ],
                                             ),
@@ -3327,7 +3401,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .toString() ??
                                                     '')),
                                                 DataCell(Text(
-                                                    'MC${controller.dashboardMcList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                    '${controller.dashboardMcList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
                                                 DataCell(Text(controller
                                                         .dashboardMcList
                                                         .value
@@ -3441,23 +3515,23 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                           // controller
                                                           //     .clearStoreDatatype();
 
-                                                          int pmTaskId = controller
-                                                                  .dashboardMcList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.item_list?[
-                                                                      index]
-                                                                  .wo_number ??
-                                                              0;
-                                                          if (pmTaskId != 0) {
-                                                            Get.toNamed(
-                                                                Routes
-                                                                    .pmTaskView,
-                                                                arguments: {
-                                                                  'pmTaskId':
-                                                                      pmTaskId
-                                                                });
-                                                          }
+                                                          // int pmTaskId = controller
+                                                          //         .dashboardMcList
+                                                          //         .value
+                                                          //         ?.cmDashboadDetails
+                                                          //         ?.item_list?[
+                                                          //             index]
+                                                          //         .wo_number ??
+                                                          //     0;
+                                                          // if (pmTaskId != 0) {
+                                                          //   Get.toNamed(
+                                                          //       Routes
+                                                          //           .pmTaskView,
+                                                          //       arguments: {
+                                                          //         'pmTaskId':
+                                                          //             pmTaskId
+                                                          //       });
+                                                          // }
                                                         },
                                                       ),
                                                     ],
@@ -3622,10 +3696,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               FontWeight.bold,
                                                           fontSize: 20.0),
                                                     ), //center text, you can set Icon as well
-                                                    footer: Text(
-                                                      "Order this Month",
-                                                      style: Styles.black13,
-                                                    ), //footer text
+                                                    // footer: Text(
+                                                    //   "Order this Month",
+                                                    //   style: Styles.black13,
+                                                    // ), //footer text
                                                     backgroundColor: ColorValues
                                                         .addNewColor, //backround of progress bar
                                                     circularStrokeCap:
@@ -3803,7 +3877,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //     ),
                                         //   ),
                                         // ),
-                                       Expanded(
+                                        Expanded(
                                           flex: 2,
                                           child: Container(
                                             margin: EdgeInsets.only(left: 10),
@@ -3826,6 +3900,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
+                                                Text("Schedule Compliance",
+                                                    style: Styles.black15),
+                                                Dimens.boxHeight10,
+
                                                 Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -3921,7 +3999,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                           ],
                                                         ),
                                                       ),
-                                            ]),
+                                                    ]),
                                                 // Dimens.boxHeight20,
                                               ],
                                             ),
@@ -4161,7 +4239,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .toString() ??
                                                     '')),
                                                 DataCell(Text(
-                                                    'IR${controller.dashboardIrList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                    '${controller.dashboardIrList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
                                                 DataCell(Text(controller
                                                         .dashboardIrList
                                                         .value
@@ -4272,23 +4350,29 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         onPress: () {
                                                           controller
                                                               .clearStoreIrData();
-                                                          // controller
-                                                          //     .clearStoreDatatype();
 
-                                                          int iRId = controller
-                                                                  .dashboardIrList
+                                                          String Id = controller
+                                                                  .dashboardBmList
                                                                   .value
                                                                   ?.cmDashboadDetails
                                                                   ?.item_list?[
                                                                       index]
                                                                   .wo_number ??
-                                                              0;
-                                                          if (iRId != 0) {
+                                                              "";
+                                                          String iRId =
+                                                              Id.substring(
+                                                                  Id.indexOf(
+                                                                          "BM") +
+                                                                      2);
+
+                                                          if (iRId != null) {
                                                             Get.toNamed(
                                                                 Routes
                                                                     .viewIncidentReportScreen,
                                                                 arguments: {
-                                                                  'irId': iRId
+                                                                  'irId': int
+                                                                      .tryParse(
+                                                                          iRId)
                                                                 });
                                                           }
                                                         },
@@ -4455,10 +4539,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               FontWeight.bold,
                                                           fontSize: 20.0),
                                                     ), //center text, you can set Icon as well
-                                                    footer: Text(
-                                                      "Order this Month",
-                                                      style: Styles.black13,
-                                                    ), //footer text
+                                                    // footer: Text(
+                                                    //   "Order this Month",
+                                                    //   style: Styles.black13,
+                                                    // ), //footer text
                                                     backgroundColor: ColorValues
                                                         .addNewColor, //backround of progress bar
                                                     circularStrokeCap:
@@ -4659,6 +4743,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
+                                                Text("Schedule Compliance",
+                                                    style: Styles.black15),
+                                                Dimens.boxHeight10,
+
                                                 Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -4754,7 +4842,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                           ],
                                                         ),
                                                       ),
-                                            ]),
+                                                    ]),
                                                 // Dimens.boxHeight20,
                                               ],
                                             ),
@@ -4994,7 +5082,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .toString() ??
                                                     '')),
                                                 DataCell(Text(
-                                                    'SM${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                    '${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
@@ -5108,23 +5196,23 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                           // controller
                                                           //     .clearStoreDatatype();
 
-                                                          int pmTaskId = controller
-                                                                  .dashboardSmList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.item_list?[
-                                                                      index]
-                                                                  .wo_number ??
-                                                              0;
-                                                          if (pmTaskId != 0) {
-                                                            Get.toNamed(
-                                                                Routes
-                                                                    .pmTaskView,
-                                                                arguments: {
-                                                                  'pmTaskId':
-                                                                      pmTaskId
-                                                                });
-                                                          }
+                                                          // int pmTaskId = controller
+                                                          //         .dashboardSmList
+                                                          //         .value
+                                                          //         ?.cmDashboadDetails
+                                                          //         ?.item_list?[
+                                                          //             index]
+                                                          //         .wo_number ??
+                                                          //     0;
+                                                          // if (pmTaskId != 0) {
+                                                          //   Get.toNamed(
+                                                          //       Routes
+                                                          //           .pmTaskView,
+                                                          //       arguments: {
+                                                          //         'pmTaskId':
+                                                          //             pmTaskId
+                                                          //       });
+                                                          // }
                                                         },
                                                       ),
                                                     ],
