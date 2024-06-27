@@ -6899,6 +6899,9 @@ class Repository {
                 .map<DashboardModel>((m) =>
                     DashboardModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
+        for (var dashboard in _DashboardModelList) {
+          dashboard.addPrefixToItems();
+        }
 
         return _DashboardModelList;
       } else {

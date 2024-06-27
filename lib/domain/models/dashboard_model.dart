@@ -5,6 +5,7 @@ class DashboardModel {
   int? category_bm_count;
   int? category_total_count;
   CmDashboadDetails? cmDashboadDetails;
+
   DashboardModel(
       {this.module_name,
       this.cmDashboadDetails,
@@ -31,6 +32,23 @@ class DashboardModel {
         "module_name": module_name,
         "cmDashboadDetails": cmDashboadDetails!.toJson(),
       };
+
+  void addPrefixToItems() {
+    String prefix = '';
+    if (module_name == 'Preventive Maintenance') {
+      prefix = 'PM';
+    } else if (module_name == 'Breakdown Maintenance') {
+      prefix = 'BM';
+    } else if (module_name == 'Module Cleaning') {
+      prefix = 'MC';
+    } else if (module_name == 'Incident Report') {
+      prefix = 'IR';
+    } else if (module_name == 'Stock Management') {
+      prefix = 'SM';
+    }
+
+    cmDashboadDetails?.addPrefixToItems(prefix);
+  }
 }
 
 class CmDashboadDetails {
@@ -53,6 +71,7 @@ class CmDashboadDetails {
       this.schedule_compliance_pending,
       this.schedule_compliance_total,
       this.item_list});
+
   int? created;
   int? submitted;
   int? assigned;
@@ -116,6 +135,14 @@ class CmDashboadDetails {
         "completed": completed,
         "item_list": List<dynamic>.from(item_list!.map((x) => x.toJson())),
       };
+
+  void addPrefixToItems(String prefix) {
+    if (item_list != null) {
+      for (var item in item_list!) {
+        item.addPrefix(prefix);
+      }
+    }
+  }
 }
 
 class Itemlist {
@@ -135,9 +162,10 @@ class Itemlist {
       this.status_long,
       this.wo_decription,
       this.wo_number});
+
   int? facility_id;
   String? facility_name;
-  int? wo_number;
+  String? wo_number;
   int? status;
   String? status_long;
   String? asset_category;
@@ -155,7 +183,7 @@ class Itemlist {
         facility_id: parsedJson['facility_id'],
         wo_decription: parsedJson['wo_decription'],
         facility_name: parsedJson['facility_name'],
-        wo_number: parsedJson['wo_number'],
+        wo_number: parsedJson['wo_number'].toString(),
         status: parsedJson['status'],
         status_long: parsedJson['status_long'],
         asset_category: parsedJson['asset_category'],
@@ -186,4 +214,8 @@ class Itemlist {
         "latestJCPTWStatus": latestJCPTWStatus,
         "latestJCApproval": latestJCApproval,
       };
+
+  void addPrefix(String prefix) {
+    wo_number = '$prefix$wo_number';
+  }
 }
