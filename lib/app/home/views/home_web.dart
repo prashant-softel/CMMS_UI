@@ -573,7 +573,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight10,
+                                                Dimens.boxHeight5,
                                                 Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -584,9 +584,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .start,
-
                                                           children: [
-                                                            Dimens.boxHeight8,
+                                                            // Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -643,7 +642,6 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                             ),
                                                             Dimens.boxHeight5,
                                                             Row(
-
                                                               children: [
                                                                 Icon(
                                                                     Icons
@@ -669,7 +667,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                         Dimens.boxHeight8,
+                                                            //  Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
@@ -1521,7 +1519,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight10,
+                                                Dimens.boxHeight5,
 
                                                 Row(
                                                     mainAxisAlignment:
@@ -1534,7 +1532,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Dimens.boxHeight8,
+                                                            // Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -1616,7 +1614,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                          Dimens.boxHeight8,
+                                                            // Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
@@ -2202,7 +2200,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight10,
+                                                Dimens.boxHeight5,
 
                                                 Row(
                                                     mainAxisAlignment:
@@ -2215,7 +2213,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Dimens.boxHeight8,
+                                                            // Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -2297,7 +2295,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                          Dimens.boxHeight8,
+                                                            // Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
@@ -3072,7 +3070,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight10,
+                                                Dimens.boxHeight5,
 
                                                 Row(
                                                     mainAxisAlignment:
@@ -3085,7 +3083,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Dimens.boxHeight8,
+                                                            // Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -3167,7 +3165,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                          Dimens.boxHeight8,
+                                                            // Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
@@ -3912,7 +3910,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight10,
+                                                Dimens.boxHeight5,
 
                                                 Row(
                                                     mainAxisAlignment:
@@ -3925,7 +3923,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Dimens.boxHeight8,
+                                                            // Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -4007,7 +4005,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                          Dimens.boxHeight8,
+                                                            // Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
@@ -4757,7 +4755,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight10,
+                                                Dimens.boxHeight5,
 
                                                 Row(
                                                     mainAxisAlignment:
@@ -4770,7 +4768,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Dimens.boxHeight8,
+                                                            // Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -4852,7 +4850,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                          Dimens.boxHeight8,
+                                                            // Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
