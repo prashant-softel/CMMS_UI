@@ -82,7 +82,8 @@ class Equipments {
       this.equipmentID,
       this.id,
       this.issued_qty,
-      this.requested_qty});
+      this.requested_qty,
+      this.serial_number});
 
   int? id;
   int? equipmentID;
@@ -90,18 +91,18 @@ class Equipments {
   String? asset_code;
   dynamic requested_qty;
   dynamic issued_qty;
-
+  dynamic serial_number;
   dynamic returned_qty;
   dynamic used_qty;
   dynamic available_qty;
   factory Equipments.fromJson(Map<String, dynamic> json) => Equipments(
-        id: json["id"],
-        equipmentID: json["asset_item_ID"],
-        asset_type_ID: json["asset_type_ID"],
-        asset_code: json["asset_code"],
-        requested_qty: json["requested_qty"],
-        issued_qty: json["issued_qty"],
-      );
+      id: json["id"],
+      equipmentID: json["asset_item_ID"],
+      asset_type_ID: json["asset_type_ID"],
+      asset_code: json["asset_code"],
+      requested_qty: json["requested_qty"],
+      issued_qty: json["issued_qty"],
+      serial_number: json["serial_number"]);
 
   Map<String, dynamic> toJson() => {
         "issued_qty": issued_qty,
@@ -110,5 +111,6 @@ class Equipments {
         "asset_type_ID": asset_type_ID,
         "asset_item_ID": equipmentID,
         "id": id,
+        "serial_number": serial_number
       };
 }

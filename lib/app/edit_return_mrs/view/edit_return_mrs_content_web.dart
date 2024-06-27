@@ -898,7 +898,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                                                     label: '',
                                                                                     message: '',
                                                                                     onPress: () {
-                                                                                      controller.rowItem.remove(record);
+                                                                                      controller.rowFaultyItem.remove(record);
                                                                                     },
                                                                                   )
                                                                                 ],

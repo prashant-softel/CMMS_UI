@@ -81,8 +81,7 @@ class PreventiveMaintenanceTaskViewContentWeb
 
                         Get.offNamed(Routes.pmTask);
                       },
-                      child: Text(" / PM TASK LIST",
-                          style: Styles.greyLight14),
+                      child: Text(" / PM TASK LIST", style: Styles.greyLight14),
                     ),
                     Text(" / PM TASK VIEW", style: Styles.greyLight14)
                   ],
@@ -419,7 +418,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                       .pmtaskViewModel
                                                                       .value
                                                                       ?.status ==
-                                                                  162 // assigned 
+                                                                  162 // assigned
                                                           ? Dimens.box0
                                                           : TableActionButton(
                                                               color: ColorValues
@@ -956,6 +955,17 @@ class PreventiveMaintenanceTaskViewContentWeb
                       ],
                     ),
                   ),
+                ),
+              ),
+              Container(
+                height: 35,
+                child: CustomElevatedButton(
+                  icon: Icons.remove_red_eye_outlined,
+                  backgroundColor: ColorValues.linktopermitColor,
+                  text: "Execute",
+                  onPressed: () {
+                    controller.gotoexecution();
+                  },
                 ),
               ),
               //  Dimens.boxHeight20,

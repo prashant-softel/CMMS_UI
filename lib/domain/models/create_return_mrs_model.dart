@@ -103,18 +103,18 @@ class FaultyItemsCmms {
 
   factory FaultyItemsCmms.fromJson(Map<String, dynamic> json) =>
       FaultyItemsCmms(
-        sr_no: json["sr_no"],
+        sr_no: json["serial_number"],
         assetMasterItemID: json["assetMasterItemID"],
-        mrsItemID: json["mrsItemID"],
+        mrsItemID: json['mrs_item_ID'] == null ? 0 : json['mrs_item_ID'],
         return_remarks: json["return_remarks"],
         returned_qty: json["returned_qty"],
       );
 
   Map<String, dynamic> toJson() => {
-        "mrsItemID": mrsItemID,
         "assetMasterItemID": assetMasterItemID,
-        "sr_no": sr_no,
+        "serial_number": sr_no,
         "return_remarks": return_remarks,
         "returned_qty": returned_qty,
+        "mrs_item_ID": mrsItemID == null ? 0 : mrsItemID,
       };
 }
