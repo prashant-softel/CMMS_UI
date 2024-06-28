@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
@@ -44,11 +45,11 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                       : GetObservationList();
                               return GestureDetector(
                                   onTap: () {
-                                    // int irId = getObsListModel?.id ?? 0;
-                                    // if (irId != 0) {
-                                    //   Get.toNamed(Routes.viewIncidentReportScreen,
-                                    //       arguments: {'irId': irId});
-                                    // }
+                                    int obsId = obsListModel?.id ?? 0;
+                                    if (obsId != 0) {
+                                      Get.toNamed(Routes.viewObservationScreen,
+                                          arguments: {'obsId': obsId});
+                                    }
                                   },
                                   child: SizedBox(
                                     width: double.infinity,
@@ -404,8 +405,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    obsListModel
-                                                            ?.action_taken ??
+                                                    obsListModel?.closer_date ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:
@@ -489,8 +489,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: () {},
-              // onPressed: () => controller.goToAddJobScreen(),
+              onPressed: () => Get.offNamed(Routes.createObservation),
               backgroundColor: ColorValues.navyBlueColor,
               child: Icon(
                 Icons.add,
