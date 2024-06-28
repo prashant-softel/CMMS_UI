@@ -942,6 +942,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             right: 16,
                                           ),
                                           child: DataTable2(
+                                            showCheckboxColumn: false,
                                             headingRowHeight: 45,
                                             dataRowHeight: 40,
                                             columnSpacing: 12,
@@ -955,6 +956,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             minWidth: 2500,
                                             columns: [
+                                              
                                               DataColumn2(
                                                 fixedWidth: 100,
                                                 label: Text(
@@ -1029,133 +1031,184 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ],
                                             rows: List<DataRow>.generate(
                                               controller.allItems.length ?? 0,
-                                              (index) => DataRow(cells: [
-                                                DataCell(Text(controller
-                                                        .allItems[index]
-                                                        ?.facility_name
-                                                        .toString() ??
-                                                    '')),
-                                                DataCell(Text(
-                                                    '${controller.allItems[index]?.wo_number.toString() ?? ''}')),
-                                                DataCell(Text(controller
-                                                        .allItems[index]
-                                                        ?.wo_decription ??
-                                                    "")),
-                                                DataCell(Text(controller
-                                                        .allItems[index]
-                                                        ?.status_long ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .allItems[index]
-                                                        ?.asset_category ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .allItems[index]
-                                                        ?.asset_name ??
-                                                    '')),
-                                                DataCell(
-                                                  Text(controller
+                                              (index) => DataRow(
+                                                  onSelectChanged: (selected) {
+                                                    if (selected!) {
+                                                      controller
+                                                          .clearStoreJobData();
+                                                      controller
+                                                          .clearStorePmData();
+                                                      String Id = controller
                                                               .allItems[index]
-                                                              ?.start_date !=
-                                                          null
-                                                      ? controller
-                                                          .allItems[index]!
-                                                          .start_date!
-                                                          .substring(
-                                                              0,
-                                                              controller
-                                                                      .allItems[
-                                                                          index]!
-                                                                      .start_date!
-                                                                      .length -
-                                                                  9)
-                                                      : controller
-                                                              .allItems[index]
-                                                              ?.start_date ??
-                                                          ''),
-                                                ),
-                                                DataCell(
-                                                  Text(controller
-                                                              .allItems[index]
-                                                              ?.end_date !=
-                                                          null
-                                                      ? controller
-                                                          .allItems[index]!
-                                                          .end_date!
-                                                          .substring(
-                                                              0,
-                                                              controller
-                                                                      .allItems[
-                                                                          index]!
-                                                                      .end_date!
-                                                                      .length -
-                                                                  9)
-                                                      : controller
-                                                              .allItems[index]
-                                                              ?.end_date ??
-                                                          ''),
-                                                ),
-                                                DataCell(
-                                                  Row(
-                                                    children: [
-                                                      TableActionButton(
-                                                        color: ColorValues
-                                                            .viewColor,
-                                                        icon: Icons
-                                                            .remove_red_eye_outlined,
-                                                        message: 'View',
-                                                        onPress: () {
-                                                          controller
-                                                              .clearStoreJobData();
-                                                          controller
-                                                              .clearStorePmData();
-                                                          String Id = controller
+                                                              ?.wo_number ??
+                                                          "";
+                                                      String prefix =
+                                                          Id.replaceAll(
+                                                              RegExp(r'\d+$'),
+                                                              '');
+
+                                                      String jobId =
+                                                          Id.substring(
+                                                              Id.indexOf("BM") +
+                                                                  2);
+                                                      String taskId =
+                                                          Id.substring(
+                                                              Id.indexOf("PM") +
+                                                                  2);
+                                                      if (prefix == 'BM') {
+                                                        Get.toNamed(
+                                                          Routes.jobDetails,
+                                                          arguments: {
+                                                            'jobId':
+                                                                int.tryParse(
+                                                                    jobId)
+                                                          },
+                                                        );
+                                                      } else if (prefix ==
+                                                          'PM') {
+                                                        Get.toNamed(
+                                                          Routes.pmTaskView,
+                                                          arguments: {
+                                                            'pmTaskId':
+                                                                int.tryParse(
+                                                                    taskId)
+                                                          },
+                                                        );
+                                                      }
+                                                    }
+                                                  },
+                                                  cells: [
+                                                    DataCell(Text(controller
+                                                            .allItems[index]
+                                                            ?.facility_name
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(
+                                                        '${controller.allItems[index]?.wo_number.toString() ?? ''}')),
+                                                    DataCell(Text(controller
+                                                            .allItems[index]
+                                                            ?.wo_decription ??
+                                                        "")),
+                                                    DataCell(Text(controller
+                                                            .allItems[index]
+                                                            ?.status_long ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .allItems[index]
+                                                            ?.asset_category ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .allItems[index]
+                                                            ?.asset_name ??
+                                                        '')),
+                                                    DataCell(
+                                                      Text(controller
                                                                   .allItems[
                                                                       index]
-                                                                  ?.wo_number ??
-                                                              "";
-                                                          String prefix =
-                                                              Id.replaceAll(
-                                                                  RegExp(
-                                                                      r'\d+$'),
-                                                                  '');
+                                                                  ?.start_date !=
+                                                              null
+                                                          ? controller
+                                                              .allItems[index]!
+                                                              .start_date!
+                                                              .substring(
+                                                                  0,
+                                                                  controller
+                                                                          .allItems[
+                                                                              index]!
+                                                                          .start_date!
+                                                                          .length -
+                                                                      9)
+                                                          : controller
+                                                                  .allItems[
+                                                                      index]
+                                                                  ?.start_date ??
+                                                              ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                                  .allItems[
+                                                                      index]
+                                                                  ?.end_date !=
+                                                              null
+                                                          ? controller
+                                                              .allItems[index]!
+                                                              .end_date!
+                                                              .substring(
+                                                                  0,
+                                                                  controller
+                                                                          .allItems[
+                                                                              index]!
+                                                                          .end_date!
+                                                                          .length -
+                                                                      9)
+                                                          : controller
+                                                                  .allItems[
+                                                                      index]
+                                                                  ?.end_date ??
+                                                              ''),
+                                                    ),
+                                                    DataCell(
+                                                      Row(
+                                                        children: [
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .viewColor,
+                                                            icon: Icons
+                                                                .remove_red_eye_outlined,
+                                                            message: 'View',
+                                                            onPress: () {
+                                                              controller
+                                                                  .clearStoreJobData();
+                                                              controller
+                                                                  .clearStorePmData();
+                                                              String Id = controller
+                                                                      .allItems[
+                                                                          index]
+                                                                      ?.wo_number ??
+                                                                  "";
+                                                              String prefix =
+                                                                  Id.replaceAll(
+                                                                      RegExp(
+                                                                          r'\d+$'),
+                                                                      '');
 
-                                                          String jobId =
-                                                              Id.substring(
-                                                                  Id.indexOf(
-                                                                          "BM") +
-                                                                      2);
-                                                          String taskId =
-                                                              Id.substring(
-                                                                  Id.indexOf(
-                                                                          "PM") +
-                                                                      2);
-                                                          if (prefix == 'BM') {
-                                                            Get.toNamed(
-                                                                Routes
-                                                                    .jobDetails,
-                                                                arguments: {
-                                                                  'jobId': int
-                                                                      .tryParse(
-                                                                          jobId)
-                                                                });
-                                                          } else if (prefix ==
-                                                              'PM') {
-                                                            Get.toNamed(
-                                                                Routes
-                                                                    .pmTaskView,
-                                                                arguments: {
-                                                                  'pmTaskId': int
-                                                                      .tryParse(
-                                                                          taskId)
-                                                                });
-                                                          }
-                                                        },
+                                                              String jobId =
+                                                                  Id.substring(
+                                                                      Id.indexOf(
+                                                                              "BM") +
+                                                                          2);
+                                                              String taskId =
+                                                                  Id.substring(
+                                                                      Id.indexOf(
+                                                                              "PM") +
+                                                                          2);
+                                                              if (prefix ==
+                                                                  'BM') {
+                                                                Get.toNamed(
+                                                                    Routes
+                                                                        .jobDetails,
+                                                                    arguments: {
+                                                                      'jobId': int
+                                                                          .tryParse(
+                                                                              jobId)
+                                                                    });
+                                                              } else if (prefix ==
+                                                                  'PM') {
+                                                                Get.toNamed(
+                                                                    Routes
+                                                                        .pmTaskView,
+                                                                    arguments: {
+                                                                      'pmTaskId':
+                                                                          int.tryParse(
+                                                                              taskId)
+                                                                    });
+                                                              }
+                                                            },
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ]),
+                                                    ),
+                                                  ]),
                                             ),
                                           ),
                                         ),
@@ -4372,7 +4425,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                           String iRId =
                                                               Id.substring(
                                                                   Id.indexOf(
-                                                                          "BM") +
+                                                                          "IR") +
                                                                       2);
 
                                                           if (iRId != null) {
