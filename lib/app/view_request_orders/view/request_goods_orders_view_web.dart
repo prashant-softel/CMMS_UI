@@ -418,7 +418,7 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                 DataColumn2(
                     fixedWidth: 150,
                     label: Text(
-                      "Cost",
+                      "Unit Cost",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     )),
