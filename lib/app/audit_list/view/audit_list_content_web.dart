@@ -155,7 +155,9 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                           icon: Icons.add,
                                           label: "Add New",
                                           onPressed: () {
-                                            // c ontroller.clearValue();
+                                            // controller.clearValue();
+                                            controller.clearStoreIdData();
+
                                             Get.offNamed(Routes.createAudit,
                                                 arguments: {
                                                   'type': controller.type.value

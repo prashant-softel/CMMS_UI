@@ -100,9 +100,9 @@ class LinkToPermitDialog extends GetView {
                           //     _controller.formattedFromdate,
                           //     false);
                           //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                          Get.toNamed(Routes.viewAuditTask,
-                              arguments: {'auditTaskId': taskId, 'type': type});
                           Get.back();
+                          Get.offAllNamed(Routes.viewAuditTask,
+                              arguments: {'auditTaskId': taskId, 'type': type});
                         },
                         child: const Text('View Audit'),
                       )
@@ -156,7 +156,8 @@ class LinkToPermitDialog extends GetView {
                           //     _controller.formattedFromdate,
                           //     false);
                           //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                          Get.offAllNamed(Routes.createMrs, arguments: {});
+                          Get.offAllNamed(Routes.auditTask,
+                              arguments: {'type': type});
                           Get.back();
                         },
                         child: const Text('Audit list'),
