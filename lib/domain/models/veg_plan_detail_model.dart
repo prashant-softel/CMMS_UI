@@ -9,6 +9,7 @@ class VegPlanDetailModel {
   int? planId;
   int? facilityId;
   String? title;
+  String? siteName;
   String? description;
   int? frequencyId;
   String? frequency;
@@ -33,6 +34,7 @@ class VegPlanDetailModel {
     this.planId,
     this.facilityId,
     this.title,
+    this.siteName,
     this.description,
     this.frequencyId,
     this.frequency,
@@ -59,6 +61,7 @@ class VegPlanDetailModel {
       planId: json['planId'],
       facilityId: json['facilityId'],
       title: json['title'],
+      siteName:json['siteName'],
       description: json['description'],
       frequencyId: json['frequencyId'],
       frequency: json['frequency'],
@@ -88,6 +91,7 @@ class VegPlanDetailModel {
         'planId': planId,
         'facilityId': facilityId,
         'title': title,
+        'siteName':siteName,
         'description': description,
         'frequencyId': frequencyId,
         'frequency': frequency,

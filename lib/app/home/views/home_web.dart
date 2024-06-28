@@ -82,7 +82,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                   children: [
                                     Text('Select Plant',
                                         style: Styles.black13W400),
-                                    Dimens.boxWidth10,
+                                    // Dimens.boxWidth10,
+                                    SizedBox(width: 10),
                                     Obx(
                                       () => SizedBox(
                                         width:
@@ -144,7 +145,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                       children: [
                                         Text('Date Range',
                                             style: Styles.black13W400),
-                                        Dimens.boxWidth10,
+                                        // Dimens.boxWidth10,
+                                        SizedBox(width: 10),
                                         CustomTextFieldForStock(
                                             width:
                                                 MediaQuery.of(context)
@@ -167,7 +169,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                   ],
                                 ),
                               ),
-                              Dimens.boxWidth10,
+                              // Dimens.boxWidth10,
+                              SizedBox(width:10),
                               if (Responsive.isDesktop(context))
                                 Icon(Icons.notifications_active,
                                     color: ColorValues.greyLightColor),
@@ -348,7 +351,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                   ),
                                 ),
                               ),
-                              Dimens.boxWidth10,
+                              // Dimens.boxWidth10,
+                              SizedBox(width: 10),
+                              
                             ],
                           ),
                         ),
@@ -471,8 +476,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                         //  '${dashbo?.module_name}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -485,8 +491,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                             '${controller.completedSum}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -506,7 +513,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Dimens.boxWidth20,
+                                                  // Dimens.boxWidth20,
+                                                  SizedBox(width: 20),
+
                                                   Container(
                                                       // padding: EdgeInsets.only(
                                                       //     top: 30,
@@ -573,7 +582,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight5,
+                                                // Dimens.boxHeight5,
+                                                SizedBox(height: 5),
                                                 Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -603,8 +613,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woOnTimeSum.value}',
@@ -613,7 +624,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            Dimens.boxHeight5,
+                                                            // Dimens.boxHeight5,
+                                                            SizedBox(height: 5),
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -630,8 +642,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                   style: Styles
                                                                       .black13,
                                                                 ),
-                                                                Dimens
-                                                                    .boxWidth37,
+                                                                // Dimens
+                                                                //     .boxWidth37,
+                                                                SizedBox(width: 35),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woDelaySum.value}',
@@ -640,7 +653,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            Dimens.boxHeight5,
+                                                            // Dimens.boxHeight5,
+                                                            SizedBox(height: 5),
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -657,8 +671,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woBacklogSum.value}',
@@ -1297,8 +1312,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                         //  '${dashbo?.module_name}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -1311,8 +1327,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                             '${controller.dashboardBmList.value?.cmDashboadDetails?.completed}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -1332,7 +1349,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Dimens.boxWidth20,
+                                                  // Dimens.boxWidth20,
+                                                  SizedBox(width: 20),
                                                   Container(
                                                       // padding: EdgeInsets.only(
                                                       //     top: 30,
@@ -1572,7 +1590,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight5,
+                                                // Dimens.boxHeight5,
+                                                SizedBox(height: 5),
 
                                                 Row(
                                                     mainAxisAlignment:
@@ -1603,8 +1622,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woOnTimeSum.value}',
@@ -1613,7 +1633,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            Dimens.boxHeight5,
+                                                            // Dimens.boxHeight5,
+                                                            SizedBox(height: 5),
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -1630,8 +1651,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                   style: Styles
                                                                       .black13,
                                                                 ),
-                                                                Dimens
-                                                                    .boxWidth37,
+                                                                // Dimens
+                                                                //     .boxWidth37,
+                                                                SizedBox(width: 35),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woDelaySum.value}',
@@ -1657,8 +1679,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woBacklogSum.value}',
@@ -1798,7 +1821,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         ),
                                       ],
                                     ),
-                                    Dimens.boxHeight10,
+                                    // Dimens.boxHeight10,
+                                    SizedBox(height: 10),
                                     Expanded(
                                       child: Container(
                                         color:
@@ -2144,8 +2168,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                         //  '${dashbo?.module_name}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -2158,8 +2183,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                             '${controller.dashboardPmList.value?.cmDashboadDetails?.completed}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -2179,7 +2205,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Dimens.boxWidth20,
+                                                  // Dimens.boxWidth20,
+                                                  SizedBox(width: 20),
                                                   Container(
                                                       // padding: EdgeInsets.only(
                                                       //     top: 30,
@@ -2253,7 +2280,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight5,
+                                                // Dimens.boxHeight5,
+                                                SizedBox(height: 5),
 
                                                 Row(
                                                     mainAxisAlignment:
@@ -2284,8 +2312,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woOnTimeSum.value}',
@@ -2294,7 +2323,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            Dimens.boxHeight5,
+                                                            // Dimens.boxHeight5,
+                                                            SizedBox(height: 5),
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -2311,8 +2341,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                   style: Styles
                                                                       .black13,
                                                                 ),
-                                                                Dimens
-                                                                    .boxWidth37,
+                                                                // Dimens
+                                                                //     .boxWidth37,
+                                                                SizedBox(width: 35),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woDelaySum.value}',
@@ -2321,7 +2352,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            Dimens.boxHeight5,
+                                                            // Dimens.boxHeight5,
+                                                            SizedBox(height: 5),
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -2338,8 +2370,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woBacklogSum.value}',
@@ -2479,7 +2512,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         ),
                                       ],
                                     ),
-                                    Dimens.boxHeight10,
+                                    // Dimens.boxHeight10,
+                                    SizedBox(height: 10),
                                     Expanded(
                                       child: Container(
                                         color:
@@ -2848,8 +2882,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                         //  '${dashbo?.module_name}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -2862,8 +2897,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                             '${controller.dashboardMcList.value?.cmDashboadDetails?.completed}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -2883,7 +2919,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Dimens.boxWidth20,
+                                                  // Dimens.boxWidth20,
+                                                  SizedBox(width: 20),
                                                   Container(
                                                       // padding: EdgeInsets.only(
                                                       //     top: 30,
@@ -3123,7 +3160,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight5,
+                                                // Dimens.boxHeight5,
+                                                SizedBox(height: 5),
 
                                                 Row(
                                                     mainAxisAlignment:
@@ -3154,8 +3192,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woOnTimeSum.value}',
@@ -3164,7 +3203,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            Dimens.boxHeight5,
+                                                            // Dimens.boxHeight5,
+                                                            SizedBox(height: 5),
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -3181,8 +3221,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                   style: Styles
                                                                       .black13,
                                                                 ),
-                                                                Dimens
-                                                                    .boxWidth37,
+                                                                // Dimens
+                                                                //     .boxWidth37,
+                                                                SizedBox(width: 35),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woDelaySum.value}',
@@ -3191,7 +3232,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            Dimens.boxHeight5,
+                                                            // Dimens.boxHeight5,
+                                                            SizedBox(height: 5),
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -3208,8 +3250,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woBacklogSum.value}',
@@ -3349,7 +3392,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         ),
                                       ],
                                     ),
-                                    Dimens.boxHeight10,
+                                    // Dimens.boxHeight10,
+                                    SizedBox(height: 10),
                                     Expanded(
                                       child: Container(
                                         color:
@@ -3688,8 +3732,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                         //  '${dashbo?.module_name}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -3702,8 +3747,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                             '${controller.dashboardIrList.value?.cmDashboadDetails?.completed}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -3723,7 +3769,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Dimens.boxWidth20,
+                                                  // Dimens.boxWidth20,
+                                                  SizedBox(width: 20),
                                                   Container(
                                                       // padding: EdgeInsets.only(
                                                       //     top: 30,
@@ -3963,7 +4010,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight5,
+                                                // Dimens.boxHeight5,
+                                                SizedBox(height: 5),
 
                                                 Row(
                                                     mainAxisAlignment:
@@ -3994,8 +4042,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woOnTimeSum.value}',
@@ -4004,7 +4053,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            Dimens.boxHeight5,
+                                                            // Dimens.boxHeight5,
+                                                            SizedBox(height: 5),
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -4021,8 +4071,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                   style: Styles
                                                                       .black13,
                                                                 ),
-                                                                Dimens
-                                                                    .boxWidth37,
+                                                                // Dimens
+                                                                //     .boxWidth37,
+                                                                SizedBox(width: 35),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woDelaySum.value}',
@@ -4031,7 +4082,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            Dimens.boxHeight5,
+                                                            // Dimens.boxHeight5,
+                                                            SizedBox(height: 5),
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -4048,8 +4100,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woBacklogSum.value}',
@@ -4189,7 +4242,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         ),
                                       ],
                                     ),
-                                    Dimens.boxHeight10,
+                                    // Dimens.boxHeight10,
+                                    SizedBox(height: 10),
                                     Expanded(
                                       child: Container(
                                         color:
@@ -4533,8 +4587,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                         //  '${dashbo?.module_name}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -4547,8 +4602,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                             '${controller.dashboardSmList.value?.cmDashboadDetails?.completed}'),
                                                                       ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxHeight5,
+                                                                    // Dimens
+                                                                    //     .boxHeight5,
+                                                                    SizedBox(height: 5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -4568,7 +4624,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Dimens.boxWidth20,
+                                                  // Dimens.boxWidth20,
+                                                  SizedBox(width: 20),
                                                   Container(
                                                       // padding: EdgeInsets.only(
                                                       //     top: 30,
@@ -4808,7 +4865,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               children: [
                                                 Text("Schedule Compliance",
                                                     style: Styles.black15),
-                                                Dimens.boxHeight5,
+                                                // Dimens.boxHeight5,
+                                                SizedBox(height: 5),
 
                                                 Row(
                                                     mainAxisAlignment:
@@ -4839,8 +4897,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woOnTimeSum.value}',
@@ -4849,7 +4908,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            Dimens.boxHeight5,
+                                                            // Dimens.boxHeight5,
+                                                            SizedBox(height: 5),
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -4866,8 +4926,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                   style: Styles
                                                                       .black13,
                                                                 ),
-                                                                Dimens
-                                                                    .boxWidth37,
+                                                                // Dimens
+                                                                //     .boxWidth37,
+                                                                SizedBox(width: 35),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woDelaySum.value}',
@@ -4876,7 +4937,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            Dimens.boxHeight5,
+                                                            // Dimens.boxHeight5,
+                                                            SizedBox(height: 5),
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -4893,8 +4955,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       .black13,
                                                                 ),
 
-                                                                Dimens
-                                                                    .boxWidth20,
+                                                                // Dimens
+                                                                //     .boxWidth20,
+                                                                SizedBox(width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woBacklogSum.value}',
@@ -5034,7 +5097,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         ),
                                       ],
                                     ),
-                                    Dimens.boxHeight10,
+                                    // Dimens.boxHeight10,
+                                    SizedBox(height: 10),
                                     Expanded(
                                       child: Container(
                                         color:
