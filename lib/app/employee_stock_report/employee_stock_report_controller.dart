@@ -181,7 +181,7 @@ class EmployeeStockReportController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<UserListModel>:
+      case const (RxList<UserListModel>):
         {
           if(value != "Please Select"){
                  int userIndex = userList.indexWhere((x) => x.name == value);

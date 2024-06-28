@@ -316,7 +316,7 @@ class ViewWarrantyClaimController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           if (value != "Please Select") {
             int facilityIndex =
@@ -328,7 +328,7 @@ class ViewWarrantyClaimController extends GetxController {
           }
         }
         break;
-      case RxList<InventoryModel>:
+      case const (RxList<InventoryModel>):
         {
           if (value != "Please Select") {
             for (var workAreaName in selectedWorkAreaNameList) {
@@ -341,7 +341,7 @@ class ViewWarrantyClaimController extends GetxController {
           }
         }
         break;
-      case RxList<BusinessListModel>:
+      case const (RxList<BusinessListModel>):
         {
           if (value != "Please Select") {
             for (var supplierName in selectedSupplierNameList) {
@@ -354,7 +354,7 @@ class ViewWarrantyClaimController extends GetxController {
           }
         }
         break;
-      case RxList<CurrencyListModel>:
+      case const (RxList<CurrencyListModel>):
         {
           if (value != "Please Select") {
             for (var unitCurrency in selectedUnitCurrencyList) {
@@ -367,7 +367,7 @@ class ViewWarrantyClaimController extends GetxController {
           }
         }
         break;
-      case RxList<EmployeeListModel>:
+      case const (RxList<EmployeeListModel>):
         {
           if (value != "Please Select") {
             for (var employeeDataList in selectedEmployeeDataList) {

@@ -514,7 +514,7 @@ class WasteDataController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<WasteSource>:
+      case const (RxList<WasteSource>):
         {
           if (value != "Please Select") {
             int typeOfWaterIndex =

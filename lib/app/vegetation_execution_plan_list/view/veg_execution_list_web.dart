@@ -267,7 +267,7 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                                       Container(
                                         width: 300,
                                         height: 40,
-                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        margin: Dimens.edgeInsets0_0_7_0,
                                         child: TextField(
                                           style: TextStyle(
                                               fontSize: 16.0,
@@ -289,7 +289,7 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                                                   width: 0.0),
                                             ),
                                             contentPadding:
-                                                Dimens.edgeInsets10_0_0_0,
+                                                Dimens.edgeInsets05_10,
                                             hintText: 'search'.tr,
                                             hintStyle: Styles.grey12,
                                           ),
@@ -535,7 +535,8 @@ class VegExcutionListDataSource extends DataTableSource {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                           decoration: BoxDecoration(
                             color: controller.vegTaskList
                                         .firstWhere(
@@ -553,7 +554,7 @@ class VegExcutionListDataSource extends DataTableSource {
                           ),
                           child: Text(
                             '${VegExcutionListDetails?.status_short}',
-                            style: Styles.white10.copyWith(
+                            style: Styles.white11.copyWith(
                               color: Colors.white,
                             ),
                           ),

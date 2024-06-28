@@ -343,20 +343,20 @@ class ViewAddGoodsOrdersController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<CurrencyListModel>:
+      case const (RxList<CurrencyListModel>):
         {
           int currencyIndex =
               unitCurrencyList.indexWhere((x) => x?.name == value);
           selectedUnitCurrencyId = unitCurrencyList[currencyIndex]?.id ?? 0;
         }
         break;
-      case RxList<BusinessTypeModel>:
+      case const (RxList<BusinessTypeModel>):
         {
           int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
           selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
         }
         break;
-      case RxList<PaiedModel>:
+      case const (RxList<PaiedModel>):
         {
           int paidIndex = paid.indexWhere((x) => x!.name == value);
           paidId = paid[paidIndex]!.id ?? 0;

@@ -55,14 +55,12 @@ class DatePickerWidget extends GetView {
           rangeSelectionColor: ColorValues.primaryColor,
           rangeTextStyle: Styles.black14,
           onSelectionChanged: selectionChanges,
-
           initialSelectedRange: initialSelectedRange,
           showActionButtons: showActionButtons,
           onSubmit: onSubmit,
           onCancel: () {
             Get.back();
           },
-          // monthCellStyle: _buildDynamicMonthCellStyle(),
         ),
       );
 }

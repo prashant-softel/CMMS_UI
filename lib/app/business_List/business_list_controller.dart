@@ -291,7 +291,7 @@ class BusinessListController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<BusinessTypeModel>:
+      case const (RxList<BusinessTypeModel>):
         {
          if (value != "Please Select") {
             int equipmentIndex =
@@ -306,7 +306,7 @@ class BusinessListController extends GetxController {
         }
 
         break;
-      case RxList<CountryModel>:
+      case const (RxList<CountryModel>):
         {
       if (value != "Please Select") {
             int frequencyIndex = countryList.indexWhere((x) => x?.name == value);
@@ -330,7 +330,7 @@ class BusinessListController extends GetxController {
       }
         }
         break;
-      case RxList<CountryState>:
+      case const (RxList<CountryState>):
         {
          if (value != "Please Select") {
             int frequencyIndex = stateList.indexWhere((x) => x?.name == value);
@@ -354,7 +354,7 @@ class BusinessListController extends GetxController {
          }
         }
         break;
-      case RxList<CityModel>:
+      case const (RxList<CityModel>):
         {
           if (value != "Please Select") {
             int frequencyIndex = cityList.indexWhere((x) => x?.name == value);

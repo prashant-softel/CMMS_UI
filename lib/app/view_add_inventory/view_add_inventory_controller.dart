@@ -712,7 +712,7 @@ class ViewAddInventoryController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           if (value != "Please Select") {
             int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
@@ -724,7 +724,7 @@ class ViewAddInventoryController extends GetxController {
         }
         break;
 
-      case RxList<FrequencyModel>:
+      case const (RxList<FrequencyModel>):
         {
          if (value != "Please Select") {
             int frequencyIndex =
@@ -736,7 +736,7 @@ class ViewAddInventoryController extends GetxController {
          }
         }
         break;
-      case RxList<ManufacturerModel>:
+      case const (RxList<ManufacturerModel>):
         {
           if (value != "Please Select") {
             int manufacturerIndex =
@@ -748,7 +748,7 @@ class ViewAddInventoryController extends GetxController {
           }
         }
         break;
-      case RxList<WarrantyTypeModel>:
+      case const (RxList<WarrantyTypeModel>):
         {
           if (value != "Please Select") {
             int warrantyIndex =
@@ -759,7 +759,7 @@ class ViewAddInventoryController extends GetxController {
           }
         }
         break;
-      case RxList<SupplierNameModel>:
+      case const (RxList<SupplierNameModel>):
         {
           if (value != "Please Select") {
             int supplierIndex =
@@ -771,7 +771,7 @@ class ViewAddInventoryController extends GetxController {
           }
         }
         break;
-      case RxList<WarrantyUsageTermListModel>:
+      case const (RxList<WarrantyUsageTermListModel>):
         {
           if (value != "Please Select") {
             int warrantyUsageTermIndex =
@@ -783,7 +783,7 @@ class ViewAddInventoryController extends GetxController {
           }
         }
         break;
-      case RxList<WarrantyUsageTermListModel>:
+      case const (RxList<WarrantyUsageTermListModel>):
         {
           if (value != "Please Select") {
             int warrantyUsageIndex =
@@ -796,7 +796,7 @@ class ViewAddInventoryController extends GetxController {
           }
         }
         break;
-      case RxList<BlockModel>:
+      case const (RxList<BlockModel>):
         {
           if (value != "Please Select") {
             int blockIndex = blocksList.indexWhere((x) => x?.name == value);
@@ -807,7 +807,7 @@ class ViewAddInventoryController extends GetxController {
           }
         }
         break;
-      case RxList<InventoryModel>:
+      case const (RxList<InventoryModel>):
         {
           // for (var workAreaName in selectedWorkAreaNameList) {
           //   int workAreaIndex =
@@ -827,7 +827,7 @@ class ViewAddInventoryController extends GetxController {
          }
         }
         break;
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           // for (var equipCat in selectedEquipmentCategoryList) {
           //   int equipCatIndex =
@@ -846,7 +846,7 @@ class ViewAddInventoryController extends GetxController {
          }
         }
         break;
-      case RxList<InventoryStatusListModel>:
+      case const (RxList<InventoryStatusListModel>):
         {
           // for (var statusName in statusNameList) {
           //   int statusIndex =
@@ -861,7 +861,7 @@ class ViewAddInventoryController extends GetxController {
          }
         }
         break;
-      case RxList<InventoryTypeListModel>:
+      case const (RxList<InventoryTypeListModel>):
         {
           // for (var typeName in typeNameList) {
           //   int typeNameIndex =

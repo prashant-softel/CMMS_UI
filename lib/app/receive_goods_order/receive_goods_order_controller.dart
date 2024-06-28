@@ -397,7 +397,7 @@ class ReceiveGoodsOrdersController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<CurrencyListModel>:
+      case const (RxList<CurrencyListModel>):
         {
           if (value != "Please Select") {
             int currencyIndex =
@@ -408,7 +408,7 @@ class ReceiveGoodsOrdersController extends GetxController {
           }
         }
         break;
-      case RxList<BusinessTypeModel>:
+      case const (RxList<BusinessTypeModel>):
         {
           if (value != "Please Select") {
             int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
@@ -418,7 +418,7 @@ class ReceiveGoodsOrdersController extends GetxController {
           }
         }
         break;
-      case RxList<PaiedModel>:
+      case const (RxList<PaiedModel>):
         {
           if (value != "Please Select") {
             int paidIndex = paid.indexWhere((x) => x!.name == value);

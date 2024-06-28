@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import '../../domain/models/file_upload_model.dart';
 import '../../domain/repositories/local_storage_keys.dart';
 import '../../domain/repositories/repository.dart';
-import '../utils/utility.dart';
 
 class FileUploadController extends GetxController {
   var repository = Get.find<Repository>();

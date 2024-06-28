@@ -224,7 +224,7 @@ class ExecuteCourseController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({list, value});
     switch (list.runtimeType) {
-      case RxList<EmployeeModel>:
+      case const (RxList<EmployeeModel>):
         {
           int employeeIndex = employees.indexWhere((x) => x.name == value);
           selectedEmployeeName.value = employees[employeeIndex].name ?? '';
@@ -232,7 +232,7 @@ class ExecuteCourseController extends GetxController {
           print("facility selected $selectedEmployeeId, $selectedEmployeeName");
         }
         break;
-      case RxList<TrainingCourse>:
+      case const (RxList<TrainingCourse>):
         {
           int courseIndex =
               trainingCourseList.indexWhere((x) => x.name == value);
@@ -241,7 +241,7 @@ class ExecuteCourseController extends GetxController {
           print("facility selected $selectedCourseName, $selectedCourseId");
         }
         break;
-      case RxList<StatusModel>:
+      case const (RxList<StatusModel>):
         {
           int agencyIndex = trainingAgency.indexWhere((x) => x.name == value);
           selectedTrainingAgencyName.value = trainingAgency[agencyIndex].name;
@@ -250,7 +250,7 @@ class ExecuteCourseController extends GetxController {
               "facility selected $selectedTrainingAgencyId, $selectedTrainingAgencyName");
         }
         break;
-      case RxList<GenderModel>:
+      case const (RxList<GenderModel>):
         {
           int modeIndex = mode.indexWhere((x) => x.name == value);
           selectedModeName.value = mode[modeIndex].name;
@@ -258,7 +258,7 @@ class ExecuteCourseController extends GetxController {
           print("facility selected $selectedModeId, $selectedModeName");
         }
         break;
-      case RxList<EmployeeListModel>:
+      case const (RxList<EmployeeListModel>):
         {
           int modeIndex = employeeNameList.indexWhere((x) => x?.name == value);
           selectedEmployeeNamesList.value =

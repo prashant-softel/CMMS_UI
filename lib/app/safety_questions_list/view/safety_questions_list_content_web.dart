@@ -73,7 +73,8 @@ class SafetyQuestionsListContentWeb
             varUserAccessModel.value.access_list!
                         .where((e) =>
                             e.feature_id ==
-                                UserAccessConstants.kPermitcheckpointFeatureId &&
+                                UserAccessConstants
+                                    .kPermitcheckpointFeatureId &&
                             e.add == UserAccessConstants.kHaveAddAccess)
                         .length >
                     0
@@ -962,7 +963,7 @@ class SafetyQuestionsListContentWeb
                                 Container(
                                   width: 300,
                                   height: 40,
-                                  margin: Dimens.edgeInsets0_0_16_0,
+                                  margin: Dimens.edgeInsets0_0_7_0,
                                   child: TextField(
                                     style: TextStyle(
                                         fontSize: 16.0,

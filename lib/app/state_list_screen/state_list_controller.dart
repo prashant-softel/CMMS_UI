@@ -90,7 +90,7 @@ class StateListController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
 
     switch (list.runtimeType) {
-      case RxList<CountryModel>:
+      case const (RxList<CountryModel>):
         {
           if (value != "Please Select") {
                  int equipmentIndex =

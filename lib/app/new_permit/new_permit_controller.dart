@@ -985,7 +985,7 @@ class NewPermitController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({list, value});
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           if (value != "Please Select") {
             int facilityIndex =
@@ -1005,7 +1005,7 @@ class NewPermitController extends GetxController {
         }
         break;
 
-      case RxList<BlockModel>:
+      case const (RxList<BlockModel>):
         {
           int blockIndex = blockList.indexWhere((x) => x?.name == value);
           selectedBlockId = blockList[blockIndex]?.id ?? 0;
@@ -1016,14 +1016,14 @@ class NewPermitController extends GetxController {
           // getInventoryCategoryList(facilityId: selectedBlockId.toString());
         }
         break;
-      case RxList<EquipmentModel>:
+      case const (RxList<EquipmentModel>):
         {
           int equipmentIndex =
               equipmentList.indexWhere((x) => x?.name == value);
           int selectedEquipmentId = equipmentList[equipmentIndex]?.id ?? 0;
         }
         break;
-      case RxList<InventoryModel>:
+      case const (RxList<InventoryModel>):
         {
           for (var workAreaName in selectedWorkAreaNameList) {
             int workAreaIndex =
@@ -1032,7 +1032,7 @@ class NewPermitController extends GetxController {
           }
         }
         break;
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           for (var equipCat in selectedEquipmentCategoryList) {
             int equipCatIndex =
@@ -1043,7 +1043,7 @@ class NewPermitController extends GetxController {
           }
         }
         break;
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           for (var equipIso in selectedEquipmentIsolationList) {
             int equipIsoIndex = selectedEquipmentIsolationList
@@ -1053,7 +1053,7 @@ class NewPermitController extends GetxController {
         }
         break;
 
-      case RxList<EmployeeModel>:
+      case const (RxList<EmployeeModel>):
         {
           int assignedToIndex =
               assignedToList.indexWhere((x) => x?.name == value);
@@ -1064,7 +1064,7 @@ class NewPermitController extends GetxController {
           selectedAssignedTo.value = value;
         }
         break;
-      case RxList<TypePermitModel>:
+      case const (RxList<TypePermitModel>):
         {
           int permitTypeIndex =
               typePermitList.indexWhere((x) => x?.name == value);
@@ -1079,7 +1079,7 @@ class NewPermitController extends GetxController {
           // getBlocksList(selectedPermitTypeId ?? 0);
         }
         break;
-      case RxList<EmployeeListModel>:
+      case const (RxList<EmployeeListModel>):
         {
           int permitIssuerListIndex =
               permitIssuerList.indexWhere((x) => x!.name == value);
@@ -1087,7 +1087,7 @@ class NewPermitController extends GetxController {
               permitIssuerList[permitIssuerListIndex]!.id ?? 0;
         }
         break;
-      case RxList<EmployeeListModel2>:
+      case const (RxList<EmployeeListModel2>):
         {
           int permitApproverListIndex =
               permitApproverList.indexWhere((x) => x!.name == value);
@@ -1095,7 +1095,7 @@ class NewPermitController extends GetxController {
               permitApproverList[permitApproverListIndex]!.id ?? 0;
         }
         break;
-      case RxList<JobTypeListModel>:
+      case const (RxList<JobTypeListModel>):
         {
           int jobTypeListIndex = jobTypeList.indexWhere((x) => x.name == value);
           selectedJobTypesId = jobTypeList[jobTypeListIndex].id ?? 0;
@@ -1105,7 +1105,7 @@ class NewPermitController extends GetxController {
           //}
         }
         break;
-      case RxList<SOPListModel>:
+      case const (RxList<SOPListModel>):
         {
           int sopPermitListIndex =
               sopPermitList.indexWhere((x) => x.name == value);

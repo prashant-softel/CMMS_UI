@@ -111,7 +111,7 @@ class PreventiveCheckListController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           if (value != "Please Select") {
             int equipmentIndex =
@@ -123,7 +123,7 @@ class PreventiveCheckListController extends GetxController {
         }
 
         break;
-      case RxList<FrequencyModel>:
+      case const (RxList<FrequencyModel>):
         {
          if (value != "Please Select") {
             int frequencyIndex =
@@ -134,7 +134,7 @@ class PreventiveCheckListController extends GetxController {
          }
         }
         break;
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           if (value != "Please Select") {
             int facilityIndex = facilityList.indexWhere((x) => x?.name == value);

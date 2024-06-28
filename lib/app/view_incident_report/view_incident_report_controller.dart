@@ -332,7 +332,7 @@ class ViewIncidentReportController extends GetxController {
       ///New Data adding
       detailsOfInjuredPersonList?.value =
           incidentReportDetailsModel.value?.injured_person ?? [];
-           detailsOfOtherInjuredPersonList?.value =
+      detailsOfOtherInjuredPersonList?.value =
           incidentReportDetailsModel.value?.Otherinjured_person ?? [];
       whyWhyAnalysisList?.value =
           incidentReportDetailsModel.value?.why_why_analysis ?? [];
@@ -347,7 +347,6 @@ class ViewIncidentReportController extends GetxController {
     }
   }
 //other injured person
-
 
   void approveIncidentReportButton({int? id}) async {
     {
@@ -541,7 +540,7 @@ class ViewIncidentReportController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
 
@@ -590,7 +589,7 @@ class ViewIncidentReportController extends GetxController {
     //Add invoice footer
     // drawFooter(page, pageSize);
     //Save the PDF document
-    final List<int> bytes = document.save();
+    final List<int> bytes = await document.save();
     //Dispose the document.
     document.dispose();
     //Save and launch the file.

@@ -43,13 +43,7 @@ class HomeDrawer extends GetView<HomeController> {
                                 fontSize: 11,
                                 wid: 7,
                                 title: "HERO \nFUTURE \nENERGIES",
-                                icon:
-                                    // controller.isExpanded.value
-                                    // ? "assets/files/logodrawer.jpg"
-                                    // :
-                                    "assets/files/logodrawer.jpg",
-                                // height: !controller.isExpanded.value ? 45 : 45,
-                                // width: !controller.isExpanded.value ? 45 : 45,
+                                icon: "assets/files/logodrawer.jpg",
                                 press: () {
                                   Get.offNamed(Routes.home);
                                 },
@@ -84,20 +78,6 @@ class HomeDrawer extends GetView<HomeController> {
                                   Get.offAllNamed(Routes.breakdown);
                                 },
                               ),
-
-                              // MenuItem(
-                              ////                                              isexpand: controller.isExpanded.valu
-                              ///e,
-                              //title: "Warranty claim",
-                              //   icon: "assets/files/warranty.png",
-                              //   press: () {
-                              //     Get.offAllNamed(Routes.warrantyClaimList);
-                              //     //  Navigator.push(
-                              //     //         context,
-                              //     //         MaterialPageRoute(
-                              //     //             builder: (context) => WarrantyClaimListWeb()));
-                              //   },
-                              // ),
                               MenuItem(
                                 isexpand: controller.isExpanded.value,
                                 menuButton: controller.menuButton.value,
@@ -111,7 +91,6 @@ class HomeDrawer extends GetView<HomeController> {
                                   Get.offAllNamed(Routes.preventive);
                                 },
                               ),
-
                               MenuItem(
                                 isexpand: controller.isExpanded.value,
                                 menuButton: controller.menuButton.value,
@@ -139,17 +118,6 @@ class HomeDrawer extends GetView<HomeController> {
                                   Get.offAllNamed(Routes.vegetationDashboard);
                                 },
                               ),
-                              // MenuItem(
-                              //   isexpand:
-                              //       controller.isExpanded.value,
-                              //   title: "Assets",
-                              //   icon:
-                              //       "assets/files/maintenance.png",
-                              //   press: () {
-                              //     Get.offAllNamed(
-                              //         Routes.inventory);
-                              //   },
-                              // ),
                               MenuItem(
                                 isexpand: controller.isExpanded.value,
                                 menuButton: controller.menuButton.value,
@@ -339,7 +307,7 @@ class HomeDrawer extends GetView<HomeController> {
 class MenuItem extends StatelessWidget {
   MenuItem({
     Key? key,
-    this.title,
+    required this.title,
     required this.icon,
     required this.press,
     this.isexpand,
@@ -351,7 +319,7 @@ class MenuItem extends StatelessWidget {
     this.color,
   }) : super(key: key);
 
-  final String? title;
+  final String title;
   final String icon;
   final bool? isexpand;
   final bool? menuButton;
@@ -368,48 +336,50 @@ class MenuItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Container(
-            child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Dimens.boxHeight15,
-            InkWell(
-              // mouseCursor: MaterialStateMouseCursor.clickable,
-              onTap: press,
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: width,
-                    child: Image.asset(
-                      icon,
-                      height: height,
-                      color: color,
+          child: Column(
+            children: [
+              Dimens.boxHeight10,
+              InkWell(
+                onTap: press,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: width,
+                      child: Image.asset(
+                        icon,
+                        height: height,
+                        color: color,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: wid,
-                  ),
-                  isexpand! || menuButton!
-                      ? Expanded(
-                          child: Text(
-                            title ?? "",
-                            style: TextStyle(
-                              color: Color(0xffD2D0D0),
-                              fontSize: fontSize,
-                              fontWeight: FontWeight.w600,
+                    SizedBox(width: wid),
+                    isexpand! || menuButton!
+                        ? Expanded(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                title,
+                                style: TextStyle(
+                                  color: Color(0xffD2D0D0),
+                                  fontSize: fontSize,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                            overflow: TextOverflow.ellipsis,
+                          )
+                        : Expanded(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(""),
+                            ),
                           ),
-                        )
-                      : Dimens.box0
-                ],
+                  ],
+                ),
               ),
-            ),
-            Dimens.boxHeight10
-          ],
-        )),
+              Dimens.boxHeight10
+            ],
+          ),
+        ),
       ),
     );
   }

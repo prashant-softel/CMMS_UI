@@ -344,7 +344,7 @@ class CreateObservationController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print("$value");
     switch (list.runtimeType) {
-      case RxList<IncidentRiskTypeModell>:
+      case const (RxList<IncidentRiskTypeModell>):
         {
           if (value != "Please Select") {
             int statusIndex =
@@ -359,7 +359,7 @@ class CreateObservationController extends GetxController {
           }
         }
         break;
-      case RxList<TypeOfObsListModel>:
+      case const (RxList<TypeOfObsListModel>):
         {
           if (value != "Please Select") {
             int typeOfObsIndex =
@@ -375,7 +375,7 @@ class CreateObservationController extends GetxController {
           }
         }
         break;
-      case RxList<SourceOfObservationListModel>:
+      case const (RxList<SourceOfObservationListModel>):
         {
           if (value != "Please Select") {
             int sourceOfObsIndex =

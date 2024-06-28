@@ -240,7 +240,7 @@ class PermitTypeController extends GetxController {
       //     // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
       //   }
       //   break;
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           if(value != "Please Select"){
             int facilityIndex = facilityList.indexWhere((x) => x?.name == value);

@@ -1,6 +1,5 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_controller.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:flutter/material.dart';

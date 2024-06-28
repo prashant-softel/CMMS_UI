@@ -368,7 +368,7 @@ class SafetyQuestionsListController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           // int equipmentIndex =
           //     equipmentCategoryList.indexWhere((x) => x?.name == value);
@@ -376,14 +376,14 @@ class SafetyQuestionsListController extends GetxController {
         }
 
         break;
-      case RxList<FrequencyModel>:
+      case const (RxList<FrequencyModel>):
         {
           // int frequencyIndex =
           // frequencyList.indexWhere((x) => x?.name == value);
           // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
         }
         break;
-      case RxList<TypePermitModel>:
+      case const (RxList<TypePermitModel>):
         {
         if (value != "Please Select") {
             int typePermitIndex =

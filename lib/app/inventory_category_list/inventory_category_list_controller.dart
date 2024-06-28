@@ -163,7 +163,7 @@ class InventoryCategoryListController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel2>:
+      case const (RxList<InventoryCategoryModel2>):
         {
           int equipmentIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
@@ -171,7 +171,7 @@ class InventoryCategoryListController extends GetxController {
         }
 
         break;
-      case RxList<FrequencyModel>:
+      case const (RxList<FrequencyModel>):
         {
           int frequencyIndex =
               frequencyList.indexWhere((x) => x?.name == value);

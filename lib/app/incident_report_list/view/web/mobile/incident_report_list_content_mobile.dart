@@ -6,7 +6,6 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class IncidentReportListMobile extends GetView<IncidentReportListController> {

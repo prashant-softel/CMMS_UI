@@ -266,7 +266,7 @@ class TransactionReportListController extends GetxController {
     print(value);
 
     switch (list.runtimeType) {
-      case RxList<TypeModel>:
+      case const (RxList<TypeModel>):
         {
           int userIndex = actorType.indexWhere((x) => x.name == value);
           selectedactorTypeId =
@@ -289,7 +289,7 @@ class TransactionReportListController extends GetxController {
           }
         }
         break;
-      case RxList<PmTaskListModel>:
+      case const (RxList<PmTaskListModel>):
         {
           int pmtaskIndex = pmTaskList.indexWhere((x) => x!.name == value);
           selectedpmtaskId = pmTaskList[pmtaskIndex]!.id ?? 0;
@@ -304,7 +304,7 @@ class TransactionReportListController extends GetxController {
               isLoading: isLoading.value);
         }
         break;
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           int facilityIndex =
               facilityNameList.indexWhere((x) => x!.name == value);
@@ -320,7 +320,7 @@ class TransactionReportListController extends GetxController {
               isLoading: isLoading.value);
         }
         break;
-      case RxList<UserListModel>:
+      case const (RxList<UserListModel>):
         {
           int userIndex = userList.indexWhere((x) => x!.name == value);
           selectedUserId = userList[userIndex]!.id ?? 0;
@@ -335,7 +335,7 @@ class TransactionReportListController extends GetxController {
               isLoading: isLoading.value);
         }
         break;
-      case RxList<InventoryModel>:
+      case const (RxList<InventoryModel>):
         {
           int inventoryIndex =
               inventoryNameList.indexWhere((x) => x!.name == value);
@@ -351,7 +351,7 @@ class TransactionReportListController extends GetxController {
               isLoading: isLoading.value);
         }
         break;
-      case RxList<JobModel>:
+      case const (RxList<JobModel>):
         {
           int jobIndex = jobList.indexWhere((x) => x!.name == value);
           selectedJobId = jobList[jobIndex]!.id ?? 0;

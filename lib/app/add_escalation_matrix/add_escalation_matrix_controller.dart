@@ -226,7 +226,7 @@ class AddEscalationMatrixController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
     switch (list.runtimeType) {
-      case RxList<ModuleModel>:
+      case const (RxList<ModuleModel>):
         {
           if (value != "Please Select") {
             int moduleListIndex =
@@ -239,7 +239,7 @@ class AddEscalationMatrixController extends GetxController {
           }
         }
         break;
-      case RxList<RoleModel>:
+      case const (RxList<RoleModel>):
         {
           if (value != "Please Select") {
             int roleModelListIndex =
@@ -251,7 +251,7 @@ class AddEscalationMatrixController extends GetxController {
           }
         }
         break;
-      case RxList<Status>:
+      case const (RxList<Status>):
         {
           if (value != "Please Select") {
             int statusIndex = status.indexWhere((x) => x?.name == value);

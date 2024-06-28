@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cmms/app/attendance_list/attendance_list_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
@@ -19,6 +20,7 @@ class AttendanceListController extends GetxController {
   Rx<int> facilityId = 0.obs;
   final HomeController homecontroller = Get.find();
   RxString selectedYear = "2023-24".obs;
+  RxList<MonthData> wholeMonthData = <MonthData>[].obs;
 
   @override
   void onInit() async {
@@ -67,6 +69,17 @@ class AttendanceListController extends GetxController {
       year: year,
       isLoading: isLoading,
     );
+    for (int i = 1; i < 31; i++) {
+      MonthData monthData = MonthData(
+        date: i,
+        hfe_employees: 0,
+        less_than_35: 0,
+        between_30_to_50: 0,
+        greater_than_50: 0,
+      );
+      wholeMonthData.add(monthData);
+      print("${jsonEncode(wholeMonthData.toJson())}");
+    }
     attendance_list.value = _attendanceList;
     isLoading = false;
     update(['attendance-list']);

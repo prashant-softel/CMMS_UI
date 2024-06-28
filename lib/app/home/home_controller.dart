@@ -430,7 +430,7 @@ class HomeController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacility.value = facilityList[facilityIndex]?.name ?? '';
@@ -445,7 +445,7 @@ class HomeController extends GetxController {
           homePresenter.saveValue(facilitydata: facilitydata);
         }
         break;
-      case RxList<InventoryModel>:
+      case const (RxList<InventoryModel>):
         {
           for (var workAreaName in selectedWorkAreaNameList) {
             int workAreaIndex =

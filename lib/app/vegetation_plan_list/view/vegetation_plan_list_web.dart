@@ -229,7 +229,7 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                       Container(
                                         width: 300,
                                         height: 40,
-                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        margin: Dimens.edgeInsets0_0_7_0,
                                         child: TextField(
                                           style: GoogleFonts.lato(
                                             textStyle: TextStyle(
@@ -286,14 +286,10 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                                     return PaginatedDataTable2(
                                                       columnSpacing: 10,
                                                       dataRowHeight: 55,
-                                                      source:
-                                                          dataSource, // Custom DataSource class
-                                                      // headingRowHeight:
-                                                      //     Get.height * 0.12,
+                                                      source: dataSource,
                                                       minWidth: Get.width * 0.7,
                                                       showCheckboxColumn: false,
-                                                      rowsPerPage:
-                                                          10, // Number of rows per page
+                                                      rowsPerPage: 10,
                                                       availableRowsPerPage: [
                                                         10,
                                                         20,
@@ -454,14 +450,15 @@ class VegetationPlanListDataSource extends DataTableSource {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Container(
-                            padding: Dimens.edgeInsets8_2_8_2,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 5),
                             decoration: BoxDecoration(
                               color: ColorValues.addNewColor,
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
                               ' ${VegetationListDetails?.statusShort}',
-                              style: Styles.white10.copyWith(
+                              style: Styles.white11.copyWith(
                                 color: Colors.white,
                               ),
                             ),

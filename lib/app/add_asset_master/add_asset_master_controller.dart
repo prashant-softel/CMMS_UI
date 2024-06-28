@@ -202,7 +202,7 @@ class AddAssetMasterController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<UnitMeasurementModel>:
+      case const (RxList<UnitMeasurementModel>):
         {
           if (value != "Please Select") {
             int Index = unitMeasurementList.indexWhere((x) => x?.name == value);
@@ -214,7 +214,7 @@ class AddAssetMasterController extends GetxController {
           }
         }
         break;
-      case RxList<AssetCategoryModel>:
+      case const (RxList<AssetCategoryModel>):
         {
           if (value != "Please Select") {
             int Index = materialCategoryList.indexWhere((x) => x?.name == value);
@@ -226,7 +226,7 @@ class AddAssetMasterController extends GetxController {
           }
         }
         break;
-      case RxList<ACDCModel>:
+      case const (RxList<ACDCModel>):
         {
           if (value != "Please Select") {
             int Index = acdclist.indexWhere((x) => x?.name == value);
@@ -238,7 +238,7 @@ class AddAssetMasterController extends GetxController {
           }
         }
         break;
-      case RxList<AssetTypeListSMModel>:
+      case const (RxList<AssetTypeListSMModel>):
         {
           if (value != "Please Select") {
             int Index = materialList.indexWhere((x) => x?.name == value);
@@ -250,7 +250,7 @@ class AddAssetMasterController extends GetxController {
           }
         }
         break;
-      case RxList<ACDCModel>:
+      case const (RxList<ACDCModel>):
         {
           if (value != "Please Select") {
             int Index = acdclist.indexWhere((x) => x?.name == value);

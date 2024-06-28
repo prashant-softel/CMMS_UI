@@ -4,6 +4,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -228,13 +229,14 @@ class JobListContentWeb extends StatelessWidget {
                             Container(
                               width: 300,
                               height: 40,
-                              margin: Dimens.edgeInsets0_0_16_0,
+                              margin: EdgeInsets.only(right: 7.w),
                               child: TextField(
                                 style: GoogleFonts.lato(
                                   textStyle: TextStyle(
-                                      fontSize: 16.0,
-                                      height: 1.0,
-                                      color: Colors.black),
+                                    fontSize: 16.0,
+                                    height: 1.0,
+                                    color: Colors.black,
+                                  ),
                                 ),
                                 onChanged: (value) => controller.search(value),
                                 decoration: InputDecoration(

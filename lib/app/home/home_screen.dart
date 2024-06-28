@@ -10,51 +10,53 @@ class HomeScreen extends GetView<HomeController> {
   final controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
-    return
-        //
-        Scaffold(
-      appBar: Responsive.isMobile(context)
-          ? AppBar(
-              title: Text('Home'),
-              centerTitle: true,
-              elevation: 0,
-            )
-          : null,
-      drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
-          ? HomeDrawerMobile() //ResponsiveSideMenu()
-          : null,
-      body: Stack(
-        children: [
-          AnimatedContainer(
-            duration: Duration(milliseconds: 450),
-            margin: EdgeInsets.only(
-              left: Responsive.isDesktop(context)
-                  ? controller.menuButton.value
-                      ? 250.0
-                      : 70.0
-                  : 0,
+    return SafeArea(
+      top: true,
+      bottom: false,
+      child: Scaffold(
+        appBar: Responsive.isMobile(context)
+            ? AppBar(
+                title: Text('Home'),
+                centerTitle: true,
+                elevation: 0,
+              )
+            : null,
+        drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
+            ? HomeDrawerMobile() //ResponsiveSideMenu()
+            : null,
+        body: Stack(
+          children: [
+            AnimatedContainer(
+              duration: Duration(milliseconds: 450),
+              margin: EdgeInsets.only(
+                left: Responsive.isDesktop(context)
+                    ? controller.menuButton.value
+                        ? 250.0
+                        : 70.0
+                    : 0,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        (Responsive.isDesktop(context))
+                            ? Expanded(child: DashBoardHomeWeb())
+                            : Dimens.box0
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      (Responsive.isDesktop(context))
-                          ? Expanded(child: DashBoardHomeWeb())
-                          : Dimens.box0
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Responsive.isDesktop(context)
-              ? AnimatedPositioned(
-                  duration: Duration(milliseconds: 450),
-                  child: HomeDrawer(),
-                )
-              : Dimens.box0
-        ],
+            Responsive.isDesktop(context)
+                ? AnimatedPositioned(
+                    duration: Duration(milliseconds: 450),
+                    child: HomeDrawer(),
+                  )
+                : Dimens.box0
+          ],
+        ),
       ),
     );
   }
