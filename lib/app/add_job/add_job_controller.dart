@@ -4,7 +4,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../domain/models/employee_model.dart';
@@ -394,7 +393,7 @@ class AddJobController extends GetxController {
   ///Value changed in any of the dropdowns - single select
   void onDropdownValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
          if (value != "Please Select") {
            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
@@ -411,7 +410,7 @@ class AddJobController extends GetxController {
         }
         break;
 
-      case RxList<BlockModel>:
+      case const (RxList<BlockModel>):
         {
           if (value != "Please Select") {
             int blockIndex = blockList.indexWhere((x) => x?.name == value);
@@ -436,7 +435,7 @@ class AddJobController extends GetxController {
           // getToolsRequiredToWorkTypeList();
         }
         break;
-      case RxList<EquipmentModel>:
+      case const (RxList<EquipmentModel>):
         {
           if (value != "Please Select") {
             int equipmentIndex =
@@ -448,7 +447,7 @@ class AddJobController extends GetxController {
           }
         }
         break;
-      case RxList<InventoryModel>:
+      case const (RxList<InventoryModel>):
         {
          if (value != "Please Select") {
             for (var workAreaName in selectedWorkAreaNameList) {
@@ -461,7 +460,7 @@ class AddJobController extends GetxController {
          }
         }
         break;
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           if (value != "Please Select") {
             for (var equipCat in selectedEquipmentCategoryList) {
@@ -475,7 +474,7 @@ class AddJobController extends GetxController {
         }
         break;
 
-      case RxList<EmployeeModel>:
+      case const (RxList<EmployeeModel>):
         {
           if (value != "Please Select") {
             int assignedToIndex =

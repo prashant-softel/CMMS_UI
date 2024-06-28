@@ -312,7 +312,7 @@ class FacilityTypeListController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<CountryModel>:
+      case const (RxList<CountryModel>):
         {
           int frequencyIndex = countryList.indexWhere((x) => x?.name == value);
           selectedCountryId = countryList[frequencyIndex]?.id ?? 0;
@@ -331,7 +331,7 @@ class FacilityTypeListController extends GetxController {
           }
         }
         break;
-      case RxList<CountryState>:
+      case const (RxList<CountryState>):
         {
           int frequencyIndex = stateList.indexWhere((x) => x?.name == value);
           selectedStateId = stateList[frequencyIndex]?.id ?? 0;
@@ -350,7 +350,7 @@ class FacilityTypeListController extends GetxController {
           }
         }
         break;
-      case RxList<CityModel>:
+      case const (RxList<CityModel>):
         {
           int frequencyIndex = cityList.indexWhere((x) => x?.name == value);
           selectedCityId = cityList[frequencyIndex]?.id ?? 0;
@@ -361,7 +361,7 @@ class FacilityTypeListController extends GetxController {
           print('CityId:${selectedCityId}');
         }
         break;
-      case RxList<BusinessListModel>:
+      case const (RxList<BusinessListModel>):
         {
           int customerIndex = customerList.indexWhere((x) => x?.name == value);
           customerId = customerList[customerIndex]?.id ?? 0;

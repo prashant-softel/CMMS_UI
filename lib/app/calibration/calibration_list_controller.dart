@@ -201,7 +201,7 @@ class CalibrationListController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<BusinessListModel>:
+      case const (RxList<BusinessListModel>):
         {
           if (value != "Please Select") {
             int facilityIndex =

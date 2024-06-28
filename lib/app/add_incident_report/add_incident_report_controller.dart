@@ -1391,7 +1391,7 @@ class AddIncidentReportController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
 
@@ -1403,7 +1403,7 @@ class AddIncidentReportController extends GetxController {
           getBlocksList(selectedFacilityId!);
         }
         break;
-      case RxList<InventoryModel>:
+      case const (RxList<InventoryModel>):
         {
           // for (var workAreaName in selectedWorkAreaNameList) {
           int equipmentNameIndex =
@@ -1422,7 +1422,7 @@ class AddIncidentReportController extends GetxController {
           // }
         }
         break;
-      case RxList<BlockModel>:
+      case const (RxList<BlockModel>):
         {
           int blockIndex = blockList.indexWhere((x) => x?.name == value);
           selectedBlockId = blockList[blockIndex]?.id ?? 0;
@@ -1453,7 +1453,7 @@ class AddIncidentReportController extends GetxController {
       //     // }
       //   }
       //   break;
-      case RxList<EmployeeListModel>:
+      case const (RxList<EmployeeListModel>):
         {
           int incidentInvestigationDoneByListIndex =
               incidentInvestigationDoneByList
@@ -1477,7 +1477,7 @@ class AddIncidentReportController extends GetxController {
               'Incident Investigation Done By Id: $selectedIncidentInvestigationDoneById');
         }
         break;
-      case RxList<IncidentRiskTypeModell>:
+      case const (RxList<IncidentRiskTypeModell>):
         {
           int riskTypeListIndex =
               incidentrisktypeList.indexWhere((x) => x.name == value);
@@ -1485,7 +1485,7 @@ class AddIncidentReportController extends GetxController {
           print('Risk Type id: $selectedRiskTypeId');
         }
         break;
-      case RxList<BusinessListModel>:
+      case const (RxList<BusinessListModel>):
         {
           int businessListIndex =
               businessList.indexWhere((x) => x.name == value);
@@ -1494,7 +1494,7 @@ class AddIncidentReportController extends GetxController {
         }
 
         break;
-      case RxList<BodyInjuredModel>:
+      case const (RxList<BodyInjuredModel>):
         {
           int bodyPartInjuredListIndex =
               bodyinjuredList.indexWhere((x) => x?.name == value);

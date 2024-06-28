@@ -99,7 +99,7 @@ class WorkTypeController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           if (value != "Please Select") {
             int equipmentIndex =

@@ -549,7 +549,7 @@ class AddUserController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print(value);
     switch (list.runtimeType) {
-      case RxList<CountryModel>:
+      case const (RxList<CountryModel>):
         {
           if (value != "Please Select") {
             int countryIndex = countryList.indexWhere((x) => x?.name == value);
@@ -570,7 +570,7 @@ class AddUserController extends GetxController {
         }
 
         break;
-      case RxList<StateModel>:
+      case const (RxList<StateModel>):
         {
           int stateIndex = stateList.indexWhere((x) => x?.name == value);
           selectedStateId = stateList[stateIndex]?.id ?? 0;
@@ -581,7 +581,7 @@ class AddUserController extends GetxController {
           getCityList(selectedStateId);
         }
         break;
-      case RxList<DesignationModel?>:
+      case const (RxList<DesignationModel?>):
         {
           int descIndex = designationList!.indexWhere((x) => x?.name == value);
           selectedDesignationId.value = designationList?[descIndex]?.id ?? 0;
@@ -592,7 +592,7 @@ class AddUserController extends GetxController {
           );
         }
         break;
-      case RxList<CityModel>:
+      case const (RxList<CityModel>):
         {
           int cityIndex = cityList.indexWhere((x) => x?.name == value);
           selectedCityId = cityList[cityIndex]?.id ?? 0;
@@ -600,7 +600,7 @@ class AddUserController extends GetxController {
         }
 
         break;
-      case RxList<GenderModel>:
+      case const (RxList<GenderModel>):
         {
           int genderIndex = genderList.indexWhere((x) => x?.name == value);
           selectedGenderId = genderList[genderIndex]?.id ?? 0;
@@ -608,7 +608,7 @@ class AddUserController extends GetxController {
           selectedGender.value = value;
         }
         break;
-      case RxList<BloodModel>:
+      case const (RxList<BloodModel>):
         {
           int bloodIndex = bloodList.indexWhere((x) => x?.name == value);
           selectedBloodId = bloodList[bloodIndex]?.id ?? 0;
@@ -616,7 +616,7 @@ class AddUserController extends GetxController {
           selectedBlood.value = value;
         }
         break;
-      case RxList<RoleModel>:
+      case const (RxList<RoleModel>):
         {
           int roleIndex = roleList.indexWhere((x) => x?.name == value);
           selectedRoleId = roleList[roleIndex]?.id ?? 0;
@@ -626,14 +626,14 @@ class AddUserController extends GetxController {
           getRoleNotificationList(roleId: selectedRoleId, isloading: true);
         }
         break;
-      case RxList<BusinessListModel>:
+      case const (RxList<BusinessListModel>):
         {
           int equipmentIndex = businessList.indexWhere((x) => x?.name == value);
           selectedBusinessTypeId = businessList[equipmentIndex]?.id ?? 0;
           isBusinessListSelected.value = true;
         }
         break;
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           for (var facility in facilityNameList) {
             print("facilities ${facility}");

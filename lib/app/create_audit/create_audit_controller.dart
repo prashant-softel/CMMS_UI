@@ -192,7 +192,7 @@ class CreateAuditController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
-      case RxList<FrequencyModel>:
+      case const (RxList<FrequencyModel>):
         {
           if (value != "Please Select") {
             int frequencyIndex =
@@ -206,7 +206,7 @@ class CreateAuditController extends GetxController {
           }
         }
         break;
-      case RxList<PreventiveCheckListModel>:
+      case const (RxList<PreventiveCheckListModel>):
         {
           if (value != "Please Select") {
             int checklistIndex = checkList.indexWhere((x) => x?.name == value);
@@ -219,7 +219,7 @@ class CreateAuditController extends GetxController {
         }
 
         break;
-      case RxList<EmployeeModel>:
+      case const (RxList<EmployeeModel>):
         {
           if (value != "Please Select") {
             int assignedToIndex =

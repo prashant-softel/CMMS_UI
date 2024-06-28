@@ -498,7 +498,7 @@ class EditJobController extends GetxController {
   bool openbreaketimeDatePicker = false;
   void onDropdownValueChanged(list, value) {
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
@@ -510,7 +510,7 @@ class EditJobController extends GetxController {
         }
         break;
 
-      case RxList<BlockModel>:
+      case const (RxList<BlockModel>):
         {
           int blockIndex = blockList.indexWhere((x) => x?.name == value);
           selectedBlockId = blockList[blockIndex]?.id ?? 0;
@@ -522,7 +522,7 @@ class EditJobController extends GetxController {
         }
         break;
 
-      case RxList<EmployeeModel>:
+      case const (RxList<EmployeeModel>):
         {
           int assignedToIndex =
               assignedToList.indexWhere((x) => x?.name == value);

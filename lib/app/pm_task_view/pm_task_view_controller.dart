@@ -389,7 +389,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
   void onDropdownValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<EmployeeModel>:
+      case const (RxList<EmployeeModel>):
         {
           int assignedToIndex =
               assignedToList.indexWhere((x) => x?.name == value);

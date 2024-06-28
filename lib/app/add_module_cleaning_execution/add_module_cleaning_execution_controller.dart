@@ -492,7 +492,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           if (value != "Please Select") {
             int facilityIndex =
@@ -504,7 +504,7 @@ class AddModuleCleaningExecutionController extends GetxController {
           }
         }
         break;
-      case RxList<ModuleListModel>:
+      case const (RxList<ModuleListModel>):
         {
           if (value != "Please Select") {
             int moduleListIndex =

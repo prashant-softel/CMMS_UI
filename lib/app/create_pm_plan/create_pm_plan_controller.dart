@@ -300,7 +300,7 @@ class CreatePmPlanController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           if (value != "Please Select") {
             int equipCatIndex =
@@ -335,7 +335,7 @@ class CreatePmPlanController extends GetxController {
           }
         }
         break;
-      case RxList<InventoryModel>:
+      case const (RxList<InventoryModel>):
         {
           if (value != "Please Select") {
             filteredInventoryNameList.value = <InventoryModel>[];
@@ -368,7 +368,7 @@ class CreatePmPlanController extends GetxController {
           }
         }
         break;
-      case RxList<FrequencyModel>:
+      case const (RxList<FrequencyModel>):
         {
           if (value != "Please Select") {
             int frequencyIndex =
@@ -387,7 +387,7 @@ class CreatePmPlanController extends GetxController {
           }
         }
         break;
-      case RxList<PreventiveCheckListModel>:
+      case const (RxList<PreventiveCheckListModel>):
         {
           if (value != "Please Select") {
             int checklistIndex =
@@ -401,7 +401,7 @@ class CreatePmPlanController extends GetxController {
           }
         }
         break;
-      case RxList<EmployeeModel>:
+      case const (RxList<EmployeeModel>):
         {
           if (value != "Please Select") {
             int assignedToIndex =

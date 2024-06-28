@@ -119,7 +119,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title: 'Date Range'),
-                                                Dimens.boxWidth10,
+                                                Dimens.boxWidth2,
                                                 CustomTextFieldForStock(
                                                   width: MediaQuery.of(context)
                                                           .size
@@ -329,9 +329,9 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                           ),
                                           Spacer(),
                                           Container(
-                                            width: 200,
-                                            height: 35,
-                                            margin: Dimens.edgeInsets0_0_16_0,
+                                            width: 300,
+                                            height: 40,
+                                            margin: Dimens.edgeInsets0_0_7_0,
                                             child: TextField(
                                               style: GoogleFonts.lato(
                                                 textStyle: TextStyle(
@@ -355,7 +355,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                                       width: 0.0),
                                                 ),
                                                 contentPadding:
-                                                    Dimens.edgeInsets10_0_0_0,
+                                                    Dimens.edgeInsets05_10,
                                                 hintText: 'search'.tr,
                                                 hintStyle: Styles.grey12,
                                               ),

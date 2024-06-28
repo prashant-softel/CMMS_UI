@@ -419,7 +419,7 @@ class PreventiveCheckPointController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<PreventiveCheckListModel>:
+      case const (RxList<PreventiveCheckListModel>):
         {
           if (value != "Please Select") {
             int checklistIndex = checkList.indexWhere((x) => x?.name == value);

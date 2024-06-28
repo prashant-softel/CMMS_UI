@@ -1,11 +1,6 @@
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
-import 'package:cmms/app/view_course/view/view_course_web.dart';
 import 'package:cmms/app/view_observation/view_observation_controller.dart';
-import 'package:cmms/app/widgets/compliance_approve_dialog.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

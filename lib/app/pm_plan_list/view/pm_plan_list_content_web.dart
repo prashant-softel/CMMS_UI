@@ -233,7 +233,7 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                   Container(
                                     width: 300,
                                     height: 40,
-                                    margin: Dimens.edgeInsets0_0_16_0,
+                                    margin: Dimens.edgeInsets0_0_7_0,
                                     child: TextField(
                                       style: GoogleFonts.lato(
                                         textStyle: TextStyle(
@@ -483,7 +483,8 @@ class PmPlanDataSource extends DataTableSource {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
+                          padding:
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                           decoration: BoxDecoration(
                             color: controller.pmPlanList
                                         .firstWhere(

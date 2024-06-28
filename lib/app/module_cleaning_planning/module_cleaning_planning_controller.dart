@@ -339,7 +339,7 @@ class ModuleCleaningPlanningController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
-      case RxList<FrequencyModel>:
+      case const (RxList<FrequencyModel>):
         {
           if(value != "Please Select"){
             int frequencyIndex =

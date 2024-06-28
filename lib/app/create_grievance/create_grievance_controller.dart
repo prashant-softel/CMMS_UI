@@ -191,7 +191,7 @@ class CreateGrievanceController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<GrievanceTypeModel>:
+      case const (RxList<GrievanceTypeModel>):
         {
           if (value != "Please Select") {
             int grievanceTypeIndex =

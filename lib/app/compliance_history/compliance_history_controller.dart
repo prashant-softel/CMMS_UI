@@ -101,7 +101,7 @@ class ComplianceHistoryController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<BusinessTypeModel>:
+      case const (RxList<BusinessTypeModel>):
         {
           if (value != "Please Select") {
             int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);

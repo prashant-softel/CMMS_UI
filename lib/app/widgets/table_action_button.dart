@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TableActionButton extends StatelessWidget {
   const TableActionButton({
@@ -23,10 +24,10 @@ class TableActionButton extends StatelessWidget {
       child: InkWell(
         onTap: onPress,
         child: Container(
-          margin: Dimens.edgeInsets4,
-          padding: Dimens.edgeInsets8_2_8_2,
+          margin: EdgeInsets.all(4.0.h),
+          padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(4.r),
             color: color,
           ),
           child: Row(
@@ -38,18 +39,18 @@ class TableActionButton extends StatelessWidget {
                       showDuration: const Duration(microseconds: 10),
                       decoration: BoxDecoration(
                         color: color,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(5)),
+                        borderRadius: BorderRadius.all(Radius.circular(5.r)),
                       ),
                       textStyle: Styles.white12.copyWith(
                         color: Colors.white,
                       ),
                       // preferBelow: true,
-
                       verticalOffset: 25,
                       child: Icon(icon, color: Colors.white, size: 14))
                   : SizedBox.shrink(),
-              icon != null ? Dimens.boxWidth2 : SizedBox.shrink(),
+              // Center(
+              //   child: icon != null ? Dimens.boxWidth2 : SizedBox.shrink(),
+              // ),
               Text(
                 label ?? "",
                 style: Styles.white12.copyWith(

@@ -206,7 +206,7 @@ class PlantStockReportController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
-      case RxList<GetAssetDataModel>:
+      case const (RxList<GetAssetDataModel>):
         {
           if (value != "Please Select") {
             if (value != null) {

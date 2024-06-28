@@ -5,7 +5,6 @@ import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../theme/color_values.dart';

@@ -267,7 +267,7 @@ class ToolTypeController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           if (value != "Please Select") {
             int equipmentIndex =
@@ -283,7 +283,7 @@ class ToolTypeController extends GetxController {
         }
 
         break;
-      case RxList<WorkTypeModel>:
+      case const (RxList<WorkTypeModel>):
         {
           int equipmentIndex = worktypeList.indexWhere((x) => x?.name == value);
           selectedWorkTypeId = worktypeList[equipmentIndex]?.id ?? 0;

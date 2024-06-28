@@ -510,7 +510,7 @@ class WaterDataListController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<WaterSource>:
+      case const (RxList<WaterSource>):
         {
           if (value != "Please Select") {
             int typeOfWaterIndex =

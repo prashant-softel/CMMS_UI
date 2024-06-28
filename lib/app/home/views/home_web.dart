@@ -3,15 +3,14 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pie_chart/pie_chart.dart';
-import 'package:semicircle_indicator/semicircle_indicator.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../navigators/app_pages.dart';
 
 class DashBoardHomeWeb extends GetView<HomeController> {
@@ -219,8 +218,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 child: Container(
                                                   width: 200,
                                                   child: AlertDialog(
-                                                    insetPadding: Dimens
-                                                        .edgeInsets10_0_10_0,
+                                                    insetPadding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 5.w),
                                                     contentPadding:
                                                         EdgeInsets.all(20),
                                                     backgroundColor: ColorValues

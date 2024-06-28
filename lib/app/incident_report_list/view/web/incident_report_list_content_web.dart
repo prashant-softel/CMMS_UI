@@ -124,7 +124,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                             children: [
                                               CustomRichText(
                                                   title: 'Date Range'),
-                                              Dimens.boxWidth10,
+                                              Dimens.boxWidth5,
                                               CustomTextFieldForStock(
                                                 width: MediaQuery.of(context)
                                                         .size
@@ -297,7 +297,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                         Container(
                                           width: 300,
                                           height: 40,
-                                          margin: Dimens.edgeInsets0_0_16_0,
+                                          margin: Dimens.edgeInsets0_0_7_0,
                                           child: TextField(
                                             style: GoogleFonts.lato(
                                               textStyle: TextStyle(
@@ -321,7 +321,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                     width: 0.0),
                                               ),
                                               contentPadding:
-                                                  Dimens.edgeInsets10_0_0_0,
+                                                  Dimens.edgeInsets05_10,
                                               hintText: 'search'.tr,
                                               hintStyle: Styles.grey12,
                                             ),
@@ -614,7 +614,8 @@ class IncidentReportListDataSource extends DataTableSource {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
+                          padding:
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                           decoration: BoxDecoration(
                               color: controller.incidentReportList
                                               .firstWhere(
@@ -698,7 +699,7 @@ class IncidentReportListDataSource extends DataTableSource {
                               ),
                           child: Text(
                             '${incidentReportListDetails?.status_short}',
-                            style: Styles.white10.copyWith(
+                            style: Styles.white11.copyWith(
                               color: Colors.white,
                             ),
                           ),

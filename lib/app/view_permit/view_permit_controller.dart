@@ -1234,7 +1234,7 @@ class ViewPermitController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           if (value != "Please Select") {
             int facilityIndex =
@@ -1254,7 +1254,7 @@ class ViewPermitController extends GetxController {
         }
         break;
 
-      case RxList<BlockModel>:
+      case const (RxList<BlockModel>):
         {
           int blockIndex = blockList.indexWhere((x) => x?.name == value);
           selectedBlockId = blockList[blockIndex]?.id ?? 0;
@@ -1265,7 +1265,7 @@ class ViewPermitController extends GetxController {
           getInventoryCategoryList(facilityId: selectedBlockId.toString());
         }
         break;
-      case RxList<EquipmentModel>:
+      case const (RxList<EquipmentModel>):
         {
           int equipmentIndex =
               equipmentList.indexWhere((x) => x?.name == value);
@@ -1273,7 +1273,7 @@ class ViewPermitController extends GetxController {
           print('euipment data5:$selectedEquipmentId');
         }
         break;
-      case RxList<InventoryModel>:
+      case const (RxList<InventoryModel>):
         {
           for (var workAreaName in selectedWorkAreaNameList) {
             int workAreaIndex =
@@ -1282,7 +1282,7 @@ class ViewPermitController extends GetxController {
           }
         }
         break;
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           for (var equipCat in selectedEquipmentCategoryList) {
             int equipCatIndex =
@@ -1294,7 +1294,7 @@ class ViewPermitController extends GetxController {
           }
         }
         break;
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           for (var equipIso in selectedEquipmentIsolationList) {
             int equipIsoIndex = selectedEquipmentIsolationList
@@ -1304,7 +1304,7 @@ class ViewPermitController extends GetxController {
         }
         break;
 
-      case RxList<EmployeeModel>:
+      case const (RxList<EmployeeModel>):
         {
           int assignedToIndex =
               assignedToList.indexWhere((x) => x?.name == value);
@@ -1315,7 +1315,7 @@ class ViewPermitController extends GetxController {
           selectedAssignedTo.value = value;
         }
         break;
-      case RxList<TypePermitModel>:
+      case const (RxList<TypePermitModel>):
         {
           int permitTypeIndex =
               typePermitList.indexWhere((x) => x?.name == value);
@@ -1329,7 +1329,7 @@ class ViewPermitController extends GetxController {
           getBlocksList(selectedTypePermitId);
         }
         break;
-      case RxList<EmployeeListModel>:
+      case const (RxList<EmployeeListModel>):
         {
           int permitIssuerListIndex =
               permitIssuerList.indexWhere((x) => x!.name == value);
@@ -1338,7 +1338,7 @@ class ViewPermitController extends GetxController {
           print('PermitIssuerId:$selectedPermitIssuerTypeId');
         }
         break;
-      case RxList<EmployeeListModel2>:
+      case const (RxList<EmployeeListModel2>):
         {
           int permitApproverListIndex =
               permitApproverList.indexWhere((x) => x!.name == value);
@@ -1347,7 +1347,7 @@ class ViewPermitController extends GetxController {
           print('PermitApproverId:$selectedPermitApproverTypeId');
         }
         break;
-      case RxList<JobTypeListModel>:
+      case const (RxList<JobTypeListModel>):
         {
           int jobTypeListIndex = jobTypeList.indexWhere((x) => x.name == value);
           selectedJobTYpesId = jobTypeList[jobTypeListIndex].id ?? 0;
@@ -1357,7 +1357,7 @@ class ViewPermitController extends GetxController {
           //}
         }
         break;
-      case RxList<SOPListModel>:
+      case const (RxList<SOPListModel>):
         {
           int sopPermitListIndex =
               sopPermitList.indexWhere((x) => x.name == value);
@@ -1728,7 +1728,7 @@ class ViewPermitController extends GetxController {
     //Add invoice footer
     // drawFooter(page, pageSize);
     //Save the PDF document
-    final List<int> bytes = document.save();
+    final List<int> bytes = await document.save();
     //Dispose the document.
     document.dispose();
     //Save and launch the file.

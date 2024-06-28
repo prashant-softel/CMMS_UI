@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../navigators/app_pages.dart';
@@ -93,7 +94,8 @@ class HeaderWidgetAllDash extends GetView<HomeController> {
                                 child: Container(
                                   width: 200,
                                   child: AlertDialog(
-                                    insetPadding: Dimens.edgeInsets10_0_10_0,
+                                    insetPadding:
+                                        EdgeInsets.symmetric(horizontal: 5.w),
                                     contentPadding: EdgeInsets.all(20),
                                     backgroundColor:
                                         ColorValues.appDarkBlueColor,

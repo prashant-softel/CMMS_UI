@@ -678,7 +678,7 @@ class EditWarrantyClaimController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           if (value != "Please Select") {
             int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
@@ -689,7 +689,7 @@ class EditWarrantyClaimController extends GetxController {
           }
         }
         break;
-      case RxList<InventoryModel>:
+      case const (RxList<InventoryModel>):
         {
           // for (var workAreaName in selectedWorkAreaNameList) {
          if (value != "Please Select") {
@@ -711,7 +711,7 @@ class EditWarrantyClaimController extends GetxController {
           // }
         }
         break;
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           // for (var workAreaName in selectedWorkAreaNameList) {
          if (value != "Please Select") {
@@ -736,7 +736,7 @@ class EditWarrantyClaimController extends GetxController {
           // }
         }
         break;
-      case RxList<BusinessListModel>:
+      case const (RxList<BusinessListModel>):
         {
           if (value != "Please Select") {
             for (var supplierName in selectedSupplierNameList) {
@@ -749,7 +749,7 @@ class EditWarrantyClaimController extends GetxController {
           }
         }
         break;
-      case RxList<CurrencyListModel>:
+      case const (RxList<CurrencyListModel>):
         {
           // for (var unitCurrency in selectedUnitCurrencyList) {
          if (value != "Please Select") {
@@ -769,7 +769,7 @@ class EditWarrantyClaimController extends GetxController {
           // }
         }
         break;
-      case RxList<EmployeeListModel>:
+      case const (RxList<EmployeeListModel>):
         {
           // for (var employeeDataList in selectedEmployeeDataList) {
          if (value != "Please Select") {
@@ -789,7 +789,7 @@ class EditWarrantyClaimController extends GetxController {
           // }
         }
         break;
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           // for (var employeeDataList in selectedEmployeeDataList) {
          if (value != "Please Select") {
@@ -806,7 +806,7 @@ class EditWarrantyClaimController extends GetxController {
           // }
         }
         break;
-      case RxList<EmployeeListModel2>:
+      case const (RxList<EmployeeListModel2>):
         {
        if (value != "Please Select") {
             // for (var employeeDataList in selectedEmployeeDataList) {

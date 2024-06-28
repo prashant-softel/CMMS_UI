@@ -11,8 +11,6 @@ import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../domain/models/file_upload_model.dart';
@@ -605,7 +603,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
-      case RxList<ScheduleCheckPoint?>:
+      case const (RxList<ScheduleCheckPoint?>):
         {
           if (value != "Please Select") {
             int assetsIndex =

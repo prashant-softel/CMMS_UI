@@ -291,7 +291,7 @@ class AddCourseController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({list, value});
     switch (list.runtimeType) {
-      case RxList<CourseCategoryModel>:
+      case const (RxList<CourseCategoryModel>):
         {
           int blockIndex = courseCategory.indexWhere((x) => x.name == value);
           selectedCategoryId.value = courseCategory[blockIndex].id ?? 0;
@@ -299,7 +299,7 @@ class AddCourseController extends GetxController {
           selectedCategory.value = value;
         }
         break;
-      case RxList<CourseCategoryModel?>:
+      case const (RxList<CourseCategoryModel?>):
         {
           int blockIndex = targetedGroup!.indexWhere((x) => x?.name == value);
           selectedGroupId.value = targetedGroup?[blockIndex]?.id ?? 0;

@@ -363,7 +363,7 @@ class ScheduleController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({list, value});
     switch (list.runtimeType) {
-      case RxList<EmployeeModel>:
+      case const (RxList<EmployeeModel>):
         {
           int employeeIndex = employees.indexWhere((x) => x.name == value);
           selectedEmployeeName.value = employees[employeeIndex].name ?? '';
@@ -372,7 +372,7 @@ class ScheduleController extends GetxController {
           print("facility selected $selectedEmployeeId, $selectedEmployeeName");
         }
         break;
-      case RxList<BusinessListModel>:
+      case const (RxList<BusinessListModel>):
         {
           int agencyIndex = trainingAgency.indexWhere((x) => x.name == value);
           selectedTrainingAgencyName.value =
@@ -383,7 +383,7 @@ class ScheduleController extends GetxController {
               "facility selected $selectedTrainingAgencyId, $selectedTrainingAgencyName");
         }
         break;
-      case RxList<StatusModel>:
+      case const (RxList<StatusModel>):
         {
           int modeIndex = mode.indexWhere((x) => x.name == value);
           selectedModeName.value = mode[modeIndex].name;

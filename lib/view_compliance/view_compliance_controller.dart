@@ -3,7 +3,6 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
-import 'package:cmms/domain/models/createStatutory_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -179,7 +178,7 @@ class ViewComplianceController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print("$value");
     switch (list.runtimeType) {
-      case RxList<StatutoryComplianceModel>:
+      case const (RxList<StatutoryComplianceModel>):
         {
           if (value != "Please Select") {
             int currencyIndex =
@@ -195,7 +194,7 @@ class ViewComplianceController extends GetxController {
           }
         }
         break;
-      case RxList<ComplianceStatusModel>:
+      case const (RxList<ComplianceStatusModel>):
         {
           if (value != "Please Select") {
             int statusIndex =

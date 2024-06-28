@@ -256,7 +256,7 @@ class AddVegetationPlanController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
-      case RxList<FrequencyModel>:
+      case const (RxList<FrequencyModel>):
         {
           if (value != "Please Select") {
             int frequencyIndex =
@@ -269,7 +269,7 @@ class AddVegetationPlanController extends GetxController {
           }
         }
         break;
-      case RxList<EmployeeModel>:
+      case const (RxList<EmployeeModel>):
         {
           if (value != "Please Select") {
             int assignedToIndex =

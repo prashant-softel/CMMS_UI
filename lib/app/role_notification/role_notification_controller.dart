@@ -58,7 +58,7 @@ class RoleNotificationController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<RoleModel>:
+      case const (RxList<RoleModel>):
         {
         if (value != "Please Select") {
             int roleIndex = roleList.indexWhere((x) => x?.name == value);

@@ -325,7 +325,7 @@ class TBTSOPListController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
+      case const (RxList<InventoryCategoryModel>):
         {
           // int equipmentIndex =
           //     equipmentCategoryList.indexWhere((x) => x?.name == value);
@@ -333,21 +333,21 @@ class TBTSOPListController extends GetxController {
         }
 
         break;
-      case RxList<FrequencyModel>:
+      case const (RxList<FrequencyModel>):
         {
           // int frequencyIndex =
           // frequencyList.indexWhere((x) => x?.name == value);
           // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
         }
         break;
-      case RxList<FacilityModel>:
+      case const (RxList<FacilityModel>):
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
 
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
         }
         break;
-      case RxList<JobTypeListModel>:
+      case const (RxList<JobTypeListModel>):
         {
           int jobTypeListIndex = jobTypeList.indexWhere((x) => x.name == value);
           int jobIds = 0;
