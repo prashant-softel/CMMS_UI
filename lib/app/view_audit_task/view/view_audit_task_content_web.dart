@@ -227,6 +227,14 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               //   'SOP Number :',
                                               //   style: Styles.black17,
                                               // ),
+                                              Text(
+                                                "Last Done Date:",
+                                                style: Styles.black17,
+                                              ),
+                                              Text(
+                                                "Due Date:",
+                                                style: Styles.black17,
+                                              ),
                                             ],
                                           ),
                                           Dimens.boxWidth10,
@@ -255,6 +263,12 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               Text(
                                                   '${controller.auditTasknDetailModel.value.schedules![0].checklist_name ?? ""}',
                                                   style: Styles.blue17),
+                                              Text(
+                                                  " ${controller.auditTasknDetailModel.value.last_done_date ?? ""}",
+                                                  style: Styles.blue17),
+                                              Text(
+                                                  "${controller.auditTasknDetailModel.value.due_date ?? ""}",
+                                                  style: Styles.blue17),
                                               // Text(
                                               //     "S1234590 hard coded", //   '${controller.auditPlanDetailModel.value?.frequencyApplicable ?? ""}',
                                               //     style: Styles.blue17),
@@ -281,12 +295,21 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 ' Frequency Name :',
                                                 style: Styles.black17,
                                               ),
+                                              Text(
+                                                "Assigned To:",
+                                                style: Styles.black17,
+                                              ),
+
+                                              Text(
+                                                "Done Date:",
+                                                style: Styles.black17,
+                                              ),
                                             ],
                                           ),
                                           Dimens.boxWidth10,
                                           Column(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.end,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               // Text(
                                               //     "hard", //  '${controller.auditTasknDetailModel.value?.created_at ?? ""}',
@@ -299,6 +322,12 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                   style: Styles.blue17),
                                               Text(
                                                   '${controller.auditTasknDetailModel.value.frequency_name ?? ""}',
+                                                  style: Styles.blue17),
+                                              Text(
+                                                  "${controller.auditTasknDetailModel.value.assigned_to_name ?? ""}",
+                                                  style: Styles.blue17),
+                                              Text(
+                                                  "${controller.auditTasknDetailModel.value.done_date ?? ""}",
                                                   style: Styles.blue17),
                                             ],
                                           ),
@@ -511,6 +540,198 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             ),
                                           ),
                                     Dimens.boxHeight15,
+                                    controller.auditTasknDetailModel.value
+                                                .permit_id ==
+                                            0
+                                        ? Dimens.box0
+                                        : Container(
+                                            margin: Dimens.edgeInsets20,
+                                            height: 150,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: ColorValues
+                                                    .lightGreyColorWithOpacity35,
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: ColorValues
+                                                      .appBlueBackgroundColor,
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        "Permit Details ",
+                                                        style: Styles.blue700,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: DataTable2(
+                                                      border: TableBorder.all(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              206,
+                                                              229,
+                                                              234)),
+                                                      columns: [
+                                                        DataColumn2(
+                                                            fixedWidth: 150,
+                                                            label: Text(
+                                                              "Permit ID",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                        DataColumn2(
+                                                            // fixedWidth: 300,
+                                                            label: Text(
+                                                          "Permit Code",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                        DataColumn2(
+                                                            // fixedWidth: 300,
+                                                            label: Text(
+                                                          "Permit Type",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                        DataColumn2(
+                                                            // fixedWidth: 300,
+                                                            label: Text(
+                                                          "Status",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                        DataColumn2(
+                                                            fixedWidth: 300,
+                                                            label: Text(
+                                                              'Action',
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                      ],
+                                                      rows: [
+                                                        DataRow(cells: [
+                                                          DataCell(Text(
+                                                            "${controller.auditTasknDetailModel.value.permit_id ?? ""}",
+                                                          )),
+                                                          DataCell(Text(
+                                                            "${controller.auditTasknDetailModel.value.permit_code ?? ""}",
+                                                          )),
+                                                          DataCell(Text(
+                                                            "${controller.auditTasknDetailModel.value.permit_type ?? ""}",
+                                                          )),
+                                                          DataCell(Text(
+                                                            "${controller.auditTasknDetailModel.value.status_short_ptw ?? ""}",
+                                                          )),
+                                                          DataCell(Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceEvenly,
+                                                            children: [
+                                                              // TableActionButton(
+                                                              //     color: ColorValue
+                                                              //         .viewColor,
+                                                              //     icon: Icons
+                                                              //         .remove_red_eye,
+                                                              //     message:
+                                                              //         "View Job Card",
+                                                              //     onPress: () {
+                                                              //       controller
+                                                              //           .clearStoreData();
+
+                                                              //       String jobCardId = controller
+                                                              //               .jobAssociatedModelsList?[
+                                                              //                   index]
+                                                              //               ?.jobCardId
+                                                              //               .toString() ??
+                                                              //           "";
+                                                              //       print({
+                                                              //         "JcId": jobCardId
+                                                              //       });
+
+                                                              //       Get.toNamed(
+                                                              //           Routes.jobCard,
+                                                              //           arguments: {
+                                                              //             'JcId': int
+                                                              //                 .tryParse(
+                                                              //                     "$jobCardId")
+                                                              //           });
+                                                              //     }),
+
+                                                              varUserAccessModel
+                                                                          .value
+                                                                          .access_list!
+                                                                          .where((e) =>
+                                                                              e.feature_id == UserAccessConstants.kPermitFeatureId &&
+                                                                              e.view ==
+                                                                                  UserAccessConstants
+                                                                                      .kHaveViewAccess)
+                                                                          .length >
+                                                                      0
+                                                                  ? TableActionButton(
+                                                                      color: ColorValues
+                                                                          .appLightBlueColor,
+                                                                      icon: Icons
+                                                                          .remove_red_eye,
+                                                                      message:
+                                                                          "View Permit",
+                                                                      onPress:
+                                                                          () {
+                                                                        // controller
+                                                                        //     .clearPermitStoreData();
+                                                                        // controller.viewNewPermitList(
+                                                                        //     permitId:
+                                                                        //         controller.pmtaskViewModel.value?.permit_id,
+                                                                        //     jobId: controller.jobDetailsModel.value!.id ?? 0);
+                                                                      })
+                                                                  : Container(),
+                                                              // TableActionButton(
+                                                              //     color: ColorValues
+                                                              //         .appYellowColor,
+                                                              //     icon: Icons.copy,
+                                                              //     message:
+                                                              //         "Clone Permit"
+                                                              //     // onPress:
+                                                              //     //     () =>
+                                                              //     //         controller.goToJobCardScreen(),
+                                                              //     ),
+                                                            ],
+                                                          )),
+                                                        ]),
+                                                      ]),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                    Dimens.boxHeight10,
                                     (controller.historyList != null &&
                                             controller.historyList!.isNotEmpty)
                                         ? Container(
@@ -809,18 +1030,43 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 ),
                                               )
                                             : Dimens.box0,
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appGreenColor,
-                                            text: "Create New Permit",
-                                            icon: Icons.add,
-                                            onPressed: () {
-                                              controller.createNewPermit();
-                                            },
-                                          ),
-                                        ),
+                                        Dimens.boxWidth20,
+                                        controller.auditTasknDetailModel.value.status == 425 &&
+                                                    varUserAccessModel.value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kAuditExecutionFeatureId &&
+                                                                e.approve ==
+                                                                    UserAccessConstants
+                                                                        .kHaveAddAccess)
+                                                            .length >
+                                                        0 ||
+                                                controller.auditTasknDetailModel
+                                                            .value.status ==
+                                                        427 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants.kAuditExecutionFeatureId &&
+                                                                e.approve == UserAccessConstants.kHaveAddAccess)
+                                                            .length >
+                                                        0
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.appGreenColor,
+                                                  text: "Create New Permit",
+                                                  icon: Icons.add,
+                                                  onPressed: () {
+                                                    controller
+                                                        .createNewPermit();
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         Dimens.boxWidth20,
 
                                         controller.auditTasknDetailModel.value.status == 422 &&

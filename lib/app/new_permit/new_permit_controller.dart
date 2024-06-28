@@ -856,11 +856,10 @@ class NewPermitController extends GetxController {
   Future<void> getEmployeePermitList() async {
     employeeNameList.value = <EmployeeListModel>[];
     final _employeeNameList = await permitPresenter.getEmployeePermitList(
-      isLoading: true,
-      // categoryIds: categoryIds,
-      facility_id: facilityId,
-      featureId: UserAccessConstants.kPermitFeatureId
-    );
+        isLoading: true,
+        // categoryIds: categoryIds,
+        facility_id: facilityId,
+        featureId: UserAccessConstants.kPermitFeatureId);
     for (var employee_list in _employeeNameList) {
       employeeNameList.add(employee_list);
     }
@@ -1661,7 +1660,8 @@ class NewPermitController extends GetxController {
         newPermit: jobJsonString,
         pmTaskId: pmTaskId!,
         activity: activity,
-        isLoading: true,type:type,
+        isLoading: true,
+        type: typee.value,
       );
       if (responseNewPermitCreatedForJob != null) {
         //  CreateNewPermitDialog();
