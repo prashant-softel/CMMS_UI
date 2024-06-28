@@ -868,39 +868,46 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                       'type': 1
                                                                     });
                                                               }),
-                                                          TableActionButton(
-                                                              color: ColorValues
-                                                                  .editColor,
-                                                              icon: Icons.edit,
-                                                              message:
-                                                                  "Edit MRS",
-                                                              onPress: () {
-                                                                final _flutterSecureStorage =
-                                                                    const FlutterSecureStorage();
+                                                          controller
+                                                                      .listMrsByJobId?[
+                                                                          index]!
+                                                                      .status ==
+                                                                  324
+                                                              ? Dimens.box0
+                                                              : TableActionButton(
+                                                                  color: ColorValues
+                                                                      .editColor,
+                                                                  icon: Icons
+                                                                      .edit,
+                                                                  message:
+                                                                      "Edit MRS",
+                                                                  onPress: () {
+                                                                    final _flutterSecureStorage =
+                                                                        const FlutterSecureStorage();
 
-                                                                _flutterSecureStorage
-                                                                    .delete(
-                                                                        key:
-                                                                            "mrsId");
-                                                                String mrsId = controller
-                                                                        .listMrsByJobId?[
-                                                                            index]
-                                                                        ?.mrsId
-                                                                        .toString() ??
-                                                                    "";
-                                                                print({
-                                                                  "mrsId": mrsId
-                                                                });
-                                                                Get.toNamed(
-                                                                    Routes
-                                                                        .editMrs,
-                                                                    arguments: {
-                                                                      'mrsId': int
-                                                                          .tryParse(
-                                                                              "$mrsId"),
-                                                                      'type': 1
+                                                                    _flutterSecureStorage
+                                                                        .delete(
+                                                                            key:
+                                                                                "mrsId");
+                                                                    String mrsId = controller
+                                                                            .listMrsByJobId?[index]
+                                                                            ?.mrsId
+                                                                            .toString() ??
+                                                                        "";
+                                                                    print({
+                                                                      "mrsId":
+                                                                          mrsId
                                                                     });
-                                                              })
+                                                                    Get.toNamed(
+                                                                        Routes
+                                                                            .editMrs,
+                                                                        arguments: {
+                                                                          'mrsId':
+                                                                              int.tryParse("$mrsId"),
+                                                                          'type':
+                                                                              1
+                                                                        });
+                                                                  })
                                                         ],
                                                       )),
                                                     ]),

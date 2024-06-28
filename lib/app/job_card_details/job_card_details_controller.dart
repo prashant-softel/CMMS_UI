@@ -246,7 +246,7 @@ class JobCardDetailsController extends GetxController {
 
       responsibilityCtrlrs.add(TextEditingController());
       currentIndex.value = -1;
-      addEmployeesDeployed();
+      // addEmployeesDeployed();
       super.onInit();
     } catch (e) {
       print(e);
@@ -727,10 +727,18 @@ class JobCardDetailsController extends GetxController {
     // print('update  Create GO  data: $carryForwardJCModelJsonString');
   }
 
-  void commentcheckform() {
+  void appcommentcheckform() {
     if (approveCommentTextFieldCtrlr.text == '') {
-      Fluttertoast.showToast(msg: "Please enter Comment!");
       isformInvalid.value = true;
+    } else {
+      isformInvalid.value = false;
+    }
+  }
+  void rejcommentcheckform() {
+    if (rejectCommentTextFieldCtrlr.text == '') {
+      isformInvalid.value = true;
+    } else {
+      isformInvalid.value = false;
     }
   }
 
@@ -811,8 +819,9 @@ class JobCardDetailsController extends GetxController {
   // // }
   void approveJobCards() async {
     {
-      commentcheckform();
-      if (isformInvalid.value) {
+      appcommentcheckform();
+      if (isformInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please enter Comment!");
         return;
       }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
@@ -863,6 +872,11 @@ class JobCardDetailsController extends GetxController {
 
   void rejectJobCard() async {
     {
+      rejcommentcheckform();
+      if (isformInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentCalibrationModel =
@@ -882,8 +896,9 @@ class JobCardDetailsController extends GetxController {
 
   void approvecloseJob() async {
     {
-      commentcheckform();
-      if (isformInvalid.value) {
+      appcommentcheckform();
+      if (isformInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please enter Comment!");
         return;
       }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
@@ -937,6 +952,11 @@ class JobCardDetailsController extends GetxController {
 
   void rejectcloseJob() async {
     {
+      rejcommentcheckform();
+      if (isformInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentCalibrationModel =
