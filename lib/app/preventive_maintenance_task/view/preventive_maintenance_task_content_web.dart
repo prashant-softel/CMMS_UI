@@ -113,7 +113,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                       Row(
                                         children: [
                                           CustomRichText(title: 'Date Range'),
-                                          Dimens.boxWidth10,
+                                          Dimens.boxWidth2,
                                           CustomTextFieldForStock(
                                             width: MediaQuery.of(context)
                                                     .size
@@ -259,7 +259,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                     Container(
                                       width: 300,
                                       height: 40,
-                                      margin: Dimens.edgeInsets0_0_7_0,
+                                      margin: EdgeInsets.only(right: 10),
                                       child: TextField(
                                         style: GoogleFonts.lato(
                                           textStyle: TextStyle(
@@ -279,7 +279,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                                 color: Colors.grey, width: 0.0),
                                           ),
                                           contentPadding:
-                                              Dimens.edgeInsets05_10,
+                                              EdgeInsets.only(left: 3),
                                           hintText: 'search'.tr,
                                           hintStyle: Styles.grey12,
                                         ),

@@ -32,7 +32,7 @@ class PmPlanApprovedDialog extends GetView {
         content: Builder(builder: (context) {
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
-            height: 200,
+            height: 180,
             width: 400,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -41,12 +41,15 @@ class PmPlanApprovedDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomRichText(title: 'Comment'),
                       SizedBox(
-                        height: 20,
+                        height: 5,
                       ),
                       TextField(
                         style: GoogleFonts.lato(
@@ -77,7 +80,7 @@ class PmPlanApprovedDialog extends GetView {
             height: 20,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Dimens.boxWidth10,
+            Dimens.boxWidth5,
             ElevatedButton(
               style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {

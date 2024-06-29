@@ -108,11 +108,14 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                               color: ColorValues.greyLightColour,
                             ),
                             Container(
-                              margin: Dimens.edgeInsets20_0_20_0,
+                              margin:
+                                  EdgeInsets.only(right: 7, left: 7, top: 15),
                               child: Row(
                                 children: [
-                                  CustomRichText(title: 'Activity: '),
-                                  Dimens.boxWidth10,
+                                  CustomRichText(
+                                      title: 'Activity: ',
+                                      includeAsterisk: false),
+                                  Dimens.boxWidth2,
                                   Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -154,8 +157,9 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                         ),
                                       )),
                                   Spacer(),
-                                  Text('Task ID: '),
-                                  Dimens.boxWidth10,
+                                  CustomRichText(
+                                      title: 'Task ID', includeAsterisk: false),
+                                  Dimens.boxWidth2,
                                   Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -199,7 +203,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                             ),
                             Container(
                               //height: 400,
-                              margin: Dimens.edgeInsets20_20_20_0,
+                              margin:
+                                  EdgeInsets.only(right: 7, left: 7, top: 15),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color:
@@ -272,7 +277,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                 80) +
                                             60,
                                     child: DataTable2(
-                                      minWidth: 2000,
+                                      minWidth: 1600,
                                       border: TableBorder.all(
                                           color: Color.fromARGB(
                                               255, 206, 229, 234)),
@@ -559,7 +564,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                             ),
                             Container(
                               //height: 400,
-                              margin: Dimens.edgeInsets20_20_20_0,
+                              margin:
+                                  EdgeInsets.only(right: 7, left: 7, top: 15),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color:
@@ -984,7 +990,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                   CustomRichText(
                                       title: "Comment:",
                                       includeAsterisk: false),
-                                  Dimens.boxWidth10,
+                                  Dimens.boxWidth2,
                                   Container(
                                       width: (Get.width * .6),
                                       decoration: BoxDecoration(
@@ -1016,14 +1022,14 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                               ),
                             ),
                             Container(
-                              margin: Dimens.edgeInsets20_0_0_0,
+                              margin: Dimens.edgeInsets15,
                               child: Row(
                                 children: [
                                   Text(
                                     'Set As Template: ',
                                     style: Styles.blackBold14,
                                   ),
-                                  Dimens.boxWidth10,
+                                  Dimens.boxWidth2,
                                   Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -1101,7 +1107,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                       },
                     ),
                   ),
-                  Dimens.boxWidth20,
+                  Dimens.boxWidth10,
                   Container(
                     height: 35,
                     child: CustomElevatedButton(

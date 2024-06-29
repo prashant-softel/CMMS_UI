@@ -31,6 +31,7 @@ class CreateMrsController extends GetxController {
   var whereUsedCtrlr = TextEditingController();
   var setTemlateCtrlr = TextEditingController();
   RxList<String> removedMaterials = <String>[].obs;
+  RxMap<String, bool> errorState = <String, bool>{}.obs;
   // int whereUsedTypeId = 0;
   var isSetTemplate = false.obs;
   Rx<int> whereUsedTypeId = 0.obs;
@@ -91,6 +92,26 @@ class CreateMrsController extends GetxController {
     super.onInit();
   }
 
+  bool validateFields() {
+    bool isValid = true;
+    errorState.clear();
+    for (int i = 0; i < rowItem.length; i++) {
+      var row = rowItem[i];
+      for (var mapData in row) {
+        if ((mapData['key'] == 'Drop_down' &&
+                (mapData['value'] == null ||
+                    mapData['value'] == 'Please Select')) ||
+            (mapData['key'] == 'Requested_Qty' &&
+                (mapData['value'] == null || mapData['value'] == ''))) {
+          errorState['$i-${mapData['key']}'] = true;
+          isValid = false;
+        }
+      }
+    }
+    update();
+    return isValid;
+  }
+
   Future<void> getEquipmentList(int _facilityId) async {
     assetItemList.value = <GetAssetItemsModel>[];
     final _assetList =
@@ -135,62 +156,66 @@ class CreateMrsController extends GetxController {
     // if (isFormInvalid.value) {
     //   return;
     // }
-    String _activity = activityCtrlr.text.trim();
-    String _remark = remarkCtrlr.text.trim();
-    String _setTemp = setTemlateCtrlr.text.trim();
-
-    Rx<DateTime> requestd_date = DateTime.now().obs;
-    String formattedFromdate =
-        DateFormat('yyyy-MM-dd').format(requestd_date.value);
-
-    List<Equipments> items = [];
-    rowItem.forEach((element) {
-      Equipments item = Equipments(
-        id: dropdownMapperData.value[element[0]["value"]]?.id,
-        issued_qty:
-            0, // dropdownMapperData[element[0]["value"]]?.available_qty,
-        asset_code: dropdownMapperData.value[element[0]["value"]]?.asset_code,
-        serial_number:
-            dropdownMapperData.value[element[0]["value"]]?.serial_number,
-
-        equipmentID: dropdownMapperData.value[element[0]["value"]]?.asset_ID,
-        asset_type_ID:
-            dropdownMapperData.value[element[0]["value"]]?.asset_type_ID,
-        requested_qty: int.tryParse(element[3]["value"] ?? '0'),
-      );
-      items.add(item);
-    });
-    CreateMrsModel createMrs = CreateMrsModel(
-        ID: 0,
-        isEditMode: 0,
-        facility_ID: facilityId,
-        setAsTemplate: _setTemp, //isSetTemplate == true ? 1 : 0,
-        activity: _activity,
-        whereUsedType: whereUsed.value,
-        whereUsedTypeId: whereUsedTypeId.value,
-        to_actor_id: whereUsedTypeId.value,
-        to_actor_type_id: to_actor_type_id.value,
-        from_actor_id: facilityId,
-        //whereUsed.value,
-        from_actor_type_id: fromActorTypeId.value,
-        remarks: _remark,
-        equipments: items);
-    var createMrsJsonString = createMrs.toJson();
-
-    print({"createMrsJsonString", createMrsJsonString});
-    Map<String, dynamic>? responseCreateMrs =
-        await createMrsPresenter.createMrs(
-      createMrsJsonString: createMrsJsonString,
-      isLoading: true,
-    );
-    if (responseCreateMrs == null) {
+    if (!validateFields()) {
+      return;
     } else {
-      Get.offAllNamed(
-        Routes.mrsListScreen,
+      String _activity = activityCtrlr.text.trim();
+      String _remark = remarkCtrlr.text.trim();
+      String _setTemp = setTemlateCtrlr.text.trim();
+
+      Rx<DateTime> requestd_date = DateTime.now().obs;
+      String formattedFromdate =
+          DateFormat('yyyy-MM-dd').format(requestd_date.value);
+
+      List<Equipments> items = [];
+      rowItem.forEach((element) {
+        Equipments item = Equipments(
+          id: dropdownMapperData.value[element[0]["value"]]?.id,
+          issued_qty:
+              0, // dropdownMapperData[element[0]["value"]]?.available_qty,
+          asset_code: dropdownMapperData.value[element[0]["value"]]?.asset_code,
+          serial_number:
+              dropdownMapperData.value[element[0]["value"]]?.serial_number,
+
+          equipmentID: dropdownMapperData.value[element[0]["value"]]?.asset_ID,
+          asset_type_ID:
+              dropdownMapperData.value[element[0]["value"]]?.asset_type_ID,
+          requested_qty: int.tryParse(element[3]["value"] ?? '0'),
+        );
+        items.add(item);
+      });
+      CreateMrsModel createMrs = CreateMrsModel(
+          ID: 0,
+          isEditMode: 0,
+          facility_ID: facilityId,
+          setAsTemplate: _setTemp, //isSetTemplate == true ? 1 : 0,
+          activity: _activity,
+          whereUsedType: whereUsed.value,
+          whereUsedTypeId: whereUsedTypeId.value,
+          to_actor_id: whereUsedTypeId.value,
+          to_actor_type_id: to_actor_type_id.value,
+          from_actor_id: facilityId,
+          //whereUsed.value,
+          from_actor_type_id: fromActorTypeId.value,
+          remarks: _remark,
+          equipments: items);
+      var createMrsJsonString = createMrs.toJson();
+
+      print({"createMrsJsonString", createMrsJsonString});
+      Map<String, dynamic>? responseCreateMrs =
+          await createMrsPresenter.createMrs(
+        createMrsJsonString: createMrsJsonString,
+        isLoading: true,
       );
+      if (responseCreateMrs == null) {
+      } else {
+        Get.offAllNamed(
+          Routes.mrsListScreen,
+        );
+      }
+      // } catch (e) {
+      //   print(e);
+      // }
     }
-    // } catch (e) {
-    //   print(e);
-    // }
   }
 }

@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/observation_pm_execution_process_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -126,7 +127,8 @@ class PreventiveMaintenanceExecutionContentWeb
                             child: Column(
                               children: [
                                 Container(
-                                  margin: Dimens.edgeInsets40_0_40_0,
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 15.w, vertical: 8.h),
                                   child: Row(
                                     children: [
                                       Column(
@@ -151,13 +153,13 @@ class PreventiveMaintenanceExecutionContentWeb
                                           ),
                                         ],
                                       ),
-                                      Dimens.boxWidth10,
+                                      Dimens.boxWidth2,
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                              "${controller.pmtaskViewModel.value?.id ?? ""}",
+                                              "PMT${controller.pmtaskViewModel.value?.id ?? ""}",
                                               style: Styles.blue17),
                                           Text(
                                               "${controller.pmtaskViewModel.value?.plan_title ?? ""}",
@@ -193,7 +195,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                           ),
                                         ],
                                       ),
-                                      Dimens.boxWidth10,
+                                      Dimens.boxWidth2,
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -346,7 +348,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                             //     ? Dimens.box0
                                                             //     : Text(
                                                             //         "Execution Done"),
-                                                            Dimens.boxWidth10,
+                                                            Dimens.boxWidth2,
                                                             DropdownWebWidget(
                                                               width: (MediaQuery.of(
                                                                               context)
@@ -385,6 +387,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                             null);
                                                               },
                                                             ),
+                                                            Dimens.boxWidth2,
                                                             // Spacer(),
                                                             varUserAccessModel
                                                                         .value
@@ -544,7 +547,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                         child: CustomRichText(
                                             title: "Comment:",
                                             includeAsterisk: false)),
-                                    Dimens.boxWidth10,
+                                    Dimens.boxWidth2,
                                     Container(
                                         width: (Get.width * .6),
                                         decoration: BoxDecoration(
@@ -605,7 +608,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                         },
                                       ),
                                     ),
-                                    Dimens.boxWidth10,
+                                    Dimens.boxWidth3,
                                     Container(
                                       height: 35,
                                       child: CustomElevatedButton(
@@ -641,16 +644,19 @@ class PreventiveMaintenanceExecutionContentWeb
                                                         Colors.white,
                                                   )
                                                 : controller.listMrsByTaskId!
-                                                            .value
-                                                            .firstWhereOrNull(
-                                                              (element) =>
-                                                                  element?.jobCardId !=
-                                                                      0 ||
-                                                                  element?.pmId !=
-                                                                      0,
-                                                            )
-                                                            ?.status !=
-                                                        323 && controller.listMrsByTaskId!.isNotEmpty
+                                                                .value
+                                                                .firstWhereOrNull(
+                                                                  (element) =>
+                                                                      element?.jobCardId !=
+                                                                          0 ||
+                                                                      element?.pmId !=
+                                                                          0,
+                                                                )
+                                                                ?.status !=
+                                                            323 &&
+                                                        controller
+                                                            .listMrsByTaskId!
+                                                            .isNotEmpty
                                                     ? Get.defaultDialog(
                                                         radius: 5,
                                                         title: 'Alert',
@@ -669,7 +675,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                         .closePmTaskExecution();
                                           }),
                                     ),
-                                    Dimens.boxWidth10,
+                                    Dimens.boxWidth3,
                                     controller.listMrsByTaskId!.value
                                                     .firstWhereOrNull(
                                                       (element) =>

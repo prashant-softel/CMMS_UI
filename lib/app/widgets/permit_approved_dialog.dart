@@ -355,7 +355,7 @@ class PermitApprovedDialog extends GetView<ViewPermitController> {
               },
               child: const Text('Cancel'),
             ),
-            Dimens.boxWidth20,
+            Dimens.boxWidth10,
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {

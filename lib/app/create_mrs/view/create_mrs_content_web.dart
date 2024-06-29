@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/custom_richtext.dart';
@@ -102,11 +103,12 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                       color: ColorValues.greyLightColour,
                     ),
                     Container(
-                      margin: Dimens.edgeInsets20_0_20_0,
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 5.w, vertical: 8.h),
                       child: Row(
                         children: [
                           CustomRichText(title: 'Activity: '),
-                          Dimens.boxWidth10,
+                          Dimens.boxWidth2,
                           Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
@@ -145,7 +147,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               )),
                           Spacer(),
                           Text('Task ID: '),
-                          Dimens.boxWidth10,
+                          Dimens.boxWidth2,
                           Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
@@ -184,7 +186,8 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                     ),
                     Container(
                       //height: 400,
-                      margin: Dimens.edgeInsets20_20_20_0,
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 5.w, vertical: 8.h),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: ColorValues.lightGreyColorWithOpacity35,
@@ -305,182 +308,274 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                           fontWeight: FontWeight.bold),
                                     )),
                               ],
-                              rows: controller.rowItem.value.map((record) {
-                                return DataRow(
-                                  // height: 50,
-                                  cells: record.map((mapData) {
-                                    return DataCell(
-                                      (mapData['key'] == "Drop_down")
-                                          ? Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: DropdownWebWidget(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4,
-                                                dropdownList: controller
-                                                    .assetItemList
-                                                    .where((p0) {
-                                                      return !controller.rowItem
-                                                          .map((p0) =>
-                                                              p0[0]["value"])
-                                                          .contains(p0!.name);
-                                                    })
-                                                    .toList()
-                                                    .obs,
-                                                selectedValue: mapData["value"],
-                                                onValueChanged:
-                                                    (list, selectedValue) {
-                                                  print({
-                                                    "web",
-                                                    controller
-                                                            .dropdownMapperData[
-                                                        selectedValue]
-                                                  });
-                                                  mapData["value"] =
-                                                      selectedValue;
-                                                  controller.dropdownMapperData[
-                                                          selectedValue] =
-                                                      list.firstWhere(
-                                                          (element) =>
-                                                              element.name ==
-                                                              selectedValue,
-                                                          orElse: null);
-                                                },
-                                              ),
-                                            )
-                                          : (mapData['key'] == "Requested_Qty")
-                                              ? Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Container(
-                                                    width: (Get.width * .4),
-                                                    // padding: EdgeInsets.all(value),
-                                                    decoration: BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
+                              rows: List.generate(
+                                controller.rowItem.length,
+                                (rowIndex) {
+                                  var row = controller.rowItem[rowIndex];
+                                  return DataRow(
+                                    // height: 50,
+                                    cells: row.map((mapData) {
+                                      return DataCell(
+                                        (mapData['key'] == "Drop_down")
+                                            ? Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: DropdownWebWidget(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      4,
+                                                  dropdownList: controller
+                                                      .assetItemList
+                                                      .where((p0) {
+                                                        return !controller
+                                                            .rowItem
+                                                            .map((p0) =>
+                                                                p0[0]["value"])
+                                                            .contains(p0!.name);
+                                                      })
+                                                      .toList()
+                                                      .obs,
+                                                  isValueSelected: controller
+                                                                  .errorState[
+                                                              '$rowIndex-${mapData['key']}'] ==
+                                                          true
+                                                      ? false
+                                                      : true,
+                                                  selectedValue:
+                                                      mapData["value"],
+                                                  onValueChanged:
+                                                      (list, selectedValue) {
+                                                    controller.errorState
+                                                        .removeWhere((key,
+                                                                value) =>
+                                                            key ==
+                                                            '$rowIndex-Drop_down');
+                                                    print({
+                                                      "web",
+                                                      controller
+                                                              .dropdownMapperData[
+                                                          selectedValue]
+                                                    });
+                                                    mapData["value"] =
+                                                        selectedValue;
+                                                    controller.dropdownMapperData[
+                                                            selectedValue] =
+                                                        list.firstWhere(
+                                                            (element) =>
+                                                                element.name ==
+                                                                selectedValue,
+                                                            orElse: null);
+                                                  },
+                                                ),
+                                              )
+                                            : (mapData['key'] ==
+                                                    "Requested_Qty")
+                                                ? Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Container(
+                                                      width: (Get.width * .4),
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                                    5.0, 5.0),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
                                                           ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                      ],
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                    ),
-                                                    child: LoginCustomTextfield(
-                                                      inputFormatters: <TextInputFormatter>[
-                                                        FilteringTextInputFormatter
-                                                            .digitsOnly
-                                                      ],
-                                                      maxLine: 1,
-                                                      textController:
-                                                          new TextEditingController(
-                                                              text: mapData[
-                                                                      "value"] ??
-                                                                  ''),
-                                                      onChanged: (txt) {
-                                                        // Convert the entered text to an integer
-                                                        int requestedQty =
-                                                            int.tryParse(txt) ??
-                                                                0;
-                                                        // Get the available quantity for the current record
-                                                        int availableQty = controller
-                                                                .dropdownMapperData
-                                                                .value[record[0]
-                                                                    ['value']]
-                                                                ?.available_qty ??
-                                                            0;
-                                                        // Validate if the requested quantity is less than or equal to the available quantity
-                                                        if (requestedQty >
-                                                            availableQty) {
-                                                          // Show an error message or perform any action as needed
-                                                          showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    context) {
-                                                              return AlertDialog(
-                                                                title: Text(
-                                                                    "Invalid Quantity!"),
-                                                                content: Text(
-                                                                    "Please select appropriate quantity.\nAvailable qty is: ${availableQty}, you requested: ${requestedQty}."),
-                                                                actions: <Widget>[
-                                                                  TextButton(
-                                                                    onPressed:
-                                                                        () {
-                                                                      Navigator.of(
-                                                                              context)
-                                                                          .pop();
-                                                                    },
-                                                                    child: Text(
-                                                                        "OK"),
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            },
-                                                          );
-                                                          mapData["value"] =
-                                                              mapData[
-                                                                  "value"]!; // This line is to trigger a rebuild
-                                                        } else {
-                                                          // Update the value if it's valid
-                                                          mapData["value"] =
-                                                              txt;
-                                                        }
-                                                      },
-                                                    ),
-                                                  ),
-                                                )
-                                              : (mapData['key'] == "Action ")
-                                                  ? Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 10),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .appRedColor,
-                                                            icon: Icons.delete,
-                                                            label: '',
-                                                            message: '',
-                                                            onPress: () {
-                                                              controller.rowItem
-                                                                  .remove(
-                                                                      record);
-                                                            },
-                                                          )
                                                         ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
                                                       ),
-                                                    )
-                                                  : (mapData['key'] ==
-                                                          "Available_Qty")
-                                                      ? Text(
-                                                          "${controller.dropdownMapperData.value[record[0]['value']]?.available_qty ?? ""}")
-                                                      : (mapData['key'] ==
-                                                              "Material_Type")
-                                                          ? Text(
-                                                              "${controller.dropdownMapperData.value[record[0]['value']]?.asset_type ?? ""}")
-                                                          : Text(
-                                                              mapData['key'] ??
-                                                                  ''),
-                                    );
-                                  }).toList(),
-                                );
-                              }).toList(),
+                                                      child: StatefulBuilder(
+                                                        builder: (BuildContext
+                                                                context,
+                                                            StateSetter
+                                                                setState) {
+                                                          // Create a TextEditingController
+                                                          TextEditingController
+                                                              _controller =
+                                                              TextEditingController(
+                                                                  text: mapData[
+                                                                          "value"] ??
+                                                                      '');
+
+                                                          return Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black26,
+                                                                  offset:
+                                                                      const Offset(
+                                                                    5.0,
+                                                                    5.0,
+                                                                  ),
+                                                                  blurRadius:
+                                                                      5.0,
+                                                                  spreadRadius:
+                                                                      1.0,
+                                                                ),
+                                                              ],
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              border: controller
+                                                                              .errorState[
+                                                                          '$rowIndex-${mapData['key']}'] ==
+                                                                      true
+                                                                  ? Border.all(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width:
+                                                                          2.0)
+                                                                  : Border.all(
+                                                                      color: ColorValues
+                                                                          .appLightBlueColor,
+                                                                      width:
+                                                                          1.0),
+                                                            ),
+                                                            child:
+                                                                LoginCustomTextfield(
+                                                              inputFormatters: <TextInputFormatter>[
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
+                                                              maxLine: 1,
+                                                              textController:
+                                                                  _controller,
+                                                              onChanged: (txt) {
+                                                                // Convert the entered text to an integer
+                                                                int requestedQty =
+                                                                    int.tryParse(
+                                                                            txt) ??
+                                                                        0;
+                                                                // Get the available quantity for the current record
+                                                                int availableQty = controller
+                                                                        .dropdownMapperData
+                                                                        .value[row[0]
+                                                                            [
+                                                                            'value']]
+                                                                        ?.available_qty ??
+                                                                    0;
+
+                                                                // Validate if the requested quantity is less than or equal to the available quantity
+                                                                if (requestedQty >
+                                                                    availableQty) {
+                                                                  // Show an error message or perform any action as needed
+                                                                  showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (BuildContext
+                                                                            context) {
+                                                                      return AlertDialog(
+                                                                        title: Text(
+                                                                            "Invalid Quantity!"),
+                                                                        content:
+                                                                            Text("Please select appropriate quantity.\nAvailable qty is: ${availableQty}, you requested: ${requestedQty}."),
+                                                                        actions: <Widget>[
+                                                                          TextButton(
+                                                                            onPressed:
+                                                                                () {
+                                                                              Navigator.of(context).pop();
+                                                                              setState(() {
+                                                                                _controller.clear();
+                                                                              });
+                                                                            },
+                                                                            child:
+                                                                                Text("OK"),
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                  setState(() {
+                                                                    mapData["value"] =
+                                                                        "";
+                                                                  });
+                                                                } else {
+                                                                  // Update the value if it's valid
+                                                                  // setState(() {
+                                                                  mapData["value"] =
+                                                                      txt;
+
+                                                                  // });
+                                                                }
+                                                                if (controller
+                                                                            .errorState[
+                                                                        '$rowIndex-${mapData['key']}'] ==
+                                                                    true) {
+                                                                  controller
+                                                                      .errorState
+                                                                      .remove(
+                                                                          '$rowIndex-${mapData['key']}');
+                                                                }
+                                                              },
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    ),
+                                                  )
+                                                : (mapData['key'] == "Action ")
+                                                    ? Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 10),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            TableActionButton(
+                                                              color: ColorValues
+                                                                  .appRedColor,
+                                                              icon:
+                                                                  Icons.delete,
+                                                              label: '',
+                                                              message: '',
+                                                              onPress: () {
+                                                                controller
+                                                                    .rowItem
+                                                                    .remove(
+                                                                        row);
+                                                              },
+                                                            )
+                                                          ],
+                                                        ),
+                                                      )
+                                                    : (mapData['key'] ==
+                                                            "Available_Qty")
+                                                        ? Text(
+                                                            "${controller.dropdownMapperData.value[row[0]['value']]?.available_qty ?? ""}")
+                                                        : (mapData['key'] ==
+                                                                "Material_Type")
+                                                            ? Text(
+                                                                "${controller.dropdownMapperData.value[row[0]['value']]?.asset_type ?? ""}")
+                                                            : Text(mapData[
+                                                                    'key'] ??
+                                                                ''),
+                                      );
+                                    }).toList(),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ],
@@ -493,7 +588,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                         children: [
                           CustomRichText(
                               title: "Comment:", includeAsterisk: false),
-                          Dimens.boxWidth10,
+                          Dimens.boxWidth2,
                           Container(
                               width: (Get.width * .6),
                               decoration: BoxDecoration(
@@ -525,7 +620,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                       ),
                     ),
                     Container(
-                      margin: Dimens.edgeInsets20_0_0_0,
+                      margin: EdgeInsets.only(top: 5, left: 10),
                       child: Row(
                         children: [
                           Text(
@@ -584,7 +679,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                             },
                           ),
                         ),
-                        Dimens.boxWidth20,
+                        Dimens.boxWidth10,
                         Container(
                           height: 35,
                           child: CustomElevatedButton(

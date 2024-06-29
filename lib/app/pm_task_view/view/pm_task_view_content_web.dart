@@ -13,6 +13,7 @@ import 'package:cmms/app/widgets/observation_pm_task_view_popup_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -171,7 +172,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                 child: Column(
                                   children: [
                                     Container(
-                                      margin: Dimens.edgeInsets40_0_40_0,
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 15.w, vertical: 8.h),
                                       child: Row(
                                         children: [
                                           Column(
@@ -196,7 +198,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               ),
                                             ],
                                           ),
-                                          Dimens.boxWidth10,
+                                          Dimens.boxWidth2,
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -238,7 +240,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               ),
                                             ],
                                           ),
-                                          Dimens.boxWidth10,
+                                          Dimens.boxWidth2,
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -957,17 +959,6 @@ class PreventiveMaintenanceTaskViewContentWeb
                   ),
                 ),
               ),
-              Container(
-                height: 35,
-                child: CustomElevatedButton(
-                  icon: Icons.remove_red_eye_outlined,
-                  backgroundColor: ColorValues.linktopermitColor,
-                  text: "Execute",
-                  onPressed: () {
-                    controller.gotoexecution();
-                  },
-                ),
-              ),
               //  Dimens.boxHeight20,
               Container(
                 margin: EdgeInsets.only(
@@ -1155,7 +1146,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                     //     },
                     //   ),
                     // ),
-                    Dimens.boxWidth10,
+                    Dimens.boxWidth3,
 
                     controller.pmtaskViewModel.value?.status == 165 &&
                             varUserAccessModel.value.access_list!
@@ -1189,7 +1180,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                             ),
                           )
                         : Dimens.box0,
-                    Dimens.boxWidth10,
+                    Dimens.boxWidth5,
                     controller.pmtaskViewModel.value?.status == 165 &&
                             varUserAccessModel.value.access_list!
                                     .where((e) =>

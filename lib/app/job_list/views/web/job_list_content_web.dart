@@ -252,7 +252,8 @@ class JobListContentWeb extends StatelessWidget {
                                       width: 0.0,
                                     ),
                                   ),
-                                  contentPadding: Dimens.edgeInsets05_10,
+                                  contentPadding:
+                                            EdgeInsets.only(left: 3),
                                   hintText: 'search'.tr,
                                   hintStyle: Styles.grey16,
                                 ),

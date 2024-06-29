@@ -64,18 +64,18 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                       ),
                     ),
                     InkWell(
-                      onTap: () {
-                        var taskId;
-                        var jobId;
-                        controller.type.value == 1
-                            ? Get.offAllNamed(Routes.jobDetails,
-                                arguments: {'jobId': jobId})
-                            : controller.type.value == 2
-                                ? Get.offAllNamed(Routes.pmTaskView,
-                                    arguments: {'pmTaskId': taskId})
-                                : Get.offNamed(Routes.mrsListScreen);
-                      },
-                      child: controller.type.value == 1
+                        onTap: () {
+                          var taskId;
+                          var jobId;
+                          controller.type.value == 1
+                              ? Get.offAllNamed(Routes.jobDetails,
+                                  arguments: {'jobId': jobId})
+                              : controller.type.value == 2
+                                  ? Get.offAllNamed(Routes.pmTaskView,
+                                      arguments: {'pmTaskId': taskId})
+                                  : Get.offNamed(Routes.mrsListScreen);
+                        },
+                        child: controller.type.value == 1
                             ? Text(
                                 "/ JOB",
                                 style: Styles.greyLight14,
@@ -122,7 +122,7 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                   "${controller.mrsDetailsModel.value?.id ?? ""}",
                                   style: Styles.blue17,
                                 ),
-                                Dimens.boxWidth8,
+                                Dimens.boxWidth3,
                                 Container(
                                   height: 30,
                                   child: CustomElevatedButton(
@@ -173,7 +173,7 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                     ),
                                   ],
                                 ),
-                                Dimens.boxWidth20,
+                                Dimens.boxWidth2,
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -227,7 +227,7 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                     ),
                                   ],
                                 ),
-                                Dimens.boxWidth20,
+                                Dimens.boxWidth2,
 
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
