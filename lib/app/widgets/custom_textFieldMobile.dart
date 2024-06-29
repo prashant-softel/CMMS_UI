@@ -97,7 +97,7 @@ class CustomTextfieldMobile extends GetView {
       height: maxLines == 1 ? 30 : null,
       width: width,
       child: Container(
-        padding: EdgeInsets.only(bottom: 5),
+        // padding: EdgeInsets.only(top: 5),
         decoration: isMobileOrTablet
             ? BoxDecoration(
                 boxShadow: [
