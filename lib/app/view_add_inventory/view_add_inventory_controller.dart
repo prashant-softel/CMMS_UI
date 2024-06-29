@@ -321,10 +321,10 @@ class ViewAddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.description ?? "";
       warrentyDescriptionCtrlr.text =
           editAddInventoryDetailsModel.value?.warrantyDescription ?? "";
-      lastCalibrationDateTc.text =
+      calibrationRemainderInTc.text =
           editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
               "";
-      calibrationRemainderInTc.text =
+      lastCalibrationDateTc.text =
           editAddInventoryDetailsModel.value?.calibrationDueDate.toString() ??
               "";
       selectedStatusNameId = editAddInventoryDetailsModel.value?.statusId ?? 0;
@@ -348,13 +348,15 @@ class ViewAddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.parentName ?? "";
       costCtrlr.text =
           editAddInventoryDetailsModel.value?.cost.toString() ?? "";
-      calibrationRemainderInTc.text = editAddInventoryDetailsModel
+      calibrationRemaingCtrlr.text = editAddInventoryDetailsModel
               .value?.calibrationReminderDays
               .toString() ??
           "";
       selectedBlockListId = editAddInventoryDetailsModel.value?.blockId ?? 0;
-      selectedfrequency.value =
-          "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationFrequency ?? ""}")}";
+      // selectedfrequency.value =
+      //     "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationFrequency ?? ""}")}";
+            selectedfrequency.value =
+          editAddInventoryDetailsModel.value?.calibrationFreqType ?? "";
       calibrationRemaingCtrlr.text =
           "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationReminderDays ?? 0}")}";
       selectedWarrantyName.value =

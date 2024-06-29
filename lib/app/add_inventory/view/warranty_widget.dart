@@ -238,7 +238,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  'Warranty certificate',
+                                  'Warranty Certificate',
                                   style: Styles.blackBold16,
                                 ),
                                 SizedBox(width: 10),
