@@ -1,7 +1,10 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/create_observation/create_observation_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textFieldMobile.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -226,6 +229,116 @@ class _CreateObservationMobileState extends State<CreateObservationMobile> {
                               },
                               hintText: '',
                             ),
+                            Dimens.boxHeight15,
+                            CustomRichTextMobile(
+                              title: "Type of Observation: ",
+                            ),
+                            Dimens.boxHeight2,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              child: Obx(
+                                () => DropdownWebWidget(
+                                  dropdownList: controller.typeOfObsList,
+                                  isValueSelected:
+                                      controller.isSelectedTypeOfObs.value,
+                                  selectedValue:
+                                      controller.selectedTypeOfObs.value,
+                                  onValueChanged: controller.onValueChanged,
+                                ),
+                              ),
+                            ),
+                            Dimens.boxHeight15,
+                            CustomRichTextMobile(
+                              title: "Location of Observation: ",
+                            ),
+                            Dimens.boxHeight2,
+                            CustomTextfieldMobile(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              keyboardType: TextInputType.number,
+                              textController:
+                                  controller.locationOfObservationCtrlr,
+                              // errorController: controller.isCorrectiveInvalid.value
+                              //     ? "Required field"
+                              //     : null,
+                              onChanged: (value) {
+                                if (value.trim().length > 0) {
+                                  controller.islocationofObservationInvalid
+                                      .value = false;
+                                } else {
+                                  controller.islocationofObservationInvalid
+                                      .value = true;
+                                }
+                              },
+                            ),
+                            Dimens.boxHeight15,
+                            CustomRichTextMobile(
+                              title: "Source of Observation: ",
+                            ),
+                            Dimens.boxHeight2,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              child: Obx(
+                                () => DropdownWebWidget(
+                                  dropdownList: controller.sourceOfObsList,
+                                  isValueSelected:
+                                      controller.isSelectedSourceOfObs.value,
+                                  selectedValue:
+                                      controller.selectedSourceOfObs.value,
+                                  onValueChanged: controller.onValueChanged,
+                                ),
+                              ),
+                            ),
+                            Dimens.boxHeight15,
+                            CustomRichTextMobile(
+                              title: "Target Date: ",
+                            ),
+                            Dimens.boxHeight2,
+                            CustomTextfieldMobile(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              numberTextField: true,
+                              textController: controller.targetDateTc,
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      contentPadding: EdgeInsets.zero,
+                                      backgroundColor: Color(0xffFFFFFF),
+                                      content: DatePickerWidget(
+                                        minDate: DateTime(DateTime.now().year),
+                                        maxDate: DateTime(
+                                            DateTime.now().year, 13, 0),
+                                        controller: DateRangePickerController(),
+                                        selectionChanges: (p0) {
+                                          print(
+                                              'po value ${p0.value.toString()}');
+                                          controller.targetDateTc.text =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(p0.value);
+                                          controller.openTargetDatePicker =
+                                              !controller.openTargetDatePicker;
+                                          controller.isTargetDateInvalid.value =
+                                              false;
+                                          controller
+                                              .update(['stock_Mangement']);
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              hintText: '',
+                            ),
+                            Dimens.boxHeight15,
+                            CustomRichTextMobile(
+                              title: "Observation Description: ",
+                            ),
+                            Dimens.boxHeight2,
+                            CustomTextfieldMobile(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              textController: controller.discriptionCtrlr,
+                            ),
                           ],
                         ),
                       ),
@@ -234,6 +347,58 @@ class _CreateObservationMobileState extends State<CreateObservationMobile> {
                 ],
               ),
             ),
+            floatingActionButton: Obx(() =>
+                    // varUserAccessModel
+                    //             .value.access_list!
+                    //             .where((e) =>
+                    //                 e.feature_id ==
+                    //                     UserAccessConstants.kGoodsFeatureId &&
+                    //                 e.add == UserAccessConstants.kHaveAddAccess)
+                    //             .length >
+                    //         0
+                    //     ?
+                    Row(
+                      children: [
+                        Spacer(),
+                        Container(
+                          height: 40,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.cancelColor,
+                            text: 'Cancel',
+                            onPressed: () {
+                              Get.toNamed(Routes.complianceScreen);
+                            },
+                          ),
+                        ),
+                        Dimens.boxWidth15,
+                        controller.obsId == 0
+                            ? Container(
+                                height: 40,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.submitColor,
+                                  text: 'Submit',
+                                  onPressed: () {
+                                    controller.isFormInvalid.value = false;
+                                    controller.createObs(1);
+                                  },
+                                ),
+                              )
+                            : Container(
+                                height: 40,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.submitColor,
+                                  text: 'Update',
+                                  onPressed: () {
+                                    controller.isFormInvalid.value = false;
+                                    controller.createObs(0);
+                                  },
+                                ),
+                              ),
+                        Spacer(),
+                      ],
+                    )
+                // : Dimens.box0
+                ),
           ),
         );
       },
