@@ -731,19 +731,20 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                 .size
                                                                 .width /
                                                             4,
-                                                        dropdownList:
-                                                            controller.assetList
-                                                                .where((p0) {
-                                                                  return !controller
-                                                                      .rowItem
-                                                                      .map((p0) =>
-                                                                          p0[0][
-                                                                              "value"])
-                                                                      .contains(
-                                                                          p0!.name);
-                                                                })
-                                                                .toList()
-                                                                .obs,
+                                                        dropdownList: controller
+                                                            .assetList
+                                                            .where((p0) =>
+                                                                p0!.asset_type ==
+                                                                    "Spare" &&
+                                                                !controller
+                                                                    .rowItem
+                                                                    .map((p0) =>
+                                                                        p0[0][
+                                                                            "value"])
+                                                                    .contains(p0!
+                                                                        .name))
+                                                            .toList()
+                                                            .obs,
                                                         selectedValue:
                                                             mapData["value"],
                                                         onValueChanged: (list,

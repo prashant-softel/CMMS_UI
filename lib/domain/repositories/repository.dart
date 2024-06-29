@@ -14987,8 +14987,8 @@ class Repository {
       print('Compliance Status ${res.data}');
 
       if (!res.hasError) {
-        var Sourcetype = statutoryHistoryFromJson(res.data);
-        return Sourcetype;
+        var historyStatutory = statutoryHistoryFromJson(res.data);
+        return historyStatutory.reversed.toList();
       }
       return [];
     } catch (error) {

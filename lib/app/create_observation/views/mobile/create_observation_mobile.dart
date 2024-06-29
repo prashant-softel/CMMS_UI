@@ -1,251 +1,117 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/create_observation/create_observation_controller.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:cmms/app/widgets/custom_textFieldMobile.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CreateObservationMobile extends GetView<CreateObservationController> {
-  CreateObservationMobile({Key? key}) : super(key: key);
+  CreateObservationMobile({super.key});
+  final FileUploadController dropzoneController =
+      Get.put(FileUploadController());
 
   @override
   Widget build(BuildContext context) {
-    return SelectionArea(
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Dimens.boxHeight10,
-                        CustomRichText(title: 'Type of Observation'),
-                        Dimens.boxHeight10,
-                        SizedBox(
-                          height: 45,
-                          child: Obx(
-                            () => DropdownWebStock(
-                              width: MediaQuery.of(context).size.width,
-                              dropdownList: [],
-                              // isValueSelected:
-                              //     controller.isSelectedBusinessType.value,
-                              // selectedValue:
-                              //     controller.selectedBusinessType.value,
-                              onValueChanged: (p0, p1) {},
-                            ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Dimens.boxHeight5,
+            HeaderWidgetMobile(),
+            Container(
+              margin: EdgeInsets.only(left: 30, top: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Create Observation",
+                    style: Styles.blackBold18,
+                  ),
+                ],
+              ),
+            ),
+            Card(
+              color: Colors.lightBlue.shade50,
+              elevation: 10,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
+              child: Padding(
+                padding: EdgeInsets.all(15),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomRichTextMobile(
+                        title: "Contractor Name: ",
+                      ),
+                      Dimens.boxHeight2,
+                      CustomTextfieldMobile(
+                        width: MediaQuery.of(context).size.width / 1.1,
+                        keyboardType: TextInputType.number,
+                        textController: controller.contractorNameCtrlr,
+                        // errorController: controller.isContractorInvalid.value
+                        //     ? "Required field"
+                        //     : null,
+                        onChanged: (value) {
+                          if (value.trim().length > 0) {
+                            controller.isContractorInvalid.value = false;
+                          } else {
+                            controller.isContractorInvalid.value = true;
+                          }
+                        },
+                      ),
+                      Dimens.boxHeight15,
+                      CustomRichTextMobile(
+                        title: "Risk Type: ",
+                      ),
+                      Dimens.boxHeight2,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 1.1,
+                        child: Obx(
+                          () => DropdownWebWidget(
+                            dropdownList: controller.incidentrisktypeList,
+                            isValueSelected:
+                                controller.isRiskTypeListSelected.value,
+                            selectedValue:
+                                controller.selectedRiskTypeList.value,
+                            onValueChanged: controller.onValueChanged,
                           ),
                         ),
-
-                        Dimens.boxHeight10,
-                        CustomRichText(title: 'Location of Observation'),
-                        Dimens.boxHeight10,
-                        TextField(
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                                fontSize: 16.0,
-                                height: 1.0,
-                                color: Colors.black),
-                          ),
-                          decoration: InputDecoration(
-                            hintText: 'Enter Location of Observation',
-                            alignLabelWithHint: true,
-                          ),
-                        ),
-                        Dimens.boxHeight10,
-
-                        CustomRichText(title: 'Contractor Name'),
-                        Dimens.boxHeight10,
-                        SizedBox(
-                          height: 45,
-                          child: Obx(
-                            () => DropdownWebStock(
-                              width: MediaQuery.of(context).size.width,
-                              dropdownList: [],
-                              onValueChanged: controller.onValueChanged,
-                            ),
-                          ),
-                        ),
-
-                        Dimens.boxHeight10,
-                        CustomRichText(title: 'Source of Observation'),
-                        Dimens.boxHeight10,
-                        SizedBox(
-                          height: 45,
-                          child: Obx(
-                            () => DropdownWebStock(
-                              width: MediaQuery.of(context).size.width,
-                              dropdownList: [],
-                              onValueChanged: controller.onValueChanged,
-                            ),
-                          ),
-                        ),
-                        Dimens.boxHeight10,
-                        CustomRichText(title: 'Risk Type'),
-                        Dimens.boxHeight10,
-                        SizedBox(
-                          height: 45,
-                          child: Obx(
-                            () => DropdownWebStock(
-                              width: MediaQuery.of(context).size.width,
-                              dropdownList: [],
-                              onValueChanged: controller.onValueChanged,
-                            ),
-                          ),
-                        ),
-                        // Dimens.boxHeight10,
-                        // CustomRichText(title: 'Observation Description'),
-                        // Dimens.boxHeight10,
-                        // TextField(
-                        //   style: TextStyle(
-                        //     fontSize: 15.0,
-                        //     height: 0.1,
-                        //     color: Colors.black,
-                        //   ),
-                        //   decoration: InputDecoration(
-                        //     hintText: 'Enter Observation Description',
-                        //     alignLabelWithHint: true,
-                        //   ),
-                        // ),
-                        Dimens.boxHeight10,
-                        CustomRichText(title: 'Corrective/Preventive Action'),
-                        Dimens.boxHeight10,
-                        TextField(
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                                fontSize: 16.0,
-                                height: 1.0,
-                                color: Colors.black),
-                          ),
-                          decoration: InputDecoration(
-                            hintText: 'Enter Corrective',
-                            alignLabelWithHint: true,
-                          ),
-                        ),
-                        // Dimens.boxHeight10,
-                        // CustomRichText(title: 'Corrective/Preventive Action'),
-                        // SizedBox(
-                        //   height: 10,
-                        // ),
-                        // TextField(
-                        //   style: TextStyle(
-                        //     fontSize: 15.0,
-                        //     height: 0.1,
-                        //     color: Colors.black,
-                        //   ),
-                        //   decoration: InputDecoration(
-                        //     hintText: 'Enter Risk Type',
-                        //     alignLabelWithHint: true,
-                        //   ),
-                        // ),
-                        Dimens.boxHeight10,
-                        CustomRichText(title: 'Responsible Person'),
-                        Dimens.boxHeight10,
-                        TextField(
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                                fontSize: 16.0,
-                                height: 1.0,
-                                color: Colors.black),
-                          ),
-                          decoration: InputDecoration(
-                            hintText: 'Enter Responsible Person',
-                            alignLabelWithHint: true,
-                          ),
-                        ),
-                        Dimens.boxHeight10,
-                        CustomRichText(title: 'Contact Number'),
-                        Dimens.boxHeight10,
-                        TextField(
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                                fontSize: 16.0,
-                                height: 1.0,
-                                color: Colors.black),
-                          ),
-                          decoration: InputDecoration(
-                            hintText: 'Enter Contact Number*',
-                            alignLabelWithHint: true,
-                          ),
-                        ),
-                        Dimens.boxHeight10,
-                        CustomRichText(title: 'Target Date'),
-                        Dimens.boxHeight10,
-                        TextField(
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                                fontSize: 16.0,
-                                height: 1.0,
-                                color: Colors.black),
-                          ),
-                          decoration: InputDecoration(
-                            hintText: 'Enter Target Date',
-                            alignLabelWithHint: true,
-                          ),
-                        ),
-                        Dimens.boxHeight10,
-                        CustomRichText(title: 'Action Taken'),
-                        Dimens.boxHeight10,
-                        TextField(
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                                fontSize: 16.0,
-                                height: 1.0,
-                                color: Colors.black),
-                          ),
-                          decoration: InputDecoration(
-                            hintText: 'Enter Action Taken',
-                            alignLabelWithHint: true,
-                          ),
-                        ),
-                        Dimens.boxHeight10,
-                        CustomRichText(title: 'Cost Type*'),
-                        Dimens.boxHeight10,
-
-                        SizedBox(
-                          height: 45,
-                          child: Obx(
-                            () => DropdownWebStock(
-                              width: MediaQuery.of(context).size.width,
-                              dropdownList: [],
-                              onValueChanged: controller.onValueChanged,
-                            ),
-                          ),
-                        ),
-                        Dimens.boxHeight10,
-                        CustomRichText(title: 'Observation Description'),
-                        Dimens.boxHeight10,
-                        TextField(
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            height: 5,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Dimens.boxHeight10,
-                        Center(
-                          child: Container(
-                            height: 40,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.submitColor,
-                              text: 'Submit',
-                              onPressed: () {},
-                            ),
-                          ),
-                        ),
-                        Dimens.boxHeight10,
-                      ],
-                    ),
+                      ),
+                      Dimens.boxHeight15,
+                      CustomRichTextMobile(
+                        title: "Corrective/Preventive Action: ",
+                      ),
+                      Dimens.boxHeight2,
+                      CustomTextfieldMobile(
+                        width: MediaQuery.of(context).size.width / 1.1,
+                        keyboardType: TextInputType.number,
+                        textController: controller.correctivePreventiveCtrlr,
+                        // errorController: controller.isCorrectiveInvalid.value
+                        //     ? "Required field"
+                        //     : null,
+                        onChanged: (value) {
+                          if (value.trim().length > 0) {
+                            controller.isCorrectiveInvalid.value = false;
+                          } else {
+                            controller.isCorrectiveInvalid.value = true;
+                          }
+                        },
+                      ),
+                      Dimens.boxHeight2,
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

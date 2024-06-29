@@ -192,7 +192,7 @@ class ComplianceHistoryWeb extends GetView<ComplianceHistoryController> {
                                       ),
                                     ),
                                     DataColumn2(
-                                      size: ColumnSize.M,
+                                      size: ColumnSize.L,
                                       label: Text(
                                         "Current Status",
                                         style: TextStyle(
