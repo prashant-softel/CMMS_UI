@@ -279,7 +279,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                                 color: Colors.grey, width: 0.0),
                                           ),
                                           contentPadding:
-                                              Dimens.edgeInsets05_10,
+                                              EdgeInsets.only(left: 3),
                                           hintText: 'search'.tr,
                                           hintStyle: Styles.grey12,
                                         ),

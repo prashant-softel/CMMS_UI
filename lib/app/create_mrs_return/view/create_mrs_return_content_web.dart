@@ -108,11 +108,14 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                               color: ColorValues.greyLightColour,
                             ),
                             Container(
-                              margin: Dimens.edgeInsets20_0_20_0,
+                              margin:
+                                  EdgeInsets.only(right: 7, left: 7, top: 15),
                               child: Row(
                                 children: [
-                                  CustomRichText(title: 'Activity: '),
-                                  Dimens.boxWidth10,
+                                  CustomRichText(
+                                      title: 'Activity: ',
+                                      includeAsterisk: false),
+                                  Dimens.boxWidth2,
                                   Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -154,8 +157,9 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                         ),
                                       )),
                                   Spacer(),
-                                  Text('Task ID: '),
-                                  Dimens.boxWidth10,
+                                  CustomRichText(
+                                      title: 'Task ID', includeAsterisk: false),
+                                  Dimens.boxWidth2,
                                   Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -199,7 +203,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                             ),
                             Container(
                               //height: 400,
-                              margin: Dimens.edgeInsets20_20_20_0,
+                              margin:
+                                  EdgeInsets.only(right: 7, left: 7, top: 15),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color:
@@ -272,7 +277,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                 80) +
                                             60,
                                     child: DataTable2(
-                                      minWidth: 2000,
+                                      minWidth: 1600,
                                       border: TableBorder.all(
                                           color: Color.fromARGB(
                                               255, 206, 229, 234)),
@@ -344,11 +349,11 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                         DataColumn2(
                                             fixedWidth: 100,
                                             label: Text(
-                                          "Action",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                              "Action",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
                                       ],
                                       rows: controller.rowItem.value
                                           .map((record) {
@@ -495,62 +500,59 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                 ],
                                                               ),
                                                             )
-
-                                                      : (mapData['key'] ==
-                                                              "Sr_No")
-                                                          ? Text(
-                                                              "${controller.dropdownMapperData.value[record[0]['value']]?.serial_no ?? ""}")
                                                           : (mapData['key'] ==
-                                                                  "code")
+                                                                  "Sr_No")
                                                               ? Text(
-                                                                  "${controller.dropdownMapperData.value[record[0]['value']]?.asset_code ?? ""}")
+                                                                  "${controller.dropdownMapperData.value[record[0]['value']]?.serial_no ?? ""}")
                                                               : (mapData['key'] ==
-                                                                      "Material_Type")
+                                                                      "code")
                                                                   ? Text(
-                                                                      "${controller.dropdownMapperData.value[record[0]['value']]?.asset_type ?? ""}")
+                                                                      "${controller.dropdownMapperData.value[record[0]['value']]?.asset_code ?? ""}")
                                                                   : (mapData['key'] ==
-                                                                          "Issue_Qty")
+                                                                          "Material_Type")
                                                                       ? Text(
-                                                                          "${controller.dropdownMapperData.value[record[0]['value']]?.issued_qty ?? ""}")
+                                                                          "${controller.dropdownMapperData.value[record[0]['value']]?.asset_type ?? ""}")
                                                                       : (mapData['key'] ==
-                                                                              "Used_Qty")
+                                                                              "Issue_Qty")
                                                                           ? Text(
-                                                                              "${controller.dropdownMapperData.value[record[0]['value']]?.consumed_qty ?? ""}")
-                                                                          : (mapData['key'] == "Remark")
-                                                                              ? Padding(
-                                                                                  padding: const EdgeInsets.all(8.0),
-                                                                                  child: Container(
-                                                                                      width: (Get.width * .5),
-                                                                                      // padding: EdgeInsets.all(value),
-                                                                                      decoration: BoxDecoration(
-                                                                                        boxShadow: [
-                                                                                          BoxShadow(
-                                                                                            color: Colors.black26,
-                                                                                            offset: const Offset(
-                                                                                              5.0,
-                                                                                              5.0,
-                                                                                            ),
-                                                                                            blurRadius: 5.0,
-                                                                                            spreadRadius: 1.0,
+                                                                              "${controller.dropdownMapperData.value[record[0]['value']]?.issued_qty ?? ""}")
+                                                                          : (mapData['key'] == "Used_Qty")
+                                                                              ? Text("${controller.dropdownMapperData.value[record[0]['value']]?.consumed_qty ?? ""}")
+                                                                              : (mapData['key'] == "Remark")
+                                                                                  ? Padding(
+                                                                                      padding: const EdgeInsets.all(8.0),
+                                                                                      child: Container(
+                                                                                          width: (Get.width * .5),
+                                                                                          // padding: EdgeInsets.all(value),
+                                                                                          decoration: BoxDecoration(
+                                                                                            boxShadow: [
+                                                                                              BoxShadow(
+                                                                                                color: Colors.black26,
+                                                                                                offset: const Offset(
+                                                                                                  5.0,
+                                                                                                  5.0,
+                                                                                                ),
+                                                                                                blurRadius: 5.0,
+                                                                                                spreadRadius: 1.0,
+                                                                                              ),
+                                                                                            ],
+                                                                                            color: ColorValues.whiteColor,
+                                                                                            borderRadius: BorderRadius.circular(5),
                                                                                           ),
-                                                                                        ],
-                                                                                        color: ColorValues.whiteColor,
-                                                                                        borderRadius: BorderRadius.circular(5),
-                                                                                      ),
-                                                                                      child: LoginCustomTextfield(
-                                                                                        // inputFormatters: <
-                                                                                        //     TextInputFormatter>[
-                                                                                        //   FilteringTextInputFormatter
-                                                                                        //       .digitsOnly
-                                                                                        // ],
-                                                                                        maxLine: 1,
-                                                                                        textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                        onChanged: (txt) {
-                                                                                          mapData["value"] = txt;
-                                                                                        },
-                                                                                      )),
-                                                                                )
-                                                                              : Text(mapData['key'] ?? ''),
+                                                                                          child: LoginCustomTextfield(
+                                                                                            // inputFormatters: <
+                                                                                            //     TextInputFormatter>[
+                                                                                            //   FilteringTextInputFormatter
+                                                                                            //       .digitsOnly
+                                                                                            // ],
+                                                                                            maxLine: 1,
+                                                                                            textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                            onChanged: (txt) {
+                                                                                              mapData["value"] = txt;
+                                                                                            },
+                                                                                          )),
+                                                                                    )
+                                                                                  : Text(mapData['key'] ?? ''),
                                             );
                                           }).toList(),
                                         );
@@ -562,7 +564,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                             ),
                             Container(
                               //height: 400,
-                              margin: Dimens.edgeInsets20_20_20_0,
+                              margin:
+                                  EdgeInsets.only(right: 7, left: 7, top: 15),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color:
@@ -986,7 +989,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                   CustomRichText(
                                       title: "Comment:",
                                       includeAsterisk: false),
-                                  Dimens.boxWidth10,
+                                  Dimens.boxWidth2,
                                   Container(
                                       width: (Get.width * .6),
                                       decoration: BoxDecoration(
@@ -1018,14 +1021,14 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                               ),
                             ),
                             Container(
-                              margin: Dimens.edgeInsets20_0_0_0,
+                              margin: Dimens.edgeInsets15,
                               child: Row(
                                 children: [
                                   Text(
                                     'Set As Template: ',
                                     style: Styles.blackBold14,
                                   ),
-                                  Dimens.boxWidth10,
+                                  Dimens.boxWidth2,
                                   Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -1103,7 +1106,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                       },
                     ),
                   ),
-                  Dimens.boxWidth20,
+                  Dimens.boxWidth10,
                   Container(
                     height: 35,
                     child: CustomElevatedButton(

@@ -91,10 +91,11 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                           color: ColorValues.greyLightColour,
                         ),
                         Container(
-                          margin: Dimens.edgeInsets20_0_20_0,
+                          margin:
+                                  EdgeInsets.only(right: 7, left: 7, top: 15),
                           child: Row(
                             children: [
-                              CustomRichText(title: 'Activity: '),
+                              CustomRichText(title: 'Activity: ', includeAsterisk: false),
                               Dimens.boxWidth10,
                               Container(
                                   decoration: BoxDecoration(
@@ -123,12 +124,15 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                   ),
                                   width:
                                       (MediaQuery.of(context).size.width * .2),
-                                  child: LoginCustomTextfield(
-                                    // inputFormatters: [
-                                    //   FilteringTextInputFormatter.deny(
-                                    //       RegExp(r'\s')),
-                                    // ],
-                                    textController: controller.activityCtrlr,
+                                  child: IgnorePointer(
+                                    ignoring: true,
+                                    child: LoginCustomTextfield(
+                                      // inputFormatters: [
+                                      //   FilteringTextInputFormatter.deny(
+                                      //       RegExp(r'\s')),
+                                      // ],
+                                      textController: controller.activityCtrlr,
+                                    ),
                                   )),
                               Spacer(),
                               Text('Task ID: '),
@@ -158,18 +162,22 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                       ),
                                     ],
                                   ),
-                                  child: LoginCustomTextfield(
-                                    // enabled: false,
-                                    width: (MediaQuery.of(context).size.width *
-                                        .2),
-                                    textController: controller.whereUsedCtrlr,
+                                  child: IgnorePointer(
+                                    ignoring: true,
+                                    child: LoginCustomTextfield(
+                                      // enabled: false,
+                                      width: (MediaQuery.of(context).size.width *
+                                          .2),
+                                      textController: controller.whereUsedCtrlr,
+                                    ),
                                   )),
                             ],
                           ),
                         ),
                         Container(
                           //height: 400,
-                          margin: Dimens.edgeInsets20_20_20_0,
+                          margin:
+                                  EdgeInsets.only(right: 7, left: 7, top: 15),
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: ColorValues.lightGreyColorWithOpacity35,
@@ -517,7 +525,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                         ),
                         Container(
                           //height: 400,
-                          margin: Dimens.edgeInsets20_20_20_0,
+                          margin: EdgeInsets.only(right: 7, left: 7, top: 15),
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: ColorValues.lightGreyColorWithOpacity35,
@@ -922,7 +930,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                             children: [
                               CustomRichText(
                                   title: "Comment:", includeAsterisk: false),
-                              Dimens.boxWidth10,
+                              Dimens.boxWidth2,
                               Container(
                                   width: (Get.width * .6),
                                   decoration: BoxDecoration(
@@ -961,7 +969,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                 'Set As Template: ',
                                 style: Styles.blackBold14,
                               ),
-                              Dimens.boxWidth10,
+                              Dimens.boxWidth2,
                               Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -1014,7 +1022,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                 },
                               ),
                             ),
-                            Dimens.boxWidth20,
+                            Dimens.boxWidth10,
                             Container(
                               height: 35,
                               child: CustomElevatedButton(

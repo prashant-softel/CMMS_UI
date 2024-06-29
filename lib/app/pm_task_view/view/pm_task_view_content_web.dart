@@ -1146,7 +1146,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                     //     },
                     //   ),
                     // ),
-                    Dimens.boxWidth10,
+                    Dimens.boxWidth3,
 
                     controller.pmtaskViewModel.value?.status == 165 &&
                             varUserAccessModel.value.access_list!
@@ -1180,7 +1180,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                             ),
                           )
                         : Dimens.box0,
-                    Dimens.boxWidth10,
+                    Dimens.boxWidth5,
                     controller.pmtaskViewModel.value?.status == 165 &&
                             varUserAccessModel.value.access_list!
                                     .where((e) =>

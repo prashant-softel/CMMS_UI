@@ -82,7 +82,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                               )
                             : Text(" / MRS LIST", style: Styles.greyLight14),
                   ),
-                  Text(" / EDIT MATERIAL SLIP", style: Styles.greyLight14)
+                  Text(" / EDIT RETURN MATERIAL SLIP", style: Styles.greyLight14)
                 ],
               ),
             ),
@@ -94,7 +94,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        "Edit Material Requisition Slip",
+                        "Edit Return Material Requisition Slip",
                         style: Styles.blackBold16,
                       ),
                     ),
@@ -102,11 +102,12 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                       color: ColorValues.greyLightColour,
                     ),
                     Container(
-                      margin: Dimens.edgeInsets20_0_20_0,
+                      margin:
+                                  EdgeInsets.only(right: 7, left: 7, top: 15),
                       child: Row(
                         children: [
-                          CustomRichText(title: 'Activity: '),
-                          Dimens.boxWidth10,
+                          CustomRichText(title: 'Activity: ',includeAsterisk: false),
+                          Dimens.boxWidth2,
                           Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
