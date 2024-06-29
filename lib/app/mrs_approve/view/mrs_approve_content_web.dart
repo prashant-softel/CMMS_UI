@@ -97,7 +97,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                 "${controller.mrsDetailsModel.value?.id ?? ""}",
                                 style: Styles.blue17,
                               ),
-                              Dimens.boxWidth8,
+                              Dimens.boxWidth3,
                               Container(
                                 height: 30,
                                 child: CustomElevatedButton(
@@ -138,7 +138,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                   ),
                                 ],
                               ),
-                              Dimens.boxWidth20,
+                              Dimens.boxWidth2,
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -170,7 +170,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                   ),
                                 ],
                               ),
-                              Dimens.boxWidth20,
+                              Dimens.boxWidth2,
 
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,7 +246,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                     )),
                                     DataColumn(
                                         label: Text(
-                                      "Available Qyt.",
+                                      "Available Qty.",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
@@ -299,7 +299,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomRichText(title: "Comment:"),
-                              Dimens.boxWidth10,
+                              Dimens.boxWidth2,
                               Container(
                                   width: (Get.width * .6),
                                   decoration: BoxDecoration(

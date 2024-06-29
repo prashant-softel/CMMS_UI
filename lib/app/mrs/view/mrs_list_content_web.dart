@@ -106,7 +106,7 @@ class MrsListContentWeb extends StatelessWidget {
                                   Row(
                                     children: [
                                       CustomRichText(title: 'Date Range'),
-                                      Dimens.boxWidth10,
+                                      Dimens.boxWidth2,
                                       CustomTextFieldForStock(
                                         width:
                                             MediaQuery.of(context).size.width /
@@ -148,7 +148,7 @@ class MrsListContentWeb extends StatelessWidget {
                                 Container(
                                   width: 300,
                                   height: 40,
-                                  margin: Dimens.edgeInsets0_0_16_0,
+                                  margin: EdgeInsets.only(right: 10),
                                   child: TextField(
                                     style: GoogleFonts.lato(
                                       textStyle: TextStyle(
@@ -402,7 +402,8 @@ class MrsListDataSource extends DataTableSource {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
+                          padding:
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                           decoration: BoxDecoration(
                             color: controller.mrsList
                                         .firstWhere(

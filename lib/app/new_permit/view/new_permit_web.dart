@@ -420,7 +420,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                               children: [
                                 Container(
                                   // height: Get.height,
-                                  margin: EdgeInsets.only(right: 30, left: 30),
+                                  margin: EdgeInsets.only(right: 30, left: 25),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
@@ -438,7 +438,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                     Dimens.boxWidth15,
                                                     CustomRichText(
                                                         title: 'Block/Plot: '),
-                                                    Dimens.boxWidth10,
+                                                    Dimens.boxWidth5,
                                                     IgnorePointer(
                                                       ignoring: controller
                                                                   .jobModel
@@ -479,7 +479,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                     CustomRichText(
                                                         title:
                                                             'Type of permit: '),
-                                                    Dimens.boxWidth10,
+                                                    Dimens.boxWidth5,
                                                     SizedBox(
                                                       width:
                                                           MediaQuery.of(context)
@@ -508,11 +508,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 Dimens.boxHeight10,
                                                 Row(
                                                   children: [
-                                                    Dimens.boxWidth15,
+                                                    Dimens.boxWidth10,
                                                     CustomRichText(
                                                         title:
                                                             'Start Date & Time: '),
-                                                    Dimens.boxWidth10,
+                                                    Dimens.boxWidth5,
                                                     _buildStartValidTillDateField_web(
                                                       context,
                                                       0,
@@ -535,7 +535,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                     CustomRichText(
                                                         title:
                                                             'Equipment Categories: '),
-                                                    Dimens.boxWidth10,
+                                                    Dimens.boxWidth5,
                                                     controller.pmtaskViewModel
                                                                     ?.id !=
                                                                 null ||
@@ -719,7 +719,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                       CustomRichText(
                                                           title:
                                                               'Expiry Date & Time: '),
-                                                      Dimens.boxWidth10,
+                                                      Dimens.boxWidth5,
                                                       _buildStartValidTillDateField_web(
                                                           context, 1),
                                                     ],
@@ -751,7 +751,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               children: [
                                                 CustomRichText(
                                                     title:
-                                                        'Electrical Isolation Required '),
+                                                        'Electrical Isolation Required ',
+                                                    includeAsterisk: false),
                                                 Switch(
                                                   value: _controller
                                                       .isToggleOn.value,
@@ -1071,7 +1072,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
 
                                                                                 controller.update();
                                                                               }),
-                                                                              Dimens.boxWidth10,
+                                                                              Dimens.boxWidth2,
                                                                               Text("${element.name}"),
                                                                             ],
                                                                           ),
@@ -1247,7 +1248,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                               child:
                                                                   FileUploadWidgetWithDropzone(),
                                                             ),
-                                                            Dimens.boxWidth10,
+                                                            Dimens.boxWidth5,
                                                             Expanded(
                                                               flex: 8,
                                                               child: Padding(
@@ -2649,7 +2650,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
         children: [
       Obx(
         () => Container(
-          margin: EdgeInsets.only(left: 10, right: 18),
+          margin: EdgeInsets.only(left: 5, right: 18),
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
