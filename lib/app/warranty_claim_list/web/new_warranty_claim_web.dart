@@ -978,7 +978,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
 
                                                                                                 // controller.addRow(controller.emailTextFieldController.text);
                                                                                                 // controller.emailTextFieldController.clear();
-                                                                                                controller.updateText(controller.nameTextFieldController.text, controller.emailTextFieldController.text, int.tryParse('${controller.mobileTextFieldController.text}'));
+                                                                                                controller.updateText(controller.nameTextFieldController.text,controller.roleTextFieldController.text, controller.emailTextFieldController.text, int.tryParse('${controller.mobileTextFieldController.text}'));
                                                                                                 controller.nameTextFieldController.clear();
                                                                                                 controller.emailTextFieldController.clear();
                                                                                                 controller.mobileTextFieldController.clear();
