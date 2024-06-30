@@ -25,6 +25,8 @@ abstract class LocalKeys {
 
   static const roId = 'roId';
   static const permitId = 'permitId';
+  static const mcTaskId = 'mcModel';
+
   static const isChecked = 'isChecked';
   static const jobModel = 'jobModel';
   static const pmTaskModel = 'pmTaskModel';

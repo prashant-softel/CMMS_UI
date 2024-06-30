@@ -73,16 +73,12 @@ class AddModuleCleaningExecutionUsecase {
         isLoading,
       );
 
-  Future<List<GetMCTaskEquipmentList>> getMCTaskEquipmentList({
-    required bool isLoading,
-    required int? taskId,
-    required int facilityId
-  }) async {
+  Future<List<GetMCTaskEquipmentList>> getMCTaskEquipmentList(
+      {required bool isLoading,
+      required int? taskId,
+      required int facilityId}) async {
     return _repository.getMCTaskEquipmentList(
-      isLoading: isLoading,
-      taskId: taskId,
-      facilityId: facilityId
-    );
+        isLoading: isLoading, taskId: taskId, facilityId: facilityId);
   }
 
   Future<Map<String, dynamic>> abandonScheduleExecutionButton({
@@ -144,4 +140,14 @@ class AddModuleCleaningExecutionUsecase {
       _repository.saveValue(LocalKeys.planId, planId);
   Future<String?> getValuePlanId() async =>
       await _repository.getStringValue(LocalKeys.planId);
+  void clearPermitStoreData() async =>
+      _repository.clearData(LocalKeys.permitId);
+  void clearmcDetailsStoreData() async =>
+      _repository.clearData(LocalKeys.mcTaskId);
+  void clearJobDetailStoreData() async =>
+      _repository.clearData(LocalKeys.jobModel);
+  void clearTypeValue() async => _repository.clearData(LocalKeys.types);
+  void clearisCheckedValue() async =>
+      _repository.clearData(LocalKeys.isChecked);
+  void clearpmTaskValue() async => _repository.clearData(LocalKeys.pmTaskModel);
 }
