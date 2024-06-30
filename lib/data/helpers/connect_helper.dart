@@ -68,6 +68,7 @@ import 'package:cmms/app/widgets/update_veg_execution_dialog.dart';
 import 'package:cmms/app/widgets/veg_plan_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/veg_plan_message_dialog.dart';
 import 'package:cmms/app/widgets/veg_plan_message_reject_dialog.dart';
+import 'package:cmms/app/widgets/view_list_of_obs_message_close_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_updated_message_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
@@ -4106,7 +4107,29 @@ class ConnectHelper {
     );
     return responseModel;
   }
+  Future<ResponseModel> viewObsCloseButton({
+    required String auth,
+    viewobsCloseJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CloseObservation',
+      Request.post,
+      viewobsCloseJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderRejecteResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(viewListOfobsMessageCloseDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
 
+    return responseModel;
+  }
   Future<ResponseModel> getJobsLinkdToPermitList({
     String? auth,
     required int facilityId,
