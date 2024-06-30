@@ -40,4 +40,13 @@ class ViewObservationUsecase {
   void clearValue() async => repository.clearData(
         LocalKeys.obsId,
       );
+      
+      Future<Map<String, dynamic>> viewObsCloseButton({
+    viewobsCloseJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.viewObsCloseButton(
+        viewobsCloseJsonString,
+        isLoading,
+      );
 }

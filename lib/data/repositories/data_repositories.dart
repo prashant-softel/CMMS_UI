@@ -2277,6 +2277,17 @@ class DataRepository extends DomainRepository {
         id: id,
         isLoading: isLoading ?? false,
       );
+
+      Future<ResponseModel> viewObsCloseButton({
+    required String auth,
+    viewobsCloseJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.viewObsCloseButton(
+        auth: auth,
+        viewobsCloseJsonString: viewobsCloseJsonString,
+        isLoading: isLoading ?? false,
+      ); 
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,
