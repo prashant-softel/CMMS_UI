@@ -410,6 +410,111 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ),
                                 )
                               : Dimens.box0,
+
+                          // hgvbjn,
+                          controller.mcExecutionDetailsModel?.executionId !=
+                                  null
+                              ? Container(
+                                  // alignment: Alignment.centerLeft,
+                                  width: Get.width * .8,
+                                  height: Get.height * .2,
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 9, vertical: 10),
+                                  padding: EdgeInsets.all(10),
+                                  // decoration: BoxDecoration(
+                                  //   border: Border.all(color: Colors.black),
+                                  // ),
+                                  child: DataTable2(
+                                    minWidth: 1400,
+                                    border: TableBorder.all(
+                                      color: Colors.black,
+                                    ),
+                                    columnSpacing: 11,
+                                    columns: [
+                                      DataColumn2(
+                                          fixedWidth: 100,
+                                          label: Text('Task Id',
+                                              overflow: TextOverflow.ellipsis)),
+                                      DataColumn2(
+                                          fixedWidth: 200,
+                                          label: Text('Plan Title',
+                                              overflow: TextOverflow.clip)),
+                                      DataColumn2(
+                                          fixedWidth: 150,
+                                          label: Text('Frequency',
+                                              overflow: TextOverflow.ellipsis)),
+                                      DataColumn2(
+                                          fixedWidth: 200,
+                                          label: Text('Planned By',
+                                              overflow: TextOverflow.ellipsis)),
+                                      DataColumn2(
+                                          fixedWidth: 200,
+                                          label: Text('Start Date Time',
+                                              overflow: TextOverflow.ellipsis)),
+                                      DataColumn2(
+                                          fixedWidth: 150,
+                                          label: Text('Planning Date Time',
+                                              overflow: TextOverflow.ellipsis)),
+                                    ],
+                                    rows: [
+                                      DataRow(cells: [
+                                        DataCell(
+                                          GestureDetector(
+                                            onTap: () {
+                                              controller.viewJobDetails();
+                                            },
+                                            child: Text(
+                                                '${int.tryParse('${controller.mcExecutionDetailsModel?.executionId ?? 0}')}',
+                                                style: TextStyle(
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                  decorationStyle:
+                                                      TextDecorationStyle.solid,
+                                                  color: Color.fromARGB(
+                                                      255, 5, 92, 163),
+                                                ),
+                                                overflow:
+                                                    TextOverflow.ellipsis),
+                                          ),
+                                        ),
+                                        DataCell(
+                                          SizedBox(
+                                            child: Text(
+                                                '${controller.mcExecutionDetailsModel!.title ?? ""}',
+                                                maxLines: 3),
+                                          ),
+                                        ),
+                                        DataCell(
+                                          SizedBox(
+                                            // width: Get.width * 0.2,
+                                            child: Text(
+                                                '${controller.mcExecutionDetailsModel!.frequency ?? ""}',
+                                                maxLines: 3),
+                                          ),
+                                        ),
+                                        DataCell(
+                                          SizedBox(
+                                            child: Text(
+                                                '${controller.mcExecutionDetailsModel!.plannedBy ?? ""}',
+                                                maxLines: 3),
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                              '${controller.mcExecutionDetailsModel!.startDate ?? ""}',
+                                              maxLines: 3),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                              '${controller.mcExecutionDetailsModel!.plannedAt ?? ""}',
+                                              maxLines: 3),
+                                        ),
+                                      ]),
+                                    ],
+                                  ),
+                                )
+                              : Dimens.box0,
+
                           IgnorePointer(
                             ignoring: controller.newPermitDetailsModel.value
                                         ?.ptwStatus ==

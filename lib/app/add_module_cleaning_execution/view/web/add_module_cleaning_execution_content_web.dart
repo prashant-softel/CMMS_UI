@@ -907,6 +907,14 @@ class AddModuleCleaningExecutionContentWeb
                                                     ),
                                                   )
                                                 : Dimens.box0,
+                                            CustomElevatedButton(
+                                              text: "Create New Permit",
+                                              icon: Icons.add,
+                                              onPressed: () =>
+                                                  controller.createNewPermit(),
+                                              backgroundColor:
+                                                  ColorValues.appLightBlueColor,
+                                            ),
 
                                             //           varUserAccessModel.value.access_list!
                                             // .where((e) => e.feature_id == 3 && e.edit == 1)

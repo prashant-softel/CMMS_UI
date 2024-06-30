@@ -10,8 +10,11 @@ import 'package:cmms/domain/models/end_mc_execution_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
+import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/update_mc_execution_model.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +71,8 @@ class AddModuleCleaningExecutionController extends GetxController {
   Rx<String> selectedTypePermit = ''.obs;
   Rx<String> selectedTypeOfPermit = ''.obs;
   Rx<bool> isTypePermit = true.obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
+  Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
 
   ///Mc Execution details
   Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
@@ -167,6 +172,25 @@ class AddModuleCleaningExecutionController extends GetxController {
     super.onInit();
   }
 
+  createNewPermit() {
+    clearJobDetailStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearpmTaskValue();
+    clearPermitStoreData();
+    clearmcDetailsStoreData();
+
+    Get.toNamed(Routes.createPermit, arguments: {
+      "jobModel": jobDetailsModel.value,
+      "permitId": 0,
+      "isChecked": false,
+      "type": 4,
+      "isFromJobDetails": true,
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value
+    });
+  }
+
   Future<void> setMcId() async {
     try {
       final _mcid = await addModuleCleaningExecutionPresenter.getValueMcId();
@@ -190,6 +214,30 @@ class AddModuleCleaningExecutionController extends GetxController {
     } catch (e) {
       // Utility.showDialog(e.toString(), 'mcid');
     }
+  }
+
+  void clearPermitStoreData() {
+    addModuleCleaningExecutionPresenter.clearPermitStoreData();
+  }
+
+  void clearmcDetailsStoreData() {
+    addModuleCleaningExecutionPresenter.clearmcDetailsStoreData();
+  }
+
+  void clearJobDetailStoreData() {
+    addModuleCleaningExecutionPresenter.clearJobDetailStoreData();
+  }
+
+  void clearTypeStoreData() {
+    addModuleCleaningExecutionPresenter.clearTypeValue();
+  }
+
+  void clearisCheckedtoreData() {
+    addModuleCleaningExecutionPresenter.clearisCheckedValue();
+  }
+
+  void clearpmTaskValue() {
+    addModuleCleaningExecutionPresenter.clearpmTaskValue();
   }
 
   Future<void> getFacilityList() async {

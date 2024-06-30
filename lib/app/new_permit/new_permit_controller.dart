@@ -11,6 +11,7 @@ import 'package:cmms/domain/models/create_permit_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
@@ -390,6 +391,7 @@ class NewPermitController extends GetxController {
   Rx<int> typee = 0.obs;
   Rx<bool> isChecked = false.obs;
   JobDetailsModel? jobModel;
+  EndMCExecutionDetailsModel? mcExecutionDetailsModel;
   PmtaskViewModel? pmtaskViewModel;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoint;
   int? jcId = 0;
@@ -517,6 +519,8 @@ class NewPermitController extends GetxController {
     try {
       JobDetailsModel? jobDetail;
       PmtaskViewModel? pmdetail;
+      EndMCExecutionDetailsModel? mcdetail;
+
 
       final _permitId = await permitPresenter.getValue();
       final _type = await permitPresenter.getValuee();
@@ -539,6 +543,7 @@ class NewPermitController extends GetxController {
         isChecked.value = dataFromPreviousScreen['isChecked'];
         typee.value = dataFromPreviousScreen['type'];
         jobModel = dataFromPreviousScreen['jobModel'];
+        mcExecutionDetailsModel = dataFromPreviousScreen['mcModel'];
         pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];
         permitPresenter.saveValue(permitId: permitId.value.toString());
         permitPresenter.saveValuee(type: typee.value.toString());
@@ -565,6 +570,9 @@ class NewPermitController extends GetxController {
         }
         if (pmdetail != null) {
           pmtaskViewModel = pmdetail;
+        }
+         if (mcdetail != null) {
+          mcExecutionDetailsModel = mcdetail;
         }
         isChecked.value = _isChecked ?? false;
         typee.value = int.tryParse(_type!) ?? 0;
