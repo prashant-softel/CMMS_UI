@@ -2937,6 +2937,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> linkMcToPermit({
+    required String auth,
+    mcId,
+    permitId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/LinkPermitToModuleCleaning?task_id=$mcId&permit_id=$permitId',
+      Request.put,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   ///
   Future<ResponseModel> createJobCard({
     String? auth,
@@ -3036,6 +3055,34 @@ class ConnectHelper {
     required String auth,
     newPermit,
     jobId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/CreatePermit',
+      Request.post,
+      newPermit,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('CreateNewPermitResponseForJob:${responseModel.data}');
+    // var res = responseModel.data;
+    // var parsedJson = json.decode(res);
+    // Get.dialog<void>(CreateNewPermitForJobDialog(
+    //   data: parsedJson['message'],
+    //   PtwId: parsedJson['id'],
+    // ));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createNewPermitForMC({
+    required String auth,
+    newPermit,
+    mcId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -4107,6 +4154,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> viewObsCloseButton({
     required String auth,
     viewobsCloseJsonString,
@@ -4130,6 +4178,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> getJobsLinkdToPermitList({
     String? auth,
     required int facilityId,
@@ -7164,7 +7213,10 @@ class ConnectHelper {
 
       type == 3
           ? 'AuditPlan/AuditLinkToPermit?audit_id=$scheduleId&ptw_id=$permitId'
-          : 'PMScheduleView/LinkPermitToPMTask?task_id=$scheduleId&permit_id=$permitId',
+          : type == 4
+              ? 'MC/LinkPermitToModuleCleaning?task_id=$scheduleId&permit_id=$permitId'
+              : 'PMScheduleView/LinkPermitToPMTask?task_id=$scheduleId&permit_id=$permitId',
+
       Request.put,
       null,
       isLoading ?? false,

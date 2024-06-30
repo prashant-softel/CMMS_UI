@@ -2192,7 +2192,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                             ),
                           ),
                           Dimens.boxHeight20,
-                          controller.jobModel?.id != null &&
+                          controller.mcExecutionDetailsModel?.id != null &&
                                   controller.permitId.value == 0
                               ? Center(
                                   child: Container(
@@ -2200,7 +2200,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       child: CustomElevatedButton(
                                         backgroundColor:
                                             ColorValues.appGreenColor,
-                                        text: "Submit For Approval",
+                                        text: "Submit For Approval MC",
                                         onPressed: () {
                                           controller.isFormInvalid.value =
                                               false;
@@ -2211,13 +2211,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                   controller
                                                           .isCheckedSOP.value ==
                                                       true
-                                              ? controller
-                                                  .createNewPermitForJob(
-                                                      jobId: controller
-                                                          .jobModel?.id,
-                                                      fileIds:
-                                                          dropzoneController
-                                                              .fileIds)
+                                              ? controller.createNewPermitForPm(
+                                                  pmTaskId: controller
+                                                      .mcExecutionDetailsModel
+                                                      ?.executionId,
+                                                  fileIds: dropzoneController
+                                                      .fileIds)
                                               : controller.isCheckedJSA.value ==
                                                           true &&
                                                       controller.isCheckedSOP
@@ -2249,34 +2248,29 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         },
                                       )),
                                 )
-                              : controller.pmtaskViewModel?.id != null &&
-                                      controller.permitId.value <= 0
+                              : controller.jobModel?.id != null &&
+                                      controller.permitId.value == 0
                                   ? Center(
                                       child: Container(
                                           height: 45,
                                           child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appGreenColor,
-                                            text: "Submit For Approval1",
+                                            text: "Submit For Approval",
                                             onPressed: () {
                                               controller.isFormInvalid.value =
                                                   false;
                                               controller.checkForm() == true &&
-                                                      controller
-                                                              .isCheckedJSA.value ==
+                                                      controller.isCheckedJSA
+                                                              .value ==
                                                           true &&
                                                       controller.isCheckedSOP
                                                               .value ==
                                                           true
                                                   ? controller
-                                                      .createNewPermitForPm(
-                                                          pmTaskId:
-                                                              controller
-                                                                  .pmtaskViewModel
-                                                                  ?.id,
-                                                          activity: controller
-                                                              .pmtaskViewModel
-                                                              ?.plan_title,
+                                                      .createNewPermitForJob(
+                                                          jobId: controller
+                                                              .jobModel?.id,
                                                           fileIds:
                                                               dropzoneController
                                                                   .fileIds)
@@ -2296,21 +2290,15 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               // print('JobId'),
                                               // controller.isFormInvalid.value =
                                               //     false;
-                                              // controller.isCheckedJSA
-                                              //                 .value ==
+                                              // controller.isCheckedJSA.value ==
                                               //             true &&
-                                              //         controller.isCheckedSOP
-                                              //                 .value ==
+                                              //         controller
+                                              //                 .isCheckedSOP.value ==
                                               //             true
                                               //     ? controller
-                                              //         .createNewPermitForPm(
-                                              //             pmTaskId: controller
-                                              //                 .pmtaskViewModel
-                                              //                 ?.id,
-                                              //             activity:
-                                              //                 controller
-                                              //                     .pmtaskViewModel
-                                              //                     ?.plan_title,
+                                              //         .createNewPermitForJob(
+                                              //             jobId: controller
+                                              //                 .jobModel?.id,
                                               //             fileIds:
                                               //                 dropzoneController
                                               //                     .fileIds)
@@ -2320,204 +2308,281 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             },
                                           )),
                                     )
-                                  : controller.permitId.value <= 0
+                                  : controller.pmtaskViewModel?.id != null &&
+                                          controller.permitId.value <= 0
                                       ? Center(
                                           child: Container(
                                               height: 45,
                                               child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.appGreenColor,
-                                                  text: "Submit For Approval",
-                                                  onPressed: () {
-                                                    controller.isFormInvalid
-                                                        .value = false;
-                                                    controller.checkForm() ==
-                                                                true &&
-                                                            controller
-                                                                    .isCheckedJSA
-                                                                    .value ==
-                                                                true &&
-                                                            controller
-                                                                    .isCheckedSOP
-                                                                    .value ==
-                                                                true
-                                                        ? controller.createNewPermit(
-                                                            fileIds:
-                                                                dropzoneController
-                                                                    .fileIds)
-                                                        : controller.isCheckedJSA
+                                                backgroundColor:
+                                                    ColorValues.appGreenColor,
+                                                text: "Submit For Approval ",
+                                                onPressed: () {
+                                                  controller.isFormInvalid
+                                                      .value = false;
+                                                  controller.checkForm() == true &&
+                                                          controller.isCheckedJSA
+                                                                  .value ==
+                                                              true &&
+                                                          controller.isCheckedSOP
+                                                                  .value ==
+                                                              true
+                                                      ? controller.createNewPermitForPm(
+                                                          pmTaskId: controller
+                                                              .pmtaskViewModel
+                                                              ?.id,
+                                                          activity: controller
+                                                              .pmtaskViewModel
+                                                              ?.plan_title,
+                                                          fileIds:
+                                                              dropzoneController
+                                                                  .fileIds)
+                                                      : controller.isCheckedJSA
+                                                                      .value ==
+                                                                  true &&
+                                                              controller
+                                                                      .isCheckedSOP
+                                                                      .value ==
+                                                                  true
+                                                          ? print(
+                                                              "condiation failed")
+                                                          : Get.dialog<void>(
+                                                              checkboxAlertBox(),
+                                                            );
+                                                  // var jobId = controller.jobModel?.id ?? 0;
+                                                  // print('JobId'),
+                                                  // controller.isFormInvalid.value =
+                                                  //     false;
+                                                  // controller.isCheckedJSA
+                                                  //                 .value ==
+                                                  //             true &&
+                                                  //         controller.isCheckedSOP
+                                                  //                 .value ==
+                                                  //             true
+                                                  //     ? controller
+                                                  //         .createNewPermitForPm(
+                                                  //             pmTaskId: controller
+                                                  //                 .pmtaskViewModel
+                                                  //                 ?.id,
+                                                  //             activity:
+                                                  //                 controller
+                                                  //                     .pmtaskViewModel
+                                                  //                     ?.plan_title,
+                                                  //             fileIds:
+                                                  //                 dropzoneController
+                                                  //                     .fileIds)
+                                                  //     : Get.dialog<void>(
+                                                  //         checkboxAlertBox());
+                                                  // controller.linkToPermit(jobId: controller.jobModel?.id);
+                                                },
+                                              )),
+                                        )
+                                      : controller.permitId.value <= 0
+                                          ? Center(
+                                              child: Container(
+                                                  height: 45,
+                                                  child: CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appGreenColor,
+                                                      text:
+                                                          "Submit For Approval",
+                                                      onPressed: () {
+                                                        controller.isFormInvalid
+                                                            .value = false;
+                                                        controller
+                                                                        .checkForm() ==
+                                                                    true &&
+                                                                controller
+                                                                        .isCheckedJSA
                                                                         .value ==
                                                                     true &&
                                                                 controller
                                                                         .isCheckedSOP
                                                                         .value ==
                                                                     true
-                                                            ? print(
-                                                                "condiation failed")
-                                                            : Get.dialog<void>(
-                                                                checkboxAlertBox(),
-                                                              );
-                                                  })),
-                                        )
-                                      : Row(
-                                          children: [
-                                            Spacer(),
-                                            controller.newPermitDetailsModel
-                                                        .value?.ptwStatus ==
-                                                    121
-                                                ? Center(
-                                                    child: Container(
+                                                            ? controller.createNewPermit(
+                                                                fileIds:
+                                                                    dropzoneController
+                                                                        .fileIds)
+                                                            : controller.isCheckedJSA
+                                                                            .value ==
+                                                                        true &&
+                                                                    controller
+                                                                            .isCheckedSOP
+                                                                            .value ==
+                                                                        true
+                                                                ? print(
+                                                                    "condiation failed")
+                                                                : Get.dialog<
+                                                                    void>(
+                                                                    checkboxAlertBox(),
+                                                                  );
+                                                      })),
+                                            )
+                                          : Row(
+                                              children: [
+                                                Spacer(),
+                                                controller.newPermitDetailsModel
+                                                            .value?.ptwStatus ==
+                                                        121
+                                                    ? Center(
+                                                        child: Container(
+                                                            height: 45,
+                                                            child:
+                                                                CustomElevatedButton(
+                                                              backgroundColor:
+                                                                  ColorValues
+                                                                      .appDarkBlueColor,
+                                                              text: "Update",
+                                                              onPressed: () {
+                                                                controller.updateNewPermit(
+                                                                    fileIds:
+                                                                        dropzoneController
+                                                                            .fileIds);
+                                                              },
+                                                            )),
+                                                      )
+                                                    : Dimens.box0,
+                                                controller.newPermitDetailsModel
+                                                                .value?.ptwStatus ==
+                                                            125 &&
+                                                        controller
+                                                                .newPermitDetailsModel
+                                                                .value
+                                                                ?.is_TBT_Expire ==
+                                                            false &&
+                                                        controller
+                                                                .newPermitDetailsModel
+                                                                .value
+                                                                ?.tbT_Done_Check ==
+                                                            0
+                                                    ? Center(
+                                                        child: Container(
+                                                          height: 45,
+                                                          child:
+                                                              CustomElevatedButton(
+                                                            backgroundColor:
+                                                                ColorValues
+                                                                    .appDarkBlueColor,
+                                                            text: "Update TBT",
+                                                            onPressed: () {
+                                                              if (controller
+                                                                          .tbtDateTimeCtrlrBuffer ==
+                                                                      null ||
+                                                                  controller
+                                                                          .selectedTbtConductedId ==
+                                                                      0 ||
+                                                                  controller
+                                                                      .tbtDateTimeCtrlrBuffer
+                                                                      .isEmpty ||
+                                                                  controller
+                                                                          .tbtDateTimeCtrlrBuffer ==
+                                                                      "") {
+                                                                showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (BuildContext
+                                                                          context) {
+                                                                    return AlertDialog(
+                                                                      title: Text(
+                                                                          "Select Time"),
+                                                                      content: controller.selectedTbtConductedId ==
+                                                                              0
+                                                                          ? Text(
+                                                                              "Select TBT Conducted By")
+                                                                          : Text(
+                                                                              "Can't do TBT without entering the time."),
+                                                                      actions: <Widget>[
+                                                                        TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.of(context).pop();
+                                                                          },
+                                                                          child:
+                                                                              Text("OK"),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
+                                                                );
+                                                                return null;
+                                                              }
+                                                              controller.updateNewPermit(
+                                                                  fileIds:
+                                                                      dropzoneController
+                                                                          .fileIds);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : Dimens.box0,
+                                                Dimens.boxWidth20,
+                                                controller.newPermitDetailsModel
+                                                                .value?.ptwStatus ==
+                                                            125 &&
+                                                        controller
+                                                                .newPermitDetailsModel
+                                                                .value
+                                                                ?.is_TBT_Expire ==
+                                                            true
+                                                    ? Container(
                                                         height: 45,
                                                         child:
                                                             CustomElevatedButton(
                                                           backgroundColor:
                                                               ColorValues
-                                                                  .appDarkBlueColor,
-                                                          text: "Update",
+                                                                  .appRedColor,
+                                                          text: "Cancel Permit",
+                                                          icon: Icons.close,
                                                           onPressed: () {
-                                                            controller.updateNewPermit(
-                                                                fileIds:
-                                                                    dropzoneController
-                                                                        .fileIds);
-                                                          },
-                                                        )),
-                                                  )
-                                                : Dimens.box0,
-                                            controller.newPermitDetailsModel
-                                                            .value?.ptwStatus ==
-                                                        125 &&
-                                                    controller
-                                                            .newPermitDetailsModel
-                                                            .value
-                                                            ?.is_TBT_Expire ==
-                                                        false &&
-                                                    controller
-                                                            .newPermitDetailsModel
-                                                            .value
-                                                            ?.tbT_Done_Check ==
-                                                        0
-                                                ? Center(
-                                                    child: Container(
-                                                      height: 45,
-                                                      child:
-                                                          CustomElevatedButton(
-                                                        backgroundColor:
-                                                            ColorValues
-                                                                .appDarkBlueColor,
-                                                        text: "Update TBT",
-                                                        onPressed: () {
-                                                          if (controller
-                                                                      .tbtDateTimeCtrlrBuffer ==
-                                                                  null ||
-                                                              controller
-                                                                      .selectedTbtConductedId ==
-                                                                  0 ||
-                                                              controller
-                                                                  .tbtDateTimeCtrlrBuffer
-                                                                  .isEmpty ||
-                                                              controller
-                                                                      .tbtDateTimeCtrlrBuffer ==
-                                                                  "") {
-                                                            showDialog(
-                                                              context: context,
-                                                              builder:
-                                                                  (BuildContext
-                                                                      context) {
-                                                                return AlertDialog(
-                                                                  title: Text(
-                                                                      "Select Time"),
-                                                                  content: controller
-                                                                              .selectedTbtConductedId ==
-                                                                          0
-                                                                      ? Text(
-                                                                          "Select TBT Conducted By")
-                                                                      : Text(
-                                                                          "Can't do TBT without entering the time."),
-                                                                  actions: <Widget>[
-                                                                    TextButton(
-                                                                      onPressed:
-                                                                          () {
-                                                                        Navigator.of(context)
-                                                                            .pop();
-                                                                      },
-                                                                      child: Text(
-                                                                          "OK"),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              },
+                                                            Get.dialog(
+                                                              PermitCancelReQuestDialog(
+                                                                permitId:
+                                                                    '${controller.permitId.value}',
+                                                                jobId: controller
+                                                                    .jobModel!
+                                                                    .id,
+                                                              ),
                                                             );
-                                                            return null;
-                                                          }
-                                                          controller.updateNewPermit(
-                                                              fileIds:
-                                                                  dropzoneController
-                                                                      .fileIds);
-                                                        },
-                                                      ),
-                                                    ),
-                                                  )
-                                                : Dimens.box0,
-                                            Dimens.boxWidth20,
-                                            controller.newPermitDetailsModel
+                                                            print(
+                                                                "Permit ID TO Cancel: ${controller.permitId.value}");
+                                                            print(
+                                                                "JobId To cancel: ${controller.jobModel!.id}");
+                                                          },
+                                                        ))
+                                                    : Dimens.box0,
+                                                Dimens.boxWidth20,
+                                                controller.newPermitDetailsModel
                                                             .value?.ptwStatus ==
-                                                        125 &&
-                                                    controller
-                                                            .newPermitDetailsModel
-                                                            .value
-                                                            ?.is_TBT_Expire ==
-                                                        true
-                                                ? Container(
-                                                    height: 45,
-                                                    child: CustomElevatedButton(
-                                                      backgroundColor:
-                                                          ColorValues
-                                                              .appRedColor,
-                                                      text: "Cancel Permit",
-                                                      icon: Icons.close,
-                                                      onPressed: () {
-                                                        Get.dialog(
-                                                          PermitCancelReQuestDialog(
-                                                            permitId:
-                                                                '${controller.permitId.value}',
-                                                            jobId: controller
-                                                                .jobModel!.id,
+                                                        124
+                                                    ? Center(
+                                                        child: Container(
+                                                          height: 45,
+                                                          child:
+                                                              CustomElevatedButton(
+                                                            backgroundColor:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    116,
+                                                                    78,
+                                                                    130),
+                                                            text:
+                                                                "Re submit Permit",
+                                                            onPressed: () {
+                                                              controller.resubmitPermit(
+                                                                  fileIds:
+                                                                      dropzoneController
+                                                                          .fileIds);
+                                                            },
                                                           ),
-                                                        );
-                                                        print(
-                                                            "Permit ID TO Cancel: ${controller.permitId.value}");
-                                                        print(
-                                                            "JobId To cancel: ${controller.jobModel!.id}");
-                                                      },
-                                                    ))
-                                                : Dimens.box0,
-                                            Dimens.boxWidth20,
-                                            controller.newPermitDetailsModel
-                                                        .value?.ptwStatus ==
-                                                    124
-                                                ? Center(
-                                                    child: Container(
-                                                      height: 45,
-                                                      child:
-                                                          CustomElevatedButton(
-                                                        backgroundColor:
-                                                            Color.fromARGB(255,
-                                                                116, 78, 130),
-                                                        text:
-                                                            "Re submit Permit",
-                                                        onPressed: () {
-                                                          controller.resubmitPermit(
-                                                              fileIds:
-                                                                  dropzoneController
-                                                                      .fileIds);
-                                                        },
-                                                      ),
-                                                    ),
-                                                  )
-                                                : Dimens.box0,
-                                            Spacer(),
-                                          ],
-                                        ),
+                                                        ),
+                                                      )
+                                                    : Dimens.box0,
+                                                Spacer(),
+                                              ],
+                                            ),
                           SizedBox(
                             height: 50,
                           ),
