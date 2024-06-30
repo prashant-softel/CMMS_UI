@@ -907,6 +907,7 @@ class AddModuleCleaningExecutionContentWeb
                                                     ),
                                                   )
                                                 : Dimens.box0,
+                                                Dimens.boxWidth10,
                                             CustomElevatedButton(
                                               text: "Create New Permit",
                                               icon: Icons.add,

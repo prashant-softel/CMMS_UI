@@ -46,6 +46,8 @@ class NewPermitController extends GetxController {
   // // swap true/false & save it to observable
   // void toggle() => on.value = on.value ? false : true;
   int? permitIdForJob = 0;
+  int? permitIdForMc = 0;
+
   var itemCount = 0.obs;
 
   var isHovered = false.obs;
@@ -521,7 +523,6 @@ class NewPermitController extends GetxController {
       PmtaskViewModel? pmdetail;
       EndMCExecutionDetailsModel? mcdetail;
 
-
       final _permitId = await permitPresenter.getValue();
       final _type = await permitPresenter.getValuee();
       final _isChecked = await permitPresenter.getisCheckedValue();
@@ -571,7 +572,7 @@ class NewPermitController extends GetxController {
         if (pmdetail != null) {
           pmtaskViewModel = pmdetail;
         }
-         if (mcdetail != null) {
+        if (mcdetail != null) {
           mcExecutionDetailsModel = mcdetail;
         }
         isChecked.value = _isChecked ?? false;
@@ -1560,6 +1561,7 @@ class NewPermitController extends GetxController {
       print('permit Id For Job data: $permitIdForJob');
     }
   }
+
 
   void createNewPermitForPm(
       {int? pmTaskId, String? activity, List<dynamic>? fileIds}) async {

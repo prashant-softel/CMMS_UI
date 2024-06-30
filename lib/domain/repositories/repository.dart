@@ -469,6 +469,9 @@ class Repository {
           if (pmTaskId != null && type == 3) {
             scheduleLinkToPermit(
                 pmTaskId, activity, permitForJob[0], true, type);
+          } else if (pmTaskId != null && type == 4) {
+            scheduleLinkToPermit(
+                pmTaskId, activity, permitForJob[0], true, type);
           } else {
             scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true, 0);
           }
@@ -2673,7 +2676,8 @@ class Repository {
       return null;
     }
   }
- Future<Map<String, dynamic>> viewObsCloseButton(
+
+  Future<Map<String, dynamic>> viewObsCloseButton(
     viewobsCloseJsonString,
     bool? isLoading,
   ) async {
@@ -2707,6 +2711,7 @@ class Repository {
       return Map();
     }
   }
+
   Future<List<CurrencyListModel>> getUnitCurrencyList({
     required int? facilityId,
     // int? blockId,

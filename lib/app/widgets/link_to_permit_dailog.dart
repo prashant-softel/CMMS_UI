@@ -10,6 +10,7 @@ class LinkToPermitDialog extends GetView {
   String? approveIncidentReportData;
   String? data;
   int? taskId;
+
   String? activity;
   int? type;
   LinkToPermitDialog(
@@ -105,24 +106,41 @@ class LinkToPermitDialog extends GetView {
                         },
                         child: const Text('View Audit'),
                       )
-                    : ElevatedButton(
-                        style: Styles.greenElevatedButtonStyle,
-                        onPressed: () {
-                          // _controller.getIncidentReportList(
-                          //     _controller.facilityId,
-                          //     _controller.formattedTodate,
-                          //     _controller.formattedFromdate,
-                          //     false);
-                          //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                    : type == 4
+                        ? ElevatedButton(
+                            style: Styles.greenElevatedButtonStyle,
+                            onPressed: () {
+                              // _controller.getIncidentReportList(
+                              //     _controller.facilityId,
+                              //     _controller.formattedTodate,
+                              //     _controller.formattedFromdate,
+                              //     false);
+                              //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                              Get.back();
+                              Get.offAllNamed(
+                                  Routes.addModuleCleaningExecutionContentWeb,
+                                  arguments: {"mcid": taskId, "planId": 0});
+                            },
+                            child: const Text('View MC'),
+                          )
+                        : ElevatedButton(
+                            style: Styles.greenElevatedButtonStyle,
+                            onPressed: () {
+                              // _controller.getIncidentReportList(
+                              //     _controller.facilityId,
+                              //     _controller.formattedTodate,
+                              //     _controller.formattedFromdate,
+                              //     false);
+                              //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
 
-                          Get.offAllNamed(Routes.pmTaskView,
-                              arguments: {'pmTaskId': taskId});
-                          Get.back();
-                        },
-                        child: const Text('View Task'),
-                      ),
+                              Get.offAllNamed(Routes.pmTaskView,
+                                  arguments: {'pmTaskId': taskId});
+                              Get.back();
+                            },
+                            child: const Text('View Task'),
+                          ),
                 Dimens.boxWidth10,
-                type == 3
+                type == 3 || type == 4
                     ? Dimens.box0
                     : ElevatedButton(
                         style: Styles.yellowElevatedButtonStyle,
@@ -161,7 +179,24 @@ class LinkToPermitDialog extends GetView {
                         },
                         child: const Text('Audit list'),
                       )
-                    : Dimens.box0,
+                    : type == 4
+                        ? ElevatedButton(
+                            style: Styles.yellowElevatedButtonStyle,
+                            onPressed: () {
+                              // _controller.getIncidentReportList(
+                              //     _controller.facilityId,
+                              //     _controller.formattedTodate,
+                              //     _controller.formattedFromdate,
+                              //     false);
+                              //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                              Get.offAllNamed(
+                                  Routes.moduleCleaningListExecution,
+                                  arguments: {'type': type});
+                              Get.back();
+                            },
+                            child: const Text('MC List'),
+                          )
+                        : Dimens.box0,
                 Spacer()
               ],
             ),
