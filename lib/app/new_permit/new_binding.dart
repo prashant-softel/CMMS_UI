@@ -11,7 +11,7 @@ import 'package:cmms/app/new_permit/new_permit_presenter.dart';
 import 'package:cmms/domain/usecases/view_permit_usecase.dart';
 import 'package:get/get.dart';
 
-class NewBinding extends Bindings {
+class NewPermitBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
