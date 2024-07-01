@@ -34,14 +34,12 @@ class CreateAuditController extends GetxController {
       <PreventiveCheckListModel>[].obs;
   Rx<String> selectedchecklist = ''.obs;
   Rx<bool> isSelectedchecklist = true.obs;
- Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
   Rx<bool> isTitleInvalid = false.obs;
-   Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
 
-  
   Rx<bool> isScheduleDateInvalid = false.obs;
 
-  
   Rx<String> selectedchecklistId = "".obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
@@ -166,8 +164,10 @@ class CreateAuditController extends GetxController {
       descriptionTc.text = _auditPlanDetailsModel.description ?? "";
       startDateDateTc.text = _auditPlanDetailsModel.schedule_Date ?? "";
       planTitleTc.text = _auditPlanDetailsModel.plan_number ?? "";
-      // selectedfrequency.value = _auditPlanDetailsModel.frequency ?? "";
+      selectedfrequency.value = _auditPlanDetailsModel.frequency_name ?? "";
       selectedfrequencyId = _auditPlanDetailsModel.frequency ?? 0;
+      selectedAssignedTo.value = _auditPlanDetailsModel.assignedTo ?? "";
+      isToggleOn.value = _auditPlanDetailsModel.is_PTW == "True" ? true : false;
       if (selectedfrequencyId > 0) {
         getPreventiveCheckList(facilityId, type, selectedfrequencyId); //
         selectedchecklist.value = _auditPlanDetailsModel.checklist_name ?? "";
@@ -199,7 +199,7 @@ class CreateAuditController extends GetxController {
                 frequencyList.indexWhere((x) => x?.name == value);
             selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
             selectedfrequency.value = value;
-            isSelectedfrequency.value=true;
+            isSelectedfrequency.value = true;
             getPreventiveCheckList(facilityId, type.value, selectedfrequencyId);
           } else {
             selectedfrequencyId = 0;
@@ -212,7 +212,7 @@ class CreateAuditController extends GetxController {
             int checklistIndex = checkList.indexWhere((x) => x?.name == value);
             selectedchecklistId.value =
                 checkList[checklistIndex]?.id.toString() ?? "";
-                isSelectedchecklist.value = true;
+            isSelectedchecklist.value = true;
           } else {
             //  selectedchecklistId=0;
           }
@@ -292,7 +292,7 @@ class CreateAuditController extends GetxController {
     // } else {
 
     checkFormAduit();
-    if(isFormInvalid.value){
+    if (isFormInvalid.value) {
       return true;
     }
     String _planTitle = planTitleTc.text.trim();
@@ -333,9 +333,9 @@ class CreateAuditController extends GetxController {
     //       msg: "Please enter required field", fontSize: 16.0);
     // } else {
 
-     checkFormAduit();
-    if(isFormInvalid.value){
-      return ;
+    checkFormAduit();
+    if (isFormInvalid.value) {
+      return;
     }
     String _planTitle = planTitleTc.text.trim();
     String _description = descriptionTc.text.trim();
@@ -347,9 +347,13 @@ class CreateAuditController extends GetxController {
       Facility_id: facilityId,
       auditee_id: varUserAccessModel.value.user_id,
       auditor_id: facilityId,
+      assignedTo: selectedAssignedTo.value,
+      Employees: selectedEmployeeNameList.value,
       Checklist_id: int.tryParse(selectedchecklistId.value),
       Description: _description,
       Schedule_Date: _startDate,
+      isPTW: isToggleOn.value,
+      Module_Type_id: type.value,
       ApplyFrequency: selectedfrequencyId,
     );
     var checkAuditJsonString =
@@ -368,34 +372,31 @@ class CreateAuditController extends GetxController {
       );
     }
   }
-  void checkFormAduit(){
-    
-      if(planTitleTc.text.trim().length==0){
-      isTitleInvalid.value=true;
-      isFormInvalid.value = true;
-    }
-    if(selectedfrequency==''){
-      isSelectedfrequency.value=false;
-      isFormInvalid.value=true;
-    }
-    if(selectedchecklist==''){
-      isSelectedchecklist.value=false;
-      isFormInvalid.value=true;
 
-    }
-       if(startDateDateTc.text.trim().length==0){
-      isScheduleDateInvalid.value=true;
+  void checkFormAduit() {
+    if (planTitleTc.text.trim().length == 0) {
+      isTitleInvalid.value = true;
       isFormInvalid.value = true;
     }
-     if(descriptionTc.text.trim().length==0){
-      isDescriptionInvalid.value=true;
+    if (selectedfrequency == '') {
+      isSelectedfrequency.value = false;
       isFormInvalid.value = true;
     }
-     if(selectedAssignedTo==''){
-      isAssignedToSelected.value=false;
-      isFormInvalid.value=true;
-
+    if (selectedchecklist == '') {
+      isSelectedchecklist.value = false;
+      isFormInvalid.value = true;
     }
- 
+    if (startDateDateTc.text.trim().length == 0) {
+      isScheduleDateInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (descriptionTc.text.trim().length == 0) {
+      isDescriptionInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (selectedAssignedTo == '') {
+      isAssignedToSelected.value = false;
+      isFormInvalid.value = true;
+    }
   }
 }

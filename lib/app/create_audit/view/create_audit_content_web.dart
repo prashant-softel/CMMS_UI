@@ -168,24 +168,20 @@ class CreateAuditWeb extends GetView<CreateAuditController> {
                                               textController:
                                                   controller.planTitleTc,
 
-                                                   //validate
-                                                    errorController: controller
-                                                            .isTitleInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .isTitleInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isTitleInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
+                                              //validate
+                                              errorController: controller
+                                                      .isTitleInvalid.value
+                                                  ? "Required field"
+                                                  : null,
+                                              onChanged: (value) {
+                                                if (value.trim().length > 0) {
+                                                  controller.isTitleInvalid
+                                                      .value = false;
+                                                } else {
+                                                  controller.isTitleInvalid
+                                                      .value = true;
+                                                }
+                                              },
 
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
@@ -332,24 +328,20 @@ class CreateAuditWeb extends GetView<CreateAuditController> {
                                       },
                                       textController:
                                           controller.startDateDateTc,
-                                           //validate
-                                                    errorController: controller
-                                                            .isScheduleDateInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .isScheduleDateInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isScheduleDateInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
+                                      //validate
+                                      errorController:
+                                          controller.isScheduleDateInvalid.value
+                                              ? "Required field"
+                                              : null,
+                                      onChanged: (value) {
+                                        if (value.trim().length > 0) {
+                                          controller.isScheduleDateInvalid
+                                              .value = false;
+                                        } else {
+                                          controller.isScheduleDateInvalid
+                                              .value = true;
+                                        }
+                                      },
                                     ),
                                     Spacer(),
                                   ],
@@ -392,224 +384,236 @@ class CreateAuditWeb extends GetView<CreateAuditController> {
                                         maxLine: 3,
                                         textController:
                                             controller.descriptionTc,
-                                             //validate
-                                                    errorController: controller
-                                                            .isDescriptionInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .isDescriptionInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isDescriptionInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
-                                      ),
-                                    ),
-                                    Spacer(),
-                                  ],
-                                ),
-                                Dimens.boxHeight10,
-                                Row(
-                                  // mainAxisAlignment:
-                                  //     MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Spacer(),
-                                    Spacer(),
-                                    SizedBox(
-                                        width: 240,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 0),
-                                          child: CustomRichText(
-                                              title: 'PTW Required? :'),
-                                        )),
-                                    Dimens.boxWidth10,
-                                    Text("No"),
-                                    CustomSwitchTroggle(
-                                        value: controller.isToggleOn.value,
+                                        //validate
+                                        errorController: controller
+                                                .isDescriptionInvalid.value
+                                            ? "Required field"
+                                            : null,
                                         onChanged: (value) {
-                                          controller.toggle();
-                                        }),
-                                    Text("Yes"),
-                                    Spacer(),
-                                    Spacer(),
+                                          if (value.trim().length > 0) {
+                                            controller.isDescriptionInvalid
+                                                .value = false;
+                                          } else {
+                                            controller.isDescriptionInvalid
+                                                .value = true;
+                                          }
+                                        },
+                                      ),
+                                    ),
                                     Spacer(),
                                   ],
                                 ),
-                                Dimens.boxHeight10,
-                                Row(
-                                  children: [
-                                    Spacer(),
-                                    SizedBox(
-                                      width: 180,
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 40),
-                                        child: CustomRichText(
-                                            title: 'Assigned To :'),
-                                      ),
-                                    ),
-                                    // Dimens.boxWidth10,
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromARGB(
-                                                    255, 236, 234, 234)
-                                                .withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
+                                controller.type.value == AppConstants.kAudit
+                                    ? Dimens.boxHeight10
+                                    : Dimens.box0,
+                                controller.type.value == AppConstants.kAudit
+                                    ? Row(
+                                        // mainAxisAlignment:
+                                        //     MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Spacer(),
+                                          Spacer(),
+                                          SizedBox(
+                                              width: 240,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 0),
+                                                child: CustomRichText(
+                                                    title: 'PTW Required? :'),
+                                              )),
+                                          Dimens.boxWidth10,
+                                          Text("No"),
+                                          CustomSwitchTroggle(
+                                              value:
+                                                  controller.isToggleOn.value,
+                                              onChanged: (value) {
+                                                controller.toggle();
+                                              }),
+                                          Text("Yes"),
+                                          Spacer(),
+                                          Spacer(),
+                                          Spacer(),
                                         ],
-                                      ),
-                                      width:
-                                          (MediaQuery.of(context).size.width *
-                                              .3),
-                                      child: DropdownWebWidget(
-                                        controller: controller,
-                                        dropdownList: controller.assignedToList,
-                                        isValueSelected: controller
-                                            .isAssignedToSelected.value,
-                                        selectedValue:
-                                            controller.selectedAssignedTo.value,
-                                        onValueChanged:
-                                            controller.onValueChanged,
-                                      ),
-                                    ),
-                                    Spacer()
-                                  ],
-                                ),
-                                Dimens.boxHeight10,
-                                Container(
-                                  margin: Dimens.edgeInsets20,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.withOpacity(.3)),
-                                  ),
-                                  constraints: BoxConstraints(
-                                    maxWidth: 1100,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      CustomAppBar(
-                                        title: 'TBT Training Attended By'.tr,
-                                        action: Row(
+                                      )
+                                    : Dimens.box0,
+                                controller.type.value == AppConstants.kAudit
+                                    ? Dimens.boxHeight10
+                                    : Dimens.box0,
+                                controller.type.value == AppConstants.kAudit
+                                    ? Row(
+                                        children: [
+                                          Spacer(),
+                                          SizedBox(
+                                            width: 180,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 40),
+                                              child: CustomRichText(
+                                                  title: 'Assigned To :'),
+                                            ),
+                                          ),
+                                          // Dimens.boxWidth10,
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 227, 224, 224),
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Color.fromARGB(
+                                                          255, 236, 234, 234)
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .3),
+                                            child: DropdownWebWidget(
+                                              controller: controller,
+                                              dropdownList:
+                                                  controller.assignedToList,
+                                              isValueSelected: controller
+                                                  .isAssignedToSelected.value,
+                                              selectedValue: controller
+                                                  .selectedAssignedTo.value,
+                                              onValueChanged:
+                                                  controller.onValueChanged,
+                                            ),
+                                          ),
+                                          Spacer()
+                                        ],
+                                      )
+                                    : Dimens.box0,
+                                controller.type.value == AppConstants.kAudit
+                                    ? Dimens.boxHeight10
+                                    : Dimens.box0,
+                                controller.type.value == AppConstants.kAudit
+                                    ? Container(
+                                        margin: Dimens.edgeInsets20,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color:
+                                                  Colors.grey.withOpacity(.3)),
+                                        ),
+                                        constraints: BoxConstraints(
+                                          maxWidth: 1100,
+                                        ),
+                                        child: Column(
                                           children: [
-                                            //   CustomRichText(
-                                            //       title:
-                                            //           "Add Employee"),
-                                            //   Dimens
-                                            //       .boxWidth10,
-                                            ActionButton(
-                                              color: ColorValues.appGreenColor,
-                                              label: "Add New",
-                                              icon: Icons.add,
-                                              onPressed: () {
-                                                Get.dialog<void>(
-                                                  AddEmployeeListAlertBox(),
-                                                );
-                                              },
+                                            CustomAppBar(
+                                              title:
+                                                  'Select Onother Employees'.tr,
+                                              action: Row(
+                                                children: [
+                                                  //   CustomRichText(
+                                                  //       title:
+                                                  //           "Add Employee"),
+                                                  //   Dimens
+                                                  //       .boxWidth10,
+                                                  ActionButton(
+                                                    color: ColorValues
+                                                        .appGreenColor,
+                                                    label: "Add New",
+                                                    icon: Icons.add,
+                                                    onPressed: () {
+                                                      Get.dialog<void>(
+                                                        AddEmployeeListAlertBox(),
+                                                      );
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Wrap(
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              2,
+                                                      child: Container(
+                                                        constraints:
+                                                            BoxConstraints(
+                                                                minHeight: 90),
+                                                        child:
+                                                            SingleChildScrollView(
+                                                          child: DataTable(
+                                                            columns: [
+                                                              DataColumn(
+                                                                  label: Text(
+                                                                      "Employee Name")),
+                                                              DataColumn(
+                                                                  label: Text(
+                                                                      "Contact No")),
+                                                              DataColumn(
+                                                                  label: Text(
+                                                                      "Responsibility")),
+                                                              DataColumn(
+                                                                  label: Text(
+                                                                      "Action")),
+                                                            ],
+                                                            rows: List<
+                                                                DataRow>.generate(
+                                                              controller
+                                                                  .filteredEmployeeNameList
+                                                                  .length,
+                                                              (index) {
+                                                                var employeeNameDetails =
+                                                                    controller
+                                                                            .filteredEmployeeNameList[
+                                                                        index];
+                                                                return DataRow(
+                                                                    cells: [
+                                                                      DataCell(Text(
+                                                                          '${employeeNameDetails?.name ?? ''}')),
+                                                                      DataCell(Text(
+                                                                          '${employeeNameDetails?.mobileNumber ?? ''}')),
+                                                                      DataCell(Text(
+                                                                          '${employeeNameDetails?.responsibility}')),
+                                                                      DataCell(
+                                                                        Wrap(
+                                                                          children: [
+                                                                            TableActionButton(
+                                                                              color: Colors.red,
+                                                                              icon: Icons.delete_outline,
+                                                                              message: 'Remove',
+                                                                              onPress: () {
+                                                                                // Call the removeItem method of the controller
+                                                                                _removeRow(index);
+                                                                                print("index");
+                                                                              },
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    ]);
+                                                              },
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Wrap(
-                                        children: [
-                                          Column(
-                                            children: [
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    2,
-                                                child: Container(
-                                                  constraints: BoxConstraints(
-                                                      minHeight: 90),
-                                                  child: SingleChildScrollView(
-                                                    child: DataTable(
-                                                      columns: [
-                                                        DataColumn(
-                                                            label: Text(
-                                                                "Employee Name")),
-                                                        DataColumn(
-                                                            label: Text(
-                                                                "Contact No")),
-                                                        DataColumn(
-                                                            label: Text(
-                                                                "Responsibility")),
-                                                        DataColumn(
-                                                            label:
-                                                                Text("Action")),
-                                                      ],
-                                                      rows: List<
-                                                          DataRow>.generate(
-                                                        controller
-                                                            .filteredEmployeeNameList
-                                                            .length,
-                                                        (index) {
-                                                          var employeeNameDetails =
-                                                              controller
-                                                                      .filteredEmployeeNameList[
-                                                                  index];
-                                                          return DataRow(
-                                                              cells: [
-                                                                DataCell(Text(
-                                                                    '${employeeNameDetails?.name ?? ''}')),
-                                                                DataCell(Text(
-                                                                    '${employeeNameDetails?.mobileNumber ?? ''}')),
-                                                                DataCell(Text(
-                                                                    '${employeeNameDetails?.responsibility}')),
-                                                                DataCell(
-                                                                  Wrap(
-                                                                    children: [
-                                                                      TableActionButton(
-                                                                        color: Colors
-                                                                            .red,
-                                                                        icon: Icons
-                                                                            .delete_outline,
-                                                                        message:
-                                                                            'Remove',
-                                                                        onPress:
-                                                                            () {
-                                                                          // Call the removeItem method of the controller
-                                                                          _removeRow(
-                                                                              index);
-                                                                          print(
-                                                                              "index");
-                                                                        },
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                )
-                                                              ]);
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                      )
+                                    : Dimens.box0,
                                 Dimens.boxHeight15,
                                 Row(
                                   children: [
@@ -670,8 +674,7 @@ class CreateAuditWeb extends GetView<CreateAuditController> {
                                     DateFormat('yyyy-MM-dd').format(p0.value);
                                 controller.openStartDatePicker =
                                     !controller.openStartDatePicker;
-                                    controller.isScheduleDateInvalid.value=false;
-
+                                controller.isScheduleDateInvalid.value = false;
 
                                 controller.update(['stock_Mangement']);
                               },
