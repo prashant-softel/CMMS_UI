@@ -35,32 +35,31 @@ class CreateWarrantyClaimModel {
 
   int? status;
 
-  CreateWarrantyClaimModel({
-    this.facilityId,
-    this.equipmentId,
-    this.goodsOrderId,
-    // this.affectedPart,
-    this.orderReference,
-    this.affectedSrNo,
-    this.costOfReplacement,
-    this.currencyId,
-    this.severity,
-    this.requestToSupplier,
-    this.warrantyStartAt,
-    this.currentTime,
-    this.warrantyEndAt,
-    this.warrantyClaimTitle,
-    this.warrantyDescription,
-    this.correctiveActionByBuyer,
-    this.approverId,
-    this.failureTime,
-    this.additionalEmailEmployees,
-    this.externalEmails,
-    this.supplierActions,
-    this.affectedParts,
-    this.status,
-    this.approxdailyloss
-  });
+  CreateWarrantyClaimModel(
+      {this.facilityId,
+      this.equipmentId,
+      this.goodsOrderId,
+      // this.affectedPart,
+      this.orderReference,
+      this.affectedSrNo,
+      this.costOfReplacement,
+      this.currencyId,
+      this.severity,
+      this.requestToSupplier,
+      this.warrantyStartAt,
+      this.currentTime,
+      this.warrantyEndAt,
+      this.warrantyClaimTitle,
+      this.warrantyDescription,
+      this.correctiveActionByBuyer,
+      this.approverId,
+      this.failureTime,
+      this.additionalEmailEmployees,
+      this.externalEmails,
+      this.supplierActions,
+      this.affectedParts,
+      this.status,
+      this.approxdailyloss});
 
   factory CreateWarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
       CreateWarrantyClaimModel(
@@ -131,17 +130,21 @@ class CreateWarrantyClaimModel {
 }
 
 class ExternalEmails {
-  ExternalEmails({this.name, this.email, this.mobile});
+  ExternalEmails({this.name, this.email, this.mobile, this.role});
 
   String? name;
+  String? role;
   String? email;
   int? mobile;
 
   factory ExternalEmails.fromJson(Map<String, dynamic> json) => ExternalEmails(
-      name: json["name"], email: json["email"], mobile: json['mobile']);
+      name: json["name"],
+      role: json["role"],
+      email: json["email"],
+      mobile: json['mobile']);
 
   Map<String, dynamic> toJson() =>
-      {"name": name, "email": email, "mobile": mobile};
+      {"name": name, "role": role, "email": email, "mobile": mobile};
 }
 
 class SupplierActions {

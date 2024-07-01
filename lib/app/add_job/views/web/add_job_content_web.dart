@@ -139,7 +139,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title: 'Job Title: '),
-                                                Dimens.boxWidth10,
+                                                Dimens.boxWidth2,
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -289,7 +289,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 CustomRichText(
                                                     title:
                                                         'Equipment Categories :'),
-                                                Dimens.boxWidth10,
+                                                Dimens.boxWidth2,
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     color:
@@ -396,7 +396,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 CustomRichText(
                                                     title:
                                                         'Work Area / Equipments :'),
-                                                Dimens.boxWidth10,
+                                                Dimens.boxWidth2,
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     color:
@@ -502,7 +502,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title: 'Breakdown Time: '),
-                                                Dimens.boxWidth10,
+                                                Dimens.boxWidth2,
                                                 Container(
                                                   width: MediaQuery.of(context)
                                                           .size
@@ -582,35 +582,42 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                             color: Colors
                                                                 .transparent),
                                                       ),
-                                            errorBorder: controller
-                                                    .isBreakdownInvalid.value
-                                                ? OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(5),
-                                                    borderSide: BorderSide(
-                                                      color: ColorValues
-                                                          .redColorDark,
+                                                      errorBorder: controller
+                                                              .isBreakdownInvalid
+                                                              .value
+                                                          ? OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: ColorValues
+                                                                    .redColorDark,
+                                                              ),
+                                                            )
+                                                          : null,
+                                                      errorText: controller
+                                                              .isBreakdownInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
                                                     ),
-                                                  )
-                                                : null,
-                                            errorText: controller
-                                                    .isBreakdownInvalid.value
-                                                ? "Required field"
-                                                : null,
-                                          ),
-                                          onChanged: (value) {
-                                            if (value.trim().isNotEmpty) {
-                                              controller.isBreakdownInvalid
-                                                  .value = false;
-                                            } else {
-                                              controller.isBreakdownInvalid
-                                                  .value = true;
-                                            }
-                                          },
-                                              
-
-                                                    ),
+                                                    onChanged: (value) {
+                                                      if (value
+                                                          .trim()
+                                                          .isNotEmpty) {
+                                                        controller
+                                                            .isBreakdownInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isBreakdownInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
                                                   ),
+                                                ),
                                                 // ),
 
                                                 // CustomTextFieldForStock(
@@ -648,7 +655,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title: 'Select Block :'),
-                                                Dimens.boxWidth10,
+                                                Dimens.boxWidth2,
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -728,7 +735,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title: 'Fault :'),
-                                                Dimens.boxWidth10,
+                                                Dimens.boxWidth2,
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     color:
@@ -832,7 +839,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                   includeAsterisk:
                                                       false, // Explicitly exclude the asterisk
                                                 ),
-                                                Dimens.boxWidth10,
+                                                Dimens.boxWidth2,
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     color:
@@ -984,7 +991,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                           child: CustomRichText(
                                               title: 'Job Description: '),
                                         ),
-                                        Dimens.boxWidth10,
+                                        Dimens.boxWidth2,
                                         Expanded(
                                           child: Padding(
                                             padding: EdgeInsets.only(
@@ -1123,7 +1130,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                   width: MediaQuery.of(context).size.width,
                                   child: Center(
                                     child: Container(
-                                      margin: Dimens.edgeInsets16,
+                                      margin: Dimens.edgeInsets6,
                                       height: Get.height,
                                       decoration: BoxDecoration(
                                         border: Border.all(
@@ -1159,7 +1166,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                               child:
                                                                   FileUploadWidgetWithDropzone(),
                                                             ),
-                                                            Dimens.boxWidth10,
+                                                            Dimens.boxWidth2,
                                                             Expanded(
                                                                 flex: 8,
                                                                 child:

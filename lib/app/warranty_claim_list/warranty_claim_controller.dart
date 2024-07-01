@@ -45,9 +45,9 @@ class WarrantyClaimController extends GetxController {
 
   ///External Emails Part
   var externalEmails = <ExternalEmails>[].obs;
-  void updateText(String name, String email, int? mobile) {
+  void updateText(String name, String role, String email, int? mobile) {
     externalEmails
-        .add(ExternalEmails(email: email, name: name, mobile: mobile));
+        .add(ExternalEmails(email: email, name: name, mobile: mobile,role:role));
   }
 
   ///Radio
@@ -93,6 +93,7 @@ class WarrantyClaimController extends GetxController {
   final TextEditingController serialNoTextFieldController =
       TextEditingController();
   final TextEditingController nameTextFieldController = TextEditingController();
+  final TextEditingController roleTextFieldController = TextEditingController();
   final TextEditingController emailTextFieldController =
       TextEditingController();
   final TextEditingController mobileTextFieldController =
@@ -942,7 +943,7 @@ class WarrantyClaimController extends GetxController {
 
       externalEmails.forEach((e) {
         external_emails_list.add(
-            ExternalEmails(name: e.name, email: e.email, mobile: e.mobile));
+            ExternalEmails(name: e.name,role: e.role, email: e.email, mobile: e.mobile));
       });
 
       late List<SupplierActions> supplier_action_list = [];

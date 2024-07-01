@@ -268,7 +268,7 @@ class PreventiveCheckPointContentWeb
                                                     ishint: 'Enter Check Point',
                                                     textController: controller
                                                         .checkPointCtrlr,
-                                                                     //validate
+                                                    //validate
                                                     errorController: controller
                                                             .isCheckPointInvalid
                                                             .value
@@ -346,7 +346,7 @@ class PreventiveCheckPointContentWeb
                                                     ishint: 'Enter Requirement',
                                                     textController: controller
                                                         .requirementCtrlr,
-                                                                     //validate
+                                                    //validate
                                                     errorController: controller
                                                             .isRequiremetInvalid
                                                             .value
@@ -432,24 +432,24 @@ class PreventiveCheckPointContentWeb
                                                   textController: controller
                                                       .failurewtgCtrlr,
 
-                                                                   //validate
-                                                    errorController: controller
-                                                            .isFailureInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .isFailureInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isFailureInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
+                                                  //validate
+                                                  errorController: controller
+                                                          .isFailureInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        0) {
+                                                      controller
+                                                          .isFailureInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isFailureInvalid
+                                                          .value = true;
+                                                    }
+                                                  },
                                                 )),
                                           ],
                                         ),
@@ -864,7 +864,7 @@ class PreventiveCheckPointContentWeb
                                   Container(
                                     width: 300,
                                     height: 40,
-                                    margin: Dimens.edgeInsets0_0_16_0,
+                                    margin: EdgeInsets.only(right: 10),
                                     child: TextField(
                                       style: TextStyle(
                                           fontSize: 16.0,
