@@ -152,7 +152,7 @@ class CreateMrsReturnController extends GetxController {
       {'key': "code", "value": ''},
       {'key': "Material_Category", "value": ''},
       {'key': "Sr_no", "value": ''},
-      {'key': "Return_Qty", "value": ''},
+      {'key': "Return_Qty", "value": '1'},
       {'key': "Remark", "value": ''},
       {'key': "Action ", "value": ''},
     ]);

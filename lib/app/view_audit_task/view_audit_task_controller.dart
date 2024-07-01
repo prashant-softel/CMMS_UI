@@ -452,4 +452,17 @@ class ViewAuditTaskController extends GetxController {
     // _updatedailog();
     // Get.back();
   }
+
+  void clearPermitStoreData() {
+    viewAuditTaskPresenter.clearPermitStoreData();
+  }
+
+  Future<void> viewNewPermitList({
+    int? permitId,
+    int? jobId,
+  }) async {
+    Get.toNamed(Routes.viewPermitScreen,
+        arguments: {"permitId": permitId, "jobId": jobId, "type": 3});
+    print({"Permit", permitId, jobId});
+  }
 }

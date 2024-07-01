@@ -535,8 +535,8 @@ class PmTaskDataSource extends DataTableSource {
       '${pmTaskDetails?.due_date ?? ''}',
       '${pmTaskDetails?.done_date ?? ''}',
       '${pmTaskDetails?.frequency_name ?? ''}',
-      // '${pmTaskDetails?.assigned_to_name ?? ''}',
-      // '${pmTaskDetails?.permit_code ?? ''}',
+      '${pmTaskDetails?.assigned_to_name ?? ''}',
+      '${pmTaskDetails?.permit_code ?? ''}',
       'Actions',
     ];
     var cells = [];

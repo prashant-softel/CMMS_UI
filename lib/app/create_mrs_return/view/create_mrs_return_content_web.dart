@@ -811,6 +811,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                 //       .digitsOnly
                                                                 // ],
                                                                 maxLine: 1,
+                                                                enabled: false,
                                                                 textController:
                                                                     new TextEditingController(
                                                                         text: mapData["value"] ??
