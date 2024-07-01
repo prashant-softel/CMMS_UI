@@ -82,7 +82,8 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                               )
                             : Text(" / MRS LIST", style: Styles.greyLight14),
                   ),
-                  Text(" / EDIT RETURN MATERIAL SLIP", style: Styles.greyLight14)
+                  Text(" / EDIT RETURN MATERIAL SLIP",
+                      style: Styles.greyLight14)
                 ],
               ),
             ),
@@ -102,11 +103,11 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                       color: ColorValues.greyLightColour,
                     ),
                     Container(
-                      margin:
-                                  EdgeInsets.only(right: 7, left: 7, top: 15),
+                      margin: EdgeInsets.only(right: 7, left: 7, top: 15),
                       child: Row(
                         children: [
-                          CustomRichText(title: 'Activity: ',includeAsterisk: false),
+                          CustomRichText(
+                              title: 'Activity: ', includeAsterisk: false),
                           Dimens.boxWidth2,
                           Container(
                               decoration: BoxDecoration(
@@ -143,7 +144,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                               )),
                           Spacer(),
                           Text('Where Used: '),
-                          Dimens.boxWidth10,
+                          Dimens.boxWidth2,
                           Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
@@ -299,18 +300,18 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                         fontWeight: FontWeight.bold),
                                   )),
                             ],
-                            rows: controller.rowItem.value.map((record) {
+                            rows: List.generate(controller.rowItem.value.length,
+                                (rowIndex) {
+                              var record = controller.rowItem.value[rowIndex];
                               return DataRow(
-                                // height: 130,
-                                cells: record.map((mapData) {
+                                cells:
+                                    List.generate(record.length, (cellIndex) {
+                                  var mapData = record[cellIndex];
                                   return DataCell(
-                                    (mapData['key'] == "Drop_down")
+                                    mapData['key'] == "Drop_down"
                                         ? Padding(
                                             padding: const EdgeInsets.only(
-                                              left: 10,
-                                              right: 10,
-                                              top: 10,
-                                            ),
+                                                left: 10, right: 10, top: 10),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -333,11 +334,23 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                       })
                                                       .toList()
                                                       .obs,
+                                                      isValueSelected: controller
+                                                                  .errorState[
+                                                              '$rowIndex-${mapData['key']}'] ==
+                                                          true
+                                                      ? false
+                                                      : true,
                                                   selectedValue:
                                                       mapData["value"],
-                                                  onValueChanged:
+                                                 onValueChanged:
                                                       (list, selectedValue) {
+                                                    controller.errorState
+                                                        .removeWhere((key,
+                                                                value) =>
+                                                            key ==
+                                                            '$rowIndex-Drop_down');
                                                     print({
+                                                      "web",
                                                       controller
                                                               .dropdownMapperData[
                                                           selectedValue]
@@ -353,19 +366,10 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                             orElse: null);
                                                   },
                                                 ),
-                                                // SizedBox(
-                                                //   height: 10,
-                                                // ),
-                                                // Row(
-                                                //   children: [
-                                                //     Text("Approval :"),
-
-                                                //   ],
-                                                // ),
                                               ],
                                             ),
                                           )
-                                        : (mapData['key'] == "Action ")
+                                        : mapData['key'] == "Action "
                                             ? Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 10),
@@ -384,145 +388,181 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                       onPress: () {
                                                         controller.rowItem
                                                             .remove(record);
-                                                        // controller
-                                                        //     .removedMaterials
-                                                        //     .forEach(
-                                                        //         (material) {
-                                                        //   controller
-                                                        //       .assetItemList
-                                                        //       .add(controller
-                                                        //           .dropdownMapperData
-                                                        //           .value[material]);
-                                                        // }
-                                                        // );
-                                                        // Clear the removedMaterials list
-                                                        // controller
-                                                        //     .removedMaterials
-                                                        //     .clear();
                                                       },
                                                     )
                                                   ],
                                                 ),
                                               )
-                                            : (mapData['key'] ==
-                                                    "Requested_Qty")
+                                            : mapData['key'] == "Requested_Qty"
                                                 ? Padding(
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            left: 10,
-                                                            right: 10,
-                                                            top: 10),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Container(
-                                                          width:
-                                                              (Get.width * .4),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black26,
-                                                                offset:
-                                                                    const Offset(
-                                                                        5.0,
-                                                                        5.0),
-                                                                blurRadius: 5.0,
-                                                                spreadRadius:
-                                                                    1.0,
-                                                              ),
-                                                            ],
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Container(
+                                                      width: (Get.width * .4),
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                                    5.0, 5.0),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
                                                           ),
-                                                          child:
-                                                              LoginCustomTextfield(
-                                                            inputFormatters: <TextInputFormatter>[
-                                                              FilteringTextInputFormatter
-                                                                  .digitsOnly
-                                                            ],
-                                                            keyboardType:
-                                                                TextInputType
-                                                                    .number,
-                                                            maxLine: 1,
-                                                            textController:
-                                                                new TextEditingController(
-                                                                    text: mapData[
-                                                                            "value"] ??
-                                                                        ''),
-                                                            onChanged: (txt) {
-                                                              int requestedQty =
-                                                                  int.tryParse(
-                                                                          txt) ??
-                                                                      0;
-                                                              int availableQty = controller
-                                                                      .dropdownMapperData[
-                                                                          record[0]
-                                                                              [
-                                                                              'value']]
-                                                                      ?.available_qty ??
-                                                                  "0";
-                                                              if (requestedQty <=
-                                                                  availableQty) {
-                                                                mapData["value"] =
-                                                                    txt; // Update only if within limit
-                                                              } else {
-                                                                // Optionally, reset the text field or alert the user
-                                                                showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (BuildContext
-                                                                          context) {
-                                                                    return AlertDialog(
-                                                                      title: Text(
-                                                                          "Invalid Quantity!"),
-                                                                      content: Text(
-                                                                          "Please enter appropriate quantity.\nAvailable qty is: ${availableQty}, you requested: ${requestedQty}."),
-                                                                      actions: <Widget>[
-                                                                        TextButton(
-                                                                          onPressed:
-                                                                              () {
-                                                                            Navigator.of(context).pop();
-                                                                          },
-                                                                          child:
-                                                                              Text("OK"),
-                                                                        ),
-                                                                      ],
-                                                                    );
-                                                                  },
-                                                                ); // You might want to reset the field or revert to the last valid value
-                                                              }
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child: StatefulBuilder(
+                                                        builder: (BuildContext
+                                                                context,
+                                                            StateSetter
+                                                                setState) {
+                                                          // Create a TextEditingController
+                                                          TextEditingController
+                                                              _controller =
+                                                              TextEditingController(
+                                                                  text: mapData[
+                                                                          "value"] ??
+                                                                      '');
+
+                                                          return Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black26,
+                                                                  offset:
+                                                                      const Offset(
+                                                                          5.0,
+                                                                          5.0),
+                                                                  blurRadius:
+                                                                      5.0,
+                                                                  spreadRadius:
+                                                                      1.0,
+                                                                ),
+                                                              ],
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              border: controller
+                                                                              .errorState[
+                                                                          '$rowIndex-${mapData['key']}'] ==
+                                                                      true
+                                                                  ? Border.all(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width:
+                                                                          2.0)
+                                                                  : Border.all(
+                                                                      color: ColorValues
+                                                                          .appLightBlueColor,
+                                                                      width:
+                                                                          1.0),
+                                                            ),
+                                                            child:
+                                                                LoginCustomTextfield(
+                                                              inputFormatters: <TextInputFormatter>[
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
+                                                              maxLine: 1,
+                                                              textController:
+                                                                  _controller,
+                                                              onChanged: (txt) {
+                                                                // Convert the entered text to an integer
+                                                                int requestedQty =
+                                                                    int.tryParse(
+                                                                            txt) ??
+                                                                        0;
+                                                                // Get the available quantity for the current record
+                                                                int availableQty = controller
+                                                                        .dropdownMapperData
+                                                                        .value[record[0]
+                                                                            [
+                                                                            'value']]
+                                                                        ?.available_qty ??
+                                                                    0;
+
+                                                                // Validate if the requested quantity is less than or equal to the available quantity
+                                                                if (requestedQty >
+                                                                    availableQty) {
+                                                                  // Show an error message or perform any action as needed
+                                                                  showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (BuildContext
+                                                                            context) {
+                                                                      return AlertDialog(
+                                                                        title: Text(
+                                                                            "Invalid Quantity!"),
+                                                                        content:
+                                                                            Text("Please select appropriate quantity.\nAvailable qty is: ${availableQty}, you requested: ${requestedQty}."),
+                                                                        actions: <Widget>[
+                                                                          TextButton(
+                                                                            onPressed:
+                                                                                () {
+                                                                              Navigator.of(context).pop();
+                                                                              setState(() {
+                                                                                _controller.clear();
+                                                                              });
+                                                                            },
+                                                                            child:
+                                                                                Text("OK"),
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                  setState(() {
+                                                                    mapData["value"] =
+                                                                        "";
+                                                                  });
+                                                                } else {
+                                                                  // Update the value if it's valid
+                                                                  mapData["value"] =
+                                                                      txt;
+                                                                }
+                                                                if (controller
+                                                                            .errorState[
+                                                                        '$rowIndex-${mapData['key']}'] ==
+                                                                    true) {
+                                                                  controller
+                                                                      .errorState
+                                                                      .remove(
+                                                                          '$rowIndex-${mapData['key']}');
+                                                                }
+                                                              },
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
                                                     ),
                                                   )
-                                                : (mapData['key'] ==
-                                                        "Available_Qty")
+                                                : mapData['key'] ==
+                                                        "Available_Qty"
                                                     ? Text(
                                                         "${controller.dropdownMapperData[record[0]['value']]?.available_qty ?? ""}")
-                                                    : (mapData['key'] ==
-                                                            "Material_Type")
+                                                    : mapData['key'] ==
+                                                            "Material_Type"
                                                         ? Text(
                                                             "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
                                                         : Text(mapData['key'] ??
                                                             ''),
                                   );
-                                }).toList(),
+                                }),
                               );
-                            }).toList(),
+                            }),
                           ),
                         ),
                       ]),
@@ -532,8 +572,8 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomRichText(title:"Comment:"),
-                          Dimens.boxWidth10,
+                          CustomRichText(title: "Comment:"),
+                          Dimens.boxWidth2,
                           Container(
                               width: (Get.width * .6),
                               decoration: BoxDecoration(
@@ -565,14 +605,14 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                       ),
                     ),
                     Container(
-                      margin: Dimens.edgeInsets20_0_0_0,
+                      margin: EdgeInsets.only(top: 5, left: 10),
                       child: Row(
                         children: [
                           Text(
                             'Set As Template: ',
                             style: Styles.blackBold14,
                           ),
-                          Dimens.boxWidth10,
+                          Dimens.boxWidth2,
                           Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
