@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:cmms/app/attendance_list/attendance_list_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -69,23 +67,60 @@ class AttendanceListController extends GetxController {
       year: year,
       isLoading: isLoading,
     );
-    for (int i = 1; i < 31; i++) {
-      MonthData monthData = MonthData(
-        date: i,
-        hfe_employees: 0,
-        less_than_35: 0,
-        between_30_to_50: 0,
-        greater_than_50: 0,
-      );
-      wholeMonthData.add(monthData);
-      print("${jsonEncode(wholeMonthData.toJson())}");
-    }
+
     attendance_list.value = _attendanceList;
     isLoading = false;
     update(['attendance-list']);
   }
 
+//   Future<void> getAttendanceList({
+//   required int facilityId,
+//   required String year,
+//   bool? isLoading,
+// }) async {
+//   attendance_list.value = <AttendanceListModel>[];
+//   final _attendanceList = await attendanceListPresenter.getAttendanceList(
+//     facilityId: facilityId,
+//     year: year,
+//     isLoading: isLoading,
+//   );
+//   // Iterate over the fetched attendance list
+//   for (var attendance in _attendanceList) {
+//     // Find matching attendance in existing list or create new if not found
+//     var existingAttendance = attendance_list.firstWhere(
+//       (a) => a.month_id == attendance.month_id,
+//       orElse: () => AttendanceListModel(
+//         facility_id: facilityId,
+//         month_id: attendance.month_id,
+//         month_name: attendance.month_name,
+//         year: int.tryParse(year) ?? 0,
+//         month_data: List.generate(31, (_) => MonthData()),
+//       ),
+//     );
+//     // Update month_data with received data
+//     for (int i = 0; i < attendance.month_data.length; i++) {
+//       existingAttendance.month_data[i] = attendance.month_data[i];
+//     }
+//     // Replace or add updated attendance to the list
+//     if (!attendance_list.contains(existingAttendance)) {
+//       attendance_list.add(existingAttendance);
+//     }
+//   }
+//   isLoading = false;
+//   update(['attendance-list']);
+// }
+
   addAttendance() {
     Get.toNamed(Routes.attendanceScreen);
   }
 }
+// for (int i = 1; i < 31; i++) {
+//   MonthData monthData = MonthData(
+//     date: i,
+//     hfe_employees: 0,
+//     less_than_35: 0,
+//     between_30_to_50: 0,
+//     greater_than_50: 0,
+//   );
+//   wholeMonthData.add(monthData);
+// }

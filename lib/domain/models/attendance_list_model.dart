@@ -43,11 +43,11 @@ class MonthData {
   int? greater_than_50;
 
   MonthData({
-    this.date,
-    this.hfe_employees,
-    this.less_than_35,
-    this.between_30_to_50,
-    this.greater_than_50,
+    this.date = 0,
+    this.hfe_employees = 0,
+    this.less_than_35 = 0,
+    this.between_30_to_50 = 0,
+    this.greater_than_50 = 0,
   });
 
   factory MonthData.fromJson(Map<String, dynamic> json) => MonthData(

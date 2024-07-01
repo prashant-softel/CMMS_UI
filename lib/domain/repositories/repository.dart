@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
 import 'package:cmms/domain/models/attendance_model.dart';
+import 'package:cmms/domain/models/attendance_month_model.dart';
 import 'package:cmms/domain/models/complicance_history_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
@@ -14174,6 +14175,31 @@ class Repository {
       if (!res.hasError) {
         var response = json.decode(res.data);
         AttendaceModel attendanceModel = AttendaceModel.fromJson(response);
+        return attendanceModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getAttendanceDetails');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<AttendanceMonthModel?> getAttendanceListMonthwise({
+    required int facilityId,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAttendanceListMonthwise(
+        auth: auth,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        var response = json.decode(res.data);
+        AttendanceMonthModel attendanceModel = AttendanceMonthModel.fromJson(response);
         return attendanceModel;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getAttendanceDetails');

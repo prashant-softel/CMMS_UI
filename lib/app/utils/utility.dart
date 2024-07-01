@@ -138,6 +138,10 @@ abstract class Utility {
     var date = DateTime.parse(datetime);
     return Utility.getyearMonthDay(date);
   }
+  static String getFormatedayMonthYear(String datetime) {
+    var date = DateTime.parse(datetime);
+    return Utility.getDayMonthYear(date);
+  }
 
   static String getyearMonthDay(DateTime dateTime) =>
       // '${getOnlyDate(dateTime)}-${DateFormat('MM').format(dateTime)}-${DateFormat.y().format(dateTime)}';

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cmms/app/attendance_list_monthwise/attendance_monthwise_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
@@ -11,7 +12,7 @@ class AttendanceListMonthController extends GetxController {
   AttendanceListMonthController(this.attendanceListMonthPresenter);
   AttendanceListMonthPresenter attendanceListMonthPresenter;
 
-  bool openFromDateToStartDatePicker = false;
+  RxBool openFromDateToStartDatePicker = false.obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 70)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
@@ -23,518 +24,206 @@ class AttendanceListMonthController extends GetxController {
   int get facilityId1 => _facilityId.value;
   RxInt facilityId = 0.obs;
   final HomeController controller = Get.find();
+  RxBool isLoading = true.obs;
 
-  Rx<AttendanceMonthModel> attendanceMonthModel = AttendanceMonthModel(
-    facility_id: 1,
-    facility_name: "Bellary",
-    attendance: [
-      Employee(
-        employeeId: 10,
-        employeeName: "Blake Snyder",
-        dateOfJoining: "2015-10-02",
-        dateOfExit: null,
-        workingStatus: "Active",
-        details: [
-          Details(
-            date: "01-10-2023",
-            status: "P",
-            inTime: "1:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "02-10-2023",
-            status: "P",
-            inTime: "2:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "03-10-2023",
-            status: "P",
-            inTime: "3:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "04-10-2023",
-            status: "P",
-            inTime: "4:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "05-10-2023",
-            status: "P",
-            inTime: "5:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "06-10-2023",
-            status: "P",
-            inTime: "6:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "07-10-2023",
-            status: "P",
-            inTime: "7:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "08-10-2023",
-            status: "P",
-            inTime: "8:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "09-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "10-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "11-10-2023",
-            status: "P",
-            inTime: "6:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "12-10-2023",
-            status: "P",
-            inTime: "7:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "13-10-2023",
-            status: "P",
-            inTime: "8:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "14-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "15-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-        ],
-      ),
-      Employee(
-        employeeId: 12,
-        employeeName: "Russell Norton",
-        dateOfJoining: "2015-10-02",
-        dateOfExit: null,
-        workingStatus: "Active",
-        details: [
-          Details(
-            date: "01-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "02-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "03-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "04-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "05-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "06-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "07-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "08-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "09-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "10-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "11-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "12-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "13-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "14-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "15-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-        ],
-      ),
-      Employee(
-        employeeId: 97,
-        employeeName: "Eleanor Lyons",
-        dateOfJoining: "2015-10-02",
-        dateOfExit: "2020-06-30",
-        workingStatus: "Inactive",
-        details: [
-          Details(
-            date: "01-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "02-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "03-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "04-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "05-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "06-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "07-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "08-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "09-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "10-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "11-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "12-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "13-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "14-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "15-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-        ],
-      ),
-      Employee(
-        employeeId: 102,
-        employeeName: "Sophie Lynch",
-        dateOfJoining: "2015-10-02",
-        dateOfExit: "2020-06-30",
-        workingStatus: "Inactive",
-        details: [
-          Details(
-            date: "01-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "02-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "03-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "04-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "05-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "06-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "07-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "08-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "09-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "10-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "11-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "12-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "13-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "14-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "15-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-        ],
-      ),
-      Employee(
-        employeeId: 97,
-        employeeName: "Ruby Farmer",
-        dateOfJoining: "2015-10-02",
-        dateOfExit: "2020-06-30",
-        workingStatus: "Inactive",
-        details: [
-          Details(
-            date: "01-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "02-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "03-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "04-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "05-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "06-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "07-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "08-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "09-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "10-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "11-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "12-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "13-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "14-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-          Details(
-            date: "15-10-2023",
-            status: "P",
-            inTime: "10:00 AM",
-            outTime: "6:00 PM",
-          ),
-        ],
-      ),
-    ],
-  ).obs;
+  Rx<AttendanceMonthModel> attendanceMonthModel = AttendanceMonthModel().obs;
+  // Rx<AttendanceMonthModel> attendanceMonthModel = AttendanceMonthModel(
+  //   facility_id: 1,
+  //   facility_name: "Bellary",
+  //   attendance: [
+  //     Employee(
+  //       employeeId: 1,
+  //       employeeName: "HFEAdmin",
+  //       dateOfJoining: "2012-02-20T00:00:00",
+  //       dateOfExit: "0001-01-01T00:00:00",
+  //       workingStatus: "Inactive",
+  //       details: [
+  //         Details(
+  //           date: "2024-06-24T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-26T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-27T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //       ],
+  //     ),
+  //     Employee(
+  //       employeeId: 12,
+  //       employeeName: "PradeepTholety",
+  //       dateOfJoining: "2022-03-22T00:00:00",
+  //       dateOfExit: "0001-01-01T00:00:00",
+  //       workingStatus: "Inactive",
+  //       details: [
+  //         Details(
+  //           date: "2024-06-24T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-26T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-27T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //       ],
+  //     ),
+  //     Employee(
+  //       employeeId: 48,
+  //       employeeName: "ShivaKumar",
+  //       dateOfJoining: "2017-10-20T00:00:00",
+  //       dateOfExit: "0001-01-01T00:00:00",
+  //       workingStatus: "Inactive",
+  //       details: [
+  //         Details(
+  //           date: "2024-06-24T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-26T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-27T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //       ],
+  //     ),
+  //     Employee(
+  //       employeeId: 50,
+  //       employeeName: "GuruKumar",
+  //       dateOfJoining: "2017-10-20T00:00:00",
+  //       dateOfExit: "0001-01-01T00:00:00",
+  //       workingStatus: "Inactive",
+  //       details: [
+  //         Details(
+  //           date: "2024-06-24T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-26T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-27T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //       ],
+  //     ),
+  //     Employee(
+  //       employeeId: 57,
+  //       employeeName: "NareshD",
+  //       dateOfJoining: "2019-08-01T00:00:00",
+  //       dateOfExit: "0001-01-01T00:00:00",
+  //       workingStatus: "Inactive",
+  //       details: [
+  //         Details(
+  //           date: "2024-06-24T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-26T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-27T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //       ],
+  //     ),
+  //     Employee(
+  //       employeeId: 77,
+  //       employeeName: "madhubansahani",
+  //       dateOfJoining: "2024-04-15T00:00:00",
+  //       dateOfExit: "0001-01-01T00:00:00",
+  //       workingStatus: "Inactive",
+  //       details: [
+  //         Details(
+  //           date: "2024-06-24T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-26T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //         Details(
+  //           date: "2024-06-27T00:00:00",
+  //           status: "P",
+  //           inTime: "10:00 AM",
+  //           outTime: "6:00 PM",
+  //         ),
+  //       ],
+  //     ),
+  //   ],
+  // ).obs;
 
   @override
   void onInit() async {
     try {
-      facilityIdStreamSubscription = controller.facilityId$.listen((event) {
+      facilityIdStreamSubscription =
+          controller.facilityId$.listen((event) async {
         facilityId.value = event;
+        await getAttendanceListMonthwise();
       });
       super.onInit();
     } catch (e) {
       print("error $e");
+    }
+  }
+
+  Future<void> getAttendanceListMonthwise() async {
+    try {
+      final _attendanceDetails =
+          await attendanceListMonthPresenter.getAttendanceListMonthwise(
+        facilityId: facilityId.value,
+        isLoading: isLoading.value,
+      );
+      if (_attendanceDetails != null) {
+        attendanceMonthModel.value = _attendanceDetails;
+        print("${jsonEncode(attendanceMonthModel.value.toJson())}");
+      }
+      update(["attendance-list-month"]);
+    } catch (e) {
+      print('Error in getAttendanceListMonthwise: $e');
     }
   }
 }

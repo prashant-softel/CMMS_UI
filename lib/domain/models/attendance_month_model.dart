@@ -1,3 +1,5 @@
+import 'package:cmms/app/utils/utility.dart';
+
 class AttendanceMonthModel {
   int? facility_id;
   String? facility_name;
@@ -13,9 +15,9 @@ class AttendanceMonthModel {
       AttendanceMonthModel(
         facility_id: json["facility_id"],
         facility_name: json["facility_name"],
-        attendance: json["attendance"] != null
+        attendance: json["result"] != null
             ? List<Employee>.from(
-                json["attendance"].map((x) => Employee.fromJson(x)),
+                json["result"].map((x) => Employee.fromJson(x)),
               )
             : null,
       );
@@ -23,7 +25,7 @@ class AttendanceMonthModel {
   Map<String, dynamic> toJson() => {
         "facility_id": facility_id,
         "facility_name": facility_name,
-        "attendance": attendance != null
+        "result": attendance != null
             ? List<dynamic>.from(
                 attendance!.map((x) => x.toJson()),
               )
@@ -49,11 +51,11 @@ class Employee {
   });
 
   factory Employee.fromJson(Map<String, dynamic> json) => Employee(
-        employeeId: json["employee_id"],
-        employeeName: json["employee_name"],
-        dateOfJoining: json["date_of_joining"],
-        dateOfExit: json["date_of_exit"],
-        workingStatus: json["working_status"],
+        employeeId: json["employeeId"],
+        employeeName: json["employeeName"],
+        dateOfJoining: Utility.getFormatedyearMonthDay(json["dateOfJoining"]),
+        dateOfExit: Utility.getFormatedyearMonthDay(json["dateofExit"]),
+        workingStatus: json["workingStatus"],
         details: json["details"] != null
             ? List<Details>.from(
                 json["details"].map((x) => Details.fromJson(x)),
@@ -62,11 +64,11 @@ class Employee {
       );
 
   Map<String, dynamic> toJson() => {
-        "employee_id": employeeId,
-        "employee_name": employeeName,
-        "date_of_joining": dateOfJoining,
-        "date_of_exit": dateOfExit,
-        "working_status": workingStatus,
+        "employeeId": employeeId,
+        "employeeName": employeeName,
+        "dateOfJoining": dateOfJoining,
+        "dateofExit": dateOfExit,
+        "workingStatus": workingStatus,
         "details": details != null
             ? List<dynamic>.from(
                 details!.map((x) => x.toJson()),
@@ -76,12 +78,14 @@ class Employee {
 }
 
 class Details {
+  int? emp_id;
   String? date;
   String? status;
   String? inTime;
   String? outTime;
 
   Details({
+    this.emp_id,
     this.date,
     this.status,
     this.inTime,
@@ -89,15 +93,17 @@ class Details {
   });
 
   factory Details.fromJson(Map<String, dynamic> json) => Details(
-        date: json["date"],
-        status: json["status"],
-        inTime: json["in_time"],
-        outTime: json["out_time"],
+        emp_id: json["emp_id"],
+        date: Utility.getFormatedayMonthYear(json["date"]),
+        status: json["status"] == 1 ? "P" : "A",
+        inTime: json["inTime"],
+        outTime: json["outTime"],
       );
   Map<String, dynamic> toJson() => {
+        "emp_id": emp_id,
         "date": date,
         "status": status,
-        "in_time": inTime,
-        "out_time": outTime,
+        "inTime": inTime,
+        "outTime": outTime,
       };
 }
