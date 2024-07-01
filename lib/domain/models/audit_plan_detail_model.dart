@@ -21,6 +21,9 @@ class AuditPlanDetailModel {
   String? schedule_Date;
   String? created_at;
   String? created_by;
+  String? assignedTo;
+  String? employees;
+  String? is_PTW;
 
   AuditPlanDetailModel(
       {this.auditee_Emp_Name,
@@ -38,11 +41,17 @@ class AuditPlanDetailModel {
       this.checklist_name,
       this.created_by,
       this.frequency_name,
-      this.created_at});
+      this.created_at,
+      this.is_PTW,
+      this.assignedTo,
+      this.employees});
 
   factory AuditPlanDetailModel.fromJson(Map<String, dynamic> json) {
     return AuditPlanDetailModel(
       status: json['status'],
+      assignedTo: json['assignedTo'],
+      is_PTW: json['is_PTW'],
+      employees: json['employees'],
       frequency_name: json['frequency_name'],
       created_by: json['created_by'],
       short_status: json['short_status'],

@@ -3,6 +3,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/view_audit_task/tbt_done_audit_dialog.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_controller.dart';
 import 'package:cmms/app/widgets/audit_execution_process_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -705,12 +706,12 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                                           "View Permit",
                                                                       onPress:
                                                                           () {
-                                                                        // controller
-                                                                        //     .clearPermitStoreData();
-                                                                        // controller.viewNewPermitList(
-                                                                        //     permitId:
-                                                                        //         controller.pmtaskViewModel.value?.permit_id,
-                                                                        //     jobId: controller.jobDetailsModel.value!.id ?? 0);
+                                                                        controller
+                                                                            .clearPermitStoreData();
+                                                                        controller.viewNewPermitList(
+                                                                            permitId:
+                                                                                controller.auditTasknDetailModel.value.permit_id,
+                                                                            jobId: controller.jobDetailsModel.value!.id ?? 0);
                                                                       })
                                                                   : Container(),
                                                               // TableActionButton(
@@ -824,7 +825,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               )
                                             : Dimens.box0,
                                         //  : Dimens.box0,
-                                        Dimens.boxWidth20,
+                                        Dimens.boxWidth5,
                                         controller.auditTasknDetailModel.value
                                                         .status ==
                                                     426 &&
@@ -856,7 +857,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               )
                                             : Dimens.box0,
                                         //: Dimens.box0,
-                                        Dimens.boxWidth20,
+                                        Dimens.boxWidth5,
                                         controller.auditTasknDetailModel.value
                                                         .status ==
                                                     425 ||
@@ -890,9 +891,9 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 ),
                                               )
                                             : Dimens.box0,
-                                        Dimens.boxWidth20,
+                                        Dimens.boxWidth5,
 
-                                        controller.auditTasknDetailModel.value.status == 422 &&
+                                        controller.auditTasknDetailModel.value.status == 430 &&
                                                     varUserAccessModel.value.access_list!
                                                             .where((e) =>
                                                                 e.feature_id ==
@@ -905,7 +906,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                         0 ||
                                                 controller.auditTasknDetailModel
                                                             .value.status ==
-                                                        430 &&
+                                                        422 &&
                                                     varUserAccessModel
                                                             .value.access_list!
                                                             .where((e) =>
@@ -930,7 +931,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 ),
                                               )
                                             : Dimens.box0,
-                                        Dimens.boxWidth20,
+                                        Dimens.boxWidth5,
 
                                         controller.auditTasknDetailModel.value
                                                         .status ==
@@ -962,7 +963,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 ),
                                               )
                                             : Dimens.box0,
-                                        Dimens.boxWidth20,
+                                        Dimens.boxWidth5,
 
                                         controller.auditTasknDetailModel.value
                                                         .status ==
@@ -995,26 +996,32 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               )
                                             : Dimens.box0,
                                         Dimens.boxWidth20,
-                                        controller.auditTasknDetailModel.value.status == 425 &&
-                                                    varUserAccessModel.value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants
-                                                                        .kAuditExecutionFeatureId &&
-                                                                e.approve ==
-                                                                    UserAccessConstants
-                                                                        .kHaveAddAccess)
-                                                            .length >
+                                        controller.auditTasknDetailModel.value
+                                                            .status ==
+                                                        425 &&
+                                                    controller.auditTasknDetailModel.value.is_PTW ==
+                                                        "False" &&
+                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess).length >
                                                         0 ||
-                                                controller.auditTasknDetailModel
-                                                            .value.status ==
-                                                        427 &&
+                                                controller.auditTasknDetailModel.value.status == 427 &&
+                                                    controller.auditTasknDetailModel.value.is_PTW ==
+                                                        "False" &&
+                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess).length >
+                                                        0 ||
+                                                controller.auditTasknDetailModel.value.status == 138 &&
+                                                    controller
+                                                            .auditTasknDetailModel
+                                                            .value
+                                                            .ptw_status ==
+                                                        125 &&
+                                                    controller
+                                                            .auditTasknDetailModel
+                                                            .value
+                                                            .is_PTW ==
+                                                        "True" &&
                                                     varUserAccessModel
                                                             .value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants.kAuditExecutionFeatureId &&
-                                                                e.approve == UserAccessConstants.kHaveAddAccess)
+                                                            .where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess)
                                                             .length >
                                                         0
                                             ? Container(
@@ -1025,32 +1032,58 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                   text: "Start",
                                                   icon: Icons.start,
                                                   onPressed: () {
-                                                    controller.startAuditTask();
+                                                    controller.auditTasknDetailModel.value
+                                                                    .ptw_tbt_done ==
+                                                                0 &&
+                                                            controller
+                                                                    .auditTasknDetailModel
+                                                                    .value
+                                                                    .is_PTW ==
+                                                                "True"
+                                                        ? Get.dialog<void>(
+                                                            TbtDoneAuditTaskDialog(
+                                                                ptw_id: controller
+                                                                        .auditTasknDetailModel
+                                                                        .value
+                                                                        .permit_id ??
+                                                                    0,
+                                                                id: controller
+                                                                        .auditTasknDetailModel
+                                                                        .value
+                                                                        .id ??
+                                                                    0))
+                                                        : controller
+                                                            .startAuditTask();
                                                   },
                                                 ),
                                               )
                                             : Dimens.box0,
-                                        Dimens.boxWidth20,
-                                        controller.auditTasknDetailModel.value.status == 425 &&
-                                                    varUserAccessModel.value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants
-                                                                        .kAuditExecutionFeatureId &&
-                                                                e.approve ==
-                                                                    UserAccessConstants
-                                                                        .kHaveAddAccess)
-                                                            .length >
+                                        Dimens.boxWidth5,
+                                        controller.auditTasknDetailModel.value.permit_id == 0 &&
+                                                    controller.auditTasknDetailModel
+                                                            .value.is_PTW ==
+                                                        "True" &&
+                                                    controller.auditTasknDetailModel
+                                                            .value.status ==
+                                                        425 &&
+                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess).length >
                                                         0 ||
                                                 controller.auditTasknDetailModel
-                                                            .value.status ==
+                                                            .value.permit_id ==
+                                                        0 &&
+                                                    controller
+                                                            .auditTasknDetailModel
+                                                            .value
+                                                            .is_PTW ==
+                                                        "True" &&
+                                                    controller
+                                                            .auditTasknDetailModel
+                                                            .value
+                                                            .status ==
                                                         427 &&
                                                     varUserAccessModel
                                                             .value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants.kAuditExecutionFeatureId &&
-                                                                e.approve == UserAccessConstants.kHaveAddAccess)
+                                                            .where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess)
                                                             .length >
                                                         0
                                             ? Container(
@@ -1067,9 +1100,9 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 ),
                                               )
                                             : Dimens.box0,
-                                        Dimens.boxWidth20,
+                                        Dimens.boxWidth5,
 
-                                        controller.auditTasknDetailModel.value.status == 422 &&
+                                        controller.auditTasknDetailModel.value.status == 430 &&
                                                     varUserAccessModel.value.access_list!
                                                             .where((e) =>
                                                                 e.feature_id ==
@@ -1082,7 +1115,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                         0 ||
                                                 controller.auditTasknDetailModel
                                                             .value.status ==
-                                                        430 &&
+                                                        422 &&
                                                     varUserAccessModel
                                                             .value.access_list!
                                                             .where((e) =>

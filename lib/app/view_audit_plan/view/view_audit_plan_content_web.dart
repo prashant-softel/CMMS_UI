@@ -221,7 +221,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                             style: Styles.black17,
                                           ),
                                           Text(
-                                            ' Frequency Applied :',
+                                            'Employees :',
                                             style: Styles.black17,
                                           ),
                                         ],
@@ -243,7 +243,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               '${controller.auditPlanDetailModel.value?.description ?? ""}',
                                               style: Styles.blue17),
                                           Text(
-                                              '${controller.auditPlanDetailModel.value?.created_by ?? ''}',
+                                              '${controller.auditPlanDetailModel.value?.assignedTo ?? ''}',
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.auditee_Emp_Name ?? ""}',
@@ -252,7 +252,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               '${controller.auditPlanDetailModel.value?.checklist_name ?? ""}',
                                               style: Styles.blue17),
                                           Text(
-                                              '${controller.auditPlanDetailModel.value?.frequencyApplicable ?? ""}',
+                                              '${controller.auditPlanDetailModel.value?.employees ?? ""}',
                                               style: Styles.blue17),
                                         ],
                                       ),
@@ -262,7 +262,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            'Created At :',
+                                            'Assigned To :',
                                             style: Styles.black17,
                                           ),
                                           Text(
@@ -281,10 +281,10 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                       ),
                                       Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                              '${controller.auditPlanDetailModel.value?.created_at ?? ''}',
+                                              '${controller.auditPlanDetailModel.value?.assignedTo ?? ''}',
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.schedule_Date ?? ''}',

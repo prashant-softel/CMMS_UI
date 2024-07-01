@@ -95,26 +95,24 @@ class AuditTaskApprovedRejectDialog extends GetView {
                 onPressed: () {
                   type == 1
                       ? controller.auditTaskApprovedButton(
-                          id: controller.auditTasknDetailModel.value.plan_id)
+                          id: controller.auditTasknDetailModel.value.id)
                       : type == 2
                           ? controller.auditTaskRejectButton(
-                              id: controller
-                                  .auditTasknDetailModel.value.plan_id)
+                              id: controller.auditTasknDetailModel.value.id)
                           : type == 3
                               ? controller.auditTaskSkipButton(
-                                  id: controller
-                                      .auditTasknDetailModel.value.plan_id)
+                                  id: controller.auditTasknDetailModel.value.id)
                               : type == 4
                                   ? controller.auditTaskCloseButton(
                                       id: controller
-                                          .auditTasknDetailModel.value.plan_id)
+                                          .auditTasknDetailModel.value.id)
                                   : type == 5
                                       ? controller.auditTaskCloseApproveButton(
-                                          id: controller.auditTasknDetailModel
-                                              .value.plan_id)
+                                          id: controller
+                                              .auditTasknDetailModel.value.id)
                                       : controller.auditTaskCloseRejectButton(
-                                          id: controller.auditTasknDetailModel
-                                              .value.plan_id);
+                                          id: controller
+                                              .auditTasknDetailModel.value.id);
 
                   // // print('Goods order id:$id');
                   Get.back();

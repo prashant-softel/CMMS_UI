@@ -23,6 +23,7 @@ class ViewAuditTaskUsecase {
   void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
   void clearjobmodelValue() async => repository.clearData(LocalKeys.jobModel);
   void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
+  void clearPermitStoreData() async => repository.clearData(LocalKeys.permitId);
 
   Future<Map<String, dynamic>> auditTaskCloseButton({
     auditTaskCloseJsonString,
