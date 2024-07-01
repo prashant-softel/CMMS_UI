@@ -26,6 +26,8 @@ class CreateObservationController extends GetxController {
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   bool openObsDatePicker = false;
+  bool openTargetDatePicker = false;
+
   bool openTargetObsDatePicker = false;
   var obsDateTc = TextEditingController();
   var targetDateTc = TextEditingController();

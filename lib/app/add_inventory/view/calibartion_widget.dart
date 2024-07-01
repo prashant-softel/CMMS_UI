@@ -76,7 +76,7 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                               children: [
                                 CustomRichText(
                                     includeAsterisk: false,
-                                    title: "Calibration remainder In"),
+                                    title: "Calibration Remainder In"),
                                 SizedBox(width: 10),
                                 Container(
                                   height: MediaQuery.of(context).size.height *
@@ -176,7 +176,7 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                             Container(
                               child: Row(
                                 children: [
-                                  Text('Calibration certificate'),
+                                  Text('Calibration Certificate'),
                                   Dimens.boxWidth20,
                                   ActionButton(
                                     label: 'Upload certification file',

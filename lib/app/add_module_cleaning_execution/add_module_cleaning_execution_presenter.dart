@@ -75,7 +75,7 @@ class AddModuleCleaningExecutionPresenter {
   }) async {
     return addModuleCleaningExecutionUsecase.getMCExecutionDetail(
       executionId: executionId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading ?? false,
     );
   }
@@ -96,10 +96,7 @@ class AddModuleCleaningExecutionPresenter {
     required int? taskId,
   }) async {
     return addModuleCleaningExecutionUsecase.getMCTaskEquipmentList(
-      isLoading: isLoading,
-      taskId: taskId,
-      facilityId: facilityId
-    );
+        isLoading: isLoading, taskId: taskId, facilityId: facilityId);
   }
 
   Future<Map<String, dynamic>?> abandonScheduleExecutionButton({
@@ -137,4 +134,17 @@ class AddModuleCleaningExecutionPresenter {
 
   Future<String?> getValuePlanId() async =>
       await addModuleCleaningExecutionUsecase.getValuePlanId();
+  void clearPermitStoreData() async =>
+      addModuleCleaningExecutionUsecase.clearPermitStoreData();
+      void clearmcDetailsStoreData() async =>
+      addModuleCleaningExecutionUsecase.clearmcDetailsStoreData();
+      
+  void clearJobDetailStoreData() async =>
+      addModuleCleaningExecutionUsecase.clearJobDetailStoreData();
+  void clearTypeValue() async =>
+      addModuleCleaningExecutionUsecase.clearTypeValue();
+  void clearisCheckedValue() async =>
+      addModuleCleaningExecutionUsecase.clearisCheckedValue();
+  void clearpmTaskValue() async =>
+      addModuleCleaningExecutionUsecase.clearpmTaskValue();
 }

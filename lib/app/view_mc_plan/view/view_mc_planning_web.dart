@@ -166,7 +166,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                                '${controller.mcPlanDetailsModel.value?.title ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                '${controller.mcPlanDetailsModel.value?.siteName ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                 style: Styles.blue17),
                                             Dimens.boxHeight10,
                                             Obx(

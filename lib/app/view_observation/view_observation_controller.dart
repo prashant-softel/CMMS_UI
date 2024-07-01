@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cmms/app/view_observation/view_observation_presenter.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -16,6 +17,7 @@ class ViewObservationController extends GetxController {
   final HomeController homeController = Get.find();
   Rx<String> selectedFacility = ''.obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
+  TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
   StreamSubscription<int>? facilityIdStreamSubscription;
   Stream<int> get facilityId$ => _facilityId.stream;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -132,6 +134,27 @@ class ViewObservationController extends GetxController {
 
       selectedFacility.value = facilityList[0]?.name ?? '';
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
+    }
+  }
+
+  
+ void viewObsCloseButton({int? id}) async {
+    {
+      String _comment = closeCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentviewListofObsCloseModel =
+          CommentModel(id: id, comment: _comment);
+
+      var ViewObsCloseJsonString = commentviewListofObsCloseModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewObservationPresenter.viewObsCloseButton(
+        ViewObsCloseJsonString: ViewObsCloseJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
     }
   }
 

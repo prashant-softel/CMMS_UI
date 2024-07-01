@@ -43,7 +43,7 @@ class CustomTextfieldMobile extends GetView {
     this.onChanged,
     this.errorText,
     this.onFieldSubmitted,
-    this.maxLines = 1,
+    this.maxLines,
     this.enabled = true,
     this.keyboardType,
     this.inputFormatters,
@@ -97,7 +97,6 @@ class CustomTextfieldMobile extends GetView {
       height: maxLines == 1 ? 30 : null,
       width: width,
       child: Container(
-        padding: EdgeInsets.only(bottom: 5),
         decoration: isMobileOrTablet
             ? BoxDecoration(
                 boxShadow: [
@@ -128,7 +127,7 @@ class CustomTextfieldMobile extends GetView {
           onFieldSubmitted: onFieldSubmitted,
           onTap: onTap,
           validator: validator,
-          maxLines: maxLines,
+          maxLines: maxLines ?? null,
           onChanged: onChanged,
           controller: textController,
           focusNode: focusNode,

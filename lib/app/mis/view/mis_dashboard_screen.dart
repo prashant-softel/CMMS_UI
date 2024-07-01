@@ -110,6 +110,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                               title: 'Create observation ',
                               onTap: () {
                                 controller.goToCreateObservation();
+                                // controller.clearStoreData();
                               },
                             ),
                             createContentTile(
