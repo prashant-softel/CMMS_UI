@@ -5,18 +5,18 @@ List<AttendanceListModel> AttendanceListModelFromJson(String str) =>
         json.decode(str).map((x) => AttendanceListModel.fromJson(x)));
 
 class AttendanceListModel {
-  int? facility_id;
-  int? month_id;
-  String? month_name;
-  int? year;
-  List<MonthData>? month_data;
+  int facility_id;
+  int month_id;
+  String month_name;
+  int year;
+  List<MonthData> month_data;
 
   AttendanceListModel({
-    this.facility_id,
-    this.month_id,
-    this.month_name,
-    this.year,
-    this.month_data,
+    required this.facility_id,
+    required this.month_id,
+    required this.month_name,
+    required this.year,
+    required this.month_data,
   });
 
   factory AttendanceListModel.fromJson(Map<String, dynamic> json) =>
@@ -25,13 +25,7 @@ class AttendanceListModel {
         month_id: json["month_id"],
         month_name: json["month_name"],
         year: json["years"],
-        month_data: json["month_data"] != null
-            ? List<MonthData>.from(
-                json["month_data"].map(
-                  (x) => MonthData.fromJson(x),
-                ),
-              )
-            : [],
+        month_data: List.generate(31, (_) => MonthData()),
       );
 }
 
@@ -43,11 +37,11 @@ class MonthData {
   int? greater_than_50;
 
   MonthData({
-    this.date,
-    this.hfe_employees,
-    this.less_than_35,
-    this.between_30_to_50,
-    this.greater_than_50,
+    this.date = 0,
+    this.hfe_employees = 0,
+    this.less_than_35 = 0,
+    this.between_30_to_50 = 0,
+    this.greater_than_50 = 0,
   });
 
   factory MonthData.fromJson(Map<String, dynamic> json) => MonthData(
