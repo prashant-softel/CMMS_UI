@@ -118,7 +118,8 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title: 'Date Range'),
+                                                    title: 'Date Range',
+                                                    includeAsterisk: false),
                                                 Dimens.boxWidth2,
                                                 CustomTextFieldForStock(
                                                   width: MediaQuery.of(context)
@@ -198,7 +199,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                                 ),
                                               ],
                                             ),
-                                            Dimens.boxWidth10,
+                                            Dimens.boxWidth3,
                                             varUserAccessModel
                                                         .value.access_list!
                                                         .where((e) =>
@@ -355,7 +356,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                                       width: 0.0),
                                                 ),
                                                 contentPadding:
-                                                    Dimens.edgeInsets05_10,
+                                                    EdgeInsets.only(left: 3),
                                                 hintText: 'search'.tr,
                                                 hintStyle: Styles.grey12,
                                               ),

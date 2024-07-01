@@ -318,7 +318,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title: 'Assigned To :'),
-                                                Dimens.boxWidth10,
+                                                Dimens.boxWidth5,
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:

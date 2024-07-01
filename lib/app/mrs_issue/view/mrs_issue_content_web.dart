@@ -108,7 +108,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                       "${controller.mrsDetailsModel.value?.id ?? ""}",
                                       style: Styles.blue17,
                                     ),
-                                    Dimens.boxWidth8,
+                                    Dimens.boxWidth3,
                                     Container(
                                       height: 30,
                                       child: CustomElevatedButton(
@@ -150,7 +150,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                         ),
                                       ],
                                     ),
-                                    Dimens.boxWidth20,
+                                    Dimens.boxWidth2,
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -184,7 +184,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                         ),
                                       ],
                                     ),
-                                    Dimens.boxWidth20,
+                                    Dimens.boxWidth2,
 
                                     Column(
                                       crossAxisAlignment:
@@ -368,6 +368,8 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                             index),
                                                                     onChanged:
                                                                         (value) {
+                                                                      // controller
+                                                                      //     .validateField();
                                                                       controller
                                                                           .clearErrorMessage(
                                                                               index);
@@ -439,6 +441,8 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                       fontSize:
                                                                           16.0,
                                                                     );
+                                                                    item.issued_qty_controller!
+                                                                        .clear();
                                                                   }
                                                                 } catch (e) {
                                                                   // Handle the case where parsing fails
@@ -464,8 +468,8 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    CustomRichText(title:"Comment:"),
-                                    Dimens.boxWidth10,
+                                    CustomRichText(title: "Comment:"),
+                                    Dimens.boxWidth2,
                                     Container(
                                         width: (Get.width * .6),
                                         decoration: BoxDecoration(

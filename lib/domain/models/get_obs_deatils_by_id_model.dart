@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/domain/models/new_permit_details_model.dart';
 
 GetObservationById getObservationByIdModelFromJson(String str) =>
     GetObservationById.fromJson(json.decode(str));
@@ -29,6 +30,7 @@ class GetObservationById {
   String? created_by;
   String? updated_at;
   String? updated_by;
+  List<FileList>? file_list;
 
   GetObservationById({
     this.id,

@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
+import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,8 @@ class CreateObservationController extends GetxController {
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   bool openObsDatePicker = false;
+  bool openTargetDatePicker = false;
+
   bool openTargetObsDatePicker = false;
   var obsDateTc = TextEditingController();
   var targetDateTc = TextEditingController();
@@ -57,12 +60,15 @@ class CreateObservationController extends GetxController {
   Rx<bool> isObsDateTcInvalid = false.obs;
   Rx<bool> isTargetDateInvalid = false.obs;
   Rx<bool> isContractorInvalid = false.obs;
-
+  RxList<FileList?>? file_list = <FileList>[].obs;
+  List<dynamic>? files = [];
   Rx<bool> isCorrectiveInvalid = false.obs;
   Rx<bool> isResponsibleInvalid = false.obs;
   Rx<bool> isContactNumberInvalid = false.obs;
   Rx<bool> isCostInvalid = false.obs;
   Rx<bool> islocationofObservationInvalid = false.obs;
+  Rx<DateTime> selectedObsTime = DateTime.now().obs;
+  Rx<DateTime> selectedTargetTime = DateTime.now().obs;
 
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
@@ -143,6 +149,12 @@ class CreateObservationController extends GetxController {
       selectedSourceOfObs.value =
           getObsById.value?.source_of_observation_name ?? '';
     }
+  }
+
+  void removeImage(int? num, int index) {
+    files!.remove(num);
+    file_list!.removeAt(index);
+    print('removed file ids ${files}');
   }
 
   Future<void> getObsHistory({required int id}) async {

@@ -216,8 +216,7 @@ import 'package:cmms/app/view_escalation_matrix/view_escalation_matrix_screen.da
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_binding.dart';
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_screen.dart';
 import 'package:cmms/app/inventory/view/inventory_screen.dart';
-import 'package:cmms/app/new_permit/anas_new_permit_binding.dart';
-import 'package:cmms/app/new_permit/view/anas_new_permit_screen.dart';
+
 import 'package:cmms/app/preventive_check_point/preventive_check_point_binding.dart';
 import 'package:cmms/app/preventive_check_point/view/preventive_check_point_screen.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.dart';
@@ -511,15 +510,11 @@ class AppPages {
       page: PreventiveListScreen.new,
       binding: PreventiveListBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.newPermit,
-      page: NewPermitScreen.new,
-      binding: NewPermitBinding(),
-    ),
+
     GetPage<dynamic>(
       name: _Paths.createPermit,
       page: CreatePermitScreen.new,
-      binding: NewBinding(),
+      binding: NewPermitBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.newPermitList,

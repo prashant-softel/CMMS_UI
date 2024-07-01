@@ -118,6 +118,10 @@ class MrsApproveController extends GetxController {
 
   rejectMrs() async {
     {
+      checkform();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _comment = commentCtrlr.text.trim();
 
       CommentModel commentModel =

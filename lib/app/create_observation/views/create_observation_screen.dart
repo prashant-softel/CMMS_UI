@@ -22,7 +22,7 @@ class CreateObservationScreen extends GetView<CreateObservationController> {
       appBar: Responsive.isMobile(context)
           ? AppBar(
               title: HeadingProfileAppBar(
-                title: "List Of Observation",
+                title: "Create Observation",
               ),
             )
           : null,

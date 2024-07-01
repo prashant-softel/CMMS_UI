@@ -47,7 +47,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                   onTap: () {
                                     int obsId = obsListModel?.id ?? 0;
                                     if (obsId != 0) {
-                                      Get.toNamed(Routes.viewObservationScreen,
+                                      Get.toNamed(Routes.createObservation,
                                           arguments: {'obsId': obsId});
                                     }
                                   },

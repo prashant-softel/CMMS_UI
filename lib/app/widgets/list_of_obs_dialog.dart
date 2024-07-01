@@ -1,19 +1,17 @@
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/view_pm_plan/view_pm_plan_controller.dart';
+import 'package:cmms/app/view_observation/view_observation_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class PmPlanApprovedDialog extends GetView {
-  // int? id;
+class ListOfObsCloseDialog extends GetView {
+  int? id;
 
-  PmPlanApprovedDialog({super.key});
-  final ViewPmPlanController controller = Get.find();
+  ListOfObsCloseDialog({super.key, this.id});
+  final ViewObservationController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +23,16 @@ class PmPlanApprovedDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          "PM Plan Approve",
+          " Observation Close",
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
         content: Builder(builder: (context) {
+          var height = MediaQuery.of(context).size.height;
+
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
-            height: 180,
+            height: 200,
             width: 400,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -41,22 +41,19 @@ class PmPlanApprovedDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomRichText(title: 'Comment'),
+                      CustomRichText(title: 'Comment', includeAsterisk: false),
                       SizedBox(
-                        height: 5,
+                        height: 20,
                       ),
                       TextField(
                         style: GoogleFonts.lato(
                           textStyle: TextStyle(
                               fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
-                        controller: controller.approveCommentTextFieldCtrlr,
+                        controller: _controller.closeCommentTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
@@ -80,7 +77,7 @@ class PmPlanApprovedDialog extends GetView {
             height: 20,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Dimens.boxWidth5,
+            Dimens.boxWidth10,
             ElevatedButton(
               style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
@@ -90,13 +87,13 @@ class PmPlanApprovedDialog extends GetView {
             ),
             Dimens.boxWidth20,
             ElevatedButton(
-              style: Styles.greenElevatedButtonStyle,
+              style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                controller.pmPlanApprovedButton(id: controller.pmPlanId.value);
-                // print('Goods order id:$id');
-                Get.back();
+                _controller.viewObsCloseButton(id: id);
+                print('obs  id:$id');
+                // Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
               },
-              child: Text('Approve PM Plan'),
+              child: Text('Close view'),
             ),
           ]),
         ],

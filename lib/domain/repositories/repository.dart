@@ -470,6 +470,9 @@ class Repository {
           if (pmTaskId != null && type == 3) {
             scheduleLinkToPermit(
                 pmTaskId, activity, permitForJob[0], true, type);
+          } else if (pmTaskId != null && type == 4) {
+            scheduleLinkToPermit(
+                pmTaskId, activity, permitForJob[0], true, type);
           } else {
             scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true, 0);
           }
@@ -2672,6 +2675,41 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return null;
+    }
+  }
+
+  Future<Map<String, dynamic>> viewObsCloseButton(
+    viewobsCloseJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.viewObsCloseButton(
+        auth: auth,
+        viewobsCloseJsonString: viewobsCloseJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'goodsOrderApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
     }
   }
 
@@ -15013,8 +15051,8 @@ class Repository {
       print('Compliance Status ${res.data}');
 
       if (!res.hasError) {
-        var Sourcetype = statutoryHistoryFromJson(res.data);
-        return Sourcetype;
+        var historyStatutory = statutoryHistoryFromJson(res.data);
+        return historyStatutory.reversed.toList();
       }
       return [];
     } catch (error) {

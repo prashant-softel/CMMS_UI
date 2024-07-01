@@ -1,7 +1,10 @@
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_observation/view_observation_controller.dart';
+import 'package:cmms/app/widgets/close_goods_order_dialog.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
+import 'package:cmms/app/widgets/list_of_obs_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
@@ -259,6 +262,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             ),
                                                           ],
                                                         ),
+                                                        
                                                         Dimens.boxWidth10,
                                                         Column(
                                                           crossAxisAlignment:
@@ -299,6 +303,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                             ),
                                           ),
                                         ),
+                                      
 
                                         // Row(
                                         //   children: [
@@ -372,7 +377,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                         //     Spacer(),
                                         //   ],
                                         // ),
-
+                     
                                         Dimens.boxHeight20,
                                         (controller.historyList != null &&
                                                 controller
@@ -405,6 +410,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             style:
                                                                 Styles.blue700,
                                                           ),
+                                                          
                                                         ],
                                                       ),
                                                     ),
@@ -419,6 +425,20 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                 ),
                                               )
                                             : Dimens.box0,
+                                                                 Container(
+                          height: 45,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.rejectColor,
+                            text: "Close",
+                            icon: Icons.close,
+                            onPressed: () {
+                              Get.dialog(ListOfObsCloseDialog(
+                                id: controller.obsId.value,
+                              ));
+                            },
+                          ),
+                        ),
+
                                       ],
                                     ),
                                   ),

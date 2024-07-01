@@ -1743,6 +1743,19 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> linkMcToPermit({
+    required String auth,
+    mcId,
+    permitId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.linkMcToPermit(
+        auth: auth,
+        mcId: mcId,
+        permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+
   ///
   Future<ResponseModel> createCheckList({
     auth,
@@ -1813,6 +1826,18 @@ class DataRepository extends DomainRepository {
         auth: auth,
         newPermit: newPermit,
         jobId: jobId,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> createNewPermitForMC({
+    required String auth,
+    newPermit,
+    mcId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createNewPermitForMC(
+        auth: auth,
+        newPermit: newPermit,
+        mcId: mcId,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> createNewPermitForPm({
@@ -2275,6 +2300,17 @@ class DataRepository extends DomainRepository {
       await connectHelper.getObsDetail(
         auth: auth,
         id: id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> viewObsCloseButton({
+    required String auth,
+    viewobsCloseJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.viewObsCloseButton(
+        auth: auth,
+        viewobsCloseJsonString: viewobsCloseJsonString,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> getHistory({

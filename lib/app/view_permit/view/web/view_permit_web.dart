@@ -1031,7 +1031,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                     'Permit Type: ',
                                                     style: Styles.blue700,
                                                   ),
-                                                  Dimens.boxWidth5,
+                                                  Dimens.boxWidth3,
                                                   Text(
                                                     '${controller.viewPermitDetailsModel.value?.permitTypeName}',
                                                     style: Styles.blue700,
@@ -2644,7 +2644,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                             : Dimens.box0,
                                       ],
                                     ),
-                                    Dimens.boxWidth20,
+                                    Dimens.boxWidth2,
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -2753,7 +2753,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                             : Dimens.box0,
                                       ],
                                     ),
-                                    Dimens.boxWidth20,
+                                    Dimens.boxWidth2,
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,

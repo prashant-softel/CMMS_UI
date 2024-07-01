@@ -56,8 +56,8 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                     onTap: () {
                       Get.offNamed(Routes.stockManagementDashboardScreen);
                     },
-                    child: Text(" / STOCK MANAGEMENT ",
-                        style: Styles.greyLight14),
+                    child:
+                        Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
                   ),
                   InkWell(
                       onTap: () {
@@ -85,8 +85,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                   "/ RETURN MRS LIST",
                                   style: Styles.greyLight14,
                                 )),
-                  Text(" / RETURN EQUIPMENT DETAILS",
-                      style: Styles.greyLight14)
+                  Text(" / RETURN EQUIPMENT DETAILS", style: Styles.greyLight14)
                 ],
               ),
             ),
@@ -118,7 +117,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                 "${controller.returnMrsDetailsModel.value?.id ?? ""}",
                                 style: Styles.blue17,
                               ),
-                              Dimens.boxWidth8,
+                              Dimens.boxWidth3,
                               Container(
                                 height: 30,
                                 child: CustomElevatedButton(
@@ -168,7 +167,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                         ),
                                 ],
                               ),
-                              Dimens.boxWidth20,
+                              Dimens.boxWidth2,
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -219,7 +218,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                         ),
                                 ],
                               ),
-                              Dimens.boxWidth20,
+                              Dimens.boxWidth2,
 
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,7 +248,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                           ),
                         ),
                         Container(
-                            margin: Dimens.edgeInsets0_0_16_16,
+                            margin: EdgeInsets.all(10.0),
                             height: ((controller.returnMrsDetailsModel.value!
                                             .cmmrsItems?.length ??
                                         0) *
@@ -507,7 +506,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomRichText(title: "Comment:"),
-                                    Dimens.boxWidth10,
+                                    Dimens.boxWidth2,
                                     Container(
                                       width: (Get.width * .6),
                                       decoration: BoxDecoration(
