@@ -141,18 +141,18 @@ class _AttendanceListWebState extends State<AttendanceListWeb> {
                                           ),
                                           Spacer(),
                                           Dimens.boxWidth10,
-                                          Container(
-                                            margin: EdgeInsets.only(right: 10),
-                                            height: 30,
-                                            child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.addNewColor,
-                                              onPressed: () {
-                                                controller.addAttendance();
-                                              },
-                                              text: 'Add New',
-                                            ),
-                                          ),
+                                          // Container(
+                                          //   margin: EdgeInsets.only(right: 10),
+                                          //   height: 30,
+                                          //   child: CustomElevatedButton(
+                                          //     backgroundColor:
+                                          //         ColorValues.addNewColor,
+                                          //     onPressed: () {
+                                          //       controller.addAttendance();
+                                          //     },
+                                          //     text: 'Add New',
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ),
