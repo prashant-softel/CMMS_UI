@@ -23,6 +23,7 @@ class EditMrsController extends GetxController {
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
   RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
+  RxMap<String, bool> errorState = <String, bool>{}.obs;
   // List<String> removedMaterials = <String>[].obs;
   // RxList<GetAssetItemsModel?> removedMaterials = <GetAssetItemsModel?>[].obs;
 
@@ -163,54 +164,79 @@ class EditMrsController extends GetxController {
     }
   }
 
+  bool validateFields() {
+    bool isValid = true;
+    errorState.clear();
+    for (int i = 0; i < rowItem.length; i++) {
+      var row = rowItem[i];
+      for (var mapData in row) {
+        if ((mapData['key'] == 'Drop_down' &&
+                (mapData['value'] == null ||
+                    mapData['value'] == 'Please Select')) ||
+            (mapData['key'] == 'Requested_Qty' &&
+                (mapData['value'] == null || mapData['value'] == ''))) {
+          errorState['$i-${mapData['key']}'] = true;
+          isValid = false;
+        }
+      }
+    }
+    update();
+    return isValid;
+  }
+
   Future<void> editMrs() async {
     {
-      checkform();
-      if (isFormInvalid.value) {
+      // checkform();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
+      if (!validateFields()) {
         return;
-      }
-      String _activity = activityCtrlr.text.trim();
-      String _remark = remarkCtrlr.text.trim();
-      String _setTemp = setTemlateCtrlr.text.trim();
-      String _wheredused = whereUsedCtrlr.text.trim();
-      List<Equipments> items = [];
-      rowItem.forEach((element) {
-        Equipments item = Equipments(
-          id: dropdownMapperData[element[0]["value"]]?.id,
-          issued_qty: dropdownMapperData[element[0]["value"]]?.issued_qty,
-          asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
-          equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
-          asset_type_ID: dropdownMapperData[element[0]["value"]]?.asset_type_ID,
-          requested_qty: int.tryParse(element[4]["value"] ?? '0'),
-        );
-        items.add(item);
-      });
-      CreateMrsModel editMrs = CreateMrsModel(
-          ID: mrsId.value,
-          isEditMode: 1,
-          facility_ID: facilityId,
-          setAsTemplate: _setTemp,
-          activity: _activity,
-          whereUsedType: 27,
-          whereUsedTypeId: int.tryParse(_wheredused),
-          to_actor_id: int.tryParse(_wheredused),
-          to_actor_type_id: 3,
-          from_actor_id: facilityId,
-          from_actor_type_id: 2,
-          remarks: _remark,
-          equipments: items);
-      var editMrsJsonString = editMrs.toJson();
-
-      print({"editMrsJsonString", editMrsJsonString});
-      Map<String, dynamic>? responseEditMrs = await editMrsPresenter.editMrs(
-        editMrsJsonString: editMrsJsonString,
-        isLoading: true,
-      );
-      if (responseEditMrs == null) {
       } else {
-        Get.offAllNamed(
-          Routes.mrsListScreen,
+        String _activity = activityCtrlr.text.trim();
+        String _remark = remarkCtrlr.text.trim();
+        String _setTemp = setTemlateCtrlr.text.trim();
+        String _wheredused = whereUsedCtrlr.text.trim();
+        List<Equipments> items = [];
+        rowItem.forEach((element) {
+          Equipments item = Equipments(
+            id: dropdownMapperData[element[0]["value"]]?.id,
+            issued_qty: dropdownMapperData[element[0]["value"]]?.issued_qty,
+            asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
+            equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
+            asset_type_ID:
+                dropdownMapperData[element[0]["value"]]?.asset_type_ID,
+            requested_qty: int.tryParse(element[4]["value"] ?? '0'),
+          );
+          items.add(item);
+        });
+        CreateMrsModel editMrs = CreateMrsModel(
+            ID: mrsId.value,
+            isEditMode: 1,
+            facility_ID: facilityId,
+            setAsTemplate: _setTemp,
+            activity: _activity,
+            whereUsedType: 27,
+            whereUsedTypeId: int.tryParse(_wheredused),
+            to_actor_id: int.tryParse(_wheredused),
+            to_actor_type_id: 3,
+            from_actor_id: facilityId,
+            from_actor_type_id: 2,
+            remarks: _remark,
+            equipments: items);
+        var editMrsJsonString = editMrs.toJson();
+
+        print({"editMrsJsonString", editMrsJsonString});
+        Map<String, dynamic>? responseEditMrs = await editMrsPresenter.editMrs(
+          editMrsJsonString: editMrsJsonString,
+          isLoading: true,
         );
+        if (responseEditMrs == null) {
+        } else {
+          Get.offAllNamed(
+            Routes.mrsListScreen,
+          );
+        }
       }
     }
   }

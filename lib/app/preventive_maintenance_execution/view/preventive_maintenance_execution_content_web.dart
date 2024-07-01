@@ -307,7 +307,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                           children: [
                                                             Container(
                                                               height: 25,
-                                                              width: 90,
+                                                              width: 70,
                                                               child: varUserAccessModel
                                                                           .value
                                                                           .access_list!
@@ -656,7 +656,9 @@ class PreventiveMaintenanceExecutionContentWeb
                                                             323 &&
                                                         controller
                                                             .listMrsByTaskId!
-                                                            .isNotEmpty
+                                                            .isNotEmpty && controller.allTrue
+                                                                .value ==
+                                                            false
                                                     ? Get.defaultDialog(
                                                         radius: 5,
                                                         title: 'Alert',
