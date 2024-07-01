@@ -56,6 +56,7 @@ class CalibrationListController extends GetxController {
   }
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Calibration Id":true,
     "Equipment Category": true,
     "Equipment Name": true,
     "Serial No.": true,
@@ -67,6 +68,7 @@ class CalibrationListController extends GetxController {
     // "Status":true,
   });
   final Map<String, double> columnwidth = {
+    "Calibration Id":200,
     "Equipment Category": 250,
     "Equipment Name": 350,
     "Serial No.": 250,
@@ -91,13 +93,16 @@ class CalibrationListController extends GetxController {
   RxString lastDoneDateFilterText = ''.obs;
   RxString dueDateFilterText = ''.obs;
   RxString srNoFilterText = ''.obs;
-
+  RxString calibrationIdText = ''.obs;
   RxString frequencyFilterText = ''.obs;
+
+
 
   ///
   @override
   void onInit() async {
     this.filterText = {
+      "Calibration Id":calibrationIdText,
       "Equipment Category": categoryFilterText,
       "Equipment Name": titleFilterText,
       "Serial No.": srNoFilterText,
