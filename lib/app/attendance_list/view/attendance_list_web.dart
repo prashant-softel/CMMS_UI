@@ -110,8 +110,9 @@ class _AttendanceListWebState extends State<AttendanceListWeb> {
                     ),
                     Expanded(
                       child: ScrollConfiguration(
-                        behavior: ScrollConfiguration.of(context)
-                            .copyWith(scrollbars: false),
+                        behavior: ScrollConfiguration.of(context).copyWith(
+                          scrollbars: false,
+                        ),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Container(
@@ -140,18 +141,18 @@ class _AttendanceListWebState extends State<AttendanceListWeb> {
                                           ),
                                           Spacer(),
                                           Dimens.boxWidth10,
-                                          Container(
-                                            margin: EdgeInsets.only(right: 10),
-                                            height: 30,
-                                            child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.addNewColor,
-                                              onPressed: () {
-                                                controller.addAttendance();
-                                              },
-                                              text: 'Add New',
-                                            ),
-                                          ),
+                                          // Container(
+                                          //   margin: EdgeInsets.only(right: 10),
+                                          //   height: 30,
+                                          //   child: CustomElevatedButton(
+                                          //     backgroundColor:
+                                          //         ColorValues.addNewColor,
+                                          //     onPressed: () {
+                                          //       controller.addAttendance();
+                                          //     },
+                                          //     text: 'Add New',
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ),
@@ -161,7 +162,8 @@ class _AttendanceListWebState extends State<AttendanceListWeb> {
                                     Dimens.boxHeight10,
                                     // First way of data showing
                                     Row(
-                                      crossAxisAlignment : CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: controller.attendance_list
                                           .map((attendance) {
                                         return _buildSection(attendance);
