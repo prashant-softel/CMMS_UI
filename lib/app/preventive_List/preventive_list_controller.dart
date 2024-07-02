@@ -289,9 +289,9 @@ class PreventiveListController extends GetxController {
 
   Future<bool> createChecklistNumber() async {
     checkFormCheckList();
-    // if(isFormInvalid.value){
-    //   return;
-    // }
+    if(isFormInvalid.value){
+      return false;
+    }
     if (checklistNumberCtrlr.text.trim() == '' ||
         selectedEquipmentId == 0 ||
         selectedfrequencyId == 0) {
@@ -455,7 +455,7 @@ class PreventiveListController extends GetxController {
   }
 
   void checkFormCheckList() {
-    if (checklistNumberCtrlr.text.trim().length < 3) {
+    if (checklistNumberCtrlr.text=='') {
       ischecklistNumberInvalid.value = true;
       isFormInvalid.value = true;
     }
