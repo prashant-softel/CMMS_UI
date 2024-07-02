@@ -254,7 +254,7 @@ class MastersDashboard extends GetView<MastersController> {
                                   //               onTap: () {
                                   //                 controller.goToToolTypeList();
                                   //               });
-
+                  
                                   //       // : Dimens.box0;
                                   //     }))),
                                   //     // OnHover(builder: (((isHovered) {
@@ -447,7 +447,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                   onTap: () {
                                                     controller
                                                         .clearStoreUserIdData();
-
+                  
                                                     controller.goToAddUser();
                                                   });
                                             })))
@@ -485,7 +485,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                   title: "Responsibility",
                                                   onTap: () {
                                                     // controller.clearStoreUserIdData();
-
+                  
                                                     controller
                                                         .goToResponsibility();
                                                   });

@@ -33,7 +33,8 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
               height: 400,
               child: Column(
                 children: [
-                  Dimens.boxHeight10,
+                  // Dimens.boxHeight10,
+                  SizedBox(height:10),
                   Text(
                     'Calibration',
                     style: Styles.blackBold18,
@@ -52,7 +53,8 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                   CustomRichText(
                                       includeAsterisk: false,
                                       title: "Calibration Frequency"),
-                                  Dimens.boxWidth5,
+                                  // Dimens.boxWidth5,
+                                  SizedBox(width: 5),
                                   SizedBox(
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -75,7 +77,9 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                 ],
                               ),
                             ),
-                            Dimens.boxHeight5,
+                            // Dimens.boxHeight5,
+                            SizedBox(height: 5),
+
                             IgnorePointer(
                               child: Row(
                                 children: [
@@ -150,8 +154,9 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                 children: [
                                   CustomRichText(
                                       includeAsterisk: false,
-                                      title: 'Received Date  : '),
-                                  Dimens.boxWidth10,
+                                      title: 'Schedule Date  : '),
+                                  // Dimens.boxWidth10,
+                                  SizedBox(width: 10),
                                   CustomTextFieldForStock(
                                       width:
                                           MediaQuery.of(context).size.width / 5,
@@ -181,20 +186,23 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                 ],
                               ),
                             ),
-                            Dimens.boxHeight5,
+                            // Dimens.boxHeight5,
+                            SizedBox(height: 5),
                             Container(
                               child: IgnorePointer(
                                 child: Row(
                                   children: [
                                     Text('Calibration Certificate'),
-                                    Dimens.boxWidth20,
+                                    // Dimens.boxWidth20,
+                                    SizedBox(width:20),
                                     ActionButton(
                                       label: 'Upload certification file',
                                       onPressed: () {},
                                       icon: Icons.file_upload_outlined,
                                       color: ColorValues.appLightBlueColor,
                                     ),
-                                    Dimens.boxWidth70,
+                                    // Dimens.boxWidth70,
+                                    SizedBox(width:70),
                                   ],
                                 ),
                               ),
