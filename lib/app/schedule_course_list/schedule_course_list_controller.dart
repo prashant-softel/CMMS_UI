@@ -60,7 +60,6 @@ class ScheduleCourseListController extends GetxController {
   String get formattedFromdate =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
   String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
-
   int selectedCorseId = 1;
   Rx<String> selectedcourse = ''.obs;
   RxBool isLoading = true.obs;
@@ -159,19 +158,6 @@ class ScheduleCourseListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getFacilityList({bool? isLoading}) async {
-    facilityList.value = <FacilityModel>[];
-    List<FacilityModel?>? _facilityList = <FacilityModel>[];
-
-    _facilityList = await scheduleCourseListPresenter.getFacilityList();
-    if (_facilityList != null && _facilityList.isNotEmpty) {
-      facilityList.value = _facilityList;
-    }
-    if (facilityList.isNotEmpty) {
-      selectedBlock.value = facilityList[0]?.name ?? '';
-    }
-  }
-
   void geScheduleCourseListByDate() {
     getScheduleCourseList(
       facilityId: facilityId.value,
@@ -215,13 +201,7 @@ class ScheduleCourseListController extends GetxController {
     update(['schedule_list']);
   }
 
-  // void onValueChanged(dynamic list, dynamic value) {
-  //   switch (list.runtimeType) {
-  //     case RxList<TrainingCourse>:
-  //       {
-  //         int courseIndex = courseDetail.indexWhere((x) => x?.id == value);
-  //         selectedCorseId = courseDetail[courseIndex]?.id ?? 0;
-  //       }
-  //   }
-  // }
+  void clearStoreData() {
+    scheduleCourseListPresenter.clearValue();
+  }
 }

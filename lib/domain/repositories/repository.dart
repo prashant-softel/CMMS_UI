@@ -86,6 +86,7 @@ import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
+import 'package:cmms/domain/models/schedule_course_details_model.dart';
 import 'package:cmms/domain/models/schedule_course_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/asset_type_list_model.dart';
@@ -14199,7 +14200,8 @@ class Repository {
       );
       if (!res.hasError) {
         var response = json.decode(res.data);
-        AttendanceMonthModel attendanceModel = AttendanceMonthModel.fromJson(response);
+        AttendanceMonthModel attendanceModel =
+            AttendanceMonthModel.fromJson(response);
         return attendanceModel;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getAttendanceDetails');
@@ -14545,6 +14547,43 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<ScheduleCourseDetails> getScheduleCourseDetails({
+    int? schedule_id,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getScheduleCourseDetails(
+        auth: auth,
+        schedule_id: schedule_id,
+        isLoading: isLoading,
+      );
+      print('Get Schedule Training Course Details: ${res.data}');
+      if (!res.hasError) {
+        final jsonScheduleCourseDetails = jsonDecode(res.data);
+        final List<ScheduleCourseDetails> _trainingList =
+            jsonScheduleCourseDetails
+                .map<ScheduleCourseDetails>(
+                  (m) => ScheduleCourseDetails.fromJson(
+                      Map<String, dynamic>.from(m)),
+                )
+                .toList();
+        final ScheduleCourseDetails _training = _trainingList.firstWhere(
+          (element) => schedule_id == element.scheduleId,
+        );
+        print(_training);
+        return _training;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getTrainingCourseList');
+        return ScheduleCourseDetails();
+      }
+    } catch (error) {
+      print(error.toString());
+      return ScheduleCourseDetails();
     }
   }
 

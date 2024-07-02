@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:cmms/app/attendance_list_monthwise/attendance_monthwise_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/attendance_month_model.dart';
@@ -25,6 +23,7 @@ class AttendanceListMonthController extends GetxController {
   RxInt facilityId = 0.obs;
   final HomeController controller = Get.find();
   RxBool isLoading = true.obs;
+  List<String> sortedDates = [];
 
   Rx<AttendanceMonthModel> attendanceMonthModel = AttendanceMonthModel().obs;
   // Rx<AttendanceMonthModel> attendanceMonthModel = AttendanceMonthModel(
@@ -200,9 +199,11 @@ class AttendanceListMonthController extends GetxController {
   void onInit() async {
     try {
       facilityIdStreamSubscription =
-          controller.facilityId$.listen((event) async {
-        facilityId.value = event;
-        await getAttendanceListMonthwise();
+          await controller.facilityId$.listen((event) async {
+        facilityId.value = 1;
+        if (facilityId != 0) {
+          await getAttendanceListMonthwise();
+        }
       });
       super.onInit();
     } catch (e) {
@@ -219,8 +220,18 @@ class AttendanceListMonthController extends GetxController {
       );
       if (_attendanceDetails != null) {
         attendanceMonthModel.value = _attendanceDetails;
-        print("${jsonEncode(attendanceMonthModel.value.toJson())}");
+        // print("${jsonEncode(attendanceMonthModel.value.toJson())}");
       }
+      List<String> uniqueDates = [];
+      attendanceMonthModel.value.attendance?.forEach((employee) {
+        print('Processing employee: ${employee.employeeName}');
+        employee.details?.forEach((data) {
+          if (data.date != null && data.date!.isNotEmpty) {
+            uniqueDates.add(data.date!);
+          }
+        });
+      });
+      sortedDates = uniqueDates.toSet().toList();
       update(["attendance-list-month"]);
     } catch (e) {
       print('Error in getAttendanceListMonthwise: $e');
