@@ -3,8 +3,8 @@ import 'package:cmms/app/attendance_list_monthwise/attendance_monthwise_controll
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/month_year_picker.dart';
+import 'package:cmms/domain/models/attendance_month_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,14 +27,6 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
         GetBuilder<AttendanceListMonthController>(
       id: "attendance-list-month",
       builder: (controller) {
-        // final uniqueDates = <String>{};
-        // controller.attendanceMonthModel.value.attendance
-        //     ?.forEach((employee) {
-        //   employee.details?.forEach((data) {
-        //     uniqueDates.add(data.date ?? "");
-        //   });
-        // });
-        // final List<String> sortedDates = uniqueDates.toList()..sort();
         return Scaffold(
           body: Stack(
             children: [
@@ -194,10 +186,12 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
                                             color: Colors.black),
                                         dataRowHeight: 40,
                                         headingRowHeight: 90,
-                                        columns: _buildColumns(controller
-                                            .attendanceMonthModel.value),
-                                        rows: _buildRows(controller
-                                            .attendanceMonthModel.value),
+                                        columns: _buildColumns(
+                                            controller.sortedDates),
+                                        rows: _buildRows(
+                                            controller.attendanceMonthModel
+                                                .value.attendance!,
+                                            controller.sortedDates),
                                       ),
                                     ),
                             ],
@@ -266,51 +260,55 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
     // );
   }
 
-  List<DataColumn> _buildColumns(var attendanceMonthModel) {
+  List<DataColumn> _buildColumns(List<String> sortedDates) {
     List<DataColumn> columns = [
       DataColumn2(
         fixedWidth: 200,
-        label: Text(
-          'Employee Name',
-        ),
+        label: Text('Employee Name'),
       ),
     ];
-    for (var detail in attendanceMonthModel.attendance?.first.details ?? []) {
+    for (var date in sortedDates) {
       columns.add(DataColumn2(
         fixedWidth: 75,
         label: RotatedBox(
           quarterTurns: 3,
-          child: Text(
-            detail.date,
-          ),
+          child: Text(date),
         ),
       ));
     }
     return columns;
   }
 
-  List<DataRow> _buildRows(var attendanceMonthModel) {
+  List<DataRow> _buildRows(List<Employee> employees, List<String> sortedDates) {
     List<DataRow> rows = [];
-    for (var employee in attendanceMonthModel.attendance ?? []) {
+    for (var employee in employees) {
       List<DataCell> cells = [
         DataCell(
           Tooltip(
             message:
                 'Name: ${employee.employeeName}\nDate of Joining: ${employee.dateOfJoining}\nDate of Exit: ${employee.dateOfExit ?? 'N/A'}\nWorking Status: ${employee.workingStatus}',
-            child: Text(employee.employeeName),
+            child: Text(employee.employeeName ?? ""),
           ),
         ),
       ];
-      for (var detail in employee.details) {
-        cells.add(
-          DataCell(
-            Tooltip(
-              message:
-                  'Name: ${employee.employeeName}\nDate of Joining: ${detail.date}\nAttendance: Present\nTiming: ${detail.inTime}-${detail.outTime}',
-              child: Text(detail.status),
+      final detailsMap = {
+        for (var d in employee.details ?? []) d.date.split('T')[0]: d
+      };
+      for (var date in sortedDates) {
+        if (detailsMap.containsKey(date)) {
+          var detail = detailsMap[date];
+          cells.add(
+            DataCell(
+              Tooltip(
+                message:
+                    'Name: ${employee.employeeName}\nDate: ${date}\nAttendance: ${detail.status == "P" ? "Present" : "Absent"}\nTiming: ${detail.inTime}-${detail.outTime}',
+                child: Text(detail.status),
+              ),
             ),
-          ),
-        );
+          );
+        } else {
+          cells.add(DataCell(Text('')));
+        }
       }
       rows.add(DataRow(cells: cells));
     }

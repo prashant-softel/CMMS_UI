@@ -5473,6 +5473,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+      Future<ResponseModel> getScheduleCourseDetails({
+    required String auth,
+    int? schedule_id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getScheduleCourseDetails(
+        auth: auth,
+        schedule_id: schedule_id,
+        isLoading: isLoading,
+      );
+
   //Course category
   //get
   Future<ResponseModel> getCourseCategory({

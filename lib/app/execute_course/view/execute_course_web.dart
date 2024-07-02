@@ -11,7 +11,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
   ExecuteCourseWeb({Key? key}) : super(key: key);
@@ -21,482 +20,482 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Color.fromARGB(255, 234, 236, 238),
-        width: Get.width,
-        height: Get.height,
-        child: Column(
-          children: [
-            HeaderWidget(),
-            Container(
-              height: 45,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color.fromARGB(255, 227, 224, 224),
-                  width: 1,
+      body: Obx(
+        () => Container(
+          color: Color.fromARGB(255, 234, 236, 238),
+          width: Get.width,
+          height: Get.height,
+          child: Column(
+            children: [
+              HeaderWidget(),
+              Container(
+                height: 45,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromARGB(255, 227, 224, 224),
+                    width: 1,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.home,
-                    color: ColorValues.greyLightColor,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.offNamed(Routes.home);
-                    },
-                    child: Text(
-                      "DASHBOARD",
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.home,
+                      color: ColorValues.greyLightColor,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.offNamed(Routes.home);
+                      },
+                      child: Text(
+                        "DASHBOARD",
+                        style: Styles.greyLight14,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        controller.clearStoreData();
+                        Get.offNamed(Routes.scheduleCourseList);
+                      },
+                      child: Text(
+                        " / Schedule Course".toUpperCase(),
+                        style: Styles.greyLight14,
+                      ),
+                    ),
+                    Text(
+                      " / Execute Course".toUpperCase(),
                       style: Styles.greyLight14,
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.offNamed(Routes.scheduleCourseList);
-                    },
-                    child: Text(
-                      " / Schedule Course".toUpperCase(),
-                      style: Styles.greyLight14,
-                    ),
-                  ),
-                  Text(
-                    " / Execute Course".toUpperCase(),
-                    style: Styles.greyLight14,
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  width: Get.width * 7,
-                  margin: EdgeInsets.only(left: 10, top: 10, right: 10),
-                  child: Card(
-                    margin: Dimens.edgeInsets12,
-                    color: ColorValues.cardColor,
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Execute Course",
-                                style: Styles.blackBold18,
-                              ),
-                            ],
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    width: Get.width * 7,
+                    margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+                    child: Card(
+                      margin: Dimens.edgeInsets12,
+                      color: ColorValues.cardColor,
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Execute Course",
+                                  style: Styles.blackBold18,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Divider(
-                          color: ColorValues.greyLightColour,
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 60,
-                            vertical: 30,
+                          Divider(
+                            color: ColorValues.greyLightColour,
                           ),
-                          child: Column(
-                            children: [
-                              Center(
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        children: [
-                                          TitleAndInfo(
-                                            "Training Course:",
-                                            "Java SpringBoot",
-                                          ),
-                                          Dimens.boxHeight10,
-                                          TitleAndInfo(
-                                            "Training Agency:",
-                                            "Softel Technologies Inc",
-                                          ),
-                                          Dimens.boxHeight10,
-                                          TitleAndInfo(
-                                            "Venu:",
-                                            "Microsoft Teams",
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Expanded(
-                                      child: Column(
-                                        children: [
-                                          TitleAndInfo(
-                                            "Date of Training:",
-                                            "2024-05-11 10:00",
-                                          ),
-                                          Dimens.boxHeight10,
-                                          TitleAndInfo(
-                                            "Trainer:",
-                                            "Leonard Pope",
-                                          ),
-                                          Dimens.boxHeight10,
-                                          TitleAndInfo(
-                                            "HFE Employee:",
-                                            "Derek Norton",
-                                          ),
-                                          Dimens.boxHeight10,
-                                          TitleAndInfo(
-                                            "Mode:",
-                                            "Online",
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Dimens.boxHeight20,
-                              Center(
-                                child: Container(
-                                  height:
-                                      // ((controller.filteredEmployeeNameList
-                                      //             .length) *
-                                      //         50) +
-                                      60,
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.2,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.withOpacity(.3)),
-                                  ),
-                                  constraints: BoxConstraints(
-                                    maxWidth: 1400,
-                                  ),
-                                  child: CustomAppBar(
-                                    title: 'Employees'.tr,
-                                  ),
-                                ),
-                              ),
-                              Center(
-                                child: Wrap(
-                                  children: [
-                                    Container(
-                                      height: (controller
-                                                  .filteredEmployeeNameList
-                                                  .length *
-                                              50) +
-                                          55,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      constraints: BoxConstraints(
-                                        maxWidth: 1400,
-                                        minHeight: 60,
-                                      ),
-                                      child: DataTable2(
-                                        // dataRowHeight: 50,
-                                        border: TableBorder.all(
-                                          color: Colors.grey.withOpacity(0.3),
-                                        ),
-                                        columns: [
-                                          DataColumn2(
-                                            size: ColumnSize.M,
-                                            label: Text(
-                                              "Employee Name",
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            size: ColumnSize.M,
-                                            label: Text(
-                                              "Email",
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            size: ColumnSize.M,
-                                            label: Text(
-                                              "Contact No",
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            size: ColumnSize.S,
-                                            label: Text(
-                                              "RSVP",
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            size: ColumnSize.S,
-                                            label: Text(
-                                              "Attended",
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            size: ColumnSize.L,
-                                            label: Text(
-                                              "Note",
-                                            ),
-                                          ),
-                                        ],
-                                        rows: List<DataRow>.generate(
-                                          controller
-                                              .filteredEmployeeNameList.length,
-                                          (index) {
-                                            var employeeNameDetails = controller
-                                                    .filteredEmployeeNameList[
-                                                index];
-                                            return DataRow(
-                                              cells: [
-                                                DataCell(
-                                                  Text(
-                                                    '${employeeNameDetails?.name ?? ''}',
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  Text(
-                                                    '${employeeNameDetails?.login_id ?? ''}',
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  Text(
-                                                    '${employeeNameDetails?.mobileNumber ?? ''}',
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  Checkbox(
-                                                    value: false,
-                                                    onChanged: (value) {
-                                                      value == true
-                                                          ? false
-                                                          : true;
-                                                    },
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  Checkbox(
-                                                    value: false,
-                                                    onChanged: (value) {
-                                                      value == true
-                                                          ? false
-                                                          : true;
-                                                    },
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  // Text(""),
-                                                  _buildTextField_web(
-                                                    context,
-                                                    controller.noteListInternal[
-                                                        index],
-                                                  ),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Dimens.boxHeight15,
-                              Center(
-                                child: Container(
-                                  height: 60,
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.2,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.withOpacity(.3)),
-                                  ),
-                                  constraints: BoxConstraints(
-                                    maxWidth: 1400,
-                                  ),
-                                  child: CustomAppBar(
-                                    title: 'External People'.tr,
-                                  ),
-                                ),
-                              ),
-                              Center(
-                                child: Wrap(
-                                  children: [
-                                    Container(
-                                      height:
-                                          (controller.externalEmployees.length *
-                                                  50) +
-                                              55,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      constraints: BoxConstraints(
-                                        maxWidth: 1400,
-                                        minHeight: 60,
-                                      ),
-                                      child: DataTable2(
-                                        border: TableBorder.all(
-                                          color: Colors.grey.withOpacity(0.3),
-                                        ),
-                                        columns: [
-                                          DataColumn2(
-                                            size: ColumnSize.M,
-                                            label: Text(
-                                              "Name",
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            size: ColumnSize.M,
-                                            label: Text(
-                                              "Email",
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            size: ColumnSize.M,
-                                            label: Text(
-                                              "Number",
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            size: ColumnSize.S,
-                                            label: Text(
-                                              "RSVP",
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            size: ColumnSize.S,
-                                            label: Text(
-                                              "Attended",
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            size: ColumnSize.L,
-                                            label: Text(
-                                              "Note",
-                                            ),
-                                          ),
-                                        ],
-                                        rows: List<DataRow>.generate(
-                                          controller.externalEmployees.length,
-                                          (index) {
-                                            var employee = controller
-                                                .externalEmployees[index];
-                                            return DataRow(
-                                              cells: [
-                                                DataCell(
-                                                  Text(
-                                                    '${employee.employeeName ?? ''}',
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  Text(
-                                                    '${employee.employeeEmail ?? ''}',
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  Text(
-                                                    '${employee.employeeNumber ?? ''}',
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  Checkbox(
-                                                    value: false,
-                                                    onChanged: (value) {
-                                                      value == true
-                                                          ? false
-                                                          : true;
-                                                    },
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  Checkbox(
-                                                    value: false,
-                                                    onChanged: (value) {
-                                                      value == true
-                                                          ? false
-                                                          : true;
-                                                    },
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  _buildTextField_web(
-                                                    context,
-                                                    controller.noteListExternal[
-                                                        index],
-                                                  ),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Center(
-                                child: Container(
-                                  height: Get.height * 0.2,
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.2,
-                                  constraints: BoxConstraints(maxWidth: 1400),
-                                  padding: EdgeInsets.all(10),
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                              horizontal: 60,
+                              vertical: 30,
+                            ),
+                            child: Column(
+                              children: [
+                                Center(
                                   child: Row(
                                     children: [
                                       Expanded(
-                                        flex: 2,
-                                        child: FileUploadWidgetWithDropzone(),
+                                        child: Column(
+                                          children: [
+                                            TitleAndInfo(
+                                              "Training Course:",
+                                              "${controller.scheduleCourseDetails.value.training_course ?? ""}",
+                                            ),
+                                            Dimens.boxHeight10,
+                                            TitleAndInfo(
+                                              "Training Agency:",
+                                              "${controller.scheduleCourseDetails.value.training_agency ?? ""}",
+                                            ),
+                                            Dimens.boxHeight10,
+                                            TitleAndInfo(
+                                              "Venu:",
+                                              "${controller.scheduleCourseDetails.value.venue ?? ""}",
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      Dimens.boxWidth10,
+                                      Spacer(),
                                       Expanded(
-                                        flex: 8,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 15),
-                                          child: FileUploadDetailsWidgetWeb2(),
+                                        child: Column(
+                                          children: [
+                                            TitleAndInfo(
+                                              "Date of Training:",
+                                              "${controller.scheduleCourseDetails.value.date_of_Training ?? ""}",
+                                            ),
+                                            Dimens.boxHeight10,
+                                            TitleAndInfo(
+                                              "Trainer:",
+                                              "${controller.scheduleCourseDetails.value.trainer ?? ""}",
+                                            ),
+                                            Dimens.boxHeight10,
+                                            TitleAndInfo(
+                                              "HFE Employee:",
+                                              "${controller.scheduleCourseDetails.value.hfe_Employee ?? ""}",
+                                            ),
+                                            Dimens.boxHeight10,
+                                            TitleAndInfo(
+                                              "Mode:",
+                                              "${controller.scheduleCourseDetails.value.mode ?? ""}",
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Row(
-                                  children: [
-                                    CustomRichText(title: "Comments: "),
-                                    Dimens.boxWidth10,
-                                    _buildCommentFieldWeb(context),
-                                  ],
+                                Dimens.boxHeight20,
+                                Center(
+                                  child: Container(
+                                    height: 60,
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.2,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.withOpacity(.3)),
+                                    ),
+                                    constraints: BoxConstraints(
+                                      maxWidth: 1400,
+                                    ),
+                                    child: CustomAppBar(
+                                      title: 'Employees'.tr,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              Dimens.boxHeight20,
-                              // Center(
-                              //   child: Padding(
-                              //     padding: const EdgeInsets.all(10.0),
-                              //     child: Container(
-                              //       margin:
-                              //           EdgeInsets.only(bottom: 20, top: 10),
-                              //       child: Row(
-                              //         mainAxisAlignment:
-                              //             MainAxisAlignment.center,
-                              //         children: [],
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
-                            ],
+                                Center(
+                                  child: Wrap(
+                                    children: [
+                                      Container(
+                                        height: (controller
+                                                    .scheduleCourseDetails
+                                                    .value
+                                                    .internal_employee
+                                                    ?.length ??
+                                                0 * 50) +
+                                            55,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        constraints: BoxConstraints(
+                                          maxWidth: 1400,
+                                          minHeight: 60,
+                                        ),
+                                        child: DataTable2(
+                                          // dataRowHeight: 50,
+                                          border: TableBorder.all(
+                                            color: Colors.grey.withOpacity(0.3),
+                                          ),
+                                          columns: [
+                                            DataColumn2(
+                                              size: ColumnSize.M,
+                                              label: Text(
+                                                "Employee Name",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.M,
+                                              label: Text(
+                                                "Email",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.M,
+                                              label: Text(
+                                                "Contact No",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.S,
+                                              label: Text(
+                                                "RSVP",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.S,
+                                              label: Text(
+                                                "Attended",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.L,
+                                              label: Text(
+                                                "Note",
+                                              ),
+                                            ),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller
+                                                    .scheduleCourseDetails
+                                                    .value
+                                                    .internal_employee
+                                                    ?.length ??
+                                                0,
+                                            (index) {
+                                              var employeeNameDetails =
+                                                  controller
+                                                          .scheduleCourseDetails
+                                                          .value
+                                                          .internal_employee?[
+                                                      index];
+                                              return DataRow(
+                                                cells: [
+                                                  DataCell(
+                                                    Text(
+                                                      '${employeeNameDetails?.name ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${employeeNameDetails?.email ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${employeeNameDetails?.mobile ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Checkbox(
+                                                      value: false,
+                                                      onChanged: (value) {
+                                                        value == true
+                                                            ? false
+                                                            : true;
+                                                      },
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Checkbox(
+                                                      value: false,
+                                                      onChanged: (value) {
+                                                        value == true
+                                                            ? false
+                                                            : true;
+                                                      },
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    // Text(""),
+                                                    _buildTextField_web(
+                                                      context,
+                                                      controller
+                                                              .noteListInternal[
+                                                          index],
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Dimens.boxHeight15,
+                                Center(
+                                  child: Container(
+                                    height: 60,
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.2,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.withOpacity(.3)),
+                                    ),
+                                    constraints: BoxConstraints(
+                                      maxWidth: 1400,
+                                    ),
+                                    child: CustomAppBar(
+                                      title: 'External People'.tr,
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Wrap(
+                                    children: [
+                                      Container(
+                                        height: (controller
+                                                    .external_employee.length *
+                                                50) +
+                                            55,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        constraints: BoxConstraints(
+                                          maxWidth: 1400,
+                                          minHeight: 60,
+                                        ),
+                                        child: DataTable2(
+                                          border: TableBorder.all(
+                                            color: Colors.grey.withOpacity(0.3),
+                                          ),
+                                          columns: [
+                                            DataColumn2(
+                                              size: ColumnSize.M,
+                                              label: Text(
+                                                "Name",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.M,
+                                              label: Text(
+                                                "Email",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.M,
+                                              label: Text(
+                                                "Number",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.S,
+                                              label: Text(
+                                                "RSVP",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.S,
+                                              label: Text(
+                                                "Attended",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.L,
+                                              label: Text(
+                                                "Note",
+                                              ),
+                                            ),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller.external_employee.length,
+                                            (index) {
+                                              var employee = controller
+                                                  .external_employee[index];
+                                              return DataRow(
+                                                cells: [
+                                                  DataCell(
+                                                    Text(
+                                                      '${employee.name ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${employee.email ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${employee.mobile ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Checkbox(
+                                                      value: false,
+                                                      onChanged: (value) {
+                                                        value == true
+                                                            ? false
+                                                            : true;
+                                                      },
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Checkbox(
+                                                      value: false,
+                                                      onChanged: (value) {
+                                                        value == true
+                                                            ? false
+                                                            : true;
+                                                      },
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    _buildTextField_web(
+                                                      context,
+                                                      controller
+                                                              .noteListExternal[
+                                                          index],
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Center(
+                                  child: Container(
+                                    height: Get.height * 0.2,
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.2,
+                                    constraints: BoxConstraints(maxWidth: 1400),
+                                    padding: EdgeInsets.all(10),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: FileUploadWidgetWithDropzone(),
+                                        ),
+                                        Dimens.boxWidth10,
+                                        Expanded(
+                                          flex: 8,
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 15),
+                                            child:
+                                                FileUploadDetailsWidgetWeb2(),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Row(
+                                    children: [
+                                      CustomRichText(title: "Comments: "),
+                                      Dimens.boxWidth10,
+                                      _buildCommentFieldWeb(context),
+                                    ],
+                                  ),
+                                ),
+                                Dimens.boxHeight20,
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: Row(
@@ -510,7 +509,7 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
               onPressed: () {},
             ),
           ),
-          Dimens.boxWidth20,
+          Dimens.boxWidth10,
           Container(
             height: 35,
             child: CustomElevatedButton(
@@ -525,98 +524,6 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
         ],
       ),
     );
-  }
-
-  Widget _buildDateTimeField_web(
-    BuildContext context,
-    TextEditingController textcontroller,
-  ) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.only(bottom: 10),
-          width: Get.width * 0.2,
-          height: 30,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                offset: Offset(2.0, 2.0),
-                blurRadius: 4.0,
-                spreadRadius: 0.5,
-              ),
-            ],
-            color: ColorValues.whiteColor,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SizedBox(
-            child: TextField(
-              textAlign: TextAlign.left,
-              style: GoogleFonts.lato(
-                textStyle: TextStyle(
-                  fontSize: 16.0,
-                  height: 1.0,
-                  color: Colors.black,
-                ),
-              ),
-              controller: textcontroller,
-              decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                hintStyle: TextStyle(color: Colors.black),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-              ),
-              onTap: () => _pickDateTime(context, textcontroller),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Future<void> _pickDateTime(
-    BuildContext context,
-    TextEditingController controller,
-  ) async {
-    DateTime currentDate = DateTime.now();
-    DateTime? date = await showDatePicker(
-        context: context,
-        initialDate: currentDate,
-        firstDate: currentDate,
-        lastDate: DateTime(2100),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        });
-
-    if (date != null) {
-      TimeOfDay? time = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay.now(),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        },
-      );
-
-      if (time != null) {
-        DateTime finalDateTime = DateTime(
-          date.year,
-          date.month,
-          date.day,
-          time.hour,
-          time.minute,
-        );
-        controller.text =
-            DateFormat('yyyy-MM-dd – HH:mm').format(finalDateTime);
-      }
-    }
   }
 
   Widget _buildCommentFieldWeb(BuildContext context) {

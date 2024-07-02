@@ -481,7 +481,7 @@ class ScheduleCourseListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'SC${ScheduleCourse?.scheduleID}',
+                        'SC${ScheduleCourse.scheduleID}',
                       ),
                     ],
                   )
@@ -498,8 +498,13 @@ class ScheduleCourseListDataSource extends DataTableSource {
                                     icon: Icons.visibility,
                                     message: 'View',
                                     onPress: () {
+                                      controller.clearStoreData();
                                       Get.toNamed(
                                         Routes.executeCourse,
+                                        arguments: {
+                                          "schedule_id":
+                                              ScheduleCourse.scheduleID
+                                        },
                                       );
                                     },
                                   ),
@@ -524,7 +529,11 @@ class ScheduleCourseListDataSource extends DataTableSource {
         );
       }).toList(),
       onSelectChanged: (_) {
-        // controller.viewCourse(courseId: TrainingCourse?.id ?? 0);
+        controller.clearStoreData();
+        Get.toNamed(
+          Routes.executeCourse,
+          arguments: {"schedule_id": ScheduleCourse.scheduleID},
+        );
       },
     );
   }

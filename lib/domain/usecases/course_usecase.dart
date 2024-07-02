@@ -38,6 +38,9 @@ class CourseUsecase {
   void clearValue() async => repository.clearData(
         LocalKeys.courseId,
       );
+  void clearScheduleValue() async => repository.clearData(
+        LocalKeys.schedule_id,
+      );
   Future<Map<String, dynamic>> addCourse({
     courseJson,
     isLoading,

@@ -9548,6 +9548,23 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getScheduleCourseDetails({
+    required String auth,
+    int? schedule_id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/GetScheduleCourseDetail?schedule_id=$schedule_id',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   //Course Category
   //Get
   Future<ResponseModel> getCourseCategory(
