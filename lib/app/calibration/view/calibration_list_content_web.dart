@@ -279,6 +279,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                     // fixedLeftColumns: 1,
                                     // dataRowHeight: Get.height * 0.10,
                                     columnSpacing: 10,
+                                    dataRowHeight:  Get.height * 0.10,
                                     source:
                                         dataSource, // Custom DataSource class
                                     // headingRowHeight:
@@ -508,7 +509,12 @@ class CalibrationDataSource extends DataTableSource {
   void filterpmTasks() {
     filteredCalibrationList = <CalibrationListModel?>[];
     filteredCalibrationList = controller.calibrationList.where((Calibration) {
-      return (Calibration?.category_name ?? '')
+      return 
+      (Calibration?.calibration_id ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.calibrationIdText.value.toLowerCase()) &&
+              (Calibration?.category_name ?? '')
               .toLowerCase()
               .contains(controller.categoryFilterText.value.toLowerCase()) &&
           (Calibration?.asset_name ?? '')
@@ -543,7 +549,9 @@ class CalibrationDataSource extends DataTableSource {
 
     // controller.calibrationId.value = calibrationDetails?.id ?? 0;
     var cellsBuffer = [
-      "category", //'${calibrationDetails?.category_name ?? ''}',
+    "id",
+      // '${calibrationDetails?.calibration_id ??''}',
+       '${calibrationDetails?.category_name ?? ''}',
       '${calibrationDetails?.asset_name ?? ''}',
       '${calibrationDetails?.asset_serial ?? ''}',
       '${calibrationDetails?.last_calibration_date ?? ''}',
@@ -574,18 +582,20 @@ class CalibrationDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'category')
+            child: (value == 'id')
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${calibrationDetails?.category_name}',
+                        'CAL${calibrationDetails?.calibration_id}',
                       ),
-                      Dimens.boxHeight5,
+                      Dimens.boxHeight2,
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
+                           padding:
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                          margin: EdgeInsets.only(top: 5),
                           decoration: BoxDecoration(
                             color: calibrationDetails?.statusID == 218
                                 ? ColorValues.appRedColor
@@ -603,9 +613,7 @@ class CalibrationDataSource extends DataTableSource {
                           ),
                           child: Text(
                             '${calibrationDetails?.calibration_status}',
-                            style: Styles.white10.copyWith(
-                              color: Colors.white,
-                            ),
+                            style: TextStyle(color: ColorValues.whiteColor),
                           ),
                         ),
                       ),

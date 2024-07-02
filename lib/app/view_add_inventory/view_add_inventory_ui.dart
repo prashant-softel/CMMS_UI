@@ -313,8 +313,10 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                           Row(
                                             children: [
                                               CustomRichText(
+                                                includeAsterisk: false,
                                                   title: 'Parent Equipment'),
                                               IgnorePointer(
+                                                
                                                 ignoring: true,
                                                 child: DropdownWebWidget(
                                                   boxShadow: [
@@ -402,6 +404,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                           Row(
                                             children: [
                                               CustomRichText(
+                                                includeAsterisk: false,
                                                   title: "Serial No"),
                                               IgnorePointer(
                                                 ignoring: true,
