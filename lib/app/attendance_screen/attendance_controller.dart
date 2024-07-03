@@ -39,7 +39,6 @@ class AttendanceController extends GetxController {
       facilityIdStreamSubscription = homeController.facilityId$.listen(
         (event) async {
           facilityId.value = event;
-          // await getEmployeeList(facilityId.value);
           await getAttendanceData(date: dateController.text);
         },
       );
@@ -82,7 +81,9 @@ class AttendanceController extends GetxController {
         date: date,
         isLoading: isLoading,
       );
-      if (_attendanceDetails?.hfeAttendance?.length != 0) {
+      if (_attendanceDetails?.hfeAttendance?.length != 0 ||
+          _attendanceDetails?.contractAttendance != null ||
+          _attendanceDetails!.hfeAttendance!.isNotEmpty) {
         getAttendanceDetails?.value = _attendanceDetails;
         final contractAttendance =
             getAttendanceDetails?.value?.contractAttendance;

@@ -18,6 +18,7 @@ class VegetationPlanListController extends GetxController {
 
   RxList<VegetationPlanListModel> vegetationPlanList =
       <VegetationPlanListModel>[].obs;
+  VegetationPlanListModel? vegPlan;
   RxList<VegetationPlanListModel> filteredData =
       <VegetationPlanListModel>[].obs;
 
@@ -174,6 +175,10 @@ class VegetationPlanListController extends GetxController {
       planId: planId ?? 0,
       isLoading: true,
     );
+  }
+
+  void getVegListByDate() {
+    getVegetationPlanList(facilityId, false);
   }
 
   void isDeleteDialog({int? planId, String? planName}) {

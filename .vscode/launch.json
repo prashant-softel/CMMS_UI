@@ -16,15 +16,15 @@
                
             ]
         },
-        // {
-        //     "name": "cmms",
-        //     "request": "launch",
-        //     "type": "dart",
-        //     "program": "lib/main_prod.dart",
-        //     "args": [
-        //         "--flavor",
-        //         "prod"
-        //     ]
-        // },
+        {
+            "name": "cmms-prod",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_prod.dart",
+            "args": [
+                "--flavor",
+                "prod"
+            ]
+        },
     ]
 }
