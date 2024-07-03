@@ -54,6 +54,7 @@ class HomeController extends GetxController {
   final assetDescpTextController = TextEditingController();
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
+  final categoryMap = <String, int>{};
   //int facilityId = 45;
   String categoryIds = '';
 
@@ -214,6 +215,8 @@ class HomeController extends GetxController {
       int lowStockItemsSumTemp = 0;
       int poItemsAwaitedSumTemp = 0;
 
+      final categoryMap = <String, int>{};
+
       for (var module in dashboardList) {
         if (module?.module_name == 'Breakdown Maintenance' ||
             module?.module_name == 'Preventive Maintenance' ||
@@ -237,16 +240,32 @@ class HomeController extends GetxController {
           woDelaySumTemp += details?.wo_delay ?? 0;
           woBacklogSumTemp += details?.wo_backlog ?? 0;
 
-          allItems.addAll(details?.item_list ?? []);
+          for (var item in details?.item_list ?? []) {
+            final categories = item.asset_category?.split(', ') ?? [];
+            for (var category in categories) {
+              if (categoryMap.containsKey(category)) {
+                categoryMap[category] = categoryMap[category]! + 1;
+              } else {
+                categoryMap[category] = 1;
+              }
+            }
+          }
         }
-        // allItems.addAll(details?.item_list ?? []);
       }
+
+      // Sort the categories by count in descending order
+      final sortedCategories = categoryMap.entries.toList()
+        ..sort((a, b) => b.value.compareTo(a.value));
+
+      // Get the top 5 categories
+      final top5 = sortedCategories.take(5).map((e) => e.key).toList();
 
       totalSumMcCount.value = totalSumMcCountTemp;
       totalSumPmCount.value = totalSumPmCountTemp;
       totalSumBmCount.value = totalSumBmcCountTemp;
       totalSumCount.value = totalSumCountTemp;
       totalSum.value = totalSumTemp;
+
       Map<String, double> dataMap() {
         return {
           "BM": double.tryParse(totalSumBmcCountTemp.toString()) ?? 0.0,
@@ -269,11 +288,13 @@ class HomeController extends GetxController {
       poItemsAwaitedSum.value = poItemsAwaitedSumTemp;
 
       dashboardBmList.value = _dashboardList[0];
-
       dashboardPmList.value = _dashboardList[1];
       dashboardMcList.value = _dashboardList[2];
       dashboardIrList.value = _dashboardList[3];
       dashboardSmList.value = _dashboardList[4];
+
+      print('Top 5 asset categories: $top5');
+      print('Category Map: $categoryMap');
 
       update(['dashboard']);
     }
