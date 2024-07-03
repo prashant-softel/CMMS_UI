@@ -26,8 +26,8 @@ class AssetMasterModel {
   int? approval_required_id;
   String? fileData;
   String? section;
-  String? max_request_qty;
-  String? reorder_qty; 
+  int? max_request_qty;
+  int? reorder_qty; 
 
   // String? action;
 
