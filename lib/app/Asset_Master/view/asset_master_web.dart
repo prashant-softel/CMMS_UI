@@ -782,10 +782,11 @@ class AssetListDataSource extends DataTableSource {
               .toLowerCase()
               .contains(controller.materialCategoryFilterText.value.toLowerCase()) &&
           (Mrs?.max_request_qty ?? '')
-          
+            .toString()
               .toLowerCase()
               .contains(controller.minRequiredQtyFilterText.value.toLowerCase())&&
             (Mrs?.reorder_qty ?? '')
+            .toString()
               .toLowerCase()
               .contains(controller.minReorderQtyTextFilterText.value.toLowerCase())&&
             (Mrs?.description ?? '')
