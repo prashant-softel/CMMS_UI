@@ -14,6 +14,7 @@ class CreateMcPalningsModel {
   int? noOfCleaningDays;
   // int? assignedToId;
   int? frequencyId;
+  int? cleaningType;
 
   List<Schedule> schedules;
 
@@ -24,6 +25,7 @@ class CreateMcPalningsModel {
     // this.assignedToId,
     this.planId,
     this.frequencyId,
+    this.cleaningType,
     this.noOfCleaningDays,
     this.schedules = const [],
   });
@@ -36,6 +38,7 @@ class CreateMcPalningsModel {
         // assignedToId: json['assignedToId'],
         planId: json['planId'],
         frequencyId: json["frequencyId"],
+        cleaningType: json["cleaningType"],
         noOfCleaningDays: json['crnoOfCleaningDayseatedAt'],
         schedules: json["schedules"] != null
             ? List<Schedule>.from(
@@ -50,6 +53,7 @@ class CreateMcPalningsModel {
         // "assignedToId": assignedToId,
         "planId": planId,
         "frequencyId": frequencyId,
+        "cleaningType": cleaningType,
         "noOfCleaningDays": noOfCleaningDays,
         "schedules": List<dynamic>.from(schedules.map((x) => x.toJson())),
       };
