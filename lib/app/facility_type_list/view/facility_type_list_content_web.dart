@@ -1372,6 +1372,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                     Container(
                                       width: 300,
                                       height: 40,
+                                       margin: EdgeInsets.only(right: 5),
                                       // margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
                                         style: GoogleFonts.lato(

@@ -273,7 +273,7 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                       Container(
                                         width: 300,
                                         height: 40,
-                                        margin: EdgeInsets.only(right: 2),
+                                        margin: EdgeInsets.only(right: 5),
                                         child: TextField(
                                           style: GoogleFonts.lato(
                                             textStyle: TextStyle(

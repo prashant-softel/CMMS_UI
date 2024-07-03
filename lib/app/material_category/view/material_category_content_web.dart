@@ -412,11 +412,12 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                                           controller.export();
                                         },
                                         text: 'Excel'),
-                                        Dimens.boxWidth5,
+                                        // Dimens.boxWidth5,
+                                        SizedBox(width:5),
                                     Container(
                                       width: 300,
                                       height: 40,
-                                      margin: Dimens.edgeInsets0_0_16_0,
+                                      margin:EdgeInsets.only(right:5),
                                       child: TextField(
                                         style: GoogleFonts.lato(
                                           textStyle: TextStyle(
