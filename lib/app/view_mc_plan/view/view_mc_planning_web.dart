@@ -479,11 +479,9 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                                     onValueChanged:
                                                                         (list,
                                                                             selectedValue) {
-                                                                      // print('paifcghb:${controller.assetList}');
-                                                                      // print({selectedValue: selectedValue});
                                                                       mapData["value"] =
                                                                           selectedValue;
-                                                                      controller.typedropdownMapperData[selectedValue] = list.firstWhere(
+                                                                      controller.cleaningTyperopdownMapperData[selectedValue] = list.firstWhere(
                                                                           (element) =>
                                                                               element.name ==
                                                                               selectedValue,

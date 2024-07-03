@@ -12,6 +12,7 @@ import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -80,8 +81,11 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                           child: Text(" / MODULE CLEANING",
                               style: Styles.greyLight14),
                         ),
-                        Text(" / ADD MODULE CLEANING PLAN",
-                            style: Styles.greyLight14)
+                        controller.planId == 0
+                            ? Text(" / ADD MODULE CLEANING PLAN",
+                                style: Styles.greyLight14)
+                            : Text(" / UPDATE MODULE CLEANING PLAN",
+                                style: Styles.greyLight14)
                       ],
                     ),
                   ),
@@ -114,10 +118,15 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 10, right: 10, left: 10),
-                                              child: Text(
-                                                "Add Module Cleaning Plan",
-                                                style: Styles.blackBold14,
-                                              ),
+                                              child: controller.planId == 0
+                                                  ? Text(
+                                                      "Add Module Cleaning Plan",
+                                                      style: Styles.blackBold14,
+                                                    )
+                                                  : Text(
+                                                      "Update Module Cleaning Plan",
+                                                      style: Styles.blackBold14,
+                                                    ),
                                             ),
                                           ],
                                         ),
@@ -213,36 +222,43 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                 ),
 
                                                 Dimens.boxHeight10,
-                                                Row(
-                                                  children: [
-                                                    Dimens.boxWidth10,
-                                                    CustomRichText(
-                                                        title:
-                                                            'Cleaning Type: '),
-                                                    Dimens.boxWidth10,
-                                                    SizedBox(
-                                                      child: DropdownWebWidget(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        controller: controller,
-                                                        dropdownList: controller
-                                                            .cleaningType,
-                                                        isValueSelected: controller
-                                                            .isSelectedCleaningType
-                                                            .value,
-                                                        selectedValue: controller
-                                                            .selectedCleaningType
-                                                            .value,
-                                                        onValueChanged:
-                                                            controller
-                                                                .onValueChanged,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                controller.planId == 0
+                                                    ? Row(
+                                                        children: [
+                                                          Dimens.boxWidth10,
+                                                          CustomRichText(
+                                                              title:
+                                                                  'Cleaning Type: '),
+                                                          Dimens.boxWidth10,
+                                                          SizedBox(
+                                                            child:
+                                                                DropdownWebWidget(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              controller:
+                                                                  controller,
+                                                              dropdownList:
+                                                                  controller
+                                                                      .cleaningType,
+                                                              isValueSelected:
+                                                                  controller
+                                                                      .isSelectedCleaningType
+                                                                      .value,
+                                                              selectedValue:
+                                                                  controller
+                                                                      .selectedCleaningType
+                                                                      .value,
+                                                              onValueChanged:
+                                                                  controller
+                                                                      .onValueChanged,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    : Dimens.box0
                                               ],
                                             ),
                                             Spacer(),
@@ -681,21 +697,18 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.start,
                                                                         children: [
-                                                                          DropdownWebStock(
-                                                                            width:
-                                                                                MediaQuery.of(context).size.width,
-                                                                            dropdownList:
-                                                                                controller.cleaningType,
-                                                                            selectedValue:
-                                                                                mapData["value"],
-                                                                            onValueChanged:
-                                                                                (list, selectedValue) {
-                                                                              // print('paifcghb:${controller.assetList}');
-                                                                              // print({selectedValue: selectedValue});
-                                                                              mapData["value"] = selectedValue;
-                                                                              controller.typedropdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
-                                                                            },
-                                                                          ),
+                                                                          IgnorePointer(
+                                                                            child:
+                                                                                DropdownWebStock(
+                                                                              width: MediaQuery.of(context).size.width,
+                                                                              dropdownList: controller.cleaningType,
+                                                                              selectedValue: mapData["value"],
+                                                                              onValueChanged: (list, selectedValue) {
+                                                                                mapData["value"] = selectedValue;
+                                                                                controller.cleaningTyperopdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
+                                                                              },
+                                                                            ),
+                                                                          )
                                                                         ],
                                                                       ),
                                                                     )

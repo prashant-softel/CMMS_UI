@@ -46,7 +46,8 @@ class ViewMcPlaningController extends GetxController {
   int selectedfrequencyId = 0;
   var startDateTc = TextEditingController();
 
-  Map<String, TypeModel> typedropdownMapperData = {};
+  // Map<String, TypeModel> typedropdownMapperData = {};
+  RxMap<dynamic, dynamic> cleaningTyperopdownMapperData = {}.obs;
 
   var days = <TypeModel>[
     TypeModel(name: 'Day 1', id: "1"),
@@ -164,7 +165,7 @@ class ViewMcPlaningController extends GetxController {
               {"key": "noOfInverters", "value": '${element.invs}'},
               {'key': "noOfSMBs", "value": '${element.smbs}'},
               {'key': "noOfModules", "value": '${element.scheduledModules}'},
-              {'key': "cleaningType", "value": 'Please Select'},
+              {'key': "cleaningType", "value": '${element.cleaningTypeName}'},
             ],
           );
         },
