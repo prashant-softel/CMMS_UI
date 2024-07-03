@@ -526,7 +526,45 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                         ),
                                                       ),
                                                     ),
-                                                    DataCell(Text('Text')),
+                                                    controller
+                                                                .auditTasknDetailModel
+                                                                .value
+                                                                .schedules![0]
+                                                                .checklist_observation?[
+                                                                    index]
+                                                                .check_point_type ==
+                                                            1
+                                                        ? DataCell(Text(
+                                                            "${controller.auditTasknDetailModel.value.schedules![0].checklist_observation?[index].type_text}"))
+                                                        : controller
+                                                                    .auditTasknDetailModel
+                                                                    .value
+                                                                    .schedules![
+                                                                        0]
+                                                                    .checklist_observation?[
+                                                                        index]
+                                                                    .check_point_type ==
+                                                                2
+                                                            ? DataCell(Column(
+                                                                children: [
+                                                                  Text(
+                                                                      "${controller.auditTasknDetailModel.value.schedules![0].checklist_observation?[index].type_text}"),
+                                                                  Row(
+                                                                    children: [
+                                                                      Text(
+                                                                          "min:${controller.auditTasknDetailModel.value.schedules![0].checklist_observation?[index].min_range}"),
+                                                                      Dimens
+                                                                          .boxWidth12,
+                                                                      Text(
+                                                                          "Max:${controller.auditTasknDetailModel.value.schedules![0].checklist_observation?[index].max_range}")
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ))
+                                                            : DataCell(
+                                                                Text('Text')),
+
+                                                    //  DataCell(Text('Text')),
                                                     DataCell(Text(controller
                                                             .auditTasknDetailModel
                                                             .value

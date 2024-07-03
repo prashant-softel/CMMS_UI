@@ -16,6 +16,8 @@ class CustomTabBar extends StatelessWidget {
       height: 30,
       width: 240,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon),
           Text(label),

@@ -121,6 +121,7 @@ class HomeController extends GetxController {
   //     // "PTW": 7,
   //   };
   // }
+  List<Map<String, String>> categoryList = [];
 
   RxInt totalSumMcCount = 0.obs;
   RxInt totalSumBmCount = 0.obs;
@@ -214,27 +215,31 @@ class HomeController extends GetxController {
       int poItemsAwaitedSumTemp = 0;
 
       for (var module in dashboardList) {
-        totalSumMcCountTemp += module?.category_mc_count ?? 0;
-        totalSumBmcCountTemp += module?.category_bm_count ?? 0;
-        totalSumPmCountTemp += module?.category_pm_count ?? 0;
-        totalSumCountTemp += module?.category_total_count ?? 0;
+        if (module?.module_name == 'Breakdown Maintenance' ||
+            module?.module_name == 'Preventive Maintenance' ||
+            module?.module_name == 'Module Cleaning') {
+          totalSumMcCountTemp += module?.category_mc_count ?? 0;
+          totalSumBmcCountTemp += module?.category_bm_count ?? 0;
+          totalSumPmCountTemp += module?.category_pm_count ?? 0;
+          totalSumCountTemp += module?.category_total_count ?? 0;
 
-        var details = module?.cmDashboadDetails;
-        totalSumTemp += details?.total ?? 0;
-        completedSumTemp += details?.completed ?? 0;
-        pendingSumTemp += details?.pending ?? 0;
-        scheduleComplianceTotalSumTemp +=
-            details?.schedule_compliance_total ?? 0;
-        scheduleComplianceCompletedSumTemp +=
-            details?.schedule_compliance_completed ?? 0;
-        scheduleCompliancePendingSumTemp +=
-            details?.schedule_compliance_pending ?? 0;
-        woOnTimeSumTemp += details?.wo_on_time ?? 0;
-        woDelaySumTemp += details?.wo_delay ?? 0;
-        woBacklogSumTemp += details?.wo_backlog ?? 0;
-        lowStockItemsSumTemp += details?.low_stock_items ?? 0;
-        poItemsAwaitedSumTemp += details?.po_items_awaited ?? 0;
-        allItems.addAll(details?.item_list ?? []);
+          var details = module?.cmDashboadDetails;
+          totalSumTemp += details?.total ?? 0;
+          completedSumTemp += details?.completed ?? 0;
+          pendingSumTemp += details?.pending ?? 0;
+          scheduleComplianceTotalSumTemp +=
+              details?.schedule_compliance_total ?? 0;
+          scheduleComplianceCompletedSumTemp +=
+              details?.schedule_compliance_completed ?? 0;
+          scheduleCompliancePendingSumTemp +=
+              details?.schedule_compliance_pending ?? 0;
+          woOnTimeSumTemp += details?.wo_on_time ?? 0;
+          woDelaySumTemp += details?.wo_delay ?? 0;
+          woBacklogSumTemp += details?.wo_backlog ?? 0;
+
+          allItems.addAll(details?.item_list ?? []);
+        }
+        // allItems.addAll(details?.item_list ?? []);
       }
 
       totalSumMcCount.value = totalSumMcCountTemp;
@@ -264,6 +269,7 @@ class HomeController extends GetxController {
       poItemsAwaitedSum.value = poItemsAwaitedSumTemp;
 
       dashboardBmList.value = _dashboardList[0];
+
       dashboardPmList.value = _dashboardList[1];
       dashboardMcList.value = _dashboardList[2];
       dashboardIrList.value = _dashboardList[3];
