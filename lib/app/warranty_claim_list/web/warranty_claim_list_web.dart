@@ -136,7 +136,8 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        // Dimens.boxWidth10,
+                                        SizedBox(width:10),
                                         varUserAccessModel.value.access_list!
                                                     .where((e) =>
                                                         e.feature_id ==
@@ -230,7 +231,8 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                       Container(
                                         width: 300,
                                         height: 40,
-                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        // margin: Dimens.edgeInsets0_0_16_0,
+                                        margin: EdgeInsets.only(right:5),
                                         child: TextField(
                                           style: GoogleFonts.lato(
                                             textStyle: TextStyle(

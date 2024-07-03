@@ -290,7 +290,8 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                                         },
                                       ),
                                     ),
-                                    Dimens.boxWidth20,
+                                    // Dimens.boxWidth20,
+                                    SizedBox(width: 20),
                                     Container(
                                       height: 35,
                                       child: CustomElevatedButton(
