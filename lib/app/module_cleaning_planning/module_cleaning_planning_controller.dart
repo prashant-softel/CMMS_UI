@@ -54,6 +54,7 @@ class ModuleCleaningPlanningController extends GetxController {
 
   Rx<bool> isSelectedfrequency = true.obs;
   Rx<bool> isSelectedCleaningType = true.obs;
+  RxMap<dynamic, dynamic> cleaningTyperopdownMapperData = {}.obs;
 
   int selectedfrequencyId = 0;
   int selectedCleaningId = 0;
@@ -80,7 +81,7 @@ class ModuleCleaningPlanningController extends GetxController {
     }
   }
 
-  Map<String, TypeModel> typedropdownMapperData = {};
+  // Map<String, TypeModel> typedropdownMapperData = {};
 
   RxList<TypeModel> cleaningType = <TypeModel>[
     TypeModel(name: "Please Select", id: "0"),
@@ -207,13 +208,17 @@ class ModuleCleaningPlanningController extends GetxController {
     String _startDateTc = htmlEscape.convert(startDateTimeCtrlr.text.trim());
     print("Start Date: ${_startDateTc}");
 
+    // Ensure the selectedCleaningId is set properly
+    if (selectedCleaningId == 0) {
+      // Optionally, you can show a validation message or return early
+      print("Please select a cleaning type");
+      return;
+    }
+
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
         planId: 0,
-        // assignedToId: 0,
-
         facilityId: facilityId,
         startDate: _startDateTc,
-        // startDate: "2023-12-02",
         frequencyId: selectedfrequencyId,
         cleaningType: selectedCleaningId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
@@ -226,7 +231,10 @@ class ModuleCleaningPlanningController extends GetxController {
       createMcPlans: createMcModelJsonString,
       isLoading: true,
     );
-    if (responseCreateMcModel == null) {}
+    if (responseCreateMcModel == null) {
+      // Optionally handle the case when the response is null
+      print("Failed to create MC Plan");
+    }
     print('Create  Create GO  data: $createMcModelJsonString');
   }
 
@@ -307,9 +315,13 @@ class ModuleCleaningPlanningController extends GetxController {
               {"key": "noOfInverters", "value": '${element.invs}'},
               {'key': "noOfSMBs", "value": '${element.smbs}'},
               {'key': "noOfModules", "value": '${element.scheduledModules}'},
-              {'key': "cleaningType", "value": 'Please Select'},
+              {'key': "cleaningType", "value": '${element.cleaningTypeName}'},
             ],
           );
+          // cleaningTyperopdownMapperData[element.cleaningTypeName ?? ""] =
+          //     cleaningType.firstWhere(
+          //         (e) => e?.name == element.cleaningTypeName,
+          //         orElse: null)!;
         },
       );
     }
@@ -362,9 +374,9 @@ class ModuleCleaningPlanningController extends GetxController {
         {
           if (value != "Please Select") {
             int cleaningTypeIndex =
-                cleaningType.indexWhere((x) => x?.name == value);
+                cleaningType.indexWhere((x) => x.name == value);
             selectedCleaningId =
-                cleaningType[cleaningTypeIndex].id as int? ?? 0;
+                int.tryParse(cleaningType[cleaningTypeIndex].id ?? '0') ?? 0;
             selectedCleaningType.value = value;
             isSelectedfrequency.value = true;
           } else {
