@@ -31,7 +31,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
-        insetPadding: Dimens.edgeInsets0_0_10_0,
+        insetPadding: EdgeInsets.all(10),
+        // Dimens.edgeInsets0_0_10_0,
         title: Column(
           children: [
             Row(
@@ -53,7 +54,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 Row(
                   children: [
                     SizedBox(
-                      width: 50,
+                      width: 20,
                     ),
                     Text('Remark: ', style: TextStyle(fontSize: 17)),
                     SizedBox(
@@ -67,14 +68,16 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     ),
                   ],
                 ),
-                Dimens.boxWidth200,
+                Dimens.boxWidth10,
                 Row(
                   children: [
                     Text(
                       'Water Used: ',
                       style: TextStyle(fontSize: 17),
                     ),
-                    Dimens.boxWidth20,
+                    SizedBox(
+                      width: 5,
+                    ),
                     LoginCustomTextfield(
                       width: (MediaQuery.of(context).size.width * .2),
                       keyboardType: TextInputType.number,

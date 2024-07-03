@@ -103,6 +103,8 @@ class ViewAuditTaskController extends GetxController {
   }
 
   Future<void> getAuditTaskDetails({int? auditTaskId, bool? isloading}) async {
+    auditTasknDetailModel.value = PmtaskViewModel();
+    rowItemAuditobs.value = [];
     final _auditTasknDetailModel =
         await viewAuditTaskPresenter.getAuditTaskDetails(
       auditTaskId: auditTaskId,
@@ -110,8 +112,6 @@ class ViewAuditTaskController extends GetxController {
     );
 
     if (_auditTasknDetailModel != null) {
-      auditTasknDetailModel.value = PmtaskViewModel();
-
       auditTasknDetailModel.value = _auditTasknDetailModel;
     }
     print({"auditPlandetailss", auditTasknDetailModel.value.id});

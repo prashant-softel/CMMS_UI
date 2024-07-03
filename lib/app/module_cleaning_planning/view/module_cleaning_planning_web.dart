@@ -12,6 +12,7 @@ import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -80,8 +81,11 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                           child: Text(" / MODULE CLEANING",
                               style: Styles.greyLight14),
                         ),
-                        Text(" / ADD MODULE CLEANING PLAN",
-                            style: Styles.greyLight14)
+                        controller.planId == 0
+                            ? Text(" / ADD MODULE CLEANING PLAN",
+                                style: Styles.greyLight14)
+                            : Text(" / UPDATE MODULE CLEANING PLAN",
+                                style: Styles.greyLight14)
                       ],
                     ),
                   ),
@@ -114,10 +118,15 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 10, right: 10, left: 10),
-                                              child: Text(
-                                                "Add Module Cleaning Plan",
-                                                style: Styles.blackBold14,
-                                              ),
+                                              child: controller.planId == 0
+                                                  ? Text(
+                                                      "Add Module Cleaning Plan",
+                                                      style: Styles.blackBold14,
+                                                    )
+                                                  : Text(
+                                                      "Update Module Cleaning Plan",
+                                                      style: Styles.blackBold14,
+                                                    ),
                                             ),
                                           ],
                                         ),
@@ -151,24 +160,26 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                           .2),
                                                       textController: controller
                                                           .mcTitelCtrlr,
-                                                             //validate
-                                                    errorController: controller
-                                                            .isTitleInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .isTitleInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isTitleInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
+                                                      //validate
+                                                      errorController: controller
+                                                              .isTitleInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller
+                                                              .isTitleInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isTitleInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                       inputFormatters: [
                                                         FilteringTextInputFormatter
                                                             .deny(
@@ -211,6 +222,43 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                 ),
 
                                                 Dimens.boxHeight10,
+                                                controller.planId == 0
+                                                    ? Row(
+                                                        children: [
+                                                          Dimens.boxWidth10,
+                                                          CustomRichText(
+                                                              title:
+                                                                  'Cleaning Type: '),
+                                                          Dimens.boxWidth10,
+                                                          SizedBox(
+                                                            child:
+                                                                DropdownWebWidget(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              controller:
+                                                                  controller,
+                                                              dropdownList:
+                                                                  controller
+                                                                      .cleaningType,
+                                                              isValueSelected:
+                                                                  controller
+                                                                      .isSelectedCleaningType
+                                                                      .value,
+                                                              selectedValue:
+                                                                  controller
+                                                                      .selectedCleaningType
+                                                                      .value,
+                                                              onValueChanged:
+                                                                  controller
+                                                                      .onValueChanged,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    : Dimens.box0
                                               ],
                                             ),
                                             Spacer(),
@@ -257,7 +305,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                     Dimens.boxHeight10
                                                   ],
                                                 ),
-                                                Dimens.boxHeight10,
                                                 Row(
                                                   children: [
                                                     Dimens.boxWidth10,
@@ -277,24 +324,26 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                         ],
                                                         textController: controller
                                                             .durationInDayCtrlr,
-                                                               //validate
-                                                    errorController: controller
-                                                            .isEstimatedInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .isEstimatedInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isEstimatedInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
+                                                        //validate
+                                                        errorController: controller
+                                                                .isEstimatedInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                        onChanged: (value) {
+                                                          if (value
+                                                                  .trim()
+                                                                  .length >
+                                                              0) {
+                                                            controller
+                                                                .isEstimatedInvalid
+                                                                .value = false;
+                                                          } else {
+                                                            controller
+                                                                .isEstimatedInvalid
+                                                                .value = true;
+                                                          }
+                                                        },
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -403,7 +452,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                         Spacer(),
                                                         GestureDetector(
                                                           onTap: () {
-                                                            
                                                             var selectedEqp =
                                                                 [];
                                                             controller
@@ -649,21 +697,18 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.start,
                                                                         children: [
-                                                                          DropdownWebStock(
-                                                                            width:
-                                                                                MediaQuery.of(context).size.width,
-                                                                            dropdownList:
-                                                                                controller.cleaningType,
-                                                                            selectedValue:
-                                                                                mapData["value"],
-                                                                            onValueChanged:
-                                                                                (list, selectedValue) {
-                                                                              // print('paifcghb:${controller.assetList}');
-                                                                              // print({selectedValue: selectedValue});
-                                                                              mapData["value"] = selectedValue;
-                                                                              controller.typedropdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
-                                                                            },
-                                                                          ),
+                                                                          IgnorePointer(
+                                                                            child:
+                                                                                DropdownWebStock(
+                                                                              width: MediaQuery.of(context).size.width,
+                                                                              dropdownList: controller.cleaningType,
+                                                                              selectedValue: mapData["value"],
+                                                                              onValueChanged: (list, selectedValue) {
+                                                                                mapData["value"] = selectedValue;
+                                                                                controller.cleaningTyperopdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
+                                                                              },
+                                                                            ),
+                                                                          )
                                                                         ],
                                                                       ),
                                                                     )
@@ -726,26 +771,26 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                   ),
                                 ),
                               ),
-                              if (controller.openStartDatePicker)
-                                Positioned(
-                                  right: 175,
-                                  top: 150,
-                                  child: DatePickerWidget(
-                                    minDate: DateTime(DateTime.now().year),
-                                    maxDate: DateTime(DateTime.now().year, 13,
-                                        0), // last date of this year
-                                    controller: DateRangePickerController(),
-                                    selectionChanges: (p0) {
-                                      print('po valu ${p0.value.toString()}');
-                                      controller.startDateTc.text =
-                                          DateFormat('yyyy-MM-dd')
-                                              .format(p0.value);
-                                      controller.openStartDatePicker =
-                                          !controller.openStartDatePicker;
-                                      controller.update(['stock_Mangement']);
-                                    },
-                                  ),
-                                ),
+                              // if (controller.openStartDatePicker)
+                              //   Positioned(
+                              //     right: 175,
+                              //     top: 150,
+                              //     child: DatePickerWidget(
+                              //       minDate: DateTime(DateTime.now().year),
+                              //       maxDate: DateTime(DateTime.now().year, 13,
+                              //           0), // last date of this year
+                              //       controller: DateRangePickerController(),
+                              //       selectionChanges: (p0) {
+                              //         print('po valu ${p0.value.toString()}');
+                              //         controller.startDateTc.text =
+                              //             DateFormat('yyyy-MM-dd')
+                              //                 .format(p0.value);
+                              //         controller.openStartDatePicker =
+                              //             !controller.openStartDatePicker;
+                              //         controller.update(['stock_Mangement']);
+                              //       },
+                              //     ),
+                              //   ),
                             ],
                           ),
                         ],
@@ -797,36 +842,37 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                 ? MediaQuery.of(context).size.width / 5
                 : MediaQuery.of(context).size.width / 1.0,
             child: TextField(
-              style: GoogleFonts.lato(
-                textStyle:
-                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-              ),
-              onTap: () {
-                position == 0
-                    ? pickDateTime_web(context, 0)
-                    : pickDateTime_web(context, 1);
-              },
-              controller: position == 0
-                  ? controller.startDateTimeCtrlr
-                  : controller.validTillTimeCtrlr,
-              autofocus: false,
-              decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-              ),
-                   onChanged: (value) {
-                if (controller.startDateTimeCtrlrBuffer.text.trim().isNotEmpty && controller.validTillTimeCtrlr.text.trim().isNotEmpty){
-                  controller.isstartdateInvalid.value = false;
-                } else {
-                  controller.isstartdateInvalid.value = true;
-                }
-               }
-
-            ),
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                      fontSize: 16.0, height: 1.0, color: Colors.black),
+                ),
+                onTap: () {
+                  position == 0
+                      ? pickDateTime_web(context, 0)
+                      : pickDateTime_web(context, 1);
+                },
+                controller: position == 0
+                    ? controller.startDateTimeCtrlr
+                    : controller.validTillTimeCtrlr,
+                autofocus: false,
+                decoration: InputDecoration(
+                  fillColor: ColorValues.whiteColor,
+                  filled: true,
+                  contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                  border: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                ),
+                onChanged: (value) {
+                  if (controller.startDateTimeCtrlrBuffer.text
+                          .trim()
+                          .isNotEmpty &&
+                      controller.validTillTimeCtrlr.text.trim().isNotEmpty) {
+                    controller.isstartdateInvalid.value = false;
+                  } else {
+                    controller.isstartdateInvalid.value = true;
+                  }
+                }),
           ),
         ),
         Dimens.boxHeight20,

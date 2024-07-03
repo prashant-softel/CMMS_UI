@@ -54,6 +54,7 @@ class HomeController extends GetxController {
   final assetDescpTextController = TextEditingController();
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
+  final categoryMap = <String, int>{};
   //int facilityId = 45;
   String categoryIds = '';
 
@@ -121,6 +122,7 @@ class HomeController extends GetxController {
   //     // "PTW": 7,
   //   };
   // }
+  List<Map<String, String>> categoryList = [];
 
   RxInt totalSumMcCount = 0.obs;
   RxInt totalSumBmCount = 0.obs;
@@ -213,35 +215,57 @@ class HomeController extends GetxController {
       int lowStockItemsSumTemp = 0;
       int poItemsAwaitedSumTemp = 0;
 
-      for (var module in dashboardList) {
-        totalSumMcCountTemp += module?.category_mc_count ?? 0;
-        totalSumBmcCountTemp += module?.category_bm_count ?? 0;
-        totalSumPmCountTemp += module?.category_pm_count ?? 0;
-        totalSumCountTemp += module?.category_total_count ?? 0;
+      final categoryMap = <String, int>{};
 
-        var details = module?.cmDashboadDetails;
-        totalSumTemp += details?.total ?? 0;
-        completedSumTemp += details?.completed ?? 0;
-        pendingSumTemp += details?.pending ?? 0;
-        scheduleComplianceTotalSumTemp +=
-            details?.schedule_compliance_total ?? 0;
-        scheduleComplianceCompletedSumTemp +=
-            details?.schedule_compliance_completed ?? 0;
-        scheduleCompliancePendingSumTemp +=
-            details?.schedule_compliance_pending ?? 0;
-        woOnTimeSumTemp += details?.wo_on_time ?? 0;
-        woDelaySumTemp += details?.wo_delay ?? 0;
-        woBacklogSumTemp += details?.wo_backlog ?? 0;
-        lowStockItemsSumTemp += details?.low_stock_items ?? 0;
-        poItemsAwaitedSumTemp += details?.po_items_awaited ?? 0;
-        allItems.addAll(details?.item_list ?? []);
+      for (var module in dashboardList) {
+        if (module?.module_name == 'Breakdown Maintenance' ||
+            module?.module_name == 'Preventive Maintenance' ||
+            module?.module_name == 'Module Cleaning') {
+          totalSumMcCountTemp += module?.category_mc_count ?? 0;
+          totalSumBmcCountTemp += module?.category_bm_count ?? 0;
+          totalSumPmCountTemp += module?.category_pm_count ?? 0;
+          totalSumCountTemp += module?.category_total_count ?? 0;
+
+          var details = module?.cmDashboadDetails;
+          totalSumTemp += details?.total ?? 0;
+          completedSumTemp += details?.completed ?? 0;
+          pendingSumTemp += details?.pending ?? 0;
+          scheduleComplianceTotalSumTemp +=
+              details?.schedule_compliance_total ?? 0;
+          scheduleComplianceCompletedSumTemp +=
+              details?.schedule_compliance_completed ?? 0;
+          scheduleCompliancePendingSumTemp +=
+              details?.schedule_compliance_pending ?? 0;
+          woOnTimeSumTemp += details?.wo_on_time ?? 0;
+          woDelaySumTemp += details?.wo_delay ?? 0;
+          woBacklogSumTemp += details?.wo_backlog ?? 0;
+
+          for (var item in details?.item_list ?? []) {
+            final categories = item.asset_category?.split(', ') ?? [];
+            for (var category in categories) {
+              if (categoryMap.containsKey(category)) {
+                categoryMap[category] = categoryMap[category]! + 1;
+              } else {
+                categoryMap[category] = 1;
+              }
+            }
+          }
+        }
       }
+
+      // Sort the categories by count in descending order
+      final sortedCategories = categoryMap.entries.toList()
+        ..sort((a, b) => b.value.compareTo(a.value));
+
+      // Get the top 5 categories
+      final top5 = sortedCategories.take(5).map((e) => e.key).toList();
 
       totalSumMcCount.value = totalSumMcCountTemp;
       totalSumPmCount.value = totalSumPmCountTemp;
       totalSumBmCount.value = totalSumBmcCountTemp;
       totalSumCount.value = totalSumCountTemp;
       totalSum.value = totalSumTemp;
+
       Map<String, double> dataMap() {
         return {
           "BM": double.tryParse(totalSumBmcCountTemp.toString()) ?? 0.0,
@@ -268,6 +292,9 @@ class HomeController extends GetxController {
       dashboardMcList.value = _dashboardList[2];
       dashboardIrList.value = _dashboardList[3];
       dashboardSmList.value = _dashboardList[4];
+
+      print('Top 5 asset categories: $top5');
+      print('Category Map: $categoryMap');
 
       update(['dashboard']);
     }

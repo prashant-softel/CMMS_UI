@@ -170,7 +170,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                 ),
                               ),
                               // Dimens.boxWidth10,
-                              SizedBox(width:10),
+                              SizedBox(width: 10),
                               if (Responsive.isDesktop(context))
                                 Icon(Icons.notifications_active,
                                     color: ColorValues.greyLightColor),
@@ -353,7 +353,6 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                               ),
                               // Dimens.boxWidth10,
                               SizedBox(width: 10),
-                              
                             ],
                           ),
                         ),
@@ -478,7 +477,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -493,7 +494,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -615,7 +618,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
 
                                                                 // Dimens
                                                                 //     .boxWidth20,
-                                                                SizedBox(width: 20),
+                                                                SizedBox(
+                                                                    width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woOnTimeSum.value}',
@@ -644,7 +648,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                                 // Dimens
                                                                 //     .boxWidth37,
-                                                                SizedBox(width: 35),
+                                                                SizedBox(
+                                                                    width: 35),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woDelaySum.value}',
@@ -673,7 +678,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
 
                                                                 // Dimens
                                                                 //     .boxWidth20,
-                                                                SizedBox(width: 20),
+                                                                SizedBox(
+                                                                    width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woBacklogSum.value}',
@@ -971,7 +977,6 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             minWidth: 2500,
                                             columns: [
-                                              
                                               DataColumn2(
                                                 fixedWidth: 100,
                                                 label: Text(
@@ -1314,7 +1319,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -1329,7 +1336,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -1624,7 +1633,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
 
                                                                 // Dimens
                                                                 //     .boxWidth20,
-                                                                SizedBox(width: 20),
+                                                                SizedBox(
+                                                                    width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woOnTimeSum.value}',
@@ -1653,7 +1663,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                                 // Dimens
                                                                 //     .boxWidth37,
-                                                                SizedBox(width: 35),
+                                                                SizedBox(
+                                                                    width: 35),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woDelaySum.value}',
@@ -1681,7 +1692,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
 
                                                                 // Dimens
                                                                 //     .boxWidth20,
-                                                                SizedBox(width: 20),
+                                                                SizedBox(
+                                                                    width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woBacklogSum.value}',
@@ -2170,7 +2182,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -2185,7 +2199,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -2314,7 +2330,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
 
                                                                 // Dimens
                                                                 //     .boxWidth20,
-                                                                SizedBox(width: 20),
+                                                                SizedBox(
+                                                                    width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woOnTimeSum.value}',
@@ -2343,7 +2360,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                                 // Dimens
                                                                 //     .boxWidth37,
-                                                                SizedBox(width: 35),
+                                                                SizedBox(
+                                                                    width: 35),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woDelaySum.value}',
@@ -2372,7 +2390,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
 
                                                                 // Dimens
                                                                 //     .boxWidth20,
-                                                                SizedBox(width: 20),
+                                                                SizedBox(
+                                                                    width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woBacklogSum.value}',
@@ -2884,7 +2903,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -2899,7 +2920,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -3194,7 +3217,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
 
                                                                 // Dimens
                                                                 //     .boxWidth20,
-                                                                SizedBox(width: 20),
+                                                                SizedBox(
+                                                                    width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woOnTimeSum.value}',
@@ -3223,7 +3247,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                                 // Dimens
                                                                 //     .boxWidth37,
-                                                                SizedBox(width: 35),
+                                                                SizedBox(
+                                                                    width: 35),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woDelaySum.value}',
@@ -3252,7 +3277,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
 
                                                                 // Dimens
                                                                 //     .boxWidth20,
-                                                                SizedBox(width: 20),
+                                                                SizedBox(
+                                                                    width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woBacklogSum.value}',
@@ -3734,7 +3760,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -3749,7 +3777,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -3985,261 +4015,261 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //     ),
                                         //   ),
                                         // ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Container(
-                                            margin: EdgeInsets.only(left: 10),
-                                            padding: EdgeInsets.only(
-                                                left: 10, top: 10),
-                                            decoration: BoxDecoration(
-                                              color: ColorValues.lightBlueColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  offset: Offset(0.0, 1.0),
-                                                  blurRadius: 6.0,
-                                                ),
-                                              ],
-                                            ),
-                                            height: 150,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text("Schedule Compliance",
-                                                    style: Styles.black15),
-                                                // Dimens.boxHeight5,
-                                                SizedBox(height: 5),
+                                        // Expanded(
+                                        //   flex: 2,
+                                        //   child: Container(
+                                        //     margin: EdgeInsets.only(left: 10),
+                                        //     padding: EdgeInsets.only(
+                                        //         left: 10, top: 10),
+                                        //     decoration: BoxDecoration(
+                                        //       color: ColorValues.lightBlueColor,
+                                        //       borderRadius:
+                                        //           BorderRadius.circular(10),
+                                        //       boxShadow: [
+                                        //         BoxShadow(
+                                        //           color: Colors.grey,
+                                        //           offset: Offset(0.0, 1.0),
+                                        //           blurRadius: 6.0,
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //     height: 150,
+                                        //     child: Column(
+                                        //       crossAxisAlignment:
+                                        //           CrossAxisAlignment.start,
+                                        //       children: [
+                                        //         Text("Schedule Compliance",
+                                        //             style: Styles.black15),
+                                        //         // Dimens.boxHeight5,
+                                        //         SizedBox(height: 5),
 
-                                                Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Container(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            // Dimens.boxHeight8,
-                                                            Row(
-                                                              children: [
-                                                                Icon(
-                                                                    Icons
-                                                                        .pie_chart,
-                                                                    size: 30,
-                                                                    color: Colors
-                                                                        .red),
-                                                                SizedBox(
-                                                                    width: 10),
+                                        //         Row(
+                                        //             mainAxisAlignment:
+                                        //                 MainAxisAlignment
+                                        //                     .center,
+                                        //             children: [
+                                        //               Container(
+                                        //                 child: Column(
+                                        //                   crossAxisAlignment:
+                                        //                       CrossAxisAlignment
+                                        //                           .start,
+                                        //                   children: [
+                                        //                     // Dimens.boxHeight8,
+                                        //                     Row(
+                                        //                       children: [
+                                        //                         Icon(
+                                        //                             Icons
+                                        //                                 .pie_chart,
+                                        //                             size: 30,
+                                        //                             color: Colors
+                                        //                                 .red),
+                                        //                         SizedBox(
+                                        //                             width: 10),
 
-                                                                Text(
-                                                                  "WO on-time",
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
+                                        //                         Text(
+                                        //                           "WO on-time",
+                                        //                           style: Styles
+                                        //                               .black13,
+                                        //                         ),
 
-                                                                // Dimens
-                                                                //     .boxWidth20,
-                                                                SizedBox(width: 20),
-                                                                // Spacer(),
-                                                                Text(
-                                                                  '${controller.woOnTimeSum.value}',
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight5,
-                                                            SizedBox(height: 5),
-                                                            Row(
-                                                              children: [
-                                                                Icon(
-                                                                    Icons
-                                                                        .pie_chart,
-                                                                    size: 30,
-                                                                    color: Colors
-                                                                        .blue),
-                                                                SizedBox(
-                                                                    width: 10),
+                                        //                         // Dimens
+                                        //                         //     .boxWidth20,
+                                        //                         SizedBox(width: 20),
+                                        //                         // Spacer(),
+                                        //                         Text(
+                                        //                           '${controller.woOnTimeSum.value}',
+                                        //                           style: Styles
+                                        //                               .black13,
+                                        //                         ),
+                                        //                       ],
+                                        //                     ),
+                                        //                     // Dimens.boxHeight5,
+                                        //                     SizedBox(height: 5),
+                                        //                     Row(
+                                        //                       children: [
+                                        //                         Icon(
+                                        //                             Icons
+                                        //                                 .pie_chart,
+                                        //                             size: 30,
+                                        //                             color: Colors
+                                        //                                 .blue),
+                                        //                         SizedBox(
+                                        //                             width: 10),
 
-                                                                Text(
-                                                                  "WO delay",
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
-                                                                // Dimens
-                                                                //     .boxWidth37,
-                                                                SizedBox(width: 35),
-                                                                // Spacer(),
-                                                                Text(
-                                                                  '${controller.woDelaySum.value}',
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight5,
-                                                            SizedBox(height: 5),
-                                                            Row(
-                                                              children: [
-                                                                Icon(
-                                                                    Icons
-                                                                        .pie_chart,
-                                                                    size: 30,
-                                                                    color: Colors
-                                                                        .green),
-                                                                SizedBox(
-                                                                    width: 10),
-                                                                Text(
-                                                                  "WO backlog",
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
+                                        //                         Text(
+                                        //                           "WO delay",
+                                        //                           style: Styles
+                                        //                               .black13,
+                                        //                         ),
+                                        //                         // Dimens
+                                        //                         //     .boxWidth37,
+                                        //                         SizedBox(width: 35),
+                                        //                         // Spacer(),
+                                        //                         Text(
+                                        //                           '${controller.woDelaySum.value}',
+                                        //                           style: Styles
+                                        //                               .black13,
+                                        //                         ),
+                                        //                       ],
+                                        //                     ),
+                                        //                     // Dimens.boxHeight5,
+                                        //                     SizedBox(height: 5),
+                                        //                     Row(
+                                        //                       children: [
+                                        //                         Icon(
+                                        //                             Icons
+                                        //                                 .pie_chart,
+                                        //                             size: 30,
+                                        //                             color: Colors
+                                        //                                 .green),
+                                        //                         SizedBox(
+                                        //                             width: 10),
+                                        //                         Text(
+                                        //                           "WO backlog",
+                                        //                           style: Styles
+                                        //                               .black13,
+                                        //                         ),
 
-                                                                // Dimens
-                                                                //     .boxWidth20,
-                                                                SizedBox(width: 20),
-                                                                // Spacer(),
-                                                                Text(
-                                                                  '${controller.woBacklogSum.value}',
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight8,
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                // Dimens.boxHeight20,
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 10, right: 10),
-                                              padding: EdgeInsets.only(
-                                                  left: 10, top: 10),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    ColorValues.lightBlueColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey,
-                                                    offset: Offset(0.0, 1.0),
-                                                    blurRadius: 6.0,
-                                                  ),
-                                                ],
-                                              ),
-                                              height: 150,
-                                              child: Row(
-                                                children: [
-                                                  Align(
-                                                      alignment:
-                                                          Alignment.topLeft,
-                                                      child: Text("Category",
-                                                          style:
-                                                              Styles.black15)),
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: Obx(() {
-                                                      // Access the dataMap from the controller
-                                                      Map<String, double> data =
-                                                          controller.getDataMap;
-                                                      return PieChart(
-                                                        dataMap: data,
-                                                        totalValue: data.values
-                                                            .reduce((a, b) =>
-                                                                a +
-                                                                b), // Sum of all values in the map
-                                                        chartType:
-                                                            ChartType.ring,
-                                                        chartRadius: 100,
-                                                        colorList: controller
-                                                            .getColorList(),
-                                                        legendOptions:
-                                                            LegendOptions(
-                                                          showLegendsInRow:
-                                                              false,
-                                                          showLegends: true,
-                                                        ),
-                                                        chartValuesOptions:
-                                                            ChartValuesOptions(
-                                                          showChartValueBackground:
-                                                              false,
-                                                          showChartValues: true,
-                                                          showChartValuesInPercentage:
-                                                              true,
-                                                          showChartValuesOutside:
-                                                              false,
-                                                        ),
-                                                      );
-                                                    }),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Container(
-                                              padding: EdgeInsets.only(top: 10),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    ColorValues.lightBlueColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey,
-                                                    offset: Offset(0.0, 1.0),
-                                                    blurRadius: 6.0,
-                                                  ),
-                                                ],
-                                              ),
-                                              height: 150,
-                                              child: Column(
-                                                children: [
-                                                  Text("Low Stock Items",
-                                                      style: Styles.black15),
-                                                  SizedBox(height: 2),
-                                                  Container(
-                                                    height: 35,
-                                                    child: CustomElevatedButton(
-                                                        backgroundColor:
-                                                            ColorValues
-                                                                .appLightBlueColor,
-                                                        onPressed: () {},
-                                                        text:
-                                                            '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
-                                                  ),
-                                                  SizedBox(height: 8),
-                                                  Text("PO Items Awaited",
-                                                      style: Styles.black15),
-                                                  SizedBox(height: 2),
-                                                  Container(
-                                                    height: 35,
-                                                    child: CustomElevatedButton(
-                                                        backgroundColor:
-                                                            ColorValues
-                                                                .appLightBlueColor,
-                                                        onPressed: () {},
-                                                        text:
-                                                            '${controller.dashboardIrList.value?.cmDashboadDetails?.po_items_awaited ?? 0}'),
-                                                  ),
-                                                ],
-                                              )),
-                                        ),
+                                        //                         // Dimens
+                                        //                         //     .boxWidth20,
+                                        //                         SizedBox(width: 20),
+                                        //                         // Spacer(),
+                                        //                         Text(
+                                        //                           '${controller.woBacklogSum.value}',
+                                        //                           style: Styles
+                                        //                               .black13,
+                                        //                         ),
+                                        //                       ],
+                                        //                     ),
+                                        //                     // Dimens.boxHeight8,
+                                        //                   ],
+                                        //                 ),
+                                        //               ),
+                                        //             ]),
+                                        //         // Dimens.boxHeight20,
+                                        //       ],
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                        // Expanded(
+                                        //   flex: 2,
+                                        //   child: Container(
+                                        //       margin: EdgeInsets.only(
+                                        //           left: 10, right: 10),
+                                        //       padding: EdgeInsets.only(
+                                        //           left: 10, top: 10),
+                                        //       decoration: BoxDecoration(
+                                        //         color:
+                                        //             ColorValues.lightBlueColor,
+                                        //         borderRadius:
+                                        //             BorderRadius.circular(10),
+                                        //         boxShadow: [
+                                        //           BoxShadow(
+                                        //             color: Colors.grey,
+                                        //             offset: Offset(0.0, 1.0),
+                                        //             blurRadius: 6.0,
+                                        //           ),
+                                        //         ],
+                                        //       ),
+                                        //       height: 150,
+                                        //       child: Row(
+                                        //         children: [
+                                        //           Align(
+                                        //               alignment:
+                                        //                   Alignment.topLeft,
+                                        //               child: Text("Category",
+                                        //                   style:
+                                        //                       Styles.black15)),
+                                        //           Align(
+                                        //             alignment:
+                                        //                 Alignment.centerLeft,
+                                        //             child: Obx(() {
+                                        //               // Access the dataMap from the controller
+                                        //               Map<String, double> data =
+                                        //                   controller.getDataMap;
+                                        //               return PieChart(
+                                        //                 dataMap: data,
+                                        //                 totalValue: data.values
+                                        //                     .reduce((a, b) =>
+                                        //                         a +
+                                        //                         b), // Sum of all values in the map
+                                        //                 chartType:
+                                        //                     ChartType.ring,
+                                        //                 chartRadius: 100,
+                                        //                 colorList: controller
+                                        //                     .getColorList(),
+                                        //                 legendOptions:
+                                        //                     LegendOptions(
+                                        //                   showLegendsInRow:
+                                        //                       false,
+                                        //                   showLegends: true,
+                                        //                 ),
+                                        //                 chartValuesOptions:
+                                        //                     ChartValuesOptions(
+                                        //                   showChartValueBackground:
+                                        //                       false,
+                                        //                   showChartValues: true,
+                                        //                   showChartValuesInPercentage:
+                                        //                       true,
+                                        //                   showChartValuesOutside:
+                                        //                       false,
+                                        //                 ),
+                                        //               );
+                                        //             }),
+                                        //           )
+                                        //         ],
+                                        //       )),
+                                        // ),
+                                        // Expanded(
+                                        //   flex: 2,
+                                        //   child: Container(
+                                        //       padding: EdgeInsets.only(top: 10),
+                                        //       decoration: BoxDecoration(
+                                        //         color:
+                                        //             ColorValues.lightBlueColor,
+                                        //         borderRadius:
+                                        //             BorderRadius.circular(10),
+                                        //         boxShadow: [
+                                        //           BoxShadow(
+                                        //             color: Colors.grey,
+                                        //             offset: Offset(0.0, 1.0),
+                                        //             blurRadius: 6.0,
+                                        //           ),
+                                        //         ],
+                                        //       ),
+                                        //       height: 150,
+                                        //       child: Column(
+                                        //         children: [
+                                        //           Text("Low Stock Items",
+                                        //               style: Styles.black15),
+                                        //           SizedBox(height: 2),
+                                        //           Container(
+                                        //             height: 35,
+                                        //             child: CustomElevatedButton(
+                                        //                 backgroundColor:
+                                        //                     ColorValues
+                                        //                         .appLightBlueColor,
+                                        //                 onPressed: () {},
+                                        //                 text:
+                                        //                     '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
+                                        //           ),
+                                        //           SizedBox(height: 8),
+                                        //           Text("PO Items Awaited",
+                                        //               style: Styles.black15),
+                                        //           SizedBox(height: 2),
+                                        //           Container(
+                                        //             height: 35,
+                                        //             child: CustomElevatedButton(
+                                        //                 backgroundColor:
+                                        //                     ColorValues
+                                        //                         .appLightBlueColor,
+                                        //                 onPressed: () {},
+                                        //                 text:
+                                        //                     '${controller.dashboardIrList.value?.cmDashboadDetails?.po_items_awaited ?? 0}'),
+                                        //           ),
+                                        //         ],
+                                        //       )),
+                                        // ),
                                       ],
                                     ),
                                     // Dimens.boxHeight10,
@@ -4269,7 +4299,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 100,
                                                 label: Text(
-                                                  'Site Name',
+                                                  'ID',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -4277,7 +4307,15 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 100,
                                                 label: Text(
-                                                  'WO Number',
+                                                  'Title',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'Description',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -4285,7 +4323,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 250,
                                                 label: Text(
-                                                  'WO Description',
+                                                  'Type Of Incident',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -4293,7 +4331,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 200,
                                                 label: Text(
-                                                  'Status',
+                                                  'Location',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -4301,7 +4339,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 150,
                                                 label: Text(
-                                                  'Asset Category',
+                                                  'Incident Date & Time',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -4309,7 +4347,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 250,
                                                 label: Text(
-                                                  'Asset Name',
+                                                  'Restoration Date & Time',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -4317,15 +4355,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 180,
                                                 label: Text(
-                                                  'Start Date',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 180,
-                                                label: Text(
-                                                  'End Date',
+                                                  'Severity',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -4352,7 +4382,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .facility_name
+                                                        .wo_number
                                                         .toString() ??
                                                     '')),
                                                 DataCell(Text(
@@ -4469,7 +4499,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               .clearStoreIrData();
 
                                                           String Id = controller
-                                                                  .dashboardBmList
+                                                                  .dashboardIrList
                                                                   .value
                                                                   ?.cmDashboadDetails
                                                                   ?.item_list?[
@@ -4589,7 +4619,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -4604,7 +4636,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     ),
                                                                     // Dimens
                                                                     //     .boxHeight5,
-                                                                    SizedBox(height: 5),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            5),
                                                                     Row(
                                                                       children: [
                                                                         Text(
@@ -4899,7 +4933,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
 
                                                                 // Dimens
                                                                 //     .boxWidth20,
-                                                                SizedBox(width: 20),
+                                                                SizedBox(
+                                                                    width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woOnTimeSum.value}',
@@ -4928,7 +4963,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                                 // Dimens
                                                                 //     .boxWidth37,
-                                                                SizedBox(width: 35),
+                                                                SizedBox(
+                                                                    width: 35),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woDelaySum.value}',
@@ -4957,7 +4993,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
 
                                                                 // Dimens
                                                                 //     .boxWidth20,
-                                                                SizedBox(width: 20),
+                                                                SizedBox(
+                                                                    width: 20),
                                                                 // Spacer(),
                                                                 Text(
                                                                   '${controller.woBacklogSum.value}',
@@ -5132,15 +5169,15 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 100,
                                                 label: Text(
-                                                  'WO Number',
+                                                  'GR No',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 100,
                                                 label: Text(
-                                                  'WO Description',
+                                                  'GO No',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -5156,7 +5193,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 150,
                                                 label: Text(
-                                                  'Asset Category',
+                                                  'Product Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -5164,7 +5201,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 250,
                                                 label: Text(
-                                                  'Asset Name',
+                                                  'Requested Quantity',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -5172,7 +5209,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 180,
                                                 label: Text(
-                                                  'Start Date',
+                                                  'GR Date',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -5180,7 +5217,47 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 180,
                                                 label: Text(
-                                                  'End Date',
+                                                  'Order Quantity',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'GO Date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'Unit Amount',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'Total Amount',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'GRN Date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'GRN Quntity',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -5232,6 +5309,41 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
                                                         .asset_category ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_name ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_name ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_name ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_name ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_name ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
