@@ -259,7 +259,7 @@ class PreventiveCheckPointController extends GetxController {
       Fluttertoast.showToast(
           msg:
               "Please enter required field and Failure waightage must be number beetween 1-100",
-          fontSize: 16.0);
+          fontSize: 16.0,timeInSecForIosWeb: 5);
     } else {
       CheckpointType checkpoint_type = CheckpointType(
           id: checkpointType.value == "Text"
@@ -463,8 +463,8 @@ class PreventiveCheckPointController extends GetxController {
     String _requirement = requirementCtrlr.text.trim();
     int _checklistId = int.tryParse(selectedchecklist.value) ?? 0;
     int _failurewtg = int.tryParse(failurewtgCtrlr.text.trim()) ?? 0;
-    int _max = int.tryParse(maxRangeCtrlr.text.trim()) ?? 0;
-    int _min = int.tryParse(minRangeCtrlr.text.trim()) ?? 0;
+    double _max = double.tryParse(maxRangeCtrlr.text.trim()) ?? 0.0;
+    double _min = double.tryParse(minRangeCtrlr.text.trim()) ?? 0.0;
 
     CheckpointType checkpoint_type = CheckpointType(
         id: checkpointType.value == "Text"
@@ -507,18 +507,24 @@ class PreventiveCheckPointController extends GetxController {
       isSelectedchecklist.value = false;
       isFormInvalid.value = true;
     }
-    if (checkPointCtrlr.text.trim().length < 3) {
+    if (checkPointCtrlr.text == '') {
       isCheckPointInvalid.value = true;
       isFormInvalid.value = true;
     }
-    if (requirementCtrlr.text.trim().length < 3) {
+    if (checkPointCtrlr.text.trim().length < 0) {
+      isCheckPointInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (requirementCtrlr.text == '') {
       isRequiremetInvalid.value = true;
       isFormInvalid.value = true;
     }
 
-    if (failurewtgCtrlr.text.trim().length < 3) {
+    if (failurewtgCtrlr.text == '') {
       isFailureInvalid.value = true;
       isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
     }
   }
 }

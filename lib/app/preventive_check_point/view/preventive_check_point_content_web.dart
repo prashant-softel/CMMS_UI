@@ -269,11 +269,11 @@ class PreventiveCheckPointContentWeb
                                                     textController: controller
                                                         .checkPointCtrlr,
                                                     //validate
-                                                    errorController: controller
-                                                            .isCheckPointInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
+                                                    // errorController: controller
+                                                    //         .isCheckPointInvalid
+                                                    //         .value
+                                                    //     ? "Required field"
+                                                    //     : null,
                                                     onChanged: (value) {
                                                       if (value.trim().length >
                                                           0) {
@@ -347,11 +347,11 @@ class PreventiveCheckPointContentWeb
                                                     textController: controller
                                                         .requirementCtrlr,
                                                     //validate
-                                                    errorController: controller
-                                                            .isRequiremetInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
+                                                    // errorController: controller
+                                                    //         .isRequiremetInvalid
+                                                    //         .value
+                                                    //     ? "Required field"
+                                                    //     : null,
                                                     onChanged: (value) {
                                                       if (value.trim().length >
                                                           0) {
@@ -386,7 +386,8 @@ class PreventiveCheckPointContentWeb
                                           //     MainAxisAlignment.spaceBetween,
                                           children: [
                                             CustomRichText(
-                                                title: 'Image Upload?'),
+                                                title: 'Image Upload?',
+                                                includeAsterisk: false),
                                             SizedBox(
                                               width: 35,
                                             ),
@@ -433,11 +434,11 @@ class PreventiveCheckPointContentWeb
                                                       .failurewtgCtrlr,
 
                                                   //validate
-                                                  errorController: controller
-                                                          .isFailureInvalid
-                                                          .value
-                                                      ? "Required field"
-                                                      : null,
+                                                  // errorController: controller
+                                                  //         .isFailureInvalid
+                                                  //         .value
+                                                  //     ? "Required field"
+                                                  //     : null,
                                                   onChanged: (value) {
                                                     if (value.trim().length >
                                                         0) {
