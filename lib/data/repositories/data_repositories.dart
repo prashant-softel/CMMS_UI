@@ -1534,6 +1534,23 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
       );
 
+    Future<ResponseModel> getObservationSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    required String fromDate,
+    required String toDate,
+  }) async =>
+      await connectHelper.getObservationSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id:facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+
+      );
+
+
   Future<ResponseModel> getBlocksList({
     String? auth,
     bool? isLoading,

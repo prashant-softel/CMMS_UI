@@ -135,6 +135,8 @@ import 'package:cmms/app/create_mrs_return/view/create_mrs_return_screen.dart';
 import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/new_permit/view/create_permit_screen.dart';
+import 'package:cmms/app/observation_summary/observation_summary_binding.dart';
+import 'package:cmms/app/observation_summary/views/observation_summary_screen.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
 import 'package:cmms/app/risk_type/risk_type_binding.dart';
@@ -1363,6 +1365,11 @@ class AppPages {
       name: _Paths.viewObservationScreen,
       page: ViewObservationScreen.new,
       binding: ViewObservationBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.observationSummary,
+      page: ObservationSummaryScreen.new,
+      binding: ObservationSummaryBinding(),
     ),
   ];
 }

@@ -129,6 +129,8 @@ abstract class Routes {
   static const ComplianceStatus = _Paths.ComplianceStatus;
   static const DocumentMaster = _Paths.DocumentMaster;
   static const viewObservationScreen = _Paths.viewObservationScreen;
+  static const observationSummary = _Paths.observationSummary;
+
 
   static const documentUploadScreen = _Paths.documentUploadScreen;
   static const viewComplianceScreen = _Paths.viewComplianceScreen;
@@ -358,6 +360,7 @@ abstract class _Paths {
   static const ComplianceStatus = '/Compliance-Status';
   static const DocumentMaster = '/Document-Master';
   static const viewObservationScreen = '/viewObservationScreen';
+  static const observationSummary = '/observation-summary';
 
   static const documentUploadScreen = '/documentUploadScreen';
   static const viewComplianceScreen = '/viewComplianceScreen';
