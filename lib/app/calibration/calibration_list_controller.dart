@@ -60,6 +60,7 @@ class CalibrationListController extends GetxController {
     "Equipment Category": true,
     "Equipment Name": true,
     "Serial No.": true,
+    "Schedule Start Date":true,
     // "Calibration Certificates":true,
     // "Installation date":true,
     "Last Calibration date": true,
@@ -68,15 +69,16 @@ class CalibrationListController extends GetxController {
     // "Status":true,
   });
   final Map<String, double> columnwidth = {
-    "Calibration Id":200,
-    "Equipment Category": 250,
-    "Equipment Name": 350,
-    "Serial No.": 250,
+    "Calibration Id":150,
+    "Equipment Category": 200,
+    "Equipment Name": 250,
+    "Serial No.": 200,
+    "Schedule Start Date":200,
     // "Calibration Certificates":250,
     // "Installation date":250,
-    "Last Calibration date": 250,
-    "Next Due Date": 250,
-    "Frequency": 200,
+    "Last Calibration date": 200,
+    "Next Due Date": 200,
+    "Frequency": 150,
     // "Status",
   };
   Map<String, RxString> filterText = {};
@@ -95,6 +97,8 @@ class CalibrationListController extends GetxController {
   RxString srNoFilterText = ''.obs;
   RxString calibrationIdText = ''.obs;
   RxString frequencyFilterText = ''.obs;
+   RxString schedulestartFilterText = ''.obs;
+
 
 
 
@@ -106,6 +110,7 @@ class CalibrationListController extends GetxController {
       "Equipment Category": categoryFilterText,
       "Equipment Name": titleFilterText,
       "Serial No.": srNoFilterText,
+      "Schedule Start Date":schedulestartFilterText,
       // "Calibration Certificates":,
       // "Installation date":,
       "Last Calibration date": lastDoneDateFilterText,
