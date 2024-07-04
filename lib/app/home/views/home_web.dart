@@ -1733,26 +1733,24 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             height: 150,
                                             child: PieChart(
-                                              dataMap: controller.categoryMap,
+                                              dataMap: controller.categoryMapBM,
                                               animationDuration:
                                                   Duration(milliseconds: 800),
-                                              chartLegendSpacing: 30,
-                                              chartRadius: 80,
+                                              chartLegendSpacing: 20,
+                                              chartRadius: 200,
                                               colorList:
                                                   controller.getColorList(),
-                                              initialAngleInDegree: 0,
+                                              // initialAngleInDegree: 50,
                                               chartType: ChartType.ring,
                                               ringStrokeWidth: 10,
-                                              // centerText: "Category",
+                                              centerText: "Category",
                                               legendOptions: LegendOptions(
                                                 showLegendsInRow: false,
                                                 legendPosition:
                                                     LegendPosition.left,
                                                 showLegends: true,
                                                 legendShape: BoxShape.circle,
-                                                legendTextStyle: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                                legendTextStyle: Styles.black13,
                                               ),
                                               chartValuesOptions:
                                                   ChartValuesOptions(
@@ -1766,6 +1764,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                           ),
                                         ),
+
                                         Expanded(
                                           flex: 2,
                                           child: Container(
@@ -2398,71 +2397,54 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 10, right: 10),
-                                              padding: EdgeInsets.only(
-                                                  left: 10, top: 10),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    ColorValues.lightBlueColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey,
-                                                    offset: Offset(0.0, 1.0),
-                                                    blurRadius: 6.0,
-                                                  ),
-                                                ],
+                                            margin: EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            padding: EdgeInsets.only(
+                                                left: 10, top: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
+                                                ),
+                                              ],
+                                            ),
+                                            height: 150,
+                                            child: PieChart(
+                                              dataMap: controller.categoryMapPM,
+                                              animationDuration:
+                                                  Duration(milliseconds: 800),
+                                              chartLegendSpacing: 20,
+                                              chartRadius: 200,
+                                              colorList:
+                                                  controller.getColorList(),
+                                              // initialAngleInDegree: 50,
+                                              chartType: ChartType.ring,
+                                              ringStrokeWidth: 10,
+                                              centerText: "Category",
+                                              legendOptions: LegendOptions(
+                                                showLegendsInRow: false,
+                                                legendPosition:
+                                                    LegendPosition.left,
+                                                showLegends: true,
+                                                legendShape: BoxShape.circle,
+                                                legendTextStyle: Styles.black13,
                                               ),
-                                              height: 150,
-                                              child: Row(
-                                                children: [
-                                                  Align(
-                                                      alignment:
-                                                          Alignment.topLeft,
-                                                      child: Text("Category",
-                                                          style:
-                                                              Styles.black15)),
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: Obx(() {
-                                                      // Access the dataMap from the controller
-                                                      Map<String, double> data =
-                                                          controller.getDataMap;
-                                                      return PieChart(
-                                                        dataMap: data,
-                                                        totalValue: data.values
-                                                            .reduce((a, b) =>
-                                                                a +
-                                                                b), // Sum of all values in the map
-                                                        chartType:
-                                                            ChartType.ring,
-                                                        chartRadius: 100,
-                                                        colorList: controller
-                                                            .getColorList(),
-                                                        legendOptions:
-                                                            LegendOptions(
-                                                          showLegendsInRow:
-                                                              false,
-                                                          showLegends: true,
-                                                        ),
-                                                        chartValuesOptions:
-                                                            ChartValuesOptions(
-                                                          showChartValueBackground:
-                                                              false,
-                                                          showChartValues: true,
-                                                          showChartValuesInPercentage:
-                                                              true,
-                                                          showChartValuesOutside:
-                                                              false,
-                                                        ),
-                                                      );
-                                                    }),
-                                                  ),
-                                                ],
-                                              )),
+                                              chartValuesOptions:
+                                                  ChartValuesOptions(
+                                                showChartValuesInPercentage:
+                                                    true,
+                                                showChartValueBackground: true,
+                                                showChartValues: true,
+                                                showChartValuesOutside: false,
+                                                decimalPlaces: 1,
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                         Expanded(
                                           flex: 2,
@@ -3351,6 +3333,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ],
                                               )),
                                         ),
+
                                         Expanded(
                                           flex: 2,
                                           child: Container(
