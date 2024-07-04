@@ -64,7 +64,7 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                         },
                         child: Text(" / STOCK MANAGEMENT",
                             style: Styles.greyLight14)),
-                    Text(" / ASSET MATERIAL", style: Styles.greyLight14)
+                    Text(" / ADD MATERIAL", style: Styles.greyLight14)
                   ],
                 ),
               ),
@@ -98,7 +98,7 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Asset Material",
+                                  "Add Material",
                                   style: Styles.blackBold18,
                                 ),
                               ],
@@ -812,7 +812,7 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                 margin: Dimens.edgeInsets10,
                                 child: Row(
                                   children: [
-                                    CustomRichText(title: 'Asset Description: '),
+                                    CustomRichText(title: 'Material Description: '),
                                     Dimens.boxWidth10,
                                     Container(
                                       width: (Get.width * .5),

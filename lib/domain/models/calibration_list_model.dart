@@ -14,6 +14,7 @@ class CalibrationListModel {
   int? asset_id;
   String? asset_name;
   String? asset_serial;
+  String? schedule_start_date;
   String? category_name;
   int? statusID;
   String? calibration_status;
@@ -32,6 +33,7 @@ class CalibrationListModel {
       this.calibration_id,
       this.asset_id,
       this.asset_name,
+      this.schedule_start_date,
       this.calibration_status,
       this.category_name,
       this.vendor_name,
@@ -58,6 +60,11 @@ class CalibrationListModel {
             ? json['next_calibration_due_date']
             : Utility.getFormatedyearMonthDay(
                 json['next_calibration_due_date']),
+
+                  schedule_start_date: json['schedule_start_date'] == null
+            ? json['schedule_start_date']
+            : Utility.getFormatedyearMonthDay(json['schedule_start_date']),
+
         asset_serial: json['asset_serial'] ?? '',
         calibration_status: json['calibration_status'] ?? '',
         category_name: json['category_name'] ?? '',
@@ -76,6 +83,7 @@ class CalibrationListModel {
         "calibration_id": calibration_id,
         "frequency_id": frequency_id,
         "frequency_name": frequency_name,
+        "schedule_start_date": schedule_start_date,
         "next_calibration_due_date": next_calibration_due_date,
         "statusID": statusID,
         "asset_name": asset_name,

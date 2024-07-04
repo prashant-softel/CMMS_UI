@@ -45,7 +45,9 @@ class RejectMcPlan extends GetView {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomRichText(title: 'Comment'),
+                      CustomRichText(
+                        title: 'Comment',
+                      ),
                       SizedBox(
                         height: 20,
                       ),
@@ -86,7 +88,9 @@ class RejectMcPlan extends GetView {
               },
               child: const Text('Cancel'),
             ),
-            Dimens.boxWidth20,
+            SizedBox(
+              width: 10,
+            ),
             ElevatedButton(
               style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {

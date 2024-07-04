@@ -329,6 +329,7 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                           ),
                                                         ],
                                                       ),
+                                                  
                                                       Dimens.boxHeight10,
                                                     ],
                                                   ),

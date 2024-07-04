@@ -50,160 +50,164 @@ class ViewSetEquipmentDialog extends GetView {
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
 
-          return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: ColorValues.lightGreyColorWithOpacity35,
-                  width: 1,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: ColorValues.appBlueBackgroundColor,
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
+          return IgnorePointer(
+            ignoring: false,
+            child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: ColorValues.lightGreyColorWithOpacity35,
+                    width: 1,
                   ),
-                ],
-              ),
-              // padding: EdgeInsets.only(right: 120, top: 10),
-              height: height / 1.5,
-              width: double.infinity,
-              child: SingleChildScrollView(
-                child: Column(
-                    children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            "Assets",
-                            style: TextStyle(color: Color(0xff31576D)),
-                          ),
-                        ),
-                        Expanded(
-                          child: Text("Modules",
-                              style: TextStyle(color: Color(0xff31576D))),
-                        ),
-                        Expanded(
-                            child: Text("Select Day",
-                                style: TextStyle(color: Color(0xff31576D)))),
-                      ],
+                  boxShadow: [
+                    BoxShadow(
+                      color: ColorValues.appBlueBackgroundColor,
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
                     ),
-                  )
-                ]..addAll(controller.equipmentList.value.map((e) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(
-                                          () {
-                                            e.isExpanded = !e.isExpanded;
-                                          },
-                                        );
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "${e?.invName}",
-                                            style: TextStyle(
-                                                fontSize: 12.0,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Icon(e!.isExpanded
-                                              ? Icons.arrow_drop_down
-                                              : Icons.arrow_drop_up)
-                                        ],
+                  ],
+                ),
+                // padding: EdgeInsets.only(right: 120, top: 10),
+                height: height / 1.5,
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  child: Column(
+                      children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Assets",
+                              style: TextStyle(color: Color(0xff31576D)),
+                            ),
+                          ),
+                          Expanded(
+                            child: Text("Modules",
+                                style: TextStyle(color: Color(0xff31576D))),
+                          ),
+                          Expanded(
+                              child: Text("Select Day",
+                                  style: TextStyle(color: Color(0xff31576D)))),
+                        ],
+                      ),
+                    )
+                  ]..addAll(controller.equipmentList.value.map((e) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          setState(
+                                            () {
+                                              e.isExpanded = !e.isExpanded;
+                                            },
+                                          );
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "${e?.invName}",
+                                              style: TextStyle(
+                                                  fontSize: 12.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Icon(e!.isExpanded
+                                                ? Icons.arrow_drop_down
+                                                : Icons.arrow_drop_up)
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      "${e.moduleQuantity}",
-                                      style: TextStyle(
-                                          fontSize: 12.0,
-                                          fontWeight: FontWeight.bold),
+                                    Expanded(
+                                      child: Text(
+                                        "${e.moduleQuantity}",
+                                        style: TextStyle(
+                                            fontSize: 12.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    child: DropdownButton<String>(
-                                      value: e.selectedDay,
-                                      onChanged: (newValue) {
-                                        setState(() {
-                                          e.selectedDay = newValue!;
-                                          e.smbs.forEach((element) {
-                                            element.selectedDay = newValue;
+                                    Expanded(
+                                      child: DropdownButton<String>(
+                                        value: e.selectedDay,
+                                        onChanged: (newValue) {
+                                          setState(() {
+                                            e.selectedDay = newValue!;
+                                            e.smbs.forEach((element) {
+                                              element.selectedDay = newValue;
+                                            });
                                           });
-                                        });
-                                      },
-                                      items: controller.days
-                                          .map(
-                                            (map) => DropdownMenuItem(
-                                              child: Text(map.name.toString()),
-                                              value: map.id,
-                                            ),
-                                          )
-                                          .toList(),
+                                        },
+                                        items: controller.days
+                                            .map(
+                                              (map) => DropdownMenuItem(
+                                                child:
+                                                    Text(map.name.toString()),
+                                                value: map.id,
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              e.isExpanded
-                                  ? Column(
-                                      children: []..addAll(
-                                          e.smbs.map(
-                                            (smbItems) {
-                                              return Row(
-                                                children: [
-                                                  Expanded(
-                                                      child: Text(
-                                                          smbItems.smbName ??
-                                                              "")),
-                                                  Expanded(
-                                                      child: Text(
-                                                          "${smbItems.moduleQuantity}")),
-                                                  Expanded(
-                                                    child:
-                                                        DropdownButton<String>(
-                                                      value:
-                                                          smbItems.selectedDay,
-                                                      onChanged: (newValue) {
-                                                        setState(() {
-                                                          smbItems.selectedDay =
-                                                              newValue!;
-                                                        });
-                                                      },
-                                                      items: controller.days
-                                                          .map(
-                                                            (map) =>
-                                                                DropdownMenuItem(
-                                                              child: Text(map
-                                                                  .name
-                                                                  .toString()),
-                                                              value: map.id,
-                                                            ),
-                                                          )
-                                                          .toList(),
+                                  ],
+                                ),
+                                e.isExpanded
+                                    ? Column(
+                                        children: []..addAll(
+                                            e.smbs.map(
+                                              (smbItems) {
+                                                return Row(
+                                                  children: [
+                                                    Expanded(
+                                                        child: Text(
+                                                            smbItems.smbName ??
+                                                                "")),
+                                                    Expanded(
+                                                        child: Text(
+                                                            "${smbItems.moduleQuantity}")),
+                                                    Expanded(
+                                                      child: DropdownButton<
+                                                          String>(
+                                                        value: smbItems
+                                                            .selectedDay,
+                                                        onChanged: (newValue) {
+                                                          setState(() {
+                                                            smbItems.selectedDay =
+                                                                newValue!;
+                                                          });
+                                                        },
+                                                        items: controller.days
+                                                            .map(
+                                                              (map) =>
+                                                                  DropdownMenuItem(
+                                                                child: Text(map
+                                                                    .name
+                                                                    .toString()),
+                                                                value: map.id,
+                                                              ),
+                                                            )
+                                                            .toList(),
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              );
-                                            },
+                                                  ],
+                                                );
+                                              },
+                                            ),
                                           ),
-                                        ),
-                                    )
-                                  : Dimens.box0
-                            ],
-                          ),
-                        );
-                      }))),
-              ));
+                                      )
+                                    : Dimens.box0
+                              ],
+                            ),
+                          );
+                        }))),
+                )),
+          );
         }),
         // actions: [
         //   controller.id == 0

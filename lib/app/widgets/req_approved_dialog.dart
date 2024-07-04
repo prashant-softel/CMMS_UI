@@ -25,7 +25,7 @@ class ReqOrderApprovedDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          "Request Order Approve",
+          "Goods Request Approve",
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -95,7 +95,7 @@ class ReqOrderApprovedDialog extends GetView {
                 print('req order id:$id');
                 Get.back();
               },
-              child: Text('Approve RO'),
+              child: Text('Approve GR'),
             ),
           ]),
         ],

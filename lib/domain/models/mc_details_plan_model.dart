@@ -13,10 +13,12 @@ class McPalningDetailsModel {
   int? planId;
   int? facilityId;
   String? title;
-  String?siteName;
+  String? siteName;
   String? description;
   int? frequencyId;
   String? frequency;
+  int? assignedToId;
+  String? assignedTo;
   int? noOfCleaningDays;
   int? createdById;
   int? scheduledModules;
@@ -40,6 +42,8 @@ class McPalningDetailsModel {
     this.description,
     this.scheduledModules,
     this.frequency,
+    this.assignedTo,
+    this.assignedToId,
     this.approvedBy,
     this.approvedById,
     this.createdAt,
@@ -62,8 +66,10 @@ class McPalningDetailsModel {
         id: json['id'],
         planId: json["planId"],
         facilityId: json['facilityId'],
+        assignedTo: json['assignedTo'],
+        assignedToId: json['assignedToId'],
         title: json['title'] ?? '',
-        siteName:json['siteName'] ?? '',
+        siteName: json['siteName'] ?? '',
         description: json['description'],
         frequencyId: json["frequencyId"],
         scheduledModules: json['scheduledModules'],
@@ -90,8 +96,10 @@ class McPalningDetailsModel {
         "id": id,
         "planId": planId,
         "facilityId": facilityId,
+        "assignedTo": assignedTo,
+        "assignedToId": assignedToId,
         "title": title,
-        "siteName":siteName,
+        "siteName": siteName,
         "description": description,
         "frequency": frequency,
         "noOfCleaningDays": noOfCleaningDays,

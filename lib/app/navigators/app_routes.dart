@@ -338,8 +338,8 @@ abstract class _Paths {
   static const GoodsOrdersReqDetailsScreen = '/goods-orders-req-details-screen';
   static const viewGoodsOrders = '/view-goods-orders';
 
-  static const assetMasterList = '/asset-Master-List';
-  static const addassetMaster = '/add-asset-Master';
+  static const assetMasterList = '/Material-List';
+  static const addassetMaster = '/add-Material-List';
   static const incidentReportListWeb = '/incident-report-list';
   static const addIncidentReportContentWeb = '/add-incident-report';
   static const mrsViewScreen = '/mrs-view';

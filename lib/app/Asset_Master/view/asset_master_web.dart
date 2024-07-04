@@ -68,7 +68,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyLight14),
                     ),
-                    Text(" / ASSET MASTER LIST", style: Styles.greyLight14),
+                    Text(" / MATERIAL LIST", style: Styles.greyLight14),
                     // Text(" / ST NUMBER",
                     //     style: Styles.greyMediumLight12)
                   ],

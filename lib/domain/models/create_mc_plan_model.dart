@@ -15,6 +15,7 @@ class CreateMcPalningsModel {
   // int? assignedToId;
   int? frequencyId;
   int? cleaningType;
+  int? assignedToId;
 
   List<Schedule> schedules;
 
@@ -27,6 +28,7 @@ class CreateMcPalningsModel {
     this.frequencyId,
     this.cleaningType,
     this.noOfCleaningDays,
+    this.assignedToId,
     this.schedules = const [],
   });
 
@@ -35,6 +37,8 @@ class CreateMcPalningsModel {
         facilityId: json['facilityId'],
         title: json['title'] ?? '',
         startDate: json['startDate'],
+        assignedToId: json['assignedToId'],
+
         // assignedToId: json['assignedToId'],
         planId: json['planId'],
         frequencyId: json["frequencyId"],
@@ -50,7 +54,7 @@ class CreateMcPalningsModel {
         "title": title,
         "facilityId": facilityId,
         "startDate": startDate,
-        // "assignedToId": assignedToId,
+        "assignedToId": assignedToId,
         "planId": planId,
         "frequencyId": frequencyId,
         "cleaningType": cleaningType,

@@ -130,7 +130,9 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                         Row(
                                           children: [
                                             CustomRichText(title: 'Date Range'),
-                                            Dimens.boxWidth10,
+                                            // Dimens.boxWidth10,
+                                            SizedBox(width:10),
+
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
                                                       .size
@@ -150,7 +152,8 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        // Dimens.boxWidth10,
+                                        SizedBox(width:10),
                                         ActionButton(
                                           icon: Icons.add,
                                           label: "Add New",
@@ -291,7 +294,8 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                       Container(
                                         width: 200,
                                         height: 35,
-                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        // margin: Dimens.edgeInsets0_0_16_0,
+                                        margin: EdgeInsets.only(right: 5),
                                         child: TextField(
                                           style: GoogleFonts.lato(
                                             textStyle: TextStyle(

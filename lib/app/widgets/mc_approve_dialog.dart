@@ -84,15 +84,17 @@ class ApproveMcPlan extends GetView {
               },
               child: const Text('Cancel'),
             ),
-            Dimens.boxWidth20,
+            SizedBox(
+              width: 10,
+            ),
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
                 _controller.mcPlanApprovedButton(id: id);
-                print('Goods order id:$id');
+
                 Get.back();
               },
-              child: Text('Approve  MC Plan'),
+              child: Text('Approve MC Plan'),
             ),
           ]),
         ],

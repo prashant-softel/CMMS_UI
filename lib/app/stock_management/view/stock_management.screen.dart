@@ -122,7 +122,7 @@ class StockManagementDashboardScreen
                                         .length >
                                     0
                                 ? _stockManagementList(
-                                    tittle: "Request Orders",
+                                    tittle: "Goods Request",
                                     ontap: () {
                                       Get.offNamed(Routes.purchaseGoodsorder);
                                     })
@@ -361,7 +361,7 @@ class StockManagementDashboardScreen
                                         .length >
                                     0
                                 ? _stockManagementList(
-                                    tittle: "Asset Master",
+                                    tittle: "Material List",
                                     ontap: () {
                                       Get.offNamed(Routes.assetMasterList);
                                     })
@@ -377,7 +377,7 @@ class StockManagementDashboardScreen
                                         .length >
                                     0
                                 ? _stockManagementList(
-                                    tittle: "Add Asset Master",
+                                    tittle: "Add Material",
                                     ontap: () {
                                       Get.offNamed(Routes.addassetMaster);
                                     })
