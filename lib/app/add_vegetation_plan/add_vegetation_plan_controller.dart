@@ -323,8 +323,8 @@ class AddVegetationPlanController extends GetxController {
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 10),
     );
     if (newDate == null) return null;
     return newDate;

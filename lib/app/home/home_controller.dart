@@ -54,7 +54,9 @@ class HomeController extends GetxController {
   final assetDescpTextController = TextEditingController();
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
-  final categoryMap = <String, int>{};
+  final categoryMap = <String, double>{};
+  Map<String, double> top5Map = <String, double>{};
+  List<String> top5String = [];
   //int facilityId = 45;
   String categoryIds = '';
 
@@ -258,7 +260,8 @@ class HomeController extends GetxController {
         ..sort((a, b) => b.value.compareTo(a.value));
 
       // Get the top 5 categories
-      final top5 = sortedCategories.take(5).map((e) => e.key).toList();
+      top5Map = sortedCategories.take(5) as Map<String, double>;
+      top5String = sortedCategories.take(5).map((e) => e.key).toList();
 
       totalSumMcCount.value = totalSumMcCountTemp;
       totalSumPmCount.value = totalSumPmCountTemp;
@@ -293,8 +296,9 @@ class HomeController extends GetxController {
       dashboardIrList.value = _dashboardList[3];
       dashboardSmList.value = _dashboardList[4];
 
-      print('Top 5 asset categories: $top5');
+      print('Top 5 asset categories: $top5String');
       print('Category Map: $categoryMap');
+      print('Category Map top5map: $top5Map');
 
       update(['dashboard']);
     }

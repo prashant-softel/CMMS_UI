@@ -126,7 +126,42 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                                     )
                                   : Dimens.box0,
                             ],
-                          )
+                          ),
+                          Responsive.isMobile(context)
+                              ? GridView.count(
+                                  shrinkWrap: true,
+                                  primary: false,
+                                  padding: Dimens.edgeInsets15,
+                                  crossAxisSpacing: 70,
+                                  mainAxisSpacing: 6,
+                                  crossAxisCount:
+                                      Responsive.isMobile(context) ? 2 : 5,
+                                  childAspectRatio: Responsive.isMobile(context)
+                                      ? (itemWidth / itemHeight)
+                                      : 5,
+                                  children: <Widget>[
+                                    varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kVegetationControlFeatureId &&
+                                                    e.add ==
+                                                        UserAccessConstants
+                                                            .kHaveAddAccess)
+                                                .length >
+                                            0
+                                        ? _vegetationList(
+                                            tittle: "Add Plan",
+                                            ontap: () {
+                                              Get.offNamed(
+                                                Routes.addVegetationPlanScreen,
+                                              );
+                                            },
+                                          )
+                                        : Dimens.box0,
+                                  ],
+                                )
+                              : Dimens.box0,
                         ],
                       ),
                     ),
