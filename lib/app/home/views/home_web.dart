@@ -1736,7 +1736,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               dataMap: controller.categoryMap,
                                               animationDuration:
                                                   Duration(milliseconds: 800),
-                                              chartLegendSpacing: 0,
+                                              chartLegendSpacing: 20,
                                               chartRadius: 200,
                                               colorList:
                                                   controller.getColorList(),
@@ -1747,7 +1747,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               legendOptions: LegendOptions(
                                                 showLegendsInRow: false,
                                                 legendPosition:
-                                                    LegendPosition.right,
+                                                    LegendPosition.left,
                                                 showLegends: true,
                                                 legendShape: BoxShape.circle,
                                                 legendTextStyle: Styles.black13,
