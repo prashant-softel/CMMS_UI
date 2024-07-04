@@ -146,7 +146,7 @@ class HomeController extends GetxController {
       Colors.blue,
       Colors.green,
       Colors.orange,
-      Colors.white24,
+      Colors.yellowAccent,
       Colors.purpleAccent,
     ];
   }

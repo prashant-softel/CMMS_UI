@@ -1736,23 +1736,21 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               dataMap: controller.categoryMap,
                                               animationDuration:
                                                   Duration(milliseconds: 800),
-                                              chartLegendSpacing: 30,
-                                              chartRadius: 80,
+                                              chartLegendSpacing: 0,
+                                              chartRadius: 200,
                                               colorList:
                                                   controller.getColorList(),
-                                              initialAngleInDegree: 0,
+                                              // initialAngleInDegree: 50,
                                               chartType: ChartType.ring,
                                               ringStrokeWidth: 10,
-                                              // centerText: "Category",
+                                              centerText: "Category",
                                               legendOptions: LegendOptions(
                                                 showLegendsInRow: false,
                                                 legendPosition:
-                                                    LegendPosition.left,
+                                                    LegendPosition.right,
                                                 showLegends: true,
                                                 legendShape: BoxShape.circle,
-                                                legendTextStyle: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                                legendTextStyle: Styles.black13,
                                               ),
                                               chartValuesOptions:
                                                   ChartValuesOptions(
@@ -1766,6 +1764,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                           ),
                                         ),
+
                                         Expanded(
                                           flex: 2,
                                           child: Container(
