@@ -87,7 +87,9 @@ class IRMessageApproveDialog extends GetView {
                   child: const Text('IR List'),
                 ),
               ),
-              Dimens.boxWidth10,
+  SizedBox(
+                width: 10,
+              ),
               Center(
                 child: ElevatedButton(
                   style: Styles.yellowElevatedButtonStyle,
