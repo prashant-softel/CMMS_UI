@@ -18,6 +18,7 @@ class HomeBinding extends Bindings {
           ),
         ),
       ),
+      fenix: true,
     );
   }
 }
