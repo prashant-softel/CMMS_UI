@@ -27,7 +27,7 @@ class ReqOrderRejectDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          "Request Order Reject",
+          "Goods Request Reject",
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -94,10 +94,10 @@ class ReqOrderRejectDialog extends GetView {
               style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
                 _controller.rejectGoodsOrder(id: id);
-                print('Request order id:$id');
+                print('Goods Request id:$id');
                 Get.back();
               },
-              child: Text('Reject RO'),
+              child: Text('Reject GR'),
             ),
             Spacer()
           ]),

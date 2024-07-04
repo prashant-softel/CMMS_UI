@@ -25,7 +25,7 @@ class ReqOrderMessageRejectDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Request Order Reject',
+          'Goods Request Reject',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
@@ -87,7 +87,7 @@ class ReqOrderMessageRejectDialog extends GetView {
                   onPressed: () {
                     Get.offAllNamed(Routes.purchaseGoodsorder);
                   },
-                  child: const Text('RO List'),
+                  child: const Text('GR List'),
                 ),
               ),
               Dimens.boxWidth10,
@@ -111,7 +111,7 @@ class ReqOrderMessageRejectDialog extends GetView {
                       },
                     );
                   },
-                  child: const Text('View RO'),
+                  child: const Text('View GR'),
                 ),
               ),
               Spacer(),

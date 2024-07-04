@@ -30,42 +30,72 @@ class AuditApprovedDialog extends GetView {
             // style: TextStyle(color: Colors.green),
           ),
           content: Builder(builder: (context) {
-            return Container(
-              padding: Dimens.edgeInsets05_0_5_0,
-              height: 200,
-              width: 400,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Divider(
-                      color: ColorValues.greyLightColour,
-                      thickness: 1,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomRichText(title: 'Comment'),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextField(
-                          controller: controller.approveCommentTextFieldCtrlr,
-                          maxLines: 4,
-                          decoration: InputDecoration(
-                            hintText: 'Comment here....',
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
+            return Obx(
+              ()=> Container(
+                padding: Dimens.edgeInsets05_0_5_0,
+                height: 200,
+                width: 400,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Divider(
+                        color: ColorValues.greyLightColour,
+                        thickness: 1,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomRichText(title: 'Comment'),
+                          SizedBox(
+                            height: 20,
                           ),
-                        ),
-                      ],
-                    ),
-                  ]),
+                          TextField(
+                            controller: controller.approveCommentTextFieldCtrlr,
+                            maxLines: 3,
+                            decoration: InputDecoration(
+                              hintText: 'Comment here....',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                                     focusedErrorBorder:
+                                    controller.iscommentTextInvalid.value
+                                        ? OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(5),
+                                            borderSide: BorderSide(
+                                              color: ColorValues.redColorDark,
+                                            ),
+                                        )
+                               : InputBorder.none,
+                                errorBorder: controller.iscommentTextInvalid.value
+                                    ? OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                        borderSide: BorderSide(
+                                          color: ColorValues.redColorDark,
+                                        ),
+                                      )
+                                    : null,
+                                errorText: controller.iscommentTextInvalid.value
+                                    ? "Required field"
+                                    : null,
+                            ),
+              
+                               onChanged: (value) {
+                                if (value.trim().length > 3) {
+                                  controller.iscommentTextInvalid.value = false;
+                                } else {
+                                  controller.iscommentTextInvalid.value = true;
+                                }
+                              },
+                          ),
+                        ],
+                      ),
+                    ]),
+              ),
             );
           }),
           actions: [
@@ -85,10 +115,14 @@ class AuditApprovedDialog extends GetView {
               ElevatedButton(
                 style: Styles.greenElevatedButtonStyle,
                 onPressed: () {
+                  if(controller.checkComment()){
+                    return;
+                  }else{
                   controller.auditPlanApprovedButton(
                       id: controller.auditId.value);
                   // print('Goods order id:$id');
                   Get.back();
+                  }
                 },
                 child: Text('Approve Audit Plan'),
               ),
