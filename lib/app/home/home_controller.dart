@@ -54,7 +54,9 @@ class HomeController extends GetxController {
   final assetDescpTextController = TextEditingController();
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
-  final categoryMap = <String, double>{};
+  final categoryMapBM = <String, double>{};
+  final categoryMapPM = <String, double>{};
+  final categoryMapMC = <String, double>{};
 
   //int facilityId = 45;
   String categoryIds = '';
@@ -240,36 +242,8 @@ class HomeController extends GetxController {
           woOnTimeSumTemp += details?.wo_on_time ?? 0;
           woDelaySumTemp += details?.wo_delay ?? 0;
           woBacklogSumTemp += details?.wo_backlog ?? 0;
-
-          for (var item in details?.item_list ?? []) {
-            final categories = item.asset_category?.split(', ') ?? [];
-            for (var category in categories) {
-              if (categoryMap.containsKey(category)) {
-                categoryMap[category] = categoryMap[category]! + 1;
-              } else {
-                categoryMap[category] = 1;
-              }
-            }
-          }
-          print({"categoryMapData": categoryMap});
         }
       }
-
-      // Sort the categories by count in descending order
-      final sortedCategories = categoryMap.entries.toList()
-        ..sort((a, b) => b.value.compareTo(a.value));
-
-      // Get the top 5 categories
-      final top5Categories = sortedCategories.take(5).toList();
-
-      // Clear the existing categoryMap and add top 5 categories
-      categoryMap.clear();
-      for (var entry in top5Categories) {
-        categoryMap[entry.key] = entry.value.toDouble();
-      }
-
-      print({"categoryMapDatatop5": top5Categories});
-      print({"categoryMapDatasortedCategories": sortedCategories});
 
       totalSumMcCount.value = totalSumMcCountTemp;
       totalSumPmCount.value = totalSumPmCountTemp;
@@ -293,9 +267,76 @@ class HomeController extends GetxController {
       dashboardMcList.value = _dashboardList[2];
       dashboardIrList.value = _dashboardList[3];
       dashboardSmList.value = _dashboardList[4];
+      Map<String, double> dataMap() {
+        return {
+          "BM": double.tryParse(totalSumBmcCountTemp.toString()) ?? 0.0,
+          "PM": double.tryParse(totalSumPmCountTemp.toString()) ?? 0.0,
+          "MC": double.tryParse(totalSumMcCountTemp.toString()) ?? 0.0,
+        };
+      }
 
-      print('Top 5 asset categories: $top5Categories');
-      print('Category Map: $categoryMap');
+      getDataMap.value = dataMap();
+      if (dashboardBmList.value != null) {
+        for (var item
+            in dashboardBmList?.value!.cmDashboadDetails!.item_list ?? []) {
+          final categories = item.asset_category?.split(', ') ?? [];
+          for (var category in categories) {
+            if (categoryMapBM.containsKey(category)) {
+              categoryMapBM[category] = categoryMapBM[category]! + 1;
+            } else {
+              categoryMapBM[category] = 1;
+            }
+          }
+        }
+        final sortedCategories = categoryMapBM.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        final top5Categories = sortedCategories.take(5).toList();
+        categoryMapBM.clear();
+        for (var entry in top5Categories) {
+          categoryMapBM[entry.key] = entry.value.toDouble();
+        }
+      }
+
+      if (dashboardPmList.value != null) {
+        for (var item
+            in dashboardPmList?.value!.cmDashboadDetails!.item_list ?? []) {
+          final categories = item.asset_category?.split(', ') ?? [];
+          for (var category in categories) {
+            if (categoryMapPM.containsKey(category)) {
+              categoryMapPM[category] = categoryMapPM[category]! + 1;
+            } else {
+              categoryMapPM[category] = 1;
+            }
+          }
+        }
+        final sortedCategories = categoryMapPM.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        final top5Categories = sortedCategories.take(5).toList();
+        categoryMapPM.clear();
+        for (var entry in top5Categories) {
+          categoryMapPM[entry.key] = entry.value.toDouble();
+        }
+      }
+      // if (dashboardMcList.value != null) {
+      //   for (var item
+      //       in dashboardMcList?.value!.cmDashboadDetails!.item_list ?? []) {
+      //     final categories = item.asset_category?.split(', ') ?? [];
+      //     for (var category in categories) {
+      //       if (categoryMapMC.containsKey(category)) {
+      //         categoryMapMC[category] = categoryMapMC[category]! + 1;
+      //       } else {
+      //         categoryMapMC[category] = 1;
+      //       }
+      //     }
+      //   }
+      //   final sortedCategories = categoryMapMC.entries.toList()
+      //     ..sort((a, b) => b.value.compareTo(a.value));
+      //   final top5Categories = sortedCategories.take(5).toList();
+      //   categoryMapMC.clear();
+      //   for (var entry in top5Categories) {
+      //     categoryMapMC[entry.key] = entry.value.toDouble();
+      //   }
+      // }
 
       update(['dashboard']);
     }
