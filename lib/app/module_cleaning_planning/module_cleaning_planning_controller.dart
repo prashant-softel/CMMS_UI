@@ -39,7 +39,7 @@ class ModuleCleaningPlanningController extends GetxController {
 
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<String> selectedAssignedTo = ''.obs;
-  int selectedAssignedToId = 0;
+  RxInt selectedAssignedToId = 0.obs;
   bool openStartDatePicker = false;
   var startDateTc = TextEditingController();
   // var mcTitelCtrlr = TextEditingController();
@@ -84,10 +84,9 @@ class ModuleCleaningPlanningController extends GetxController {
   // Map<String, TypeModel> typedropdownMapperData = {};
 
   RxList<TypeModel> cleaningType = <TypeModel>[
-    TypeModel(name: "Please Select", id: "0"),
-    TypeModel(name: 'Dry', id: "1"),
-    TypeModel(name: 'Wet', id: "2"),
-    TypeModel(name: 'Robotic', id: "3"),
+    TypeModel(name: 'Dry', id: "0"),
+    TypeModel(name: 'Wet', id: "1"),
+    TypeModel(name: 'Robotic', id: "2"),
   ].obs;
   // var days = <TypeModel>[
   //   TypeModel(name: "Please Select", id: "0"),
@@ -115,11 +114,15 @@ class ModuleCleaningPlanningController extends GetxController {
           getEquipmentModelList(facilityId, true);
         });
       });
+      Future.delayed(Duration(seconds: 1), () {
+        getAssignedToList();
+      });
       if (id != 0) {
         Future.delayed(Duration(seconds: 1), () {
           getMcPlanDetail(planId: id.value, facilityId: facilityId);
         });
       }
+
       Future.delayed(Duration(seconds: 1), () {
         getFrequencyList();
       });
@@ -216,14 +219,16 @@ class ModuleCleaningPlanningController extends GetxController {
     }
 
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
-        planId: 0,
-        facilityId: facilityId,
-        startDate: _startDateTc,
-        frequencyId: selectedfrequencyId,
-        cleaningType: selectedCleaningId,
-        noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
-        title: _mcTitelCtrlr,
-        schedules: schedules);
+      planId: 0,
+      facilityId: facilityId,
+      startDate: _startDateTc,
+      frequencyId: selectedfrequencyId,
+      cleaningType: selectedCleaningId,
+      noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
+      title: _mcTitelCtrlr,
+      schedules: schedules,
+      assignedToId: selectedAssignedToId.value,
+    );
 
     var createMcModelJsonString = [createMcModel.toJson()];
     Map<String, dynamic>? responseCreateMcModel =
@@ -275,6 +280,7 @@ class ModuleCleaningPlanningController extends GetxController {
         frequencyId: selectedfrequencyId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         title: _mcTitelCtrlr,
+        assignedToId: selectedAssignedToId.value,
         schedules: sch ?? []);
 
     var updateMcModelJsonString = [createMcModel.toJson()];
@@ -301,6 +307,9 @@ class ModuleCleaningPlanningController extends GetxController {
       mcPlanDetailsModel.value = _mcPlanDetails;
       mcTitelCtrlr.text = mcPlanDetailsModel.value?.title ?? "";
       selectedfrequency.value = mcPlanDetailsModel.value?.frequency ?? '';
+      selectedAssignedToId.value = mcPlanDetailsModel.value?.assignedToId ?? 0;
+      selectedAssignedTo.value = mcPlanDetailsModel.value?.assignedTo ?? '';
+
       startDateTc.text = mcPlanDetailsModel.value?.startDate ?? '';
       durationInDayCtrlr.text =
           mcPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
@@ -381,6 +390,20 @@ class ModuleCleaningPlanningController extends GetxController {
             isSelectedfrequency.value = true;
           } else {
             selectedCleaningId = 0;
+          }
+        }
+        break;
+      case const (RxList<EmployeeModel>):
+        {
+          if (value != "Please Select") {
+            int assignedToIndex =
+                assignedToList.indexWhere((x) => x?.name == value);
+            selectedAssignedToId.value =
+                assignedToList[assignedToIndex]?.id ?? 0;
+            isAssignedToSelected.value = true;
+            selectedAssignedTo.value = value;
+          } else {
+            selectedAssignedToId.value = 0;
           }
         }
         break;
