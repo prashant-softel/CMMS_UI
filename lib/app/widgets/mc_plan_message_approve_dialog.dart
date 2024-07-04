@@ -88,7 +88,9 @@ class McPlanMessageApproveDialog extends GetView {
                   child: const Text('MC List'),
                 ),
               ),
-              Dimens.boxWidth10,
+              SizedBox(
+                width: 10,
+              ),
               Center(
                 child: ElevatedButton(
                   style: Styles.yellowElevatedButtonStyle,
