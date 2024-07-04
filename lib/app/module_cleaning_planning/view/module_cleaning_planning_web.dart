@@ -268,45 +268,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                               children: [
                                                 Row(
                                                   children: [
-                                                    Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Start date:'),
-                                                        Dimens.boxWidth10,
-
-                                                        _buildStartValidTillDateField_web(
-                                                          context,
-                                                          0,
-                                                        ),
-
-                                                        // CustomTextFieldForStock(
-                                                        //   width: MediaQuery.of(
-                                                        //               context)
-                                                        //           .size
-                                                        //           .width /
-                                                        //       5,
-                                                        //   numberTextField: true,
-                                                        //   onTap: () {
-                                                        //     controller
-                                                        //             .openStartDatePicker =
-                                                        //         !controller
-                                                        //             .openStartDatePicker;
-                                                        //     controller.update([
-                                                        //       'stock_Mangement'
-                                                        //     ]);
-                                                        //   },
-                                                        //   textController:
-                                                        //       controller
-                                                        //           .startDateTc,
-                                                        // ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxHeight10
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
                                                     Dimens.boxWidth10,
                                                     CustomRichText(
                                                         title:
@@ -350,6 +311,47 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                                 .width /
                                                             5,
                                                       ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Dimens.boxHeight10,
+                                                Row(
+                                                  children: [
+                                                    CustomRichText(
+                                                        title: 'Assigned To :'),
+                                                    Dimens.boxWidth10,
+                                                    SizedBox(
+                                                      child: DropdownWebWidget(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        controller: controller,
+                                                        dropdownList: controller
+                                                            .assignedToList,
+                                                        isValueSelected: controller
+                                                            .isAssignedToSelected
+                                                            .value,
+                                                        selectedValue: controller
+                                                            .selectedAssignedTo
+                                                            .value,
+                                                        onValueChanged:
+                                                            controller
+                                                                .onValueChanged,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Dimens.boxHeight10,
+                                                Row(
+                                                  children: [
+                                                    CustomRichText(
+                                                        title: 'Start date:'),
+                                                    Dimens.boxWidth10,
+                                                    _buildStartValidTillDateField_web(
+                                                      context,
+                                                      0,
                                                     ),
                                                   ],
                                                 ),
@@ -812,71 +814,49 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
     int position,
   ) {
     final ModuleCleaningPlanningController controller = Get.find();
-    return Column(
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.height * 0.050,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: const Offset(
-                  5.0,
-                  5.0,
-                ),
-                blurRadius: 5.0,
-                spreadRadius: 1.0,
-              ),
-              BoxShadow(
-                color: ColorValues.whiteColor,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 0.0,
-                spreadRadius: 0.0,
-              ), //BoxShadow
-            ],
-            color: ColorValues.whiteColor,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SizedBox(
-            width: Responsive.isDesktop(context)
-                ? MediaQuery.of(context).size.width / 5
-                : MediaQuery.of(context).size.width / 1.0,
-            child: TextField(
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                      fontSize: 16.0, height: 1.0, color: Colors.black),
-                ),
-                onTap: () {
-                  position == 0
-                      ? pickDateTime_web(context, 0)
-                      : pickDateTime_web(context, 1);
-                },
-                controller: position == 0
-                    ? controller.startDateTimeCtrlr
-                    : controller.validTillTimeCtrlr,
-                autofocus: false,
-                decoration: InputDecoration(
-                  fillColor: ColorValues.whiteColor,
-                  filled: true,
-                  contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                  border: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                ),
-                onChanged: (value) {
-                  if (controller.startDateTimeCtrlrBuffer.text
-                          .trim()
-                          .isNotEmpty &&
-                      controller.validTillTimeCtrlr.text.trim().isNotEmpty) {
-                    controller.isstartdateInvalid.value = false;
-                  } else {
-                    controller.isstartdateInvalid.value = true;
-                  }
-                }),
-          ),
-        ),
-        Dimens.boxHeight20,
-      ],
+    return Container(
+      padding: EdgeInsets.only(bottom: 10),
+      height: MediaQuery.of(context).size.height * 0.040,
+      decoration: BoxDecoration(
+        boxShadow: [],
+        color: ColorValues.whiteColor,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: SizedBox(
+        width: Responsive.isDesktop(context)
+            ? MediaQuery.of(context).size.width / 5
+            : MediaQuery.of(context).size.width / 1.0,
+        child: TextField(
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
+            onTap: () {
+              position == 0
+                  ? pickDateTime_web(context, 0)
+                  : pickDateTime_web(context, 1);
+            },
+            controller: position == 0
+                ? controller.startDateTc
+                : controller.validTillTimeCtrlr,
+            autofocus: false,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+            ),
+            onChanged: (value) {
+              if (controller.startDateTimeCtrlrBuffer.text.trim().isNotEmpty &&
+                  controller.validTillTimeCtrlr.text.trim().isNotEmpty) {
+                controller.isstartdateInvalid.value = false;
+              } else {
+                controller.isstartdateInvalid.value = true;
+              }
+            }),
+      ),
     );
   }
 
@@ -905,14 +885,12 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
     position == 0
         ? controller.selectedmcstarttime.value
         : controller.selectedValidTillTime.value = dateTime;
-    position == 0
-        ? controller.startDateTimeCtrlr
-        : controller.validTillTimeCtrlr
+    position == 0 ? controller.startDateTc : controller.validTillTimeCtrlr
       ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
           offset: position == 0
-              ? controller.startDateTimeCtrlr.text.length
+              ? controller.startDateTc.text.length
               : controller.validTillTimeCtrlr.text.length,
           affinity: TextAffinity.upstream,
         ),
