@@ -61,7 +61,7 @@ class PurchaseGoodsorderViewWeb
                 },
                 child: Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
               ),
-              Text(" / VIEW REQUEST ORDER DETAILS", style: Styles.greyLight14)
+              Text(" / VIEW GOODS REQUEST DETAILS", style: Styles.greyLight14)
             ],
           ),
         ),
@@ -88,7 +88,7 @@ class PurchaseGoodsorderViewWeb
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              " View Request  Order  Details",
+                              " View Goods Request Details",
                               style: Styles.blackBold14,
                             ),
                           ),

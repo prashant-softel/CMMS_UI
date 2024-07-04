@@ -20,6 +20,7 @@ class ViewAuditPlanController extends GetxController {
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   Rx<int> auditId = 0.obs;
   Rx<int> type = 0.obs;
+  RxBool iscommentTextInvalid = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
@@ -103,22 +104,21 @@ class ViewAuditPlanController extends GetxController {
   }
 
   void auditPlanApprovedButton({int? id}) async {
-    {
-      String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentauditPlanAproveModel =
-          CommentModel(id: id, comment: _comment);
+    String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      var auditPlanApproveJsonString = commentauditPlanAproveModel.toJson();
+    CommentModel commentauditPlanAproveModel =
+        CommentModel(id: id, comment: _comment);
 
-      Map<String, dynamic>? response =
-          await viewAuditPlanPresenter.auditPlanApprovedButton(
-        auditPlanApproveJsonString: auditPlanApproveJsonString,
-        isLoading: true,
-      );
-      if (response == true) {
-        //getCalibrationList(facilityId, true);
-      }
+    var auditPlanApproveJsonString = commentauditPlanAproveModel.toJson();
+
+    Map<String, dynamic>? response =
+        await viewAuditPlanPresenter.auditPlanApprovedButton(
+      auditPlanApproveJsonString: auditPlanApproveJsonString,
+      isLoading: true,
+    );
+    if (response == true) {
+      //getCalibrationList(facilityId, true);
     }
   }
 
@@ -140,5 +140,14 @@ class ViewAuditPlanController extends GetxController {
         //getCalibrationList(facilityId, true);
       }
     }
+  }
+
+  bool checkComment() {
+    if (approveCommentTextFieldCtrlr.text == "") {
+      iscommentTextInvalid.value = true;
+      return true;
+    }
+
+    return false;
   }
 }
