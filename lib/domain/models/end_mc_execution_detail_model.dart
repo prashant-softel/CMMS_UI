@@ -26,6 +26,11 @@ class EndMCExecutionDetailsModel {
   int? status;
   String? status_short;
   String? status_long;
+  int? permit_id;
+  String? permit_code;
+  int? ptw_status;
+  int? ptw_tbt_done;
+  String? status_short_ptw;
   List<Schedules> schedules;
 
   EndMCExecutionDetailsModel({
@@ -46,12 +51,18 @@ class EndMCExecutionDetailsModel {
     this.status,
     this.status_short,
     this.status_long,
+    this.permit_id,
+    this.permit_code,
+    this.ptw_status,
+    this.ptw_tbt_done,
+    this.status_short_ptw,
     this.schedules = const [],
   });
 
   factory EndMCExecutionDetailsModel.fromJson(Map<String, dynamic> json) =>
       EndMCExecutionDetailsModel(
         id: json['id'],
+        status_short_ptw: json['status_short_ptw'],
         executionId: json["executionId"],
         title: json['title'],
         description: json['description'] ?? '',
@@ -68,6 +79,10 @@ class EndMCExecutionDetailsModel {
         status: json['status'],
         status_short: json['status_short'],
         status_long: json['status_long'],
+        permit_id: json['permit_id'],
+        permit_code: json['permit_code'],
+        ptw_status: json['ptw_status'],
+        ptw_tbt_done: json['ptw_tbt_done'],
         schedules: json["schedules"] != null
             ? List<Schedules>.from(
                 json["schedules"].map((x) => Schedules.fromJson(x)))
@@ -76,6 +91,7 @@ class EndMCExecutionDetailsModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "status_short_ptw": status_short_ptw,
         "executionId": executionId,
         "title": title,
         "description": description,
@@ -92,6 +108,10 @@ class EndMCExecutionDetailsModel {
         "status": status,
         "status_short": status_short,
         "status_long": status_long,
+        "permit_id": permit_id,
+        "permit_code": permit_code,
+        "ptw_status": ptw_status,
+        "ptw_tbt_done": ptw_tbt_done,
         "schedules": List<dynamic>.from(schedules.map((x) => x)),
       };
 }
