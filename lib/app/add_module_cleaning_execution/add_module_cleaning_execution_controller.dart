@@ -255,6 +255,15 @@ class AddModuleCleaningExecutionController extends GetxController {
     }
   }
 
+  Future<void> viewNewPermitList({
+    int? permitId,
+    int? jobId,
+  }) async {
+    Get.toNamed(Routes.viewPermitScreen,
+        arguments: {"permitId": permitId, "jobId": jobId, "type": 3});
+    print({"Permit", permitId, jobId});
+  }
+
   Future<void> getMCTaskEquipmentList(int taskId, bool isLoading) async {
     equipmenTasktList.value = <GetMCTaskEquipmentList>[];
 
