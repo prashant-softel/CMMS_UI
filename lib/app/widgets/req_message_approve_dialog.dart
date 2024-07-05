@@ -91,7 +91,8 @@ class ReqOrderMessageApproveDialog extends GetView {
                     child: const Text('Goods Request List'),
                   ),
                 ),
-                Dimens.boxWidth10,
+                // Dimens.boxWidth10,
+                SizedBox(width:10),
                 Center(
                   child: ElevatedButton(
                     style: Styles.yellowElevatedButtonStyle,
