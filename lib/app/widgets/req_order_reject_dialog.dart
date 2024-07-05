@@ -89,7 +89,8 @@ class ReqOrderRejectDialog extends GetView {
               },
               child: const Text('Cancel'),
             ),
-            Dimens.boxWidth20,
+            // Dimens.boxWidth20,
+            SizedBox(width:20),
             ElevatedButton(
               style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {

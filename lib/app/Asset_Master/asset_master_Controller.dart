@@ -43,27 +43,22 @@ class AssetMasterController extends GetxController {
   Rx<bool> isSelectedequipment = true.obs;
   Rx<bool> isLoading = true.obs;
   RxString materialNameFilterText = ''.obs;
-    RxString acdcFilterText = ''.obs;
+  RxString acdcFilterText = ''.obs;
   RxString materialTypeFilterText = ''.obs;
   RxString materialCategoryFilterText = ''.obs;
-  
-    RxString minRequiredQtyFilterText = ''.obs;
-     RxString minReorderQtyTextFilterText = ''.obs;
-      RxString descriptionFilterText = ''.obs;
-      RxString unitofMeasurementFilterText = ''.obs;
-      RxString approvalRequiredFilterText = ''.obs;
 
-      
+  RxString minRequiredQtyFilterText = ''.obs;
+  RxString minReorderQtyTextFilterText = ''.obs;
+  RxString descriptionFilterText = ''.obs;
+  RxString unitofMeasurementFilterText = ''.obs;
+  RxString approvalRequiredFilterText = ''.obs;
 
-      
-     
-
-   RxList<AssetMasterModel?> AssetList = <AssetMasterModel?>[].obs;
+  RxList<AssetMasterModel?> AssetList = <AssetMasterModel?>[].obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<AssetMasterModel?>? moduleList = <AssetMasterModel?>[].obs;
   RxList<AssetMasterModel> buffermodulelist = <AssetMasterModel>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
-    Rx<DateTime> toDate = DateTime.now().obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
   bool openFromDateToStartDatePicker = false;
 
   String get formattedFromdate =>
@@ -79,33 +74,33 @@ class AssetMasterController extends GetxController {
     rowsPerPage: 10,
   );
   RxString mdmFilterText = ''.obs;
-   Rx<int> AssetId = 0.obs;
+  Rx<int> AssetId = 0.obs;
 
-    final columnVisibility = ValueNotifier<Map<String, bool>>({
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
     "MDM Code": true,
     "Material Name": true,
     "AC/DC": true,
     "Material Type": true,
     "Material Category": true,
-    "Min. Required Qty":true,
-    "Min. Reorder Qty":true,
-    "Description":true,
-    "Unit Of Measurement":true,
-    "Approval Required":true,
+    "Min. Required Qty": true,
+    "Min. Reorder Qty": true,
+    "Description": true,
+    "Unit Of Measurement": true,
+    "Approval Required": true,
   });
-    final Map<String, double> columnwidth = {
-     "MDM Code": 200,
+  final Map<String, double> columnwidth = {
+    "MDM Code": 200,
     "Material Name": 400,
     "AC/DC": 200,
     "Material Type": 200,
     "Material Category": 200,
-     "Min. Required Qty":200,
-    "Min. Reorder Qty":200,
-    "Description":300,
-    "Unit Of Measurement":200,
-    "Approval Required":200,
+    "Min. Required Qty": 200,
+    "Min. Reorder Qty": 200,
+    "Description": 300,
+    "Unit Of Measurement": 200,
+    "Approval Required": 200,
   };
-    Map<String, RxString> filterText = {};
+  Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
     final newVisibility = Map<String, bool>.from(columnVisibility.value)
       ..[columnName] = isVisible;
@@ -122,7 +117,6 @@ class AssetMasterController extends GetxController {
   var isToggle5On = false.obs;
   var isToggle6On = false.obs;
   final isSuccess = false.obs;
-
 
   void toggle() {
     isToggleOn.value = !isToggleOn.value;
@@ -162,18 +156,17 @@ class AssetMasterController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
-    this.filterText={
-        "MDM Code": mdmFilterText,
-    "Material Name": materialNameFilterText,
-    "AC/DC": acdcFilterText,
-    "Material Type": materialTypeFilterText,
-    "Material Category": materialCategoryFilterText,
-     "Min. Required Qty":minRequiredQtyFilterText,
-    "Min. Reorder Qty":minReorderQtyTextFilterText,
-    "Description":descriptionFilterText,
-    "Unit Of Measurement":unitofMeasurementFilterText,
-    "Approval Required":approvalRequiredFilterText,
-
+    this.filterText = {
+      "MDM Code": mdmFilterText,
+      "Material Name": materialNameFilterText,
+      "AC/DC": acdcFilterText,
+      "Material Type": materialTypeFilterText,
+      "Material Category": materialCategoryFilterText,
+      "Min. Required Qty": minRequiredQtyFilterText,
+      "Min. Reorder Qty": minReorderQtyTextFilterText,
+      "Description": descriptionFilterText,
+      "Unit Of Measurement": unitofMeasurementFilterText,
+      "Approval Required": approvalRequiredFilterText,
     };
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
@@ -189,7 +182,10 @@ class AssetMasterController extends GetxController {
       int facilityId, int type, bool? isExport) async {
     moduleList?.value = <AssetMasterModel>[];
     final _moduleList = await moduleListPresenter.getAssetMasterList(
-        facilityId: facilityId, type: type, isLoading: isLoading.value,isExport:isExport);
+        facilityId: facilityId,
+        type: type,
+        isLoading: isLoading.value,
+        isExport: isExport);
     buffermodulelist.value = <AssetMasterModel>[];
     // moduleList!.value = _moduleList ?? <AssetMasterModel>[];
     buffermodulelist.value =
@@ -202,30 +198,57 @@ class AssetMasterController extends GetxController {
           _moduleList.whereType<AssetMasterModel>().toList() ??
               <AssetMasterModel>[];
 
-
-        isLoading.value=false;
-      }
-    
+      isLoading.value = false;
+    }
   }
 
   void search(String keyword) {
     print('Keyword: $keyword');
 
     if (keyword.isEmpty) {
-      moduleList!.value = buffermodulelist.toList();
+      moduleList!.value = buffermodulelist.value;
     } else {
-      List<AssetMasterModel> filteredList = buffermodulelist
-          .where((item) => (item.asset_name?.toString().toLowerCase() ?? '')
-              .contains(keyword.toLowerCase()))
-          .toList();
+      List<AssetMasterModel> filteredList = buffermodulelist.where((Mrs) {
+        return (Mrs.asset_code ?? '')
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ||
+            (Mrs.asset_name ?? '')
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ||
+            (Mrs.section ?? '').toLowerCase().contains(keyword.toLowerCase()) ||
+            (Mrs.asset_type ?? '')
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ||
+            (Mrs.cat_name ?? '')
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ||
+            (Mrs.max_request_qty ?? '')
+                .toString()
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ||
+            (Mrs.reorder_qty ?? '')
+                .toString()
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ||
+            (Mrs.description ?? '')
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ||
+            (Mrs.measurement ?? '')
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ||
+            (Mrs.approval_required ?? '')
+                .toLowerCase()
+                .contains(keyword.toLowerCase());
+      }).toList();
 
-      moduleList?.value = filteredList;
+      moduleList!.value = filteredList;
+
+      // Update paginationController when the list changes
+      paginationController = PaginationController(
+        rowCount: moduleList!.length,
+        rowsPerPage: 10,
+      );
     }
-    // Update paginationController when the list changes
-    paginationController = PaginationController(
-      rowCount: moduleList!.length,
-      rowsPerPage: 10,
-    );
   }
 
   Future<void> createModulelist() async {
@@ -381,13 +404,15 @@ class AssetMasterController extends GetxController {
   //   );
   //   return true;
   // }
-  void getmoduleListByDate(){
- getAssetMasterList(facilityId,type,false);
+  void getmoduleListByDate() {
+    getAssetMasterList(facilityId, type, false);
   }
-void clearStoreData() {
+
+  void clearStoreData() {
     moduleListPresenter.clearValue();
   }
-   void clearpmTaskValue() {
+
+  void clearpmTaskValue() {
     moduleListPresenter.clearpmTaskValue();
   }
 
@@ -410,8 +435,8 @@ void clearStoreData() {
   void clearStoreTaskWhereUsedData() {
     moduleListPresenter.clearStoreTaskWhereUsedData();
   }
+
   void export() {
-    getAssetMasterList(facilityId, type,true);
+    getAssetMasterList(facilityId, type, true);
   }
 }
-

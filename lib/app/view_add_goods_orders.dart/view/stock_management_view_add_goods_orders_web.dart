@@ -1378,7 +1378,8 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                   ),
                                                 )
                                               : Dimens.box0,
-                                          Dimens.boxWidth10,
+                                          // Dimens.boxWidth10,
+                                          SizedBox(width:10),
                                           controller.getPurchaseDetailsByIDModel
                                                               .value?.status ==
                                                           302 &&

@@ -123,7 +123,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                   // Container(
                                   //     margin: Dimens.edgeInsets30_0_0_0,
                                   //     child:
-                                  Dimens.boxWidth30,
+                                  // Dimens.boxWidth30,
+                                  SizedBox(width:30),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
@@ -157,7 +158,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                       // ),
                                     ],
                                   ),
-                                  Dimens.boxWidth15,
+                                  // Dimens.boxWidth15,
+                                  SizedBox(width:15),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -225,7 +227,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                       ),
                                     ],
                                   ),
-                                  Dimens.boxWidth15,
+                                  // Dimens.boxWidth15,
+                                  SizedBox(width:15),
 
                                   Column(
                                     crossAxisAlignment:
@@ -351,7 +354,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                             children: [
                                                               Icon(Icons
                                                                   .analytics_outlined),
-                                                              Dimens.boxWidth5,
+                                                              // Dimens.boxWidth5,
+                                                              SizedBox(width:5),
                                                               Text(
                                                                   'Plant Access'),
                                                             ],
@@ -365,7 +369,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                             children: [
                                                               Icon(Icons
                                                                   .account_tree_outlined),
-                                                              Dimens.boxWidth5,
+                                                              // Dimens.boxWidth5,
+                                                              SizedBox(width:5),
                                                               Text(
                                                                 'Access Level',
                                                               ),
@@ -380,7 +385,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                             children: [
                                                               Icon(Icons
                                                                   .notifications),
-                                                              Dimens.boxWidth5,
+                                                              // Dimens.boxWidth5,
+                                                              SizedBox(width:5),
                                                               Text(
                                                                 'Notification',
                                                               ),
@@ -417,6 +423,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                   child: Container(
                                                                       height: Get.height,
                                                                       margin: Dimens.edgeInsets15,
+                                                                      // margin: EdgeInsets.only(right:15 ),
                                                                       decoration: BoxDecoration(
                                                                         border:
                                                                             Border.all(
@@ -706,7 +713,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                       .whiteColor,
                                                                   child: Container(
                                                                       height: Get.height - 30,
-                                                                      margin: Dimens.edgeInsets15,
+                                                                      // margin: Dimens.edgeInsets15,
+                                                                      margin: EdgeInsets.only(right: 15),
                                                                       decoration: BoxDecoration(
                                                                         border:
                                                                             Border.all(
@@ -780,7 +788,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                 ],
                               ),
                             ),
-                            Dimens.boxHeight15
+                            // Dimens.boxHeight15
+                            SizedBox(height:15),
                           ],
                         ),
                       ),
