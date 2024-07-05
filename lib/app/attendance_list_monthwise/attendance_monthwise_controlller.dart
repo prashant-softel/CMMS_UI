@@ -24,6 +24,7 @@ class AttendanceListMonthController extends GetxController {
   final HomeController controller = Get.find();
   RxBool isLoading = true.obs;
   List<String> sortedDates = [];
+  RxList<Employee> attendance = <Employee>[].obs;
 
   Rx<AttendanceMonthModel> attendanceMonthModel = AttendanceMonthModel().obs;
   // Rx<AttendanceMonthModel> attendanceMonthModel = AttendanceMonthModel(
@@ -200,7 +201,7 @@ class AttendanceListMonthController extends GetxController {
     try {
       facilityIdStreamSubscription =
           await controller.facilityId$.listen((event) async {
-        facilityId.value = 1;
+        facilityId.value = event;
         if (facilityId != 0) {
           await getAttendanceListMonthwise();
         }
@@ -220,6 +221,7 @@ class AttendanceListMonthController extends GetxController {
       );
       if (_attendanceDetails != null) {
         attendanceMonthModel.value = _attendanceDetails;
+        attendance.value = attendanceMonthModel.value.attendance ?? [];
         // print("${jsonEncode(attendanceMonthModel.value.toJson())}");
       }
       List<String> uniqueDates = [];
@@ -232,6 +234,9 @@ class AttendanceListMonthController extends GetxController {
         });
       });
       sortedDates = uniqueDates.toSet().toList();
+      DateFormat inputFormat = DateFormat('dd-MM-yyyy');
+      sortedDates
+          .sort((a, b) => inputFormat.parse(a).compareTo(inputFormat.parse(b)));
       update(["attendance-list-month"]);
     } catch (e) {
       print('Error in getAttendanceListMonthwise: $e');
