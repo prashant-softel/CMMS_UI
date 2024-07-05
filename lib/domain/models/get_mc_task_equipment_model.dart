@@ -88,6 +88,8 @@ class SMBS {
         scheduledAt: json["scheduledAt"],
         scheduledDay: json["scheduledDay"],
         isCleaned: json["isCleaned"],
+        isCleanedSmbCheck: json["isCleaned"] == 1 ? true : false,
+        isAbandonSmbCheck: json["isAbandoned"] == 1 ? true : false,
         cleanedAt: json["cleanedAt"],
         executedDay: json["executedDay"],
         isAbandoned: json["isAbandoned"],

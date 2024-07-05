@@ -626,7 +626,7 @@ class CreateAuditWeb extends GetView<CreateAuditController> {
                                       },
                                     ),
                                     Dimens.boxWidth15,
-                                    controller.auditId != 0
+                                    controller.auditId > 0
                                         ? CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.updateColor,

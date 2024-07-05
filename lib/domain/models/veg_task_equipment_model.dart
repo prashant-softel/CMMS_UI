@@ -93,6 +93,8 @@ class SMB {
         isPending: json["isPending"],
         scheduleAt: json["scheduleAt"],
         scheduledDay: json["scheduledDay"],
+        isCleanedSmbCheck: json["isCleaned"] == 1 ? true : false,
+        isAbandonSmbCheck: json["isAbandoned"] == 1 ? true : false,
         isCleaned: json["isCleaned"],
         cleanedAt: json["cleanedAt"],
         executedDay: json["executedDay"],

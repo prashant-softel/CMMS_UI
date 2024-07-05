@@ -90,7 +90,8 @@ class ReqOrderMessageRejectDialog extends GetView {
                   child: const Text('GR List'),
                 ),
               ),
-              Dimens.boxWidth10,
+              // Dimens.boxWidth10,
+              SizedBox(width:10),
               Center(
                 child: ElevatedButton(
                   style: Styles.yellowElevatedButtonStyle,
