@@ -1413,6 +1413,7 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                           backgroundColor: ColorValues.greenColor,
                           text: 'Submit',
                           onPressed: () {
+                           controller.isFormInvalid.value= false;
                             controller.addAsset().then((value) {
                               print("value,$value");
                               if (value == true)
@@ -1438,7 +1439,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                           },
                         ),
                       ),
-                Dimens.boxWidth20,
+                // Dimens.boxWidth20,
+                SizedBox(width:20),
                 Container(
                   height: 35,
                   child: CustomElevatedButton(

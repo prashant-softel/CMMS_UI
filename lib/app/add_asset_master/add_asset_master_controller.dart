@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/material_category_model.dart';
 import 'package:flutter/services.dart';
@@ -215,7 +216,7 @@ class AddAssetMasterController extends GetxController {
           }
         }
         break;
-      case const (RxList<AssetCategoryModel>):
+      case const (RxList<MaterialCategoryListModel>):
         {
           if (value != "Please Select") {
             int Index = materialCategoryList.indexWhere((x) => x?.name == value);
@@ -314,12 +315,12 @@ class AddAssetMasterController extends GetxController {
     // } else {
       checkForm();
       if(isFormInvalid.value){
-        return true;
+        return false;
       }
     String _name = matNameCtrlr.text.trim();
     String _mdmcode = mdmcodeCtrlr.text.trim();
-    String _reorderQty = reorderQty.text.trim();
-    String _reqQty = reqQty.text.trim();
+    int _reorderQty = int.tryParse(reorderQty.text.trim())??0;
+    int _reqQty = int.tryParse(reqQty.text.trim()) ??0;
     String _desc = descCtrlr.text.trim();
 
     CreateAssetSMModel createAssetSMModel = CreateAssetSMModel(
@@ -329,8 +330,8 @@ class AddAssetMasterController extends GetxController {
         asset_type_ID: selectedMaterialTypeId,
         item_category_ID: selectedMaterialCategoryId,
         unit_measurement_ID: selectedUnitOfMeasurementId,
-        min_req_qty: int.parse(_reqQty),
-        reorder_qty: int.parse(_reorderQty),
+        min_req_qty:_reqQty,
+        reorder_qty:_reorderQty,
         approval_required_ID: 1,
 
         // fileData:
@@ -361,7 +362,9 @@ class AddAssetMasterController extends GetxController {
     isSuccess.toggle();
 
     // isToggleOn.value = false;
+  
     await {cleardata()};
+    Get.offNamed(Routes.assetMasterList);
   }
 
   void checkForm() {
@@ -373,6 +376,12 @@ class AddAssetMasterController extends GetxController {
       isSelectedMaterialCategory.value = false;
       isFormInvalid.value = true;
     }
+
+    //    if (selectedMaterialCategoryId == 0) {
+    //   isSelectedMaterialCategory.value = false;
+    //   isFormInvalid.value = true;
+    // }
+    // selectedMaterialCategoryId
     if (selectedUnitOfMeasurement.value == '') {
       isSelectedUnitOfMeasurement.value = false;
       isFormInvalid.value = true;
@@ -385,7 +394,7 @@ class AddAssetMasterController extends GetxController {
       isNameInvalid.value=true;
       isFormInvalid.value = true;
 
- if(reqQty.text.trim().length < 3){
+   if(reqQty.text.trim().length < 3){
       isRequiredInvalid.value=true;
       isFormInvalid.value = true;
 
