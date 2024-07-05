@@ -82,7 +82,8 @@ class AbandoneVegScheduleDialog extends GetView<VegExecutionController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Dimens.boxWidth10,
+                // Dimens.boxWidth10,
+                 SizedBox(width:10),
                 ElevatedButton(
                   style: Styles.darkRedElevatedButtonStyle,
                   onPressed: () {
@@ -90,7 +91,8 @@ class AbandoneVegScheduleDialog extends GetView<VegExecutionController> {
                   },
                   child: const Text('Cancel'),
                 ),
-                Dimens.boxWidth20,
+                // Dimens.boxWidth20,
+                 SizedBox(width:20),
                 ElevatedButton(
                   style: Styles.greenElevatedButtonStyle,
                   onPressed: () {

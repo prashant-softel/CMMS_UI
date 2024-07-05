@@ -88,13 +88,17 @@ class WasteGeneratedAddDialog extends GetView {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Dimens.boxHeight5,
+                      // Dimens.boxHeight5,
+                       SizedBox(height: 5),
                       CustomRichText(title: 'Date of procurement :'),
-                      Dimens.boxHeight20,
+                      // Dimens.boxHeight20,
+                       SizedBox(height:20),
                       CustomRichText(title: 'Type of Waste :'),
-                      Dimens.boxHeight20,
+                      // Dimens.boxHeight20,
+                       SizedBox(height:20),
                       CustomRichText(title: 'Quantity in KL unit:'),
-                      Dimens.boxHeight20,
+                      // Dimens.boxHeight20,
+                       SizedBox(height:20),
                       CustomRichText(title: 'Description:'),
                     ],
                   ),
@@ -102,7 +106,8 @@ class WasteGeneratedAddDialog extends GetView {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Dimens.boxHeight10,
+                      // Dimens.boxHeight10,
+                       SizedBox(height:10),
                       IgnorePointer(
                         ignoring: controller.detailId != 0 ? true : false,
                         child: Container(
@@ -190,7 +195,8 @@ class WasteGeneratedAddDialog extends GetView {
                           ),
                         ),
                       ),
-                      Dimens.boxHeight10,
+                      // Dimens.boxHeight10,
+                       SizedBox(height:10),
                       IgnorePointer(
                         ignoring: controller.detailId != 0 ? true : false,
                         child: SizedBox(
@@ -206,7 +212,8 @@ class WasteGeneratedAddDialog extends GetView {
                           ),
                         ),
                       ),
-                      Dimens.boxHeight10,
+                      // Dimens.boxHeight10,
+                       SizedBox(height:10),
                       LoginCustomTextfield(
                         width: (MediaQuery.of(context).size.width * .2),
                         keyboardType: TextInputType.number,
@@ -222,7 +229,8 @@ class WasteGeneratedAddDialog extends GetView {
                           }
                         },
                       ),
-                      Dimens.boxHeight10,
+                      // Dimens.boxHeight10,
+                       SizedBox(height:10),
                       IgnorePointer(
                         ignoring: controller.detailId != 0 ? true : false,
                         child: LoginCustomTextfield(
@@ -255,7 +263,8 @@ class WasteGeneratedAddDialog extends GetView {
                 },
               ),
             ),
-            Dimens.boxWidth20,
+            // Dimens.boxWidth20,
+             SizedBox(width:20),
             Container(
               height: 35,
               child: id == 0 || id == null

@@ -39,7 +39,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Update For Day", style: Styles.blue20),
-                Dimens.boxWidth10,
+                // Dimens.boxWidth10,
+                 SizedBox(width:10),
                 Text(
                   "${cleaningDay}",
                   style: TextStyle(
@@ -48,7 +49,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 ),
               ],
             ),
-            Dimens.boxHeight15,
+            // Dimens.boxHeight15,
+             SizedBox(height:15),
             Row(
               children: [
                 Row(
@@ -68,7 +70,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     ),
                   ],
                 ),
-                Dimens.boxWidth10,
+                // Dimens.boxWidth10,
+                 SizedBox(width:10),
                 Row(
                   children: [
                     Text(
@@ -382,7 +385,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   },
                 ),
               ),
-              Dimens.boxWidth20,
+              // Dimens.boxWidth20,
+               SizedBox(width:20),
               Container(
                 height: 35,
                 child: CustomElevatedButton(
@@ -399,7 +403,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   },
                 ),
               ),
-              Dimens.boxWidth20,
+              // Dimens.boxWidth20,
+               SizedBox(width:20),
               Container(
                 height: 35,
                 child: CustomElevatedButton(
@@ -416,7 +421,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   },
                 ),
               ),
-              Dimens.boxWidth20,
+              // Dimens.boxWidth20,
+               SizedBox(width:20),
               Container(
                 height: 35,
                 child: CustomElevatedButton(

@@ -73,7 +73,8 @@ class AbandonScheduleExecutionMessageDialog extends GetView {
           );
         }),
         actions: [
-          Dimens.boxWidth10,
+          // Dimens.boxWidth10,
+          SizedBox(width:10),
           Center(
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,

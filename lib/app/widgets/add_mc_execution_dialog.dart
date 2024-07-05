@@ -71,7 +71,8 @@ class AddMCExecutionDialog extends GetView {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text('Plan Id', style: Styles.black17),
-                                  Dimens.boxHeight5,
+                                  // Dimens.boxHeight5,
+                                   SizedBox(height: 5),
                                   Text(
                                     '${planId}',
                                     style: Styles.blue17,
@@ -83,7 +84,8 @@ class AddMCExecutionDialog extends GetView {
                                 children: [
                                   Text('Start Date Time',
                                       style: Styles.black17),
-                                  Dimens.boxHeight5,
+                                  // Dimens.boxHeight5,
+                                   SizedBox(height: 5),
                                   CustomTextFieldForStock(
                                     width:
                                         MediaQuery.of(context).size.width / 8,
@@ -140,7 +142,8 @@ class AddMCExecutionDialog extends GetView {
                             ),
                           ],
                         ),
-                        Dimens.boxHeight30
+                        // Dimens.boxHeight30
+                         SizedBox(height:30),
                       ],
                     ),
                   ),
