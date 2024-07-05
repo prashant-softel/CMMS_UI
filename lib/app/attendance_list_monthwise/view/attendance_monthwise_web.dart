@@ -21,10 +21,7 @@ class AttendanceMonthWiseWeb extends StatefulWidget {
 class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
   @override
   Widget build(BuildContext context) {
-    return
-        // Obx(
-        //   () =>
-        GetBuilder<AttendanceListMonthController>(
+    return GetBuilder<AttendanceListMonthController>(
       id: "attendance-list-month",
       builder: (controller) {
         return Scaffold(
@@ -153,18 +150,12 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
                               Divider(
                                 color: ColorValues.greyLightColour,
                               ),
-                              controller.attendanceMonthModel.value
-                                              .facility_id ==
-                                          0 ||
-                                      controller.attendanceMonthModel.value
-                                              .facility_id ==
-                                          null
+                              controller.attendance.isEmpty
                                   ? Center(
                                       child: Text(""),
                                     )
                                   : Container(
-                                      height: ((controller.attendanceMonthModel
-                                                  .value.attendance!.length) *
+                                      height: ((controller.attendance.length) *
                                               40) +
                                           100,
                                       width: ((controller
@@ -188,9 +179,7 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
                                         headingRowHeight: 90,
                                         columns: _buildColumns(
                                             controller.sortedDates),
-                                        rows: _buildRows(
-                                            controller.attendanceMonthModel
-                                                .value.attendance!,
+                                        rows: _buildRows(controller.attendance,
                                             controller.sortedDates),
                                       ),
                                     ),
@@ -257,7 +246,6 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
         );
       },
     );
-    // );
   }
 
   List<DataColumn> _buildColumns(List<String> sortedDates) {

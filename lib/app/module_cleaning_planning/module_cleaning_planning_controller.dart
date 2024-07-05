@@ -26,6 +26,8 @@ class ModuleCleaningPlanningController extends GetxController {
   Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
   var validTillTimeCtrlrBuffer;
   var startDateTimeCtrlrBuffer;
+  RxBool isDateInvalid = false.obs;
+  RxBool isDurationInvalid = false.obs;
 
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<List<List<Map<String, String>>>> rowItem =
@@ -186,7 +188,7 @@ class ModuleCleaningPlanningController extends GetxController {
     var mappedData = {};
     List<Schedule> schedules = [];
 
-    equipmentList.value.forEach((element) {
+    equipmentList.forEach((element) {
       (element?.smbs ?? []).forEach((smbsItem) {
         if (smbsItem.selectedDay != null) {
           mappedData[smbsItem.selectedDay] = [
@@ -449,8 +451,8 @@ class ModuleCleaningPlanningController extends GetxController {
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 10),
     );
 
     if (newDate == null) return null;
@@ -502,5 +504,129 @@ class ModuleCleaningPlanningController extends GetxController {
       isFormInvalid = false.obs;
       ;
     }
+  }
+
+  Future pickDateTime_web(BuildContext context, int position) async {
+    final ModuleCleaningPlanningController controller = Get.find();
+    var dateTime = position == 0
+        ? controller.selectedmcstarttime.value
+        : controller.selectedValidTillTime.value;
+    final date = await pickDate_web(context, position);
+    if (date == null) {
+      return;
+    }
+
+    final time = await pickTime_web(context, position, date);
+    if (time == null) {
+      return;
+    }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    position == 0
+        ? controller.selectedmcstarttime.value
+        : controller.selectedValidTillTime.value = dateTime;
+    position == 0 ? controller.startDateTc : controller.validTillTimeCtrlr
+      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: position == 0
+              ? controller.startDateTc.text.length
+              : controller.validTillTimeCtrlr.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+    controller.validTillTimeCtrlr.text =
+        DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
+    controller.validTillTimeCtrlrBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            .format(dateTime.add(Duration(hours: 8)));
+    controller.startDateTimeCtrlrBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
+  }
+
+  Future<DateTime?> pickDate_web(BuildContext context, int position) async {
+    final ModuleCleaningPlanningController controller = Get.find();
+    DateTime? dateTime = position == 0
+        ? controller.selectedmcstarttime.value
+        : controller.selectedValidTillTime.value;
+    // final currentDate = DateTime.now();
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 5),
+    );
+    print('New Date is: $newDate');
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime_web(
+      BuildContext context, int position, DateTime? selectedDate) async {
+    final ModuleCleaningPlanningController controller = Get.find();
+    DateTime dateTime = position == 0
+        ? controller.selectedmcstarttime.value
+        : controller.selectedValidTillTime.value;
+    final newTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light(),
+          child: child!,
+        );
+      },
+    );
+    print('New Date new time : $newTime');
+    if (newTime == null) {
+      return null;
+    }
+
+    final currentTime = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+      TimeOfDay.now().hour,
+      TimeOfDay.now().minute,
+    );
+    final selected = DateTime(
+      selectedDate?.year ?? DateTime.now().year,
+      selectedDate?.month ?? DateTime.now().month,
+      selectedDate?.day ?? DateTime.now().day,
+      newTime.hour,
+      newTime.minute,
+    );
+
+    // If date is today and time is in the past, show an error message
+    print('selected time : $selected');
+    if (currentTime.isAfter(selected)) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Invalid Time"),
+            content: Text("Please select a time in the future."),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+      return null;
+    }
+
+    return newTime;
   }
 }
