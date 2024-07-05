@@ -251,64 +251,6 @@ class AssetMasterController extends GetxController {
     }
   }
 
-  // void search(String keyword) {
-  //   print('Keyword: $keyword');
-
-  //   if (keyword.isEmpty) {
-  //     moduleList!.value = buffermodulelist.value;
-  //   }
-
-  //       List<AssetMasterModel> filteredList = buffermodulelist.where((Mrs) {
-  //         return (Mrs.asset_code ?? '')
-  //                 .toLowerCase()
-  //                 .contains(keyword.toLowerCase()) ||
-  //             (Mrs.asset_name ?? '')
-  //                 .toLowerCase()
-  //                 .contains(keyword.toLowerCase()) ||
-  //             (Mrs.section ?? '')
-  //                 .toLowerCase()
-  //                 .contains(keyword.toLowerCase()) ||
-  //             (Mrs.asset_type ?? '')
-  //                 .toLowerCase()
-  //                 .contains(keyword.toLowerCase()) ||
-  //             (Mrs.cat_name ?? '')
-  //                 .toLowerCase()
-  //                 .contains(keyword.toLowerCase()) ||
-  //             (Mrs.max_request_qty ?? '')
-  //                 .toString()
-  //                 .toLowerCase()
-  //                 .contains(keyword.toLowerCase()) ||
-  //             (Mrs.reorder_qty ?? '')
-  //                 .toString()
-  //                 .toLowerCase()
-  //                 .contains(keyword.toLowerCase()) ||
-  //             (Mrs.description ?? '')
-  //                 .toLowerCase()
-  //                 .contains(keyword.toLowerCase()) ||
-  //             (Mrs.measurement ?? '')
-  //                 .toLowerCase()
-  //                 .contains(keyword.toLowerCase()) ||
-  //             (Mrs.approval_required ?? '')
-  //                 .toLowerCase()
-  //                 .contains(keyword.toLowerCase());
-  //       }).toList();
-  //        moduleList!.value = filteredList;
-  //   //
-  //   //else {
-  //   //   List<AssetMasterModel> filteredList = buffermodulelist
-  //   //       .where((item) => (item.asset_name?.toString().toLowerCase() ?? '')
-  //   //           .contains(keyword.toLowerCase()))
-  //   //       .toList();
-
-  //   //   moduleList?.value = filteredList;
-  //   // }
-  //   // Update paginationController when the list changes
-  //   paginationController = PaginationController(
-  //     rowCount: moduleList!.length,
-  //     rowsPerPage: 10,
-  //   );
-  // }
-
   Future<void> createModulelist() async {
     Get.toNamed(
       Routes.createCheckList,
