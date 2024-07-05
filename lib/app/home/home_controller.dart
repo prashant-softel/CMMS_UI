@@ -57,6 +57,7 @@ class HomeController extends GetxController {
   final categoryMapBM = <String, double>{};
   final categoryMapPM = <String, double>{};
   final categoryMapMC = <String, double>{};
+  Map<String, double> categoryMapBMDouble = <String, double>{};
 
   //int facilityId = 45;
   String categoryIds = '';
@@ -149,6 +150,7 @@ class HomeController extends GetxController {
       Colors.green,
       Colors.orange,
       Colors.yellowAccent,
+      Color.fromARGB(255, 61, 149, 114),
       Colors.purpleAccent,
     ];
   }
@@ -201,6 +203,7 @@ class HomeController extends GetxController {
         endDate: formattedTodate1,
         startDate: formattedFromdate1,
         isLoading: true);
+
     if (_dashboardList != null) {
       dashboardList.value = _dashboardList;
       int totalSumMcCountTemp = 0;
@@ -242,7 +245,6 @@ class HomeController extends GetxController {
           woOnTimeSumTemp += details?.wo_on_time ?? 0;
           woDelaySumTemp += details?.wo_delay ?? 0;
           woBacklogSumTemp += details?.wo_backlog ?? 0;
-
           allItems.addAll(details?.item_list ?? []);
         }
       }
@@ -263,6 +265,7 @@ class HomeController extends GetxController {
       woBacklogSum.value = woBacklogSumTemp;
       lowStockItemsSum.value = lowStockItemsSumTemp;
       poItemsAwaitedSum.value = poItemsAwaitedSumTemp;
+
       Map<String, double> dataMap() {
         return {
           "BM": double.tryParse(totalSumBmcCountTemp.toString()) ?? 0.0,
@@ -277,10 +280,11 @@ class HomeController extends GetxController {
       dashboardMcList.value = _dashboardList[2];
       dashboardIrList.value = _dashboardList[3];
       dashboardSmList.value = _dashboardList[4];
-
       if (dashboardBmList.value != null) {
+        final categoryMapBM = <String, int>{};
+
         for (var item
-            in dashboardBmList?.value!.cmDashboadDetails!.item_list ?? []) {
+            in dashboardBmList.value!.cmDashboadDetails!.item_list ?? []) {
           final categories = item.asset_category?.split(', ') ?? [];
           for (var category in categories) {
             if (categoryMapBM.containsKey(category)) {
@@ -290,13 +294,29 @@ class HomeController extends GetxController {
             }
           }
         }
+
         final sortedCategories = categoryMapBM.entries.toList()
           ..sort((a, b) => b.value.compareTo(a.value));
         final top5Categories = sortedCategories.take(5).toList();
+        final otherCategoriesCount = sortedCategories.skip(5).fold<int>(
+              0,
+              (sum, entry) => sum + entry.value,
+            );
+
         categoryMapBM.clear();
         for (var entry in top5Categories) {
-          categoryMapBM[entry.key] = entry.value.toDouble();
+          categoryMapBM[entry.key] = entry.value;
         }
+        if (otherCategoriesCount > 0) {
+          categoryMapBM['Other'] = otherCategoriesCount;
+        }
+
+        categoryMapBMDouble =
+            categoryMapBM.map((key, value) => MapEntry(key, value.toDouble()));
+
+        print('Final category map with top 5 and Other: $categoryMapBMDouble');
+        print('Final otherCategoriesCount: $otherCategoriesCount');
+        print('Final categoryMapBM: $categoryMapBMDouble');
       }
 
       if (dashboardPmList.value != null) {
@@ -319,26 +339,6 @@ class HomeController extends GetxController {
           categoryMapPM[entry.key] = entry.value.toDouble();
         }
       }
-      // if (dashboardMcList.value != null) {
-      //   for (var item
-      //       in dashboardMcList?.value!.cmDashboadDetails!.item_list ?? []) {
-      //     final categories = item.asset_category?.split(', ') ?? [];
-      //     for (var category in categories) {
-      //       if (categoryMapMC.containsKey(category)) {
-      //         categoryMapMC[category] = categoryMapMC[category]! + 1;
-      //       } else {
-      //         categoryMapMC[category] = 1;
-      //       }
-      //     }
-      //   }
-      //   final sortedCategories = categoryMapMC.entries.toList()
-      //     ..sort((a, b) => b.value.compareTo(a.value));
-      //   final top5Categories = sortedCategories.take(5).toList();
-      //   categoryMapMC.clear();
-      //   for (var entry in top5Categories) {
-      //     categoryMapMC[entry.key] = entry.value.toDouble();
-      //   }
-      // }
 
       update(['dashboard']);
     }
