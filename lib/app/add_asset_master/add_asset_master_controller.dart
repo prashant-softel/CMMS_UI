@@ -228,23 +228,23 @@ class AddAssetMasterController extends GetxController {
           }
         }
         break;
-      case const (RxList<ACDCModel>):
-        {
-          if (value != "Please Select") {
-            int Index = acdclist.indexWhere((x) => x?.name == value);
-          selectedACDCId = unitMeasurementList[Index]?.id ?? 0;
-          selectedACDC.value = value;
-          isSelectedACDC.value=true;
-          } else {
-            selectedACDCId=0;
-          }
-        }
-        break;
+      // case const (RxList<UnitMeasurementModel>):
+      //   {
+      //     if (value != "Please Select") {
+      //       int Index = unitMeasurementList.indexWhere((x) => x?.name == value);
+      //     selectedUnitOfMeasurementId = unitMeasurementList[Index]?.id ?? 0;
+      //     selectedUnitOfMeasurement.value = value;
+      //     isSelectedUnitOfMeasurement.value=true;
+      //     } else {
+      //       selectedACDCId=0;
+      //     }
+      //   }
+      //   break;
       case const (RxList<AssetTypeListSMModel>):
         {
           if (value != "Please Select") {
             int Index = materialList.indexWhere((x) => x?.name == value);
-          selectedMaterialTypeId = unitMeasurementList[Index]?.id ?? 0;
+          selectedMaterialTypeId = materialList[Index]?.id ?? 0;
           selectedMaterialType.value = value;
           isSelectedMaterialType.value= true;
           } else {
@@ -327,9 +327,11 @@ class AddAssetMasterController extends GetxController {
         asset_code: _mdmcode,
         asset_name: _name,
         asset_description: _desc,
+
         asset_type_ID: selectedMaterialTypeId,
         item_category_ID: selectedMaterialCategoryId,
         unit_measurement_ID: selectedUnitOfMeasurementId,
+        section: selectedACDCId,
         min_req_qty:_reqQty,
         reorder_qty:_reorderQty,
         approval_required_ID: 1,

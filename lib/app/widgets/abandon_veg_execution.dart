@@ -55,7 +55,8 @@ class AbandonVegExecutionDialog extends GetView<VegExecutionController> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CustomRichText(title: 'Reason  :'),
-                        Dimens.boxWidth10,
+                        // Dimens.boxWidth10,
+                         SizedBox(width:10),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
