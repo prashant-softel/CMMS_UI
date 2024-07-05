@@ -433,7 +433,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Row(
                                                 children: [
                                                   Column(
@@ -578,7 +578,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ),
                                               ],
                                             ),
-                                            height: 150,
+                                            height: 160,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -849,7 +849,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Row(
                                                 children: [
                                                   Align(
@@ -915,7 +915,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Column(
                                                 children: [
                                                   Text("Low Stock Items",
@@ -1275,7 +1275,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Row(
                                                 children: [
                                                   Column(
@@ -1426,7 +1426,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //         ),
                                         //       ],
                                         //     ),
-                                        //     height: 150,
+                                        //     height: 160,
                                         //     child: Column(
                                         //       children: [
                                         //         Row(
@@ -1592,7 +1592,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ),
                                               ],
                                             ),
-                                            height: 150,
+                                            height: 160,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -1717,8 +1717,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                           child: Container(
                                             margin: EdgeInsets.only(
                                                 left: 10, right: 10),
-                                            padding: EdgeInsets.only(
-                                                left: 10, top: 10),
+                                            // padding: EdgeInsets.only(
+                                            //     left: 10, top: 10),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -1731,18 +1731,18 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ),
                                               ],
                                             ),
-                                            height: 150,
+                                            height: 160,
                                             child: PieChart(
-                                              dataMap: controller.categoryMapBM,
+                                              dataMap: controller
+                                                  .categoryMapBMDouble,
                                               animationDuration:
                                                   Duration(milliseconds: 800),
                                               chartLegendSpacing: 20,
                                               chartRadius: 200,
                                               colorList:
                                                   controller.getColorList(),
-                                              // initialAngleInDegree: 50,
                                               chartType: ChartType.ring,
-                                              ringStrokeWidth: 12,
+                                              ringStrokeWidth: 10,
                                               centerText: "Category",
                                               legendOptions: LegendOptions(
                                                 showLegendsInRow: false,
@@ -1782,7 +1782,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Column(
                                                 children: [
                                                   Text("Low Stock Items",
@@ -2122,7 +2122,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Row(
                                                 children: [
                                                   Column(
@@ -2273,7 +2273,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ),
                                               ],
                                             ),
-                                            height: 150,
+                                            height: 160,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -2413,7 +2413,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ),
                                               ],
                                             ),
-                                            height: 150,
+                                            height: 160,
                                             child: PieChart(
                                               dataMap: controller.categoryMapPM,
                                               animationDuration:
@@ -2463,7 +2463,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Column(
                                                 children: [
                                                   Text("Low Stock Items",
@@ -2826,7 +2826,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Row(
                                                 children: [
                                                   Column(
@@ -2977,7 +2977,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //         ),
                                         //       ],
                                         //     ),
-                                        //     height: 150,
+                                        //     height: 160,
                                         //     child: Column(
                                         //       children: [
                                         //         Row(
@@ -3143,7 +3143,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ),
                                               ],
                                             ),
-                                            height: 150,
+                                            height: 160,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -3284,7 +3284,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Row(
                                                 children: [
                                                   Align(
@@ -3351,7 +3351,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Column(
                                                 children: [
                                                   Text("Low Stock Items",
@@ -3684,7 +3684,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Row(
                                                 children: [
                                                   Column(
@@ -3817,59 +3817,6 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ],
                                               )),
                                         ),
-
-                                        Expanded(
-                                          flex: 2,
-                                          child: Container(
-                                            margin: EdgeInsets.only(
-                                                left: 10, right: 10),
-                                            padding: EdgeInsets.only(
-                                                left: 10, top: 10),
-                                            decoration: BoxDecoration(
-                                              color: ColorValues.lightBlueColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  offset: Offset(0.0, 1.0),
-                                                  blurRadius: 6.0,
-                                                ),
-                                              ],
-                                            ),
-                                            height: 150,
-                                            child: PieChart(
-                                              dataMap: controller.categoryMapPM,
-                                              animationDuration:
-                                                  Duration(milliseconds: 800),
-                                              chartLegendSpacing: 20,
-                                              chartRadius: 200,
-                                              colorList:
-                                                  controller.getColorList(),
-                                              // initialAngleInDegree: 50,
-                                              chartType: ChartType.ring,
-                                              ringStrokeWidth: 12,
-                                              centerText: "Category",
-                                              legendOptions: LegendOptions(
-                                                showLegendsInRow: false,
-                                                legendPosition:
-                                                    LegendPosition.left,
-                                                showLegends: true,
-                                                legendShape: BoxShape.circle,
-                                                legendTextStyle: Styles.black13,
-                                              ),
-                                              chartValuesOptions:
-                                                  ChartValuesOptions(
-                                                showChartValuesInPercentage:
-                                                    true,
-                                                showChartValueBackground: true,
-                                                showChartValues: true,
-                                                showChartValuesOutside: false,
-                                                decimalPlaces: 1,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
                                         // Expanded(
                                         //   flex: 2,
                                         //   child: Container(
@@ -3888,7 +3835,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //         ),
                                         //       ],
                                         //     ),
-                                        //     height: 150,
+                                        //     height: 160,
                                         //     child: Column(
                                         //       children: [
                                         //         Row(
@@ -4054,7 +4001,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //         ),
                                         //       ],
                                         //     ),
-                                        //     height: 150,
+                                        //     height: 160,
                                         //     child: Column(
                                         //       crossAxisAlignment:
                                         //           CrossAxisAlignment.start,
@@ -4192,7 +4139,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //           ),
                                         //         ],
                                         //       ),
-                                        //       height: 150,
+                                        //       height: 160,
                                         //       child: Row(
                                         //         children: [
                                         //           Align(
@@ -4258,7 +4205,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //           ),
                                         //         ],
                                         //       ),
-                                        //       height: 150,
+                                        //       height: 160,
                                         //       child: Column(
                                         //         children: [
                                         //           Text("Low Stock Items",
@@ -4596,7 +4543,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Row(
                                                 children: [
                                                   Column(
@@ -4747,7 +4694,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         //         ),
                                         //       ],
                                         //     ),
-                                        //     height: 150,
+                                        //     height: 160,
                                         //     child: Column(
                                         //       children: [
                                         //         Row(
@@ -4913,7 +4860,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ),
                                               ],
                                             ),
-                                            height: 150,
+                                            height: 160,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -5054,7 +5001,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Row(
                                                 children: [
                                                   Align(
@@ -5120,7 +5067,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                              height: 150,
+                                              height: 160,
                                               child: Column(
                                                 children: [
                                                   Text("Low Stock Items",
