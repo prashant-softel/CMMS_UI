@@ -242,6 +242,8 @@ class HomeController extends GetxController {
           woOnTimeSumTemp += details?.wo_on_time ?? 0;
           woDelaySumTemp += details?.wo_delay ?? 0;
           woBacklogSumTemp += details?.wo_backlog ?? 0;
+
+          allItems.addAll(details?.item_list ?? []);
         }
       }
 
@@ -261,12 +263,6 @@ class HomeController extends GetxController {
       woBacklogSum.value = woBacklogSumTemp;
       lowStockItemsSum.value = lowStockItemsSumTemp;
       poItemsAwaitedSum.value = poItemsAwaitedSumTemp;
-
-      dashboardBmList.value = _dashboardList[0];
-      dashboardPmList.value = _dashboardList[1];
-      dashboardMcList.value = _dashboardList[2];
-      dashboardIrList.value = _dashboardList[3];
-      dashboardSmList.value = _dashboardList[4];
       Map<String, double> dataMap() {
         return {
           "BM": double.tryParse(totalSumBmcCountTemp.toString()) ?? 0.0,
@@ -276,6 +272,12 @@ class HomeController extends GetxController {
       }
 
       getDataMap.value = dataMap();
+      dashboardBmList.value = _dashboardList[0];
+      dashboardPmList.value = _dashboardList[1];
+      dashboardMcList.value = _dashboardList[2];
+      dashboardIrList.value = _dashboardList[3];
+      dashboardSmList.value = _dashboardList[4];
+
       if (dashboardBmList.value != null) {
         for (var item
             in dashboardBmList?.value!.cmDashboadDetails!.item_list ?? []) {

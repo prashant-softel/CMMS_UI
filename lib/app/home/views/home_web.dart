@@ -1742,7 +1742,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   controller.getColorList(),
                                               // initialAngleInDegree: 50,
                                               chartType: ChartType.ring,
-                                              ringStrokeWidth: 10,
+                                              ringStrokeWidth: 12,
                                               centerText: "Category",
                                               legendOptions: LegendOptions(
                                                 showLegendsInRow: false,
@@ -3816,6 +3816,59 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   )),
                                                 ],
                                               )),
+                                        ),
+
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            padding: EdgeInsets.only(
+                                                left: 10, top: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
+                                                ),
+                                              ],
+                                            ),
+                                            height: 150,
+                                            child: PieChart(
+                                              dataMap: controller.categoryMapPM,
+                                              animationDuration:
+                                                  Duration(milliseconds: 800),
+                                              chartLegendSpacing: 20,
+                                              chartRadius: 200,
+                                              colorList:
+                                                  controller.getColorList(),
+                                              // initialAngleInDegree: 50,
+                                              chartType: ChartType.ring,
+                                              ringStrokeWidth: 12,
+                                              centerText: "Category",
+                                              legendOptions: LegendOptions(
+                                                showLegendsInRow: false,
+                                                legendPosition:
+                                                    LegendPosition.left,
+                                                showLegends: true,
+                                                legendShape: BoxShape.circle,
+                                                legendTextStyle: Styles.black13,
+                                              ),
+                                              chartValuesOptions:
+                                                  ChartValuesOptions(
+                                                showChartValuesInPercentage:
+                                                    true,
+                                                showChartValueBackground: true,
+                                                showChartValues: true,
+                                                showChartValuesOutside: false,
+                                                decimalPlaces: 1,
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                         // Expanded(
                                         //   flex: 2,
