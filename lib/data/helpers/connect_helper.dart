@@ -9423,10 +9423,10 @@ class ConnectHelper {
   Future<ResponseModel> deleteMaterialCategory({
     required String auth,
     bool? isLoading,
-    required business_id,
+    required materialcat_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMMaster/DeleteMaterialCategory?acID=86',
+      'SMMaster/DeleteMaterialCategory?acID=$materialcat_id',
       Request.delete,
       null,
       isLoading ?? false,

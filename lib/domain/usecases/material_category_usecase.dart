@@ -18,11 +18,11 @@ class MaterialCategoryUsecase {
   }
 
   Future<void> deleteMaterialCategory({
-    required Object business_id,
+    required Object materialcat_id,
     required bool isLoading,
   }) async {
     await repository.deleteMaterialCategory(
-      business_id,
+      materialcat_id,
       isLoading,
     );
   }

@@ -1,6 +1,6 @@
 
 
-import '../../domain/models/asset_category_model.dart';
+import 'package:cmms/domain/models/material_category_model.dart';
 import '../../domain/models/asset_type_list_sm_model.dart';
 import '../../domain/models/unit_measurement_model.dart';
 import '../../domain/usecases/add_asset_master_usecase.dart';
@@ -33,10 +33,10 @@ class AddAssetMasterPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<List<AssetCategoryModel?>?> getAssetCategoryList({
+  Future<List<MaterialCategoryListModel?>?> getMaterialList({
     bool? isLoading,
   }) async =>
-      await addAssetUsecase.getAssetCategoryList(
+      await addAssetUsecase.getMaterialList(
         isLoading: isLoading ?? false,
       );
 }

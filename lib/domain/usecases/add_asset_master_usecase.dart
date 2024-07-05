@@ -1,7 +1,6 @@
 
+import 'package:cmms/domain/models/material_category_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
-
-import '../models/asset_category_model.dart';
 import '../models/asset_type_list_sm_model.dart';
 import '../models/unit_measurement_model.dart';
 
@@ -15,10 +14,10 @@ class AddAssetMasterUsecase {
       await repository.createAssetSM(
           isLoading: isLoading, assetListJsonString: assetListJsonString);
 
-  Future<List<AssetCategoryModel?>?> getAssetCategoryList({
+  Future<List<MaterialCategoryListModel?>?> getMaterialList({
     bool? isLoading,
   }) async =>
-      await repository.getAssetCategoryList(
+      await repository.getMaterialList(
         isLoading: true,
       );
   Future<List<UnitMeasurementModel?>?> getUnitMeasurementList({
