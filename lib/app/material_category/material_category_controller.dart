@@ -244,10 +244,10 @@ class MaterialCategoryController extends GetxController {
     );
   }
 
-  Future<void> deleteMaterialCategory(String? business_id) async {
+  Future<void> deleteMaterialCategory(String? materialcat_id) async {
     {
-      await materialCategoryPresenter.deleteFacility(
-        business_id,
+      await materialCategoryPresenter.deleteMaterialCategory(
+        materialcat_id,
         isLoading: true,
       );
     }

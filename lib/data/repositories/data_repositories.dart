@@ -5394,10 +5394,10 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> deleteMaterialCategory({
     auth,
     bool? isLoading,
-    business_id,
+    materialcat_id,
   }) async {
     var response = await connectHelper.deleteMaterialCategory(
-        auth: auth, isLoading: isLoading, business_id: business_id);
+        auth: auth, isLoading: isLoading, materialcat_id: materialcat_id);
     return response;
   }
 

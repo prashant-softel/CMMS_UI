@@ -36,7 +36,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -114,8 +115,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                margin: Dimens.edgeInsets30_0_0_0,
-                                child: Dimens.boxWidth30,
+                                margin: EdgeInsets.all(10),
+                                child: Dimens.boxWidth0,
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -123,11 +124,12 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                   Row(
                                     children: [
                                       CustomRichText(title: 'Material Name: '),
-                                      Dimens.boxWidth10,
+                                      Dimens.boxWidth2,
                                       Container(
                                         // height : 100,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           border: Border.all(
                                             color: Color.fromARGB(
                                                 255, 227, 224, 224),
@@ -163,11 +165,11 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                                   color: Colors.black),
                                             ),
                                             controller: controller.matNameCtrlr,
-                                            
                                             focusNode: controller.nameFocus,
                                             scrollController:
                                                 controller.nameScroll,
-                                            keyboardType: TextInputType.multiline,
+                                            keyboardType:
+                                                TextInputType.multiline,
                                             maxLines: 1,
                                             autofocus: false,
                                             decoration: InputDecoration(
@@ -240,13 +242,13 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                   Row(
                                     children: [
                                       CustomRichText(title: 'Material Type: '),
-                                      Dimens.boxWidth10,
+                                      Dimens.boxWidth2,
                                       Container(
                                         width:
                                             (MediaQuery.of(context).size.width *
                                                 .2),
                                         // height : 100,
-      
+
                                         child: Obx(
                                           () => DropdownWebWidget(
                                             boxShadow: [
@@ -267,7 +269,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                               ),
                                             ],
                                             controller: controller,
-                                            dropdownList: controller.materialList,
+                                            dropdownList:
+                                                controller.materialList,
                                             isValueSelected: controller
                                                 .isSelectedMaterialType.value,
                                             selectedValue: controller
@@ -284,7 +287,7 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                     children: [
                                       CustomRichText(
                                           title: 'Unit of Measurement: '),
-                                      Dimens.boxWidth10,
+                                      Dimens.boxWidth2,
                                       Container(
                                         width:
                                             (MediaQuery.of(context).size.width *
@@ -315,7 +318,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                                 .isSelectedUnitOfMeasurement
                                                 .value,
                                             selectedValue: controller
-                                                .selectedUnitOfMeasurement.value,
+                                                .selectedUnitOfMeasurement
+                                                .value,
                                             onValueChanged:
                                                 controller.onValueChanged,
                                           ),
@@ -326,12 +330,14 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                   Dimens.boxHeight8,
                                   Row(
                                     children: [
-                                      CustomRichText(title: 'Min Required Qty: '),
-                                      Dimens.boxWidth10,
+                                      CustomRichText(
+                                          title: 'Min Required Qty: '),
+                                      Dimens.boxWidth2,
                                       Container(
                                         // height : 100,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           border: Border.all(
                                             color: Color.fromARGB(
                                                 255, 227, 224, 224),
@@ -370,7 +376,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                             focusNode: controller.reqFocus,
                                             scrollController:
                                                 controller.reqScroll,
-                                            keyboardType: TextInputType.multiline,
+                                            keyboardType:
+                                                TextInputType.multiline,
                                             maxLines: 1,
                                             autofocus: false,
                                             decoration: InputDecoration(
@@ -434,7 +441,7 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                       ),
                                     ],
                                   ),
-      
+
                                   Dimens.boxHeight8,
                                   // Row(
                                   //   children: [
@@ -486,12 +493,13 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                   Row(
                                     children: [
                                       CustomRichText(title: 'MDM Code: '),
-                                      Dimens.boxWidth10,
+                                      Dimens.boxWidth2,
                                       Container(
                                         // height : 100,
-      
+
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           border: Border.all(
                                             color: Color.fromARGB(
                                                 255, 227, 224, 224),
@@ -527,11 +535,11 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                                   color: Colors.black),
                                             ),
                                             controller: controller.mdmcodeCtrlr,
-                                            
                                             focusNode: controller.mdmFocus,
                                             scrollController:
                                                 controller.mdmScroll,
-                                            keyboardType: TextInputType.multiline,
+                                            keyboardType:
+                                                TextInputType.multiline,
                                             maxLines: 1,
                                             autofocus: false,
                                             decoration: InputDecoration(
@@ -600,10 +608,10 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                     children: [
                                       CustomRichText(
                                           title: 'Material Category: '),
-                                      Dimens.boxWidth10,
+                                      Dimens.boxWidth2,
                                       Container(
                                         // height : 100,
-      
+
                                         width:
                                             (MediaQuery.of(context).size.width *
                                                 .2),
@@ -630,7 +638,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                             dropdownList:
                                                 controller.materialCategoryList,
                                             isValueSelected: controller
-                                                .isSelectedMaterialCategory.value,
+                                                .isSelectedMaterialCategory
+                                                .value,
                                             selectedValue: controller
                                                 .selectedMaterialCategory.value,
                                             onValueChanged:
@@ -644,10 +653,10 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                   Row(
                                     children: [
                                       CustomRichText(title: 'AC/DC: '),
-                                      Dimens.boxWidth10,
+                                      Dimens.boxWidth2,
                                       Container(
                                         // height : 100,
-      
+
                                         width:
                                             (MediaQuery.of(context).size.width *
                                                 .2),
@@ -686,12 +695,14 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                   Dimens.boxHeight8,
                                   Row(
                                     children: [
-                                      CustomRichText(title: 'Min Reorder Qty: '),
-                                      Dimens.boxWidth10,
+                                      CustomRichText(
+                                          title: 'Min Reorder Qty: '),
+                                      Dimens.boxWidth2,
                                       Container(
                                         // height : 100,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           border: Border.all(
                                             color: Color.fromARGB(
                                                 255, 227, 224, 224),
@@ -730,7 +741,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                             focusNode: controller.reorderFocus,
                                             scrollController:
                                                 controller.reorderScroll,
-                                            keyboardType: TextInputType.multiline,
+                                            keyboardType:
+                                                TextInputType.multiline,
                                             maxLines: 1,
                                             autofocus: false,
                                             decoration: InputDecoration(
@@ -846,7 +858,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                                 color: Colors.black),
                                           ),
                                           controller: controller.descCtrlr,
-                                          scrollController: controller.descScroll,
+                                          scrollController:
+                                              controller.descScroll,
                                           focusNode: controller.descFocus,
                                           keyboardType: TextInputType.multiline,
                                           maxLines: 1,
@@ -873,7 +886,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                                     .isDescriptionInvalid.value
                                                 ? OutlineInputBorder(
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     borderSide: BorderSide(
                                                       color: ColorValues
                                                           .redColorDark,
@@ -884,7 +898,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                                     .isDescriptionInvalid.value
                                                 ? OutlineInputBorder(
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     borderSide: BorderSide(
                                                       color: ColorValues
                                                           .redColorDark,

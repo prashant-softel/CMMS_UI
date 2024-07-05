@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/material_category_model.dart';
 import 'package:flutter/services.dart';
 
 import 'package:cmms/domain/models/access_level_model.dart';
@@ -27,7 +28,7 @@ class AddAssetMasterController extends GetxController {
   RxList<UnitMeasurementModel?> unitMeasurementList =
       <UnitMeasurementModel>[].obs;
   RxList<AssetTypeListSMModel?> materialList = <AssetTypeListSMModel>[].obs;
-  RxList<AssetCategoryModel?> materialCategoryList = <AssetCategoryModel>[].obs;
+  RxList<MaterialCategoryListModel?> materialCategoryList = <MaterialCategoryListModel>[].obs;
 
   // RxList<CountryModel?> countryList = <CountryModel>[].obs;
   RxList<ACDCModel?> acdclist = <ACDCModel>[
@@ -127,7 +128,7 @@ class AddAssetMasterController extends GetxController {
   void onInit() {
     // userId = Get.arguments;
     getUnitMeasurementList();
-    getAssetCategoryList();
+    getMaterialList();
 
     getAssetType();
     Get.put(FileUploadController());
@@ -190,8 +191,8 @@ class AddAssetMasterController extends GetxController {
     }
   }
 
-  Future<void> getAssetCategoryList() async {
-    final list = await addAssetPresenter.getAssetCategoryList();
+  Future<void> getMaterialList() async {
+    final list = await addAssetPresenter.getMaterialList();
 
     if (list != null) {
       for (var _materialcatList in list) {

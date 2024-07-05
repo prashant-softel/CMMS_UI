@@ -14349,12 +14349,12 @@ class Repository {
 
   //delete
   Future<void> deleteMaterialCategory(
-      Object business_id, bool isLoading) async {
+      Object materialcat_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteMaterialCategory(
         auth: auth,
-        business_id: business_id,
+        materialcat_id: materialcat_id,
         isLoading: isLoading,
       );
 

@@ -29,10 +29,10 @@ class MaterialCategoryPresenter {
     );
   }
 
-  Future<bool> deleteFacility(String? business_id,
+  Future<bool> deleteMaterialCategory(String? materialcat_id,
       {required bool isLoading}) async {
     await materialCategoryUsecase.deleteMaterialCategory(
-      business_id: business_id ?? "",
+      materialcat_id: materialcat_id ?? "",
       isLoading: isLoading,
     );
     return true;
