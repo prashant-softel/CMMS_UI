@@ -63,7 +63,14 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                             margin: EdgeInsets.only(left: 20),
                             child: Row(
                               children: [
-                                Text("Vegetation Control"),
+                                Text(
+                                  "Vegetation Control",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 159, 156, 156),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
                                 SizedBox(width: 10),
                                 Expanded(
                                   child: Divider(
