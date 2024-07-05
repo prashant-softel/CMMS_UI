@@ -232,7 +232,8 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                               Container(
                                 width: 300,
                                 height: 40,
-                                margin: Dimens.edgeInsets0_0_16_0,
+                                // margin: Dimens.edgeInsets0_0_16_0,
+                                margin: EdgeInsets.only(right: 5),
                                 child: TextField(
                                   style: GoogleFonts.lato(
                                     textStyle: TextStyle(
@@ -525,6 +526,14 @@ class CalibrationDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.srNoFilterText.value.toLowerCase()) &&
+
+              
+          
+          (Calibration?.schedule_start_date ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.schedulestartFilterText.value.toLowerCase()) &&
+
           (Calibration?.next_calibration_due_date ?? '')
               .toString()
               .toLowerCase()
@@ -554,6 +563,7 @@ class CalibrationDataSource extends DataTableSource {
        '${calibrationDetails?.category_name ?? ''}',
       '${calibrationDetails?.asset_name ?? ''}',
       '${calibrationDetails?.asset_serial ?? ''}',
+       '${calibrationDetails?.schedule_start_date ?? ''}',
       '${calibrationDetails?.last_calibration_date ?? ''}',
       '${calibrationDetails?.next_calibration_due_date ?? ''}',
       '${calibrationDetails?.frequency_name ?? ''}',

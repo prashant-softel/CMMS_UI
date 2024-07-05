@@ -146,7 +146,8 @@ class DocumentManagerWeb extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        // Dimens.boxWidth10,
+                                        SizedBox(width:10),
                                         ActionButton(
                                           icon: Icons.add,
                                           label: "Upload Document",

@@ -85,7 +85,7 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                               child: Text(" / STOCK MANAGEMENT",
                                   style: Styles.greyLight14),
                             ),
-                            Text(" / REQUEST ORDER LIST",
+                            Text(" / GOODS REQUEST LIST",
                                 style: Styles.greyLight14)
                           ],
                         ),
@@ -113,7 +113,7 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Request Order List",
+                                          "Goods Request List",
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
@@ -140,7 +140,8 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        // Dimens.boxWidth10,
+                                        SizedBox(width:10),
                                         varUserAccessModel.value.access_list!
                                                     .where((e) =>
                                                         e.feature_id ==
@@ -291,7 +292,8 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                       Container(
                                         width: 300,
                                         height: 40,
-                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        // margin: Dimens.edgeInsets0_0_16_0,
+                                        margin: EdgeInsets.only(right: 5),
                                         child: TextField(
                                           style: GoogleFonts.lato(
                                             textStyle: TextStyle(
@@ -581,7 +583,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' RO ${GoodsOrderListDetails?.name}',
+                        ' GR ${GoodsOrderListDetails?.name}',
                       ),
                       Dimens.boxHeight10,
                       Align(

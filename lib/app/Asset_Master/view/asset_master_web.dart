@@ -68,7 +68,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyLight14),
                     ),
-                    Text(" / ASSET MASTER LIST", style: Styles.greyLight14),
+                    Text(" / MATERIAL LIST", style: Styles.greyLight14),
                     // Text(" / ST NUMBER",
                     //     style: Styles.greyMediumLight12)
                   ],
@@ -543,7 +543,8 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                   Row(
                                     children: [
                                       CustomRichText(title: 'Date Range'),
-                                      Dimens.boxWidth10,
+                                      // Dimens.boxWidth10,
+                                      SizedBox(width: 10),
                                       CustomTextFieldForStock(
                                         width:
                                             MediaQuery.of(context).size.width /
@@ -585,7 +586,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                 Container(
                                   width: 300,
                                   height: 40,
-                                  margin: Dimens.edgeInsets0_0_16_0,
+                                  margin: EdgeInsets.only(right: 5),
                                   child: TextField(
                                     style: GoogleFonts.lato(
                                       textStyle: TextStyle(
@@ -781,10 +782,11 @@ class AssetListDataSource extends DataTableSource {
               .toLowerCase()
               .contains(controller.materialCategoryFilterText.value.toLowerCase()) &&
           (Mrs?.max_request_qty ?? '')
-          
+            .toString()
               .toLowerCase()
               .contains(controller.minRequiredQtyFilterText.value.toLowerCase())&&
             (Mrs?.reorder_qty ?? '')
+            .toString()
               .toLowerCase()
               .contains(controller.minReorderQtyTextFilterText.value.toLowerCase())&&
             (Mrs?.description ?? '')

@@ -201,6 +201,7 @@ class AddModuleCleaningExecutionController extends GetxController {
         data = Get.arguments;
 
         mcid.value = data['mcid'];
+
         planId.value = data['planId'];
 
         addModuleCleaningExecutionPresenter.saveValueMcId(

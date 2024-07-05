@@ -30,6 +30,7 @@ class ViewVegPlanController extends GetxController {
   RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
   List<int?> scheduleId = [];
   RxList<Schedules?>? schedules = <Schedules?>[].obs;
+  Schedules? selectedSchedules;
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;

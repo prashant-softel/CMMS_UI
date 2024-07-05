@@ -54,6 +54,10 @@ class HomeController extends GetxController {
   final assetDescpTextController = TextEditingController();
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
+  final categoryMapBM = <String, double>{};
+  final categoryMapPM = <String, double>{};
+  final categoryMapMC = <String, double>{};
+
   //int facilityId = 45;
   String categoryIds = '';
 
@@ -121,6 +125,7 @@ class HomeController extends GetxController {
   //     // "PTW": 7,
   //   };
   // }
+  List<Map<String, String>> categoryList = [];
 
   RxInt totalSumMcCount = 0.obs;
   RxInt totalSumBmCount = 0.obs;
@@ -143,6 +148,8 @@ class HomeController extends GetxController {
       Colors.blue,
       Colors.green,
       Colors.orange,
+      Colors.yellowAccent,
+      Colors.purpleAccent,
     ];
   }
 
@@ -214,27 +221,28 @@ class HomeController extends GetxController {
       int poItemsAwaitedSumTemp = 0;
 
       for (var module in dashboardList) {
-        totalSumMcCountTemp += module?.category_mc_count ?? 0;
-        totalSumBmcCountTemp += module?.category_bm_count ?? 0;
-        totalSumPmCountTemp += module?.category_pm_count ?? 0;
-        totalSumCountTemp += module?.category_total_count ?? 0;
+        if (module?.module_name == 'Breakdown Maintenance' ||
+            module?.module_name == 'Preventive Maintenance' ||
+            module?.module_name == 'Module Cleaning') {
+          totalSumMcCountTemp += module?.category_mc_count ?? 0;
+          totalSumBmcCountTemp += module?.category_bm_count ?? 0;
+          totalSumPmCountTemp += module?.category_pm_count ?? 0;
+          totalSumCountTemp += module?.category_total_count ?? 0;
 
-        var details = module?.cmDashboadDetails;
-        totalSumTemp += details?.total ?? 0;
-        completedSumTemp += details?.completed ?? 0;
-        pendingSumTemp += details?.pending ?? 0;
-        scheduleComplianceTotalSumTemp +=
-            details?.schedule_compliance_total ?? 0;
-        scheduleComplianceCompletedSumTemp +=
-            details?.schedule_compliance_completed ?? 0;
-        scheduleCompliancePendingSumTemp +=
-            details?.schedule_compliance_pending ?? 0;
-        woOnTimeSumTemp += details?.wo_on_time ?? 0;
-        woDelaySumTemp += details?.wo_delay ?? 0;
-        woBacklogSumTemp += details?.wo_backlog ?? 0;
-        lowStockItemsSumTemp += details?.low_stock_items ?? 0;
-        poItemsAwaitedSumTemp += details?.po_items_awaited ?? 0;
-        allItems.addAll(details?.item_list ?? []);
+          var details = module?.cmDashboadDetails;
+          totalSumTemp += details?.total ?? 0;
+          completedSumTemp += details?.completed ?? 0;
+          pendingSumTemp += details?.pending ?? 0;
+          scheduleComplianceTotalSumTemp +=
+              details?.schedule_compliance_total ?? 0;
+          scheduleComplianceCompletedSumTemp +=
+              details?.schedule_compliance_completed ?? 0;
+          scheduleCompliancePendingSumTemp +=
+              details?.schedule_compliance_pending ?? 0;
+          woOnTimeSumTemp += details?.wo_on_time ?? 0;
+          woDelaySumTemp += details?.wo_delay ?? 0;
+          woBacklogSumTemp += details?.wo_backlog ?? 0;
+        }
       }
 
       totalSumMcCount.value = totalSumMcCountTemp;
@@ -242,15 +250,6 @@ class HomeController extends GetxController {
       totalSumBmCount.value = totalSumBmcCountTemp;
       totalSumCount.value = totalSumCountTemp;
       totalSum.value = totalSumTemp;
-      Map<String, double> dataMap() {
-        return {
-          "BM": double.tryParse(totalSumBmcCountTemp.toString()) ?? 0.0,
-          "PM": double.tryParse(totalSumPmCountTemp.toString()) ?? 0.0,
-          "MC": double.tryParse(totalSumMcCountTemp.toString()) ?? 0.0,
-        };
-      }
-
-      getDataMap.value = dataMap();
 
       completedSum.value = completedSumTemp;
       pendingSum.value = pendingSumTemp;
@@ -268,6 +267,76 @@ class HomeController extends GetxController {
       dashboardMcList.value = _dashboardList[2];
       dashboardIrList.value = _dashboardList[3];
       dashboardSmList.value = _dashboardList[4];
+      Map<String, double> dataMap() {
+        return {
+          "BM": double.tryParse(totalSumBmcCountTemp.toString()) ?? 0.0,
+          "PM": double.tryParse(totalSumPmCountTemp.toString()) ?? 0.0,
+          "MC": double.tryParse(totalSumMcCountTemp.toString()) ?? 0.0,
+        };
+      }
+
+      getDataMap.value = dataMap();
+      if (dashboardBmList.value != null) {
+        for (var item
+            in dashboardBmList?.value!.cmDashboadDetails!.item_list ?? []) {
+          final categories = item.asset_category?.split(', ') ?? [];
+          for (var category in categories) {
+            if (categoryMapBM.containsKey(category)) {
+              categoryMapBM[category] = categoryMapBM[category]! + 1;
+            } else {
+              categoryMapBM[category] = 1;
+            }
+          }
+        }
+        final sortedCategories = categoryMapBM.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        final top5Categories = sortedCategories.take(5).toList();
+        categoryMapBM.clear();
+        for (var entry in top5Categories) {
+          categoryMapBM[entry.key] = entry.value.toDouble();
+        }
+      }
+
+      if (dashboardPmList.value != null) {
+        for (var item
+            in dashboardPmList?.value!.cmDashboadDetails!.item_list ?? []) {
+          final categories = item.asset_category?.split(', ') ?? [];
+          for (var category in categories) {
+            if (categoryMapPM.containsKey(category)) {
+              categoryMapPM[category] = categoryMapPM[category]! + 1;
+            } else {
+              categoryMapPM[category] = 1;
+            }
+          }
+        }
+        final sortedCategories = categoryMapPM.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        final top5Categories = sortedCategories.take(5).toList();
+        categoryMapPM.clear();
+        for (var entry in top5Categories) {
+          categoryMapPM[entry.key] = entry.value.toDouble();
+        }
+      }
+      // if (dashboardMcList.value != null) {
+      //   for (var item
+      //       in dashboardMcList?.value!.cmDashboadDetails!.item_list ?? []) {
+      //     final categories = item.asset_category?.split(', ') ?? [];
+      //     for (var category in categories) {
+      //       if (categoryMapMC.containsKey(category)) {
+      //         categoryMapMC[category] = categoryMapMC[category]! + 1;
+      //       } else {
+      //         categoryMapMC[category] = 1;
+      //       }
+      //     }
+      //   }
+      //   final sortedCategories = categoryMapMC.entries.toList()
+      //     ..sort((a, b) => b.value.compareTo(a.value));
+      //   final top5Categories = sortedCategories.take(5).toList();
+      //   categoryMapMC.clear();
+      //   for (var entry in top5Categories) {
+      //     categoryMapMC[entry.key] = entry.value.toDouble();
+      //   }
+      // }
 
       update(['dashboard']);
     }

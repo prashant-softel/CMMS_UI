@@ -144,7 +144,8 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                               ),
                                             ],
                                           ),
-                                          Dimens.boxWidth10,
+                                          // Dimens.boxWidth10,
+                                          SizedBox(width: 10),
                                           varUserAccessModel.value.access_list!
                                                       .where((e) =>
                                                           e.feature_id ==

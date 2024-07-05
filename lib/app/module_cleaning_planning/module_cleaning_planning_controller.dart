@@ -35,24 +35,29 @@ class ModuleCleaningPlanningController extends GetxController {
   Rx<DateTime> selectedStartTime = DateTime.now().obs;
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isEstimatedInvalid = false.obs;
-   Rx<bool> isstartdateInvalid = false.obs;
+  Rx<bool> isstartdateInvalid = false.obs;
 
-  
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<String> selectedAssignedTo = ''.obs;
-  int selectedAssignedToId = 0;
+  RxInt selectedAssignedToId = 0.obs;
   bool openStartDatePicker = false;
   var startDateTc = TextEditingController();
   // var mcTitelCtrlr = TextEditingController();
 
-   Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
   TextEditingController mcTitelCtrlr = TextEditingController();
 
   var durationInDayCtrlr = TextEditingController();
 
   Rx<String> selectedfrequency = ''.obs;
+  Rx<String> selectedCleaningType = ''.obs;
+
   Rx<bool> isSelectedfrequency = true.obs;
+  Rx<bool> isSelectedCleaningType = true.obs;
+  RxMap<dynamic, dynamic> cleaningTyperopdownMapperData = {}.obs;
+
   int selectedfrequencyId = 0;
+  int selectedCleaningId = 0;
 
   var selectedOption = ''.obs;
 
@@ -76,12 +81,12 @@ class ModuleCleaningPlanningController extends GetxController {
     }
   }
 
-  Map<String, TypeModel> typedropdownMapperData = {};
+  // Map<String, TypeModel> typedropdownMapperData = {};
 
   RxList<TypeModel> cleaningType = <TypeModel>[
-    TypeModel(name: "Please Select", id: "0"),
-    TypeModel(name: 'Dry', id: "1"),
-    TypeModel(name: 'Wet', id: "2"),
+    TypeModel(name: 'Dry', id: "0"),
+    TypeModel(name: 'Wet', id: "1"),
+    TypeModel(name: 'Robotic', id: "2"),
   ].obs;
   // var days = <TypeModel>[
   //   TypeModel(name: "Please Select", id: "0"),
@@ -109,11 +114,15 @@ class ModuleCleaningPlanningController extends GetxController {
           getEquipmentModelList(facilityId, true);
         });
       });
+      Future.delayed(Duration(seconds: 1), () {
+        getAssignedToList();
+      });
       if (id != 0) {
         Future.delayed(Duration(seconds: 1), () {
           getMcPlanDetail(planId: id.value, facilityId: facilityId);
         });
       }
+
       Future.delayed(Duration(seconds: 1), () {
         getFrequencyList();
       });
@@ -202,17 +211,24 @@ class ModuleCleaningPlanningController extends GetxController {
     String _startDateTc = htmlEscape.convert(startDateTimeCtrlr.text.trim());
     print("Start Date: ${_startDateTc}");
 
-    CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
-        planId: 0,
-        // assignedToId: 0,
+    // Ensure the selectedCleaningId is set properly
+    if (selectedCleaningId == 0) {
+      // Optionally, you can show a validation message or return early
+      print("Please select a cleaning type");
+      return;
+    }
 
-        facilityId: facilityId,
-        startDate: _startDateTc,
-        // startDate: "2023-12-02",
-        frequencyId: selectedfrequencyId,
-        noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
-        title: _mcTitelCtrlr,
-        schedules: schedules);
+    CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
+      planId: 0,
+      facilityId: facilityId,
+      startDate: _startDateTc,
+      frequencyId: selectedfrequencyId,
+      cleaningType: selectedCleaningId,
+      noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
+      title: _mcTitelCtrlr,
+      schedules: schedules,
+      assignedToId: selectedAssignedToId.value,
+    );
 
     var createMcModelJsonString = [createMcModel.toJson()];
     Map<String, dynamic>? responseCreateMcModel =
@@ -220,7 +236,10 @@ class ModuleCleaningPlanningController extends GetxController {
       createMcPlans: createMcModelJsonString,
       isLoading: true,
     );
-    if (responseCreateMcModel == null) {}
+    if (responseCreateMcModel == null) {
+      // Optionally handle the case when the response is null
+      print("Failed to create MC Plan");
+    }
     print('Create  Create GO  data: $createMcModelJsonString');
   }
 
@@ -261,6 +280,7 @@ class ModuleCleaningPlanningController extends GetxController {
         frequencyId: selectedfrequencyId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         title: _mcTitelCtrlr,
+        assignedToId: selectedAssignedToId.value,
         schedules: sch ?? []);
 
     var updateMcModelJsonString = [createMcModel.toJson()];
@@ -287,6 +307,9 @@ class ModuleCleaningPlanningController extends GetxController {
       mcPlanDetailsModel.value = _mcPlanDetails;
       mcTitelCtrlr.text = mcPlanDetailsModel.value?.title ?? "";
       selectedfrequency.value = mcPlanDetailsModel.value?.frequency ?? '';
+      selectedAssignedToId.value = mcPlanDetailsModel.value?.assignedToId ?? 0;
+      selectedAssignedTo.value = mcPlanDetailsModel.value?.assignedTo ?? '';
+
       startDateTc.text = mcPlanDetailsModel.value?.startDate ?? '';
       durationInDayCtrlr.text =
           mcPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
@@ -301,9 +324,13 @@ class ModuleCleaningPlanningController extends GetxController {
               {"key": "noOfInverters", "value": '${element.invs}'},
               {'key': "noOfSMBs", "value": '${element.smbs}'},
               {'key': "noOfModules", "value": '${element.scheduledModules}'},
-              {'key': "cleaningType", "value": 'Please Select'},
+              {'key': "cleaningType", "value": '${element.cleaningTypeName}'},
             ],
           );
+          // cleaningTyperopdownMapperData[element.cleaningTypeName ?? ""] =
+          //     cleaningType.firstWhere(
+          //         (e) => e?.name == element.cleaningTypeName,
+          //         orElse: null)!;
         },
       );
     }
@@ -341,18 +368,45 @@ class ModuleCleaningPlanningController extends GetxController {
     switch (list.runtimeType) {
       case const (RxList<FrequencyModel>):
         {
-          if(value != "Please Select"){
+          if (value != "Please Select") {
             int frequencyIndex =
-              frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-          selectedfrequency.value = value;
-           isSelectedfrequency.value=true;
-          }else{
-            selectedfrequencyId=0;
+                frequencyList.indexWhere((x) => x?.name == value);
+            selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+            selectedfrequency.value = value;
+            isSelectedfrequency.value = true;
+          } else {
+            selectedfrequencyId = 0;
           }
         }
         break;
-
+      case const (RxList<TypeModel>):
+        {
+          if (value != "Please Select") {
+            int cleaningTypeIndex =
+                cleaningType.indexWhere((x) => x.name == value);
+            selectedCleaningId =
+                int.tryParse(cleaningType[cleaningTypeIndex].id ?? '0') ?? 0;
+            selectedCleaningType.value = value;
+            isSelectedfrequency.value = true;
+          } else {
+            selectedCleaningId = 0;
+          }
+        }
+        break;
+      case const (RxList<EmployeeModel>):
+        {
+          if (value != "Please Select") {
+            int assignedToIndex =
+                assignedToList.indexWhere((x) => x?.name == value);
+            selectedAssignedToId.value =
+                assignedToList[assignedToIndex]?.id ?? 0;
+            isAssignedToSelected.value = true;
+            selectedAssignedTo.value = value;
+          } else {
+            selectedAssignedToId.value = 0;
+          }
+        }
+        break;
       default:
         {}
         break;
@@ -423,27 +477,30 @@ class ModuleCleaningPlanningController extends GetxController {
 
     return newTime;
   }
-  void checkFromModule(){
-    if(mcTitelCtrlr.text.trim().length==0){
-      isTitleInvalid.value=true;
+
+  void checkFromModule() {
+    if (mcTitelCtrlr.text.trim().length == 0) {
+      isTitleInvalid.value = true;
       isFormInvalid.value = true;
     }
- if (selectedfrequency == '') {
+    if (selectedfrequency == '') {
       isSelectedfrequency.value = false;
       isFormInvalid.value = true;
     }
-      if(durationInDayCtrlr.text.trim().length==0){
-      isEstimatedInvalid.value=true;
+    if (durationInDayCtrlr.text.trim().length == 0) {
+      isEstimatedInvalid.value = true;
       isFormInvalid.value = true;
     }
-  
-     if (startDateTimeCtrlrBuffer.text.trim().length == 0) {
-      isstartdateInvalid.value= true;
-       isFormInvalid = false.obs;;
-    }
-     if (validTillTimeCtrlr.text.trim().length == 0) {
+
+    if (startDateTimeCtrlrBuffer.text.trim().length == 0) {
       isstartdateInvalid.value = true;
-      isFormInvalid = false.obs;;
+      isFormInvalid = false.obs;
+      ;
+    }
+    if (validTillTimeCtrlr.text.trim().length == 0) {
+      isstartdateInvalid.value = true;
+      isFormInvalid = false.obs;
+      ;
     }
   }
 }

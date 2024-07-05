@@ -129,7 +129,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                               ],
                                             ),
                                           ),
-                                          Dimens.boxHeight10,
+                                          // Dimens.boxHeight10,
+                                          SizedBox(height: 10),
 
                                           CustomAppBar(
                                               title: controller.irId.value > 0
@@ -156,7 +157,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         ),
                                                       ],
                                                     )
-                                                  : Dimens.box0),
+                                                  : Dimens.box0), 
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 10, top: 10, right: 10),

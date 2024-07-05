@@ -212,6 +212,9 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             CustomRichText(
                                                 title:
                                                     'Planning Date & Time :'),
+                                            Dimens.boxHeight10,
+                                            CustomRichText(
+                                                title: 'Assign To :'),
                                           ],
                                         ),
                                         Dimens.boxWidth10,
@@ -222,7 +225,9 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             Text(
                                                 '${controller.mcPlanDetailsModel.value?.createdAt ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                 style: Styles.blue17),
-
+                                            Text(
+                                                '${controller.mcPlanDetailsModel.value?.assignedTo ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                style: Styles.blue17),
                                             // Dimens.boxHeight10,
                                           ],
                                         ),
@@ -479,11 +484,9 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                                     onValueChanged:
                                                                         (list,
                                                                             selectedValue) {
-                                                                      // print('paifcghb:${controller.assetList}');
-                                                                      // print({selectedValue: selectedValue});
                                                                       mapData["value"] =
                                                                           selectedValue;
-                                                                      controller.typedropdownMapperData[selectedValue] = list.firstWhere(
+                                                                      controller.cleaningTyperopdownMapperData[selectedValue] = list.firstWhere(
                                                                           (element) =>
                                                                               element.name ==
                                                                               selectedValue,

@@ -1,13 +1,11 @@
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
+import 'package:cmms/app/view_vegetation_plan/view_veg_plan_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../theme/dimens.dart';
 
-class ViewSetEquipmentDialog extends GetView {
-  final ViewMcPlaningController controller = Get.find();
-
+class ViewVegSetEquipmentDialogMobile extends GetView<ViewVegPlanController> {
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(builder: ((context, setState) {
@@ -24,32 +22,10 @@ class ViewSetEquipmentDialog extends GetView {
                 fontSize: 15,
               ),
             ),
-            // Spacer(),
-            // Container(
-            //   width: 150,
-            //   height: 25,
-            //   margin: Dimens.edgeInsets0_0_16_0,
-            //   child: TextField(
-            //     decoration: InputDecoration(
-            //       enabledBorder: const OutlineInputBorder(
-            //         borderSide:
-            //             const BorderSide(color: Colors.grey, width: 0.0),
-            //       ),
-            //       focusedBorder: const OutlineInputBorder(
-            //         borderSide:
-            //             const BorderSide(color: Colors.grey, width: 0.0),
-            //       ),
-            //       contentPadding: Dimens.edgeInsets10_0_0_0,
-            //       hintText: 'search'.tr,
-            //       hintStyle: Styles.grey12,
-            //     ),
-            //   ),
-            // ),
           ],
         ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
-
           return IgnorePointer(
             ignoring: false,
             child: Container(
@@ -70,7 +46,7 @@ class ViewSetEquipmentDialog extends GetView {
                 ),
                 // padding: EdgeInsets.only(right: 120, top: 10),
                 height: height / 1.5,
-                width: double.infinity,
+                width: Get.width * .95,
                 child: SingleChildScrollView(
                   child: Column(
                       children: [
@@ -79,22 +55,25 @@ class ViewSetEquipmentDialog extends GetView {
                       child: Row(
                         children: [
                           Expanded(
+                            flex: 2,
                             child: Text(
                               "Assets",
                               style: TextStyle(color: Color(0xff31576D)),
                             ),
                           ),
                           Expanded(
-                            child: Text("Modules",
+                            flex: 1,
+                            child: Text("Area",
                                 style: TextStyle(color: Color(0xff31576D))),
                           ),
                           Expanded(
+                              flex: 1,
                               child: Text("Select Day",
                                   style: TextStyle(color: Color(0xff31576D)))),
                         ],
                       ),
                     )
-                  ]..addAll(controller.equipmentList.value.map((e) {
+                  ]..addAll(controller.vegEquipmentList.map((e) {
                           return Padding(
                             padding: const EdgeInsets.only(left: 20),
                             child: Column(
@@ -102,6 +81,7 @@ class ViewSetEquipmentDialog extends GetView {
                                 Row(
                                   children: [
                                     Expanded(
+                                      flex: 2,
                                       child: GestureDetector(
                                         onTap: () {
                                           setState(
@@ -126,20 +106,22 @@ class ViewSetEquipmentDialog extends GetView {
                                       ),
                                     ),
                                     Expanded(
+                                      flex: 1,
                                       child: Text(
-                                        "${e.moduleQuantity}",
+                                        "${e.area}",
                                         style: TextStyle(
                                             fontSize: 12.0,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     Expanded(
+                                      flex: 1,
                                       child: DropdownButton<String>(
                                         value: e.selectedDay,
                                         onChanged: (newValue) {
                                           setState(() {
                                             e.selectedDay = newValue!;
-                                            e.smbs.forEach((element) {
+                                            e.smbs?.forEach((element) {
                                               element.selectedDay = newValue;
                                             });
                                           });
@@ -160,18 +142,21 @@ class ViewSetEquipmentDialog extends GetView {
                                 e.isExpanded
                                     ? Column(
                                         children: []..addAll(
-                                            e.smbs.map(
+                                            e.smbs!.map(
                                               (smbItems) {
                                                 return Row(
                                                   children: [
                                                     Expanded(
+                                                        flex: 2,
                                                         child: Text(
                                                             smbItems.smbName ??
                                                                 "")),
                                                     Expanded(
+                                                        flex: 1,
                                                         child: Text(
-                                                            "${smbItems.moduleQuantity}")),
+                                                            "${smbItems.area}")),
                                                     Expanded(
+                                                      flex: 1,
                                                       child: DropdownButton<
                                                           String>(
                                                         value: smbItems
@@ -209,73 +194,6 @@ class ViewSetEquipmentDialog extends GetView {
                 )),
           );
         }),
-        // actions: [
-        //   controller.id == 0
-        //       ? Row(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.greenColor,
-        //                 text: 'Submit',
-        //                 onPressed: () {
-        //                   // controller.createMcPlan();
-        //                 },
-        //               ),
-        //             ),
-        //             Dimens.boxWidth20,
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.redColor,
-        //                 text: "Cancel",
-        //                 onPressed: () {
-        //                   final _flutterSecureStorage =
-        //                       // const FlutterSecureStorage();
-
-        //                       // _flutterSecureStorage.delete(
-        //                       // key: "userId");
-
-        //                       Get.back();
-        //                 },
-        //               ),
-        //             ),
-        //           ],
-        //         )
-        //       : Row(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.redColor,
-        //                 text: "Cancel",
-        //                 onPressed: () {
-        //                   // final _flutterSecureStorage =
-        //                   // const FlutterSecureStorage();
-
-        //                   // _flutterSecureStorage.delete(
-        //                   // key: "userId");
-
-        //                   Get.back();
-        //                 },
-        //               ),
-        //             ),
-        //             Dimens.boxWidth20,
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.greenColor,
-        //                 text: 'Update',
-        //                 onPressed: () {
-        //                   // controller.updateMcPlan();
-        //                 },
-        //               ),
-        //             ),
-        //           ],
-        //         ),
-        // ],
       );
     }));
   }
