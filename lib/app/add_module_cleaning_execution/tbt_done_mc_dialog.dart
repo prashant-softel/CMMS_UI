@@ -104,7 +104,8 @@ class TbtDoneMcDialog extends GetView {
                             "type": 2,
                             "jobModel": controller.jobDetailsModel.value,
                             "pmTaskModel": controller.pmtaskViewModel.value,
-                            "mcModel": controller.mcExecutionDetailsModel.value
+                            "mcModel": controller.mcExecutionDetailsModel.value,
+                            "scheduleID": 0
                           });
                           // controller.assignToPmTask(id: id ?? 0);
                         },

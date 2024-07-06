@@ -544,8 +544,14 @@ class AddModuleCleaningExecutionController extends GetxController {
           {"key": "Remark", "value": '${element.remark}'},
           {"key": "Permit ID", "value": '${element.permit_id}'},
           {"key": "Permit Code", "value": '${element.permit_code}'},
-          {"key": "Permit Status", "value": '${element.status_short_ptw}'},
-          {"key": "Status", "value": '${element.status_short}'},
+          {
+            "key": "Permit Status",
+            "value": '${element.status_short_ptw}ptw${element.ptw_status}'
+          },
+          {
+            "key": "Status",
+            "value": '${element.status_short}st${element.status}'
+          },
           {'key': "Actions", "value": ''},
         ]);
       });
