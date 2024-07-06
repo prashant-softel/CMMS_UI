@@ -273,46 +273,6 @@ class AddAssetMasterController extends GetxController {
   }
 
   Future<bool> addAsset() async {
-    // if (matNameCtrlr.text.trim() == '' ) {
-    //   isNameInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
-
-    // if (mdmcodeCtrlr.text.trim() == '' ) {
-    //   isCodeInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
-
-    // if (reqQty.text.trim() == '' ) {
-    //   isRequiredInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
-
-    // if (reorderQty.text.trim() == '' ) {
-    //   isReorderInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
-
-    // if (descCtrlr.text.trim() == '' ) {
-    //   isDescriptionInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
-
-    // checkForm();
-    // if (isFormInvalid.value) {
-    //   return false;
-    // }
-
-    // if (matNameCtrlr.text.trim() == '' ||
-    //     mdmcodeCtrlr.text.trim() == ''  ||
-    //     reorderQty.text.trim() == '' ||
-    //     reqQty.text.trim() == '' ||
-    //     descCtrlr.text.trim() == ''
-
-    // ) {
-    //   Fluttertoast.showToast(
-    //       msg: "Please enter required field", fontSize: 16.0);
-    // } else {
       checkForm();
       if(isFormInvalid.value){
         return false;
@@ -343,7 +303,6 @@ class AddAssetMasterController extends GetxController {
           "File_type": fileType.value,
           "File_size": fileBytes.toString(),
         });
-    //function to write sum of 2 numbers
 
     var assetListJsonString =
         createAssetSMModel.toJson(); //createCheckListToJson([createChecklist]);
