@@ -9,7 +9,8 @@ import 'package:cmms/app/app.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:pie_chart/pie_chart.dart';
+// import 'package:pie_chart/pie_chart.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../navigators/app_pages.dart';
 
@@ -443,7 +444,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     children: [
                                                       Text("Overview",
                                                           style:
-                                                              Styles.black15),
+                                                              Styles.black14),
                                                       // Dimens.boxHeight20,
                                                       // Spacer(),
                                                       Center(
@@ -584,7 +585,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text("Schedule Compliance",
-                                                    style: Styles.black15),
+                                                    style: Styles.black14),
                                                 // Dimens.boxHeight5,
                                                 SizedBox(height: 5),
                                                 Row(
@@ -832,71 +833,129 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 10, right: 10),
-                                              padding: EdgeInsets.only(
-                                                  left: 10, top: 10),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    ColorValues.lightBlueColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey,
-                                                    offset: Offset(0.0, 1.0),
-                                                    blurRadius: 6.0,
-                                                  ),
-                                                ],
+                                            margin: EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            // padding: EdgeInsets.only(
+                                            //     left: 10, top: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
+                                                ),
+                                              ],
+                                            ),
+                                            height: 160,
+                                            child: SfCircularChart(
+                                              // title: ChartTitle(
+                                              //     text: "Category",
+                                              //     textStyle: Styles.black12,
+                                              //     alignment:
+                                              //         ChartAlignment.near),
+                                              tooltipBehavior: TooltipBehavior(
+                                                enable: true,
+                                                tooltipPosition:
+                                                    TooltipPosition.pointer,
+                                                builder: (dynamic data,
+                                                    dynamic point,
+                                                    dynamic series,
+                                                    int pointIndex,
+                                                    int seriesIndex) {
+                                                  var entry = controller
+                                                      .getDataMap.entries
+                                                      .toList()[pointIndex];
+                                                  double totalValue = controller
+                                                      .getDataMap.values
+                                                      .reduce((a, b) => a + b);
+                                                  double percentage =
+                                                      (entry.value /
+                                                              totalValue) *
+                                                          100;
+                                                  return Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    child: Text(
+                                                      '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  );
+                                                },
                                               ),
-                                              height: 160,
-                                              child: Row(
-                                                children: [
-                                                  Align(
-                                                      alignment:
-                                                          Alignment.topLeft,
-                                                      child: Text("Category",
-                                                          style:
-                                                              Styles.black15)),
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: Obx(() {
-                                                      // Access the dataMap from the controller
-                                                      Map<String, double> data =
-                                                          controller.getDataMap;
-                                                      return PieChart(
-                                                        dataMap: data,
-                                                        totalValue: data.values
-                                                            .reduce((a, b) =>
-                                                                a +
-                                                                b), // Sum of all values in the map
-                                                        chartType:
-                                                            ChartType.ring,
-                                                        chartRadius: 100,
-                                                        colorList: controller
-                                                            .getColorList(),
-                                                        legendOptions:
-                                                            LegendOptions(
-                                                          showLegendsInRow:
-                                                              false,
-                                                          showLegends: true,
-                                                        ),
-                                                        chartValuesOptions:
-                                                            ChartValuesOptions(
-                                                          showChartValueBackground:
-                                                              false,
-                                                          showChartValues: true,
-                                                          showChartValuesInPercentage:
-                                                              true,
-                                                          showChartValuesOutside:
-                                                              false,
-                                                        ),
-                                                      );
-                                                    }),
-                                                  )
-                                                ],
-                                              )),
+                                              legend: Legend(
+                                                isVisible: true,
+                                                position: LegendPosition
+                                                    .right, // Position the legend to the right to stack vertically
+                                                overflowMode:
+                                                    LegendItemOverflowMode.wrap,
+                                                textStyle: Styles.black13,
+                                                alignment: ChartAlignment
+                                                    .center, // Align the legend items to the center
+                                                itemPadding:
+                                                    4, // Adjust the padding between legend items
+                                              ),
+                                              series: <CircularSeries>[
+                                                DoughnutSeries<
+                                                    MapEntry<String, double>,
+                                                    String>(
+                                                  strokeWidth: 25,
+                                                  innerRadius: '80%',
+                                                  dataSource: controller
+                                                      .getDataMap.entries
+                                                      .toList(),
+                                                  xValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.key,
+                                                  yValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.value,
+                                                  // dataLabelSettings:
+                                                  //     DataLabelSettings(
+                                                  //   isVisible: true,
+                                                  //   labelPosition:
+                                                  //       ChartDataLabelPosition
+                                                  //           .outside,
+                                                  //   useSeriesColor: true,
+                                                  //   textStyle:
+                                                  //       TextStyle(fontSize: 12),
+                                                  // ),
+                                                  pointColorMapper:
+                                                      (MapEntry<String, double>
+                                                              data,
+                                                          _) {
+                                                    var entriesList = controller
+                                                        .getDataMap.entries
+                                                        .toList();
+                                                    int index = entriesList
+                                                        .indexWhere((entry) =>
+                                                            entry.key ==
+                                                                data.key &&
+                                                            entry.value ==
+                                                                data.value);
+                                                    var colorList = controller
+                                                        .getWoColorList();
+                                                    Color color = colorList[
+                                                        index %
+                                                            colorList.length];
+                                                    return color;
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                         Expanded(
                                           flex: 2,
@@ -1285,7 +1344,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     children: [
                                                       Text("Overview",
                                                           style:
-                                                              Styles.black15),
+                                                              Styles.black14),
                                                       // Dimens.boxHeight20,
                                                       // Spacer(),
                                                       Center(
@@ -1598,7 +1657,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text("Schedule Compliance",
-                                                    style: Styles.black15),
+                                                    style: Styles.black14),
                                                 // Dimens.boxHeight5,
                                                 SizedBox(height: 5),
 
@@ -1732,35 +1791,114 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               ],
                                             ),
                                             height: 160,
-                                            child: PieChart(
-                                              dataMap: controller
-                                                  .categoryMapBMDouble,
-                                              animationDuration:
-                                                  Duration(milliseconds: 800),
-                                              chartLegendSpacing: 20,
-                                              chartRadius: 200,
-                                              colorList:
-                                                  controller.getColorList(),
-                                              chartType: ChartType.ring,
-                                              ringStrokeWidth: 10,
-                                              centerText: "Category",
-                                              legendOptions: LegendOptions(
-                                                showLegendsInRow: false,
-                                                legendPosition:
-                                                    LegendPosition.left,
-                                                showLegends: true,
-                                                legendShape: BoxShape.circle,
-                                                legendTextStyle: Styles.black13,
+                                            child: SfCircularChart(
+                                              // title: ChartTitle(
+                                              //     text: "Category",
+                                              //     textStyle: Styles.black12,
+                                              //     alignment:
+                                              //         ChartAlignment.near),
+                                              tooltipBehavior: TooltipBehavior(
+                                                enable: true,
+                                                tooltipPosition:
+                                                    TooltipPosition.pointer,
+                                                builder: (dynamic data,
+                                                    dynamic point,
+                                                    dynamic series,
+                                                    int pointIndex,
+                                                    int seriesIndex) {
+                                                  var entry = controller
+                                                      .categoryMapBMDouble
+                                                      .entries
+                                                      .toList()[pointIndex];
+                                                  double totalValue = controller
+                                                      .categoryMapBMDouble
+                                                      .values
+                                                      .reduce((a, b) => a + b);
+                                                  double percentage =
+                                                      (entry.value /
+                                                              totalValue) *
+                                                          100;
+                                                  return Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    child: Text(
+                                                      '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  );
+                                                },
                                               ),
-                                              chartValuesOptions:
-                                                  ChartValuesOptions(
-                                                showChartValuesInPercentage:
-                                                    true,
-                                                showChartValueBackground: true,
-                                                showChartValues: true,
-                                                showChartValuesOutside: false,
-                                                decimalPlaces: 1,
+                                              legend: Legend(
+                                                isVisible: true,
+                                                position: LegendPosition
+                                                    .right, // Position the legend to the right to stack vertically
+                                                overflowMode:
+                                                    LegendItemOverflowMode.wrap,
+                                                textStyle: Styles.black13,
+                                                alignment: ChartAlignment
+                                                    .center, // Align the legend items to the center
+                                                itemPadding:
+                                                    4, // Adjust the padding between legend items
                                               ),
+                                              series: <CircularSeries>[
+                                                DoughnutSeries<
+                                                    MapEntry<String, double>,
+                                                    String>(
+                                                  strokeWidth: 15,
+                                                  innerRadius: '80%',
+                                                  dataSource: controller
+                                                      .categoryMapBMDouble
+                                                      .entries
+                                                      .toList(),
+                                                  xValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.key,
+                                                  yValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.value,
+                                                  // dataLabelSettings:
+                                                  //     DataLabelSettings(
+                                                  //   isVisible: true,
+                                                  //   labelPosition:
+                                                  //       ChartDataLabelPosition
+                                                  //           .outside,
+                                                  //   useSeriesColor: true,
+                                                  //   textStyle:
+                                                  //       TextStyle(fontSize: 12),
+                                                  // ),
+                                                  pointColorMapper:
+                                                      (MapEntry<String, double>
+                                                              data,
+                                                          _) {
+                                                    var entriesList = controller
+                                                        .categoryMapBMDouble
+                                                        .entries
+                                                        .toList();
+                                                    int index = entriesList
+                                                        .indexWhere((entry) =>
+                                                            entry.key ==
+                                                                data.key &&
+                                                            entry.value ==
+                                                                data.value);
+                                                    var colorList = controller
+                                                        .getColorList();
+                                                    Color color = colorList[
+                                                        index %
+                                                            colorList.length];
+                                                    return color;
+                                                  },
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -2399,8 +2537,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                           child: Container(
                                             margin: EdgeInsets.only(
                                                 left: 10, right: 10),
-                                            padding: EdgeInsets.only(
-                                                left: 10, top: 10),
+                                            // padding: EdgeInsets.only(
+                                            //     left: 10, top: 10),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -2414,35 +2552,114 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               ],
                                             ),
                                             height: 160,
-                                            child: PieChart(
-                                              dataMap: controller.categoryMapPM,
-                                              animationDuration:
-                                                  Duration(milliseconds: 800),
-                                              chartLegendSpacing: 20,
-                                              chartRadius: 200,
-                                              colorList:
-                                                  controller.getColorList(),
-                                              // initialAngleInDegree: 50,
-                                              chartType: ChartType.ring,
-                                              ringStrokeWidth: 10,
-                                              centerText: "Category",
-                                              legendOptions: LegendOptions(
-                                                showLegendsInRow: false,
-                                                legendPosition:
-                                                    LegendPosition.left,
-                                                showLegends: true,
-                                                legendShape: BoxShape.circle,
-                                                legendTextStyle: Styles.black13,
+                                            child: SfCircularChart(
+                                              // title: ChartTitle(
+                                              //     text: "Category",
+                                              //     textStyle: Styles.black12,
+                                              //     alignment:
+                                              //         ChartAlignment.near),
+                                              tooltipBehavior: TooltipBehavior(
+                                                enable: true,
+                                                tooltipPosition:
+                                                    TooltipPosition.pointer,
+                                                builder: (dynamic data,
+                                                    dynamic point,
+                                                    dynamic series,
+                                                    int pointIndex,
+                                                    int seriesIndex) {
+                                                  var entry = controller
+                                                      .categoryMapPMDouble
+                                                      .entries
+                                                      .toList()[pointIndex];
+                                                  double totalValue = controller
+                                                      .categoryMapPMDouble
+                                                      .values
+                                                      .reduce((a, b) => a + b);
+                                                  double percentage =
+                                                      (entry.value /
+                                                              totalValue) *
+                                                          100;
+                                                  return Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    child: Text(
+                                                      '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  );
+                                                },
                                               ),
-                                              chartValuesOptions:
-                                                  ChartValuesOptions(
-                                                showChartValuesInPercentage:
-                                                    true,
-                                                showChartValueBackground: true,
-                                                showChartValues: true,
-                                                showChartValuesOutside: false,
-                                                decimalPlaces: 1,
+                                              legend: Legend(
+                                                isVisible: true,
+                                                position: LegendPosition
+                                                    .right, // Position the legend to the right to stack vertically
+                                                overflowMode:
+                                                    LegendItemOverflowMode.wrap,
+                                                textStyle: Styles.black13,
+                                                alignment: ChartAlignment
+                                                    .center, // Align the legend items to the center
+                                                itemPadding:
+                                                    4, // Adjust the padding between legend items
                                               ),
+                                              series: <CircularSeries>[
+                                                DoughnutSeries<
+                                                    MapEntry<String, double>,
+                                                    String>(
+                                                  strokeWidth: 25,
+                                                  innerRadius: '80%',
+                                                  dataSource: controller
+                                                      .categoryMapPMDouble
+                                                      .entries
+                                                      .toList(),
+                                                  xValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.key,
+                                                  yValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.value,
+                                                  // dataLabelSettings:
+                                                  //     DataLabelSettings(
+                                                  //   isVisible: true,
+                                                  //   labelPosition:
+                                                  //       ChartDataLabelPosition
+                                                  //           .outside,
+                                                  //   useSeriesColor: true,
+                                                  //   textStyle:
+                                                  //       TextStyle(fontSize: 12),
+                                                  // ),
+                                                  pointColorMapper:
+                                                      (MapEntry<String, double>
+                                                              data,
+                                                          _) {
+                                                    var entriesList = controller
+                                                        .categoryMapPMDouble
+                                                        .entries
+                                                        .toList();
+                                                    int index = entriesList
+                                                        .indexWhere((entry) =>
+                                                            entry.key ==
+                                                                data.key &&
+                                                            entry.value ==
+                                                                data.value);
+                                                    var colorList = controller
+                                                        .getColorList();
+                                                    Color color = colorList[
+                                                        index %
+                                                            colorList.length];
+                                                    return color;
+                                                  },
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -3286,51 +3503,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               ),
                                               height: 160,
                                               child: Row(
-                                                children: [
-                                                  Align(
-                                                      alignment:
-                                                          Alignment.topLeft,
-                                                      child: Text("Category",
-                                                          style:
-                                                              Styles.black15)),
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: Obx(() {
-                                                      // Access the dataMap from the controller
-                                                      Map<String, double> data =
-                                                          controller.getDataMap;
-                                                      return PieChart(
-                                                        dataMap: data,
-                                                        totalValue: data.values
-                                                            .reduce((a, b) =>
-                                                                a +
-                                                                b), // Sum of all values in the map
-                                                        chartType:
-                                                            ChartType.ring,
-                                                        chartRadius: 100,
-                                                        colorList: controller
-                                                            .getColorList(),
-                                                        legendOptions:
-                                                            LegendOptions(
-                                                          showLegendsInRow:
-                                                              false,
-                                                          showLegends: true,
-                                                        ),
-                                                        chartValuesOptions:
-                                                            ChartValuesOptions(
-                                                          showChartValueBackground:
-                                                              false,
-                                                          showChartValues: true,
-                                                          showChartValuesInPercentage:
-                                                              true,
-                                                          showChartValuesOutside:
-                                                              false,
-                                                        ),
-                                                      );
-                                                    }),
-                                                  )
-                                                ],
+                                                children: [],
                                               )),
                                         ),
 
@@ -5010,43 +5183,6 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                       child: Text("Category",
                                                           style:
                                                               Styles.black15)),
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: Obx(() {
-                                                      // Access the dataMap from the controller
-                                                      Map<String, double> data =
-                                                          controller.getDataMap;
-                                                      return PieChart(
-                                                        dataMap: data,
-                                                        totalValue: data.values
-                                                            .reduce((a, b) =>
-                                                                a +
-                                                                b), // Sum of all values in the map
-                                                        chartType:
-                                                            ChartType.ring,
-                                                        chartRadius: 100,
-                                                        colorList: controller
-                                                            .getColorList(),
-                                                        legendOptions:
-                                                            LegendOptions(
-                                                          showLegendsInRow:
-                                                              false,
-                                                          showLegends: true,
-                                                        ),
-                                                        chartValuesOptions:
-                                                            ChartValuesOptions(
-                                                          showChartValueBackground:
-                                                              false,
-                                                          showChartValues: true,
-                                                          showChartValuesInPercentage:
-                                                              true,
-                                                          showChartValuesOutside:
-                                                              false,
-                                                        ),
-                                                      );
-                                                    }),
-                                                  )
                                                 ],
                                               )),
                                         ),

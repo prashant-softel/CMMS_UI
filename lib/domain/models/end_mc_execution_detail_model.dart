@@ -133,6 +133,11 @@ class Schedules {
     this.status,
     this.status_short,
     this.equipments,
+    this.permit_id,
+    this.permit_code,
+    this.ptw_status,
+    this.ptw_tbt_done,
+    this.status_short_ptw,
   });
 
   int? id;
@@ -149,10 +154,20 @@ class Schedules {
   String? remark;
   int? status;
   String? status_short;
+  int? permit_id;
+  String? permit_code;
+  int? ptw_status;
+  int? ptw_tbt_done;
+  String? status_short_ptw;
   List<EquipmentsList?>? equipments;
 
   factory Schedules.fromJson(Map<String, dynamic> json) => Schedules(
         id: json["id"],
+        permit_id: json['permit_id'],
+        permit_code: json['permit_code'],
+        ptw_status: json['ptw_status'],
+        ptw_tbt_done: json['ptw_tbt_done'],
+        status_short_ptw: json['status_short_ptw'],
         scheduleId: json['scheduleId'],
         executionId: json['executionId'],
         cleaningDay: json['cleaningDay'],
@@ -174,6 +189,7 @@ class Schedules {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "status_short_ptw": status_short_ptw,
         "scheduleId": scheduleId,
         "executionId": executionId,
         "cleaningDay": cleaningDay,
@@ -187,6 +203,10 @@ class Schedules {
         "remark": remark,
         "status": status,
         "status_short": status_short,
+        "permit_id": permit_id,
+        "permit_code": permit_code,
+        "ptw_status": ptw_status,
+        "ptw_tbt_done": ptw_tbt_done,
         "equipments": List<dynamic>.from(equipments!.map((x) => x)),
       };
 }

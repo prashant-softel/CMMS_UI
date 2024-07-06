@@ -64,6 +64,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   Rx<String> selectedModuleList = ''.obs;
   int? selectedModuleListId = 0;
   int type = 1;
+  var schedule;
 
   ///Permit Type
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
@@ -172,7 +173,7 @@ class AddModuleCleaningExecutionController extends GetxController {
     super.onInit();
   }
 
-  createNewPermit() {
+  createNewPermit({int? scheduleID}) {
     clearJobDetailStoreData();
     clearTypeStoreData();
     clearisCheckedtoreData();
@@ -187,7 +188,8 @@ class AddModuleCleaningExecutionController extends GetxController {
       "type": 4,
       "isFromJobDetails": true,
       "pmTaskModel": pmtaskViewModel.value,
-      "mcModel": mcExecutionDetailsModel.value
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": scheduleID
     });
   }
 
@@ -540,7 +542,16 @@ class AddModuleCleaningExecutionController extends GetxController {
           {"key": "Type", "value": '${element.cleaningTypeName}'},
           {"key": "Water Used", "value": '${element.waterUsed}'},
           {"key": "Remark", "value": '${element.remark}'},
-          {"key": "Status", "value": '${element.status_short}'},
+          {"key": "Permit ID", "value": '${element.permit_id}'},
+          {"key": "Permit Code", "value": '${element.permit_code}'},
+          {
+            "key": "Permit Status",
+            "value": '${element.status_short_ptw}ptw${element.ptw_status}'
+          },
+          {
+            "key": "Status",
+            "value": '${element.status_short}st${element.status}'
+          },
           {'key': "Actions", "value": ''},
         ]);
       });
