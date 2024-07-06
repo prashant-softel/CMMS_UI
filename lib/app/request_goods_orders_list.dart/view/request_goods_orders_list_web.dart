@@ -120,7 +120,8 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                         Row(
                                           children: [
                                             CustomRichText(title: 'Date Range'),
-                                            Dimens.boxWidth10,
+                                            // Dimens.boxWidth10,
+                                            SizedBox(width:10),
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
                                                       .size
