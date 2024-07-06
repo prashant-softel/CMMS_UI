@@ -98,7 +98,8 @@ class CalibrationDialog extends GetView {
                   },
                   child: const Text('View Calibration'),
                 ),
-                Dimens.boxWidth10,
+                // Dimens.boxWidth10,
+                SizedBox(width:10),
                 ElevatedButton(
                   style: Styles.yellowElevatedButtonStyle,
                   onPressed: () {

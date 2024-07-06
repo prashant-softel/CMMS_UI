@@ -57,7 +57,8 @@ class CreateSchedule extends GetView {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CustomRichText(title: 'Block  :'),
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
+                     SizedBox(width:10),
                     Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -85,9 +86,11 @@ class CreateSchedule extends GetView {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
+                     SizedBox(width:10),
                     CustomRichText(title: 'Equipment :'),
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
+                     SizedBox(width:10),
                     SizedBox(
                       child: DropdownWebStock(
                         width: MediaQuery.of(context).size.width / 6,
@@ -100,9 +103,11 @@ class CreateSchedule extends GetView {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
+                     SizedBox(width:10),
                     CustomRichText(title: 'Equipment Category :'),
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
+                     SizedBox(width:10),
                     SizedBox(
                       child: DropdownWebStock(
                         width: MediaQuery.of(context).size.width / 6,
@@ -116,7 +121,8 @@ class CreateSchedule extends GetView {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CustomRichText(title: 'Module Quantity :'),
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
+                     SizedBox(width:10),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -145,9 +151,11 @@ class CreateSchedule extends GetView {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
+                     SizedBox(width:10),
                     CustomRichText(title: 'Type of Cleaning :'),
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
+                     SizedBox(width:10),
                     SizedBox(
                       child: DropdownWebStock(
                         width: MediaQuery.of(context).size.width / 6,
@@ -160,9 +168,11 @@ class CreateSchedule extends GetView {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
+                     SizedBox(width:10),
                     CustomRichText(title: 'Estimated Duration\n(In Days) :'),
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
+                     SizedBox(width:10),
                     SizedBox(
                       child: DropdownWebStock(
                         width: MediaQuery.of(context).size.width / 6,
