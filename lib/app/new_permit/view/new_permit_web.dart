@@ -2213,8 +2213,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                       true
                                               ? controller.createNewPermitForPm(
                                                   pmTaskId: controller
-                                                      .mcExecutionDetailsModel
-                                                      ?.executionId,
+                                                      .scheduleID.value,
                                                   fileIds: dropzoneController
                                                       .fileIds)
                                               : controller.isCheckedJSA.value ==

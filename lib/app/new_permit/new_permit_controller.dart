@@ -391,6 +391,8 @@ class NewPermitController extends GetxController {
   bool isFromJobDetails = false;
   Rx<int> permitId = 0.obs;
   Rx<int> typee = 0.obs;
+  Rx<int> scheduleID = 0.obs;
+
   Rx<bool> isChecked = false.obs;
   JobDetailsModel? jobModel;
   EndMCExecutionDetailsModel? mcExecutionDetailsModel;
@@ -544,6 +546,7 @@ class NewPermitController extends GetxController {
         isChecked.value = dataFromPreviousScreen['isChecked'];
         typee.value = dataFromPreviousScreen['type'];
         jobModel = dataFromPreviousScreen['jobModel'];
+        scheduleID.value = dataFromPreviousScreen['scheduleID'];
         mcExecutionDetailsModel = dataFromPreviousScreen['mcModel'];
         pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];
         permitPresenter.saveValue(permitId: permitId.value.toString());
@@ -574,6 +577,7 @@ class NewPermitController extends GetxController {
         }
         if (mcdetail != null) {
           mcExecutionDetailsModel = mcdetail;
+          //  scheduleID.value = int.tryParse(_type!) ?? 0;
         }
         isChecked.value = _isChecked ?? false;
         typee.value = int.tryParse(_type!) ?? 0;
@@ -1561,7 +1565,6 @@ class NewPermitController extends GetxController {
       print('permit Id For Job data: $permitIdForJob');
     }
   }
-
 
   void createNewPermitForPm(
       {int? pmTaskId, String? activity, List<dynamic>? fileIds}) async {

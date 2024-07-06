@@ -339,7 +339,7 @@ class AddModuleCleaningExecutionContentWeb
                                             ),
                                             Expanded(
                                               child: DataTable2(
-                                                // minWidth: 2000,
+                                                minWidth: 1500,
                                                 dataRowHeight: 105,
                                                 columnSpacing: 10,
                                                 border: TableBorder.all(
@@ -435,6 +435,35 @@ class AddModuleCleaningExecutionContentWeb
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   )),
+                                                  DataColumn2(
+                                                      // fixedWidth: 200,
+                                                      label: Text(
+                                                    "Permit ID",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataColumn2(
+                                                      fixedWidth: 160,
+                                                      label: Text(
+                                                        "Permit Code",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                  DataColumn2(
+                                                      fixedWidth: 160,
+                                                      label: Text(
+                                                        "Permit Status",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
                                                   DataColumn2(
                                                       fixedWidth: 100,
                                                       label: Text(
@@ -539,40 +568,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                           style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                         ),
                                                                                       )
-                                                                                    : (mapData['key'] == "Water Used")
-                                                                                        // ? Column(
-                                                                                        //     mainAxisAlignment: MainAxisAlignment.center,
-                                                                                        //     crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                        //     children: [
-                                                                                        //       Container(
-                                                                                        //           decoration: BoxDecoration(
-                                                                                        //             boxShadow: [
-                                                                                        //               BoxShadow(
-                                                                                        //                 color: Colors.black26,
-                                                                                        //                 offset: const Offset(
-                                                                                        //                   5.0,
-                                                                                        //                   5.0,
-                                                                                        //                 ),
-                                                                                        //                 blurRadius: 5.0,
-                                                                                        //                 spreadRadius: 1.0,
-                                                                                        //               ),
-                                                                                        //             ],
-                                                                                        //             color: ColorValues.whiteColor,
-                                                                                        //             borderRadius: BorderRadius.circular(5),
-                                                                                        //           ),
-                                                                                        //           child: IgnorePointer(
-                                                                                        //             child: LoginCustomTextfield(
-                                                                                        //               width: MediaQuery.of(context).size.width / 2,
-                                                                                        //               maxLine: 1,
-                                                                                        //               textController: new TextEditingController(
-                                                                                        //                   text: mapData["value"] ?? ''),
-                                                                                        //               onChanged: (txt) {
-                                                                                        //                 mapData["value"] = txt;
-                                                                                        //               },
-                                                                                        //             ),
-                                                                                        //           )),
-                                                                                        //     ],
-                                                                                        //   )
+                                                                                    : (mapData['key'] == "Permit Status")
                                                                                         ? Center(
                                                                                             child: Text(
                                                                                               mapData["value"] ?? "",
@@ -580,182 +576,260 @@ class AddModuleCleaningExecutionContentWeb
                                                                                               style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                             ),
                                                                                           )
-                                                                                        : (mapData['key'] == "Remark")
-                                                                                            ?
-                                                                                            // Column(
-                                                                                            //     mainAxisAlignment: MainAxisAlignment.center,
-                                                                                            //     crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                            //     children: [
-                                                                                            //       Container(
-                                                                                            //           decoration: BoxDecoration(
-                                                                                            //             boxShadow: [
-                                                                                            //               BoxShadow(
-                                                                                            //                 color: Colors.black26,
-                                                                                            //                 offset: const Offset(
-                                                                                            //                   5.0,
-                                                                                            //                   5.0,
-                                                                                            //                 ),
-                                                                                            //                 blurRadius: 5.0,
-                                                                                            //                 spreadRadius: 1.0,
-                                                                                            //               ),
-                                                                                            //             ],
-                                                                                            //             color: ColorValues.whiteColor,
-                                                                                            //             borderRadius: BorderRadius.circular(5),
-                                                                                            //           ),
-                                                                                            //           child: IgnorePointer(
-                                                                                            //             child: LoginCustomTextfield(
-                                                                                            //               width: MediaQuery.of(context).size.width / 2,
-                                                                                            //               maxLine: 1,
-                                                                                            //               textController: new TextEditingController(
-                                                                                            //                   text: mapData["value"] ?? ''),
-                                                                                            //               onChanged: (txt) {
-                                                                                            //                 mapData["value"] = txt;
-                                                                                            //               },
-                                                                                            //             ),
-                                                                                            //           )),
-                                                                                            //     ],
-                                                                                            //   )
-                                                                                            Center(
+                                                                                        : (mapData['key'] == "Permit ID")
+                                                                                            ? Center(
                                                                                                 child: Text(
                                                                                                   mapData["value"] ?? "",
                                                                                                   // "${element?.scheduleId}",
                                                                                                   style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                 ),
                                                                                               )
-                                                                                            : (mapData['key'] == "Status")
-                                                                                                ? Text(
-                                                                                                    mapData["value"] ?? "",
-                                                                                                    // "${element?.scheduleId}",
-                                                                                                    style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                            : (mapData['key'] == "Permit Code")
+                                                                                                ? Center(
+                                                                                                    child: Text(
+                                                                                                      mapData["value"] ?? "",
+                                                                                                      // "${element?.scheduleId}",
+                                                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                                    ),
                                                                                                   )
-                                                                                                : (mapData['key'] == "Actions")
-                                                                                                    ? Wrap(
-                                                                                                        children: [
-                                                                                                          //  record[9]['value'] == "Scheduled"
-                                                                                                          // controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 360
-                                                                                                          controller.mcExecutionDetailsModel.value?.status == 361
-                                                                                                              ? TableActionButton(
-                                                                                                                  // label: 'Start',
-                                                                                                                  onPress: () {
-                                                                                                                    var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
-
-                                                                                                                    print('filteredData:${filterdData!.scheduleId}');
-                                                                                                                    //  selectedData = filterdData;
-
-                                                                                                                    controller.startMCExecutionScheduleButton(scheduleID: filterdData.scheduleId);
-                                                                                                                    // print({
-                                                                                                                    //   'scheduledata:':
-                                                                                                                    //       filterdData.scheduleId
-                                                                                                                    // });
-                                                                                                                  },
-                                                                                                                  color: Colors.green,
-                                                                                                                  icon: Icons.add,
-                                                                                                                  message: 'Start',
-                                                                                                                )
-                                                                                                              : Dimens.box0,
-
-                                                                                                          //End MC Schedule Execution
-                                                                                                          //  record[9]['value'] == "In Progress"
-                                                                                                          //    controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 361
-                                                                                                          controller.mcExecutionDetailsModel.value?.status == 366
-                                                                                                              ? TableActionButton(
-                                                                                                                  // label: 'Start',
-                                                                                                                  onPress: () {
-                                                                                                                    var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
-
-                                                                                                                    print('filteredData:${filterdData!.scheduleId}');
-                                                                                                                    //  selectedData = filterdData;
-
-                                                                                                                    controller.endMCScheduleExecutionButton(scheduleID: filterdData.scheduleId);
-                                                                                                                    // print({
-                                                                                                                    //   'scheduledata:':
-                                                                                                                    //       filterdData.scheduleId
-                                                                                                                    // });
-                                                                                                                  },
-                                                                                                                  color: Color.fromARGB(255, 70, 95, 57),
-                                                                                                                  icon: Icons.add,
-                                                                                                                  message: 'End',
-                                                                                                                )
-                                                                                                              : Dimens.box0,
-
-                                                                                                          // controller.listSchedules!
-                                                                                                          //             .firstWhere(
-                                                                                                          //               (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                          //               orElse: () => Schedules(status_short: ""),
-                                                                                                          //             )
-                                                                                                          //             ?.status_short ==
-                                                                                                          //         "Completed"
-                                                                                                          //     ?
-                                                                                                          // TableActionButton(
-                                                                                                          //   onPress: () {
-                                                                                                          //     // Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                          //     var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
-
-                                                                                                          //     controller.updateMCScheduleExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
-                                                                                                          //     // print({"filteredData:${filterdData?.scheduleId}"});
-                                                                                                          //     // print({"filteredData:${filterdData!.cleaningDay}"});
-                                                                                                          //     // print({"filteredData:${filterdData.waterUsed}"});
-                                                                                                          //   },
-                                                                                                          //   color: ColorValues.appLightBlueColor,
-                                                                                                          //   icon: Icons.add,
-                                                                                                          //   message: 'Update',
-                                                                                                          // ),
-                                                                                                          // : Dimens.box0,
-
-                                                                                                          ///Abandon
-                                                                                                          // controller.listSchedules!
-                                                                                                          //             .firstWhere(
-                                                                                                          //               (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                          //               orElse: () => Schedules(status_short: ""),
-                                                                                                          //             )
-                                                                                                          //             ?.status_short ==
-                                                                                                          //         "In Progress"
-                                                                                                          //     ?
-                                                                                                          controller.mcExecutionDetailsModel.value?.status == 361
-                                                                                                              ? TableActionButton(
-                                                                                                                  // label: 'Abandon',
-                                                                                                                  onPress: () {
-                                                                                                                    var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
-                                                                                                                    controller.scheduledId = filterdData?.scheduleId;
-                                                                                                                    print({
-                                                                                                                      'Executiondata:': filterdData?.executionId
-                                                                                                                    });
-                                                                                                                    Get.dialog(AbandoneScheduleExecutionDialog(
-                                                                                                                      id: filterdData?.executionId,
-                                                                                                                    ));
-                                                                                                                  },
-                                                                                                                  color: Colors.red,
-                                                                                                                  icon: Icons.close,
-                                                                                                                  message: 'Abandon',
-                                                                                                                )
-                                                                                                              : Dimens.box0,
-
-                                                                                                          // controller.listSchedules!
-                                                                                                          //             .firstWhere(
-                                                                                                          //               (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                          //               orElse: () => Schedules(status_short: ""),
-                                                                                                          //             )
-                                                                                                          //             ?.status_short ==
-                                                                                                          //         "In Progress"
-                                                                                                          //     ?
-                                                                                                          TableActionButton(
-                                                                                                            // label: 'Equipments',
-                                                                                                            onPress: () {
-                                                                                                              var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
-
-                                                                                                              Get.dialog(AddModuleCleaningExecutionDialog(
-                                                                                                                scheduleId: filterdData!.scheduleId,
-                                                                                                                cleaningDay: filterdData.cleaningDay,
-                                                                                                                waterUsed: filterdData.waterUsed,
-                                                                                                              ));
-                                                                                                            },
-                                                                                                            color: ColorValues.appDarkBlueColor,
-                                                                                                            icon: Icons.category,
-                                                                                                            message: 'Equipments',
-                                                                                                          ),
-                                                                                                        ],
+                                                                                                : (mapData['key'] == "Water Used")
+                                                                                                    // ? Column(
+                                                                                                    //     mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    //     crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                    //     children: [
+                                                                                                    //       Container(
+                                                                                                    //           decoration: BoxDecoration(
+                                                                                                    //             boxShadow: [
+                                                                                                    //               BoxShadow(
+                                                                                                    //                 color: Colors.black26,
+                                                                                                    //                 offset: const Offset(
+                                                                                                    //                   5.0,
+                                                                                                    //                   5.0,
+                                                                                                    //                 ),
+                                                                                                    //                 blurRadius: 5.0,
+                                                                                                    //                 spreadRadius: 1.0,
+                                                                                                    //               ),
+                                                                                                    //             ],
+                                                                                                    //             color: ColorValues.whiteColor,
+                                                                                                    //             borderRadius: BorderRadius.circular(5),
+                                                                                                    //           ),
+                                                                                                    //           child: IgnorePointer(
+                                                                                                    //             child: LoginCustomTextfield(
+                                                                                                    //               width: MediaQuery.of(context).size.width / 2,
+                                                                                                    //               maxLine: 1,
+                                                                                                    //               textController: new TextEditingController(
+                                                                                                    //                   text: mapData["value"] ?? ''),
+                                                                                                    //               onChanged: (txt) {
+                                                                                                    //                 mapData["value"] = txt;
+                                                                                                    //               },
+                                                                                                    //             ),
+                                                                                                    //           )),
+                                                                                                    //     ],
+                                                                                                    //   )
+                                                                                                    ? Center(
+                                                                                                        child: Text(
+                                                                                                          mapData["value"] ?? "",
+                                                                                                          // "${element?.scheduleId}",
+                                                                                                          style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                                        ),
                                                                                                       )
-                                                                                                    : Text(mapData['key'] ?? ''),
+                                                                                                    : (mapData['key'] == "Remark")
+                                                                                                        ?
+                                                                                                        // Column(
+                                                                                                        //     mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                        //     crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                        //     children: [
+                                                                                                        //       Container(
+                                                                                                        //           decoration: BoxDecoration(
+                                                                                                        //             boxShadow: [
+                                                                                                        //               BoxShadow(
+                                                                                                        //                 color: Colors.black26,
+                                                                                                        //                 offset: const Offset(
+                                                                                                        //                   5.0,
+                                                                                                        //                   5.0,
+                                                                                                        //                 ),
+                                                                                                        //                 blurRadius: 5.0,
+                                                                                                        //                 spreadRadius: 1.0,
+                                                                                                        //               ),
+                                                                                                        //             ],
+                                                                                                        //             color: ColorValues.whiteColor,
+                                                                                                        //             borderRadius: BorderRadius.circular(5),
+                                                                                                        //           ),
+                                                                                                        //           child: IgnorePointer(
+                                                                                                        //             child: LoginCustomTextfield(
+                                                                                                        //               width: MediaQuery.of(context).size.width / 2,
+                                                                                                        //               maxLine: 1,
+                                                                                                        //               textController: new TextEditingController(
+                                                                                                        //                   text: mapData["value"] ?? ''),
+                                                                                                        //               onChanged: (txt) {
+                                                                                                        //                 mapData["value"] = txt;
+                                                                                                        //               },
+                                                                                                        //             ),
+                                                                                                        //           )),
+                                                                                                        //     ],
+                                                                                                        //   )
+                                                                                                        Center(
+                                                                                                            child: Text(
+                                                                                                              mapData["value"] ?? "",
+                                                                                                              // "${element?.scheduleId}",
+                                                                                                              style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                                            ),
+                                                                                                          )
+                                                                                                        : (mapData['key'] == "Status")
+                                                                                                            ? Text(
+                                                                                                                mapData["value"] ?? "",
+                                                                                                                // "${element?.scheduleId}",
+                                                                                                                style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                                              )
+                                                                                                            : (mapData['key'] == "Actions")
+                                                                                                                ? Wrap(
+                                                                                                                    children: [
+                                                                                                                      TableActionButton(
+                                                                                                                        // label: 'Equipments',
+                                                                                                                        onPress: () {
+                                                                                                                          var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                                                                                                          controller.createNewPermit(scheduleID: filterdData?.scheduleId);
+                                                                                                                        },
+                                                                                                                        color: ColorValues.appDarkBlueColor,
+                                                                                                                        icon: Icons.add,
+                                                                                                                        message: 'Create New Permit',
+                                                                                                                      ),
+                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.permit_id != 0
+                                                                                                                          ? TableActionButton(
+                                                                                                                              color: ColorValues.appLightBlueColor,
+                                                                                                                              icon: Icons.remove_red_eye,
+                                                                                                                              message: "View Permit",
+                                                                                                                              onPress: () {
+                                                                                                                                var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                                                                                                                controller.clearPermitStoreData();
+                                                                                                                                controller.viewNewPermitList(permitId: filterdData?.permit_id, jobId: controller.jobDetailsModel.value!.id ?? 0);
+                                                                                                                              })
+                                                                                                                          : Dimens.box0,
+                                                                                                                      //  record[9]['value'] == "Scheduled"
+                                                                                                                      // controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 360
+                                                                                                                      controller.mcExecutionDetailsModel.value?.status == 361
+                                                                                                                          ? TableActionButton(
+                                                                                                                              // label: 'Start',
+                                                                                                                              onPress: () {
+                                                                                                                                var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                                                                                                                print('filteredData:${filterdData!.scheduleId}');
+                                                                                                                                //  selectedData = filterdData;
+
+                                                                                                                                controller.startMCExecutionScheduleButton(scheduleID: filterdData.scheduleId);
+                                                                                                                                // print({
+                                                                                                                                //   'scheduledata:':
+                                                                                                                                //       filterdData.scheduleId
+                                                                                                                                // });
+                                                                                                                              },
+                                                                                                                              color: Colors.green,
+                                                                                                                              icon: Icons.add,
+                                                                                                                              message: 'Start',
+                                                                                                                            )
+                                                                                                                          : Dimens.box0,
+
+                                                                                                                      //End MC Schedule Execution
+                                                                                                                      //  record[9]['value'] == "In Progress"
+                                                                                                                      //    controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 361
+                                                                                                                      controller.mcExecutionDetailsModel.value?.status == 366
+                                                                                                                          ? TableActionButton(
+                                                                                                                              // label: 'Start',
+                                                                                                                              onPress: () {
+                                                                                                                                var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                                                                                                                print('filteredData:${filterdData!.scheduleId}');
+                                                                                                                                //  selectedData = filterdData;
+
+                                                                                                                                controller.endMCScheduleExecutionButton(scheduleID: filterdData.scheduleId);
+                                                                                                                                // print({
+                                                                                                                                //   'scheduledata:':
+                                                                                                                                //       filterdData.scheduleId
+                                                                                                                                // });
+                                                                                                                              },
+                                                                                                                              color: Color.fromARGB(255, 70, 95, 57),
+                                                                                                                              icon: Icons.add,
+                                                                                                                              message: 'End',
+                                                                                                                            )
+                                                                                                                          : Dimens.box0,
+
+                                                                                                                      // controller.listSchedules!
+                                                                                                                      //             .firstWhere(
+                                                                                                                      //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                                      //               orElse: () => Schedules(status_short: ""),
+                                                                                                                      //             )
+                                                                                                                      //             ?.status_short ==
+                                                                                                                      //         "Completed"
+                                                                                                                      //     ?
+                                                                                                                      // TableActionButton(
+                                                                                                                      //   onPress: () {
+                                                                                                                      //     // Get.dialog(AddModuleCleaningExecutionDialog());
+                                                                                                                      //     var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                                                                                                      //     controller.updateMCScheduleExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
+                                                                                                                      //     // print({"filteredData:${filterdData?.scheduleId}"});
+                                                                                                                      //     // print({"filteredData:${filterdData!.cleaningDay}"});
+                                                                                                                      //     // print({"filteredData:${filterdData.waterUsed}"});
+                                                                                                                      //   },
+                                                                                                                      //   color: ColorValues.appLightBlueColor,
+                                                                                                                      //   icon: Icons.add,
+                                                                                                                      //   message: 'Update',
+                                                                                                                      // ),
+                                                                                                                      // : Dimens.box0,
+
+                                                                                                                      ///Abandon
+                                                                                                                      // controller.listSchedules!
+                                                                                                                      //             .firstWhere(
+                                                                                                                      //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                                      //               orElse: () => Schedules(status_short: ""),
+                                                                                                                      //             )
+                                                                                                                      //             ?.status_short ==
+                                                                                                                      //         "In Progress"
+                                                                                                                      //     ?
+                                                                                                                      controller.mcExecutionDetailsModel.value?.status == 361
+                                                                                                                          ? TableActionButton(
+                                                                                                                              // label: 'Abandon',
+                                                                                                                              onPress: () {
+                                                                                                                                var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+                                                                                                                                controller.scheduledId = filterdData?.scheduleId;
+                                                                                                                                print({'Executiondata:': filterdData?.executionId});
+                                                                                                                                Get.dialog(AbandoneScheduleExecutionDialog(
+                                                                                                                                  id: filterdData?.executionId,
+                                                                                                                                ));
+                                                                                                                              },
+                                                                                                                              color: Colors.red,
+                                                                                                                              icon: Icons.close,
+                                                                                                                              message: 'Abandon',
+                                                                                                                            )
+                                                                                                                          : Dimens.box0,
+
+                                                                                                                      // controller.listSchedules!
+                                                                                                                      //             .firstWhere(
+                                                                                                                      //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                                      //               orElse: () => Schedules(status_short: ""),
+                                                                                                                      //             )
+                                                                                                                      //             ?.status_short ==
+                                                                                                                      //         "In Progress"
+                                                                                                                      //     ?
+                                                                                                                      TableActionButton(
+                                                                                                                        // label: 'Equipments',
+                                                                                                                        onPress: () {
+                                                                                                                          var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                                                                                                          Get.dialog(AddModuleCleaningExecutionDialog(
+                                                                                                                            scheduleId: filterdData!.scheduleId,
+                                                                                                                            cleaningDay: filterdData.cleaningDay,
+                                                                                                                            waterUsed: filterdData.waterUsed,
+                                                                                                                          ));
+                                                                                                                        },
+                                                                                                                        color: ColorValues.appDarkBlueColor,
+                                                                                                                        icon: Icons.category,
+                                                                                                                        message: 'Equipments',
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  )
+                                                                                                                : Text(mapData['key'] ?? ''),
                                                       );
                                                     }).toList(),
                                                   );
