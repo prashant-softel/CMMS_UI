@@ -100,6 +100,20 @@ class McPlanMessageApproveDialog extends GetView {
                   child: const Text('View MC Plan'),
                 ),
               ),
+              SizedBox(
+                width: 10,
+              ),
+              Center(
+                child: ElevatedButton(
+                  style: Styles.navyBlueElevatedButtonStyle,
+                  onPressed: () {
+                    Get.toNamed(
+                      Routes.moduleCleaningListExecution,
+                    );
+                  },
+                  child: const Text('Execution List'),
+                ),
+              ),
               Dimens.boxWidth10,
             ],
           )

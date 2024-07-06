@@ -65,6 +65,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   int? selectedModuleListId = 0;
   int type = 1;
   var schedule;
+  TextEditingController commentCtrlr = TextEditingController();
 
   ///Permit Type
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
@@ -674,5 +675,77 @@ class AddModuleCleaningExecutionController extends GetxController {
   Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
     print('Argument$id');
+  }
+
+  approveShecduleExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var approvetoJsonString = commentModel.toJson();
+      final response =
+          await addModuleCleaningExecutionPresenter.approveShecduleExecution(
+        approvetoJsonString: approvetoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.moduleCleaningListExecution);
+      }
+    }
+  }
+
+  rejectShecduleExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var rejecttoJsonString = commentModel.toJson();
+      final response =
+          await addModuleCleaningExecutionPresenter.rejectShecduleExecution(
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.moduleCleaningListExecution);
+      }
+    }
+  }
+
+  endApproveExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var approvetoJsonString = commentModel.toJson();
+      final response =
+          await addModuleCleaningExecutionPresenter.endApproveExecution(
+        approvetoJsonString: approvetoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.moduleCleaningListExecution);
+      }
+    }
+  }
+
+  endRejectExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var rejecttoJsonString = commentModel.toJson();
+      final response =
+          await addModuleCleaningExecutionPresenter.endRejectExecution(
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.moduleCleaningListExecution);
+      }
+    }
   }
 }

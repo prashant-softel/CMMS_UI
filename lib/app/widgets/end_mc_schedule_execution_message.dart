@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +11,9 @@ class EndMCScheduleExecutionMessageDialog extends GetView {
   String? data;
   List<dynamic>? endMCId;
 
-  EndMCScheduleExecutionMessageDialog({super.key, this.createPermitData, this.data, this.endMCId});
-  // final ModuleCleaningListExecutionController _controller = Get.find();
-
+  EndMCScheduleExecutionMessageDialog(
+      {super.key, this.createPermitData, this.data, this.endMCId});
+  final AddModuleCleaningExecutionController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -46,28 +47,56 @@ class EndMCScheduleExecutionMessageDialog extends GetView {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                          '${data} ', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
+                      Text('${data} ',
+                          style: TextStyle(color: Colors.green),
+                          textAlign: TextAlign.center),
                       Text('with id '),
-                      Text('${endMCId}',style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),)
+                      Text(
+                        '${endMCId}',
+                        style: TextStyle(
+                            color: Colors.blue, fontWeight: FontWeight.bold),
+                      )
                     ],
                   ),
-                      
                 ]),
           );
         }),
         actions: [
-          Dimens.boxWidth10,
           Center(
-            child: ElevatedButton(
-              style: Styles.darkBlueElevatedButtonStyle,
-              onPressed: () {
-                Get.offAllNamed(Routes.moduleCleaningListExecution);
-                // _controller.getMCTaskList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, true);
-                
-                Get.back();
-              },
-              child: const Text('Ok'),
+            child: Row(
+              children: [
+                Spacer(),
+                ElevatedButton(
+                  style: Styles.darkBlueElevatedButtonStyle,
+                  onPressed: () {
+                    Get.offAllNamed(Routes.moduleCleaningListExecution);
+                    // _controller.getMCTaskList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, true);
+
+                    Get.back();
+                  },
+                  child: const Text('Execution List'),
+                ),
+                Spacer(),
+                ElevatedButton(
+                  style: Styles.darkBlueElevatedButtonStyle,
+                  onPressed: () {
+                    controller.setMcId();
+
+                    controller.getFacilityList();
+                    controller.getInventoryCategoryList();
+                    controller.getMCExecutionDetail(
+                        executionId: controller.mcid.value,
+                        facilityId: controller.facilityId);
+                    controller.getMCTaskEquipmentList(
+                        controller.mcid.value, true);
+                    //  });
+
+                    Get.back();
+                  },
+                  child: const Text('View Execution'),
+                ),
+                Spacer(),
+              ],
             ),
           ),
         ],

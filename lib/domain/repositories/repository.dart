@@ -879,6 +879,54 @@ class Repository {
     }
   }
 
+  Future<bool> approvePmTaskExecution(
+      {bool? isLoading, approvetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approvePmTaskExecution(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: json.encode(approvetoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> rejectPmTaskExecution(
+      {bool? isLoading, rejecttoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectPmTaskExecution(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: json.encode(rejecttoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
   Future<Map<String, dynamic>> createObs(
       createObs, bool? isLoading, int? position) async {
     try {
@@ -12193,12 +12241,12 @@ class Repository {
     }
   }
 
-  Future<bool> approvePmTaskExecution(
+  Future<bool> approveShecduleExecution(
       {bool? isLoading, approvetoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approvePmTaskExecution(
+      final res = await _dataRepository.approveShecduleExecution(
           auth: auth,
           isLoading: isLoading,
           approvetoJsonString: json.encode(approvetoJsonString));
@@ -12217,12 +12265,59 @@ class Repository {
     }
   }
 
-  Future<bool> rejectPmTaskExecution(
+  Future<bool> rejectShecduleExecution(
       {bool? isLoading, rejecttoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectPmTaskExecution(
+      final res = await _dataRepository.rejectShecduleExecution(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: json.encode(rejecttoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> endApproveExecution(
+      {bool? isLoading, approvetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.endApproveExecution(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: json.encode(approvetoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> endRejectExecution({bool? isLoading, rejecttoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.endRejectExecution(
           auth: auth,
           isLoading: isLoading,
           rejecttoJsonString: json.encode(rejecttoJsonString));
