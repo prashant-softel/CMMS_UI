@@ -318,7 +318,7 @@ class ViewAddInventoryController extends GetxController {
       selectedTypeName.value = editAddInventoryDetailsModel.value?.type ?? "";
       assetsNameCtrlr.text = editAddInventoryDetailsModel.value?.name ?? '';
       assesDiscriptionCtrlr.text =
-          editAddInventoryDetailsModel.value?.description ?? "";
+          editAddInventoryDetailsModel.value?.asset_description ?? "";
       warrentyDescriptionCtrlr.text =
           editAddInventoryDetailsModel.value?.warrantyDescription ?? "";
       calibrationRemainderInTc.text =

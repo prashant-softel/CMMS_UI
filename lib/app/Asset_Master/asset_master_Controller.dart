@@ -215,7 +215,9 @@ class AssetMasterController extends GetxController {
             (Mrs.asset_name ?? '')
                 .toLowerCase()
                 .contains(keyword.toLowerCase()) ||
-            (Mrs.section ?? '').toLowerCase().contains(keyword.toLowerCase()) ||
+            (Mrs.section ?? '')
+            .toLowerCase()
+            .contains(keyword.toLowerCase()) ||
             (Mrs.asset_type ?? '')
                 .toLowerCase()
                 .contains(keyword.toLowerCase()) ||

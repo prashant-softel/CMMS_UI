@@ -91,7 +91,8 @@ class CreateJobCardDialog extends GetView {
           );
         }),
         actions: [
-          Dimens.boxWidth10,
+          // Dimens.boxWidth10,
+           SizedBox(width:10),
           Row(
             children: [
               Spacer(),

@@ -12596,7 +12596,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), 'Add Asset');
         return false;
       }
     } catch (error) {

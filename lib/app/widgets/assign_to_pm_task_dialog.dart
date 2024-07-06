@@ -35,7 +35,8 @@ class AssignToPMTaskDialog extends GetView {
                 fontSize: 15,
               ),
             ),
-            Dimens.boxWidth10,
+            // Dimens.boxWidth10,
+             SizedBox(width: 10),
             Text(
               "PMT${id}",
               style:
@@ -74,7 +75,8 @@ class AssignToPMTaskDialog extends GetView {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CustomRichText(title: 'Assign To  '),
-                        Dimens.boxWidth10,
+                        // Dimens.boxWidth10,
+                         SizedBox(width: 10),
                         SizedBox(
                           height: 30,
                           width: MediaQuery.of(context).size.width / 7,
@@ -146,7 +148,8 @@ class AssignToPMTaskDialog extends GetView {
   ) {
     return Column(//
         children: [
-      Dimens.boxHeight5,
+      // Dimens.boxHeight5,
+       SizedBox(height:5),
       Container(
         height: MediaQuery.of(context).size.height * 0.050,
         decoration: BoxDecoration(
@@ -223,7 +226,8 @@ class AssignToPMTaskDialog extends GetView {
           ),
         ),
       ),
-      Dimens.boxHeight20,
+      // Dimens.boxHeight20,
+       SizedBox(height:20),
     ]);
   }
 

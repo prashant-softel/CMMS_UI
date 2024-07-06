@@ -78,7 +78,8 @@ class CreateNewPermitDialog extends GetView {
                           },
                           child: const Text('Permit List'),
                         ),
-                        Dimens.boxWidth10,
+                        // Dimens.boxWidth10,
+                         SizedBox(width:10),
                         ElevatedButton(
                           style: Styles.blueElevatedButtonStyle,
                           onPressed: () {
@@ -87,7 +88,8 @@ class CreateNewPermitDialog extends GetView {
                           },
                           child: const Text('View This Permit'),
                         ),
-                        Dimens.boxWidth10,
+                        // Dimens.boxWidth10,
+                         SizedBox(width:10),
                         // ElevatedButton(
                         //   style: Styles.redElevatedButtonStyle,
                         //   onPressed: () => Get.offAndToNamed(Routes.addJob),

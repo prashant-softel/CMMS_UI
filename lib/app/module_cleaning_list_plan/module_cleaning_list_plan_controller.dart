@@ -122,6 +122,10 @@ class ModuleCleaningListPlanController extends GetxController {
   }
     }
 
+  void mcPlanListByDate() {
+    getModuleCleaningListPlan(facilityId, false);
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {}
   }
@@ -169,6 +173,11 @@ class ModuleCleaningListPlanController extends GetxController {
 
   void clearStoreDataPlanid() {
     moduleCleaningListPlanPresenter.clearValuePlanId();
+  }
+
+  void clearStoreData() {
+    clearStoreDataMcid();
+    clearStoreDataPlanid();
   }
 
   void export() {
