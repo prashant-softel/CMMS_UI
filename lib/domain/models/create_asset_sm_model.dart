@@ -20,6 +20,7 @@ class CreateAssetSMModel {
     this.asset_type_ID,
     this.item_category_ID,
     this.unit_measurement_ID,
+    this.section,
     this.min_req_qty,
     this.reorder_qty,
     this.approval_required_ID,
@@ -37,6 +38,7 @@ class CreateAssetSMModel {
   int? asset_type_ID;
   int? item_category_ID;
   int? unit_measurement_ID;
+  int?section;
   int? min_req_qty;
   int? reorder_qty;
 
@@ -51,6 +53,8 @@ class CreateAssetSMModel {
       asset_type_ID: json["asset_type_ID"],
       item_category_ID: json["item_category_ID"],
       unit_measurement_ID: json["unit_measurement_ID"],
+      section: json["section"],
+      
       min_req_qty: json["min_req_qty"],
       reorder_qty: json["reorder_qty"],
       approval_required_ID: json["approval_required_ID"],
@@ -66,6 +70,7 @@ class CreateAssetSMModel {
     "asset_type_ID": asset_type_ID,
     "item_category_ID": item_category_ID,
     "unit_measurement_ID": unit_measurement_ID,
+    "section": section,
     "min_req_qty": min_req_qty,
     "reorder_qty": reorder_qty,
     "approval_required_ID": approval_required_ID,
