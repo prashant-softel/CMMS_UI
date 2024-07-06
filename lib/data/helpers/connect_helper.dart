@@ -2368,7 +2368,7 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CMMS/getDashboadDetails?facilityId=$facilityId&fromDate=$startDate&toDate=$endDate',
+      'CMMS/getDashboadDetails?facilityId=$facilityId&fromDate=2024-01-01&toDate=2024-07-31',
       // 'CMMS/getDashboadDetails?facilityId=$facilityId',
       Request.get,
       null,
@@ -7214,7 +7214,7 @@ class ConnectHelper {
       type == 3
           ? 'AuditPlan/AuditLinkToPermit?audit_id=$scheduleId&ptw_id=$permitId'
           : type == 4
-              ? 'MC/LinkPermitToModuleCleaning?task_id=$scheduleId&permit_id=$permitId'
+              ? 'MC/LinkPermitToModuleCleaning?scheduleId=$scheduleId&permit_id=$permitId'
               : 'PMScheduleView/LinkPermitToPMTask?task_id=$scheduleId&permit_id=$permitId',
 
       Request.put,

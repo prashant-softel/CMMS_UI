@@ -58,6 +58,7 @@ class HomeController extends GetxController {
   final categoryMapPM = <String, double>{};
   final categoryMapMC = <String, double>{};
   Map<String, double> categoryMapBMDouble = <String, double>{};
+  Map<String, double> categoryMapPMDouble = <String, double>{};
 
   //int facilityId = 45;
   String categoryIds = '';
@@ -154,6 +155,8 @@ class HomeController extends GetxController {
       Colors.purpleAccent,
     ];
   }
+
+  
 
   List<Color> getWoColorList() {
     return [
@@ -311,33 +314,53 @@ class HomeController extends GetxController {
           categoryMapBM['Other'] = otherCategoriesCount;
         }
 
-        categoryMapBMDouble =
-            categoryMapBM.map((key, value) => MapEntry(key, value.toDouble()));
+        final totalValue = categoryMapBM.values.reduce((a, b) => a + b);
+        categoryMapBMDouble = categoryMapBM
+            .map((key, value) => MapEntry(key, (value.toDouble())));
 
         print('Final category map with top 5 and Other: $categoryMapBMDouble');
         print('Final otherCategoriesCount: $otherCategoriesCount');
         print('Final categoryMapBM: $categoryMapBMDouble');
       }
-
       if (dashboardPmList.value != null) {
+        final categoryMapPm = <String, int>{};
+
         for (var item
-            in dashboardPmList?.value!.cmDashboadDetails!.item_list ?? []) {
+            in dashboardPmList.value!.cmDashboadDetails!.item_list ?? []) {
           final categories = item.asset_category?.split(', ') ?? [];
           for (var category in categories) {
-            if (categoryMapPM.containsKey(category)) {
-              categoryMapPM[category] = categoryMapPM[category]! + 1;
+            if (categoryMapPm.containsKey(category)) {
+              categoryMapPm[category] = categoryMapPm[category]! + 1;
             } else {
-              categoryMapPM[category] = 1;
+              categoryMapPm[category] = 1;
             }
           }
         }
-        final sortedCategories = categoryMapPM.entries.toList()
+
+        final sortedCategories = categoryMapPm.entries.toList()
           ..sort((a, b) => b.value.compareTo(a.value));
         final top5Categories = sortedCategories.take(5).toList();
-        categoryMapPM.clear();
+        final otherCategoriesCount = sortedCategories.skip(5).fold<int>(
+              0,
+              (sum, entry) => sum + entry.value,
+            );
+
+        categoryMapPm.clear();
         for (var entry in top5Categories) {
-          categoryMapPM[entry.key] = entry.value.toDouble();
+          categoryMapPm[entry.key] = entry.value;
         }
+        if (otherCategoriesCount > 0) {
+          categoryMapPm['Other'] = otherCategoriesCount;
+        }
+
+        final totalValue = categoryMapPm.values.reduce((a, b) => a + b);
+        categoryMapPMDouble = categoryMapPm
+            .map((key, value) => MapEntry(key, (value.toDouble())));
+
+        print(
+            'Final category map pm with top 5 and Other: $categoryMapPMDouble');
+        print('Final otherCategoriesCount123: $otherCategoriesCount');
+        print('Final categoryMapPMDouble: $categoryMapPMDouble');
       }
 
       update(['dashboard']);
