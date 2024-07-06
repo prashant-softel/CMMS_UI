@@ -136,9 +136,9 @@ class AddModuleCleaningExecutionPresenter {
       await addModuleCleaningExecutionUsecase.getValuePlanId();
   void clearPermitStoreData() async =>
       addModuleCleaningExecutionUsecase.clearPermitStoreData();
-      void clearmcDetailsStoreData() async =>
+  void clearmcDetailsStoreData() async =>
       addModuleCleaningExecutionUsecase.clearmcDetailsStoreData();
-      
+
   void clearJobDetailStoreData() async =>
       addModuleCleaningExecutionUsecase.clearJobDetailStoreData();
   void clearTypeValue() async =>
@@ -147,4 +147,43 @@ class AddModuleCleaningExecutionPresenter {
       addModuleCleaningExecutionUsecase.clearisCheckedValue();
   void clearpmTaskValue() async =>
       addModuleCleaningExecutionUsecase.clearpmTaskValue();
+  Future<bool> approveShecduleExecution({
+    approvetoJsonString,
+    required bool isLoading,
+  }) async {
+    return addModuleCleaningExecutionUsecase.approveShecduleExecution(
+      approvetoJsonString: approvetoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> rejectShecduleExecution({
+    rejecttoJsonString,
+    required bool isLoading,
+  }) async {
+    return addModuleCleaningExecutionUsecase.rejectShecduleExecution(
+      rejecttoJsonString: rejecttoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> endApproveExecution({
+    approvetoJsonString,
+    required bool isLoading,
+  }) async {
+    return addModuleCleaningExecutionUsecase.endApproveExecution(
+      approvetoJsonString: approvetoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> endRejectExecution({
+    rejecttoJsonString,
+    required bool isLoading,
+  }) async {
+    return addModuleCleaningExecutionUsecase.endRejectExecution(
+      rejecttoJsonString: rejecttoJsonString,
+      isLoading: isLoading,
+    );
+  }
 }

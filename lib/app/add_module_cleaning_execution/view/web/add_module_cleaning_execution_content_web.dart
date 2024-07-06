@@ -1,6 +1,7 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
+import 'package:cmms/app/add_module_cleaning_execution/custom_confirmation_dialog.dart';
 import 'package:cmms/app/add_module_cleaning_execution/tbt_done_mc_dialog.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
@@ -11,6 +12,7 @@ import 'package:cmms/app/widgets/abandon_all_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_dialog.dart';
 import 'package:cmms/app/widgets/add_module_cleaning_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/execution_approve_dialog.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 
@@ -719,7 +721,10 @@ class AddModuleCleaningExecutionContentWeb
 
                                                                                                                                 print('filteredData:${filterdData!.scheduleId}');
                                                                                                                                 //  selectedData = filterdData;
-                                                                                                                                filterdData.ptw_tbt_done == 1 ? controller.startMCExecutionScheduleButton(scheduleID: filterdData.scheduleId) : Get.dialog<void>(TbtDoneMcDialog(ptw_id: filterdData.permit_id ?? 0, id: controller.mcExecutionDetailsModel.value?.executionId ?? 0));
+                                                                                                                                filterdData.ptw_tbt_done == 1
+                                                                                                                                    ? Get.dialog<void>(CustomCalibrationDialog(id: filterdData.scheduleId ?? 0, title: filterdData.scheduleId.toString(), starttype: 1))
+                                                                                                                                    //controller.startMCExecutionScheduleButton(scheduleID: filterdData.scheduleId)
+                                                                                                                                    : Get.dialog<void>(TbtDoneMcDialog(ptw_id: filterdData.permit_id ?? 0, id: controller.mcExecutionDetailsModel.value?.executionId ?? 0));
                                                                                                                                 // print({
                                                                                                                                 //   'scheduledata:':
                                                                                                                                 //       filterdData.scheduleId
@@ -789,7 +794,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                       //             ?.status_short ==
                                                                                                                       //         "In Progress"
                                                                                                                       //     ?
-                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 361
+                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 361 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 603
                                                                                                                           ? TableActionButton(
                                                                                                                               // label: 'Equipments',
                                                                                                                               onPress: () {
@@ -806,7 +811,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                               message: 'Equipments',
                                                                                                                             )
                                                                                                                           : Dimens.box0,
-                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 361
+                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 361 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 603
                                                                                                                           ? TableActionButton(
                                                                                                                               // label: 'Start',
                                                                                                                               onPress: () {
@@ -814,8 +819,7 @@ class AddModuleCleaningExecutionContentWeb
 
                                                                                                                                 print('filteredData:${filterdData!.scheduleId}');
                                                                                                                                 //  selectedData = filterdData;
-
-                                                                                                                                controller.endMCScheduleExecutionButton(scheduleID: filterdData.scheduleId);
+                                                                                                                                Get.dialog<void>(CustomCalibrationDialog(id: filterdData.scheduleId ?? 0, title: filterdData.scheduleId.toString(), starttype: 2));
                                                                                                                                 // print({
                                                                                                                                 //   'scheduledata:':
                                                                                                                                 //       filterdData.scheduleId
@@ -823,10 +827,10 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                               },
                                                                                                                               color: ColorValues.closeColor, //Color.fromARGB(255, 70, 95, 57),
                                                                                                                               icon: Icons.close,
-                                                                                                                              message: 'End',
+                                                                                                                              message: 'Close',
                                                                                                                             )
                                                                                                                           : Dimens.box0,
-                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 363
+                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 602
                                                                                                                           ? TableActionButton(
                                                                                                                               // label: 'Equipments',
                                                                                                                               onPress: () {
@@ -837,6 +841,48 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                               color: ColorValues.appDarkBlueColor,
                                                                                                                               icon: Icons.remove_red_eye,
                                                                                                                               message: 'View',
+                                                                                                                            )
+                                                                                                                          : Dimens.box0,
+                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 363
+                                                                                                                          ? TableActionButton(
+                                                                                                                              // label: 'Equipments',
+                                                                                                                              onPress: () {
+                                                                                                                                var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+                                                                                                                                Get.dialog(CustonApproveRejectDialog(
+                                                                                                                                  text: "Schedule Approve",
+                                                                                                                                  controller: controller,
+                                                                                                                                  buttonText: "Approve",
+                                                                                                                                  style: Styles.greenElevatedButtonStyle,
+                                                                                                                                  onPressed: () {
+                                                                                                                                    controller.approveShecduleExecution(filterdData?.scheduleId ?? 0);
+                                                                                                                                    Get.back();
+                                                                                                                                  },
+                                                                                                                                ));
+                                                                                                                              },
+                                                                                                                              color: ColorValues.approveColor,
+                                                                                                                              icon: Icons.check,
+                                                                                                                              message: 'Approve',
+                                                                                                                            )
+                                                                                                                          : Dimens.box0,
+                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 363
+                                                                                                                          ? TableActionButton(
+                                                                                                                              // label: 'Equipments',
+                                                                                                                              onPress: () {
+                                                                                                                                var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+                                                                                                                                Get.dialog(CustonApproveRejectDialog(
+                                                                                                                                  text: "Schedule Reject",
+                                                                                                                                  controller: controller,
+                                                                                                                                  buttonText: "Reject",
+                                                                                                                                  style: Styles.darkRedElevatedButtonStyle,
+                                                                                                                                  onPressed: () {
+                                                                                                                                    controller.rejectShecduleExecution(filterdData?.scheduleId ?? 0);
+                                                                                                                                    Get.back();
+                                                                                                                                  },
+                                                                                                                                ));
+                                                                                                                              },
+                                                                                                                              color: ColorValues.rejectColor,
+                                                                                                                              icon: Icons.close,
+                                                                                                                              message: 'Reject',
                                                                                                                             )
                                                                                                                           : Dimens.box0,
                                                                                                                     ],
@@ -893,8 +939,22 @@ class AddModuleCleaningExecutionContentWeb
                                                               .addNewColor,
                                                       text: "Start",
                                                       onPressed: () {
-                                                        controller
-                                                            .startMCExecutionButton();
+                                                        Get.dialog<void>(
+                                                            CustomCalibrationDialog(
+                                                          id: controller
+                                                                  .mcExecutionDetailsModel
+                                                                  .value
+                                                                  ?.executionId ??
+                                                              0,
+                                                          title: controller
+                                                                  .mcExecutionDetailsModel
+                                                                  .value
+                                                                  ?.title ??
+                                                              "",
+                                                        ));
+
+                                                        // controller
+                                                        //     .startMCExecutionButton();
                                                       },
                                                     ),
                                                   )
@@ -925,9 +985,20 @@ class AddModuleCleaningExecutionContentWeb
                                                               .cancelColor,
                                                       text: "Close",
                                                       onPressed: () {
+                                                        Get.dialog<void>(CustomCalibrationDialog(
+                                                            id: controller
+                                                                    .mcExecutionDetailsModel
+                                                                    .value
+                                                                    ?.executionId ??
+                                                                0,
+                                                            title: controller
+                                                                    .mcExecutionDetailsModel
+                                                                    .value
+                                                                    ?.title ??
+                                                                "",
+                                                            starttype: 3));
+
                                                         // Get.dialog(EndMCExecutionDialog());
-                                                        controller
-                                                            .endMcExecutionButton();
                                                       },
                                                     ),
                                                   )
@@ -968,6 +1039,100 @@ class AddModuleCleaningExecutionContentWeb
 
                                                         // controller
                                                         //     .createEscalationMatrix();
+                                                      },
+                                                    ),
+                                                  )
+                                                : Dimens.box0,
+                                            controller.mcExecutionDetailsModel
+                                                            .value?.status ==
+                                                        363 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kModuleCleaningexeFeatureId &&
+                                                                e.edit ==
+                                                                    UserAccessConstants
+                                                                        .kHaveEditAccess)
+                                                            .length >
+                                                        0
+                                                ? Container(
+                                                    height: 28,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .cancelColor,
+                                                      text: "Approve",
+                                                      onPressed: () {
+                                                        Get.dialog(
+                                                            CustonApproveRejectDialog(
+                                                          text:
+                                                              "Execution Approve",
+                                                          controller:
+                                                              controller,
+                                                          buttonText: "Approve",
+                                                          style: Styles
+                                                              .darkRedElevatedButtonStyle,
+                                                          onPressed: () {
+                                                            controller.endApproveExecution(
+                                                                controller
+                                                                        .mcExecutionDetailsModel
+                                                                        .value
+                                                                        ?.executionId ??
+                                                                    0);
+                                                            Get.back();
+                                                          },
+                                                        ));
+
+                                                        // Get.dialog(EndMCExecutionDialog());
+                                                      },
+                                                    ),
+                                                  )
+                                                : Dimens.box0,
+                                            controller.mcExecutionDetailsModel
+                                                            .value?.status ==
+                                                        363 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kModuleCleaningexeFeatureId &&
+                                                                e.edit ==
+                                                                    UserAccessConstants
+                                                                        .kHaveEditAccess)
+                                                            .length >
+                                                        0
+                                                ? Container(
+                                                    height: 28,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .cancelColor,
+                                                      text: "Reject",
+                                                      onPressed: () {
+                                                        Get.dialog(
+                                                            CustonApproveRejectDialog(
+                                                          text:
+                                                              "Execution Reject",
+                                                          controller:
+                                                              controller,
+                                                          buttonText: "Reject",
+                                                          style: Styles
+                                                              .darkRedElevatedButtonStyle,
+                                                          onPressed: () {
+                                                            controller.endRejectExecution(
+                                                                controller
+                                                                        .mcExecutionDetailsModel
+                                                                        .value
+                                                                        ?.executionId ??
+                                                                    0);
+                                                            Get.back();
+                                                          },
+                                                        ));
+
+                                                        // Get.dialog(EndMCExecutionDialog());
                                                       },
                                                     ),
                                                   )

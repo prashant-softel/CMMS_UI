@@ -4445,6 +4445,27 @@ class DataRepository extends DomainRepository {
         ClosePMTaskExecutionJsonString: ClosePMTaskExecutionJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> rejectPmTaskExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.rejectPmTaskExecution(
+        auth: auth,
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> approvePmTaskExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.approvePmTaskExecution(
+        auth: auth,
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> assignToPmTask({
     required String auth,
     int? assignId,
@@ -4482,22 +4503,42 @@ class DataRepository extends DomainRepository {
         cloneJobs: cloneJobs,
         isloading: isloading ?? false,
       );
-  Future<ResponseModel> rejectPmTaskExecution({
+  Future<ResponseModel> rejectShecduleExecution({
     required String auth,
     rejecttoJsonString,
     bool? isLoading,
   }) async =>
-      await connectHelper.rejectPmTaskExecution(
+      await connectHelper.rejectShecduleExecution(
         auth: auth,
         rejecttoJsonString: rejecttoJsonString,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> approvePmTaskExecution({
+  Future<ResponseModel> approveShecduleExecution({
     required String auth,
     approvetoJsonString,
     bool? isLoading,
   }) async =>
-      await connectHelper.approvePmTaskExecution(
+      await connectHelper.approveShecduleExecution(
+        auth: auth,
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> endRejectExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.endRejectExecution(
+        auth: auth,
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> endApproveExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.endApproveExecution(
         auth: auth,
         approvetoJsonString: approvetoJsonString,
         isLoading: isLoading ?? false,
@@ -5473,7 +5514,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-      Future<ResponseModel> getScheduleCourseDetails({
+  Future<ResponseModel> getScheduleCourseDetails({
     required String auth,
     int? schedule_id,
     bool? isLoading,

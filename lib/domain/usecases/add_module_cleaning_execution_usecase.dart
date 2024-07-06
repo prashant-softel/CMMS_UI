@@ -150,4 +150,28 @@ class AddModuleCleaningExecutionUsecase {
   void clearisCheckedValue() async =>
       _repository.clearData(LocalKeys.isChecked);
   void clearpmTaskValue() async => _repository.clearData(LocalKeys.pmTaskModel);
+  Future<bool> approveShecduleExecution({
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.approveShecduleExecution(
+          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> rejectShecduleExecution({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.rejectShecduleExecution(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+  Future<bool> endApproveExecution({
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.endApproveExecution(
+          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> endRejectExecution({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.endRejectExecution(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
 }
