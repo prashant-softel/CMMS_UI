@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class EndMcExecutionMessageDialog extends GetView {
 
   EndMcExecutionMessageDialog(
       {super.key, this.createPermitData, this.data, this.endMCId});
-  // final ModuleCleaningListExecutionController _controller = Get.find();
+  final AddModuleCleaningExecutionController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

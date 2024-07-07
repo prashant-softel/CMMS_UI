@@ -794,7 +794,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                       //             ?.status_short ==
                                                                                                                       //         "In Progress"
                                                                                                                       //     ?
-                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 361 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 603
+                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 361 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 384
                                                                                                                           ? TableActionButton(
                                                                                                                               // label: 'Equipments',
                                                                                                                               onPress: () {
@@ -811,7 +811,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                               message: 'Equipments',
                                                                                                                             )
                                                                                                                           : Dimens.box0,
-                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 361 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 603
+                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 361 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 384
                                                                                                                           ? TableActionButton(
                                                                                                                               // label: 'Start',
                                                                                                                               onPress: () {
@@ -830,7 +830,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                               message: 'Close',
                                                                                                                             )
                                                                                                                           : Dimens.box0,
-                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 602
+                                                                                                                      controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 383
                                                                                                                           ? TableActionButton(
                                                                                                                               // label: 'Equipments',
                                                                                                                               onPress: () {
@@ -964,19 +964,27 @@ class AddModuleCleaningExecutionContentWeb
                                             Dimens.boxWidth10,
 
                                             controller.mcExecutionDetailsModel
-                                                            .value?.status ==
-                                                        361 &&
-                                                    varUserAccessModel
-                                                            .value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants
-                                                                        .kModuleCleaningexeFeatureId &&
-                                                                e.edit ==
-                                                                    UserAccessConstants
-                                                                        .kHaveEditAccess)
-                                                            .length >
-                                                        0
+                                                                .value?.status ==
+                                                            361 &&
+                                                        varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kModuleCleaningexeFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0 ||
+                                                    controller.mcExecutionDetailsModel
+                                                                .value?.status ==
+                                                            382 &&
+                                                        varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) => e.feature_id == UserAccessConstants.kModuleCleaningexeFeatureId && e.edit == UserAccessConstants.kHaveEditAccess)
+                                                                .length >
+                                                            0
                                                 ? Container(
                                                     height: 28,
                                                     child: CustomElevatedButton(
@@ -1043,6 +1051,7 @@ class AddModuleCleaningExecutionContentWeb
                                                     ),
                                                   )
                                                 : Dimens.box0,
+
                                             controller.mcExecutionDetailsModel
                                                             .value?.status ==
                                                         363 &&
@@ -1062,7 +1071,7 @@ class AddModuleCleaningExecutionContentWeb
                                                     child: CustomElevatedButton(
                                                       backgroundColor:
                                                           ColorValues
-                                                              .cancelColor,
+                                                              .approveColor,
                                                       text: "Approve",
                                                       onPressed: () {
                                                         Get.dialog(
@@ -1073,7 +1082,7 @@ class AddModuleCleaningExecutionContentWeb
                                                               controller,
                                                           buttonText: "Approve",
                                                           style: Styles
-                                                              .darkRedElevatedButtonStyle,
+                                                              .greenElevatedButtonStyle,
                                                           onPressed: () {
                                                             controller.endApproveExecution(
                                                                 controller
@@ -1090,6 +1099,7 @@ class AddModuleCleaningExecutionContentWeb
                                                     ),
                                                   )
                                                 : Dimens.box0,
+                                            Dimens.boxWidth10,
                                             controller.mcExecutionDetailsModel
                                                             .value?.status ==
                                                         363 &&
