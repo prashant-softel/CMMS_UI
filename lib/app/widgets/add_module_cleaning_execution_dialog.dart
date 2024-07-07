@@ -14,13 +14,13 @@ class AddModuleCleaningExecutionDialog extends GetView {
   int? cleaningDay;
   int? waterUsed;
   // int? executedDay;
-  // int? day;
+  int? is_view;
 
-  AddModuleCleaningExecutionDialog({
-    required this.scheduleId,
-    required this.cleaningDay,
-    required this.waterUsed,
-  });
+  AddModuleCleaningExecutionDialog(
+      {required this.scheduleId,
+      required this.cleaningDay,
+      required this.waterUsed,
+      this.is_view});
 
   final AddModuleCleaningExecutionController controller = Get.find();
 
@@ -214,30 +214,33 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   flex: 1,
                                   child: Container(
                                     alignment: Alignment.centerLeft,
-                                    child: Checkbox(
-                                      value: e.isCleanedChecked,
-                                      onChanged: (bool? value) {
-                                        // controller.toggleItemSelection(index);
-                                        setState(
-                                          () {
-                                            e.isCleanedChecked =
-                                                !e.isCleanedChecked!;
-                                            if (e.isCleanedChecked!) {
-                                              e.isAbandonedChecked = false;
-                                            }
-                                            e.smbs.forEach((smbItem) {
-                                              smbItem.isCleanedSmbCheck =
-                                                  e.isCleanedChecked;
+                                    child: IgnorePointer(
+                                      ignoring: is_view == 1 ? true : false,
+                                      child: Checkbox(
+                                        value: e.isCleanedChecked,
+                                        onChanged: (bool? value) {
+                                          // controller.toggleItemSelection(index);
+                                          setState(
+                                            () {
+                                              e.isCleanedChecked =
+                                                  !e.isCleanedChecked!;
                                               if (e.isCleanedChecked!) {
-                                                smbItem.isAbandonSmbCheck =
-                                                    false;
+                                                e.isAbandonedChecked = false;
                                               }
-                                            });
-                                          },
-                                        );
-                                        print(
-                                            'Element Cancel:${e.isCleanedChecked}');
-                                      },
+                                              e.smbs.forEach((smbItem) {
+                                                smbItem.isCleanedSmbCheck =
+                                                    e.isCleanedChecked;
+                                                if (e.isCleanedChecked!) {
+                                                  smbItem.isAbandonSmbCheck =
+                                                      false;
+                                                }
+                                              });
+                                            },
+                                          );
+                                          print(
+                                              'Element Cancel:${e.isCleanedChecked}');
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -245,30 +248,33 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   flex: 1,
                                   child: Container(
                                     alignment: Alignment.centerLeft,
-                                    child: Checkbox(
-                                      value: e.isAbandonedChecked,
-                                      onChanged: (bool? value) {
-                                        // controller.toggleItemSelection(index);
-                                        setState(
-                                          () {
-                                            e.isAbandonedChecked =
-                                                !e.isAbandonedChecked!;
-                                            if (e.isAbandonedChecked!) {
-                                              e.isCleanedChecked = false;
-                                            }
-                                            e.smbs.forEach((smbItem) {
-                                              smbItem.isAbandonSmbCheck =
-                                                  e.isAbandonedChecked;
+                                    child: IgnorePointer(
+                                      ignoring: is_view == 1 ? true : false,
+                                      child: Checkbox(
+                                        value: e.isAbandonedChecked,
+                                        onChanged: (bool? value) {
+                                          // controller.toggleItemSelection(index);
+                                          setState(
+                                            () {
+                                              e.isAbandonedChecked =
+                                                  !e.isAbandonedChecked!;
                                               if (e.isAbandonedChecked!) {
-                                                smbItem.isCleanedSmbCheck =
-                                                    false;
+                                                e.isCleanedChecked = false;
                                               }
-                                            });
-                                          },
-                                        );
-                                        print(
-                                            'Element Cancel:${e.isAbandonedChecked}');
-                                      },
+                                              e.smbs.forEach((smbItem) {
+                                                smbItem.isAbandonSmbCheck =
+                                                    e.isAbandonedChecked;
+                                                if (e.isAbandonedChecked!) {
+                                                  smbItem.isCleanedSmbCheck =
+                                                      false;
+                                                }
+                                              });
+                                            },
+                                          );
+                                          print(
+                                              'Element Cancel:${e.isAbandonedChecked}');
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -302,27 +308,33 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                   child: Container(
                                                     alignment:
                                                         Alignment.centerLeft,
-                                                    child: Checkbox(
-                                                      value: smbItems
-                                                          .isCleanedSmbCheck,
-                                                      onChanged: (bool? value) {
-                                                        // controller.toggleItemSelection(index);
-                                                        setState(
-                                                          () {
-                                                            smbItems.isCleanedSmbCheck =
-                                                                !smbItems
-                                                                    .isCleanedSmbCheck!;
-                                                            if (smbItems
-                                                                .isCleanedSmbCheck!) {
-                                                              smbItems.isAbandonSmbCheck =
-                                                                  false;
-                                                            }
-                                                          },
-                                                        );
+                                                    child: IgnorePointer(
+                                                      ignoring: is_view == 1
+                                                          ? true
+                                                          : false,
+                                                      child: Checkbox(
+                                                        value: smbItems
+                                                            .isCleanedSmbCheck,
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          // controller.toggleItemSelection(index);
+                                                          setState(
+                                                            () {
+                                                              smbItems.isCleanedSmbCheck =
+                                                                  !smbItems
+                                                                      .isCleanedSmbCheck!;
+                                                              if (smbItems
+                                                                  .isCleanedSmbCheck!) {
+                                                                smbItems.isAbandonSmbCheck =
+                                                                    false;
+                                                              }
+                                                            },
+                                                          );
 
-                                                        print(
-                                                            'Element Cancel:${e.isCleanedChecked}');
-                                                      },
+                                                          print(
+                                                              'Element Cancel:${e.isCleanedChecked}');
+                                                        },
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -331,27 +343,33 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                   child: Container(
                                                     alignment:
                                                         Alignment.centerLeft,
-                                                    child: Checkbox(
-                                                      value: smbItems
-                                                          .isAbandonSmbCheck,
-                                                      onChanged: (bool? value) {
-                                                        // controller.toggleItemSelection(index);
-                                                        setState(
-                                                          () {
-                                                            smbItems.isAbandonSmbCheck =
-                                                                !smbItems
-                                                                    .isAbandonSmbCheck!;
-                                                            if (smbItems
-                                                                .isAbandonSmbCheck!) {
-                                                              smbItems.isCleanedSmbCheck =
-                                                                  false;
-                                                            }
-                                                          },
-                                                        );
+                                                    child: IgnorePointer(
+                                                      ignoring: is_view == 1
+                                                          ? true
+                                                          : false,
+                                                      child: Checkbox(
+                                                        value: smbItems
+                                                            .isAbandonSmbCheck,
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          // controller.toggleItemSelection(index);
+                                                          setState(
+                                                            () {
+                                                              smbItems.isAbandonSmbCheck =
+                                                                  !smbItems
+                                                                      .isAbandonSmbCheck!;
+                                                              if (smbItems
+                                                                  .isAbandonSmbCheck!) {
+                                                                smbItems.isCleanedSmbCheck =
+                                                                    false;
+                                                              }
+                                                            },
+                                                          );
 
-                                                        print(
-                                                            'Element Cancel:${smbItems.isAbandonSmbCheck}');
-                                                      },
+                                                          print(
+                                                              'Element Cancel:${smbItems.isAbandonSmbCheck}');
+                                                        },
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -372,76 +390,92 @@ class AddModuleCleaningExecutionDialog extends GetView {
               ));
         }),
         actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 35,
-                child: CustomElevatedButton(
-                  backgroundColor: ColorValues.greenColor,
-                  text: 'Expand',
-                  onPressed: () {
-                    // controller.createMcPlan();
-                  },
-                ),
-              ),
-              // Dimens.boxWidth20,
-               SizedBox(width:20),
-              Container(
-                height: 35,
-                child: CustomElevatedButton(
-                  backgroundColor: ColorValues.redColor,
-                  text: "Collapse",
-                  onPressed: () {
-                    final _flutterSecureStorage =
-                        // const FlutterSecureStorage();
+          is_view == 1
+              ? Center(
+                  child: Container(
+                    height: 35,
+                    child: CustomElevatedButton(
+                      backgroundColor: ColorValues.redColor,
+                      text: "Cancel",
+                      onPressed: () {
+                        final _flutterSecureStorage =
+                            // const FlutterSecureStorage();
 
-                        // _flutterSecureStorage.delete(
-                        // key: "userId");
+                            // _flutterSecureStorage.delete(
+                            // key: "userId");
 
-                        Get.back();
-                  },
-                ),
-              ),
-              // Dimens.boxWidth20,
-               SizedBox(width:20),
-              Container(
-                height: 35,
-                child: CustomElevatedButton(
-                  backgroundColor: ColorValues.redColor,
-                  text: "Cancel",
-                  onPressed: () {
-                    final _flutterSecureStorage =
-                        // const FlutterSecureStorage();
+                            Get.back();
+                      },
+                    ),
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.greenColor,
+                        text: 'Expand',
+                        onPressed: () {
+                          // controller.createMcPlan();
+                        },
+                      ),
+                    ),
+                    //Dimens.boxWidth20,
+                    SizedBox(width:20),Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.redColor,
+                        text: "Collapse",
+                        onPressed: () {
+                          final _flutterSecureStorage =
+                              // const FlutterSecureStorage();
 
-                        // _flutterSecureStorage.delete(
-                        // key: "userId");
+                              // _flutterSecureStorage.delete(
+                              // key: "userId");
 
-                        Get.back();
-                  },
-                ),
-              ),
-              // Dimens.boxWidth20,
-               SizedBox(width:20),
-              Container(
-                height: 35,
-                child: CustomElevatedButton(
-                  backgroundColor: ColorValues.greenColor,
-                  text: 'Submit',
-                  onPressed: () {
-                    // controller.createMcPlan();
-                    controller.updateMCScheduleExecution(
-                        scheduleId: scheduleId,
-                        cleaningDay: cleaningDay,
-                        waterUsed: int.tryParse(
-                            '${controller.waterUsedCtrlrWeb.text}'),
-                        remark: '${controller.remarkCtrlrWeb.text}');
-                    Get.back();
-                  },
-                ),
-              ),
-            ],
-          ),
+                              Get.back();
+                        },
+                      ),
+                    ),
+                    //Dimens.boxWidth20,
+                    SizedBox(width:20),Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.redColor,
+                        text: "Cancel",
+                        onPressed: () {
+                          final _flutterSecureStorage =
+                              // const FlutterSecureStorage();
+
+                              // _flutterSecureStorage.delete(
+                              // key: "userId");
+
+                              Get.back();
+                        },
+                      ),
+                    ),
+                    //Dimens.boxWidth20,
+                    SizedBox(width:20),Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.greenColor,
+                        text: 'Submit',
+                        onPressed: () {
+                          // controller.createMcPlan();
+                          controller.updateMCScheduleExecution(
+                              scheduleId: scheduleId,
+                              cleaningDay: cleaningDay,
+                              waterUsed: int.tryParse(
+                                  '${controller.waterUsedCtrlrWeb.text}'),
+                              remark: '${controller.remarkCtrlrWeb.text}');
+                          Get.back();
+                        },
+                      ),
+                    ),
+                  ],
+                )
         ],
       );
     }));

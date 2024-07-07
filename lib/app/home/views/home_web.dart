@@ -851,11 +851,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             height: 160,
                                             child: SfCircularChart(
-                                              title: ChartTitle(
-                                                  text: "Category",
-                                                  textStyle: Styles.black12,
-                                                  alignment:
-                                                      ChartAlignment.near),
+                                              // title: ChartTitle(
+                                              //     text: "Category",
+                                              //     textStyle: Styles.black12,
+                                              //     alignment:
+                                              //         ChartAlignment.near),
                                               tooltipBehavior: TooltipBehavior(
                                                 enable: true,
                                                 tooltipPosition:
