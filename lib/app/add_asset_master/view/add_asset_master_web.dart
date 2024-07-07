@@ -1416,8 +1416,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                            controller.isFormInvalid.value= false;
                             controller.addAsset().then((value) {
                               print("value,$value");
-                              if (value == true)
-                                controller.issuccessCreateAssetlist();
+                              // if (value == true)
+                              //   controller.issuccessCreateAssetlist();
                             }); //  controller.saveAccessLevel();
                           },
                         ),

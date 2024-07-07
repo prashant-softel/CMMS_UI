@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
+import 'package:cmms/app/widgets/add_material_popup.dart';
 import 'package:cmms/app/widgets/attendance_popup.dart';
 import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
@@ -12687,7 +12688,17 @@ class Repository {
           isLoading: isLoading,
           assetListJsonString: assetListJsonString);
 
+      var resourceData = res.data;
       if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var json = jsonDecode(resourceData);
+          String message = json['message'];
+          Get.dialog<void>(
+            MaterialPopup(
+              message: message,
+            ),
+          );
+        }
         return true;
       } //
       else {
