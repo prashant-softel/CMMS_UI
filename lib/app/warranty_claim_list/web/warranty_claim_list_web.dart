@@ -81,7 +81,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                               child:
                                   Text(" / MASTERS", style: Styles.greyLight14),
                             ),
-                            Text(" / Warranty Claim List".toUpperCase(),
+                            Text(" / WARRANTY CLAIM LIST",
                                 style: Styles.greyLight14)
                           ],
                         ),
@@ -506,7 +506,7 @@ class WarrantyClaimListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'WC${WarrantyClaimListDetails?.wc_id}',
+                        'WAR${WarrantyClaimListDetails?.wc_id}',
                       ),
                       Dimens.boxHeight10,
                       Align(
