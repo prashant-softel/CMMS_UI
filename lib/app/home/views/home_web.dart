@@ -5391,14 +5391,16 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .facility_name
                                                         .toString() ??
                                                     '')),
-                                                DataCell(Text(
-                                                    '${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                DataCell(Text(""
+                                                    // '${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].grNo.toString() ?? ''}')
+
+                                                    )),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .wo_decription ??
+                                                        .goNo.toString() ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
@@ -5412,120 +5414,64 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .asset_category ??
+                                                        .product_name ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .asset_name ??
+                                                        .requested_qty.toString() ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .asset_name ??
+                                                        .gr_date ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .asset_name ??
+                                                        .ordered_qty.toString() ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .asset_name ??
+                                                        .go_date.toString() ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .asset_name ??
+                                                        .unit_amount.toString() ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .asset_name ??
+                                                        .total_amount .toString()??
                                                     '')),
-                                                DataCell(
-                                                  Text(controller
-                                                              .dashboardSmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .start_date !=
-                                                          null
-                                                      ? controller
-                                                          .dashboardSmList
-                                                          .value!
-                                                          .cmDashboadDetails!
-                                                          .item_list![index]
-                                                          .start_date!
-                                                          .substring(
-                                                              0,
-                                                              controller
-                                                                      .dashboardSmList
-                                                                      .value!
-                                                                      .cmDashboadDetails!
-                                                                      .item_list![
-                                                                          index]
-                                                                      .start_date!
-                                                                      .length -
-                                                                  9)
-                                                      : controller
-                                                              .dashboardSmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .start_date ??
-                                                          ''),
-                                                ),
-                                                DataCell(
-                                                  Text(controller
-                                                              .dashboardSmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .end_date !=
-                                                          null
-                                                      ? controller
-                                                          .dashboardSmList
-                                                          .value!
-                                                          .cmDashboadDetails!
-                                                          .item_list![index]
-                                                          .end_date!
-                                                          .substring(
-                                                              0,
-                                                              controller
-                                                                      .dashboardSmList
-                                                                      .value!
-                                                                      .cmDashboadDetails!
-                                                                      .item_list![
-                                                                          index]
-                                                                      .end_date!
-                                                                      .length -
-                                                                  9)
-                                                      : controller
-                                                              .dashboardSmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .end_date ??
-                                                          ''),
-                                                ),
+                                              DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .grn_date ??
+                                                    '')), 
+DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .grn_qty.toString() ??
+                                                    '')),
                                                 DataCell(
                                                   Row(
                                                     children: [
