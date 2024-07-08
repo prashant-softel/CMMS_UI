@@ -543,15 +543,14 @@ class AddModuleCleaningExecutionController extends GetxController {
           {"key": "Type", "value": '${element.cleaningTypeName}'},
           {"key": "Water Used", "value": '${element.waterUsed}'},
           {"key": "Remark", "value": '${element.remark}'},
-          {"key": "Permit ID", "value": '${element.permit_id}'},
           {"key": "Permit Code", "value": '${element.permit_code}'},
           {
             "key": "Permit Status",
-            "value": '${element.status_short_ptw}ptw${element.ptw_status}'
+            "value": '${element.status_short_ptw}' //ptw${element.ptw_status}'
           },
           {
             "key": "Status",
-            "value": '${element.status_short}st${element.status}'
+            "value": '${element.status_short}' //st${element.status}'
           },
           {'key': "Actions", "value": ''},
         ]);
@@ -740,6 +739,42 @@ class AddModuleCleaningExecutionController extends GetxController {
       var rejecttoJsonString = commentModel.toJson();
       final response =
           await addModuleCleaningExecutionPresenter.endRejectExecution(
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.moduleCleaningListExecution);
+      }
+    }
+  }
+
+  abandonedApproveExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var approvetoJsonString = commentModel.toJson();
+      final response =
+          await addModuleCleaningExecutionPresenter.abandonedApproveExecution(
+        approvetoJsonString: approvetoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.moduleCleaningListExecution);
+      }
+    }
+  }
+
+  abandoneRejectExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var rejecttoJsonString = commentModel.toJson();
+      final response =
+          await addModuleCleaningExecutionPresenter.abandoneRejectExecution(
         rejecttoJsonString: rejecttoJsonString,
         isLoading: true,
       );

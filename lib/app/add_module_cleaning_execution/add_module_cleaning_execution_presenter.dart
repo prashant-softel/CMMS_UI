@@ -186,4 +186,24 @@ class AddModuleCleaningExecutionPresenter {
       isLoading: isLoading,
     );
   }
+
+  Future<bool> abandonedApproveExecution({
+    approvetoJsonString,
+    required bool isLoading,
+  }) async {
+    return addModuleCleaningExecutionUsecase.abandonedApproveExecution(
+      approvetoJsonString: approvetoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> abandoneRejectExecution({
+    rejecttoJsonString,
+    required bool isLoading,
+  }) async {
+    return addModuleCleaningExecutionUsecase.abandoneRejectExecution(
+      rejecttoJsonString: rejecttoJsonString,
+      isLoading: isLoading,
+    );
+  }
 }

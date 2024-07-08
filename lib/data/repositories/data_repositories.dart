@@ -4544,6 +4544,27 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> abandoneRejectExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.abandoneRejectExecution(
+        auth: auth,
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> abandonedApproveExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.abandonedApproveExecution(
+        auth: auth,
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getAssetCategoryList({
     required bool isLoading,
     required String auth,

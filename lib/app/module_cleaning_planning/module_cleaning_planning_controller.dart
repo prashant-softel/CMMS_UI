@@ -214,11 +214,11 @@ class ModuleCleaningPlanningController extends GetxController {
     print("Start Date: ${_startDateTc}");
 
     // Ensure the selectedCleaningId is set properly
-    if (selectedCleaningId == 0) {
-      // Optionally, you can show a validation message or return early
-      print("Please select a cleaning type");
-      return;
-    }
+    // if (selectedCleaningId == 0) {
+    //   // Optionally, you can show a validation message or return early
+    //   print("Please select a cleaning type");
+    //   return;
+    // }
 
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
       planId: 0,

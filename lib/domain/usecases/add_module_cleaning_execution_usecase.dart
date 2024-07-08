@@ -174,4 +174,16 @@ class AddModuleCleaningExecutionUsecase {
   }) async =>
       await _repository.endRejectExecution(
           rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+  Future<bool> abandonedApproveExecution({
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.abandonedApproveExecution(
+          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> abandoneRejectExecution({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.abandoneRejectExecution(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
 }
