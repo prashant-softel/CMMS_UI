@@ -1,5 +1,6 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:flutter/material.dart';
@@ -172,6 +173,16 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                               ),
                               // Dimens.boxWidth10,
                               SizedBox(width: 10),
+                              Text("Available"),
+                              Obx(
+                                () => CustomSwitchTroggle(
+                                    value: controller.isToggleOn.value,
+                                    onChanged: (value) {
+                                      controller.toggle();
+                                    }),
+                              ),
+                              Text("Consumption"), SizedBox(width: 10),
+
                               if (Responsive.isDesktop(context))
                                 Icon(Icons.notifications_active,
                                     color: ColorValues.greyLightColor),
@@ -531,7 +542,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     radius:
                                                         50.0, //radius for circle
                                                     lineWidth:
-                                                        15.0, //width of circle line
+                                                        10.0, //width of circle line
                                                     animation:
                                                         true, //animate when it shows progress indicator first
                                                     percent: (controller
@@ -851,11 +862,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             height: 160,
                                             child: SfCircularChart(
-                                              // title: ChartTitle(
-                                              //     text: "Category",
-                                              //     textStyle: Styles.black12,
-                                              //     alignment:
-                                              //         ChartAlignment.near),
+                                              title: ChartTitle(
+                                                  text: "Category",
+                                                  textStyle: Styles.black12,
+                                                  alignment:
+                                                      ChartAlignment.near),
                                               tooltipBehavior: TooltipBehavior(
                                                 enable: true,
                                                 tooltipPosition:
@@ -897,11 +908,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     .right, // Position the legend to the right to stack vertically
                                                 overflowMode:
                                                     LegendItemOverflowMode.wrap,
-                                                textStyle: Styles.black13,
+                                                textStyle: Styles.black10,
                                                 alignment: ChartAlignment
                                                     .center, // Align the legend items to the center
                                                 itemPadding:
-                                                    4, // Adjust the padding between legend items
+                                                    2, // Adjust the padding between legend items
                                               ),
                                               series: <CircularSeries>[
                                                 DoughnutSeries<
@@ -1430,7 +1441,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     radius:
                                                         50.0, //radius for circle
                                                     lineWidth:
-                                                        15.0, //width of circle line
+                                                        10.0, //width of circle line
                                                     animation:
                                                         true, //animate when it shows progress indicator first
                                                     percent: (controller
@@ -1467,172 +1478,6 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ],
                                               )),
                                         ),
-                                        // Expanded(
-                                        //   flex: 2,
-                                        //   child: Container(
-                                        //     margin: EdgeInsets.only(left: 5),
-                                        //     padding: EdgeInsets.only(
-                                        //         left: 5, top: 10),
-                                        //     decoration: BoxDecoration(
-                                        //       color: ColorValues.lightBlueColor,
-                                        //       borderRadius:
-                                        //           BorderRadius.circular(10),
-                                        //       boxShadow: [
-                                        //         BoxShadow(
-                                        //           color: Colors.grey,
-                                        //           offset: Offset(0.0, 1.0),
-                                        //           blurRadius: 6.0,
-                                        //         ),
-                                        //       ],
-                                        //     ),
-                                        //     height: 160,
-                                        //     child: Column(
-                                        //       children: [
-                                        //         Row(
-                                        //           crossAxisAlignment:
-                                        //               CrossAxisAlignment.start,
-                                        //           children: [
-                                        //             Align(
-                                        //                 alignment:
-                                        //                     Alignment.topLeft,
-                                        //                 child: Column(
-                                        //                   children: [
-                                        //                     Text(
-                                        //                         "Schedule Compliance",
-                                        //                         style: Styles
-                                        //                             .black15),
-                                        //                     Dimens.boxHeight10,
-                                        //                     SemicircularIndicator(
-                                        //                       radius: 60,
-                                        //                       color: Color
-                                        //                           .fromARGB(
-                                        //                               255,
-                                        //                               195,
-                                        //                               146,
-                                        //                               230),
-                                        //                       backgroundColor:
-                                        //                           Colors
-                                        //                               .lightGreen,
-                                        //                       strokeWidth: 13,
-                                        //                       bottomPadding: 0,
-                                        //                       child: Text(
-                                        //                         '${((controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
-                                        //                         style: TextStyle(
-                                        //                             fontWeight:
-                                        //                                 FontWeight
-                                        //                                     .bold,
-                                        //                             fontSize:
-                                        //                                 20.0,
-                                        //                             color: Colors
-                                        //                                 .redAccent),
-                                        //                       ),
-                                        //                     ),
-                                        //                   ],
-                                        //                 )),
-                                        //             Spacer(),
-                                        //             Container(
-                                        //               height: Get.height * 0.09,
-                                        //               width: Get.width * 0.09,
-                                        //               margin: EdgeInsets.only(
-                                        //                   left: 20, right: 10),
-                                        //               padding: EdgeInsets.only(
-                                        //                   left: 10,
-                                        //                   top: 10,
-                                        //                   right: 10),
-                                        //               decoration: BoxDecoration(
-                                        //                   color: Colors.white,
-                                        //                   borderRadius:
-                                        //                       BorderRadius
-                                        //                           .circular(10),
-                                        //                   boxShadow: [
-                                        //                     BoxShadow(
-                                        //                       color:
-                                        //                           Colors.grey,
-                                        //                       offset: Offset(
-                                        //                           0.0, 1.0),
-                                        //                       blurRadius: 6.0,
-                                        //                     ),
-                                        //                   ]),
-                                        //               child: Column(
-                                        //                 crossAxisAlignment:
-                                        //                     CrossAxisAlignment
-                                        //                         .start,
-                                        //                 children: [
-                                        //                   Row(
-                                        //                     children: [
-                                        //                       Text(
-                                        //                         "Total",
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                       Spacer(),
-                                        //                       Text(
-                                        //                         '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_total}',
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                     ],
-                                        //                   ),
-                                        //                   // Dimens.boxHeight2,
-                                        //                   Row(
-                                        //                     children: [
-                                        //                       Text(
-                                        //                         "Completed",
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                       Spacer(),
-                                        //                       Text(
-                                        //                         '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_completed}',
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                     ],
-                                        //                   ),
-                                        //                   // Dimens.boxHeight5,
-                                        //                   Row(
-                                        //                     children: [
-                                        //                       Text(
-                                        //                         "Pending",
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                       Spacer(),
-                                        //                       Text(
-                                        //                         '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_pending}',
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                     ],
-                                        //                   ),
-                                        //                 ],
-                                        //               ),
-                                        //             ),
-                                        //           ],
-                                        //         ),
-                                        //         // Dimens.boxHeight20,
-                                        //       ],
-                                        //     ),
-                                        //   ),
-                                        // ),
                                         Expanded(
                                           flex: 2,
                                           child: Container(
@@ -1792,11 +1637,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             height: 160,
                                             child: SfCircularChart(
-                                              // title: ChartTitle(
-                                              //     text: "Category",
-                                              //     textStyle: Styles.black12,
-                                              //     alignment:
-                                              //         ChartAlignment.near),
+                                              title: ChartTitle(
+                                                  text: "Category",
+                                                  textStyle: Styles.black12,
+                                                  alignment:
+                                                      ChartAlignment.near),
                                               tooltipBehavior: TooltipBehavior(
                                                 enable: true,
                                                 tooltipPosition:
@@ -1840,11 +1685,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     .right, // Position the legend to the right to stack vertically
                                                 overflowMode:
                                                     LegendItemOverflowMode.wrap,
-                                                textStyle: Styles.black13,
+                                                textStyle: Styles.black10,
                                                 alignment: ChartAlignment
                                                     .center, // Align the legend items to the center
                                                 itemPadding:
-                                                    4, // Adjust the padding between legend items
+                                                    2, // Adjust the padding between legend items
                                               ),
                                               series: <CircularSeries>[
                                                 DoughnutSeries<
@@ -1902,7 +1747,6 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                           ),
                                         ),
-
                                         Expanded(
                                           flex: 2,
                                           child: Container(
@@ -2356,7 +2200,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     radius:
                                                         50.0, //radius for circle
                                                     lineWidth:
-                                                        15.0, //width of circle line
+                                                        10.0, //width of circle line
                                                     animation:
                                                         true, //animate when it shows progress indicator first
                                                     percent: (controller
@@ -2553,11 +2397,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                             height: 160,
                                             child: SfCircularChart(
-                                              // title: ChartTitle(
-                                              //     text: "Category",
-                                              //     textStyle: Styles.black12,
-                                              //     alignment:
-                                              //         ChartAlignment.near),
+                                              title: ChartTitle(
+                                                  text: "Category",
+                                                  textStyle: Styles.black12,
+                                                  alignment:
+                                                      ChartAlignment.near),
                                               tooltipBehavior: TooltipBehavior(
                                                 enable: true,
                                                 tooltipPosition:
@@ -2601,11 +2445,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     .right, // Position the legend to the right to stack vertically
                                                 overflowMode:
                                                     LegendItemOverflowMode.wrap,
-                                                textStyle: Styles.black13,
+                                                textStyle: Styles.black10,
                                                 alignment: ChartAlignment
                                                     .center, // Align the legend items to the center
                                                 itemPadding:
-                                                    4, // Adjust the padding between legend items
+                                                    2, // Adjust the padding between legend items
                                               ),
                                               series: <CircularSeries>[
                                                 DoughnutSeries<
@@ -3139,7 +2983,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     radius:
                                                         50.0, //radius for circle
                                                     lineWidth:
-                                                        15.0, //width of circle line
+                                                        10.0, //width of circle line
                                                     animation:
                                                         true, //animate when it shows progress indicator first
                                                     percent: (controller
@@ -3953,7 +3797,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     radius:
                                                         50.0, //radius for circle
                                                     lineWidth:
-                                                        15.0, //width of circle line
+                                                        10.0, //width of circle line
                                                     animation:
                                                         true, //animate when it shows progress indicator first
                                                     percent: (controller
@@ -3990,6 +3834,124 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ],
                                               )),
                                         ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
+                                                ),
+                                              ],
+                                            ),
+                                            height: 160,
+                                            child: SfCartesianChart(
+                                              tooltipBehavior: TooltipBehavior(
+                                                enable: true,
+                                                tooltipPosition:
+                                                    TooltipPosition.pointer,
+                                                builder: (dynamic data,
+                                                    dynamic point,
+                                                    dynamic series,
+                                                    int pointIndex,
+                                                    int seriesIndex) {
+                                                  var entry = controller
+                                                      .categoryMapPMDouble
+                                                      .entries
+                                                      .toList()[pointIndex];
+                                                  double totalValue = controller
+                                                      .categoryMapPMDouble
+                                                      .values
+                                                      .reduce((a, b) => a + b);
+                                                  double percentage =
+                                                      (entry.value /
+                                                              totalValue) *
+                                                          100;
+                                                  return Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    child: Text(
+                                                      '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                              legend: Legend(
+                                                isVisible: true,
+                                                position: LegendPosition
+                                                    .right, // Position the legend to the right to stack vertically
+                                                overflowMode:
+                                                    LegendItemOverflowMode.wrap,
+                                                textStyle: Styles.black10,
+                                                alignment: ChartAlignment
+                                                    .center, // Align the legend items to the center
+                                                itemPadding:
+                                                    2, // Adjust the padding between legend items
+                                              ),
+                                              primaryXAxis: CategoryAxis(),
+                                              primaryYAxis: NumericAxis(),
+                                              series: <CartesianSeries>[
+                                                ColumnSeries<
+                                                    MapEntry<String, double>,
+                                                    String>(
+                                                  dataSource: controller
+                                                      .categoryMapPMDouble
+                                                      .entries
+                                                      .toList(),
+                                                  xValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.key,
+                                                  yValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.value,
+                                                  pointColorMapper:
+                                                      (MapEntry<String, double>
+                                                              data,
+                                                          _) {
+                                                    var entriesList = controller
+                                                        .categoryMapPMDouble
+                                                        .entries
+                                                        .toList();
+                                                    int index = entriesList
+                                                        .indexWhere((entry) =>
+                                                            entry.key ==
+                                                                data.key &&
+                                                            entry.value ==
+                                                                data.value);
+                                                    var colorList = controller
+                                                        .getColorList();
+                                                    Color color = colorList[
+                                                        index %
+                                                            colorList.length];
+                                                    return color;
+                                                  },
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5)),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+
                                         // Expanded(
                                         //   flex: 2,
                                         //   child: Container(
@@ -4435,10 +4397,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     .lightGreyColor;
                                               },
                                             ),
-                                            minWidth: 2500,
+                                            minWidth: 2000,
                                             columns: [
                                               DataColumn2(
-                                                fixedWidth: 100,
+                                                fixedWidth: 70,
                                                 label: Text(
                                                   'ID',
                                                   style: Styles.blackBold14,
@@ -4446,7 +4408,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 100,
+                                                fixedWidth: 200,
                                                 label: Text(
                                                   'Title',
                                                   style: Styles.blackBold14,
@@ -4462,7 +4424,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 200,
                                                 label: Text(
                                                   'Type Of Incident',
                                                   style: Styles.blackBold14,
@@ -4478,7 +4440,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 150,
+                                                fixedWidth: 200,
                                                 label: Text(
                                                   'Incident Date & Time',
                                                   style: Styles.blackBold14,
@@ -4486,7 +4448,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 200,
                                                 label: Text(
                                                   'Restoration Date & Time',
                                                   style: Styles.blackBold14,
@@ -4494,7 +4456,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 180,
+                                                fixedWidth: 150,
                                                 label: Text(
                                                   'Severity',
                                                   style: Styles.blackBold14,
@@ -4527,7 +4489,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .toString() ??
                                                     '')),
                                                 DataCell(Text(
-                                                    '${controller.dashboardIrList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                    '${controller.dashboardIrList.value?.cmDashboadDetails?.item_list?[index].title.toString() ?? ''}')),
                                                 DataCell(Text(controller
                                                         .dashboardIrList
                                                         .value
@@ -4540,92 +4502,36 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .status_long ??
+                                                        .type_of_incident ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardIrList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .asset_category ??
+                                                        .location_of_incident ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardIrList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .asset_name ??
+                                                        .incident_datetime ??
                                                     '')),
-                                                DataCell(
-                                                  Text(controller
-                                                              .dashboardIrList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .start_date !=
-                                                          null
-                                                      ? controller
-                                                          .dashboardIrList
-                                                          .value!
-                                                          .cmDashboadDetails!
-                                                          .item_list![index]
-                                                          .start_date!
-                                                          .substring(
-                                                              0,
-                                                              controller
-                                                                      .dashboardIrList
-                                                                      .value!
-                                                                      .cmDashboadDetails!
-                                                                      .item_list![
-                                                                          index]
-                                                                      .start_date!
-                                                                      .length -
-                                                                  9)
-                                                      : controller
-                                                              .dashboardIrList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .start_date ??
-                                                          ''),
-                                                ),
-                                                DataCell(
-                                                  Text(controller
-                                                              .dashboardIrList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .end_date !=
-                                                          null
-                                                      ? controller
-                                                          .dashboardIrList
-                                                          .value!
-                                                          .cmDashboadDetails!
-                                                          .item_list![index]
-                                                          .end_date!
-                                                          .substring(
-                                                              0,
-                                                              controller
-                                                                      .dashboardIrList
-                                                                      .value!
-                                                                      .cmDashboadDetails!
-                                                                      .item_list![
-                                                                          index]
-                                                                      .end_date!
-                                                                      .length -
-                                                                  9)
-                                                      : controller
-                                                              .dashboardIrList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .end_date ??
-                                                          ''),
-                                                ),
+                                                DataCell(Text(controller
+                                                        .dashboardIrList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .restoration_datetime ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardIrList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .severity ??
+                                                    '')),
                                                 DataCell(
                                                   Row(
                                                     children: [
@@ -4747,7 +4653,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                               .center,
                                                                       children: [
                                                                         Text(
-                                                                          "Total",
+                                                                          "GR",
                                                                           style:
                                                                               Styles.black13,
                                                                         ),
@@ -4766,7 +4672,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     Row(
                                                                       children: [
                                                                         Text(
-                                                                          "Completed",
+                                                                          "GO Raised",
                                                                           style:
                                                                               Styles.black13,
                                                                         ),
@@ -4783,7 +4689,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                     Row(
                                                                       children: [
                                                                         Text(
-                                                                          "Pending",
+                                                                          "GO Pending",
                                                                           style:
                                                                               Styles.black13,
                                                                         ),
@@ -4812,7 +4718,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     radius:
                                                         50.0, //radius for circle
                                                     lineWidth:
-                                                        15.0, //width of circle line
+                                                        10.0, //width of circle line
                                                     animation:
                                                         true, //animate when it shows progress indicator first
                                                     percent: (controller
@@ -4849,178 +4755,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ],
                                               )),
                                         ),
-                                        // Expanded(
-                                        //   flex: 2,
-                                        //   child: Container(
-                                        //     margin: EdgeInsets.only(left: 5),
-                                        //     padding: EdgeInsets.only(
-                                        //         left: 5, top: 10),
-                                        //     decoration: BoxDecoration(
-                                        //       color: ColorValues.lightBlueColor,
-                                        //       borderRadius:
-                                        //           BorderRadius.circular(10),
-                                        //       boxShadow: [
-                                        //         BoxShadow(
-                                        //           color: Colors.grey,
-                                        //           offset: Offset(0.0, 1.0),
-                                        //           blurRadius: 6.0,
-                                        //         ),
-                                        //       ],
-                                        //     ),
-                                        //     height: 160,
-                                        //     child: Column(
-                                        //       children: [
-                                        //         Row(
-                                        //           crossAxisAlignment:
-                                        //               CrossAxisAlignment.start,
-                                        //           children: [
-                                        //             Align(
-                                        //                 alignment:
-                                        //                     Alignment.topLeft,
-                                        //                 child: Column(
-                                        //                   children: [
-                                        //                     Text(
-                                        //                         "Schedule Compliance",
-                                        //                         style: Styles
-                                        //                             .black15),
-                                        //                     Dimens.boxHeight10,
-                                        //                     SemicircularIndicator(
-                                        //                       radius: 60,
-                                        //                       color: Color
-                                        //                           .fromARGB(
-                                        //                               255,
-                                        //                               195,
-                                        //                               146,
-                                        //                               230),
-                                        //                       backgroundColor:
-                                        //                           Colors
-                                        //                               .lightGreen,
-                                        //                       strokeWidth: 13,
-                                        //                       bottomPadding: 0,
-                                        //                       child: Text(
-                                        //                         '${((controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
-                                        //                         style: TextStyle(
-                                        //                             fontWeight:
-                                        //                                 FontWeight
-                                        //                                     .bold,
-                                        //                             fontSize:
-                                        //                                 20.0,
-                                        //                             color: Colors
-                                        //                                 .redAccent),
-                                        //                       ),
-                                        //                     ),
-                                        //                   ],
-                                        //                 )),
-                                        //             Spacer(),
-                                        //             Container(
-                                        //               height: Get.height * 0.09,
-                                        //               width: Get.width * 0.09,
-                                        //               margin: EdgeInsets.only(
-                                        //                   left: 20, right: 10),
-                                        //               padding: EdgeInsets.only(
-                                        //                   left: 10,
-                                        //                   top: 10,
-                                        //                   right: 10),
-                                        //               decoration: BoxDecoration(
-                                        //                   color: Colors.white,
-                                        //                   borderRadius:
-                                        //                       BorderRadius
-                                        //                           .circular(10),
-                                        //                   boxShadow: [
-                                        //                     BoxShadow(
-                                        //                       color:
-                                        //                           Colors.grey,
-                                        //                       offset: Offset(
-                                        //                           0.0, 1.0),
-                                        //                       blurRadius: 6.0,
-                                        //                     ),
-                                        //                   ]),
-                                        //               child: Column(
-                                        //                 crossAxisAlignment:
-                                        //                     CrossAxisAlignment
-                                        //                         .start,
-                                        //                 children: [
-                                        //                   Row(
-                                        //                     children: [
-                                        //                       Text(
-                                        //                         "Total",
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                       Spacer(),
-                                        //                       Text(
-                                        //                         '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_total}',
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                     ],
-                                        //                   ),
-                                        //                   // Dimens.boxHeight2,
-                                        //                   Row(
-                                        //                     children: [
-                                        //                       Text(
-                                        //                         "Completed",
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                       Spacer(),
-                                        //                       Text(
-                                        //                         '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_completed}',
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                     ],
-                                        //                   ),
-                                        //                   // Dimens.boxHeight5,
-                                        //                   Row(
-                                        //                     children: [
-                                        //                       Text(
-                                        //                         "Pending",
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                       Spacer(),
-                                        //                       Text(
-                                        //                         '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_pending}',
-                                        //                         style: TextStyle(
-                                        //                             fontSize:
-                                        //                                 Get.width *
-                                        //                                         0.009 -
-                                        //                                     1),
-                                        //                       ),
-                                        //                     ],
-                                        //                   ),
-                                        //                 ],
-                                        //               ),
-                                        //             ),
-                                        //           ],
-                                        //         ),
-                                        //         // Dimens.boxHeight20,
-                                        //       ],
-                                        //     ),
-                                        //   ),
-                                        // ),
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                            margin: EdgeInsets.only(left: 10),
-                                            padding: EdgeInsets.only(
-                                                left: 10, top: 10),
+                                            margin: EdgeInsets.only(
+                                                left: 10, right: 10),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -5034,122 +4773,101 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               ],
                                             ),
                                             height: 160,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text("Schedule Compliance",
-                                                    style: Styles.black15),
-                                                // Dimens.boxHeight5,
-                                                SizedBox(height: 5),
-
-                                                Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Container(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            // Dimens.boxHeight8,
-                                                            Row(
-                                                              children: [
-                                                                Icon(
-                                                                    Icons
-                                                                        .pie_chart,
-                                                                    size: 30,
-                                                                    color: Colors
-                                                                        .red),
-                                                                SizedBox(
-                                                                    width: 10),
-
-                                                                Text(
-                                                                  "WO on-time",
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
-
-                                                                // Dimens
-                                                                //     .boxWidth20,
-                                                                SizedBox(
-                                                                    width: 20),
-                                                                // Spacer(),
-                                                                Text(
-                                                                  '${controller.woOnTimeSum.value}',
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight5,
-                                                            SizedBox(height: 5),
-                                                            Row(
-                                                              children: [
-                                                                Icon(
-                                                                    Icons
-                                                                        .pie_chart,
-                                                                    size: 30,
-                                                                    color: Colors
-                                                                        .blue),
-                                                                SizedBox(
-                                                                    width: 10),
-
-                                                                Text(
-                                                                  "WO delay",
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
-                                                                // Dimens
-                                                                //     .boxWidth37,
-                                                                SizedBox(
-                                                                    width: 35),
-                                                                // Spacer(),
-                                                                Text(
-                                                                  '${controller.woDelaySum.value}',
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight5,
-                                                            SizedBox(height: 5),
-                                                            Row(
-                                                              children: [
-                                                                Icon(
-                                                                    Icons
-                                                                        .pie_chart,
-                                                                    size: 30,
-                                                                    color: Colors
-                                                                        .green),
-                                                                SizedBox(
-                                                                    width: 10),
-                                                                Text(
-                                                                  "WO backlog",
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
-
-                                                                // Dimens
-                                                                //     .boxWidth20,
-                                                                SizedBox(
-                                                                    width: 20),
-                                                                // Spacer(),
-                                                                Text(
-                                                                  '${controller.woBacklogSum.value}',
-                                                                  style: Styles
-                                                                      .black13,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight8,
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                // Dimens.boxHeight20,
+                                            child: SfCartesianChart(
+                                              tooltipBehavior: TooltipBehavior(
+                                                enable: true,
+                                                tooltipPosition:
+                                                    TooltipPosition.pointer,
+                                                builder: (dynamic data,
+                                                    dynamic point,
+                                                    dynamic series,
+                                                    int pointIndex,
+                                                    int seriesIndex) {
+                                                  var entry = controller
+                                                      .categoryMapPMDouble
+                                                      .entries
+                                                      .toList()[pointIndex];
+                                                  double totalValue = controller
+                                                      .categoryMapPMDouble
+                                                      .values
+                                                      .reduce((a, b) => a + b);
+                                                  double percentage =
+                                                      (entry.value /
+                                                              totalValue) *
+                                                          100;
+                                                  return Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    child: Text(
+                                                      '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                              legend: Legend(
+                                                isVisible: true,
+                                                position: LegendPosition
+                                                    .right, // Position the legend to the right to stack vertically
+                                                overflowMode:
+                                                    LegendItemOverflowMode.wrap,
+                                                textStyle: Styles.black10,
+                                                alignment: ChartAlignment
+                                                    .center, // Align the legend items to the center
+                                                itemPadding:
+                                                    2, // Adjust the padding between legend items
+                                              ),
+                                              primaryXAxis: CategoryAxis(),
+                                              primaryYAxis: NumericAxis(),
+                                              series: <CartesianSeries>[
+                                                ColumnSeries<
+                                                    MapEntry<String, double>,
+                                                    String>(
+                                                  dataSource: controller
+                                                      .categoryMapPMDouble
+                                                      .entries
+                                                      .toList(),
+                                                  xValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.key,
+                                                  yValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.value,
+                                                  pointColorMapper:
+                                                      (MapEntry<String, double>
+                                                              data,
+                                                          _) {
+                                                    var entriesList = controller
+                                                        .categoryMapPMDouble
+                                                        .entries
+                                                        .toList();
+                                                    int index = entriesList
+                                                        .indexWhere((entry) =>
+                                                            entry.key ==
+                                                                data.key &&
+                                                            entry.value ==
+                                                                data.value);
+                                                    var colorList = controller
+                                                        .getColorList();
+                                                    Color color = colorList[
+                                                        index %
+                                                            colorList.length];
+                                                    return color;
+                                                  },
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5)),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -5157,84 +4875,266 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 10, right: 10),
-                                              padding: EdgeInsets.only(
-                                                  left: 10, top: 10),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    ColorValues.lightBlueColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey,
-                                                    offset: Offset(0.0, 1.0),
-                                                    blurRadius: 6.0,
-                                                  ),
-                                                ],
+                                            margin: EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            // padding: EdgeInsets.only(
+                                            //     left: 10, top: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
+                                                ),
+                                              ],
+                                            ),
+                                            height: 160,
+                                            child: SfCircularChart(
+                                              title: ChartTitle(
+                                                  text:
+                                                      "Stock Available/Consumption by Goods",
+                                                  textStyle: Styles.black12,
+                                                  alignment:
+                                                      ChartAlignment.near),
+                                              tooltipBehavior: TooltipBehavior(
+                                                enable: true,
+                                                tooltipPosition:
+                                                    TooltipPosition.pointer,
+                                                builder: (dynamic data,
+                                                    dynamic point,
+                                                    dynamic series,
+                                                    int pointIndex,
+                                                    int seriesIndex) {
+                                                  var entry = controller
+                                                      .categoryMapSmAvailableDouble
+                                                      .entries
+                                                      .toList()[pointIndex];
+                                                  double totalValue = controller
+                                                      .categoryMapSmAvailableDouble
+                                                      .values
+                                                      .reduce((a, b) => a + b);
+                                                  double percentage =
+                                                      (entry.value /
+                                                              totalValue) *
+                                                          100;
+                                                  return Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    child: Text(
+                                                      '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  );
+                                                },
                                               ),
-                                              height: 160,
-                                              child: Row(
-                                                children: [
-                                                  Align(
-                                                      alignment:
-                                                          Alignment.topLeft,
-                                                      child: Text("Category",
-                                                          style:
-                                                              Styles.black15)),
-                                                ],
-                                              )),
+                                              legend: Legend(
+                                                isVisible: true,
+                                                position: LegendPosition
+                                                    .right, // Position the legend to the right to stack vertically
+                                                overflowMode:
+                                                    LegendItemOverflowMode.wrap,
+                                                textStyle: Styles.black10,
+                                                alignment: ChartAlignment
+                                                    .center, // Align the legend items to the center
+                                                itemPadding:
+                                                    2, // Adjust the padding between legend items
+                                              ),
+                                              series: <CircularSeries>[
+                                                DoughnutSeries<
+                                                    MapEntry<String, double>,
+                                                    String>(
+                                                  strokeWidth: 15,
+                                                  innerRadius: '80%',
+                                                  dataSource: controller
+                                                      .categoryMapSmAvailableDouble
+                                                      .entries
+                                                      .toList(),
+                                                  xValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.key,
+                                                  yValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.value,
+                                                  // dataLabelSettings:
+                                                  //     DataLabelSettings(
+                                                  //   isVisible: true,
+                                                  //   labelPosition:
+                                                  //       ChartDataLabelPosition
+                                                  //           .outside,
+                                                  //   useSeriesColor: true,
+                                                  //   textStyle:
+                                                  //       TextStyle(fontSize: 12),
+                                                  // ),
+                                                  pointColorMapper:
+                                                      (MapEntry<String, double>
+                                                              data,
+                                                          _) {
+                                                    var entriesList = controller
+                                                        .categoryMapSmAvailableDouble
+                                                        .entries
+                                                        .toList();
+                                                    int index = entriesList
+                                                        .indexWhere((entry) =>
+                                                            entry.key ==
+                                                                data.key &&
+                                                            entry.value ==
+                                                                data.value);
+                                                    var colorList = controller
+                                                        .getColorList();
+                                                    Color color = colorList[
+                                                        index %
+                                                            colorList.length];
+                                                    return color;
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                              padding: EdgeInsets.only(top: 10),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    ColorValues.lightBlueColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey,
-                                                    offset: Offset(0.0, 1.0),
-                                                    blurRadius: 6.0,
-                                                  ),
-                                                ],
+                                            margin: EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            // padding: EdgeInsets.only(
+                                            //     left: 10, top: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
+                                                ),
+                                              ],
+                                            ),
+                                            height: 160,
+                                            child: SfCircularChart(
+                                              title: ChartTitle(
+                                                  text:
+                                                      "Stock Available/Consumption by Sites",
+                                                  textStyle: Styles.black12,
+                                                  alignment:
+                                                      ChartAlignment.near),
+                                              tooltipBehavior: TooltipBehavior(
+                                                enable: true,
+                                                tooltipPosition:
+                                                    TooltipPosition.pointer,
+                                                builder: (dynamic data,
+                                                    dynamic point,
+                                                    dynamic series,
+                                                    int pointIndex,
+                                                    int seriesIndex) {
+                                                  var entry = controller
+                                                      .categoryMapSmAvailableSiteDouble
+                                                      .entries
+                                                      .toList()[pointIndex];
+                                                  double totalValue = controller
+                                                      .categoryMapSmAvailableSiteDouble
+                                                      .values
+                                                      .reduce((a, b) => a + b);
+                                                  double percentage =
+                                                      (entry.value /
+                                                              totalValue) *
+                                                          100;
+                                                  return Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    child: Text(
+                                                      '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  );
+                                                },
                                               ),
-                                              height: 160,
-                                              child: Column(
-                                                children: [
-                                                  Text("Low Stock Items",
-                                                      style: Styles.black15),
-                                                  SizedBox(height: 2),
-                                                  Container(
-                                                    height: 35,
-                                                    child: CustomElevatedButton(
-                                                        backgroundColor:
-                                                            ColorValues
-                                                                .appLightBlueColor,
-                                                        onPressed: () {},
-                                                        text:
-                                                            '${controller.dashboardSmList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
-                                                  ),
-                                                  SizedBox(height: 8),
-                                                  Text("PO Items Awaited",
-                                                      style: Styles.black15),
-                                                  SizedBox(height: 2),
-                                                  Container(
-                                                    height: 35,
-                                                    child: CustomElevatedButton(
-                                                        backgroundColor:
-                                                            ColorValues
-                                                                .appLightBlueColor,
-                                                        onPressed: () {},
-                                                        text:
-                                                            '${controller.dashboardSmList.value?.cmDashboadDetails?.po_items_awaited ?? 0}'),
-                                                  ),
-                                                ],
-                                              )),
+                                              legend: Legend(
+                                                isVisible: true,
+                                                position: LegendPosition
+                                                    .right, // Position the legend to the right to stack vertically
+                                                overflowMode:
+                                                    LegendItemOverflowMode.wrap,
+                                                textStyle: Styles.black10,
+                                                alignment: ChartAlignment
+                                                    .center, // Align the legend items to the center
+                                                itemPadding:
+                                                    2, // Adjust the padding between legend items
+                                              ),
+                                              series: <CircularSeries>[
+                                                DoughnutSeries<
+                                                    MapEntry<String, double>,
+                                                    String>(
+                                                  strokeWidth: 15,
+                                                  innerRadius: '80%',
+                                                  dataSource: controller
+                                                      .categoryMapSmAvailableSiteDouble
+                                                      .entries
+                                                      .toList(),
+                                                  xValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.key,
+                                                  yValueMapper:
+                                                      (MapEntry<String, double>
+                                                                  data,
+                                                              _) =>
+                                                          data.value,
+                                                  // dataLabelSettings:
+                                                  //     DataLabelSettings(
+                                                  //   isVisible: true,
+                                                  //   labelPosition:
+                                                  //       ChartDataLabelPosition
+                                                  //           .outside,
+                                                  //   useSeriesColor: true,
+                                                  //   textStyle:
+                                                  //       TextStyle(fontSize: 12),
+                                                  // ),
+                                                  pointColorMapper:
+                                                      (MapEntry<String, double>
+                                                              data,
+                                                          _) {
+                                                    var entriesList = controller
+                                                        .categoryMapSmAvailableSiteDouble
+                                                        .entries
+                                                        .toList();
+                                                    int index = entriesList
+                                                        .indexWhere((entry) =>
+                                                            entry.key ==
+                                                                data.key &&
+                                                            entry.value ==
+                                                                data.value);
+                                                    var colorList = controller
+                                                        .getColorList();
+                                                    Color color = colorList[
+                                                        index %
+                                                            colorList.length];
+                                                    return color;
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
