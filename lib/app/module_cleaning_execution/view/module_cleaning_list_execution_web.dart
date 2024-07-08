@@ -512,7 +512,7 @@ class MCExcutionListDataSource extends DataTableSource {
       '${McExcutionListDetails?.noOfDays ?? ''}',
       '${McExcutionListDetails?.startDate ?? ''}',
       '${McExcutionListDetails?.doneDate ?? ''}',
-      '${McExcutionListDetails?.status ?? ''}',
+      // '${McExcutionListDetails?.status_short ?? ''}',
 
       'Actions',
     ];
@@ -563,9 +563,160 @@ class MCExcutionListDataSource extends DataTableSource {
                                               MCTaskListModel(executionId: 00),
                                         )
                                         ?.status ==
-                                    301
-                                ? ColorValues.approveColor
-                                : ColorValues.addNewColor,
+                                    360
+                                ? ColorValues.addNewColor
+                                : controller.mcTaskList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.executionId ==
+                                                  McExcutionListDetails!
+                                                      .executionId,
+                                              orElse: () => MCTaskListModel(
+                                                  executionId: 00),
+                                            )
+                                            ?.status ==
+                                        361
+                                    ? ColorValues.startColor
+                                    : controller.mcTaskList
+                                                .firstWhere(
+                                                  (e) =>
+                                                      e?.executionId ==
+                                                      McExcutionListDetails!
+                                                          .executionId,
+                                                  orElse: () => MCTaskListModel(
+                                                      executionId: 00),
+                                                )
+                                                ?.status ==
+                                            362
+                                        ? ColorValues.closeColor
+                                        : controller.mcTaskList
+                                                    .firstWhere(
+                                                      (e) =>
+                                                          e?.executionId ==
+                                                          McExcutionListDetails!
+                                                              .executionId,
+                                                      orElse: () =>
+                                                          MCTaskListModel(
+                                                              executionId: 00),
+                                                    )
+                                                    ?.status ==
+                                                363
+                                            ? ColorValues.completeColor
+                                            : controller.mcTaskList
+                                                        .firstWhere(
+                                                          (e) =>
+                                                              e?.executionId ==
+                                                              McExcutionListDetails!
+                                                                  .executionId,
+                                                          orElse: () =>
+                                                              MCTaskListModel(
+                                                                  executionId:
+                                                                      00),
+                                                        )
+                                                        ?.status ==
+                                                    364
+                                                ? ColorValues.lightBlueColor
+                                                : controller.mcTaskList
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.executionId ==
+                                                                  McExcutionListDetails!
+                                                                      .executionId,
+                                                              orElse: () =>
+                                                                  MCTaskListModel(
+                                                                      executionId:
+                                                                          00),
+                                                            )
+                                                            ?.status ==
+                                                        365
+                                                    ? ColorValues.approveColor
+                                                    : controller.mcTaskList
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      e?.executionId ==
+                                                                      McExcutionListDetails!
+                                                                          .executionId,
+                                                                  orElse: () =>
+                                                                      MCTaskListModel(
+                                                                          executionId:
+                                                                              00),
+                                                                )
+                                                                ?.status ==
+                                                            366
+                                                        ? ColorValues
+                                                            .rejectColor
+                                                        : controller.mcTaskList
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          e?.executionId ==
+                                                                          McExcutionListDetails!
+                                                                              .executionId,
+                                                                      orElse: () =>
+                                                                          MCTaskListModel(
+                                                                              executionId: 00),
+                                                                    )
+                                                                    ?.status ==
+                                                                367
+                                                            ? ColorValues
+                                                                .yellowColor
+                                                            : controller
+                                                                        .mcTaskList
+                                                                        .firstWhere(
+                                                                          (e) =>
+                                                                              e?.executionId ==
+                                                                              McExcutionListDetails!.executionId,
+                                                                          orElse: () =>
+                                                                              MCTaskListModel(executionId: 00),
+                                                                        )
+                                                                        ?.status ==
+                                                                    368
+                                                                ? ColorValues
+                                                                    .linktopermitColor
+                                                                : controller
+                                                                            .mcTaskList
+                                                                            .firstWhere(
+                                                                              (e) => e?.executionId == McExcutionListDetails!.executionId,
+                                                                              orElse: () => MCTaskListModel(executionId: 00),
+                                                                            )
+                                                                            ?.status ==
+                                                                        381
+                                                                    ? const Color
+                                                                        .fromARGB(
+                                                                        255,
+                                                                        83,
+                                                                        105,
+                                                                        72)
+                                                                    : controller
+                                                                                .mcTaskList
+                                                                                .firstWhere(
+                                                                                  (e) => e?.executionId == McExcutionListDetails!.executionId,
+                                                                                  orElse: () => MCTaskListModel(executionId: 00),
+                                                                                )
+                                                                                ?.status ==
+                                                                            382
+                                                                        ? const Color
+                                                                            .fromARGB(
+                                                                            255,
+                                                                            142,
+                                                                            99,
+                                                                            96)
+                                                                        : controller.mcTaskList
+                                                                                    .firstWhere(
+                                                                                      (e) => e?.executionId == McExcutionListDetails!.executionId,
+                                                                                      orElse: () => MCTaskListModel(executionId: 00),
+                                                                                    )
+                                                                                    ?.status ==
+                                                                                383
+                                                                            ? ColorValues.approveColor
+                                                                            : controller.mcTaskList
+                                                                                        .firstWhere(
+                                                                                          (e) => e?.executionId == McExcutionListDetails!.executionId,
+                                                                                          orElse: () => MCTaskListModel(executionId: 00),
+                                                                                        )
+                                                                                        ?.status ==
+                                                                                    384
+                                                                                ? ColorValues.rejectColor
+                                                                                : ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
@@ -592,8 +743,8 @@ class MCExcutionListDataSource extends DataTableSource {
                                 controller.clearStoreDataMcid();
                                 controller.clearStoreDataPlanid();
                                 Get.toNamed(
-                                    Routes.viewModuleCleaningExecutionScreen,
-                                    arguments: {'mcid': id, "planId": planId});
+                                    Routes.addModuleCleaningExecutionContentWeb,
+                                    arguments: {"mcid": id, "planId": planId});
                               }
                             },
                           ),

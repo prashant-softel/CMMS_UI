@@ -7939,6 +7939,54 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> abandonedApproveExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/ApproveAbandonExecution',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      approvetoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> abandoneRejectExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/RejectAbandonExecution',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      rejecttoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> approvePmTaskExecution({
     required String auth,
     approvetoJsonString,
