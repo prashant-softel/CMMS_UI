@@ -729,7 +729,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                     .kHaveAddAccess)
                                         .length >
                                     0 &&
-                                GoodsOrderListDetails?.status == 308
+                                GoodsOrderListDetails?.status == 308 || GoodsOrderListDetails?.status == 310
                             ? TableActionButton(
                                 color: ColorValues.viewColor,
                                 icon: Icons.remove_red_eye_outlined,
