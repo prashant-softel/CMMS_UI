@@ -1668,6 +1668,20 @@ class DataRepository extends DomainRepository {
         userId: userId,
         isLoading: isLoading,
       );
+  Future<ResponseModel> getReAssignedToList({
+    required String auth,
+    int? facilityId,
+    int? featureId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getReAssignedToList(
+        auth: auth,
+        facilityId: facilityId,
+        featureId: featureId,
+        userId: userId,
+        isLoading: isLoading,
+      );
   Future<ResponseModel> getAssignedToEmployee({
     required String auth,
     int? facilityId,
