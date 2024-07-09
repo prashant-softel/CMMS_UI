@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:cmms/data/data.dart';
@@ -5387,11 +5388,15 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> getAttendanceListMonthwise({
     required String auth,
     required int facilityId,
+    String? start_date,
+    String? end_date,
     bool? isLoading,
   }) async =>
       await connectHelper.getAttendanceListMonthwise(
         auth: auth,
         facilityId: facilityId,
+        start_date: start_date,
+        end_date: end_date,
         isLoading: isLoading ?? false,
       );
 

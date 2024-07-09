@@ -203,7 +203,10 @@ class AttendanceListMonthController extends GetxController {
           await controller.facilityId$.listen((event) async {
         facilityId.value = event;
         if (facilityId != 0) {
-          await getAttendanceListMonthwise();
+          await getAttendanceListMonthwise(
+            start_date: formattedFromdate,
+            end_date: formattedTodate,
+          );
         }
       });
       super.onInit();
@@ -212,11 +215,16 @@ class AttendanceListMonthController extends GetxController {
     }
   }
 
-  Future<void> getAttendanceListMonthwise() async {
+  Future<void> getAttendanceListMonthwise({
+    String? start_date,
+    String? end_date,
+  }) async {
     try {
       final _attendanceDetails =
           await attendanceListMonthPresenter.getAttendanceListMonthwise(
         facilityId: facilityId.value,
+        start_date: start_date,
+        end_date: end_date,
         isLoading: isLoading.value,
       );
       if (_attendanceDetails != null) {

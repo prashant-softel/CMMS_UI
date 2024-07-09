@@ -395,7 +395,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                 ],
               ),
               floatingActionButton:
-                  controller.vegPlanDetailsModel.value?.status == 371 &&
+                  controller.vegPlanDetailsModel.value?.status == 702 &&
                           varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==

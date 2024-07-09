@@ -348,6 +348,7 @@ class JobCardDetailsController extends GetxController {
         "Block": jobCardDetailsModel.value?.blockName,
         // "Equipment Categories": jobCardDetailsModel.value?.assetCategoryName,
       };
+      print("${plantDetails}");
     }
     file_list.value = jobCardDetailsModel.value?.fileList ?? [];
     file_list_new.value = jobCardDetailsModel.value?.fileListJc ?? [];
@@ -734,6 +735,7 @@ class JobCardDetailsController extends GetxController {
       isformInvalid.value = false;
     }
   }
+
   void rejcommentcheckform() {
     if (rejectCommentTextFieldCtrlr.text == '') {
       isformInvalid.value = true;

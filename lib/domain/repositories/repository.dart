@@ -14343,6 +14343,8 @@ class Repository {
 
   Future<AttendanceMonthModel?> getAttendanceListMonthwise({
     required int facilityId,
+    String? start_date,
+    String? end_date,
     bool? isLoading,
   }) async {
     try {
@@ -14350,6 +14352,8 @@ class Repository {
       final res = await _dataRepository.getAttendanceListMonthwise(
         auth: auth,
         facilityId: facilityId,
+        start_date: start_date,
+        end_date: end_date,
         isLoading: isLoading,
       );
       if (!res.hasError) {

@@ -502,7 +502,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                                               planId: 00),
                                         )
                                         .status ==
-                                    371
+                                    702
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,
@@ -538,7 +538,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                                               planId: 00),
                                         )
                                         .status ==
-                                    371
+                                    702
                             ? TableActionButton(
                                 color: ColorValues.deleteColor,
                                 icon: Icons.delete,
@@ -571,7 +571,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                                               planId: 00),
                                         )
                                         .status ==
-                                    352
+                                    703
                             ? TableActionButton(
                                 color: Color.fromARGB(255, 116, 78, 130),
                                 icon: Icons.ads_click,
@@ -597,7 +597,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                                               planId: 00),
                                         )
                                         .status ==
-                                    371 &&
+                                    702 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==
@@ -613,8 +613,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                                 icon: Icons.check,
                                 message: 'Approve/Reject',
                                 onPress: () {
-                                  // controller.clearStoreDataMcid();
-                                  // controller.clearStoreDataPlanid();
+                                  controller.clearStoreData();
                                   int id = VegetationListDetails?.planId ?? 0;
                                   if (id != 0) {
                                     Get.toNamed(
