@@ -108,7 +108,9 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                 style: Styles.greyLight14),
                                           ),
                                           Text(
-                                            " / ADD ASSETS",
+                                            controller.inventoryId.value == 0
+                                                ? " / ADD ASSETS"
+                                                : " / UPDATE ASSETS",
                                             style: Styles.greyLight14,
                                           ),
                                         ],

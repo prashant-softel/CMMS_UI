@@ -14,6 +14,7 @@ import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../theme/color_values.dart';
@@ -576,25 +577,32 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   //  )
                                   : //
                                   Dimens.box0,
-                              controller.calibrationDetailModel.value
-                                          ?.statusId ==
-                                      214
-                                  ? Row(
-                                      children: [
-                                        Text(
-                                          "Any Damages:",
-                                          style: Styles.blackBold15,
-                                        ),
-                                        Dimens.boxWidth10,
-                                        CustomSwitchTroggle(
-                                            value: controller.isToggleOn.value,
-                                            onChanged: (value) {
-                                              controller.toggle();
-                                            }),
-                                      ],
-                                    )
-                                  : Dimens.box0,
-                              Dimens.boxHeight10,
+                              // controller.calibrationDetailModel.value
+                              //             ?.statusId ==
+                              //         214
+                                  // ?
+                                   IgnorePointer(
+                                    ignoring: controller.calibrationDetailModel.value
+                                          ?.statusId ==214,
+                                          
+                                     child: Row(
+                                        children: [
+                                          Text(
+                                            "Any Damages:",
+                                            style: Styles.blackBold15,
+                                          ),
+                                          Dimens.boxWidth10,
+                                          CustomSwitchTroggle(
+                                              value: controller.isToggleOn.value,
+                                              onChanged: (value) {
+                                                controller.toggle();
+                                              }),
+                                        ],
+                                      ),
+
+                                   ),
+                                  // : Dimens.box0,
+                              // Dimens.boxHeight10,
                               // Row(
                               //   children: [
                               //     Text(

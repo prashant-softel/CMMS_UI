@@ -526,8 +526,6 @@ class CalibrationDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.srNoFilterText.value.toLowerCase()) &&
-
-              
           
           (Calibration?.schedule_start_date ?? '')
               .toString()
@@ -747,6 +745,8 @@ class CalibrationDataSource extends DataTableSource {
                               ),
                       ])
                     : Text(value.toString()),
+                    
+                   
           ),
         );
       }).toList(),

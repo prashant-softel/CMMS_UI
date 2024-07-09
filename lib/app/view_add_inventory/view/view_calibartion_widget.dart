@@ -34,7 +34,7 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
               child: Column(
                 children: [
                   // Dimens.boxHeight10,
-                  SizedBox(height:10),
+                  SizedBox(height: 10),
                   Text(
                     'Calibration',
                     style: Styles.blackBold18,
@@ -63,14 +63,16 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                       child: DropdownWebStock(
                                         margin: Dimens.edgeInsets5,
                                         width:
-                                            MediaQuery.of(context).size.width / 5,
+                                            MediaQuery.of(context).size.width /
+                                                5,
                                         controller: controller,
                                         dropdownList: controller.frequencyList,
-                                        isValueSelected:
-                                            controller.isSelectedfrequency.value,
+                                        isValueSelected: controller
+                                            .isSelectedfrequency.value,
                                         selectedValue:
                                             controller.selectedfrequency.value,
-                                        onValueChanged: controller.onValueChanged,
+                                        onValueChanged:
+                                            controller.onValueChanged,
                                       ),
                                     ),
                                   ),
@@ -90,7 +92,8 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                   Container(
                                     height: MediaQuery.of(context).size.height *
                                         0.040,
-                                    width: MediaQuery.of(context).size.width / 5,
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
                                     child: TextField(
                                       style: GoogleFonts.lato(
                                         textStyle: TextStyle(
@@ -103,7 +106,7 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                       ],
                                       controller:
                                           controller.calibrationRemaingCtrlr,
-                                                
+
                                       //  errorController: controller
                                       //                     .isSerialNoInvalid
                                       //                     .value
@@ -127,11 +130,13 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                         contentPadding: Dimens.edgeInsets5,
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(width: .2),
-                                          borderRadius: BorderRadius.circular(2),
+                                          borderRadius:
+                                              BorderRadius.circular(2),
                                         ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(width: .2),
-                                          borderRadius: BorderRadius.circular(2),
+                                          borderRadius:
+                                              BorderRadius.circular(2),
                                         ),
                                       ),
                                     ),
@@ -158,31 +163,39 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                   // Dimens.boxWidth10,
                                   SizedBox(width: 10),
                                   CustomTextFieldForStock(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      numberTextField: true,
-                                      onTap: () {
-                                        controller.openLastCalibrationDatePicker =
-                                            !controller
-                                                .openLastCalibrationDatePicker;
-                                        controller.update(['calibration_tab']);
-                                      },
-                                      textController:
-                                          controller.lastCalibrationDateTc,
-                                      // errorController:
-                                      //     controller.isReceivedDateInvalid.value
-                                      //         ? "Required field"
-                                      //         : null,
-                                      // onChanged: (value) {
-                                      //   if (value.trim().length > 1) {
-                                      //     controller.isReceivedDateInvalid.value =
-                                      //         false;
-                                      //   } else {
-                                      //     controller.isReceivedDateInvalid.value =
-                                      //         true;
-                                      //   }
-                                      // }
-                                      ),
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
+                                    numberTextField: true,
+                                    onTap: () {
+                                      controller.openLastCalibrationDatePicker =
+                                          !controller
+                                              .openLastCalibrationDatePicker;
+                                      controller.update(['calibration_tab']);
+                                    },
+                                    // textController:
+                                    //     controller.lastCalibrationDateTc,
+                                    textController: TextEditingController(
+                                      text: controller
+                                                  .lastCalibrationDateTc.text ==
+                                              '0001-01-01'
+                                          ? ''
+                                          : controller
+                                              .lastCalibrationDateTc.text,
+                                    ),
+                                    // errorController:
+                                    //     controller.isReceivedDateInvalid.value
+                                    //         ? "Required field"
+                                    //         : null,
+                                    // onChanged: (value) {
+                                    //   if (value.trim().length > 1) {
+                                    //     controller.isReceivedDateInvalid.value =
+                                    //         false;
+                                    //   } else {
+                                    //     controller.isReceivedDateInvalid.value =
+                                    //         true;
+                                    //   }
+                                    // }
+                                  ),
                                 ],
                               ),
                             ),
@@ -194,7 +207,7 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                   children: [
                                     Text('Calibration Certificate'),
                                     // Dimens.boxWidth20,
-                                    SizedBox(width:20),
+                                    SizedBox(width: 20),
                                     ActionButton(
                                       label: 'Upload certification file',
                                       onPressed: () {},
@@ -202,7 +215,7 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                       color: ColorValues.appLightBlueColor,
                                     ),
                                     // Dimens.boxWidth70,
-                                    SizedBox(width:70),
+                                    SizedBox(width: 70),
                                   ],
                                 ),
                               ),
@@ -226,6 +239,10 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                     print('po valu ${p0.value.toString()}');
                     controller.lastCalibrationDateTc.text =
                         DateFormat('yyyy-MM-dd').format(p0.value);
+                    if (controller.lastCalibrationDateTc.text ==
+                        '0001-01-01T00:00:00') {
+                      controller.lastCalibrationDateTc.text = '';
+                    }
                     controller.openLastCalibrationDatePicker =
                         !controller.openLastCalibrationDatePicker;
                     controller.update(['calibration_tab']);

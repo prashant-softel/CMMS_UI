@@ -320,9 +320,20 @@ class AddInventoryController extends GetxController {
 
       warrentyDescriptionCtrlr.text =
           editAddInventoryDetailsModel.value?.warrantyDescription ?? "";
-      lastCalibrationDateTc.text =
-          editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
-              "";
+      // lastCalibrationDateTc.text =
+      //     editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
+      //         "";
+     // Ensure the text field is properly updated with the calibration date
+ lastCalibrationDateTc.text = editAddInventoryDetailsModel.value?.calibrationLastDate?.toString() ?? "";
+
+// Check if the calibration date is '0001-01-01T00:00:00' and set it to an empty string
+if (lastCalibrationDateTc.text == '0001-01-01T00:00:00') {
+  lastCalibrationDateTc.text = '';
+} else {
+  lastCalibrationDateTc.text;
+}
+
+
       startDateTc.text =
           editAddInventoryDetailsModel.value?.start_date.toString() ?? "";
       expireDateTc.text =
