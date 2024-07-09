@@ -102,7 +102,7 @@ class _AttendanceListWebState extends State<AttendanceListWeb> {
                             ),
                           ),
                           Text(
-                            " / ATTENDANCE LIST",
+                            " / ATTENDANCE SUMMARY",
                             style: Styles.greyLight14,
                           ),
                         ],

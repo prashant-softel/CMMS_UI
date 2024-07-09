@@ -189,7 +189,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                               child: Column(
                                 children: [
                                   Container(
-                                    margin:EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: 15.w, vertical: 10.h),
                                     child: Column(
                                       children: [
                                         Row(
@@ -206,6 +207,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "Job Id:",
                                                       style: Styles.black14,
                                                     ),
+                                                    Dimens.boxWidth2,
                                                     Text(
                                                         "${controller.jobDetailsModel.value?.id ?? ""}",
                                                         style: Styles.blue14),
@@ -219,6 +221,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "Job Title:",
                                                       style: Styles.black14,
                                                     ),
+                                                    Dimens.boxWidth2,
                                                     Container(
                                                       width: Get.width * 0.3,
                                                       child: Text(
@@ -236,6 +239,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "Plant Name:",
                                                       style: Styles.black14,
                                                     ),
+                                                    Dimens.boxWidth2,
                                                     Text(
                                                         "${controller.jobDetailsModel.value?.facilityName ?? ""}",
                                                         style: Styles.blue14),
@@ -249,6 +253,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "Equipment Categories:",
                                                       style: Styles.black14,
                                                     ),
+                                                    Dimens.boxWidth2,
                                                     Container(
                                                       width: Get.width * 0.3,
                                                       child: Text(
@@ -266,6 +271,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "Fault:",
                                                       style: Styles.black14,
                                                     ),
+                                                    Dimens.boxWidth2,
                                                     Container(
                                                       width: Get.width * 0.3,
                                                       child: Text(
@@ -281,6 +287,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "Job Description:",
                                                       style: Styles.black14,
                                                     ),
+                                                    Dimens.boxWidth2,
                                                     Text(
                                                         "${controller.jobDetailsModel.value?.jobDescription ?? ""}",
                                                         style: Styles.blue14),
@@ -356,8 +363,9 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "Block Name:",
                                                       style: Styles.black14,
                                                     ),
+                                                    Dimens.boxWidth2,
                                                     Text(
-                                                        " ${controller.jobDetailsModel.value?.blockName ?? ""}",
+                                                        "${controller.jobDetailsModel.value?.blockName ?? ""}",
                                                         style: Styles.blue14),
                                                   ],
                                                 ),
@@ -367,6 +375,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "Equipment Name:",
                                                       style: Styles.black14,
                                                     ),
+                                                    Dimens.boxWidth2,
                                                     Container(
                                                       width: Get.width * 0.3,
                                                       child: Text(
@@ -382,6 +391,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "Raised By:",
                                                       style: Styles.black14,
                                                     ),
+                                                    Dimens.boxWidth2,
                                                     Text(
                                                         "${controller.jobDetailsModel.value?.createdByName ?? ""}",
                                                         style: Styles.blue14),
@@ -393,6 +403,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "Assigned To:",
                                                       style: Styles.black14,
                                                     ),
+                                                    Dimens.boxWidth2,
                                                     Text(
                                                         "${controller.jobDetailsModel.value?.assignedName ?? ""}",
                                                         style: Styles.blue14),
@@ -404,6 +415,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "BreakDown Time:",
                                                       style: Styles.black14,
                                                     ),
+                                                    Dimens.boxWidth2,
                                                     Text(
                                                         " ${controller.jobDetailsModel.value?.breakdownTime ?? ""}",
                                                         style: Styles.blue14),
