@@ -250,4 +250,11 @@ class AttendanceListMonthController extends GetxController {
       print('Error in getAttendanceListMonthwise: $e');
     }
   }
+
+  void getAttendanceListByDate() {
+    getAttendanceListMonthwise(
+      start_date: formattedFromdate,
+      end_date: formattedTodate,
+    );
+  }
 }

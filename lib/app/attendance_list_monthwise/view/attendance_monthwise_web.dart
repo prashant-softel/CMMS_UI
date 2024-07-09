@@ -222,8 +222,7 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
                         dropDate != null
                             ? controller.toDate.value = dropDate
                             : controller.toDate.value = pickUpDate;
-
-                        // controller.getNewPermitListByDate();
+                        controller.getAttendanceListByDate();
                         controller.openFromDateToStartDatePicker.value =
                             !controller.openFromDateToStartDatePicker.value;
                         controller.update(['stock_Mangement_Date']);
