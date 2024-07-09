@@ -62,7 +62,7 @@ class AttendanceWeb extends GetView<AttendanceController> {
                     ),
                   ),
                   Text(
-                    " / ATTENDANCE",
+                    " / MARK ATTENDANCE",
                     style: Styles.greyLight14,
                   ),
                 ],

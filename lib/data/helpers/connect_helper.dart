@@ -9450,10 +9450,12 @@ class ConnectHelper {
   Future<ResponseModel> getAttendanceListMonthwise({
     required String auth,
     required int facilityId,
+    String? start_date,
+    String? end_date,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Attendence/GetAttendanceByDetailsByMonth?facility_id=$facilityId',
+      'Attendence/GetAttendanceByDetailsByMonth?facility_id=$facilityId&start_date=$start_date&end_date=$end_date',
       Request.get,
       null,
       isLoading ?? false,

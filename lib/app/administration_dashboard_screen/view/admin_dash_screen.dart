@@ -93,19 +93,19 @@ class AdminDashboardScreen extends GetView<AdminDashboardController> {
                                 : 5,
                             children: <Widget>[
                               createContentTile(
-                                title: "Attendance List",
+                                title: "Attendance Summary",
                                 onTap: () {
                                   Get.toNamed(Routes.attendanceListScreen);
                                 },
                               ),
                               createContentTile(
-                                title: "Attendance List MonthWise",
+                                title: "Attendance List",
                                 onTap: () {
                                   Get.offNamed(Routes.attendanceListMonthwise);
                                 },
                               ),
                               createContentTile(
-                                title: "Attendace",
+                                title: "Mark Attendace",
                                 onTap: () {
                                   controller.clearStoreData();
                                   DateTime date = DateTime.now();

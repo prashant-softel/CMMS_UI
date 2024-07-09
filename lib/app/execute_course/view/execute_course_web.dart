@@ -188,11 +188,8 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                     children: [
                                       Container(
                                         height: (controller
-                                                    .scheduleCourseDetails
-                                                    .value
-                                                    .internal_employee
-                                                    ?.length ??
-                                                0 * 50) +
+                                                    .internal_employee.length *
+                                                50) +
                                             55,
                                         width:
                                             MediaQuery.of(context).size.width /
@@ -245,34 +242,26 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                             ),
                                           ],
                                           rows: List<DataRow>.generate(
-                                            controller
-                                                    .scheduleCourseDetails
-                                                    .value
-                                                    .internal_employee
-                                                    ?.length ??
-                                                0,
+                                            controller.internal_employee.length,
                                             (index) {
                                               var employeeNameDetails =
                                                   controller
-                                                          .scheduleCourseDetails
-                                                          .value
-                                                          .internal_employee?[
-                                                      index];
+                                                      .internal_employee[index];
                                               return DataRow(
                                                 cells: [
                                                   DataCell(
                                                     Text(
-                                                      '${employeeNameDetails?.name ?? ''}',
+                                                      '${employeeNameDetails.name ?? ''}',
                                                     ),
                                                   ),
                                                   DataCell(
                                                     Text(
-                                                      '${employeeNameDetails?.email ?? ''}',
+                                                      '${employeeNameDetails.email ?? ''}',
                                                     ),
                                                   ),
                                                   DataCell(
                                                     Text(
-                                                      '${employeeNameDetails?.mobile ?? ''}',
+                                                      '${employeeNameDetails.mobile ?? ''}',
                                                     ),
                                                   ),
                                                   DataCell(
