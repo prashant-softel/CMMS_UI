@@ -571,7 +571,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                                               planId: 00),
                                         )
                                         .status ==
-                                    703
+                                    352
                             ? TableActionButton(
                                 color: Color.fromARGB(255, 116, 78, 130),
                                 icon: Icons.ads_click,
