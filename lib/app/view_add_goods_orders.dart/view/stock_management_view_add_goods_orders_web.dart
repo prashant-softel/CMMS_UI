@@ -851,20 +851,20 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            "Selects Material ",
+                                            "Selected Material ",
                                             style: Styles.blue700,
                                           ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              controller.addRowItem();
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Text("Add"),
-                                                Icon(Icons.exposure_plus_1),
-                                              ],
-                                            ),
-                                          ),
+                                          // GestureDetector(
+                                          //   onTap: () {
+                                          //     controller.addRowItem();
+                                          //   },
+                                          //   child: Row(
+                                          //     children: [
+                                          //       Text("Add"),
+                                          //       Icon(Icons.exposure_plus_1),
+                                          //     ],
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ),
