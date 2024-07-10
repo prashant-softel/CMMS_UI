@@ -365,7 +365,7 @@ class MrsListDataSource extends DataTableSource {
       "Requested by:${MrsDetails?.requested_by_name ?? ""}\nIssued by:${MrsDetails?.approver_name ?? ""}",
       '${MrsDetails?.requestd_date ?? ''}',
       '${MrsDetails?.activity ?? ''}',
-      '${MrsDetails?.whereUsedType.toString().toUpperCase() ?? ''}${MrsDetails?.whereUsedTypeId ?? ''}',
+      "${MrsDetails?.whereUsedType.toString().toUpperCase() == 'PMTASK' ? 'PMT' : MrsDetails?.whereUsedType.toString().toUpperCase() == 'JOBCARD' ? 'JC' : ''}${MrsDetails?.whereUsedTypeId ?? ''}",
       'Actions',
     ];
     var cells = [];
