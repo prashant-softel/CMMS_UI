@@ -181,13 +181,28 @@ class AddInventoryDetailsModel {
       calibrationFrequency: json['calibrationFrequency'],
       calibrationFreqType: json['calibrationFreqType'],
       calibrationReminderDays: json['calibrationReminderDays'],
-      calibrationLastDate:
-          Utility.getFormatedyearMonthDay(json['calibrationLastDate']),
-      // calibrationLastDate: DateTime.parse(json['calibrationLastDate']),
-      calibrationDueDate:
-          Utility.getFormatedyearMonthDay(json['calibrationDueDate']),
-      expiry_date: Utility.getFormatedyearMonthDay(json['expiry_date']),
-      start_date: Utility.getFormatedyearMonthDay(json['start_date']),
+      // calibrationLastDate:
+      //     Utility.getFormatedyearMonthDay(json['calibrationLastDate']),
+      // // calibrationLastDate: DateTime.parse(json['calibrationLastDate']),
+      // calibrationDueDate:
+      //     Utility.getFormatedyearMonthDay(json['calibrationDueDate']),
+      // expiry_date: Utility.getFormatedyearMonthDay(json['expiry_date']),
+      // start_date: Utility.getFormatedyearMonthDay(json['start_date']),
+calibrationLastDate: json['calibrationLastDate'] != null 
+    ? Utility.getFormatedyearMonthDay(json['calibrationLastDate']) 
+    : 'default_value', 
+calibrationDueDate: json['calibrationDueDate'] != null 
+    ? Utility.getFormatedyearMonthDay(json['calibrationDueDate']) 
+    : 'default_value', 
+
+expiry_date: json['expiry_date'] != null 
+    ? Utility.getFormatedyearMonthDay(json['expiry_date']) 
+    : 'default_value',
+
+start_date: json['start_date'] != null 
+    ? Utility.getFormatedyearMonthDay(json['start_date']) 
+    : 'default_value', 
+
 
       // calibrationDueDate: DateTime.parse(json['calibrationDueDate']),
       specialTool: json['specialTool'],
