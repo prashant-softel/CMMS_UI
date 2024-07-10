@@ -1969,6 +1969,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             right: 16,
                                           ),
                                           child: DataTable2(
+                                            showCheckboxColumn: false,
                                             headingRowHeight: 45,
                                             dataRowHeight: 40,
                                             columnSpacing: 12,
@@ -2062,157 +2063,190 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                       ?.item_list
                                                       ?.length ??
                                                   0,
-                                              (index) => DataRow(cells: [
-                                                DataCell(Text(controller
-                                                        .dashboardBmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .facility_name
-                                                        .toString() ??
-                                                    '')),
-                                                DataCell(Text(
-                                                    '${controller.dashboardBmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                DataCell(Text(controller
-                                                        .dashboardBmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .wo_decription ??
-                                                    "")),
-                                                DataCell(Text(controller
-                                                        .dashboardBmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .status_long ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .dashboardBmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .asset_category ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .dashboardBmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .asset_name ??
-                                                    '')),
-                                                DataCell(
-                                                  Text(controller
-                                                              .dashboardBmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .start_date !=
-                                                          null
-                                                      ? controller
-                                                          .dashboardBmList
-                                                          .value!
-                                                          .cmDashboadDetails!
-                                                          .item_list![index]
-                                                          .start_date!
-                                                          .substring(
-                                                              0,
-                                                              controller
-                                                                      .dashboardBmList
-                                                                      .value!
-                                                                      .cmDashboadDetails!
-                                                                      .item_list![
-                                                                          index]
-                                                                      .start_date!
-                                                                      .length -
-                                                                  9)
-                                                      : controller
-                                                              .dashboardBmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .start_date ??
-                                                          ''),
-                                                ),
-                                                DataCell(
-                                                  Text(controller
-                                                              .dashboardBmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .end_date !=
-                                                          null
-                                                      ? controller
-                                                          .dashboardBmList
-                                                          .value!
-                                                          .cmDashboadDetails!
-                                                          .item_list![index]
-                                                          .end_date!
-                                                          .substring(
-                                                              0,
-                                                              controller
-                                                                      .dashboardBmList
-                                                                      .value!
-                                                                      .cmDashboadDetails!
-                                                                      .item_list![
-                                                                          index]
-                                                                      .end_date!
-                                                                      .length -
-                                                                  9)
-                                                      : controller
-                                                              .dashboardBmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .end_date ??
-                                                          ''),
-                                                ),
-                                                DataCell(
-                                                  Row(
-                                                    children: [
-                                                      TableActionButton(
-                                                        color: ColorValues
-                                                            .viewColor,
-                                                        icon: Icons
-                                                            .remove_red_eye_outlined,
-                                                        message: 'View',
-                                                        onPress: () {
-                                                          controller
-                                                              .clearStoreJobData();
-                                                          String Id = controller
+                                              (index) => DataRow(
+                                                  onSelectChanged: (selected) {
+                                                    if (selected!) {
+                                                      controller
+                                                          .clearStoreJobData();
+                                                      controller
+                                                          .clearStorePmData();
+                                                      String Id = controller
+                                                              .allItems[index]
+                                                              ?.wo_number ??
+                                                          "";
+                                                      String prefix =
+                                                          Id.replaceAll(
+                                                              RegExp(r'\d+$'),
+                                                              '');
+
+                                                      String jobId =
+                                                          Id.substring(
+                                                              Id.indexOf("BM") +
+                                                                  2);
+                                                      if (prefix == 'BM') {
+                                                        Get.toNamed(
+                                                          Routes.jobDetails,
+                                                          arguments: {
+                                                            'jobId':
+                                                                int.tryParse(
+                                                                    jobId)
+                                                          },
+                                                        );
+                                                      }
+                                                    }
+                                                  },
+                                                  cells: [
+                                                    DataCell(Text(controller
+                                                            .dashboardBmList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list?[index]
+                                                            .facility_name
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(
+                                                        '${controller.dashboardBmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                    DataCell(Text(controller
+                                                            .dashboardBmList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list?[index]
+                                                            .wo_decription ??
+                                                        "")),
+                                                    DataCell(Text(controller
+                                                            .dashboardBmList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list?[index]
+                                                            .status_long ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .dashboardBmList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list?[index]
+                                                            .asset_category ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .dashboardBmList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list?[index]
+                                                            .asset_name ??
+                                                        '')),
+                                                    DataCell(
+                                                      Text(controller
                                                                   .dashboardBmList
                                                                   .value
                                                                   ?.cmDashboadDetails
                                                                   ?.item_list?[
                                                                       index]
-                                                                  .wo_number ??
-                                                              "";
-                                                          String jobId =
-                                                              Id.substring(
-                                                                  Id.indexOf(
-                                                                          "BM") +
-                                                                      2);
+                                                                  .start_date !=
+                                                              null
+                                                          ? controller
+                                                              .dashboardBmList
+                                                              .value!
+                                                              .cmDashboadDetails!
+                                                              .item_list![index]
+                                                              .start_date!
+                                                              .substring(
+                                                                  0,
+                                                                  controller
+                                                                          .dashboardBmList
+                                                                          .value!
+                                                                          .cmDashboadDetails!
+                                                                          .item_list![
+                                                                              index]
+                                                                          .start_date!
+                                                                          .length -
+                                                                      9)
+                                                          : controller
+                                                                  .dashboardBmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .start_date ??
+                                                              ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                                  .dashboardBmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .end_date !=
+                                                              null
+                                                          ? controller
+                                                              .dashboardBmList
+                                                              .value!
+                                                              .cmDashboadDetails!
+                                                              .item_list![index]
+                                                              .end_date!
+                                                              .substring(
+                                                                  0,
+                                                                  controller
+                                                                          .dashboardBmList
+                                                                          .value!
+                                                                          .cmDashboadDetails!
+                                                                          .item_list![
+                                                                              index]
+                                                                          .end_date!
+                                                                          .length -
+                                                                      9)
+                                                          : controller
+                                                                  .dashboardBmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .end_date ??
+                                                              ''),
+                                                    ),
+                                                    DataCell(
+                                                      Row(
+                                                        children: [
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .viewColor,
+                                                            icon: Icons
+                                                                .remove_red_eye_outlined,
+                                                            message: 'View',
+                                                            onPress: () {
+                                                              controller
+                                                                  .clearStoreJobData();
+                                                              String Id = controller
+                                                                      .dashboardBmList
+                                                                      .value
+                                                                      ?.cmDashboadDetails
+                                                                      ?.item_list?[
+                                                                          index]
+                                                                      .wo_number ??
+                                                                  "";
+                                                              String jobId =
+                                                                  Id.substring(
+                                                                      Id.indexOf(
+                                                                              "BM") +
+                                                                          2);
 
-                                                          if (jobId != null) {
-                                                            Get.toNamed(
-                                                                Routes
-                                                                    .jobDetails,
-                                                                arguments: {
-                                                                  'jobId': int
-                                                                      .tryParse(
-                                                                          jobId)
-                                                                });
-                                                          }
-                                                        },
+                                                              if (jobId !=
+                                                                  null) {
+                                                                Get.toNamed(
+                                                                    Routes
+                                                                        .jobDetails,
+                                                                    arguments: {
+                                                                      'jobId': int
+                                                                          .tryParse(
+                                                                              jobId)
+                                                                    });
+                                                              }
+                                                            },
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ]),
+                                                    ),
+                                                  ]),
                                             ),
                                           ),
                                         ),
@@ -2726,6 +2760,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(16),
                                           child: DataTable2(
+                                            showCheckboxColumn: false,
                                             headingRowHeight: 45,
                                             dataRowHeight: 40,
                                             columnSpacing: 12,
@@ -2819,7 +2854,45 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                       ?.item_list
                                                       ?.length ??
                                                   0,
-                                              (index) => DataRow(cells: [
+                                              (index) => DataRow(
+                                                 onSelectChanged: (selected) {
+                                                    if (selected!) {
+                                                      controller
+                                                          .clearStoreJobData();
+                                                      controller
+                                                          .clearStorePmData();
+                                                      String Id = controller
+                                                              .allItems[index]
+                                                              ?.wo_number ??
+                                                          "";
+                                                      String prefix =
+                                                          Id.replaceAll(
+                                                              RegExp(r'\d+$'),
+                                                              '');
+
+                                              
+                                                      String taskId =
+                                                          Id.substring(
+                                                              Id.indexOf("PM") +
+                                                                  2);
+                                                      if (prefix ==
+                                                          'PM') {
+                                                        Get.toNamed(
+                                                          Routes.pmTaskView,
+                                                          arguments: {
+                                                            'pmTaskId':
+                                                                int.tryParse(
+                                                                    taskId)
+                                                          },
+                                                        );
+                                                      }
+                                                    }
+                                                  },
+                                                
+                                                
+                                                cells:
+                                              
+                                              [
                                                 DataCell(Text(controller
                                                         .dashboardPmList
                                                         .value
@@ -5400,7 +5473,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .goNo.toString() ??
+                                                        .goNo
+                                                        .toString() ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
@@ -5421,7 +5495,8 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .requested_qty.toString() ??
+                                                        .requested_qty
+                                                        .toString() ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
@@ -5435,42 +5510,47 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .ordered_qty.toString() ??
+                                                        .ordered_qty
+                                                        .toString() ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .go_date.toString() ??
+                                                        .go_date
+                                                        .toString() ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .unit_amount.toString() ??
+                                                        .unit_amount
+                                                        .toString() ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .total_amount .toString()??
+                                                        .total_amount
+                                                        .toString() ??
                                                     '')),
-                                              DataCell(Text(controller
+                                                DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
                                                         .grn_date ??
-                                                    '')), 
-DataCell(Text(controller
+                                                    '')),
+                                                DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .grn_qty.toString() ??
+                                                        .grn_qty
+                                                        .toString() ??
                                                     '')),
                                                 DataCell(
                                                   Row(

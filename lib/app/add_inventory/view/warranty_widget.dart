@@ -4,6 +4,8 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -68,7 +70,8 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               ),
                             ],
                           ),
-                          Dimens.boxHeight10,
+                          // Dimens.boxHeight10,
+                          SizedBox(height:10),
                           Row(
                             children: [
                               CustomRichText(
@@ -96,7 +99,8 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               ),
                             ],
                           ),
-                          Dimens.boxHeight10,
+                          // Dimens.boxHeight10,
+                          SizedBox(height:10),
                           Row(
                             children: [
                               CustomRichText(
@@ -125,7 +129,8 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   ),
                             ],
                           ),
-                          Dimens.boxHeight10,
+                          // Dimens.boxHeight10,
+                          SizedBox(height:10),
                           Row(
                             children: [
                               CustomRichText(
@@ -156,7 +161,8 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   ),
                             ],
                           ),
-                          Dimens.boxHeight10,
+                          // Dimens.boxHeight10,
+                          SizedBox(height:10),
                         ],
                       ),
                       Spacer(),
@@ -188,7 +194,8 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               ),
                             ],
                           ),
-                          Dimens.boxHeight10,
+                          // Dimens.boxHeight10,
+                          SizedBox(height:10),
                           Row(
                             children: [
                               CustomRichText(
@@ -232,26 +239,28 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               ),
                             ],
                           ),
-                          Dimens.boxHeight10,
-                          Container(
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  'Warranty Certificate',
-                                  style: Styles.blackBold16,
-                                ),
-                                SizedBox(width: 10),
-                                ActionButton(
-                                  label: 'Upload certification file',
-                                  onPressed: () {},
-                                  icon: Icons.file_upload_outlined,
-                                  color: ColorValues.appLightBlueColor,
-                                )
-                              ],
-                            ),
-                          ),
-                          Dimens.boxHeight10,
+                          // Dimens.boxHeight10,
+                          SizedBox(height:10),
+                          // Container(
+                          //   child: Row(
+                          //     mainAxisSize: MainAxisSize.min,
+                          //     children: [
+                          //       Text(
+                          //         'Warranty Certificate',
+                          //         style: Styles.blackBold16,
+                          //       ),
+                          //       SizedBox(width: 10),
+                          //       ActionButton(
+                          //         label: 'Upload certification file',
+                          //         onPressed: () {},
+                          //         icon: Icons.file_upload_outlined,
+                          //         color: ColorValues.appLightBlueColor,
+                          //       )
+                          //     ],
+                          //   ),
+                          // ),
+                          // Dimens.boxHeight10,
+                          SizedBox(height:10),
                           Row(
                             children: [
                               CustomRichText(
@@ -283,7 +292,8 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   ),
                             ],
                           ),
-                          Dimens.boxHeight10,
+                          // Dimens.boxHeight10,
+                          SizedBox(height:10),
                         ],
                       ),
                     ],
@@ -364,6 +374,64 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                 ),
                               ],
                             ),
+                              Row(children: [Container(
+                              height: 400,
+
+                              width: MediaQuery.of(context).size.width *0.9,
+                              child: Center(
+                                child: Container(
+                                  // margin: EdgeInsets.all(16),
+                                  margin: EdgeInsets.only(top: 16),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey.withOpacity(.3)),
+                                  ),
+                                  constraints: BoxConstraints(
+                                    maxWidth: 1100,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      CustomAppBar(
+                                        title: ' Warranty Certificate'.tr,
+                                      ),
+                                      SizedBox(height: 10),
+                                      Wrap(
+                                        children: [
+                                          Column(
+                                            children: [
+                                              // SizedBox(
+                                              //   width: MediaQuery.of(context)
+                                              //       .size
+                                              //       // .width ,
+                                                  Container(
+                                                  height: MediaQuery.of(context).size.height * 0.2,
+                                                  width: MediaQuery.of(context).size.width * 0.6,
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child: FileUploadWidgetWithDropzone(),
+                                                      ),
+                                                      SizedBox(width: 10),
+                                                      Expanded(
+                                                          flex: 8,
+                                                          child:
+                                                              FileUploadDetailsWidgetWeb()),
+                                                    ],
+                                                  ),
+                                                ),
+                                              // ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],)
+                     
                         ],
                       ),
                     ]),

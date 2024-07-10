@@ -221,7 +221,7 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                   child: Column(
                                     children: [
                                       CustomAppBar(
-                                        title: 'File Attach Here'.tr,
+                                        title: ' Calibration Certificate'.tr,
                                       ),
                                       SizedBox(height: 10),
                                       Wrap(
