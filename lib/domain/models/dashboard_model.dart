@@ -9,14 +9,17 @@ class DashboardModel {
   int? category_bm_count;
   int? category_total_count;
   CmDashboadDetails? cmDashboadDetails;
+  
 
-  DashboardModel(
-      {this.module_name,
-      this.cmDashboadDetails,
-      this.category_bm_count,
-      this.category_mc_count,
-      this.category_pm_count,
-      this.category_total_count});
+  DashboardModel({
+    this.module_name,
+    this.cmDashboadDetails,
+    this.category_bm_count,
+    this.category_mc_count,
+    this.category_pm_count,
+    this.category_total_count,
+   
+  });
 
   factory DashboardModel.fromJson(Map<String, dynamic> json) => DashboardModel(
         module_name: json["module_name"],
@@ -24,8 +27,9 @@ class DashboardModel {
         category_mc_count: json["category_mc_count"],
         category_pm_count: json["category_pm_count"],
         category_total_count: json["category_total_count"],
-        cmDashboadDetails:
-            CmDashboadDetails.fromJson(json['cmDashboadDetails']),
+         cmDashboadDetails:CmDashboadDetails.fromJson(json['cmDashboadDetails']),
+       
+       
       );
 
   Map<String, dynamic> toJson() => {
@@ -35,6 +39,7 @@ class DashboardModel {
         "category_pm_count": category_pm_count,
         "module_name": module_name,
         "cmDashboadDetails": cmDashboadDetails!.toJson(),
+        
       };
 
   void addPrefixToItems() {
@@ -213,6 +218,19 @@ class Itemlist {
       this.status_long,
       this.wo_decription,
       this.wo_number,
+       this.go_id,
+    this.grNo,
+    this.goNo,
+    this.product_name,
+    this.requested_qty,
+    this.gr_date,
+    this.ordered_qty,
+    this.go_date,
+    this.unit_amount,
+    this.total_amount,
+    this.grn_date,
+    this.grn_qty,
+      
       this.incident_datetime,
       this.location_of_incident,
       this.restoration_datetime,
@@ -235,6 +253,18 @@ class Itemlist {
   int? latestJCid;
   int? latestJCPTWStatus;
   int? latestJCApproval;
+  dynamic  go_id;
+  dynamic grNo;
+  dynamic  goNo;
+  dynamic product_name;
+  dynamic  requested_qty;
+  dynamic gr_date;
+  dynamic  ordered_qty;
+  dynamic go_date;
+  dynamic  unit_amount;
+  dynamic  total_amount;
+  dynamic grn_date;
+  dynamic  grn_qty;
   String? title;
   String? type_of_incident;
   String? location_of_incident;
@@ -269,6 +299,18 @@ class Itemlist {
         latestJCid: parsedJson['latestJCid'],
         latestJCPTWStatus: parsedJson['latestJCPTWStatus'],
         latestJCApproval: parsedJson['latestJCApproval'],
+         go_id: parsedJson["go_id"],
+        grNo: parsedJson["grNo"],
+        goNo: parsedJson["goNo"],
+        product_name: parsedJson["product_name"],
+        requested_qty: parsedJson["requested_qty"],
+        gr_date: parsedJson["gr_date"],
+        ordered_qty: parsedJson["ordered_qty"],
+        go_date: parsedJson["go_date"],
+        unit_amount: parsedJson["unit_amount"],
+        total_amount: parsedJson["total_amount"],
+        grn_date: parsedJson["grn_date"],
+        grn_qty: parsedJson["grn_qty"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -293,13 +335,25 @@ class Itemlist {
         "latestJCid": latestJCid,
         "latestJCPTWStatus": latestJCPTWStatus,
         "latestJCApproval": latestJCApproval,
+         "go_id": go_id,
+         "grNo": grNo,
+         "goNo": goNo,
+         "product_name": product_name,
+         "requested_qty": requested_qty,
+         "gr_date": gr_date,
+         "ordered_qty": ordered_qty,
+         "go_date": go_date,
+         "unit_amount": unit_amount,
+         "total_amount": total_amount,
+         "grn_date": grn_date,
+         "grn_qty": grn_qty,
       };
 
   void addPrefix(String prefix) {
     wo_number = '$prefix$wo_number';
   }
-}
 
+}
 class AllChartview {
   AllChartview({
     this.key,

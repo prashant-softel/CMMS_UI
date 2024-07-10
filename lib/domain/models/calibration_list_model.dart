@@ -60,11 +60,14 @@ class CalibrationListModel {
             ? json['next_calibration_due_date']
             : Utility.getFormatedyearMonthDay(
                 json['next_calibration_due_date']),
+        // schedule_start_date: json['schedule_start_date'] == null
+        //     ? json['schedule_start_date']
+        //     : Utility.getFormatedyearMonthDay(json['schedule_start_date']),
 
-                  schedule_start_date: json['schedule_start_date'] == null
-            ? json['schedule_start_date']
-            : Utility.getFormatedyearMonthDay(json['schedule_start_date']),
-
+        schedule_start_date: (json['schedule_start_date'] == null ||
+              json['schedule_start_date'] == '0001-01-01T00:00:00')
+          ? "-"
+          : Utility.getFormatedyearMonthDay(json['schedule_start_date']),
         asset_serial: json['asset_serial'] ?? '',
         calibration_status: json['calibration_status'] ?? '',
         category_name: json['category_name'] ?? '',

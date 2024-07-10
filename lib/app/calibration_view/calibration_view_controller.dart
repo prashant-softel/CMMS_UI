@@ -105,6 +105,7 @@ class CalibrationViewController extends GetxController {
       List<int?> fileid = file_list!.map((element) => element!.id).toList();
       print("files while getting ${fileid}");
       files!.addAll(fileid);
+      isToggleOn.value=calibrationDetailModel.value?.is_damaged == 1? true : false;
     }
   }
 
