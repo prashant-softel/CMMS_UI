@@ -59,6 +59,10 @@ class HomeController extends GetxController {
   final categoryMapMC = <String, double>{};
   Map<String, double> categoryMapBMDouble = <String, double>{};
   Map<String, double> categoryMapPMDouble = <String, double>{};
+  Map<String, double> categoryMapSmConsumptionDouble = <String, double>{};
+  Map<String, double> categoryMapSmConsumptionSiteDouble = <String, double>{};
+  Map<String, double> categoryMapSmAvailableDouble = <String, double>{};
+  Map<String, double> categoryMapSmAvailableSiteDouble = <String, double>{};
 
   //int facilityId = 45;
   String categoryIds = '';
@@ -156,8 +160,6 @@ class HomeController extends GetxController {
     ];
   }
 
-  
-
   List<Color> getWoColorList() {
     return [
       Colors.blue,
@@ -168,6 +170,12 @@ class HomeController extends GetxController {
 
   void toggleExpansion() {
     isExpanded.toggle();
+  }
+
+  var isToggleOn = false.obs;
+
+  void toggle() {
+    isToggleOn.value = !isToggleOn.value;
   }
 
   ///
@@ -314,13 +322,8 @@ class HomeController extends GetxController {
           categoryMapBM['Other'] = otherCategoriesCount;
         }
 
-        final totalValue = categoryMapBM.values.reduce((a, b) => a + b);
         categoryMapBMDouble = categoryMapBM
             .map((key, value) => MapEntry(key, (value.toDouble())));
-
-        print('Final category map with top 5 and Other: $categoryMapBMDouble');
-        print('Final otherCategoriesCount: $otherCategoriesCount');
-        print('Final categoryMapBM: $categoryMapBMDouble');
       }
       if (dashboardPmList.value != null) {
         final categoryMapPm = <String, int>{};
@@ -353,14 +356,143 @@ class HomeController extends GetxController {
           categoryMapPm['Other'] = otherCategoriesCount;
         }
 
-        final totalValue = categoryMapPm.values.reduce((a, b) => a + b);
         categoryMapPMDouble = categoryMapPm
             .map((key, value) => MapEntry(key, (value.toDouble())));
+      }
 
-        print(
-            'Final category map pm with top 5 and Other: $categoryMapPMDouble');
-        print('Final otherCategoriesCount123: $otherCategoriesCount');
-        print('Final categoryMapPMDouble: $categoryMapPMDouble');
+      if (dashboardSmList.value != null) {
+        final categoryMapSmConsumption = <String, double>{};
+        final categoryMapSmConsumptionSites = <String, double>{};
+        final categoryMapSmAvailable = <String, double>{};
+        final categoryMapSmAvailableSites = <String, double>{};
+        if (dashboardSmList.value?.cmDashboadDetails?.stockConsumptionByGoods !=
+            null) {
+          for (var item in dashboardSmList
+                  .value?.cmDashboadDetails?.stockConsumptionByGoods ??
+              []) {
+            if (categoryMapSmConsumption.containsKey(item.key)) {
+              categoryMapSmConsumption[item.key!] =
+                  categoryMapSmConsumption[item.key!]! + item.value!;
+            } else {
+              categoryMapSmConsumption[item.key!] = item.value!.toDouble();
+            }
+          }
+          for (var item in dashboardSmList
+                  .value?.cmDashboadDetails?.stockConsumptionBySites ??
+              []) {
+            if (categoryMapSmConsumptionSites.containsKey(item.key)) {
+              categoryMapSmConsumptionSites[item.key!] =
+                  categoryMapSmConsumptionSites[item.key!]! + item.value!;
+            } else {
+              categoryMapSmConsumptionSites[item.key!] = item.value!.toDouble();
+            }
+          }
+          for (var item in dashboardSmList
+                  .value?.cmDashboadDetails?.stockAvailbleByGoods ??
+              []) {
+            if (categoryMapSmAvailable.containsKey(item.key)) {
+              categoryMapSmAvailable[item.key!] =
+                  categoryMapSmAvailable[item.key!]! + item.value!;
+            } else {
+              categoryMapSmAvailable[item.key!] = item.value!.toDouble();
+            }
+          }
+          for (var item in dashboardSmList
+                  .value?.cmDashboadDetails?.stockAvailbleBySites ??
+              []) {
+            if (categoryMapSmAvailableSites.containsKey(item.key)) {
+              categoryMapSmAvailableSites[item.key!] =
+                  categoryMapSmAvailableSites[item.key!]! + item.value!;
+            } else {
+              categoryMapSmAvailableSites[item.key!] = item.value!.toDouble();
+            }
+          }
+        }
+
+        ///good consumption
+        final sortedCategories = categoryMapSmConsumption.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        final top5Categories = sortedCategories.take(5).toList();
+        final otherCategoriesCount = sortedCategories.skip(5).fold<double>(
+              0.0,
+              (sum, entry) => sum + entry.value,
+            );
+
+        final top5CategoryMapSmConsumption = <String, double>{};
+        for (var entry in top5Categories) {
+          top5CategoryMapSmConsumption[entry.key] = entry.value;
+        }
+        if (otherCategoriesCount > 0) {
+          top5CategoryMapSmConsumption['Other'] = otherCategoriesCount;
+        }
+
+        categoryMapSmConsumptionDouble = top5CategoryMapSmConsumption;
+
+        ///sites consumption
+        final sortedCategoriesConsumptionSites =
+            categoryMapSmConsumptionSites.entries.toList()
+              ..sort((a, b) => b.value.compareTo(a.value));
+        final top5CategoriesConsumptionSites =
+            sortedCategoriesConsumptionSites.take(5).toList();
+        final otherCategoriesCountConsumptionSites =
+            sortedCategoriesConsumptionSites.skip(5).fold<double>(
+                  0.0,
+                  (sum, entry) => sum + entry.value,
+                );
+
+        final top5CategoryMapSmConsumptionSites = <String, double>{};
+        for (var entry in top5CategoriesConsumptionSites) {
+          top5CategoryMapSmConsumptionSites[entry.key] = entry.value;
+        }
+        if (otherCategoriesCountConsumptionSites > 0) {
+          top5CategoryMapSmConsumptionSites['Other'] =
+              otherCategoriesCountConsumptionSites;
+        }
+
+        categoryMapSmConsumptionSiteDouble = top5CategoryMapSmConsumptionSites;
+        ////Available good
+        final sortedCategoriesAvailable = categoryMapSmAvailable.entries
+            .toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        final top5CategoriesAvailable =
+            sortedCategoriesAvailable.take(5).toList();
+        final otherCategoriesCountAvailable =
+            sortedCategoriesAvailable.skip(5).fold<double>(
+                  0.0,
+                  (sum, entry) => sum + entry.value,
+                );
+
+        final top5CategoryMapAvailable = <String, double>{};
+        for (var entry in top5CategoriesAvailable) {
+          top5CategoryMapAvailable[entry.key] = entry.value;
+        }
+        if (otherCategoriesCountAvailable > 0) {
+          top5CategoryMapAvailable['Other'] = otherCategoriesCountAvailable;
+        }
+
+        categoryMapSmAvailableDouble = top5CategoryMapAvailable;
+        ////Available Site
+        final sortedCategoriesAvailableSites =
+            categoryMapSmAvailableSites.entries.toList()
+              ..sort((a, b) => b.value.compareTo(a.value));
+        final top5CategoriesAvailableSites =
+            sortedCategoriesAvailableSites.take(5).toList();
+        final otherCategoriesCountAvailableSites =
+            sortedCategoriesAvailableSites.skip(5).fold<double>(
+                  0.0,
+                  (sum, entry) => sum + entry.value,
+                );
+
+        final top5CategoryMapAvailableSites = <String, double>{};
+        for (var entry in top5CategoriesAvailableSites) {
+          top5CategoryMapAvailableSites[entry.key] = entry.value;
+        }
+        if (otherCategoriesCountAvailableSites > 0) {
+          top5CategoryMapAvailableSites['Other'] =
+              otherCategoriesCountAvailableSites;
+        }
+
+        categoryMapSmAvailableSiteDouble = top5CategoryMapAvailableSites;
       }
 
       update(['dashboard']);
