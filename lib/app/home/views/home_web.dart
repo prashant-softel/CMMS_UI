@@ -4872,270 +4872,632 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             ),
                                           ),
                                         ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Container(
-                                            margin: EdgeInsets.only(
-                                                left: 10, right: 10),
-                                            // padding: EdgeInsets.only(
-                                            //     left: 10, top: 10),
-                                            decoration: BoxDecoration(
-                                              color: ColorValues.lightBlueColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  offset: Offset(0.0, 1.0),
-                                                  blurRadius: 6.0,
-                                                ),
-                                              ],
-                                            ),
-                                            height: 160,
-                                            child: SfCircularChart(
-                                              title: ChartTitle(
-                                                  text:
-                                                      "Stock Available/Consumption by Goods",
-                                                  textStyle: Styles.black12,
-                                                  alignment:
-                                                      ChartAlignment.near),
-                                              tooltipBehavior: TooltipBehavior(
-                                                enable: true,
-                                                tooltipPosition:
-                                                    TooltipPosition.pointer,
-                                                builder: (dynamic data,
-                                                    dynamic point,
-                                                    dynamic series,
-                                                    int pointIndex,
-                                                    int seriesIndex) {
-                                                  var entry = controller
-                                                      .categoryMapSmAvailableDouble
-                                                      .entries
-                                                      .toList()[pointIndex];
-                                                  double totalValue = controller
-                                                      .categoryMapSmAvailableDouble
-                                                      .values
-                                                      .reduce((a, b) => a + b);
-                                                  double percentage =
-                                                      (entry.value /
-                                                              totalValue) *
-                                                          100;
-                                                  return Container(
-                                                    padding: EdgeInsets.all(5),
+                                        Obx(() {
+                                          return controller.isToggleOn.value ==
+                                                  false
+                                              ? Expanded(
+                                                  flex: 2,
+                                                  child: SingleChildScrollView(
+                                                    child: Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                      decoration: BoxDecoration(
+                                                        color: ColorValues
+                                                            .lightBlueColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: Colors.grey,
+                                                            offset: Offset(
+                                                                0.0, 1.0),
+                                                            blurRadius: 6.0,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      height: 160,
+                                                      child: SfCircularChart(
+                                                        title: ChartTitle(
+                                                          text:
+                                                              "Stock Available/Consumption by Goods",
+                                                          textStyle:
+                                                              Styles.black12,
+                                                          alignment:
+                                                              ChartAlignment
+                                                                  .near,
+                                                        ),
+                                                        tooltipBehavior:
+                                                            TooltipBehavior(
+                                                          enable: true,
+                                                          tooltipPosition:
+                                                              TooltipPosition
+                                                                  .pointer,
+                                                          builder: (dynamic
+                                                                  data,
+                                                              dynamic point,
+                                                              dynamic series,
+                                                              int pointIndex,
+                                                              int seriesIndex) {
+                                                            var entry = controller
+                                                                    .categoryMapSmAvailableDouble
+                                                                    .entries
+                                                                    .toList()[
+                                                                pointIndex];
+                                                            double totalValue =
+                                                                controller
+                                                                    .categoryMapSmAvailableDouble
+                                                                    .values
+                                                                    .reduce((a,
+                                                                            b) =>
+                                                                        a + b);
+                                                            double percentage =
+                                                                (entry.value /
+                                                                        totalValue) *
+                                                                    100;
+                                                            return Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(5),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Colors
+                                                                    .black,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                              ),
+                                                              child: Text(
+                                                                '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
+                                                        legend: Legend(
+                                                          isVisible: true,
+                                                          position:
+                                                              LegendPosition
+                                                                  .right,
+                                                          overflowMode:
+                                                              LegendItemOverflowMode
+                                                                  .wrap,
+                                                          textStyle:
+                                                              Styles.black10,
+                                                          alignment:
+                                                              ChartAlignment
+                                                                  .center,
+                                                          itemPadding: 2,
+                                                        ),
+                                                        series: <CircularSeries>[
+                                                          DoughnutSeries<
+                                                              MapEntry<String,
+                                                                  double>,
+                                                              String>(
+                                                            strokeWidth: 15,
+                                                            innerRadius: '80%',
+                                                            dataSource: controller
+                                                                .categoryMapSmAvailableDouble
+                                                                .entries
+                                                                .toList(),
+                                                            xValueMapper:
+                                                                (MapEntry<String,
+                                                                                double>
+                                                                            data,
+                                                                        _) =>
+                                                                    data.key,
+                                                            yValueMapper:
+                                                                (MapEntry<String,
+                                                                                double>
+                                                                            data,
+                                                                        _) =>
+                                                                    data.value,
+                                                            pointColorMapper:
+                                                                (MapEntry<String,
+                                                                            double>
+                                                                        data,
+                                                                    _) {
+                                                              var entriesList =
+                                                                  controller
+                                                                      .categoryMapSmAvailableDouble
+                                                                      .entries
+                                                                      .toList();
+                                                              int index = entriesList.indexWhere((entry) =>
+                                                                  entry.key ==
+                                                                      data
+                                                                          .key &&
+                                                                  entry.value ==
+                                                                      data.value);
+                                                              var colorList =
+                                                                  controller
+                                                                      .getColorList();
+                                                              Color color =
+                                                                  colorList[index %
+                                                                      colorList
+                                                                          .length];
+                                                              return color;
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : Expanded(
+                                                  flex: 2,
+                                                  child: SingleChildScrollView(
+                                                    child: Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                      decoration: BoxDecoration(
+                                                        color: ColorValues
+                                                            .lightBlueColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: Colors.grey,
+                                                            offset: Offset(
+                                                                0.0, 1.0),
+                                                            blurRadius: 6.0,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      height: 160,
+                                                      child: SfCircularChart(
+                                                        title: ChartTitle(
+                                                          text:
+                                                              "Stock Available/Consumption by Goods",
+                                                          textStyle:
+                                                              Styles.black12,
+                                                          alignment:
+                                                              ChartAlignment
+                                                                  .near,
+                                                        ),
+                                                        tooltipBehavior:
+                                                            TooltipBehavior(
+                                                          enable: true,
+                                                          tooltipPosition:
+                                                              TooltipPosition
+                                                                  .pointer,
+                                                          builder: (dynamic
+                                                                  data,
+                                                              dynamic point,
+                                                              dynamic series,
+                                                              int pointIndex,
+                                                              int seriesIndex) {
+                                                            var entry = controller
+                                                                    .categoryMapSmConsumptionDouble
+                                                                    .entries
+                                                                    .toList()[
+                                                                pointIndex];
+                                                            double totalValue =
+                                                                controller
+                                                                    .categoryMapSmConsumptionDouble
+                                                                    .values
+                                                                    .reduce((a,
+                                                                            b) =>
+                                                                        a + b);
+                                                            double percentage =
+                                                                (entry.value /
+                                                                        totalValue) *
+                                                                    100;
+                                                            return Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(5),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Colors
+                                                                    .black,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                              ),
+                                                              child: Text(
+                                                                '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
+                                                        legend: Legend(
+                                                          isVisible: true,
+                                                          position:
+                                                              LegendPosition
+                                                                  .right,
+                                                          overflowMode:
+                                                              LegendItemOverflowMode
+                                                                  .wrap,
+                                                          textStyle:
+                                                              Styles.black10,
+                                                          alignment:
+                                                              ChartAlignment
+                                                                  .center,
+                                                          itemPadding: 2,
+                                                        ),
+                                                        series: <CircularSeries>[
+                                                          DoughnutSeries<
+                                                              MapEntry<String,
+                                                                  double>,
+                                                              String>(
+                                                            strokeWidth: 15,
+                                                            innerRadius: '80%',
+                                                            dataSource: controller
+                                                                .categoryMapSmConsumptionDouble
+                                                                .entries
+                                                                .toList(),
+                                                            xValueMapper:
+                                                                (MapEntry<String,
+                                                                                double>
+                                                                            data,
+                                                                        _) =>
+                                                                    data.key,
+                                                            yValueMapper:
+                                                                (MapEntry<String,
+                                                                                double>
+                                                                            data,
+                                                                        _) =>
+                                                                    data.value,
+                                                            pointColorMapper:
+                                                                (MapEntry<String,
+                                                                            double>
+                                                                        data,
+                                                                    _) {
+                                                              var entriesList =
+                                                                  controller
+                                                                      .categoryMapSmConsumptionDouble
+                                                                      .entries
+                                                                      .toList();
+                                                              int index = entriesList.indexWhere((entry) =>
+                                                                  entry.key ==
+                                                                      data
+                                                                          .key &&
+                                                                  entry.value ==
+                                                                      data.value);
+                                                              var colorList =
+                                                                  controller
+                                                                      .getColorList();
+                                                              Color color =
+                                                                  colorList[index %
+                                                                      colorList
+                                                                          .length];
+                                                              return color;
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                        }),
+                                        Obx(() {
+                                          return controller.isToggleOn.value ==
+                                                  false
+                                              ? Expanded(
+                                                  flex: 2,
+                                                  child: Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 10, right: 10),
+                                                    // padding: EdgeInsets.only(
+                                                    //     left: 10, top: 10),
                                                     decoration: BoxDecoration(
-                                                      color: Colors.black,
+                                                      color: ColorValues
+                                                          .lightBlueColor,
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              5),
+                                                              10),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey,
+                                                          offset:
+                                                              Offset(0.0, 1.0),
+                                                          blurRadius: 6.0,
+                                                        ),
+                                                      ],
                                                     ),
-                                                    child: Text(
-                                                      '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
-                                                      style: TextStyle(
-                                                          color: Colors.white),
+                                                    height: 160,
+                                                    child: SfCircularChart(
+                                                      title: ChartTitle(
+                                                          text:
+                                                              "Stock Available/Consumption by Sites",
+                                                          textStyle:
+                                                              Styles.black12,
+                                                          alignment:
+                                                              ChartAlignment
+                                                                  .near),
+                                                      tooltipBehavior:
+                                                          TooltipBehavior(
+                                                        enable: true,
+                                                        tooltipPosition:
+                                                            TooltipPosition
+                                                                .pointer,
+                                                        builder: (dynamic data,
+                                                            dynamic point,
+                                                            dynamic series,
+                                                            int pointIndex,
+                                                            int seriesIndex) {
+                                                          var entry = controller
+                                                              .categoryMapSmAvailableSiteDouble
+                                                              .entries
+                                                              .toList()[pointIndex];
+                                                          double totalValue =
+                                                              controller
+                                                                  .categoryMapSmAvailableSiteDouble
+                                                                  .values
+                                                                  .reduce((a,
+                                                                          b) =>
+                                                                      a + b);
+                                                          double percentage =
+                                                              (entry.value /
+                                                                      totalValue) *
+                                                                  100;
+                                                          return Container(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    5),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color:
+                                                                  Colors.black,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                            ),
+                                                            child: Text(
+                                                              '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                      legend: Legend(
+                                                        isVisible: true,
+                                                        position: LegendPosition
+                                                            .right, // Position the legend to the right to stack vertically
+                                                        overflowMode:
+                                                            LegendItemOverflowMode
+                                                                .wrap,
+                                                        textStyle:
+                                                            Styles.black10,
+                                                        alignment: ChartAlignment
+                                                            .center, // Align the legend items to the center
+                                                        itemPadding:
+                                                            2, // Adjust the padding between legend items
+                                                      ),
+                                                      series: <CircularSeries>[
+                                                        DoughnutSeries<
+                                                            MapEntry<String,
+                                                                double>,
+                                                            String>(
+                                                          strokeWidth: 15,
+                                                          innerRadius: '80%',
+                                                          dataSource: controller
+                                                              .categoryMapSmAvailableSiteDouble
+                                                              .entries
+                                                              .toList(),
+                                                          xValueMapper: (MapEntry<
+                                                                          String,
+                                                                          double>
+                                                                      data,
+                                                                  _) =>
+                                                              data.key,
+                                                          yValueMapper: (MapEntry<
+                                                                          String,
+                                                                          double>
+                                                                      data,
+                                                                  _) =>
+                                                              data.value,
+                                                          // dataLabelSettings:
+                                                          //     DataLabelSettings(
+                                                          //   isVisible: true,
+                                                          //   labelPosition:
+                                                          //       ChartDataLabelPosition
+                                                          //           .outside,
+                                                          //   useSeriesColor: true,
+                                                          //   textStyle:
+                                                          //       TextStyle(fontSize: 12),
+                                                          // ),
+                                                          pointColorMapper:
+                                                              (MapEntry<String,
+                                                                          double>
+                                                                      data,
+                                                                  _) {
+                                                            var entriesList =
+                                                                controller
+                                                                    .categoryMapSmAvailableSiteDouble
+                                                                    .entries
+                                                                    .toList();
+                                                            int index = entriesList
+                                                                .indexWhere((entry) =>
+                                                                    entry.key ==
+                                                                        data
+                                                                            .key &&
+                                                                    entry.value ==
+                                                                        data.value);
+                                                            var colorList =
+                                                                controller
+                                                                    .getColorList();
+                                                            Color color =
+                                                                colorList[index %
+                                                                    colorList
+                                                                        .length];
+                                                            return color;
+                                                          },
+                                                        ),
+                                                      ],
                                                     ),
-                                                  );
-                                                },
-                                              ),
-                                              legend: Legend(
-                                                isVisible: true,
-                                                position: LegendPosition
-                                                    .right, // Position the legend to the right to stack vertically
-                                                overflowMode:
-                                                    LegendItemOverflowMode.wrap,
-                                                textStyle: Styles.black10,
-                                                alignment: ChartAlignment
-                                                    .center, // Align the legend items to the center
-                                                itemPadding:
-                                                    2, // Adjust the padding between legend items
-                                              ),
-                                              series: <CircularSeries>[
-                                                DoughnutSeries<
-                                                    MapEntry<String, double>,
-                                                    String>(
-                                                  strokeWidth: 15,
-                                                  innerRadius: '80%',
-                                                  dataSource: controller
-                                                      .categoryMapSmAvailableDouble
-                                                      .entries
-                                                      .toList(),
-                                                  xValueMapper:
-                                                      (MapEntry<String, double>
-                                                                  data,
-                                                              _) =>
-                                                          data.key,
-                                                  yValueMapper:
-                                                      (MapEntry<String, double>
-                                                                  data,
-                                                              _) =>
-                                                          data.value,
-                                                  // dataLabelSettings:
-                                                  //     DataLabelSettings(
-                                                  //   isVisible: true,
-                                                  //   labelPosition:
-                                                  //       ChartDataLabelPosition
-                                                  //           .outside,
-                                                  //   useSeriesColor: true,
-                                                  //   textStyle:
-                                                  //       TextStyle(fontSize: 12),
-                                                  // ),
-                                                  pointColorMapper:
-                                                      (MapEntry<String, double>
-                                                              data,
-                                                          _) {
-                                                    var entriesList = controller
-                                                        .categoryMapSmAvailableDouble
-                                                        .entries
-                                                        .toList();
-                                                    int index = entriesList
-                                                        .indexWhere((entry) =>
-                                                            entry.key ==
-                                                                data.key &&
-                                                            entry.value ==
-                                                                data.value);
-                                                    var colorList = controller
-                                                        .getColorList();
-                                                    Color color = colorList[
-                                                        index %
-                                                            colorList.length];
-                                                    return color;
-                                                  },
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Container(
-                                            margin: EdgeInsets.only(
-                                                left: 10, right: 10),
-                                            // padding: EdgeInsets.only(
-                                            //     left: 10, top: 10),
-                                            decoration: BoxDecoration(
-                                              color: ColorValues.lightBlueColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  offset: Offset(0.0, 1.0),
-                                                  blurRadius: 6.0,
-                                                ),
-                                              ],
-                                            ),
-                                            height: 160,
-                                            child: SfCircularChart(
-                                              title: ChartTitle(
-                                                  text:
-                                                      "Stock Available/Consumption by Sites",
-                                                  textStyle: Styles.black12,
-                                                  alignment:
-                                                      ChartAlignment.near),
-                                              tooltipBehavior: TooltipBehavior(
-                                                enable: true,
-                                                tooltipPosition:
-                                                    TooltipPosition.pointer,
-                                                builder: (dynamic data,
-                                                    dynamic point,
-                                                    dynamic series,
-                                                    int pointIndex,
-                                                    int seriesIndex) {
-                                                  var entry = controller
-                                                      .categoryMapSmAvailableSiteDouble
-                                                      .entries
-                                                      .toList()[pointIndex];
-                                                  double totalValue = controller
-                                                      .categoryMapSmAvailableSiteDouble
-                                                      .values
-                                                      .reduce((a, b) => a + b);
-                                                  double percentage =
-                                                      (entry.value /
-                                                              totalValue) *
-                                                          100;
-                                                  return Container(
-                                                    padding: EdgeInsets.all(5),
+                                                  ),
+                                                )
+                                              : Expanded(
+                                                  flex: 2,
+                                                  child: Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 10, right: 10),
+                                                    // padding: EdgeInsets.only(
+                                                    //     left: 10, top: 10),
                                                     decoration: BoxDecoration(
-                                                      color: Colors.black,
+                                                      color: ColorValues
+                                                          .lightBlueColor,
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              5),
+                                                              10),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey,
+                                                          offset:
+                                                              Offset(0.0, 1.0),
+                                                          blurRadius: 6.0,
+                                                        ),
+                                                      ],
                                                     ),
-                                                    child: Text(
-                                                      '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
-                                                      style: TextStyle(
-                                                          color: Colors.white),
+                                                    height: 160,
+                                                    child: SfCircularChart(
+                                                      title: ChartTitle(
+                                                          text:
+                                                              "Stock Available/Consumption by Sites",
+                                                          textStyle:
+                                                              Styles.black12,
+                                                          alignment:
+                                                              ChartAlignment
+                                                                  .near),
+                                                      tooltipBehavior:
+                                                          TooltipBehavior(
+                                                        enable: true,
+                                                        tooltipPosition:
+                                                            TooltipPosition
+                                                                .pointer,
+                                                        builder: (dynamic data,
+                                                            dynamic point,
+                                                            dynamic series,
+                                                            int pointIndex,
+                                                            int seriesIndex) {
+                                                          var entry = controller
+                                                              .categoryMapSmConsumptionSiteDouble
+                                                              .entries
+                                                              .toList()[pointIndex];
+                                                          double totalValue =
+                                                              controller
+                                                                  .categoryMapSmConsumptionSiteDouble
+                                                                  .values
+                                                                  .reduce((a,
+                                                                          b) =>
+                                                                      a + b);
+                                                          double percentage =
+                                                              (entry.value /
+                                                                      totalValue) *
+                                                                  100;
+                                                          return Container(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    5),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color:
+                                                                  Colors.black,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                            ),
+                                                            child: Text(
+                                                              '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                      legend: Legend(
+                                                        isVisible: true,
+                                                        position: LegendPosition
+                                                            .right, // Position the legend to the right to stack vertically
+                                                        overflowMode:
+                                                            LegendItemOverflowMode
+                                                                .wrap,
+                                                        textStyle:
+                                                            Styles.black10,
+                                                        alignment: ChartAlignment
+                                                            .center, // Align the legend items to the center
+                                                        itemPadding:
+                                                            2, // Adjust the padding between legend items
+                                                      ),
+                                                      series: <CircularSeries>[
+                                                        DoughnutSeries<
+                                                            MapEntry<String,
+                                                                double>,
+                                                            String>(
+                                                          strokeWidth: 15,
+                                                          innerRadius: '80%',
+                                                          dataSource: controller
+                                                              .categoryMapSmConsumptionSiteDouble
+                                                              .entries
+                                                              .toList(),
+                                                          xValueMapper: (MapEntry<
+                                                                          String,
+                                                                          double>
+                                                                      data,
+                                                                  _) =>
+                                                              data.key,
+                                                          yValueMapper: (MapEntry<
+                                                                          String,
+                                                                          double>
+                                                                      data,
+                                                                  _) =>
+                                                              data.value,
+                                                          // dataLabelSettings:
+                                                          //     DataLabelSettings(
+                                                          //   isVisible: true,
+                                                          //   labelPosition:
+                                                          //       ChartDataLabelPosition
+                                                          //           .outside,
+                                                          //   useSeriesColor: true,
+                                                          //   textStyle:
+                                                          //       TextStyle(fontSize: 12),
+                                                          // ),
+                                                          pointColorMapper:
+                                                              (MapEntry<String,
+                                                                          double>
+                                                                      data,
+                                                                  _) {
+                                                            var entriesList =
+                                                                controller
+                                                                    .categoryMapSmConsumptionSiteDouble
+                                                                    .entries
+                                                                    .toList();
+                                                            int index = entriesList
+                                                                .indexWhere((entry) =>
+                                                                    entry.key ==
+                                                                        data
+                                                                            .key &&
+                                                                    entry.value ==
+                                                                        data.value);
+                                                            var colorList =
+                                                                controller
+                                                                    .getColorList();
+                                                            Color color =
+                                                                colorList[index %
+                                                                    colorList
+                                                                        .length];
+                                                            return color;
+                                                          },
+                                                        ),
+                                                      ],
                                                     ),
-                                                  );
-                                                },
-                                              ),
-                                              legend: Legend(
-                                                isVisible: true,
-                                                position: LegendPosition
-                                                    .right, // Position the legend to the right to stack vertically
-                                                overflowMode:
-                                                    LegendItemOverflowMode.wrap,
-                                                textStyle: Styles.black10,
-                                                alignment: ChartAlignment
-                                                    .center, // Align the legend items to the center
-                                                itemPadding:
-                                                    2, // Adjust the padding between legend items
-                                              ),
-                                              series: <CircularSeries>[
-                                                DoughnutSeries<
-                                                    MapEntry<String, double>,
-                                                    String>(
-                                                  strokeWidth: 15,
-                                                  innerRadius: '80%',
-                                                  dataSource: controller
-                                                      .categoryMapSmAvailableSiteDouble
-                                                      .entries
-                                                      .toList(),
-                                                  xValueMapper:
-                                                      (MapEntry<String, double>
-                                                                  data,
-                                                              _) =>
-                                                          data.key,
-                                                  yValueMapper:
-                                                      (MapEntry<String, double>
-                                                                  data,
-                                                              _) =>
-                                                          data.value,
-                                                  // dataLabelSettings:
-                                                  //     DataLabelSettings(
-                                                  //   isVisible: true,
-                                                  //   labelPosition:
-                                                  //       ChartDataLabelPosition
-                                                  //           .outside,
-                                                  //   useSeriesColor: true,
-                                                  //   textStyle:
-                                                  //       TextStyle(fontSize: 12),
-                                                  // ),
-                                                  pointColorMapper:
-                                                      (MapEntry<String, double>
-                                                              data,
-                                                          _) {
-                                                    var entriesList = controller
-                                                        .categoryMapSmAvailableSiteDouble
-                                                        .entries
-                                                        .toList();
-                                                    int index = entriesList
-                                                        .indexWhere((entry) =>
-                                                            entry.key ==
-                                                                data.key &&
-                                                            entry.value ==
-                                                                data.value);
-                                                    var colorList = controller
-                                                        .getColorList();
-                                                    Color color = colorList[
-                                                        index %
-                                                            colorList.length];
-                                                    return color;
-                                                  },
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
+                                                  ),
+                                                );
+                                        }),
                                       ],
                                     ),
                                     // Dimens.boxHeight10,
