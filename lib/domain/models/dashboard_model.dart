@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:cmms/app/utils/utility.dart';
+
 class DashboardModel {
   String? module_name;
   int? category_mc_count;
@@ -75,7 +79,12 @@ class CmDashboadDetails {
       this.schedule_compliance_completed,
       this.schedule_compliance_pending,
       this.schedule_compliance_total,
-      this.item_list});
+      this.item_list,
+      this.stockConsumptionBySites,
+      this.stockConsumptionByGoods,
+      this.stockAvailbleBySites,
+      this.stockAvailbleByGoods,
+      this.stockOverview});
 
   int? created;
   int? submitted;
@@ -95,6 +104,11 @@ class CmDashboadDetails {
   int? schedule_compliance_completed;
   int? schedule_compliance_pending;
   List<Itemlist>? item_list;
+  List<AllChartview>? stockOverview;
+  List<AllChartview>? stockConsumptionByGoods;
+  List<AllChartview>? stockConsumptionBySites;
+  List<AllChartview>? stockAvailbleByGoods;
+  List<AllChartview>? stockAvailbleBySites;
 
   factory CmDashboadDetails.fromJson(Map<String, dynamic> parsedJson) =>
       CmDashboadDetails(
@@ -116,8 +130,30 @@ class CmDashboadDetails {
         total: parsedJson['total'],
         completed: parsedJson['completed'],
         pending: parsedJson['pending'],
-        item_list: List<Itemlist>.from(
-            parsedJson["item_list"].map((x) => Itemlist.fromJson(x))),
+        item_list: parsedJson['item_list'] != null
+            ? List<Itemlist>.from(
+                parsedJson['item_list'].map((x) => Itemlist.fromJson(x)))
+            : null,
+        stockOverview: parsedJson['stockOverview'] != null
+            ? List<AllChartview>.from(parsedJson['stockOverview']
+                .map((x) => AllChartview.fromJson(x)))
+            : null,
+        stockConsumptionByGoods: parsedJson['stockConsumptionByGoods'] != null
+            ? List<AllChartview>.from(parsedJson['stockConsumptionByGoods']
+                .map((x) => AllChartview.fromJson(x)))
+            : null,
+        stockConsumptionBySites: parsedJson['stockConsumptionBySites'] != null
+            ? List<AllChartview>.from(parsedJson['stockConsumptionBySites']
+                .map((x) => AllChartview.fromJson(x)))
+            : null,
+        stockAvailbleByGoods: parsedJson['stockAvailbleByGoods'] != null
+            ? List<AllChartview>.from(parsedJson['stockAvailbleByGoods']
+                .map((x) => AllChartview.fromJson(x)))
+            : null,
+        stockAvailbleBySites: parsedJson['stockAvailbleBySites'] != null
+            ? List<AllChartview>.from(parsedJson['stockAvailbleBySites']
+                .map((x) => AllChartview.fromJson(x)))
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -138,7 +174,22 @@ class CmDashboadDetails {
         "issued": issued,
         "pending": pending,
         "completed": completed,
-        "item_list": List<dynamic>.from(item_list!.map((x) => x.toJson())),
+        'item_list': item_list != null
+            ? List<dynamic>.from(item_list!.map((x) => x.toJson()))
+            : null,
+        'stockOverview': stockOverview != null
+            ? List<dynamic>.from(stockOverview!.map((x) => x.toJson()))
+            : null,
+        'stockConsumptionByGoods': stockConsumptionByGoods != null
+            ? List<dynamic>.from(
+                stockConsumptionByGoods!.map((x) => x.toJson()))
+            : null,
+        'stockAvailbleByGoods': stockAvailbleByGoods != null
+            ? List<dynamic>.from(stockAvailbleByGoods!.map((x) => x.toJson()))
+            : null,
+        'stockAvailbleBySites': stockAvailbleBySites != null
+            ? List<dynamic>.from(stockAvailbleBySites!.map((x) => x.toJson()))
+            : null,
       };
 
   void addPrefixToItems(String prefix) {
@@ -178,7 +229,14 @@ class Itemlist {
     this.unit_amount,
     this.total_amount,
     this.grn_date,
-    this.grn_qty,});
+    this.grn_qty,
+      
+      this.incident_datetime,
+      this.location_of_incident,
+      this.restoration_datetime,
+      this.severity,
+      this.title,
+      this.type_of_incident});
 
   int? facility_id;
   String? facility_name;
@@ -207,9 +265,26 @@ class Itemlist {
   dynamic  total_amount;
   dynamic grn_date;
   dynamic  grn_qty;
+  String? title;
+  String? type_of_incident;
+  String? location_of_incident;
+  String? severity;
+  String? incident_datetime;
+  String? restoration_datetime;
 
   factory Itemlist.fromJson(Map<String, dynamic> parsedJson) => Itemlist(
         facility_id: parsedJson['facility_id'],
+        title: parsedJson['title'],
+        location_of_incident: parsedJson['location_of_incident'],
+        type_of_incident: parsedJson['type_of_incident'],
+        severity: parsedJson['severity'],
+        incident_datetime: parsedJson['incident_datetime'] == null
+            ? parsedJson['incident_datetime']
+            : Utility.getFormatedyearMonthDay(parsedJson['incident_datetime']),
+        restoration_datetime: parsedJson['restoration_datetime'] == null
+            ? parsedJson['restoration_datetime']
+            : Utility.getFormatedyearMonthDay(
+                parsedJson['restoration_datetime']),
         wo_decription: parsedJson['wo_decription'],
         facility_name: parsedJson['facility_name'],
         wo_number: parsedJson['wo_number'].toString(),
@@ -240,6 +315,12 @@ class Itemlist {
 
   Map<String, dynamic> toJson() => {
         "facility_id": facility_id,
+        "title": title,
+        "location_of_incident": location_of_incident,
+        "type_of_incident": type_of_incident,
+        "severity": severity,
+        "incident_datetime": incident_datetime,
+        "restoration_datetime": restoration_datetime,
         "wo_decription": wo_decription,
         "facility_name": facility_name,
         "wo_number": wo_number,
@@ -271,4 +352,25 @@ class Itemlist {
   void addPrefix(String prefix) {
     wo_number = '$prefix$wo_number';
   }
+
+}
+class AllChartview {
+  AllChartview({
+    this.key,
+    this.value,
+  });
+
+  dynamic value;
+  String? key;
+
+  factory AllChartview.fromJson(Map<String, dynamic> parsedJson) =>
+      AllChartview(
+        key: parsedJson['key'],
+        value: parsedJson['value'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "key": key,
+        "value": value,
+      };
 }
