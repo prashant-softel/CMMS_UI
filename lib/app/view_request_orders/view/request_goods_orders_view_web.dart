@@ -115,13 +115,15 @@ class PurchaseGoodsorderViewWeb
                     Divider(
                       color: ColorValues.greyLightColour,
                     ),
-                    Dimens.boxHeight10,
+                    // Dimens.boxHeight10,
+                    SizedBox(height:10),
                     Center(
                       child: Text(
                         "${controller.getPurchaseDetailsByIDModel.value?.status_long ?? ""}",
                       ),
                     ),
-                    Dimens.boxHeight10,
+                    // Dimens.boxHeight10,
+                    SizedBox(height:10),
                     Row(
                       children: [
                         Spacer(),
@@ -129,7 +131,8 @@ class PurchaseGoodsorderViewWeb
                           'Generated  by :',
                           style: Styles.black17,
                         ),
-                        Dimens.boxWidth10,
+                        // Dimens.boxWidth10,
+                        SizedBox(width:10),
                         Text(
                           "${controller.getPurchaseDetailsByIDModel.value?.generatedBy}",
                           style: Styles.blue17,
@@ -139,7 +142,8 @@ class PurchaseGoodsorderViewWeb
                           'Order Date & Time :',
                           style: Styles.black17,
                         ),
-                        Dimens.boxWidth10,
+                        // Dimens.boxWidth10,
+                        SizedBox(width:10),
                         Text(
                           "${controller.getPurchaseDetailsByIDModel.value?.generatedAt ?? ""}",
                           style: Styles.blue17,
@@ -148,10 +152,12 @@ class PurchaseGoodsorderViewWeb
                       ],
                     ),
 
-                    Dimens.boxHeight10,
+                    // Dimens.boxHeight10,
+                    SizedBox(height:10),
                     AddRowInReqGoodsOrder(),
 
-                    Dimens.boxHeight10,
+                    // Dimens.boxHeight10,
+                    SizedBox(height:10),
 
                     controller.historyList!.isEmpty
                         ? Dimens.box0
@@ -298,7 +304,8 @@ class PurchaseGoodsorderViewWeb
                                   // },
                                 ),
                               ),
-                              Dimens.boxWidth10,
+                              // Dimens.boxWidth10,
+                              SizedBox(width:10),
                               Container(
                                   height: 40,
                                   child: CustomElevatedButton(
@@ -317,7 +324,8 @@ class PurchaseGoodsorderViewWeb
                             ],
                           )
                         : Dimens.box0,
-                    Dimens.boxHeight15,
+                    // Dimens.boxHeight15,
+                    SizedBox(height:15),
                   ],
                 ),
               ),

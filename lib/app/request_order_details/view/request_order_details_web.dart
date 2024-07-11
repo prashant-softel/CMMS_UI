@@ -97,10 +97,12 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                       Divider(
                         color: ColorValues.greyLightColour,
                       ),
-                      Dimens.boxHeight10,
+                      // Dimens.boxHeight10,
+                      SizedBox(height: 10),
                       AddRowInReqGoodsOrder(),
 
-                      Dimens.boxHeight15,
+                      // Dimens.boxHeight15,
+                       SizedBox(height: 15),
                       controller.historyList!.isEmpty
                           ? Dimens.box0
                           : Container(
@@ -259,7 +261,8 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                         ]),
                       ),
 
-                      Dimens.boxHeight15,
+                      // Dimens.boxHeight15,
+                       SizedBox(height: 15),
                       Row(
                         children: [
                           Spacer(),
@@ -271,7 +274,8 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                               // controller.AddInventory();
                             },
                           ),
-                          Dimens.boxWidth15,
+                          // Dimens.boxWidth15,
+                           SizedBox(width: 15),
                           controller.roId == 0
                               ? CustomElevatedButton(
                                   backgroundColor: ColorValues.appGreenColor,
@@ -290,7 +294,8 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                           Spacer()
                         ],
                       ),
-                      Dimens.boxHeight15,
+                      // Dimens.boxHeight15,
+                       SizedBox(height: 15),
                     ],
                   ),
                 ),
