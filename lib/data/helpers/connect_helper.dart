@@ -2806,15 +2806,17 @@ class ConnectHelper {
 
     return responseModel;
   }
-  Future<ResponseModel> getReAssignedToList({
+
+  Future<ResponseModel> getAssignedToListWOAttend({
     required String auth,
     bool? isLoading,
     int? facilityId,
     int? featureId,
+    int? isattendanceneeded,
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId',
+      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId&isattendence=$isattendanceneeded',
       Request.get,
       null,
       isLoading ?? false,
@@ -2833,7 +2835,7 @@ class ConnectHelper {
     int? featureId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId',
+      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId&isattendence=1',
       Request.get,
       null,
       isLoading ?? false,

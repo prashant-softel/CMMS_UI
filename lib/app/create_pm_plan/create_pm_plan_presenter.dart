@@ -59,16 +59,18 @@ class CreatePmPlanPresenter {
           isLoading: isLoading ?? false,
           categoryId: categoryId,
           frequencyid: frequencyid);
-  Future<List<EmployeeModel?>?> getAssignedToEmployee({
+  Future<List<EmployeeModel?>?> getAssignedToListWOAttend({
     String? auth,
     int? facilityId,
     int? featureId,
+    int? isattendanceneeded,
     bool? isLoading,
   }) async =>
-      await createPmPlanUsecase.getAssignedToEmployee(
+      await createPmPlanUsecase.getAssignedToListWOAttend(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
         featureId: featureId,
+        isattendanceneeded: isattendanceneeded,
         isLoading: isLoading ?? false,
       );
   Future<PMPlanDetail?> getPmPlanDetails({
