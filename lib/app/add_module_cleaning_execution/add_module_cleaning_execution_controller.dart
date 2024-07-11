@@ -546,6 +546,7 @@ class AddModuleCleaningExecutionController extends GetxController {
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
       startedAtDateTimeCtrlrWeb.text =
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
+
       listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
       scheduleId =
           listSchedules!.map((element) => element?.scheduleId).toList();
