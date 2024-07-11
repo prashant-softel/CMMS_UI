@@ -319,9 +319,9 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       addObservations.add(item);
     });
     // });
-    List<Schedules> schedule = <Schedules>[];
+    List<SchedulesTask> schedule = <SchedulesTask>[];
     // checklistObservations?.forEach((e) {
-    schedule.add(Schedules(
+    schedule.add(SchedulesTask(
         schedule_id: selectedItem?.schedule_id ?? 0,
         add_observations: addObservations));
     // });

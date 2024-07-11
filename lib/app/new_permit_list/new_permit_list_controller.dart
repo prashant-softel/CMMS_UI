@@ -4,6 +4,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
@@ -79,10 +80,11 @@ class NewPermitListController extends GetxController {
   // RxString PtwStatusFilterText = ''.obs;
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
-
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
+      EndMCExecutionDetailsModel().obs;
   RxString ActionFilterText = ''.obs;
 
- Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
@@ -357,7 +359,9 @@ class NewPermitListController extends GetxController {
       'permitId': permitId,
       'isChecked': false,
       "jobModel": jobDetailsModel.value,
-      "pmTaskModel": pmtaskViewModel.value
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": 0
     });
   }
 
@@ -372,7 +376,9 @@ class NewPermitListController extends GetxController {
       'permitId': permitId,
       'isChecked': isChecked,
       "jobModel": jobDetailsModel.value,
-      "pmTaskModel": pmtaskViewModel.value
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": 0
     });
     print('PermitIDForTBt:$permitId');
     print('PermitIdArgument:$isChecked');
@@ -451,7 +457,8 @@ class NewPermitListController extends GetxController {
     getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
         false, false, true);
   }
-   bool isOneHour(String validTill) {
+
+  bool isOneHour(String validTill) {
     DateTime current = DateTime.now();
     DateTime expiryTime = DateTime.parse(validTill);
     Duration timeDifference = expiryTime.difference(current);
