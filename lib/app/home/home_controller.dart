@@ -166,10 +166,10 @@ class HomeController extends GetxController {
   var index = 0;
   List<Color> colorList() {
     return [
-      Colors.blue,
+      const Color.fromARGB(255, 2, 63, 114),
       Colors.green,
-      Colors.orange,
-      Colors.yellowAccent,
+      Color.fromARGB(255, 147, 42, 42),
+      Color.fromARGB(255, 96, 154, 98),
     ];
   }
 

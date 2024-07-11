@@ -5,9 +5,6 @@ import 'package:cmms/app/utils/utility.dart';
 EndMCExecutionDetailsModel endMCExecutionDetailsModelFromJson(String str) =>
     EndMCExecutionDetailsModel.fromJson(json.decode(str));
 
-// String endMCExecutionDetailsModelToJson(EndMCExecutionDetailsModel data) =>
-//     json.encode(data.toJson());
-
 class EndMCExecutionDetailsModel {
   int? id;
   int? executionId;
@@ -62,7 +59,9 @@ class EndMCExecutionDetailsModel {
   factory EndMCExecutionDetailsModel.fromJson(Map<String, dynamic> json) =>
       EndMCExecutionDetailsModel(
         id: json['id'],
-        status_short_ptw: json['status_short_ptw'],
+        status_short_ptw: json['status_short_ptw'] == 'Invalid'
+            ? ''
+            : json['status_short_ptw'],
         executionId: json["executionId"],
         title: json['title'],
         description: json['description'] ?? '',
@@ -72,7 +71,7 @@ class EndMCExecutionDetailsModel {
         noOfDays: json["noOfDays"],
         plannedBy: json['plannedBy'],
         plannedAt: json['plannedAt'],
-        startedBy: json['startedBy'],
+        startedBy: json['startedBy'] ?? '',
         startedAt: json['startedAt'],
         abandonedBy: json["abandonedBy"] ?? '',
         abandonedAt: json["abandonedAt"],
@@ -81,7 +80,7 @@ class EndMCExecutionDetailsModel {
         status_long: json['status_long'],
         permit_id: json['permit_id'],
         permit_code: json['permit_code'] ?? '',
-        ptw_status: json['ptw_status'] ?? '',
+        ptw_status: json['ptw_status'],
         ptw_tbt_done: json['ptw_tbt_done'],
         schedules: json["schedules"] != null
             ? List<Schedules>.from(
@@ -91,7 +90,8 @@ class EndMCExecutionDetailsModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "status_short_ptw": status_short_ptw,
+        "status_short_ptw":
+            status_short_ptw == 'Invalid' ? '' : status_short_ptw,
         "executionId": executionId,
         "title": title,
         "description": description,
@@ -101,7 +101,7 @@ class EndMCExecutionDetailsModel {
         "noOfDays": noOfDays,
         "plannedBy": plannedBy,
         "plannedAt": plannedAt,
-        "startedBy": startedBy,
+        "startedBy": startedBy ?? '',
         "startedAt": startedAt,
         "abandonedBy": abandonedBy,
         "abandonedAt": abandonedAt,
@@ -110,7 +110,7 @@ class EndMCExecutionDetailsModel {
         "status_long": status_long,
         "permit_id": permit_id,
         "permit_code": permit_code ?? '',
-        "ptw_status": ptw_status ?? '',
+        "ptw_status": ptw_status,
         "ptw_tbt_done": ptw_tbt_done,
         "schedules": List<dynamic>.from(schedules.map((x) => x)),
       };
@@ -165,9 +165,11 @@ class Schedules {
         id: json["id"],
         permit_id: json['permit_id'],
         permit_code: json['permit_code'] ?? '',
-        ptw_status: json['ptw_status'] ?? '',
+        ptw_status: json['ptw_status'],
         ptw_tbt_done: json['ptw_tbt_done'],
-        status_short_ptw: json['status_short_ptw'],
+        status_short_ptw: json['status_short_ptw'] == 'Invalid'
+            ? ''
+            : json['status_short_ptw'],
         scheduleId: json['scheduleId'],
         executionId: json['executionId'],
         cleaningDay: json['cleaningDay'],
@@ -189,7 +191,8 @@ class Schedules {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "status_short_ptw": status_short_ptw,
+        "status_short_ptw":
+            status_short_ptw == 'Invalid' ? '' : status_short_ptw,
         "scheduleId": scheduleId,
         "executionId": executionId,
         "cleaningDay": cleaningDay,
@@ -205,13 +208,12 @@ class Schedules {
         "status_short": status_short,
         "permit_id": permit_id,
         "permit_code": permit_code ?? '',
-        "ptw_status": ptw_status ?? '',
+        "ptw_status": ptw_status,
         "ptw_tbt_done": ptw_tbt_done,
         "equipments": List<dynamic>.from(equipments!.map((x) => x)),
       };
 }
 
-///Equipments List Detail Model
 class EquipmentsList {
   EquipmentsList({
     this.id,

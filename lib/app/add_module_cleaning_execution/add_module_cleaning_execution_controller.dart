@@ -44,6 +44,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   int count = 0;
 
   int? scheduledId = 0;
+  Rx<bool> allScheduleTrue = false.obs;
 
   // void addRowItem() {
   //   rowItem.value.add([
@@ -554,6 +555,10 @@ class AddModuleCleaningExecutionController extends GetxController {
 
       rowItem.value = [];
       schedules?.value = _mcExecutionDetails.schedules;
+      bool allStatus383 =
+          schedules!.every((schedule) => schedule?.status == 383);
+
+      allScheduleTrue.value = allStatus383;
 
       _mcExecutionDetails.schedules.forEach((element) {
         rowItem.value.add([
