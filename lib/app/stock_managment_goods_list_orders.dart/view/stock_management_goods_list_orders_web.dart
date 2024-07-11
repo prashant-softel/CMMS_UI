@@ -1166,7 +1166,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                     .length >
                                 0
                         ? Get.toNamed(
-                            Routes.viewGoodsOrders,
+                            Routes.receiveGoodsOrders,
                             arguments: {
                               'goId': GoodsOrderListDetails?.id,
                               "goType": 1

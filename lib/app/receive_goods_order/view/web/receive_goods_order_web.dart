@@ -12,6 +12,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -243,10 +244,13 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               IgnorePointer(
                                                 child: Row(
                                                   children: [
-                                                    Dimens.boxWidth10,
+                                                    // Dimens.boxWidth10,
+                                                    SizedBox(width:8),
                                                     CustomRichText(
                                                         title: 'Vendor: '),
-                                                    Dimens.boxWidth10,
+                                                        
+                                                    // Dimens.boxWidth10,
+                                                     SizedBox(width:8),
                                                     SizedBox(
                                                       child: DropdownWebStock(
                                                         width: MediaQuery.of(
@@ -270,13 +274,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ],
                                                 ),
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height:5),
                                               IgnorePointer(
                                                 child: Row(
                                                   children: [
                                                     CustomRichText(
                                                         title: 'P.O No: '),
-                                                    Dimens.boxWidth10,
+                                                    // Dimens.boxWidth10,
+                                                     SizedBox(width: 10),
                                                     Container(
                                                         decoration:
                                                             BoxDecoration(
@@ -323,12 +329,14 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ],
                                                 ),
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height: 5),
                                               IgnorePointer(
                                                 child: Row(children: [
                                                   CustomRichText(
                                                       title: 'Amount : '),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -372,13 +380,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       )),
                                                 ]),
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height: 5),
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title:
                                                           'Invoice number : '),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -443,13 +453,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       )),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height:5),
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title:
                                                           'Delivery Challan : '),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -511,13 +523,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       )),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height:5),
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title:
                                                           'Count of Package received :'),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -579,12 +593,14 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       )),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                                SizedBox(height:5),
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title: 'Vehicle No. : '),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -647,13 +663,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       )),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height:5),
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title:
                                                           'Gate Inward Register number : '),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -715,11 +733,13 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       )),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height: 5),
                                               Row(children: [
                                                 CustomRichText(
                                                     title: 'Freight : '),
-                                                Dimens.boxWidth10,
+                                                // Dimens.boxWidth10,
+                                                 SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -785,7 +805,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   children: [
                                                     CustomRichText(
                                                         title: 'PO Date  : '),
-                                                    Dimens.boxWidth10,
+                                                    // Dimens.boxWidth10,
+                                                     SizedBox(width: 10),
                                                     CustomTextFieldForStock(
                                                       width:
                                                           MediaQuery.of(context)
@@ -808,14 +829,17 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ],
                                                 ),
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height:5),
                                               IgnorePointer(
                                                 child: Row(
                                                   children: [
-                                                    Dimens.boxWidth10,
+                                                    // Dimens.boxWidth10,
+                                                     SizedBox(width: 10),
                                                     CustomRichText(
                                                         title: 'Currency: '),
-                                                    Dimens.boxWidth10,
+                                                    // Dimens.boxWidth10,
+                                                     SizedBox(width: 10),
                                                     SizedBox(
                                                       child: DropdownWebStock(
                                                         width: MediaQuery.of(
@@ -839,12 +863,14 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ],
                                                 ),
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height:5),
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title: 'GRN No. : '),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -908,12 +934,14 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                               })),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height:5),
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title: 'Invoice Date : '),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   CustomTextFieldForStock(
                                                     width:
                                                         MediaQuery.of(context)
@@ -979,14 +1007,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               //     ),
                                               //   ],
                                               // ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height: 5),
 
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title:
                                                           'Delivery Challan Date : '),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   CustomTextFieldForStock(
                                                     width:
                                                         MediaQuery.of(context)
@@ -1024,13 +1054,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height:5),
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title:
                                                           'Material Receive Date : '),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   CustomTextFieldForStock(
                                                     width:
                                                         MediaQuery.of(context)
@@ -1068,12 +1100,14 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height:5),
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title: 'L.R No.  : '),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -1136,12 +1170,14 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       )),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height:5),
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title: 'E way bill : '),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -1204,13 +1240,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       )),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              // Dimens.boxHeight5,
+                                               SizedBox(height:5),
 
                                               Row(children: [
                                                 CustomRichText(
                                                     title:
                                                         'Inspection Report : '),
-                                                Dimens.boxWidth10,
+                                                // Dimens.boxWidth10,
+                                                 SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -1266,7 +1304,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               ]),
                                             ],
                                           ),
-                                          Dimens.boxWidth30,
+                                          // Dimens.boxWidth30,
+                                           SizedBox(width: 30),
                                         ],
                                       ),
                                     ),
@@ -1646,7 +1685,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                 },
                                                                               ),
                                                                             ),
-                                                                            Dimens.boxHeight10,
+                                                                            // Dimens.boxHeight10,
+                                                                            SizedBox(height:10),
                                                                             controller.dropdownMapperData[record[0]['value']]?.asset_type == "Spare"
                                                                                 ? Text(
                                                                                     "Sr No",
@@ -1768,7 +1808,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                         },
                                                                                       ),
                                                                                     ),
-                                                                                    Dimens.boxHeight30,
+                                                                                    // Dimens.boxHeight30,
+                                                                                     SizedBox(height:30),
                                                                                     controller.dropdownMapperData[record[0]['value']]?.asset_type == "Spare"
                                                                                         ? Container(
                                                                                             // padding: EdgeInsets.all(value),
@@ -1980,7 +2021,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                         ),
                                       ]),
                                     ),
-                                    Dimens.boxHeight15,
+                                    // Dimens.boxHeight15,
+                                     SizedBox(height:15),
                                     controller.historyList!.isEmpty
                                         ? Dimens.box0
                                         : Container(
@@ -2242,7 +2284,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                   //     },
                   //   ),
                   // ),
-                  Dimens.boxWidth15,
+                  // Dimens.boxWidth15,
+                   SizedBox(width:15),
                   controller.getPurchaseDetailsByIDModel.value?.status ==
                                   306 &&
                               varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length >
@@ -2277,7 +2320,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                         )
                       : Dimens.box0,
 
-                  Dimens.boxWidth15,
+                  // Dimens.boxWidth15,
+                   SizedBox(width:15),
                   controller.getPurchaseDetailsByIDModel.value?.status ==
                                   306 &&
                               varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length >
@@ -2311,7 +2355,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                           ),
                         )
                       : Dimens.box0,
-                  Dimens.boxWidth10,
+                  // Dimens.boxWidth10,
+                   SizedBox(width:10),
                   varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
@@ -2339,7 +2384,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                         )
                       : Dimens.box0,
 
-                  Dimens.boxWidth15,
+                  // Dimens.boxWidth15,
+                   SizedBox(width:15),
                   varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==

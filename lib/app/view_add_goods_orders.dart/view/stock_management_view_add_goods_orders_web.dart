@@ -232,10 +232,12 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                           children: [
                                             Row(
                                               children: [
-                                                Dimens.boxWidth10,
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width:10),
                                                 CustomRichText(
                                                     title: 'Vendor: '),
-                                                Dimens.boxWidth10,
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width:10),
                                                 SizedBox(
                                                   child: DropdownWebStock(
                                                     width:
@@ -257,7 +259,8 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                 ),
                                               ],
                                             ),
-                                            Dimens.boxHeight5,
+                                            // Dimens.boxHeight5,
+                                            SizedBox(height:5),
                                             // Row(
                                             //   children: [
                                             //     CustomRichText(
@@ -298,11 +301,13 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                             //         )),
                                             //   ],
                                             // ),
-                                            Dimens.boxHeight5,
+                                            // Dimens.boxHeight5,
+                                            SizedBox(height:5),
                                             Row(
                                               children: [
                                                 CustomRichText(title: 'P.O: '),
-                                                Dimens.boxWidth10,
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width:10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -506,12 +511,14 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                             //   ],
                                             // ),
 
-                                            Dimens.boxHeight5,
+                                            // Dimens.boxHeight5,
+                                            SizedBox(height:5),
 
                                             Row(children: [
                                               CustomRichText(
                                                   title: 'Amount : '),
-                                              Dimens.boxWidth10,
+                                              // Dimens.boxWidth10,
+                                              SizedBox(width:10),
                                               Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -606,7 +613,8 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title: 'PO Date: '),
-                                                Dimens.boxWidth10,
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width:10),
                                                 CustomTextFieldForStock(
                                                   width: MediaQuery.of(context)
                                                           .size
@@ -784,7 +792,8 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title: 'Currency: '),
-                                                Dimens.boxWidth10,
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width:10),
                                                 SizedBox(
                                                   child: DropdownWebStock(
                                                     width:
@@ -1425,7 +1434,8 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                         ],
                                       )
                                     : Container(),
-                                Dimens.boxHeight10
+                                // Dimens.boxHeight10
+                                SizedBox(height:10),
                               ],
                             ),
                           ),

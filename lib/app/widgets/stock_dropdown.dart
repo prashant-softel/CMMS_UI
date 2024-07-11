@@ -94,6 +94,9 @@ class DropdownWebStock extends StatelessWidget {
               contentPadding: Dimens.edgeInsets05_0_5_0,
               hintText: "Select",
             ),
+            baseStyle: TextStyle(
+              overflow: TextOverflow.ellipsis,
+            )
           ),
           onChanged: (String? _selectedValue) {
             selectedValue = _selectedValue ?? '';
