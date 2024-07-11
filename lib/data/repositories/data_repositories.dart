@@ -1668,17 +1668,19 @@ class DataRepository extends DomainRepository {
         userId: userId,
         isLoading: isLoading,
       );
-  Future<ResponseModel> getReAssignedToList({
+  Future<ResponseModel> getAssignedToListWOAttend({
     required String auth,
     int? facilityId,
     int? featureId,
+    int? isattendanceneeded,
     int? userId,
     bool? isLoading,
   }) async =>
-      await connectHelper.getReAssignedToList(
+      await connectHelper.getAssignedToListWOAttend(
         auth: auth,
         facilityId: facilityId,
         featureId: featureId,
+        isattendanceneeded: isattendanceneeded,
         userId: userId,
         isLoading: isLoading,
       );

@@ -40,16 +40,18 @@ class PreventiveMaintenanceTaskViewUsecase {
   //       isLoading,a
   //     );
 
-  Future<List<EmployeeModel?>?> getReAssignedToList({
+  Future<List<EmployeeModel?>?> getAssignedToListWOAttend({
     String? auth,
     int? facilityId,
     int? featureId,
+    int? isattendanceneeded,
     bool? isLoading,
   }) async =>
-      await repository.getReAssignedToList(
+      await repository.getAssignedToListWOAttend(
         auth,
         facilityId,
         featureId,
+        isattendanceneeded,
         isLoading,
       );
 

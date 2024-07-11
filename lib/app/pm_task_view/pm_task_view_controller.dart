@@ -168,9 +168,10 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
   Future<void> getReAssignedToList(_facilityId) async {
     final _assignedToList =
-        await preventiveMaintenanceTaskViewPresenter.getReAssignedToList(
+        await preventiveMaintenanceTaskViewPresenter.getAssignedToListWOAttend(
             facilityId: _facilityId,
-            featureId: UserAccessConstants.kPmTaskFeatureId);
+            featureId: UserAccessConstants.kPmTaskFeatureId,
+            isattendanceneeded: 0);
 
     if (_assignedToList != null) {
       for (var _assignedTo in _assignedToList) {

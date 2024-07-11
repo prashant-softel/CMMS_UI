@@ -182,10 +182,11 @@ class CreatePmPlanController extends GetxController {
 
   Future<void> getAssignedToList() async {
     assignedToList.clear();
-    final _assignedToList = await createPmPlanPresenter.getAssignedToEmployee(
-      facilityId: facilityId,
-      featureId: UserAccessConstants.kPmPlanFeatureId,
-    );
+    final _assignedToList =
+        await createPmPlanPresenter.getAssignedToListWOAttend(
+            facilityId: facilityId,
+            featureId: UserAccessConstants.kPmTaskFeatureId,
+            isattendanceneeded: 0);
 
     if (_assignedToList != null) {
       for (var assignedTo in _assignedToList) {

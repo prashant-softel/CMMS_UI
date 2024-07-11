@@ -31,16 +31,18 @@ class PreventiveMaintenanceTaskViewPresenter {
         isLoading: isLoading,
       );
 
-  Future<List<EmployeeModel?>?> getReAssignedToList({
+  Future<List<EmployeeModel?>?> getAssignedToListWOAttend({
     String? auth,
     int? facilityId,
     int? featureId,
+    int? isattendanceneeded,
     bool? isLoading,
   }) async =>
-      await preventiveMaintenanceTaskViewUsecase.getReAssignedToList(
+      await preventiveMaintenanceTaskViewUsecase.getAssignedToListWOAttend(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
         featureId: featureId ?? 0,
+        isattendanceneeded: isattendanceneeded ?? 0,
         isLoading: isLoading ?? false,
       );
 

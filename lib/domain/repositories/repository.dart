@@ -6553,19 +6553,21 @@ class Repository {
       return [];
     }
   }
-  Future<List<EmployeeModel?>?> getReAssignedToList(
+  Future<List<EmployeeModel?>?> getAssignedToListWOAttend(
     String? auth,
     int? facilityId,
     int? featureId,
+    int? isattendanceneeded,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getReAssignedToList(
+      final res = await _dataRepository.getAssignedToListWOAttend(
         auth: auth,
         isLoading: isLoading,
         facilityId: facilityId,
         featureId: featureId,
+        isattendanceneeded: isattendanceneeded,
       );
 
       if (!res.hasError) {
@@ -6577,7 +6579,7 @@ class Repository {
             .toList();
         return _employeeModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'getReAssignedToList');
+        Utility.showDialog(res.errorCode.toString(), 'getAssignedToListwithoutattendance');
         return null;
       }
     } catch (error) {
