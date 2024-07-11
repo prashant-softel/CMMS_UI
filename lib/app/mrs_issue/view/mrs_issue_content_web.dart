@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -421,6 +422,8 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                       fontSize:
                                                                           16.0,
                                                                     );
+                                                                    item.issued_qty_controller!
+                                                                        .clear();
                                                                     return; // Exit early
                                                                   }
 
