@@ -2,6 +2,7 @@ import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
@@ -28,7 +29,8 @@ class ViewAuditTaskController extends GetxController {
   Rx<int> type = 0.obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
-
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
+      EndMCExecutionDetailsModel().obs;
   RxInt selectedValue = 1.obs;
   Rx<PmtaskViewModel> auditTasknDetailModel = PmtaskViewModel().obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
@@ -431,9 +433,9 @@ class ViewAuditTaskController extends GetxController {
       addObservations.add(item);
     });
     // });
-    List<Schedules> schedule = <Schedules>[];
+    List<SchedulesTask> schedule = <SchedulesTask>[];
     // checklistObservations?.forEach((e) {
-    schedule.add(Schedules(
+    schedule.add(SchedulesTask(
         schedule_id: auditTasknDetailModel.value.schedules![0].schedule_id ?? 0,
         add_observations: addObservations));
     // });

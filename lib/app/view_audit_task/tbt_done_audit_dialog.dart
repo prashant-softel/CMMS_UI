@@ -101,7 +101,9 @@ class TbtDoneAuditTaskDialog extends GetView {
                             'type': 2,
                             "jobModel": controller.jobDetailsModel.value,
                             "pmTaskModel":
-                                controller.auditTasknDetailModel.value
+                                controller.auditTasknDetailModel.value,
+                            "mcModel": controller.mcExecutionDetailsModel.value,
+                            "scheduleID": 0
                           });
                           // controller.assignToPmTask(id: id ?? 0);
                         },

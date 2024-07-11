@@ -16,6 +16,7 @@ import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/extend_permit_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
@@ -304,6 +305,9 @@ class ViewPermitController extends GetxController {
   RxList<ListCategory?>? listCategory = <ListCategory?>[].obs; //ListCategory
   RxList<LotoLists?>? listLoto = <LotoLists?>[].obs; //ListsLoto
   RxList<ListIsolation?>? listIsolation = <ListIsolation?>[].obs; //ListCategory
+
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
+      EndMCExecutionDetailsModel().obs;
 
   ///Safety Measure List
   RxList<SafetyMeasureListModel> safetyMeasureList =
@@ -2771,7 +2775,9 @@ class ViewPermitController extends GetxController {
       'permitId': permitId,
       'isChecked': isChecked,
       "jobModel": jobDetailsModel.value,
-      "pmTaskModel": pmtaskViewModel.value
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": 0
     });
     print('PermitIdArgument:$permitId');
   }
@@ -2799,13 +2805,13 @@ class ViewPermitController extends GetxController {
   void clearStoreDataPMtaskId() {
     viewPermitPresenter.clearStoreDataPMtaskId();
   }
-  bool checkComment(){
-    if(approveCommentTextFieldCtrlr.text ==""){
-      iscommentTextInvalid.value=true;
+
+  bool checkComment() {
+    if (approveCommentTextFieldCtrlr.text == "") {
+      iscommentTextInvalid.value = true;
       return true;
     }
 
     return false;
-
   }
 }

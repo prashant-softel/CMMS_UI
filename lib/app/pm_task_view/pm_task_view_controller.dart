@@ -10,6 +10,7 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
@@ -73,6 +74,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<MRSListByJobIdModel?>? listMrsByTaskId = <MRSListByJobIdModel?>[].obs;
   RxList<CmmrsItems> cmmrsItems = <CmmrsItems>[].obs;
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
+      EndMCExecutionDetailsModel().obs;
   //////////////////////////////////
 
   @override
@@ -428,6 +431,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       "isChecked": false,
       "type": 2,
       "isFromPmTaskDetails": true,
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": 0
     });
   }
 

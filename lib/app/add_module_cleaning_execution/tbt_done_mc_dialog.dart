@@ -101,7 +101,8 @@ class TbtDoneMcDialog extends GetView {
                           Get.toNamed(Routes.createPermit, arguments: {
                             "permitId": ptw_id,
                             "isChecked": false,
-                            "type": 2,
+                            "type": 4,
+                            "isFromJobDetails": true,
                             "jobModel": controller.jobDetailsModel.value,
                             "pmTaskModel": controller.pmtaskViewModel.value,
                             "mcModel": controller.mcExecutionDetailsModel.value,

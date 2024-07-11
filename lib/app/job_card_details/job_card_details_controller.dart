@@ -3,6 +3,7 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
@@ -65,6 +66,8 @@ class JobCardDetailsController extends GetxController {
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   int selectedEmployeeId = 0;
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
+      EndMCExecutionDetailsModel().obs;
 
   /// Isolation and Loto Assets
   Rx<bool> isNormalized = false.obs;

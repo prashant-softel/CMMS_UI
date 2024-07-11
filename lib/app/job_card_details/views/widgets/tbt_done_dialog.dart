@@ -100,7 +100,10 @@ class TbtDoneBMDialog extends GetView {
                             'isChecked': false,
                             'type': 1,
                             "jobModel": controller.jobDetailsModel.value,
-                            "pmTaskModel": controller.pmtaskViewModel.value
+                            "pmTaskModel": controller.pmtaskViewModel.value,
+                            "isFromJobDetails": true,
+                            "mcModel": controller.mcExecutionDetailsModel.value,
+                            "scheduleID": 0
                           });
                           // controller.assignToPmTask(id: id ?? 0);
                         },

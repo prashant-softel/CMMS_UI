@@ -3,6 +3,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility/facility_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,8 @@ class JobDetailsController extends GetxController {
   var facilityId = 0;
   Rx<int> jobCardId = 0.obs;
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
+      EndMCExecutionDetailsModel().obs;
 
   ///
   // @override
@@ -282,7 +285,9 @@ class JobDetailsController extends GetxController {
       "isChecked": false,
       "type": 1,
       "isFromJobDetails": true,
-      "pmTaskModel": pmtaskViewModel.value
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": 0
     });
   }
 
