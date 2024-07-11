@@ -215,9 +215,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   child: Container(
                                     alignment: Alignment.centerLeft,
                                     child: IgnorePointer(
-                                      ignoring: is_view == 1 ||
-                                              !controller.check
-                                                  .containsKey(e.invName)
+                                      ignoring: is_view == 1
+                                          // ||
+                                          // !controller.check
+                                          //     .containsKey(e.invName)
                                           ? true
                                           : false,
                                       child: Checkbox(
@@ -232,11 +233,15 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                 e.isAbandonedChecked = false;
                                               }
                                               e.smbs.forEach((smbItem) {
-                                                smbItem.isCleanedSmbCheck =
-                                                    e.isCleanedChecked;
-                                                if (e.isCleanedChecked!) {
-                                                  smbItem.isAbandonSmbCheck =
-                                                      false;
+                                                if (!controller.check
+                                                    .containsKey(
+                                                        smbItem.smbName)) {
+                                                  smbItem.isCleanedSmbCheck =
+                                                      e.isCleanedChecked;
+                                                  if (e.isCleanedChecked!) {
+                                                    smbItem.isAbandonSmbCheck =
+                                                        false;
+                                                  }
                                                 }
                                               });
                                             },
@@ -253,9 +258,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   child: Container(
                                     alignment: Alignment.centerLeft,
                                     child: IgnorePointer(
-                                      ignoring: is_view == 1 ||
-                                              !controller.check
-                                                  .containsKey(e.invName)
+                                      ignoring: is_view == 1
+                                          // ||
+                                          //         !controller.check
+                                          //             .containsKey(e.invName)
                                           ? true
                                           : false,
                                       child: Checkbox(
@@ -270,11 +276,15 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                 e.isCleanedChecked = false;
                                               }
                                               e.smbs.forEach((smbItem) {
-                                                smbItem.isAbandonSmbCheck =
-                                                    e.isAbandonedChecked;
-                                                if (e.isAbandonedChecked!) {
-                                                  smbItem.isCleanedSmbCheck =
-                                                      false;
+                                                if (!controller.check
+                                                    .containsKey(
+                                                        smbItem.smbName)) {
+                                                  smbItem.isAbandonSmbCheck =
+                                                      e.isAbandonedChecked;
+                                                  if (e.isAbandonedChecked!) {
+                                                    smbItem.isCleanedSmbCheck =
+                                                        false;
+                                                  }
                                                 }
                                               });
                                             },
@@ -428,36 +438,36 @@ class AddModuleCleaningExecutionDialog extends GetView {
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.greenColor,
-                        text: 'Expand',
-                        onPressed: () {
-                          // controller.createMcPlan();
-                        },
-                      ),
-                    ),
+                    // Container(
+                    //   height: 35,
+                    //   child: CustomElevatedButton(
+                    //     backgroundColor: ColorValues.greenColor,
+                    //     text: 'Expand',
+                    //     onPressed: () {
+                    //       // controller.createMcPlan();
+                    //     },
+                    //   ),
+                    // ),
                     //Dimens.boxWidth20,
-                    SizedBox(width: 20),
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.redColor,
-                        text: "Collapse",
-                        onPressed: () {
-                          final _flutterSecureStorage =
-                              // const FlutterSecureStorage();
+                    // SizedBox(width: 20),
+                    // Container(
+                    //   height: 35,
+                    //   child: CustomElevatedButton(
+                    //     backgroundColor: ColorValues.redColor,
+                    //     text: "Collapse",
+                    //     onPressed: () {
+                    //       final _flutterSecureStorage =
+                    //           // const FlutterSecureStorage();
 
-                              // _flutterSecureStorage.delete(
-                              // key: "userId");
+                    //           // _flutterSecureStorage.delete(
+                    //           // key: "userId");
 
-                              Get.back();
-                        },
-                      ),
-                    ),
+                    //           Get.back();
+                    //     },
+                    //   ),
+                    // ),
                     //Dimens.boxWidth20,
-                    SizedBox(width: 20),
+                    // SizedBox(width: 20),
                     Container(
                       height: 35,
                       child: CustomElevatedButton(
