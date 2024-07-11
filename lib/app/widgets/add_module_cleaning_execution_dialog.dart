@@ -40,7 +40,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
               children: [
                 Text("Update For Day", style: Styles.blue20),
                 // Dimens.boxWidth10,
-                 SizedBox(width:10),
+                SizedBox(width: 10),
                 Text(
                   "${cleaningDay}",
                   style: TextStyle(
@@ -50,7 +50,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
               ],
             ),
             // Dimens.boxHeight15,
-             SizedBox(height:15),
+            SizedBox(height: 15),
             Row(
               children: [
                 Row(
@@ -71,7 +71,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   ],
                 ),
                 // Dimens.boxWidth10,
-                 SizedBox(width:10),
+                SizedBox(width: 10),
                 Row(
                   children: [
                     Text(
@@ -215,7 +215,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   child: Container(
                                     alignment: Alignment.centerLeft,
                                     child: IgnorePointer(
-                                      ignoring: is_view == 1 ? true : false,
+                                      ignoring: is_view == 1 ||
+                                              !controller.check
+                                                  .containsKey(e.invName)
+                                          ? true
+                                          : false,
                                       child: Checkbox(
                                         value: e.isCleanedChecked,
                                         onChanged: (bool? value) {
@@ -249,7 +253,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   child: Container(
                                     alignment: Alignment.centerLeft,
                                     child: IgnorePointer(
-                                      ignoring: is_view == 1 ? true : false,
+                                      ignoring: is_view == 1 ||
+                                              !controller.check
+                                                  .containsKey(e.invName)
+                                          ? true
+                                          : false,
                                       child: Checkbox(
                                         value: e.isAbandonedChecked,
                                         onChanged: (bool? value) {
@@ -309,7 +317,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                     alignment:
                                                         Alignment.centerLeft,
                                                     child: IgnorePointer(
-                                                      ignoring: is_view == 1
+                                                      ignoring: is_view == 1 ||
+                                                              controller.check
+                                                                  .containsKey(
+                                                                      smbItems
+                                                                          .smbName)
                                                           ? true
                                                           : false,
                                                       child: Checkbox(
@@ -344,7 +356,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                     alignment:
                                                         Alignment.centerLeft,
                                                     child: IgnorePointer(
-                                                      ignoring: is_view == 1
+                                                      ignoring: is_view == 1 ||
+                                                              controller.check
+                                                                  .containsKey(
+                                                                      smbItems
+                                                                          .smbName)
                                                           ? true
                                                           : false,
                                                       child: Checkbox(
@@ -423,7 +439,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                       ),
                     ),
                     //Dimens.boxWidth20,
-                    SizedBox(width:20),Container(
+                    SizedBox(width: 20),
+                    Container(
                       height: 35,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.redColor,
@@ -440,7 +457,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                       ),
                     ),
                     //Dimens.boxWidth20,
-                    SizedBox(width:20),Container(
+                    SizedBox(width: 20),
+                    Container(
                       height: 35,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.redColor,
@@ -457,7 +475,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                       ),
                     ),
                     //Dimens.boxWidth20,
-                    SizedBox(width:20),Container(
+                    SizedBox(width: 20),
+                    Container(
                       height: 35,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.greenColor,

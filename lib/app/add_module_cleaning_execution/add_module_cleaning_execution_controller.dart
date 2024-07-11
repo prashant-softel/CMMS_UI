@@ -40,6 +40,8 @@ class AddModuleCleaningExecutionController extends GetxController {
   Map<String, Schedules> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<Schedules?>? schedules = <Schedules?>[].obs;
+  Map<String, String> check = <String, String>{};
+  int count = 0;
 
   int? scheduledId = 0;
 
@@ -122,7 +124,8 @@ class AddModuleCleaningExecutionController extends GetxController {
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
   RxList<GetMCTaskEquipmentList?> equipmenTasktList =
       <GetMCTaskEquipmentList?>[].obs;
-
+  GetMCTaskEquipmentList? equipment;
+  // SMBS? smb;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
   PaginationController paginationController = PaginationController(
@@ -278,9 +281,27 @@ class AddModuleCleaningExecutionController extends GetxController {
     for (var equipment_list in list) {
       equipmenTasktList.add(equipment_list);
     }
-
     equipmenTasktList.value = list;
+    check.clear();
 
+    for (var equipment in equipmenTasktList) {
+      for (var smb in equipment?.smbs ?? []) {
+        if (smb.isAbandonSmbCheck) {
+          check["${smb.smbName}"] = "abandon";
+          count++;
+        } else if (smb.isCleanedSmbCheck) {
+          check["${smb.smbName}"] = "cleaned";
+          count++;
+        } else {
+          print("${smb.smbName} execution remaining");
+        }
+      }
+      if (count == 0) {
+        check["${equipment?.invName}"] = "remaining";
+      }
+      count = 0;
+    }
+    print("${check}");
     update(['equipment_list']);
   }
 
