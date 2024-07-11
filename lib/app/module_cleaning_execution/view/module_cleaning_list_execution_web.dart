@@ -510,8 +510,12 @@ class MCExcutionListDataSource extends DataTableSource {
 
       '${McExcutionListDetails?.frequency ?? ''}',
       '${McExcutionListDetails?.noOfDays ?? ''}',
-      '${McExcutionListDetails?.startDate ?? ''}',
-      '${McExcutionListDetails?.doneDate ?? ''}',
+      McExcutionListDetails?.startDate == "0001-01-01"
+          ? "-"
+          : '${McExcutionListDetails?.startDate ?? ''}',
+      McExcutionListDetails?.doneDate == "0001-01-01"
+          ? "-"
+          : '${McExcutionListDetails?.doneDate ?? ''}',
       // '${McExcutionListDetails?.status_short ?? ''}',
 
       'Actions',
