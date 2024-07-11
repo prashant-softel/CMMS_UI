@@ -339,6 +339,7 @@ class AddModuleCleaningExecutionController extends GetxController {
 
       UpdateMcScheduleExecutionModel updateMCScheduleExecutionModel =
           UpdateMcScheduleExecutionModel(
+              executionId: mcid.value,
               scheduleId: scheduleId,
               cleaningDay: cleaningDay,
               // waterUsed: int.tryParse('${rowItem.value[0][7]["value"]}'),

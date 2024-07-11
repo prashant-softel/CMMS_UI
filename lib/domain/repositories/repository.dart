@@ -6553,6 +6553,38 @@ class Repository {
       return [];
     }
   }
+  Future<List<EmployeeModel?>?> getReAssignedToList(
+    String? auth,
+    int? facilityId,
+    int? featureId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getReAssignedToList(
+        auth: auth,
+        isLoading: isLoading,
+        facilityId: facilityId,
+        featureId: featureId,
+      );
+
+      if (!res.hasError) {
+        final jsonEmployeeModels = jsonDecode(res.data);
+        final List<EmployeeModel> _employeeModelList = jsonEmployeeModels
+            .map<EmployeeModel>(
+              (m) => EmployeeModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+        return _employeeModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getReAssignedToList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
 
   Future<List<EmployeeModel?>?> getAssignedToEmployee(
     String? auth,

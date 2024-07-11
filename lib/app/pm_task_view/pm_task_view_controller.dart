@@ -6,6 +6,7 @@ import 'package:cmms/app/pm_task_view/pm_task_view_presenter.dart';
 import 'package:cmms/app/pm_task_view/view/permit_list_table.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
@@ -91,7 +92,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
             getHistory(facilityId);
             getMrsListByModuleTask(taskId: scheduleId.value);
           }
-          getAssignedToList(facilityId);
+          getReAssignedToList(facilityId);
         }
       });
 
@@ -162,9 +163,11 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     update(["historyList"]);
   }
 
-  Future<void> getAssignedToList(_facilityId) async {
-    final _assignedToList = await preventiveMaintenanceTaskViewPresenter
-        .getAssignedToList(facilityId: _facilityId);
+  Future<void> getReAssignedToList(_facilityId) async {
+    final _assignedToList =
+        await preventiveMaintenanceTaskViewPresenter.getReAssignedToList(
+            facilityId: _facilityId,
+            featureId: UserAccessConstants.kPmTaskFeatureId);
 
     if (_assignedToList != null) {
       for (var _assignedTo in _assignedToList) {
@@ -335,7 +338,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
                                   facilityId: facilityId);
                               getHistory(facilityId);
                               getMrsListByModuleTask(taskId: scheduleId.value);
-                              getAssignedToList(facilityId);
+                              getReAssignedToList(facilityId);
                             }
                             // textControllers =
                             //     List.generate(permitValuesCount, (_) => TextEditingController());
