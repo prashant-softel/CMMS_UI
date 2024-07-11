@@ -11,6 +11,7 @@ class AssetMasterModel {
   // int? id;
 
   String? asset_type;
+  int? min_qty;
   int? flag;
   int? asset_Type_id;
   String? asset_code;
@@ -34,6 +35,7 @@ class AssetMasterModel {
   AssetMasterModel({
     // this.id,
     this.asset_type,
+    this.min_qty,
     this.flag,
     this.asset_Type_id,
     this.asset_code,
@@ -58,6 +60,7 @@ class AssetMasterModel {
       AssetMasterModel(
         // id: json['id'],
         asset_type:json['asset_type'],
+        min_qty:json['min_qty'],
         flag:json['flag'],
         approval_required:json['approval_required'],
         cat_name:json['cat_name'],
@@ -82,6 +85,7 @@ reorder_qty: json['reorder_qty'],
   Map<String, dynamic> toJson() => {
         // "id": id,
     "asset_type":asset_type,
+    "min_qty":min_qty,
     "flag":flag,
     "approval_required":approval_required,
     "cat_name":cat_name,

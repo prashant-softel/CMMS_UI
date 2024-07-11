@@ -891,7 +891,7 @@ class Repository {
           approvetoJsonString: json.encode(approvetoJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: "Approved Successfully!", fontSize: 45.0);
 
         return true;
       } else {
@@ -12435,7 +12435,7 @@ class Repository {
 
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: "PM Task Closed Successfully!", fontSize: 45.0);
         permitCloseButton(closePtwJsonString, isLoading, 0, closetype);
         return true;
       } else {

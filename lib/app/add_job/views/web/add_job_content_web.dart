@@ -9,6 +9,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 
 import 'package:cmms/domain/models/inventory_category_model.dart';
@@ -1170,7 +1171,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                             Expanded(
                                                                 flex: 8,
                                                                 child:
-                                                                    FileUploadDetailsWidgetWeb()),
+                                                                    FileUploadDetailsWidgetWeb2()),
                                                           ]),
                                                     ),
                                                   ),

@@ -82,8 +82,8 @@ class AssetMasterController extends GetxController {
     "AC/DC": true,
     "Material Type": true,
     "Material Category": true,
-    "Min. Required Qty": true,
-    "Min. Reorder Qty": true,
+    "Min. Qty": true,
+    "Reorder Qty": true,
     "Description": true,
     "Unit Of Measurement": true,
     "Approval Required": true,
@@ -94,8 +94,8 @@ class AssetMasterController extends GetxController {
     "AC/DC": 200,
     "Material Type": 200,
     "Material Category": 200,
-    "Min. Required Qty": 200,
-    "Min. Reorder Qty": 200,
+    "Min. Qty": 200,
+    "Reorder Qty": 200,
     "Description": 300,
     "Unit Of Measurement": 200,
     "Approval Required": 200,
@@ -162,8 +162,8 @@ class AssetMasterController extends GetxController {
       "AC/DC": acdcFilterText,
       "Material Type": materialTypeFilterText,
       "Material Category": materialCategoryFilterText,
-      "Min. Required Qty": minRequiredQtyFilterText,
-      "Min. Reorder Qty": minReorderQtyTextFilterText,
+      "Min. Qty": minRequiredQtyFilterText,
+      "Reorder Qty": minReorderQtyTextFilterText,
       "Description": descriptionFilterText,
       "Unit Of Measurement": unitofMeasurementFilterText,
       "Approval Required": approvalRequiredFilterText,
@@ -215,9 +215,7 @@ class AssetMasterController extends GetxController {
             (Mrs.asset_name ?? '')
                 .toLowerCase()
                 .contains(keyword.toLowerCase()) ||
-            (Mrs.section ?? '')
-            .toLowerCase()
-            .contains(keyword.toLowerCase()) ||
+            (Mrs.section ?? '').toLowerCase().contains(keyword.toLowerCase()) ||
             (Mrs.asset_type ?? '')
                 .toLowerCase()
                 .contains(keyword.toLowerCase()) ||
