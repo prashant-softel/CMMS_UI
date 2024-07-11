@@ -210,7 +210,7 @@ class ModuleCleaningPlanningController extends GetxController {
 
     String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
     String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
-    String _startDateTc = htmlEscape.convert(startDateTimeCtrlr.text.trim());
+    String _startDateTc = htmlEscape.convert(startDateTc.text.trim());
     print("Start Date: ${_startDateTc}");
 
     // Ensure the selectedCleaningId is set properly

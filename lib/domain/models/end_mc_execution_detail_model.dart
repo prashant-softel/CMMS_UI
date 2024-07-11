@@ -80,8 +80,8 @@ class EndMCExecutionDetailsModel {
         status_short: json['status_short'],
         status_long: json['status_long'],
         permit_id: json['permit_id'],
-        permit_code: json['permit_code'],
-        ptw_status: json['ptw_status'],
+        permit_code: json['permit_code'] ?? '',
+        ptw_status: json['ptw_status'] ?? '',
         ptw_tbt_done: json['ptw_tbt_done'],
         schedules: json["schedules"] != null
             ? List<Schedules>.from(
@@ -109,8 +109,8 @@ class EndMCExecutionDetailsModel {
         "status_short": status_short,
         "status_long": status_long,
         "permit_id": permit_id,
-        "permit_code": permit_code,
-        "ptw_status": ptw_status,
+        "permit_code": permit_code ?? '',
+        "ptw_status": ptw_status ?? '',
         "ptw_tbt_done": ptw_tbt_done,
         "schedules": List<dynamic>.from(schedules.map((x) => x)),
       };
@@ -164,8 +164,8 @@ class Schedules {
   factory Schedules.fromJson(Map<String, dynamic> json) => Schedules(
         id: json["id"],
         permit_id: json['permit_id'],
-        permit_code: json['permit_code'],
-        ptw_status: json['ptw_status'],
+        permit_code: json['permit_code'] ?? '',
+        ptw_status: json['ptw_status'] ?? '',
         ptw_tbt_done: json['ptw_tbt_done'],
         status_short_ptw: json['status_short_ptw'],
         scheduleId: json['scheduleId'],
@@ -204,8 +204,8 @@ class Schedules {
         "status": status,
         "status_short": status_short,
         "permit_id": permit_id,
-        "permit_code": permit_code,
-        "ptw_status": ptw_status,
+        "permit_code": permit_code ?? '',
+        "ptw_status": ptw_status ?? '',
         "ptw_tbt_done": ptw_tbt_done,
         "equipments": List<dynamic>.from(equipments!.map((x) => x)),
       };

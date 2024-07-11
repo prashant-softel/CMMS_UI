@@ -309,6 +309,7 @@ class AddModuleCleaningExecutionContentWeb
                                                   ' ${controller.mcExecutionDetailsModel.value?.plannedBy}',
                                                   style: Styles.blue17,
                                                 ),
+                                                controller.startedAtDateTimeCtrlrWeb.text=="0001-01-01 05:30:00"?Text(""):
                                                 Text(
                                                   ' ${controller.startedAtDateTimeCtrlrWeb.text}',
                                                   style: Styles.blue17,
