@@ -826,10 +826,10 @@ class AssetListDataSource extends DataTableSource {
       '${AssetDetails?.section ?? ''}',
        '${AssetDetails?.asset_type ?? ''}',
       '${AssetDetails?.cat_name ?? ''}',
-      '${AssetDetails?.max_request_qty ?? ''}',
+      '${AssetDetails?.min_qty ?? ''}',
       '${AssetDetails?.reorder_qty ?? ''}',
       '${AssetDetails?.description ?? ''}',
-         '${AssetDetails?.measurement ?? ''}',
+      '${AssetDetails?.measurement ?? ''}',
       '${AssetDetails?.approval_required ?? ''}',
 
     ];
