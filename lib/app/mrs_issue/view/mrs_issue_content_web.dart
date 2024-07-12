@@ -191,8 +191,9 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                             style: Styles.blue17),
                                         Dimens.boxHeight10,
                                         Text(
-                                            "${controller.mrsDetailsModel.value?.whereUsedTypeName ?? ""}${controller.mrsDetailsModel.value?.whereUsedRefID ?? ""}",
-                                            style: Styles.blue17),
+                                          "${controller.mrsDetailsModel.value?.whereUsedTypeName == 'JOBCARD' ? 'JC' : controller.mrsDetailsModel.value?.whereUsedTypeName == 'PMTASK' ? 'PMT' : ''} ${controller.mrsDetailsModel.value?.whereUsedRefID ?? ""}",
+                                          style: Styles.blue17,
+                                        ),
                                       ],
                                     )
                                   ],
@@ -378,8 +379,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                           (Get.width /
                                                                               9),
                                                                       textController:
-                                                                          controller
-                                                                              .controllers[index],
+                                                                          item.serial_number_controller,
                                                                       decoration:
                                                                           InputDecoration(
                                                                         hintText:
@@ -410,10 +410,8 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                 width:
                                                                     (Get.width /
                                                                         9),
-                                                                textController:
-                                                                    controller
-                                                                            .controllers[
-                                                                        index],
+                                                                 textController:
+                                                                    item.issued_qty_controller,
                                                                 decoration:
                                                                     InputDecoration(
                                                                   hintText:
@@ -442,9 +440,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                         fontSize:
                                                                             16.0,
                                                                       );
-                                                                      controller
-                                                                          .controllers[
-                                                                              index]
+                                                                       item.issued_qty_controller!
                                                                           .clear();
                                                                       return;
                                                                     }
@@ -466,9 +462,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                         fontSize:
                                                                             16.0,
                                                                       );
-                                                                      controller
-                                                                          .controllers[
-                                                                              index]
+                                                                       item.issued_qty_controller!
                                                                           .clear();
                                                                     }
                                                                   } catch (e) {
