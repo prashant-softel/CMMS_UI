@@ -55,7 +55,7 @@ class InventoryListController extends GetxController {
     "Serial No": true,
     "Parent Asset": true,
     "Category": true,
-    "Asset Facility Name": true,
+    "Block Name": true,
 
     // "search": true,
   });
@@ -65,7 +65,7 @@ class InventoryListController extends GetxController {
     "Serial No": 120,
     "Parent Asset": 200,
     "Category": 223,
-    "Asset Facility Name": 153,
+    "Block Name": 153,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -84,7 +84,7 @@ class InventoryListController extends GetxController {
       "Serial No": serialNoFilterText,
       "Parent Asset": parrentAssetFilterText,
       "Category": catergoryFilterText,
-      "Asset Facility Name": assetFacilityNameFilterText,
+      "Block Name": assetFacilityNameFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
