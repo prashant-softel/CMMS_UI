@@ -379,8 +379,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                           (Get.width /
                                                                               9),
                                                                       textController:
-                                                                          controller
-                                                                              .controllers[index],
+                                                                          item.serial_number_controller,
                                                                       decoration:
                                                                           InputDecoration(
                                                                         hintText:
@@ -411,10 +410,8 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                 width:
                                                                     (Get.width /
                                                                         9),
-                                                                textController:
-                                                                    controller
-                                                                            .controllers[
-                                                                        index],
+                                                                 textController:
+                                                                    item.issued_qty_controller,
                                                                 decoration:
                                                                     InputDecoration(
                                                                   hintText:
@@ -443,9 +440,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                         fontSize:
                                                                             16.0,
                                                                       );
-                                                                      controller
-                                                                          .controllers[
-                                                                              index]
+                                                                       item.issued_qty_controller!
                                                                           .clear();
                                                                       return;
                                                                     }
@@ -467,9 +462,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                         fontSize:
                                                                             16.0,
                                                                       );
-                                                                      controller
-                                                                          .controllers[
-                                                                              index]
+                                                                       item.issued_qty_controller!
                                                                           .clear();
                                                                     }
                                                                   } catch (e) {
