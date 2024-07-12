@@ -1675,7 +1675,7 @@ class Repository {
           };
           exportToExcel(assetlistData, "asset.xlsx");
         }
-        return _inventoryModelList.reversed.toList();
+        return _inventoryModelList;
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getInventoryList');
@@ -6553,6 +6553,7 @@ class Repository {
       return [];
     }
   }
+
   Future<List<EmployeeModel?>?> getAssignedToListWOAttend(
     String? auth,
     int? facilityId,
@@ -6579,7 +6580,8 @@ class Repository {
             .toList();
         return _employeeModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'getAssignedToListwithoutattendance');
+        Utility.showDialog(
+            res.errorCode.toString(), 'getAssignedToListwithoutattendance');
         return null;
       }
     } catch (error) {
@@ -12435,7 +12437,8 @@ class Repository {
 
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: "PM Task Closed Successfully!", fontSize: 45.0);
+        Fluttertoast.showToast(
+            msg: "PM Task Closed Successfully!", fontSize: 45.0);
         permitCloseButton(closePtwJsonString, isLoading, 0, closetype);
         return true;
       } else {
