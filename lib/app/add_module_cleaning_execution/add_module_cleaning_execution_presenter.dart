@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
@@ -115,6 +116,28 @@ class AddModuleCleaningExecutionPresenter {
   }) async {
     return addModuleCleaningExecutionUsecase.updateMCScheduleExecution(
       updateMCScheduleExecutionJsonString: updateMCScheduleExecutionJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<List<EmployeeModel?>?> getAssignedToList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await addModuleCleaningExecutionUsecase.getAssignedToList(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<bool> assignToMC({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    return addModuleCleaningExecutionUsecase.assignToMC(
+      assignId: assignId,
+      taskId: taskId,
       isLoading: isLoading,
     );
   }

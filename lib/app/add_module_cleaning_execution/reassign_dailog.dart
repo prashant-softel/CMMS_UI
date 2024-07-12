@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -7,11 +8,11 @@ import 'package:get/get.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class AssignToPMTaskDialog extends GetView {
+class AssignToMcDialog extends GetView {
   int? id;
-  AssignToPMTaskDialog({this.id});
+  AssignToMcDialog({this.id});
 
-  final PreventiveMaintenanceTaskViewController controller = Get.find();
+  final AddModuleCleaningExecutionController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +28,15 @@ class AssignToPMTaskDialog extends GetView {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "PM Task Id:",
+              "MC Id:",
               style: TextStyle(
                 fontSize: 15,
               ),
             ),
             // Dimens.boxWidth10,
-             SizedBox(width: 10),
+            SizedBox(width: 10),
             Text(
-              "PMT${id}",
+              "MC${id}",
               style:
                   TextStyle(fontSize: 15, color: ColorValues.appDarkBlueColor),
             ),
@@ -63,7 +64,7 @@ class AssignToPMTaskDialog extends GetView {
             padding: EdgeInsets.only(right: 30, top: 10),
             height: height / 4.7,
             // width: double.infinity,
-            child: GetBuilder<PreventiveMaintenanceTaskViewController>(
+            child: GetBuilder<AddModuleCleaningExecutionController>(
               id: 'stock_Mangement',
               builder: (controller) {
                 return Column(
@@ -73,7 +74,7 @@ class AssignToPMTaskDialog extends GetView {
                       children: [
                         CustomRichText(title: 'Assign To  '),
                         // Dimens.boxWidth10,
-                         SizedBox(width: 10),
+                        SizedBox(width: 10),
                         SizedBox(
                           height: 30,
                           width: MediaQuery.of(context).size.width / 7,
@@ -100,7 +101,7 @@ class AssignToPMTaskDialog extends GetView {
                             isValueSelected:
                                 controller.isAssignedToSelected.value,
                             selectedValue: controller.selectedAssignedTo.value,
-                            onValueChanged: controller.onDropdownValueChanged,
+                            onValueChanged: controller.onValueChanged,
                           ),
                         ),
                       ],
@@ -124,7 +125,7 @@ class AssignToPMTaskDialog extends GetView {
                         style: Styles.greenElevatedButtonStyle,
                         onPressed: () {
                           Get.back();
-                          controller.assignToPmTask(id: id ?? 0);
+                          controller.assignToMC(id: id ?? 0);
                         },
                         child: const Text('Submit'),
                       ),

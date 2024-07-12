@@ -3930,11 +3930,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     int pointIndex,
                                                     int seriesIndex) {
                                                   var entry = controller
-                                                      .categoryMapPMDouble
+                                                      .categoryMapIRDouble
                                                       .entries
                                                       .toList()[pointIndex];
                                                   double totalValue = controller
-                                                      .categoryMapPMDouble
+                                                      .categoryMapIRDouble
                                                       .values
                                                       .reduce((a, b) => a + b);
                                                   double percentage =
@@ -3976,7 +3976,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     MapEntry<String, double>,
                                                     String>(
                                                   dataSource: controller
-                                                      .categoryMapPMDouble
+                                                      .categoryMapIRDouble
                                                       .entries
                                                       .toList(),
                                                   xValueMapper:
@@ -3994,7 +3994,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               data,
                                                           _) {
                                                     var entriesList = controller
-                                                        .categoryMapPMDouble
+                                                        .categoryMapIRDouble
                                                         .entries
                                                         .toList();
                                                     int index = entriesList
@@ -4004,7 +4004,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                             entry.value ==
                                                                 data.value);
                                                     var colorList = controller
-                                                        .getColorList();
+                                                        .getColorIrList();
                                                     Color color = colorList[
                                                         index %
                                                             colorList.length];
@@ -4851,12 +4851,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     int pointIndex,
                                                     int seriesIndex) {
                                                   var entry = controller
-                                                      .stockOverviewmap
-                                                      .entries
+                                                      .stockOverviewmap.entries
                                                       .toList()[pointIndex];
                                                   double totalValue = controller
-                                                      .stockOverviewmap
-                                                      .values
+                                                      .stockOverviewmap.values
                                                       .reduce((a, b) => a + b);
                                                   double percentage =
                                                       (entry.value /
@@ -4897,8 +4895,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     MapEntry<String, double>,
                                                     String>(
                                                   dataSource: controller
-                                                      .stockOverviewmap
-                                                      .entries
+                                                      .stockOverviewmap.entries
                                                       .toList(),
                                                   xValueMapper:
                                                       (MapEntry<String, double>

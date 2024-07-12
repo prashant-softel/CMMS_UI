@@ -12,15 +12,12 @@ import '../home/home_controller.dart';
 import '../navigators/navigators.dart';
 
 class MrsIssueController extends GetxController {
-  ///
-  MrsIssueController(
-    this.mrsIssuePresenter,
-  );
+  MrsIssueController(this.mrsIssuePresenter);
+
   StreamSubscription<int>? facilityIdStreamSubscription;
   HomeController homeController = Get.find<HomeController>();
   int facilityId = 0;
   Rx<bool> isFormValid = false.obs;
-
   Rx<bool> isFacilitySelected = true.obs;
   MrsIssuePresenter mrsIssuePresenter;
   final HomeController homecontroller = Get.find();
@@ -32,10 +29,6 @@ class MrsIssueController extends GetxController {
   var controllers = <TextEditingController>[].obs;
   var errorMessages = <String?>[].obs;
   Rx<bool> isFormInvalid = false.obs;
-  // final List<TextEditingController> _textcontrollers = [];
-  // final List<String?> errorMessages = [];
-
-  ///
 
   @override
   void onInit() async {
@@ -66,7 +59,7 @@ class MrsIssueController extends GetxController {
   }
 
   void clearErrorMessage(int index) {
-    if (errorMessages[index] != null) {
+    if (index < errorMessages.length) {
       errorMessages[index] = null;
     }
   }
@@ -103,7 +96,6 @@ class MrsIssueController extends GetxController {
       final _mrsId = await mrsIssuePresenter.getValue();
       if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
         var dataFromPreviousScreen = Get.arguments;
-
         mrsId.value = dataFromPreviousScreen['mrsId'];
         mrsIssuePresenter.saveValue(mrsId: mrsId.value.toString());
       } else {
@@ -122,9 +114,7 @@ class MrsIssueController extends GetxController {
     if (_mrsDetailsModel != null) {
       mrsDetailsModel.value = _mrsDetailsModel;
       cmmrsItemsDetail.value = _mrsDetailsModel.cmmrsItems ?? [];
-      // whereUsedType = mrsDetailsModel.value?.whereUsedType == 1 ? "JC" : "PM";
     }
-    // print({"mrsdetailss", mrsDetailsModel});
   }
 
   void checkform() {
@@ -142,7 +132,6 @@ class MrsIssueController extends GetxController {
       if (isFormInvalid.value) {
         return;
       }
-      // if (isFormValid.value) {
       String _comment = commentCtrlr.text.trim();
       List<CmmrsItemsModel> cmmrsItems = <CmmrsItemsModel>[];
       cmmrsItemsDetail.forEach((element) {
