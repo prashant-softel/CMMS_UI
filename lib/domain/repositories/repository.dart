@@ -1675,7 +1675,7 @@ class Repository {
           };
           exportToExcel(assetlistData, "asset.xlsx");
         }
-        return _inventoryModelList.reversed.toList();
+        return _inventoryModelList;
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getInventoryList');
