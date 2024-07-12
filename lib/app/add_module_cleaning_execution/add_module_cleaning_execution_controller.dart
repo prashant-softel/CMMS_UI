@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_presenter.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
@@ -45,7 +47,10 @@ class AddModuleCleaningExecutionController extends GetxController {
 
   int? scheduledId = 0;
   Rx<bool> allScheduleTrue = false.obs;
-
+  RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+  Rx<String> selectedAssignedTo = ''.obs;
+  Rx<bool> isAssignedToSelected = true.obs;
+  int selectedAssignedToId = 0;
   // void addRowItem() {
   //   rowItem.value.add([
   //     {"key": "Schedule Id", "value": ''},
@@ -168,6 +173,7 @@ class AddModuleCleaningExecutionController extends GetxController {
           await getMCTaskEquipmentList(mcid.value, true);
           //  });
         }
+        await getAssignedToList();
       });
     });
 
@@ -323,6 +329,22 @@ class AddModuleCleaningExecutionController extends GetxController {
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
+    }
+  }
+
+  Future<void> getAssignedToList() async {
+    assignedToList.clear();
+    final _assignedToList =
+        await addModuleCleaningExecutionPresenter.getAssignedToList(
+      facilityId: facilityId,
+    );
+
+    if (_assignedToList != null) {
+      for (var assignedTo in _assignedToList) {
+        assignedToList.add(assignedTo);
+      }
+      // selectedAssignedTo.value =
+      //     getAssignedToName(jobDetailsModel.value?.assignedId ?? 0) ?? '';
     }
   }
 
@@ -601,6 +623,17 @@ class AddModuleCleaningExecutionController extends GetxController {
           }
         }
         break;
+      case const (RxList<EmployeeModel>):
+        {
+          int assignedToIndex =
+              assignedToList.indexWhere((x) => x?.name == value);
+          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+          if (selectedAssignedToId != 0) {
+            isAssignedToSelected.value = true;
+          }
+          selectedAssignedTo.value = value;
+        }
+        break;
       case const (RxList<ModuleListModel>):
         {
           if (value != "Please Select") {
@@ -809,6 +842,16 @@ class AddModuleCleaningExecutionController extends GetxController {
       if (response == true) {
         Get.offAllNamed(Routes.moduleCleaningListExecution);
       }
+    }
+  }
+
+  assignToMC({required int id}) async {
+    {
+      final response = await addModuleCleaningExecutionPresenter.assignToMC(
+        assignId: selectedAssignedToId,
+        taskId: id,
+        isLoading: true,
+      );
     }
   }
 }

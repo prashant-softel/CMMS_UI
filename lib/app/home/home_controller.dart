@@ -60,6 +60,7 @@ class HomeController extends GetxController {
   Map<String, double> categoryMapBMDouble = <String, double>{};
   Map<String, double> categoryMapPMDouble = <String, double>{};
   Map<String, double> categoryMapSMDouble = <String, double>{};
+  Map<String, double> categoryMapIRDouble = <String, double>{};
 
   Map<String, double> categoryMapSmConsumptionDouble = <String, double>{};
   Map<String, double> categoryMapSmConsumptionSiteDouble = <String, double>{};
@@ -160,6 +161,17 @@ class HomeController extends GetxController {
       Colors.yellowAccent,
       Color.fromARGB(255, 61, 149, 114),
       Colors.purpleAccent,
+    ];
+  }
+
+  List<Color> getColorIrList() {
+    return [
+      Colors.blue,
+      Colors.blue,
+      Colors.blue,
+      Colors.blue,
+      Colors.blue,
+      Colors.blue,
     ];
   }
 
@@ -370,6 +382,40 @@ class HomeController extends GetxController {
         }
 
         categoryMapPMDouble = categoryMapPm
+            .map((key, value) => MapEntry(key, (value.toDouble())));
+      }
+      if (dashboardIrList.value != null) {
+        final categoryMapIr = <String, int>{};
+
+        for (var item
+            in dashboardIrList.value!.cmDashboadDetails!.item_list ?? []) {
+          final categories = item.type_of_incident?.split(', ') ?? [];
+          for (var category in categories) {
+            if (categoryMapIr.containsKey(category)) {
+              categoryMapIr[category] = categoryMapIr[category]! + 1;
+            } else {
+              categoryMapIr[category] = 1;
+            }
+          }
+        }
+
+        final sortedCategories = categoryMapIr.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        final top5Categories = sortedCategories.take(5).toList();
+        final otherCategoriesCount = sortedCategories.skip(5).fold<int>(
+              0,
+              (sum, entry) => sum + entry.value,
+            );
+
+        categoryMapIr.clear();
+        for (var entry in top5Categories) {
+          categoryMapIr[entry.key] = entry.value;
+        }
+        if (otherCategoriesCount > 0) {
+          categoryMapIr['Other'] = otherCategoriesCount;
+        }
+
+        categoryMapIRDouble = categoryMapIr
             .map((key, value) => MapEntry(key, (value.toDouble())));
       }
 

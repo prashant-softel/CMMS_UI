@@ -1,4 +1,5 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
@@ -112,7 +113,26 @@ class AddModuleCleaningExecutionUsecase {
         updateMCScheduleExecutionJsonString,
         isLoading,
       );
-
+  Future<List<EmployeeModel?>?> getAssignedToList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getAssignedToList(
+        auth,
+        facilityId,
+        isLoading,
+      );
+  Future<bool> assignToMC({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async =>
+      await _repository.assignToMC(
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
     bool? isLoading,
     required int executionId,

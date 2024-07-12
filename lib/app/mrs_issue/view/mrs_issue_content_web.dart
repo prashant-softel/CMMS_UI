@@ -29,8 +29,6 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
               width: Get.width,
               height: Get.height,
               color: Color.fromARGB(255, 234, 236, 238),
-              // width: Get.width,
-              // height: Get.height,
               child: Column(
                 children: [
                   HeaderWidget(),
@@ -88,7 +86,6 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                           .copyWith(scrollbars: false),
                       child: SingleChildScrollView(
                         child: Container(
-                          // margin: Dimens.edgeInsets20,
                           color: Color.fromARGB(255, 245, 248, 250),
                           child: Column(
                             children: [
@@ -132,9 +129,6 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // Container(
-                                    //     margin: Dimens.edgeInsets30_0_0_0,
-                                    //     child:
                                     Dimens.boxWidth30,
                                     Column(
                                       crossAxisAlignment:
@@ -186,7 +180,6 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                       ],
                                     ),
                                     Dimens.boxWidth2,
-
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -247,6 +240,20 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                               shrinkWrap: true,
                                               children: [
                                                 Obx(() {
+                                                  if (controller
+                                                              .mrsDetailsModel
+                                                              .value
+                                                              ?.cmmrsItems ==
+                                                          null ||
+                                                      controller
+                                                          .mrsDetailsModel
+                                                          .value!
+                                                          .cmmrsItems!
+                                                          .isEmpty) {
+                                                    return Center(
+                                                        child: Text(
+                                                            "No items available"));
+                                                  }
                                                   return DataTable(
                                                     border: TableBorder.all(
                                                         color: Color.fromARGB(
@@ -314,153 +321,170 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                     ],
                                                     rows:
                                                         List<DataRow>.generate(
-                                                            controller
-                                                                .mrsDetailsModel
-                                                                .value!
-                                                                .cmmrsItems!
-                                                                .length,
-                                                            (index) {
-                                                      var item = controller
+                                                      controller
                                                           .mrsDetailsModel
                                                           .value!
-                                                          .cmmrsItems![index];
-                                                      return DataRow(cells: [
-                                                        DataCell(Text(item
-                                                            .asset_name
-                                                            .toString())),
-                                                        DataCell(Text(item
-                                                            .asset_type
-                                                            .toString())),
-                                                        DataCell(Text(item
-                                                            .available_qty
-                                                            .toString())),
-                                                        DataCell(Text(item
-                                                            .requested_qty
-                                                            .toString())),
-                                                        DataCell(Text(item
-                                                            .requested_qty
-                                                            .toString())),
-                                                        item.asset_type ==
-                                                                "Spare"
-                                                            ? DataCell(
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .all(
-                                                                          8.0),
-                                                                  child:
-                                                                      LoginCustomTextfield(
-                                                                    width:
-                                                                        (Get.width /
-                                                                            9),
-                                                                    textController:
-                                                                        item.serial_number_controller,
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      hintText:
-                                                                          'Enter Serial Number',
-                                                                      errorText:
+                                                          .cmmrsItems!
+                                                          .length,
+                                                      (index) {
+                                                        var item = controller
+                                                            .mrsDetailsModel
+                                                            .value!
+                                                            .cmmrsItems![index];
+                                                        // Ensure the lists are synchronized
+                                                        if (controller
+                                                                .controllers
+                                                                .length <=
+                                                            index) {
+                                                          controller.controllers
+                                                              .add(
+                                                                  TextEditingController());
+                                                        }
+                                                        if (controller
+                                                                .errorMessages
+                                                                .length <=
+                                                            index) {
+                                                          controller
+                                                              .errorMessages
+                                                              .add(null);
+                                                        }
+                                                        return DataRow(cells: [
+                                                          DataCell(Text(item
+                                                              .asset_name
+                                                              .toString())),
+                                                          DataCell(Text(item
+                                                              .asset_type
+                                                              .toString())),
+                                                          DataCell(Text(item
+                                                              .available_qty
+                                                              .toString())),
+                                                          DataCell(Text(item
+                                                              .requested_qty
+                                                              .toString())),
+                                                          DataCell(Text(item
+                                                              .requested_qty
+                                                              .toString())),
+                                                          item.asset_type ==
+                                                                  "Spare"
+                                                              ? DataCell(
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .all(
+                                                                            8.0),
+                                                                    child:
+                                                                        LoginCustomTextfield(
+                                                                      width:
+                                                                          (Get.width /
+                                                                              9),
+                                                                      textController:
                                                                           controller
-                                                                              .errorMessages[index],
-                                                                    ),
-                                                                    validator: (value) =>
-                                                                        controller.validateField(
-                                                                            value,
-                                                                            index),
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      // controller
-                                                                      //     .validateField();
-                                                                      controller
-                                                                          .clearErrorMessage(
-                                                                              index);
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              )
-                                                            : DataCell(
-                                                                Text("NA")),
-                                                        DataCell(
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child:
-                                                                LoginCustomTextfield(
-                                                              width:
-                                                                  (Get.width /
-                                                                      9),
-                                                              textController: item
-                                                                  .issued_qty_controller,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                hintText:
-                                                                    'Enter Issued Quantity',
-                                                                errorText:
-                                                                    controller
-                                                                            .errorMessages[
-                                                                        index],
-                                                              ),
-                                                              validator: (value) =>
-                                                                  controller
-                                                                      .validateField(
+                                                                              .controllers[index],
+                                                                      decoration:
+                                                                          InputDecoration(
+                                                                        hintText:
+                                                                            'Enter Serial Number',
+                                                                        errorText:
+                                                                            controller.errorMessages[index],
+                                                                      ),
+                                                                      validator: (value) => controller.validateField(
                                                                           value,
                                                                           index),
-                                                              onChanged:
-                                                                  (text) {
-                                                                try {
-                                                                  // Validate input using a regular expression
-                                                                  if (!RegExp(
-                                                                          r'^[0-9]+(?:\.[0-9]+)?$')
-                                                                      .hasMatch(
-                                                                          text)) {
-                                                                    // Input is not a valid double
-                                                                    Fluttertoast
-                                                                        .showToast(
-                                                                      msg:
-                                                                          'Enter valid quantity in numbers',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                    );
-                                                                    item.issued_qty_controller!
-                                                                        .clear();
-                                                                    return; // Exit early
-                                                                  }
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        controller
+                                                                            .clearErrorMessage(index);
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              : DataCell(
+                                                                  Text("NA")),
+                                                          DataCell(
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child:
+                                                                  LoginCustomTextfield(
+                                                                width:
+                                                                    (Get.width /
+                                                                        9),
+                                                                textController:
+                                                                    controller
+                                                                            .controllers[
+                                                                        index],
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  hintText:
+                                                                      'Enter Issued Quantity',
+                                                                  errorText:
+                                                                      controller
+                                                                              .errorMessages[
+                                                                          index],
+                                                                ),
+                                                                validator: (value) =>
+                                                                    controller
+                                                                        .validateField(
+                                                                            value,
+                                                                            index),
+                                                                onChanged:
+                                                                    (text) {
+                                                                  try {
+                                                                    if (!RegExp(
+                                                                            r'^[0-9]+(?:\.[0-9]+)?$')
+                                                                        .hasMatch(
+                                                                            text)) {
+                                                                      Fluttertoast
+                                                                          .showToast(
+                                                                        msg:
+                                                                            'Enter valid quantity in numbers',
+                                                                        fontSize:
+                                                                            16.0,
+                                                                      );
+                                                                      controller
+                                                                          .controllers[
+                                                                              index]
+                                                                          .clear();
+                                                                      return;
+                                                                    }
 
-                                                                  double
-                                                                      parsedValue =
-                                                                      double.parse(
-                                                                          text);
-                                                                  double
-                                                                      requestedQty =
-                                                                      item.requested_qty!;
+                                                                    double
+                                                                        parsedValue =
+                                                                        double.parse(
+                                                                            text);
+                                                                    double
+                                                                        requestedQty =
+                                                                        item.requested_qty!;
 
-                                                                  if (parsedValue >
-                                                                      requestedQty) {
-                                                                    Fluttertoast
-                                                                        .showToast(
-                                                                      msg:
-                                                                          'Enter qty below the approved qty',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                    );
-                                                                    item.issued_qty_controller!
-                                                                        .clear();
+                                                                    if (parsedValue >
+                                                                        requestedQty) {
+                                                                      Fluttertoast
+                                                                          .showToast(
+                                                                        msg:
+                                                                            'Enter qty below the approved qty',
+                                                                        fontSize:
+                                                                            16.0,
+                                                                      );
+                                                                      controller
+                                                                          .controllers[
+                                                                              index]
+                                                                          .clear();
+                                                                    }
+                                                                  } catch (e) {
+                                                                    print(
+                                                                        'Error: $e');
                                                                   }
-                                                                } catch (e) {
-                                                                  // Handle the case where parsing fails
-                                                                  print(
-                                                                      'Error: $e');
-                                                                }
-                                                                controller
-                                                                    .clearErrorMessage(
-                                                                        index);
-                                                              },
+                                                                  controller
+                                                                      .clearErrorMessage(
+                                                                          index);
+                                                                },
+                                                              ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      ]);
-                                                    }),
+                                                        ]);
+                                                      },
+                                                    ),
                                                   );
                                                 }),
                                               ])),
@@ -541,13 +565,8 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                             print("isssue4 123");
 
                                             controller.issueMrs();
-
-                                            // All validations passed
-                                            // Make your API call here
                                           } else {
                                             print("isssue 123");
-                                            // Validation failed
-                                            // Show an error message or handle the error
                                           }
                                         },
                                       ),
