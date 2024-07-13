@@ -232,11 +232,11 @@ class AddModuleCleaningExecutionContentWeb
                                                   CrossAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                  'Plan Id: ',
+                                                  'Plan ID: ',
                                                   style: Styles.black17,
                                                 ),
                                                 Text(
-                                                  'Execution Id: ',
+                                                  'Task ID: ',
                                                   style: Styles.black17,
                                                 ),
                                               ],
