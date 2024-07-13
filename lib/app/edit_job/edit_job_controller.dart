@@ -87,8 +87,9 @@ class EditJobController extends GetxController {
   Rx<String> selectedToolRequiredToWorkType = ''.obs;
   Rx<bool> isToolRequiredToWorkTypeSelected = false.obs;
   RxList<ToolsModel?>? toolsRequiredToWorkTypeList = <ToolsModel>[].obs;
-  RxList<String?> selectedtoolsRequiredToWorkTypeList = <String>[].obs;
+  RxList<ToolsModel?> selectedtoolsRequiredToWorkTypeList = <ToolsModel>[].obs;
   RxList<int?> selectedtoolsRequiredToWorkTypeIdList = <int>[].obs;
+
   RxList<WorkTypeList?>? workTypeListObj = <WorkTypeList>[].obs;
 
   ///
@@ -251,6 +252,10 @@ class EditJobController extends GetxController {
   }
 
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
+    try{
+
+      selectedtoolsRequiredToWorkTypeList.clear();
+      selectedtoolsRequiredToWorkTypeIdList.clear();
     final list = await editJobPresenter.getToolsRequiredToWorkTypeList(
       isLoading: true,
       workTypeIds: workTypeIds,
@@ -258,7 +263,22 @@ class EditJobController extends GetxController {
     print('paifcghb:${list}');
 
     toolsRequiredToWorkTypeList?.value = list ?? <ToolsModel>[];
+if (jobDetailsModel.value?.toolsRequiredList != null) {
+  for (var toolType in jobDetailsModel.value?.toolsRequiredList ?? []) {
+    ToolsModel linkedToolName = ToolsModel(
+      id: toolType.toolId,
+      linkedToolName: toolType.toolName,
+    );
+    selectedtoolsRequiredToWorkTypeList.add(linkedToolName);
+    selectedtoolsRequiredToWorkTypeIdList.add(linkedToolName.id ?? 0);
+  }
+}
+
     update(['toolsRequiredToWorkTypeList']);
+    }
+   catch(e){
+    print(e);
+  }
   }
 
   Future<void> getInventoryCategoryList(String? facilityId) async {
@@ -321,6 +341,7 @@ class EditJobController extends GetxController {
       workTypeList.clear();
       selectedWorkTypeList.clear();
       selectedWorkTypeIdList.clear();
+      
 
       ///
       categoryIds = selectedEquipmentCategoryIdList;
@@ -551,6 +572,7 @@ class EditJobController extends GetxController {
   }
 
   void toolsRequiredSelected(_selectedtoolsRequiredToWorkTypeId) async {
+    
     selectedtoolsRequiredToWorkTypeIdList.value = <int>[];
     for (var _selectedtoolsRequiredToWorkType
         in _selectedtoolsRequiredToWorkTypeId) {
