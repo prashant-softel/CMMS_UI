@@ -963,27 +963,42 @@ class AddModuleCleaningExecutionContentWeb
                                             //     onPressed: () {},
                                             //   ),
                                             // ),
-                                            Container(
-                                              height: 28,
-                                              child: CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.blueColor,
-                                                text: "Re-assign",
-                                                onPressed: () {
-                                                  Get.dialog<void>(
-                                                      AssignToMcDialog(
-                                                    id: controller
-                                                            .mcExecutionDetailsModel
-                                                            .value
-                                                            ?.executionId ??
-                                                        0,
-                                                  ));
+                                            controller.mcExecutionDetailsModel
+                                                            .value?.status ==
+                                                        387 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kModuleCleaningexeFeatureId &&
+                                                                e.edit ==
+                                                                    UserAccessConstants
+                                                                        .kHaveAddAccess)
+                                                            .length >
+                                                        0
+                                                ? Container(
+                                                    height: 28,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues.blueColor,
+                                                      text: "Re-assign",
+                                                      onPressed: () {
+                                                        Get.dialog<void>(
+                                                            AssignToMcDialog(
+                                                          id: controller
+                                                                  .mcExecutionDetailsModel
+                                                                  .value
+                                                                  ?.executionId ??
+                                                              0,
+                                                        ));
 
-                                                  // controller
-                                                  //     .startMCExecutionButton();
-                                                },
-                                              ),
-                                            ),
+                                                        // controller
+                                                        //     .startMCExecutionButton();
+                                                      },
+                                                    ),
+                                                  )
+                                                : Dimens.box0,
                                             Dimens.boxWidth10,
                                             controller.mcExecutionDetailsModel
                                                             .value?.status ==

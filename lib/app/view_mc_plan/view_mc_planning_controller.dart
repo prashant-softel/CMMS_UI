@@ -157,7 +157,12 @@ class ViewMcPlaningController extends GetxController {
           mcPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
 
       rowItem.value = [];
-      schedules!.value = _mcPlanDetails.schedules;
+      final sortedSchedules = _mcPlanDetails.schedules;
+      sortedSchedules
+          .sort((a, b) => a.cleaningDay!.compareTo(b.cleaningDay ?? 0));
+
+      schedules!.value = sortedSchedules;
+
       _mcPlanDetails.schedules.forEach(
         (element) {
           rowItem.value.add(
