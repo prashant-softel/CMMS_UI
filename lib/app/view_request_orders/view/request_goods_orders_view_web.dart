@@ -12,6 +12,7 @@ import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class PurchaseGoodsorderViewWeb
@@ -116,14 +117,14 @@ class PurchaseGoodsorderViewWeb
                       color: ColorValues.greyLightColour,
                     ),
                     // Dimens.boxHeight10,
-                    SizedBox(height:10),
+                    SizedBox(height: 10),
                     Center(
                       child: Text(
                         "${controller.getPurchaseDetailsByIDModel.value?.status_long ?? ""}",
                       ),
                     ),
                     // Dimens.boxHeight10,
-                    SizedBox(height:10),
+                    SizedBox(height: 10),
                     Row(
                       children: [
                         Spacer(),
@@ -132,7 +133,7 @@ class PurchaseGoodsorderViewWeb
                           style: Styles.black17,
                         ),
                         // Dimens.boxWidth10,
-                        SizedBox(width:10),
+                        SizedBox(width: 10),
                         Text(
                           "${controller.getPurchaseDetailsByIDModel.value?.generatedBy}",
                           style: Styles.blue17,
@@ -143,7 +144,7 @@ class PurchaseGoodsorderViewWeb
                           style: Styles.black17,
                         ),
                         // Dimens.boxWidth10,
-                        SizedBox(width:10),
+                        SizedBox(width: 10),
                         Text(
                           "${controller.getPurchaseDetailsByIDModel.value?.generatedAt ?? ""}",
                           style: Styles.blue17,
@@ -153,11 +154,11 @@ class PurchaseGoodsorderViewWeb
                     ),
 
                     // Dimens.boxHeight10,
-                    SizedBox(height:10),
+                    SizedBox(height: 10),
                     AddRowInReqGoodsOrder(),
 
                     // Dimens.boxHeight10,
-                    SizedBox(height:10),
+                    SizedBox(height: 10),
 
                     controller.historyList!.isEmpty
                         ? Dimens.box0
@@ -305,7 +306,7 @@ class PurchaseGoodsorderViewWeb
                                 ),
                               ),
                               // Dimens.boxWidth10,
-                              SizedBox(width:10),
+                              SizedBox(width: 10),
                               Container(
                                   height: 40,
                                   child: CustomElevatedButton(
@@ -325,7 +326,7 @@ class PurchaseGoodsorderViewWeb
                           )
                         : Dimens.box0,
                     // Dimens.boxHeight15,
-                    SizedBox(height:15),
+                    SizedBox(height: 15),
                   ],
                 ),
               ),
@@ -424,6 +425,12 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 )),
                 DataColumn2(
+                  label: Text(
+                    "Currency",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                DataColumn2(
                     fixedWidth: 150,
                     label: Text(
                       "Unit Cost",
@@ -501,79 +508,38 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                 ],
                               ),
                             )
-                          : (mapData['key'] == "Order") ||
-                                  (mapData['key'] == "Cost")
+                          : (mapData['key'] == "currency_drop_down")
                               ? Padding(
-                                  padding: EdgeInsets.only(top: 10),
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10, top: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: IgnorePointer(
-                                            child: LoginCustomTextfield(
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              inputFormatters: <
-                                                  TextInputFormatter>[
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly
-                                              ],
-                                              maxLine: 1,
-                                              textController:
-                                                  new TextEditingController(
-                                                      text: mapData["value"] ??
-                                                          ''),
-                                              onChanged: (txt) {
-                                                mapData["value"] = txt;
-                                              },
-                                              //validate
-
-                                                      // errorController: controller
-                                                      //         .isCostInvalid
-                                                      //         .value
-                                                      //     ? "Required field"
-                                                      //     : null,
-
-                                                      // onChanged: (value) {
-                                                      //   if (value
-                                                      //           .trim()
-                                                      //           .length >
-                                                      //       0) {
-                                                      //     controller
-                                                      //         .isCostInvalid
-                                                      //         .value = false;
-                                                      //   } else {
-                                                      //     controller
-                                                      //         .isCostInvalid
-                                                      //         .value = true;
-                                                      //   }
-                                                      // },
-                                            ),
-                                          )),
+                                      IgnorePointer(
+                                        child: DropdownWebStock(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
+                                          dropdownList:
+                                              controller.unitCurrencyList,
+                                          selectedValue: mapData["value"],
+                                          onValueChanged:
+                                              (list, selectedValue) {
+                                            print(
+                                                {selectedValue: selectedValue});
+                                          },
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 )
-                              : (mapData['key'] == "Comment")
+                              : (mapData['key'] == "Order") ||
+                                      (mapData['key'] == "Cost")
                                   ? Padding(
-                                      padding: const EdgeInsets.only(top: 10),
+                                      padding: EdgeInsets.only(top: 10),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -599,6 +565,12 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                               ),
                                               child: IgnorePointer(
                                                 child: LoginCustomTextfield(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: <TextInputFormatter>[
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
                                                   maxLine: 1,
                                                   textController:
                                                       new TextEditingController(
@@ -608,7 +580,74 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                                   onChanged: (txt) {
                                                     mapData["value"] = txt;
                                                   },
-                                                   //validate
+                                                  //validate
+
+                                                  // errorController: controller
+                                                  //         .isCostInvalid
+                                                  //         .value
+                                                  //     ? "Required field"
+                                                  //     : null,
+
+                                                  // onChanged: (value) {
+                                                  //   if (value
+                                                  //           .trim()
+                                                  //           .length >
+                                                  //       0) {
+                                                  //     controller
+                                                  //         .isCostInvalid
+                                                  //         .value = false;
+                                                  //   } else {
+                                                  //     controller
+                                                  //         .isCostInvalid
+                                                  //         .value = true;
+                                                  //   }
+                                                  // },
+                                                ),
+                                              )),
+                                        ],
+                                      ),
+                                    )
+                                  : (mapData['key'] == "Comment")
+                                      ? Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 10),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: IgnorePointer(
+                                                    child: LoginCustomTextfield(
+                                                      maxLine: 1,
+                                                      textController:
+                                                          new TextEditingController(
+                                                              text: mapData[
+                                                                      "value"] ??
+                                                                  ''),
+                                                      onChanged: (txt) {
+                                                        mapData["value"] = txt;
+                                                      },
+                                                      //validate
 
                                                       // errorController: controller
                                                       //         .isCommentInvalid
@@ -630,13 +669,12 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                                       //         .value = true;
                                                       //   }
                                                       //   },
-
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-                                    )
-                                  : Text(mapData['key'] ?? ''),
+                                                    ),
+                                                  )),
+                                            ],
+                                          ),
+                                        )
+                                      : Text(mapData['key'] ?? ''),
                     );
                   }).toList(),
                 );

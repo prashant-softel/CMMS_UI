@@ -4,6 +4,7 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/utils/module_type_constants.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
+import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
@@ -23,6 +24,7 @@ class PurchaseGoodsorderViewController extends GetxController {
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
+  RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
 
   Rx<bool> isCommentInvalid = false.obs;
   Rx<bool> isCostInvalid = false.obs;
@@ -46,7 +48,9 @@ class PurchaseGoodsorderViewController extends GetxController {
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
       });
-
+      Future.delayed(Duration(seconds: 1), () {
+        getUnitCurrencyList();
+      });
       Future.delayed(
         Duration(seconds: 1),
         () {
@@ -81,6 +85,21 @@ class PurchaseGoodsorderViewController extends GetxController {
     } catch (e) {
       print(e.toString() + 'userId');
     }
+  }
+
+  void getUnitCurrencyList() async {
+    unitCurrencyList.value = <CurrencyListModel>[];
+    final _unitCUrrencyList =
+        await purchaseGoodsorderViewPresenter.getUnitCurrencyList(
+      isLoading: true,
+      facilityId: facilityId,
+    );
+    print('Unit Currency List:$unitCurrencyList');
+    for (var unit_currency_list in _unitCUrrencyList) {
+      unitCurrencyList.add(unit_currency_list);
+    }
+
+    update(['unit_currency_list']);
   }
 
   Future<void> getAssetList(int _facilityId) async {
@@ -203,7 +222,7 @@ class PurchaseGoodsorderViewController extends GetxController {
   void addRowItem() {
     rowItem.value.add([
       {"key": "Drop_down", "value": 'Please Select'},
-      // {'key': "Paid_By", "value": 'Please Select'},
+      {'key': "currency_drop_down", "value": 'Please Select'},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
       {'key': "Comment", "value": ''},
@@ -229,7 +248,7 @@ class PurchaseGoodsorderViewController extends GetxController {
           ?.forEach((element) {
         rowItem.value.add([
           {"key": "Drop_down", "value": '${element.name}'},
-          // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
+          {'key': "currency_drop_down", "value": '${element.currency}'},
           {'key': "Cost", "value": '${element.cost}'},
           {'key': "Order", "value": '${element.ordered_qty}'},
           {'key': "Comment", "value": '${element.comment}'},
