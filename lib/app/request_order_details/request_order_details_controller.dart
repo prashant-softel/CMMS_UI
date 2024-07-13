@@ -256,7 +256,11 @@ class GoodsOrdersReqDetailController extends GetxController {
             'assetMasterItemID': '${element.id}',
             'itemID': '${element.itemID}'
           },
-          // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
+          {
+            'key': "currency_drop_down",
+            "value": '${element.currency}',
+            'id': '${element.currencyID}'
+          },
           {'key': "Cost", "value": '${element.cost}'},
           {'key': "Order", "value": '${element.ordered_qty}'},
           {'key': "Comment", "value": '${element.comment}'},
@@ -317,11 +321,11 @@ class GoodsOrdersReqDetailController extends GetxController {
     rowItem.forEach((element) {
       SubmitItems item = SubmitItems(
           itemID: int.tryParse('${element[0]["itemID"]}') ?? 0,
-          assetMasterItemID: dropdownMapperData[element[0]["value"]]
-              ?.id, //int.tryParse('${element[0]["assetMasterItemID"]}'),
-          cost: int.tryParse(element[1]["value"] ?? '0'),
-          ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
-          comment: element[3]["value"] ?? '0');
+          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
+          currencyId: unitCurrencydropdownMapperData[element[1]["value"]]?.id,
+          cost: int.tryParse(element[2]["value"] ?? '0'),
+          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+          comment: element[4]["value"] ?? '0');
 
       items.add(item);
 

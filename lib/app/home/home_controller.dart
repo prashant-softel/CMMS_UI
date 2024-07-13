@@ -401,18 +401,11 @@ class HomeController extends GetxController {
 
         final sortedCategories = categoryMapIr.entries.toList()
           ..sort((a, b) => b.value.compareTo(a.value));
-        final top5Categories = sortedCategories.take(5).toList();
-        final otherCategoriesCount = sortedCategories.skip(5).fold<int>(
-              0,
-              (sum, entry) => sum + entry.value,
-            );
+        final topCategories = sortedCategories.toList();
 
         categoryMapIr.clear();
-        for (var entry in top5Categories) {
+        for (var entry in topCategories) {
           categoryMapIr[entry.key] = entry.value;
-        }
-        if (otherCategoriesCount > 0) {
-          categoryMapIr['Other'] = otherCategoriesCount;
         }
 
         categoryMapIRDouble = categoryMapIr
