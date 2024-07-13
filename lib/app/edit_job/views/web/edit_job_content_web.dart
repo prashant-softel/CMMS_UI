@@ -531,9 +531,10 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                 Row(
                                                   children: [
                                                     CustomRichText(
-                                                        title:
-                                                            'Tools Required For Fault :',
-                                                            includeAsterisk: false,),
+                                                      title:
+                                                          'Tools Required For Fault :',
+                                                      includeAsterisk: false,
+                                                    ),
                                                     Dimens.boxWidth10,
                                                     Container(
                                                       decoration: BoxDecoration(
@@ -570,64 +571,67 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                               .size
                                                               .width *
                                                           .2),
-                                                      child:
-                                                          MultiSelectDialogField(
-                                                        searchable: true,
-                                                        // validator: (selectedItems) {
-                                                        //   if (controller.isToolRequiredToWorkTypeSelected.value == false) {
-                                                        //     return "Required field";
-                                                        //   } else {
-                                                        //     return null;
-                                                        //   }
-                                                        // },
-                                                        initialValue: //
-                                                            controller
-                                                                .selectedtoolsRequiredToWorkTypeIdList
-                                                                .map((equipmentId) =>
-                                                                    equipmentId) // Extract the IDs from the list of InventoryCategoryModel objects
-                                                                .toList(),
-                                                        autovalidateMode:
-                                                            AutovalidateMode
-                                                                .always,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                            color:
-                                                                // con troller.isToolRequiredToWorkTypeSelected.value == false
-                                                                //     ? Colors.red
-                                                                //     :
-                                                                Colors
-                                                                    .transparent,
-                                                            width: 1.0,
+                                                      child: Obx(
+                                                        () =>
+                                                            MultiSelectDialogField(
+                                                          searchable: true,
+                                                          // validator: (selectedItems) {
+                                                          //   if (controller.isToolRequiredToWorkTypeSelected.value == false) {
+                                                          //     return "Required field";
+                                                          //   } else {
+                                                          //     return null;
+                                                          //   }
+                                                          // },
+                                                          initialValue: //
+                                                              controller
+                                                                  .selectedtoolsRequiredToWorkTypeIdList
+                                                                  .map((toolId) =>
+                                                                      toolId) // Extract the IDs from the list of InventoryCategoryModel objects
+                                                                  .toList(),
+                                                          autovalidateMode:
+                                                              AutovalidateMode
+                                                                  .always,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                              color:
+                                                                  // con troller.isToolRequiredToWorkTypeSelected.value == false
+                                                                  //     ? Colors.red
+                                                                  //     :
+                                                                  Colors
+                                                                      .transparent,
+                                                              width: 1.0,
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
                                                           ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
+                                                          buttonIcon: Icon(Icons
+                                                              .arrow_drop_down),
+                                                          items: controller
+                                                              .toolsRequiredToWorkTypeList!
+                                                              .map(
+                                                                (linkedToolName) =>
+                                                                    MultiSelectItem(
+                                                                  linkedToolName
+                                                                      ?.id,
+                                                                  linkedToolName
+                                                                          ?.linkedToolName ??
+                                                                      '',
+                                                                ),
+                                                              )
+                                                              .toList(),
+                                                          onConfirm:
+                                                              (selectedOptionsList) =>
+                                                                  {
+                                                            controller
+                                                                .toolsRequiredSelected(
+                                                                    selectedOptionsList)
+                                                          },
+                                                          chipDisplay:
+                                                              MultiSelectChipDisplay(),
                                                         ),
-                                                        buttonIcon: Icon(Icons
-                                                            .arrow_drop_down),
-                                                        items: controller
-                                                            .toolsRequiredToWorkTypeList!
-                                                            .map(
-                                                              (equipmentCategory) =>
-                                                                  MultiSelectItem(
-                                                                equipmentCategory
-                                                                    ?.id,
-                                                                equipmentCategory
-                                                                        ?.linkedToolName ??
-                                                                    '',
-                                                              ),
-                                                            )
-                                                            .toList(),
-                                                        onConfirm:
-                                                            (selectedOptionsList) =>
-                                                                {
-                                                          controller
-                                                              .toolsRequiredSelected(
-                                                                  selectedOptionsList)
-                                                        },
-                                                        chipDisplay:
-                                                            MultiSelectChipDisplay(),
                                                       ),
 
                                                       // DropdownWidget(

@@ -16,20 +16,20 @@ class ToolsModel {
         equipmentCategoryId: json["equipmentCategoryId"],
       );
   ToolsModel({
-    required this.id,
-    required this.Equipment_name,
-    required this.workTypeName,
-    required this.linkedToolName,
-    required this.WorkTypeId,
-    required this.equipmentCategoryId,
+ this.id,
+this.Equipment_name,
+this.workTypeName,
+this.linkedToolName,
+this.WorkTypeId,
+ this.equipmentCategoryId,
   });
 
-  int id;
-  String Equipment_name;
-  String workTypeName;
-  String linkedToolName;
-  int WorkTypeId;
-  int equipmentCategoryId;
+  int? id;
+  String ?Equipment_name;
+  String ?workTypeName;
+  String? linkedToolName;
+  int ?WorkTypeId;
+  int? equipmentCategoryId;
 
   Map<String, dynamic> toJson() => {
         "id": id,
