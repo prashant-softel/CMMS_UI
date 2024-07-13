@@ -181,9 +181,11 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                           "",
                                       style: Styles.blue17),
                                   Dimens.boxHeight10,
-                                  Text(
-                                      "${controller.mrsDetailsModel.value?.whereUsedTypeName ?? ""}",
-                                      style: Styles.blue17),
+                                 Text(
+                                    "${controller.mrsDetailsModel.value?.whereUsedTypeName == 'JOBCARD' ? 'JC' : controller.mrsDetailsModel.value?.whereUsedTypeName == 'PMTASK' ? 'PMT' : ''} ${controller.mrsDetailsModel.value?.whereUsedRefID ?? ""}",
+                                    style: Styles.blue17,
+                                  ),
+
                                 ],
                               )
                             ],

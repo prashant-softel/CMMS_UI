@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_presenter.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
@@ -40,9 +42,15 @@ class AddModuleCleaningExecutionController extends GetxController {
   Map<String, Schedules> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<Schedules?>? schedules = <Schedules?>[].obs;
+  Map<String, String> check = <String, String>{};
+  int count = 0;
 
   int? scheduledId = 0;
-
+  Rx<bool> allScheduleTrue = false.obs;
+  RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+  Rx<String> selectedAssignedTo = ''.obs;
+  Rx<bool> isAssignedToSelected = true.obs;
+  int selectedAssignedToId = 0;
   // void addRowItem() {
   //   rowItem.value.add([
   //     {"key": "Schedule Id", "value": ''},
@@ -122,7 +130,8 @@ class AddModuleCleaningExecutionController extends GetxController {
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
   RxList<GetMCTaskEquipmentList?> equipmenTasktList =
       <GetMCTaskEquipmentList?>[].obs;
-
+  GetMCTaskEquipmentList? equipment;
+  // SMBS? smb;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
   PaginationController paginationController = PaginationController(
@@ -164,6 +173,7 @@ class AddModuleCleaningExecutionController extends GetxController {
           await getMCTaskEquipmentList(mcid.value, true);
           //  });
         }
+        await getAssignedToList();
       });
     });
 
@@ -278,9 +288,27 @@ class AddModuleCleaningExecutionController extends GetxController {
     for (var equipment_list in list) {
       equipmenTasktList.add(equipment_list);
     }
-
     equipmenTasktList.value = list;
+    check.clear();
 
+    for (var equipment in equipmenTasktList) {
+      for (var smb in equipment?.smbs ?? []) {
+        if (smb.isAbandonSmbCheck) {
+          check["${smb.smbName}"] = "abandon";
+          count++;
+        } else if (smb.isCleanedSmbCheck) {
+          check["${smb.smbName}"] = "cleaned";
+          count++;
+        } else {
+          print("${smb.smbName} execution remaining");
+        }
+      }
+      if (count == 0) {
+        check["${equipment?.invName}"] = "remaining";
+      }
+      count = 0;
+    }
+    print("${check}");
     update(['equipment_list']);
   }
 
@@ -301,6 +329,22 @@ class AddModuleCleaningExecutionController extends GetxController {
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
+    }
+  }
+
+  Future<void> getAssignedToList() async {
+    assignedToList.clear();
+    final _assignedToList =
+        await addModuleCleaningExecutionPresenter.getAssignedToList(
+      facilityId: facilityId,
+    );
+
+    if (_assignedToList != null) {
+      for (var assignedTo in _assignedToList) {
+        assignedToList.add(assignedTo);
+      }
+      // selectedAssignedTo.value =
+      //     getAssignedToName(jobDetailsModel.value?.assignedId ?? 0) ?? '';
     }
   }
 
@@ -525,6 +569,7 @@ class AddModuleCleaningExecutionController extends GetxController {
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
       startedAtDateTimeCtrlrWeb.text =
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
+
       listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
       scheduleId =
           listSchedules!.map((element) => element?.scheduleId).toList();
@@ -532,6 +577,10 @@ class AddModuleCleaningExecutionController extends GetxController {
 
       rowItem.value = [];
       schedules?.value = _mcExecutionDetails.schedules;
+      bool allStatus383 =
+          schedules!.every((schedule) => schedule?.status == 383);
+
+      allScheduleTrue.value = allStatus383;
 
       _mcExecutionDetails.schedules.forEach((element) {
         rowItem.value.add([
@@ -572,6 +621,17 @@ class AddModuleCleaningExecutionController extends GetxController {
           } else {
             facilityId = 0;
           }
+        }
+        break;
+      case const (RxList<EmployeeModel>):
+        {
+          int assignedToIndex =
+              assignedToList.indexWhere((x) => x?.name == value);
+          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+          if (selectedAssignedToId != 0) {
+            isAssignedToSelected.value = true;
+          }
+          selectedAssignedTo.value = value;
         }
         break;
       case const (RxList<ModuleListModel>):
@@ -782,6 +842,16 @@ class AddModuleCleaningExecutionController extends GetxController {
       if (response == true) {
         Get.offAllNamed(Routes.moduleCleaningListExecution);
       }
+    }
+  }
+
+  assignToMC({required int id}) async {
+    {
+      final response = await addModuleCleaningExecutionPresenter.assignToMC(
+        assignId: selectedAssignedToId,
+        taskId: id,
+        isLoading: true,
+      );
     }
   }
 }

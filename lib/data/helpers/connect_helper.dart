@@ -7864,6 +7864,32 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> assignToMC({
+    required String auth,
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/ReAssignMcTask?task_id=$taskId&assign_to=$assignId',
+      Request.put,
+      null,
+      isLoading,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PmTaskViewDialog(
+      data: parsedJson['message'],
+      taskId: taskId,
+    ));
+    return responseModel;
+  }
+
   Future<ResponseModel> approveShecduleExecution({
     required String auth,
     approvetoJsonString,

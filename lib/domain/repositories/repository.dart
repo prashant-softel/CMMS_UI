@@ -891,7 +891,7 @@ class Repository {
           approvetoJsonString: json.encode(approvetoJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: "Approved Successfully!", fontSize: 45.0);
 
         return true;
       } else {
@@ -1675,7 +1675,7 @@ class Repository {
           };
           exportToExcel(assetlistData, "asset.xlsx");
         }
-        return _inventoryModelList.reversed.toList();
+        return _inventoryModelList;
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getInventoryList');
@@ -6523,6 +6523,33 @@ class Repository {
     }
   }
 
+  Future<bool> assignToMC({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.assignToMC(
+        auth: auth,
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
   Future<List<EmployeeModel?>?> getAssignedToList(
     String? auth,
     int? facilityId,
@@ -6553,6 +6580,7 @@ class Repository {
       return [];
     }
   }
+
   Future<List<EmployeeModel?>?> getAssignedToListWOAttend(
     String? auth,
     int? facilityId,
@@ -6579,7 +6607,8 @@ class Repository {
             .toList();
         return _employeeModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'getAssignedToListwithoutattendance');
+        Utility.showDialog(
+            res.errorCode.toString(), 'getAssignedToListwithoutattendance');
         return null;
       }
     } catch (error) {
@@ -12435,7 +12464,8 @@ class Repository {
 
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(
+            msg: "PM Task Closed Successfully!", fontSize: 45.0);
         permitCloseButton(closePtwJsonString, isLoading, 0, closetype);
         return true;
       } else {

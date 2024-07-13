@@ -59,10 +59,14 @@ class HomeController extends GetxController {
   final categoryMapMC = <String, double>{};
   Map<String, double> categoryMapBMDouble = <String, double>{};
   Map<String, double> categoryMapPMDouble = <String, double>{};
+  Map<String, double> categoryMapSMDouble = <String, double>{};
+  Map<String, double> categoryMapIRDouble = <String, double>{};
+
   Map<String, double> categoryMapSmConsumptionDouble = <String, double>{};
   Map<String, double> categoryMapSmConsumptionSiteDouble = <String, double>{};
   Map<String, double> categoryMapSmAvailableDouble = <String, double>{};
   Map<String, double> categoryMapSmAvailableSiteDouble = <String, double>{};
+  Map<String, double> stockOverviewmap = <String, double>{};
 
   //int facilityId = 45;
   String categoryIds = '';
@@ -157,6 +161,27 @@ class HomeController extends GetxController {
       Colors.yellowAccent,
       Color.fromARGB(255, 61, 149, 114),
       Colors.purpleAccent,
+    ];
+  }
+
+  List<Color> getColorIrList() {
+    return [
+      Colors.blue,
+      Colors.blue,
+      Colors.blue,
+      Colors.blue,
+      Colors.blue,
+      Colors.blue,
+    ];
+  }
+
+  var index = 0;
+  List<Color> colorList() {
+    return [
+      const Color.fromARGB(255, 2, 63, 114),
+      Colors.green,
+      Color.fromARGB(255, 147, 42, 42),
+      Color.fromARGB(255, 96, 154, 98),
     ];
   }
 
@@ -359,14 +384,59 @@ class HomeController extends GetxController {
         categoryMapPMDouble = categoryMapPm
             .map((key, value) => MapEntry(key, (value.toDouble())));
       }
+      if (dashboardIrList.value != null) {
+        final categoryMapIr = <String, int>{};
+
+        for (var item
+            in dashboardIrList.value!.cmDashboadDetails!.item_list ?? []) {
+          final categories = item.type_of_incident?.split(', ') ?? [];
+          for (var category in categories) {
+            if (categoryMapIr.containsKey(category)) {
+              categoryMapIr[category] = categoryMapIr[category]! + 1;
+            } else {
+              categoryMapIr[category] = 1;
+            }
+          }
+        }
+
+        final sortedCategories = categoryMapIr.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        final top5Categories = sortedCategories.take(5).toList();
+        final otherCategoriesCount = sortedCategories.skip(5).fold<int>(
+              0,
+              (sum, entry) => sum + entry.value,
+            );
+
+        categoryMapIr.clear();
+        for (var entry in top5Categories) {
+          categoryMapIr[entry.key] = entry.value;
+        }
+        if (otherCategoriesCount > 0) {
+          categoryMapIr['Other'] = otherCategoriesCount;
+        }
+
+        categoryMapIRDouble = categoryMapIr
+            .map((key, value) => MapEntry(key, (value.toDouble())));
+      }
 
       if (dashboardSmList.value != null) {
         final categoryMapSmConsumption = <String, double>{};
         final categoryMapSmConsumptionSites = <String, double>{};
         final categoryMapSmAvailable = <String, double>{};
         final categoryMapSmAvailableSites = <String, double>{};
+
         if (dashboardSmList.value?.cmDashboadDetails?.stockConsumptionByGoods !=
             null) {
+          for (var item
+              in dashboardSmList.value?.cmDashboadDetails?.stockOverview ??
+                  []) {
+            if (stockOverviewmap.containsKey(item.key)) {
+              stockOverviewmap[item.key!] =
+                  stockOverviewmap[item.key!]! + item.value!;
+            } else {
+              stockOverviewmap[item.key!] = item.value!.toDouble();
+            }
+          }
           for (var item in dashboardSmList
                   .value?.cmDashboadDetails?.stockConsumptionByGoods ??
               []) {
@@ -408,6 +478,24 @@ class HomeController extends GetxController {
             }
           }
         }
+////stock overview
+        // final sortedCategoriesstock = stockOverviewmap.entries.toList()
+        //   ..sort((a, b) => b.value.compareTo(a.value));
+        // final top5CategoriesStock = sortedCategoriesstock.take(5).toList();
+        // final otherStockCount = sortedCategoriesstock.skip(5).fold<double>(
+        //       0.0,
+        //       (sum, entry) => sum + entry.value,
+        //     );
+
+        // final top5StockOverview = <String, double>{};
+        // for (var entry in top5CategoriesStock) {
+        //   top5StockOverview[entry.key] = entry.value;
+        // }
+        // if (otherStockCount > 0) {
+        //   top5StockOverview['Other'] = otherStockCount;
+        // }
+
+        // stockOverviewDouble = top5StockOverview;
 
         ///good consumption
         final sortedCategories = categoryMapSmConsumption.entries.toList()

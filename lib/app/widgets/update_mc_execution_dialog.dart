@@ -85,23 +85,16 @@ class UpdateMCExecutionDialog extends GetView {
                   style: Styles.darkBlueElevatedButtonStyle,
                   onPressed: () {
                     Get.back();
-                    Future.delayed(Duration(seconds: 1), () {
-                      controller.getTypePermitList();
-                    });
-
-                    Future.delayed(Duration(seconds: 1), () {
-                      controller.getInventoryCategoryList();
-                    });
-                    Future.delayed(Duration(seconds: 1), () {
+                    controller.getFacilityList();
+                    controller.getInventoryCategoryList();
+                    if (controller.mcid > 0) {
+                      //   Future.delayed(Duration(seconds: 1), () {
+                      controller.getMCExecutionDetail(
+                          executionId: controller.mcid.value,
+                          facilityId: controller.facilityId);
                       controller.getMCTaskEquipmentList(
-                          controller.taskId, true);
-                    });
-
-                    if (mcExecutionId![0] != null) {
-                      Future.delayed(Duration(seconds: 1), () {
-                        controller.getMCExecutionDetail(
-                            executionId: controller.data['id']!, facilityId:controller.facilityId);
-                      });
+                          controller.mcid.value, true);
+                      //  });
                     }
 
                     // Get.offAllNamed(Routes.addModuleCleaningExecutionContentWeb);

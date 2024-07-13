@@ -2699,7 +2699,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                       ?.length ??
                                                   0,
                                               (index) => DataRow(
-                                                 onSelectChanged: (selected) {
+                                                  onSelectChanged: (selected) {
                                                     if (selected!) {
                                                       controller
                                                           .clearStoreJobData();
@@ -2714,13 +2714,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               RegExp(r'\d+$'),
                                                               '');
 
-                                              
                                                       String taskId =
                                                           Id.substring(
                                                               Id.indexOf("PM") +
                                                                   2);
-                                                      if (prefix ==
-                                                          'PM') {
+                                                      if (prefix == 'PM') {
                                                         Get.toNamed(
                                                           Routes.pmTaskView,
                                                           arguments: {
@@ -2732,187 +2730,183 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                       }
                                                     }
                                                   },
-                                                
-                                                
-                                                cells:
-                                              
-                                              [
-                                                DataCell(Text(controller
-                                                        .dashboardPmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .facility_name
-                                                        .toString() ??
-                                                    '')),
-                                                DataCell(Text(
-                                                    '${controller.dashboardPmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                DataCell(Text(controller
-                                                        .dashboardPmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .wo_decription ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .dashboardPmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .status_long ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .dashboardPmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .asset_category ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .dashboardPmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .asset_name ??
-                                                    '')),
-                                                DataCell(
-                                                  Text(controller
-                                                              .dashboardPmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .start_date !=
-                                                          null
-                                                      ? controller
-                                                          .dashboardPmList
-                                                          .value!
-                                                          .cmDashboadDetails!
-                                                          .item_list![index]
-                                                          .start_date!
-                                                          .substring(
-                                                              0,
-                                                              controller
-                                                                      .dashboardPmList
-                                                                      .value!
-                                                                      .cmDashboadDetails!
-                                                                      .item_list![
-                                                                          index]
-                                                                      .start_date!
-                                                                      .length -
-                                                                  9)
-                                                      : controller
-                                                              .dashboardPmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .start_date ??
-                                                          ''),
-                                                ),
-                                                DataCell(
-                                                  Text(controller
-                                                              .dashboardPmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .end_date !=
-                                                          null
-                                                      ? controller
-                                                          .dashboardPmList
-                                                          .value!
-                                                          .cmDashboadDetails!
-                                                          .item_list![index]
-                                                          .end_date!
-                                                          .substring(
-                                                              0,
-                                                              controller
-                                                                      .dashboardPmList
-                                                                      .value!
-                                                                      .cmDashboadDetails!
-                                                                      .item_list![
-                                                                          index]
-                                                                      .end_date!
-                                                                      .length -
-                                                                  9)
-                                                      : controller
-                                                              .dashboardPmList
-                                                              .value
-                                                              ?.cmDashboadDetails
-                                                              ?.item_list?[
-                                                                  index]
-                                                              .end_date ??
-                                                          ''),
-                                                ),
-                                                DataCell(
-                                                  Row(
-                                                    children: [
-                                                      TableActionButton(
-                                                        color: ColorValues
-                                                            .viewColor,
-                                                        icon: Icons
-                                                            .remove_red_eye_outlined,
-                                                        message: 'View',
-                                                        onPress: () {
-                                                          controller
-                                                              .clearStorePmData();
-                                                          // controller
-                                                          //     .clearStoreDatatype();
-
-                                                          // int pmTaskId = controller
-                                                          //         .dashboardPmList
-                                                          //         .value
-                                                          //         ?.cmDashboadDetails
-                                                          //         ?.item_list?[
-                                                          //             index]
-                                                          //         .wo_number ??
-                                                          //     0;
-                                                          // if (pmTaskId != 0) {
-                                                          //   Get.toNamed(
-                                                          //       Routes
-                                                          //           .pmTaskView,
-                                                          //       arguments: {
-                                                          //         'pmTaskId':
-                                                          //             pmTaskId
-                                                          //       });
-                                                          // }
-                                                          String Id = controller
+                                                  cells: [
+                                                    DataCell(Text(controller
+                                                            .dashboardPmList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list?[index]
+                                                            .facility_name
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(
+                                                        '${controller.dashboardPmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                    DataCell(Text(controller
+                                                            .dashboardPmList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list?[index]
+                                                            .wo_decription ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .dashboardPmList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list?[index]
+                                                            .status_long ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .dashboardPmList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list?[index]
+                                                            .asset_category ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .dashboardPmList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list?[index]
+                                                            .asset_name ??
+                                                        '')),
+                                                    DataCell(
+                                                      Text(controller
                                                                   .dashboardPmList
                                                                   .value
                                                                   ?.cmDashboadDetails
                                                                   ?.item_list?[
                                                                       index]
-                                                                  .wo_number ??
-                                                              "";
-                                                          String pmTaskId =
-                                                              Id.substring(
-                                                                  Id.indexOf(
-                                                                          "PM") +
-                                                                      2);
+                                                                  .start_date !=
+                                                              null
+                                                          ? controller
+                                                              .dashboardPmList
+                                                              .value!
+                                                              .cmDashboadDetails!
+                                                              .item_list![index]
+                                                              .start_date!
+                                                              .substring(
+                                                                  0,
+                                                                  controller
+                                                                          .dashboardPmList
+                                                                          .value!
+                                                                          .cmDashboadDetails!
+                                                                          .item_list![
+                                                                              index]
+                                                                          .start_date!
+                                                                          .length -
+                                                                      9)
+                                                          : controller
+                                                                  .dashboardPmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .start_date ??
+                                                              ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                                  .dashboardPmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .end_date !=
+                                                              null
+                                                          ? controller
+                                                              .dashboardPmList
+                                                              .value!
+                                                              .cmDashboadDetails!
+                                                              .item_list![index]
+                                                              .end_date!
+                                                              .substring(
+                                                                  0,
+                                                                  controller
+                                                                          .dashboardPmList
+                                                                          .value!
+                                                                          .cmDashboadDetails!
+                                                                          .item_list![
+                                                                              index]
+                                                                          .end_date!
+                                                                          .length -
+                                                                      9)
+                                                          : controller
+                                                                  .dashboardPmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .end_date ??
+                                                              ''),
+                                                    ),
+                                                    DataCell(
+                                                      Row(
+                                                        children: [
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .viewColor,
+                                                            icon: Icons
+                                                                .remove_red_eye_outlined,
+                                                            message: 'View',
+                                                            onPress: () {
+                                                              controller
+                                                                  .clearStorePmData();
+                                                              // controller
+                                                              //     .clearStoreDatatype();
 
-                                                          print({
-                                                            'objeeerre':
-                                                                pmTaskId
-                                                          });
+                                                              // int pmTaskId = controller
+                                                              //         .dashboardPmList
+                                                              //         .value
+                                                              //         ?.cmDashboadDetails
+                                                              //         ?.item_list?[
+                                                              //             index]
+                                                              //         .wo_number ??
+                                                              //     0;
+                                                              // if (pmTaskId != 0) {
+                                                              //   Get.toNamed(
+                                                              //       Routes
+                                                              //           .pmTaskView,
+                                                              //       arguments: {
+                                                              //         'pmTaskId':
+                                                              //             pmTaskId
+                                                              //       });
+                                                              // }
+                                                              String Id = controller
+                                                                      .dashboardPmList
+                                                                      .value
+                                                                      ?.cmDashboadDetails
+                                                                      ?.item_list?[
+                                                                          index]
+                                                                      .wo_number ??
+                                                                  "";
+                                                              String pmTaskId =
+                                                                  Id.substring(
+                                                                      Id.indexOf(
+                                                                              "PM") +
+                                                                          2);
 
-                                                          if (pmTaskId !=
-                                                              null) {
-                                                            Get.toNamed(
-                                                                Routes
-                                                                    .pmTaskView,
-                                                                arguments: {
-                                                                  'pmTaskId': int
-                                                                      .tryParse(
-                                                                          pmTaskId)
-                                                                });
-                                                          }
-                                                        },
+                                                              print({
+                                                                'objeeerre':
+                                                                    pmTaskId
+                                                              });
+
+                                                              if (pmTaskId !=
+                                                                  null) {
+                                                                Get.toNamed(
+                                                                    Routes
+                                                                        .pmTaskView,
+                                                                    arguments: {
+                                                                      'pmTaskId':
+                                                                          int.tryParse(
+                                                                              pmTaskId)
+                                                                    });
+                                                              }
+                                                            },
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ]),
+                                                    ),
+                                                  ]),
                                             ),
                                           ),
                                         ),
@@ -3936,11 +3930,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     int pointIndex,
                                                     int seriesIndex) {
                                                   var entry = controller
-                                                      .categoryMapPMDouble
+                                                      .categoryMapIRDouble
                                                       .entries
                                                       .toList()[pointIndex];
                                                   double totalValue = controller
-                                                      .categoryMapPMDouble
+                                                      .categoryMapIRDouble
                                                       .values
                                                       .reduce((a, b) => a + b);
                                                   double percentage =
@@ -3982,7 +3976,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     MapEntry<String, double>,
                                                     String>(
                                                   dataSource: controller
-                                                      .categoryMapPMDouble
+                                                      .categoryMapIRDouble
                                                       .entries
                                                       .toList(),
                                                   xValueMapper:
@@ -4000,7 +3994,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               data,
                                                           _) {
                                                     var entriesList = controller
-                                                        .categoryMapPMDouble
+                                                        .categoryMapIRDouble
                                                         .entries
                                                         .toList();
                                                     int index = entriesList
@@ -4010,7 +4004,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                             entry.value ==
                                                                 data.value);
                                                     var colorList = controller
-                                                        .getColorList();
+                                                        .getColorIrList();
                                                     Color color = colorList[
                                                         index %
                                                             colorList.length];
@@ -4857,12 +4851,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                     int pointIndex,
                                                     int seriesIndex) {
                                                   var entry = controller
-                                                      .categoryMapPMDouble
-                                                      .entries
+                                                      .stockOverviewmap.entries
                                                       .toList()[pointIndex];
                                                   double totalValue = controller
-                                                      .categoryMapPMDouble
-                                                      .values
+                                                      .stockOverviewmap.values
                                                       .reduce((a, b) => a + b);
                                                   double percentage =
                                                       (entry.value /
@@ -4886,25 +4878,24 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               ),
                                               legend: Legend(
                                                 isVisible: true,
-                                                position: LegendPosition
-                                                    .right, // Position the legend to the right to stack vertically
+                                                position: LegendPosition.right,
                                                 overflowMode:
                                                     LegendItemOverflowMode.wrap,
-                                                textStyle: Styles.black10,
-                                                alignment: ChartAlignment
-                                                    .center, // Align the legend items to the center
-                                                itemPadding:
-                                                    2, // Adjust the padding between legend items
+                                                textStyle: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10),
+                                                alignment:
+                                                    ChartAlignment.center,
+                                                itemPadding: 2,
                                               ),
                                               primaryXAxis: CategoryAxis(),
                                               primaryYAxis: NumericAxis(),
                                               series: <CartesianSeries>[
-                                                ColumnSeries<
+                                                WaterfallSeries<
                                                     MapEntry<String, double>,
                                                     String>(
                                                   dataSource: controller
-                                                      .categoryMapPMDouble
-                                                      .entries
+                                                      .stockOverviewmap.entries
                                                       .toList(),
                                                   xValueMapper:
                                                       (MapEntry<String, double>
@@ -4921,7 +4912,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               data,
                                                           _) {
                                                     var entriesList = controller
-                                                        .categoryMapPMDouble
+                                                        .stockOverviewmap
                                                         .entries
                                                         .toList();
                                                     int index = entriesList
@@ -4930,11 +4921,12 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 data.key &&
                                                             entry.value ==
                                                                 data.value);
-                                                    var colorList = controller
-                                                        .getColorList();
-                                                    Color color = colorList[
-                                                        index %
-                                                            colorList.length];
+                                                    Color color =
+                                                        controller.colorList()[
+                                                            index %
+                                                                controller
+                                                                    .colorList()
+                                                                    .length];
                                                     return color;
                                                   },
                                                   borderRadius:

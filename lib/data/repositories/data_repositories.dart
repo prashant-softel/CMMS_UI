@@ -4494,6 +4494,17 @@ class DataRepository extends DomainRepository {
         assignId: assignId,
         taskId: taskId,
         isLoading: isLoading,
+      ); Future<ResponseModel> assignToMC({
+    required String auth,
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async =>
+      await connectHelper.assignToMC(
+        auth: auth,
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
       );
   Future<ResponseModel> UpdatePMTaskExecution({
     required String auth,

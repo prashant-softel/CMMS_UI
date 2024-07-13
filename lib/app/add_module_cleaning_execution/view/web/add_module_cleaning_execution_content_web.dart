@@ -2,6 +2,7 @@
 
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/add_module_cleaning_execution/custom_confirmation_dialog.dart';
+import 'package:cmms/app/add_module_cleaning_execution/reassign_dailog.dart';
 import 'package:cmms/app/add_module_cleaning_execution/tbt_done_mc_dialog.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
@@ -309,10 +310,14 @@ class AddModuleCleaningExecutionContentWeb
                                                   ' ${controller.mcExecutionDetailsModel.value?.plannedBy}',
                                                   style: Styles.blue17,
                                                 ),
-                                                Text(
-                                                  ' ${controller.startedAtDateTimeCtrlrWeb.text}',
-                                                  style: Styles.blue17,
-                                                ),
+                                                controller.startedAtDateTimeCtrlrWeb
+                                                            .text ==
+                                                        "0001-01-01 05:30:00"
+                                                    ? Text("")
+                                                    : Text(
+                                                        ' ${controller.startedAtDateTimeCtrlrWeb.text}',
+                                                        style: Styles.blue17,
+                                                      ),
                                               ],
                                             ),
                                             Spacer(),
@@ -958,7 +963,28 @@ class AddModuleCleaningExecutionContentWeb
                                             //     onPressed: () {},
                                             //   ),
                                             // ),
+                                            Container(
+                                              height: 28,
+                                              child: CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.blueColor,
+                                                text: "Re-assign",
+                                                onPressed: () {
+                                                  Get.dialog<void>(
+                                                      AssignToMcDialog(
+                                                    id: controller
+                                                            .mcExecutionDetailsModel
+                                                            .value
+                                                            ?.executionId ??
+                                                        0,
+                                                  ));
 
+                                                  // controller
+                                                  //     .startMCExecutionButton();
+                                                },
+                                              ),
+                                            ),
+                                            Dimens.boxWidth10,
                                             controller.mcExecutionDetailsModel
                                                             .value?.status ==
                                                         360 &&
@@ -1033,6 +1059,27 @@ class AddModuleCleaningExecutionContentWeb
                                                               .cancelColor,
                                                       text: "Close",
                                                       onPressed: () {
+                                                        // controller.allScheduleTrue
+                                                        //             .value ==
+                                                        //         false
+                                                        //     ? Get.defaultDialog(
+                                                        //         radius: 5,
+                                                        //         title: 'Alert',
+                                                        //         middleText:
+                                                        //             'Please complete the all schedules',
+                                                        //         textConfirm:
+                                                        //             'OK',
+                                                        //         onConfirm: () {
+                                                        //           Get.back(); // Close the dialog
+                                                        //         },
+                                                        //         buttonColor:
+                                                        //             ColorValues
+                                                        //                 .appGreenColor,
+                                                        //         confirmTextColor:
+                                                        //             Colors
+                                                        //                 .white,
+                                                        //       )
+                                                        //     :
                                                         Get.dialog<void>(CustomCalibrationDialog(
                                                             id: controller
                                                                     .mcExecutionDetailsModel
