@@ -582,36 +582,33 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'MC ${ModuleCleaningPlanningListDetails?.planId}',
+                        'MC${ModuleCleaningPlanningListDetails?.planId}',
                       ),
                       Dimens.boxHeight10,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                          decoration: BoxDecoration(
-                            color: controller.moduleCleaningListPlan
-                                        .firstWhere(
-                                          (e) =>
-                                              e.planId ==
-                                              ModuleCleaningPlanningListDetails!
-                                                  .planId,
-                                          orElse: () =>
-                                              ModuleCleaningListPlanModel(
-                                                  planId: 00),
-                                        )
-                                        .status ==
-                                    342
-                                ? ColorValues.approveColor
-                                : ColorValues.addNewColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            'MC ${ModuleCleaningPlanningListDetails?.status_short}',
-                            style: Styles.white11.copyWith(
-                              color: Colors.white,
-                            ),
+                      Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                        decoration: BoxDecoration(
+                          color: controller.moduleCleaningListPlan
+                                      .firstWhere(
+                                        (e) =>
+                                            e.planId ==
+                                            ModuleCleaningPlanningListDetails!
+                                                .planId,
+                                        orElse: () =>
+                                            ModuleCleaningListPlanModel(
+                                                planId: 00),
+                                      )
+                                      .status ==
+                                  342
+                              ? ColorValues.approveColor
+                              : ColorValues.addNewColor,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          'MC ${ModuleCleaningPlanningListDetails?.status_short}',
+                          style: Styles.white11.copyWith(
+                            color: Colors.white,
                           ),
                         ),
                       ),
