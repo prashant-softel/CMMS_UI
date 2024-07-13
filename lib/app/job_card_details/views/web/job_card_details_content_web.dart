@@ -107,8 +107,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                 onTap: () {
                   Get.offNamed(Routes.goToJobCardList);
                 },
-                child: Text(" / JOB CARD LIST",
-                    style: Styles.greyMediumLight12),
+                child:
+                    Text(" / JOB CARD LIST", style: Styles.greyMediumLight12),
               ),
               Text(" / JOB CARD DETAILS ", style: Styles.greyMediumLight12)
             ],
@@ -445,7 +445,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                           // String baseUrl =
                                                           //     "http://65.0.20.19/CMMS_API/";
                                                           String baseUrl =
-                                                          'http://172.20.43.9:83/';
+                                                              'http://172.20.43.9:83/';
                                                           String fileName =
                                                               controller
                                                                       .allFiles[
@@ -1126,59 +1126,58 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   controller.allTrue.value ==
                                                       false
                                               ? CustomElevatedButton(
-                                                icon: Icons
-                                                    .keyboard_return_outlined,
-                                                backgroundColor: ColorValues
-                                                    .linktopermitColor,
-                                                text: "Return Mrs",
-                                                onPressed: () {
-                                                  // controller
-                                                  //     .getMrsListByModuleTask(
-                                                  //         taskId: controller
-                                                  //             .scheduleId
-                                                  //             .value);
-                                                  // controller.clearStoreTaskData();
-                                                  // controller
-                                                  //     .clearStoreTaskActivityData();
-                                                  // controller
-                                                  //     .clearStoreTasktoActorData();
-                                                  // controller
-                                                  //     .clearStoreTaskWhereUsedData();
-                                                  // controller
-                                                  //     .clearStoreTaskfromActorData();
-                                              
-                                                  // Get.toNamed(
-                                                  //     Routes
-                                                  //         .mrsReturnScreen,
-                                                  //     arguments: {
-                                                  //       'type': 1,
-                                                  //       "whereUsed": 4,
-                                                  //       "fromActorTypeId":
-                                                  //           2,
-                                                  //       "to_actor_type_id":
-                                                  //           4,
-                                                  //       "pmTaskId": controller
-                                                  //               .listMrsByTaskId!
-                                                  //               .value
-                                                  //               .id ??
-                                                  //           0,
-                                                  //       "activity": controller
-                                                  //           .pmtaskViewModel
-                                                  //           .value
-                                                  //           ?.plan_title,
-                                                  //       "mrsId": controller
-                                                  //               .listMrsByTaskId!
-                                                  //               .firstWhere(
-                                                  //                   (element) =>
-                                                  //                       element?.mrsId !=
-                                                  //                       0,
-                                                  //                   orElse:
-                                                  //                       null)!
-                                                  //               .mrsId ??
-                                                  //           0
-                                                  //     });
-                                                },
-                                              )
+                                                  icon: Icons
+                                                      .keyboard_return_outlined,
+                                                  backgroundColor: ColorValues
+                                                      .linktopermitColor,
+                                                  text: "Return Mrs",
+                                                  onPressed: () {
+                                                    controller.getMrsListByModule(
+                                                        jobId: controller
+                                                                .jobCardDetailsModel
+                                                                .value
+                                                                ?.jobId ??
+                                                            0);
+                                                    // controller.clearStoreTaskData();
+                                                    // controller
+                                                    //     .clearStoreTaskActivityData();
+                                                    // controller
+                                                    //     .clearStoreTasktoActorData();
+                                                    // controller
+                                                    //     .clearStoreTaskWhereUsedData();
+                                                    // controller
+                                                    //     .clearStoreTaskfromActorData();
+
+                                                    Get.toNamed(
+                                                        Routes.mrsReturnScreen,
+                                                        arguments: {
+                                                          'type': 2,
+                                                          "whereUsed": 4,
+                                                          "fromActorTypeId": 2,
+                                                          "to_actor_type_id": 4,
+                                                          "pmTaskId": //controller
+                                                              // .listMrsByTaskId!
+                                                              // .value.id
+                                                              //  ??
+                                                              0,
+                                                          "activity": controller
+                                                              .pmtaskViewModel
+                                                              .value
+                                                              ?.plan_title,
+                                                          "mrsId": controller
+                                                                  .listMrsByTaskId!
+                                                                  .firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              ?.mrsId !=
+                                                                          0,
+                                                                      orElse:
+                                                                          null)!
+                                                                  .mrsId ??
+                                                              0
+                                                        });
+                                                  },
+                                                )
                                               : Dimens.box0
                                         ])
                                   : controller.jobCardDetailsModel.value!
