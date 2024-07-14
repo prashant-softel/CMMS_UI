@@ -83,7 +83,8 @@ class Equipments {
       this.id,
       this.issued_qty,
       this.requested_qty,
-      this.serial_number});
+      this.serial_number,
+      this.available_qty});
 
   int? id;
   int? equipmentID;
@@ -102,6 +103,7 @@ class Equipments {
       asset_code: json["asset_code"],
       requested_qty: json["requested_qty"],
       issued_qty: json["issued_qty"],
+      available_qty: json["available_qty"],
       serial_number: json["serial_number"]);
 
   Map<String, dynamic> toJson() => {
@@ -111,6 +113,7 @@ class Equipments {
         "asset_type_ID": asset_type_ID,
         "asset_item_ID": equipmentID,
         "id": id,
+        "available_qty": available_qty,
         "serial_number": serial_number
       };
 }

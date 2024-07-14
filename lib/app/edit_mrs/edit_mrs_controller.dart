@@ -201,6 +201,8 @@ class EditMrsController extends GetxController {
         rowItem.forEach((element) {
           Equipments item = Equipments(
             id: dropdownMapperData[element[0]["value"]]?.id,
+            available_qty:
+                dropdownMapperData[element[0]["value"]]?.available_qty,
             issued_qty: dropdownMapperData[element[0]["value"]]?.issued_qty,
             asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
             equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,

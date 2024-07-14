@@ -266,7 +266,7 @@ class JobCardDetailsController extends GetxController {
           false,
         ) ??
         [];
-    var _assetsList = listMrsByTaskId![0]!.cmmrsItems;
+    var _assetsList = listMrsByTaskId!.last!.cmmrsItems;
     for (var asset in _assetsList!) {
       cmmrsItems!.add(asset);
     }
