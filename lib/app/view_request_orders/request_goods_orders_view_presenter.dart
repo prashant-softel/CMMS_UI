@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
@@ -7,15 +8,24 @@ import '../../domain/usecases/purchase_goods_order_view_usecase.dart';
 class PurchaseGoodsorderViewPresenter {
   PurchaseGoodsorderViewPresenter(this.purchaseGoodsorderViewUsecase);
   PurchaseGoodsorderViewUsecase purchaseGoodsorderViewUsecase;
-  Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID({
-    bool? isLoading,
-    required int requestID,
-    required int facilityId
-  }) async {
+  Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID(
+      {bool? isLoading,
+      required int requestID,
+      required int facilityId}) async {
     return purchaseGoodsorderViewUsecase.getRoDetailsByID(
       requestID: requestID,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading ?? false,
+    );
+  }
+
+  Future<List<CurrencyListModel>> getUnitCurrencyList({
+    required bool isLoading,
+    required int? facilityId,
+  }) async {
+    return purchaseGoodsorderViewUsecase.getUnitCurrencyList(
+      isLoading: isLoading,
+      facilityId: facilityId,
     );
   }
 

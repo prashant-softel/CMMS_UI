@@ -1,4 +1,5 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
@@ -14,7 +15,7 @@ class PurchaseGoodsorderViewUsecase {
   }) async =>
       await _repository.getRoDetailsByID(
         requestID: requestID,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
   Future<List<GetAssetDataModel?>?> getAssetList({
@@ -27,6 +28,14 @@ class PurchaseGoodsorderViewUsecase {
         facilityId,
         isLoading,
       );
+  Future<List<CurrencyListModel>> getUnitCurrencyList(
+      {required bool isLoading, required int? facilityId}) async {
+    return _repository.getUnitCurrencyList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
   Future<Map<String, dynamic>> approveGoodsOrder({
     goodsOrderApproveJsonString,
     bool? isLoading,

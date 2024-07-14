@@ -285,9 +285,10 @@ class AddModuleCleaningExecutionController extends GetxController {
             isLoading: isLoading, taskId: taskId, facilityId: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
-    for (var equipment_list in list) {
-      equipmenTasktList.add(equipment_list);
-    }
+    // for (var equipment_list in list) {
+    //   equipmenTasktList.add(equipment_list);
+    // }
+
     equipmenTasktList.value = list;
     check.clear();
 
@@ -569,8 +570,13 @@ class AddModuleCleaningExecutionController extends GetxController {
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
       startedAtDateTimeCtrlrWeb.text =
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
+      final sortedSchedules = mcExecutionDetailsModel.value?.schedules ?? [];
+      sortedSchedules
+          .sort((a, b) => a.cleaningDay!.compareTo(b.cleaningDay ?? 0));
 
-      listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
+      listSchedules?.value = sortedSchedules;
+
+      //  listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
       scheduleId =
           listSchedules!.map((element) => element?.scheduleId).toList();
       print('ScheduleId: ${scheduleId}');

@@ -19,7 +19,9 @@ class GetAssetDataModel {
   int? mrs_item_id;
   int? itemID;
   int? requestID;
-  // int? assetMasterItemID;
+  String? currency;
+  int? currencyID;
+
   double? cost;
   double? ordered_qty;
   int? accepted_qty;
@@ -30,6 +32,7 @@ class GetAssetDataModel {
       {this.id,
       this.asset_type,
       this.name,
+      this.currencyID,
       this.asset_code,
       this.cat_name,
       this.serial_number,
@@ -37,7 +40,7 @@ class GetAssetDataModel {
       this.return_remarks,
       this.mrs_item_id,
       this.accepted_qty,
-      // this.assetMasterItemID,
+      this.currency,
       this.asset_cat,
       this.asset_name,
       this.comment,
@@ -54,6 +57,9 @@ class GetAssetDataModel {
     asset_name = json['asset_name'];
     comment = json['comment'];
     cost = json['cost'];
+    currency = json['currency'];
+    currencyID = json['currencyID'];
+
     itemID = json['itemID'];
     ordered_qty = json['ordered_qty'];
     requestID = json['requestID'];
@@ -75,6 +81,9 @@ class GetAssetDataModel {
         "asset_name": asset_name,
         "comment": comment,
         "cost": cost,
+        "currency": currency,
+        "currencyID": currencyID,
+
         "itemID": itemID,
         "ordered_qty": ordered_qty,
         "requestID": requestID,

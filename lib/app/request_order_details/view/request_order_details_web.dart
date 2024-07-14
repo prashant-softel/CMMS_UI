@@ -102,7 +102,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                       AddRowInReqGoodsOrder(),
 
                       // Dimens.boxHeight15,
-                       SizedBox(height: 15),
+                      SizedBox(height: 15),
                       controller.historyList!.isEmpty
                           ? Dimens.box0
                           : Container(
@@ -262,7 +262,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                       ),
 
                       // Dimens.boxHeight15,
-                       SizedBox(height: 15),
+                      SizedBox(height: 15),
                       Row(
                         children: [
                           Spacer(),
@@ -275,7 +275,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                             },
                           ),
                           // Dimens.boxWidth15,
-                           SizedBox(width: 15),
+                          SizedBox(width: 15),
                           controller.roId == 0
                               ? CustomElevatedButton(
                                   backgroundColor: ColorValues.appGreenColor,
@@ -295,7 +295,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                         ],
                       ),
                       // Dimens.boxHeight15,
-                       SizedBox(height: 15),
+                      SizedBox(height: 15),
                     ],
                   ),
                 ),
@@ -385,6 +385,13 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                   DataColumn2(
                     label: Text(
                       "Assets Code",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  DataColumn2(
+                    label: Text(
+                      "Currency",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
@@ -493,70 +500,122 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                       ],
                                     ),
                                   )
-                                : (mapData['key'] == "Action")
+                                : (mapData['key'] == "currency_drop_down")
                                     ? Padding(
-                                        padding: EdgeInsets.only(top: 10),
+                                        padding: const EdgeInsets.only(
+                                            left: 10, right: 10, top: 10),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            TableActionButton(
-                                              color: ColorValues.appRedColor,
-                                              icon: Icons.delete_outlined,
-                                              label: '',
-                                              message: '',
-                                              onPress: () {
-                                                controller.rowItem.remove(row);
-                                                controller.update();
+                                            DropdownWebStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  4,
+                                              dropdownList:
+                                                  controller.unitCurrencyList,
+                                              isValueSelected: controller
+                                                              .errorState[
+                                                          '$rowIndex-${mapData['key']}'] ==
+                                                      true
+                                                  ? false
+                                                  : true,
+                                              selectedValue: mapData["value"],
+                                              onValueChanged:
+                                                  (list, selectedValue) {
+                                                print({
+                                                  selectedValue: selectedValue
+                                                });
+                                                mapData["value"] =
+                                                    selectedValue;
+                                                controller
+                                                    .validateSpecificField(
+                                                        rowIndex);
+                                                controller.unitCurrencydropdownMapperData[
+                                                        selectedValue] =
+                                                    list.firstWhere(
+                                                        (element) =>
+                                                            element.name ==
+                                                            selectedValue,
+                                                        orElse: null);
                                               },
-                                            )
+                                            ),
                                           ],
                                         ),
                                       )
-                                    : Padding(
-                                        padding: EdgeInsets.only(top: 10),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset:
-                                                        const Offset(5.0, 5.0),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
+                                    : (mapData['key'] == "Action")
+                                        ? Padding(
+                                            padding: EdgeInsets.only(top: 10),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                TableActionButton(
+                                                  color:
+                                                      ColorValues.appRedColor,
+                                                  icon: Icons.delete_outlined,
+                                                  label: '',
+                                                  message: '',
+                                                  onPress: () {
+                                                    controller.rowItem
+                                                        .remove(row);
+                                                    controller.update();
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        : Padding(
+                                            padding: EdgeInsets.only(top: 10),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                            5.0, 5.0),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    border: controller
+                                                                    .errorState[
+                                                                '$rowIndex-${mapData['key']}'] ==
+                                                            true
+                                                        ? Border.all(
+                                                            color: Colors.red,
+                                                            width: 2.0)
+                                                        : Border.all(
+                                                            color: ColorValues
+                                                                .appLightBlueColor,
+                                                            width: 1.0),
                                                   ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                border: controller.errorState[
-                                                            '$rowIndex-${mapData['key']}'] ==
-                                                        true
-                                                    ? Border.all(
-                                                        color: Colors.red,
-                                                        width: 2.0)
-                                                    : Border.all(
-                                                        color: ColorValues
-                                                            .appLightBlueColor,
-                                                        width: 1.0),
-                                              ),
-                                              child: LoginCustomTextfield(
-                                                keyboardType: (mapData['key'] ==
-                                                            "Order" ||
-                                                        mapData['key'] ==
-                                                            "Cost")
-                                                    ? TextInputType.number
-                                                    : TextInputType.text,
-                                                inputFormatters:
-                                                    (mapData['key'] ==
+                                                  child: LoginCustomTextfield(
+                                                    keyboardType: (mapData[
+                                                                    'key'] ==
+                                                                "Order" ||
+                                                            mapData['key'] ==
+                                                                "Cost")
+                                                        ? TextInputType.number
+                                                        : TextInputType.text,
+                                                    inputFormatters: (mapData[
+                                                                    'key'] ==
                                                                 "Order" ||
                                                             mapData['key'] ==
                                                                 "Cost")
@@ -565,26 +624,27 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                                                 .digitsOnly
                                                           ]
                                                         : null,
-                                                maxLine: 1,
-                                                textController:
-                                                    TextEditingController(
-                                                        text:
-                                                            mapData["value"] ??
+                                                    maxLine: 1,
+                                                    textController:
+                                                        TextEditingController(
+                                                            text: mapData[
+                                                                    "value"] ??
                                                                 ''),
-                                                onChanged: (txt) {
-                                                  mapData["value"] = txt;
-                                                  if (controller.errorState[
-                                                          '$rowIndex-${mapData['key']}'] ==
-                                                      true) {
-                                                    controller.errorState.remove(
-                                                        '$rowIndex-${mapData['key']}');
-                                                  }
-                                                },
-                                              ),
+                                                    onChanged: (txt) {
+                                                      mapData["value"] = txt;
+                                                      if (controller.errorState[
+                                                              '$rowIndex-${mapData['key']}'] ==
+                                                          true) {
+                                                        controller.errorState
+                                                            .remove(
+                                                                '$rowIndex-${mapData['key']}');
+                                                      }
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                      ),
+                                          ),
                           );
                         },
                       ).toList(),

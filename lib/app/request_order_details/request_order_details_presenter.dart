@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
@@ -17,14 +18,23 @@ class GoodsOrdersReqDetailPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID({
-    bool? isLoading,
-    required int requestID,
-    required int facilityId
+  Future<List<CurrencyListModel>> getUnitCurrencyList({
+    required bool isLoading,
+    required int? facilityId,
   }) async {
+    return goodsOrdersReqDetailUsecase.getUnitCurrencyList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID(
+      {bool? isLoading,
+      required int requestID,
+      required int facilityId}) async {
     return goodsOrdersReqDetailUsecase.getRoDetailsByID(
       requestID: requestID,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading ?? false,
     );
   }

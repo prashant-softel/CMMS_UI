@@ -4825,117 +4825,145 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                            margin: EdgeInsets.only(
-                                                left: 10, right: 10),
-                                            decoration: BoxDecoration(
-                                              color: ColorValues.lightBlueColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey,
-                                                  offset: Offset(0.0, 1.0),
-                                                  blurRadius: 6.0,
-                                                ),
-                                              ],
-                                            ),
-                                            height: 160,
-                                            child: SfCartesianChart(
-                                              tooltipBehavior: TooltipBehavior(
-                                                enable: true,
-                                                tooltipPosition:
-                                                    TooltipPosition.pointer,
-                                                builder: (dynamic data,
-                                                    dynamic point,
-                                                    dynamic series,
-                                                    int pointIndex,
-                                                    int seriesIndex) {
-                                                  var entry = controller
-                                                      .stockOverviewmap.entries
-                                                      .toList()[pointIndex];
-                                                  double totalValue = controller
-                                                      .stockOverviewmap.values
-                                                      .reduce((a, b) => a + b);
-                                                  double percentage =
-                                                      (entry.value /
-                                                              totalValue) *
-                                                          100;
-                                                  return Container(
-                                                    padding: EdgeInsets.all(5),
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.black,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                    ),
-                                                    child: Text(
-                                                      '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    ),
-                                                  );
-                                                },
+                                              margin: EdgeInsets.only(
+                                                  left: 10, right: 10),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
                                               ),
-                                              legend: Legend(
-                                                isVisible: true,
-                                                position: LegendPosition.right,
-                                                overflowMode:
-                                                    LegendItemOverflowMode.wrap,
-                                                textStyle: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 10),
-                                                alignment:
-                                                    ChartAlignment.center,
-                                                itemPadding: 2,
-                                              ),
-                                              primaryXAxis: CategoryAxis(),
-                                              primaryYAxis: NumericAxis(),
-                                              series: <CartesianSeries>[
-                                                WaterfallSeries<
-                                                    MapEntry<String, double>,
-                                                    String>(
-                                                  dataSource: controller
-                                                      .stockOverviewmap.entries
-                                                      .toList(),
-                                                  xValueMapper:
-                                                      (MapEntry<String, double>
-                                                                  data,
-                                                              _) =>
-                                                          data.key,
-                                                  yValueMapper:
-                                                      (MapEntry<String, double>
-                                                                  data,
-                                                              _) =>
-                                                          data.value,
-                                                  pointColorMapper:
-                                                      (MapEntry<String, double>
-                                                              data,
-                                                          _) {
-                                                    var entriesList = controller
+                                              height: 160,
+                                              child: SfCartesianChart(
+                                                tooltipBehavior:
+                                                    TooltipBehavior(
+                                                  enable: true,
+                                                  tooltipPosition:
+                                                      TooltipPosition.pointer,
+                                                  builder: (dynamic data,
+                                                      dynamic point,
+                                                      dynamic series,
+                                                      int pointIndex,
+                                                      int seriesIndex) {
+                                                    var entry = controller
                                                         .stockOverviewmap
                                                         .entries
-                                                        .toList();
-                                                    int index = entriesList
-                                                        .indexWhere((entry) =>
-                                                            entry.key ==
-                                                                data.key &&
-                                                            entry.value ==
-                                                                data.value);
-                                                    Color color =
-                                                        controller.colorList()[
-                                                            index %
-                                                                controller
-                                                                    .colorList()
-                                                                    .length];
-                                                    return color;
+                                                        .toList()[pointIndex];
+                                                    double totalValue =
+                                                        controller
+                                                            .stockOverviewmap
+                                                            .values
+                                                            .reduce((a, b) =>
+                                                                a + b);
+                                                    double percentage =
+                                                        (entry.value /
+                                                                totalValue) *
+                                                            100;
+                                                    return Container(
+                                                      padding:
+                                                          EdgeInsets.all(5),
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.black,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child: Text(
+                                                        '${entry.key}: ${entry.value.toStringAsFixed(0)} (${percentage.toStringAsFixed(2)}%)',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                    );
                                                   },
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(5)),
                                                 ),
-                                              ],
-                                            ),
-                                          ),
+                                                legend: Legend(
+                                                  isVisible:
+                                                      false, // Hide the legend
+                                                  position:
+                                                      LegendPosition.right,
+                                                  overflowMode:
+                                                      LegendItemOverflowMode
+                                                          .wrap,
+                                                  textStyle: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 10),
+                                                  alignment:
+                                                      ChartAlignment.center,
+                                                  itemPadding: 2,
+                                                ),
+                                                primaryXAxis: CategoryAxis(),
+                                                primaryYAxis: NumericAxis(),
+                                                series: <CartesianSeries>[
+                                                  WaterfallSeries<
+                                                      MapEntry<String, double>,
+                                                      String>(
+                                                    dataSource: controller
+                                                        .stockOverviewmap
+                                                        .entries
+                                                        .toList(),
+                                                    xValueMapper: (MapEntry<
+                                                                    String,
+                                                                    double>
+                                                                data,
+                                                            _) =>
+                                                        data.key,
+                                                    yValueMapper: (MapEntry<
+                                                                    String,
+                                                                    double>
+                                                                data,
+                                                            _) =>
+                                                        data.value,
+                                                    pointColorMapper: (MapEntry<
+                                                                String, double>
+                                                            data,
+                                                        _) {
+                                                      var entriesList =
+                                                          controller
+                                                              .stockOverviewmap
+                                                              .entries
+                                                              .toList();
+                                                      int index = entriesList
+                                                          .indexWhere((entry) =>
+                                                              entry.key ==
+                                                                  data.key &&
+                                                              entry.value ==
+                                                                  data.value);
+                                                      Color color = controller
+                                                              .colorList()[
+                                                          index %
+                                                              controller
+                                                                  .colorList()
+                                                                  .length];
+                                                      return color;
+                                                    },
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(5)),
+                                                    intermediateSumPredicate:
+                                                        (MapEntry<String,
+                                                                        double>
+                                                                    data,
+                                                                _) =>
+                                                            data.key ==
+                                                            'Balance',
+                                                    totalSumPredicate:
+                                                        (MapEntry<String,
+                                                                        double>
+                                                                    data,
+                                                                _) =>
+                                                            data.key ==
+                                                            'Balance',
+                                                  ),
+                                                ],
+                                              )),
                                         ),
                                         Obx(() {
                                           return controller.isToggleOn.value ==

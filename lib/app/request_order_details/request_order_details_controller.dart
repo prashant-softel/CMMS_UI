@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/request_order_details/request_order_details_presenter.dart';
 import 'package:cmms/app/utils/module_type_constants.dart';
+import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
@@ -32,6 +33,9 @@ class GoodsOrdersReqDetailController extends GetxController {
   Rx<bool> isCostInvalid = false.obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
+  RxMap<dynamic, dynamic> unitCurrencydropdownMapperData = {}.obs;
+
   RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
@@ -51,7 +55,9 @@ class GoodsOrdersReqDetailController extends GetxController {
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
       });
-
+      Future.delayed(Duration(seconds: 1), () {
+        getUnitCurrencyList();
+      });
       Future.delayed(Duration(seconds: 1), () {
         getAssetList(facilityId);
 
@@ -77,6 +83,9 @@ class GoodsOrdersReqDetailController extends GetxController {
         if ((mapData['key'] == 'Drop_down' &&
                 (mapData['value'] == null ||
                     mapData['value'] == 'Please Select')) ||
+            (mapData['key'] == 'currency_drop_down' &&
+                (mapData['value'] == null ||
+                    mapData['value'] == 'Please Select')) ||
             (mapData['key'] == 'Order' &&
                 (mapData['value'] == null || mapData['value']!.isEmpty)) ||
             (mapData['key'] == 'Cost' &&
@@ -93,10 +102,16 @@ class GoodsOrdersReqDetailController extends GetxController {
   bool validateSpecificField(int index) {
     bool isValid = true;
     errorState.removeWhere((key, value) => key == '$index-Drop_down');
+    errorState.removeWhere((key, value) => key == '$index-currency_drop_down');
+
     var row = rowItem[index];
     for (var mapData in row) {
       if ((mapData['key'] == 'Drop_down' &&
-          (mapData['value'] == null || mapData['value'] == 'Please Select'))) {
+              (mapData['value'] == null ||
+                  mapData['value'] == 'Please Select')) ||
+          (mapData['key'] == 'currency_drop_down' &&
+              (mapData['value'] == null ||
+                  mapData['value'] == 'Please Select'))) {
         // errorState['$index-${mapData['key']}'] = true;
         isValid = false;
       }
@@ -171,6 +186,21 @@ class GoodsOrdersReqDetailController extends GetxController {
     addRowItem();
   }
 
+  void getUnitCurrencyList() async {
+    unitCurrencyList.value = <CurrencyListModel>[];
+    final _unitCUrrencyList =
+        await goodsOrdersReqDetailPresenter.getUnitCurrencyList(
+      isLoading: true,
+      facilityId: facilityId,
+    );
+    print('Unit Currency List:$unitCurrencyList');
+    for (var unit_currency_list in _unitCUrrencyList) {
+      unitCurrencyList.add(unit_currency_list);
+    }
+
+    update(['unit_currency_list']);
+  }
+
   void addRowItem() {
     rowItem.add([
       {
@@ -179,6 +209,7 @@ class GoodsOrdersReqDetailController extends GetxController {
         "assetMasterItemID": '',
         "id": ''
       },
+      {'key': "currency_drop_down", "value": 'Please Select', "id": ''},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
       {'key': "Comment", "value": ''},
@@ -225,7 +256,11 @@ class GoodsOrdersReqDetailController extends GetxController {
             'assetMasterItemID': '${element.id}',
             'itemID': '${element.itemID}'
           },
-          // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
+          {
+            'key': "currency_drop_down",
+            "value": '${element.currency}',
+            'id': '${element.currencyID}'
+          },
           {'key': "Cost", "value": '${element.cost}'},
           {'key': "Order", "value": '${element.ordered_qty}'},
           {'key': "Comment", "value": '${element.comment}'},
@@ -248,9 +283,10 @@ class GoodsOrdersReqDetailController extends GetxController {
       SubmitItems item = SubmitItems(
           itemID: 0,
           assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
-          cost: int.tryParse(element[1]["value"] ?? '0'),
-          ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
-          comment: element[3]["value"] ?? '0');
+          currencyId: unitCurrencydropdownMapperData[element[1]["value"]]?.id,
+          cost: int.tryParse(element[2]["value"] ?? '0'),
+          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+          comment: element[4]["value"] ?? '0');
 
       items.add(item);
 
@@ -285,11 +321,11 @@ class GoodsOrdersReqDetailController extends GetxController {
     rowItem.forEach((element) {
       SubmitItems item = SubmitItems(
           itemID: int.tryParse('${element[0]["itemID"]}') ?? 0,
-          assetMasterItemID: dropdownMapperData[element[0]["value"]]
-              ?.id, //int.tryParse('${element[0]["assetMasterItemID"]}'),
-          cost: int.tryParse(element[1]["value"] ?? '0'),
-          ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
-          comment: element[3]["value"] ?? '0');
+          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
+          currencyId: unitCurrencydropdownMapperData[element[1]["value"]]?.id,
+          cost: int.tryParse(element[2]["value"] ?? '0'),
+          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+          comment: element[4]["value"] ?? '0');
 
       items.add(item);
 

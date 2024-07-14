@@ -121,7 +121,7 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                           children: [
                                             CustomRichText(title: 'Date Range'),
                                             // Dimens.boxWidth10,
-                                            SizedBox(width:10),
+                                            SizedBox(width: 10),
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
                                                       .size
@@ -142,7 +142,7 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                           ],
                                         ),
                                         // Dimens.boxWidth10,
-                                        SizedBox(width:10),
+                                        SizedBox(width: 10),
                                         varUserAccessModel.value.access_list!
                                                     .where((e) =>
                                                         e.feature_id ==
@@ -584,85 +584,80 @@ class GoodsOrderListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' GR ${GoodsOrderListDetails?.name}',
+                        ' GR${GoodsOrderListDetails?.name}',
                       ),
-                      Dimens.boxHeight10,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
-                          decoration: BoxDecoration(
-                            color: controller.goodsOrdersList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.name ==
-                                              GoodsOrderListDetails!.name,
-                                          orElse: () =>
-                                              GetRequestOrderListModel(
-                                                  name: ""),
-                                        )
-                                        .status ==
-                                    342
-                                ? ColorValues.yellowColor
-                                : controller.goodsOrdersList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.name ==
-                                                  GoodsOrderListDetails!.name,
-                                              orElse: () =>
-                                                  GetRequestOrderListModel(
-                                                      name: ""),
-                                            )
-                                            .status ==
-                                        343
-                                    ? ColorValues.rejectColor
-                                    : controller.goodsOrdersList
-                                                .firstWhere(
-                                                  (e) =>
-                                                      e.name ==
-                                                      GoodsOrderListDetails!
-                                                          .name,
-                                                  orElse: () =>
-                                                      GetRequestOrderListModel(
-                                                          name: ""),
-                                                )
-                                                .status ==
-                                            345
-                                        ? Color.fromARGB(255, 152, 145, 145)
-                                        : controller.goodsOrdersList
-                                                    .firstWhere(
-                                                      (e) =>
-                                                          e.name ==
-                                                          GoodsOrderListDetails!
-                                                              .name,
-                                                      orElse: () =>
-                                                          GetRequestOrderListModel(
-                                                              name: ""),
-                                                    )
-                                                    .status ==
-                                                341
-                                            ? Color(0xff77cae7)
-                                            : controller.goodsOrdersList
-                                                        .firstWhere(
-                                                          (e) =>
-                                                              e.name ==
-                                                              GoodsOrderListDetails!
-                                                                  .name,
-                                                          orElse: () =>
-                                                              GetRequestOrderListModel(
-                                                                  name: ""),
-                                                        )
-                                                        .status ==
-                                                    301
-                                                ? ColorValues.approveColor
-                                                : ColorValues.addNewColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            '${GoodsOrderListDetails?.status_short}',
-                            style: Styles.white10.copyWith(
-                              color: Colors.white,
-                            ),
+                      // Dimens.boxHeight10,
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: controller.goodsOrdersList
+                                      .firstWhere(
+                                        (e) =>
+                                            e.name ==
+                                            GoodsOrderListDetails!.name,
+                                        orElse: () =>
+                                            GetRequestOrderListModel(name: ""),
+                                      )
+                                      .status ==
+                                  342
+                              ? ColorValues.yellowColor
+                              : controller.goodsOrdersList
+                                          .firstWhere(
+                                            (e) =>
+                                                e.name ==
+                                                GoodsOrderListDetails!.name,
+                                            orElse: () =>
+                                                GetRequestOrderListModel(
+                                                    name: ""),
+                                          )
+                                          .status ==
+                                      343
+                                  ? ColorValues.rejectColor
+                                  : controller.goodsOrdersList
+                                              .firstWhere(
+                                                (e) =>
+                                                    e.name ==
+                                                    GoodsOrderListDetails!.name,
+                                                orElse: () =>
+                                                    GetRequestOrderListModel(
+                                                        name: ""),
+                                              )
+                                              .status ==
+                                          345
+                                      ? Color.fromARGB(255, 152, 145, 145)
+                                      : controller.goodsOrdersList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        e.name ==
+                                                        GoodsOrderListDetails!
+                                                            .name,
+                                                    orElse: () =>
+                                                        GetRequestOrderListModel(
+                                                            name: ""),
+                                                  )
+                                                  .status ==
+                                              341
+                                          ? Color(0xff77cae7)
+                                          : controller.goodsOrdersList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            e.name ==
+                                                            GoodsOrderListDetails!
+                                                                .name,
+                                                        orElse: () =>
+                                                            GetRequestOrderListModel(
+                                                                name: ""),
+                                                      )
+                                                      .status ==
+                                                  301
+                                              ? ColorValues.approveColor
+                                              : ColorValues.addNewColor,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          '${GoodsOrderListDetails?.status_short}',
+                          style: Styles.white10.copyWith(
+                            color: Colors.white,
                           ),
                         ),
                       ),
