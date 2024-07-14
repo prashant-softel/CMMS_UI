@@ -115,11 +115,12 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                 ),
                                 Spacer(),
                                 Text(
-                                  "MRS ID:",
+                                  "ID:",
                                   style: Styles.black17,
                                 ),
+                                Dimens.boxWidth2,
                                 Text(
-                                  "${controller.mrsDetailsModel.value?.id ?? ""}",
+                                  "MRS${controller.mrsDetailsModel.value?.id ?? ""}",
                                   style: Styles.blue17,
                                 ),
                                 Dimens.boxWidth3,
