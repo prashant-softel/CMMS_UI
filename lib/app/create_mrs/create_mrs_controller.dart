@@ -163,26 +163,19 @@ class CreateMrsController extends GetxController {
       String _remark = remarkCtrlr.text.trim();
       String _setTemp = setTemlateCtrlr.text.trim();
 
-      Rx<DateTime> requestd_date = DateTime.now().obs;
-      String formattedFromdate =
-          DateFormat('yyyy-MM-dd').format(requestd_date.value);
-
       List<Equipments> items = [];
       rowItem.forEach((element) {
         Equipments item = Equipments(
-          id: dropdownMapperData.value[element[0]["value"]]?.id,
-          available_qty:
-              dropdownMapperData.value[element[0]["value"]]?.available_qty,
+          id: dropdownMapperData[element[0]["value"]]?.id,
+          available_qty: dropdownMapperData[element[0]["value"]]?.available_qty,
 
           issued_qty:
               0, // dropdownMapperData[element[0]["value"]]?.available_qty,
-          asset_code: dropdownMapperData.value[element[0]["value"]]?.asset_code,
-          serial_number:
-              dropdownMapperData.value[element[0]["value"]]?.serial_number,
+          asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
+          serial_number: dropdownMapperData[element[0]["value"]]?.serial_number,
 
-          equipmentID: dropdownMapperData.value[element[0]["value"]]?.asset_ID,
-          asset_type_ID:
-              dropdownMapperData.value[element[0]["value"]]?.asset_type_ID,
+          equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
+          asset_type_ID: dropdownMapperData[element[0]["value"]]?.asset_type_ID,
           requested_qty: int.tryParse(element[3]["value"] ?? '0'),
         );
         items.add(item);
