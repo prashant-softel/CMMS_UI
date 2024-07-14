@@ -832,11 +832,12 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
-                                                              .listMrsByJobId?[
-                                                                  index]
-                                                              ?.mrsId
-                                                              .toString() ??
-                                                          '')),
+                                                                  .listMrsByJobId?[
+                                                                      index]
+                                                                  ?.is_mrs_return ==
+                                                              0
+                                                          ? "MRS${controller.listMrsByJobId?[index]?.mrsId.toString() ?? ''}"
+                                                          : "RMRS${controller.listMrsByJobId?[index]?.mrs_return_ID.toString() ?? ''}")),
                                                       DataCell(Text(controller
                                                               .listMrsByJobId?[
                                                                   index]
@@ -868,24 +869,70 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                         ?.mrsId
                                                                         .toString() ??
                                                                     "";
+                                                                String rmrsId = controller
+                                                                        .listMrsByJobId?[
+                                                                            index]
+                                                                        ?.mrs_return_ID
+                                                                        .toString() ??
+                                                                    "";
+
                                                                 print({
                                                                   "mrsId": mrsId
                                                                 });
-                                                                Get.toNamed(
-                                                                    Routes
-                                                                        .mrsViewScreen,
-                                                                    arguments: {
-                                                                      'mrsId': int
-                                                                          .tryParse(
-                                                                              "$mrsId"),
-                                                                      'type': 1
-                                                                    });
+                                                                rmrsId == "0"
+                                                                    ? Get.toNamed(
+                                                                        Routes
+                                                                            .mrsViewScreen,
+                                                                        arguments: {
+                                                                            'mrsId':
+                                                                                int.tryParse("$mrsId"),
+                                                                            'type':
+                                                                                1
+                                                                          })
+                                                                    : Get.toNamed(
+                                                                        Routes
+                                                                            .approverReturnMrs,
+                                                                        arguments: {
+                                                                            'mrsId':
+                                                                                rmrsId,
+                                                                            'type':
+                                                                                1
+                                                                          });
+                                                                ;
+                                                                // String mrsId = controller
+                                                                //         .listMrsByJobId?[
+                                                                //             index]
+                                                                //         ?.mrsId
+                                                                //         .toString() ??
+                                                                //     "";
+                                                                // print({
+                                                                //   "mrsId": mrsId
+                                                                // });
+                                                                // Get.toNamed(
+                                                                //     Routes
+                                                                //         .mrsViewScreen,
+                                                                //     arguments: {
+                                                                //       'mrsId': int
+                                                                //           .tryParse(
+                                                                //               "$mrsId"),
+                                                                //       'type': 1
+                                                                //     });
                                                               }),
                                                           controller
-                                                                      .listMrsByJobId?[
-                                                                          index]!
-                                                                      .status ==
-                                                                  324
+                                                                          .listMrsByJobId?[
+                                                                              index]
+                                                                          ?.status ==
+                                                                      323 ||
+                                                                  controller
+                                                                          .listMrsByJobId?[
+                                                                              index]
+                                                                          ?.status ==
+                                                                      321 ||
+                                                                  controller
+                                                                          .listMrsByJobId?[
+                                                                              index]
+                                                                          ?.status ==
+                                                                      324
                                                               ? Dimens.box0
                                                               : TableActionButton(
                                                                   color: ColorValues
@@ -895,31 +942,37 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                   message:
                                                                       "Edit MRS",
                                                                   onPress: () {
-                                                                    final _flutterSecureStorage =
-                                                                        const FlutterSecureStorage();
-
-                                                                    _flutterSecureStorage
-                                                                        .delete(
-                                                                            key:
-                                                                                "mrsId");
+                                                                    controller
+                                                                        .clearMrsIdStoreData();
                                                                     String mrsId = controller
                                                                             .listMrsByJobId?[index]
                                                                             ?.mrsId
                                                                             .toString() ??
                                                                         "";
+                                                                    String rmrsId = controller
+                                                                            .listMrsByJobId?[index]
+                                                                            ?.mrs_return_ID
+                                                                            .toString() ??
+                                                                        "";
+
                                                                     print({
                                                                       "mrsId":
                                                                           mrsId
                                                                     });
-                                                                    Get.toNamed(
-                                                                        Routes
-                                                                            .editMrs,
-                                                                        arguments: {
-                                                                          'mrsId':
-                                                                              int.tryParse("$mrsId"),
-                                                                          'type':
-                                                                              1
-                                                                        });
+                                                                    rmrsId ==
+                                                                            "0"
+                                                                        ? Get.toNamed(
+                                                                            Routes.editMrs,
+                                                                            arguments: {
+                                                                                'mrsId': int.tryParse("$mrsId"),
+                                                                                'type': 1
+                                                                              })
+                                                                        : Get.toNamed(
+                                                                            Routes
+                                                                                .editReturnMrs,
+                                                                            arguments:
+                                                                                int.tryParse(rmrsId));
+                                                                    ;
                                                                   })
                                                         ],
                                                       )),

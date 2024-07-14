@@ -7799,7 +7799,7 @@ class Repository {
                 )
                 .toList();
         print({"_mrsListByModule", _mrsListByModule});
-        return _mrsListByModule;
+        return _mrsListByModule.reversed.toList();
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getMrsListByModule');
         return null;

@@ -478,9 +478,17 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                 )
                               : Dimens.box0,
                           Dimens.boxHeight10,
-                          controller.cmmrsItems!.isEmpty
-                              ? Dimens.box0
-                              : Container(
+                          controller.listMrsByTaskId!.value
+                                          .firstWhereOrNull(
+                                            (element) =>
+                                                element?.jobCardId != 0 ||
+                                                element?.pmId != 0,
+                                          )
+                                          ?.mrs_return_ID ==
+                                      0 &&
+                                  controller.allTrue.value == false &&
+                                  controller.cmmrsItems!.isNotEmpty
+                              ? Container(
                                   margin: Dimens.edgeInsets20,
                                   height: 300,
                                   // width: MediaQuery.of(context).size.width / 1.2,
@@ -829,7 +837,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       ),
                                     ],
                                   ),
-                                ),
+                                )
+                              : Dimens.box0,
 
                           Dimens.boxHeight20,
                           Row(//
@@ -1153,17 +1162,14 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                         arguments: {
                                                           'type': 2,
                                                           "whereUsed": 4,
-                                                          "fromActorTypeId": 2,
-                                                          "to_actor_type_id": 4,
-                                                          "pmTaskId": //controller
-                                                              // .listMrsByTaskId!
-                                                              // .value.id
-                                                              //  ??
-                                                              0,
+                                                          "fromActorTypeId": 4,
+                                                          "to_actor_type_id": 2,
+                                                          "pmTaskId": controller
+                                                              .jobCardId.value,
                                                           "activity": controller
-                                                              .pmtaskViewModel
+                                                              .jobDetailsModel
                                                               .value
-                                                              ?.plan_title,
+                                                              ?.jobTitle,
                                                           "mrsId": controller
                                                                   .listMrsByTaskId!
                                                                   .firstWhere(
