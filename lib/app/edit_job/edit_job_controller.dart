@@ -252,33 +252,32 @@ class EditJobController extends GetxController {
   }
 
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
-    try{
-
+    try {
+      toolsRequiredToWorkTypeList!.clear();
       selectedtoolsRequiredToWorkTypeList.clear();
       selectedtoolsRequiredToWorkTypeIdList.clear();
-    final list = await editJobPresenter.getToolsRequiredToWorkTypeList(
-      isLoading: true,
-      workTypeIds: workTypeIds,
-    );
-    print('paifcghb:${list}');
+      final list = await editJobPresenter.getToolsRequiredToWorkTypeList(
+        isLoading: true,
+        workTypeIds: workTypeIds,
+      );
+      print('paifcghb:${list}');
 
-    toolsRequiredToWorkTypeList?.value = list ?? <ToolsModel>[];
-if (jobDetailsModel.value?.toolsRequiredList != null) {
-  for (var toolType in jobDetailsModel.value?.toolsRequiredList ?? []) {
-    ToolsModel linkedToolName = ToolsModel(
-      id: toolType.toolId,
-      linkedToolName: toolType.toolName,
-    );
-    selectedtoolsRequiredToWorkTypeList.add(linkedToolName);
-    selectedtoolsRequiredToWorkTypeIdList.add(linkedToolName.id ?? 0);
-  }
-}
+      toolsRequiredToWorkTypeList?.value = list ?? <ToolsModel>[];
+      if (jobDetailsModel.value?.toolsRequiredList != null) {
+        for (var toolType in jobDetailsModel.value?.toolsRequiredList ?? []) {
+          ToolsModel linkedToolName = ToolsModel(
+            id: toolType.toolId,
+            linkedToolName: toolType.toolName,
+          );
+          selectedtoolsRequiredToWorkTypeList.add(linkedToolName);
+          selectedtoolsRequiredToWorkTypeIdList.add(linkedToolName.id ?? 0);
+        }
+      }
 
-    update(['toolsRequiredToWorkTypeList']);
+      update(['toolsRequiredToWorkTypeList']);
+    } catch (e) {
+      print(e);
     }
-   catch(e){
-    print(e);
-  }
   }
 
   Future<void> getInventoryCategoryList(String? facilityId) async {
@@ -341,7 +340,6 @@ if (jobDetailsModel.value?.toolsRequiredList != null) {
       workTypeList.clear();
       selectedWorkTypeList.clear();
       selectedWorkTypeIdList.clear();
-      
 
       ///
       categoryIds = selectedEquipmentCategoryIdList;
@@ -572,7 +570,6 @@ if (jobDetailsModel.value?.toolsRequiredList != null) {
   }
 
   void toolsRequiredSelected(_selectedtoolsRequiredToWorkTypeId) async {
-    
     selectedtoolsRequiredToWorkTypeIdList.value = <int>[];
     for (var _selectedtoolsRequiredToWorkType
         in _selectedtoolsRequiredToWorkTypeId) {
