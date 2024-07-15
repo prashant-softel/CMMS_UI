@@ -582,7 +582,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'MC${ModuleCleaningPlanningListDetails?.planId}',
+                        'MCP${ModuleCleaningPlanningListDetails?.planId}',
                       ),
                       Dimens.boxHeight10,
                       Container(

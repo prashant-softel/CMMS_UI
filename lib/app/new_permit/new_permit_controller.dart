@@ -2004,6 +2004,12 @@ class NewPermitController extends GetxController {
   Future<void> viewJobDetails() async {
     Get.toNamed(Routes.jobDetails);
   }
+  Future<void> viewPMTDetails() async {
+    Get.toNamed(Routes.pmTaskView);
+  }
+  Future<void> viewMCTDetails() async {
+    Get.toNamed(Routes.addModuleCleaningExecutionContentWeb);
+  }
 
   browseFiles({Uint8List? fileBytes}) async {
     await permitPresenter.browseFiles(

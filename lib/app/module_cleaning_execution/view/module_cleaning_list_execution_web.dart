@@ -548,7 +548,7 @@ class MCExcutionListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'MCTASK${McExcutionListDetails?.executionId}',
+                        'MCT${McExcutionListDetails?.executionId}',
                       ),
                       Dimens.boxHeight10,
                       Align(
