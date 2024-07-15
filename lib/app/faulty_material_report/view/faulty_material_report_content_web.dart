@@ -439,7 +439,7 @@ class FaultyStockReportListDataSource extends DataTableSource {
     var cellsBuffer = [
       '${faultyDetails?.asset_name ?? ''}',
       '${faultyDetails?.serial_number ?? ''}',
-      '${faultyDetails?.replaceSerialNo ?? ''}',
+      // '${faultyDetails?.replaceSerialNo ?? ''}',
       '${faultyDetails?.lastInsetedDateTime ?? ''}',
       '${faultyDetails?.qty ?? ''}',
       '${faultyDetails?.remarks ?? ''}',

@@ -52,7 +52,7 @@ class FaultyMaterialReportController extends GetxController {
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Assets Name": true,
     "Serial Number": true,
-    "Replace Serial No.": true,
+    // "Replace Serial No.": true,
     "Inseted DateTime": true,
     "quantity": true,
     "Remark": true
@@ -60,7 +60,7 @@ class FaultyMaterialReportController extends GetxController {
   final Map<String, double> columnwidth = {
     "Assets Name": 300,
     "Serial Number": 250,
-    "Replace Serial No.": 250,
+    // "Replace Serial No.": 250,
     "Inseted DateTime": 200,
     "quantity": 100,
     "Remark": 300,
@@ -80,7 +80,7 @@ class FaultyMaterialReportController extends GetxController {
     this.filterText = {
       "Assets Name": assetNameFilterText,
       "Serial Number": serialNoFilterText,
-      "Replace Serial No.": replaceFilterText,
+      // "Replace Serial No.": replaceFilterText,
       "Inseted DateTime": insetedFilterText,
       "quantity": quantityFilterText,
       "Remark": remarkFilterText,
