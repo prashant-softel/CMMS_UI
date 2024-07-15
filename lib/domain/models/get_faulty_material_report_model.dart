@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 List<FaultyMaterialReportModel> FaultyMaterialReportModelFromJson(String str) =>
     List<FaultyMaterialReportModel>.from(
         json.decode(str).map((x) => FaultyMaterialReportModel.fromJson(x)));
@@ -73,7 +75,9 @@ class FaultyMaterialReportModel {
       referedby: parsedJson['referedby'],
       qty: parsedJson['qty'],
       nature_Of_Transaction: parsedJson['nature_Of_Transaction'],
-      lastInsetedDateTime: parsedJson['lastInsetedDateTime'],
+      lastInsetedDateTime: parsedJson['lastInsetedDateTime'] == null
+          ? parsedJson['lastInsetedDateTime']
+          : Utility.getFormatedyearMonthDay(parsedJson['lastInsetedDateTime']),
       item_condition: parsedJson['item_condition'],
       item_category_ID: parsedJson['item_category_ID'],
       id: parsedJson['id'],
