@@ -130,7 +130,12 @@ class CreateWarrantyClaimModel {
 }
 
 class ExternalEmails {
-  ExternalEmails({this.name, this.email, this.mobile, this.role});
+  ExternalEmails({
+    this.name,
+    this.email,
+    this.mobile,
+    this.role,
+  });
 
   String? name;
   String? role;
@@ -143,8 +148,12 @@ class ExternalEmails {
       email: json["email"],
       mobile: json['mobile']);
 
-  Map<String, dynamic> toJson() =>
-      {"name": name, "role": role, "email": email, "mobile": mobile};
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "role": role,
+        "email": email,
+        "mobile": mobile,
+      };
 }
 
 class SupplierActions {

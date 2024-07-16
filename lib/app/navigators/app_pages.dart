@@ -236,6 +236,7 @@ import 'package:cmms/app/view_water_data/view_water_data_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
+import 'package:cmms/app/warranty_claim_list/web/create_warranty_claim_web.dart';
 import 'package:cmms/app/waste_data/views/waste_data_screen.dart';
 import 'package:cmms/app/waste_data/waste_data_binding.dart';
 import 'package:cmms/app/waste_type_master/view/waste_type_master_screen.dart';
@@ -592,6 +593,10 @@ class AppPages {
     GetPage<dynamic>(
         name: _Paths.newWarrantyClaimList,
         page: NewWarrantyClaimWeb.new,
+        binding: WarrantyClaimBinding()),
+    GetPage<dynamic>(
+        name: _Paths.createWarrantyClaimList,
+        page: CreateWarrantyClaimWeb.new,
         binding: WarrantyClaimBinding()),
     GetPage<dynamic>(
         name: _Paths.warrantyClaimListWeb,
