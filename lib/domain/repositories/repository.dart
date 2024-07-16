@@ -493,15 +493,15 @@ class Repository {
 
   //Update New Permit
   Future<Map<String, dynamic>> updateNewPermit(
-      newPermit, bool? isLoading, bool? resubmit,int? type) async {
+      newPermit, bool? isLoading, bool? resubmit, int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateNewPermit(
-        auth: auth,
-        newPermit: newPermit,
-        isLoading: isLoading ?? false,
-        resubmit: resubmit,type:type
-      );
+          auth: auth,
+          newPermit: newPermit,
+          isLoading: isLoading ?? false,
+          resubmit: resubmit,
+          type: type);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -7647,9 +7647,7 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> closeJob(
-    jobCard,
-    bool? isLoading,
-  ) async {
+      jobCard, bool? isLoading, closePtwJsonString) async {
     // final res = ResponseModel(data: '', hasError: false);
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -7662,6 +7660,8 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
+          permitCloseButton(closePtwJsonString, isLoading, 0, 2);
+
           return responseMap;
         }
       } //
