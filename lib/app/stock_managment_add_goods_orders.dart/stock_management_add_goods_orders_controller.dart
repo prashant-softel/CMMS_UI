@@ -557,13 +557,17 @@ class StockManagementAddGoodsOrdersController extends GetxController {
                 goodsOrdersList.where((order) => order?.status == 344).toList();
             if (filteredOrders.isNotEmpty) {
               int reqOrderIndex =
-                  filteredOrders.indexWhere((x) => x?.name == value);
+                  filteredOrders.indexWhere((x) => x?.requestOrderId == value);
               rowItem.value = <List<Map<String, String>>>[].obs;
               // rowItem.remove();
               selectedReqOrder.value =
-                  filteredOrders[reqOrderIndex]?.name ?? "";
-              selectedReqOrderId.add(
-                  int.tryParse(filteredOrders[reqOrderIndex]?.name ?? "") ?? 0);
+                  filteredOrders[reqOrderIndex]?.requestOrderId.toString() ??
+                      "";
+              selectedReqOrderId.add(int.tryParse(filteredOrders[reqOrderIndex]
+                          ?.requestOrderId
+                          .toString() ??
+                      "") ??
+                  0);
               getRoDetailsByID(
                   requestID: selectedReqOrderId, facilityId: facilityId);
             }
@@ -802,7 +806,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         _goodsordersList.where((order) => order.status == 344).toList();
     for (var requ in filteredOrders) {
       goodsOrdersList.add(requ);
-      selectedReqOrderId.add(int.tryParse(requ.name ?? "") ?? 0);
+      selectedReqOrderId
+          .add(int.tryParse(requ.requestOrderId.toString() ?? '') ?? 0);
     }
     if (filteredOrders.isNotEmpty) {
       // selectedReqOrderId.add(int.tryParse(filteredOrders[0].name ?? "") ?? 0);
