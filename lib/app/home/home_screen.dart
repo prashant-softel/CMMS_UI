@@ -252,12 +252,13 @@ class CustomTextFieldForStock extends StatelessWidget {
     this.decoration,
     this.onChanged,
     this.alignment,
+    this.suffixText,
     this.numberTextField = false,
   }) : super(key: key);
 
   final String? label;
   String? errorController;
-
+  String? suffixText;
   final int? maxLine;
   final double? width;
   final bool readOnly;
@@ -307,6 +308,7 @@ class CustomTextFieldForStock extends StatelessWidget {
                   ),
                   errorText: errorController,
                   suffixIcon: Icon(Icons.date_range),
+                  suffixText: suffixText,
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 8.0, horizontal: 5),
                   filled: true,

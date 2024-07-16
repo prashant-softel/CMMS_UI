@@ -323,16 +323,17 @@ class AddInventoryController extends GetxController {
       // lastCalibrationDateTc.text =
       //     editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
       //         "";
-     // Ensure the text field is properly updated with the calibration date
- lastCalibrationDateTc.text = editAddInventoryDetailsModel.value?.calibrationLastDate?.toString() ?? "";
+      // Ensure the text field is properly updated with the calibration date
+      lastCalibrationDateTc.text =
+          editAddInventoryDetailsModel.value?.calibrationLastDate?.toString() ??
+              "";
 
 // Check if the calibration date is '0001-01-01T00:00:00' and set it to an empty string
-if (lastCalibrationDateTc.text == '0001-01-01T00:00:00') {
-  lastCalibrationDateTc.text = '';
-} else {
-  lastCalibrationDateTc.text;
-}
-
+      if (lastCalibrationDateTc.text == '0001-01-01T00:00:00') {
+        lastCalibrationDateTc.text = '';
+      } else {
+        lastCalibrationDateTc.text;
+      }
 
       startDateTc.text =
           editAddInventoryDetailsModel.value?.start_date.toString() ?? "";
@@ -597,7 +598,7 @@ if (lastCalibrationDateTc.text == '0001-01-01T00:00:00') {
             warranty_term_type: selectedwarrantyUsageTermNameId,
             parent_equipment_no: _parentEquipmentNoCtrlr,
             uplaodfile_ids: fileIds,
-            calibrationFrequencyType: 2,
+            calibrationFrequencyType: selectedfrequency.value,
             acCapacity: 2000,
             dcCapacity: 5000,
             multiplier: 3,
@@ -736,7 +737,7 @@ if (lastCalibrationDateTc.text == '0001-01-01T00:00:00') {
             warranty_term_type: selectedwarrantyUsageTermNameId,
             parent_equipment_no: _parentEquipmentNoCtrlr,
             uplaodfile_ids: fileIds,
-            calibrationFrequencyType: 2,
+            calibrationFrequencyType: selectedfrequency.value,
             acCapacity: 2000,
             dcCapacity: 5000,
             multiplier: 3,

@@ -110,11 +110,12 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                               ),
                               Spacer(),
                               Text(
-                                "MRS ID:",
+                                "ID:",
                                 style: Styles.black17,
                               ),
+                              Dimens.boxWidth2,
                               Text(
-                                "${controller.returnMrsDetailsModel.value?.id ?? ""}",
+                                "RMRS${controller.returnMrsDetailsModel.value?.id ?? ""}",
                                 style: Styles.blue17,
                               ),
                               Dimens.boxWidth3,
@@ -229,9 +230,13 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                           "",
                                       style: Styles.blue17),
                                   Dimens.boxHeight10,
+                                  // Text(
+                                  //     "${controller.returnMrsDetailsModel.value?.whereUsedType ?? ""}${controller.returnMrsDetailsModel.value?.whereUsedTypeId ?? ""}",
+                                  //     style: Styles.blue17),
                                   Text(
-                                      "${controller.returnMrsDetailsModel.value?.whereUsedType ?? ""}${controller.returnMrsDetailsModel.value?.whereUsedTypeId ?? ""}",
-                                      style: Styles.blue17),
+                                    "${controller.returnMrsDetailsModel.value?.whereUsedType == 'JOBCARD' ? 'JC' : controller.returnMrsDetailsModel.value?.whereUsedType == 'PMTASK' ? 'PMT' : ''} ${controller.returnMrsDetailsModel.value?.whereUsedTypeId ?? ""}",
+                                    style: Styles.blue17,
+                                  ),
                                   Dimens.boxHeight10,
                                   controller.returnMrsDetailsModel.value
                                               ?.status ==

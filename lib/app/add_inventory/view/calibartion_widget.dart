@@ -59,26 +59,31 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                     SizedBox(
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(2),
+                                          borderRadius:
+                                              BorderRadius.circular(2),
                                         ),
                                         child: DropdownWebStock(
                                           margin: Dimens.edgeInsets5,
-                                          width:
-                                              MediaQuery.of(context).size.width / 5,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              5,
                                           controller: controller,
-                                          dropdownList: controller.frequencyList,
-                                          isValueSelected:
-                                              controller.isSelectedfrequency.value,
-                                          selectedValue:
-                                              controller.selectedfrequency.value,
-                                          onValueChanged: controller.onValueChanged,
+                                          dropdownList:
+                                              controller.frequencyList,
+                                          isValueSelected: controller
+                                              .isSelectedfrequency.value,
+                                          selectedValue: controller
+                                              .selectedfrequency.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
                                 // Dimens.boxHeight5,
-                                SizedBox(height:5),
+                                SizedBox(height: 5),
                                 Row(
                                   children: [
                                     CustomRichText(
@@ -86,10 +91,12 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                         title: "Calibration Remainder In"),
                                     SizedBox(width: 10),
                                     Container(
-                                      height: MediaQuery.of(context).size.height *
-                                          0.040,
-                                      width: MediaQuery.of(context).size.width / 5,
-                                      child: TextField(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.040,
+                                      width:
+                                          MediaQuery.of(context).size.width / 5,
+                                      child: TextFormField(
                                         style: GoogleFonts.lato(
                                           textStyle: TextStyle(
                                               fontSize: 16.0,
@@ -101,7 +108,7 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                         ],
                                         controller:
                                             controller.calibrationRemaingCtrlr,
-                        
+
                                         //  errorController: controller
                                         //                     .isSerialNoInvalid
                                         //                     .value
@@ -120,16 +127,20 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                         //               }
                                         //               },
                                         focusNode: controller.calremFocus,
-                                        scrollController: controller.calremScroll,
+                                        scrollController:
+                                            controller.calremScroll,
                                         decoration: InputDecoration(
                                           contentPadding: Dimens.edgeInsets5,
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(width: .2),
-                                            borderRadius: BorderRadius.circular(2),
+                                            borderRadius:
+                                                BorderRadius.circular(2),
                                           ),
+                                          suffixText: "Days",
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(width: .2),
-                                            borderRadius: BorderRadius.circular(2),
+                                            borderRadius:
+                                                BorderRadius.circular(2),
                                           ),
                                         ),
                                       ),
@@ -155,27 +166,30 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                     SizedBox(width: 10),
                                     CustomTextFieldForStock(
                                         width:
-                                            MediaQuery.of(context).size.width / 5,
+                                            MediaQuery.of(context).size.width /
+                                                5,
                                         numberTextField: true,
                                         onTap: () {
-                                          controller.openLastCalibrationDatePicker =
+                                          controller
+                                                  .openLastCalibrationDatePicker =
                                               !controller
                                                   .openLastCalibrationDatePicker;
-                                          controller.update(['calibration_tab']);
+                                          controller
+                                              .update(['calibration_tab']);
                                         },
                                         textController:
                                             controller.lastCalibrationDateTc,
-                                        errorController:
-                                            controller.isReceivedDateInvalid.value
-                                                ? "Required field"
-                                                : null,
+                                        errorController: controller
+                                                .isReceivedDateInvalid.value
+                                            ? "Required field"
+                                            : null,
                                         onChanged: (value) {
                                           if (value.trim().length > 1) {
-                                            controller.isReceivedDateInvalid.value =
-                                                false;
+                                            controller.isReceivedDateInvalid
+                                                .value = false;
                                           } else {
-                                            controller.isReceivedDateInvalid.value =
-                                                true;
+                                            controller.isReceivedDateInvalid
+                                                .value = true;
                                           }
                                         }),
                                   ],
@@ -199,14 +213,15 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                 //     ],
                                 //   ),
                                 // ),
-                                     ],
+                              ],
                             ),
                           ],
                         ),
-                        Row(children: [Container(
+                        Row(
+                          children: [
+                            Container(
                               height: 400,
-
-                              width: MediaQuery.of(context).size.width *0.9,
+                              width: MediaQuery.of(context).size.width * 0.9,
                               child: Center(
                                 child: Container(
                                   // margin: EdgeInsets.all(16),
@@ -232,23 +247,30 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                               //   width: MediaQuery.of(context)
                                               //       .size
                                               //       // .width ,
-                                                  Container(
-                                                  height: MediaQuery.of(context).size.height * 0.2,
-                                                  width: MediaQuery.of(context).size.width * 0.6,
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        flex: 2,
-                                                        child: FileUploadWidgetWithDropzone(),
-                                                      ),
-                                                      SizedBox(width: 10),
-                                                      Expanded(
-                                                          flex: 8,
-                                                          child:
-                                                              FileUploadDetailsWidgetWeb()),
-                                                    ],
-                                                  ),
+                                              Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.2,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.6,
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child:
+                                                          FileUploadWidgetWithDropzone(),
+                                                    ),
+                                                    SizedBox(width: 10),
+                                                    Expanded(
+                                                        flex: 8,
+                                                        child:
+                                                            FileUploadDetailsWidgetWeb()),
+                                                  ],
                                                 ),
+                                              ),
                                               // ),
                                             ],
                                           ),
@@ -259,15 +281,14 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                 ),
                               ),
                             ),
-                        ],)
+                          ],
+                        )
                       ],
                     ),
-                    
                   ),
                 ],
               ),
             ),
-            
             if (controller.openLastCalibrationDatePicker)
               Positioned(
                 right: 150,

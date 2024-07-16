@@ -68,6 +68,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                   InkWell(
                       onTap: () {
                         var taskId;
+                        var mcid;
                         var jobId;
                         controller.typee.value == 1
                             ? Get.offAllNamed(Routes.jobDetails,
@@ -78,7 +79,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                 : controller.typee.value == 3
                                     ? Get.offAllNamed(Routes.pmTaskView,
                                         arguments: {'pmTaskId': taskId})
-                                    : Get.offNamed(Routes.newPermitList);
+                                    : controller.typee.value == 4
+                                        ? Get.offAllNamed(
+                                            Routes
+                                                .addModuleCleaningExecutionContentWeb,
+                                            arguments: {'mcid': mcid})
+                                        : Get.offNamed(Routes.newPermitList);
                       },
                       child: controller.typee.value == 1
                           ? Text(
@@ -95,10 +101,15 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       "/ AUDIT TASK ",
                                       style: Styles.greyLight14,
                                     )
-                                  : Text(
-                                      "/ PERMIT LIST",
-                                      style: Styles.greyLight14,
-                                    )),
+                                  : controller.typee.value == 4
+                                      ? Text(
+                                          "/ MC TASK ",
+                                          style: Styles.greyLight14,
+                                        )
+                                      : Text(
+                                          "/ PERMIT LIST",
+                                          style: Styles.greyLight14,
+                                        )),
                   controller.newPermitDetailsModel.value?.permitNo == null
                       ? Text(
                           " / ADD NEW PERMIT",
@@ -206,16 +217,23 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             DataRow(
                                               cells: [
                                                 DataCell(
-                                                  Text(
-                                                    '${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
-                                                    style: TextStyle(
-                                                      decoration: TextDecoration
-                                                          .underline,
-                                                      decorationStyle:
-                                                          TextDecorationStyle
-                                                              .solid,
-                                                      color: Color.fromARGB(
-                                                          255, 5, 92, 163),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      controller
+                                                          .viewPMTDetails();
+                                                    },
+                                                    child: Text(
+                                                      'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
+                                                      style: TextStyle(
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline,
+                                                        decorationStyle:
+                                                            TextDecorationStyle
+                                                                .solid,
+                                                        color: Color.fromARGB(
+                                                            255, 5, 92, 163),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -461,10 +479,10 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         DataCell(
                                           GestureDetector(
                                             onTap: () {
-                                              controller.viewJobDetails();
+                                              controller.viewMCTDetails();
                                             },
                                             child: Text(
-                                                '${int.tryParse('${controller.mcExecutionDetailsModel?.executionId ?? 0}')}',
+                                                'MCT${int.tryParse('${controller.mcExecutionDetailsModel?.executionId ?? 0}')}',
                                                 style: TextStyle(
                                                   decoration:
                                                       TextDecoration.underline,
@@ -3282,7 +3300,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
               return Obx(
                 () => Container(
                   padding: Dimens.edgeInsets05_0_5_0,
-                  height: 300,
+                  height: 150,
                   width: 300,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -3296,7 +3314,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                       ),
                       SizedBox(
                         width: 250,
-                        height: 120,
+                        height: 50,
                         child: CustomMultiSelectDialogField(
                           buttonText: 'Add Employee',
                           title: 'Select Employee',

@@ -29,11 +29,13 @@ class JobCardDetailsPresenter {
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
+    int? featureId,
     bool? isLoading,
   }) async =>
       await jobCardDetailsUsecase.getAssignedToList(
         auth: auth ?? "",
         facilityId: facilityId,
+        featureId: featureId,
         isLoading: isLoading,
       );
 

@@ -241,17 +241,18 @@ class AddModuleCleaningExecutionContentWeb
                                                 ),
                                               ],
                                             ),
+                                            Dimens.boxWidth2,
 
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  ' ${controller.planId}',
+                                                  'MCP${controller.planId}',
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                  ' ${controller.mcid}',
+                                                  'MCT${controller.mcid}',
                                                   style: Styles.blue17,
                                                 ),
                                               ],
@@ -1074,39 +1075,38 @@ class AddModuleCleaningExecutionContentWeb
                                                               .cancelColor,
                                                       text: "Close",
                                                       onPressed: () {
-                                                        // controller.allScheduleTrue
-                                                        //             .value ==
-                                                        //         false
-                                                        //     ? Get.defaultDialog(
-                                                        //         radius: 5,
-                                                        //         title: 'Alert',
-                                                        //         middleText:
-                                                        //             'Please complete the all schedules',
-                                                        //         textConfirm:
-                                                        //             'OK',
-                                                        //         onConfirm: () {
-                                                        //           Get.back(); // Close the dialog
-                                                        //         },
-                                                        //         buttonColor:
-                                                        //             ColorValues
-                                                        //                 .appGreenColor,
-                                                        //         confirmTextColor:
-                                                        //             Colors
-                                                        //                 .white,
-                                                        //       )
-                                                        //     :
-                                                        Get.dialog<void>(CustomCalibrationDialog(
-                                                            id: controller
-                                                                    .mcExecutionDetailsModel
-                                                                    .value
-                                                                    ?.executionId ??
-                                                                0,
-                                                            title: controller
-                                                                    .mcExecutionDetailsModel
-                                                                    .value
-                                                                    ?.title ??
-                                                                "",
-                                                            starttype: 3));
+                                                        controller.allScheduleTrue
+                                                                    .value ==
+                                                                false
+                                                            ? Get.defaultDialog(
+                                                                radius: 5,
+                                                                title: 'Alert',
+                                                                middleText:
+                                                                    'Please complete the all schedules',
+                                                                textConfirm:
+                                                                    'OK',
+                                                                onConfirm: () {
+                                                                  Get.back(); // Close the dialog
+                                                                },
+                                                                buttonColor:
+                                                                    ColorValues
+                                                                        .appGreenColor,
+                                                                confirmTextColor:
+                                                                    Colors
+                                                                        .white,
+                                                              )
+                                                            : Get.dialog<void>(CustomCalibrationDialog(
+                                                                id: controller
+                                                                        .mcExecutionDetailsModel
+                                                                        .value
+                                                                        ?.executionId ??
+                                                                    0,
+                                                                title: controller
+                                                                        .mcExecutionDetailsModel
+                                                                        .value
+                                                                        ?.title ??
+                                                                    "",
+                                                                starttype: 3));
 
                                                         // Get.dialog(EndMCExecutionDialog());
                                                       },

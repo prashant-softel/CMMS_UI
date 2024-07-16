@@ -1135,6 +1135,12 @@ class MastersDashboard extends GetView<MastersController> {
                                                     .newWarrantyClaimList();
                                               })
                                           : Dimens.box0,
+                                      _inventoryList(
+                                          tittle: "Create Warranty Claim",
+                                          ontap: () {
+                                            controller
+                                                .createWarrantyClaimList();
+                                          }),
                                       varUserAccessModel.value.access_list!
                                                   .where((e) =>
                                                       e.feature_id ==
@@ -1296,48 +1302,52 @@ class MastersDashboard extends GetView<MastersController> {
                                           : Dimens.box0,
                                     ],
                                   ),
-                                 GridView.count(
-                          shrinkWrap: true,
-                          primary: false,
-                          padding: Dimens.edgeInsets15,
-                          crossAxisSpacing: 70,
-                          mainAxisSpacing: 6,
-                          crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                          childAspectRatio: Responsive.isMobile(context)
-                              ? (itemWidth / itemHeight)
-                              : 5,
-                          children: <Widget>[
-                            OnHover(builder: (((isHovered) {
-                              return createContentTile(
-                                  title: "Type of observation",
-                                  onTap: () {
-                                    controller.goToTypeOfObservation();
-                                  });
-                            }))),
-                            OnHover(builder: (((isHovered) {
-                              return createContentTile(
-                                  title: "Source of observation",
-                                  onTap: () {
-                                    controller.goToSourceOfObservation();
-                                  });
-                            }))),
-                            OnHover(builder: (((isHovered) {
-                              return createContentTile(
-                                  title: "Risk Type",
-                                  onTap: () {
-                                    controller.goToRiskType();
-                                  });
-                            }))),
-                            OnHover(builder: (((isHovered) {
-                              return createContentTile(
-                                  title: "Document Upload",
-                                  onTap: () {
-                                    controller.documentUpload();
-                                  });
-                            }))),
-                          ],
-                        ),
-                     
+                                  GridView.count(
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    padding: Dimens.edgeInsets15,
+                                    crossAxisSpacing: 70,
+                                    mainAxisSpacing: 6,
+                                    crossAxisCount:
+                                        Responsive.isMobile(context) ? 2 : 5,
+                                    childAspectRatio:
+                                        Responsive.isMobile(context)
+                                            ? (itemWidth / itemHeight)
+                                            : 5,
+                                    children: <Widget>[
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Type of observation",
+                                            onTap: () {
+                                              controller
+                                                  .goToTypeOfObservation();
+                                            });
+                                      }))),
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Source of observation",
+                                            onTap: () {
+                                              controller
+                                                  .goToSourceOfObservation();
+                                            });
+                                      }))),
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Risk Type",
+                                            onTap: () {
+                                              controller.goToRiskType();
+                                            });
+                                      }))),
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Document Upload",
+                                            onTap: () {
+                                              controller.documentUpload();
+                                            });
+                                      }))),
+                                    ],
+                                  ),
+
                                   GridView.count(
                                     shrinkWrap: true,
                                     primary: false,

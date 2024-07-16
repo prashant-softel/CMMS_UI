@@ -15,12 +15,39 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../navigators/app_pages.dart';
 
-class DashBoardHomeWeb extends GetView<HomeController> {
+class DashBoardHomeWeb extends StatefulWidget {
   DashBoardHomeWeb({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<DashBoardHomeWeb> createState() => _DashBoardHomeWebState();
+}
+
+class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  bool _isTaskbarVisible = false;
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 6, vsync: this);
+
+    _tabController.addListener(() {
+      setState(() {
+        _isTaskbarVisible = _tabController.index ==
+            5; // 5 is the index of the Stock Management tab
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   final screenWidth = Get.width;
+
   Color getColor(String category) {
     switch (category) {
       case 'WO On-time':
@@ -173,15 +200,23 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                               ),
                               // Dimens.boxWidth10,
                               SizedBox(width: 10),
-                              Text("Available"),
-                              Obx(
-                                () => CustomSwitchTroggle(
-                                    value: controller.isToggleOn.value,
-                                    onChanged: (value) {
-                                      controller.toggle();
-                                    }),
-                              ),
-                              Text("Consumption"), SizedBox(width: 10),
+                              _isTaskbarVisible
+                                  ? Row(
+                                      children: [
+                                        Text("Available"),
+                                        Obx(
+                                          () => CustomSwitchTroggle(
+                                              value:
+                                                  controller.isToggleOn.value,
+                                              onChanged: (value) {
+                                                controller.toggle();
+                                              }),
+                                        ),
+                                        Text("Consumption"),
+                                        SizedBox(width: 10),
+                                      ],
+                                    )
+                                  : Dimens.box0,
 
                               if (Responsive.isDesktop(context))
                                 Icon(Icons.notifications_active,
@@ -373,6 +408,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                           alignment: Alignment.center,
                           child: Container(
                             child: TabBar(
+                              controller: _tabController,
                               indicatorColor: Color(0xFF363A40),
                               isScrollable: true,
                               tabs: [
@@ -407,6 +443,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
 
                         Expanded(
                           child: TabBarView(
+                            controller: _tabController,
                             children: [
                               //alll..........................
                               Container(

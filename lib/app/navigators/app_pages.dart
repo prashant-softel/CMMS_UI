@@ -51,6 +51,8 @@ import 'package:cmms/app/calibration_history/view/calibration_history_screen.dar
 import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
 import 'package:cmms/app/check_list_of_observation/checklist_of_observation_binding.dart';
 import 'package:cmms/app/check_list_of_observation/views/checklist_of_observation_screen.dart';
+import 'package:cmms/app/checklist_Inspection/view/ChecklistInsp_list_screen.dart';
+import 'package:cmms/app/checklist_Inspection/ChecklistInsp_list_binding.dart';
 
 import 'package:cmms/app/compliance/compliance_binding.dart';
 import 'package:cmms/app/compliance/views/compliance_screen.dart';
@@ -236,6 +238,7 @@ import 'package:cmms/app/view_water_data/view_water_data_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
+import 'package:cmms/app/warranty_claim_list/web/create_warranty_claim_web.dart';
 import 'package:cmms/app/waste_data/views/waste_data_screen.dart';
 import 'package:cmms/app/waste_data/waste_data_binding.dart';
 import 'package:cmms/app/waste_type_master/view/waste_type_master_screen.dart';
@@ -592,6 +595,10 @@ class AppPages {
     GetPage<dynamic>(
         name: _Paths.newWarrantyClaimList,
         page: NewWarrantyClaimWeb.new,
+        binding: WarrantyClaimBinding()),
+    GetPage<dynamic>(
+        name: _Paths.createWarrantyClaimList,
+        page: CreateWarrantyClaimWeb.new,
         binding: WarrantyClaimBinding()),
     GetPage<dynamic>(
         name: _Paths.warrantyClaimListWeb,
@@ -1358,6 +1365,11 @@ class AppPages {
       name: _Paths.viewObservationScreen,
       page: ViewObservationScreen.new,
       binding: ViewObservationBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.checklistInspection,
+      page: ChecklistInspectionListScreen.new,
+      binding: ChecklistInspectionListBinding(),
     ),
   ];
 }

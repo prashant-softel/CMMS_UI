@@ -203,10 +203,11 @@ class HomeController extends GetxController {
     isToggleOn.value = !isToggleOn.value;
   }
 
-  ///
-
+  
   @override
   void onInit() async {
+
+    
     // facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
     //   facilityId = event;
     //   if (facilityId > 0) {
