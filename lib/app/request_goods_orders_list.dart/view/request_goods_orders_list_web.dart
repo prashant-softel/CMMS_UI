@@ -553,7 +553,7 @@ class GoodsOrderListDataSource extends DataTableSource {
       '${GoodsOrderListDetails?.generatedAt ?? ''}',
       // '${GoodsOrderListDetails?.status ?? ''}',
       '${GoodsOrderListDetails?.cost ?? ''}',
-      // '${GoodsOrderListDetails?.currency ?? ''}',
+      '${GoodsOrderListDetails?.displayCurrency ?? ''}',
 
       'Actions',
     ];

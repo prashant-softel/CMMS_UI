@@ -29,6 +29,7 @@ class GetRequestOrderListModel {
   int? numberOfMasters;
   int? numberOfItemCount;
   List<RequestOrderItem>? requestOrderItems;
+  String? displayCurrency;
 
   GetRequestOrderListModel({
     this.requestOrderId,
@@ -50,6 +51,7 @@ class GetRequestOrderListModel {
     this.numberOfMasters,
     this.numberOfItemCount,
     this.requestOrderItems,
+    this.displayCurrency,
   });
 
   // Factory method to create a GetRequestOrderListModel instance from JSON
@@ -77,6 +79,7 @@ class GetRequestOrderListModel {
           ? List<RequestOrderItem>.from(json['request_order_items']
               .map((x) => RequestOrderItem.fromJson(x)))
           : null,
+      displayCurrency: null,
     );
   }
 
@@ -105,6 +108,7 @@ class GetRequestOrderListModel {
       data['request_order_items'] =
           this.requestOrderItems!.map((v) => v.toJson()).toList();
     }
+    data['displayCurrency'] = this.displayCurrency;
     return data;
   }
 }
