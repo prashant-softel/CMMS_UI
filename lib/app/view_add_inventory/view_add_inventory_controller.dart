@@ -355,7 +355,7 @@ class ViewAddInventoryController extends GetxController {
       selectedBlockListId = editAddInventoryDetailsModel.value?.blockId ?? 0;
       // selectedfrequency.value =
       //     "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationFrequency ?? ""}")}";
-            selectedfrequency.value =
+      selectedfrequency.value =
           editAddInventoryDetailsModel.value?.calibrationFreqType ?? "";
       calibrationRemaingCtrlr.text =
           "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationReminderDays ?? 0}")}";
@@ -400,7 +400,7 @@ class ViewAddInventoryController extends GetxController {
         // meterLimit: 1,
         // meterUnit: 1,
         certificate_number: int.tryParse(_certificateNoCtrlr),
-        expiryDate: "2030-12-31",
+        expiryDate: _expireDateTc, //"2030-12-31",
         // startDate///  is missing
         warrantyDiscription: _warrentyDescriptionCtrlr);
 
@@ -421,12 +421,16 @@ class ViewAddInventoryController extends GetxController {
             cost: int.tryParse(_costCtrlr),
             model: _modelNoCtrlr,
             serialNumber: _serialNoCtrlr,
+            warranty_provider_id: selectedmanufacturerNameId,
+            warranty_type: selectedWarrentyNameId,
+            warranty_term_type: selectedwarrantyUsageTermNameId,
+            parent_equipment_no: _parentEquipmentNoCtrlr,
             parentId: selectedEquipmentnameId,
             calibrationFrequency: selectedfrequencyId,
-            calibrationReminderDays: 10, //int.tryParse("2023-03-10"),
-            calibrationLastDate: "2023-01-10",
-            calibrationFirstDueDate: "2023-01-10",
-            calibrationFrequencyType: 2,
+            calibrationReminderDays: int.tryParse(_calibrationRemainderInTc),
+            calibrationLastDate: _lastCalibrationDateTc, // "2023-01-10",
+            // calibrationFirstDueDate: "2023-01-10",
+            calibrationFrequencyType: selectedfrequency.value,
             acCapacity: 2000,
             dcCapacity: 5000,
             multiplier: 3,
@@ -717,36 +721,37 @@ class ViewAddInventoryController extends GetxController {
       case const (RxList<FacilityModel>):
         {
           if (value != "Please Select") {
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
 
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
           } else {
-            facilityId=0;
+            facilityId = 0;
           }
         }
         break;
 
       case const (RxList<FrequencyModel>):
         {
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             int frequencyIndex =
-              frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-          isSelectedfrequency.value=true;
-         } else {
-            selectedfrequencyId=0;
-         }
+                frequencyList.indexWhere((x) => x?.name == value);
+            selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+            isSelectedfrequency.value = true;
+          } else {
+            selectedfrequencyId = 0;
+          }
         }
         break;
       case const (RxList<ManufacturerModel>):
         {
           if (value != "Please Select") {
             int manufacturerIndex =
-              manufacturerModelNameList.indexWhere((x) => x?.name == value);
-          selectedmanufacturerNameId =
-              manufacturerModelNameList[manufacturerIndex]?.id ?? 0;
+                manufacturerModelNameList.indexWhere((x) => x?.name == value);
+            selectedmanufacturerNameId =
+                manufacturerModelNameList[manufacturerIndex]?.id ?? 0;
           } else {
-            selectedmanufacturerNameId=0;
+            selectedmanufacturerNameId = 0;
           }
         }
         break;
@@ -754,10 +759,10 @@ class ViewAddInventoryController extends GetxController {
         {
           if (value != "Please Select") {
             int warrantyIndex =
-              warrantyNameList.indexWhere((x) => x?.name == value);
-          selectedWarrentyNameId = warrantyNameList[warrantyIndex]?.id ?? 0;
+                warrantyNameList.indexWhere((x) => x?.name == value);
+            selectedWarrentyNameId = warrantyNameList[warrantyIndex]?.id ?? 0;
           } else {
-            selectedWarrentyNameId=0;
+            selectedWarrentyNameId = 0;
           }
         }
         break;
@@ -765,11 +770,11 @@ class ViewAddInventoryController extends GetxController {
         {
           if (value != "Please Select") {
             int supplierIndex =
-              supplierNameModelNameList.indexWhere((x) => x?.name == value);
-          selectedsupplierrNameId =
-              supplierNameModelNameList[supplierIndex]?.id ?? 0;
+                supplierNameModelNameList.indexWhere((x) => x?.name == value);
+            selectedsupplierrNameId =
+                supplierNameModelNameList[supplierIndex]?.id ?? 0;
           } else {
-            selectedsupplierrNameId=0;
+            selectedsupplierrNameId = 0;
           }
         }
         break;
@@ -777,11 +782,11 @@ class ViewAddInventoryController extends GetxController {
         {
           if (value != "Please Select") {
             int warrantyUsageTermIndex =
-              warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
-          selectedwarrantyUsageTermNameId =
-              warrantyNameList[warrantyUsageTermIndex]?.id ?? 0;
+                warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
+            selectedwarrantyUsageTermNameId =
+                warrantyNameList[warrantyUsageTermIndex]?.id ?? 0;
           } else {
-            selectedwarrantyUsageTermNameId=0;
+            selectedwarrantyUsageTermNameId = 0;
           }
         }
         break;
@@ -789,12 +794,12 @@ class ViewAddInventoryController extends GetxController {
         {
           if (value != "Please Select") {
             int warrantyUsageIndex =
-              warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
+                warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
 
-          selectedwarrantyUsageTermNameId =
-              warrantyUsageTermNameList[warrantyUsageIndex]?.id ?? 0;
+            selectedwarrantyUsageTermNameId =
+                warrantyUsageTermNameList[warrantyUsageIndex]?.id ?? 0;
           } else {
-            selectedwarrantyUsageTermNameId=0;
+            selectedwarrantyUsageTermNameId = 0;
           }
         }
         break;
@@ -803,9 +808,9 @@ class ViewAddInventoryController extends GetxController {
           if (value != "Please Select") {
             int blockIndex = blocksList.indexWhere((x) => x?.name == value);
 
-          selectedBlockListId = blocksList[blockIndex]?.id ?? 0;
+            selectedBlockListId = blocksList[blockIndex]?.id ?? 0;
           } else {
-            selectedBlockListId=0;
+            selectedBlockListId = 0;
           }
         }
         break;
@@ -818,15 +823,15 @@ class ViewAddInventoryController extends GetxController {
           // }
           // int workAreaIndex = workAreaList.indexWhere((x) => x?.name == value);
           // selectedWarrentyNameId = frequencyList[workAreaIndex]?.id ?? 0;
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             int eqipmentNameListIndex =
-              eqipmentNameList.indexWhere((x) => x?.name == value);
-          selectedEquipmentnameId =
-              eqipmentNameList[eqipmentNameListIndex]?.id ?? 0;
-          print({"selectedEquipmentnameId", selectedEquipmentnameId});
-         } else {
-           selectedEquipmentnameId=0;
-         }
+                eqipmentNameList.indexWhere((x) => x?.name == value);
+            selectedEquipmentnameId =
+                eqipmentNameList[eqipmentNameListIndex]?.id ?? 0;
+            print({"selectedEquipmentnameId", selectedEquipmentnameId});
+          } else {
+            selectedEquipmentnameId = 0;
+          }
         }
         break;
       case const (RxList<InventoryCategoryModel>):
@@ -838,14 +843,14 @@ class ViewAddInventoryController extends GetxController {
           //   // selectedInventoryCategoryId = equipmentCategoryList[equipCatIndex]?.id ?? 0;
           //   print('First Category Id:$selectedEquipmentCategoryList');
           // }
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             int equipCatIndex =
-              equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedEquipmentCategoryNameId =
-              equipmentCategoryList[equipCatIndex]?.id ?? 0;
-         } else {
-           selectedEquipmentCategoryNameId=0;
-         }
+                equipmentCategoryList.indexWhere((x) => x?.name == value);
+            selectedEquipmentCategoryNameId =
+                equipmentCategoryList[equipCatIndex]?.id ?? 0;
+          } else {
+            selectedEquipmentCategoryNameId = 0;
+          }
         }
         break;
       case const (RxList<InventoryStatusListModel>):
@@ -855,12 +860,13 @@ class ViewAddInventoryController extends GetxController {
           //       statusNameList.indexWhere((x) => x?.name == statusName);
           //   selectedWorkAreaIdList.add(statusIndex);
           // }
-         if (value != "Please Select") {
-            int statusIndex = statusNameList.indexWhere((x) => x?.name == value);
-          selectedStatusNameId = statusNameList[statusIndex]?.id ?? 0;
-         } else {
-           selectedStatusNameId=0;
-         }
+          if (value != "Please Select") {
+            int statusIndex =
+                statusNameList.indexWhere((x) => x?.name == value);
+            selectedStatusNameId = statusNameList[statusIndex]?.id ?? 0;
+          } else {
+            selectedStatusNameId = 0;
+          }
         }
         break;
       case const (RxList<InventoryTypeListModel>):
@@ -870,12 +876,13 @@ class ViewAddInventoryController extends GetxController {
           //       typeNameList.indexWhere((x) => x?.name == typeName);
           //   selectedWorkAreaIdList.add(typeNameIndex);
           // }
-         if (value != "Please Select") {
-            int typeNameIndex = typeNameList.indexWhere((x) => x?.name == value);
-          selectedTypeNameId = typeNameList[typeNameIndex]?.id ?? 0;
-         } else {
-           selectedTypeNameId=0;
-         }
+          if (value != "Please Select") {
+            int typeNameIndex =
+                typeNameList.indexWhere((x) => x?.name == value);
+            selectedTypeNameId = typeNameList[typeNameIndex]?.id ?? 0;
+          } else {
+            selectedTypeNameId = 0;
+          }
         }
         break;
 

@@ -280,7 +280,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                     // fixedLeftColumns: 1,
                                     // dataRowHeight: Get.height * 0.10,
                                     columnSpacing: 10,
-                                    dataRowHeight:  Get.height * 0.10,
+                                    dataRowHeight: Get.height * 0.10,
                                     source:
                                         dataSource, // Custom DataSource class
                                     // headingRowHeight:
@@ -510,12 +510,11 @@ class CalibrationDataSource extends DataTableSource {
   void filterpmTasks() {
     filteredCalibrationList = <CalibrationListModel?>[];
     filteredCalibrationList = controller.calibrationList.where((Calibration) {
-      return 
-      (Calibration?.calibration_id ?? '')
+      return (Calibration?.calibration_id ?? '')
               .toString()
               .toLowerCase()
               .contains(controller.calibrationIdText.value.toLowerCase()) &&
-              (Calibration?.category_name ?? '')
+          (Calibration?.category_name ?? '')
               .toLowerCase()
               .contains(controller.categoryFilterText.value.toLowerCase()) &&
           (Calibration?.asset_name ?? '')
@@ -526,12 +525,11 @@ class CalibrationDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.srNoFilterText.value.toLowerCase()) &&
-          
           (Calibration?.schedule_start_date ?? '')
               .toString()
               .toLowerCase()
-              .contains(controller.schedulestartFilterText.value.toLowerCase()) &&
-
+              .contains(
+                  controller.schedulestartFilterText.value.toLowerCase()) &&
           (Calibration?.next_calibration_due_date ?? '')
               .toString()
               .toLowerCase()
@@ -556,13 +554,13 @@ class CalibrationDataSource extends DataTableSource {
 
     // controller.calibrationId.value = calibrationDetails?.id ?? 0;
     var cellsBuffer = [
-    "id",
+      "id",
       // '${calibrationDetails?.calibration_id ??''}',
-       '${calibrationDetails?.category_name ?? ''}',
+      '${calibrationDetails?.category_name ?? ''}',
       '${calibrationDetails?.asset_name ?? ''}',
       '${calibrationDetails?.asset_serial ?? ''}',
-       '${calibrationDetails?.schedule_start_date ?? ''}',
       '${calibrationDetails?.last_calibration_date ?? ''}',
+      '${calibrationDetails?.schedule_start_date ?? ''}',
       '${calibrationDetails?.next_calibration_due_date ?? ''}',
       '${calibrationDetails?.frequency_name ?? ''}',
       'Actions',
@@ -601,7 +599,7 @@ class CalibrationDataSource extends DataTableSource {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                           padding:
+                          padding:
                               EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                           margin: EdgeInsets.only(top: 5),
                           decoration: BoxDecoration(
@@ -745,8 +743,6 @@ class CalibrationDataSource extends DataTableSource {
                               ),
                       ])
                     : Text(value.toString()),
-                    
-                   
           ),
         );
       }).toList(),
