@@ -14,7 +14,7 @@ class AddInventoryRequestModel {
   String? serialNumber;
   int? multiplier;
   int? calibrationFrequency;
-  int? calibrationFrequencyType;
+  String? calibrationFrequencyType;
   int? calibrationReminderDays;
   String? calibrationFirstDueDate;
   String? calibrationLastDate;

@@ -56,28 +56,30 @@ class CalibrationListController extends GetxController {
   }
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    "Calibration Id":true,
+    "Calibration Id": true,
     "Equipment Category": true,
     "Equipment Name": true,
     "Serial No.": true,
-    "Schedule Start Date":true,
+    // "Schedule Start Date": true,
     // "Calibration Certificates":true,
     // "Installation date":true,
-    "Last Calibration date": true,
-    "Next Due Date": true,
+    "Last Done date": true,
+    "Due Date": true, "Done date": true,
+
     "Frequency": true,
     // "Status":true,
   });
   final Map<String, double> columnwidth = {
-    "Calibration Id":150,
+    "Calibration Id": 150,
     "Equipment Category": 200,
     "Equipment Name": 250,
     "Serial No.": 200,
-    "Schedule Start Date":200,
+    // "Schedule Start Date": 200,
     // "Calibration Certificates":250,
     // "Installation date":250,
-    "Last Calibration date": 200,
-    "Next Due Date": 200,
+    "Last Done date": 200,
+    "Due Date": 200, "Done date": 200,
+
     "Frequency": 150,
     // "Status",
   };
@@ -97,24 +99,22 @@ class CalibrationListController extends GetxController {
   RxString srNoFilterText = ''.obs;
   RxString calibrationIdText = ''.obs;
   RxString frequencyFilterText = ''.obs;
-   RxString schedulestartFilterText = ''.obs;
-
-
-
+  RxString schedulestartFilterText = ''.obs;
 
   ///
   @override
   void onInit() async {
     this.filterText = {
-      "Calibration Id":calibrationIdText,
+      "Calibration Id": calibrationIdText,
       "Equipment Category": categoryFilterText,
       "Equipment Name": titleFilterText,
       "Serial No.": srNoFilterText,
-      "Schedule Start Date":schedulestartFilterText,
       // "Calibration Certificates":,
       // "Installation date":,
-      "Last Calibration date": lastDoneDateFilterText,
-      "Next Due Date": dueDateFilterText,
+      "Last Done date": lastDoneDateFilterText,
+      "Due Date": dueDateFilterText,
+      "Done date": schedulestartFilterText,
+
       "Frequency": frequencyFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
@@ -809,6 +809,7 @@ class CalibrationListController extends GetxController {
                           ),
                           width: Get.width / 5,
                           child: LoginCustomTextfield(
+                            enabled: false,
                             textController: previousDateController,
                             ontap: () {
                               _selectDate(context, 1);
