@@ -263,7 +263,7 @@ class PermitApprovedDialog extends GetView<ViewPermitController> {
                         CustomRichText(title: 'Comment'),
                         Dimens.boxHeight10,
                         Obx(
-                         () => TextField(
+                          () => TextField(
                             style: GoogleFonts.lato(
                               textStyle: TextStyle(
                                   fontSize: 16.0,
@@ -273,28 +273,28 @@ class PermitApprovedDialog extends GetView<ViewPermitController> {
                             controller: controller.approveCommentTextFieldCtrlr,
                             maxLines: 4,
                             decoration: InputDecoration(
-                               hintText: 'Comment here....',
+                              hintText: 'Comment here....',
                               fillColor: ColorValues.whiteColor,
                               filled: true,
                               contentPadding: Dimens.edgeInsets05_10,
                               border: InputBorder.none,
-                                                          enabledBorder: OutlineInputBorder(
+                              enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Colors.black,
                                 ),
                               ),
-                              focusedBorder:OutlineInputBorder(
-                                 borderSide: BorderSide(color: Colors.black),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
                               ),
-                              focusedErrorBorder:
-                                  controller.iscommentTextInvalid.value
-                                      ? OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5),
-                                          borderSide: BorderSide(
-                                            color: ColorValues.redColorDark,
-                                          ),
-                                        )
-                                      : InputBorder.none,
+                              focusedErrorBorder: controller
+                                      .iscommentTextInvalid.value
+                                  ? OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      borderSide: BorderSide(
+                                        color: ColorValues.redColorDark,
+                                      ),
+                                    )
+                                  : InputBorder.none,
                               errorBorder: controller.iscommentTextInvalid.value
                                   ? OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5),
@@ -368,7 +368,7 @@ class PermitApprovedDialog extends GetView<ViewPermitController> {
                       jobId: jobId,
                       type: type);
                   print('jobId:$jobId');
-                  Get.offAndToNamed(Routes.newPermitList);
+                  //  Get.offAndToNamed(Routes.newPermitList);
                 }
               },
               child: Text(

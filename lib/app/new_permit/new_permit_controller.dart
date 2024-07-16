@@ -1830,10 +1830,10 @@ class NewPermitController extends GetxController {
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.updateNewPermit(
-        newPermit: jobJsonString,
-        resubmit: isChecked.value,
-        isLoading: true,
-      );
+              newPermit: jobJsonString,
+              resubmit: isChecked.value,
+              isLoading: true,
+              type: typee.value);
       if (responseUpdatePermit != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();

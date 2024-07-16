@@ -1873,12 +1873,12 @@ class DataRepository extends DomainRepository {
           {required String auth,
           newPermit,
           bool? isLoading,
-          bool? resubmit}) async =>
+          bool? resubmit,int?type}) async =>
       await connectHelper.updateNewPermit(
           auth: auth,
           newPermit: newPermit,
           isLoading: isLoading ?? false,
-          resubmit: resubmit);
+          resubmit: resubmit,type:type);
 
   Future<ResponseModel> resubmitPermit(
           {required String auth,

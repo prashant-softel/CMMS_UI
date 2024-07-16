@@ -493,14 +493,14 @@ class Repository {
 
   //Update New Permit
   Future<Map<String, dynamic>> updateNewPermit(
-      newPermit, bool? isLoading, bool? resubmit) async {
+      newPermit, bool? isLoading, bool? resubmit,int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateNewPermit(
         auth: auth,
         newPermit: newPermit,
         isLoading: isLoading ?? false,
-        resubmit: resubmit,
+        resubmit: resubmit,type:type
       );
 
       var resourceData = res.data;
@@ -5319,9 +5319,11 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
-          type == 1
+          type == 2
               ? Get.offAllNamed(Routes.pmTaskView)
-              : Get.offAllNamed(Routes.newPermitList);
+              : type == 1
+                  ? Get.offAllNamed(Routes.jobDetails)
+                  : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());

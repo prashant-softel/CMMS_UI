@@ -10,9 +10,10 @@ class UpdateNewPermitDialog extends GetView {
   String? createPermitData;
   String? data;
   List<dynamic>? PtwId;
+  int? type;
 
   UpdateNewPermitDialog(
-      {super.key, this.createPermitData, this.data, this.PtwId});
+      {super.key, this.createPermitData, this.data, this.PtwId, this.type});
   final NewPermitController controller = Get.find();
 
   @override
@@ -121,31 +122,41 @@ class UpdateNewPermitDialog extends GetView {
           //     child: const Text('Ok'),
           //   ),
           // ),
-          Row(
-            children: [
-              Spacer(),
-              ElevatedButton(
-                style: Styles.greenElevatedButtonStyle,
-                onPressed: () {
-                  Get.offAllNamed(Routes.newPermitList);
-                  // _controller.getNewPermitList(_controller.facilityId, _controller.userId);
-                },
-                child: const Text('Permit List'),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              ElevatedButton(
-                style: Styles.blueElevatedButtonStyle,
-                onPressed: () {
-                  // Get.offAndToNamed(Routes.viewPermitWebScreen);
-                  controller.viewNewPermitList(permitId: PtwId![0]);
-                },
-                child: const Text('View This Permit'),
-              ),
-              Spacer(),
-            ],
-          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            SizedBox(
+              width: 15,
+            ),
+            ElevatedButton(
+              style: Styles.greenElevatedButtonStyle,
+              onPressed: () {
+                Get.offAllNamed(Routes.newPermitList);
+                // _controller.getNewPermitList(_controller.facilityId, _controller.userId);
+              },
+              child: const Text('Permit List'),
+            ),
+            Dimens.boxWidth10,
+            ElevatedButton(
+              style: Styles.blueElevatedButtonStyle,
+              onPressed: () {
+                // Get.offAndToNamed(Routes.viewPermitWebScreen);
+                controller.viewNewPermitList(permitId: PtwId![0]);
+              },
+              child: const Text('View This Permit'),
+            ),
+            Dimens.boxWidth10,
+            type == 1
+                ? ElevatedButton(
+                    style: Styles.darkBlueElevatedButtonStyle,
+                    onPressed: () => Get.offAllNamed(Routes.jobCard),
+                    child: const Text('View JC'),
+                  )
+                : ElevatedButton(
+                    style: Styles.darkBlueElevatedButtonStyle,
+                    onPressed: () => Get.offAllNamed(Routes.pmTaskView),
+                    child: const Text('View Task'),
+                  ),
+            Dimens.boxWidth10,
+          ]),
         ],
       );
     }));

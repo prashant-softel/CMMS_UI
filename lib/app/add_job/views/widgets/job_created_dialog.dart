@@ -65,6 +65,7 @@ class JobCreatedDialog extends GetView<AddJobController> {
               ElevatedButton(
                 style: Styles.yellowElevatedButtonStyle,
                 onPressed: () {
+                  controller.clearStoreData();
                   controller.goToJobDetailsScreen(jobId ?? 0);
                 },
                 child: const Text('View Job'),
