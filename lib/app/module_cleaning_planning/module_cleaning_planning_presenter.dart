@@ -53,11 +53,13 @@ class ModuleCleaningPlanningPresenter {
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
+    int? featureId,
     bool? isLoading,
   }) async =>
       await moduleCleaningPlanningUsecase.getAssignedToList(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
+        featureId: featureId ?? 0,
         isLoading: isLoading ?? false,
       );
   Future<McPalningDetailsModel?> getMcPlanDetail({

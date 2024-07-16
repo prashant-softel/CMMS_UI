@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_presenter.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/create_mc_plan_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
@@ -343,6 +344,7 @@ class ModuleCleaningPlanningController extends GetxController {
     final _assignedToList =
         await moduleCleaningPlanningPresenter.getAssignedToList(
       facilityId: facilityId,
+      featureId: UserAccessConstants.kModuleCleaningplanFeatureId
     );
 
     if (_assignedToList != null) {
