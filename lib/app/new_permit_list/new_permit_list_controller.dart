@@ -40,7 +40,7 @@ class NewPermitListController extends GetxController {
     "Working Area": true,
     "Requested By": true,
     "Approved By": true,
-    "Status": true,
+    // "Status": true,
     // "Status code": true,
 
     // "search": true,
@@ -53,7 +53,7 @@ class NewPermitListController extends GetxController {
     "Working Area": 153,
     "Requested By": 130,
     "Approved By": 150,
-    "Status": 100,
+    // "Status": 100,
     // "Status code": 120,
   };
   Map<String, RxString> filterText = {};
@@ -179,7 +179,7 @@ class NewPermitListController extends GetxController {
       "Working Area": WorkingAreaNameFilterText,
       "Requested By": RequestByNameFilterText,
       "Approved By": ApprovedByNameFilterText,
-      "Status": CurrentStatusShortFilterText,
+      // "Status": CurrentStatusShortFilterText,
       // "Status code": PtwStatusFilterText,
     };
     //homePresenter.generateToken();
