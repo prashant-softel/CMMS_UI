@@ -1153,6 +1153,18 @@ class PermitListDataSource extends DataTableSource {
                                                   ?.ptwStatus !=
                                               PermitStatusConstants
                                                   .PTW_CANCEL_REQUEST_APPROVED) &&
+                                          controller.newPermitList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.permitId}" ==
+                                                        "${PermitDetails?.permitId}",
+                                                    orElse: () =>
+                                                        NewPermitModel(
+                                                            permitId: 000),
+                                                  )
+                                                  ?.ptwStatus !=
+                                              PermitStatusConstants
+                                                  .PTW_CLOSED &&
                                           (varUserAccessModel.value.access_list!
                                                       .where((e) =>
                                                           e.feature_id ==
@@ -1162,7 +1174,9 @@ class PermitListDataSource extends DataTableSource {
                                                               UserAccessConstants
                                                                   .kHaveApproveAccess)
                                                       .length >
-                                                  0 ||
+                                                  0
+                                              //126
+                                              ||
                                               varUserAccessModel
                                                       .value.access_list!
                                                       .where((e) =>
