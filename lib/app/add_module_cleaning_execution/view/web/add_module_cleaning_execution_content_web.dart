@@ -241,17 +241,18 @@ class AddModuleCleaningExecutionContentWeb
                                                 ),
                                               ],
                                             ),
+                                            Dimens.boxWidth2,
 
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  ' ${controller.planId}',
+                                                  'MCP${controller.planId}',
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                  ' ${controller.mcid}',
+                                                  'MCT${controller.mcid}',
                                                   style: Styles.blue17,
                                                 ),
                                               ],

@@ -88,7 +88,7 @@ class InventoryListController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () async {
+      Future.delayed(Duration(seconds: 1), () async {
         await getInventoryAssetsList(facilityId,  false);
       });
     });
