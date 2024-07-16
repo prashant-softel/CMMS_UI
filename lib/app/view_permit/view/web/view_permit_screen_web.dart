@@ -2853,7 +2853,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     // String
                                                                     //     baseUrl =
                                                                     //     'http://65.0.20.19/CMMS_API/';
-                                                                    String baseUrl = 'http://172.20.43.9:83/';
+                                                                    String
+                                                                        baseUrl =
+                                                                        'http://172.20.43.9:83/';
                                                                     String
                                                                         endpoint =
                                                                         '${_controller.sopData}';
@@ -2891,7 +2893,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   // String
                                                                   //     baseUrl =
                                                                   //     'http://65.0.20.19/CMMS_API/';
-                                                                  String baseUrl = 'http://172.20.43.9:83/';
+                                                                  String
+                                                                      baseUrl =
+                                                                      'http://172.20.43.9:83/';
                                                                   String
                                                                       endpoint =
                                                                       '${_controller.jsaData}';
@@ -3486,167 +3490,170 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             : Dimens.box0,
 
                                         ///Close Condition List
-                                        controller.viewPermitDetailsModel.value
-                                                    ?.ptwStatus ==
-                                                PermitStatusConstants
-                                                    .PTW_CLOSED //126
-                                            ? SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    1,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(20),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      // CustomAppBar(
-                                                      //   title: 'Following safety Measures taken to carry out the work'.tr,
-                                                      // ),
-                                                      Text(
-                                                        'Close Condition List',
-                                                        style: Styles.blue700,
-                                                      ),
-                                                      Dimens.boxHeight10,
-                                                      Column(
-                                                        children: [
-                                                          Column(
-                                                            children: [
-                                                              // controller.permitId != null
-                                                              //     ?
-                                                              Column(
-                                                                // alignment: WrapAlignment.start,
-                                                                // spacing: 100,
-                                                                children: []
-                                                                  ..addAll(controller
-                                                                      .listCloseCondition!
-                                                                      .map((element) =>
-                                                                          Column(
-                                                                            // mainAxisSize: MainAxisSize.min,
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.start,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
-                                                                            children: [
-                                                                              SizedBox(
-                                                                                // width: 200,
-                                                                                child: Row(
-                                                                                  children: [
-                                                                                    checkBoxMethod(1),
-                                                                                    // Text("${l = l! + 1}. "),
-                                                                                    Expanded(child: Text("${element!.name}"))
-                                                                                  ],
-                                                                                ),
-                                                                              )
-                                                                            ],
-                                                                          ))),
-                                                              ),
-                                                              // : Container(),
-                                                              SizedBox(
-                                                                height: 20,
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        left:
-                                                                            10,
-                                                                        right:
-                                                                            10),
-                                                                child: Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .end,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Attached Files',
-                                                                          style:
-                                                                              Styles.blackBold17,
-                                                                        ),
-                                                                        Text(
-                                                                          'anas zia.jpeg',
-                                                                          style: TextStyle(
-                                                                              decoration: TextDecoration.underline,
-                                                                              decorationStyle: TextDecorationStyle.solid,
-                                                                              color: Color.fromARGB(255, 5, 92, 163),
-                                                                              fontSize: Dimens.seventeen),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Spacer(),
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .end,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Comment/Remark',
-                                                                          style:
-                                                                              Styles.blackBold17,
-                                                                        ),
-                                                                        Text(
-                                                                          'Close Conditions',
-                                                                          style:
-                                                                              Styles.black17,
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Spacer(),
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .end,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Approver Name',
-                                                                          style:
-                                                                              Styles.blackBold17,
-                                                                        ),
-                                                                        Text(
-                                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                                          style:
-                                                                              Styles.black17,
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Spacer(),
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .end,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Date & Time',
-                                                                          style:
-                                                                              Styles.blackBold17,
-                                                                        ),
-                                                                        Text(
-                                                                          '${controller.viewPermitDetailsModel.value?.start_datetime}',
-                                                                          style:
-                                                                              Styles.black17,
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              )
-                                            : Dimens.box0,
+                                        ///TODO
+                                        // controller.viewPermitDetailsModel.value
+                                        //             ?.ptwStatus ==
+                                        //         PermitStatusConstants
+                                        //             .PTW_CLOSED //126
+                                        //     ? SizedBox(
+                                        //         width: MediaQuery.of(context)
+                                        //                 .size
+                                        //                 .width /
+                                        //             1,
+                                        //         child: Padding(
+                                        //           padding:
+                                        //               const EdgeInsets.all(20),
+                                        //           child: Column(
+                                        //             crossAxisAlignment:
+                                        //                 CrossAxisAlignment
+                                        //                     .start,
+                                        //             children: [
+                                        //               // CustomAppBar(
+                                        //               //   title: 'Following safety Measures taken to carry out the work'.tr,
+                                        //               // ),
+                                        //               Text(
+                                        //                 'Close Condition List',
+                                        //                 style: Styles.blue700,
+                                        //               ),
+                                        //               Dimens.boxHeight10,
+                                        //               Column(
+                                        //                 children: [
+                                        //                   Column(
+                                        //                     children: [
+                                        //                       // controller.permitId != null
+                                        //                       //     ?
+                                        //                       Column(
+                                        //                         // alignment: WrapAlignment.start,
+                                        //                         // spacing: 100,
+                                        //                         children: []
+                                        //                           ..addAll(controller
+                                        //                               .listCloseCondition!
+                                        //                               .map((element) =>
+                                        //                                   Column(
+                                        //                                     // mainAxisSize: MainAxisSize.min,
+                                        //                                     mainAxisAlignment:
+                                        //                                         MainAxisAlignment.start,
+                                        //                                     crossAxisAlignment:
+                                        //                                         CrossAxisAlignment.start,
+                                        //                                     children: [
+                                        //                                       SizedBox(
+                                        //                                         // width: 200,
+                                        //                                         child: Row(
+                                        //                                           children: [
+                                        //                                             checkBoxMethod(1),
+                                        //                                             // Text("${l = l! + 1}. "),
+                                        //                                             Expanded(child: Text("${element!.name}"))
+                                        //                                           ],
+                                        //                                         ),
+                                        //                                       )
+                                        //                                     ],
+                                        //                                   ))),
+                                        //                       ),
+                                        //                       // : Container(),
+                                        //                       SizedBox(
+                                        //                         height: 20,
+                                        //                       ),
+
+                                        //                       Padding(
+                                        //                         padding:
+                                        //                             const EdgeInsets
+                                        //                                 .only(
+                                        //                                 left:
+                                        //                                     10,
+                                        //                                 right:
+                                        //                                     10),
+                                        //                         child: Row(
+                                        //                           crossAxisAlignment:
+                                        //                               CrossAxisAlignment
+                                        //                                   .start,
+                                        //                           children: [
+                                        //                             Column(
+                                        //                               crossAxisAlignment:
+                                        //                                   CrossAxisAlignment
+                                        //                                       .end,
+                                        //                               children: [
+                                        //                                 Text(
+                                        //                                   'Attached Files',
+                                        //                                   style:
+                                        //                                       Styles.blackBold17,
+                                        //                                 ),
+                                        //                                 Text(
+                                        //                                   'anas zia.jpeg',
+                                        //                                   style: TextStyle(
+                                        //                                       decoration: TextDecoration.underline,
+                                        //                                       decorationStyle: TextDecorationStyle.solid,
+                                        //                                       color: Color.fromARGB(255, 5, 92, 163),
+                                        //                                       fontSize: Dimens.seventeen),
+                                        //                                 ),
+                                        //                               ],
+                                        //                             ),
+                                        //                             Spacer(),
+                                        //                             Column(
+                                        //                               crossAxisAlignment:
+                                        //                                   CrossAxisAlignment
+                                        //                                       .end,
+                                        //                               children: [
+                                        //                                 Text(
+                                        //                                   'Comment/Remark',
+                                        //                                   style:
+                                        //                                       Styles.blackBold17,
+                                        //                                 ),
+                                        //                                 Text(
+                                        //                                   'Close Conditions',
+                                        //                                   style:
+                                        //                                       Styles.black17,
+                                        //                                 ),
+                                        //                               ],
+                                        //                             ),
+                                        //                             Spacer(),
+                                        //                             Column(
+                                        //                               crossAxisAlignment:
+                                        //                                   CrossAxisAlignment
+                                        //                                       .end,
+                                        //                               children: [
+                                        //                                 Text(
+                                        //                                   'Approver Name',
+                                        //                                   style:
+                                        //                                       Styles.blackBold17,
+                                        //                                 ),
+                                        //                                 Text(
+                                        //                                   '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                        //                                   style:
+                                        //                                       Styles.black17,
+                                        //                                 ),
+                                        //                               ],
+                                        //                             ),
+                                        //                             Spacer(),
+                                        //                             Column(
+                                        //                               crossAxisAlignment:
+                                        //                                   CrossAxisAlignment
+                                        //                                       .end,
+                                        //                               children: [
+                                        //                                 Text(
+                                        //                                   'Date & Time',
+                                        //                                   style:
+                                        //                                       Styles.blackBold17,
+                                        //                                 ),
+                                        //                                 Text(
+                                        //                                   '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                        //                                   style:
+                                        //                                       Styles.black17,
+                                        //                                 ),
+                                        //                               ],
+                                        //                             ),
+                                        //                           ],
+                                        //                         ),
+                                        //                       ),
+
+                                        //                     ],
+                                        //                   )
+                                        //                 ],
+                                        //               ),
+                                        //             ],
+                                        //           ),
+                                        //         ),
+                                        //       )
+                                        //     : Dimens.box0,
 
                                         ///File Upload
                                         Container(
