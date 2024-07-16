@@ -41,6 +41,10 @@ class EditMrsController extends GetxController {
     isSetTemplate.value = !isSetTemplate.value;
   }
 
+  Rx<int> fromActorTypeId = 0.obs;
+  Rx<int> to_actor_type_id = 0.obs;
+  Rx<String> whereUsedTypeName = "".obs;
+
   ///
   @override
   void onInit() async {
@@ -102,7 +106,9 @@ class EditMrsController extends GetxController {
       // activityCtrlr.text = _mrsDetailsModel. ?? "";
       remarkCtrlr.text = _mrsDetailsModel.remarks ?? "";
       whereUsedCtrlr.text = _mrsDetailsModel.whereUsedRefID.toString();
-
+      to_actor_type_id.value = _mrsDetailsModel.whereUsedRefID;
+      fromActorTypeId.value = 2;
+      whereUsedTypeName.value = _mrsDetailsModel.whereUsedTypeName ?? "";
       rowItem.value = [];
       _mrsDetailsModel.cmmrsItems?.forEach((element) {
         rowItem.add(
@@ -218,12 +224,12 @@ class EditMrsController extends GetxController {
             facility_ID: facilityId,
             setAsTemplate: _setTemp,
             activity: _activity,
-            whereUsedType: 27,
+            whereUsedType: whereUsedTypeName.value == "PMTASK" ? 27 : 4,
             whereUsedTypeId: int.tryParse(_wheredused),
             to_actor_id: int.tryParse(_wheredused),
-            to_actor_type_id: 3,
+            to_actor_type_id: to_actor_type_id.value,
             from_actor_id: facilityId,
-            from_actor_type_id: 2,
+            from_actor_type_id: fromActorTypeId.value,
             remarks: _remark,
             equipments: items);
         var editMrsJsonString = editMrs.toJson();
