@@ -598,7 +598,7 @@ class AddModuleCleaningExecutionController extends GetxController {
           {"key": "Pending", "value": '${element.pending}'},
           {"key": "Type", "value": '${element.cleaningTypeName}'},
           {"key": "Water Used", "value": '${element.waterUsed}'},
-          {"key": "Remark", "value": '${element.remark}'},
+          {"key": "Remark", "value": '${element.remark_of_schedule}'},
           {"key": "Permit Code", "value": '${element.permit_code}'},
           {
             "key": "Permit Status",

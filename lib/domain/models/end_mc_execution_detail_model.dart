@@ -130,6 +130,7 @@ class Schedules {
     this.waterUsed,
     this.start_date,
     this.remark,
+    this.remark_of_schedule,
     this.status,
     this.status_short,
     this.equipments,
@@ -145,6 +146,7 @@ class Schedules {
   int? executionId;
   int? cleaningDay;
   String? cleaningTypeName;
+  String? remark_of_schedule;
   int? scheduled;
   int? cleaned;
   int? abandoned;
@@ -167,6 +169,7 @@ class Schedules {
         permit_code: json['permit_code'] ?? '',
         ptw_status: json['ptw_status'],
         ptw_tbt_done: json['ptw_tbt_done'],
+        remark_of_schedule: json['remark_of_schedule'] ?? '',
         status_short_ptw: json['status_short_ptw'] == 'Invalid'
             ? ''
             : json['status_short_ptw'],
@@ -195,6 +198,7 @@ class Schedules {
             status_short_ptw == 'Invalid' ? '' : status_short_ptw,
         "scheduleId": scheduleId,
         "executionId": executionId,
+        "remark_of_schedule": remark_of_schedule,
         "cleaningDay": cleaningDay,
         "cleaningTypeName": cleaningTypeName,
         "scheduled": scheduled,

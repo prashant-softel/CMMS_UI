@@ -51,6 +51,8 @@ import 'package:cmms/app/calibration_history/view/calibration_history_screen.dar
 import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
 import 'package:cmms/app/check_list_of_observation/checklist_of_observation_binding.dart';
 import 'package:cmms/app/check_list_of_observation/views/checklist_of_observation_screen.dart';
+import 'package:cmms/app/checklist_Inspection/view/ChecklistInsp_list_screen.dart';
+import 'package:cmms/app/checklist_Inspection/ChecklistInsp_list_binding.dart';
 
 import 'package:cmms/app/compliance/compliance_binding.dart';
 import 'package:cmms/app/compliance/views/compliance_screen.dart';
@@ -1363,6 +1365,11 @@ class AppPages {
       name: _Paths.viewObservationScreen,
       page: ViewObservationScreen.new,
       binding: ViewObservationBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.checklistInspection,
+      page: ChecklistInspectionListScreen.new,
+      binding: ChecklistInspectionListBinding(),
     ),
   ];
 }
