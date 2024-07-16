@@ -251,34 +251,71 @@ class EditJobController extends GetxController {
     }
   }
 
+  // Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
+  //   try {
+  //     toolsRequiredToWorkTypeList?.clear();
+  //     selectedtoolsRequiredToWorkTypeList.clear();
+  //     selectedtoolsRequiredToWorkTypeIdList.clear();
+  //     final list = await editJobPresenter.getToolsRequiredToWorkTypeList(
+  //       isLoading: true,
+  //       workTypeIds: workTypeIds,
+  //     );
+  //     print('paifcghb:${list}');
+
+  //     toolsRequiredToWorkTypeList?.value = list ?? <ToolsModel>[];
+  //     if (jobDetailsModel.value?.toolsRequiredList != null) {
+  //       for (var toolType in jobDetailsModel.value?.toolsRequiredList ?? []) {
+  //         ToolsModel linkedToolName = ToolsModel(
+  //           id: toolType.toolId,
+  //           linkedToolName: toolType.toolName,
+  //         );
+  //         selectedtoolsRequiredToWorkTypeList.add(linkedToolName);
+  //         selectedtoolsRequiredToWorkTypeIdList.add(linkedToolName.id ?? 0);
+  //       }
+  //     }
+
+  //     update(['toolsRequiredToWorkTypeList']);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
-    try {
-      toolsRequiredToWorkTypeList!.clear();
-      selectedtoolsRequiredToWorkTypeList.clear();
-      selectedtoolsRequiredToWorkTypeIdList.clear();
-      final list = await editJobPresenter.getToolsRequiredToWorkTypeList(
-        isLoading: true,
-        workTypeIds: workTypeIds,
-      );
-      print('paifcghb:${list}');
+  try {
+    toolsRequiredToWorkTypeList?.clear();
+    selectedtoolsRequiredToWorkTypeList.clear();
+    selectedtoolsRequiredToWorkTypeIdList.clear();
 
-      toolsRequiredToWorkTypeList?.value = list ?? <ToolsModel>[];
-      if (jobDetailsModel.value?.toolsRequiredList != null) {
-        for (var toolType in jobDetailsModel.value?.toolsRequiredList ?? []) {
-          ToolsModel linkedToolName = ToolsModel(
-            id: toolType.toolId,
-            linkedToolName: toolType.toolName,
-          );
-          selectedtoolsRequiredToWorkTypeList.add(linkedToolName);
-          selectedtoolsRequiredToWorkTypeIdList.add(linkedToolName.id ?? 0);
-        }
-      }
+    // Fetch the list of tools from the API
+    final toolsList = await editJobPresenter.getToolsRequiredToWorkTypeList(
+      isLoading: true,
+      workTypeIds: workTypeIds,
+    );
 
-      update(['toolsRequiredToWorkTypeList']);
-    } catch (e) {
-      print(e);
+    // Create a set to store unique tools
+    final uniqueTools = <ToolsModel>{};
+
+    // Add tools from the API response to the set
+    for (var tool in toolsList ?? []) {
+      uniqueTools.add(tool);
     }
+
+    // Add tools from jobDetailsModel (if available) to the set
+    for (var toolType in jobDetailsModel.value?.toolsRequiredList ?? []) {
+      uniqueTools.add(ToolsModel(
+        id: toolType.toolId,
+        linkedToolName: toolType.toolName,
+      ));
+    }
+
+    // Update the list with unique tools
+    toolsRequiredToWorkTypeList?.value = uniqueTools.toList();
+
+    // Update the UI
+    update(['toolsRequiredToWorkTypeList']);
+  } catch (e) {
+    print(e);
   }
+}
 
   Future<void> getInventoryCategoryList(String? facilityId) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
@@ -307,7 +344,32 @@ class EditJobController extends GetxController {
     }
   }
 
-  Future<void> getInventoryList({
+  // Future<void> getInventoryList({
+  //   int? facilityId,
+  //   int? blockId,
+  // }) async {
+  //   selectedWorkAreaIdList.clear();
+  //   categoryIds = selectedEquipmentCategoryIdList;
+  //   String lststrCategoryIds = categoryIds.join(', ').toString();
+  //   final _workAreaList = await homePresenter.getInventoryList(
+  //     facilityId: facilityId,
+  //     blockId: blockId,
+  //     categoryIds: lststrCategoryIds,
+  //     isLoading: true,
+  //   );
+  //   if (_workAreaList.isNotEmpty) {
+  //     workAreaList.value = _workAreaList;
+  //     if (jobDetailsModel.value?.workingAreaList != null)
+  //       for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
+  //         int _selectedWorkAreaId = _workArea.workingAreaId ?? 0;
+  //         if (_selectedWorkAreaId > 0) {
+  //           selectedWorkAreaIdList.add(_selectedWorkAreaId);
+  //         }
+  //         update();
+  //       }
+  //   }
+  // }
+    Future<void> getInventoryList({
     int? facilityId,
     int? blockId,
   }) async {
@@ -325,7 +387,8 @@ class EditJobController extends GetxController {
       if (jobDetailsModel.value?.workingAreaList != null)
         for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
           int _selectedWorkAreaId = _workArea.workingAreaId ?? 0;
-          if (_selectedWorkAreaId > 0) {
+          if (_selectedWorkAreaId > 0 && 
+              !selectedWorkAreaIdList.contains(_selectedWorkAreaId)) {
             selectedWorkAreaIdList.add(_selectedWorkAreaId);
           }
           update();
