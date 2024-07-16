@@ -459,11 +459,11 @@ class PreventiveListController extends GetxController {
       ischecklistNumberInvalid.value = true;
       isFormInvalid.value = true;
     }
-    if (selectedequipment == '') {
+    if (selectedEquipmentId == 0) {
       isSelectedequipment.value = false;
       isFormInvalid.value = true;
     }
-    if (selectedfrequency == '') {
+    if (selectedfrequencyId == 0) {
       isSelectedfrequency.value = false;
       isFormInvalid.value = true;
     }
