@@ -254,7 +254,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                               DataColumn2(
                                   fixedWidth: 500,
                                   label: Text(
-                                    "Equipment Name",
+                                    "Material Name",
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
@@ -334,7 +334,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                       })
                                                       .toList()
                                                       .obs,
-                                                      isValueSelected: controller
+                                                  isValueSelected: controller
                                                                   .errorState[
                                                               '$rowIndex-${mapData['key']}'] ==
                                                           true
@@ -342,7 +342,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                       : true,
                                                   selectedValue:
                                                       mapData["value"],
-                                                 onValueChanged:
+                                                  onValueChanged:
                                                       (list, selectedValue) {
                                                     controller.errorState
                                                         .removeWhere((key,
