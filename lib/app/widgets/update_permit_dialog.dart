@@ -121,34 +121,31 @@ class UpdateNewPermitDialog extends GetView {
           //     child: const Text('Ok'),
           //   ),
           // ),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            SizedBox(
-              width: 15,
-            ),
-            ElevatedButton(
-              style: Styles.greenElevatedButtonStyle,
-              onPressed: () {
-                Get.offAllNamed(Routes.newPermitList);
-                // _controller.getNewPermitList(_controller.facilityId, _controller.userId);
-              },
-              child: const Text('Permit List'),
-            ),
-            Dimens.boxWidth10,
-            ElevatedButton(
-              style: Styles.blueElevatedButtonStyle,
-              onPressed: () {
-                // Get.offAndToNamed(Routes.viewPermitWebScreen);
-                controller.viewNewPermitList(permitId: PtwId![0]);
-              },
-              child: const Text('View This Permit'),
-            ),
-            Dimens.boxWidth10,
-            // ElevatedButton(
-            //   style: Styles.redElevatedButtonStyle,
-            //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-            //   child: const Text('Add New Job'),
-            // ),
-          ]),
+          Row(
+            children: [
+              Spacer(),
+              ElevatedButton(
+                style: Styles.greenElevatedButtonStyle,
+                onPressed: () {
+                  Get.offAllNamed(Routes.newPermitList);
+                  // _controller.getNewPermitList(_controller.facilityId, _controller.userId);
+                },
+                child: const Text('Permit List'),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              ElevatedButton(
+                style: Styles.blueElevatedButtonStyle,
+                onPressed: () {
+                  // Get.offAndToNamed(Routes.viewPermitWebScreen);
+                  controller.viewNewPermitList(permitId: PtwId![0]);
+                },
+                child: const Text('View This Permit'),
+              ),
+              Spacer(),
+            ],
+          ),
         ],
       );
     }));

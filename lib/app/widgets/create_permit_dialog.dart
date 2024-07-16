@@ -33,69 +33,69 @@ class CreateNewPermitDialog extends GetView {
 
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
-            height: Responsive.isDesktop(context) ? 120 : 160,
+            height: Responsive.isDesktop(context) ? 135 : 160,
             width: double.infinity,
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Divider(
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  RichText(
-                    text: TextSpan(
-                      text: 'Permit Generated with Permit Id ',
-                      style: DefaultTextStyle.of(context).style,
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '$PtwId',
-                          style: TextStyle(
-                            color: Colors.blue, // Set the desired text color
-                            fontWeight: FontWeight
-                                .bold, // Set any additional styles as needed
-                          ),
-                        ),
-                        TextSpan(
-                            text:
-                                '. Please wait for Approval, you can start \nthe job only after PTW is approved'),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: 15,
-                        ),
-                        ElevatedButton(
-                          style: Styles.greenElevatedButtonStyle,
-                          onPressed: () {
-                            Get.offAllNamed(Routes.newPermitList);
-                            // _controller.getNewPermitList(_controller.facilityId, _controller.userId);
-                          },
-                          child: const Text('Permit List'),
-                        ),
-                        // Dimens.boxWidth10,
-                         SizedBox(width:10),
-                        ElevatedButton(
-                          style: Styles.blueElevatedButtonStyle,
-                          onPressed: () {
-                            // Get.offAndToNamed(Routes.viewPermitWebScreen);
-                            controller.viewNewPermitList(permitId: PtwId![0]);
-                          },
-                          child: const Text('View This Permit'),
-                        ),
-                        // Dimens.boxWidth10,
-                         SizedBox(width:10),
-                        // ElevatedButton(
-                        //   style: Styles.redElevatedButtonStyle,
-                        //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-                        //   child: const Text('Add New Job'),
-                        // ),
-                      ]),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Permit Generated with Permit Id ',
+                        style: Styles.black16,
+                      ),
+                      Text(
+                        "$PtwId",
+                        style: Styles.green700,
+                      ),
+                    ],
+                  ),
+
+                  Text(
+                    'Please wait for Approval, you can start',
+                    style: Styles.black16,
+                  ),
+                  Text(
+                    'the job only after PTW is approved',
+                    style: Styles.black16,
+                  ), // RichText(
+
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(children: [
+                    Spacer(),
+                    ElevatedButton(
+                      style: Styles.greenElevatedButtonStyle,
+                      onPressed: () {
+                        Get.offAllNamed(Routes.newPermitList);
+                        // _controller.getNewPermitList(_controller.facilityId, _controller.userId);
+                      },
+                      child: const Text('Permit List'),
+                    ),
+                    // Dimens.boxWidth10,
+                    SizedBox(width: 10),
+                    ElevatedButton(
+                      style: Styles.blueElevatedButtonStyle,
+                      onPressed: () {
+                        // Get.offAndToNamed(Routes.viewPermitWebScreen);
+                        controller.viewNewPermitList(permitId: PtwId![0]);
+                      },
+                      child: const Text('View This Permit'),
+                    ),
+                    // Dimens.boxWidth10,
+                    Spacer(),
+                    // ElevatedButton(
+                    //   style: Styles.redElevatedButtonStyle,
+                    //   onPressed: () => Get.offAndToNamed(Routes.addJob),
+                    //   child: const Text('Add New Job'),
+                    // ),
+                  ]),
                 ]),
           );
         }),
