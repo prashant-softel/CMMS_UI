@@ -3300,7 +3300,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
               return Obx(
                 () => Container(
                   padding: Dimens.edgeInsets05_0_5_0,
-                  height: 300,
+                  height: 150,
                   width: 300,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -3314,7 +3314,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                       ),
                       SizedBox(
                         width: 250,
-                        height: 120,
+                        height: 50,
                         child: CustomMultiSelectDialogField(
                           buttonText: 'Add Employee',
                           title: 'Select Employee',

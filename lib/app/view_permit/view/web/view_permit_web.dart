@@ -3255,7 +3255,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         e.feature_id ==
                                             UserAccessConstants
                                                 .kPermitFeatureId &&
-                                        e.edit ==
+                                        e.add ==
                                             UserAccessConstants.kHaveAddAccess)
                                     .length >
                                 0 &&
@@ -3267,15 +3267,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                     .viewPermitDetailsModel.value?.ptwStatus !=
                                 PermitStatusConstants
                                     .PTW_EXTEND_REQUEST_REJECTED
-                    // ||
-                    // controller.viewPermitDetailsModel.value?.ptwStatus ==
-                    //     PermitStatusConstants.PTW_CREATED //121
-                    // ||
-                    // controller.viewPermitDetailsModel.value?.ptwStatus ==
-                    //     PermitStatusConstants.PTW_EXTEND_REQUEST_REJECTED ||
-                    // controller.viewPermitDetailsModel.value?.ptwStatus ==
-                    // PermitStatusConstants.PTW_CANCEL_REQUEST_REJECTED
-                    ? Padding(
+                    ? Dimens.box0
+                    : Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Container(
                             height: 45,
@@ -3293,8 +3286,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                 );
                               },
                             )),
-                      )
-                    : Dimens.box0,
+                      ),
 
                 // Dimens.boxWidth5,
 
