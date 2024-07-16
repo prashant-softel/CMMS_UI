@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/utils/app_constants.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
@@ -316,8 +317,9 @@ class JobCardDetailsController extends GetxController {
   }
 
   Future<void> getEmployeeList() async {
-    final _employeeList =
-        await jobCardDetailsPresenter.getAssignedToList(facilityId: facilityId);
+    final _employeeList = await jobCardDetailsPresenter.getAssignedToList(
+        facilityId: facilityId,
+        featureId: UserAccessConstants.kJobCardFeatureId);
     if (_employeeList != null) {
       for (var employee in _employeeList) {
         employeeList.add(employee);
