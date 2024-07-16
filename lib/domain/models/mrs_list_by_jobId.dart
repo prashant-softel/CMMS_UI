@@ -177,4 +177,6 @@ class CmmrsItems {
                 ? ""
                 : parsedJson['issued_qty'].toString()));
   }
+
+  map(DataCell Function(dynamic mapData) param0) {}
 }

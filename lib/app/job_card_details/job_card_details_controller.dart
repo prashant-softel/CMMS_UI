@@ -87,6 +87,7 @@ class JobCardDetailsController extends GetxController {
 
   /// Job Details
   Rx<int?> jobId = 0.obs;
+  Rx<int> permitIdclose = 0.obs;
   RxMap jobDetails = {}.obs;
   RxString strWorkTypes = ''.obs;
   RxString strWorkAreasOrEquipments = ''.obs;
@@ -495,7 +496,7 @@ class JobCardDetailsController extends GetxController {
           // Check if permitList is not empty
           LstPermitDetailList permit = permitList!.value.firstWhere((element) =>
               element.permitId != null); // Access the first element
-
+          permitIdclose.value = permit.permitId ?? 0;
           permitDetails.value = {
             "Permit ID": "PTW" + permit.permitId.toString(),
             // "Site Permit No.": permit.sitePermitNo.toString(),
@@ -709,7 +710,11 @@ class JobCardDetailsController extends GetxController {
     }
 
     var _comment = descriptionOfWorkDoneCtrlr.text.trim();
-
+    ClosePermitModel ptwClose = ClosePermitModel(
+        id: permitIdclose.value,
+        comment: _comment,
+        conditionIds: [1, 2, 3, 4],
+        fileIds: []);
     var jobCard = {
       "id": jobCardId.value,
       "isolationId": isolationId,
@@ -720,10 +725,13 @@ class JobCardDetailsController extends GetxController {
       "lotoStatus": lotoStatus,
       "uploadfile_ids": fileIds,
     };
+    var closePtwJsonString = ptwClose.toJson();
+
     Map<String, dynamic>? responseCarryForwardJCModel =
         await jobCardDetailsPresenter.closeJob(
       jobCard,
       true,
+      closePtwJsonString,
     );
 
     if (responseCarryForwardJCModel == null) {

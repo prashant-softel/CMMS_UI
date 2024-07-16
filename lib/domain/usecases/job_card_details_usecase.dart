@@ -121,14 +121,9 @@ class JobCardDetailsUsecase {
         jobCard,
         isLoading,
       );
-  Future<Map<String, dynamic>?> closeJob({
-    jobCard,
-    bool? isLoading,
-  }) async =>
-      await repository.closeJob(
-        jobCard,
-        isLoading,
-      );
+  Future<Map<String, dynamic>?> closeJob(
+          {jobCard, bool? isLoading, closePtwJsonString}) async =>
+      await repository.closeJob(jobCard, isLoading, closePtwJsonString);
 
   ///
   Future<List<HistoryModel>?> getJobCardHistory({

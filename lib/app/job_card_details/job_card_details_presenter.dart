@@ -125,10 +125,12 @@ class JobCardDetailsPresenter {
   Future<Map<String, dynamic>?> closeJob(
     jobCard,
     isLoading,
+    closePtwJsonString,
   ) async =>
       await jobCardDetailsUsecase.closeJob(
         jobCard: jobCard,
         isLoading: isLoading,
+        closePtwJsonString: closePtwJsonString,
       );
 
   ///

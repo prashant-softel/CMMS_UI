@@ -349,7 +349,8 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                               .errorMessages
                                                               .add(null);
                                                         }
-                                                        return DataRow(cells: [
+                                                        return 
+                                                        DataRow(cells: [
                                                           DataCell(Text(item
                                                               .asset_name
                                                               .toString())),
