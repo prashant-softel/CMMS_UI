@@ -42,7 +42,7 @@ class JobCardListController extends GetxController {
 
   Rx<int> jobId = 0.obs;
 
-   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
@@ -51,26 +51,40 @@ class JobCardListController extends GetxController {
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
 
-
   void search(String keyword) {
     if (keyword.isEmpty) {
       jobList.value = filteredData;
       return;
     }
-    
 
     List<JobCardModel?> filteredList = filteredData
         .where((item) =>
-            (item?.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
-            (item?.jobCardId?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item?.id
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.jobId?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item?.jobCardId
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.jobId?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item?.jobId
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.jobId
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false) ||
             // (item?.permit_id?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
             //     false) ||
-            (item?.permit_no?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item?.permit_no
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.description
                     ?.toString()
@@ -82,7 +96,10 @@ class JobCardListController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.end_time?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item?.end_time
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.job_assinged_to
                     ?.toString()
@@ -105,17 +122,21 @@ class JobCardListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        jobCardList(facilityId,formattedTodate1, formattedFromdate1, false);
+        if (facilityId > 0) {
+          jobCardList(facilityId, formattedTodate1, formattedFromdate1, false);
+        }
       });
     });
 
     super.onInit();
   }
-   void getjobcardListByDate() {
+
+  void getjobcardListByDate() {
     jobCardList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
-  Future<void> jobCardList(int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
+  Future<void> jobCardList(
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
     jobList.value = <JobCardModel>[];
     final _jobList = await jobCardPresenter.jobCardList(
         facilityId: facilityId, isLoading: isLoading.value, isExport: isExport);
@@ -146,6 +167,6 @@ class JobCardListController extends GetxController {
   }
 
   void export() {
-    jobCardList(facilityId, formattedTodate1, formattedFromdate1,true);
+    jobCardList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
 }

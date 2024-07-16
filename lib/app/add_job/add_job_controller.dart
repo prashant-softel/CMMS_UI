@@ -87,7 +87,7 @@ class AddJobController extends GetxController {
   int facilityId = 0;
   int blockId = 72;
 
- Rx<bool> isBreakdownInvalid = false.obs;
+  Rx<bool> isBreakdownInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
   Rx<bool> isJobTitleInvalid = false.obs;
   Rx<bool> isJobDescriptionInvalid = false.obs;
@@ -253,11 +253,9 @@ class AddJobController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    if(breakdownTimeCtrlr.text.trim().length < 3) {
-      isBreakdownInvalid.value=true;
-      isFormInvalid.value=true;
-     
-
+    if (breakdownTimeCtrlr.text.trim().length < 3) {
+      isBreakdownInvalid.value = true;
+      isFormInvalid.value = true;
     }
     //  if (selectedBlockIdList.length < 1) {
     //   isBlockSelected.value = false;
@@ -278,12 +276,9 @@ class AddJobController extends GetxController {
     if (jobDescriptionCtrlr.text.trim().length < 3) {
       isJobDescriptionInvalid.value = true;
     }
-        if (breakdownTimeCtrlr.text.trim().length < 3) {
+    if (breakdownTimeCtrlr.text.trim().length < 3) {
       isBreakdownInvalid.value = true;
     }
-
-
-    
 
     if (isFacilitySelected.value == false ||
         isBlockSelected.value == false ||
@@ -291,7 +286,7 @@ class AddJobController extends GetxController {
         isJobDescriptionInvalid == true ||
         isEquipmentCategorySelected.value == false ||
         isWorkAreaSelected.value == false ||
-        breakdownTimeCtrlr.text == ''||
+        breakdownTimeCtrlr.text == '' ||
         isWorkTypeSelected.value == false) //
     {
       isFormInvalid.value = true;
@@ -395,18 +390,18 @@ class AddJobController extends GetxController {
     switch (list.runtimeType) {
       case const (RxList<FacilityModel>):
         {
-         if (value != "Please Select") {
-           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
-          selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
-          if (selectedFacilityId != 0) {
-            isFacilitySelected.value = true;
+          if (value != "Please Select") {
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
+            selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
+            if (selectedFacilityId != 0) {
+              isFacilitySelected.value = true;
+            }
+            selectedFacility.value = value;
+            getBlocksList(selectedFacilityId);
+          } else {
+            selectedFacilityId = 0;
           }
-          selectedFacility.value = value;
-          getBlocksList(selectedFacilityId);
-           
-         }else{
-          selectedFacilityId=0;
-         }
         }
         break;
 
@@ -414,22 +409,22 @@ class AddJobController extends GetxController {
         {
           if (value != "Please Select") {
             int blockIndex = blockList.indexWhere((x) => x?.name == value);
-          selectedBlockId = blockList[blockIndex]?.id ?? 0;
-          if (selectedBlockId > 0) {
-            isBlockSelected.value = true;
-          }
-          selectedBlock.value = value;
-          print('SelectedBlock:$selectedBlock');
-          // selectedEquipmentCategory.value ='';
-          // selectedToolRequiredToWorkType.value ='';
-          // selectedWorkAreaList.value = [];
-          // selectedAssignedTo.value ='';
-          // selectedWorkTypeList.value = [];
-          getInventoryCategoryList(selectedBlockId.toString());
-          getWorkTypeList();
-          getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
+            selectedBlockId = blockList[blockIndex]?.id ?? 0;
+            if (selectedBlockId > 0) {
+              isBlockSelected.value = true;
+            }
+            selectedBlock.value = value;
+            print('SelectedBlock:$selectedBlock');
+            // selectedEquipmentCategory.value ='';
+            // selectedToolRequiredToWorkType.value ='';
+            // selectedWorkAreaList.value = [];
+            // selectedAssignedTo.value ='';
+            // selectedWorkTypeList.value = [];
+            getInventoryCategoryList(selectedBlockId.toString());
+            getWorkTypeList();
+            getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
           } else {
-            selectedBlockId=0;
+            selectedBlockId = 0;
           }
 
           // getToolsRequiredToWorkTypeList();
@@ -439,9 +434,9 @@ class AddJobController extends GetxController {
         {
           if (value != "Please Select") {
             int equipmentIndex =
-              equipmentList.indexWhere((x) => x?.name == value);
-          int selectedEquipmentId = equipmentList[equipmentIndex]?.id ?? 0;
-          print(selectedEquipmentId);
+                equipmentList.indexWhere((x) => x?.name == value);
+            int selectedEquipmentId = equipmentList[equipmentIndex]?.id ?? 0;
+            print(selectedEquipmentId);
           } else {
             // selectedEquipmentId=0;
           }
@@ -449,28 +444,24 @@ class AddJobController extends GetxController {
         break;
       case const (RxList<InventoryModel>):
         {
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             for (var workAreaName in selectedWorkAreaNameList) {
-            int workAreaIndex =
-                workAreaList.indexWhere((x) => x?.name == workAreaName);
-            selectedWorkAreaIdList.add(workAreaIndex);
-          }
-         } else {
-           
-         }
+              int workAreaIndex =
+                  workAreaList.indexWhere((x) => x?.name == workAreaName);
+              selectedWorkAreaIdList.add(workAreaIndex);
+            }
+          } else {}
         }
         break;
       case const (RxList<InventoryCategoryModel>):
         {
           if (value != "Please Select") {
             for (var equipCat in selectedEquipmentCategoryList) {
-            int equipCatIndex = selectedEquipmentCategoryList
-                .indexWhere((x) => x?.name == equipCat);
-            selectedEquipmentCategoryIdList.add(equipCatIndex);
-          }
-          } else {
-            
-          }
+              int equipCatIndex = selectedEquipmentCategoryList
+                  .indexWhere((x) => x?.name == equipCat);
+              selectedEquipmentCategoryIdList.add(equipCatIndex);
+            }
+          } else {}
         }
         break;
 
@@ -478,14 +469,14 @@ class AddJobController extends GetxController {
         {
           if (value != "Please Select") {
             int assignedToIndex =
-              assignedToList.indexWhere((x) => x?.name == value);
-          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
-          if (selectedAssignedToId != 0) {
-            isAssignedToSelected.value = true;
-          }
-          selectedAssignedTo.value = value;
+                assignedToList.indexWhere((x) => x?.name == value);
+            selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+            if (selectedAssignedToId != 0) {
+              isAssignedToSelected.value = true;
+            }
+            selectedAssignedTo.value = value;
           } else {
-            selectedAssignedToId=0;
+            selectedAssignedToId = 0;
           }
         }
         break;
@@ -567,6 +558,10 @@ class AddJobController extends GetxController {
     Get.offAndToNamed(Routes.addJob);
   }
 
+  void clearStoreData() {
+    jobListPresenter.clearValue();
+  }
+
   goToJobDetailsScreen(int _jobId) {
     Get.offAndToNamed(Routes.jobDetails, arguments: {"jobId": _jobId});
   }
@@ -595,9 +590,8 @@ class AddJobController extends GetxController {
       time.minute,
     );
     selectedBreakdownTime.value = dateTime;
-      isBreakdownInvalid.value = false;
+    isBreakdownInvalid.value = false;
     breakdownTimeCtrlr
-    
       ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
@@ -618,7 +612,7 @@ class AddJobController extends GetxController {
     );
 
     if (newDate == null) return null;
-  
+
     return newDate;
   }
 

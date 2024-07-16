@@ -3156,12 +3156,12 @@ class ConnectHelper {
     return responseModel;
   }
 
-  //Update New Permit
+  //Update New Permit123
   Future<ResponseModel> updateNewPermit({
     required String auth,
     newPermit,
     bool? isLoading,
-    bool? resubmit,
+    bool? resubmit,int?type
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
@@ -3179,7 +3179,7 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(UpdateNewPermitDialog(
       data: parsedJson['message'],
-      PtwId: parsedJson['id'],
+      PtwId: parsedJson['id'],type:type
     ));
 
     return responseModel;

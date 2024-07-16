@@ -620,6 +620,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                           () {
                                                                         controller
                                                                             .clearPermitStoreData();
+                                                                        controller
+                                                                            .clearTypeStoreData();
                                                                         controller.viewNewPermitList(
                                                                             permitId:
                                                                                 controller.pmtaskViewModel.value?.permit_id,

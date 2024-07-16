@@ -10,9 +10,10 @@ class UpdateNewPermitDialog extends GetView {
   String? createPermitData;
   String? data;
   List<dynamic>? PtwId;
+  int? type;
 
   UpdateNewPermitDialog(
-      {super.key, this.createPermitData, this.data, this.PtwId});
+      {super.key, this.createPermitData, this.data, this.PtwId, this.type});
   final NewPermitController controller = Get.find();
 
   @override
@@ -143,11 +144,18 @@ class UpdateNewPermitDialog extends GetView {
               child: const Text('View This Permit'),
             ),
             Dimens.boxWidth10,
-            // ElevatedButton(
-            //   style: Styles.redElevatedButtonStyle,
-            //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-            //   child: const Text('Add New Job'),
-            // ),
+            type == 1
+                ? ElevatedButton(
+                    style: Styles.darkBlueElevatedButtonStyle,
+                    onPressed: () => Get.offAllNamed(Routes.jobCard),
+                    child: const Text('View JC'),
+                  )
+                : ElevatedButton(
+                    style: Styles.darkBlueElevatedButtonStyle,
+                    onPressed: () => Get.offAllNamed(Routes.pmTaskView),
+                    child: const Text('View Task'),
+                  ),
+            Dimens.boxWidth10,
           ]),
         ],
       );

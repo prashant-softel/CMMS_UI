@@ -651,6 +651,9 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                   onPress: () {
                                                                     controller
                                                                         .clearPermitStoreData();
+                                                                    controller
+                                                                        .clearTypeStoreData();
+
                                                                     controller.viewNewPermitList(
                                                                         permitId:
                                                                             controller.jobAssociatedModelsList?[index]?.permitId ??
