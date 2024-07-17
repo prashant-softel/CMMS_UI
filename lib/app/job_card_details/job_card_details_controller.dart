@@ -27,28 +27,20 @@ import '../utils/utility.dart';
 import 'job_card_details_presenter.dart';
 
 class JobCardDetailsController extends GetxController {
-  ///
-  JobCardDetailsController(
-    this.jobCardDetailsPresenter,
-  );
+  JobCardDetailsController(this.jobCardDetailsPresenter);
+
   StreamSubscription<int>? facilityIdStreamSubscription;
   Rx<bool> isFacilitySelected = true.obs;
   final HomeController homeController = Get.find();
   JobCardDetailsPresenter jobCardDetailsPresenter;
 
-  ///
-  // late JobDetailsPresenter jobDetailsPresenter;
-
-  /// History
   var historyController = Get.put(HistoryController());
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<FilesModel?> file_list = <FilesModel?>[].obs;
   RxList<FilesModel?> file_list_new = <FilesModel?>[].obs;
   RxList<FilesModel?> allFiles = <FilesModel?>[].obs;
   RxList<WorkingAreaList>? workingAreaList = <WorkingAreaList>[].obs;
-  // RxList<JobDetailsModel>? jobDetailsList = <JobDetailsModel>[].obs;
 
-  /// Employee Table
   Rx<String> selectedEmployeeName = ''.obs;
   Rx<bool> isEmployeeSelected = true.obs;
 
@@ -61,7 +53,6 @@ class JobCardDetailsController extends GetxController {
   RxList<int> selectedEmployeeIdList = <int>[].obs;
   RxList<String> responsibilityList = <String>[].obs;
 
-  // Employee
   RxList<SelectedEmployee> employee = <SelectedEmployee>[].obs;
   SelectedEmployee selectedEmployees = SelectedEmployee();
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
@@ -70,14 +61,12 @@ class JobCardDetailsController extends GetxController {
   Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
       EndMCExecutionDetailsModel().obs;
 
-  /// Isolation and Loto Assets
   Rx<bool> isNormalized = false.obs;
 
   RxList<LotoAsset> lotoAppliedAssets = RxList<LotoAsset>([]);
   RxList<IsolationAssetsCategory> isolationAssetsCategoryList =
       RxList<IsolationAssetsCategory>([]);
 
-  /// Permit Details
   int? permitId = 0;
   RxMap permitDetails = {}.obs;
   RxList<LstPermitDetailList>? permitList = <LstPermitDetailList>[].obs;
@@ -85,7 +74,6 @@ class JobCardDetailsController extends GetxController {
   RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
   RxMap<dynamic, dynamic> dropdownMapperDataworkingArea = {}.obs;
 
-  /// Job Details
   Rx<int?> jobId = 0.obs;
   Rx<int> permitIdclose = 0.obs;
   RxMap jobDetails = {}.obs;
@@ -107,17 +95,14 @@ class JobCardDetailsController extends GetxController {
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
 
-  /// Plant Details
   int userId = 35;
   int facilityId = 0;
   RxMap plantDetails = {}.obs;
 
-  /// Job Card
   Rx<int> jobCardId = 0.obs;
   Rx<bool> isJobCardStarted = false.obs;
   var comment = '';
 
-  /// Other
   Rx<int> currentIndex = 0.obs;
   final unescape = HtmlUnescape();
   var descriptionOfWorkDoneCtrlr = TextEditingController();
@@ -188,27 +173,20 @@ class JobCardDetailsController extends GetxController {
     ]);
   }
 
-  ///
   @override
   void onInit() async {
     facilityIdStreamSubscription =
         homeController.facilityId$.listen((event) async {
       facilityId = event;
-      // if (facilityId > 0) {
-      //   isFacilitySelected.value = true;
-      //   await getHistory(facilityId);
-      // }
+      if (facilityId > 0) {
+        isFacilitySelected.value = true;
+        await getEmployeeList();
+      }
     });
-    // print({"madfhuiwef", jobCardId});
+
     try {
       Get.put(FileUploadController());
 
-      // final _flutterSecureStorage = const FlutterSecureStorage();
-
-      // await _flutterSecureStorage.delete(key: "JcId");
-
-      // jobCardId.value = Get.arguments["JcId"];
-      await getEmployeeList();
       await setJcId();
 
       if (jobCardId.value != 0) {
@@ -241,17 +219,12 @@ class JobCardDetailsController extends GetxController {
               .firstWhere((e) => e!.name == element.name, orElse: null);
         });
       }
-      // await getHistory(facilityId);
       createPlantDetailsTableData();
       createJobDetailsTableData();
       createPermitDetailsTableData();
-      //  createJcDetailsTableData();
-
-      //  getPermitDetails();
 
       responsibilityCtrlrs.add(TextEditingController());
       currentIndex.value = -1;
-      // addEmployeesDeployed();
       super.onInit();
     } catch (e) {
       print(e);
@@ -274,8 +247,6 @@ class JobCardDetailsController extends GetxController {
     }
     _processJsonData();
     allTrue.value = itemExistsWithZeroDifference.every((element) => element);
-    print({"mrsit", allTrue});
-    print({"mrsit", itemExistsWithZeroDifference});
     addRowItem();
   }
 
@@ -306,7 +277,6 @@ class JobCardDetailsController extends GetxController {
     } catch (e) {
       Utility.showDialog(e.toString(), 'JcId');
     }
-    // return jobId.value;
   }
 
   @override
@@ -318,14 +288,16 @@ class JobCardDetailsController extends GetxController {
   }
 
   Future<void> getEmployeeList() async {
-    final _employeeList = await jobCardDetailsPresenter.getAssignedToList(
-        facilityId: facilityId,
-        featureId: UserAccessConstants.kJobCardFeatureId);
-    if (_employeeList != null) {
-      for (var employee in _employeeList) {
-        employeeList.add(employee);
+    if (facilityId > 0) {
+      final _employeeList = await jobCardDetailsPresenter.getAssignedToList(
+          facilityId: facilityId,
+          featureId: UserAccessConstants.kJobCardFeatureId);
+      if (_employeeList != null) {
+        for (var employee in _employeeList) {
+          employeeList.add(employee);
+        }
+        update(["employeeList"]);
       }
-      update(["employeeList"]);
     }
   }
 
@@ -345,16 +317,12 @@ class JobCardDetailsController extends GetxController {
     if (jobCardList.isNotEmpty) {
       jobCardDetailsModel.value = jobCardList[0];
       equipmentCategoryNames = <String>[];
-      for (var eC in jobCardDetailsModel.value?.lstPermitDetailList ?? []) {
-        //  equipmentCategoryNames.add(eC);
-      }
+      for (var eC in jobCardDetailsModel.value?.lstPermitDetailList ?? []) {}
       strEquipmentCategories.value = equipmentCategoryNames.join(', ');
       plantDetails.value = {
         "Plant": jobCardDetailsModel.value?.plantName,
         "Block": jobCardDetailsModel.value?.blockName,
-        // "Equipment Categories": jobCardDetailsModel.value?.assetCategoryName,
       };
-      print("${plantDetails}");
     }
     file_list.value = jobCardDetailsModel.value?.fileList ?? [];
     file_list_new.value = jobCardDetailsModel.value?.fileListJc ?? [];
@@ -386,8 +354,6 @@ class JobCardDetailsController extends GetxController {
       items.add(item);
     });
     var transferItemJsonString = items;
-    print({"transferItemJsonString", transferItemJsonString});
-
     var responsetransferItem = await jobCardDetailsPresenter.transferItem(
       transferItemJsonString: transferItemJsonString,
       isLoading: true,
@@ -395,20 +361,15 @@ class JobCardDetailsController extends GetxController {
   }
 
   void createJobDetailsTableData() {
-    print({'status to start job', jobCardList[0]!.status});
-
     try {
       if (jobCardList.isNotEmpty) {
         getJobDetails(jobCardList[0]!.jobId, facilityId);
-        //   // jobCardDetailsModel.value = jobCardList[0];
-
-        //   // Convert tools required to comma separated list
         List<String> toolsRequiredNames = jobCardDetailsModel.value?.toolList
                 ?.map((tool) => tool.toolName ?? '')
                 .toList() ??
             [];
         strToolsRequired.value = toolsRequiredNames.join(', ');
-        //   // Convert work type(s) to comma separated list
+
         workTypeNames = <String?>[];
         for (var workTypenames
             in jobCardDetailsModel.value?.lstCmjcJobDetailList ?? []) {
@@ -417,7 +378,7 @@ class JobCardDetailsController extends GetxController {
           }
         }
         strWorkTypes.value = workTypeNames.join(', ');
-        //remove extra comma at the end
+
         if (strWorkTypes.value.length > 0) {
           strWorkTypes.value = strWorkTypes.substring(
             0,
@@ -430,40 +391,26 @@ class JobCardDetailsController extends GetxController {
           assignNames.add(assignName.jobAssignedEmployeeName);
         }
         strAssignName.value = assignNames.join(', ');
-        //remove extra comma at the end
+
         if (strAssignName.value.length > 0) {
           strAssignName.value = strAssignName.substring(
             0,
             strAssignName.value.length,
           );
         }
-        // Convert work area(s)/equipment(s) to comma separated list
-        //   var workAreaNames = <String>[];
-        // // for (var workArea in jobCardDetailsModel.value?.workingAreaList ?? []) {
-        // //   workAreaNames.add(workArea.workingAreaName);
-        // // }
-        // strWorkAreasOrEquipments.value = workAreaNames.join(', ');
-        // //remove extra comma at the end
-        // if (strWorkAreasOrEquipments.value.length > 0) {
-        //   strWorkAreasOrEquipments.value = strWorkAreasOrEquipments.substring(
-        //     0,
-        //     strWorkAreasOrEquipments.value.length - 1,
-        //   );
-        // }
 
         jobDetails.value = {
           "Job ID": "JOB" + jobCardDetailsModel.value!.jobId.toString(),
           "Job Title": jobCardDetailsModel.value?.title,
           "Job Description": jobCardDetailsModel.value?.description,
-          "Job Assigned To": strAssignName.value, //jobCardDetailsModel.value?.,
-          // "Work Area / Equipments": strWorkAreasOrEquipments.value,
+          "Job Assigned To": strAssignName.value,
           "Fault": strWorkTypes.value,
           "Linked Tool To Fault": strToolsRequired.value,
           "Job Created By": jobCardDetailsModel.value?.created_by,
           "Job Status": jobCardDetailsModel.value?.status_short,
         };
         getMrsListByModule(jobId: jobCardDetailsModel.value?.jobId ?? 0);
-      } //
+      }
     } catch (e) {
       print(e);
     }
@@ -493,13 +440,11 @@ class JobCardDetailsController extends GetxController {
             jobCardDetailsModel.value!.lstPermitDetailList ?? [];
 
         if (permitList!.value.isNotEmpty) {
-          // Check if permitList is not empty
-          LstPermitDetailList permit = permitList!.value.firstWhere((element) =>
-              element.permitId != null); // Access the first element
+          LstPermitDetailList permit = permitList!.value
+              .firstWhere((element) => element.permitId != null);
           permitIdclose.value = permit.permitId ?? 0;
           permitDetails.value = {
             "Permit ID": "PTW" + permit.permitId.toString(),
-            // "Site Permit No.": permit.sitePermitNo.toString(),
             "Permit Type": permit.permitType,
             "Permit Description": permit.permitDescription,
             "Permit Requested By": permit.permitIssuedByName ?? "",
@@ -514,7 +459,6 @@ class JobCardDetailsController extends GetxController {
   }
 
   void updateJobCard({List<dynamic>? fileIds}) async {
-    // isolation asset categories
     try {
       var _isolatedAssetCatList = [];
       for (IsolationAssetsCategory isolationAssetsCategory
@@ -535,7 +479,7 @@ class JobCardDetailsController extends GetxController {
         );
         employees.add(item);
       });
-      // lots assets
+
       var _lotoAssetList = [];
       for (LotoAsset lotoAsset in lotoAppliedAssets) {
         _lotoAssetList.add({
@@ -543,19 +487,7 @@ class JobCardDetailsController extends GetxController {
           "lotoRemovedStatus": lotoAsset.removedStatus,
         });
       }
-      // selected employees
-      // var _employeeList = [];
-
-      // for (EmployeeModel employee in selectedEmployeeList ?? []) {
-      //   int _index = selectedEmployeeList?.indexOf(employee) ?? 0;
-      //   final _responsibility = getResponsibility(_index);
-      //   _employeeList.add({
-      //     "empId": employee.id,
-      //     "responsibility": _responsibility,
-      //   });
-      // }
       var _comment = descriptionOfWorkDoneCtrlr.text.trim();
-      // create jobcard object
       var jobCard = {
         "id": jobCardId.value,
         "comment": _comment,
@@ -583,11 +515,8 @@ class JobCardDetailsController extends GetxController {
         if (responseMapJobCardUpdated["message"] != null) {
           _message = responseMapJobCardUpdated["message"];
         }
-        // showAlertDialog(
-        //     jobId: _jobId, message: _message, dialog: JobCardUpdatedDialog());
       }
-    } //
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }
@@ -597,7 +526,6 @@ class JobCardDetailsController extends GetxController {
     int employeeId =
         employeeList.indexWhere((element) => element!.name == selectedValue);
     selectedEmployeeId = employeeList[employeeId]!.id ?? 0;
-    print('Selected Employee Id: $selectedEmployeeId');
   }
 
   startStopJobCard() {
@@ -606,8 +534,6 @@ class JobCardDetailsController extends GetxController {
 
   Future<void> createJobCard(int jobId) async {
     await startStopJobCard();
-
-    ///
     if (isJobCardStarted.value == true) {
       Map<String, dynamic>? responseMapJobCardStarted =
           await jobCardDetailsPresenter.createJobCard(
@@ -621,8 +547,6 @@ class JobCardDetailsController extends GetxController {
         jobCardId.value = _jobCardId;
       }
     }
-
-    /// Get History
     getHistory(facilityId);
   }
 
@@ -644,8 +568,6 @@ class JobCardDetailsController extends GetxController {
       "request": {"uploadfile_ids": fileIds, "LstCMJCEmpList": employees}
     };
 
-    print("filesids: ${fileIds}");
-    // Map<String, dynamic> files = UploadFiles(uploadfile_ids: fileIds).toJson();
     if (isJobCardStarted.value == true) {
       Map<String, dynamic>? responseMapJobCardStarted =
           await jobCardDetailsPresenter.startJobCard(
@@ -695,7 +617,7 @@ class JobCardDetailsController extends GetxController {
         in isolationAssetsCategoryList) {
       isolationId = isolationAssetsCategory.isolationAssetsCatId ?? 0;
     }
-    // lots assets
+
     int lotoStatus = 0;
     int lotoId = 0;
 
@@ -734,11 +656,7 @@ class JobCardDetailsController extends GetxController {
       closePtwJsonString,
     );
 
-    if (responseCarryForwardJCModel == null) {
-      //  CreateNewPermitDialog();
-      // showAlertDialog();
-    }
-    // print('update  Create GO  data: $carryForwardJCModelJsonString');
+    if (responseCarryForwardJCModel == null) {}
   }
 
   void appcommentcheckform() {
@@ -763,7 +681,7 @@ class JobCardDetailsController extends GetxController {
         in isolationAssetsCategoryList) {
       isolationId = isolationAssetsCategory.isolationAssetsCatId ?? 0;
     }
-    // lots assets
+
     int lotoStatus = 0;
     int lotoId = 0;
 
@@ -781,10 +699,6 @@ class JobCardDetailsController extends GetxController {
       employees.add(item);
     });
 
-    // int _employeeId = 0;
-    // for (EmployeeModel employee in selectedEmployeeList ?? []) {
-    //   _employeeId = employee.id ?? 0;
-    // }
     var _comment = descriptionOfWorkDoneCtrlr.text.trim();
 
     var jobCard = {
@@ -803,35 +717,9 @@ class JobCardDetailsController extends GetxController {
       true,
     );
 
-    if (responseCarryForwardJCModel == null) {
-      //  CreateNewPermitDialog();
-      // showAlertDialog();
-    }
-    // print('update  Create GO  data: $carryForwardJCModelJsonString');
+    if (responseCarryForwardJCModel == null) {}
   }
 
-  // void approveJobCard() async {
-  //   final response = await jobCardDetailsPresenter.approveJobCard(
-  //     jobCardId: jobCardId.value,
-  //     comment: comment,
-  //     isLoading: true,
-  //   );
-  // }
-
-  // // void rejectJobCard() async {
-  // //   try {
-  // //     var comment = "comment"; //descriptionOfWorkDoneCtrlr.text.trim();
-  // //     Map<String, dynamic>? response =
-  // //         await jobCardDetailsPresenter.rejectJobCard(
-  // //       id: jobCardId.value,
-  // //       comment: comment,
-  // //       isLoading: false,
-  // //     );
-  // //   } //
-  // //   catch (e) {
-  // //     Utility.showDialog(e.toString() + ' rejectJobCard');
-  // //   }
-  // // }
   void approveJobCards() async {
     {
       appcommentcheckform();
@@ -845,7 +733,6 @@ class JobCardDetailsController extends GetxController {
           CommentModel(id: jobCardId.value, comment: _comment);
 
       var approveJsonString = commentCalibrationModel.toJson();
-      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       final response = await jobCardDetailsPresenter.approveJobCards(
         approveJsonString: approveJsonString,
         isLoading: true,
@@ -855,10 +742,6 @@ class JobCardDetailsController extends GetxController {
           Get.put(FileUploadController());
 
           final _flutterSecureStorage = const FlutterSecureStorage();
-
-          // await _flutterSecureStorage.delete(key: "JcId");
-
-          //   await controller.setJcId();
 
           jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
                 jobCardId: jobCardId.value,
@@ -870,17 +753,13 @@ class JobCardDetailsController extends GetxController {
 
           createJobDetailsTableData();
           createPermitDetailsTableData();
-          //  createJcDetailsTableData();
           getEmployeeList();
-          //  getPermitDetails();
 
           responsibilityCtrlrs.add(TextEditingController());
           currentIndex.value = -1;
         } catch (e) {
           print(e);
         }
-        //
-        //getCalibrationList(facilityId, true);
       }
     }
   }
@@ -898,14 +777,11 @@ class JobCardDetailsController extends GetxController {
           CommentModel(id: jobCardId.value, comment: _comment);
 
       var rejectJsonString = commentCalibrationModel.toJson();
-      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       final response = await jobCardDetailsPresenter.rejectJobCard(
         rejectJsonString: rejectJsonString,
         isLoading: true,
       );
-      if (response == true) {
-        //getCalibrationList(facilityId, true);
-      }
+      if (response == true) {}
     }
   }
 
@@ -924,7 +800,6 @@ class JobCardDetailsController extends GetxController {
           id: ptwId, comment: comment, conditionIds: [1, 2, 3, 4], fileIds: []);
       var closePtwJsonString = ptwClose.toJson();
       var approveJsonString = commentCalibrationModel.toJson();
-      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       final response = await jobCardDetailsPresenter.approvecloseJob(
         approveJsonString: approveJsonString,
         closePtwJsonString: closePtwJsonString,
@@ -933,12 +808,6 @@ class JobCardDetailsController extends GetxController {
       if (response == true) {
         try {
           Get.put(FileUploadController());
-
-          // final _flutterSecureStorage = const FlutterSecureStorage();
-
-          // await _flutterSecureStorage.delete(key: "JcId");
-
-          //   await controller.setJcId();
 
           jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
                 jobCardId: jobCardId.value,
@@ -950,17 +819,13 @@ class JobCardDetailsController extends GetxController {
 
           createJobDetailsTableData();
           createPermitDetailsTableData();
-          //  createJcDetailsTableData();
           getEmployeeList();
-          //  getPermitDetails();
 
           responsibilityCtrlrs.add(TextEditingController());
           currentIndex.value = -1;
         } catch (e) {
           print(e);
         }
-        //
-        //getCalibrationList(facilityId, true);
       }
     }
   }
@@ -978,20 +843,15 @@ class JobCardDetailsController extends GetxController {
           CommentModel(id: jobCardId.value, comment: _comment);
 
       var rejectJsonString = commentCalibrationModel.toJson();
-      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       final response = await jobCardDetailsPresenter.rejectcloseJob(
         rejectJsonString: rejectJsonString,
         isLoading: true,
       );
-      if (response == true) {
-        //getCalibrationList(facilityId, true);
-      }
+      if (response == true) {}
     }
   }
 
   String? getResponsibility(index) {
-    //return null;
-
     final responsibitlity = responsibilityCtrlrs[index].text;
     return responsibitlity;
   }
@@ -1005,8 +865,6 @@ class JobCardDetailsController extends GetxController {
 
   void goToJobCardScreen() {
     Get.back();
-
-    //  Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId.value});
   }
 
   goToAddJobScreen() {
@@ -1015,9 +873,7 @@ class JobCardDetailsController extends GetxController {
   }
 
   void addNewEmployee(EmployeeModel selectedEmployee, String responsibility) {
-    // Create a new index for this row based on the current number of rows
     final uniqueKey = UniqueKey();
-    // Create a new DataRow2 with the selected employee and responsibility
     final newRow = DataRow2(
       key: uniqueKey,
       cells: [
@@ -1043,7 +899,7 @@ class JobCardDetailsController extends GetxController {
           IconButton(
               icon: Icon(Icons.delete),
               onPressed: () {
-                deleteEmployee(uniqueKey); // Delete based on the index
+                deleteEmployee(uniqueKey);
               }),
         ),
       ],
@@ -1054,8 +910,6 @@ class JobCardDetailsController extends GetxController {
       responsibility: responsibility,
     );
     employee.add(selectedEmployees);
-    print("Employees names and ids: ${employee[0]}");
-
     employeeTableRows.add(newRow);
 
     responsibilityCtrlr.clear();
@@ -1063,16 +917,13 @@ class JobCardDetailsController extends GetxController {
   }
 
   void deleteEmployee(Key key) {
-    // Find the index of the row with this key
     final index = employeeTableRows.indexWhere((row) => row.key == key);
     if (index != -1) {
-      // If found, remove the row from the table
       employeeTableRows.removeAt(index);
       employee.removeAt(index);
     }
   }
 
-  /// Show alert dialog
   void showAlertDialog({
     int? jobId,
     String? message,
@@ -1082,13 +933,4 @@ class JobCardDetailsController extends GetxController {
   }) async {
     await Get.dialog<void>(dialog ?? SizedBox());
   }
-
-  ///
 }
-
-// class DataRow2 {
-//   final List<DataCell> cells;
-//   final int index;
-
-//   DataRow2({required this.cells, this.index = -1});
-// }
