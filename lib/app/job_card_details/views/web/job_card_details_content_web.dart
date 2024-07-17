@@ -450,7 +450,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                         color: ColorValues
                                                             .appDarkBlueColor,
                                                         icon: Icons.visibility,
-                                                        message: 'View Permit',
+                                                        message: 'View Image',
                                                         onPress: () async {
                                                           // String baseUrl =
                                                           //     "http://65.0.20.19/CMMS_API/";
