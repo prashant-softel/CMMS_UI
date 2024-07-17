@@ -109,11 +109,7 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
                         },
                         child: const Text('View Job'),
                       ),
-                      // ElevatedButton(
-                      //   style: Styles.redElevatedButtonStyle,
-                      //   onPressed: () => controller.goToAddJobScreen(),
-                      //   child: const Text('Add New Job'),
-                      // ),
+                    
                     ]),
               ]),
         );
