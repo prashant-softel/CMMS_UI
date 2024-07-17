@@ -2018,8 +2018,10 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     closetype == 1
         ? Get.offAllNamed(Routes.pmTask)
-        : Get.dialog<void>(PermitMessageCloseDialog(
-            data: parsedJson['message'], jobId: jobId));
+        : closetype == 2
+            ? Get.offAllNamed(Routes.jobCard)
+            : Get.dialog<void>(PermitMessageCloseDialog(
+                data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
@@ -3157,12 +3159,12 @@ class ConnectHelper {
   }
 
   //Update New Permit123
-  Future<ResponseModel> updateNewPermit({
-    required String auth,
-    newPermit,
-    bool? isLoading,
-    bool? resubmit,int?type
-  }) async {
+  Future<ResponseModel> updateNewPermit(
+      {required String auth,
+      newPermit,
+      bool? isLoading,
+      bool? resubmit,
+      int? type}) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3178,9 +3180,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(UpdateNewPermitDialog(
-      data: parsedJson['message'],
-      PtwId: parsedJson['id'],type:type
-    ));
+        data: parsedJson['message'], PtwId: parsedJson['id'], type: type));
 
     return responseModel;
   }
