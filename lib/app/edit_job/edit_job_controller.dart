@@ -242,6 +242,7 @@ class EditJobController extends GetxController {
     final _assignedToList = await editJobPresenter.getAssignedToEmployee(
       facilityId: selectedFacilityId,
       featureId: UserAccessConstants.kJobFeatureId,
+      isattendanceneeded: 0,
     );
 
     if (_assignedToList != null) {
