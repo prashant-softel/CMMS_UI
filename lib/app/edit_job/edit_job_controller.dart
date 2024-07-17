@@ -185,6 +185,7 @@ class EditJobController extends GetxController {
       // Fill Job Title and Job Description and Breakdown Time
       jobTitleCtrlr.text = jobDetailsModel.value?.jobTitle ?? '';
       jobDescriptionCtrlr.text = jobDetailsModel.value?.jobDescription ?? '';
+      selectedBlock.value = jobDetailsModel.value?.blockName ?? "";
       breakdownTimeCtrlr.text =
           formatDateTimeForUI(jobDetailsModel.value?.breakdownTime);
       toolsRequiredList?.value = jobDetailsModel.value?.toolsRequiredList ?? [];
@@ -193,6 +194,7 @@ class EditJobController extends GetxController {
       // selectedtoolsRequiredToWorkTypeIdList =
       //     toolReqIds.whereType<int>().toList();
       toolsRequiredSelected(toolReqIds);
+
       // workTypeListObj?.value = jobDetailsModel.value!.workTypeList ?? [];
       // List<int?> workTypeIdList =
       //     workTypeListObj!.map((element) => element!.workTypeId).toList();
@@ -280,42 +282,42 @@ class EditJobController extends GetxController {
   //   }
   // }
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
-  try {
-    toolsRequiredToWorkTypeList?.clear();
-    selectedtoolsRequiredToWorkTypeList.clear();
-    selectedtoolsRequiredToWorkTypeIdList.clear();
+    try {
+      toolsRequiredToWorkTypeList?.clear();
+      selectedtoolsRequiredToWorkTypeList.clear();
+      selectedtoolsRequiredToWorkTypeIdList.clear();
 
-    // Fetch the list of tools from the API
-    final toolsList = await editJobPresenter.getToolsRequiredToWorkTypeList(
-      isLoading: true,
-      workTypeIds: workTypeIds,
-    );
+      // Fetch the list of tools from the API
+      final toolsList = await editJobPresenter.getToolsRequiredToWorkTypeList(
+        isLoading: true,
+        workTypeIds: workTypeIds,
+      );
 
-    // Create a set to store unique tools
-    final uniqueTools = <ToolsModel>{};
+      // Create a set to store unique tools
+      final uniqueTools = <ToolsModel>{};
 
-    // Add tools from the API response to the set
-    for (var tool in toolsList ?? []) {
-      uniqueTools.add(tool);
+      // Add tools from the API response to the set
+      for (var tool in toolsList ?? []) {
+        uniqueTools.add(tool);
+      }
+
+      // Add tools from jobDetailsModel (if available) to the set
+      for (var toolType in jobDetailsModel.value?.toolsRequiredList ?? []) {
+        uniqueTools.add(ToolsModel(
+          id: toolType.toolId,
+          linkedToolName: toolType.toolName,
+        ));
+      }
+
+      // Update the list with unique tools
+      toolsRequiredToWorkTypeList?.value = uniqueTools.toList();
+
+      // Update the UI
+      update(['toolsRequiredToWorkTypeList']);
+    } catch (e) {
+      print(e);
     }
-
-    // Add tools from jobDetailsModel (if available) to the set
-    for (var toolType in jobDetailsModel.value?.toolsRequiredList ?? []) {
-      uniqueTools.add(ToolsModel(
-        id: toolType.toolId,
-        linkedToolName: toolType.toolName,
-      ));
-    }
-
-    // Update the list with unique tools
-    toolsRequiredToWorkTypeList?.value = uniqueTools.toList();
-
-    // Update the UI
-    update(['toolsRequiredToWorkTypeList']);
-  } catch (e) {
-    print(e);
   }
-}
 
   Future<void> getInventoryCategoryList(String? facilityId) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
@@ -369,7 +371,7 @@ class EditJobController extends GetxController {
   //       }
   //   }
   // }
-    Future<void> getInventoryList({
+  Future<void> getInventoryList({
     int? facilityId,
     int? blockId,
   }) async {
@@ -387,7 +389,7 @@ class EditJobController extends GetxController {
       if (jobDetailsModel.value?.workingAreaList != null)
         for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
           int _selectedWorkAreaId = _workArea.workingAreaId ?? 0;
-          if (_selectedWorkAreaId > 0 && 
+          if (_selectedWorkAreaId > 0 &&
               !selectedWorkAreaIdList.contains(_selectedWorkAreaId)) {
             selectedWorkAreaIdList.add(_selectedWorkAreaId);
           }
