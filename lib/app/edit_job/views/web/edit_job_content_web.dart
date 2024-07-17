@@ -102,6 +102,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                   Stack(
                     children: [
                       Container(
+                        height: 700,
                         //   height: Get.height,
                         child: Card(
                           color: Color.fromARGB(255, 245, 248, 250),
@@ -302,7 +303,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                   ),
                                                 ],
                                               ),
-              
+                                    
                                               // Dimens.boxHeight10,
                                                SizedBox(height:10),
                                               IgnorePointer(
@@ -419,7 +420,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                               ),
                                               // Dimens.boxHeight10,
                                                SizedBox(height:10),
-              
+                                    
                                               Row(
                                                 children: [
                                                   CustomRichText(
@@ -639,7 +640,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                             MultiSelectChipDisplay(),
                                                       ),
                                                     ),
-              
+                                    
                                                     // DropdownWidget(
                                                     //   dropdownList: controller.toolsRequiredToWorkTypeList,
                                                     //   onValueChanged: controller.onDropdownValueChanged,
@@ -650,7 +651,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                               ),
                                               // Dimens.boxHeight10,
                                                SizedBox(height:10),
-              
+                                    
                                               // Dimens.boxHeight10,
                                                SizedBox(height:10),
                                               Row(
@@ -681,7 +682,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                   ),
                                                 ],
                                               ),
-              
+                                    
                                               // Dimens.boxHeight10,
                                                SizedBox(height:10),
                                             ],
@@ -753,7 +754,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                             ),
                                             // Dimens.boxHeight10,
                                              SizedBox(height:10),
-              
+                                    
                                             ///
                                             IgnorePointer(
                                               child: Row(
@@ -870,7 +871,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                 ],
                                               ),
                                             ),
-              
+                                    
                                             // Dimens.boxHeight10,
                                              SizedBox(height:10),
                                             Row(
@@ -1079,7 +1080,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                     ),
                                   ),
                                 ),
-              
+                                    
                                 ///File Upload
                                 //   SizedBox(
                                 //   width: MediaQuery.of(context).size.width / 1.5,
