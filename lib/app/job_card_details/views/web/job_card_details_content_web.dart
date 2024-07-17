@@ -216,7 +216,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                         ),
                                       ],
                                     ),
-                                    Dimens.boxWidth10,
+                                    // Dimens.boxWidth10,
+                                    SizedBox(width: 10),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -224,7 +225,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                         Text(" JC${controller.jobCardId.value}",
                                             style: Styles.blue14),
                                         Container(
-                                          width: 400,
+                                          width: 280,
                                           child: Text(
                                               " ${controller.jobCardDetailsModel.value?.assetcatlist != null ? controller.jobCardDetailsModel.value?.assetcatlist?.map<String>((item) => item.name.toString()).toList() : []}",
                                               maxLines: 3,
@@ -268,7 +269,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                         ),
                                       ],
                                     ),
-                                    Dimens.boxWidth10,
+                                    // Dimens.boxWidth10,
+                                    SizedBox(width: 10),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -304,7 +306,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                             Text('Plant Details :', style: Styles.blackBold16),
                           ]),
                           TransposedTable(controller.plantDetails),
-                          Dimens.boxHeight20,
+                          // Dimens.boxHeight20,
+                          SizedBox(height: 20),
 
                           /// TABLE - JOB DETAILS
                           Row(//
@@ -312,7 +315,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                             Text('Job Details :', style: Styles.blackBold16),
                           ]),
                           TransposedTable(controller.jobDetails),
-                          Dimens.boxHeight20,
+                          // Dimens.boxHeight20,
+                           SizedBox(height: 20),
 
                           /// TABLE - PERMIT DETAILS
                           Row(//
@@ -320,7 +324,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                             Text('Permit Details :', style: Styles.blackBold16),
                           ]),
                           TransposedTable(controller.permitDetails),
-                          Dimens.boxHeight20,
+                          // Dimens.boxHeight20,
+                           SizedBox(height: 20),
 
                           /// ISOLATED ASSETS TABLE WIDGET
                           (controller.isolationAssetsCategoryList.isNotEmpty)
@@ -330,14 +335,16 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                           /// LOTO APPLIED ASSETS TABLE WIDGET
                           (controller.lotoAppliedAssets.isNotEmpty)
                               ? LotoAppliedAssetsWidget()
-                              : Dimens.boxHeight20,
+                              // : Dimens.boxHeight20,
+                              : SizedBox(height: 20),
                           CustomDivider(),
 
                           /// EMPLOYEE TABL
                           DeployedTeam(),
                           // EmployeeTableWidget(
                           //     controller: controller, isWeb: true),
-                          Dimens.boxHeight20,
+                          // Dimens.boxHeight20,
+                           SizedBox(height: 20),
                           CustomDivider(),
 
                           /// FILE UPLOAD WIDGET
@@ -352,15 +359,18 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       flex: 2,
                                       child: FileUploadWidgetWithDropzone(),
                                     ),
-                                    Dimens.boxWidth10,
+                                    // Dimens.boxWidth10,
+                                     SizedBox(width: 10),
                                     Expanded(
                                         flex: 8,
                                         child: FileUploadDetailsWidgetWeb()),
                                   ]),
                                 ),
-                          Dimens.boxHeight20,
+                          // Dimens.boxHeight20,
+                           SizedBox(height: 20),
                           CustomDivider(),
-                          Dimens.boxHeight20,
+                          // Dimens.boxHeight20,
+                           SizedBox(height: 20),
                           controller.allFiles.length > 0
                               ? Container(
                                   margin: Dimens.edgeInsets20,
@@ -477,7 +487,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                   ),
                                 )
                               : Dimens.box0,
-                          Dimens.boxHeight10,
+                          // Dimens.boxHeight10,
+                           SizedBox(height: 10),
                           // controller.listMrsByTaskId!.value
                           //                 .firstWhereOrNull(
                           //                   (element) =>
@@ -826,7 +837,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                           //  : Dimens.box0,
 
                           ,
-                          Dimens.boxHeight20,
+                          // Dimens.boxHeight20,
+                           SizedBox(height: 20),
                           Row(//
                               children: [
                             Text('History', style: Styles.blackBold16),
@@ -896,7 +908,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                   ),
                                 ]),
 
-                          Dimens.boxHeight20,
+                          // Dimens.boxHeight20,
+                           SizedBox(height: 20),
 
                           /// START JOB CARD BUTTON
                           controller.jobCardDetailsModel.value!.status == 151 &&
@@ -964,7 +977,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                             backgroundColor:
                                                 ColorValues.appRedColor,
                                           ),
-                                          Dimens.boxWidth10,
+                                          // Dimens.boxWidth10,
+                                           SizedBox(width: 10),
                                           varUserAccessModel.value.access_list!
                                                       .where((e) =>
                                                           e.feature_id ==
@@ -1017,7 +1031,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   },
                                                 )
                                               : Dimens.box0,
-                                          Dimens.boxWidth10,
+                                          // Dimens.boxWidth10,
+                                           SizedBox(width: 10),
                                           varUserAccessModel.value.access_list!
                                                       .where((e) =>
                                                           e.feature_id ==
@@ -1077,7 +1092,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   },
                                                 )
                                               : Container(),
-                                          Dimens.boxWidth10,
+                                          // Dimens.boxWidth10,
+                                           SizedBox(width: 10),
                                           CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appLightBlueColor,
@@ -1126,7 +1142,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                               }
                                             },
                                           ),
-                                          Dimens.boxWidth10,
+                                          // Dimens.boxWidth10,
+                                           SizedBox(width: 10),
                                           controller.listMrsByTaskId!.value
                                                           .firstWhereOrNull(
                                                             (element) =>
@@ -1209,7 +1226,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 backgroundColor:
                                                     ColorValues.appRedColor,
                                               ),
-                                              Dimens.boxWidth10,
+                                              // Dimens.boxWidth10,
+                                               SizedBox(width: 10),
                                               CustomElevatedButton(
                                                 backgroundColor:
                                                     ColorValues.appYellowColor,
@@ -1231,7 +1249,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   }
                                                 },
                                               ),
-                                              Dimens.boxWidth10,
+                                              // Dimens.boxWidth10,
+                                               SizedBox(width: 10),
                                               // CustomElevatedButton(
                                               //   backgroundColor:
                                               //       ColorValues.approveColor,
@@ -1251,7 +1270,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                               //   },
                                               // ),
 
-                                              Dimens.boxWidth10,
+                                              // Dimens.boxWidth10,
+                                               SizedBox(width: 10),
 
                                               varUserAccessModel.value
                                                               .access_list!
@@ -1303,7 +1323,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                         },
                                                       ))
                                                   : Container(),
-                                              Dimens.boxWidth10,
+                                              // Dimens.boxWidth10,
+                                               SizedBox(width: 10),
                                               varUserAccessModel.value
                                                               .access_list!
                                                               .where((e) =>
@@ -1385,7 +1406,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                           ));
                                                         },
                                                       )),
-                                                  Dimens.boxWidth10,
+                                                  // Dimens.boxWidth10,
+                                                   SizedBox(width: 10),
                                                   Container(
                                                       height: 30,
                                                       child:
@@ -1411,7 +1433,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 ])
                                           : Container(),
 
-                          Dimens.boxHeight20,
+                          // Dimens.boxHeight20,
+                           SizedBox(height: 20),
                         ]),
                   ),
                 );
