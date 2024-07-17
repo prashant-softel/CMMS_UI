@@ -17,41 +17,37 @@ class EditJobScreen extends GetView<EditJobController> {
 
   @override
   Widget build(BuildContext context) {
-    return SelectionArea(
-      child: Scaffold(
-        appBar: Responsive.isMobile(context) || Responsive.isTablet(context)
-            ? AppBar(
-                title: HeadingProfileAppBar(
-                  title: "Edit Job",
-                ),
-              )
-            : null,
-        drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
-            ? HomeDrawerMobile() //ResponsiveSideMenu()
-            : null,
-        body: Stack(
+    return Scaffold(
+      appBar: Responsive.isMobile(context)
+          ? AppBar(
+              centerTitle: true,
+              elevation: 0,
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
+      body: Obx(
+        () => Stack(
           children: [
             AnimatedContainer(
                 duration: Duration(milliseconds: 450),
                 margin: EdgeInsets.only(
-                  left: Responsive.isDesktop(context)
-                      ? homecontroller.menuButton.value
-                          ? 250.0
-                          : 70.0
-                      : 0,
-                ),
+                    left: homecontroller.menuButton.value ? 250.0 : 70.0),
                 width: Get.width,
                 height: Get.height,
                 child: Row(
                   children: [
+                    (Responsive.isMobile(context) ||
+                            Responsive.isTablet(context))
+                        ? Dimens.box0
+                        : Container(),
                     Expanded(
                       child: Column(
                         children: [
-                          if (Responsive.isMobile(context) ||
-                              Responsive.isTablet(context))
-                            Expanded(
-                              child: EditJobContentMobile(),
-                            ),
+                          if (Responsive.isMobile(context))
+                            Expanded(child: EditJobContentMobile()),
                           if (Responsive.isDesktop(context))
                             Expanded(
                               child: EditJobContentWeb(),
@@ -61,12 +57,8 @@ class EditJobScreen extends GetView<EditJobController> {
                     ),
                   ],
                 )),
-            Responsive.isDesktop(context)
-                ? AnimatedPositioned(
-                    duration: Duration(milliseconds: 450),
-                    child: HomeDrawer(),
-                  )
-                : Dimens.box0
+            AnimatedPositioned(
+                child: HomeDrawer(), duration: Duration(milliseconds: 450))
           ],
         ),
       ),
