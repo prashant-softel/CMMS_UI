@@ -52,11 +52,13 @@ class EditJobPresenter {
     int? facilityId,
     int? featureId,
     bool? isLoading,
+    int? isattendanceneeded,
   }) async =>
       await editJobUsecase.getAssignedToEmployee(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
         featureId: featureId,
+        isattendanceneeded: isattendanceneeded,
         isLoading: isLoading ?? false,
       );
 
