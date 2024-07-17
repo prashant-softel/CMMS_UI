@@ -23,7 +23,7 @@ class JobUpdatedDialog extends GetView<EditJobController> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
       ),
-      insetPadding: Dimens.edgeInsets10_0_10_0,
+      insetPadding: EdgeInsets.all(8),
       contentPadding: EdgeInsets.zero,
       title: Text(
         'Job Updated',
@@ -41,20 +41,27 @@ class JobUpdatedDialog extends GetView<EditJobController> {
                   color: ColorValues.greyLightColour,
                   thickness: 1,
                 ),
-                Dimens.boxHeight20,
+                SizedBox(
+                  height: 10,
+                ),
                 Center(child: Text(message ?? '')),
-                Dimens.boxHeight25,
+                SizedBox(
+                  height: 10,
+                )
               ]),
         );
       }),
       actions: [
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Row(children: [
+          Spacer(),
           ElevatedButton(
             style: Styles.darkBlueElevatedButtonStyle,
             onPressed: () => controller.goToJobListScreen(),
             child: const Text('Job List'),
           ),
-          Dimens.boxWidth10,
+          SizedBox(
+            width: 10,
+          ),
           ElevatedButton(
             style: Styles.yellowElevatedButtonStyle,
             onPressed: () {
@@ -62,13 +69,16 @@ class JobUpdatedDialog extends GetView<EditJobController> {
             },
             child: const Text('View Job'),
           ),
-          Dimens.boxWidth10,
+          SizedBox(
+            width: 10,
+          ),
           ElevatedButton(
             style: Styles.greenElevatedButtonStyle,
             onPressed: () => //
                 controller.goToAddJobScreen(),
             child: const Text('Add New Job'),
           ),
+          Spacer()
         ]),
       ],
     );
