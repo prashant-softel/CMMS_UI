@@ -281,7 +281,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                           controller.jobModel?.id != null
                               ? Container(
                                   // alignment: Alignment.centerLeft,
-                                  width: Get.width * .8,
+                                  width: Get.width * .9,
                                   height: Get.height * .2,
                                   margin: EdgeInsets.symmetric(
                                       horizontal: 9, vertical: 10),
