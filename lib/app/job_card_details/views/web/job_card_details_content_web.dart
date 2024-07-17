@@ -910,27 +910,6 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
 
                           // Dimens.boxHeight20,
                           SizedBox(height: 20),
-                          CustomElevatedButton(
-                            text: 'Startfctgvhbj',
-                            onPressed: () {
-                              controller.permitList
-                                          ?.firstWhere((element) =>
-                                              element.permitId != null)
-                                          .tbT_Done_Check ==
-                                      1
-                                  ? controller.startJobCard(
-                                      jcCard: controller.jobCardId.value,
-                                      fileIds: dropzoneController.fileIds)
-                                  : Get.dialog<void>(TbtDoneBMDialog(
-                                      ptw_id: controller.jobCardDetailsModel
-                                              .value?.ptwId ??
-                                          0,
-                                      id: controller
-                                              .jobCardDetailsModel.value?.id ??
-                                          0));
-                            },
-                            backgroundColor: ColorValues.addNewColor,
-                          ),
 
                           /// START JOB CARD BUTTON
                           controller.jobCardDetailsModel.value!.status == 151 &&
