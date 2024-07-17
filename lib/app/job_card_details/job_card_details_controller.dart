@@ -868,7 +868,6 @@ class JobCardDetailsController extends GetxController {
   }
 
   goToAddJobScreen() {
-    Get.back();
     Get.offAllNamed(Routes.jobDetails);
   }
 
