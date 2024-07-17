@@ -2837,7 +2837,7 @@ class ConnectHelper {
     int? featureId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId&isattendence=0',
+      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId&isattendence=1',
       Request.get,
       null,
       isLoading ?? false,

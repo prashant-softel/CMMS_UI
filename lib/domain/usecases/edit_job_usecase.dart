@@ -40,13 +40,10 @@ class EditJobUsecase {
     int? facilityId,
     int? featureId,
     bool? isLoading,
+    int? isattendanceneeded,
   }) async =>
-      await repository.getAssignedToEmployee(
-        auth,
-        facilityId,
-        featureId,
-        isLoading,
-      );
+      await repository.getAssignedToListWOAttend(
+          auth, facilityId, featureId, isattendanceneeded, isLoading);
 
   ///
   Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList({
