@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/job_card_approve_dialog.dart';
 import 'package:cmms/app/widgets/job_card_reject_dialog.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -363,7 +364,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                     SizedBox(width: 10),
                                     Expanded(
                                         flex: 8,
-                                        child: FileUploadDetailsWidgetWeb()),
+                                        child: FileUploadDetailsWidgetWeb2()),
                                   ]),
                                 ),
                           // Dimens.boxHeight20,
