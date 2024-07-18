@@ -181,11 +181,10 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                           "",
                                       style: Styles.blue17),
                                   Dimens.boxHeight10,
-                                 Text(
+                                  Text(
                                     "${controller.mrsDetailsModel.value?.whereUsedTypeName == 'JOBCARD' ? 'JC' : controller.mrsDetailsModel.value?.whereUsedTypeName == 'PMTASK' ? 'PMT' : ''} ${controller.mrsDetailsModel.value?.whereUsedRefID ?? ""}",
                                     style: Styles.blue17,
                                   ),
-
                                 ],
                               )
                             ],
@@ -263,7 +262,11 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                   ],
                                   rows: List<DataRow>.generate(
                                       controller.mrsDetailsModel.value!
-                                          .cmmrsItems!.length,
+                                                  .cmmrsItems !=
+                                              null
+                                          ? controller.mrsDetailsModel.value!
+                                              .cmmrsItems!.length
+                                          : 0,
                                       (index) => DataRow(cells: [
                                             DataCell(Text(controller
                                                 .mrsDetailsModel
