@@ -175,20 +175,18 @@ class JobCardDetailsController extends GetxController {
 
   @override
   void onInit() async {
-    facilityIdStreamSubscription =
-        homeController.facilityId$.listen((event) async {
-      facilityId = event;
-      if (facilityId > 0) {
-        isFacilitySelected.value = true;
-        await getEmployeeList();
-      }
-    });
-
     try {
       Get.put(FileUploadController());
 
       await setJcId();
-
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
+        facilityId = event;
+        if (facilityId > 0) {
+          isFacilitySelected.value = true;
+          await getEmployeeList();
+        }
+      });
       if (jobCardId.value != 0) {
         jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
               jobCardId: jobCardId.value,
@@ -218,10 +216,10 @@ class JobCardDetailsController extends GetxController {
           deployedEmployeeMapperData[element.name ?? ""] = employeeList
               .firstWhere((e) => e!.name == element.name, orElse: null);
         });
+        createPlantDetailsTableData();
+        createJobDetailsTableData();
+        createPermitDetailsTableData();
       }
-      createPlantDetailsTableData();
-      createJobDetailsTableData();
-      createPermitDetailsTableData();
 
       responsibilityCtrlrs.add(TextEditingController());
       currentIndex.value = -1;
@@ -298,6 +296,7 @@ class JobCardDetailsController extends GetxController {
         }
         update(["employeeList"]);
       }
+      addEmployeesDeployed();
     }
   }
 
@@ -868,7 +867,8 @@ class JobCardDetailsController extends GetxController {
   }
 
   goToAddJobScreen() {
-    Get.offAllNamed(Routes.jobDetails);
+    Get.offAllNamed(Routes.jobDetails,
+        arguments: {'jobId': jobDetailsModel.value?.id});
   }
 
   void addNewEmployee(EmployeeModel selectedEmployee, String responsibility) {

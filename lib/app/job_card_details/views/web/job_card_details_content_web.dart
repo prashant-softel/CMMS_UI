@@ -11,8 +11,10 @@ import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -338,15 +340,20 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                               ? LotoAppliedAssetsWidget()
                               // : Dimens.boxHeight20,
                               : SizedBox(height: 20),
-                          CustomDivider(),
+                          // CustomDivider(),
 
                           /// EMPLOYEE TABL
+                          // controller.employeesDeployed.length > 0
+                          //     ? Container()
+                          //     :
                           DeployedTeam(),
+
                           // EmployeeTableWidget(
                           //     controller: controller, isWeb: true),
                           // Dimens.boxHeight20,
                           SizedBox(height: 20),
-                          CustomDivider(),
+
+                          // CustomDivider(),
 
                           /// FILE UPLOAD WIDGET
                           controller.jobCardDetailsModel.value!.status == 158
@@ -490,354 +497,723 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                               : Dimens.box0,
                           // Dimens.boxHeight10,
                           SizedBox(height: 10),
-                          // controller.listMrsByTaskId!.value
-                          //                 .firstWhereOrNull(
-                          //                   (element) =>
-                          //                       element?.jobCardId != 0 ||
-                          //                       element?.pmId != 0,
-                          //                 )
-                          //                 ?.mrs_return_ID ==
-                          //             0 &&
-                          //         controller.allTrue.value == false &&
-                          //         controller.cmmrsItems!.isNotEmpty
-                          // ?
-                          Container(
-                            margin: Dimens.edgeInsets20,
-                            height: 300,
-                            // width: MediaQuery.of(context).size.width / 1.2,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: ColorValues.lightGreyColorWithOpacity35,
-                                width: 1,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ColorValues.appBlueBackgroundColor,
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Material Used For ",
-                                        style: Styles.blue700,
+                          controller.listMrsByTaskId!.value
+                                          .firstWhereOrNull(
+                                            (element) =>
+                                                element?.jobCardId != 0 ||
+                                                element?.pmId != 0,
+                                          )
+                                          ?.mrs_return_ID ==
+                                      0 &&
+                                  controller.allTrue.value == false &&
+                                  controller.cmmrsItems!.isNotEmpty
+                              ? Container(
+                                  margin: Dimens.edgeInsets20,
+                                  height: 300,
+                                  // width: MediaQuery.of(context).size.width / 1.2,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: ColorValues
+                                          .lightGreyColorWithOpacity35,
+                                      width: 1,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 2),
                                       ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          controller.addRowItem();
-                                        },
-                                        child: Container(
-                                          height: 25,
-                                          width: 70,
-                                          decoration: BoxDecoration(
-                                            color: ColorValues.addNewColor,
-                                            border: Border.all(
-                                              color: ColorValues
-                                                  .lightGreyColorWithOpacity35,
-                                              width: 1,
-                                            ),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(5)),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              " + Add ",
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w100,
-                                                  color: Colors.white),
-                                            ),
-                                          ),
-                                        ),
-                                      )
                                     ],
                                   ),
-                                ),
-                                Expanded(
-                                  child: Obx(() {
-                                    return DataTable2(
-                                      minWidth: 2000,
-                                      dataRowHeight: 70,
-                                      columnSpacing: 10,
-                                      border: TableBorder.all(
-                                          color: Color.fromARGB(
-                                              255, 206, 229, 234)),
-                                      columns: [
-                                        DataColumn2(
-                                            fixedWidth: 250,
-                                            label: Text(
-                                              "Material Name",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 250,
-                                            label: Text(
-                                              "Equipment",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 100,
-                                            label: Text(
-                                              "Sr No.",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 150,
-                                            label: Text(
-                                              "MDM Code",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 120,
-                                            label: Text(
-                                              "Material Type",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 100,
-                                            label: Text(
-                                              "Issued Qty",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 100,
-                                            label: Text(
-                                              "Used Qty",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 130,
-                                            label: Text(
-                                              "Consumed  Qty",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 70,
-                                            label: Text(
-                                              "Action",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                      ],
-                                      rows: controller.rowItem.value
-                                          .map((record) {
-                                        return DataRow(
-                                          // height: 130,
-                                          cells: record.map((mapData) {
-                                            return DataCell(
-                                              (mapData['key'] == "Drop_down")
-                                                  ? DropdownWebStock(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      dropdownList: controller
-                                                          .cmmrsItems!
-                                                          .where((p0) {
-                                                            return !controller
-                                                                .rowItem
-                                                                .map((p0) => p0[
-                                                                    0]["value"])
-                                                                .contains(
-                                                                    p0!.name);
-                                                          })
-                                                          .toList()
-                                                          .obs,
-                                                      selectedValue:
-                                                          mapData["value"],
-                                                      onValueChanged: (list,
-                                                          selectedValue) {
-                                                        // print('paifcghb:${controller.assetList}');
-                                                        // print({selectedValue: selectedValue});
-                                                        mapData["value"] =
-                                                            selectedValue;
-                                                        controller.dropdownMapperData[
-                                                                selectedValue] =
-                                                            list.firstWhere(
-                                                                (element) =>
-                                                                    element
-                                                                        .name ==
-                                                                    selectedValue,
-                                                                orElse: null);
-                                                        Future.delayed(
-                                                            Duration.zero, () {
-                                                          //  setState(() {});
-                                                        });
-                                                      },
-                                                    )
-                                                  : (mapData['key'] ==
-                                                          "Drop_down_eq")
-                                                      ? DropdownWebStock(
-                                                          width: MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width,
-                                                          dropdownList: controller
-                                                              .workingAreaList!
-                                                              .where((p0) {
-                                                                return !controller
-                                                                    .rowItem
-                                                                    .map((p0) =>
-                                                                        p0[0][
-                                                                            "value"])
-                                                                    .contains(p0
-                                                                        .name);
-                                                              })
-                                                              .toList()
-                                                              .obs,
-                                                          selectedValue:
-                                                              mapData["value"],
-                                                          onValueChanged: (list,
-                                                              selectedValue) {
-                                                            // print('paifcghb:${controller.assetList}');
-                                                            // print({selectedValue: selectedValue});
-                                                            mapData["value"] =
-                                                                selectedValue;
-                                                            controller.dropdownMapperDataworkingArea[
-                                                                    selectedValue] =
-                                                                list.firstWhere(
-                                                                    (element) =>
-                                                                        element
-                                                                            .name ==
-                                                                        selectedValue,
-                                                                    orElse:
-                                                                        null);
-                                                            Future.delayed(
-                                                                Duration.zero,
-                                                                () {
-                                                              //  setState(() {});
-                                                            });
-                                                          },
-                                                        )
-                                                      : (mapData['key'] ==
-                                                              "Sr_No")
-                                                          ? Text(
-                                                              "${controller.dropdownMapperData[record[0]['value']]?.serial_number ?? ""}")
-                                                          : (mapData['key'] ==
-                                                                  "code")
-                                                              ? Text(
-                                                                  "${controller.dropdownMapperData[record[0]['value']]?.asset_MDM_code ?? ""}")
-                                                              : (mapData['key'] ==
-                                                                      "Material_Type")
-                                                                  ? Text(
-                                                                      "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
-                                                                  : (mapData['key'] ==
-                                                                          "Action ")
-                                                                      ? Padding(
-                                                                          padding:
-                                                                              EdgeInsets.only(top: 10),
-                                                                          child:
-                                                                              Column(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.start,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
-                                                                            children: [
-                                                                              TableActionButton(
-                                                                                color: ColorValues.appRedColor,
-                                                                                icon: Icons.delete,
-                                                                                label: '',
-                                                                                message: '',
-                                                                                onPress: () {
-                                                                                  controller.rowItem.remove(record);
-                                                                                },
-                                                                              )
-                                                                            ],
-                                                                          ),
-                                                                        )
-                                                                      : (mapData['key'] ==
-                                                                              "Issued_Qty")
-                                                                          ? Text(
-                                                                              "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}")
-                                                                          : (mapData['key'] == "Used_Qty")
-                                                                              ? Text("${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
-                                                                              : (mapData['key'] == "Consumed_Qty")
-                                                                                  ? Padding(
-                                                                                      padding: const EdgeInsets.only(top: 10),
-                                                                                      child: Container(
-                                                                                        decoration: BoxDecoration(
-                                                                                          boxShadow: [
-                                                                                            BoxShadow(
-                                                                                              color: Colors.black26,
-                                                                                              offset: const Offset(
-                                                                                                5.0,
-                                                                                                5.0,
-                                                                                              ),
-                                                                                              blurRadius: 5.0,
-                                                                                              spreadRadius: 1.0,
-                                                                                            ),
-                                                                                          ],
-                                                                                          color: ColorValues.whiteColor,
-                                                                                          borderRadius: BorderRadius.circular(5),
-                                                                                        ),
-                                                                                        child: LoginCustomTextfield(
-                                                                                          width: (Get.width * .4),
-                                                                                          keyboardType: TextInputType.number,
-                                                                                          inputFormatters: <TextInputFormatter>[
-                                                                                            FilteringTextInputFormatter.digitsOnly
-                                                                                          ],
-                                                                                          maxLine: 1,
-                                                                                          textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                          onChanged: (txt) {
-                                                                                            // Ensure the entered value is less than or equal to the issued qty
-                                                                                            num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
-                                                                                            num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
-                                                                                            int consumedQty = int.tryParse(txt) ?? 0;
-
-                                                                                            if (consumedQty <= (issuedQty - usedQty)) {
-                                                                                              mapData["value"] = txt;
-                                                                                            } else {
-                                                                                              // If the entered quantity exceeds the issued quantity, show an error message or handle it accordingly
-                                                                                              Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
-                                                                                              // Reset the consumed quantity to the previous valid value
-                                                                                              // setState(() {
-                                                                                              //   mapData["value"] = mapData["value"]!;
-                                                                                              // });
-                                                                                            }
-                                                                                          },
-                                                                                        ),
-                                                                                      ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Material Used For ",
+                                              style: Styles.blue700,
+                                            ),
+                                            controller.jobCardDetailsModel
+                                                        .value!.status ==
+                                                    158
+                                                ? Dimens.box0
+                                                : GestureDetector(
+                                                    onTap: () {
+                                                      controller.addRowItem();
+                                                    },
+                                                    child: Container(
+                                                      height: 25,
+                                                      width: 70,
+                                                      decoration: BoxDecoration(
+                                                        color: ColorValues
+                                                            .addNewColor,
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    5)),
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          " + Add ",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w100,
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Obx(() {
+                                          return DataTable2(
+                                            minWidth: 2000,
+                                            dataRowHeight: 70,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 250,
+                                                  label: Text(
+                                                    "Material Name",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  fixedWidth: 250,
+                                                  label: Text(
+                                                    "Equipment",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Sr No.",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  fixedWidth: 150,
+                                                  label: Text(
+                                                    "MDM Code",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  fixedWidth: 120,
+                                                  label: Text(
+                                                    "Material Type",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Issued Qty",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Used Qty",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  fixedWidth: 130,
+                                                  label: Text(
+                                                    "Consumed  Qty",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  fixedWidth: 70,
+                                                  label: Text(
+                                                    "Action",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: controller.rowItem.value
+                                                .map((record) {
+                                              return DataRow(
+                                                // height: 130,
+                                                cells: record.map((mapData) {
+                                                  return DataCell(
+                                                    (mapData['key'] ==
+                                                            "Drop_down")
+                                                        ? DropdownWebStock(
+                                                            width:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                            dropdownList:
+                                                                controller
+                                                                    .cmmrsItems!
+                                                                    .where(
+                                                                        (p0) {
+                                                                      return !controller
+                                                                          .rowItem
+                                                                          .map((p0) => p0[0]
+                                                                              [
+                                                                              "value"])
+                                                                          .contains(
+                                                                              p0!.name);
+                                                                    })
+                                                                    .toList()
+                                                                    .obs,
+                                                            selectedValue:
+                                                                mapData[
+                                                                    "value"],
+                                                            onValueChanged: (list,
+                                                                selectedValue) {
+                                                              // print('paifcghb:${controller.assetList}');
+                                                              // print({selectedValue: selectedValue});
+                                                              mapData["value"] =
+                                                                  selectedValue;
+                                                              controller.dropdownMapperData[
+                                                                      selectedValue] =
+                                                                  list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse:
+                                                                          null);
+                                                              Future.delayed(
+                                                                  Duration.zero,
+                                                                  () {
+                                                                //  setState(() {});
+                                                              });
+                                                            },
+                                                          )
+                                                        : (mapData['key'] ==
+                                                                "Drop_down_eq")
+                                                            ? DropdownWebStock(
+                                                                width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                                dropdownList:
+                                                                    controller
+                                                                        .workingAreaList!
+                                                                        .where(
+                                                                            (p0) {
+                                                                          return !controller
+                                                                              .rowItem
+                                                                              .map((p0) => p0[0]["value"])
+                                                                              .contains(p0.name);
+                                                                        })
+                                                                        .toList()
+                                                                        .obs,
+                                                                selectedValue:
+                                                                    mapData[
+                                                                        "value"],
+                                                                onValueChanged:
+                                                                    (list,
+                                                                        selectedValue) {
+                                                                  // print('paifcghb:${controller.assetList}');
+                                                                  // print({selectedValue: selectedValue});
+                                                                  mapData["value"] =
+                                                                      selectedValue;
+                                                                  controller.dropdownMapperDataworkingArea[selectedValue] = list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse:
+                                                                          null);
+                                                                  Future.delayed(
+                                                                      Duration
+                                                                          .zero,
+                                                                      () {
+                                                                    //  setState(() {});
+                                                                  });
+                                                                },
+                                                              )
+                                                            : (mapData['key'] ==
+                                                                    "Sr_No")
+                                                                ? Text(
+                                                                    "${controller.dropdownMapperData[record[0]['value']]?.serial_number ?? ""}")
+                                                                : (mapData['key'] ==
+                                                                        "code")
+                                                                    ? Text(
+                                                                        "${controller.dropdownMapperData[record[0]['value']]?.asset_MDM_code ?? ""}")
+                                                                    : (mapData['key'] ==
+                                                                            "Material_Type")
+                                                                        ? Text(
+                                                                            "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
+                                                                        : (mapData['key'] ==
+                                                                                "Action ")
+                                                                            ? Padding(
+                                                                                padding: EdgeInsets.only(top: 10),
+                                                                                child: Column(
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  children: [
+                                                                                    TableActionButton(
+                                                                                      color: ColorValues.appRedColor,
+                                                                                      icon: Icons.delete,
+                                                                                      label: '',
+                                                                                      message: '',
+                                                                                      onPress: () {
+                                                                                        controller.rowItem.remove(record);
+                                                                                      },
                                                                                     )
-                                                                                  : Text(mapData['value'] ?? ''),
-                                            );
-                                          }).toList(),
-                                        );
-                                      }).toList(),
-                                    );
-                                  }),
-                                ),
-                              ],
-                            ),
-                          )
-                          //  : Dimens.box0,
+                                                                                  ],
+                                                                                ),
+                                                                              )
+                                                                            : (mapData['key'] == "Issued_Qty")
+                                                                                ? Text("${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}")
+                                                                                : (mapData['key'] == "Used_Qty")
+                                                                                    ? Text("${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
+                                                                                    : (mapData['key'] == "Consumed_Qty")
+                                                                                        ? Padding(
+                                                                                            padding: const EdgeInsets.only(top: 10),
+                                                                                            child: Container(
+                                                                                              decoration: BoxDecoration(
+                                                                                                boxShadow: [
+                                                                                                  BoxShadow(
+                                                                                                    color: Colors.black26,
+                                                                                                    offset: const Offset(
+                                                                                                      5.0,
+                                                                                                      5.0,
+                                                                                                    ),
+                                                                                                    blurRadius: 5.0,
+                                                                                                    spreadRadius: 1.0,
+                                                                                                  ),
+                                                                                                ],
+                                                                                                color: ColorValues.whiteColor,
+                                                                                                borderRadius: BorderRadius.circular(5),
+                                                                                              ),
+                                                                                              child: LoginCustomTextfield(
+                                                                                                width: (Get.width * .4),
+                                                                                                keyboardType: TextInputType.number,
+                                                                                                inputFormatters: <TextInputFormatter>[
+                                                                                                  FilteringTextInputFormatter.digitsOnly
+                                                                                                ],
+                                                                                                maxLine: 1,
+                                                                                                textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                onChanged: (txt) {
+                                                                                                  // Ensure the entered value is less than or equal to the issued qty
+                                                                                                  num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
+                                                                                                  num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
+                                                                                                  int consumedQty = int.tryParse(txt) ?? 0;
 
-                          ,
+                                                                                                  if (consumedQty <= (issuedQty - usedQty)) {
+                                                                                                    mapData["value"] = txt;
+                                                                                                  } else {
+                                                                                                    // If the entered quantity exceeds the issued quantity, show an error message or handle it accordingly
+                                                                                                    Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
+                                                                                                    // Reset the consumed quantity to the previous valid value
+                                                                                                    // setState(() {
+                                                                                                    //   mapData["value"] = mapData["value"]!;
+                                                                                                    // });
+                                                                                                  }
+                                                                                                },
+                                                                                              ),
+                                                                                            ),
+                                                                                          )
+                                                                                        : Text(mapData['value'] ?? ''),
+                                                  );
+                                                }).toList(),
+                                              );
+                                            }).toList(),
+                                          );
+                                        }),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : controller.listMrsByTaskId!.length > 0
+                                  ? Container(
+                                      margin: Dimens.edgeInsets20,
+                                      height:
+                                          controller.listMrsByTaskId!.length > 0
+                                              ? ((controller.listMrsByTaskId
+                                                              ?.length ??
+                                                          0) *
+                                                      40) +
+                                                  150
+                                              : 55,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: ColorValues
+                                                .appBlueBackgroundColor,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.topLeft,
+                                            padding: EdgeInsets.all(10),
+                                            child: Text(
+                                              "Material Issue / Used",
+                                              style: Styles.blue700,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: DataTable2(
+                                              border: TableBorder.all(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 229, 234)),
+                                              columns: [
+                                                DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      "Job Card Id",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    fixedWidth: 130,
+                                                    label: Text(
+                                                      "MRS ID",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    // fixedWidth: 200,
+                                                    label: Text(
+                                                  "Mrs Items List ",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                                DataColumn2(
+                                                    //  fixedWidth: 300,
+                                                    label: Text(
+                                                  "Status",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                                DataColumn2(
+                                                    fixedWidth: 300,
+                                                    label: Text(
+                                                      'Action',
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller.listMrsByTaskId
+                                                        ?.length ??
+                                                    0,
+                                                (index) => DataRow(cells: [
+                                                  DataCell(Text(controller
+                                                          .listMrsByTaskId?[
+                                                              index]
+                                                          ?.jobCardId
+                                                          .toString() ??
+                                                      '')),
+                                                  DataCell(Text(controller
+                                                              .listMrsByTaskId?[
+                                                                  index]
+                                                              ?.is_mrs_return ==
+                                                          0
+                                                      ? "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}"
+                                                      : "RMRS${controller.listMrsByTaskId?[index]?.mrs_return_ID.toString() ?? ''}")),
+                                                  DataCell(Text(controller
+                                                          .listMrsByTaskId?[
+                                                              index]
+                                                          ?.mrsItems ??
+                                                      '')),
+                                                  DataCell(Text(controller
+                                                          .listMrsByTaskId?[
+                                                              index]
+                                                          ?.status_short ??
+                                                      '')),
+                                                  DataCell(Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      TableActionButton(
+                                                          color: ColorValues
+                                                              .viewColor,
+                                                          icon: Icons
+                                                              .remove_red_eye,
+                                                          message: "View MRS",
+                                                          onPress: () {
+                                                            // controller
+                                                            //     .clearMrsIdStoreData();
+                                                            String mrsId = controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.mrsId
+                                                                    .toString() ??
+                                                                "";
+                                                            String rmrsId = controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.mrs_return_ID
+                                                                    .toString() ??
+                                                                "";
+
+                                                            print({
+                                                              "mrsId": mrsId
+                                                            });
+                                                            rmrsId == "0"
+                                                                ? Get.toNamed(
+                                                                    Routes
+                                                                        .mrsViewScreen,
+                                                                    arguments: {
+                                                                        'mrsId':
+                                                                            int.tryParse("$mrsId"),
+                                                                        'type':
+                                                                            1
+                                                                      })
+                                                                : Get.toNamed(
+                                                                    Routes
+                                                                        .approverReturnMrs,
+                                                                    arguments: {
+                                                                        'mrsId':
+                                                                            rmrsId,
+                                                                        'type':
+                                                                            1
+                                                                      });
+                                                            ;
+                                                            // String mrsId = controller
+                                                            //         .listMrsByJobId?[
+                                                            //             index]
+                                                            //         ?.mrsId
+                                                            //         .toString() ??
+                                                            //     "";
+                                                            // print({
+                                                            //   "mrsId": mrsId
+                                                            // });
+                                                            // Get.toNamed(
+                                                            //     Routes
+                                                            //         .mrsViewScreen,
+                                                            //     arguments: {
+                                                            //       'mrsId': int
+                                                            //           .tryParse(
+                                                            //               "$mrsId"),
+                                                            //       'type': 1
+                                                            //     });
+                                                          }),
+                                                      controller
+                                                                      .listMrsByTaskId?[
+                                                                          index]
+                                                                      ?.status ==
+                                                                  323 ||
+                                                              controller
+                                                                      .listMrsByTaskId?[
+                                                                          index]
+                                                                      ?.status ==
+                                                                  321 ||
+                                                              controller
+                                                                      .listMrsByTaskId?[
+                                                                          index]
+                                                                      ?.status ==
+                                                                  324
+                                                          ? Dimens.box0
+                                                          : TableActionButton(
+                                                              color: ColorValues
+                                                                  .editColor,
+                                                              icon: Icons.edit,
+                                                              message:
+                                                                  "Edit MRS",
+                                                              onPress: () {
+                                                                // controller
+                                                                //     .clearMrsIdStoreData();
+                                                                String mrsId = controller
+                                                                        .listMrsByTaskId?[
+                                                                            index]
+                                                                        ?.mrsId
+                                                                        .toString() ??
+                                                                    "";
+                                                                String rmrsId = controller
+                                                                        .listMrsByTaskId?[
+                                                                            index]
+                                                                        ?.mrs_return_ID
+                                                                        .toString() ??
+                                                                    "";
+
+                                                                print({
+                                                                  "mrsId": mrsId
+                                                                });
+                                                                rmrsId == "0"
+                                                                    ? Get.toNamed(
+                                                                        Routes
+                                                                            .editMrs,
+                                                                        arguments: {
+                                                                            'mrsId':
+                                                                                int.tryParse("$mrsId"),
+                                                                            'type':
+                                                                                1
+                                                                          })
+                                                                    : Get.toNamed(
+                                                                        Routes
+                                                                            .editReturnMrs,
+                                                                        arguments:
+                                                                            int.tryParse(rmrsId));
+                                                                ;
+                                                              })
+                                                    ],
+                                                  )),
+                                                ]),
+                                              ),
+                                            ),
+                                          ),
+
+                                          // Expanded(
+                                          //   child: ScrollableTableView(
+                                          //     columns: [
+                                          //       "Job Card ID",
+                                          //       "Mrs ID",
+                                          //       "Mrs Items List ",
+                                          //       "Status",
+                                          //       "Action",
+                                          //     ].map((column) {
+                                          //       return TableViewColumn(
+                                          //         label: column,
+                                          //         minWidth: Get.width * 0.15,
+                                          //       );
+                                          //     }).toList(),
+                                          //     rows: [
+                                          //       ...List.generate(
+                                          //         controller.listMrsByJobId
+                                          //                 ?.length ??
+                                          //             0,
+                                          //         (index) {
+                                          //           var getJobsLinkedMrsList =
+                                          //               controller
+                                          //                       .listMrsByJobId?[
+                                          //                   index];
+                                          //           return [
+                                          //             '${getJobsLinkedMrsList?.jobCardId}',
+                                          //             '${getJobsLinkedMrsList?.mrsId}',
+                                          //             '${getJobsLinkedMrsList?.mrsItems ?? ''}',
+                                          //             '${getJobsLinkedMrsList?.status_short ?? ''}',
+                                          //             'Action',
+                                          //           ];
+                                          //         },
+                                          //       ),
+                                          //     ].map((record) {
+                                          //       return TableViewRow(
+                                          //         height: 40,
+                                          //         cells: record.map((value) {
+                                          //           return TableViewCell(
+                                          //               child:
+                                          //                   value == 'Action'
+                                          //                       ? Row(
+                                          //                           children: [
+                                          //                             TableActionButton(
+                                          //                                 color: ColorValues
+                                          //                                     .viewColor,
+                                          //                                 icon: Icons
+                                          //                                     .remove_red_eye,
+                                          //                                 message:
+                                          //                                     "View MRS",
+                                          //                                 onPress:
+                                          //                                     () {
+                                          //                                   final _flutterSecureStorage = const FlutterSecureStorage();
+
+                                          //                                   _flutterSecureStorage.delete(key: "mrsId");
+                                          //                                   String mrsId = record[1];
+                                          //                                   if (mrsId != null) {
+                                          //                                     print({
+                                          //                                       "mrsId": mrsId
+                                          //                                     });
+                                          //                                     Get.toNamed(Routes.mrsViewScreen, arguments: {
+                                          //                                       'mrsId': int.tryParse("$mrsId")
+                                          //                                     });
+                                          //                                   }
+                                          //                                 }),
+                                          //                             TableActionButton(
+                                          //                                 color: ColorValues
+                                          //                                     .editColor,
+                                          //                                 icon: Icons
+                                          //                                     .edit,
+                                          //                                 message:
+                                          //                                     "Edit MRS",
+                                          //                                 onPress:
+                                          //                                     () {
+                                          //                                   final _flutterSecureStorage = const FlutterSecureStorage();
+
+                                          //                                   _flutterSecureStorage.delete(key: "mrsId");
+                                          //                                   String mrsId = record[1];
+                                          //                                   if (mrsId != null) {
+                                          //                                     print({
+                                          //                                       "mrsId": mrsId
+                                          //                                     });
+                                          //                                     Get.toNamed(Routes.editMrs, arguments: {
+                                          //                                       'mrsId': int.tryParse("$mrsId")
+                                          //                                     });
+                                          //                                   }
+                                          //                                 })
+                                          //                           ],
+                                          //                         )
+                                          //                       : Text(
+                                          //                           value));
+                                          //         }).toList(),
+                                          //       );
+                                          //     }).toList(),
+                                          //   ),
+                                          // ),
+                                        ],
+                                      ),
+                                    )
+                                  : Dimens.box0,
                           // Dimens.boxHeight20,
                           SizedBox(height: 20),
                           Row(//
@@ -911,27 +1287,6 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
 
                           // Dimens.boxHeight20,
                           SizedBox(height: 20),
-                          CustomElevatedButton(
-                            text: 'Startfctgvhbj',
-                            onPressed: () {
-                              controller.permitList
-                                          ?.firstWhere((element) =>
-                                              element.permitId != null)
-                                          .tbT_Done_Check ==
-                                      1
-                                  ? controller.startJobCard(
-                                      jcCard: controller.jobCardId.value,
-                                      fileIds: dropzoneController.fileIds)
-                                  : Get.dialog<void>(TbtDoneBMDialog(
-                                      ptw_id: controller.jobCardDetailsModel
-                                              .value?.ptwId ??
-                                          0,
-                                      id: controller
-                                              .jobCardDetailsModel.value?.id ??
-                                          0));
-                            },
-                            backgroundColor: ColorValues.addNewColor,
-                          ),
 
                           /// START JOB CARD BUTTON
                           controller.jobCardDetailsModel.value!.status == 151 &&
@@ -1077,38 +1432,62 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                       'Are you sure you want to Close Job ?',
                                                     );
                                                     if (confirmed == true) {
-                                                      controller.listMrsByTaskId!
-                                                                      .value
-                                                                      .firstWhereOrNull((element) =>
-                                                                          element!.jobCardId !=
-                                                                              0 ||
-                                                                          element.pmId !=
-                                                                              0)!
-                                                                      .mrs_return_ID ==
-                                                                  0 &&
-                                                              controller.allTrue
-                                                                      .value ==
-                                                                  false
-                                                          ? Get.defaultDialog(
-                                                              radius: 5,
-                                                              title: 'Alert',
-                                                              middleText:
-                                                                  'Please return all items first!',
-                                                              textConfirm: 'OK',
-                                                              onConfirm: () {
-                                                                Get.back(); // Close the dialog
-                                                              },
-                                                              buttonColor:
-                                                                  ColorValues
-                                                                      .appGreenColor,
-                                                              confirmTextColor:
-                                                                  Colors.white,
-                                                            )
-                                                          : controller.closeJob(
-                                                              fileIds:
-                                                                  dropzoneController
-                                                                      .fileIds);
+                                                      // Check if the listMrsByTaskId is not null and is not empty
+                                                      if (controller
+                                                                  .listMrsByTaskId !=
+                                                              null &&
+                                                          controller
+                                                              .listMrsByTaskId!
+                                                              .isNotEmpty) {
+                                                        // Find the first element that meets the condition
+                                                        var element = controller
+                                                            .listMrsByTaskId!
+                                                            .firstWhereOrNull(
+                                                                (element) =>
+                                                                    (element!.jobCardId !=
+                                                                            0 ||
+                                                                        element.pmId !=
+                                                                            0));
 
+                                                        // Check if the conditions are met
+                                                        if (element != null &&
+                                                            element.mrs_return_ID ==
+                                                                0 &&
+                                                            controller.allTrue
+                                                                    .value ==
+                                                                false) {
+                                                          Get.defaultDialog(
+                                                            radius: 5,
+                                                            title: 'Alert',
+                                                            middleText:
+                                                                'Please return all items first!',
+                                                            textConfirm: 'OK',
+                                                            onConfirm: () {
+                                                              Get.back(); // Close the dialog
+                                                            },
+                                                            buttonColor:
+                                                                ColorValues
+                                                                    .appGreenColor,
+                                                            confirmTextColor:
+                                                                Colors.white,
+                                                          );
+                                                        } else {
+                                                          controller.closeJob(
+                                                            fileIds:
+                                                                dropzoneController
+                                                                    .fileIds,
+                                                          );
+                                                        }
+                                                      } else {
+                                                        // Handle the case where the list is null or empty if needed
+                                                        controller.closeJob(
+                                                          fileIds:
+                                                              dropzoneController
+                                                                  .fileIds,
+                                                        );
+                                                      }
+
+                                                      // This Text widget seems misplaced, ensure it is used correctly in your UI
                                                       Text(
                                                           'Are you sure you want to Close Job ?');
                                                     }
@@ -1128,41 +1507,97 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 'Are you sure you want to Carry Forward Job ?',
                                               );
                                               if (confirmed == true) {
-                                                controller.listMrsByTaskId!
-                                                                .value
-                                                                .firstWhereOrNull(
-                                                                    (element) =>
-                                                                        element!.jobCardId !=
-                                                                            0 ||
-                                                                        element.pmId !=
-                                                                            0)!
-                                                                .mrs_return_ID ==
-                                                            0 &&
-                                                        controller.allTrue
-                                                                .value ==
-                                                            false
-                                                    ? Get.defaultDialog(
-                                                        radius: 5,
-                                                        title: 'Alert',
-                                                        middleText:
-                                                            'Please return all items first!',
-                                                        textConfirm: 'OK',
-                                                        onConfirm: () {
-                                                          Get.back(); // Close the dialog
-                                                        },
-                                                        buttonColor: ColorValues
-                                                            .appGreenColor,
-                                                        confirmTextColor:
-                                                            Colors.white,
-                                                      )
-                                                    : controller.carryForwardJob(
+                                                // Check if the listMrsByTaskId is not null and is not empty
+                                                if (controller
+                                                            .listMrsByTaskId !=
+                                                        null &&
+                                                    controller.listMrsByTaskId!
+                                                        .isNotEmpty) {
+                                                  // Find the first element that meets the condition
+                                                  var element = controller
+                                                      .listMrsByTaskId!
+                                                      .firstWhereOrNull(
+                                                          (element) => (element!
+                                                                      .jobCardId !=
+                                                                  0 ||
+                                                              element.pmId !=
+                                                                  0));
+
+                                                  // Check if the conditions are met
+                                                  if (element != null &&
+                                                      element.mrs_return_ID ==
+                                                          0 &&
+                                                      controller
+                                                              .allTrue.value ==
+                                                          false) {
+                                                    Get.defaultDialog(
+                                                      radius: 5,
+                                                      title: 'Alert',
+                                                      middleText:
+                                                          'Please return all items first!',
+                                                      textConfirm: 'OK',
+                                                      onConfirm: () {
+                                                        Get.back(); // Close the dialog
+                                                      },
+                                                      buttonColor: ColorValues
+                                                          .appGreenColor,
+                                                      confirmTextColor:
+                                                          Colors.white,
+                                                    );
+                                                  } else {
+                                                    controller.carryForwardJob(
                                                         fileIds:
                                                             dropzoneController
                                                                 .fileIds);
+                                                  }
+                                                } else {
+                                                  // Handle the case where the list is null or empty if needed
+                                                  controller.carryForwardJob(
+                                                      fileIds:
+                                                          dropzoneController
+                                                              .fileIds);
+                                                }
 
+                                                // This Text widget seems misplaced, ensure it is used correctly in your UI
                                                 Text(
-                                                    'Are you sure you want to Carry Forward Job ?');
+                                                    'Are you sure you want to Close Job ?');
                                               }
+                                              // if (confirmed == true) {
+                                              //   controller.listMrsByTaskId!
+                                              //                   .value
+                                              //                   .firstWhereOrNull(
+                                              //                       (element) =>
+                                              //                           element!.jobCardId !=
+                                              //                               0 ||
+                                              //                           element.pmId !=
+                                              //                               0)!
+                                              //                   .mrs_return_ID ==
+                                              //               0 &&
+                                              //           controller.allTrue
+                                              //                   .value ==
+                                              //               false
+                                              //       ? Get.defaultDialog(
+                                              //           radius: 5,
+                                              //           title: 'Alert',
+                                              //           middleText:
+                                              //               'Please return all items first!',
+                                              //           textConfirm: 'OK',
+                                              //           onConfirm: () {
+                                              //             Get.back(); // Close the dialog
+                                              //           },
+                                              //           buttonColor: ColorValues
+                                              //               .appGreenColor,
+                                              //           confirmTextColor:
+                                              //               Colors.white,
+                                              //         )
+                                              //       : controller.carryForwardJob(
+                                              //           fileIds:
+                                              //               dropzoneController
+                                              //                   .fileIds);
+
+                                              //   Text(
+                                              //       'Are you sure you want to Carry Forward Job ?');
+                                              // }
                                             },
                                           ),
                                           // Dimens.boxWidth10,
@@ -1500,12 +1935,6 @@ class DeployedTeam extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // Column(
-            //     children: []
-            //       ..addAll(controller.employeesDeployed.value.map((e) {
-            //         return Text(jsonEncode(e));
-            //       }))),
-            // Text(jsonEncode(controller.deployedEmployeeMapperData)),
             Padding(
               padding: const EdgeInsets.only(
                 top: 10,
@@ -1520,32 +1949,35 @@ class DeployedTeam extends StatelessWidget {
                     "Team Deployed To Carry Out The Job",
                     style: Styles.blue700,
                   ),
-                  InkWell(
-                    onTap: () {
-                      controller.addEmployeesDeployed();
-                    },
-                    child: Container(
-                      height: 25,
-                      width: 90,
-                      decoration: BoxDecoration(
-                        color: ColorValues.addNewColor,
-                        border: Border.all(
-                          color: ColorValues.lightGreyColorWithOpacity35,
-                          width: 1,
+                  controller.jobCardDetailsModel.value!.status == 158
+                      ? Dimens.box0
+                      : InkWell(
+                          onTap: () {
+                            controller.addEmployeesDeployed();
+                          },
+                          child: Container(
+                            height: 25,
+                            width: 90,
+                            decoration: BoxDecoration(
+                              color: ColorValues.addNewColor,
+                              border: Border.all(
+                                color: ColorValues.lightGreyColorWithOpacity35,
+                                width: 1,
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Center(
+                              child: Text(
+                                " + Add ",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w100,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
                         ),
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      child: Center(
-                        child: Text(
-                          " + Add ",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -1583,29 +2015,37 @@ class DeployedTeam extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        DropdownWebWidget(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              4,
-                                          // controller: controller,
-                                          dropdownList: controller.employeeList,
-                                          selectedValue: mapData["value"],
-                                          onValueChanged:
-                                              (list, selectedValue) {
-                                            // if (selectedValue != null) {
-                                            //   controller.updateSelectedOption(
-                                            //       selectedValue);
-                                            // }
-                                            mapData["value"] = selectedValue;
-                                            controller.deployedEmployeeMapperData[
-                                                    selectedValue] =
-                                                list.firstWhere(
-                                                    (element) =>
-                                                        element.name ==
-                                                        selectedValue,
-                                                    orElse: null);
-                                          },
+                                        IgnorePointer(
+                                          ignoring: controller
+                                                  .jobCardDetailsModel
+                                                  .value!
+                                                  .status ==
+                                              158,
+                                          child: DropdownWebWidget(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4,
+                                            // controller: controller,
+                                            dropdownList:
+                                                controller.employeeList,
+                                            selectedValue: mapData["value"],
+                                            onValueChanged:
+                                                (list, selectedValue) {
+                                              // if (selectedValue != null) {
+                                              //   controller.updateSelectedOption(
+                                              //       selectedValue);
+                                              // }
+                                              mapData["value"] = selectedValue;
+                                              controller.deployedEmployeeMapperData[
+                                                      selectedValue] =
+                                                  list.firstWhere(
+                                                      (element) =>
+                                                          element.name ==
+                                                          selectedValue,
+                                                      orElse: null);
+                                            },
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -1620,7 +2060,14 @@ class DeployedTeam extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "${controller.deployedEmployeeMapperData[record[0]['value']]?.designation ?? "Select Designation"}",
+                                              controller
+                                                          .deployedEmployeeMapperData[
+                                                              record[0]
+                                                                  ['value']]
+                                                          ?.designation ==
+                                                      null
+                                                  ? "No Designation"
+                                                  : "${controller.deployedEmployeeMapperData[record[0]['value']]?.designation}",
                                             ),
                                           ],
                                         ),
@@ -1634,16 +2081,24 @@ class DeployedTeam extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                TableActionButton(
-                                                  color:
-                                                      ColorValues.appRedColor,
-                                                  icon: Icons.delete,
-                                                  label: '',
-                                                  message: '',
-                                                  onPress: () {
-                                                    controller.employeesDeployed
-                                                        .remove(record);
-                                                  },
+                                                IgnorePointer(
+                                                  ignoring: controller
+                                                          .jobCardDetailsModel
+                                                          .value!
+                                                          .status ==
+                                                      158,
+                                                  child: TableActionButton(
+                                                    color:
+                                                        ColorValues.appRedColor,
+                                                    icon: Icons.delete,
+                                                    label: '',
+                                                    message: '',
+                                                    onPress: () {
+                                                      controller
+                                                          .employeesDeployed
+                                                          .remove(record);
+                                                    },
+                                                  ),
                                                 )
                                               ],
                                             ),
