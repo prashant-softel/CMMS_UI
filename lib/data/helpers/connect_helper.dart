@@ -2020,7 +2020,8 @@ class ConnectHelper {
         ? Get.offAllNamed(Routes.pmTask)
         : closetype == 2
             ? Get.offAllNamed(Routes.jobCard)
-            : Get.dialog<void>(PermitMessageCloseDialog(
+            :
+             Get.dialog<void>(PermitMessageCloseDialog(
                 data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
@@ -4515,10 +4516,10 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(closeJobDialog(
-      message: parsedJson['message'],
-      jobId: parsedJson['id'],
-    ));
+    // Get.dialog<void>(closeJobDialog(
+    //   message: parsedJson['message'],
+    //   jobId: parsedJson['id'],
+    // ));
     return responseModel;
   }
 
