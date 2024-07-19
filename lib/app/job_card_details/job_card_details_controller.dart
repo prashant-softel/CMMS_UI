@@ -196,7 +196,9 @@ class JobCardDetailsController extends GetxController {
         getHistory(facilityId);
         jobCardDetailsModel.value =
             jobCardList.value.firstWhere((element) => element?.id != null);
-
+        createPlantDetailsTableData();
+        createJobDetailsTableData();
+        createPermitDetailsTableData();
         jobCardDetailsModel.value?.lstCmjcEmpList?.forEach((element) {
           employeesDeployed.value.add([
             {
@@ -216,9 +218,6 @@ class JobCardDetailsController extends GetxController {
           deployedEmployeeMapperData[element.name ?? ""] = employeeList
               .firstWhere((e) => e!.name == element.name, orElse: null);
         });
-        createPlantDetailsTableData();
-        createJobDetailsTableData();
-        createPermitDetailsTableData();
       }
 
       responsibilityCtrlrs.add(TextEditingController());
