@@ -338,8 +338,9 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                       )),
                                     ],
                                     rows: List<DataRow>.generate(
-                                        controller.mrsDetailsModel.value!
-                                            .cmmrsItems!.length,
+                                        // controller.mrsDetailsModel.value!
+                                        //     .cmmrsItems!.length,
+                                        controller.mrsDetailsModel.value?.cmmrsItems?.length?? 0,
                                         (index) => DataRow(cells: [
                                               DataCell(Text(controller
                                                   .mrsDetailsModel
