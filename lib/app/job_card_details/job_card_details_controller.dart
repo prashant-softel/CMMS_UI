@@ -296,7 +296,9 @@ class JobCardDetailsController extends GetxController {
         }
         update(["employeeList"]);
       }
-      addEmployeesDeployed();
+      if (jobCardDetailsModel.value!.lstCmjcEmpList!.isEmpty) {
+        addEmployeesDeployed();
+      }
     }
   }
 
