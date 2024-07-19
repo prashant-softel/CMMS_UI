@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/job_card_approve_dialog.dart';
 import 'package:cmms/app/widgets/job_card_reject_dialog.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -370,7 +371,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                     SizedBox(width: 10),
                                     Expanded(
                                         flex: 8,
-                                        child: FileUploadDetailsWidgetWeb()),
+                                        child: FileUploadDetailsWidgetWeb2()),
                                   ]),
                                 ),
                           // Dimens.boxHeight20,
@@ -457,7 +458,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                         color: ColorValues
                                                             .appDarkBlueColor,
                                                         icon: Icons.visibility,
-                                                        message: 'View Permit',
+                                                        message: 'View Image',
                                                         onPress: () async {
                                                           // String baseUrl =
                                                           //     "http://65.0.20.19/CMMS_API/";
@@ -1948,7 +1949,7 @@ class DeployedTeam extends StatelessWidget {
                     "Team Deployed To Carry Out The Job",
                     style: Styles.blue700,
                   ),
-                  controller.jobCardDetailsModel.value!.status == 158
+                  controller.jobCardDetailsModel.value!.status == 158 && controller.jobCardDetailsModel.value!.status == 156
                       ? Dimens.box0
                       : InkWell(
                           onTap: () {

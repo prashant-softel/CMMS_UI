@@ -7,6 +7,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/job_card_details/views/widgets/carry_forward_Job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/close_job_dialog.dart';
+import 'package:cmms/app/job_card_details/views/widgets/job_card_started_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/Incident_report_message_approve_dialog.dart';
@@ -2020,8 +2021,7 @@ class ConnectHelper {
         ? Get.offAllNamed(Routes.pmTask)
         : closetype == 2
             ? Get.offAllNamed(Routes.jobCard)
-            :
-             Get.dialog<void>(PermitMessageCloseDialog(
+            : Get.dialog<void>(PermitMessageCloseDialog(
                 data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
@@ -3021,6 +3021,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(JobCardStartedDialog(
+      message: parsedJson['message'],
+      jobId: parsedJson['id'],
+    ));
     return responseModel;
   }
 
@@ -4562,7 +4568,7 @@ class ConnectHelper {
     Get.dialog<void>(ApproveJcJobDialog(
       message: parsedJson['message'],
       jobId: parsedJson['id'],
-      tittle: "JOb carry forward approved",
+      tittle: "JOB carry forward approved",
     ));
     return responseModel;
   }

@@ -7455,8 +7455,8 @@ class Repository {
         // Fluttertoast.showToast(
         //     msg: "Start Job Card Successfully...", fontSize: 16.0);
 
-        Get.offAllNamed(Routes.jobCard,
-            arguments: {'JcId': int.tryParse("$jcCard")});
+        // Get.offAllNamed(Routes.jobCard,
+        //     arguments: {'JcId': int.tryParse("$jcCard")});
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       }
       // if (!res.hasError) {
