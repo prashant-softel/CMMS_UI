@@ -100,31 +100,31 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                           style: Styles.greyLight14,
                                         ),
                                         Spacer(),
-                                        Container(
-                                          color: Colors.red,
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 2, horizontal: 5),
-                                          margin: EdgeInsets.only(top: 5),
-                                          child: Text(
-                                            controller.inventoryList.isNotEmpty
-                                                ? controller.inventoryList.first
-                                                        .warrantyStatus ??
-                                                    ""
-                                                : "",
-                                            style: TextStyle(
-                                              color: controller
-                                                      .inventoryList.isNotEmpty
-                                                  ? controller
-                                                              .inventoryList
-                                                              .first
-                                                              .warrantyStatus ==
-                                                          "Inactive"
-                                                      ? Colors.grey
-                                                      : Colors.green
-                                                  : Colors.grey,
-                                            ),
-                                          ),
-                                        )
+                                        // Container(
+                                        //   color: Colors.red,
+                                        //   padding: EdgeInsets.symmetric(
+                                        //       vertical: 2, horizontal: 5),
+                                        //   margin: EdgeInsets.only(top: 5),
+                                        //   child: Text(
+                                        //     controller.inventoryList.isNotEmpty
+                                        //         ? controller.inventoryList.first
+                                        //                 .warrantyStatus ??
+                                        //             ""
+                                        //         : "",
+                                        //     style: TextStyle(
+                                        //       color: controller
+                                        //               .inventoryList.isNotEmpty
+                                        //           ? controller
+                                        //                       .inventoryList
+                                        //                       .first
+                                        //                       .warrantyStatus ==
+                                        //                   "Inactive"
+                                        //               ? Colors.grey
+                                        //               : Colors.green
+                                        //           : Colors.grey,
+                                        //     ),
+                                        //   ),
+                                        // )
                                       ],
                                     ),
                                   ),
