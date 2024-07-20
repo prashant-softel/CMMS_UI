@@ -4,6 +4,7 @@ import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execu
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
@@ -103,6 +104,8 @@ class AddModuleCleaningExecutionController extends GetxController {
   var equipments = <Equipments>[].obs;
   RxList<InventoryCategoryModel?> filteredequipmentsList =
       <InventoryCategoryModel>[].obs;
+  Rx<int> permitIdclose = 0.obs;
+  var descriptionOfWorkDoneCtrlr = TextEditingController();
 
   ///Date Time
   var startedAtDateTimeCtrlrWeb = TextEditingController();
@@ -507,13 +510,18 @@ class AddModuleCleaningExecutionController extends GetxController {
     // print('Plan Data:${data['planId']}');
   }
 
-  Future<void> endMCScheduleExecutionButton({int? scheduleID}) async {
+  Future<void> endMCScheduleExecutionButton(
+      {int? scheduleID, int? ptw_id}) async {
+    var _comment = descriptionOfWorkDoneCtrlr.text.trim();
+    ClosePermitModel ptwClose = ClosePermitModel(
+        id: ptw_id, comment: _comment, conditionIds: [1, 2, 3, 4], fileIds: []);
+    var closePtwJsonString = ptwClose.toJson();
+
     final _endMCScheduleExecutionBtn =
         await addModuleCleaningExecutionPresenter.endMCScheduleExecutionButton(
       scheduleId: scheduleID,
+      closePtwJsonString: closePtwJsonString,
     );
-
-    // print('Plan Data:${data['planId']}');
   }
 
   void endMCExecutionButton({int? id}) async {
@@ -654,89 +662,10 @@ class AddModuleCleaningExecutionController extends GetxController {
         break;
 
       default:
-        {
-          //statements;
-        }
+        {}
         break;
     }
   }
-
-  // void createEscalationMatrix() async {
-  //   List<Escalation> days = [];
-  //   rowItem.value.forEach((element) {
-  //     Escalation day = Escalation(
-  //       days: int.tryParse(element[0]["value"] ?? '0'),
-  //       role_id: dropdownMapperData[element[1]["value"]]?.id,
-  //     );
-  //     days.add(day);
-  //   });
-
-  //   print('Days:${days}');
-
-  //   late List<Status_escalation> state_escalation_list = [];
-
-  //   state_escalation_list
-  //       .add(Status_escalation(status_id: 102, escalation: days));
-
-  //   CreateEscalationMatrixModel createEscalationMatrixModel =
-  //       CreateEscalationMatrixModel(
-  //     module_id: selectedModuleListId,
-  //     status_escalation: state_escalation_list,
-  //   );
-
-  //   var escalationMatrixJsonString = [createEscalationMatrixModel.toJson()];
-  //   Map<String, dynamic>? responseCreateEscalationMatrixModel =
-  //       await addEscalationPresenter.createEscalationMatrix(
-  //     createEscalationMatrix: escalationMatrixJsonString,
-  //     isLoading: true,
-  //   );
-
-  //   if (responseCreateEscalationMatrixModel == null) {
-  //     //  CreateNewPermitDialog();
-  //     // showAlertDialog();
-  //   }
-  //   print('Add Escalation Matrix   data: $escalationMatrixJsonString');
-  // }
-
-  // void createEscalationMatrix() async {
-  //   {
-  //     List<Escalation> days = [];
-  //     rowItem.value.forEach((element) {
-  //       Escalation day = Escalation(
-  //         role_id: dropdownMapperData[element[1]["value"]]?.role_id,
-  //         days: int.tryParse(element[0]["value"] ?? '0'),
-  //       );
-  //       days.add(day);
-  //     });
-
-  //     late List<Status_escalation> status_escalation = [];
-
-  //     status_Escalation.forEach((e) {
-  //       status_escalation.add(
-  //           Status_escalation(status_id: e.status_id, escalation: e.escalation
-  //               // is_required: e.is_required
-  //               ));
-  //     });
-
-  //     CreateEscalationMatrixModel createEscalationMatrixModel =
-  //         CreateEscalationMatrixModel();
-
-  //     var escalationMatrixJsonString = [
-  //       {
-  //         "module_id": selectedModuleListId,
-  //         "status_escalation": status_escalation
-  //       }
-  //     ];
-  //     Map<String, dynamic>? responseCreateEscalationMatrix =
-  //         await viewIncidentReportPresenter.createEscalationMatrix(
-  //       createEscalationMatrix: escalationMatrixJsonString,
-  //       isLoading: true,
-  //     );
-
-  //     if (responseCreateEscalationMatrix == null) {}
-  //     print('Create Escalation Matrix data: $escalationMatrixJsonString');
-  //   }
-  // }
 
   Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
