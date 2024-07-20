@@ -1062,11 +1062,11 @@ class AppPages {
       binding: PlantStockReportBinding(),
     ),
     
-     GetPage<dynamic>(
-      name: _Paths.plantStockReportDetails,
-      page: PlantStockReportDetailsScreen.new,
-      binding: PlantStockReportDetailsBinding(),
-    ),
+    //  GetPage<dynamic>(
+    //   name: _Paths.plantStockReportDetails,
+    //   page: PlantStockReportDetailsScreen.new,
+    //   binding: PlantStockReportDetailsBinding(),
+    // ),
     
     GetPage<dynamic>(
       name: _Paths.employeeStockReport,
