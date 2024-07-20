@@ -55,7 +55,8 @@ class InventoryModel {
       this.calibrationtestdate,
       this.startdate,
       this.calilastdate,
-      this.moduleQuantity});
+      this.moduleQuantity,
+      this.warrantyStatus});
 
   int? id;
   String? name;
@@ -99,6 +100,7 @@ class InventoryModel {
   String? status;
   int? linkedToBlockId;
   String? linkedToBlockName;
+  String? warrantyStatus;
 
   int? moduleQuantity;
   factory InventoryModel.fromJson(Map<String, dynamic> json) => InventoryModel(
@@ -153,6 +155,7 @@ class InventoryModel {
             ? null
             : DateTime.parse(json['calibrationLastDate'] as String),
         status: json["status"],
+        warrantyStatus:json["warrantyStatus"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -199,5 +202,6 @@ class InventoryModel {
         "start_date": startdate?.toIso8601String(),
         "calibrationLastDate": calilastdate?.toIso8601String(),
         "status": status,
+        "warrantyStatus":warrantyStatus,
       };
 }

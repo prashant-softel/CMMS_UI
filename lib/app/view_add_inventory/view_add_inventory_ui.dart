@@ -99,16 +99,44 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                           "/VIEW ASSETS",
                                           style: Styles.greyLight14,
                                         ),
+                                        Spacer(),
+                                        Container(
+                                          color: Colors.red,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 2, horizontal: 5),
+                                          margin: EdgeInsets.only(top: 5),
+                                          child: Text(
+                                            controller.inventoryList.isNotEmpty
+                                                ? controller.inventoryList.first
+                                                        .warrantyStatus ??
+                                                    ""
+                                                : "",
+                                            style: TextStyle(
+                                              color: controller
+                                                      .inventoryList.isNotEmpty
+                                                  ? controller
+                                                              .inventoryList
+                                                              .first
+                                                              .warrantyStatus ==
+                                                          "Inactive"
+                                                      ? Colors.grey
+                                                      : Colors.green
+                                                  : Colors.grey,
+                                            ),
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),
+
                                   Dimens.boxHeight10,
+
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      AddPhoto(),
+                                      // AddPhoto(),
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
