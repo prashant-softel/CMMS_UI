@@ -1873,12 +1873,14 @@ class DataRepository extends DomainRepository {
           {required String auth,
           newPermit,
           bool? isLoading,
-          bool? resubmit,int?type}) async =>
+          bool? resubmit,
+          int? type}) async =>
       await connectHelper.updateNewPermit(
           auth: auth,
           newPermit: newPermit,
           isLoading: isLoading ?? false,
-          resubmit: resubmit,type:type);
+          resubmit: resubmit,
+          type: type);
 
   Future<ResponseModel> resubmitPermit(
           {required String auth,
@@ -4494,7 +4496,8 @@ class DataRepository extends DomainRepository {
         assignId: assignId,
         taskId: taskId,
         isLoading: isLoading,
-      ); Future<ResponseModel> assignToMC({
+      );
+  Future<ResponseModel> assignToMC({
     required String auth,
     int? assignId,
     int? taskId,
@@ -5397,6 +5400,14 @@ class DataRepository extends DomainRepository {
         auth: auth,
         facilityId: facilityId,
         year: year,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getChecklistInspection({
+    required String auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getChecklistInspection(
+        auth: auth,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> getAttendanceDetail({

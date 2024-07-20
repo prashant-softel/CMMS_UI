@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
 import 'package:cmms/domain/models/attendance_model.dart';
 import 'package:cmms/domain/models/attendance_month_model.dart';
+import 'package:cmms/domain/models/check_list_inspection_model.dart';
 import 'package:cmms/domain/models/complicance_history_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
@@ -14376,6 +14377,28 @@ class Repository {
         return attendanceDataList;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getdsmDataList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<GetChecklistInspection>> getChecklistInspection({
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getChecklistInspection(
+        auth: auth,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        var checklistInspectionList = getChecklistInspectionFromJson(res.data);
+        return checklistInspectionList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Check_list_Inspection');
         return [];
       }
     } catch (error) {
