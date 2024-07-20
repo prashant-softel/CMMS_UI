@@ -1640,7 +1640,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                     Get.toNamed(
                                                         Routes.mrsReturnScreen,
                                                         arguments: {
-                                                          'type': 2,
+                                                          'type': 0,
                                                           "whereUsed": 4,
                                                           "fromActorTypeId": 4,
                                                           "to_actor_type_id": 2,
@@ -1949,7 +1949,7 @@ class DeployedTeam extends StatelessWidget {
                     "Team Deployed To Carry Out The Job",
                     style: Styles.blue700,
                   ),
-                  controller.jobCardDetailsModel.value!.status == 158 && controller.jobCardDetailsModel.value!.status == 156
+                  controller.jobCardDetailsModel.value!.status == 158 || controller.jobCardDetailsModel.value!.status == 156 || controller.jobCardDetailsModel.value!.status == 157
                       ? Dimens.box0
                       : InkWell(
                           onTap: () {
