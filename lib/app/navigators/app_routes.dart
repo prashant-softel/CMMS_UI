@@ -168,6 +168,8 @@ abstract class Routes {
   static const purchaseGoodsorder = _Paths.purchaseGoodsorder;
   static const purchaseGoodsorderView = _Paths.purchaseGoodsorderView;
   static const plantStockReport = _Paths.plantStockReport;
+static const plantStockReportDetails = _Paths.plantStockReportDetails;
+  
   static const employeeStockReport = _Paths.employeeStockReport;
   static const transactionReport = _Paths.transactionReport;
 
@@ -399,6 +401,8 @@ abstract class _Paths {
   static const viewModuleCleaningExecutionScreen =
       '/view-module-cleaning-execution';
   static const plantStockReport = '/plant-stock-report';
+  static const plantStockReportDetails = '/plant-stock-report-details';
+  
   static const employeeStockReport = '/employee-stock-report';
   static const transactionReport = '/transaction-report';
 
