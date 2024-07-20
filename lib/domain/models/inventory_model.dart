@@ -12,53 +12,60 @@ String inventoryModelToJson(List<InventoryModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class InventoryModel {
-  InventoryModel(
-      {this.id,
-      this.name,
-      this.facilityName,
-      this.blockName,
-      this.description,
-      this.type,
-      this.categoryId,
-      this.categoryName,
-      this.supplierName,
-      this.parentId,
-      this.parentName,
-      this.customerName,
-      this.ownerName,
-      this.operatorName,
-      this.serialNumber,
-      this.specialTool,
-      this.warrantyId,
-      this.calibrationDueDate,
-      this.status,
-      this.linkedToBlockId,
-      this.linkedToBlockName,
-      this.dccapacity,
-      this.dcRating,
-      this.acrating,
-      this.acCapacity,
-      this.descMaintenace,
-      this.warrtype,
-      this.wprovidername,
-      this.wtenure,
-      this.certinumber,
-      this.manuname,
-      this.model,
-      this.cost,
-      this.currency,
-      this.barcode,
-      this.unspcCode,
-      this.purchasecode,
-      this.califrequency,
-      this.calireminderdays,
-      this.calibrationtestdate,
-      this.startdate,
-      this.calilastdate,
-      this.moduleQuantity,
-      this.warrantyStatus});
+  InventoryModel({
+    this.id,
+    this.name,
+    this.facilityName,
+    this.blockName,
+    this.description,
+    this.type,
+    this.categoryId,
+    this.categoryName,
+    this.supplierName,
+    this.parentId,
+    this.parentName,
+    this.customerName,
+    this.ownerName,
+    this.operatorName,
+    this.serialNumber,
+    this.specialTool,
+    this.warrantyId,
+    this.calibrationDueDate,
+    this.status,
+    this.linkedToBlockId,
+    this.linkedToBlockName,
+    this.dccapacity,
+    this.dcRating,
+    this.acrating,
+    this.acCapacity,
+    this.descMaintenace,
+    this.warrtype,
+    this.wprovidername,
+    this.wtenure,
+    this.certinumber,
+    this.manuname,
+    this.model,
+    this.cost,
+    this.currency,
+    this.barcode,
+    this.unspcCode,
+    this.purchasecode,
+    this.califrequency,
+    this.calireminderdays,
+    this.calibrationtestdate,
+    this.startdate,
+    this.calilastdate,
+    this.moduleQuantity,
+    this.checklist_id,
+    this.checklist_name,
+    this.module_qty,
+  });
 
   int? id;
+
+  int? module_qty;
+  int? checklist_id;
+  String? checklist_name;
   String? name;
   String? facilityName;
   String? supplierName;
@@ -100,12 +107,14 @@ class InventoryModel {
   String? status;
   int? linkedToBlockId;
   String? linkedToBlockName;
-  String? warrantyStatus;
 
   int? moduleQuantity;
   factory InventoryModel.fromJson(Map<String, dynamic> json) => InventoryModel(
         id: json["id"],
         name: json["name"],
+        module_qty: json["module_qty"],
+        checklist_id: json['checklist_id'],
+        checklist_name: json['checklist_name'],
         facilityName: json["facilityName"],
         blockName: json["blockName"],
         description: json["description"],
@@ -155,12 +164,14 @@ class InventoryModel {
             ? null
             : DateTime.parse(json['calibrationLastDate'] as String),
         status: json["status"],
-        warrantyStatus:json["warrantyStatus"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "module_qty": module_qty,
+        "checklist_id": checklist_id,
+        "checklist_name": checklist_name,
         "linkedToBlockId": linkedToBlockId,
         "moduleQuantity": moduleQuantity,
         "linkedToBlockName": linkedToBlockName,
@@ -202,6 +213,5 @@ class InventoryModel {
         "start_date": startdate?.toIso8601String(),
         "calibrationLastDate": calilastdate?.toIso8601String(),
         "status": status,
-        "warrantyStatus":warrantyStatus,
       };
 }
