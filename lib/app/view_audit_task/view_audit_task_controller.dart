@@ -262,6 +262,8 @@ class ViewAuditTaskController extends GetxController {
       "isChecked": false,
       "type": 3,
       "isFromPmTaskDetails": true,
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": 0
     });
   }
 

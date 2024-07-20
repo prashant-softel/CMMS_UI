@@ -193,7 +193,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                       ),
                                       Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                               '${controller.pmPlanDetailsModel.value?.plan_id ?? ''}',
@@ -270,7 +270,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                                   fontWeight: FontWeight.bold),
                                             )),
                                             DataColumn2(
-                                                fixedWidth: 150,
+                                                fixedWidth: 120,
                                                 label: Text(
                                                   "Asset ID",
                                                   style: TextStyle(
@@ -287,7 +287,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                                   fontWeight: FontWeight.bold),
                                             )),
                                             DataColumn2(
-                                                fixedWidth: 150,
+                                                fixedWidth: 200,
                                                 label: Text(
                                                   "Module Quantity",
                                                   style: TextStyle(
@@ -326,7 +326,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                                       .value
                                                       ?.mapAssetChecklist?[
                                                           index]
-                                                      .asset_id
+                                                      .id
                                                       .toString() ??
                                                   '')),
                                               DataCell(Text(controller
@@ -334,7 +334,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                                       .value
                                                       ?.mapAssetChecklist?[
                                                           index]
-                                                      .parent_name ??
+                                                      .parentName ??
                                                   '')),
                                               DataCell(Text(controller
                                                       .pmPlanDetailsModel
