@@ -87,9 +87,9 @@ class ModuleCleaningPlanningController extends GetxController {
   // Map<String, TypeModel> typedropdownMapperData = {};
 
   RxList<TypeModel> cleaningType = <TypeModel>[
-    TypeModel(name: 'Dry', id: "0"),
-    TypeModel(name: 'Wet', id: "1"),
-    TypeModel(name: 'Robotic', id: "2"),
+    TypeModel(name: 'Dry', id: "1"),
+    TypeModel(name: 'Wet', id: "2"),
+    TypeModel(name: 'Robotic', id: "3"),
   ].obs;
   // var days = <TypeModel>[
   //   TypeModel(name: "Please Select", id: "0"),
@@ -343,9 +343,8 @@ class ModuleCleaningPlanningController extends GetxController {
     assignedToList.clear();
     final _assignedToList =
         await moduleCleaningPlanningPresenter.getAssignedToList(
-      facilityId: facilityId,
-      featureId: UserAccessConstants.kModuleCleaningplanFeatureId
-    );
+            facilityId: facilityId,
+            featureId: UserAccessConstants.kModuleCleaningplanFeatureId);
 
     if (_assignedToList != null) {
       for (var assignedTo in _assignedToList) {

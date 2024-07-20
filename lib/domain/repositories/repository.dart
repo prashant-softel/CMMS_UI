@@ -5793,6 +5793,7 @@ class Repository {
   Future<void> endMCScheduleExecutionButton(
     int? scheduleId,
     bool? isLoading,
+    closePtwJsonString,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -5804,8 +5805,11 @@ class Repository {
       );
       print('EndScheduleExecutionResponse55: ${res.data}');
 
-      if (!res.hasError) {
-        //  return _permitIssueModel;
+      if (res.errorCode == 200) {
+        var responseMap = json.decode(res.data);
+        permitCloseButton(closePtwJsonString, isLoading, 0, 4);
+
+        return responseMap;
       } else {
         Utility.showDialog(
             res.errorCode.toString(), 'endMCScheduleExecutionButton');
