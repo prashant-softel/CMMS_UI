@@ -26,13 +26,9 @@ class ChecklistInspectionListWeb
             ? BoxDecoration(
                 border: Border(
                   right: BorderSide(width: 1.0, color: Colors.white),
-                ), // Custom border color for header cells
-              )
-            : BoxDecoration(
-                // border: Border.all(
-                //     color: Colors.blue,
-                //     width: 2), // Custom border color for header cells
                 ),
+              )
+            : BoxDecoration(),
       );
 
   TableCell _actonData(PeriodData data) => TableCell(
@@ -220,150 +216,7 @@ class ChecklistInspectionListWeb
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 child: Column(
-                                                  children: [
-                                                    Row(
-                                                      children: []..addAll(controller
-                                                          .mainHeaderList
-                                                          .map((element) =>
-                                                              Container(
-                                                                  height: 60,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: ColorValues
-                                                                        .lightGreyColor,
-                                                                    border:
-                                                                        Border(
-                                                                      left: BorderSide(
-                                                                          color: Colors
-                                                                              .grey,
-                                                                          width:
-                                                                              1),
-                                                                      right: BorderSide(
-                                                                          color: Colors
-                                                                              .grey,
-                                                                          width:
-                                                                              1),
-                                                                      top: BorderSide(
-                                                                          color: Colors
-                                                                              .grey,
-                                                                          width:
-                                                                              1),
-                                                                    ),
-                                                                  ),
-                                                                  width: 150.0 *
-                                                                      element[
-                                                                          'colSpan'],
-                                                                  child: headerCell(
-                                                                      element[
-                                                                          'label'])))),
-                                                    ),
-                                                    Table(
-                                                      border: TableBorder.all(
-                                                          color: Colors.grey,
-                                                          width: 1),
-                                                      columnWidths:
-                                                          generateColumnWidths(
-                                                              150),
-                                                      children: [
-                                                        TableRow(
-                                                            children: []
-                                                              ..addAll(controller
-                                                                  .headerList
-                                                                  .map((e) {
-                                                                if (e['subHeader'] ==
-                                                                    '+') {
-                                                                  return Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: ColorValues
-                                                                          .addNewColor,
-                                                                    ),
-                                                                    child:
-                                                                        headerCell(
-                                                                      e['subHeader'],
-                                                                      isHeader:
-                                                                          true,
-                                                                    ),
-                                                                  );
-                                                                } else if (e[
-                                                                        'subHeader'] ==
-                                                                    '-') {
-                                                                  return Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: ColorValues
-                                                                          .appRedColor,
-                                                                    ),
-                                                                    child:
-                                                                        headerCell(
-                                                                      e['subHeader'],
-                                                                      isHeader:
-                                                                          true,
-                                                                    ),
-                                                                  );
-                                                                } else {
-                                                                  return headerCell(
-                                                                      e[
-                                                                          'subHeader'],
-                                                                      isHeader:
-                                                                          true);
-                                                                }
-                                                              }))),
-                                                        ...List<
-                                                                TableRow>.generate(
-                                                            controller.waterDataList
-                                                                        .length >
-                                                                    0
-                                                                ? controller
-                                                                        .waterDataList[
-                                                                            0]
-                                                                        .periods
-                                                                        .length ??
-                                                                    0
-                                                                : 0,
-                                                            (index) => TableRow(
-                                                                children: []
-                                                                  ..addAll(controller
-                                                                      .headerList
-                                                                      .map((e) {
-                                                                    if (e['dataKey'] ==
-                                                                        'Month') {
-                                                                      return dataCell(
-                                                                          '${controller.waterDataList[0].periods[index].monthName}');
-                                                                    }
-                                                                    if (e['dataKey'] ==
-                                                                        'action') {
-                                                                      return _actonData(controller
-                                                                          .waterDataList[
-                                                                              0]
-                                                                          .periods[index]);
-                                                                    }
-                                                                    DetailData? data = controller
-                                                                        .waterDataList[
-                                                                            0]
-                                                                        .periods[
-                                                                            index]
-                                                                        .details
-                                                                        .firstWhereOrNull((element) =>
-                                                                            element.waterType ==
-                                                                            e['label']);
-                                                                    if (data ==
-                                                                        null) {
-                                                                      return dataCell(
-                                                                          '');
-                                                                    }
-                                                                    // return dataCell(
-                                                                    //     "text");
-                                                                    return dataCell(_CellData(
-                                                                            data,
-                                                                            e[
-                                                                                'dataKey'])) ??
-                                                                        dataCell(
-                                                                            "");
-                                                                  })))),
-                                                      ],
-                                                    ),
-                                                  ],
+                                                  children: [],
                                                 ),
                                               ),
                                             ),
@@ -444,7 +297,7 @@ _showYearPicker(
             color: ColorValues.addNewColor,
             onPressed: () {
               controller.waterDateTc.text = controller.selectedYear.toString();
-              controller.goWaterDataList();
+              // controller.goWaterDataList();
               controller.update(['stock_Mangement_Date']);
               Navigator.of(context).pop();
             },

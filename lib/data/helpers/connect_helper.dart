@@ -9488,6 +9488,22 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getChecklistInspection({
+    required String auth,
+    required bool isLoading,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetChecklistInspection',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getAttendanceDetail({
     required String auth,
     required int facilityId,
