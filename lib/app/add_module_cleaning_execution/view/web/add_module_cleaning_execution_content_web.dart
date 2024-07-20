@@ -867,7 +867,7 @@ class AddModuleCleaningExecutionContentWeb
 
                                                                                                                             print('filteredData:${filterdData!.scheduleId}');
                                                                                                                             //  selectedData = filterdData;
-                                                                                                                            Get.dialog<void>(CustomCalibrationDialog(id: filterdData.scheduleId ?? 0, title: filterdData.scheduleId.toString(), starttype: 2));
+                                                                                                                            Get.dialog<void>(CustomCalibrationDialog(id: filterdData.scheduleId ?? 0,ptw_id: filterdData.permit_id, title: filterdData.scheduleId.toString(), starttype: 2));
                                                                                                                             // print({
                                                                                                                             //   'scheduledata:':
                                                                                                                             //       filterdData.scheduleId

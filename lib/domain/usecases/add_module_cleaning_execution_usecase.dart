@@ -58,10 +58,12 @@ class AddModuleCleaningExecutionUsecase {
   Future<void> endMCScheduleExecutionButton({
     int? scheduleId,
     bool? isLoading,
+    closePtwJsonString,
   }) async {
     await _repository.endMCScheduleExecutionButton(
       scheduleId,
       isLoading,
+      closePtwJsonString,
     );
   }
 
