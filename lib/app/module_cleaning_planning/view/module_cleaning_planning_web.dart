@@ -4,20 +4,15 @@ import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_contr
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
-import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/set_equipments_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class ModuleCleaningPlanningWeb extends StatefulWidget {
   ModuleCleaningPlanningWeb({
