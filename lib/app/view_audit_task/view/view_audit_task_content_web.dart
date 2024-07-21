@@ -262,7 +262,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                   '${controller.auditTasknDetailModel.value.approved_by_name ?? ""}',
                                                   style: Styles.blue17),
                                               Text(
-                                                  '${controller.auditTasknDetailModel.value.schedules![0].checklist_name ?? ""}',
+                                                  '${controller.auditTasknDetailModel.value.schedules?[0]?.checklist_name ?? ""}',
                                                   style: Styles.blue17),
                                               Text(
                                                   " ${controller.auditTasknDetailModel.value.last_done_date ?? ""}",
@@ -335,12 +335,20 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         ],
                                       ),
                                     ),
-                                    controller
-                                                .auditTasknDetailModel
-                                                .value
-                                                .schedules![0]
-                                                .checklist_observation!
-                                                .length ==
+                                    // controller
+                                    //             .auditTasknDetailModel
+                                    //             .value
+                                    //             .schedules![0]
+                                    //             .checklist_observation!
+                                    //             .length ==
+                                    //         0
+                                    (controller
+                                                    ?.auditTasknDetailModel
+                                                    ?.value
+                                                    ?.schedules?[0]
+                                                    ?.checklist_observation
+                                                    ?.length ??
+                                                0) ==
                                             0
                                         ? Dimens.box0
                                         : Container(
