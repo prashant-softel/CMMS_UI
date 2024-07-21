@@ -14391,7 +14391,7 @@ class Repository {
     }
   }
 
-  Future<List<GetChecklistInspection>> getChecklistInspection({
+  Future<ChecklistInspectionModel?> getChecklistInspection({
     bool? isLoading,
   }) async {
     try {
@@ -14401,15 +14401,61 @@ class Repository {
         isLoading: isLoading,
       );
       if (!res.hasError) {
-        var checklistInspectionList = getChecklistInspectionFromJson(res.data);
+        var checklistInspectionList = ChecklistInspectionModel.fromJson({
+          "checklist": [
+            {
+              "checklist Name": "Vehicle Fitness Checklist",
+              "sOPNumber": "HFE/HSE/SOP-11/C-1",
+              "frequency": "Monthly",
+              "monthlyInspection": [
+                {
+                  "inspectionMonth": "April",
+                  "inspectionStatus": "sdsd",
+                  "dateOfInspection": "",
+                  "ChecklistAttachment": "",
+                  "NoOfUnsafeObservations": ""
+                },
+                {
+                  "inspectionMonth": "May",
+                  "inspectionStatus": "",
+                  "dateOfInspection": "",
+                  "ChecklistAttachment": "",
+                  "NoOfUnsafeObservations": ""
+                }
+              ]
+            },
+            {
+              "checklistName":
+                  "Bird & Bat Monitoring Checklist (Wind Projects)",
+              "sOPNumber": "HFE/HSE/SOP-11/C-1",
+              "frequency": "Monthly",
+              "monthlyInspection": [
+                {
+                  "inspectionMonth": "April",
+                  "inspectionStatus": "",
+                  "dateOfInspection": "",
+                  "ChecklistAttachment": "",
+                  "NoOfUnsafeObservations": ""
+                },
+                {
+                  "inspectionMonth": "May",
+                  "inspectionStatus": "",
+                  "dateOfInspection": "",
+                  "ChecklistAttachment": "",
+                  "NoOfUnsafeObservations": ""
+                }
+              ]
+            }
+          ]
+        });
         return checklistInspectionList;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Check_list_Inspection');
-        return [];
+        return null;
       }
     } catch (error) {
       print(error.toString());
-      return [];
+      return null;
     }
   }
 
