@@ -1,6 +1,7 @@
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_presenter.dart';
+import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -195,12 +196,20 @@ class ViewAuditTaskController extends GetxController {
 
       CommentModel commentauditTaskCloseModel =
           CommentModel(id: id, comment: _comment);
+      ClosePermitModel ptwClose = ClosePermitModel(
+          id: auditTasknDetailModel.value.permit_id,
+          comment: _comment,
+          conditionIds: [1, 2, 3, 4],
+          fileIds: []);
 
       var auditTaskCloseJsonString = commentauditTaskCloseModel.toJson();
+      var closePtwJsonString = ptwClose.toJson();
 
       Map<String, dynamic>? response =
           await viewAuditTaskPresenter.auditTaskCloseButton(
         auditTaskCloseJsonString: auditTaskCloseJsonString,
+        closePtwJsonString: closePtwJsonString,
+        ptw_req: auditTasknDetailModel.value.is_PTW == "True" ? true : false,
         isLoading: true,
       );
       if (response == true) {

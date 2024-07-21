@@ -1635,8 +1635,8 @@ class ConnectHelper {
     print('goodsOrderApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
-        type: 4, data: parsedJson['message'], id: parsedJson['id']));
+    // Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+    //     type: 4, data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
@@ -2017,12 +2017,14 @@ class ConnectHelper {
     print('PermitCloseResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    closetype == 1
+    closetype == 2
         ? Get.offAllNamed(Routes.pmTask)
-        : closetype == 2
+        : closetype == 1
             ? Get.offAllNamed(Routes.jobCard)
-            : Get.dialog<void>(PermitMessageCloseDialog(
-                data: parsedJson['message'], jobId: jobId));
+            : closetype == 3
+                ? Get.offAllNamed(Routes.auditTask)
+                : Get.dialog<void>(PermitMessageCloseDialog(
+                    data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
@@ -2516,7 +2518,7 @@ class ConnectHelper {
       int? selectedchecklistId,
       int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId&facility_id=$facilityId',
+      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId&facility_id=$facilityId&type=2',
       Request.get,
       null,
       isLoading ?? false,
@@ -3193,12 +3195,12 @@ class ConnectHelper {
   }
 
   ///resubmit permit
-  Future<ResponseModel> resubmitPermit({
-    required String auth,
-    newPermit,
-    bool? isLoading,
-    bool? resubmit,
-  }) async {
+  Future<ResponseModel> resubmitPermit(
+      {required String auth,
+      newPermit,
+      bool? isLoading,
+      bool? resubmit,
+      int? type}) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3214,9 +3216,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(UpdateNewPermitDialog(
-      data: parsedJson['message'],
-      PtwId: parsedJson['id'],
-    ));
+        data: parsedJson['message'], PtwId: parsedJson['id'], type: type));
 
     return responseModel;
   }

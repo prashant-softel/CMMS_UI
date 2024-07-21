@@ -246,13 +246,13 @@ class NewPermitPresenter {
         resubmit: resubmit);
   }
 
-  Future<Map<String, dynamic>?> resubmitPermit({
-    newPermit,
-    required bool isLoading,
-    required bool resubmit,
-  }) async {
+  Future<Map<String, dynamic>?> resubmitPermit(
+      {newPermit,
+      required bool isLoading,
+      required bool resubmit,
+      int? type}) async {
     return newPermitUsecase.resubmitPermit(
-        newPermit: newPermit, isLoading: isLoading, resubmit: true);
+        newPermit: newPermit, isLoading: isLoading, resubmit: true, type: type);
   }
 
   Future<NewPermitDetailModel?> getNewPermitDetail(

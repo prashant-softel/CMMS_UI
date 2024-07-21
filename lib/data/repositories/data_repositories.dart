@@ -1873,22 +1873,26 @@ class DataRepository extends DomainRepository {
           {required String auth,
           newPermit,
           bool? isLoading,
-          bool? resubmit,int?type}) async =>
+          bool? resubmit,
+          int? type}) async =>
       await connectHelper.updateNewPermit(
           auth: auth,
           newPermit: newPermit,
           isLoading: isLoading ?? false,
-          resubmit: resubmit,type:type);
+          resubmit: resubmit,
+          type: type);
 
   Future<ResponseModel> resubmitPermit(
           {required String auth,
           newPermit,
+          int? type,
           bool? isLoading,
           bool? resubmit}) async =>
       await connectHelper.resubmitPermit(
           auth: auth,
           newPermit: newPermit,
           isLoading: isLoading ?? false,
+          type: type,
           resubmit: resubmit);
 
   Future<ResponseModel> createSOP({
@@ -4494,7 +4498,8 @@ class DataRepository extends DomainRepository {
         assignId: assignId,
         taskId: taskId,
         isLoading: isLoading,
-      ); Future<ResponseModel> assignToMC({
+      );
+  Future<ResponseModel> assignToMC({
     required String auth,
     int? assignId,
     int? taskId,

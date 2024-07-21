@@ -1865,12 +1865,17 @@ class NewPermitController extends GetxController {
 
       print('EmpoyeeData34:${data.toString()}');
 
+      // List<Employeelist> employee_map_list = [];
+      // filteredEmployeeNameList.forEach((e) {
+      //   employee_map_list.add(
+      //       Employeelist(employeeId: e?.id, responsibility: data.toString()));
+      // });
       List<Employeelist> employee_map_list = [];
+
       filteredEmployeeNameList.forEach((e) {
         employee_map_list.add(
-            Employeelist(employeeId: e?.id, responsibility: data.toString()));
+            Employeelist(employeeId: e?.id, responsibility: e!.designation));
       });
-
       late List<LotoList> loto_map_list = [];
 
       filteredEquipmentNameList.forEach(
@@ -1932,6 +1937,7 @@ class NewPermitController extends GetxController {
         newPermit: jobJsonString,
         resubmit: true,
         isLoading: true,
+        type: typee.value,
       );
       if (responseNewPermitCreated != null) {
         //  CreateNewPermitDialog();
@@ -2004,9 +2010,11 @@ class NewPermitController extends GetxController {
   Future<void> viewJobDetails() async {
     Get.toNamed(Routes.jobDetails);
   }
+
   Future<void> viewPMTDetails() async {
     Get.toNamed(Routes.pmTaskView);
   }
+
   Future<void> viewMCTDetails() async {
     Get.toNamed(Routes.addModuleCleaningExecutionContentWeb);
   }
