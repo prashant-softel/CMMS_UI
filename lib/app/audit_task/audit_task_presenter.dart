@@ -10,13 +10,15 @@ class AuditTaskPresenter {
           bool? isLoading,
           bool? isExport,
           dynamic endDate,
-          dynamic startDate}) async =>
+          dynamic startDate,
+          int? type}) async =>
       await auditTaskUsecase.getAuditTaskList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           isExport: isExport,
           endDate: endDate,
-          startDate: startDate);
+          startDate: startDate,
+          type: type);
   void clearValue() async => auditTaskUsecase.clearValue();
   void clearTypeValue() async => auditTaskUsecase.clearTypeValue();
 

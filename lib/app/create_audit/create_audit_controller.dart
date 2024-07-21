@@ -291,10 +291,10 @@ class CreateAuditController extends GetxController {
     //       msg: "Please enter required field", fontSize: 16.0);
     // } else {
 
-    checkFormAduit();
-    if (isFormInvalid.value) {
-      return true;
-    }
+    // checkFormAduit();
+    // if (isFormInvalid.value) {
+    //   return true;
+    // }
     String _planTitle = planTitleTc.text.trim();
     String _description = descriptionTc.text.trim();
     String _startDate = startDateDateTc.text.trim();
