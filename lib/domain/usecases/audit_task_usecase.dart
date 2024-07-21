@@ -10,9 +10,10 @@ class AuditTaskUsecase {
           bool? isLoading,
           bool? isExport,
           dynamic endDate,
-          dynamic startDate}) async =>
+          dynamic startDate,
+          int? type}) async =>
       await repository.getAuditTaskList(
-          facilityId, isLoading, isExport, startDate, endDate);
+          facilityId, isLoading, isExport, startDate, endDate, type);
   void clearValue() async => repository.clearData(LocalKeys.auditTaskId);
   void clearTypeValue() async => repository.clearData(LocalKeys.type);
 

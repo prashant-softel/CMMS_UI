@@ -24,6 +24,7 @@ import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
+import 'package:cmms/app/widgets/create_plan_dialog_msg.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/end_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
@@ -2826,7 +2827,7 @@ class ConnectHelper {
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId&isattendence=$isattendanceneeded',
+      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId&isattendence=0',
       Request.get,
       null,
       isLoading ?? false,
@@ -5010,9 +5011,9 @@ class ConnectHelper {
       bool? isLoading,
       int? facilityId,
       dynamic startDate,
-      dynamic endDate}) async {
+      dynamic endDate,int?type}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'AuditPlan/GetTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}&module_type_id=3',
+      'AuditPlan/GetTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}&module_type_id=$type',
       Request.get,
       null,
       isLoading ?? true,
@@ -6727,6 +6728,11 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CreatePlanMessageDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+    print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
 

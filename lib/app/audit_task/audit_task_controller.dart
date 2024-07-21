@@ -109,8 +109,8 @@ class AuditTaskController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getAuditTaskList(
-            facilityId, formattedTodate1, formattedFromdate1, false);
+        getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1,
+            false, type.value);
       });
       // isDataLoading.value = false;
 
@@ -152,8 +152,8 @@ class AuditTaskController extends GetxController {
     //     .toList();
   }
 
-  Future<void> getAuditTaskList(
-      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
+  Future<void> getAuditTaskList(int facilityId, dynamic startDate,
+      dynamic endDate, bool isExport, int? type) async {
     pmTaskList.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
     final _pmTaskList = await auditTaskPresenter.getAuditTaskList(
@@ -161,7 +161,8 @@ class AuditTaskController extends GetxController {
         isLoading: isLoading.value,
         isExport: isExport,
         startDate: startDate,
-        endDate: endDate);
+        endDate: endDate,
+        type: type);
     if (_pmTaskList != null) {
       pmTaskList.value = _pmTaskList;
       filteredData.value = pmTaskList.value;
@@ -170,7 +171,8 @@ class AuditTaskController extends GetxController {
   }
 
   void getPmTaskListByDate() {
-    getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
+    getAuditTaskList(
+        facilityId, formattedTodate1, formattedFromdate1, false, type.value);
   }
 
   void clearStoreData() {
@@ -180,6 +182,7 @@ class AuditTaskController extends GetxController {
   void clearTypeValue() async => auditTaskPresenter.clearTypeValue();
 
   void export() {
-    getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1, true);
+    getAuditTaskList(
+        facilityId, formattedTodate1, formattedFromdate1, true, type.value);
   }
 }

@@ -128,7 +128,9 @@ class CreatePmPlanController extends GetxController {
       // Utility.showDialog(e.toString() + 'pmPlanId');
     }
   }
-
+void clearStoreData() {
+    createPmPlanPresenter.clearValue();
+  }
   Future<void> getPmPlanDetails(
       {int? pmPlanId, bool? isloading, required int facilityId}) async {
     final _pmPlanDetailsModel = await createPmPlanPresenter.getPmPlanDetails(
