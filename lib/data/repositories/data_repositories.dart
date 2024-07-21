@@ -5404,6 +5404,14 @@ class DataRepository extends DomainRepository {
         year: year,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getChecklistInspection({
+    required String auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getChecklistInspection(
+        auth: auth,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getAttendanceDetail({
     required String auth,
     required int facilityId,
