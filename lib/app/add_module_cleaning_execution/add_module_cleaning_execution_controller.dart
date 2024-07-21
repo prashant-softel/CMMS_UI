@@ -519,9 +519,9 @@ class AddModuleCleaningExecutionController extends GetxController {
 
     final _endMCScheduleExecutionBtn =
         await addModuleCleaningExecutionPresenter.endMCScheduleExecutionButton(
-      scheduleId: scheduleID,
-      closePtwJsonString: closePtwJsonString,
-    );
+            scheduleId: scheduleID,
+            closePtwJsonString: closePtwJsonString,
+            isLoading: true);
   }
 
   void endMCExecutionButton({int? id}) async {
