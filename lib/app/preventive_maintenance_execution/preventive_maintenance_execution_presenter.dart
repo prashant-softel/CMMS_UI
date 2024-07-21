@@ -28,6 +28,8 @@ class PreventiveMaintenanceExecutionPresenter {
     );
   }
 
+  void clearValue() async => preventiveMaintenanceExecutionUsecase.clearValue();
+
   Future<PmFiles?> browseFiles(
       Uint8List? fileBytes, String fileName, bool isLoading) async {
     return await preventiveMaintenanceExecutionUsecase.browseFiles(

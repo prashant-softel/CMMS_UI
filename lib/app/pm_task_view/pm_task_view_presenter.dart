@@ -84,12 +84,11 @@ class PreventiveMaintenanceTaskViewPresenter {
     );
   }
 
-  Future<bool> closePmTaskExecution({
-    closetoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> closePmTaskExecution(
+      {closetoJsonString, required bool isLoading, closePtwJsonString}) async {
     return preventiveMaintenanceTaskViewUsecase.closePmTaskExecution(
       closetoJsonString: closetoJsonString,
+      closePtwJsonString: closePtwJsonString,
       isLoading: isLoading,
     );
   }
@@ -123,7 +122,7 @@ class PreventiveMaintenanceTaskViewPresenter {
       await preventiveMaintenanceTaskViewUsecase.getHistory(
         moduleType: moduleType,
         id: id,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
   void saveValue({String? pmTaskId}) async {

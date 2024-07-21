@@ -30,10 +30,14 @@ class ViewAuditTaskPresenter {
 
   Future<Map<String, dynamic>?> auditTaskCloseButton({
     auditTaskCloseJsonString,
+    closePtwJsonString,
+    bool? ptw_req,
     required bool isLoading,
   }) async {
     return viewAuditTaskUsecase.auditTaskCloseButton(
       auditTaskCloseJsonString: auditTaskCloseJsonString,
+      closePtwJsonString: closePtwJsonString,
+      ptw_req: ptw_req,
       isLoading: isLoading,
     );
   }

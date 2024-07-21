@@ -77,8 +77,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                 ? Get.offAllNamed(Routes.pmTaskView,
                                     arguments: {'pmTaskId': taskId})
                                 : controller.typee.value == 3
-                                    ? Get.offAllNamed(Routes.pmTaskView,
-                                        arguments: {'pmTaskId': taskId})
+                                    ? Get.offAllNamed(Routes.viewAuditTask,
+                                        arguments: {'auditTaskId': taskId})
                                     : controller.typee.value == 4
                                         ? Get.offAllNamed(
                                             Routes
@@ -2572,8 +2572,13 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                     : Dimens.box0,
                                                 Dimens.boxWidth20,
                                                 controller.newPermitDetailsModel
-                                                            .value?.ptwStatus ==
-                                                        124
+                                                                .value?.ptwStatus ==
+                                                            124 ||
+                                                        controller
+                                                                .newPermitDetailsModel
+                                                                .value
+                                                                ?.ptwStatus ==
+                                                            132
                                                     ? Center(
                                                         child: Container(
                                                           height: 45,

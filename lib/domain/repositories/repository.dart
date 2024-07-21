@@ -535,15 +535,15 @@ class Repository {
 
   /// sesubmit permit
   Future<Map<String, dynamic>> resubmitPermit(
-      newPermit, bool? isLoading, bool? resubmit) async {
+      newPermit, bool? isLoading, bool? resubmit, int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.resubmitPermit(
-        auth: auth,
-        newPermit: newPermit,
-        isLoading: isLoading ?? false,
-        resubmit: resubmit,
-      );
+          auth: auth,
+          newPermit: newPermit,
+          isLoading: isLoading ?? false,
+          resubmit: resubmit,
+          type: type);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -3658,6 +3658,8 @@ class Repository {
 
   Future<Map<String, dynamic>> auditTaskCloseButton(
     auditTaskCloseJsonString,
+    closePtwJsonString,
+    bool? ptw_req,
     bool? isLoading,
   ) async {
     try {
@@ -3675,6 +3677,10 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
+          if (ptw_req == true) {
+            permitCloseButton(closePtwJsonString, isLoading, 0, 3);
+          }
+
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -7665,7 +7671,7 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
-          permitCloseButton(closePtwJsonString, isLoading, 0, 2);
+          permitCloseButton(closePtwJsonString, isLoading, 0, 1);
 
           return responseMap;
         }
@@ -12455,11 +12461,11 @@ class Repository {
     }
   }
 
-  Future<bool> ClosePMTaskExecution(
-      {bool? isLoading,
-      closetoJsonString,
-      closePtwJsonString,
-      int? closetype}) async {
+  Future<bool> ClosePMTaskExecution({
+    bool? isLoading,
+    closetoJsonString,
+    closePtwJsonString,
+  }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -12473,7 +12479,7 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "PM Task Closed Successfully!", fontSize: 45.0);
-        permitCloseButton(closePtwJsonString, isLoading, 0, closetype);
+        permitCloseButton(closePtwJsonString, isLoading, 0, 2);
         return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);

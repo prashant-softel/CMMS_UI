@@ -496,6 +496,265 @@ class PreventiveMaintenanceExecutionContentWeb
                                     ],
                                   ),
                                 ),
+                                controller.pmtaskViewModel.value?.status ==
+                                                169 &&
+                                            controller
+                                                .listMrsByTaskId!.isEmpty ||
+                                        controller.pmtaskViewModel.value
+                                                ?.status ==
+                                            162 ||
+                                        controller.pmtaskViewModel.value
+                                                ?.status ==
+                                            161
+                                    ? Dimens.box0
+                                    : Container(
+                                        margin: Dimens.edgeInsets20,
+                                        height:
+                                            controller.listMrsByTaskId!.length >
+                                                    0
+                                                ? ((controller.listMrsByTaskId
+                                                                ?.length ??
+                                                            0) *
+                                                        40) +
+                                                    150
+                                                : 55,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: ColorValues
+                                                .lightGreyColorWithOpacity35,
+                                            width: 1,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: ColorValues
+                                                  .appBlueBackgroundColor,
+                                              spreadRadius: 2,
+                                              blurRadius: 5,
+                                              offset: Offset(0, 2),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Material Issue / Used",
+                                                    style: Styles.blue700,
+                                                  ),
+                                                  Spacer(),
+                                                  controller.listMrsByTaskId!
+                                                          .isEmpty
+                                                      ? Container(
+                                                          height: 30,
+                                                          child:
+                                                              CustomElevatedButton(
+                                                            backgroundColor:
+                                                                ColorValues
+                                                                    .addNewColor,
+                                                            onPressed:
+                                                                () async {
+                                                              Get.offAllNamed(
+                                                                  Routes
+                                                                      .createMrs,
+                                                                  arguments: {
+                                                                    "whereUsedId":
+                                                                        controller
+                                                                            .pmtaskViewModel
+                                                                            .value
+                                                                            ?.id,
+                                                                    "activity": controller
+                                                                        .pmtaskViewModel
+                                                                        .value
+                                                                        ?.plan_title,
+                                                                    "whereUsed":
+                                                                        27,
+                                                                    "fromActorTypeId":
+                                                                        2,
+                                                                    "type": 2,
+                                                                    "to_actor_type_id":
+                                                                        3
+                                                                  });
+                                                            },
+                                                            text: "Add New MRS",
+                                                          ),
+                                                        )
+                                                      : Dimens.box0,
+                                                ],
+                                              ),
+                                            ),
+                                            // Divider(
+                                            //   color:
+                                            //       ColorValues.greyLightColour,
+                                            // ),
+                                            controller.listMrsByTaskId!.length >
+                                                    0
+                                                ? Expanded(
+                                                    child: DataTable2(
+                                                      border: TableBorder.all(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              206,
+                                                              229,
+                                                              234)),
+                                                      columns: [
+                                                        DataColumn2(
+                                                            fixedWidth: 100,
+                                                            label: Text(
+                                                              "Sr. No.",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                        DataColumn2(
+                                                            fixedWidth: 130,
+                                                            label: Text(
+                                                              "MRS ID",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                        DataColumn2(
+                                                            // fixedWidth: 200,
+                                                            label: Text(
+                                                          "MRS Items List ",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                        DataColumn2(
+                                                            //  fixedWidth: 300,
+                                                            label: Text(
+                                                          "Status",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                        DataColumn2(
+                                                            fixedWidth: 300,
+                                                            label: Text(
+                                                              'Action',
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                      ],
+                                                      rows: List<
+                                                          DataRow>.generate(
+                                                        controller
+                                                                .listMrsByTaskId
+                                                                ?.length ??
+                                                            0,
+                                                        (index) => DataRow(
+                                                            cells: [
+                                                              DataCell(Text(
+                                                                  '${index + 1}')),
+                                                              DataCell(Text(controller
+                                                                          .listMrsByTaskId?[
+                                                                              index]
+                                                                          ?.is_mrs_return ==
+                                                                      0
+                                                                  ? "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}"
+                                                                  : "RMRS${controller.listMrsByTaskId?[index]?.mrs_return_ID.toString() ?? ''}")),
+                                                              DataCell(Text(controller
+                                                                      .listMrsByTaskId?[
+                                                                          index]
+                                                                      ?.mrsItems ??
+                                                                  '')),
+                                                              DataCell(Text(controller
+                                                                      .listMrsByTaskId?[
+                                                                          index]
+                                                                      ?.status_short ??
+                                                                  '')),
+                                                              DataCell(Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceEvenly,
+                                                                children: [
+                                                                  TableActionButton(
+                                                                      color: ColorValues
+                                                                          .viewColor,
+                                                                      icon: Icons
+                                                                          .remove_red_eye,
+                                                                      message:
+                                                                          "View",
+                                                                      onPress:
+                                                                          () {
+                                                                        controller
+                                                                            .clearMrsStoreData();
+                                                                        int? rmrsId = controller
+                                                                            .listMrsByTaskId?[index]
+                                                                            ?.mrs_return_ID;
+                                                                        String
+                                                                            mrsId =
+                                                                            controller.listMrsByTaskId?[index]?.mrsId.toString() ??
+                                                                                "";
+                                                                        controller.listMrsByTaskId?[index]?.is_mrs_return ==
+                                                                                0
+                                                                            ? Get.toNamed(Routes.mrsViewScreen, arguments: {
+                                                                                'mrsId': int.tryParse("$mrsId"),
+                                                                                'type': 2
+                                                                              })
+                                                                            : Get.toNamed(Routes.approverReturnMrs, arguments: {
+                                                                                'mrsId': rmrsId,
+                                                                                'type': 2
+                                                                              });
+                                                                      }),
+                                                                  // controller.pmtaskViewModel.value?.status != 169 &&
+                                                                  controller.listMrsByTaskId?[index]?.status == 323 ||
+                                                                          controller.listMrsByTaskId?[index]?.status ==
+                                                                              321 ||
+                                                                          controller.listMrsByTaskId?[index]?.status ==
+                                                                              324
+                                                                      ? Dimens
+                                                                          .box0
+                                                                      : varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kMrsFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length >
+                                                                              0
+                                                                          ? TableActionButton(
+                                                                              color: ColorValues.editColor,
+                                                                              icon: Icons.edit,
+                                                                              message: "Edit MRS",
+                                                                              onPress: () {
+                                                                                controller.clearMrsStoreData();
+
+                                                                                String mrsId = controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
+                                                                                String rmrsId = controller.listMrsByTaskId?[index]?.mrs_return_ID.toString() ?? "";
+
+                                                                                print({
+                                                                                  "mrsId": mrsId
+                                                                                });
+                                                                                rmrsId == "0"
+                                                                                    ? Get.toNamed(Routes.editMrs, arguments: {
+                                                                                        'mrsId': int.tryParse("$mrsId"),
+                                                                                        'type': 2
+                                                                                      })
+                                                                                    : Get.toNamed(Routes.editReturnMrs, arguments: int.tryParse(rmrsId));
+                                                                                ;
+                                                                              })
+                                                                          : Dimens.box0
+                                                                ],
+                                                              )),
+                                                            ]),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : Dimens.box0,
+                                          ],
+                                        ),
+                                      ),
                                 (controller.historyList != null &&
                                         controller.historyList!.isNotEmpty)
                                     ? Container(
@@ -656,7 +915,8 @@ class PreventiveMaintenanceExecutionContentWeb
                                                             323 &&
                                                         controller
                                                             .listMrsByTaskId!
-                                                            .isNotEmpty && controller.allTrue
+                                                            .isNotEmpty &&
+                                                        controller.allTrue
                                                                 .value ==
                                                             false
                                                     ? Get.defaultDialog(

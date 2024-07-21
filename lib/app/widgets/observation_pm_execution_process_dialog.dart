@@ -309,44 +309,41 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 "Material Used For ",
                                                 style: Styles.blue700,
                                               ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  controller.addRowItem();
-                                                },
-                                                child: Container(
-                                                  height: 25,
-                                                  width: 70,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        ColorValues.addNewColor,
-                                                    border: Border.all(
-                                                      color: ColorValues
-                                                          .lightGreyColorWithOpacity35,
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(5)),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      " + Add ",
-                                                      style: TextStyle(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w100,
-                                                          color: Colors.white),
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
+                                              // GestureDetector(
+                                              //   onTap: () {
+                                              //     controller.addRowItem();
+                                              //   },
+                                              //   child: Container(
+                                              //     height: 25,
+                                              //     width: 70,
+                                              //     decoration: BoxDecoration(
+                                              //       color: ColorValues.addNewColor,
+                                              //       border: Border.all(
+                                              //         color: ColorValues
+                                              //             .lightGreyColorWithOpacity35,
+                                              //         width: 1,
+                                              //       ),
+                                              //       borderRadius: BorderRadius.all(
+                                              //           Radius.circular(5)),
+                                              //     ),
+                                              //     child: Center(
+                                              //       child: Text(
+                                              //         " + Add ",
+                                              //         style: TextStyle(
+                                              //             fontSize: 18,
+                                              //             fontWeight: FontWeight.w100,
+                                              //             color: Colors.white),
+                                              //       ),
+                                              //     ),
+                                              //   ),
+                                              // )
                                             ],
                                           ),
                                         ),
                                         Expanded(
                                           child: Obx(() {
                                             return DataTable2(
-                                              // minWidth: 2000,
+                                              minWidth: 1600,
                                               dataRowHeight: 70,
                                               columnSpacing: 10,
                                               border: TableBorder.all(
@@ -363,7 +360,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                               FontWeight.bold),
                                                     )),
                                                 DataColumn2(
-                                                    fixedWidth: 100,
+                                                    fixedWidth: 150,
                                                     label: Text(
                                                       "Sr No.",
                                                       style: TextStyle(
@@ -381,50 +378,50 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                               FontWeight.bold),
                                                     )),
                                                 DataColumn2(
-                                                    // fixedWidth: 350,
+                                                    fixedWidth: 250,
                                                     label: Text(
-                                                  "Material Type",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                                DataColumn2(
-                                                    //  fixedWidth: 350,
-                                                    label: Text(
-                                                  "Issued Qty",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                                DataColumn2(
-                                                    //  fixedWidth: 350,
-                                                    label: Text(
-                                                  "Used Qty",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                                DataColumn2(
-                                                    //  fixedWidth: 350,
-                                                    label: Text(
-                                                  "Consumed  Qty",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                                DataColumn2(
-                                                    fixedWidth: 100,
-                                                    label: Text(
-                                                      "Action",
+                                                      "Material Type",
                                                       style: TextStyle(
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     )),
+                                                DataColumn2(
+                                                    fixedWidth: 150,
+                                                    label: Text(
+                                                      "Issued Qty",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    fixedWidth: 150,
+                                                    label: Text(
+                                                      "Used Qty",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    fixedWidth: 200,
+                                                    label: Text(
+                                                      "Consumed  Qty",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                // DataColumn2(
+                                                //     fixedWidth: 100,
+                                                //     label: Text(
+                                                //       "Action",
+                                                //       style: TextStyle(
+                                                //           fontSize: 15,
+                                                //           fontWeight:
+                                                //               FontWeight.bold),
+                                                //     )),
                                               ],
                                               rows: controller.rowItem.value
                                                   .map((record) {
@@ -491,78 +488,82 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                           "Material_Type")
                                                                       ? Text(
                                                                           "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
+                                                                      // : (mapData['key'] ==
+                                                                      //         "Action ")
+                                                                      //     ? Padding(
+                                                                      //         padding: EdgeInsets.only(top: 10),
+                                                                      //         child: Column(
+                                                                      //           mainAxisAlignment: MainAxisAlignment.start,
+                                                                      //           crossAxisAlignment: CrossAxisAlignment.start,
+                                                                      //           children: [
+                                                                      //             TableActionButton(
+                                                                      //               color: ColorValues.appRedColor,
+                                                                      //               icon: Icons.delete,
+                                                                      //               label: '',
+                                                                      //               message: '',
+                                                                      //               onPress: () {
+                                                                      //                 controller.rowItem.remove(record);
+                                                                      //               },
+                                                                      //             )
+                                                                      //           ],
+                                                                      //         ),
+                                                                      //       )
                                                                       : (mapData['key'] ==
-                                                                              "Action ")
-                                                                          ? Padding(
-                                                                              padding: EdgeInsets.only(top: 10),
-                                                                              child: Column(
-                                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                children: [
-                                                                                  TableActionButton(
-                                                                                    color: ColorValues.appRedColor,
-                                                                                    icon: Icons.delete,
-                                                                                    label: '',
-                                                                                    message: '',
-                                                                                    onPress: () {
-                                                                                      controller.rowItem.remove(record);
-                                                                                    },
-                                                                                  )
-                                                                                ],
-                                                                              ),
-                                                                            )
-                                                                          : (mapData['key'] == "Issued_Qty")
-                                                                              ? Text("${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}")
-                                                                              : (mapData['key'] == "Used_Qty")
-                                                                                  ? Text("${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
-                                                                                  : (mapData['key'] == "Consumed_Qty")
-                                                                                      ? Padding(
-                                                                                          padding: const EdgeInsets.only(top: 10),
-                                                                                          child: Container(
-                                                                                            decoration: BoxDecoration(
-                                                                                              boxShadow: [
-                                                                                                BoxShadow(
-                                                                                                  color: Colors.black26,
-                                                                                                  offset: const Offset(
-                                                                                                    5.0,
-                                                                                                    5.0,
-                                                                                                  ),
-                                                                                                  blurRadius: 5.0,
-                                                                                                  spreadRadius: 1.0,
-                                                                                                ),
-                                                                                              ],
-                                                                                              color: ColorValues.whiteColor,
-                                                                                              borderRadius: BorderRadius.circular(5),
+                                                                              "Issued_Qty")
+                                                                          ? Text(
+                                                                              "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}")
+                                                                          : (mapData['key'] == "Used_Qty")
+                                                                              ? Text("${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
+                                                                              : (mapData['key'] == "Consumed_Qty")
+                                                                                  ? Padding(
+                                                                                      padding: const EdgeInsets.only(top: 10),
+                                                                                      child: Container(
+                                                                                        decoration: BoxDecoration(
+                                                                                          boxShadow: [
+                                                                                            BoxShadow(
+                                                                                              color: Colors.black26,
+                                                                                              offset: const Offset(
+                                                                                                5.0,
+                                                                                                5.0,
+                                                                                              ),
+                                                                                              blurRadius: 5.0,
+                                                                                              spreadRadius: 1.0,
                                                                                             ),
-                                                                                            child: LoginCustomTextfield(
-                                                                                              width: (Get.width * .4),
-                                                                                              keyboardType: TextInputType.number,
-                                                                                              inputFormatters: <TextInputFormatter>[
-                                                                                                FilteringTextInputFormatter.digitsOnly
-                                                                                              ],
-                                                                                              maxLine: 1,
-                                                                                              textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                              onChanged: (txt) {
-                                                                                                // Ensure the entered value is less than or equal to the issued qty
-                                                                                                num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
-                                                                                                num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
-                                                                                                int consumedQty = int.tryParse(txt) ?? 0;
+                                                                                          ],
+                                                                                          color: ColorValues.whiteColor,
+                                                                                          borderRadius: BorderRadius.circular(5),
+                                                                                        ),
+                                                                                        child: LoginCustomTextfield(
+                                                                                          width: (Get.width * .4),
+                                                                                          keyboardType: TextInputType.number,
+                                                                                          inputFormatters: <TextInputFormatter>[
+                                                                                            FilteringTextInputFormatter.digitsOnly
+                                                                                          ],
+                                                                                          maxLine: 1,
+                                                                                          textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                          onChanged: (txt) {
+                                                                                            mapData["value"] = txt;
 
-                                                                                                if (consumedQty <= (issuedQty - usedQty)) {
-                                                                                                  mapData["value"] = txt;
-                                                                                                } else {
-                                                                                                  // If the entered quantity exceeds the issued quantity, show an error message or handle it accordingly
-                                                                                                  Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
-                                                                                                  // Reset the consumed quantity to the previous valid value
-                                                                                                  setState(() {
-                                                                                                    mapData["value"] = mapData["value"]!;
-                                                                                                  });
-                                                                                                }
-                                                                                              },
-                                                                                            ),
-                                                                                          ),
-                                                                                        )
-                                                                                      : Text(mapData['value'] ?? ''),
+                                                                                            // Ensure the entered value is less than or equal to the issued qty
+                                                                                            //   num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
+                                                                                            //   num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
+                                                                                            //   int consumedQty = int.tryParse(txt) ?? 0;
+
+                                                                                            //   if (consumedQty <= (issuedQty - usedQty)) {
+                                                                                            //     mapData["value"] = txt;
+                                                                                            //   } else {
+                                                                                            //     // If the entered quantity exceeds the issued quantity, show an error message or handle it accordingly
+                                                                                            //     Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
+                                                                                            //     // Reset the consumed quantity to the previous valid value
+                                                                                            //     setState(() {
+                                                                                            //       mapData["value"] = mapData["value"]!;
+                                                                                            //     });
+                                                                                            //   }
+                                                                                          },
+                                                                                        ),
+                                                                                      ),
+                                                                                    )
+                                                                                  : Text(mapData['value'] ?? ''),
                                                     );
                                                   }).toList(),
                                                 );

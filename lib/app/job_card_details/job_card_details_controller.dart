@@ -169,7 +169,7 @@ class JobCardDetailsController extends GetxController {
       {'key': "Issued_Qty", "value": ''},
       {'key': "Used_Qty", "value": ''},
       {'key': "Consumed_Qty", "value": ''},
-      {'key': "Action ", "value": ''},
+      // {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -242,9 +242,27 @@ class JobCardDetailsController extends GetxController {
     for (var asset in _assetsList!) {
       cmmrsItems!.add(asset);
     }
+    cmmrsItems?.forEach((element) {
+      rowItem.add([
+        {"key": "Drop_down", "value": '${element?.name}'},
+        {"key": "Drop_down_eq", "value": 'Please Select'},
+
+        {'key': "Sr_No", "value": ''},
+        {'key': "code", "value": ''},
+        {'key': "Material_Type", "value": ''},
+        {'key': "Issued_Qty", "value": ''},
+        {'key': "Used_Qty", "value": ''},
+        {'key': "Consumed_Qty", "value": '${element?.used_qty}'},
+        // {'key': "Action ", "value": ''},
+      ]);
+      dropdownMapperData[element?.name ?? ""] = listMrsByTaskId!
+          .value.last!.cmmrsItems!
+          .firstWhere((e) => e!.serial_number == element?.serial_number,
+              orElse: null);
+    });
     _processJsonData();
     allTrue.value = itemExistsWithZeroDifference.every((element) => element);
-    addRowItem();
+    // addRowItem();
   }
 
   void _processJsonData() {
@@ -335,21 +353,24 @@ class JobCardDetailsController extends GetxController {
     List<TranferItems> items = [];
     rowItem.forEach((element) {
       TranferItems item = TranferItems(
-          assetItemID:
-              dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-          facilityID: facilityId,
-          fromActorID: jobCardId.value,
-          fromActorType: AppConstants.kJobCard,
-          mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-          mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
-          qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
-          refID: jobCardId.value,
-          refType: AppConstants.kJobCard,
-          remarks: "remarks",
-          toActorID: dropdownMapperDataworkingArea[element[1]["value"]]
-                  .workingAreaId ??
-              0,
-          toActorType: AppConstants.kInventory);
+        assetItemID:
+            dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+        facilityID: facilityId,
+        fromActorID: jobCardId.value,
+        fromActorType: AppConstants.kJobCard,
+        mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
+        mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
+        qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
+        refID: jobCardId.value,
+        refType: AppConstants.kJobCard,
+        remarks: "remarks",
+        toActorID:
+            dropdownMapperDataworkingArea[element[1]["value"]].workingAreaId ??
+                0,
+        toActorType: AppConstants.kInventory,
+        transaction_id:
+            dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
+      );
 
       items.add(item);
     });
