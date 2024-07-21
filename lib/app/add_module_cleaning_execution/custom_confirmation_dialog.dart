@@ -32,7 +32,7 @@ class CustomCalibrationDialog extends GetView {
                 text: starttype == 1
                     ? 'Are you sure you want to start the schedule for '
                     : starttype == 2
-                        ? 'Are you sure you want to close the Schedule for '
+                        ? 'Are you sure you want to close the Schedule for MCS'
                         : starttype == 3
                             ? 'Are you sure you want to close the Execution for '
                             : 'Are you sure you want to start the execution for ',

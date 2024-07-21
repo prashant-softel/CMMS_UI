@@ -15,10 +15,7 @@ import 'package:intl/intl.dart';
 import '../home/home_controller.dart';
 
 class ModuleCleaningPlanningController extends GetxController {
-  ///
-  ModuleCleaningPlanningController(
-    this.moduleCleaningPlanningPresenter,
-  );
+  ModuleCleaningPlanningController(this.moduleCleaningPlanningPresenter);
   ModuleCleaningPlanningPresenter moduleCleaningPlanningPresenter;
   final HomeController homecontroller = Get.find();
   var startDateTimeCtrlr = TextEditingController();
@@ -45,11 +42,8 @@ class ModuleCleaningPlanningController extends GetxController {
   RxInt selectedAssignedToId = 0.obs;
   bool openStartDatePicker = false;
   var startDateTc = TextEditingController();
-  // var mcTitelCtrlr = TextEditingController();
-
   Rx<bool> isFormInvalid = false.obs;
   TextEditingController mcTitelCtrlr = TextEditingController();
-
   var durationInDayCtrlr = TextEditingController();
 
   Rx<String> selectedfrequency = ''.obs;
@@ -72,31 +66,24 @@ class ModuleCleaningPlanningController extends GetxController {
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
   RxList<SMBS> smblist = <SMBS>[].obs;
 
-  // RxList<McPalningDetailsModel?>? mcPlanDetailsList =
-  //     <McPalningDetailsModel?>[].obs;
   Rx<McPalningDetailsModel?> mcPlanDetailsModel = McPalningDetailsModel().obs;
   RxList<TypeModel> days = <TypeModel>[].obs;
+
+  RxBool isDurationEditable = true.obs; // New observable to control editability
+
   void dayCount({required int dayCount}) {
     days = <TypeModel>[].obs;
-
     for (int i = 1; i <= dayCount; i++) {
       days.add(TypeModel(name: 'Day $i', id: "$i"));
     }
   }
-
-  // Map<String, TypeModel> typedropdownMapperData = {};
 
   RxList<TypeModel> cleaningType = <TypeModel>[
     TypeModel(name: 'Dry', id: "1"),
     TypeModel(name: 'Wet', id: "2"),
     TypeModel(name: 'Robotic', id: "3"),
   ].obs;
-  // var days = <TypeModel>[
-  //   TypeModel(name: "Please Select", id: "0"),
-  //   TypeModel(name: 'Day 1', id: "1"),
-  //   TypeModel(name: 'Day 2', id: "2"),
-  //   TypeModel(name: 'Day 3', id: "3"),
-  // ];
+
   void addRowItem() {
     rowItem.value.add([
       {"key": "day", "value": ''},
@@ -130,7 +117,6 @@ class ModuleCleaningPlanningController extends GetxController {
         getFrequencyList();
       });
 
-      // getMcPlanHistory(id: id.value);
       super.onInit();
     } catch (e) {
       print(e);
@@ -139,17 +125,6 @@ class ModuleCleaningPlanningController extends GetxController {
     super.onInit();
   }
 
-  // Future<void> setUserId() async {
-  //   try {
-  //     var dataFromPreviousScreen = Get.arguments;
-
-  //     id.value = dataFromPreviousScreen['id'];
-  //     // id= Get.arguments;
-  //     print('AddStock:$id');
-  //   } catch (e) {
-  //     print(e.toString() + 'userId');
-  //   }
-  // }
   Future<void> setMcId() async {
     try {
       final _mcid = await moduleCleaningPlanningPresenter.getValueMcId();
@@ -214,13 +189,6 @@ class ModuleCleaningPlanningController extends GetxController {
     String _startDateTc = htmlEscape.convert(startDateTc.text.trim());
     print("Start Date: ${_startDateTc}");
 
-    // Ensure the selectedCleaningId is set properly
-    // if (selectedCleaningId == 0) {
-    //   // Optionally, you can show a validation message or return early
-    //   print("Please select a cleaning type");
-    //   return;
-    // }
-
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
       planId: 0,
       facilityId: facilityId,
@@ -240,14 +208,12 @@ class ModuleCleaningPlanningController extends GetxController {
       isLoading: true,
     );
     if (responseCreateMcModel == null) {
-      // Optionally handle the case when the response is null
       print("Failed to create MC Plan");
     }
     print('Create  Create GO  data: $createMcModelJsonString');
   }
 
   void updateMcPlan() async {
-    // return;
     int i = -1;
 
     List<Schedule>? sch =
@@ -264,13 +230,6 @@ class ModuleCleaningPlanningController extends GetxController {
           }).toList());
     }).toList();
     print({"sch": sch});
-    // rowItem.value.forEach((element) {
-    //   Schedule item = Schedule(
-    //     cleaningType: int.tryParse('${element[4]["id"]}'),
-    //   );
-
-    //   // Schedule.add(item);
-    // });
 
     String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
     String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
@@ -298,9 +257,6 @@ class ModuleCleaningPlanningController extends GetxController {
 
   Future<void> getMcPlanDetail(
       {required int planId, required int facilityId}) async {
-    // newPermitDetails!.value = <NewPermitListModel>[];
-    // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
-
     final _mcPlanDetails =
         await moduleCleaningPlanningPresenter.getMcPlanDetail(
             planId: planId, facilityId: facilityId, isLoading: true);
@@ -330,10 +286,6 @@ class ModuleCleaningPlanningController extends GetxController {
               {'key': "cleaningType", "value": '${element.cleaningTypeName}'},
             ],
           );
-          // cleaningTyperopdownMapperData[element.cleaningTypeName ?? ""] =
-          //     cleaningType.firstWhere(
-          //         (e) => e?.name == element.cleaningTypeName,
-          //         orElse: null)!;
         },
       );
     }
@@ -350,8 +302,6 @@ class ModuleCleaningPlanningController extends GetxController {
       for (var assignedTo in _assignedToList) {
         assignedToList.add(assignedTo);
       }
-      // selectedAssignedTo.value =
-      //     getAssignedToName(jobDetailsModel.value?.assignedId ?? 0) ?? '';
     }
   }
 
@@ -377,6 +327,14 @@ class ModuleCleaningPlanningController extends GetxController {
             selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
             selectedfrequency.value = value;
             isSelectedfrequency.value = true;
+
+            
+            if (value == "Daily") {
+              durationInDayCtrlr.text = '1';
+              isDurationEditable.value = false;
+            } else {
+              isDurationEditable.value = true;
+            }
           } else {
             selectedfrequencyId = 0;
           }
@@ -498,12 +456,10 @@ class ModuleCleaningPlanningController extends GetxController {
     if (startDateTimeCtrlrBuffer.text.trim().length == 0) {
       isstartdateInvalid.value = true;
       isFormInvalid = false.obs;
-      ;
     }
     if (validTillTimeCtrlr.text.trim().length == 0) {
       isstartdateInvalid.value = true;
       isFormInvalid = false.obs;
-      ;
     }
   }
 
@@ -556,7 +512,6 @@ class ModuleCleaningPlanningController extends GetxController {
     DateTime? dateTime = position == 0
         ? controller.selectedmcstarttime.value
         : controller.selectedValidTillTime.value;
-    // final currentDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime,
@@ -605,8 +560,6 @@ class ModuleCleaningPlanningController extends GetxController {
       newTime.minute,
     );
 
-    // If date is today and time is in the past, show an error message
-    print('selected time : $selected');
     if (currentTime.isAfter(selected)) {
       showDialog(
         context: context,

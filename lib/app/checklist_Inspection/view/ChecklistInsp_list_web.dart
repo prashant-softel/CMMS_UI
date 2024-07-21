@@ -2,12 +2,10 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/checklist_Inspection/ChecklistInsp_list_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/minus_dialog.dart';
 import 'package:cmms/domain/models/check_list_inspection_model.dart';
-import 'package:cmms/domain/models/water_data_list_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -141,7 +139,8 @@ class ChecklistInspectionListWeb
                         },
                         child: Text(" / MIS", style: Styles.greyLight14),
                       ),
-                      Text(" / WATER DATA LIST", style: Styles.greyLight14)
+                      Text(" / CHECK LIST INSPECTION ",
+                          style: Styles.greyLight14)
                     ],
                   ),
                 ),
@@ -175,17 +174,7 @@ class ChecklistInspectionListWeb
                                               top: 20,
                                             ),
                                             child: Text(
-                                              "Water Data List",
-                                              style: Styles.blackBold16,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                              top: 20,
-                                            ),
-                                            child: Text(
-                                              "All the data in KL units",
+                                              "Check list Inspection",
                                               style: Styles.blackBold16,
                                             ),
                                           ),
@@ -215,34 +204,34 @@ class ChecklistInspectionListWeb
                                               ],
                                             ),
                                           ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                              top: 20,
-                                              right: 20,
-                                            ),
-                                            child: ActionButton(
-                                              icon: Icons.add,
-                                              label: "Procurements",
-                                              onPressed: () {
-                                                Get.dialog(AddDialog());
-                                              },
-                                              color: ColorValues.addNewColor,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                              top: 20,
-                                              right: 5,
-                                            ),
-                                            child: ActionButton(
-                                              icon: Icons.minimize_sharp,
-                                              label: "Consumption",
-                                              onPressed: () {
-                                                Get.dialog(MinusDialog());
-                                              },
-                                              color: ColorValues.appRedColor,
-                                            ),
-                                          )
+                                          // Padding(
+                                          //   padding: EdgeInsets.only(
+                                          //     top: 20,
+                                          //     right: 20,
+                                          //   ),
+                                          //   child: ActionButton(
+                                          //     icon: Icons.add,
+                                          //     label: "Procurements",
+                                          //     onPressed: () {
+                                          //       Get.dialog(AddDialog());
+                                          //     },
+                                          //     color: ColorValues.addNewColor,
+                                          //   ),
+                                          // ),
+                                          // Padding(
+                                          //   padding: EdgeInsets.only(
+                                          //     top: 20,
+                                          //     right: 5,
+                                          //   ),
+                                          //   child: ActionButton(
+                                          //     icon: Icons.minimize_sharp,
+                                          //     label: "Consumption",
+                                          //     onPressed: () {
+                                          //       Get.dialog(MinusDialog());
+                                          //     },
+                                          //     color: ColorValues.appRedColor,
+                                          //   ),
+                                          // )
                                         ],
                                       ),
                                       Divider(
@@ -453,7 +442,7 @@ _showYearPicker(
             color: ColorValues.addNewColor,
             onPressed: () {
               controller.waterDateTc.text = controller.selectedYear.toString();
-              controller.goWaterDataList();
+              // controller.goWaterDataList();
               controller.update(['stock_Mangement_Date']);
               Navigator.of(context).pop();
             },
