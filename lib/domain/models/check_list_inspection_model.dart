@@ -1,83 +1,92 @@
-import 'dart:convert';
+class ChecklistInspectionModel {
+  List<Checklist>? checklist;
 
-List<GetChecklistInspection> getChecklistInspectionFromJson(String str) =>
-    List<GetChecklistInspection>.from(
-        json.decode(str).map((x) => GetChecklistInspection.fromJson(x)));
+  ChecklistInspectionModel({this.checklist});
 
-class GetChecklistInspection {
-  int? facilityId;
-  String? facilityName;
-  List<InspectionData>? inspectionData;
+  ChecklistInspectionModel.fromJson(Map<String, dynamic> json) {
+    if (json['checklist'] != null) {
+      checklist = <Checklist>[];
+      json['checklist'].forEach((v) {
+        checklist!.add(new Checklist.fromJson(v));
+      });
+    }
+  }
 
-  GetChecklistInspection({
-    this.facilityId,
-    this.facilityName,
-    this.inspectionData,
-  });
-
-  factory GetChecklistInspection.fromJson(Map<String, dynamic> json) =>
-      GetChecklistInspection(
-        facilityId: json["facilityId"],
-        facilityName: json["facilityName"],
-        inspectionData: json["inspectionData"] != null
-            ? List<InspectionData>.from(
-                json["inspectionData"].map((x) => InspectionData.fromJson(x)),
-              )
-            : [],
-      );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.checklist != null) {
+      data['checklist'] = this.checklist!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
-class InspectionData {
-  String? monthName;
-  int? monthId;
-  int? year;
-  List<CheckList>? checkList;
-
-  InspectionData({
-    this.monthName,
-    this.monthId,
-    this.year,
-    this.checkList,
-  });
-
-  factory InspectionData.fromJson(Map<String, dynamic> json) => InspectionData(
-        monthName: json["monthName"],
-        monthId: json["monthId"],
-        year: json["year"],
-        checkList: json["checkList"] != null
-            ? List<CheckList>.from(
-                json["checkList"].map((x) => CheckList.fromJson(x)),
-              )
-            : [],
-      );
-}
-
-class CheckList {
+class Checklist {
   String? checklistName;
-  String? sopNumber;
+  String? sOPNumber;
   String? frequency;
+  List<MonthlyInspection>? monthlyInspection;
+
+  Checklist(
+      {this.checklistName,
+      this.sOPNumber,
+      this.frequency,
+      this.monthlyInspection});
+
+  Checklist.fromJson(Map<String, dynamic> json) {
+    checklistName = json['checklistName'];
+    sOPNumber = json['sOPNumber'];
+    frequency = json['frequency'];
+    if (json['monthlyInspection'] != null) {
+      monthlyInspection = <MonthlyInspection>[];
+      json['monthlyInspection'].forEach((v) {
+        monthlyInspection!.add(new MonthlyInspection.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['checklistName'] = this.checklistName;
+    data['sOPNumber'] = this.sOPNumber;
+    data['frequency'] = this.frequency;
+    if (this.monthlyInspection != null) {
+      data['monthlyInspection'] =
+          this.monthlyInspection!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class MonthlyInspection {
+  String? inspectionMonth;
   String? inspectionStatus;
   String? dateOfInspection;
   String? checklistAttachment;
-  int? noOfUnsafeObservation;
+  String? noOfUnsafeObservations;
 
-  CheckList({
-    this.checklistName,
-    this.sopNumber,
-    this.frequency,
-    this.inspectionStatus,
-    this.dateOfInspection,
-    this.checklistAttachment,
-    this.noOfUnsafeObservation,
-  });
+  MonthlyInspection(
+      {this.inspectionMonth,
+      this.inspectionStatus,
+      this.dateOfInspection,
+      this.checklistAttachment,
+      this.noOfUnsafeObservations});
 
-  factory CheckList.fromJson(Map<String, dynamic> json) => CheckList(
-        checklistName: json["checklistName"],
-        sopNumber: json["sopNumber"],
-        frequency: json["frequency"],
-        inspectionStatus: json["inspectionStatus"],
-        dateOfInspection: json["dateOfInspection"],
-        checklistAttachment: json["checklistAttachment"],
-        noOfUnsafeObservation: json["noOfUnsafeObservation"],
-      );
+  MonthlyInspection.fromJson(Map<String, dynamic> json) {
+    inspectionMonth = json['inspectionMonth'];
+    inspectionStatus = json['inspectionStatus'];
+    dateOfInspection = json['dateOfInspection'];
+    checklistAttachment = json['checklistAttachment'];
+    noOfUnsafeObservations = json['noOfUnsafeObservations'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['inspectionMonth'] = this.inspectionMonth;
+    data['inspectionStatus'] = this.inspectionStatus;
+    data['dateOfInspection'] = this.dateOfInspection;
+    data['checklistAttachment'] = this.checklistAttachment;
+    data['noOfUnsafeObservations'] = this.noOfUnsafeObservations;
+    return data;
+  }
 }
