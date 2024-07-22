@@ -1,13 +1,14 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/dashboard_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class HomeScreen extends GetView<HomeController> {
+class HomeScreen extends GetView<DashboardController> {
   HomeScreen({super.key});
-  final controller = Get.find<HomeController>();
+  final controller = Get.find<DashboardController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(

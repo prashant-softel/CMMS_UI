@@ -246,7 +246,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               '${controller.auditPlanDetailModel.value?.assignedTo ?? ''}',
                                               style: Styles.blue17),
                                           Text(
-                                              '${controller.auditPlanDetailModel.value?.auditee_Emp_Name ?? ""}',
+                                              '${controller.auditPlanDetailModel.value?.approved_by ?? ""}',
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.checklist_name ?? ""}',
@@ -287,7 +287,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               '${controller.auditPlanDetailModel.value?.assignedTo ?? ''}',
                                               style: Styles.blue17),
                                           Text(
-                                              '${controller.auditPlanDetailModel.value?.schedule_Date ?? ''}',
+                                              '${controller.auditPlanDetailModel.value?.approved_Date ?? ''}',
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.schedule_Date ?? ''}',
