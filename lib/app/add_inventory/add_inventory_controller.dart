@@ -745,7 +745,9 @@ class AddInventoryController extends GetxController {
             operatorId: 3,
             ownerId: 2,
             stockCount: 50,
-            attachments: null);
+            attachments: null,
+            uplaodfile_of_calibration: [],
+            uplaodfile_of_warranty: []);
 
     var addInventoryJsonString = [addInventoryRequestModel.toJson()];
 

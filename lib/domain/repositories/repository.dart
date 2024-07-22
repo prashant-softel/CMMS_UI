@@ -5330,7 +5330,9 @@ class Repository {
               ? Get.offAllNamed(Routes.pmTaskView)
               : type == 1
                   ? Get.offAllNamed(Routes.jobDetails)
-                  : Get.offAllNamed(Routes.newPermitList);
+                  : type == 3
+                      ? Get.offAllNamed(Routes.viewAuditTask)
+                      : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -14403,8 +14405,7 @@ class Repository {
         isLoading: isLoading,
       );
       if (!res.hasError) {
-        var checklistInspectionList = ChecklistInspectionModel.fromJson(
-          {
+        var checklistInspectionList = ChecklistInspectionModel.fromJson({
           "checklist": [
             {
               "checklist Name": "Vehicle Fitness Checklist",
@@ -14451,7 +14452,7 @@ class Repository {
             }
           ]
         });
-      
+
         return checklistInspectionList;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Check_list_Inspection');

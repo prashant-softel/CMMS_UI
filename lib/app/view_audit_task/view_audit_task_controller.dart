@@ -258,6 +258,26 @@ class ViewAuditTaskController extends GetxController {
     }
   }
 
+  Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
+    Get.toNamed(Routes.createPermit, arguments: {
+      'permitId': permitId,
+      'isChecked': isChecked,
+      "type": 2,
+      "isFromPmTaskDetails": true,
+      "jobModel": jobDetailsModel.value,
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": 0
+    });
+    print('PermitIDForTBt:$permitId');
+    print('PermitIdArgument:$isChecked');
+  }
+
   createNewPermit() {
     clearStoreData();
     clearTypeStoreData();

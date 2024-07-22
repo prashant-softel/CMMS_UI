@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/dashboard_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
@@ -63,7 +64,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
+    return GetBuilder<DashboardController>(
         id: 'dashboard',
         builder: (controller) {
           return Stack(
@@ -129,12 +130,13 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                               DashCustomMultiSelectDialogField(
                                             title: 'Select Facility',
                                             initialValue: controller
-                                                .facilityList
+                                                .homecontroller.facilityList
                                                 .where((facility) =>
                                                     facility != null)
                                                 .map((facility) => facility!.id)
                                                 .toList(),
-                                            items: controller.facilityList
+                                            items: controller
+                                                .homecontroller.facilityList
                                                 .where((facility) =>
                                                     facility != null)
                                                 .map(
@@ -149,7 +151,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                   selectedOptionsList
                                                       .cast<int>());
                                               print(
-                                                  'Equipment list ${controller.selectedFacilityIdList}');
+                                                  'Equipment list ${controller.homecontroller.selectedFacilityIdList}');
                                             },
                                             // titleTextStyle: TextStyle(
                                             //     fontSize:

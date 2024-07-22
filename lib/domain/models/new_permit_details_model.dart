@@ -68,6 +68,7 @@ class NewPermitDetailModel {
   bool? is_TBT_Expire;
   int? is_loto_required;
   int? tbT_Done_Check;
+  int? is_physical_iso_required;
   // int? sop_type_id;
   // int? issuer_id;
   // int? approver_id;
@@ -97,6 +98,7 @@ class NewPermitDetailModel {
     this.permitTypeName,
     this.job_type_name,
     this.sop_type_name,
+    this.is_physical_iso_required,
     this.title,
     this.description,
     this.siteName,
@@ -139,6 +141,7 @@ class NewPermitDetailModel {
       NewPermitDetailModel(
         isExpired: json['isExpired'],
         insertedId: json["insertedId"],
+        is_physical_iso_required: json["is_physical_iso_required"],
         ptwStatus: json["ptwStatus"],
         permitNo: json["permitNo"],
         tbT_Done_Check: json["tbT_Done_Check"],
@@ -241,6 +244,7 @@ class NewPermitDetailModel {
 
   Map<String, dynamic> toJson() => {
         "isExpired": isExpired,
+        "is_physical_iso_required": is_physical_iso_required,
         "insertedId": insertedId,
         "ptwStatus": ptwStatus,
         "permitNo": permitNo,
