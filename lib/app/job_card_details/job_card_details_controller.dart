@@ -169,7 +169,7 @@ class JobCardDetailsController extends GetxController {
       {'key': "Issued_Qty", "value": ''},
       {'key': "Used_Qty", "value": ''},
       {'key': "Consumed_Qty", "value": ''},
-      // {'key': "Action ", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -242,27 +242,9 @@ class JobCardDetailsController extends GetxController {
     for (var asset in _assetsList!) {
       cmmrsItems!.add(asset);
     }
-    cmmrsItems?.forEach((element) {
-      rowItem.add([
-        {"key": "Drop_down", "value": '${element?.name}'},
-        {"key": "Drop_down_eq", "value": 'Please Select'},
-
-        {'key': "Sr_No", "value": ''},
-        {'key': "code", "value": ''},
-        {'key': "Material_Type", "value": ''},
-        {'key': "Issued_Qty", "value": ''},
-        {'key': "Used_Qty", "value": ''},
-        {'key': "Consumed_Qty", "value": '${element?.used_qty}'},
-        // {'key': "Action ", "value": ''},
-      ]);
-      dropdownMapperData[element?.name ?? ""] = listMrsByTaskId!
-          .value.last!.cmmrsItems!
-          .firstWhere((e) => e!.serial_number == element?.serial_number,
-              orElse: null);
-    });
     _processJsonData();
     allTrue.value = itemExistsWithZeroDifference.every((element) => element);
-    // addRowItem();
+    addRowItem();
   }
 
   void _processJsonData() {
@@ -313,9 +295,7 @@ class JobCardDetailsController extends GetxController {
         }
         update(["employeeList"]);
       }
-      if (jobCardDetailsModel.value!.lstCmjcEmpList!.isEmpty) {
-        addEmployeesDeployed();
-      }
+      addEmployeesDeployed();
     }
   }
 
