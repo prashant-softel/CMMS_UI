@@ -14,7 +14,7 @@ class CreateAuditPresenter {
       await createAuditUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  Future<List<EmployeeListModel>> getEmployeePermitList({
+  Future<List<EmployeeModel?>?> getEmployeePermitList({
     required bool isLoading,
     required int? facility_id,
   }) async {
