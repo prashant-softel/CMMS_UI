@@ -15,10 +15,15 @@ class CreateAuditUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
-  Future<List<EmployeeListModel>> getEmployeePermitList(
+  Future<List<EmployeeModel?>?> getEmployeePermitList(
       {required bool isLoading, required int? facility_id}) async {
-    return repository.getEmployeePermitList(
-        isLoading: isLoading, facility_id: facility_id, featureId: 3);
+    return repository.getAssignedToListWOAttend(
+      "",
+      facility_id,
+      3,
+      0,
+      isLoading ?? false,
+    );
   }
 
   Future<List<EmployeeModel?>?> getAssignedToEmployee({

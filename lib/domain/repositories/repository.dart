@@ -14403,7 +14403,8 @@ class Repository {
         isLoading: isLoading,
       );
       if (!res.hasError) {
-        var checklistInspectionList = ChecklistInspectionModel.fromJson({
+        var checklistInspectionList = ChecklistInspectionModel.fromJson(
+          {
           "checklist": [
             {
               "checklist Name": "Vehicle Fitness Checklist",
@@ -14450,6 +14451,7 @@ class Repository {
             }
           ]
         });
+      
         return checklistInspectionList;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Check_list_Inspection');
