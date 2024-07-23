@@ -19,43 +19,8 @@ class DashboardController extends GetxController {
   DashboardController(this.homePresenter);
   HomePresenter homePresenter;
 
-  // RxList<String?> selectedWorkAreaNameList = <String>[].obs;
-  // RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
-  // RxList<int?> selectedWorkAreaIdList = <int>[].obs;
-
-  // //Permit Type list
-  // RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
-  // Rx<bool> isTypePermitSelected = true.obs;
-  // Rx<String> selectedTypePermit = ''.obs;
-  // Rx<String> selectedTypeOfPermit = ''.obs;
-  // Rx<bool> isTypePermit = true.obs;
-  // Rx<String> selectedFacilityName = ''.obs;
-
-  // //block
-  // int facilityId = 0;
-  // StreamSubscription<int>? facilityIdStreamSubscription;
-  // RxList<BlockModel?> blocksList = <BlockModel>[].obs;
-  // Rx<bool> isBlocksSelected = true.obs;
-  // Rx<String> selectedBlocks = ''.obs;
-  // Rx<bool> isstartdateFieldSelected = true.obs;
-  // RxList<int> selectedFacilityIdList = <int>[].obs;
-
-  // var inventoryList = <InventoryModel>[];
-  // var blockList = <BlockModel>[];
-  // var equipmentList = <EquipmentModel>[];
-  // final blockTextController = TextEditingController();
-  // final parentEquipmentTextController = TextEditingController();
-  // final typeTextController = TextEditingController();
-  // final categoryTextController = TextEditingController();
-  // final serialNoTextController = TextEditingController();
-  // final statusTextController = TextEditingController();
-  // final assetNameTextController = TextEditingController();
-  // final enterMultiplierTextController = TextEditingController();
-  // final assetDescpTextController = TextEditingController();
-  // var selectedBlock = BlockModel();
   final HomeController homecontroller = Get.find();
 
-  // var selectedEquipment = EquipmentModel();
   final categoryMapBM = <String, double>{};
   final categoryMapPM = <String, double>{};
   final categoryMapMC = <String, double>{};
@@ -71,30 +36,30 @@ class DashboardController extends GetxController {
   Map<String, double> stockOverviewmap = <String, double>{};
 
   //int facilityId = 45;
-  String categoryIds = '';
+  // String categoryIds = '';
 
-  Rx<String> selectedFacility = ''.obs;
-  String username = '';
+  // Rx<String> selectedFacility = ''.obs;
+  // String username = '';
 
-  RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
-  RxList<int> selectedEquipmentList = <int>[].obs;
-  Rx<bool> isInventorySelected = true.obs;
-  RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
-  Rx<String> selectedInventory = ''.obs;
+  // RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
+  // RxList<int> selectedEquipmentList = <int>[].obs;
+  // Rx<bool> isInventorySelected = true.obs;
+  // RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
+  // Rx<String> selectedInventory = ''.obs;
   var selectedSection = 0.obs;
 
   ////
-  RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<InventoryCategoryModel?> equipmentCategoryList =
-      <InventoryCategoryModel>[].obs;
-  var challanDateTc = TextEditingController();
+  // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
+  // RxList<InventoryCategoryModel?> equipmentCategoryList =
+  //     <InventoryCategoryModel>[].obs;
+  // var challanDateTc = TextEditingController();
 
-  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-  Rx<bool> isFacilitySelected = true.obs;
-  PaginationController paginationController = PaginationController(
-    rowCount: 0,
-    rowsPerPage: 10,
-  );
+  // RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
+  // Rx<bool> isFacilitySelected = true.obs;
+  // PaginationController paginationController = PaginationController(
+  //   rowCount: 0,
+  //   rowsPerPage: 10,
+  // );
   RxList<DashboardModel?> dashboardList = <DashboardModel?>[].obs;
   Rx<DashboardModel?> dashboardBmList = DashboardModel().obs;
   Rx<DashboardModel?> dashboardPmList = DashboardModel().obs;
@@ -105,14 +70,7 @@ class DashboardController extends GetxController {
 
   RxList<DashboardModel?> filteredData = <DashboardModel>[].obs;
   List<DashboardModel?>? BufferdashboardList = <DashboardModel?>[].obs;
-  // BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
-  // Stream<int> get facilityId$ => _facilityId.stream;
-  // int get facilityId1 => _facilityId.value;
-  // BehaviorSubject<String> _facilityName = BehaviorSubject.seeded('');
-  // Stream<String> get facilityName$ => _facilityName.stream;
-  // String get facilityName1 => _facilityName.value;
-  // Rx<int> selectedIndex = 0.obs;
-  // var isExpanded = false.obs;
+
   RxBool menuButton = false.obs;
   RxList<FacilityModel?> selectedFacilityNameList = <FacilityModel>[].obs;
   bool openFromDateToStartDatePicker = false;
