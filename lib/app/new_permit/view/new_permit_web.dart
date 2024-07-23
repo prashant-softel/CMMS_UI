@@ -2558,9 +2558,10 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                               PermitCancelReQuestDialog(
                                                                 permitId:
                                                                     '${controller.permitId.value}',
-                                                                jobId: controller
-                                                                    .jobModel!
-                                                                    .id,
+                                                                // jobId: controller
+                                                                //         .jobModel!
+                                                                //         .id ??
+                                                                //     0,
                                                               ),
                                                             );
                                                             print(

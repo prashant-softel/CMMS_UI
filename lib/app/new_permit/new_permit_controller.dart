@@ -631,7 +631,7 @@ class NewPermitController extends GetxController {
           '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${newPermitDetailsModel.value?.start_datetime}')).toString()}';
 
       startDateTimeCtrlrBuffer =
-          '${newPermitDetailsModel.value?.start_datetime}';
+          '${DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateTime.parse('${newPermitDetailsModel.value?.start_datetime}')).toString()}';
 
       ///
 
@@ -1929,7 +1929,7 @@ class NewPermitController extends GetxController {
         TBT_Done_by: selectedTbtConductedId,
         TBT_Done_at: tbtDateTimeCtrlrBuffer,
         PHYSICAL_ISO_REMARK: _workPermitRemark,
-        is_physical_iso_required:isToggleOn.value,
+        is_physical_iso_required: isToggleOn.value,
       );
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreated =
