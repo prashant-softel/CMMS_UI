@@ -67,7 +67,7 @@ class ViewAuditTaskController extends GetxController {
 
   Future<void> getHistory() async {
     /// TODO: CHANGE THESE VALUES
-    int moduleType = 27;
+    int moduleType = 41;
     //
     historyList?.value = await viewAuditTaskPresenter.getHistory(
           // tempModuleType,
