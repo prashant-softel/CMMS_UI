@@ -114,7 +114,9 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                         Spacer(),
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Date Range'),
+                                            CustomRichText(
+                                                title: 'Date Range',
+                                                includeAsterisk: false),
                                             // Dimens.boxWidth10,
                                             SizedBox(width: 10),
                                             CustomTextFieldForStock(
@@ -170,34 +172,36 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                             ),
                                           ),
                                         ),
-                                        itemBuilder: (BuildContext context) => <
-                                            PopupMenuEntry<String>>[]..addAll(
-                                              controller.columnVisibility.value
-                                                  .entries
-                                                  .map((e) {
-                                            return PopupMenuItem<String>(
-                                                child: ValueListenableBuilder(
-                                                    valueListenable: controller
-                                                        .columnVisibility,
-                                                    builder: (context, value,
-                                                        child) {
-                                                      return Row(
-                                                        children: [
-                                                          Checkbox(
-                                                            value: value[e.key],
-                                                            onChanged:
-                                                                (newValue) {
-                                                              controller
-                                                                  .setColumnVisibility(
-                                                                      e.key,
-                                                                      newValue!);
-                                                            },
-                                                          ),
-                                                          Text(e.key),
-                                                        ],
-                                                      );
-                                                    }));
-                                          })),
+                                        itemBuilder: (BuildContext context) =>
+                                            <PopupMenuEntry<String>>[]..addAll(
+                                                  controller.columnVisibility
+                                                      .value.entries
+                                                      .map((e) {
+                                                return PopupMenuItem<String>(
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                            valueListenable:
+                                                                controller
+                                                                    .columnVisibility,
+                                                            builder: (context,
+                                                                value, child) {
+                                                              return Row(
+                                                                children: [
+                                                                  Checkbox(
+                                                                    value: value[
+                                                                        e.key],
+                                                                    onChanged:
+                                                                        (newValue) {
+                                                                      controller.setColumnVisibility(
+                                                                          e.key,
+                                                                          newValue!);
+                                                                    },
+                                                                  ),
+                                                                  Text(e.key),
+                                                                ],
+                                                              );
+                                                            }));
+                                              })),
                                         onSelected: (String value) {
                                           // Handle column selection
                                         },
@@ -252,7 +256,7 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                           style: Styles.blackBold14,
                                         ),
                                         // Dimens.boxWidth20,
-                                        SizedBox(width:5),
+                                        SizedBox(width: 5),
                                         Container(
                                           width: (MediaQuery.of(context)
                                                   .size
@@ -274,12 +278,12 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                         ),
                                         Spacer(),
                                         Text(
-                                          'Task Name: ',
+                                          'Actor Name: ',
                                           style: Styles.blackBold14,
                                         ),
                                         // Dimens.boxWidth20,
                                         // SizedBox(width:20),
-                                         SizedBox(width:5),
+                                        SizedBox(width: 5),
                                         controller.selectedactorTypeId ==
                                                 AppConstants.kTask
                                             ? Container(

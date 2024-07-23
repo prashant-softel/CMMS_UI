@@ -79,8 +79,8 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   RxList<TypeModel> cleaningType = <TypeModel>[
-    TypeModel(name: 'Dry', id: "1"),
-    TypeModel(name: 'Wet', id: "2"),
+    TypeModel(name: 'Wet', id: "1"),
+    TypeModel(name: 'Dry', id: "2"),
     TypeModel(name: 'Robotic', id: "3"),
   ].obs;
 
@@ -328,7 +328,6 @@ class ModuleCleaningPlanningController extends GetxController {
             selectedfrequency.value = value;
             isSelectedfrequency.value = true;
 
-            
             if (value == "Daily") {
               durationInDayCtrlr.text = '1';
               isDurationEditable.value = false;
