@@ -56,10 +56,9 @@ class CreateAuditController extends GetxController {
   Rx<bool> isAssignedToSelected = true.obs;
   int selectedAssignedToId = 0;
   Map<dynamic, dynamic> employee_map = {};
-  RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
+  RxList<EmployeeModel?> employeeNameList = <EmployeeModel>[].obs;
 
-  RxList<EmployeeListModel?> filteredEmployeeNameList =
-      <EmployeeListModel>[].obs;
+  RxList<EmployeeModel?> filteredEmployeeNameList = <EmployeeModel>[].obs;
   RxList<int> selectedEmployeeNameIdList = <int>[].obs;
   RxList<String> selectedEmployeeNameList = <String>[].obs;
 
@@ -138,13 +137,13 @@ class CreateAuditController extends GetxController {
   }
 
   Future<void> getEmployeePermitList() async {
-    employeeNameList.value = <EmployeeListModel>[];
+    employeeNameList.value = <EmployeeModel>[];
     final _employeeNameList = await createAuditPresenter.getEmployeePermitList(
       isLoading: true,
       // categoryIds: categoryIds,
       facility_id: facilityId,
     );
-    for (var employee_list in _employeeNameList) {
+    for (var employee_list in _employeeNameList!) {
       employeeNameList.add(employee_list);
     }
     // supplierNameList = _supplierNameList;
@@ -244,12 +243,12 @@ class CreateAuditController extends GetxController {
 
   void employeeNameSelected(_selectedEmployeeNameIds) {
     selectedEmployeeNameIdList.value = <int>[];
-    filteredEmployeeNameList.value = <EmployeeListModel>[];
+    filteredEmployeeNameList.value = <EmployeeModel>[];
     late int emp_id = 0; //late int emp_id = 0;
 
     for (var _selectedEmployeeNameId in _selectedEmployeeNameIds) {
       selectedEmployeeNameIdList.add(_selectedEmployeeNameId);
-      EmployeeListModel? e = employeeNameList.firstWhere((element) {
+      EmployeeModel? e = employeeNameList.firstWhere((element) {
         return element?.id == _selectedEmployeeNameId;
       });
       filteredEmployeeNameList.add(e);
@@ -291,10 +290,10 @@ class CreateAuditController extends GetxController {
     //       msg: "Please enter required field", fontSize: 16.0);
     // } else {
 
-    checkFormAduit();
-    if (isFormInvalid.value) {
-      return true;
-    }
+    // checkFormAduit();
+    // if (isFormInvalid.value) {
+    //   return true;
+    // }
     String _planTitle = planTitleTc.text.trim();
     String _description = descriptionTc.text.trim();
     String _startDate = startDateDateTc.text.trim();

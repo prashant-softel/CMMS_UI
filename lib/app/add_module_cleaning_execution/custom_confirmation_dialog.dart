@@ -7,9 +7,10 @@ import 'package:get/get.dart';
 class CustomCalibrationDialog extends GetView {
   int id;
   String title;
+  int? ptw_id;
   int? starttype;
   CustomCalibrationDialog(
-      {required this.id, required this.title, this.starttype});
+      {required this.id, required this.title, this.starttype, this.ptw_id});
 
   final AddModuleCleaningExecutionController controller = Get.find();
 
@@ -31,7 +32,7 @@ class CustomCalibrationDialog extends GetView {
                 text: starttype == 1
                     ? 'Are you sure you want to start the schedule for '
                     : starttype == 2
-                        ? 'Are you sure you want to close the Schedule for '
+                        ? 'Are you sure you want to close the Schedule for MCS'
                         : starttype == 3
                             ? 'Are you sure you want to close the Execution for '
                             : 'Are you sure you want to start the execution for ',
@@ -65,7 +66,7 @@ class CustomCalibrationDialog extends GetView {
                           scheduleID: id)
                       : starttype == 2
                           ? controller.endMCScheduleExecutionButton(
-                              scheduleID: id)
+                              scheduleID: id, ptw_id: ptw_id)
                           : starttype == 3
                               ? controller.endMcExecutionButton()
                               : controller.startMCExecutionButton();

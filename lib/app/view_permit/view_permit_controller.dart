@@ -87,7 +87,8 @@ class ViewPermitController extends GetxController {
   RxBool isCheckedJSA = false.obs;
 
   //Loto Checkbox
-  RxBool isCheckedLoto = true.obs;
+  RxBool isCheckedIso = false.obs;
+  RxBool isCheckedLoto = false.obs;
 
   void toggleCheckbox1() {
     isChecked1.value = !isChecked1.value; // Toggle the checkbox state
@@ -671,7 +672,7 @@ class ViewPermitController extends GetxController {
       CancelPermitRequestModel cancelPermitModel = CancelPermitRequestModel(
           id: int.tryParse('${permitId}'),
           comment: _cancelComment,
-          conditionIds: data,
+          conditionIds: [1],
           fileIds: fileIds);
 
       var cancelPermitJsonString = cancelPermitModel.toJson();
@@ -858,12 +859,16 @@ class ViewPermitController extends GetxController {
 
     if (_viewPermitDetails != null) {
       viewPermitDetailsModel.value = _viewPermitDetails;
+      isCheckedIso.value =
+          _viewPermitDetails.is_physical_iso_required == 0 ? false : true;
       listEmployee?.value = viewPermitDetailsModel.value?.employee_list ?? [];
       safetyList?.value =
           viewPermitDetailsModel.value?.safety_question_list ?? [];
       listCategory?.value = viewPermitDetailsModel.value?.lstCategory ?? [];
       listLoto?.value = viewPermitDetailsModel.value?.loto_list ?? [];
-      // titleTextCtrlr.text = newPermitDetailsModel.value?.title ?? '';
+      isCheckedLoto.value = viewPermitDetailsModel.value?.is_loto_required == 1
+          ? true
+          : false; // titleTextCtrlr.text = newPermitDetailsModel.value?.title ?? '';
       // permitDescriptionCtrlr.text = newPermitDetailsModel.value?.description ?? '';
       startDateTimeCtrlr.text =
           '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.start_datetime}'))}';

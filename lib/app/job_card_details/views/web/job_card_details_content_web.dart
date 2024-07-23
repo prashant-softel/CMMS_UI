@@ -1949,7 +1949,8 @@ class DeployedTeam extends StatelessWidget {
                     "Team Deployed To Carry Out The Job",
                     style: Styles.blue700,
                   ),
-                  controller.jobCardDetailsModel.value!.status == 158 && controller.jobCardDetailsModel.value!.status == 156
+                  controller.jobCardDetailsModel.value!.status == 158 &&
+                          controller.jobCardDetailsModel.value!.status == 156
                       ? Dimens.box0
                       : InkWell(
                           onTap: () {

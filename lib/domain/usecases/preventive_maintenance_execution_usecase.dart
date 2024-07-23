@@ -21,6 +21,8 @@ class PreventiveMaintenanceExecutionUsecase {
         pmExecutionJsonString,
         isLoading,
       );
+  void clearValue() async => repository.clearData(LocalKeys.mrsId);
+
   Future<PmFiles?> browseFiles(
       Uint8List? fileBytes, String fileName, bool isLoading) async {
     return await repository.browsePmFiles(
@@ -49,10 +51,10 @@ class PreventiveMaintenanceExecutionUsecase {
           bool? isLoading,
           int? closetype}) async =>
       await repository.ClosePMTaskExecution(
-          closetoJsonString: closetoJsonString,
-          closePtwJsonString: closePtwJsonString,
-          isLoading: isLoading,
-          closetype: closetype);
+        closetoJsonString: closetoJsonString,
+        closePtwJsonString: closePtwJsonString,
+        isLoading: isLoading,
+      );
   Future<bool> UpdatePMTaskExecution({
     updatePMTaskExecutionJsonString,
     bool? isLoading,

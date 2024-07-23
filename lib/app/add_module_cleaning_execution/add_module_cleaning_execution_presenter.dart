@@ -51,11 +51,13 @@ class AddModuleCleaningExecutionPresenter {
   Future<void> endMCScheduleExecutionButton({
     int? scheduleId,
     bool? isLoading,
+    closePtwJsonString,
   }) async =>
       await addModuleCleaningExecutionUsecase.endMCScheduleExecutionButton(
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+    closePtwJsonString:
+          closePtwJsonString);
 
   Future<List<TypePermitModel?>?> getTypePermitList(
           {required int facility_id}) async =>

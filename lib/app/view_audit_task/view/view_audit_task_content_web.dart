@@ -259,7 +259,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               //     "hard cod", // '${controller.auditTasknDetailModel.value?.created_by_name ?? ''}',
                                               //     style: Styles.blue17),
                                               Text(
-                                                  '${controller.auditTasknDetailModel.value.approved_by_name ?? ""}',
+                                                  '${controller.auditTasknDetailModel.value.approved_by ?? ""}',
                                                   style: Styles.blue17),
                                               Text(
                                                   '${controller.auditTasknDetailModel.value.schedules?[0]?.checklist_name ?? ""}',
@@ -760,6 +760,37 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                                             jobId: controller.jobDetailsModel.value!.id ?? 0);
                                                                       })
                                                                   : Container(),
+                                                              controller.pmtaskViewModel.value
+                                                                              ?.ptw_status ==
+                                                                          124 ||
+                                                                      controller
+                                                                              .pmtaskViewModel
+                                                                              .value
+                                                                              ?.ptw_status ==
+                                                                          132
+                                                                  ? TableActionButton(
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          116,
+                                                                          78,
+                                                                          130),
+                                                                      icon: Icons
+                                                                          .ads_click,
+                                                                      message:
+                                                                          'Re-Submit Permit',
+                                                                      onPress:
+                                                                          () {
+                                                                        controller.editNewPermit(
+                                                                            permitId:
+                                                                                controller.pmtaskViewModel.value?.permit_id,
+                                                                            isChecked: false
+                                                                            // controller
+                                                                            //     .isChecked
+                                                                            //     .value
+                                                                            );
+                                                                      },
+                                                                    )
+                                                                  : Dimens.box0
                                                               // TableActionButton(
                                                               //     color: ColorValues
                                                               //         .appYellowColor,

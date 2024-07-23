@@ -16,7 +16,7 @@ class TranferItems {
   String remarks;
   int mrsID;
   int mrsItemID;
-
+  int transaction_id;
   TranferItems(
       {required this.assetItemID,
       required this.facilityID,
@@ -29,22 +29,23 @@ class TranferItems {
       required this.remarks,
       required this.toActorID,
       required this.toActorType,
-      required this.mrsItemID});
+      required this.mrsItemID,
+      required this.transaction_id});
 
   factory TranferItems.fromJson(Map<String, dynamic> json) => TranferItems(
-        assetItemID: json['assetItemID'],
-        facilityID: json['facilityID'],
-        fromActorID: json['fromActorID'],
-        fromActorType: json['fromActorType'],
-        mrsID: json['mrsID'],
-        mrsItemID: json['mrsItemID'],
-        qty: json['qty'],
-        refID: json['refID'],
-        refType: json['refType'],
-        remarks: json['remarks'],
-        toActorID: json['toActorID'],
-        toActorType: json['toActorType'],
-      );
+      assetItemID: json['assetItemID'],
+      facilityID: json['facilityID'],
+      fromActorID: json['fromActorID'],
+      fromActorType: json['fromActorType'],
+      mrsID: json['mrsID'],
+      mrsItemID: json['mrsItemID'],
+      qty: json['qty'],
+      refID: json['refID'],
+      refType: json['refType'],
+      remarks: json['remarks'],
+      toActorID: json['toActorID'],
+      toActorType: json['toActorType'],
+      transaction_id: json['transaction_id']);
 
   Map<String, dynamic> toJson() => {
         "assetItemID": assetItemID,
@@ -58,6 +59,7 @@ class TranferItems {
         'toActorID': toActorID,
         'toActorType': toActorType,
         'mrsID': mrsID,
-        'mrsItemID': mrsItemID
+        'mrsItemID': mrsItemID,
+        'transaction_id': transaction_id
       };
 }

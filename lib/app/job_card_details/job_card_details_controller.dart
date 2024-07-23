@@ -295,9 +295,7 @@ class JobCardDetailsController extends GetxController {
         }
         update(["employeeList"]);
       }
-      if (jobCardDetailsModel.value!.lstCmjcEmpList!.isEmpty) {
-        addEmployeesDeployed();
-      }
+      addEmployeesDeployed();
     }
   }
 
@@ -335,21 +333,24 @@ class JobCardDetailsController extends GetxController {
     List<TranferItems> items = [];
     rowItem.forEach((element) {
       TranferItems item = TranferItems(
-          assetItemID:
-              dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-          facilityID: facilityId,
-          fromActorID: jobCardId.value,
-          fromActorType: AppConstants.kJobCard,
-          mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-          mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
-          qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
-          refID: jobCardId.value,
-          refType: AppConstants.kJobCard,
-          remarks: "remarks",
-          toActorID: dropdownMapperDataworkingArea[element[1]["value"]]
-                  .workingAreaId ??
-              0,
-          toActorType: AppConstants.kInventory);
+        assetItemID:
+            dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+        facilityID: facilityId,
+        fromActorID: jobCardId.value,
+        fromActorType: AppConstants.kJobCard,
+        mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
+        mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
+        qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
+        refID: jobCardId.value,
+        refType: AppConstants.kJobCard,
+        remarks: "remarks",
+        toActorID:
+            dropdownMapperDataworkingArea[element[1]["value"]].workingAreaId ??
+                0,
+        toActorType: AppConstants.kInventory,
+        transaction_id:
+            dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
+      );
 
       items.add(item);
     });

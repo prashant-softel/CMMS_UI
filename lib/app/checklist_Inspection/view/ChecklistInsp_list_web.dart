@@ -2,8 +2,10 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/checklist_Inspection/ChecklistInsp_list_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/domain/models/water_data_list_model.dart';
+import 'package:cmms/app/widgets/minus_dialog.dart';
+import 'package:cmms/domain/models/check_list_inspection_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +37,7 @@ class ChecklistInspectionListWeb
                 ),
       );
 
-  TableCell _actonData(PeriodData data) => TableCell(
+  TableCell _actonData(dynamic data) => TableCell(
         child: Center(
             child: Wrap(
           children: [
@@ -44,8 +46,8 @@ class ChecklistInspectionListWeb
               icon: Icons.remove_red_eye_outlined,
               message: 'view',
               onPress: () {
-                Get.toNamed(Routes.viewWaterData,
-                    arguments: {"monthId": data.month_id, "year": data.year});
+                // Get.toNamed(Routes.viewWaterData,
+                //     arguments: {"monthId": data.month_id, "year": data.year});
               },
             ),
             TableActionButton(
@@ -53,8 +55,8 @@ class ChecklistInspectionListWeb
               icon: Icons.edit,
               message: 'Edit',
               onPress: () {
-                Get.toNamed(Routes.viewWaterData,
-                    arguments: {"monthId": data.month_id, "year": data.year});
+                // Get.toNamed(Routes.viewWaterData,
+                //     arguments: {"monthId": data.month_id, "year": data.year});
               },
             ),
           ],
@@ -64,18 +66,19 @@ class ChecklistInspectionListWeb
         child: Center(child: Text(text)),
       );
 
-  String _CellData(DetailData data, String type) {
+  String _CellData(MonthlyInspection? data, String type) {
+    // return daat==null ? "sd"
     switch (type) {
-      case '-':
-        return '${data.consumedQty}';
-      case '+':
-        return '${data.procuredQty}';
+      case 'inspectionStatus':
+        return '${data?.inspectionStatus}';
+      case 'dateOfInspection':
+        return '${data?.dateOfInspection}';
 
-      case 'opening':
-        return '${data.opening}';
+      case 'ChecklistAttachment':
+        return '${data?.checklistAttachment}';
 
-      case 'closingQty':
-        return '${data.closingQty}';
+      case 'NoOfUnsafeObservations':
+        return '${data?.noOfUnsafeObservations}';
 
       default:
         return '';
@@ -201,6 +204,34 @@ class ChecklistInspectionListWeb
                                               ],
                                             ),
                                           ),
+                                          // Padding(
+                                          //   padding: EdgeInsets.only(
+                                          //     top: 20,
+                                          //     right: 20,
+                                          //   ),
+                                          //   child: ActionButton(
+                                          //     icon: Icons.add,
+                                          //     label: "Procurements",
+                                          //     onPressed: () {
+                                          //       Get.dialog(AddDialog());
+                                          //     },
+                                          //     color: ColorValues.addNewColor,
+                                          //   ),
+                                          // ),
+                                          // Padding(
+                                          //   padding: EdgeInsets.only(
+                                          //     top: 20,
+                                          //     right: 5,
+                                          //   ),
+                                          //   child: ActionButton(
+                                          //     icon: Icons.minimize_sharp,
+                                          //     label: "Consumption",
+                                          //     onPressed: () {
+                                          //       Get.dialog(MinusDialog());
+                                          //     },
+                                          //     color: ColorValues.appRedColor,
+                                          //   ),
+                                          // )
                                         ],
                                       ),
                                       Divider(
@@ -227,35 +258,31 @@ class ChecklistInspectionListWeb
                                                           .map((element) =>
                                                               Container(
                                                                   height: 60,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: ColorValues
-                                                                        .lightGreyColor,
-                                                                    border:
-                                                                        Border(
-                                                                      left: BorderSide(
-                                                                          color: Colors
-                                                                              .grey,
-                                                                          width:
-                                                                              1),
-                                                                      right: BorderSide(
-                                                                          color: Colors
-                                                                              .grey,
-                                                                          width:
-                                                                              1),
-                                                                      top: BorderSide(
-                                                                          color: Colors
-                                                                              .grey,
-                                                                          width:
-                                                                              1),
-                                                                    ),
-                                                                  ),
+                                                                  decoration: element[
+                                                                          'isShow']
+                                                                      ? BoxDecoration(
+                                                                          color:
+                                                                              ColorValues.lightGreyColor,
+                                                                          border:
+                                                                              Border(
+                                                                            left:
+                                                                                BorderSide(color: Colors.grey, width: 1),
+                                                                            right:
+                                                                                BorderSide(color: Colors.grey, width: 1),
+                                                                            top:
+                                                                                BorderSide(color: Colors.grey, width: 1),
+                                                                          ),
+                                                                        )
+                                                                      : null,
                                                                   width: 150.0 *
                                                                       element[
                                                                           'colSpan'],
-                                                                  child: headerCell(
-                                                                      element[
-                                                                          'label'])))),
+                                                                  child: element[
+                                                                          'isShow']
+                                                                      ? headerCell(
+                                                                          element[
+                                                                              'label'])
+                                                                      : SizedBox()))),
                                                     ),
                                                     Table(
                                                       border: TableBorder.all(
@@ -270,90 +297,61 @@ class ChecklistInspectionListWeb
                                                               ..addAll(controller
                                                                   .headerList
                                                                   .map((e) {
-                                                                if (e['subHeader'] ==
-                                                                    '+') {
-                                                                  return Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: ColorValues
-                                                                          .addNewColor,
-                                                                    ),
-                                                                    child:
-                                                                        headerCell(
-                                                                      e['subHeader'],
-                                                                      isHeader:
-                                                                          true,
-                                                                    ),
-                                                                  );
-                                                                } else if (e[
-                                                                        'subHeader'] ==
-                                                                    '-') {
-                                                                  return Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: ColorValues
-                                                                          .appRedColor,
-                                                                    ),
-                                                                    child:
-                                                                        headerCell(
-                                                                      e['subHeader'],
-                                                                      isHeader:
-                                                                          true,
-                                                                    ),
-                                                                  );
-                                                                } else {
-                                                                  return headerCell(
-                                                                      e[
-                                                                          'subHeader'],
-                                                                      isHeader:
-                                                                          true);
-                                                                }
+                                                                return headerCell(
+                                                                    e[
+                                                                        'subHeader'],
+                                                                    isHeader:
+                                                                        true);
                                                               }))),
                                                         ...List<
                                                                 TableRow>.generate(
-                                                            controller.waterDataList
-                                                                        .length >
-                                                                    0
-                                                                ? controller
-                                                                        .waterDataList[
-                                                                            0]
-                                                                        .periods
-                                                                        .length ??
-                                                                    0
-                                                                : 0,
+                                                            (controller
+                                                                    .checklist_inspection
+                                                                    ?.checklist
+                                                                    ?.length ??
+                                                                0),
                                                             (index) => TableRow(
                                                                 children: []
                                                                   ..addAll(controller
                                                                       .headerList
                                                                       .map((e) {
                                                                     if (e['dataKey'] ==
-                                                                        'Month') {
+                                                                        'ChecklistName') {
                                                                       return dataCell(
-                                                                          '${controller.waterDataList[0].periods[index].monthName}');
+                                                                          '${controller.checklist_inspection?.checklist?[index].checklistName}');
                                                                     }
                                                                     if (e['dataKey'] ==
-                                                                        'action') {
-                                                                      return _actonData(controller
-                                                                          .waterDataList[
-                                                                              0]
-                                                                          .periods[index]);
-                                                                    }
-                                                                    DetailData? data = controller
-                                                                        .waterDataList[
-                                                                            0]
-                                                                        .periods[
-                                                                            index]
-                                                                        .details
-                                                                        .firstWhereOrNull((element) =>
-                                                                            element.waterType ==
-                                                                            e['label']);
-                                                                    if (data ==
-                                                                        null) {
+                                                                        'SOPNumber') {
                                                                       return dataCell(
-                                                                          '');
+                                                                          '${controller.checklist_inspection?.checklist?[index].sOPNumber}');
                                                                     }
-                                                                    // return dataCell(
-                                                                    //     "text");
+                                                                    if (e['dataKey'] ==
+                                                                        'Frequency') {
+                                                                      return dataCell(
+                                                                          '${controller.checklist_inspection?.checklist?[index].frequency}');
+                                                                    }
+
+                                                                    // if (e['dataKey'] ==
+                                                                    //     'action') {
+                                                                    //   return _actonData(
+                                                                    //       controller
+                                                                    //           .inspectionData[index]);
+                                                                    // }
+                                                                    MonthlyInspection?
+                                                                        data;
+                                                                    try {
+                                                                      data = controller
+                                                                          .checklist_inspection
+                                                                          ?.checklist?[
+                                                                              index]
+                                                                          .monthlyInspection
+                                                                          ?.firstWhere(
+                                                                              (element) => element.inspectionMonth == e['label'],
+                                                                              orElse: null);
+                                                                    } catch (e) {
+                                                                      print(e);
+                                                                    }
+
                                                                     return dataCell(_CellData(
                                                                             data,
                                                                             e[
@@ -444,7 +442,7 @@ _showYearPicker(
             color: ColorValues.addNewColor,
             onPressed: () {
               controller.waterDateTc.text = controller.selectedYear.toString();
-              controller.goWaterDataList();
+              // controller.goWaterDataList();
               controller.update(['stock_Mangement_Date']);
               Navigator.of(context).pop();
             },

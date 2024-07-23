@@ -82,10 +82,11 @@ class PermitMessageCancelRequestDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                jobId != 0
-                    ? Get.offAllNamed(Routes.jobDetails,
-                        arguments: {"jobId": jobId})
-                    : Get.offAllNamed(Routes.newPermitList);
+                // jobId != 0
+                //     ? Get.offAllNamed(Routes.jobDetails,
+                //         arguments: {"jobId": jobId})
+                //     :
+                Get.offAllNamed(Routes.newPermitList);
               },
               child: const Text('Ok'),
             ),

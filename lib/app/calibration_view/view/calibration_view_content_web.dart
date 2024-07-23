@@ -68,7 +68,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.back();
+                      Get.offNamed(Routes.calibrationList);
                     },
                     child: Text(" / CALIBRATION LIST",
                         style: Styles.greyMediumLight12),
@@ -235,7 +235,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                               ),
                               controller.calibrationDetailModel.value
                                           ?.statusId ==
-                                      214
+                                      215
                                   ? Container(
                                       height: Get.height * 0.2,
                                       width: Get.width,
@@ -577,31 +577,33 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   //  )
                                   : //
                                   Dimens.box0,
-                              // controller.calibrationDetailModel.value
-                              //             ?.statusId ==
-                              //         214
-                                  // ?
-                                   IgnorePointer(
-                                    ignoring: controller.calibrationDetailModel.value
-                                          ?.statusId ==214,
-                                          
-                                     child: Row(
-                                        children: [
-                                          Text(
-                                            "Any Damages:",
-                                            style: Styles.blackBold15,
-                                          ),
-                                          Dimens.boxWidth10,
-                                          CustomSwitchTroggle(
-                                              value: controller.isToggleOn.value,
-                                              onChanged: (value) {
-                                                controller.toggle();
-                                              }),
-                                        ],
-                                      ),
-
-                                   ),
-                                  // : Dimens.box0,
+                              controller.calibrationDetailModel.value
+                                          ?.statusId ==
+                                      215
+                                  ?
+                                  //  IgnorePointer(
+                                  //     ignoring: controller
+                                  //             .calibrationDetailModel
+                                  //             .value
+                                  //             ?.statusId ==
+                                  //         214,
+                                  //     child:
+                                  Row(
+                                      children: [
+                                        Text(
+                                          "Any Damages:",
+                                          style: Styles.blackBold15,
+                                        ),
+                                        Dimens.boxWidth10,
+                                        CustomSwitchTroggle(
+                                            value: controller.isToggleOn.value,
+                                            onChanged: (value) {
+                                              controller.toggle();
+                                            }),
+                                      ],
+                                    )
+                                  // )
+                                  : Dimens.box0,
                               // Dimens.boxHeight10,
                               // Row(
                               //   children: [
@@ -705,7 +707,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                     // ),
                                     controller.calibrationDetailModel.value
                                                     ?.statusId ==
-                                                213 &&
+                                                214 &&
                                             varUserAccessModel
                                                     .value.access_list!
                                                     .where((e) =>
@@ -738,7 +740,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                         : Dimens.box0,
                                     controller.calibrationDetailModel.value
                                                     ?.statusId ==
-                                                211 &&
+                                                212 &&
                                             varUserAccessModel
                                                     .value.access_list!
                                                     .where((e) =>
@@ -767,7 +769,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                     Dimens.boxWidth20,
                                     controller.calibrationDetailModel.value
                                                     ?.statusId ==
-                                                211 &&
+                                                212 &&
                                             varUserAccessModel
                                                     .value.access_list!
                                                     .where((e) =>
@@ -796,7 +798,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                     Dimens.boxWidth20,
                                     controller.calibrationDetailModel.value
                                                     ?.statusId ==
-                                                214 &&
+                                                215 &&
                                             varUserAccessModel
                                                     .value.access_list!
                                                     .where((e) =>
@@ -825,7 +827,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                         : Dimens.box0,
                                     controller.calibrationDetailModel.value
                                                     ?.statusId ==
-                                                216 &&
+                                                217 &&
                                             varUserAccessModel
                                                     .value.access_list!
                                                     .where((e) =>
@@ -854,7 +856,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                     Dimens.boxWidth20,
                                     controller.calibrationDetailModel.value
                                                     ?.statusId ==
-                                                216 &&
+                                                217 &&
                                             varUserAccessModel
                                                     .value.access_list!
                                                     .where((e) =>
@@ -882,7 +884,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                         : Dimens.box0,
                                     controller.calibrationDetailModel.value
                                                     ?.statusId ==
-                                                215 &&
+                                                216 &&
                                             varUserAccessModel
                                                     .value.access_list!
                                                     .where((e) =>

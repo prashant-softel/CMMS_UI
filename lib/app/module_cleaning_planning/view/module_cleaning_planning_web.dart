@@ -4,20 +4,15 @@ import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_contr
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
-import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/set_equipments_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class ModuleCleaningPlanningWeb extends StatefulWidget {
   ModuleCleaningPlanningWeb({
@@ -146,7 +141,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.end,
                                               children: [
-                                                //
                                                 Row(
                                                   children: [
                                                     CustomRichText(
@@ -189,7 +183,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                     ),
                                                   ],
                                                 ),
-
                                                 Dimens.boxHeight10,
                                                 Row(
                                                   children: [
@@ -220,7 +213,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                     ),
                                                   ],
                                                 ),
-
                                                 Dimens.boxHeight10,
                                                 controller.planId == 0
                                                     ? Row(
@@ -273,43 +265,48 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                         title:
                                                             'Estimated Duration In Day'),
                                                     Dimens.boxWidth10,
-                                                    SizedBox(
-                                                      child:
-                                                          LoginCustomTextfield(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        inputFormatters: <TextInputFormatter>[
-                                                          FilteringTextInputFormatter
-                                                              .digitsOnly
-                                                        ],
-                                                        textController: controller
-                                                            .durationInDayCtrlr,
-                                                        //validate
-                                                        errorController: controller
-                                                                .isEstimatedInvalid
-                                                                .value
-                                                            ? "Required field"
-                                                            : null,
-                                                        onChanged: (value) {
-                                                          if (value
-                                                                  .trim()
-                                                                  .length >
-                                                              0) {
-                                                            controller
-                                                                .isEstimatedInvalid
-                                                                .value = false;
-                                                          } else {
-                                                            controller
-                                                                .isEstimatedInvalid
-                                                                .value = true;
-                                                          }
-                                                        },
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
+                                                    Obx(
+                                                      () => SizedBox(
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          inputFormatters: <TextInputFormatter>[
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly
+                                                          ],
+                                                          textController: controller
+                                                              .durationInDayCtrlr,
+                                                          //validate
+                                                          errorController: controller
+                                                                  .isEstimatedInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                0) {
+                                                              controller
+                                                                  .isEstimatedInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isEstimatedInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          enabled: controller
+                                                              .isDurationEditable
+                                                              .value,
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
@@ -378,10 +375,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                             '${controller.durationInDayCtrlr.text}'),
                                                   ));
                                                 },
-                                                // color: ColorValues.appDarkBlueColor,
-                                                // onTap: () {
-                                                //   controller.addRowItem();
-                                                // },
                                                 child: Container(
                                                   height: 30,
                                                   width: 150,
@@ -411,10 +404,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                               ),
                                             )
                                           : Dimens.box0,
-
-                                      // controller.filteredInventoryNameList.length > 0
-                                      //     ?
-
                                       controller.id == 0
                                           ? Dimens.box0
                                           : Container(
@@ -530,16 +519,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                                 });
                                                               }
                                                             });
-                                                            // controller
-                                                            //     .equipmentList
-                                                            //     .value
-                                                            //     .forEach(
-                                                            //         (element) {
-
-                                                            //         });
-
-                                                            // print(
-                                                            //     'MC plan Detail:${controller.schedules.toJson()}');
 
                                                             controller.dayCount(
                                                                 dayCount:
@@ -554,10 +533,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                                       '${controller.durationInDayCtrlr.text}'),
                                                             ));
                                                           },
-                                                          // color: ColorValues.appDarkBlueColor,
-                                                          // onTap: () {
-                                                          //   controller.addRowItem();
-                                                          // },
                                                           child: Container(
                                                             height: 30,
                                                             width: 150,
@@ -595,16 +570,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                       ],
                                                     ),
                                                   ),
-                                                  // Column(
-                                                  //     children: []..addAll(
-                                                  //           controller
-                                                  //               .rowItem.value
-                                                  //               .map((e) {
-                                                  //         return Text(
-                                                  //             jsonEncode(e));
-                                                  //       }))),
-                                                  // Text(jsonEncode(controller
-                                                  //     .typedropdownMapperData)),
                                                   Expanded(
                                                     child: DataTable2(
                                                       border: TableBorder.all(
@@ -626,7 +591,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                           ),
                                                         ),
                                                         DataColumn2(
-                                                          //fixedWidth: 150,
                                                           label: Text(
                                                             'No. of Inverters',
                                                             style: TextStyle(
@@ -648,7 +612,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                           ),
                                                         ),
                                                         DataColumn2(
-                                                          // fixedWidth: 300,
                                                           label: Text(
                                                             'No of modules',
                                                             style: TextStyle(
@@ -659,7 +622,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                           ),
                                                         ),
                                                         DataColumn2(
-                                                          // fixedWidth: 300,
                                                           label: Text(
                                                             'Type',
                                                             style: TextStyle(
@@ -669,14 +631,11 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                                         .bold),
                                                           ),
                                                         ),
-
-                                                        // print({"mappedData": mappedData});
                                                       ],
                                                       rows: controller
                                                           .rowItem.value
                                                           .map((record) {
                                                         return DataRow(
-                                                          // height: 130,
                                                           cells: record
                                                               .map((mapData) {
                                                             return DataCell(
@@ -731,75 +690,16 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                 ],
                                               ),
                                             ),
-
-                                      // controller.id == 0
-                                      //     ? Container()
-                                      //     : Row(
-                                      //         mainAxisAlignment:
-                                      //             MainAxisAlignment.center,
-                                      //         children: [
-                                      //           Container(
-                                      //             height: 35,
-                                      //             child: CustomElevatedButton(
-                                      //               backgroundColor:
-                                      //                   ColorValues.redColor,
-                                      //               text: "Cancel",
-                                      //               onPressed: () {
-                                      //                 // final _flutterSecureStorage =
-                                      //                 // const FlutterSecureStorage();
-
-                                      //                 // _flutterSecureStorage.delete(
-                                      //                 // key: "userId");
-
-                                      //                 Get.back();
-                                      //               },
-                                      //             ),
-                                      //           ),
-                                      //           Dimens.boxWidth20,
-                                      //           Container(
-                                      //             height: 35,
-                                      //             child: CustomElevatedButton(
-                                      //               backgroundColor:
-                                      //                   ColorValues.greenColor,
-                                      //               text: 'Submit',
-                                      //               onPressed: () {
-                                      //                 controller.updateMcPlan();
-                                      //               },
-                                      //             ),
-                                      //           ),
-                                      //         ],
-                                      //       ),
                                     ],
                                   ),
                                 ),
                               ),
-                              // if (controller.openStartDatePicker)
-                              //   Positioned(
-                              //     right: 175,
-                              //     top: 150,
-                              //     child: DatePickerWidget(
-                              //       minDate: DateTime(DateTime.now().year),
-                              //       maxDate: DateTime(DateTime.now().year, 13,
-                              //           0), // last date of this year
-                              //       controller: DateRangePickerController(),
-                              //       selectionChanges: (p0) {
-                              //         print('po valu ${p0.value.toString()}');
-                              //         controller.startDateTc.text =
-                              //             DateFormat('yyyy-MM-dd')
-                              //                 .format(p0.value);
-                              //         controller.openStartDatePicker =
-                              //             !controller.openStartDatePicker;
-                              //         controller.update(['stock_Mangement']);
-                              //       },
-                              //     ),
-                              //   ),
                             ],
                           ),
                         ],
                       ),
                     ),
                   ),
-                  // Dimens.boxHeight40,
                 ],
               ),
             ),
@@ -909,7 +809,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
     DateTime? dateTime = position == 0
         ? controller.selectedmcstarttime.value
         : controller.selectedValidTillTime.value;
-    // final currentDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime,
@@ -958,8 +857,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
       newTime.minute,
     );
 
-    // If date is today and time is in the past, show an error message
-    print('selected time : $selected');
     if (currentTime.isAfter(selected)) {
       showDialog(
         context: context,

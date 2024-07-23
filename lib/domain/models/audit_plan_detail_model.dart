@@ -24,6 +24,8 @@ class AuditPlanDetailModel {
   String? assignedTo;
   String? employees;
   String? is_PTW;
+  String? approved_Date;
+  String? approved_by;
 
   AuditPlanDetailModel(
       {this.auditee_Emp_Name,
@@ -44,7 +46,9 @@ class AuditPlanDetailModel {
       this.created_at,
       this.is_PTW,
       this.assignedTo,
-      this.employees});
+      this.employees,
+      this.approved_Date,
+      this.approved_by});
 
   factory AuditPlanDetailModel.fromJson(Map<String, dynamic> json) {
     return AuditPlanDetailModel(
@@ -61,6 +65,10 @@ class AuditPlanDetailModel {
       schedule_Date: json['schedule_Date'] == null
           ? json['schedule_Date']
           : Utility.getFormatedyearMonthDay(json['schedule_Date']),
+      approved_Date: json['approved_Date'] == null
+          ? json['approved_Date']
+          : Utility.getFormatedyearMonthDay(json['approved_Date']),
+      approved_by: json['approved_by'],
       plan_number: json['plan_number'],
       id: json['id'],
       frequencyApplicable: json['frequencyApplicable'],

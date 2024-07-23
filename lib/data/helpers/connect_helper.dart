@@ -24,6 +24,7 @@ import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
+import 'package:cmms/app/widgets/create_plan_dialog_msg.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/end_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
@@ -1635,8 +1636,8 @@ class ConnectHelper {
     print('goodsOrderApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
-        type: 4, data: parsedJson['message'], id: parsedJson['id']));
+    // Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+    //     type: 4, data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
@@ -2017,12 +2018,19 @@ class ConnectHelper {
     print('PermitCloseResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    closetype == 1
+    closetype == 2
         ? Get.offAllNamed(Routes.pmTask)
-        : closetype == 2
+        : closetype == 1
             ? Get.offAllNamed(Routes.jobCard)
-            : Get.dialog<void>(PermitMessageCloseDialog(
-                data: parsedJson['message'], jobId: jobId));
+            : closetype == 3
+                ? Get.offAllNamed(Routes.auditTask)
+                : closetype == 4
+                    ? Get.dialog<void>(EndMCScheduleExecutionMessageDialog(
+                        data: parsedJson['message'],
+                        endMCId: parsedJson['id'],
+                      ))
+                    : Get.dialog<void>(PermitMessageCloseDialog(
+                        data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
@@ -2199,10 +2207,10 @@ class ConnectHelper {
     // print('StartExecutionResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(EndMCScheduleExecutionMessageDialog(
-      data: parsedJson['message'],
-      endMCId: parsedJson['id'],
-    ));
+    // Get.dialog<void>(EndMCScheduleExecutionMessageDialog(
+    //   data: parsedJson['message'],
+    //   endMCId: parsedJson['id'],
+    // ));
 
     return responseModel;
   }
@@ -2516,7 +2524,7 @@ class ConnectHelper {
       int? selectedchecklistId,
       int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId&facility_id=$facilityId',
+      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId&facility_id=$facilityId&type=2',
       Request.get,
       null,
       isLoading ?? false,
@@ -2819,7 +2827,7 @@ class ConnectHelper {
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId&isattendence=$isattendanceneeded',
+      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId&isattendence=0',
       Request.get,
       null,
       isLoading ?? false,
@@ -3193,12 +3201,12 @@ class ConnectHelper {
   }
 
   ///resubmit permit
-  Future<ResponseModel> resubmitPermit({
-    required String auth,
-    newPermit,
-    bool? isLoading,
-    bool? resubmit,
-  }) async {
+  Future<ResponseModel> resubmitPermit(
+      {required String auth,
+      newPermit,
+      bool? isLoading,
+      bool? resubmit,
+      int? type}) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3214,9 +3222,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(UpdateNewPermitDialog(
-      data: parsedJson['message'],
-      PtwId: parsedJson['id'],
-    ));
+        data: parsedJson['message'], PtwId: parsedJson['id'], type: type));
 
     return responseModel;
   }
@@ -5005,9 +5011,10 @@ class ConnectHelper {
       bool? isLoading,
       int? facilityId,
       dynamic startDate,
-      dynamic endDate}) async {
+      dynamic endDate,
+      int? type}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'AuditPlan/GetTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}&module_type_id=3',
+      'AuditPlan/GetTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}&module_type_id=$type',
       Request.get,
       null,
       isLoading ?? true,
@@ -6722,6 +6729,11 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CreatePlanMessageDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+    print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
 
@@ -9473,6 +9485,22 @@ class ConnectHelper {
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Attendence/GetAttendanceList?facility_id=$facilityId&year=2024',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getChecklistInspection({
+    required String auth,
+    required bool isLoading,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetChecklistInspection',
       Request.get,
       null,
       isLoading,

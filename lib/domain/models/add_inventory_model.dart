@@ -37,6 +37,8 @@ class AddInventoryRequestModel {
   int? warranty_term_type;
   String? certificate_number;
   List<dynamic>? uplaodfile_ids;
+  List<dynamic>? uplaodfile_of_calibration;
+  List<dynamic>? uplaodfile_of_warranty;
 
   dynamic attachments;
   List<LstWarrantyDetail>? lstWarrantyDetail;
@@ -81,10 +83,15 @@ class AddInventoryRequestModel {
       this.parent_equipment_no,
       this.uplaodfile_ids,
       this.warranty_term_type,
-      this.certificate_number});
+      this.certificate_number,
+      this.uplaodfile_of_warranty,
+      this.uplaodfile_of_calibration});
 
   AddInventoryRequestModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    uplaodfile_of_warranty = json['uplaodfile_of_warranty'];
+    uplaodfile_of_calibration = json['uplaodfile_of_calibration'];
+
     name = json['name'];
     description = json['description'];
     assetdescription = json['assetdescription'];
@@ -136,6 +143,9 @@ class AddInventoryRequestModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data["id"] = this.id;
+    data["uplaodfile_of_warranty"] = this.uplaodfile_of_warranty;
+    data["uplaodfile_of_calibration"] = this.uplaodfile_of_calibration;
+
     data['name'] = this.name;
     data['description'] = this.description;
     data['assetdescription'] = this.assetdescription;

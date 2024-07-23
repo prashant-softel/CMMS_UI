@@ -64,7 +64,7 @@ class AssetChecklist {
 
   factory AssetChecklist.fromJson(Map<String, dynamic> parsedJson) =>
       AssetChecklist(
-        asset_id: parsedJson['asset_id'],
+        asset_id: parsedJson['id'],
         name: parsedJson['asset_name'],
         checklist_id: parsedJson['checklist_id'],
         checklist_name: parsedJson['checklist_name'],
@@ -74,7 +74,7 @@ class AssetChecklist {
       );
 
   Map<String, dynamic> toJson() => {
-        "asset_id": asset_id,
+        "id": asset_id,
         "parent_name": parent_name,
         "module_qty": module_qty,
         "checklist_id": checklist_id,

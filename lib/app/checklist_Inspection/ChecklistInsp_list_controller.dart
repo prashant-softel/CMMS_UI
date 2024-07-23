@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cmms/app/checklist_Inspection/ChecklistInsp_list_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/domain/models/check_list_inspection_model.dart';
 import 'package:cmms/domain/models/create_water_data_model.dart';
 import 'package:cmms/domain/models/type_of_water_model.dart';
 import 'package:cmms/domain/models/water_data_list_model.dart';
@@ -37,7 +38,8 @@ class ChecklistInspectionListController extends GetxController {
   RxList<MasterList> masterDataList = <MasterList>[].obs;
   RxList<WaterDataList> waterDataList = <WaterDataList>[].obs;
   RxList<String> masterDataListName = <String>[].obs;
-
+  ChecklistInspectionModel? checklist_inspection;
+  // List<InspectionData> inspectionData = [];
   RxList<dynamic> headerList = [].obs;
   RxList<dynamic> mainHeaderList = [].obs;
 
@@ -98,16 +100,33 @@ class ChecklistInspectionListController extends GetxController {
       Future.delayed(
         Duration(seconds: 2),
         () async {
-          // await getWaterDataList(
-          //     facilityId, formattedTodate1, formattedFromdate1, false);
+          await getWaterDataList(
+              facilityId, formattedTodate1, formattedFromdate1, false);
         },
       );
+
       Future.delayed(Duration(seconds: 1), () async {
         getTypeOfWaterList();
+      });
+      Future.delayed(Duration(seconds: 1), () async {
+        getChecklistInspection();
       });
     });
 
     super.onInit();
+  }
+
+  Future<void> getChecklistInspection({
+    bool? isLoading,
+  }) async {
+    final _checklistInspection =
+        await checklistInspectionListPresenter.getChecklistInspection(
+      isLoading: isLoading,
+    );
+
+    checklist_inspection = _checklistInspection;
+    // inspectionData = checklist_inspection?.inspectionData ?? [];
+    isLoading = false;
   }
 
   Future<void> getWaterDataList(
@@ -130,77 +149,150 @@ class ChecklistInspectionListController extends GetxController {
     masterDataListName.value = [];
     headerList = [].obs;
     mainHeaderList = [].obs;
-    mainHeaderList.add(
+    mainHeaderList.addAll([
       {
-        "label": 'Month',
+        "label": 'Checklist Inspection Details',
         "isShow": true,
-        'subHeader': "Month",
-        "dataKey": 'Month',
-        "colSpan": 1
+        'subHeader': "Checklist Name",
+        "dataKey": 'ChecklistName',
+        "colSpan": 3
       },
-    );
-    headerList.add(
       {
-        "label": 'Month',
-        "isShow": true,
-        'subHeader': "Month",
-        "dataKey": 'Month'
+        "label": 'SOP Number',
+        "isShow": false,
+        'subHeader': "SOP Number",
+        "dataKey": 'SOPNumber',
+        "colSpan": 0
       },
-    );
-    masterDataListName.add('Month');
-    print({"masterDataList.value": masterDataList.value});
-
-    for (var _dataList in masterDataList.value) {
+      {
+        "label": 'Frequency',
+        "isShow": false,
+        'subHeader': "Frequency",
+        "dataKey": 'Frequency',
+        "colSpan": 0
+      }
+    ]);
+    headerList.addAll([
+      {
+        "label": 'Checklist Name',
+        "isShow": true,
+        'subHeader': "Checklist Name",
+        "dataKey": 'ChecklistName'
+      },
+      {
+        "label": 'SOP Number',
+        "isShow": true,
+        'subHeader': "SOP Number",
+        "dataKey": 'SOPNumber'
+      },
+      {
+        "label": 'Frequency',
+        "isShow": true,
+        'subHeader': "Frequency",
+        "dataKey": 'Frequency'
+      },
+    ]);
+    // masterDataListName.add('Month');
+    print({"checklist_inspection.value": checklist_inspection});
+    var index = 0;
+    for (var _dataList in checklist_inspection!.checklist!) {
       // {"label": 'Headersdhfgd1', "isShow": true, 'key': "open"},
+      _dataList.monthlyInspection?.forEach((element) {
+        if (index == 0) {
+          mainHeaderList.add(
+            {
+              "label": element.inspectionMonth,
+              "isShow": true,
+              'subHeader': "inspectionMonth",
+              "dataKey": 'inspectionMonth',
+              "colSpan": 4
+            },
+          );
+          headerList.add(
+            {
+              "label": element.inspectionMonth,
+              "isShow": true,
+              'subHeader': "Inspection Status",
+              "dataKey": 'inspectionStatus'
+            },
+          );
+
+          headerList.add(
+            {
+              "label": element.inspectionMonth,
+              "isShow": true,
+              'subHeader': "Date of Inspection",
+              "dataKey": "dateOfInspection"
+            },
+          );
+          headerList.add(
+            {
+              "label": element.inspectionMonth,
+              "isShow": true,
+              'subHeader': "Checklist Attachment ",
+              "dataKey": "ChecklistAttachment"
+            },
+          );
+          headerList.add(
+            {
+              "label": element.inspectionMonth,
+              "isShow": true,
+              'subHeader': "No of Unsafe Observation  ",
+              "dataKey": "NoOfUnsafeObservations"
+            },
+          );
+        }
+      });
+
+      index++;
       print({"_dataList": _dataList});
-      mainHeaderList.add(
-        {
-          "label": _dataList.water_type,
-          "isShow": true,
-          'subHeader': "Month",
-          "dataKey": 'Month',
-          "colSpan": _dataList.show_opening == 1 ? 4 : 2
-        },
-      );
-      if (_dataList.show_opening == 1) {
-        headerList.add(
-          {
-            "label": _dataList.water_type,
-            "isShow": true,
-            'subHeader': "Opening",
-            "dataKey": 'opening'
-          },
-        );
-      }
-      headerList.add(
-        {
-          "label": _dataList.water_type,
-          "isShow": _dataList.show_opening == 1 ? false : true,
-          'subHeader': "+",
-          "dataKey": '+'
-        },
-      );
-      headerList.add(
-        {
-          "label": _dataList.water_type,
-          "isShow": false,
-          'subHeader': "-",
-          "dataKey": '-'
-        },
-      );
 
-      if (_dataList.show_opening == 1) {
-        headerList.add(
-          {
-            "label": _dataList.water_type,
-            "isShow": false,
-            'subHeader': "Closing",
-            "dataKey": 'closingQty'
-          },
-        );
-      }
+      // headerList.add(
+      //   {
+      //     "label": "Inspection Status ",
+      //     "isShow": true,
+      //     'subHeader': "Inspection Status ",
+      //     "dataKey": 'Inspection Status '
+      //   },
+      // );
 
-      masterDataListName.add(_dataList.water_type ?? '');
+      // headerList.add(
+      //   {
+      //     "label": "Date of Inspection",
+      //     "isShow": true,
+      //     'subHeader': "Date of Inspection",
+      //     "dataKey": "Date of Inspection"
+      //   },
+      // );
+      // headerList.add(
+      //   {
+      //     "label": "Checklist Attachment",
+      //     "isShow": true,
+      //     'subHeader': "Checklist Attachment ",
+      //     "dataKey": "Checklist Attachment "
+      //   },
+      // );
+      // headerList.add(
+      //   {
+      //     "label": "No of Unsafe Observation ",
+      //     "isShow": true,
+      //     'subHeader': "No of Unsafe Observation  ",
+      //     "dataKey": "No of Unsafe Observation  "
+      //   },
+      // );
+
+      // if (_dataList.show_opening == 1) {
+      //   headerList.add(
+      //     {
+      //       "label": _dataList.water_type,
+      //       "isShow": false,
+      //       'subHeader': "Closing",
+      //       "dataKey": 'closingQty'
+      //     },
+      //   );
+      // }
+
+      // masterDataListName.add(_dataList.water_type ?? '');
     }
     headerList.add(
       {

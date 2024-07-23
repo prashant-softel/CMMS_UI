@@ -86,6 +86,7 @@ class CmmrsItems {
   int? status;
   String? status_short;
   String? status_long;
+  int? transaction_id;
 
   TextEditingController? issued_qty_controller;
   int? materialID;
@@ -116,10 +117,14 @@ class CmmrsItems {
       this.assetMasterID,
       this.materialID,
       this.serial_number,
-      this.name});
+      this.name,
+      this.transaction_id});
 
   factory CmmrsItems.fromJson(Map<String, dynamic> parsedJson) {
     return CmmrsItems(
+        transaction_id: parsedJson["transaction_id"] == null
+            ? 0
+            : parsedJson['transaction_id'],
         id: parsedJson["id"] == null ? 0 : parsedJson['id'],
         assetMasterID: parsedJson["assetMasterID"] == null
             ? 0
