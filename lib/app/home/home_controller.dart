@@ -3,13 +3,8 @@ import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/inventory_category_model.dart';
-import 'package:cmms/domain/models/type_permit_model.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
 
@@ -17,54 +12,54 @@ class HomeController extends GetxController {
   HomeController(this.homePresenter);
   HomePresenter homePresenter;
 
-  RxList<String?> selectedWorkAreaNameList = <String>[].obs;
-  RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
-  RxList<int?> selectedWorkAreaIdList = <int>[].obs;
+  // RxList<String?> selectedWorkAreaNameList = <String>[].obs;
+  // RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
+  // RxList<int?> selectedWorkAreaIdList = <int>[].obs;
 
   //Permit Type list
-  RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
-  Rx<bool> isTypePermitSelected = true.obs;
-  Rx<String> selectedTypePermit = ''.obs;
-  Rx<String> selectedTypeOfPermit = ''.obs;
-  Rx<bool> isTypePermit = true.obs;
-  Rx<String> selectedFacilityName = ''.obs;
+  // RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
+  // Rx<bool> isTypePermitSelected = true.obs;
+  // Rx<String> selectedTypePermit = ''.obs;
+  // Rx<String> selectedTypeOfPermit = ''.obs;
+  // Rx<bool> isTypePermit = true.obs;
+  // Rx<String> selectedFacilityName = ''.obs;
 
   //block
   int facilityId = 0;
   StreamSubscription<int>? facilityIdStreamSubscription;
-  RxList<BlockModel?> blocksList = <BlockModel>[].obs;
-  Rx<bool> isBlocksSelected = true.obs;
-  Rx<String> selectedBlocks = ''.obs;
-  Rx<bool> isstartdateFieldSelected = true.obs;
+  // RxList<BlockModel?> blocksList = <BlockModel>[].obs;
+  // Rx<bool> isBlocksSelected = true.obs;
+  // Rx<String> selectedBlocks = ''.obs;
+  // Rx<bool> isstartdateFieldSelected = true.obs;
   RxList<int> selectedFacilityIdList = <int>[].obs;
 
-  var inventoryList = <InventoryModel>[];
-  var blockList = <BlockModel>[];
-  var equipmentList = <EquipmentModel>[];
-  final blockTextController = TextEditingController();
-  final parentEquipmentTextController = TextEditingController();
-  final typeTextController = TextEditingController();
-  final categoryTextController = TextEditingController();
-  final serialNoTextController = TextEditingController();
-  final statusTextController = TextEditingController();
-  final assetNameTextController = TextEditingController();
-  final enterMultiplierTextController = TextEditingController();
-  final assetDescpTextController = TextEditingController();
-  var selectedBlock = BlockModel();
-  var selectedEquipment = EquipmentModel();
-  final categoryMapBM = <String, double>{};
-  final categoryMapPM = <String, double>{};
-  final categoryMapMC = <String, double>{};
-  Map<String, double> categoryMapBMDouble = <String, double>{};
-  Map<String, double> categoryMapPMDouble = <String, double>{};
-  Map<String, double> categoryMapSMDouble = <String, double>{};
-  Map<String, double> categoryMapIRDouble = <String, double>{};
+  // var inventoryList = <InventoryModel>[];
+  // var blockList = <BlockModel>[];
+  // var equipmentList = <EquipmentModel>[];
+  // final blockTextController = TextEditingController();
+  // final parentEquipmentTextController = TextEditingController();
+  // final typeTextController = TextEditingController();
+  // final categoryTextController = TextEditingController();
+  // final serialNoTextController = TextEditingController();
+  // final statusTextController = TextEditingController();
+  // final assetNameTextController = TextEditingController();
+  // final enterMultiplierTextController = TextEditingController();
+  // final assetDescpTextController = TextEditingController();
+  // var selectedBlock = BlockModel();
+  // var selectedEquipment = EquipmentModel();
+  // final categoryMapBM = <String, double>{};
+  // final categoryMapPM = <String, double>{};
+  // final categoryMapMC = <String, double>{};
+  // Map<String, double> categoryMapBMDouble = <String, double>{};
+  // Map<String, double> categoryMapPMDouble = <String, double>{};
+  // Map<String, double> categoryMapSMDouble = <String, double>{};
+  // Map<String, double> categoryMapIRDouble = <String, double>{};
 
-  Map<String, double> categoryMapSmConsumptionDouble = <String, double>{};
-  Map<String, double> categoryMapSmConsumptionSiteDouble = <String, double>{};
-  Map<String, double> categoryMapSmAvailableDouble = <String, double>{};
-  Map<String, double> categoryMapSmAvailableSiteDouble = <String, double>{};
-  Map<String, double> stockOverviewmap = <String, double>{};
+  // Map<String, double> categoryMapSmConsumptionDouble = <String, double>{};
+  // Map<String, double> categoryMapSmConsumptionSiteDouble = <String, double>{};
+  // Map<String, double> categoryMapSmAvailableDouble = <String, double>{};
+  // Map<String, double> categoryMapSmAvailableSiteDouble = <String, double>{};
+  // Map<String, double> stockOverviewmap = <String, double>{};
 
   //int facilityId = 45;
   String categoryIds = '';
@@ -72,25 +67,25 @@ class HomeController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   String username = '';
 
-  RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
-  RxList<int> selectedEquipmentList = <int>[].obs;
-  Rx<bool> isInventorySelected = true.obs;
-  RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
-  Rx<String> selectedInventory = ''.obs;
-  var selectedSection = 0.obs;
+  // RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
+  // RxList<int> selectedEquipmentList = <int>[].obs;
+  // Rx<bool> isInventorySelected = true.obs;
+  // RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
+  // Rx<String> selectedInventory = ''.obs;
+  // var selectedSection = 0.obs;
 
   ////
-  RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<InventoryCategoryModel?> equipmentCategoryList =
-      <InventoryCategoryModel>[].obs;
-  var challanDateTc = TextEditingController();
+  // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
+  // RxList<InventoryCategoryModel?> equipmentCategoryList =
+  //     <InventoryCategoryModel>[].obs;
+  // var challanDateTc = TextEditingController();
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
-  PaginationController paginationController = PaginationController(
-    rowCount: 0,
-    rowsPerPage: 10,
-  );
+  // PaginationController paginationController = PaginationController(
+  //   rowCount: 0,
+  //   rowsPerPage: 10,
+  // );
   // RxList<DashboardModel?> dashboardList = <DashboardModel?>[].obs;
   // Rx<DashboardModel?> dashboardBmList = DashboardModel().obs;
   // Rx<DashboardModel?> dashboardPmList = DashboardModel().obs;
@@ -687,7 +682,6 @@ class HomeController extends GetxController {
   //   }
   // }
 
- 
   Future<void> getuserAccessData() async {
     final _userAccessList = await homePresenter.getUserAcessValue();
 
@@ -724,7 +718,6 @@ class HomeController extends GetxController {
   //   update(['equipment_list']);
   // }
 
-  
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case const (RxList<FacilityModel>):
