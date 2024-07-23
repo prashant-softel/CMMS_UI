@@ -152,6 +152,7 @@ class PlantStockReportController extends GetxController {
   }
 
   Future<void> getAssetList(int _facilityId) async {
+    assetList.clear();
     assetList.value = <GetAssetDataModel>[];
     final _assetList =
         await pantStockReportPresenter.getAssetList(facilityId: facilityId);

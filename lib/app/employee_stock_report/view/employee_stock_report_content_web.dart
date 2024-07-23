@@ -151,7 +151,8 @@ class EmployeeStockReportContentWeb
                                           Row(
                                             children: [
                                               CustomRichText(
-                                                  title: 'Date Range'),
+                                                  title: 'Date Range',
+                                                  includeAsterisk: false),
                                               Dimens.boxWidth2,
                                               CustomTextFieldForStock(
                                                 width: MediaQuery.of(context)

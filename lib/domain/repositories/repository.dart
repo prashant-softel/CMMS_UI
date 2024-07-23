@@ -5330,8 +5330,8 @@ class Repository {
               ? Get.offAllNamed(Routes.pmTaskView)
               : type == 1
                   ? Get.offAllNamed(Routes.jobDetails)
-                  : type == 3
-                      ? Get.offAllNamed(Routes.viewAuditTask)
+                  // : type == 3
+                  //     ? Get.offAllNamed(Routes.viewAuditTask)
                       : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
