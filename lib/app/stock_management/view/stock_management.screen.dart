@@ -256,14 +256,14 @@ class StockManagementDashboardScreen
                                   );
                                   //  controller.checkPoint();
                                 }),
-                                _stockManagementList(
-                                tittle: "Plant Stock Report Details",
-                                ontap: () {
-                                  Get.toNamed(
-                                    Routes.plantStockReportDetails,
-                                  );
-                                  //  controller.checkPoint();
-                                }),
+                                // _stockManagementList(
+                                // tittle: "Plant Stock Report Details",
+                                // ontap: () {
+                                //   Get.toNamed(
+                                //     Routes.plantStockReportDetails,
+                                //   );
+                                //   //  controller.checkPoint();
+                                // }),
                             // : Dimens.box0,
                             // varUserAccessModel.value.access_list!
                             //             .where((e) =>
