@@ -581,7 +581,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                           backgroundColor:
                                               ColorValues.appLightBlueColor,
                                           onPressed: () {
-                                            // controller.export();
+                                            controller.export();
                                           },
                                           text: 'Excel'),
                                     ),

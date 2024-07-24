@@ -10071,19 +10071,19 @@ class Repository {
               'asset_name',
               'asset_description',
               'category',
-              'approval_required'
-                  'measurement',
+              'approval_required',
+              'measurement',
               'decimal_status'
             ],
             ...jsonDataList
                 .map((assetmasterjson) => [
                       assetmasterjson['id'],
-                      assetmasterjson['asset_type_id'],
+                      assetmasterjson['asset_type_ID'],
                       assetmasterjson['asset_type'],
                       assetmasterjson['asset_code'],
                       assetmasterjson['asset_name'],
-                      assetmasterjson['asset_description'],
-                      assetmasterjson['category'],
+                      assetmasterjson['description'],
+                      assetmasterjson['cat_name'],
                       assetmasterjson['approval_required'],
                       assetmasterjson['measurement'],
                       assetmasterjson['decimal_status']
@@ -10091,7 +10091,7 @@ class Repository {
                 .toList(),
           ];
           Map<String, List<List<dynamic>>> assetmasterData = {'Sheet1': data};
-          exportToExcel(assetmasterData, "AssetMaster.xlsx");
+          exportToExcel(assetmasterData, "MaterialList.xlsx");
         }
 
         return _ModuleListModelList;
@@ -10758,10 +10758,10 @@ class Repository {
               'requested_by_id',
               'requested_by',
               'requested_date',
+              'approved_date',
               'issued_date',
               'issued_by',
               'activity',
-              'approved_date',
               'approved_status',
               'approved_cmnt',
               'where_used_type',
@@ -10776,10 +10776,10 @@ class Repository {
                       mrslistjson['requested_by_emp_ID'],
                       mrslistjson['requested_by_name'],
                       mrslistjson['requestd_date'],
+                      mrslistjson['approval_date'],
                       mrslistjson['issued_date'],
                       mrslistjson['issued_name'],
                       mrslistjson['activity'],
-                      mrslistjson['approval_date'],
                       mrslistjson['approval_status'],
                       mrslistjson['approval_comment'],
                       mrslistjson['whereUsedTypeName'],
@@ -11680,20 +11680,18 @@ class Repository {
           List<dynamic> jsonDataList = jsonDecode(jsonData);
           List<List<dynamic>> data = [
             [
-              'id',
+              'Id',
               'requested_by_id',
               'requested_date',
               'requested_by',
-              'issued_date',
-              'issued_name',
               'approver_name',
               'approved_date',
               'approver_cmnt',
               'activity',
               'remarks',
-              'whereused_ref_id',
               'where_used_name',
-              'is_splitted',
+              'whereused_ref_id',
+              // 'is_splitted',
               'short_status',
               'long_status',
             ],
@@ -11703,16 +11701,14 @@ class Repository {
                       mrsrlistjson['requested_by_emp_ID'],
                       mrsrlistjson['requestd_date'],
                       mrsrlistjson['requested_by_name'],
-                      mrsrlistjson['issued_date'],
-                      mrsrlistjson['issued_name'],
                       mrsrlistjson['approver_name'],
                       mrsrlistjson['approval_date'],
                       mrsrlistjson['approval_comment'],
                       mrsrlistjson['activity'],
                       mrsrlistjson['remarks'],
-                      mrsrlistjson['whereUsedRefID'],
                       mrsrlistjson['whereUsedTypeName'],
-                      mrsrlistjson['is_splited'],
+                      mrsrlistjson['whereUsedRefID'],
+                      // mrsrlistjson['is_splited'],
                       mrsrlistjson['status_short'],
                       mrsrlistjson['status_long'],
                     ])
