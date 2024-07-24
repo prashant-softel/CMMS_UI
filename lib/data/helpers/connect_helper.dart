@@ -10193,5 +10193,56 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getObservationSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    required String fromDate,
+    required String toDate,
+  }) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('Observation List: ${response}');
+    try {
+      response = await apiWrapper.makeRequest(
+        'MISMaster/GetObservationSummaryReport?facility_id=$facility_id&fromDate=$fromDate&toDate=$toDate',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
+
+  Future<ResponseModel> getTrainingSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    String? fromDate,
+    String? toDate,
+  }) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('Training Report List: ${response}');
+    try {
+      response = await apiWrapper.makeRequest(
+        'Training/GetTrainingReportByCategory?facility_id=$facility_id&from_date=$fromDate&to_date=$toDate',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
   //end
 }

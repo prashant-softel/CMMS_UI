@@ -97,6 +97,10 @@ class MisDashboardController extends GetxController {
     misDashboardPresenter.clearValue();
   }
 
+  void goToObservationSummary() {
+    Get.offNamed(Routes.observationSummary);
+  }
+
   Future<void> createChecklist() async {
     misDashboardPresenter.clearValue();
 
@@ -120,6 +124,10 @@ class MisDashboardController extends GetxController {
 
   void trainingCourse() {
     Get.toNamed(Routes.trainingCourse);
+  }
+
+  void trainingSummary() {
+    Get.toNamed(Routes.trainingSummary);
   }
 
   void grievanceList() {

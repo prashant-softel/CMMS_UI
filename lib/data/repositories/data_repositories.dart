@@ -1873,12 +1873,14 @@ class DataRepository extends DomainRepository {
           {required String auth,
           newPermit,
           bool? isLoading,
-          bool? resubmit,int?type}) async =>
+          bool? resubmit,
+          int? type}) async =>
       await connectHelper.updateNewPermit(
           auth: auth,
           newPermit: newPermit,
           isLoading: isLoading ?? false,
-          resubmit: resubmit,type:type);
+          resubmit: resubmit,
+          type: type);
 
   Future<ResponseModel> resubmitPermit(
           {required String auth,
@@ -4494,7 +4496,8 @@ class DataRepository extends DomainRepository {
         assignId: assignId,
         taskId: taskId,
         isLoading: isLoading,
-      ); Future<ResponseModel> assignToMC({
+      );
+  Future<ResponseModel> assignToMC({
     required String auth,
     int? assignId,
     int? taskId,
@@ -5858,5 +5861,36 @@ class DataRepository extends DomainRepository {
         startDate: startDate,
         endDate: endDate,
       );
+
+  Future<ResponseModel> getObservationSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    required String fromDate,
+    required String toDate,
+  }) async =>
+      await connectHelper.getObservationSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
+  Future<ResponseModel> getTrainingSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+     String? fromDate,
+     String? toDate,
+  }) async =>
+      await connectHelper.getTrainingSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
 //end
 }

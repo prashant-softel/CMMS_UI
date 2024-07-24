@@ -113,6 +113,12 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 // controller.clearStoreData();
                               },
                             ),
+                            createContentTile(
+                              title: 'Observation Summary',
+                              onTap: () {
+                                controller.goToObservationSummary();
+                              },
+                            ),
 
                             createContentTile(
                                 title: "MIS Checklist",
@@ -305,6 +311,11 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 title: "Training Courses",
                                 onTap: () {
                                   controller.trainingCourse();
+                                }),
+                            createContentTile(
+                                title: "Training Report",
+                                onTap: () {
+                                  controller.trainingSummary();
                                 }),
                             createContentTile(
                                 title: "Schedule Course",
