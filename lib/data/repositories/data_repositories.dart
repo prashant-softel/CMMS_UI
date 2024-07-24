@@ -5293,6 +5293,23 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+   Future<ResponseModel> getPlantStockMonthDetail({
+    required String auth,
+  
+    required int facilityID,
+    required int assetItemID,
+     String? start_date,
+    required String end_date,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPlantStockMonthDetail(
+        auth: auth,
+ start_date:start_date,
+ end_date:end_date,
+    assetItemID:  assetItemID,
+        facilityID: facilityID,
+        isLoading: isLoading ?? false,
+      );
 
   //create
   Future<ResponseModel> createSourceOfObslist({

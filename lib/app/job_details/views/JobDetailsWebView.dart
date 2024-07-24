@@ -674,16 +674,16 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                             0);
                                                                   })
                                                               : Container(),
-                                                          TableActionButton(
-                                                              color: ColorValues
-                                                                  .appYellowColor,
-                                                              icon: Icons.copy,
-                                                              message:
-                                                                  "Clone Permit"
-                                                              // onPress:
-                                                              //     () =>
-                                                              //         controller.goToJobCardScreen(),
-                                                              ),
+                                                          // TableActionButton(
+                                                          //     color: ColorValues
+                                                          //         .appYellowColor,
+                                                          //     icon: Icons.copy,
+                                                          //     message:
+                                                          //         "Clone Permit"
+                                                          //     // onPress:
+                                                          //     //     () =>
+                                                          //     //         controller.goToJobCardScreen(),
+                                                          //     ),
                                                         ],
                                                       )),
                                                     ]),
