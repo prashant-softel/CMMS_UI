@@ -81,6 +81,7 @@ class StockDetails {
       this.serial_no});
 
   factory StockDetails.fromJson(Map<String, dynamic> parsedJson) {
+    var serialNumber = parsedJson['serial_number'] ?? '';
     return StockDetails(
       assetItemID: parsedJson['assetItemID'],
       return_remarks: parsedJson['return_remarks'],
@@ -91,7 +92,7 @@ class StockDetails {
       consumed_qty: parsedJson['consumed_qty'],
       issued_qty: parsedJson['issued_qty'],
       requested_qty: parsedJson['requested_qty'],
-      serial_no: parsedJson['serial_number'],
+      serial_no: serialNumber,
       asset_code: parsedJson['asset_code'],
       asset_type_ID: parsedJson['asset_type_ID'],
       asset_type: parsedJson['asset_type'],
@@ -99,7 +100,7 @@ class StockDetails {
       issued_date: parsedJson['issued_date'],
       facility_Is_Block: parsedJson['facility_Is_Block'],
       facility_Is_Block_of_name: parsedJson['facility_Is_Block_of_name'],
-      name: "${parsedJson['asset_name']} (${parsedJson['serial_number']})",
+      name: "${parsedJson['asset_name']} ($serialNumber)",
       inward: parsedJson['inward'],
       opening: parsedJson['opening'],
       outward: parsedJson['outward'],

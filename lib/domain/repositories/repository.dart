@@ -5332,7 +5332,7 @@ class Repository {
                   ? Get.offAllNamed(Routes.jobDetails)
                   // : type == 3
                   //     ? Get.offAllNamed(Routes.viewAuditTask)
-                      : Get.offAllNamed(Routes.newPermitList);
+                  : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -10826,7 +10826,6 @@ class Repository {
 
       if (!res.hasError) {
         final jsonPlantStockListModels = jsonDecode(res.data);
-        // print(res.data);
         final List<PlantStockListModel> _plantStockListModels =
             jsonPlantStockListModels
                 .map<PlantStockListModel>((m) =>
@@ -10849,19 +10848,21 @@ class Repository {
               'outward',
               'balance',
             ],
-            ...jsonDataList.map((plantstockjson) => [
-                  plantstockjson['facilityID'],
-                  plantstockjson['facilityName'],
-                  plantstockjson['assetItemID'],
-                  plantstockjson['asset_name'],
-                  plantstockjson['asset_code'],
-                  plantstockjson['asset_type_ID'],
-                  plantstockjson['asset_type'],
-                  plantstockjson['opening'],
-                  plantstockjson['inward'],
-                  plantstockjson['outward'],
-                  plantstockjson['balance'],
-                ])
+            for (var facility in jsonDataList)
+              for (var stock in facility['stockDetails'])
+                [
+                  facility['facilityID'],
+                  facility['facilityName'],
+                  stock['assetItemID'],
+                  stock['asset_name'],
+                  stock['asset_code'],
+                  stock['asset_type_ID'],
+                  stock['asset_type'],
+                  stock['opening'],
+                  stock['inward'],
+                  stock['outward'],
+                  stock['balance'],
+                ]
           ];
           Map<String, List<List<dynamic>>> plantstocklistData = {
             'Sheet1': data,
