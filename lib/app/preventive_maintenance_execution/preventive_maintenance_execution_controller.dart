@@ -48,6 +48,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<MRSListByJobIdModel?>? listMrsByTaskId = <MRSListByJobIdModel?>[].obs;
   RxList<CmmrsItems?>? cmmrsItems = <CmmrsItems?>[].obs;
+  RxList<MaterialUsedAssets?>? materialUsedAssets = <MaterialUsedAssets?>[].obs;
 
   var commentCtrlr = TextEditingController();
   var updatecommentCtrlr = TextEditingController();
@@ -132,6 +133,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Future<void> getMrsListByModuleTask({required int taskId}) async {
     rowItem.value = [];
     cmmrsItems!.value = <CmmrsItems>[];
+    materialUsedAssets!.value = <MaterialUsedAssets>[];
 
     listMrsByTaskId?.value =
         await preventiveMaintenanceExecutionPresenter.getMrsListByModuleTask(
@@ -139,12 +141,37 @@ class PreventiveMaintenanceExecutionController extends GetxController {
               false,
             ) ??
             [];
+
     if (listMrsByTaskId!.value.isNotEmpty) {
       var _assetsList = listMrsByTaskId!.value.last!.cmmrsItems;
       for (var asset in _assetsList!) {
         cmmrsItems!.add(asset);
       }
+
+      var _usedassetsList =
+          listMrsByTaskId!.value.last!.material_used_by_assets!;
+
+      for (var usedasset in _usedassetsList) {
+        materialUsedAssets!.add(usedasset);
+      }
+
       cmmrsItems?.forEach((element) {
+        var consumedQty = '';
+        var matchedUsedAssets = materialUsedAssets!
+            .where((usedAsset) => usedAsset!.asset_id == selectedItem?.assetsID)
+            .toList();
+
+        if (matchedUsedAssets.isNotEmpty) {
+          var usedItems = matchedUsedAssets.first!.items
+              ?.where(
+                  (usedItem) => usedItem.sm_asset_id == element?.asset_item_ID)
+              .toList();
+
+          if (usedItems != null && usedItems.isNotEmpty) {
+            consumedQty = usedItems.first.used_qty.toString();
+          }
+        }
+
         rowItem.add([
           {"key": "Drop_down", "value": '${element?.name}'},
           {'key': "Sr_No", "value": ''},
@@ -152,21 +179,23 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           {'key': "Material_Type", "value": ''},
           {'key': "Issued_Qty", "value": ''},
           {'key': "Used_Qty", "value": ''},
-          {'key': "Consumed_Qty", "value": '${element?.used_qty}'},
+          {'key': "Consumed_Qty", "value": consumedQty},
           // {'key': "Action ", "value": ''},
         ]);
+
         dropdownMapperData[element?.name ?? ""] = listMrsByTaskId!
             .value.last!.cmmrsItems!
             .firstWhere((e) => e!.serial_number == element?.serial_number,
                 orElse: null);
       });
+
       _processJsonData();
       allTrue.value = itemExistsWithZeroDifference.every((item) => item);
       //  addRowItem();
     }
 
-    print({"mrsit12mrs", allTrue.value});
-    print({"mrsit12mrs", itemExistsWithZeroDifference});
+    // print({"mrsit12mrs", listMrsByTaskId!.value.last!.material_used_by_assets});
+    //   print({"mrsit12mrs", itemExistsWithZeroDifference});
   }
 
   void _processJsonData() {

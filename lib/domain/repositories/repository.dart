@@ -5335,7 +5335,7 @@ class Repository {
                   ? Get.offAllNamed(Routes.jobDetails)
                   // : type == 3
                   //     ? Get.offAllNamed(Routes.viewAuditTask)
-                      : Get.offAllNamed(Routes.newPermitList);
+                  : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -5413,7 +5413,8 @@ class Repository {
       // String? id,
       cancelPermitJsonString,
       bool? isLoading,
-      int? jobId) async {
+      int? jobId,
+      int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -5421,7 +5422,8 @@ class Repository {
           auth: auth,
           cancelPermitJsonString: json.encode(cancelPermitJsonString),
           isLoading: isLoading ?? false,
-          jobId: jobId);
+          jobId: jobId,
+          type: type);
       print('PermitCancelRequestResponse: ${res.data}');
 
       if (!res.hasError) {
@@ -14104,6 +14106,7 @@ class Repository {
       return null;
     }
   }
+
   //plant stock details
   Future<List<PlantStockMonth?>?> getPlantStockMonthDetail({
     String? start_date,
@@ -14118,7 +14121,7 @@ class Repository {
         auth: auth,
         start_date: start_date,
         end_date: end_date,
-        assetItemID:assetItemID,
+        assetItemID: assetItemID,
         facilityID: facilityID,
         isLoading: isLoading ?? false,
       );

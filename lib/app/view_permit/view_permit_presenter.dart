@@ -112,16 +112,16 @@ class ViewPermitPresenter {
   //       isLoading: isLoading ?? false,
   //     );
 
-  Future<Map<String, dynamic>?> permitCancelRequestButton({
-    cancelPermitJsonString,
-    required bool isLoading,
-    int? jobId,
-  }) async {
+  Future<Map<String, dynamic>?> permitCancelRequestButton(
+      {cancelPermitJsonString,
+      required bool isLoading,
+      int? jobId,
+      int? type}) async {
     return viewPermitUsecase.permitCancelRequestButton(
-      cancelPermitJsonString: cancelPermitJsonString,
-      isLoading: isLoading,
-      jobId: jobId,
-    );
+        cancelPermitJsonString: cancelPermitJsonString,
+        isLoading: isLoading,
+        jobId: jobId,
+        type: type);
   }
 
   Future<Map<String, dynamic>?> permitExtendButton({
@@ -403,14 +403,15 @@ class ViewPermitPresenter {
   void saveValue({String? permitId}) async {
     return viewPermitUsecase.saveValue(permitId: permitId);
   }
+
   Future<String?> getValue() async => await viewPermitUsecase.getValue();
 
   void saveJobIdValue({String? jobId}) async {
     return viewPermitUsecase.saveJobIdValue(jobId: jobId);
   }
+
   Future<String?> getJobIdValue() async =>
       await viewPermitUsecase.getJobIdValue();
-
 
   void clearValue() async => viewPermitUsecase.clearValue();
   void clearTypeValue() async => viewPermitUsecase.clearTypeValue();

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/create_mrs_return/create_mrs_return_presenter.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -22,8 +23,10 @@ class CreateMrsReturnController extends GetxController {
   int facilityId = 0;
   RxList<PlantStockListModel?> assetItemList = <PlantStockListModel?>[].obs;
   RxList<StockDetails?> StockDetailsList = <StockDetails?>[].obs;
+  Rx<String> selectedasset = ''.obs;
 
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+  RxMap<dynamic, dynamic> checkdropdownMapperData = {}.obs;
 
   RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
   var activityCtrlr = TextEditingController();
@@ -31,7 +34,9 @@ class CreateMrsReturnController extends GetxController {
   var whereUsedCtrlr = TextEditingController();
   var setTemlateCtrlr = TextEditingController();
   var allDropdownsSelected = true.obs;
-
+  RxList<ScheduleCheckPoint> scheduleCheckPoints = <ScheduleCheckPoint>[].obs;
+  RxList<ScheduleCheckPoint> scheduleCheckPointsdrop =
+      <ScheduleCheckPoint>[].obs;
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<int> type = 0.obs;
   Rx<String> activity = ''.obs;
@@ -69,6 +74,7 @@ class CreateMrsReturnController extends GetxController {
               facilityId,
             );
             getAssetList(facilityId);
+            getPmtaskViewList(facilityId: facilityId);
           });
         }
       }
@@ -148,6 +154,7 @@ class CreateMrsReturnController extends GetxController {
   void addRowFaultyItem() {
     rowFaultyItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "assets", "value": ''},
       {'key': "Material_Type", "value": ''},
       {'key': "code", "value": ''},
       {'key': "Material_Category", "value": ''},
@@ -170,6 +177,56 @@ class CreateMrsReturnController extends GetxController {
       {'key': "Remark", "value": ''},
       {'key': "Action ", "value": ''},
     ]);
+  }
+
+  Future<void> getPmtaskViewList(
+      {int? scheduleId, bool? isloading, required int facilityId}) async {
+    scheduleCheckPoints.value = <ScheduleCheckPoint>[];
+    scheduleCheckPointsdrop.value = <ScheduleCheckPoint>[];
+
+    // rowItemclone.value = [];
+    final _permitDetails = await createmrsReturnPresenter.getPmtaskViewList(
+        scheduleId: whereUsedTypeId.value,
+        isloading: isloading,
+        facilityId: facilityId);
+    if (_permitDetails != null) {
+      // pmtaskViewModel.value = _permitDetails;
+      _permitDetails.schedules?.forEach((element) {
+        //  if (element.completedBy_id == 0) {
+        // rowItemclone.value.add([
+        //   {
+        //     "key": "Asset",
+        //     "value": '${element.name}',
+        //     "id": '${element.assetsID}'
+        //   },
+        //   {
+        //     'key': "Checklist",
+        //     "value": '${element.checklist_name}',
+        //     'executionDone': '${element.completedBy_id}'
+        //   },
+        //   {
+        //     'key': "executionDone",
+        //     'value': '${element.completedBy_id}',
+        //     'completed': '${element.completedBy_name}'
+        //   },
+        //   {'key': "dropdown", "value": ''},
+        // ]);
+        // // Add to scheduleCheckPoints if completedBy_id != 0
+        // if (element.completedBy_id != 0) {
+        scheduleCheckPointsdrop.value.add(element);
+        // }
+      });
+      if (_permitDetails.schedules != null) {
+        for (var _frequencyList in _permitDetails.schedules ?? []) {
+          scheduleCheckPoints.add(_frequencyList);
+        }
+      }
+      // await getMrsListByModuleTask(taskId: scheduleId ?? 0);
+    }
+    // selectedasset.value = scheduleCheckPoints[0].name ?? "";
+    update(["getPmtaskViewList"]);
+
+    // print({"checklistObservations", checklistObservations});
   }
 
   Future<void> createReturnMrs() async {
@@ -200,10 +257,10 @@ class CreateMrsReturnController extends GetxController {
         assetMasterItemID:
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
         mrsItemID: 0,
-        // dropdownFaultyMapperData.value[element[0]["value"]].issued_qty,
-        sr_no: element[4]["value"] ?? '0',
-        returned_qty: int.tryParse(element[5]["value"] ?? '0'),
-        return_remarks: element[6]["value"] ?? '0',
+        assetsID: checkdropdownMapperData[element[1]["value"]].assetsID,
+        sr_no: element[6]["value"] ?? '0',
+        returned_qty: int.tryParse(element[6]["value"] ?? '0'),
+        return_remarks: element[7]["value"] ?? '0',
       );
       faultyItems.add(item);
     });

@@ -1170,17 +1170,18 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> permitCancelRequestButton({
-    required String auth,
-    cancelPermitJsonString,
-    bool? isLoading,
-    int? jobId,
-  }) async =>
+  Future<ResponseModel> permitCancelRequestButton(
+          {required String auth,
+          cancelPermitJsonString,
+          bool? isLoading,
+          int? jobId,
+          int? type}) async =>
       await connectHelper.permitCancelRequestButton(
           auth: auth,
           cancelPermitJsonString: cancelPermitJsonString,
           isLoading: isLoading ?? false,
-          jobId: jobId);
+          jobId: jobId,
+          type: type);
 
   Future<ResponseModel> permitCancelByApproverButton({
     required String auth,
@@ -5293,20 +5294,20 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
-   Future<ResponseModel> getPlantStockMonthDetail({
+
+  Future<ResponseModel> getPlantStockMonthDetail({
     required String auth,
-  
     required int facilityID,
     required int assetItemID,
-     String? start_date,
+    String? start_date,
     required String end_date,
     bool? isLoading,
   }) async =>
       await connectHelper.getPlantStockMonthDetail(
         auth: auth,
- start_date:start_date,
- end_date:end_date,
-    assetItemID:  assetItemID,
+        start_date: start_date,
+        end_date: end_date,
+        assetItemID: assetItemID,
         facilityID: facilityID,
         isLoading: isLoading ?? false,
       );
@@ -5910,8 +5911,8 @@ class DataRepository extends DomainRepository {
     String? auth,
     bool? isLoading,
     required int facility_id,
-     String? fromDate,
-     String? toDate,
+    String? fromDate,
+    String? toDate,
   }) async =>
       await connectHelper.getTrainingSummary(
         auth: auth,

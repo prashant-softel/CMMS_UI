@@ -1859,12 +1859,12 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> permitCancelRequestButton({
-    required String auth,
-    cancelPermitJsonString,
-    bool? isLoading,
-    int? jobId,
-  }) async {
+  Future<ResponseModel> permitCancelRequestButton(
+      {required String auth,
+      cancelPermitJsonString,
+      bool? isLoading,
+      int? jobId,
+      int? type}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitCancelRequest',
@@ -1881,7 +1881,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageCancelRequestDialog(
-        data: parsedJson['message'], jobId: jobId));
+        data: parsedJson['message'], jobId: jobId, type: type));
 
     return responseModel;
   }
@@ -9319,7 +9319,8 @@ class ConnectHelper {
     );
     return responseModel;
   }
-Future<ResponseModel> getPlantStockMonthDetail({
+
+  Future<ResponseModel> getPlantStockMonthDetail({
     required String auth,
     required int facilityID,
     required int assetItemID,
@@ -9339,6 +9340,7 @@ Future<ResponseModel> getPlantStockMonthDetail({
     print('ViewResponseModel${responseModel.data}');
     return responseModel;
   }
+
   //create
   Future<ResponseModel> createSourceOfOb({
     required String auth,

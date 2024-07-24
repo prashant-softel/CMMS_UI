@@ -12,9 +12,10 @@ class PermitMessageCancelRequestDialog extends GetView {
   String? createPermitData;
   String? data;
   int? jobId;
+  int? type;
 
   PermitMessageCancelRequestDialog(
-      {super.key, this.createPermitData, this.data, this.jobId});
+      {super.key, this.createPermitData, this.data, this.jobId, this.type});
   final ViewPermitController _controller = Get.find();
 
   @override
@@ -82,11 +83,15 @@ class PermitMessageCancelRequestDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                // jobId != 0
-                //     ? Get.offAllNamed(Routes.jobDetails,
-                //         arguments: {"jobId": jobId})
-                //     :
-                Get.offAllNamed(Routes.newPermitList);
+                type == 1
+
+                    // jobId != 0
+                    ? Get.offAllNamed(
+                        Routes.jobCard,
+                      )
+                    : type == 2
+                        ? Get.offAllNamed(Routes.pmTaskView)
+                        : Get.offAllNamed(Routes.newPermitList);
               },
               child: const Text('Ok'),
             ),
