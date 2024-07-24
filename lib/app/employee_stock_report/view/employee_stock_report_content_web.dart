@@ -112,7 +112,7 @@ class EmployeeStockReportContentWeb
                                             'User Login ID: ',
                                             style: Styles.blackBold14,
                                           ),
-                                          Dimens.boxWidth20,
+                                          Dimens.boxWidth2,
                                           Container(
                                             width: (MediaQuery.of(context)
                                                     .size
@@ -276,7 +276,7 @@ class EmployeeStockReportContentWeb
                                         Container(
                                           width: 200,
                                           height: 35,
-                                          margin: Dimens.edgeInsets0_0_16_0,
+                                          margin: EdgeInsets.only(right: 8),
                                           child: TextField(
                                             style: GoogleFonts.lato(
                                               textStyle: TextStyle(
@@ -300,7 +300,7 @@ class EmployeeStockReportContentWeb
                                                     width: 0.0),
                                               ),
                                               contentPadding:
-                                                  Dimens.edgeInsets10_0_0_0,
+                                                  EdgeInsets.only(left: 5),
                                               hintText: 'search'.tr,
                                               hintStyle: Styles.grey12,
                                             ),
