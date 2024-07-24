@@ -5890,5 +5890,36 @@ class DataRepository extends DomainRepository {
         startDate: startDate,
         endDate: endDate,
       );
+
+  Future<ResponseModel> getObservationSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    required String fromDate,
+    required String toDate,
+  }) async =>
+      await connectHelper.getObservationSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
+  Future<ResponseModel> getTrainingSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+     String? fromDate,
+     String? toDate,
+  }) async =>
+      await connectHelper.getTrainingSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
 //end
 }

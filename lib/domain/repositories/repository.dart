@@ -78,6 +78,7 @@ import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
+import 'package:cmms/domain/models/observation_summary_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/permit_cancel_condition_list_model.dart';
 import 'package:cmms/domain/models/plant_stock_month.dart';
@@ -102,6 +103,7 @@ import 'package:cmms/domain/models/stock_management_update_goods_orders_model.da
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/training_course_list_model.dart';
+import 'package:cmms/domain/models/training_summary_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_waste_model.dart';
@@ -15480,5 +15482,73 @@ class Repository {
       return [];
     }
   }
+
+  Future<List<ObservationSummaryModel?>?> getObservationSummary(
+      int? facility_id, bool? isLoading, String fromDate, String toDate) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      if (facility_id == null) {
+        throw ArgumentError('facility_id cannot be null');
+      }
+
+      final res = await _dataRepository.getObservationSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
+      if (!res.hasError) {
+        // String jsonObservationSummaryModels = jsonDecode(res.data);
+        final List<ObservationSummaryModel> _observationSummaryModelList =
+            obsSummaryFromJson(res.data);
+
+        return _observationSummaryModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getObservationSummary');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<TrainingSummaryModel?>?> getTrainingSummary(
+      int? facility_id, bool? isLoading, String fromDate, String toDate) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      if (facility_id == null) {
+        throw ArgumentError('facility_id cannot be null');
+      }
+
+      final res = await _dataRepository.getTrainingSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
+      if (!res.hasError) {
+        // String jsonObservationSummaryModels = jsonDecode(res.data);
+
+        final List<TrainingSummaryModel> _trainingSummaryModelList =
+            trainingSummaryFromJson(res.data);
+
+        return _trainingSummaryModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getTrainingSummary');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   //end
 }
