@@ -194,7 +194,7 @@ class _FaultyMaterialReportContentWebState
                                   Container(
                                     width: 300,
                                     height: 40,
-                                    margin: Dimens.edgeInsets0_0_16_0,
+                                    margin: EdgeInsets.only(right: 5),
                                     child: TextField(
                                       style: GoogleFonts.lato(
                                         textStyle: TextStyle(
@@ -214,7 +214,7 @@ class _FaultyMaterialReportContentWebState
                                               color: Colors.grey, width: 0.0),
                                         ),
                                         contentPadding:
-                                            Dimens.edgeInsets10_0_0_0,
+                                            EdgeInsets.only(left: 8),
                                         hintText: 'search'.tr,
                                         hintStyle: Styles.grey12,
                                       ),

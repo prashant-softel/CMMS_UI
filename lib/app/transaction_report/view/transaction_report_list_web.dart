@@ -235,7 +235,7 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                                   width: 0.0),
                                             ),
                                             contentPadding:
-                                                Dimens.edgeInsets10_0_0_0,
+                                                EdgeInsets.only(left: 8),
                                             hintText: 'search'.tr,
                                             hintStyle: Styles.grey12,
                                           ),
