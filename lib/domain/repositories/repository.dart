@@ -80,6 +80,7 @@ import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/permit_cancel_condition_list_model.dart';
+import 'package:cmms/domain/models/plant_stock_month.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
@@ -14090,6 +14091,42 @@ class Repository {
               waterDataMonthDetailModelFromJson(res.data);
           print({"water data by month", waterDataMonthDetails});
           return waterDataMonthDetails;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+  //plant stock details
+  Future<List<PlantStockMonth?>?> getPlantStockMonthDetail({
+    String? start_date,
+    required String end_date,
+    required int facilityID,
+    required int assetItemID,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPlantStockMonthDetail(
+        auth: auth,
+        start_date: start_date,
+        end_date: end_date,
+        assetItemID:assetItemID,
+        facilityID: facilityID,
+        isLoading: isLoading ?? false,
+      );
+      print({"Plant Stock By Months", res.data});
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var plantStockMonthDetails =
+              PlantStockMonthDetailModelFromJson(res.data);
+          print({"Plant Stock By Months", plantStockMonthDetails[0].details});
+          return plantStockMonthDetails;
         }
       } else {
         Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
