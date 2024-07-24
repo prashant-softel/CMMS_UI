@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/check_list_inspection_model.dart';
 import 'package:cmms/domain/models/type_of_water_model.dart';
 import 'package:cmms/domain/models/water_data_list_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
@@ -6,6 +7,14 @@ class ChecklistInspectionListUsecase {
   Repository repository;
 
   ChecklistInspectionListUsecase(this.repository);
+  Future<ChecklistInspectionModel?> getChecklistInspection({
+    bool? isLoading,
+  }) async {
+    return repository.getChecklistInspection(
+      isLoading: isLoading,
+    );
+  }
+
   Future<Map<String, dynamic>> createWaterData({
     createWaterData,
     bool? isLoading,

@@ -8,6 +8,7 @@ import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
@@ -437,6 +438,26 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     });
   }
 
+  Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
+    Get.toNamed(Routes.createPermit, arguments: {
+      'permitId': permitId,
+      'isChecked': isChecked,
+      "type": 2,
+      "isFromPmTaskDetails": true,
+      "jobModel": jobDetailsModel.value,
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": 0
+    });
+    print('PermitIDForTBt:$permitId');
+    print('PermitIdArgument:$isChecked');
+  }
+
   approvePmTaskExecution() async {
     {
       String _comment = commentCtrlr.text.trim();
@@ -462,13 +483,19 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
       CommentModel commentModel =
           CommentModel(id: scheduleId.value, comment: _comment);
-
+      ClosePermitModel ptwClose = ClosePermitModel(
+          id: pmtaskViewModel.value?.permit_id ?? 0,
+          comment: _comment,
+          conditionIds: [1, 2, 3, 4],
+          fileIds: []);
       var closetoJsonString = commentModel.toJson();
+      var closePtwJsonString = ptwClose.toJson();
+
       final response =
           await preventiveMaintenanceTaskViewPresenter.closePmTaskExecution(
-        closetoJsonString: closetoJsonString,
-        isLoading: true,
-      );
+              closetoJsonString: closetoJsonString,
+              isLoading: true,
+              closePtwJsonString: closePtwJsonString);
       if (response == true) {
         Get.offAllNamed(Routes.pmTask);
       }

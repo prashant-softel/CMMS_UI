@@ -17,6 +17,8 @@ class CreatePmPlanUsecase {
         isLoading: isLoading, facilityId: facilityId, categoryId: categoryId);
   }
 
+  void clearValue() async => repository.clearData(LocalKeys.pmPlanId);
+
   Future<List<FrequencyModel?>?> getFrequencyList({
     bool? isLoading,
   }) async =>

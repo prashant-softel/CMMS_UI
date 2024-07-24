@@ -27,10 +27,14 @@ class ViewAuditTaskUsecase {
 
   Future<Map<String, dynamic>> auditTaskCloseButton({
     auditTaskCloseJsonString,
+    closePtwJsonString,
+    bool? ptw_req,
     bool? isLoading,
   }) async =>
       await repository.auditTaskCloseButton(
         auditTaskCloseJsonString,
+        closePtwJsonString,
+        ptw_req,
         isLoading,
       );
   Future<PmFiles?> browseFiles(

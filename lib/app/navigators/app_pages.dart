@@ -137,6 +137,8 @@ import 'package:cmms/app/create_mrs_return/view/create_mrs_return_screen.dart';
 import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/new_permit/view/create_permit_screen.dart';
+import 'package:cmms/app/plant_stock_report_details/plant_stock_report_binding_details.dart';
+import 'package:cmms/app/plant_stock_report_details/view/plant_stock_report_screen_details.dart';
 import 'package:cmms/app/observation_summary/observation_summary_binding.dart';
 import 'package:cmms/app/observation_summary/views/observation_summary_screen.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
@@ -1063,6 +1065,13 @@ class AppPages {
       page: PlantStockReportScreen.new,
       binding: PlantStockReportBinding(),
     ),
+
+    GetPage<dynamic>(
+      name: _Paths.plantStockReportDetails,
+      page: PlantStockReportDetailsScreen.new,
+      binding: PlantStockReportDetailsBinding(),
+    ),
+
     GetPage<dynamic>(
       name: _Paths.employeeStockReport,
       page: EmployeeStockReportScreen.new,
@@ -1383,7 +1392,7 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.trainingSummary,
       page: TrainingSummaryScreen.new,
-      binding: TrainingSummaryBinding(),   
+      binding: TrainingSummaryBinding(),
     ),
   ];
 }

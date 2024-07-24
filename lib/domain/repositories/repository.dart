@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
 import 'package:cmms/domain/models/attendance_model.dart';
 import 'package:cmms/domain/models/attendance_month_model.dart';
+import 'package:cmms/domain/models/check_list_inspection_model.dart';
 import 'package:cmms/domain/models/complicance_history_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
@@ -80,6 +81,7 @@ import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/observation_summary_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/permit_cancel_condition_list_model.dart';
+import 'package:cmms/domain/models/plant_stock_month.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
@@ -536,15 +538,15 @@ class Repository {
 
   /// sesubmit permit
   Future<Map<String, dynamic>> resubmitPermit(
-      newPermit, bool? isLoading, bool? resubmit) async {
+      newPermit, bool? isLoading, bool? resubmit, int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.resubmitPermit(
-        auth: auth,
-        newPermit: newPermit,
-        isLoading: isLoading ?? false,
-        resubmit: resubmit,
-      );
+          auth: auth,
+          newPermit: newPermit,
+          isLoading: isLoading ?? false,
+          resubmit: resubmit,
+          type: type);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -3659,6 +3661,8 @@ class Repository {
 
   Future<Map<String, dynamic>> auditTaskCloseButton(
     auditTaskCloseJsonString,
+    closePtwJsonString,
+    bool? ptw_req,
     bool? isLoading,
   ) async {
     try {
@@ -3676,6 +3680,10 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
+          if (ptw_req == true) {
+            permitCloseButton(closePtwJsonString, isLoading, 0, 3);
+          }
+
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -5325,7 +5333,9 @@ class Repository {
               ? Get.offAllNamed(Routes.pmTaskView)
               : type == 1
                   ? Get.offAllNamed(Routes.jobDetails)
-                  : Get.offAllNamed(Routes.newPermitList);
+                  // : type == 3
+                  //     ? Get.offAllNamed(Routes.viewAuditTask)
+                      : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -5795,6 +5805,7 @@ class Repository {
   Future<void> endMCScheduleExecutionButton(
     int? scheduleId,
     bool? isLoading,
+    closePtwJsonString,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -5806,8 +5817,11 @@ class Repository {
       );
       print('EndScheduleExecutionResponse55: ${res.data}');
 
-      if (!res.hasError) {
-        //  return _permitIssueModel;
+      if (res.errorCode == 200) {
+        var responseMap = json.decode(res.data);
+        permitCloseButton(closePtwJsonString, isLoading, 0, 4);
+
+        return responseMap;
       } else {
         Utility.showDialog(
             res.errorCode.toString(), 'endMCScheduleExecutionButton');
@@ -7457,8 +7471,8 @@ class Repository {
         // Fluttertoast.showToast(
         //     msg: "Start Job Card Successfully...", fontSize: 16.0);
 
-        Get.offAllNamed(Routes.jobCard,
-            arguments: {'JcId': int.tryParse("$jcCard")});
+        // Get.offAllNamed(Routes.jobCard,
+        //     arguments: {'JcId': int.tryParse("$jcCard")});
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       }
       // if (!res.hasError) {
@@ -7662,7 +7676,7 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
-          permitCloseButton(closePtwJsonString, isLoading, 0, 2);
+          permitCloseButton(closePtwJsonString, isLoading, 0, 1);
 
           return responseMap;
         }
@@ -8397,7 +8411,8 @@ class Repository {
       bool? isLoading,
       bool? isExport,
       dynamic startDate,
-      dynamic endDate) async {
+      dynamic endDate,
+      int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getAuditTaskList(
@@ -8405,7 +8420,8 @@ class Repository {
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           startDate: startDate,
-          endDate: endDate);
+          endDate: endDate,
+          type: type);
       // print(res.data);
       if (!res.hasError) {
         final jsonPmTaskListModelModels = jsonDecode(res.data);
@@ -12452,11 +12468,11 @@ class Repository {
     }
   }
 
-  Future<bool> ClosePMTaskExecution(
-      {bool? isLoading,
-      closetoJsonString,
-      closePtwJsonString,
-      int? closetype}) async {
+  Future<bool> ClosePMTaskExecution({
+    bool? isLoading,
+    closetoJsonString,
+    closePtwJsonString,
+  }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -12470,7 +12486,7 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "PM Task Closed Successfully!", fontSize: 45.0);
-        permitCloseButton(closePtwJsonString, isLoading, 0, closetype);
+        permitCloseButton(closePtwJsonString, isLoading, 0, 2);
         return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -14088,6 +14104,42 @@ class Repository {
       return null;
     }
   }
+  //plant stock details
+  Future<List<PlantStockMonth?>?> getPlantStockMonthDetail({
+    String? start_date,
+    required String end_date,
+    required int facilityID,
+    required int assetItemID,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPlantStockMonthDetail(
+        auth: auth,
+        start_date: start_date,
+        end_date: end_date,
+        assetItemID:assetItemID,
+        facilityID: facilityID,
+        isLoading: isLoading ?? false,
+      );
+      print({"Plant Stock By Months", res.data});
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var plantStockMonthDetails =
+              PlantStockMonthDetailModelFromJson(res.data);
+          print({"Plant Stock By Months", plantStockMonthDetails[0].details});
+          return plantStockMonthDetails;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
 
   Future<WasteDataMonthModel> getWasteDataMonthDetail({
     required int month,
@@ -14379,6 +14431,75 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<ChecklistInspectionModel?> getChecklistInspection({
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getChecklistInspection(
+        auth: auth,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        var checklistInspectionList = ChecklistInspectionModel.fromJson({
+          "checklist": [
+            {
+              "checklist Name": "Vehicle Fitness Checklist",
+              "sOPNumber": "HFE/HSE/SOP-11/C-1",
+              "frequency": "Monthly",
+              "monthlyInspection": [
+                {
+                  "inspectionMonth": "April",
+                  "inspectionStatus": "sdsd",
+                  "dateOfInspection": "",
+                  "ChecklistAttachment": "",
+                  "NoOfUnsafeObservations": ""
+                },
+                {
+                  "inspectionMonth": "May",
+                  "inspectionStatus": "",
+                  "dateOfInspection": "",
+                  "ChecklistAttachment": "",
+                  "NoOfUnsafeObservations": ""
+                }
+              ]
+            },
+            {
+              "checklistName":
+                  "Bird & Bat Monitoring Checklist (Wind Projects)",
+              "sOPNumber": "HFE/HSE/SOP-11/C-1",
+              "frequency": "Monthly",
+              "monthlyInspection": [
+                {
+                  "inspectionMonth": "April",
+                  "inspectionStatus": "",
+                  "dateOfInspection": "",
+                  "ChecklistAttachment": "",
+                  "NoOfUnsafeObservations": ""
+                },
+                {
+                  "inspectionMonth": "May",
+                  "inspectionStatus": "",
+                  "dateOfInspection": "",
+                  "ChecklistAttachment": "",
+                  "NoOfUnsafeObservations": ""
+                }
+              ]
+            }
+          ]
+        });
+
+        return checklistInspectionList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Check_list_Inspection');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return null;
     }
   }
 

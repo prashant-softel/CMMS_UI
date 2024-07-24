@@ -9,11 +9,8 @@ class PreventiveMaintenanceTaskViewUsecase {
   final Repository repository;
 
   PreventiveMaintenanceTaskViewUsecase(this.repository);
-  Future<PmtaskViewModel?> getPmtaskViewList({
-    int? scheduleId,
-    bool? isLoading,
-    required int facilityId
-  }) async =>
+  Future<PmtaskViewModel?> getPmtaskViewList(
+          {int? scheduleId, bool? isLoading, required int facilityId}) async =>
       await repository.getPmtaskViewList(
         scheduleId,
         isLoading,
@@ -77,10 +74,13 @@ class PreventiveMaintenanceTaskViewUsecase {
           rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
   Future<bool> closePmTaskExecution({
     closetoJsonString,
+    closePtwJsonString,
     bool? isLoading,
   }) async =>
       await repository.ClosePMTaskExecution(
-          closetoJsonString: closetoJsonString, isLoading: isLoading);
+          closetoJsonString: closetoJsonString,
+          closePtwJsonString: closePtwJsonString,
+          isLoading: isLoading);
   Future<bool> assignToPmTask({
     int? assignId,
     int? taskId,

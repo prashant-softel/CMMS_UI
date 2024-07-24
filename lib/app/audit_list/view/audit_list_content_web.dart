@@ -758,56 +758,118 @@ class AuditListListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPmExecutionFeatureId &&
-                                        e.view ==
-                                            UserAccessConstants.kHaveEditAccess)
-                                    .length >
-                                0
-                            ? TableActionButton(
-                                color: ColorValues.editColor,
-                                icon: Icons.edit,
-                                message: 'Edit',
-                                onPress: () {
-                                  controller.clearStoreIdData();
-                                  // controller.clearValue();
-                                  int id =
-                                      AuditPlanPlanningListDetails?.id ?? 0;
-                                  if (id != 0) {
-                                    Get.toNamed(Routes.createAudit, arguments: {
-                                      "auditId": id,
-                                      'type': controller.type.value
-                                    });
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kAuditPlanFeatureId &&
-                                        e.delete ==
-                                            UserAccessConstants
-                                                .kHaveDeleteAccess)
-                                    .length >
-                                0
-                            ? TableActionButton(
-                                color: ColorValues.deleteColor,
-                                icon: Icons.delete,
-                                message: 'Delete',
-                                onPress: () {
-                                  controller.isDeleteDialog(
-                                      planName: AuditPlanPlanningListDetails
-                                          ?.plan_number,
-                                      planId: AuditPlanPlanningListDetails?.id
-                                          .toString());
-                                },
-                              )
-                            : Dimens.box0
+                            controller.auditPlanList
+                            .firstWhere(
+                              (e) => e.id == AuditPlanPlanningListDetails!.id,
+                              orElse: () => AuditPlanListModel(id: 00),
+                            )
+                            .status !=
+                        425
+                    ? Wrap(
+                        children: [
+                          varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants
+                                                  .kPmExecutionFeatureId &&
+                                          e.view ==
+                                              UserAccessConstants
+                                                  .kHaveEditAccess)
+                                      .length >
+                                  0
+                              ? TableActionButton(
+                                  color: ColorValues.editColor,
+                                  icon: Icons.edit,
+                                  message: 'Edit',
+                                  onPress: () {
+                                    controller.clearStoreIdData();
+                                    int id =
+                                        AuditPlanPlanningListDetails?.id ?? 0;
+                                    if (id != 0) {
+                                      Get.toNamed(Routes.createAudit, arguments: {
+                                        "auditId": id,
+                                        'type': controller.type.value
+                                      });
+                                    }
+                                  },
+                                )
+                              : Dimens.box0,
+                          varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants
+                                                  .kAuditPlanFeatureId &&
+                                          e.delete ==
+                                              UserAccessConstants
+                                                  .kHaveDeleteAccess)
+                                      .length >
+                                  0
+                              ? TableActionButton(
+                                  color: ColorValues.deleteColor,
+                                  icon: Icons.delete,
+                                  message: 'Delete',
+                                  onPress: () {
+                                    controller.isDeleteDialog(
+                                        planName: AuditPlanPlanningListDetails
+                                            ?.plan_number,
+                                        planId: AuditPlanPlanningListDetails?.id
+                                            .toString());
+                                  },
+                                )
+                              : Dimens.box0,
+                        ],
+                      )
+                    : Dimens.box0,
+                        // varUserAccessModel.value.access_list!
+                        //             .where((e) =>
+                        //                 e.feature_id ==
+                        //                     UserAccessConstants
+                        //                         .kPmExecutionFeatureId &&
+                        //                 e.view ==
+                        //                     UserAccessConstants.kHaveEditAccess)
+                        //             .length >
+                        //         0
+                        //     ? TableActionButton(
+                        //         color: ColorValues.editColor,
+                        //         icon: Icons.edit,
+                        //         message: 'Edit',
+                        //         onPress: () {
+                        //           controller.clearStoreIdData();
+                        //           // controller.clearValue();
+                        //           int id =
+                        //               AuditPlanPlanningListDetails?.id ?? 0;
+                        //           if (id != 0) {
+                        //             Get.toNamed(Routes.createAudit, arguments: {
+                        //               "auditId": id,
+                        //               'type': controller.type.value
+                        //             });
+                        //           }
+                        //         },
+                        //       )
+                        //     : Dimens.box0,
+                        // varUserAccessModel.value.access_list!
+                        //             .where((e) =>
+                        //                 e.feature_id ==
+                        //                     UserAccessConstants
+                        //                         .kAuditPlanFeatureId &&
+                        //                 e.delete ==
+                        //                     UserAccessConstants
+                        //                         .kHaveDeleteAccess)
+                        //             .length >
+                        //         0
+                        //     ? TableActionButton(
+                        //         color: ColorValues.deleteColor,
+                        //         icon: Icons.delete,
+                        //         message: 'Delete',
+                        //         onPress: () {
+                        //           controller.isDeleteDialog(
+                        //               planName: AuditPlanPlanningListDetails
+                        //                   ?.plan_number,
+                        //               planId: AuditPlanPlanningListDetails?.id
+                        //                   .toString());
+                        //         },
+                        //       )
+                        //     : Dimens.box0
                         // TableActionButton(
                         //   color: ColorValues.appGreenColor,
                         //   icon: Icons.add,

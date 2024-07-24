@@ -21,6 +21,8 @@ class CreatePmPlanPresenter {
       await createPmPlanUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
+  void clearValue() async => createPmPlanUsecase.clearValue();
+
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
@@ -79,10 +81,7 @@ class CreatePmPlanPresenter {
     bool? isLoading,
   }) async =>
       await createPmPlanUsecase.getPmPlanDetails(
-        pmPlanId: pmPlanId,
-        isLoading: isLoading,
-        facilityId: facilityId
-      );
+          pmPlanId: pmPlanId, isLoading: isLoading, facilityId: facilityId);
   void saveValue({String? pmPlanId}) async {
     return createPmPlanUsecase.saveValue(pmPlanId: pmPlanId);
   }

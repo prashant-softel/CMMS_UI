@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/dashboard_controller.dart';
 import 'package:get/get.dart';
 
 import '../../domain/usecases/home_usecase.dart';
@@ -7,6 +8,15 @@ import '../../domain/usecases/home_usecase.dart';
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut<DashboardController>(
+      () => DashboardController(
+        HomePresenter(
+          HomeUsecase(
+            Get.find(),
+          ),
+        ),
+      ),
+    );
     // Get.find<HomeController>();
     Get.lazyPut(
       () => HomeController(

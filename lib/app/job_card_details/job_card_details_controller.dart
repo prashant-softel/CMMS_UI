@@ -175,20 +175,18 @@ class JobCardDetailsController extends GetxController {
 
   @override
   void onInit() async {
-    facilityIdStreamSubscription =
-        homeController.facilityId$.listen((event) async {
-      facilityId = event;
-      if (facilityId > 0) {
-        isFacilitySelected.value = true;
-        await getEmployeeList();
-      }
-    });
-
     try {
       Get.put(FileUploadController());
 
       await setJcId();
-
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
+        facilityId = event;
+        if (facilityId > 0) {
+          isFacilitySelected.value = true;
+          await getEmployeeList();
+        }
+      });
       if (jobCardId.value != 0) {
         jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
               jobCardId: jobCardId.value,
@@ -198,7 +196,9 @@ class JobCardDetailsController extends GetxController {
         getHistory(facilityId);
         jobCardDetailsModel.value =
             jobCardList.value.firstWhere((element) => element?.id != null);
-
+        createPlantDetailsTableData();
+        createJobDetailsTableData();
+        createPermitDetailsTableData();
         jobCardDetailsModel.value?.lstCmjcEmpList?.forEach((element) {
           employeesDeployed.value.add([
             {
@@ -219,9 +219,6 @@ class JobCardDetailsController extends GetxController {
               .firstWhere((e) => e!.name == element.name, orElse: null);
         });
       }
-      createPlantDetailsTableData();
-      createJobDetailsTableData();
-      createPermitDetailsTableData();
 
       responsibilityCtrlrs.add(TextEditingController());
       currentIndex.value = -1;
@@ -298,6 +295,7 @@ class JobCardDetailsController extends GetxController {
         }
         update(["employeeList"]);
       }
+      addEmployeesDeployed();
     }
   }
 
@@ -335,21 +333,24 @@ class JobCardDetailsController extends GetxController {
     List<TranferItems> items = [];
     rowItem.forEach((element) {
       TranferItems item = TranferItems(
-          assetItemID:
-              dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-          facilityID: facilityId,
-          fromActorID: jobCardId.value,
-          fromActorType: AppConstants.kJobCard,
-          mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-          mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
-          qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
-          refID: jobCardId.value,
-          refType: AppConstants.kJobCard,
-          remarks: "remarks",
-          toActorID: dropdownMapperDataworkingArea[element[1]["value"]]
-                  .workingAreaId ??
-              0,
-          toActorType: AppConstants.kInventory);
+        assetItemID:
+            dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+        facilityID: facilityId,
+        fromActorID: jobCardId.value,
+        fromActorType: AppConstants.kJobCard,
+        mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
+        mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
+        qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
+        refID: jobCardId.value,
+        refType: AppConstants.kJobCard,
+        remarks: "remarks",
+        toActorID:
+            dropdownMapperDataworkingArea[element[1]["value"]].workingAreaId ??
+                0,
+        toActorType: AppConstants.kInventory,
+        transaction_id:
+            dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
+      );
 
       items.add(item);
     });
@@ -868,7 +869,8 @@ class JobCardDetailsController extends GetxController {
   }
 
   goToAddJobScreen() {
-    Get.offAllNamed(Routes.jobDetails);
+    Get.offAllNamed(Routes.jobDetails,
+        arguments: {'jobId': jobDetailsModel.value?.id});
   }
 
   void addNewEmployee(EmployeeModel selectedEmployee, String responsibility) {

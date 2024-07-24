@@ -140,11 +140,11 @@ class PlantStockReportController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(Duration(seconds: 1), () {
         getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
-             false, selectedAssetsNameIdList.value);
+            false, selectedAssetsNameIdList.value);
       });
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(Duration(seconds: 1), () {
         getAssetList(facilityId);
       });
     });
@@ -152,6 +152,7 @@ class PlantStockReportController extends GetxController {
   }
 
   Future<void> getAssetList(int _facilityId) async {
+    assetList.clear();
     assetList.value = <GetAssetDataModel>[];
     final _assetList =
         await pantStockReportPresenter.getAssetList(facilityId: facilityId);
@@ -170,6 +171,7 @@ class PlantStockReportController extends GetxController {
       dynamic endDate,
       bool? isExport,
       List<int>? selectedAssetsNameIdList) async {
+    plantStockList!.clear();
     plantStockList?.value = <PlantStockListModel>[];
     StockDetailsList.value = <StockDetails>[];
 
@@ -199,8 +201,8 @@ class PlantStockReportController extends GetxController {
   }
 
   void getPlantStockListByDate() {
-    getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, 
-        false, selectedAssetsNameIdList.value);
+    getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, false,
+        selectedAssetsNameIdList.value);
   }
 
   void onValueChanged(dynamic list, dynamic value) {
@@ -210,27 +212,23 @@ class PlantStockReportController extends GetxController {
         {
           if (value != "Please Select") {
             if (value != null) {
-            for (var selectedItem in value) {
-              int equipCatIndex =
-                  assetList.indexWhere((x) => x?.name == selectedItem);
-              if (equipCatIndex >= 0) {
-                selectedAssetsNameIdList.add(assetList[equipCatIndex]?.id ?? 0);
+              for (var selectedItem in value) {
+                int equipCatIndex =
+                    assetList.indexWhere((x) => x?.name == selectedItem);
+                if (equipCatIndex >= 0) {
+                  selectedAssetsNameIdList
+                      .add(assetList[equipCatIndex]?.id ?? 0);
+                }
               }
             }
-          }
 
-          print('First Category Id:$selectedAssetsNameIdList');
-          plantStockList?.value = <PlantStockListModel>[];
+            print('First Category Id:$selectedAssetsNameIdList');
+            plantStockList?.value = <PlantStockListModel>[];
 
-          getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
-               false, selectedAssetsNameIdList.value);
-            
-          }else{
-            
+            getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
+                false, selectedAssetsNameIdList.value);
+          } else {
             // selectedAssetsNameIdList=0;
-
-          
-
           }
         }
         break;
@@ -240,6 +238,6 @@ class PlantStockReportController extends GetxController {
 
   void export() {
     getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, true,
-         selectedAssetsNameIdList.value);
+        selectedAssetsNameIdList.value);
   }
 }

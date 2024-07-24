@@ -401,7 +401,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         children: [
                                                           Checkbox(
                                                             value: controller
-                                                                .isCheckedLoto
+                                                                .isCheckedIso
                                                                 .value,
                                                             onChanged:
                                                                 (value) {},
@@ -2431,7 +2431,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               ),
                                               Checkbox(
                                                 value: controller
-                                                    .isCheckedLoto.value,
+                                                    .isCheckedIso.value,
                                                 onChanged: (value) {},
                                               ),
                                               Spacer(),

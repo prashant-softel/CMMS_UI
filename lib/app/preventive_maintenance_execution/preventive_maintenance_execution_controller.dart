@@ -125,7 +125,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       {'key': "Issued_Qty", "value": ''},
       {'key': "Used_Qty", "value": ''},
       {'key': "Consumed_Qty", "value": ''},
-      {'key': "Action ", "value": ''},
+      // {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -144,9 +144,25 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       for (var asset in _assetsList!) {
         cmmrsItems!.add(asset);
       }
+      cmmrsItems?.forEach((element) {
+        rowItem.add([
+          {"key": "Drop_down", "value": '${element?.name}'},
+          {'key': "Sr_No", "value": ''},
+          {'key': "code", "value": ''},
+          {'key': "Material_Type", "value": ''},
+          {'key': "Issued_Qty", "value": ''},
+          {'key': "Used_Qty", "value": ''},
+          {'key': "Consumed_Qty", "value": '${element?.used_qty}'},
+          // {'key': "Action ", "value": ''},
+        ]);
+        dropdownMapperData[element?.name ?? ""] = listMrsByTaskId!
+            .value.last!.cmmrsItems!
+            .firstWhere((e) => e!.serial_number == element?.serial_number,
+                orElse: null);
+      });
       _processJsonData();
       allTrue.value = itemExistsWithZeroDifference.every((item) => item);
-      addRowItem();
+      //  addRowItem();
     }
 
     print({"mrsit12mrs", allTrue.value});
@@ -211,6 +227,10 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     print(isTouchable.value);
   }
 
+  void clearMrsStoreData() {
+    preventiveMaintenanceExecutionPresenter.clearValue();
+  }
+
   Future<void> getPmtaskViewList(
       {int? scheduleId, bool? isloading, required int facilityId}) async {
     scheduleCheckPoints.value = <ScheduleCheckPoint>[];
@@ -266,20 +286,23 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     List<TranferItems> items = [];
     rowItem.value.forEach((element) {
       TranferItems item = TranferItems(
-          assetItemID:
-              dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-          facilityID: pmtaskViewModel.value?.facility_id ?? 0,
-          fromActorID: scheduleId.value,
-          fromActorType: AppConstants.kTask,
-          mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-          mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
-          qty: int.tryParse(element[6]["value"] ?? '0') ?? 0,
-          refID: scheduleId.value,
-          refType: AppConstants.kTask,
-          remarks: "remarks",
-          toActorID: selectedItem?.assetsID ?? 0,
-          // dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-          toActorType: AppConstants.kInventory);
+        assetItemID:
+            dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+        facilityID: pmtaskViewModel.value?.facility_id ?? 0,
+        fromActorID: scheduleId.value,
+        fromActorType: AppConstants.kTask,
+        mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
+        mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
+        qty: int.tryParse(element[6]["value"] ?? '0') ?? 0,
+        refID: scheduleId.value,
+        refType: AppConstants.kTask,
+        remarks: "remarks",
+        toActorID: selectedItem?.assetsID ?? 0,
+        // dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+        toActorType: AppConstants.kInventory,
+        transaction_id:
+            dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
+      );
 
       items.add(item);
     });

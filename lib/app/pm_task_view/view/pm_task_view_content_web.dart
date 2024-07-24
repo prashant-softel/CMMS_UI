@@ -628,16 +628,37 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                             jobId: controller.jobDetailsModel.value!.id ?? 0);
                                                                       })
                                                                   : Container(),
-                                                              // TableActionButton(
-                                                              //     color: ColorValues
-                                                              //         .appYellowColor,
-                                                              //     icon: Icons.copy,
-                                                              //     message:
-                                                              //         "Clone Permit"
-                                                              //     // onPress:
-                                                              //     //     () =>
-                                                              //     //         controller.goToJobCardScreen(),
-                                                              //     ),
+                                                              controller.pmtaskViewModel.value
+                                                                              ?.ptw_status ==
+                                                                          124 ||
+                                                                      controller
+                                                                              .pmtaskViewModel
+                                                                              .value
+                                                                              ?.ptw_status ==
+                                                                          132
+                                                                  ? TableActionButton(
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          116,
+                                                                          78,
+                                                                          130),
+                                                                      icon: Icons
+                                                                          .ads_click,
+                                                                      message:
+                                                                          'Re-Submit Permit',
+                                                                      onPress:
+                                                                          () {
+                                                                        controller.editNewPermit(
+                                                                            permitId:
+                                                                                controller.pmtaskViewModel.value?.permit_id,
+                                                                            isChecked: false
+                                                                            // controller
+                                                                            //     .isChecked
+                                                                            //     .value
+                                                                            );
+                                                                      },
+                                                                    )
+                                                                  : Dimens.box0
                                                             ],
                                                           )),
                                                         ]),
@@ -1022,7 +1043,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                         e.add ==
                                             UserAccessConstants.kHaveAddAccess)
                                     .length >
-                                0
+                                0 &&
+                            controller.pmtaskViewModel.value?.ptw_status == 125
                         ? Container(
                             height: 35,
                             child: CustomElevatedButton(

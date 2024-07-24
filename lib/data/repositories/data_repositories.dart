@@ -1885,12 +1885,14 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> resubmitPermit(
           {required String auth,
           newPermit,
+          int? type,
           bool? isLoading,
           bool? resubmit}) async =>
       await connectHelper.resubmitPermit(
           auth: auth,
           newPermit: newPermit,
           isLoading: isLoading ?? false,
+          type: type,
           resubmit: resubmit);
 
   Future<ResponseModel> createSOP({
@@ -2854,13 +2856,15 @@ class DataRepository extends DomainRepository {
           int? facilityId,
           bool? isLoading,
           dynamic startDate,
-          dynamic endDate}) async =>
+          dynamic endDate,
+          int? type}) async =>
       await connectHelper.getAuditTaskList(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           startDate: startDate,
-          endDate: endDate);
+          endDate: endDate,
+          type: type);
   Future<ResponseModel> getPmtaskViewList({
     String? auth,
     int? scheduleId,
@@ -5289,6 +5293,23 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+   Future<ResponseModel> getPlantStockMonthDetail({
+    required String auth,
+  
+    required int facilityID,
+    required int assetItemID,
+     String? start_date,
+    required String end_date,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPlantStockMonthDetail(
+        auth: auth,
+ start_date:start_date,
+ end_date:end_date,
+    assetItemID:  assetItemID,
+        facilityID: facilityID,
+        isLoading: isLoading ?? false,
+      );
 
   //create
   Future<ResponseModel> createSourceOfObslist({
@@ -5400,6 +5421,14 @@ class DataRepository extends DomainRepository {
         auth: auth,
         facilityId: facilityId,
         year: year,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getChecklistInspection({
+    required String auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getChecklistInspection(
+        auth: auth,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> getAttendanceDetail({

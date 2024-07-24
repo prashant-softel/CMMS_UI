@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cmms/domain/models/create_pm_plan_model.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
 
 import '../../app/utils/utility.dart';
 
@@ -35,7 +35,7 @@ class PMPlanDetail {
   int? updated_by_id;
   String? updated_by_name;
   String? updated_at;
-  List<AssetChecklist>? mapAssetChecklist;
+  List<InventoryModel>? mapAssetChecklist;
 
   PMPlanDetail(
       {this.approved_at,
@@ -70,8 +70,8 @@ class PMPlanDetail {
   factory PMPlanDetail.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['mapAssetChecklist'] as List;
     print(list.runtimeType);
-    List<AssetChecklist> mapAssetChecklist =
-        list.map((i) => AssetChecklist.fromJson(i)).toList();
+    List<InventoryModel> mapAssetChecklist =
+        list.map((i) => InventoryModel.fromJson(i)).toList();
 
     return PMPlanDetail(
       approved_at: parsedJson['approved_at'],

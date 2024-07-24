@@ -128,7 +128,9 @@ class CreatePmPlanController extends GetxController {
       // Utility.showDialog(e.toString() + 'pmPlanId');
     }
   }
-
+void clearStoreData() {
+    createPmPlanPresenter.clearValue();
+  }
   Future<void> getPmPlanDetails(
       {int? pmPlanId, bool? isloading, required int facilityId}) async {
     final _pmPlanDetailsModel = await createPmPlanPresenter.getPmPlanDetails(
@@ -157,20 +159,19 @@ class CreatePmPlanController extends GetxController {
 
         _pmPlanDetailsModel.mapAssetChecklist?.forEach((element) {
           InventoryModel? inventoryModel = inventoryNameList.firstWhere(
-            (e) => e.id == element.asset_id,
+            (e) => e.id == element.id,
             // orElse: () => null,
           );
           print("hsdfbhjgfhsbgfhdsbshj");
           selectedInventoryNameList.value.add(inventoryModel);
           rowItem.value.add([
             {"key": "assetName", "value": '${element.name}'},
-            {'key': "assetsId", "value": '${element.asset_id}'},
-            {'key': "parentAsset", "value": '${element.parent_name}'},
+            {'key': "assetsId", "value": '${element.id}'},
+            {'key': "parentAsset", "value": '${element.parentName}'},
             {'key': "qty", "value": '${element.module_qty}'},
             {
               'key': "checklist",
               "value": '${element.checklist_name}',
-              "id": '${element.checklist_id}'
             },
           ]);
         });
@@ -272,7 +273,7 @@ class CreatePmPlanController extends GetxController {
           {
             'key': "checklist",
             "value": (aa.length > 0 ? '${aa[4]["value"]}' : ''),
-            "id": (aa.length > 0 ? '${aa[4]["id"]}' : '')
+            // "id": (aa.length > 0 ? '${aa[4]["id"]}' : '')
           },
         ]);
       });
@@ -491,7 +492,7 @@ class CreatePmPlanController extends GetxController {
           parent_id: 0,
           parent_name: "",
           asset_id: int.tryParse(element[1]["value"] ?? '0'),
-          checklist_id: int.tryParse('${element[4]["id"]}'));
+          checklist_id: checkdropdownMapperData[element[4]["value"]]?.id);
       mapAssetChecklist.add(item);
     });
     CreatePmPlanModel createPmPlan = CreatePmPlanModel(

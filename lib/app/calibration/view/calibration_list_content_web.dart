@@ -280,7 +280,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                     // fixedLeftColumns: 1,
                                     // dataRowHeight: Get.height * 0.10,
                                     columnSpacing: 10,
-                                    dataRowHeight: Get.height * 0.10,
+                                    dataRowHeight: 65, //Get.height * 0.10,
                                     source:
                                         dataSource, // Custom DataSource class
                                     // headingRowHeight:
@@ -617,10 +617,11 @@ class CalibrationDataSource extends DataTableSource {
                                                 : ColorValues.appDarkBlueColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: Text(
-                            '${calibrationDetails?.calibration_status}',
-                            style: TextStyle(color: ColorValues.whiteColor),
-                          ),
+                          child:
+                              Text('${calibrationDetails?.calibration_status}',
+                                  style: Styles.white10.copyWith(
+                                    color: Colors.white,
+                                  )),
                         ),
                       ),
                     ],
@@ -646,7 +647,7 @@ class CalibrationDataSource extends DataTableSource {
                                               asset_id: 00),
                                         )
                                         ?.statusID ==
-                                    212
+                                    211
                             ? TableActionButton(
                                 color: ColorValues.lightGreenColor,
                                 message: 'Request Calibration',
@@ -684,7 +685,7 @@ class CalibrationDataSource extends DataTableSource {
                                               asset_id: 00),
                                         )
                                         ?.statusID ==
-                                    212
+                                    211
                             ? TableActionButton(
                                 color: ColorValues.startColor,
                                 message: 'Skip Calibration',
@@ -708,7 +709,7 @@ class CalibrationDataSource extends DataTableSource {
                                           CalibrationListModel(asset_id: 00),
                                     )
                                     ?.statusID ==
-                                0
+                                211
                             ? Dimens.box0
                             : TableActionButton(
                                 color: ColorValues.viewColor,
@@ -724,23 +725,23 @@ class CalibrationDataSource extends DataTableSource {
                                       });
                                 },
                               ),
-                        controller.calibrationList
-                                    .firstWhere(
-                                      (e) =>
-                                          e?.asset_id ==
-                                          calibrationDetails!.asset_id,
-                                      orElse: () =>
-                                          CalibrationListModel(asset_id: 00),
-                                    )
-                                    ?.statusID ==
-                                0
-                            ? Dimens.box0
-                            : TableActionButton(
-                                color: ColorValues.deleteColor,
-                                icon: Icons.delete,
-                                message: 'Delete',
-                                onPress: () {},
-                              ),
+                        // controller.calibrationList
+                        //             .firstWhere(
+                        //               (e) =>
+                        //                   e?.asset_id ==
+                        //                   calibrationDetails!.asset_id,
+                        //               orElse: () =>
+                        //                   CalibrationListModel(asset_id: 00),
+                        //             )
+                        //             ?.statusID ==
+
+                        //     ? Dimens.box0
+                        //     : TableActionButton(
+                        //         color: ColorValues.deleteColor,
+                        //         icon: Icons.delete,
+                        //         message: 'Delete',
+                        //         onPress: () {},
+                        //       ),
                       ])
                     : Text(value.toString()),
           ),

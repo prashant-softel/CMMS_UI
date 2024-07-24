@@ -1,6 +1,7 @@
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_presenter.dart';
+import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -66,7 +67,7 @@ class ViewAuditTaskController extends GetxController {
 
   Future<void> getHistory() async {
     /// TODO: CHANGE THESE VALUES
-    int moduleType = 27;
+    int moduleType = 41;
     //
     historyList?.value = await viewAuditTaskPresenter.getHistory(
           // tempModuleType,
@@ -195,12 +196,20 @@ class ViewAuditTaskController extends GetxController {
 
       CommentModel commentauditTaskCloseModel =
           CommentModel(id: id, comment: _comment);
+      ClosePermitModel ptwClose = ClosePermitModel(
+          id: auditTasknDetailModel.value.permit_id,
+          comment: _comment,
+          conditionIds: [1, 2, 3, 4],
+          fileIds: []);
 
       var auditTaskCloseJsonString = commentauditTaskCloseModel.toJson();
+      var closePtwJsonString = ptwClose.toJson();
 
       Map<String, dynamic>? response =
           await viewAuditTaskPresenter.auditTaskCloseButton(
         auditTaskCloseJsonString: auditTaskCloseJsonString,
+        closePtwJsonString: closePtwJsonString,
+        ptw_req: auditTasknDetailModel.value.is_PTW == "True" ? true : false,
         isLoading: true,
       );
       if (response == true) {
@@ -249,6 +258,26 @@ class ViewAuditTaskController extends GetxController {
     }
   }
 
+  Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
+    Get.toNamed(Routes.createPermit, arguments: {
+      'permitId': permitId,
+      'isChecked': isChecked,
+      "type": 2,
+      "isFromPmTaskDetails": true,
+      "jobModel": jobDetailsModel.value,
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": 0
+    });
+    print('PermitIDForTBt:$permitId');
+    print('PermitIdArgument:$isChecked');
+  }
+
   createNewPermit() {
     clearStoreData();
     clearTypeStoreData();
@@ -262,6 +291,8 @@ class ViewAuditTaskController extends GetxController {
       "isChecked": false,
       "type": 3,
       "isFromPmTaskDetails": true,
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": 0
     });
   }
 

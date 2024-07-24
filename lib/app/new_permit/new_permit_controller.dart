@@ -631,7 +631,7 @@ class NewPermitController extends GetxController {
           '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${newPermitDetailsModel.value?.start_datetime}')).toString()}';
 
       startDateTimeCtrlrBuffer =
-          '${newPermitDetailsModel.value?.start_datetime}';
+          '${DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateTime.parse('${newPermitDetailsModel.value?.start_datetime}')).toString()}';
 
       ///
 
@@ -1420,7 +1420,7 @@ class NewPermitController extends GetxController {
         block_ids: selectedEmployeeNameIdList,
         category_ids: selectedEquipmentCategoryIdList,
         uploadfile_ids: fileIds,
-        is_loto_required: isToggleOn.value,
+        is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
         lotoOtherDetails: [],
@@ -1429,7 +1429,7 @@ class NewPermitController extends GetxController {
         TBT_Done_by: selectedTbtConductedId,
         TBT_Done_at: tbtDateTimeCtrlrBuffer,
         PHYSICAL_ISO_REMARK: _workPermitRemark,
-        is_physical_iso_required: true,
+        is_physical_iso_required: isToggleOn.value,
       );
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreated =
@@ -1540,7 +1540,7 @@ class NewPermitController extends GetxController {
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
         category_ids: selectedEquipmentCategoryIdList,
-        is_loto_required: isToggleOn.value,
+        is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
         employee_list: employee_map_list,
@@ -1548,7 +1548,7 @@ class NewPermitController extends GetxController {
         TBT_Done_by: selectedTbtConductedId,
         TBT_Done_at: tbtDateTimeCtrlrBuffer,
         PHYSICAL_ISO_REMARK: _workPermitRemark,
-        is_physical_iso_required: true,
+        is_physical_iso_required: isToggleOn.value,
       );
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreatedForJob =
@@ -1654,7 +1654,7 @@ class NewPermitController extends GetxController {
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
         category_ids: selectedEquipmentCategoryIdList,
-        is_loto_required: isToggleOn.value,
+        is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
         lotoOtherDetails: [],
@@ -1663,7 +1663,7 @@ class NewPermitController extends GetxController {
         TBT_Done_by: selectedTbtConductedId,
         TBT_Done_at: tbtDateTimeCtrlrBuffer,
         PHYSICAL_ISO_REMARK: _workPermitRemark,
-        is_physical_iso_required: true,
+        is_physical_iso_required: isToggleOn.value,
       );
       var jobJsonString = createPermitModel.toJson();
       print(createPermitModel);
@@ -1815,7 +1815,7 @@ class NewPermitController extends GetxController {
         block_ids: selectedEmployeeNameIdList,
         category_ids: selectedEquipmentCategoryIdList,
         uploadfile_ids: files,
-        is_loto_required: isToggleOn.value,
+        is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
         employee_list: employee_map_list,
@@ -1825,7 +1825,7 @@ class NewPermitController extends GetxController {
         TBT_Done_by: selectedTbtConductedId,
         TBT_Done_at: tbtDateTimeCtrlrBuffer,
         PHYSICAL_ISO_REMARK: _workPermitRemark,
-        is_physical_iso_required: true,
+        is_physical_iso_required: isToggleOn.value,
       );
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
@@ -1865,12 +1865,17 @@ class NewPermitController extends GetxController {
 
       print('EmpoyeeData34:${data.toString()}');
 
+      // List<Employeelist> employee_map_list = [];
+      // filteredEmployeeNameList.forEach((e) {
+      //   employee_map_list.add(
+      //       Employeelist(employeeId: e?.id, responsibility: data.toString()));
+      // });
       List<Employeelist> employee_map_list = [];
+
       filteredEmployeeNameList.forEach((e) {
         employee_map_list.add(
-            Employeelist(employeeId: e?.id, responsibility: data.toString()));
+            Employeelist(employeeId: e?.id, responsibility: e!.designation));
       });
-
       late List<LotoList> loto_map_list = [];
 
       filteredEquipmentNameList.forEach(
@@ -1915,7 +1920,7 @@ class NewPermitController extends GetxController {
         block_ids: selectedEmployeeNameIdList,
         category_ids: selectedEquipmentCategoryIdList,
         uploadfile_ids: fileIds,
-        is_loto_required: isToggleOn.value,
+        is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
         lotoOtherDetails: [],
@@ -1924,7 +1929,7 @@ class NewPermitController extends GetxController {
         TBT_Done_by: selectedTbtConductedId,
         TBT_Done_at: tbtDateTimeCtrlrBuffer,
         PHYSICAL_ISO_REMARK: _workPermitRemark,
-        is_physical_iso_required: true,
+        is_physical_iso_required: isToggleOn.value,
       );
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreated =
@@ -1932,6 +1937,7 @@ class NewPermitController extends GetxController {
         newPermit: jobJsonString,
         resubmit: true,
         isLoading: true,
+        type: typee.value,
       );
       if (responseNewPermitCreated != null) {
         //  CreateNewPermitDialog();
@@ -2004,9 +2010,11 @@ class NewPermitController extends GetxController {
   Future<void> viewJobDetails() async {
     Get.toNamed(Routes.jobDetails);
   }
+
   Future<void> viewPMTDetails() async {
     Get.toNamed(Routes.pmTaskView);
   }
+
   Future<void> viewMCTDetails() async {
     Get.toNamed(Routes.addModuleCleaningExecutionContentWeb);
   }

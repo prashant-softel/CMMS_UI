@@ -699,7 +699,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                               columns: [
                                                 DataColumn(
                                                   label: Text(
-                                                    "PM Task Id",
+                                                    "Task Id",
                                                     style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
@@ -708,7 +708,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                 ),
                                                 DataColumn(
                                                   label: Text(
-                                                    "PM Task Title",
+                                                    "Task Title",
                                                     style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
