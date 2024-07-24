@@ -93,13 +93,15 @@ class FaultyItemsCmms {
       this.assetMasterItemID,
       this.sr_no,
       this.return_remarks,
-      this.returned_qty});
+      this.returned_qty,
+      this.assetsID});
 
   int? mrsItemID;
   int? assetMasterItemID;
   int? returned_qty;
   String? return_remarks;
   String? sr_no;
+  int? assetsID;
 
   factory FaultyItemsCmms.fromJson(Map<String, dynamic> json) =>
       FaultyItemsCmms(
@@ -108,6 +110,7 @@ class FaultyItemsCmms {
         mrsItemID: json['mrs_item_ID'] == null ? 0 : json['mrs_item_ID'],
         return_remarks: json["return_remarks"],
         returned_qty: json["returned_qty"],
+        assetsID: json["faulty_item_asset_id"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -115,6 +118,7 @@ class FaultyItemsCmms {
         "serial_number": sr_no,
         "return_remarks": return_remarks,
         "returned_qty": returned_qty,
+        "faulty_item_asset_id": assetsID,
         "mrs_item_ID": mrsItemID == null ? 0 : mrsItemID,
       };
 }

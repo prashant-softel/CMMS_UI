@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 
 import '../../domain/usecases/edit_return_mrs_usecase.dart';
 
@@ -22,6 +23,14 @@ class EditMrsReturnPresenter {
       isLoading: isLoading,
     );
   }
+
+  Future<PmtaskViewModel?> getPmtaskViewList({
+    int? scheduleId,
+    required int facilityId,
+    bool? isloading,
+  }) async =>
+      await editmrsReturnUsecase.getPmtaskViewList(
+          scheduleId: scheduleId, isLoading: isloading, facilityId: facilityId);
 
   Future<List<GetAssetDataModel?>?> getAssetList({
     String? auth,

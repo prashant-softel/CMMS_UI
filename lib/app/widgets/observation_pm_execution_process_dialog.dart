@@ -397,7 +397,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                           DataColumn2(
                                               fixedWidth: 150,
                                               label: Text(
-                                                "Used Qty",
+                                                "Consumed By All",
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
@@ -406,7 +406,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                           DataColumn2(
                                               fixedWidth: 200,
                                               label: Text(
-                                                "Consumed  Qty",
+                                                "Consumed By This",
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:

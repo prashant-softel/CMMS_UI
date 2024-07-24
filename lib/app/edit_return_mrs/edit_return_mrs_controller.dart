@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/create_return_mrs_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
@@ -22,10 +23,15 @@ class EditMrsReturnController extends GetxController {
   RxList<PlantStockListModel?> assetItemList = <PlantStockListModel?>[].obs;
   RxList<StockDetails?> StockDetailsList = <StockDetails?>[].obs;
   var allDropdownsSelected = true.obs;
+  RxMap<dynamic, dynamic> checkdropdownMapperData = {}.obs;
+  Rx<String> selectedasset = ''.obs;
 
   // RxList<CmmrsItemsModel?> assetItemList = <CmmrsItemsModel?>[].obs;
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
+  RxList<ScheduleCheckPoint> scheduleCheckPoints = <ScheduleCheckPoint>[].obs;
+  RxList<ScheduleCheckPoint> scheduleCheckPointsdrop =
+      <ScheduleCheckPoint>[].obs;
   RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
@@ -73,6 +79,7 @@ class EditMrsReturnController extends GetxController {
         _returnMrsrsDetailsModel.mrs_id ?? 0,
       );
       getAssetList(facilityId);
+      getPmtaskViewList(facilityId: facilityId);
     }
     // print({"mrsdetailss", returnMrsDetailsModel.value});
   }
@@ -175,9 +182,60 @@ class EditMrsReturnController extends GetxController {
     ]);
   }
 
+  Future<void> getPmtaskViewList(
+      {int? scheduleId, bool? isloading, required int facilityId}) async {
+    scheduleCheckPoints.value = <ScheduleCheckPoint>[];
+    scheduleCheckPointsdrop.value = <ScheduleCheckPoint>[];
+
+    // rowItemclone.value = [];
+    final _permitDetails = await editmrsReturnPresenter.getPmtaskViewList(
+        scheduleId: returnMrsDetailsModel.value?.whereUsedTypeId,
+        isloading: isloading,
+        facilityId: facilityId);
+    if (_permitDetails != null) {
+      // pmtaskViewModel.value = _permitDetails;
+      _permitDetails.schedules?.forEach((element) {
+        //  if (element.completedBy_id == 0) {
+        // rowItemclone.value.add([
+        //   {
+        //     "key": "Asset",
+        //     "value": '${element.name}',
+        //     "id": '${element.assetsID}'
+        //   },
+        //   {
+        //     'key': "Checklist",
+        //     "value": '${element.checklist_name}',
+        //     'executionDone': '${element.completedBy_id}'
+        //   },
+        //   {
+        //     'key': "executionDone",
+        //     'value': '${element.completedBy_id}',
+        //     'completed': '${element.completedBy_name}'
+        //   },
+        //   {'key': "dropdown", "value": ''},
+        // ]);
+        // // Add to scheduleCheckPoints if completedBy_id != 0
+        // if (element.completedBy_id != 0) {
+        scheduleCheckPointsdrop.value.add(element);
+        // }
+      });
+      if (_permitDetails.schedules != null) {
+        for (var _frequencyList in _permitDetails.schedules ?? []) {
+          scheduleCheckPoints.add(_frequencyList);
+        }
+      }
+      // await getMrsListByModuleTask(taskId: scheduleId ?? 0);
+    }
+    // selectedasset.value = scheduleCheckPoints[0].name ?? "";
+    update(["getPmtaskViewList"]);
+
+    // print({"checklistObservations", checklistObservations});
+  }
+
   void addRowFaultyItem() {
     rowFaultyItem.add([
       {"key": "Drop_down", "value": 'Please Select', "id": ''},
+      {'key': "assets", "value": ''},
       {'key': "code", "value": ''},
       {'key': "Material_Type", "value": ''},
       {'key': "Material_Category", "value": ''},
@@ -209,6 +267,7 @@ class EditMrsReturnController extends GetxController {
         assetMasterItemID:
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
         mrsItemID: int.tryParse(element[0]["id"] ?? '0'),
+        assetsID: checkdropdownMapperData[element[1]["value"]].assetsID,
         sr_no: element[4]["value"] ?? '0',
         returned_qty: int.tryParse(element[5]["value"] ?? '0'),
         return_remarks: element[6]["value"] ?? '0',

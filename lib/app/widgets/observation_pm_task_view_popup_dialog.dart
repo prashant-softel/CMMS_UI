@@ -27,7 +27,7 @@ class ObservationPMTaskViewDialog extends GetView {
         // contentPadding: EdgeInsets.zero,
         title: Center(
           child: Text(
-            "Observation of  ${controller.selectedItem?.name ?? ""}",
+            "Observation of  ${controller.selectedItem?.assetsID ?? ""}",
             style: Styles.blue700,
           ),
         ),
@@ -253,7 +253,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 message: "View",
                                                 onPress: () async {
                                                   String baseUrl =
-                                                  //     'http://65.0.20.19/CMMS_API/';
+                                                      //     'http://65.0.20.19/CMMS_API/';
                                                       'http://172.20.43.18:82/';
                                                   String imageUrl =
                                                       "${controller.selectedItem?.checklist_observation![index].files?[index].file_path}";
@@ -333,145 +333,162 @@ class ObservationPMTaskViewDialog extends GetView {
                           ),
 
                           ////Associated Job cards
-                          Container(
-                            margin: Dimens.edgeInsets20,
-                            height: ((controller.selectedItem?.schedule_link_job
-                                            ?.length ??
-                                        0) *
-                                    40) +
-                                120,
-                            width: MediaQuery.of(context).size.width / 1.2,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: ColorValues.lightGreyColorWithOpacity35,
-                                width: 1,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ColorValues.appBlueBackgroundColor,
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Associated JobCard(s) ",
-                                        style: Styles.blue700,
+                          controller.selectedItem!.schedule_link_job!.isNotEmpty
+                              ? Container(
+                                  margin: Dimens.edgeInsets20,
+                                  height: ((controller.selectedItem
+                                                  ?.schedule_link_job?.length ??
+                                              0) *
+                                          40) +
+                                      120,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.2,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: ColorValues
+                                          .lightGreyColorWithOpacity35,
+                                      width: 1,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 2),
                                       ),
                                     ],
                                   ),
-                                ),
-                                Expanded(
-                                  child: DataTable2(
-                                    minWidth: 2000,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "Job ID",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "For Check point No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 400,
-                                          label: Text(
-                                            "Job Title",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "Job Date",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "Job Status",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.selectedItem?.schedule_link_job
-                                              ?.length ??
-                                          0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text('${index + 1}')),
-                                        DataCell(InkWell(
-                                          onTap: () {
-                                            controller.clearStoreDataJobId();
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Associated JobCard(s) ",
+                                              style: Styles.blue700,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: DataTable2(
+                                          minWidth: 2000,
+                                          border: TableBorder.all(
+                                              color: Color.fromARGB(
+                                                  255, 206, 229, 234)),
+                                          columns: [
+                                            DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  "Sr.No.",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                fixedWidth: 300,
+                                                label: Text(
+                                                  "Job ID",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                fixedWidth: 300,
+                                                label: Text(
+                                                  "For Check point No.",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                fixedWidth: 400,
+                                                label: Text(
+                                                  "Job Title",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                fixedWidth: 300,
+                                                label: Text(
+                                                  "Job Date",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                fixedWidth: 300,
+                                                label: Text(
+                                                  "Job Status",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller
+                                                    .selectedItem
+                                                    ?.schedule_link_job
+                                                    ?.length ??
+                                                0,
+                                            (index) => DataRow(cells: [
+                                              DataCell(Text('${index + 1}')),
+                                              DataCell(InkWell(
+                                                onTap: () {
+                                                  controller
+                                                      .clearStoreDataJobId();
 
-                                            Get.toNamed(Routes.jobDetails,
-                                                arguments: {
-                                                  'jobId': controller
+                                                  Get.toNamed(Routes.jobDetails,
+                                                      arguments: {
+                                                        'jobId': controller
+                                                            .selectedItem
+                                                            ?.schedule_link_job?[
+                                                                index]
+                                                            .job_id
+                                                      });
+                                                },
+                                                child: Text(
+                                                  "JOB${controller.selectedItem?.schedule_link_job?[index].job_id.toString() ?? ''}",
+                                                  style: Styles
+                                                      .primary15Underlined,
+                                                ),
+                                              )),
+                                              DataCell(Text('--')),
+                                              DataCell(Text(controller
                                                       .selectedItem
                                                       ?.schedule_link_job?[
                                                           index]
-                                                      .job_id
-                                                });
-                                          },
-                                          child: Text(
-                                            "JOB${controller.selectedItem?.schedule_link_job?[index].job_id.toString() ?? ''}",
-                                            style: Styles.primary15Underlined,
+                                                      .job_title ??
+                                                  '')),
+                                              DataCell(Text(controller
+                                                      .selectedItem
+                                                      ?.schedule_link_job?[
+                                                          index]
+                                                      .job_date ??
+                                                  '')),
+                                              DataCell(Text(controller
+                                                      .selectedItem
+                                                      ?.schedule_link_job?[
+                                                          index]
+                                                      .job_status ??
+                                                  '')),
+                                            ]),
                                           ),
-                                        )),
-                                        DataCell(Text('--')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.schedule_link_job?[index]
-                                                .job_title ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.schedule_link_job?[index]
-                                                .job_date ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.schedule_link_job?[index]
-                                                .job_status ??
-                                            '')),
-                                      ]),
-                                    ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-
+                                )
+                              : Dimens.box0,
                           controller.listMrsByTaskId!.length > 0
                               ? Container(
                                   margin: Dimens.edgeInsets20,
@@ -638,7 +655,9 @@ class ObservationPMTaskViewDialog extends GetView {
                                                                 .toString() ??
                                                             "";
                                                         print({"mrsId": mrsId});
-                                                        print({"retmrsId": rmrsId});
+                                                        print({
+                                                          "retmrsId": rmrsId
+                                                        });
                                                         controller
                                                                     .listMrsByTaskId?[
                                                                         index]
