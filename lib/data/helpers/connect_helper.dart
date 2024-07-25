@@ -1859,12 +1859,12 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> permitCancelRequestButton({
-    required String auth,
-    cancelPermitJsonString,
-    bool? isLoading,
-    int? jobId,
-  }) async {
+  Future<ResponseModel> permitCancelRequestButton(
+      {required String auth,
+      cancelPermitJsonString,
+      bool? isLoading,
+      int? jobId,
+      int? type}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitCancelRequest',
@@ -1881,7 +1881,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageCancelRequestDialog(
-        data: parsedJson['message'], jobId: jobId));
+        data: parsedJson['message'], jobId: jobId, type: type));
 
     return responseModel;
   }
@@ -9320,6 +9320,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getPlantStockMonthDetail({
+    required String auth,
+    required int facilityID,
+    required int assetItemID,
+    String? start_date,
+    required String end_date,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMReports/GetPlantItemTransactionReport?facility_id=1&assetItemId=2&fromDate=2023-07-22&toDate=2024-07-23',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
   //create
   Future<ResponseModel> createSourceOfOb({
     required String auth,
@@ -10228,5 +10249,56 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getObservationSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    required String fromDate,
+    required String toDate,
+  }) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('Observation List: ${response}');
+    try {
+      response = await apiWrapper.makeRequest(
+        'MISMaster/GetObservationSummaryReport?facility_id=$facility_id&fromDate=$fromDate&toDate=$toDate',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
+
+  Future<ResponseModel> getTrainingSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    String? fromDate,
+    String? toDate,
+  }) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('Training Report List: ${response}');
+    try {
+      response = await apiWrapper.makeRequest(
+        'Training/GetTrainingReportByCategory?facility_id=$facility_id&from_date=$fromDate&to_date=$toDate',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
   //end
 }

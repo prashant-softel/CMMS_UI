@@ -1,587 +1,356 @@
-// import 'package:cmms/app/home/home_screen.dart';
-// import 'package:cmms/app/home/widgets/header_widget.dart';
-// import 'package:cmms/app/navigators/app_pages.dart';
-// import 'package:cmms/app/plant_stock_report_details/plant_stock_report_controller_details.dart';
-// import 'package:cmms/app/theme/dimens.dart';
-// import 'package:cmms/app/widgets/custom_elevated_button.dart';
-// import 'package:cmms/app/widgets/custom_richtext.dart';
-// import 'package:cmms/app/widgets/date_picker.dart';
-// import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
-// import 'package:cmms/domain/models/get_plant_Stock_list.dart';
-// import 'package:data_table_2/data_table_2.dart';
-// import 'package:flutter/material.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/plant_stock_report_details/plant_stock_report_controller_details.dart';
+import 'package:cmms/domain/models/plant_stock_month.dart';
+import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:cmms/app/app.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
 
-// import 'package:get/get.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-// import '../../theme/color_values.dart';
-// import '../../theme/styles.dart';
+class PlantStockReportDetailsWeb extends StatefulWidget {
+  PlantStockReportDetailsWeb({
+    Key? key,
+  }) : super(key: key);
 
-// class PlantStockReportDetailsContentWeb extends StatefulWidget {
-//   PlantStockReportDetailsContentWeb({
-//     Key? key,
-//   }) : super(key: key);
+  @override
+  State<PlantStockReportDetailsWeb> createState() => _PlantStockReportDetailsWebState();
+}
 
-//   @override
-//   State<PlantStockReportDetailsContentWeb> createState() =>
-//       _PlantStockReportDetailsContentWebState();
-// }
+class _PlantStockReportDetailsWebState extends State<PlantStockReportDetailsWeb> {
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<PlantStockReportDetailsController>(
+      id: 'stock_Mangement',
+      builder: (controller) {
+        return SelectionArea(
+          child: Scaffold(
+            body: Obx(
+              () => Stack(
+                children: [
+                  Column(
+                    children: [
+                      HeaderWidget(),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromARGB(255, 227, 224, 224),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.home,
+                              color: ColorValues.greyLightColor,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
+                            // InkWell(
+                            //   onTap: () {
+                                
+                            //     Get.offNamed(Routes.PlantStockReportDetailsScreen);
+                            //   },
+                            //   child: Text(" / Plant Stock Report",
+                            //       style: Styles.greyLight14),
+                            // ),
+                            Text(
+                              " / Plant Stock Report Details",
+                              style: Styles.greyLight14,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.all(15),
+                          child: Card(
+                            color: Color.fromARGB(255, 245, 248, 250),
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 20, top: 20),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Plant Stock Report Data For  Month",
+                                          style: Styles.blackBold16,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Dimens.boxHeight20,
+                                  Container(
+                                    color: Color.fromARGB(255, 245, 248, 250),
+                                    height: Get.height * .7,
+                                    width: Get.width * .92,
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: controller.plantStockReportByMonthList
+                                          .length,
+                                      itemBuilder: (context, index) {
+                                        final item = controller.plantStockReportByMonthList
+                                           [index];
+                                        return Container(
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Color.fromARGB(
+                                                  255, 227, 224, 224),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                        255, 236, 234, 234)
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
+                                              ),  
+                                            ],
+                                          ),
+                                          height:500,
+                                              // (((item?.plantdetails?.length ?? 0) +
+                                              //             2) *
+                                              //         50 +
+                                              //     155),
+                                          margin: EdgeInsets.all(15),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(15),
+                                                child: Text(
+                                                  "${"details"}",
+                                                  style: Styles.blue17,
+                                                ),
+                                              ),
+                                              Divider(
+                                                color:
+                                                    ColorValues.greyLightColour,
+                                              ),
+                                              Expanded(
+                                                child: DataTable2(
+                                                  columns: [
+                                                    DataColumn2(
+                                                      size: ColumnSize.M,
+                                                      label: Text(
+                                                        "From Actor Type",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      size: ColumnSize.L,
+                                                      label: Text(
+                                                        "From Actor Name",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      size: ColumnSize.L,
+                                                      label: Text(
+                                                        "To Actor Type",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      size: ColumnSize.M,
+                                                      label: Text(
+                                                        "To Actor Name",
+                                                        style: Styles.green17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      size: ColumnSize.M,
+                                                      label: Text(
+                                                        "Asset Item Name",
+                                                        style: Styles.red17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      size: ColumnSize.M,
+                                                      label: Text(
+                                                        "Last Updated",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                    ),
+                                                      DataColumn2(
+                                                      size: ColumnSize.M,
+                                                      label: Text(
+                                                        "Created At",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                      ),
+                                                   
+                                                  ],
+                                                  rows: _buildTableRows(
+                                                    item ,
+                                                    item?.details,
+                                                  ),
+                                                ),
+                                              ),
+                                              Dimens.boxHeight20,
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (controller.openPurchaseDatePicker)
+                    Positioned(
+                      right: 65,
+                      top: 130,
+                      child: DatePickerWidget(
+                        minDate: DateTime(DateTime.now().year),
+                        maxDate: DateTime(DateTime.now().year, 13,
+                            0), // last date of this year
+                        controller: DateRangePickerController(),
+                        selectionChanges: (p0) {
+                          print('po valu ${p0.value.toString()}');
+                          controller.purchaseDateTc.text =
+                              DateFormat('yyyy-MM-dd').format(p0.value);
+                          controller.openPurchaseDatePicker =
+                              !controller.openPurchaseDatePicker;
+                          controller.update(['stock_Mangement']);
+                        },
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+        );
+        // );
+      },
+    );
+  }
 
-// class _PlantStockReportDetailsContentWebState
-//     extends State<PlantStockReportDetailsContentWeb> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetBuilder<PlantStockReportDetailsController>(
-//         id: 'stock_Mangement_Date',
-//         builder: (controller) {
-//           return Obx(() {
-//             final dataSource = PlantListDetailsDataSource(controller);
+  List<DataRow> _buildTableRows(PlantStockMonth? item, List<PlantDetail>? plantdetails) {
+    double opening = item?.opening ?? 0;
+    // double total = opening;
+    // double newTotal = 0;
+    // double totalProcurement = 0;
+    // double totalConsumption = 0;
 
-//             return SelectionArea(
-//               child: Column(children: [
-//                 HeaderWidget(),
-//                 Container(
-//                   height: 45,
-//                   decoration: BoxDecoration(
-//                     border: Border.all(
-//                       color: Color.fromARGB(255, 227, 224, 224),
-//                       width: 1,
-//                     ),
-//                     boxShadow: [
-//                       BoxShadow(
-//                         color:
-//                             Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-//                         spreadRadius: 2,
-//                         blurRadius: 5,
-//                         offset: Offset(0, 2),
-//                       ),
-//                     ],
-//                   ),
-//                   child: Row(
-//                     children: [
-//                       Icon(
-//                         Icons.home,
-//                         color: ColorValues.greyLightColor,
-//                       ),
-//                       InkWell(
-//                         onTap: () {
-//                           Get.offNamed(Routes.home);
-//                         },
-//                         child: Text(
-//                           "DASHBOARD",
-//                           style: Styles.greyLight14,
-//                         ),
-//                       ),
-//                       InkWell(
-//                         onTap: () {
-//                           Get.offNamed(Routes.stockManagementDashboardScreen);
-//                         },
-//                         child: Text(" / STOCK MANAGEMENT",
-//                             style: Styles.greyLight14),
-//                       ),
-//                       Text(" / PLANT STOCK REPORT Details", style: Styles.greyLight14),
-//                     ],
-//                   ),
-//                 ),
-//                 Expanded(
-//                   child: SingleChildScrollView(
-//                     child: Stack(children: [
-//                       Container(
-//                         width: Get.width * 7,
-//                         margin: EdgeInsets.all(10),
-//                         height: Get.height * .85 - 10,
-//                         child: Card(
-//                           color: Color.fromARGB(255, 245, 248, 250),
-//                           elevation: 10,
-//                           shape: RoundedRectangleBorder(
-//                             borderRadius: BorderRadius.circular(10.0),
-//                           ),
-//                           child: Column(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             children: [
-//                               Padding(
-//                                 padding: const EdgeInsets.all(10.0),
-//                                 child: Row(
-//                                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                                   children: [
-//                                     Text(
-//                                       "Plant Stock Report Details",
-//                                       style: Styles.blackBold16,
-//                                     ),
-//                                     Spacer(),
-//                                     Container(
-//                                       height: 45,
-//                                       decoration: BoxDecoration(
-//                                         boxShadow: [
-//                                           BoxShadow(
-//                                             color: Colors.black26,
-//                                             offset: const Offset(
-//                                               5.0,
-//                                               5.0,
-//                                             ),
-//                                             blurRadius: 5.0,
-//                                             spreadRadius: 1.0,
-//                                           ),
-//                                         ],
-//                                         color: ColorValues.whiteColor,
-//                                         borderRadius: BorderRadius.circular(5),
-//                                       ),
-//                                       child: MultipDropdownWebWidget(
-//                                         width:
-//                                             (MediaQuery.of(context).size.width *
-//                                                 .21),
-//                                         //  height: 35,
-//                                         dropdownList: controller.assetList,
-//                                         selectedItems:
-//                                             controller.selectedAssetsNameList,
-//                                         onValueChanged:
-//                                             controller.onValueChanged,
-//                                       ),
-//                                     ),
-//                                     Spacer(),
-//                                     Row(
-//                                       children: [
-//                                         CustomRichText(title: 'Date Range'),
-//                                         Dimens.boxWidth2,
-//                                         CustomTextFieldForStock(
-//                                           width: MediaQuery.of(context)
-//                                                   .size
-//                                                   .width /
-//                                               5,
-//                                           numberTextField: true,
-//                                           onTap: () {
-//                                             controller
-//                                                     .openFromDateToStartDatePicker =
-//                                                 !controller
-//                                                     .openFromDateToStartDatePicker;
-//                                             controller.update(
-//                                                 ['stock_Mangement_Date']);
-//                                           },
-//                                           hintText:
-//                                               '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
-//                                         ),
-//                                       ],
-//                                     ),
-//                                     // Dimens.boxWidth15,
-//                                     // ActionButton(
-//                                     //   icon: Icons.add,
-//                                     //   label: "Add New",
-//                                     //   onPressed: () {
-//                                     //     final _flutterSecureStorage =
-//                                     //         const FlutterSecureStorage();
+    List<DataRow> rows = [];
 
-//                                     //     _flutterSecureStorage.delete(key: "mrsId");
-//                                     //     Get.toNamed(Routes.createMrs);
-//                                     //   },
-//                                     //   color: ColorValues.addNewColor,
-//                                     // ),
-//                                   ],
-//                                 ),
-//                               ),
-//                               Divider(
-//                                 color: ColorValues.greyLightColour,
-//                               ),
-//                               Row(
-//                                 children: [
-//                                   // Container(
-//                                   //   height: 35,
-//                                   //   margin: EdgeInsets.only(left: 10),
-//                                   //   child: CustomElevatedButton(
-//                                   //       backgroundColor:
-//                                   //           ColorValues.appLightBlueColor,
-//                                   //       onPressed: () {},
-//                                   //       text: 'Copy'),
-//                                   // ),
-//                                   // Container(
-//                                   //   height: 35,
-//                                   //   margin: EdgeInsets.only(left: 10),
-//                                   //   child: CustomElevatedButton(
-//                                   //       backgroundColor:
-//                                   //           ColorValues.appLightBlueColor,
-//                                   //       onPressed: () {},
-//                                   //       text: 'Excel'),
-//                                   // ),
-//                                   // Container(x
-//                                   //   height: 35,
-//                                   //   margin: EdgeInsets.only(left: 10),
-//                                   //   child: CustomElevatedButton(
-//                                   //       backgroundColor:
-//                                   //           ColorValues.appLightBlueColor,
-//                                   //       onPressed: () {},
-//                                   //       text: 'PDF'),
-//                                   // ),
-//                                   PopupMenuButton<String>(
-//                                     tooltip: "",
-//                                     elevation: 25.0,
-//                                     child: Container(
-//                                       height: 35,
-//                                       margin: EdgeInsets.only(left: 10),
-//                                       padding: EdgeInsets.only(
-//                                           top: 4, bottom: 4, right: 8, left: 8),
-//                                       decoration: BoxDecoration(
-//                                         color: ColorValues.appLightBlueColor,
-//                                         borderRadius: BorderRadius.circular(5),
-//                                       ),
-//                                       child: Text(
-//                                         'Column Visibility',
-//                                         style: TextStyle(
-//                                           color: Colors.white,
-//                                           fontSize: 16,
-//                                           fontWeight: FontWeight.w400,
-//                                         ),
-//                                       ),
-//                                     ),
-//                                     itemBuilder: (BuildContext context) =>
-//                                         <PopupMenuEntry<String>>[]..addAll(
-//                                               controller.columnVisibility.value
-//                                                   .entries
-//                                                   .map((e) {
-//                                             return PopupMenuItem<String>(
-//                                                 child: ValueListenableBuilder(
-//                                                     valueListenable: controller
-//                                                         .columnVisibility,
-//                                                     builder: (context, value,
-//                                                         child) {
-//                                                       return Row(
-//                                                         children: [
-//                                                           Checkbox(
-//                                                             value: value[e.key],
-//                                                             onChanged:
-//                                                                 (newValue) {
-//                                                               controller
-//                                                                   .setColumnVisibility(
-//                                                                       e.key,
-//                                                                       newValue!);
-//                                                             },
-//                                                           ),
-//                                                           Text(e.key),
-//                                                         ],
-//                                                       );
-//                                                     }));
-//                                           })),
-//                                     onSelected: (String value) {
-//                                       // Handle column selection
-//                                     },
-//                                   ),
-//                                   Container(
-//                                     height: 35,
-//                                     margin: EdgeInsets.only(left: 10),
-//                                     child: CustomElevatedButton(
-//                                         backgroundColor:
-//                                             ColorValues.appLightBlueColor,
-//                                         onPressed: () {
-//                                           controller.export();
-//                                         },
-//                                         text: 'Excel'),
-//                                   ),
+    rows.add(
+      DataRow(
+        cells: [
+          DataCell(Text('', style: Styles.black14)),
+          DataCell(Text('Opening Balance', style: Styles.green700)),
+          DataCell(Text('', style: Styles.black14)),
+          DataCell(Text('', style: Styles.green700)),
+          DataCell(Text('', style: Styles.Red700)),
+          DataCell(Text('${opening}', style: Styles.black14)),
+          DataCell(Text('', style: Styles.black14)),
+          DataCell(Text('', style: Styles.black14)),
+          DataCell(Text('', style: Styles.black14)),
+        ],
+      ),
+    );
+    if (plantdetails != null) {
+      for (int i = 0; i < plantdetails.length; i++) {
+       
+        rows.add(
+          DataRow(
+            cells: [
+              DataCell(
+                Text(plantdetails[i].fromActorType ?? '', style: Styles.black14),
+              ),
+              DataCell(
+                Text(plantdetails[i].fromActorName ?? '', style: Styles.black14),
+              ),
+              DataCell(
+                Text(plantdetails[i].toActorType ?? '', style: Styles.black14),
+              ),
+               DataCell(
+                Text(plantdetails[i].toActorName ?? '', style: Styles.black14),
+              ),
+               DataCell(
+                Text(plantdetails[i].assetItemName ?? '', style: Styles.black14),
+              ),
+               DataCell(
+                Text( '', style: Styles.black14),
+              ),
+               DataCell(
+                Text( '', style: Styles.black14),
+              ),
 
-//                                   Spacer(),
-//                                   Container(
-//                                     width: 300,
-//                                     height: 40,
-//                                     margin: Dimens.edgeInsets0_0_16_0,
-//                                     child: TextField(
-//                                       style: GoogleFonts.lato(
-//                                         textStyle: TextStyle(
-//                                             fontSize: 16.0,
-//                                             height: 1.0,
-//                                             color: Colors.black),
-//                                       ),
-//                                       onChanged: (value) =>
-//                                           controller.search(value),
-//                                       decoration: InputDecoration(
-//                                         enabledBorder: const OutlineInputBorder(
-//                                           borderSide: const BorderSide(
-//                                             color: Colors.grey,
-//                                             width: 0.0,
-//                                           ),
-//                                         ),
-//                                         focusedBorder: const OutlineInputBorder(
-//                                           borderSide: const BorderSide(
-//                                             color: Colors.grey,
-//                                             width: 0.0,
-//                                           ),
-//                                         ),
-//                                         contentPadding: Dimens.edgeInsets05_10,
-//                                         hintText: 'search'.tr,
-//                                         hintStyle: Styles.grey16,
-//                                       ),
-//                                     ),
-//                                   ),
-//                                 ],
-//                               ),
-//                               Dimens.boxHeight5,
-//                               controller.StockDetailsList.isEmpty == true &&
-//                                       controller.isLoading == false
-//                                   ? Center(child: Text('No data'))
-//                                   : controller.isLoading.value == true
-//                                       ? Center(
-//                                           child: Text("Data Loading......"))
-//                                       : Expanded(
-//                                           child: ValueListenableBuilder(
-//                                               valueListenable:
-//                                                   controller.columnVisibility,
-//                                               builder: (context, value, child) {
-//                                                 final dataSource =
-//                                                     PlantListDetailsDataSource(
-//                                                         controller);
+            ],
+          ),
+        );
+       
+      }
+      
+    }
 
-//                                                 return PaginatedDataTable2(
-//                                                   // fixedLeftColumns: 1,
-//                                                   // dataRowHeight:
-//                                                   // 70,
-//                                                   //Get.height * 0.10,
-//                                                   columnSpacing: 10,
-//                                                   source:
-//                                                       dataSource, // Custom DataSource class
-//                                                   // headingRowHeight: Get.height * 0.12,
-//                                                   // minWidth: Get.width * 0.7,
-//                                                   minWidth: 1500,
-//                                                   showCheckboxColumn: false,
-//                                                   rowsPerPage:
-//                                                       10, // Number of rows per page
-//                                                   availableRowsPerPage: [
-//                                                     10,
-//                                                     20,
-//                                                     30,
-//                                                     50
-//                                                   ],
-//                                                   columns: [
-//                                                     for (var entry
-//                                                         in value.entries)
-//                                                       if (entry.value)
-//                                                         buildDataColumn(
-//                                                           entry.key,
-//                                                           controller.filterText[
-//                                                               entry.key]!,
-//                                                           controller
-//                                                                   .columnwidth[
-//                                                               entry.key],
-//                                                         ),
-//                                                   ],
-//                                                 );
-//                                               }),
-//                                         )
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                       if (controller.openFromDateToStartDatePicker)
-//                         Positioned(
-//                           right: 150,
-//                           top: 85,
-//                           child: DatePickerWidget(
-//                             selectionMode: DateRangePickerSelectionMode.range,
-//                             monthCellStyle: DateRangePickerMonthCellStyle(
-//                               todayCellDecoration: BoxDecoration(
-//                                   shape: BoxShape.circle,
-//                                   color: ColorValues.appDarkBlueColor),
-//                             ), // last date of this year
-//                             // controller: DateRangePickerController(),
-//                             initialSelectedRange: PickerDateRange(
-//                               controller.fromDate.value,
-//                               controller.toDate.value,
-//                             ),
-
-//                             onSubmit: (value) {
-//                               print('po valu ${value.toString()}');
-//                               PickerDateRange? data = value as PickerDateRange;
-
-//                               var pickUpDate =
-//                                   DateTime.parse(data.startDate.toString());
-//                               controller.fromDate.value = pickUpDate;
-//                               var dropDate =
-//                                   DateTime.parse(data.endDate.toString());
-//                               dropDate != null
-//                                   ? controller.toDate.value = dropDate
-//                                   : controller.toDate.value = pickUpDate;
-
-//                               controller.getPlantStockListByDate();
-//                               controller.openFromDateToStartDatePicker =
-//                                   !controller.openFromDateToStartDatePicker;
-//                               controller.update(['stock_Mangement_Date']);
-
-//                               // Get.toNamed(
-//                               //   Routes.stockManagementGoodsOrdersScreen,
-//                               // );
-//                             },
-//                           ),
-//                         ),
-//                     ]),
-//                   ),
-//                 ),
-//               ]),
-//             );
-//           });
-//         });
-//   }
-
-//   DataColumn2 buildDataColumn(
-//     // String columnName,
-//     String header,
-
-//     /// ColumnSize columnSize,
-//     RxString filterText,
-//     double? fixedWidth,
-//     //  {required Function(String) onSearchCallBack}
-//   ) {
-//     return //
-//         DataColumn2(
-//       // size: columnSize,
-//       fixedWidth: fixedWidth,
-
-//       label: //
-//           Column(
-//               mainAxisAlignment: MainAxisAlignment.center, //
-//               children: [
-//             // SizedBox(
-//             //   height: Get.height * 0.05,
-//             //   child: TextField(
-//             //     style: GoogleFonts.lato(
-//             //       textStyle: TextStyle(
-//             //           fontSize: 16.0, height: 1.0, color: Colors.black),
-//             //     ),
-//             //     onChanged: (value) {
-//             //       filterText.value = value;
-//             //       //   onSearchCallBack(value);
-//             //     },
-//             //     textAlign: TextAlign.left,
-//             //     decoration: InputDecoration(
-//             //       hintText: 'Filter',
-//             //       contentPadding: EdgeInsets.fromLTRB(
-//             //           5, 0, 5, 0), // Reduced vertical padding
-//             //       border: OutlineInputBorder(
-//             //         borderRadius: BorderRadius.circular(5),
-//             //         borderSide: BorderSide(color: Colors.black),
-//             //       ),
-//             //       focusedBorder: OutlineInputBorder(
-//             //         borderRadius: BorderRadius.circular(5),
-//             //         borderSide: BorderSide(color: Colors.black),
-//             //       ),
-//             //       enabledBorder: OutlineInputBorder(
-//             //         borderRadius: BorderRadius.circular(5),
-//             //         borderSide: BorderSide(color: Colors.black),
-//             //       ),
-//             //     ),
-//             //   ),
-//             // ),
-//             Align(
-//               alignment: Alignment.centerLeft,
-//               child: Text(
-//                 header,
-//                 style: Styles.black16W500,
-//               ),
-//             ),
-//           ]),
-//       // ),
-//     );
-//   }
-// }
-
-// class PlantListDetailsDataSource extends DataTableSource {
-//   final PlantStockReportDetailsController controller;
-
-//   late List<StockDetails?> filteredPlantList;
-
-//   PlantListDetailsDataSource(this.controller) {
-//     filterMrss();
-//   }
-
-//   ///
-//   void filterMrss() {
-//     filteredPlantList = <StockDetails?>[];
-//     filteredPlantList = controller.StockDetailsList.where((Plant) {
-//       return (Plant?.name ?? '')
-//               .toString()
-//               .toLowerCase()
-//               .contains(controller.assetNameFilterText.value.toLowerCase()) &&
-//           (Plant?.asset_code ?? '')
-//               .toLowerCase()
-//               .contains(controller.assetsCodeFilterText.value.toLowerCase()) &&
-//           (Plant?.opening ?? '')
-//               .toString()
-//               .toLowerCase()
-//               .contains(controller.openingFilterText.value.toLowerCase()) &&
-//           (Plant?.inward ?? '')
-//               .toString()
-//               .toLowerCase()
-//               .contains(controller.inwardFilterText.value.toLowerCase()) &&
-//           (Plant?.outward ?? '')
-//               .toString()
-//               .toLowerCase()
-//               .contains(controller.outwardFilterText.value.toLowerCase()) &&
-//           (Plant?.balance ?? '')
-//               .toString()
-//               .toLowerCase()
-//               .contains(controller.balanceFilterText.value.toLowerCase()) &&
-//           (Plant?.asset_type ?? '')
-//               .toString()
-//               .toLowerCase()
-//               .contains(controller.assetTypeFilterText.value.toLowerCase());
-
-//       // Add other filter conditions as needed
-//     }).toList();
-//     // print({"filteredPlantList": filteredPlantList});
-//   }
-
-//   @override
-//   DataRow? getRow(int index) {
-//     // print({"getRow call"});
-//     final PlantDetails = filteredPlantList[index];
-//     String nameWithoutSerial = (PlantDetails?.name ?? '').split(' (')[0];
-
-//     // controller.PlantId.value = PlantDetails?.asset_name ?? 0;
-//     var cellsBuffer = [
-//       nameWithoutSerial,
-//       '${PlantDetails?.asset_code ?? ''}',
-//       '${PlantDetails?.asset_type ?? ''}',
-//       '${PlantDetails?.opening ?? ''}',
-//       '${PlantDetails?.inward ?? ''}',
-//       '${PlantDetails?.outward ?? ''}',
-//       '${PlantDetails?.balance ?? ''}',
-//     ];
-//     var cells = [];
-//     int i = 0;
-
-//     for (var entry in controller.columnVisibility.value.entries) {
-//       // print({"entry.value entry": entry});
-//       if (entry.key == "search") {
-//         return null;
-//       }
-//       if (entry.value) {
-//         // print({"entry.value removed": entry.key});
-//         cells.add(cellsBuffer[i]);
-//       }
-//       i++;
-//     }
-
-//     // print({"cell": cells});
-//     return DataRow.byIndex(
-//       index: index,
-//       cells: cells.map((value) {
-//         return DataCell(
-//           Padding(
-//             padding: EdgeInsets.zero,
-//             child: Text(value.toString()),
-//           ),
-//         );
-//       }).toList(),
-//       //   ],
-//       onSelectChanged: (_) {
-//         // final _flutterSecureStorage = const FlutterSecureStorage();
-
-//         // _flutterSecureStorage.delete(key: "mrsId");
-//         // Get.toNamed(Routes.mrsViewScreen, arguments: {'mrsId': MrsDetails?.id});
-//       },
-//     );
-//   }
-
-//   @override
-//   int get rowCount => filteredPlantList.length;
-
-//   @override
-//   bool get isRowCountApproximate => false;
-
-//   @override
-//   int get selectedRowCount => 0;
-// }
+    // rows.add(
+    //   DataRow(
+    //     cells: [
+    //       DataCell(
+    //         Text('', style: Styles.black14),
+    //       ),
+    //       DataCell(
+    //         Text('Closing Balance', style: Styles.Red700),
+    //       ),
+    //       DataCell(
+    //         Text('', style: Styles.black14),
+    //       ),
+    //       DataCell(
+    //         Text('Total: $totalProcurement', style: Styles.green700),
+    //       ),
+    //       DataCell(
+    //         Text('Total: $totalConsumption', style: Styles.Red700),
+    //       ),
+    //       DataCell(
+    //         Text("$total"),
+    //       ),
+    //       DataCell(
+    //         Text('', style: Styles.black14),
+    //       ),
+    //     ],
+    //   ),
+    // );
+    return rows;
+  }
+}

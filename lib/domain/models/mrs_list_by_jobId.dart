@@ -24,7 +24,8 @@ class MRSListByJobIdModel {
       this.status_short,
       this.is_mrs_return,
       this.mrs_return_ID,
-      this.cmmrsItems});
+      this.cmmrsItems,
+      this.material_used_by_assets});
   int? is_mrs_return;
   int? mrs_return_ID;
   int? mrsId;
@@ -35,11 +36,17 @@ class MRSListByJobIdModel {
   int? status;
   String? status_short;
   List<CmmrsItems>? cmmrsItems;
+  List<MaterialUsedAssets>? material_used_by_assets;
 
   factory MRSListByJobIdModel.fromJson(Map<String, dynamic> json) {
     var list = json['cmmrsItems'] == null ? [] : json['cmmrsItems'] as List;
     List<CmmrsItems> cmmrsItems =
         list.map((i) => CmmrsItems.fromJson(i)).toList();
+    var usedmaterial = json['material_used_by_assets'] == null
+        ? []
+        : json['material_used_by_assets'] as List;
+    List<MaterialUsedAssets> usematerialAssets =
+        usedmaterial.map((i) => MaterialUsedAssets.fromJson(i)).toList();
     return MRSListByJobIdModel(
         mrsId: json['mrsId'] == null ? 0 : json['mrsId'],
         jobId: json["jobId"] == null ? 0 : json["jobId"],
@@ -52,7 +59,8 @@ class MRSListByJobIdModel {
         is_mrs_return:
             json["is_mrs_return"] == null ? 0 : json["is_mrs_return"],
         status_short: json['status_short'] == null ? '' : json['status_short'],
-        cmmrsItems: cmmrsItems);
+        cmmrsItems: cmmrsItems,
+        material_used_by_assets: usematerialAssets);
   }
   Map<String, dynamic> toJson() => {
         "mrsId": mrsId,
@@ -184,4 +192,36 @@ class CmmrsItems {
   }
 
   map(DataCell Function(dynamic mapData) param0) {}
+}
+
+class MaterialUsedAssets {
+  int? asset_id;
+
+  List<UsedItems>? items;
+  MaterialUsedAssets({this.asset_id, this.items});
+
+  factory MaterialUsedAssets.fromJson(Map<String, dynamic> parsedJson) {
+    var list = parsedJson['items'] == null ? [] : parsedJson['items'] as List;
+    List<UsedItems> usedItems = list.map((i) => UsedItems.fromJson(i)).toList();
+
+    return MaterialUsedAssets(
+        asset_id: parsedJson["asset_id"] == null ? 0 : parsedJson['asset_id'],
+        items: usedItems);
+  }
+
+  // map(DataCell Function(dynamic mapData) param0) {}
+}
+
+class UsedItems {
+  int? sm_asset_id;
+  dynamic used_qty;
+  UsedItems({this.sm_asset_id, this.used_qty});
+
+  factory UsedItems.fromJson(Map<String, dynamic> parsedJson) {
+    return UsedItems(
+      sm_asset_id:
+          parsedJson["sm_asset_id"] == null ? 0 : parsedJson['sm_asset_id'],
+      used_qty: parsedJson["used_qty"],
+    );
+  }
 }

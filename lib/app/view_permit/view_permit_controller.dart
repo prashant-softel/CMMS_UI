@@ -679,10 +679,10 @@ class ViewPermitController extends GetxController {
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitCancelRequestButton(
-        cancelPermitJsonString: cancelPermitJsonString,
-        jobId: jobId,
-        isLoading: true,
-      );
+              cancelPermitJsonString: cancelPermitJsonString,
+              jobId: jobId,
+              isLoading: true,
+              type: type.value);
       print('cancelPermitRequest:$cancelPermitJsonString');
       if (response == true) {
         //getCalibrationList(facilityId, true);

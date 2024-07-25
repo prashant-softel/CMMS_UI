@@ -470,6 +470,9 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                             },
                                                                           ]);
                                                                         });
+                                                                        controller.getMrsListByModuleTask(
+                                                                            taskId:
+                                                                                controller.scheduleId.value);
                                                                         Get.dialog(
                                                                             ObservationPmExecutionViewDialog());
                                                                       }

@@ -91,11 +91,11 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                           color: ColorValues.greyLightColour,
                         ),
                         Container(
-                          margin:
-                                  EdgeInsets.only(right: 7, left: 7, top: 15),
+                          margin: EdgeInsets.only(right: 7, left: 7, top: 15),
                           child: Row(
                             children: [
-                              CustomRichText(title: 'Activity: ', includeAsterisk: false),
+                              CustomRichText(
+                                  title: 'Activity: ', includeAsterisk: false),
                               Dimens.boxWidth10,
                               Container(
                                   decoration: BoxDecoration(
@@ -166,8 +166,9 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                     ignoring: true,
                                     child: LoginCustomTextfield(
                                       // enabled: false,
-                                      width: (MediaQuery.of(context).size.width *
-                                          .2),
+                                      width:
+                                          (MediaQuery.of(context).size.width *
+                                              .2),
                                       textController: controller.whereUsedCtrlr,
                                     ),
                                   )),
@@ -176,8 +177,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                         ),
                         Container(
                           //height: 400,
-                          margin:
-                                  EdgeInsets.only(right: 7, left: 7, top: 15),
+                          margin: EdgeInsets.only(right: 7, left: 7, top: 15),
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: ColorValues.lightGreyColorWithOpacity35,
@@ -610,6 +610,14 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                     DataColumn2(
                                         fixedWidth: 170,
                                         label: Text(
+                                          "Assets",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                    DataColumn2(
+                                        fixedWidth: 170,
+                                        label: Text(
                                           "Material Type",
                                           style: TextStyle(
                                               fontSize: 15,
@@ -726,58 +734,68 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                     },
                                                   ),
                                                 )
-                                              : (mapData['key'] == "Return_Qty")
-                                                  ? Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Container(
-                                                          width:
-                                                              (Get.width * .5),
-                                                          // padding: EdgeInsets.all(value),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black26,
-                                                                offset:
-                                                                    const Offset(
-                                                                  5.0,
-                                                                  5.0,
-                                                                ),
-                                                                blurRadius: 5.0,
-                                                                spreadRadius:
-                                                                    1.0,
-                                                              ),
-                                                            ],
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                          ),
+                                              : (mapData['key'] == "assets")
+                                                  ? Column(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(6.0),
                                                           child:
-                                                              LoginCustomTextfield(
-                                                            // inputFormatters: <
-                                                            //     TextInputFormatter>[
-                                                            //   FilteringTextInputFormatter
-                                                            //       .digitsOnly
-                                                            // ],
-                                                            maxLine: 1,
-                                                            textController:
-                                                                new TextEditingController(
-                                                                    text: mapData[
-                                                                            "value"] ??
-                                                                        ''),
-                                                            onChanged: (txt) {
+                                                              DropdownWebWidget(
+                                                            width: (MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    .2) -
+                                                                100,
+                                                            controller:
+                                                                controller,
+                                                            dropdownList: controller
+                                                                .scheduleCheckPointsdrop,
+                                                            selectedValue:
+                                                                mapData[
+                                                                    "value"],
+                                                            onValueChanged: (list,
+                                                                selectedValue) {
+                                                              controller
+                                                                  .selectedasset
+                                                                  .value;
                                                               mapData["value"] =
-                                                                  txt;
+                                                                  selectedValue;
+
+                                                              controller
+                                                                      .selectedasset
+                                                                      .value =
+                                                                  selectedValue;
+
+                                                              controller.checkdropdownMapperData[
+                                                                      selectedValue] =
+                                                                  list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse:
+                                                                          null);
                                                             },
-                                                          )),
+                                                          ),
+                                                        ), // Obx(() {
+                                                        //   return controller
+                                                        //           .allDropdownsSelected
+                                                        //           .value
+                                                        //       ? Container()
+                                                        //       : Text(
+                                                        //           'Please select all dropdown values!',
+                                                        //           style: TextStyle(
+                                                        //               color: Colors
+                                                        //                   .red),
+                                                        //         );
+                                                        // }),
+                                                      ],
                                                     )
-                                                  : (mapData['key'] == "Remark")
+                                                  : (mapData['key'] ==
+                                                          "Return_Qty")
                                                       ? Padding(
                                                           padding:
                                                               const EdgeInsets
@@ -831,7 +849,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                               )),
                                                         )
                                                       : (mapData['key'] ==
-                                                              "Sr_no")
+                                                              "Remark")
                                                           ? Padding(
                                                               padding:
                                                                   const EdgeInsets
@@ -884,39 +902,85 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                                   )),
                                                             )
                                                           : (mapData['key'] ==
-                                                                  "code")
-                                                              ? Text(
-                                                                  "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.asset_code ?? ""}")
+                                                                  "Sr_no")
+                                                              ? Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child: Container(
+                                                                      width: (Get.width * .5),
+                                                                      // padding: EdgeInsets.all(value),
+                                                                      decoration: BoxDecoration(
+                                                                        boxShadow: [
+                                                                          BoxShadow(
+                                                                            color:
+                                                                                Colors.black26,
+                                                                            offset:
+                                                                                const Offset(
+                                                                              5.0,
+                                                                              5.0,
+                                                                            ),
+                                                                            blurRadius:
+                                                                                5.0,
+                                                                            spreadRadius:
+                                                                                1.0,
+                                                                          ),
+                                                                        ],
+                                                                        color: ColorValues
+                                                                            .whiteColor,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
+                                                                      ),
+                                                                      child: LoginCustomTextfield(
+                                                                        // inputFormatters: <
+                                                                        //     TextInputFormatter>[
+                                                                        //   FilteringTextInputFormatter
+                                                                        //       .digitsOnly
+                                                                        // ],
+                                                                        maxLine:
+                                                                            1,
+                                                                        textController:
+                                                                            new TextEditingController(text: mapData["value"] ?? ''),
+                                                                        onChanged:
+                                                                            (txt) {
+                                                                          mapData["value"] =
+                                                                              txt;
+                                                                        },
+                                                                      )),
+                                                                )
                                                               : (mapData['key'] ==
-                                                                      "Material_Type")
+                                                                      "code")
                                                                   ? Text(
-                                                                      "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.asset_type ?? ""}")
+                                                                      "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.asset_code ?? ""}")
                                                                   : (mapData['key'] ==
-                                                                          "Material_Category")
+                                                                          "Material_Type")
                                                                       ? Text(
-                                                                          "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.cat_name ?? ""}")
+                                                                          "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.asset_type ?? ""}")
                                                                       : (mapData['key'] ==
-                                                                              "Action ")
-                                                                          ? Padding(
-                                                                              padding: EdgeInsets.only(top: 10),
-                                                                              child: Column(
-                                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                children: [
-                                                                                  TableActionButton(
-                                                                                    color: ColorValues.appRedColor,
-                                                                                    icon: Icons.delete,
-                                                                                    label: '',
-                                                                                    message: '',
-                                                                                    onPress: () {
-                                                                                      controller.rowFaultyItem.remove(record);
-                                                                                    },
-                                                                                  )
-                                                                                ],
-                                                                              ),
-                                                                            )
-                                                                          : Text(mapData['key'] ??
-                                                                              ''),
+                                                                              "Material_Category")
+                                                                          ? Text(
+                                                                              "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.cat_name ?? ""}")
+                                                                          : (mapData['key'] == "Action ")
+                                                                              ? Padding(
+                                                                                  padding: EdgeInsets.only(top: 10),
+                                                                                  child: Column(
+                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                    children: [
+                                                                                      TableActionButton(
+                                                                                        color: ColorValues.appRedColor,
+                                                                                        icon: Icons.delete,
+                                                                                        label: '',
+                                                                                        message: '',
+                                                                                        onPress: () {
+                                                                                          controller.rowFaultyItem.remove(record);
+                                                                                        },
+                                                                                      )
+                                                                                    ],
+                                                                                  ),
+                                                                                )
+                                                                              : Text(mapData['key'] ?? ''),
                                         );
                                       }).toList(),
                                     );

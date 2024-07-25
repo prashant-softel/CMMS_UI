@@ -653,100 +653,89 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.end,
                                               children: [
-                                                Row(
+                                                Column(
                                                   children: [
-                                                    CustomRichText(
-                                                        title:
-                                                            'Equipment Categories: '),
-                                                    Dimens.boxWidth5,
-                                                    controller.pmtaskViewModel
-                                                                    ?.id !=
-                                                                null ||
-                                                            controller.jobModel
-                                                                    ?.id !=
-                                                                null
-                                                        ? IgnorePointer(
-                                                            child: SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child:
-                                                                  CustomMultiSelectDialogField(
-                                                                title:
-                                                                    'Select Equipment Category',
-                                                                // buttonText:
-                                                                //     'Equipment Category',
-                                                                initialValue: ((controller
-                                                                        .selectedEquipmentCategoryIdList
-                                                                        .isNotEmpty)
-                                                                    ? controller
-                                                                        .selectedEquipmentCategoryIdList
-                                                                    : []),
-                                                                items: controller
-                                                                    .equipmentCategoryList
-                                                                    .map(
-                                                                      (equipmentCategory) =>
-                                                                          MultiSelectItem(
-                                                                        equipmentCategory
-                                                                            ?.id,
-                                                                        equipmentCategory?.name ??
-                                                                            '',
+                                                    controller.typee != 3
+                                                        ? Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Equipment Categories: '),
+                                                              Dimens.boxWidth5,
+                                                              controller.pmtaskViewModel
+                                                                              ?.id !=
+                                                                          null ||
+                                                                      controller
+                                                                              .jobModel
+                                                                              ?.id !=
+                                                                          null
+                                                                  ? IgnorePointer(
+                                                                      child:
+                                                                          SizedBox(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                5,
+                                                                        child:
+                                                                            CustomMultiSelectDialogField(
+                                                                          title:
+                                                                              'Select Equipment Category',
+                                                                          // buttonText:
+                                                                          //     'Equipment Category',
+                                                                          initialValue: ((controller.selectedEquipmentCategoryIdList.isNotEmpty)
+                                                                              ? controller.selectedEquipmentCategoryIdList
+                                                                              : []),
+                                                                          items: controller
+                                                                              .equipmentCategoryList
+                                                                              .map(
+                                                                                (equipmentCategory) => MultiSelectItem(
+                                                                                  equipmentCategory?.id,
+                                                                                  equipmentCategory?.name ?? '',
+                                                                                ),
+                                                                              )
+                                                                              .toList(),
+                                                                          onConfirm:
+                                                                              (selectedOptionsList) => {
+                                                                            controller.equipmentCategoriesSelected(selectedOptionsList),
+                                                                            print('Equipment list ${controller.selectedEquipmentCategoryIdList}')
+                                                                          },
+                                                                        ),
                                                                       ),
                                                                     )
-                                                                    .toList(),
-                                                                onConfirm:
-                                                                    (selectedOptionsList) =>
-                                                                        {
-                                                                  controller
-                                                                      .equipmentCategoriesSelected(
-                                                                          selectedOptionsList),
-                                                                  print(
-                                                                      'Equipment list ${controller.selectedEquipmentCategoryIdList}')
-                                                                },
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : SizedBox(
-                                                            width:
-                                                                Get.width * .2,
-                                                            child:
-                                                                CustomMultiSelectDialogField(
-                                                              title:
-                                                                  'Please Select',
-                                                              buttonText:
-                                                                  'Equipment Category',
-                                                              initialValue: (controller
-                                                                      .selectedEquipmentCategoryIdList
-                                                                      .isNotEmpty)
-                                                                  ? controller
-                                                                      .selectedEquipmentCategoryIdList
-                                                                  : [],
-                                                              items: controller
-                                                                  .equipmentCategoryList
-                                                                  .map(
-                                                                    (equipmentCategory) =>
-                                                                        MultiSelectItem(
-                                                                      equipmentCategory
-                                                                          ?.id,
-                                                                      equipmentCategory
-                                                                              ?.name ??
-                                                                          '',
+                                                                  : SizedBox(
+                                                                      width:
+                                                                          Get.width *
+                                                                              .2,
+                                                                      child:
+                                                                          CustomMultiSelectDialogField(
+                                                                        title:
+                                                                            'Please Select',
+                                                                        buttonText:
+                                                                            'Equipment Category',
+                                                                        initialValue: (controller.selectedEquipmentCategoryIdList.isNotEmpty)
+                                                                            ? controller.selectedEquipmentCategoryIdList
+                                                                            : [],
+                                                                        items: controller
+                                                                            .equipmentCategoryList
+                                                                            .map(
+                                                                              (equipmentCategory) => MultiSelectItem(
+                                                                                equipmentCategory?.id,
+                                                                                equipmentCategory?.name ?? '',
+                                                                              ),
+                                                                            )
+                                                                            .toList(),
+                                                                        onConfirm:
+                                                                            (selectedOptionsList) =>
+                                                                                {
+                                                                          controller
+                                                                              .equipmentCategoriesSelected(selectedOptionsList),
+                                                                          print(
+                                                                              'Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
+                                                                        },
+                                                                      ),
                                                                     ),
-                                                                  )
-                                                                  .toList(),
-                                                              onConfirm:
-                                                                  (selectedOptionsList) =>
-                                                                      {
-                                                                controller
-                                                                    .equipmentCategoriesSelected(
-                                                                        selectedOptionsList),
-                                                                print(
-                                                                    'Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
-                                                              },
-                                                            ),
-                                                          ),
+                                                            ],
+                                                          )
+                                                        : Dimens.box0,
                                                   ],
                                                 ),
                                                 Dimens.boxHeight10,

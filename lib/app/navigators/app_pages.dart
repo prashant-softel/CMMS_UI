@@ -139,6 +139,8 @@ import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/new_permit/view/create_permit_screen.dart';
 import 'package:cmms/app/plant_stock_report_details/plant_stock_report_binding_details.dart';
 import 'package:cmms/app/plant_stock_report_details/view/plant_stock_report_screen_details.dart';
+import 'package:cmms/app/observation_summary/observation_summary_binding.dart';
+import 'package:cmms/app/observation_summary/views/observation_summary_screen.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
 import 'package:cmms/app/risk_type/risk_type_binding.dart';
@@ -153,6 +155,8 @@ import 'package:cmms/app/tool_type/tool_type_binding.dart';
 import 'package:cmms/app/tool_type/views/tool_type_screen.dart';
 import 'package:cmms/app/training_courses/training_course_binding.dart';
 import 'package:cmms/app/training_courses/views/training_course_screen.dart';
+import 'package:cmms/app/training_report/training_summary_binding.dart';
+import 'package:cmms/app/training_report/views/training_summary_screen.dart';
 import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
 import 'package:cmms/app/type_water_master/type_water_master_binding.dart';
 import 'package:cmms/app/type_water_master/view/type_water_master_screen.dart';
@@ -1061,13 +1065,13 @@ class AppPages {
       page: PlantStockReportScreen.new,
       binding: PlantStockReportBinding(),
     ),
-    
-    //  GetPage<dynamic>(
-    //   name: _Paths.plantStockReportDetails,
-    //   page: PlantStockReportDetailsScreen.new,
-    //   binding: PlantStockReportDetailsBinding(),
-    // ),
-    
+
+    GetPage<dynamic>(
+      name: _Paths.plantStockReportDetails,
+      page: PlantStockReportDetailsScreen.new,
+      binding: PlantStockReportDetailsBinding(),
+    ),
+
     GetPage<dynamic>(
       name: _Paths.employeeStockReport,
       page: EmployeeStockReportScreen.new,
@@ -1379,6 +1383,16 @@ class AppPages {
       name: _Paths.checklistInspection,
       page: ChecklistInspectionListScreen.new,
       binding: ChecklistInspectionListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.observationSummary,
+      page: ObservationSummaryScreen.new,
+      binding: ObservationSummaryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.trainingSummary,
+      page: TrainingSummaryScreen.new,
+      binding: TrainingSummaryBinding(),
     ),
   ];
 }

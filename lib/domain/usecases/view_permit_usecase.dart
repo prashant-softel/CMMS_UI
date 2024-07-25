@@ -99,9 +99,10 @@ class ViewPermitUsecase {
     cancelPermitJsonString,
     bool? isLoading,
     int? jobId,
+    int? type,
   }) async =>
       await repository.permitCancelRequestButton(
-          cancelPermitJsonString, isLoading, jobId);
+          cancelPermitJsonString, isLoading, jobId, type);
 
   Future<CreateSOPModel?> browseFiles(
       Uint8List? fileBytes, String fileName, bool isLoading) async {

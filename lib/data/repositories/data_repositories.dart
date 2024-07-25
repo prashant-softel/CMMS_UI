@@ -1170,17 +1170,18 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> permitCancelRequestButton({
-    required String auth,
-    cancelPermitJsonString,
-    bool? isLoading,
-    int? jobId,
-  }) async =>
+  Future<ResponseModel> permitCancelRequestButton(
+          {required String auth,
+          cancelPermitJsonString,
+          bool? isLoading,
+          int? jobId,
+          int? type}) async =>
       await connectHelper.permitCancelRequestButton(
           auth: auth,
           cancelPermitJsonString: cancelPermitJsonString,
           isLoading: isLoading ?? false,
-          jobId: jobId);
+          jobId: jobId,
+          type: type);
 
   Future<ResponseModel> permitCancelByApproverButton({
     required String auth,
@@ -5294,6 +5295,23 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getPlantStockMonthDetail({
+    required String auth,
+    required int facilityID,
+    required int assetItemID,
+    String? start_date,
+    required String end_date,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getPlantStockMonthDetail(
+        auth: auth,
+        start_date: start_date,
+        end_date: end_date,
+        assetItemID: assetItemID,
+        facilityID: facilityID,
+        isLoading: isLoading ?? false,
+      );
+
   //create
   Future<ResponseModel> createSourceOfObslist({
     auth,
@@ -5873,5 +5891,36 @@ class DataRepository extends DomainRepository {
         startDate: startDate,
         endDate: endDate,
       );
+
+  Future<ResponseModel> getObservationSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    required String fromDate,
+    required String toDate,
+  }) async =>
+      await connectHelper.getObservationSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
+  Future<ResponseModel> getTrainingSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    String? fromDate,
+    String? toDate,
+  }) async =>
+      await connectHelper.getTrainingSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
 //end
 }
