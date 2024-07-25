@@ -258,7 +258,7 @@ class CreateMrsReturnController extends GetxController {
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
         mrsItemID: 0,
         assetsID: checkdropdownMapperData[element[1]["value"]].assetsID,
-        sr_no: element[6]["value"] ?? '0',
+        sr_no: element[5]["value"] ?? '0',
         returned_qty: int.tryParse(element[6]["value"] ?? '0'),
         return_remarks: element[7]["value"] ?? '0',
       );
