@@ -117,15 +117,53 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                       ),
                                       Spacer(),
                                       Container(
-                                        height: 30,
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () async {},
-                                          text:
-                                              "${controller.pmPlanDetailsModel.value?.status_short ?? ""}",
+                                        // height: 30,
+                                        // width: MediaQuery.of(context)
+                                        //         .size
+                                        //         .width /
+                                        //     5,
+                                        padding: EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                            color: controller.pmPlanDetailsModel
+                                                        .value!.status_id ==
+                                                    405
+                                                ? ColorValues.approveColor
+                                                : controller.pmPlanDetailsModel
+                                                            .value!.status_id ==
+                                                        406
+                                                    ? ColorValues.appRedColor
+                                                    : ColorValues
+                                                        .appLightBlueColor,
+                                            width: 1,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: controller
+                                                          .pmPlanDetailsModel
+                                                          .value!
+                                                          .status_id ==
+                                                      405
+                                                  ? ColorValues.approveColor
+                                                  : controller
+                                                              .pmPlanDetailsModel
+                                                              .value!
+                                                              .status_id ==
+                                                          406
+                                                      ? ColorValues.appRedColor
+                                                      : ColorValues
+                                                          .appLightBlueColor,
+                                            ),
+                                          ],
                                         ),
-                                      ),
+                                        child: Center(
+                                            child: Text(
+                                          '${controller.pmPlanDetailsModel.value?.status_short}',
+                                          style: TextStyle(color: Colors.white),
+                                        )),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -196,7 +234,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                              '${controller.pmPlanDetailsModel.value?.plan_id ?? ''}',
+                                              'PMP${controller.pmPlanDetailsModel.value?.plan_id ?? ''}',
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.pmPlanDetailsModel.value?.plan_freq_name ?? ''}',
