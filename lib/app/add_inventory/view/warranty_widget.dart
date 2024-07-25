@@ -4,7 +4,9 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/file_upload3_details_widget.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_dropzone3.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -410,13 +412,13 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                                     children: [
                                                       Expanded(
                                                         flex: 2,
-                                                        child: FileUploadWidgetWithDropzone(),
+                                                        child: FileUploadWidgetWithDropzone3(),
                                                       ),
                                                       SizedBox(width: 10),
                                                       Expanded(
                                                           flex: 8,
                                                           child:
-                                                              FileUploadDetailsWidgetWeb()),
+                                                              FileUpload3DetailsWidgetWeb()),
                                                     ],
                                                   ),
                                                 ),
