@@ -688,19 +688,20 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                                     .width,
                                                             dropdownList:
                                                                 controller
-                                                                    .cmmrsItems!
-                                                                    .where(
-                                                                        (p0) {
-                                                                      return !controller
-                                                                          .rowItem
-                                                                          .map((p0) => p0[0]
-                                                                              [
-                                                                              "value"])
-                                                                          .contains(
-                                                                              p0!.name);
-                                                                    })
-                                                                    .toList()
-                                                                    .obs,
+                                                                    .cmmrsItems
+                                                            // !
+                                                            // .where(
+                                                            //     (p0) {
+                                                            //   return !controller
+                                                            //       .rowItem
+                                                            //       .map((p0) => p0[0]
+                                                            //           [
+                                                            //           "value"])
+                                                            //       .contains(
+                                                            //           p0!.name);
+                                                            // })
+                                                            // .toList()
+                                                            , //  .obs,
                                                             selectedValue:
                                                                 mapData[
                                                                     "value"],
@@ -814,10 +815,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                                                                 boxShadow: [
                                                                                                   BoxShadow(
                                                                                                     color: Colors.black26,
-                                                                                                    offset: const Offset(
-                                                                                                      5.0,
-                                                                                                      5.0,
-                                                                                                    ),
+                                                                                                    offset: const Offset(5.0, 5.0),
                                                                                                     blurRadius: 5.0,
                                                                                                     spreadRadius: 1.0,
                                                                                                   ),
@@ -826,33 +824,20 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                                                                 borderRadius: BorderRadius.circular(5),
                                                                                               ),
                                                                                               child: LoginCustomTextfield(
-                                                                                                width: (Get.width * .4),
+                                                                                                width: Get.width * 0.4,
                                                                                                 keyboardType: TextInputType.number,
                                                                                                 inputFormatters: <TextInputFormatter>[
                                                                                                   FilteringTextInputFormatter.digitsOnly
                                                                                                 ],
-                                                                                                maxLine: 1,
-                                                                                                textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                // maxLines: 1,
+                                                                                                textController: TextEditingController(text: mapData["value"] ?? ''),
                                                                                                 onChanged: (txt) {
-                                                                                                  // Ensure the entered value is less than or equal to the issued qty
-                                                                                                  num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
-                                                                                                  num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
-                                                                                                  int consumedQty = int.tryParse(txt) ?? 0;
-
-                                                                                                  if (consumedQty <= (issuedQty - usedQty)) {
-                                                                                                    mapData["value"] = txt;
-                                                                                                  } else {
-                                                                                                    // If the entered quantity exceeds the issued quantity, show an error message or handle it accordingly
-                                                                                                    Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
-                                                                                                    // Reset the consumed quantity to the previous valid value
-                                                                                                    // setState(() {
-                                                                                                    //   mapData["value"] = mapData["value"]!;
-                                                                                                    // });
-                                                                                                  }
+                                                                                                  // Handle onChanged for "Consumed Qty"
+                                                                                                  mapData["value"] = txt; // Update the value in mapData
+                                                                                                  // You can perform validation or other logic here if needed
                                                                                                 },
                                                                                               ),
-                                                                                            ),
-                                                                                          )
+                                                                                            ))
                                                                                         : Text(mapData['value'] ?? ''),
                                                   );
                                                 }).toList(),
@@ -1378,30 +1363,29 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                       'Are you sure you want to Update job ?',
                                                     );
                                                     if (confirmed == true) {
-                                                      controller.updateJobCard(
-                                                          fileIds:
-                                                              dropzoneController
-                                                                  .fileIds);
-                                                      if (controller
-                                                                  .listMrsByTaskId!
-                                                                  .value
-                                                                  .firstWhereOrNull(
-                                                                    (element) =>
-                                                                        element?.jobCardId !=
-                                                                            0 ||
-                                                                        element?.pmId !=
-                                                                            0,
-                                                                  )
-                                                                  ?.mrs_return_ID ==
-                                                              0 &&
-                                                          controller.allTrue
-                                                                  .value ==
-                                                              false &&
-                                                          controller.cmmrsItems!
-                                                              .isNotEmpty) {
-                                                        controller
-                                                            .transferItem();
-                                                      }
+                                                      // controller.updateJobCard(
+                                                      //     fileIds:
+                                                      //         dropzoneController
+                                                      //             .fileIds);
+                                                      // if (controller
+                                                      //             .listMrsByTaskId!
+                                                      //             .value
+                                                      //             .firstWhereOrNull(
+                                                      //               (element) =>
+                                                      //                   element?.jobCardId !=
+                                                      //                       0 ||
+                                                      //                   element?.pmId !=
+                                                      //                       0,
+                                                      //             )
+                                                      //             ?.mrs_return_ID ==
+                                                      //         0 &&
+                                                      //     controller.allTrue
+                                                      //             .value ==
+                                                      //         false &&
+                                                      //     controller.cmmrsItems!
+                                                      //         .isNotEmpty) {
+                                                      controller.transferItem();
+                                                      //  }
 
                                                       Text(
                                                           'Are you sure you want to Update job ?');

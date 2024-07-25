@@ -94,6 +94,7 @@ class JobCardDetailsController extends GetxController {
 
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
+  RxList<MaterialUsedAssets?>? materialUsedAssets = <MaterialUsedAssets?>[].obs;
 
   int userId = 35;
   int facilityId = 0;
@@ -242,9 +243,59 @@ class JobCardDetailsController extends GetxController {
     for (var asset in _assetsList!) {
       cmmrsItems!.add(asset);
     }
+    // addRowItem();
+
+    var _usedassetsList = listMrsByTaskId!.value.last!.material_used_by_assets!;
+
+    for (var usedasset in _usedassetsList) {
+      materialUsedAssets!.add(usedasset);
+    }
+
+    // // Ensure workingAreaList is populated and not null
+    if (workingAreaList != null && workingAreaList!.isNotEmpty) {
+      //   // Assuming you want to find the first item in workingAreaList
+      //   // You might need to adjust this logic based on your actual requirement
+      var firstWorkingAreaList = workingAreaList!.first;
+      if (firstWorkingAreaList != null) {
+        cmmrsItems?.forEach((element) {
+          var consumedQty = '';
+          var matchedUsedAssets = materialUsedAssets!
+              .where((usedAsset) =>
+                  usedAsset!.asset_id == firstWorkingAreaList.workingAreaId)
+              .toList();
+
+          if (matchedUsedAssets.isNotEmpty) {
+            var usedItems = matchedUsedAssets.first!.items
+                ?.where((usedItem) =>
+                    usedItem.sm_asset_id == element?.asset_item_ID)
+                .toList();
+
+            if (usedItems != null && usedItems.isNotEmpty) {
+              consumedQty = usedItems.first.used_qty.toString();
+            }
+          }
+          rowItem.add([
+            {"key": "Drop_down", "value": '${element?.name}'},
+            {"key": "Drop_down_eq", "value": 'Please Select'},
+            {'key': "Sr_No", "value": ''},
+            {'key': "code", "value": ''},
+            {'key': "Material_Type", "value": ''},
+            {'key': "Issued_Qty", "value": ''},
+            {'key': "Used_Qty", "value": ''},
+            {'key': "Consumed_Qty", "value": ''},
+            {'key': "Action ", "value": consumedQty},
+          ]);
+          dropdownMapperData[element?.name ?? ""] = listMrsByTaskId!
+              .value.last!.cmmrsItems!
+              .firstWhere((e) => e!.serial_number == element?.serial_number,
+                  orElse: null);
+        });
+      }
+    }
+
     _processJsonData();
     allTrue.value = itemExistsWithZeroDifference.every((element) => element);
-    addRowItem();
+    // addRowItem();
   }
 
   void _processJsonData() {
@@ -295,7 +346,9 @@ class JobCardDetailsController extends GetxController {
         }
         update(["employeeList"]);
       }
-      addEmployeesDeployed();
+      if (jobCardDetailsModel.value!.lstCmjcEmpList!.isEmpty) {
+        addEmployeesDeployed();
+      }
     }
   }
 
@@ -344,9 +397,16 @@ class JobCardDetailsController extends GetxController {
         refID: jobCardId.value,
         refType: AppConstants.kJobCard,
         remarks: "remarks",
-        toActorID:
-            dropdownMapperDataworkingArea[element[1]["value"]].workingAreaId ??
-                0,
+        toActorID: dropdownMapperDataworkingArea[element[1]["value"]] != null
+            //  &&
+            //         dropdownMapperDataworkingArea[element[1]["value"]]
+            //                 .workingAreaId !=
+            //             null &&
+            //         dropdownMapperDataworkingArea[element[1]["value"]]
+            //                 .workingAreaId !=
+            //             0
+            ? dropdownMapperDataworkingArea[element[1]["value"]].workingAreaId
+            : 0,
         toActorType: AppConstants.kInventory,
         transaction_id:
             dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
@@ -354,6 +414,7 @@ class JobCardDetailsController extends GetxController {
 
       items.add(item);
     });
+
     var transferItemJsonString = items;
     var responsetransferItem = await jobCardDetailsPresenter.transferItem(
       transferItemJsonString: transferItemJsonString,
