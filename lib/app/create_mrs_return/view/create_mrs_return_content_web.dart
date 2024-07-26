@@ -277,7 +277,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                 80) +
                                             60,
                                     child: DataTable2(
-                                      minWidth: 1600,
+                                      // minWidth: 1600,
                                       border: TableBorder.all(
                                           color: Color.fromARGB(
                                               255, 206, 229, 234)),
@@ -635,7 +635,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                     margin:
                                         EdgeInsets.only(left: 10, right: 10),
                                     child: DataTable2(
-                                      minWidth: 1600,
+                                      // minWidth: 1600,
                                       columnSpacing: 10,
                                       border: TableBorder.all(
                                           color: Color.fromARGB(
@@ -650,21 +650,21 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                               fontWeight: FontWeight.bold),
                                         )),
                                         DataColumn2(
-                                            fixedWidth: 170,
+                                            // fixedWidth: 200,
                                             label: Text(
-                                              "Assets",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 170,
-                                            label: Text(
-                                              "Material Type",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
+                                          "Assets",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        // DataColumn2(
+                                        //     fixedWidth: 170,
+                                        //     label: Text(
+                                        //       "Material Type",
+                                        //       style: TextStyle(
+                                        //           fontSize: 15,
+                                        //           fontWeight: FontWeight.bold),
+                                        //     )),
                                         // DataColumn2(
                                         //     fixedWidth: 250,
                                         //     label: Text(
@@ -681,14 +681,14 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold),
                                             )),
-                                        DataColumn2(
-                                            fixedWidth: 200,
-                                            label: Text(
-                                              "Material Category",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
+                                        // DataColumn2(
+                                        //     fixedWidth: 200,
+                                        //     label: Text(
+                                        //       "Material Category",
+                                        //       style: TextStyle(
+                                        //           fontSize: 15,
+                                        //           fontWeight: FontWeight.bold),
+                                        //     )),
                                         DataColumn2(
                                             fixedWidth: 200,
                                             label: Text(
@@ -698,7 +698,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                   fontWeight: FontWeight.bold),
                                             )),
                                         DataColumn2(
-                                            fixedWidth: 150,
+                                            fixedWidth: 130,
                                             label: Text(
                                               "Return Qty",
                                               style: TextStyle(
@@ -706,13 +706,13 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                   fontWeight: FontWeight.bold),
                                             )),
                                         DataColumn2(
-                                            // fixedWidth: 200,
+                                            fixedWidth: 200,
                                             label: Text(
-                                          "Remark",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                              "Remark",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
                                         DataColumn2(
                                             fixedWidth: 100,
                                             label: Text(
@@ -784,44 +784,43 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                   const EdgeInsets
                                                                       .all(6.0),
                                                               child:
-                                                           DropdownWebWidget(
-                                                              width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      .2) -
-                                                                  100,
-                                                              controller:
-                                                                  controller,
-                                                              dropdownList:
+                                                                  DropdownWebWidget(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4,
+                                                                controller:
+                                                                    controller,
+                                                                dropdownList:
+                                                                    controller
+                                                                        .scheduleCheckPointsdrop,
+                                                                selectedValue:
+                                                                    mapData[
+                                                                        "value"],
+                                                                onValueChanged:
+                                                                    (list,
+                                                                        selectedValue) {
                                                                   controller
-                                                                      .scheduleCheckPointsdrop,
-                                                              selectedValue:
-                                                                  mapData[
-                                                                      "value"],
-                                                              onValueChanged: (list,
-                                                                  selectedValue) {
-                                                                controller
-                                                                    .selectedasset
-                                                                    .value;
-                                                                mapData["value"] =
-                                                                    selectedValue;
+                                                                      .selectedasset
+                                                                      .value;
+                                                                  mapData["value"] =
+                                                                      selectedValue;
 
-                                                                controller
-                                                                        .selectedasset
-                                                                        .value =
-                                                                    selectedValue;
+                                                                  controller
+                                                                          .selectedasset
+                                                                          .value =
+                                                                      selectedValue;
 
-                                                                controller.checkdropdownMapperData[
-                                                                        selectedValue] =
-                                                                    list.firstWhere(
-                                                                        (element) =>
-                                                                            element.name ==
-                                                                            selectedValue,
-                                                                        orElse:
-                                                                            null);
-                                                              },
-                                                            ),
+                                                                  controller.checkdropdownMapperData[selectedValue] = list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse:
+                                                                          null);
+                                                                },
+                                                              ),
                                                             ), // Obx(() {
                                                             //   return controller
                                                             //           .allDropdownsSelected
@@ -1000,32 +999,36 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                           "code")
                                                                       ? Text(
                                                                           "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.asset_code ?? ""}")
+                                                                      // : (mapData['key'] ==
+                                                                      //         "Material_Type")
+                                                                      //     ? Text(
+                                                                      //         "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.asset_type ?? ""}")
+                                                                      // : (mapData['key'] ==
+                                                                      //         "Material_Category")
+                                                                      //     ? Text(
+                                                                      //         "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.cat_name ?? ""}")
                                                                       : (mapData['key'] ==
-                                                                              "Material_Type")
-                                                                          ? Text(
-                                                                              "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.asset_type ?? ""}")
-                                                                          : (mapData['key'] == "Material_Category")
-                                                                              ? Text("${controller.dropdownFaultyMapperData.value[record[0]['value']]?.cat_name ?? ""}")
-                                                                              : (mapData['key'] == "Action ")
-                                                                                  ? Padding(
-                                                                                      padding: EdgeInsets.only(top: 10),
-                                                                                      child: Column(
-                                                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                        children: [
-                                                                                          TableActionButton(
-                                                                                            color: ColorValues.appRedColor,
-                                                                                            icon: Icons.delete,
-                                                                                            label: '',
-                                                                                            message: '',
-                                                                                            onPress: () {
-                                                                                              controller.rowFaultyItem.remove(record);
-                                                                                            },
-                                                                                          )
-                                                                                        ],
-                                                                                      ),
-                                                                                    )
-                                                                                  : Text(mapData['key'] ?? ''),
+                                                                              "Action ")
+                                                                          ? Padding(
+                                                                              padding: EdgeInsets.only(top: 10),
+                                                                              child: Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  TableActionButton(
+                                                                                    color: ColorValues.appRedColor,
+                                                                                    icon: Icons.delete,
+                                                                                    label: '',
+                                                                                    message: '',
+                                                                                    onPress: () {
+                                                                                      controller.rowFaultyItem.remove(record);
+                                                                                    },
+                                                                                  )
+                                                                                ],
+                                                                              ),
+                                                                            )
+                                                                          : Text(mapData['key'] ??
+                                                                              ''),
                                             );
                                           }).toList(),
                                         );

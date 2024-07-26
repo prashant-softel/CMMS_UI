@@ -31,4 +31,8 @@ class MrsApproveUsecase {
       repository.saveValue(LocalKeys.mrsId, mrsId);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.mrsId);
+  void saveValuee({String? type}) async =>
+      repository.saveValue(LocalKeys.type, type);
+  Future<String?> getValuee() async =>
+      await repository.getStringValue(LocalKeys.type);
 }

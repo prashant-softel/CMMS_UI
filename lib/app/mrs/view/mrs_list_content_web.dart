@@ -496,7 +496,7 @@ class MrsListDataSource extends DataTableSource {
 
                             // _flutterSecureStorage.delete(key: "mrsId");
                             int mrsId = MrsDetails?.id ?? 0;
-                            Get.toNamed(Routes.mrsViewScreen,
+                            Get.toNamed(Routes.mrsApprovalScreen,
                                 arguments: {'mrsId': mrsId, 'type': 0});
                           },
                         ),
@@ -534,40 +534,40 @@ class MrsListDataSource extends DataTableSource {
                                       arguments: {'mrsId': mrsId, 'type': 0});
                                 })
                             : Dimens.box0,
-                        controller.mrsList
-                                        .firstWhere(
-                                          (e) => e?.id == MrsDetails!.id,
-                                          orElse: () => MrsListModel(id: 00),
-                                        )
-                                        ?.status ==
-                                    321 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kMrsFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.approveColor,
-                                icon: Icons.check,
-                                message: 'Approve',
-                                onPress: () {
-                                  controller.clearStoreData();
+                        // controller.mrsList
+                        //                 .firstWhere(
+                        //                   (e) => e?.id == MrsDetails!.id,
+                        //                   orElse: () => MrsListModel(id: 00),
+                        //                 )
+                        //                 ?.status ==
+                        //             321 &&
+                        //         varUserAccessModel.value.access_list!
+                        //                 .where((e) =>
+                        //                     e.feature_id ==
+                        //                         UserAccessConstants
+                        //                             .kMrsFeatureId &&
+                        //                     e.approve ==
+                        //                         UserAccessConstants
+                        //                             .kHaveApproveAccess)
+                        //                 .length >
+                        //             0
+                        //     ? TableActionButton(
+                        //         color: ColorValues.approveColor,
+                        //         icon: Icons.check,
+                        //         message: 'Approve',
+                        //         onPress: () {
+                        //           controller.clearStoreData();
 
-                                  // final _flutterSecureStorage =
-                                  //     const FlutterSecureStorage();
+                        //           // final _flutterSecureStorage =
+                        //           //     const FlutterSecureStorage();
 
-                                  // _flutterSecureStorage.delete(key: "mrsId");
-                                  int mrsId = MrsDetails?.id ?? 0;
-                                  Get.toNamed(Routes.mrsApprovalScreen,
-                                      arguments: {'mrsId': mrsId});
-                                },
-                              )
-                            : Dimens.box0,
+                        //           // _flutterSecureStorage.delete(key: "mrsId");
+                        //           int mrsId = MrsDetails?.id ?? 0;
+                        //           Get.toNamed(Routes.mrsApprovalScreen,
+                        //               arguments: {'mrsId': mrsId});
+                        //         },
+                        //       )
+                        //     : Dimens.box0,
                         controller.mrsList
                                         .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
@@ -602,40 +602,40 @@ class MrsListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList
-                                        .firstWhere(
-                                          (e) => e?.id == MrsDetails!.id,
-                                          orElse: () => MrsListModel(id: 00),
-                                        )
-                                        ?.status ==
-                                    321 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kMrsFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.rejectColor,
-                                icon: Icons.close,
-                                message: 'Reject',
-                                onPress: () {
-                                  controller.clearStoreData();
+                        // controller.mrsList
+                        //                 .firstWhere(
+                        //                   (e) => e?.id == MrsDetails!.id,
+                        //                   orElse: () => MrsListModel(id: 00),
+                        //                 )
+                        //                 ?.status ==
+                        //             321 &&
+                        //         varUserAccessModel.value.access_list!
+                        //                 .where((e) =>
+                        //                     e.feature_id ==
+                        //                         UserAccessConstants
+                        //                             .kMrsFeatureId &&
+                        //                     e.approve ==
+                        //                         UserAccessConstants
+                        //                             .kHaveApproveAccess)
+                        //                 .length >
+                        //             0
+                        //     ? TableActionButton(
+                        //         color: ColorValues.rejectColor,
+                        //         icon: Icons.close,
+                        //         message: 'Reject',
+                        //         onPress: () {
+                        //           controller.clearStoreData();
 
-                                  // final _flutterSecureStorage =
-                                  //     const FlutterSecureStorage();
+                        //           // final _flutterSecureStorage =
+                        //           //     const FlutterSecureStorage();
 
-                                  // _flutterSecureStorage.delete(key: "mrsId");
-                                  int mrsId = MrsDetails?.id ?? 0;
-                                  Get.toNamed(Routes.mrsApprovalScreen,
-                                      arguments: {'mrsId': mrsId});
-                                },
-                              )
-                            : Dimens.box0,
+                        //           // _flutterSecureStorage.delete(key: "mrsId");
+                        //           int mrsId = MrsDetails?.id ?? 0;
+                        //           Get.toNamed(Routes.mrsApprovalScreen,
+                        //               arguments: {'mrsId': mrsId});
+                        //         },
+                        //       )
+                        //     : Dimens.box0,
                         // controller.mrsList
                         //                 .firstWhere(
                         //                   (e) => e?.id == MrsDetails!.id,
@@ -757,7 +757,7 @@ class MrsListDataSource extends DataTableSource {
 
         // _flutterSecureStorage.delete(key: "mrsId");
         Get.toNamed(
-          Routes.mrsViewScreen,
+          Routes.mrsApprovalScreen,
           arguments: {'mrsId': MrsDetails?.id, 'type': 0},
         );
       },

@@ -27,6 +27,7 @@ class MrsApproveController extends GetxController {
   String whereUsedType = "";
   Rx<bool> isFormInvalid = false.obs;
   var commentCtrlr = TextEditingController();
+  Rx<int> type = 0.obs;
 
   ///
   @override
@@ -57,13 +58,17 @@ class MrsApproveController extends GetxController {
   Future<void> setMrsId() async {
     try {
       final _mrsId = await mrsApprovePresenter.getValue();
+      final _type = await mrsApprovePresenter.getValuee();
       if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         mrsId.value = dataFromPreviousScreen['mrsId'];
+        type.value = dataFromPreviousScreen['type'];
         mrsApprovePresenter.saveValue(mrsId: mrsId.value.toString());
+        mrsApprovePresenter.saveValuee(type: type.value.toString());
       } else {
         mrsId.value = int.tryParse(_mrsId) ?? 0;
+        type.value = int.tryParse(_type!) ?? 0;
       }
     } catch (e) {
       Utility.showDialog(e.toString(), 'mrsId');

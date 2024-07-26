@@ -10967,14 +10967,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createMrs(
-    createMrsJsonString,
+    createMrsJsonString,type,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createMrs(
         auth: auth,
-        createMrsJsonString: createMrsJsonString,
+        createMrsJsonString: createMrsJsonString,type:type,
         isLoading: isLoading ?? false,
       );
 

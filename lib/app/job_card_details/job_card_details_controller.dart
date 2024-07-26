@@ -266,8 +266,7 @@ class JobCardDetailsController extends GetxController {
 
           if (matchedUsedAssets.isNotEmpty) {
             var usedItems = matchedUsedAssets.first!.items
-                ?.where((usedItem) =>
-                    usedItem.sm_asset_id == element?.asset_item_ID)
+                ?.where((usedItem) => usedItem.mrs_Item_Id == element?.id)
                 .toList();
 
             if (usedItems != null && usedItems.isNotEmpty) {
@@ -276,7 +275,7 @@ class JobCardDetailsController extends GetxController {
           }
           rowItem.add([
             {"key": "Drop_down", "value": '${element?.name}'},
-            {"key": "Drop_down_eq", "value": 'Please Select'},
+            {"key": "Drop_down_eq", "value": '${element?.name}'},
             {'key': "Sr_No", "value": ''},
             {'key': "code", "value": ''},
             {'key': "Material_Type", "value": ''},

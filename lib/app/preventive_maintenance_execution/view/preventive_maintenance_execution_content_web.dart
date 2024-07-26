@@ -707,7 +707,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                                 "";
                                                                         controller.listMrsByTaskId?[index]?.is_mrs_return ==
                                                                                 0
-                                                                            ? Get.toNamed(Routes.mrsViewScreen, arguments: {
+                                                                            ? Get.toNamed(Routes.mrsApprovalScreen, arguments: {
                                                                                 'mrsId': int.tryParse("$mrsId"),
                                                                                 'type': 2
                                                                               })

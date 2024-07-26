@@ -3813,12 +3813,12 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> createMrs({
     required String auth,
-    createMrsJsonString,
+    createMrsJsonString,type,
     bool? isLoading,
   }) async =>
       await connectHelper.createMrs(
         auth: auth,
-        createMrsJsonString: createMrsJsonString,
+        createMrsJsonString: createMrsJsonString,type:type,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> createPmPlan({
