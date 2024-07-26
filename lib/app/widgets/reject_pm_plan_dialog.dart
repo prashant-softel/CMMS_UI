@@ -79,7 +79,7 @@ class PmPlanRejectDialog extends GetView {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Dimens.boxWidth5,
             ElevatedButton(
-              style: Styles.darkRedElevatedButtonStyle,
+              style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 Get.back();
               },
