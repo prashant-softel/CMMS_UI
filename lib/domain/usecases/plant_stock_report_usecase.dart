@@ -25,4 +25,7 @@ class PlantStockReportUsecase {
         facilityId,
         isLoading,
       );
+      void clearValue() async => _repository.clearData(
+        LocalKeys.assetId,
+      );
 }

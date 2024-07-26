@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -540,6 +541,7 @@ class PlantListDataSource extends DataTableSource {
       '${PlantDetails?.inward ?? ''}',
       '${PlantDetails?.outward ?? ''}',
       '${PlantDetails?.balance ?? ''}',
+      'Actions',
     ];
     var cells = [];
     int i = 0;
@@ -555,6 +557,7 @@ class PlantListDataSource extends DataTableSource {
       }
       i++;
     }
+    // cells.add('Actions');
 
     // print({"cell": cells});
     return DataRow.byIndex(
@@ -563,7 +566,22 @@ class PlantListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: Text(value.toString()),
+            // child: Text(value.toString()),
+                child: value == 'Actions'
+              ? TableActionButton(
+                  color: ColorValues.viewColor,
+                   icon: Icons.remove_red_eye_outlined,
+                    message: 'view',
+                 onPress:() {
+                  controller.clearStoreData();
+                    int assetId = PlantDetails?.assetItemID ?? 0;
+                    if (assetId != 0) {
+                      Get.toNamed(Routes.plantStockReportDetails, arguments: {'assetId': assetId,});
+                    }
+                  },
+                )
+              : Text(value.toString()),
+            
           ),
         );
       }).toList(),
@@ -574,6 +592,8 @@ class PlantListDataSource extends DataTableSource {
         // _flutterSecureStorage.delete(key: "mrsId");
         // Get.toNamed(Routes.mrsViewScreen, arguments: {'mrsId': MrsDetails?.id});
       },
+
+      
     );
   }
 

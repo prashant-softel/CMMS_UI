@@ -9328,7 +9328,7 @@ Future<ResponseModel> getPlantStockMonthDetail({
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMReports/GetPlantItemTransactionReport?facility_id=1&assetItemId=2&fromDate=2023-07-22&toDate=2024-07-23',
+      'SMReports/GetPlantItemTransactionReport?facility_id=$facilityID&assetItemId=$assetItemID&fromDate=2023-07-22&toDate=2024-07-23',
       Request.get,
       null,
       isLoading ?? false,
