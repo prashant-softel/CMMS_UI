@@ -5999,7 +5999,7 @@ class ConnectHelper {
     int? type,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMMaster/GetAssetMasterList',
+      'SMMaster/GetAssetMasterList?facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,

@@ -90,8 +90,15 @@ class ViewPmPlanController extends GetxController {
     print({"pmPlandetailss", pmPlanDetailsModel.value?.plan_name});
   }
 
-  Future<void> checkform() async {
+  Future<void> checkformapp() async {
     if (approveCommentTextFieldCtrlr.text == '') {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+  Future<void> checkformrej() async {
+    if (rejectCommentTextFieldCtrlr.text == '') {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -100,7 +107,7 @@ class ViewPmPlanController extends GetxController {
 
   void pmPlanApprovedButton({int? id}) async {
     {
-      await checkform();
+      await checkformapp();
       if (isFormInvalid.value == true) {
         Fluttertoast.showToast(msg: "Please Enter Comment!");
         return;
@@ -125,6 +132,11 @@ class ViewPmPlanController extends GetxController {
 
   void pmPlanRejectButton({int? id}) async {
     {
+      await checkformrej();
+      if (isFormInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentpmPlanRejectModel =
