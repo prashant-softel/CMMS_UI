@@ -114,7 +114,6 @@ abstract class Routes {
   static const addassetMaster = _Paths.addassetMaster;
   static const incidentReportListWeb = _Paths.incidentReportListWeb;
   static const addIncidentReportContentWeb = _Paths.addIncidentReportContentWeb;
-  static const mrsViewScreen = _Paths.mrsViewScreen;
   static const mrsApprovalScreen = _Paths.mrsApprovalScreen;
   static const mrsIssueScreen = _Paths.mrsIssueScreen;
   static const mrsReturnScreen = _Paths.mrsReturnScreen;
@@ -350,7 +349,6 @@ abstract class _Paths {
   static const addassetMaster = '/add-Material-List';
   static const incidentReportListWeb = '/incident-report-list';
   static const addIncidentReportContentWeb = '/add-incident-report';
-  static const mrsViewScreen = '/mrs-view';
   static const mrsApprovalScreen = '/mrs-approval';
   static const mrsIssueScreen = '/mrs-issue';
   static const mrsReturnScreen = '/mrs-return';

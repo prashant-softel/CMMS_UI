@@ -155,9 +155,9 @@ class CreateMrsReturnController extends GetxController {
     rowFaultyItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "assets", "value": ''},
-      {'key': "Material_Type", "value": ''},
+      // {'key': "Material_Type", "value": ''},
       {'key': "code", "value": ''},
-      {'key': "Material_Category", "value": ''},
+      // {'key': "Material_Category", "value": ''},
       {'key': "Sr_no", "value": ''},
       {'key': "Return_Qty", "value": '1'},
       {'key': "Remark", "value": ''},
@@ -258,9 +258,9 @@ class CreateMrsReturnController extends GetxController {
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
         mrsItemID: 0,
         assetsID: checkdropdownMapperData[element[1]["value"]].assetsID,
-        sr_no: element[5]["value"] ?? '0',
-        returned_qty: int.tryParse(element[6]["value"] ?? '0'),
-        return_remarks: element[7]["value"] ?? '0',
+        sr_no: element[3]["value"] ?? '0',
+        returned_qty: int.tryParse(element[4]["value"] ?? '0'),
+        return_remarks: element[5]["value"] ?? '0',
       );
       faultyItems.add(item);
     });

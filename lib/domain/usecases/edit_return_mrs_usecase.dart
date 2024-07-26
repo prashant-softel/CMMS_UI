@@ -2,6 +2,7 @@ import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class EditMrsReturnUsecase {
@@ -22,6 +23,10 @@ class EditMrsReturnUsecase {
         createReturnMrsJsonString,
         isLoading,
       );
+  void saveValue({String? mrsId}) async =>
+      repository.saveValue(LocalKeys.mrsId, mrsId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.mrsId);
   Future<PmtaskViewModel?> getPmtaskViewList(
           {int? scheduleId, bool? isLoading, required int facilityId}) async =>
       await repository.getPmtaskViewList(scheduleId, isLoading, facilityId);

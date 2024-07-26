@@ -134,8 +134,6 @@ import 'package:cmms/app/mrs_issue/mrs_issue_binding.dart';
 import 'package:cmms/app/mrs_issue/view/mrs_issue_screen.dart';
 import 'package:cmms/app/create_mrs_return/create_mrs_return_binding.dart';
 import 'package:cmms/app/create_mrs_return/view/create_mrs_return_screen.dart';
-import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
-import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/new_permit/view/create_permit_screen.dart';
 import 'package:cmms/app/plant_stock_report_details/plant_stock_report_binding_details.dart';
 import 'package:cmms/app/plant_stock_report_details/view/plant_stock_report_screen_details.dart';
@@ -876,11 +874,7 @@ class AppPages {
       page: ViewEscalationMatrixScreen.new,
       binding: ViewEscalationMatrixBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.mrsViewScreen,
-      page: MrsViewScreen.new,
-      binding: MrsViewBinding(),
-    ),
+
     GetPage<dynamic>(
       name: _Paths.mrsApprovalScreen,
       page: MrsApproveScreen.new,

@@ -23,6 +23,7 @@ import 'package:cmms/app/widgets/compliance_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
+import 'package:cmms/app/widgets/create_mrs_success_dailog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_plan_dialog_msg.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
@@ -6681,6 +6682,7 @@ class ConnectHelper {
   Future<ResponseModel> createMrs({
     required String auth,
     createMrsJsonString,
+    type,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -6693,6 +6695,10 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CreateMrsSuccessDialog(
+        data: parsedJson['message'], mrsId: parsedJson['id'], type: type));
     return responseModel;
   }
 
