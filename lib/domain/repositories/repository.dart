@@ -14126,8 +14126,8 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var plantStockMonthDetails =
-              PlantStockMonthDetailModelFromJson(res.data);
-          print({"Plant Stock By Months", plantStockMonthDetails[0].details});
+              plantStockMonthDetailModelFromJson(res.data);
+          // print({"Plant Stock By Months", plantStockMonthDetails[0].details});
           return plantStockMonthDetails;
         }
       } else {

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/plant_stock_report_details/plant_stock_report_presenter_details.dart';
 import 'package:cmms/domain/models/plant_stock_month.dart';
@@ -27,23 +26,30 @@ class PlantStockReportDetailsController extends GetxController {
       DateFormat('dd/MM/yyyy').format(fromDate.value);
   String get formattedToDate => DateFormat('dd/MM/yyyy').format(toDate.value);
   String get formattedToDate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
   String get formattedFromDate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   int facilityID = 0;
   int assetItemID = 0;
   Rx<int> assetID = 0.obs;
-  
 
   Rx<int> type = 0.obs;
   Rx<int> selectedYear = 0.obs;
   Rx<int> selectedMonth = 0.obs;
   Rx<String> monthName = ''.obs;
+  Rx<String> assetItemName = ''.obs;
+    bool openFromDateToStartDatePicker = false;
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
 
   // Rx<PlantStockMonth?> plantStockReportByMonth = PlantStockMonth().obs;
-  RxList<PlantStockMonth?> plantStockReportByMonthList = <PlantStockMonth?>[].obs;
+  
+  RxList<PlantStockMonth?> plantStockReportByMonthList =
+      <PlantStockMonth?>[].obs;
   // Rx<PlantDetail?> plantdetails = PlantDetail().obs;
   RxList<PlantDetail?> plantDetailList = <PlantDetail?>[].obs;
+  PlantDetail? plantDetails;
   RxList<double> totalColumn = <double>[].obs;
 
   MonthModel? monthModel = MonthModel(name: '');
@@ -63,6 +69,8 @@ class PlantStockReportDetailsController extends GetxController {
     MonthModel(name: 'Dec', id: "12"),
   ].obs;
 
+  
+
   @override
   void onInit() async {
     await setPlantDetails();
@@ -73,29 +81,30 @@ class PlantStockReportDetailsController extends GetxController {
         facilityID: facilityID,
         start_date: formattedFromDate1,
         end_date: formattedToDate1,
-        assetItemID: assetItemID,
+        assetItemID: assetID.value,
       );
     });
     super.onInit();
   }
 
   Future<void> setPlantDetails() async {
-    // try {
-    //   final _assetID = await plantStockReportDetailsPresenter.getValue();
+    try {
+      final _assetId = await plantStockReportDetailsPresenter.getValue();
 
-    //   if (_assetID == null || _assetID == '' || _assetID == "null") {
-    //     var dataFromPreviousScreen = Get.arguments;
+      if (_assetId == null || _assetId.isEmpty || _assetId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
 
-    //     assetID.value = dataFromPreviousScreen['assetID'];
+        assetID.value = dataFromPreviousScreen['assetId'];
 
-    //     plantStockReportDetailsPresenter.saveValue(assetID: assetID.value.toString());
-    //   } else {
-    //     assetID.value = int.tryParse(_assetID) ?? 0;
-    //   }
-    // } catch (e) {
-    //   print(e.toString() + 'assetID');
-    //   //  Utility.showDialog(e.toString() + 'userId');
-    // }
+        plantStockReportDetailsPresenter.saveValue(
+            assetId: assetID.value.toString());
+      } else {
+        assetID.value = int.tryParse(_assetId) ?? 0;
+      }
+    } catch (e) {
+      print('${e.toString()} assetID');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   Future<void> getPlantStockMonthDetail({
@@ -116,9 +125,13 @@ class PlantStockReportDetailsController extends GetxController {
       plantStockReportByMonthList.value = _plantStockMonthDetail;
       // plantStockReportByMonth.value = plantStockReportByMonthList.firstWhereOrNull(
       //     (element) => element?.facilityID != 0);
-       for (var plantDetail in plantStockReportByMonthList){
-      plantDetailList.value = plantDetail?.details ?? [];
-       }
+      for (var plantDetail in plantStockReportByMonthList) {
+        plantDetailList.value = plantDetail?.details ?? [];
+        plantDetails = plantDetailList
+            .firstWhere((element) => element?.assetItemName != null);
+        assetItemName.value = plantDetails?.assetItemName;
+      }
     }
   }
+  
 }

@@ -20,12 +20,12 @@ class PlantStockReportDetailsPresenter {
       isLoading: isLoading ?? false,
     );
   }
-//  void saveValue({String? assetID}) async {
-//     return PlantStockReportDetailsUsecase.saveValue(assetID: assetID);
-//   }
-
-//   Future<String?> getValue() async =>
-//       await PlantStockReportDetailsUsecase.getValue();
+void saveValue({String? assetId}) async {
+  return plantStockReportDetailsUsecase.saveValue(assetId: assetId);
 }
 
+Future<String?> getValue() async {
+  return await plantStockReportDetailsUsecase.getValue();
+}
+}
 
