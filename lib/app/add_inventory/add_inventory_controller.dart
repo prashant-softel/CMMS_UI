@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:cmms/app/controllers/file_upload_controller.dart';
+import 'package:cmms/app/controllers/file_upload_controller2.dart';
+import 'package:cmms/app/controllers/file_upload_controller3.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/app/add_inventory/add_inventory_presenter.dart';
@@ -28,6 +31,12 @@ import '../../domain/models/user_access_model.dart';
 class AddInventoryController extends GetxController {
   AddInventoryController(this.addInventoryPresenter);
   AddInventoryPresenter addInventoryPresenter;
+  final FileUploadController dropzoneController =
+      Get.put(FileUploadController());
+  final FileUploadController2 dropzoneController2 =
+      Get.put(FileUploadController2());
+  final FileUploadController3 dropzoneController3 =
+      Get.put(FileUploadController3());
 
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
@@ -695,6 +704,8 @@ class AddInventoryController extends GetxController {
     String _expireDateTc = expireDateTc.text.trim();
     String _startDateTc = startDateTc.text.trim();
     String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
+    List<dynamic> _calibrationFileIds = dropzoneController2.fileIds;
+    List<dynamic> _warrantyFileIds = dropzoneController3.fileIds;
 
     int _cost = int.tryParse(_costCtrlr) ?? 0;
 
@@ -746,8 +757,8 @@ class AddInventoryController extends GetxController {
             ownerId: 2,
             stockCount: 50,
             attachments: null,
-            uplaodfile_of_calibration: [],
-            uplaodfile_of_warranty: []);
+            uplaodfile_of_calibration: _calibrationFileIds,
+            uplaodfile_of_warranty: _warrantyFileIds);
 
     var addInventoryJsonString = [addInventoryRequestModel.toJson()];
 
