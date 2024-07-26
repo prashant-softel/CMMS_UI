@@ -21,6 +21,8 @@ class GetAssetDataModel {
   int? requestID;
   String? currency;
   int? currencyID;
+  int? fromActorID;
+  String? fromActorName;
 
   double? cost;
   double? ordered_qty;
@@ -47,12 +49,15 @@ class GetAssetDataModel {
       this.cost,
       this.itemID,
       this.ordered_qty,
-      this.requestID});
+      this.requestID,
+      this.fromActorName,
+      this.fromActorID});
 
   GetAssetDataModel.fromJson(Map<String, dynamic> json) {
     accepted_qty = json['accepted_qty'];
     id = json['id'];
-    // assetMasterItemID = json['assetMasterItemID'];
+
+    fromActorName = json['fromActorName'];
     asset_cat = json['asset_cat'];
     asset_name = json['asset_name'];
     comment = json['comment'];
@@ -72,11 +77,13 @@ class GetAssetDataModel {
     cat_name = json['cat_name'];
     return_remarks = json['return_remarks'];
     returned_qty = json['returned_qty'];
+    fromActorID = json['fromActorID'];
   }
 
   Map<String, dynamic> toJson() => {
         "accepted_qty": accepted_qty,
-        // "assetMasterItemID": assetMasterItemID,
+        "fromActorName": fromActorName,
+        "fromActorID": fromActorID,
         "asset_cat": asset_cat,
         "asset_name": asset_name,
         "comment": comment,
@@ -88,11 +95,10 @@ class GetAssetDataModel {
         "ordered_qty": ordered_qty,
         "requestID": requestID,
         "id": id,
-        "id": id,
         "mrs_item_id": mrs_item_id,
         "serial_number": serial_number,
         "asset_type": asset_type,
-        "asset_name": name,
+        // "asset_name": name,
         "asset_code": asset_code,
         "cat_name": cat_name,
         "return_remarks": return_remarks,

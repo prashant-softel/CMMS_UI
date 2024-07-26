@@ -666,7 +666,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                                 0
                                                             ? Get.toNamed(
                                                                 Routes
-                                                                    .mrsViewScreen,
+                                                                    .mrsApprovalScreen,
                                                                 arguments: {
                                                                     'mrsId': int
                                                                         .tryParse(

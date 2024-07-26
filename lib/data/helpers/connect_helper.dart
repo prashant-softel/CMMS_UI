@@ -23,6 +23,7 @@ import 'package:cmms/app/widgets/compliance_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
+import 'package:cmms/app/widgets/create_mrs_success_dailog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_plan_dialog_msg.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
@@ -6681,6 +6682,7 @@ class ConnectHelper {
   Future<ResponseModel> createMrs({
     required String auth,
     createMrsJsonString,
+    type,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -6693,6 +6695,10 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CreateMrsSuccessDialog(
+        data: parsedJson['message'], mrsId: parsedJson['id'], type: type));
     return responseModel;
   }
 
@@ -9329,7 +9335,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMReports/GetPlantItemTransactionReport?facility_id=1&assetItemId=2&fromDate=2023-07-22&toDate=2024-07-23',
+      'SMReports/GetPlantItemTransactionReport?facility_id=$facilityID&assetItemId=$assetItemID&fromDate=2023-07-22&toDate=2024-07-23',
       Request.get,
       null,
       isLoading ?? false,

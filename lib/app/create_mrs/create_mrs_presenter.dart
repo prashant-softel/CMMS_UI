@@ -15,10 +15,12 @@ class CreateMrsPresenter {
       );
   Future<Map<String, dynamic>?> createMrs({
     createMrsJsonString,
+    type,
     required bool isLoading,
   }) async {
     return createmrsUsecase.createMrs(
       createMrsJsonString: createMrsJsonString,
+      type: type,
       isLoading: isLoading,
     );
   }

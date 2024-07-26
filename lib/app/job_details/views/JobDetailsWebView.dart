@@ -897,7 +897,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                 rmrsId == "0"
                                                                     ? Get.toNamed(
                                                                         Routes
-                                                                            .mrsViewScreen,
+                                                                            .mrsApprovalScreen,
                                                                         arguments: {
                                                                             'mrsId':
                                                                                 int.tryParse("$mrsId"),

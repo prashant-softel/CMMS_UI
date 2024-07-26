@@ -474,7 +474,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                                 .returnMrsDetailsModel
                                                 .value!
                                                 .cmmrsFaultyItems![index]
-                                                .asset_type
+                                                .fromActorName
                                                 .toString())),
                                             DataCell(Text(controller
                                                 .returnMrsDetailsModel

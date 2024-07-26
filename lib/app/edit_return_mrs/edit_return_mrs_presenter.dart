@@ -24,6 +24,12 @@ class EditMrsReturnPresenter {
     );
   }
 
+  void saveValue({String? mrsId}) async {
+    return editmrsReturnUsecase.saveValue(mrsId: mrsId);
+  }
+
+  Future<String?> getValue() async => await editmrsReturnUsecase.getValue();
+
   Future<PmtaskViewModel?> getPmtaskViewList({
     int? scheduleId,
     required int facilityId,

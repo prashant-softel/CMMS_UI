@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cmms/app/edit_return_mrs/edit_return_mrs_presenter.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/create_return_mrs_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
@@ -40,7 +41,7 @@ class EditMrsReturnController extends GetxController {
   RxList<List<Map<String, String>>> rowFaultyItem =
       <List<Map<String, String>>>[].obs;
   RxMap<dynamic, dynamic> dropdownFaultyMapperData = {}.obs;
-  int mrsId = 0;
+  Rx<int> mrsId = 0.obs;
   var isSetTemplate = false.obs;
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   Rx<ReturnMrsDetailsModel?> returnMrsDetailsModel =
@@ -53,17 +54,49 @@ class EditMrsReturnController extends GetxController {
   ///
   @override
   void onInit() async {
-    mrsId = Get.arguments;
+    try {
+      await setMrsId();
 
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getReturnMrsDetails(
-            mrsId: mrsId, isloading: true, facilityId: facilityId);
-        // getAssetList(facilityId);
+      facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+        facilityId = event;
+        if (facilityId > 0) {
+          if (mrsId != 0) {
+            Future.delayed(Duration(seconds: 1), () {
+              getReturnMrsDetails(
+                  mrsId: mrsId.value, isloading: true, facilityId: facilityId);
+              // getAssetList(facilityId);
+            });
+          }
+        }
       });
-    });
-    super.onInit();
+      // if (mrsId != 0) {
+      //   await getMrsDetails(mrsId: mrsId.value, isloading: true);
+      // }
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> setMrsId() async {
+    try {
+      final _mrsId = await editmrsReturnPresenter.getValue();
+      final _type = await editmrsReturnPresenter.getValue();
+      if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        mrsId.value = dataFromPreviousScreen['mrsId'];
+        // type.value = dataFromPreviousScreen['type'];
+        editmrsReturnPresenter.saveValue(mrsId: mrsId.value.toString());
+        // editMrsPresenter.saveValuee(type: type.value.toString());
+      } else {
+        mrsId.value = int.tryParse(_mrsId) ?? 0;
+        // type.value = int.tryParse(_type!) ?? 0;
+      }
+      //  await _flutterSecureStorage.delete(key: "mrsId");
+    } catch (e) {
+      Utility.showDialog(e.toString(), 'mrsId');
+    }
   }
 
   Future<void> getReturnMrsDetails(
@@ -75,11 +108,12 @@ class EditMrsReturnController extends GetxController {
     if (_returnMrsrsDetailsModel != null) {
       returnMrsDetailsModel.value = _returnMrsrsDetailsModel;
 
-      getCmmsItemList(
+      await getCmmsItemList(
         _returnMrsrsDetailsModel.mrs_id ?? 0,
       );
-      getAssetList(facilityId);
-      getPmtaskViewList(facilityId: facilityId);
+      await getPmtaskViewList(facilityId: facilityId);
+
+      await getAssetList(facilityId);
     }
     // print({"mrsdetailss", returnMrsDetailsModel.value});
   }
@@ -150,11 +184,15 @@ class EditMrsReturnController extends GetxController {
             "value": '${element.name}',
             "id": '${element.mrs_item_id}'
           },
-          {'key': "assets", "value": ''},
+          {
+            'key': "assets",
+            "value": '${element.fromActorName}',
+            "id": '${element.fromActorID}'
+          },
 
           {'key': "code", "value": ''},
           // {'key': "Material_Type", "value": ''},
-          {'key': "Material_Category", "value": ''},
+          // {'key': "Material_Category", "value": ''},
           {'key': "Sr_no", "value": '${element.serial_number}'},
           {'key': "Return_Qty", "value": '${element.returned_qty}'},
           {'key': "Remark", "value": '${element.return_remarks}'},
@@ -164,6 +202,10 @@ class EditMrsReturnController extends GetxController {
         dropdownFaultyMapperData[element.name] = assetList.firstWhere(
             (e) => e!.asset_type == element.asset_type,
             orElse: null);
+        checkdropdownMapperData[element.fromActorName ?? ""] =
+            scheduleCheckPointsdrop.firstWhere(
+                (e) => e.name == element.fromActorName,
+                orElse: null);
       });
       update(["AssetList"]);
     }
@@ -237,10 +279,10 @@ class EditMrsReturnController extends GetxController {
   void addRowFaultyItem() {
     rowFaultyItem.add([
       {"key": "Drop_down", "value": 'Please Select', "id": ''},
-      {'key': "assets", "value": ''},
+      {'key': "assets", "value": '', "id": ''},
       {'key': "code", "value": ''},
       // {'key': "Material_Type", "value": ''},
-      {'key': "Material_Category", "value": ''},
+      // {'key': "Material_Category", "value": ''},
       {'key': "Sr_no", "value": ''},
       {'key': "Return_Qty", "value": '1'},
       {'key': "Remark", "value": ''},
@@ -270,14 +312,14 @@ class EditMrsReturnController extends GetxController {
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
         mrsItemID: int.tryParse(element[0]["id"] ?? '0'),
         assetsID: checkdropdownMapperData[element[1]["value"]].assetsID,
-        sr_no: element[4]["value"] ?? '0',
-        returned_qty: int.tryParse(element[5]["value"] ?? '0'),
+        sr_no: element[3]["value"] ?? '0',
+        returned_qty: int.tryParse(element[4]["value"] ?? '0'),
         return_remarks: element[6]["value"] ?? '0',
       );
       faultyItems.add(item);
     });
     CreateReturnMrsModel createMrs = CreateReturnMrsModel(
-        ID: mrsId,
+        ID: mrsId.value,
         facility_ID: facilityId,
         setAsTemplate: "", //isSetTemplate == true ? 1 : 0,
         activity: _activity,
