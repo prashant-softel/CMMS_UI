@@ -615,14 +615,14 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold),
                                         )),
-                                    DataColumn2(
-                                        fixedWidth: 170,
-                                        label: Text(
-                                          "Material Type",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                    // DataColumn2(
+                                    //     fixedWidth: 170,
+                                    //     label: Text(
+                                    //       "Material Type",
+                                    //       style: TextStyle(
+                                    //           fontSize: 15,
+                                    //           fontWeight: FontWeight.bold),
+                                    //     )),
                                     // DataColumn2(
                                     //     fixedWidth: 250,
                                     //     label: Text(
