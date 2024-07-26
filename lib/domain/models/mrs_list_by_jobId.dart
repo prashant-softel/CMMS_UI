@@ -214,14 +214,15 @@ class MaterialUsedAssets {
 
 class UsedItems {
   int? sm_asset_id;
+  int? mrs_Item_Id;
   dynamic used_qty;
-  UsedItems({this.sm_asset_id, this.used_qty});
+  UsedItems({this.sm_asset_id, this.used_qty, this.mrs_Item_Id});
 
   factory UsedItems.fromJson(Map<String, dynamic> parsedJson) {
     return UsedItems(
-      sm_asset_id:
-          parsedJson["sm_asset_id"] == null ? 0 : parsedJson['sm_asset_id'],
-      used_qty: parsedJson["used_qty"],
-    );
+        sm_asset_id:
+            parsedJson["sm_asset_id"] == null ? 0 : parsedJson['sm_asset_id'],
+        used_qty: parsedJson["used_qty"],
+        mrs_Item_Id: parsedJson["mrs_Item_Id"]);
   }
 }

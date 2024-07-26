@@ -164,7 +164,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
         if (matchedUsedAssets.isNotEmpty) {
           var usedItems = matchedUsedAssets.first!.items
               ?.where(
-                  (usedItem) => usedItem.sm_asset_id == element?.asset_item_ID)
+                  (usedItem) => usedItem.mrs_Item_Id == element?.id)
               .toList();
 
           if (usedItems != null && usedItems.isNotEmpty) {
