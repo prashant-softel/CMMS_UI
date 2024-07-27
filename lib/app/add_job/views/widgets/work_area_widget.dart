@@ -17,10 +17,8 @@ class _WorkAreaWidgetState extends State<WorkAreaWidget> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Column(
-        crossAxisAlignment : CrossAxisAlignment.start,
-        children: [
-        CustomRichTextMobile(title: 'Equipment Categories: '),
+      () => Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        CustomRichTextMobile(title: 'Work Area / Equipments: '),
         Dimens.boxHeight2,
         Container(
           decoration: BoxDecoration(

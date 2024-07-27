@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -34,6 +35,21 @@ class CreateMrsReturnUsecase {
       await repository.getAssetList(
         auth,
         facilityId,
+        isLoading,
+      );
+
+  Future<List<JobDetailsModel?>?> getJobDetails({
+    required String auth,
+    required int jobId,
+    required int facilityId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await repository.getJobDetails(
+        auth,
+        jobId,
+        facilityId,
+        userId,
         isLoading,
       );
   void saveValue({String? whereUsedTypeId}) async =>
