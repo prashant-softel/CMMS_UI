@@ -5,6 +5,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/transferItems_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
@@ -48,7 +49,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<MRSListByJobIdModel?>? listMrsByTaskId = <MRSListByJobIdModel?>[].obs;
   RxList<CmmrsItems?>? cmmrsItems = <CmmrsItems?>[].obs;
-  RxList<MaterialUsedAssets?>? materialUsedAssets = <MaterialUsedAssets?>[].obs;
+  RxList<WorkingAreaList?>? materialUsedAssets = <WorkingAreaList?>[].obs;
 
   var commentCtrlr = TextEditingController();
   var updatecommentCtrlr = TextEditingController();
@@ -133,7 +134,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Future<void> getMrsListByModuleTask({required int taskId}) async {
     rowItem.value = [];
     cmmrsItems!.value = <CmmrsItems>[];
-    materialUsedAssets!.value = <MaterialUsedAssets>[];
+    materialUsedAssets!.value = <WorkingAreaList>[];
 
     listMrsByTaskId?.value =
         await preventiveMaintenanceExecutionPresenter.getMrsListByModuleTask(
