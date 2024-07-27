@@ -94,7 +94,7 @@ class JobCardDetailsController extends GetxController {
 
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
-  RxList<MaterialUsedAssets?>? materialUsedAssets = <MaterialUsedAssets?>[].obs;
+  RxList<WorkingAreaList?>? materialUsedAssets = <WorkingAreaList?>[].obs;
 
   int userId = 35;
   int facilityId = 0;
@@ -240,62 +240,69 @@ class JobCardDetailsController extends GetxController {
           false,
         ) ??
         [];
+
     var _assetsList = listMrsByTaskId!.last!.cmmrsItems;
     for (var asset in _assetsList!) {
       cmmrsItems!.add(asset);
     }
-    // addRowItem();
 
     var _usedassetsList = listMrsByTaskId!.value.last!.material_used_by_assets!;
-
     for (var usedasset in _usedassetsList) {
       materialUsedAssets!.add(usedasset);
     }
 
-    // // Ensure workingAreaList is populated and not null
+    // Ensure workingAreaList is populated and not null
     if (workingAreaList != null && workingAreaList!.isNotEmpty) {
-      //   // Assuming you want to find the first item in workingAreaList
-      //   // You might need to adjust this logic based on your actual requirement
+      // Assuming you want to find the first item in workingAreaList
       var firstWorkingAreaList = workingAreaList!.first;
       if (firstWorkingAreaList != null) {
         cmmrsItems?.forEach((element) {
           var consumedQty = '';
+          var dropDownEqValue = firstWorkingAreaList.name ?? '';
+
           var matchedUsedAssets = materialUsedAssets!
               .where((usedAsset) =>
-                  usedAsset!.asset_id == firstWorkingAreaList.workingAreaId)
+                  usedAsset!.asset_id == firstWorkingAreaList.asset_id)
               .toList();
 
           if (matchedUsedAssets.isNotEmpty) {
             var usedItems = matchedUsedAssets.first!.items
                 ?.where((usedItem) => usedItem.mrs_Item_Id == element?.id)
                 .toList();
-
             if (usedItems != null && usedItems.isNotEmpty) {
               consumedQty = usedItems.first.used_qty.toString();
             }
           }
+
           rowItem.add([
             {"key": "Drop_down", "value": '${element?.name}'},
-            {"key": "Drop_down_eq", "value": '${element?.name}'},
+            {
+              "key": "Drop_down_eq",
+              "value": dropDownEqValue
+            }, // Set the Drop_down_eq value from WorkingAreaList name
             {'key': "Sr_No", "value": ''},
             {'key': "code", "value": ''},
             {'key': "Material_Type", "value": ''},
             {'key': "Issued_Qty", "value": ''},
             {'key': "Used_Qty", "value": ''},
-            {'key': "Consumed_Qty", "value": ''},
-            {'key': "Action ", "value": consumedQty},
+            {'key': "Consumed_Qty", "value": consumedQty},
+            {'key': "Action ", "value": ''},
           ]);
+
           dropdownMapperData[element?.name ?? ""] = listMrsByTaskId!
               .value.last!.cmmrsItems!
               .firstWhere((e) => e!.serial_number == element?.serial_number,
                   orElse: null);
+          //  dropdownMapperDataworkingArea[element?.name ?? ""] = workingAreaList!
+          //       .value!
+          //       .firstWhere((e) => e.asset_id == element?.,
+          //           orElse: null);
         });
       }
     }
 
     _processJsonData();
     allTrue.value = itemExistsWithZeroDifference.every((element) => element);
-    // addRowItem();
   }
 
   void _processJsonData() {
@@ -405,7 +412,7 @@ class JobCardDetailsController extends GetxController {
             //         dropdownMapperDataworkingArea[element[1]["value"]]
             //                 .workingAreaId !=
             //             0
-            ? dropdownMapperDataworkingArea[element[1]["value"]].workingAreaId
+            ? dropdownMapperDataworkingArea[element[1]["value"]].asset_id
             : 0,
         toActorType: AppConstants.kInventory,
         transaction_id:
