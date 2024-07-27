@@ -66,7 +66,9 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                 var jobId;
                                 controller.type.value == 1
                                     ? Get.offAllNamed(Routes.jobDetails,
-                                        arguments: {'jobId': jobId})
+                                        arguments: {
+                                            'jobId': controller.jobid.value
+                                          })
                                     : controller.type.value == 2
                                         ? Get.offAllNamed(Routes.pmExecution,
                                             arguments: {'pmTaskId': taskId})
@@ -792,9 +794,13 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                     4,
                                                                 controller:
                                                                     controller,
-                                                                dropdownList:
-                                                                    controller
-                                                                        .scheduleCheckPointsdrop,
+                                                                dropdownList: controller
+                                                                            .type.value ==
+                                                                        2
+                                                                    ? controller
+                                                                        .scheduleCheckPointsdrop
+                                                                    : controller
+                                                                        .workingAreaList,
                                                                 selectedValue:
                                                                     mapData[
                                                                         "value"],

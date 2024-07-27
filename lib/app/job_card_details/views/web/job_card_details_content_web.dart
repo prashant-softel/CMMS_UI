@@ -1612,7 +1612,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                     Get.toNamed(
                                                         Routes.mrsReturnScreen,
                                                         arguments: {
-                                                          'type': 2,
+                                                          'type': 1,
+                                                          'jobId': controller.jobId.value,
                                                           "whereUsed": 4,
                                                           "fromActorTypeId": 4,
                                                           "to_actor_type_id": 2,
