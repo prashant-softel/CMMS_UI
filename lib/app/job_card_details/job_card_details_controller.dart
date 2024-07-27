@@ -258,8 +258,9 @@ class JobCardDetailsController extends GetxController {
       if (firstWorkingAreaList != null) {
         cmmrsItems?.forEach((element) {
           var consumedQty = '';
-          var dropDownEqValue = firstWorkingAreaList.name ?? '';
+          var dropDownEqValue = '';
 
+          // Find the matching used assets based on asset_id
           var matchedUsedAssets = materialUsedAssets!
               .where((usedAsset) =>
                   usedAsset!.asset_id == firstWorkingAreaList.asset_id)
@@ -271,6 +272,7 @@ class JobCardDetailsController extends GetxController {
                 .toList();
             if (usedItems != null && usedItems.isNotEmpty) {
               consumedQty = usedItems.first.used_qty.toString();
+              dropDownEqValue = matchedUsedAssets.first!.name!;
             }
           }
 
@@ -279,7 +281,7 @@ class JobCardDetailsController extends GetxController {
             {
               "key": "Drop_down_eq",
               "value": dropDownEqValue
-            }, // Set the Drop_down_eq value from WorkingAreaList name
+            }, // Set the Drop_down_eq value from usedItems asset_name
             {'key': "Sr_No", "value": ''},
             {'key': "code", "value": ''},
             {'key': "Material_Type", "value": ''},
@@ -290,13 +292,13 @@ class JobCardDetailsController extends GetxController {
           ]);
 
           dropdownMapperData[element?.name ?? ""] = listMrsByTaskId!
-              .value.last!.cmmrsItems!
-              .firstWhere((e) => e!.serial_number == element?.serial_number,
+              .last!.cmmrsItems!
+              .firstWhere((e) => e.serial_number == element?.serial_number,
                   orElse: null);
-          //  dropdownMapperDataworkingArea[element?.name ?? ""] = workingAreaList!
-          //       .value!
-          //       .firstWhere((e) => e.asset_id == element?.,
-          //           orElse: null);
+          dropdownMapperDataworkingArea[matchedUsedAssets.first!.name ?? ""] =
+              workingAreaList!.firstWhere(
+                  (e) => e.name == matchedUsedAssets.first!.name,
+                  orElse: null);
         });
       }
     }
@@ -414,7 +416,9 @@ class JobCardDetailsController extends GetxController {
             //             0
             ? dropdownMapperDataworkingArea[element[1]["value"]].asset_id
             : 0,
-        toActorType: AppConstants.kInventory,
+        toActorType: dropdownMapperDataworkingArea[element[1]["value"]] != null
+            ? AppConstants.kInventory
+            : 0,
         transaction_id:
             dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
       );
