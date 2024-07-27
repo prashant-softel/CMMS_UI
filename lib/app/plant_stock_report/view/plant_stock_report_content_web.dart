@@ -142,7 +142,8 @@ class _PlantStockReportContentWebState
                                     Spacer(),
                                     Row(
                                       children: [
-                                        CustomRichText(title: 'Date Range',
+                                        CustomRichText(
+                                            title: 'Date Range',
                                             includeAsterisk: false),
                                         Dimens.boxWidth2,
                                         CustomTextFieldForStock(
@@ -562,38 +563,46 @@ class PlantListDataSource extends DataTableSource {
     // print({"cell": cells});
     return DataRow.byIndex(
       index: index,
+
       cells: cells.map((value) {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
             // child: Text(value.toString()),
-                child: value == 'Actions'
-              ? TableActionButton(
-                  color: ColorValues.viewColor,
-                   icon: Icons.remove_red_eye_outlined,
+            child: value == 'Actions'
+                ? TableActionButton(
+                    color: ColorValues.viewColor,
+                    icon: Icons.remove_red_eye_outlined,
                     message: 'view',
-                 onPress:() {
-                  controller.clearStoreData();
-                    int assetId = PlantDetails?.assetItemID ?? 0;
-                    if (assetId != 0) {
-                      Get.toNamed(Routes.plantStockReportDetails, arguments: {'assetId': assetId,});
-                    }
-                  },
-                )
-              : Text(value.toString()),
-            
+                    onPress: () {
+                      controller.clearStoreData();
+                      int assetId = PlantDetails?.assetItemID ?? 0;
+                      if (assetId != 0) {
+                        Get.toNamed(Routes.plantStockReportDetails, arguments: {
+                          'assetId': assetId,
+                        });
+                      }
+                    },
+                  )
+                : Text(value.toString()),
           ),
         );
       }).toList(),
       //   ],
       onSelectChanged: (_) {
+        controller.clearStoreData();
+        int assetId = PlantDetails?.assetItemID ?? 0;
+        if (assetId != 0) {
+          Get.toNamed(Routes.plantStockReportDetails, arguments: {
+            'assetId': assetId,
+          });
+        }
+
         // final _flutterSecureStorage = const FlutterSecureStorage();
 
         // _flutterSecureStorage.delete(key: "mrsId");
         // Get.toNamed(Routes.mrsViewScreen, arguments: {'mrsId': MrsDetails?.id});
       },
-
-      
     );
   }
 
