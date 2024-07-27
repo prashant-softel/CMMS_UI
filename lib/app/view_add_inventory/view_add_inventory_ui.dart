@@ -12,6 +12,7 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import 'view/view_warranty_tab_widget.dart';
@@ -100,36 +101,37 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                           style: Styles.greyLight14,
                                         ),
                                         Spacer(),
-                                        // Container(
-                                        //   color: Colors.red,
-                                        //   padding: EdgeInsets.symmetric(
-                                        //       vertical: 2, horizontal: 5),
-                                        //   margin: EdgeInsets.only(top: 5),
-                                        //   child: Text(
-                                        //     controller.inventoryList.isNotEmpty
-                                        //         ? controller.inventoryList.first
-                                        //                 .warrantyStatus ??
-                                        //             ""
-                                        //         : "",
-                                        //     style: TextStyle(
-                                        //       color: controller
-                                        //               .inventoryList.isNotEmpty
-                                        //           ? controller
-                                        //                       .inventoryList
-                                        //                       .first
-                                        //                       .warrantyStatus ==
-                                        //                   "Inactive"
-                                        //               ? Colors.grey
-                                        //               : Colors.green
-                                        //           : Colors.grey,
-                                        //     ),
-                                        //   ),
-                                        // )
                                       ],
                                     ),
                                   ),
 
                                   Dimens.boxHeight10,
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: controller
+                                                    .editAddInventoryDetailsModel
+                                                    .value!
+                                                    .warrantyStatus ==
+                                                "Inactive"
+                                            ? Colors.red
+                                            : Colors.green,
+                                        borderRadius: BorderRadius.circular(
+                                            8), // Adjust the radius as needed
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 2, horizontal: 5),
+                                      margin: EdgeInsets.only(top: 5),
+                                      child: Text(
+                                        " Warranty Status:${controller.editAddInventoryDetailsModel.value!.warrantyStatus}",
+                                        style: TextStyle(
+                                          color: Colors
+                                              .white, // Text color set to white for visibility on red/green background
+                                        ),
+                                      ),
+                                    ),
+                                  ),
 
                                   Row(
                                     crossAxisAlignment:
@@ -302,6 +304,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                         ],
                                       ),
                                       Spacer(),
+
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,

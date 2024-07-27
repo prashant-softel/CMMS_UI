@@ -73,6 +73,7 @@ class AddInventoryDetailsModel {
   String? asset_description;
   String? warrantyType;
   String? warranty_term_type;
+  String? warrantyStatus;
 
   AddInventoryDetailsModel({
     this.id,
@@ -142,6 +143,7 @@ class AddInventoryDetailsModel {
     this.parent_equipment_no,
     this.warrantyType,
     this.warranty_term_type,
+    this.warrantyStatus
   });
 
   // Factory method to create a AddInventoryDetailsModel instance from JSON
@@ -235,6 +237,7 @@ start_date: json['start_date'] != null
       asset_description: json['asset_description'],
       warrantyType: json['warrantyType'],
       warranty_term_type: json['warranty_term_type'],
+      warrantyStatus:json['warrantyStatus'],
     );
   }
 }
