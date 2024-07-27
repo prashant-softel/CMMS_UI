@@ -197,6 +197,7 @@ class JobCardDetailsController extends GetxController {
         getHistory(facilityId);
         jobCardDetailsModel.value =
             jobCardList.value.firstWhere((element) => element?.id != null);
+        jobId.value = jobCardDetailsModel.value?.jobId;
         createPlantDetailsTableData();
         createJobDetailsTableData();
         createPermitDetailsTableData();
