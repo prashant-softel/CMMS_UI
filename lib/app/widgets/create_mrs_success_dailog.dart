@@ -8,7 +8,7 @@ import '../navigators/app_pages.dart';
 class CreateMrsSuccessDialog extends GetView {
   String? createPermitData;
   String? data;
-  List<dynamic>? mrsId;
+dynamic mrsId;
   int? type;
 
   CreateMrsSuccessDialog(
@@ -85,7 +85,7 @@ class CreateMrsSuccessDialog extends GetView {
                       style: Styles.yellowElevatedButtonStyle,
                       onPressed: () {
                         Get.toNamed(Routes.mrsApprovalScreen,
-                            arguments: {'mrsId': mrsId, 'type': type});
+                            arguments: {'mrsId': mrsId![0], 'type': type});
                       },
                       child: const Text('View MRS'),
                     ),
