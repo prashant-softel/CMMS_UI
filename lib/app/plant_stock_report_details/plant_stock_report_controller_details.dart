@@ -39,6 +39,7 @@ class PlantStockReportDetailsController extends GetxController {
   Rx<int> selectedMonth = 0.obs;
   Rx<String> monthName = ''.obs;
   Rx<String> assetItemName = ''.obs;
+  Rx<String>assetType=''.obs;
     bool openFromDateToStartDatePicker = false;
   String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
@@ -130,6 +131,9 @@ class PlantStockReportDetailsController extends GetxController {
         plantDetails = plantDetailList
             .firstWhere((element) => element?.assetItemName != null);
         assetItemName.value = plantDetails?.assetItemName;
+        plantDetails = plantDetailList
+            .firstWhere((element) => element?.assetType != null);
+        assetType.value = plantDetails?.assetType;
       }
     }
   }
