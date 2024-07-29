@@ -1265,7 +1265,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                           // String baseUrl =
                                                           //     'http://65.0.20.19/CMMS_API/';
                                                           String baseUrl =
-                                                              'http://172.20.43.18:82/';
+                                                              'http://172.20.43.9:83/';
                                                           String endpoint =
                                                               '${controller.sopData}';
 
@@ -1298,7 +1298,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         // String baseUrl =
                                                         //     'http://65.0.20.19/CMMS_API/';
                                                         String baseUrl =
-                                                            'http://172.20.43.18:82/';
+                                                            'http://172.20.43.9:83/';
                                                         String endpoint =
                                                             '${controller.jsaData}';
                                                         String fullUrl =
