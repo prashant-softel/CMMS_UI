@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:cmms/app/controllers/history_controller.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -19,6 +21,8 @@ class ViewPmPlanController extends GetxController {
   int facilityId = 0;
   Rx<bool> isFacilitySelected = true.obs;
 
+  var historyController = Get.put(HistoryController());
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   ViewPmPlanPresenter viewPmPlanPresenter;
   final HomeController homecontroller = Get.find();
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
@@ -46,6 +50,7 @@ class ViewPmPlanController extends GetxController {
 
         await getPmPlanDetails(
             pmPlanId: pmPlanId.value, isloading: true, facilityId: facilityId);
+        await getHistory(facilityId);
       }
       super.onInit();
     } catch (e) {
@@ -141,5 +146,17 @@ class ViewPmPlanController extends GetxController {
         //getCalibrationList(facilityId, true);
       }
     }
+  }
+
+  Future<void> getHistory(int facilityId) async {
+    int moduleType = 4;
+    historyList?.value = await viewPmPlanPresenter.getViewPlanHistory(
+          moduleType,
+          pmPlanId.value,
+          facilityId,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 }
