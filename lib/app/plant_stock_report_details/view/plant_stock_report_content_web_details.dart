@@ -129,7 +129,7 @@ class _PlantStockReportDetailsWebState
                                                       ['stock_Mangement_Date']);
                                                 },
                                                 hintText:
-                                                    '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                                    '${controller.enddate.toString()} To ${controller.startdate.toString()}',
                                               ),
                                             ],
                                           ),

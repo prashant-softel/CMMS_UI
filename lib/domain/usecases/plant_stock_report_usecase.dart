@@ -28,4 +28,10 @@ class PlantStockReportUsecase {
       void clearValue() async => _repository.clearData(
         LocalKeys.assetId,
       );
+       void clearstartValue() async => _repository.clearData(
+        LocalKeys.startdate,
+      );
+       void clearendValue() async => _repository.clearData(
+        LocalKeys.enddate,
+      );
 }

@@ -26,8 +26,20 @@ class PlantStockReportDetailsUsecase {
 void saveValue({String? assetId}) async {
   repository.saveValue(LocalKeys.assetId, assetId);
 }
+void savestartValue({String? startdate}) async {
+  repository.saveValue(LocalKeys.startdate, startdate);
+}
+void saveendValue({String? enddate}) async {
+  repository.saveValue(LocalKeys.enddate, enddate);
+}
 
 Future<String?> getValue() async {
   return await repository.getStringValue(LocalKeys.assetId);
+}
+Future<String?> getStartdateValue() async {
+  return await repository.getStringValue(LocalKeys.startdate);
+}
+Future<String?> getEnddateValue() async {
+  return await repository.getStringValue(LocalKeys.enddate);
 }
 }

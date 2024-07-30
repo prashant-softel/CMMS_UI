@@ -249,4 +249,10 @@ class PlantStockReportController extends GetxController {
    void clearStoreData() {
     pantStockReportPresenter.clearValue();
   }
+   void clearStorestartData() {
+    pantStockReportPresenter.clearstartValue();
+  }
+   void clearStoreendData() {
+    pantStockReportPresenter.clearendValue();
+  }
 }
