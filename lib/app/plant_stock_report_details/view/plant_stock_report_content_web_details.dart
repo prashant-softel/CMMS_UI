@@ -129,7 +129,7 @@ class _PlantStockReportDetailsWebState
                                                       ['stock_Mangement_Date']);
                                                 },
                                                 hintText:
-                                                    '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                                    '${controller.enddate.toString()} To ${controller.startdate.toString()}',
                                               ),
                                             ],
                                           ),
@@ -180,7 +180,7 @@ class _PlantStockReportDetailsWebState
                                                 padding:
                                                     const EdgeInsets.all(15),
                                                 child: Text(
-                                                  "Asset Item - ${controller.assetItemName}",
+                                                  "Asset Name:${controller.assetItemName} (${controller.assetType})",
                                                   style: Styles.blue17,
                                                 ),
                                               ),
@@ -236,7 +236,7 @@ class _PlantStockReportDetailsWebState
                                                     DataColumn2(
                                                       size: ColumnSize.M,
                                                       label: Text(
-                                                        "Last Update",
+                                                        "Last Update By",
                                                         style: Styles.blue17,
                                                       ),
                                                     ),
@@ -380,11 +380,12 @@ class _PlantStockReportDetailsWebState
           DataCell(
             Text('${isoutward.where((bool value) => value).length}', style: Styles.Red700),
           ),
+          
           DataCell(
-            Text("Closing Balance: ${total}", style: Styles.Red700),
+            Text(' ${total}', style: Styles.black14),
           ),
           DataCell(
-            Text('', style: Styles.black14),
+            Text("Closing Balance: ${total}", style: Styles.Red700),
           ),
         ],
       ),

@@ -97,7 +97,7 @@ class PlantDetail {
       referenceBy: json['referenceBy'],
       referenceName: json['referenceName'],
       remarks: json['remarks'],
-     lastUpdated: json['lastUpdated'],
+     lastUpdated: "${json['lastUpdated']}-${json['createdBy']}",
       createdBy: json['createdBy'],
       createdAt: json['createdAt'],
     );

@@ -575,11 +575,15 @@ class PlantListDataSource extends DataTableSource {
                     icon: Icons.remove_red_eye_outlined,
                     message: 'view',
                     onPress: () {
+                      controller.clearStorestartData();
+                      controller.clearStoreendData();
                       controller.clearStoreData();
                       int assetId = PlantDetails?.assetItemID ?? 0;
                       if (assetId != 0) {
                         Get.toNamed(Routes.plantStockReportDetails, arguments: {
                           'assetId': assetId,
+                          'startdate': controller.formattedTodate1,
+                          'enddate': controller.formattedFromdate1,
                         });
                       }
                     },
@@ -591,10 +595,14 @@ class PlantListDataSource extends DataTableSource {
       //   ],
       onSelectChanged: (_) {
         controller.clearStoreData();
+        controller.clearStorestartData();
+        controller.clearStoreendData();
         int assetId = PlantDetails?.assetItemID ?? 0;
         if (assetId != 0) {
           Get.toNamed(Routes.plantStockReportDetails, arguments: {
             'assetId': assetId,
+            'startdate': controller.formattedTodate1,
+            'enddate': controller.formattedFromdate1,
           });
         }
 
