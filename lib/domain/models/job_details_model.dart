@@ -331,11 +331,12 @@ class JobAssociatedModel {
       // this.description,
       this.jobAssingedTo,
       this.jobCardDate,
-      // this.start_time,
+      this.permitStatus,
       this.endTime,
       this.status,
       this.approvedStatus,
-      this.status_short});
+      this.status_short,
+      this.permit_status_short});
 
   // int? id;
   int? jobCardId;
@@ -343,10 +344,10 @@ class JobAssociatedModel {
   int? jobId;
   int? permitId;
   String? permitNo;
-
+  int? permitStatus;
   String? jobAssingedTo;
   String? jobCardDate;
-
+  String? permit_status_short;
   String? endTime;
   int? status;
   int? approvedStatus;
@@ -354,9 +355,10 @@ class JobAssociatedModel {
 
   factory JobAssociatedModel.fromJson(Map<String, dynamic> json) =>
       JobAssociatedModel(
-        // id: json["id"] == null ? 0 : json['id'],
+        permitStatus: json["permitStatus"] == null ? 0 : json['permitStatus'],
         jobCardId: json["jobCardId"] == null ? 0 : json['jobCardId'],
         jobCardNo: json["jobCardNo"] == null ? "" : json['jobCardNo'],
+        permit_status_short: json['permit_status_short'],
         jobId: json["jobId"] == null ? 0 : json['jobId'],
         permitId: json["permitId"] == null ? 0 : json['permitId'],
         permitNo: json["permitNo"] == null ? "" : json['permitNo'],
@@ -371,9 +373,10 @@ class JobAssociatedModel {
       );
 
   Map<String, dynamic> toJson() => {
-        // "id": id,
+        "permitStatus": permitStatus,
         "jobCardId": jobCardId,
         "jobCardNo": jobCardNo,
+        "permit_status_short": permit_status_short,
         "jobId": jobId,
         "permitId": permitId,
         "permitNo": permitNo,

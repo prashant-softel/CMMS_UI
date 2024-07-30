@@ -463,7 +463,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                           // String baseUrl =
                                                           //     "http://65.0.20.19/CMMS_API/";
                                                           String baseUrl =
-                                                              'http://172.20.43.9:83/';
+                                                              'http://172.20.43.18:82/';
                                                           String fileName =
                                                               controller
                                                                       .allFiles[
@@ -1351,29 +1351,30 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                       'Are you sure you want to Update job ?',
                                                     );
                                                     if (confirmed == true) {
-                                                      // controller.updateJobCard(
-                                                      //     fileIds:
-                                                      //         dropzoneController
-                                                      //             .fileIds);
-                                                      // if (controller
-                                                      //             .listMrsByTaskId!
-                                                      //             .value
-                                                      //             .firstWhereOrNull(
-                                                      //               (element) =>
-                                                      //                   element?.jobCardId !=
-                                                      //                       0 ||
-                                                      //                   element?.pmId !=
-                                                      //                       0,
-                                                      //             )
-                                                      //             ?.mrs_return_ID ==
-                                                      //         0 &&
-                                                      //     controller.allTrue
-                                                      //             .value ==
-                                                      //         false &&
-                                                      //     controller.cmmrsItems!
-                                                      //         .isNotEmpty) {
-                                                      controller.transferItem();
-                                                      //  }
+                                                      controller.updateJobCard(
+                                                          fileIds:
+                                                              dropzoneController
+                                                                  .fileIds);
+                                                      if (controller
+                                                                  .listMrsByTaskId!
+                                                                  .value
+                                                                  .firstWhereOrNull(
+                                                                    (element) =>
+                                                                        element?.jobCardId !=
+                                                                            0 ||
+                                                                        element?.pmId !=
+                                                                            0,
+                                                                  )
+                                                                  ?.mrs_return_ID ==
+                                                              0 &&
+                                                          controller.allTrue
+                                                                  .value ==
+                                                              false &&
+                                                          controller.cmmrsItems!
+                                                              .isNotEmpty) {
+                                                        controller
+                                                            .transferItem();
+                                                      }
 
                                                       Text(
                                                           'Are you sure you want to Update job ?');
@@ -1613,7 +1614,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                         Routes.mrsReturnScreen,
                                                         arguments: {
                                                           'type': 1,
-                                                          'jobId': controller.jobId.value,
+                                                          'jobId': controller
+                                                              .jobId.value,
                                                           "whereUsed": 4,
                                                           "fromActorTypeId": 4,
                                                           "to_actor_type_id": 2,

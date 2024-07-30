@@ -213,6 +213,26 @@ class JobDetailsController extends GetxController {
     }
   }
 
+  Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
+    clearJobDetailStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearpmTaskValue();
+    clearPermitStoreData();
+    Get.toNamed(Routes.createPermit, arguments: {
+      'permitId': permitId,
+      'isChecked': isChecked,
+      "type": 1,
+      "isFromPmTaskDetails": true,
+      "jobModel": jobDetailsModel.value,
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "scheduleID": 0
+    });
+    print('PermitIDForTBt:$permitId');
+    print('PermitIdArgument:$isChecked');
+  }
+
   Future<void> getMrsListByModule(
       {required int jobId, required int facilityId}) async {
     /// TODO: CHANGE THESE VALUES

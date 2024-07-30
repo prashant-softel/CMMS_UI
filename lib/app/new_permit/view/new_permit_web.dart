@@ -3044,8 +3044,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text("Invalid Time"),
-            content:
-                Text("Please select the time within one hour from Start Time."),
+            content: Text(
+                "Please select the time within one hour from Start Time (${controller.startDateTimeCtrlr.text.trim()})."),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
