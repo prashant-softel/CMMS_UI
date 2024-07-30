@@ -2446,6 +2446,21 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+  Future<ResponseModel> getViewPlanHistory({
+    String? auth,
+    int? pmPlanId,
+    required int facilityId,
+    int? moduleType,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getViewPlanHistory(
+      auth: auth,
+      moduleType: moduleType,
+      pmPlanId: pmPlanId,
+      facilityId: facilityId,
+      isLoading: isLoading,
+    );
+  }
 
   ///Permit History
   Future<ResponseModel> getPermitHistory({

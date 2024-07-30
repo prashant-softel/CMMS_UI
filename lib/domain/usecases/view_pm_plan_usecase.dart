@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../repositories/local_storage_keys.dart';
@@ -33,6 +34,20 @@ class ViewPmPlanUsecase {
         facilityId,
         isLoading,
       );
+
+    Future<List<HistoryModel>?>  getViewPlanHistory({
+    moduleType,
+    pmPlanId,
+    facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getViewPlanHistory(
+        moduleType,
+        pmPlanId,
+        facilityId,
+        isLoading,
+      );
+      
   void saveValue({String? pmPlanId}) async =>
       repository.saveValue(LocalKeys.pmPlanId, pmPlanId);
   Future<String?> getValue() async =>

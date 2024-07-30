@@ -8278,6 +8278,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getViewPlanHistory({
+    required String? auth,
+    int? moduleType,
+    int? pmPlanId,
+    required int facilityId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Utils/GetHistoryLog?module_type=$moduleType&id=$pmPlanId&facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
 // <<<<<<< HEAD
   Future<ResponseModel> getGrievanceList({
     required String auth,

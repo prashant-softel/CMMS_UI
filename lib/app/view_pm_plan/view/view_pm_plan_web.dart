@@ -5,6 +5,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/pm_plan_approve_dialog.dart';
 import 'package:cmms/app/widgets/reject_pm_plan_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -404,7 +405,33 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                       ),
                     ),
                   ),
-                  // Dimens.boxHeight40,
+
+                  SizedBox(height: 20),
+                  Container(
+                    child: Row(//
+                        children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: Text('History', style: Styles.blackBold16),
+                      ),
+                    ]),
+                  ),
+
+                  ///HISTORY
+                  (controller.historyList != null &&
+                          controller.historyList!.isNotEmpty)
+                      ? Container(
+                          margin: Dimens.edgeInsets20,
+                          height: ((controller.historyList?.length ?? 0) * 40) +
+                              120,
+                          child: //
+                              HistoryTableWidgetWeb(
+                            historyList: controller.historyList,
+                          ),
+                        )
+                      //  )
+                      : //
+                      Dimens.box0,
                   Row(
                     children: [
                       Spacer(),
