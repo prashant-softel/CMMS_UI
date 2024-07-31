@@ -160,7 +160,7 @@ class MrsIssueController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
-        Get.offAllNamed(Routes.mrsListScreen);
+        // Get.offAllNamed(Routes.mrsListScreen);
       } else {
         Utility.showDialog("Issue", "Please fill all the required fields");
       }
