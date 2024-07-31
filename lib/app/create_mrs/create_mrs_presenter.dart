@@ -13,6 +13,10 @@ class CreateMrsPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+  void clearValue() async {
+    return createmrsUsecase.clearValue();
+  }
+
   Future<Map<String, dynamic>?> createMrs({
     createMrsJsonString,
     type,

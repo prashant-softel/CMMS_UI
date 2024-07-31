@@ -44,6 +44,8 @@ import 'package:cmms/app/widgets/mc_execution_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/mc_plan_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/mc_plan_message_dialog.dart';
 import 'package:cmms/app/widgets/mc_plan_message_reject_dialog.dart';
+import 'package:cmms/app/widgets/mrs_approval_dialog.dart';
+import 'package:cmms/app/widgets/mrs_issue_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_message_dialog.dart';
@@ -3195,8 +3197,10 @@ class ConnectHelper {
     print('UpdateNewPermitResponse5:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(UpdateNewPermitDialog(
-        data: parsedJson['message'], PtwId: parsedJson['id'], type: type));
+    Get.dialog<void>(
+        UpdateNewPermitDialog(
+            data: parsedJson['message'], PtwId: parsedJson['id'], type: type),
+        barrierDismissible: false);
 
     return responseModel;
   }
@@ -6697,8 +6701,10 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(CreateMrsSuccessDialog(
-        data: parsedJson['message'], mrsId: parsedJson['id'], type: type));
+    Get.dialog<void>(
+        CreateMrsSuccessDialog(
+            data: parsedJson['message'], mrsId: parsedJson['id'], type: type),
+        barrierDismissible: false);
     return responseModel;
   }
 
@@ -7047,6 +7053,7 @@ class ConnectHelper {
   Future<ResponseModel> approveMrs({
     required String auth,
     bool? isLoading,
+    int? type,
     required approvetoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -7059,6 +7066,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        MrsApprovalSuccessDialog(
+            data: parsedJson['message'], mrsId: parsedJson['id'], type: type),
+        barrierDismissible: false);
 
     return responseModel;
   }
@@ -7173,6 +7186,7 @@ class ConnectHelper {
   Future<ResponseModel> issueMrs({
     required String auth,
     bool? isLoading,
+    int? type,
     required issuetoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -7185,6 +7199,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        MrsIssueSuccessDialog(
+            data: parsedJson['message'], mrsId: parsedJson['id'], type: type),
+        barrierDismissible: false);
 
     return responseModel;
   }
@@ -7273,12 +7293,14 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(LinkToPermitDialog(
-        data: parsedJson['message'],
-        taskId: scheduleId,
-        activity: activity,
-        type: type //parsedJson['id']
-        ));
+    Get.dialog<void>(
+        LinkToPermitDialog(
+            data: parsedJson['message'],
+            taskId: scheduleId,
+            activity: activity,
+            type: type //parsedJson['id']
+            ),
+        barrierDismissible: false);
     print('jcId2:${parsedJson['id']}');
     return responseModel;
   }

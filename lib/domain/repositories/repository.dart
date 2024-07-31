@@ -7561,7 +7561,7 @@ class Repository {
     }
   }
 
-   Future<List<HistoryModel>?> getViewPlanHistory(
+  Future<List<HistoryModel>?> getViewPlanHistory(
     int? moduleType,
     int? pmPlanId,
     int facilityId,
@@ -7587,7 +7587,6 @@ class Repository {
             )
             .toList();
 
-       
         return _pmPlanDetailsList;
       } else {
         Utility.showDialog(res.errorCode.toString(), "getPMPlanHistory");
@@ -7598,7 +7597,6 @@ class Repository {
       return [];
     }
   }
-
 
   ///Permit History
   Future<List<HistoryModel>?> getPermitHistory(
@@ -11006,14 +11004,16 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createMrs(
-    createMrsJsonString,type,
+    createMrsJsonString,
+    type,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createMrs(
         auth: auth,
-        createMrsJsonString: createMrsJsonString,type:type,
+        createMrsJsonString: createMrsJsonString,
+        type: type,
         isLoading: isLoading ?? false,
       );
 
@@ -11415,13 +11415,15 @@ class Repository {
     }
   }
 
-  Future<bool> approveMrs({bool? isLoading, approvetoJsonString}) async {
+  Future<bool> approveMrs(
+      {bool? isLoading, approvetoJsonString, int? type}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.approveMrs(
           auth: auth,
           isLoading: isLoading,
+          type: type,
           approvetoJsonString: approvetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
@@ -11628,13 +11630,14 @@ class Repository {
     }
   }
 
-  Future<bool> issueMrs({bool? isLoading, issuetoJsonString}) async {
+  Future<bool> issueMrs({bool? isLoading, int? type, issuetoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.issueMrs(
           auth: auth,
           isLoading: isLoading,
+          type: type,
           issuetoJsonString: issuetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {

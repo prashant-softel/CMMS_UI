@@ -95,6 +95,9 @@ class MrsApproveController extends GetxController {
       isFormInvalid.value = false;
     }
   }
+  void clearStoreData() {
+    mrsApprovePresenter.clearValue();
+  }
 
   approveMrs() async {
     {
@@ -110,13 +113,14 @@ class MrsApproveController extends GetxController {
       var approvetoJsonString = commentModel.toJson();
       final response = await mrsApprovePresenter.approveMrs(
         approvetoJsonString: approvetoJsonString,
+        type: type.value,
         isLoading: true,
       );
       if (response == true) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+        // final _flutterSecureStorage = const FlutterSecureStorage();
 
-        _flutterSecureStorage.delete(key: "mrsId");
-        Get.offAllNamed(Routes.mrsListScreen);
+        // _flutterSecureStorage.delete(key: "mrsId");
+        // Get.offAllNamed(Routes.mrsListScreen);
       }
     }
   }

@@ -205,7 +205,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                   Dimens.boxHeight10,
                                   Text(
                                       controller.mrsDetailsModel.value
-                                              ?.approver_name ??
+                                              ?.issued_name ??
                                           "",
                                       style: Styles.blue17),
                                 ],

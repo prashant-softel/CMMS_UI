@@ -2446,6 +2446,7 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
   Future<ResponseModel> getViewPlanHistory({
     String? auth,
     int? pmPlanId,
@@ -3828,12 +3829,14 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> createMrs({
     required String auth,
-    createMrsJsonString,type,
+    createMrsJsonString,
+    type,
     bool? isLoading,
   }) async =>
       await connectHelper.createMrs(
         auth: auth,
-        createMrsJsonString: createMrsJsonString,type:type,
+        createMrsJsonString: createMrsJsonString,
+        type: type,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> createPmPlan({
@@ -4080,11 +4083,13 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> approveMrs({
     auth,
     bool? isLoading,
+    int? type,
     approvetoJsonString,
   }) async {
     var response = await connectHelper.approveMrs(
         auth: auth,
         isLoading: isLoading,
+        type: type,
         approvetoJsonString: approvetoJsonString);
     return response;
   }
@@ -4159,13 +4164,13 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  Future<ResponseModel> issueMrs({
-    auth,
-    bool? isLoading,
-    issuetoJsonString,
-  }) async {
+  Future<ResponseModel> issueMrs(
+      {auth, bool? isLoading, issuetoJsonString, int? type}) async {
     var response = await connectHelper.issueMrs(
-        auth: auth, isLoading: isLoading, issuetoJsonString: issuetoJsonString);
+        auth: auth,
+        isLoading: isLoading,
+        type: type,
+        issuetoJsonString: issuetoJsonString);
     return response;
   }
 
