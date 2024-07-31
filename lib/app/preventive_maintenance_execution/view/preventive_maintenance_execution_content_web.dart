@@ -904,7 +904,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                         .appGreenColor,
                                                     confirmTextColor:
                                                         Colors.white,
-                                                  )
+                                                    barrierDismissible: false)
                                                 : controller.listMrsByTaskId!
                                                                 .value
                                                                 .firstWhereOrNull(
@@ -935,7 +935,8 @@ class PreventiveMaintenanceExecutionContentWeb
                                                             .appGreenColor,
                                                         confirmTextColor:
                                                             Colors.white,
-                                                      )
+                                                        barrierDismissible:
+                                                            false)
                                                     : controller
                                                         .closePmTaskExecution();
                                           }),
