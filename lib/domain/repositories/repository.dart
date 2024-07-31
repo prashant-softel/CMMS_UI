@@ -8161,7 +8161,7 @@ class Repository {
           approveJsonString: json.encode(approveJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
-        permitCloseButton(closePtwJsonString, isLoading, 0, 0);
+        // permitCloseButton(closePtwJsonString, isLoading, 0, 0);
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
         // Get.offAllNamed(Routes.jobList);
         return true;
