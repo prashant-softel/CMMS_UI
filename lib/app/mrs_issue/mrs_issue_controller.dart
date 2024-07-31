@@ -104,7 +104,7 @@ class MrsIssueController extends GetxController {
         mrsIssuePresenter.saveValuee(type: type.value.toString());
       } else {
         mrsId.value = int.tryParse(_mrsId) ?? 0;
-        type.value = int.tryParse(_type!) ?? 0;
+        type.value = int.tryParse(_type ?? '') ?? 0;
       }
     } catch (e) {
       Utility.showDialog(e.toString(), 'mrsId');
@@ -113,6 +113,9 @@ class MrsIssueController extends GetxController {
 
   void clearStoreData() {
     mrsIssuePresenter.clearValue();
+  }
+  void clearStoreDataa() {
+    mrsIssuePresenter.clearValuee();
   }
 
   Future<void> getMrsDetails(

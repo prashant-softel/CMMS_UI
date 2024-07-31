@@ -32,23 +32,19 @@ class MrsApproveController extends GetxController {
   ///
   @override
   void onInit() async {
-    facilityIdStreamSubscription =
-        homeController.facilityId$.listen((event) async {
-      facilityId = event;
-      if (facilityId > 0) {
-        isFacilitySelected.value = true;
-      }
-      Future.delayed(Duration(seconds: 1), () {
-        getMrsDetails(
-            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
-      });
-    });
     try {
       await setMrsId();
-      if (mrsId.value != 0) {
-        await getMrsDetails(
-            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
-      }
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
+        facilityId = event;
+        if (facilityId > 0) {
+          isFacilitySelected.value = true;
+          if (mrsId.value != 0) {
+            await getMrsDetails(
+                mrsId: mrsId.value, isloading: true, facilityId: facilityId);
+          }
+        }
+      });
       super.onInit();
     } catch (e) {
       print(e);
@@ -95,8 +91,12 @@ class MrsApproveController extends GetxController {
       isFormInvalid.value = false;
     }
   }
+
   void clearStoreData() {
     mrsApprovePresenter.clearValue();
+  }
+  void clearStoreDataa() {
+    mrsApprovePresenter.clearValuee();
   }
 
   approveMrs() async {
