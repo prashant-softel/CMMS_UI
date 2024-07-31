@@ -22,13 +22,11 @@ class PlantStockReportDetailsController extends GetxController {
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
 
-  String get formattedFromDate =>
+  String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
-  String get formattedToDate => DateFormat('dd/MM/yyyy').format(toDate.value);
-  String get formattedToDate1 => DateFormat('dd/MM/yyyy').format(toDate.value);
   String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
-  String get formattedFromDate1 =>
-      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get end_date => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get start_date => DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   int facilityID = 0;
   int assetItemID = 0;
@@ -39,16 +37,18 @@ class PlantStockReportDetailsController extends GetxController {
   Rx<int> selectedMonth = 0.obs;
   Rx<String> monthName = ''.obs;
   Rx<String> assetItemName = ''.obs;
-  Rx<String>assetType=''.obs;
-  Rx<String>startdate=''.obs;
-  Rx<String>enddate=''.obs;
+  Rx<String> assetType = ''.obs;
+  Rx<String> startdate = ''.obs;
+  Rx<String> enddate = ''.obs;
+  Rx<String> startDate = ''.obs;
+  Rx<String> endDate = ''.obs;
 
-    bool openFromDateToStartDatePicker = false;
-  String get formattedFromdate =>
-      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  bool openFromDateToStartDatePicker = false;
+  // String get formattedFromdate =>
+  //     DateFormat('dd/MM/yyyy').format(fromDate.value);
 
   // Rx<PlantStockMonth?> plantStockReportByMonth = PlantStockMonth().obs;
-  
+
   RxList<PlantStockMonth?> plantStockReportByMonthList =
       <PlantStockMonth?>[].obs;
   // Rx<PlantDetail?> plantdetails = PlantDetail().obs;
@@ -73,8 +73,6 @@ class PlantStockReportDetailsController extends GetxController {
     MonthModel(name: 'Dec', id: "12"),
   ].obs;
 
-  
-
   @override
   void onInit() async {
     await setPlantDetails();
@@ -86,7 +84,6 @@ class PlantStockReportDetailsController extends GetxController {
         start_date: startdate.value,
         end_date: enddate.value,
         assetItemID: assetID.value,
-        
       );
     });
     super.onInit();
@@ -95,32 +92,46 @@ class PlantStockReportDetailsController extends GetxController {
   Future<void> setPlantDetails() async {
     try {
       final _assetId = await plantStockReportDetailsPresenter.getValue();
-      final _startdate = await plantStockReportDetailsPresenter.getStartdateValue();
+      final _startdate =
+          await plantStockReportDetailsPresenter.getStartdateValue();
       final _enddate = await plantStockReportDetailsPresenter.getEnddateValue();
 
       if (_assetId == null || _assetId.isEmpty || _assetId == "null") {
         var dataFromPreviousScreen = Get.arguments;
-
+  
         assetID.value = dataFromPreviousScreen['assetId'];
         startdate.value = dataFromPreviousScreen['startdate'];
         enddate.value = dataFromPreviousScreen['enddate'];
-        
-         plantStockReportDetailsPresenter.savestartValue(
+        DateTime start = DateTime.parse(startdate.value);
+        DateTime end = DateTime.parse(enddate.value);
+        startDate.value=DateFormat("dd/MM/yyyy").format(start);
+        endDate.value=DateFormat("dd/MM/yyyy").format(end);
+
+        plantStockReportDetailsPresenter.savestartValue(
             startdate: startdate.value.toString());
-             plantStockReportDetailsPresenter.saveendValue(
+        plantStockReportDetailsPresenter.saveendValue(
             enddate: enddate.value.toString());
 
         plantStockReportDetailsPresenter.saveValue(
             assetId: assetID.value.toString());
       } else {
         assetID.value = int.tryParse(_assetId) ?? 0;
-        startdate.value = _startdate ??'';
-        enddate.value =_enddate?? '';
+        startdate.value = _startdate ?? '';
+        enddate.value = _enddate ?? '';
       }
     } catch (e) {
       print('${e.toString()} assetID');
       //  Utility.showDialog(e.toString() + 'userId');
     }
+  }
+
+  Future<void> getPlantStockListByDate() async {
+    await getPlantStockMonthDetail(
+      facilityID: facilityID,
+      start_date: start_date,
+      end_date: end_date,
+      assetItemID: assetID.value,
+    );
   }
 
   Future<void> getPlantStockMonthDetail({
@@ -146,11 +157,10 @@ class PlantStockReportDetailsController extends GetxController {
         plantDetails = plantDetailList
             .firstWhere((element) => element?.assetItemName != null);
         assetItemName.value = plantDetails?.assetItemName;
-        plantDetails = plantDetailList
-            .firstWhere((element) => element?.assetType != null);
+        plantDetails =
+            plantDetailList.firstWhere((element) => element?.assetType != null);
         assetType.value = plantDetails?.assetType;
       }
     }
   }
-  
 }
