@@ -550,7 +550,8 @@ class AddJobController extends GetxController {
     String? title,
     Function()? onPress,
   }) async {
-    await Get.dialog<void>(JobCreatedDialog(jobId: jobId, message: message));
+    await Get.dialog<void>(JobCreatedDialog(jobId: jobId, message: message),
+        barrierDismissible: false);
   }
 
   ///

@@ -42,6 +42,9 @@ class MrsApprovePresenter {
   void clearValue() async {
     return mrsApproveUsecase.clearValue();
   }
+  void clearValuee() async {
+    return mrsApproveUsecase.clearValuee();
+  }
 
   Future<String?> getValue() async => await mrsApproveUsecase.getValue();
   void saveValuee({String? type}) async {

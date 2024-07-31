@@ -31,6 +31,7 @@ class MrsIssueUsecase {
   void saveValuee({String? type}) async =>
       repository.saveValue(LocalKeys.type, type);
   void clearValue() async => repository.clearData(LocalKeys.mrsId);
+  void clearValuee() async => repository.clearData(LocalKeys.type);
 
   Future<String?> getValuee() async =>
       await repository.getStringValue(LocalKeys.type);

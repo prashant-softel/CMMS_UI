@@ -36,6 +36,9 @@ class MrsIssuePresenter {
   void clearValue() async {
     return mrsIssueUsecase.clearValue();
   }
+  void clearValuee() async {
+    return mrsIssueUsecase.clearValuee();
+  }
 
   Future<String?> getValue() async => await mrsIssueUsecase.getValue();
   Future<String?> getValuee() async => await mrsIssueUsecase.getValue();

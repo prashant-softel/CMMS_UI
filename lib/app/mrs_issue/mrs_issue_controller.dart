@@ -104,7 +104,7 @@ class MrsIssueController extends GetxController {
         mrsIssuePresenter.saveValuee(type: type.value.toString());
       } else {
         mrsId.value = int.tryParse(_mrsId) ?? 0;
-        type.value = int.tryParse(_type!) ?? 0;
+        type.value = int.tryParse(_type ?? '') ?? 0;
       }
     } catch (e) {
       Utility.showDialog(e.toString(), 'mrsId');
@@ -113,6 +113,9 @@ class MrsIssueController extends GetxController {
 
   void clearStoreData() {
     mrsIssuePresenter.clearValue();
+  }
+  void clearStoreDataa() {
+    mrsIssuePresenter.clearValuee();
   }
 
   Future<void> getMrsDetails(
@@ -160,7 +163,7 @@ class MrsIssueController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
-        Get.offAllNamed(Routes.mrsListScreen);
+        // Get.offAllNamed(Routes.mrsListScreen);
       } else {
         Utility.showDialog("Issue", "Please fill all the required fields");
       }
