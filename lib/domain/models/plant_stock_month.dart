@@ -58,6 +58,8 @@ class PlantDetail {
    String? lastUpdated;
   dynamic createdBy;
   String? createdAt;
+  String?toActorType1;
+  String?fromActorType1;
 
   PlantDetail({
     this.fromActorID,
@@ -78,15 +80,21 @@ class PlantDetail {
     this.lastUpdated,
     this.createdBy,
     this.createdAt,
+    this.toActorType1,
+    this.fromActorType1,
+
   });
 
   factory PlantDetail.fromJson(Map<String, dynamic> json) {
     return PlantDetail(
       fromActorID: json['fromActorID'],
       fromActorType: "${json['fromActorType']}-${json['fromActorName']}",
+      fromActorType1:json['fromActorType'],
       fromActorName: json['fromActorName'],
       toActorID: json['toActorID'],
       toActorType: "${json['toActorType']}-${json['toActorName']}",
+      toActorType1: json['toActorType'],
+
       toActorName: json['toActorName'],
       assetItemID: json['assetItemID'],
       assetItemName: json['assetItemName']??"",
@@ -97,7 +105,7 @@ class PlantDetail {
       referenceBy: json['referenceBy'],
       referenceName: json['referenceName'],
       remarks: json['remarks'],
-     lastUpdated: "${json['lastUpdated']}-${json['createdBy']}",
+     lastUpdated: "${json['createdBy']}-${json['lastUpdated']}",
       createdBy: json['createdBy'],
       createdAt: json['createdAt'],
     );

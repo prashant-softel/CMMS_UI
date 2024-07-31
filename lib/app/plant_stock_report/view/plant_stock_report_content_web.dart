@@ -582,8 +582,8 @@ class PlantListDataSource extends DataTableSource {
                       if (assetId != 0) {
                         Get.toNamed(Routes.plantStockReportDetails, arguments: {
                           'assetId': assetId,
-                          'startdate': controller.formattedTodate1,
-                          'enddate': controller.formattedFromdate1,
+                          'startdate': controller.formattedFromdate1,
+                          'enddate': controller.formattedTodate1,
                         });
                       }
                     },
@@ -601,8 +601,8 @@ class PlantListDataSource extends DataTableSource {
         if (assetId != 0) {
           Get.toNamed(Routes.plantStockReportDetails, arguments: {
             'assetId': assetId,
-            'startdate': controller.formattedTodate1,
-            'enddate': controller.formattedFromdate1,
+            'startdate': controller.formattedFromdate1,
+            'enddate': controller.formattedTodate1,
           });
         }
 

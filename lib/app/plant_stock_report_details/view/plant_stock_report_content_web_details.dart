@@ -1,21 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:data_table_2/data_table_2.dart';
+
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/plant_stock_report_details/plant_stock_report_controller_details.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/domain/models/plant_stock_month.dart';
-import 'package:data_table_2/data_table_2.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/app.dart';
 
 class PlantStockReportDetailsWeb extends StatefulWidget {
-  PlantStockReportDetailsWeb({
-    Key? key,
-  }) : super(key: key);
+  PlantStockReportDetailsWeb({Key? key}) : super(key: key);
 
   @override
   State<PlantStockReportDetailsWeb> createState() =>
@@ -27,7 +25,7 @@ class _PlantStockReportDetailsWebState
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PlantStockReportDetailsController>(
-      id: 'stock_Mangement',
+      id: 'stock_Mangement_Date',
       builder: (controller) {
         return SelectionArea(
           child: Scaffold(
@@ -71,8 +69,7 @@ class _PlantStockReportDetailsWebState
                             ),
                             InkWell(
                               onTap: () {
-                                Get.offNamed(
-                                    Routes.plantStockReport);
+                                Get.offNamed(Routes.plantStockReport);
                               },
                               child: Text(" / PLANT STOCK REPORT",
                                   style: Styles.greyLight14),
@@ -103,37 +100,36 @@ class _PlantStockReportDetailsWebState
                                     child: Row(
                                       children: [
                                         Text(
-                                          "Plant Stock Report Data For  Month",
+                                          "Material Transaction Report",
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
-                                        IgnorePointer(
-                                          child: Row(
-                                            children: [
-                                              CustomRichText(
-                                                  title: 'Date Range',
-                                                  includeAsterisk: false),
-                                              Dimens.boxWidth2,
-                                              CustomTextFieldForStock(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                                numberTextField: true,
-                                                onTap: () {
-                                                  controller
-                                                          .openFromDateToStartDatePicker =
-                                                      !controller
-                                                          .openFromDateToStartDatePicker;
-                                                  controller.update(
-                                                      ['stock_Mangement_Date']);
-                                                },
-                                                hintText:
-                                                    '${controller.enddate.toString()} To ${controller.startdate.toString()}',
-                                              ),
-                                            ],
-                                          ),
+                                        Row(
+                                          children: [
+                                            CustomRichText(
+                                                title: 'Date Range',
+                                                includeAsterisk: false),
+                                            Dimens.boxWidth2,
+                                            CustomTextFieldForStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              numberTextField: true,
+                                              onTap: () {
+                                                controller
+                                                        .openFromDateToStartDatePicker =
+                                                    !controller
+                                                        .openFromDateToStartDatePicker;
+                                                controller.update(
+                                                    ['stock_Mangement_Date']);
+                                              },
+                                              hintText:
+                                                  '${controller.startDate.toString()} To ${controller.endDate.toString()}',
+                                            ),
+                                          ],
                                         ),
+                                        SizedBox(width: 5),
                                       ],
                                     ),
                                   ),
@@ -180,7 +176,7 @@ class _PlantStockReportDetailsWebState
                                                 padding:
                                                     const EdgeInsets.all(15),
                                                 child: Text(
-                                                  "Asset Name:${controller.assetItemName} (${controller.assetType})",
+                                                  "Asset Name : ${controller.assetItemName} (${controller.assetType})",
                                                   style: Styles.blue17,
                                                 ),
                                               ),
@@ -190,51 +186,75 @@ class _PlantStockReportDetailsWebState
                                               ),
                                               Expanded(
                                                 child: DataTable2(
+                                                  minWidth: 2000,
                                                   columns: [
                                                     DataColumn2(
-                                                      size: ColumnSize.M,
+                                                      // size: ColumnSize.M,
+                                                      fixedWidth: 200,
                                                       label: Text(
                                                         "From Actor",
                                                         style: Styles.blue17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      size: ColumnSize.M,
+                                                      // size: ColumnSize.M,
+                                                      fixedWidth: 200,
                                                       label: Text(
                                                         "To Actor",
                                                         style: Styles.blue17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      size: ColumnSize.S,
+                                                      // size: ColumnSize.S,
+                                                      fixedWidth: 200,
                                                       label: Text(
                                                         "Inward",
                                                         style: Styles.green17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      size: ColumnSize.S,
-                                                      label: Text(
-                                                        "Internal",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      size: ColumnSize.S,
+                                                      // size: ColumnSize.S,
+                                                      fixedWidth: 200,
                                                       label: Text(
                                                         "Outward",
                                                         style: Styles.red17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      size: ColumnSize.S,
+                                                      // size: ColumnSize.S,
+                                                      fixedWidth: 200,
                                                       label: Text(
-                                                        "Balance",
+                                                        "Closing Balance",
                                                         style: Styles.blue17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      size: ColumnSize.M,
+                                                      // size: ColumnSize.S,
+                                                      fixedWidth: 130,
+                                                      label: Text(
+                                                        "Internal",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      // size: ColumnSize.S,
+                                                      fixedWidth: 220,
+                                                      label: Text(
+                                                        "Internal Balance",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      // size: ColumnSize.S,
+                                                      fixedWidth: 250,
+                                                      label: Text(
+                                                        "Available Qty For MRS",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      // size: ColumnSize.M,
+                                                      fixedWidth: 200,
                                                       label: Text(
                                                         "Last Update By",
                                                         style: Styles.blue17,
@@ -262,22 +282,37 @@ class _PlantStockReportDetailsWebState
                       ),
                     ],
                   ),
-                  if (controller.openPurchaseDatePicker)
+                  if (controller.openFromDateToStartDatePicker)
                     Positioned(
-                      right: 65,
-                      top: 130,
+                      right: 50,
+                      top: 180,
                       child: DatePickerWidget(
-                        minDate: DateTime(DateTime.now().year),
-                        maxDate: DateTime(DateTime.now().year, 13,
-                            0), // last date of this year
-                        controller: DateRangePickerController(),
-                        selectionChanges: (p0) {
-                          print('po valu ${p0.value.toString()}');
-                          controller.purchaseDateTc.text =
-                              DateFormat('yyyy-MM-dd').format(p0.value);
-                          controller.openPurchaseDatePicker =
-                              !controller.openPurchaseDatePicker;
-                          controller.update(['stock_Mangement']);
+                        selectionMode: DateRangePickerSelectionMode.range,
+                        monthCellStyle: DateRangePickerMonthCellStyle(
+                          todayCellDecoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ColorValues.appDarkBlueColor,
+                          ),
+                        ),
+                        initialSelectedRange: PickerDateRange(
+                          controller.fromDate.value,
+                          controller.toDate.value,
+                        ),
+                        onSubmit: (value) {
+                          if (value is PickerDateRange) {
+                            controller.fromDate.value =
+                                value.startDate ?? DateTime.now();
+                            controller.toDate.value =
+                                value.endDate ?? DateTime.now();
+                            controller.startDate.value =
+                                DateFormat('dd/MM/yyyy')
+                                    .format(controller.fromDate.value);
+                            controller.endDate.value = DateFormat('dd/MM/yyyy')
+                                .format(controller.toDate.value);
+                            controller.getPlantStockListByDate();
+                            controller.openFromDateToStartDatePicker = false;
+                            controller.update(['stock_Mangement_Date']);
+                          }
                         },
                       ),
                     ),
@@ -294,10 +329,13 @@ class _PlantStockReportDetailsWebState
       PlantStockMonth? item, List<PlantDetail>? plantdetails) {
     double opening = item?.opening ?? 0;
     double totalQuantity = 0;
-    double total=opening;
-    List<bool> isinward = List<bool>.filled(plantdetails?.length??0, false);
-    List<bool> isoutward = List<bool>.filled(plantdetails?.length??0, false);
-    List<bool> isinternal = List<bool>.filled(plantdetails?.length??0, false);
+    double internaltotoal = 0;
+    double avialableqty=0;
+  
+    double total = opening;
+    List<int> isinward = List<int>.filled(plantdetails?.length ?? 0, 0);
+    List<int> isoutward = List<int>.filled(plantdetails?.length ?? 0, 0);
+    List<int> isinternal = List<int>.filled(plantdetails?.length ?? 0, 0);
 
     List<DataRow> rows = [];
 
@@ -308,8 +346,10 @@ class _PlantStockReportDetailsWebState
           DataCell(Text('Opening Balance', style: Styles.green700)),
           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('', style: Styles.black14)),
-          DataCell(Text('', style: Styles.black14)),
           DataCell(Text('${opening}', style: Styles.black14)),
+          DataCell(Text('', style: Styles.black14)),
+          DataCell(Text('', style: Styles.black14)),
+          DataCell(Text('', style: Styles.black14)),
           DataCell(Text('', style: Styles.black14)),
         ],
       ),
@@ -319,40 +359,79 @@ class _PlantStockReportDetailsWebState
       for (int i = 0; i < plantdetails.length; i++) {
         double qty = double.tryParse(plantdetails[i].qty ?? '') ?? 0.0;
 
-        totalQuantity += qty; // Update totalQuantity
-        totalQuantity += totalQuantity;
+        totalQuantity += qty;
 
         if (plantdetails[i].fromActorID == 325) {
-          isinward[i] = true;
+          isinward[i] = 1;
           total++;
         } else if (plantdetails[i].fromActorID == 1) {
-          isinternal[i] = true;
-          
+          isinternal[i] = 1;
+          internaltotoal++;
+
+        } else if (plantdetails[i].fromActorID == 14) {
+          isinternal[i] = -1;
+          internaltotoal--;
         } else {
-          isoutward[i] = true;
+          isoutward[i] = 1;
+          isinternal[i]=-1;
+          internaltotoal--;
           total--;
+        }
+        if(total!=0 && internaltotoal!=0){
+          
+          avialableqty=total-internaltotoal;
         }
         rows.add(
           DataRow(
             cells: [
               DataCell(
-                Text(plantdetails[i].fromActorType ?? '',
-                    style: Styles.black14),
+                InkWell(
+                  child: Text(
+                    plantdetails[i].fromActorType ?? '',
+                    style: Styles.black14,
+                  ),
+                  onTap: () {
+                    if (plantdetails[i].fromActorType1 == "JobCard") {
+                      Get.toNamed(Routes.jobCard,
+                          arguments: {'JcId': plantdetails[i].fromActorID});
+                    }
+                  },
+                ),
               ),
               DataCell(
-                Text(plantdetails[i].toActorType ?? '', style: Styles.black14),
+                InkWell(
+                  child: Text(
+                    plantdetails[i].toActorType ?? '',
+                    style: Styles.black14,
+                  ),
+                  onTap: () {
+                    // if(plantdetails[i].toActorType1=="Task"){
+
+                    //   Get.toNamed(Routres.)
+                    // }
+                  },
+                ),
               ),
               DataCell(
-                Text(isinward[i] == true ? '1' : '', style: Styles.green700),
+                Text(isinward[i] != 0 ? isinward[i].toString() : '',
+                    style: Styles.green700),
               ),
               DataCell(
-                Text(isinternal[i] == true ? '1' : '', style: Styles.black14),
-              ),
-              DataCell(
-                Text(isoutward[i] == true ? '1' : '', style: Styles.Red700),
+                Text(isoutward[i] != 0 ? isoutward[i].toString() : '',
+                    style: Styles.Red700),
               ),
               DataCell(
                 Text('$total', style: Styles.black14),
+              ),
+              DataCell(
+                Text(isinternal[i] == 0 ? ' ' : isinternal[i].toString(),
+                    style: Styles.black14),
+              ),
+              DataCell(
+                Text(internaltotoal==0? '' :'$internaltotoal', style: Styles.black14),
+              ),
+              DataCell(
+                Text(avialableqty==0?'':'$avialableqty', style: Styles.black14),
               ),
               DataCell(
                 Text(plantdetails[i].lastUpdated ?? '', style: Styles.black14),
@@ -365,28 +444,18 @@ class _PlantStockReportDetailsWebState
     rows.add(
       DataRow(
         cells: [
-          DataCell(
-            Text('', style: Styles.black14),
-          ),
-          DataCell(
-            Text('TotalQuantity', style: Styles.green700),
-          ),
-          DataCell(
-            Text('${isinward.where((bool value) => value).length}', style: Styles.green700),
-          ),
-          DataCell(
-            Text('${isinternal.where((bool value) => value).length}', style: Styles.black14),
-          ),
-          DataCell(
-            Text('${isoutward.where((bool value) => value).length}', style: Styles.Red700),
-          ),
-          
-          DataCell(
-            Text(' ${total}', style: Styles.black14),
-          ),
-          DataCell(
-            Text("Closing Balance: ${total}", style: Styles.Red700),
-          ),
+          DataCell(Text('', style: Styles.black14)),
+          DataCell(Text('Total Quantity', style: Styles.green700)),
+          DataCell(Text('${isinward.where((int value) => value==1).length}',
+              style: Styles.green700)),
+          DataCell(Text('${isoutward.where((int value) => value==1).length}',
+              style: Styles.Red700)),
+          DataCell(Text(' ${total}', style: Styles.black14)),
+          DataCell(Text('${isinternal.fold(0, (prev, element) => prev + element)}',
+              style: Styles.black14)),
+          DataCell(Text('$internaltotoal', style: Styles.black14)),
+          DataCell(Text('', style: Styles.black14)),
+          DataCell(Text('', style: Styles.Red700)),
         ],
       ),
     );

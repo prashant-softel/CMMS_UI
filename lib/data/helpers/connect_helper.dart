@@ -9377,7 +9377,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMReports/GetAssetItemTransactionReport?facility_id=$facilityID&assetItemId=$assetItemID&fromDate=$end_date&toDate=$start_date',
+      'SMReports/GetAssetItemTransactionReport?facility_id=$facilityID&assetItemId=$assetItemID&fromDate=$start_date&toDate=$end_date',
       Request.get,
       null,
       isLoading ?? false,
