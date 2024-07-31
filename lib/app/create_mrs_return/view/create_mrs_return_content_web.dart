@@ -426,18 +426,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                               .name));
                                                             },
                                                           ),
-                                                        ), // Obx(() {
-                                                        //   return controller
-                                                        //           .allDropdownsSelected
-                                                        //           .value
-                                                        //       ? Container()
-                                                        //       : Text(
-                                                        //           'Please select all dropdown values!',
-                                                        //           style: TextStyle(
-                                                        //               color: Colors
-                                                        //                   .red),
-                                                        //         );
-                                                        // }),
+                                                        ), 
                                                       ],
                                                     )
                                                   : (mapData['key'] ==
@@ -735,7 +724,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                       padding:
                                                           const EdgeInsets.all(
                                                               5.0),
-                                                      child: DropdownWebWidget(
+                                                      child:
+                                                       DropdownWebWidget(
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -827,18 +817,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                           null);
                                                                 },
                                                               ),
-                                                            ), // Obx(() {
-                                                            //   return controller
-                                                            //           .allDropdownsSelected
-                                                            //           .value
-                                                            //       ? Container()
-                                                            //       : Text(
-                                                            //           'Please select all dropdown values!',
-                                                            //           style: TextStyle(
-                                                            //               color: Colors
-                                                            //                   .red),
-                                                            //         );
-                                                            // }),
+                                                            ), 
                                                           ],
                                                         )
                                                       : (mapData['key'] ==
@@ -965,7 +944,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                       padding: const EdgeInsets
                                                                           .all(
                                                                           8.0),
-                                                                      child: Container(
+                                                                      child: 
+                                                                      Container(
                                                                           width: (Get.width * .5),
                                                                           // padding: EdgeInsets.all(value),
                                                                           decoration: BoxDecoration(

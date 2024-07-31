@@ -304,7 +304,7 @@ class EditMrsContentMobile extends GetView<EditMrsController> {
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
-                                                                              Text("Available_Qty: "),
+                                                                              Text("Available Qty: "),
                                                                               Dimens.boxWidth2,
                                                                               Obx(
                                                                                 () {
@@ -326,7 +326,7 @@ class EditMrsContentMobile extends GetView<EditMrsController> {
                                                                             Row(
                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                                                 children: [
-                                                                                  Text("Material_Type: "),
+                                                                                  Text("Material Type: "),
                                                                                   Dimens.boxWidth2,
                                                                                   Obx(
                                                                                     () {
