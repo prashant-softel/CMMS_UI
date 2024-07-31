@@ -546,21 +546,34 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                                             controller.allTrue.value == false
                                                                                         ? true
                                                                                         : false,
-                                                                                    textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                    onChanged: (txt) {
-                                                                                      // num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
-                                                                                      // num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
-                                                                                      // num maxAllowedQty = issuedQty - usedQty;
+                                                                                    textController: TextEditingController(text: (() {
+                                                                                      num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
+                                                                                      num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
+                                                                                      num maxAllowedQty = issuedQty - usedQty;
+                                                                                      String initialText = mapData["value"] ?? '';
+                                                                                      num enteredValue = num.tryParse(initialText) ?? 0;
 
-                                                                                      // if (txt.isNotEmpty) {
-                                                                                      //   num enteredValue = num.tryParse(txt) ?? 0;
-                                                                                      //   if (enteredValue > maxAllowedQty) {
-                                                                                      //     // If the entered quantity exceeds the allowed maximum, truncate it
-                                                                                      //     txt = maxAllowedQty.toString();
-                                                                                      //     // Optionally, you can show an error message or handle the situation
-                                                                                      //     Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
-                                                                                      //   }
-                                                                                      // }
+                                                                                      // Ensure initial value does not exceed max allowed quantity
+                                                                                      if (enteredValue > maxAllowedQty) {
+                                                                                        initialText = maxAllowedQty.toString();
+                                                                                      }
+
+                                                                                      return initialText;
+                                                                                    })()),
+                                                                                    onChanged: (txt) {
+                                                                                      num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
+                                                                                      num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
+                                                                                      num maxAllowedQty = issuedQty - usedQty;
+
+                                                                                      if (txt.isNotEmpty) {
+                                                                                        num enteredValue = num.tryParse(txt) ?? 0;
+                                                                                        if (enteredValue > maxAllowedQty) {
+                                                                                          // If the entered quantity exceeds the allowed maximum, truncate it
+                                                                                          txt = maxAllowedQty.toString();
+                                                                                          // Optionally, you can show an error message or handle the situation
+                                                                                          Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
+                                                                                        }
+                                                                                      }
 
                                                                                       mapData["value"] = txt;
                                                                                     },
