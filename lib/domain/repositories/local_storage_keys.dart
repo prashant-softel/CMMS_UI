@@ -107,4 +107,6 @@ abstract class LocalKeys {
   static const moduleId = 'module_id';
   static const date = 'date';
 static const assetId = 'assetId';
+static const startdate = 'startdate';
+static const enddate = 'enddate';
 }

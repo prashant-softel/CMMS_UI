@@ -284,6 +284,7 @@ class CreateMrsReturnController extends GetxController {
         assetMasterItemID:
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
         mrsItemID: 0,
+      
         assetsID: type == 1
             ? checkdropdownMapperData[element[1]["value"]].asset_id
             : checkdropdownMapperData[element[1]["value"]].assetsID,

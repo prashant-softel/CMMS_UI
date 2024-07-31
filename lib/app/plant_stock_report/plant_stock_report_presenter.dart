@@ -30,4 +30,6 @@ class PlantStockReportPresenter {
         isLoading: isLoading ?? false,
       );
        void clearValue() async => plantStockReportUsecase.clearValue();
+         void clearstartValue() async => plantStockReportUsecase.clearstartValue();
+           void clearendValue() async => plantStockReportUsecase.clearendValue();
 }

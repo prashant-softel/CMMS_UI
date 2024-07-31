@@ -7561,6 +7561,45 @@ class Repository {
     }
   }
 
+   Future<List<HistoryModel>?> getViewPlanHistory(
+    int? moduleType,
+    int? pmPlanId,
+    int facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getViewPlanHistory(
+        auth: auth,
+        moduleType: moduleType,
+        pmPlanId: pmPlanId,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsonPMPlanDetailsModels = jsonDecode(res.data);
+        final List<HistoryModel> _pmPlanDetailsList = jsonPMPlanDetailsModels
+            .map<HistoryModel>(
+              (m) => HistoryModel.fromJson(
+                Map<String, dynamic>.from(m),
+              ),
+            )
+            .toList();
+
+       
+        return _pmPlanDetailsList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), "getPMPlanHistory");
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+
   ///Permit History
   Future<List<HistoryModel>?> getPermitHistory(
     int? moduleType,

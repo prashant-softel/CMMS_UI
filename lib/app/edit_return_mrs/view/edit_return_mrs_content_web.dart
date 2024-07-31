@@ -639,14 +639,14 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                     //           fontSize: 15,
                                     //           fontWeight: FontWeight.bold),
                                     //     )),
-                                    DataColumn2(
-                                        fixedWidth: 200,
-                                        label: Text(
-                                          "Material Category",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                    // DataColumn2(
+                                    //     fixedWidth: 200,
+                                    //     label: Text(
+                                    //       "Material Category",
+                                    //       style: TextStyle(
+                                    //           fontSize: 15,
+                                    //           fontWeight: FontWeight.bold),
+                                    //     )),
                                     DataColumn2(
                                         fixedWidth: 200,
                                         label: Text(
@@ -751,7 +751,14 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                             controller:
                                                                 controller,
                                                             dropdownList: controller
-                                                                .scheduleCheckPointsdrop,
+                                                                        .returnMrsDetailsModel
+                                                                        .value
+                                                                        ?.whereUsedType ==
+                                                                    "JOBCARD"
+                                                                ? controller
+                                                                    .workingAreaList
+                                                                : controller
+                                                                    .scheduleCheckPointsdrop,
                                                             selectedValue:
                                                                 mapData[
                                                                     "value"],

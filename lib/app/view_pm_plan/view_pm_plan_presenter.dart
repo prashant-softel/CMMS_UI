@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 
 import '../../domain/usecases/view_pm_plan_usecase.dart';
 
@@ -33,7 +34,7 @@ class ViewPmPlanPresenter {
   }) async =>
       await viewPmPlanUsecase.getPmPlanDetails(
         pmPlanId: pmPlanId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
   void saveValue({String? pmPlanId}) async {
@@ -41,4 +42,17 @@ class ViewPmPlanPresenter {
   }
 
   Future<String?> getValue() async => await viewPmPlanUsecase.getValue();
+
+  Future<List<HistoryModel>?> getViewPlanHistory(
+    moduleType,
+    pmPlanId,
+    facilityId,
+    isLoading,
+  ) async =>
+      await viewPmPlanUsecase.getViewPlanHistory(
+        moduleType: moduleType,
+        pmPlanId: pmPlanId,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
 }
