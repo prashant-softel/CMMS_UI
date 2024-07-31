@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/approve_return_mrs/approve_return_mrs_controller.dart';
 import 'package:cmms/app/job_details/views/widgets/job_detail_field.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -127,6 +128,12 @@ class ApproveReturnMrsViewContentMobile
                                     ]),
                               ),
                             ]),
+                        Dimens.boxHeight10,
+                        Text(
+                          "Issued Return Material  ",
+                          style: Styles.blue700,
+                        ),
+                        Dimens.boxHeight5,
                         ListView.builder(
                             //physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -238,6 +245,140 @@ class ApproveReturnMrsViewContentMobile
                                 ),
                               );
                             }),
+                        Dimens.boxHeight10,
+                        Text(
+                          "Faulty Return Material  ",
+                          style: Styles.blue700,
+                        ),
+                        Dimens.boxHeight5,
+                        ListView.builder(
+                            //physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: controller.returnMrsDetailsModel.value!
+                                        .cmmrsFaultyItems !=
+                                    null
+                                ? controller.returnMrsDetailsModel.value!
+                                    .cmmrsFaultyItems!.length
+                                : 0,
+                            itemBuilder: (context, index) {
+                              final faultyMaterial = (controller
+                                          .returnMrsDetailsModel
+                                          .value!
+                                          .cmmrsFaultyItems !=
+                                      null)
+                                  ? controller.returnMrsDetailsModel.value!
+                                      .cmmrsFaultyItems![index]
+                                  : GetAssetDataModel();
+                              return GestureDetector(
+                                onTap: () {
+                                  // var _taskId =
+                                  //     controller.scheduleCheckPoint[index]!.id ?? 0;
+                                  // Get.toNamed(Routes.pmTaskView,
+                                  //     arguments: {'pmTaskId': _taskId});
+                                },
+                                child: Card(
+                                  color: Colors.lightBlue.shade50,
+                                  elevation: 10,
+                                  shadowColor: Colors.black87,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(children: [
+                                            Text('Material Name:',
+                                                style: Styles.appDarkGrey12),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  '${faultyMaterial.name}'
+                                                  '',
+                                                  style: Styles.appDarkBlue12),
+                                            ),
+                                          ]),
+                                          Row(//
+                                              children: [
+                                            Text("Remove From: ",
+                                                style: Styles.appDarkGrey12),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  faultyMaterial
+                                                          .fromActorName ??
+                                                      '',
+                                                  style: Styles.appDarkBlue12),
+                                            )
+                                          ]),
+                                          Row(children: [
+                                            Text('Material Code: ',
+                                                style: Styles.appDarkGrey12),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  faultyMaterial.asset_code
+                                                          .toString() ??
+                                                      '',
+                                                  style: Styles.appDarkBlue12),
+                                            )
+                                          ]),
+                                          Row(children: [
+                                            Text('Serial No.: ',
+                                                style: Styles.appDarkGrey12),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  faultyMaterial.serial_number
+                                                          .toString() ??
+                                                      '',
+                                                  style: Styles.appDarkBlue12),
+                                            )
+                                          ]),
+                                          Row(children: [
+                                            Text('Return Qty.: ',
+                                                style: Styles.appDarkGrey12),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  faultyMaterial.returned_qty
+                                                          .toString() ??
+                                                      '',
+                                                  style: Styles.appDarkBlue12),
+                                            )
+                                          ]),
+                                          Row(children: [
+                                            Text('Remarks: ',
+                                                style: Styles.appDarkGrey12),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  faultyMaterial.return_remarks
+                                                          .toString() ??
+                                                      '',
+                                                  style: Styles.appDarkBlue12),
+                                            )
+                                          ]),
+                                        ]),
+                                  ),
+                                ),
+                              );
+                            }),
+
                         //Spacer(),
                         controller.returnMrsDetailsModel.value?.status == 321
                             ? Column(

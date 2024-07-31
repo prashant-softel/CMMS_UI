@@ -37,7 +37,7 @@ class CreateMrsReturnController extends GetxController {
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
   var setTemlateCtrlr = TextEditingController();
-  var allDropdownsSelected = true.obs;
+  var allDropdownsSelected = false.obs;
   RxList<ScheduleCheckPoint> scheduleCheckPoints = <ScheduleCheckPoint>[].obs;
   RxList<ScheduleCheckPoint> scheduleCheckPointsdrop =
       <ScheduleCheckPoint>[].obs;
@@ -284,7 +284,6 @@ class CreateMrsReturnController extends GetxController {
         assetMasterItemID:
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
         mrsItemID: 0,
-      
         assetsID: type == 1
             ? checkdropdownMapperData[element[1]["value"]].asset_id
             : checkdropdownMapperData[element[1]["value"]].assetsID,

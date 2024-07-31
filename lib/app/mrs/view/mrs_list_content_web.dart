@@ -516,8 +516,8 @@ class MrsListDataSource extends DataTableSource {
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
-                                        ?.status !=
-                                    324
+                                        ?.status ==
+                                    321
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,

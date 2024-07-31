@@ -277,6 +277,8 @@ class PreventiveMaintenanceExecutionContentMobile
                                                     onPress: () {
                                                       controller.selectedItem =
                                                           null;
+                                                      controller.rowItemobs
+                                                          .value = [];
                                                       controller.selectedItem = controller
                                                           .scheduleCheckPoints
                                                           .firstWhere((element) =>
@@ -370,6 +372,48 @@ class PreventiveMaintenanceExecutionContentMobile
                             },
                           ),
                         ),
+                        Dimens.boxHeight10,
+                        Row(
+                          children: [
+                            Text(
+                              "Material Issue / Used",
+                              style: Styles.blue700,
+                            ),
+                            Spacer(),
+                            controller.listMrsByTaskId!.isNotEmpty
+                                ? Dimens.box0
+                                : GestureDetector(
+                                    onTap: () async {
+                                      Get.offAllNamed(Routes.createMrs,
+                                          arguments: {
+                                            "whereUsedId": controller
+                                                .pmtaskViewModel.value?.id,
+                                            "activity": controller
+                                                .pmtaskViewModel
+                                                .value
+                                                ?.plan_title,
+                                            "whereUsed": 27,
+                                            "fromActorTypeId": 2,
+                                            "to_actor_type_id": 3
+                                          });
+                                    },
+                                    child: Container(
+                                      padding: Dimens.edgeInsets8_2_8_2,
+                                      decoration: BoxDecoration(
+                                        color: ColorValues.addNewColor,
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: Text(
+                                        'Add MRS',
+                                        style: Styles.white10.copyWith(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                          ],
+                        ),
+                        Dimens.boxHeight10,
                         controller.pmtaskViewModel.value?.permit_id == 0
                             ? Dimens.box0
                             : Text(
@@ -531,62 +575,73 @@ class PreventiveMaintenanceExecutionContentMobile
                             Container(
                               height: 35,
                               child: CustomElevatedButton(
-                                //  icon: Icons.close,
-                                backgroundColor: ColorValues.closeColor,
-                                text: "Close",
-                                onPressed: () {
-                                  controller.listMrsByTaskId!.value
-                                                  .firstWhereOrNull(
-                                                    (element) =>
-                                                        element?.jobCardId !=
-                                                            0 ||
-                                                        element?.pmId != 0,
-                                                  )
-                                                  ?.mrs_return_ID ==
-                                              0 &&
-                                          controller.allTrue.value == false
-                                      ? Get.defaultDialog(
-                                          radius: 5,
-                                          title: 'Alert',
-                                          middleText:
-                                              'Please return all items!',
-                                          textConfirm: 'OK',
-                                          onConfirm: () {
-                                            Get.back(); // Close the dialog
-                                          },
-                                          buttonColor:
-                                              ColorValues.appGreenColor,
-                                          confirmTextColor: Colors.white,
-                                        )
-                                      : Get.dialog(CustonApproveRejectDialog(
-                                          text: "Execution Close",
-                                          controller: controller,
-                                          buttonText: "Close",
-                                          style: Styles
-                                              .navyBlueElevatedButtonStyle,
-                                          onPressed: () {
-                                            controller.closePmTaskExecution();
-                                          },
-                                        ));
-                                },
-                              ),
+                                  //  icon: Icons.close,
+                                  backgroundColor: ColorValues.closeColor,
+                                  text: "Close",
+                                  onPressed: () {
+                                    controller.listMrsByTaskId!.value
+                                                    .firstWhereOrNull(
+                                                      (element) =>
+                                                          element?.jobCardId !=
+                                                              0 ||
+                                                          element?.pmId != 0,
+                                                    )
+                                                    ?.mrs_return_ID ==
+                                                0 &&
+                                            controller.allTrue.value == false
+                                        ? Get.defaultDialog(
+                                            radius: 5,
+                                            title: 'Alert',
+                                            middleText:
+                                                'Please return all items!',
+                                            textConfirm: 'OK',
+                                            onConfirm: () {
+                                              Get.back(); // Close the dialog
+                                            },
+                                            buttonColor:
+                                                ColorValues.appGreenColor,
+                                            confirmTextColor: Colors.white,
+                                          )
+                                        : controller.listMrsByTaskId!.value
+                                                        .firstWhereOrNull(
+                                                          (element) =>
+                                                              element?.jobCardId !=
+                                                                  0 ||
+                                                              element?.pmId !=
+                                                                  0,
+                                                        )
+                                                        ?.status !=
+                                                    323 &&
+                                                controller.listMrsByTaskId!
+                                                    .isNotEmpty &&
+                                                controller.allTrue.value ==
+                                                    false
+                                            ? Get.defaultDialog(
+                                                radius: 5,
+                                                title: 'Alert',
+                                                middleText:
+                                                    'Please get Return MRS approved!',
+                                                textConfirm: 'OK',
+                                                onConfirm: () {
+                                                  Get.back(); // Close the dialog
+                                                },
+                                                buttonColor:
+                                                    ColorValues.appGreenColor,
+                                                confirmTextColor: Colors.white,
+                                              )
+                                            : controller.closePmTaskExecution();
+                                  }),
                             ),
                             Dimens.boxWidth10,
-                            controller.listMrsByTaskId!.isNotEmpty &&
-                                    (() {
-                                      try {
-                                        final firstCmmrsItem =
-                                            controller.cmmrsItems!.firstWhere(
-                                          (element) =>
-                                              element?.mrs_return_ID == 0,
-                                          orElse: () =>
-                                              CmmrsItems(mrs_return_ID: 1),
-                                        );
-                                        return firstCmmrsItem != null;
-                                      } catch (e) {
-                                        return false;
-                                      }
-                                    }())
+                            controller.listMrsByTaskId!.value
+                                            .firstWhereOrNull(
+                                              (element) =>
+                                                  element?.jobCardId != 0 ||
+                                                  element?.pmId != 0,
+                                            )
+                                            ?.mrs_return_ID ==
+                                        0 &&
+                                    controller.allTrue.value == false
                                 ? Container(
                                     height: 35,
                                     child: CustomElevatedButton(
@@ -610,6 +665,7 @@ class PreventiveMaintenanceExecutionContentMobile
 
                                         Get.toNamed(Routes.mrsReturnScreen,
                                             arguments: {
+                                              'type': 2,
                                               "whereUsed": 27,
                                               "fromActorTypeId": 3,
                                               "to_actor_type_id": 2,
@@ -623,7 +679,12 @@ class PreventiveMaintenanceExecutionContentMobile
                                                   .value
                                                   ?.plan_title,
                                               "mrsId": controller
-                                                      .listMrsByTaskId![0]!
+                                                      .listMrsByTaskId!
+                                                      .firstWhere(
+                                                          (element) =>
+                                                              element?.mrsId !=
+                                                              0,
+                                                          orElse: null)!
                                                       .mrsId ??
                                                   0
                                             });

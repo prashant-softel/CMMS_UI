@@ -185,8 +185,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
         dropdownMapperData[element?.name ?? ""] = listMrsByTaskId!
             .value.last!.cmmrsItems!
-            .firstWhere((e) => e!.serial_number == element?.serial_number,
-                orElse: null);
+            .firstWhere((e) => e!.id == element?.id, orElse: null);
       });
 
       _processJsonData();
