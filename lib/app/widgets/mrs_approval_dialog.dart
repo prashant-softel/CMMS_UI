@@ -83,7 +83,7 @@ class MrsApprovalSuccessDialog extends GetView {
                       onPressed: () {
                         controller.clearStoreData();
                         Get.toNamed(Routes.mrsIssueScreen,
-                            arguments: {'mrsId': mrsId![0]});
+                            arguments: {'mrsId': mrsId![0], type: type});
                       },
                       child: const Text('Issue MRS'),
                     ),
