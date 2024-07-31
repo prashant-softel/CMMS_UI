@@ -1275,28 +1275,66 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       CustomElevatedButton(
                                         text: 'Start',
                                         onPressed: () {
-                                          controller.permitList
+                                          var permitCondition = controller
+                                                  .permitList
+                                                  ?.firstWhere((element) =>
+                                                      element.permitId != null)
+                                                  .tbT_Done_Check ==
+                                              0;
+                                          var employeesNotDeployed = controller
+                                              .employeesDeployed.value.isEmpty;
+                                          var anyEmployeeNotSelected = controller
+                                              .employeesDeployed.value
+                                              .any((employeeList) =>
+                                                  employeeList.any((employee) =>
+                                                      employee['key'] ==
+                                                          "Employee Name" &&
+                                                      employee['value'] ==
+                                                          "Please Select"));
+
+                                          if ((permitCondition &&
+                                                  employeesNotDeployed) ||
+                                              (permitCondition &&
+                                                  anyEmployeeNotSelected)) {
+                                            Get.defaultDialog(
+                                              radius: 5,
+                                              title: 'Alert',
+                                              middleText:
+                                                  'Please select team members!',
+                                              textConfirm: 'OK',
+                                              onConfirm: () {
+                                                Get.back(); // Close the dialog
+                                              },
+                                              buttonColor:
+                                                  ColorValues.appGreenColor,
+                                              confirmTextColor: Colors.white,
+                                            );
+                                          } else if ((controller.permitList
                                                       ?.firstWhere((element) =>
                                                           element.permitId !=
                                                           null)
                                                       .tbT_Done_Check ==
-                                                  1
-                                              ? controller.startJobCard(
-                                                  jcCard: controller
-                                                      .jobCardId.value,
-                                                  fileIds: dropzoneController
-                                                      .fileIds)
-                                              : Get.dialog<void>(TbtDoneBMDialog(
-                                                  ptw_id: controller
-                                                          .jobCardDetailsModel
-                                                          .value
-                                                          ?.ptwId ??
-                                                      0,
-                                                  id: controller
-                                                          .jobCardDetailsModel
-                                                          .value
-                                                          ?.id ??
-                                                      0));
+                                                  1) &&
+                                              (employeesNotDeployed ||
+                                                  anyEmployeeNotSelected)) {
+                                            controller.startJobCard(
+                                              jcCard:
+                                                  controller.jobCardId.value,
+                                              fileIds:
+                                                  dropzoneController.fileIds,
+                                            );
+                                          } else {
+                                            Get.dialog<void>(TbtDoneBMDialog(
+                                              ptw_id: controller
+                                                      .jobCardDetailsModel
+                                                      .value
+                                                      ?.ptwId ??
+                                                  0,
+                                              id: controller.jobCardDetailsModel
+                                                      .value?.id ??
+                                                  0,
+                                            ));
+                                          }
                                         },
                                         backgroundColor:
                                             ColorValues.addNewColor,

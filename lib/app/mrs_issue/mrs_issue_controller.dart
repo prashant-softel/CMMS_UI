@@ -22,6 +22,7 @@ class MrsIssueController extends GetxController {
   MrsIssuePresenter mrsIssuePresenter;
   final HomeController homecontroller = Get.find();
   Rx<int> mrsId = 0.obs;
+  Rx<int> type = 0.obs;
   Rx<MrsDetailsModel?> mrsDetailsModel = MrsDetailsModel().obs;
   RxList<GetAssetItemsModel?> cmmrsItemsDetail = <GetAssetItemsModel>[].obs;
   String whereUsedType = "";
@@ -94,16 +95,24 @@ class MrsIssueController extends GetxController {
   Future<void> setMrsId() async {
     try {
       final _mrsId = await mrsIssuePresenter.getValue();
+      final _type = await mrsIssuePresenter.getValuee();
       if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
         var dataFromPreviousScreen = Get.arguments;
         mrsId.value = dataFromPreviousScreen['mrsId'];
+        type.value = dataFromPreviousScreen['type'];
         mrsIssuePresenter.saveValue(mrsId: mrsId.value.toString());
+        mrsIssuePresenter.saveValuee(type: type.value.toString());
       } else {
         mrsId.value = int.tryParse(_mrsId) ?? 0;
+        type.value = int.tryParse(_type!) ?? 0;
       }
     } catch (e) {
       Utility.showDialog(e.toString(), 'mrsId');
     }
+  }
+
+  void clearStoreData() {
+    mrsIssuePresenter.clearValue();
   }
 
   Future<void> getMrsDetails(
@@ -146,6 +155,7 @@ class MrsIssueController extends GetxController {
           issue_comment: _comment, ID: mrsId.value, cmmrsItems: cmmrsItems);
       var issuetoJsonString = issueMrs.toJson();
       final response = await mrsIssuePresenter.issueMrs(
+        type: type.value,
         issuetoJsonString: issuetoJsonString,
         isLoading: true,
       );

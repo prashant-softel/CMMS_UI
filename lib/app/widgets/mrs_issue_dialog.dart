@@ -1,20 +1,18 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/create_mrs/create_mrs_controller.dart';
-import 'package:cmms/app/new_permit/new_permit_controller.dart';
+import 'package:cmms/app/mrs_approve/mrs_approve_controller.dart';
+import 'package:cmms/app/mrs_issue/mrs_issue_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../navigators/app_pages.dart';
+// import '../theme/colors_value.dart';
 
-class CreateMrsSuccessDialog extends GetView {
-  String? createPermitData;
+class MrsIssueSuccessDialog extends GetView {
   String? data;
-  dynamic mrsId;
+  List<dynamic>? mrsId;
   int? type;
 
-  CreateMrsSuccessDialog(
-      {super.key, this.createPermitData, this.data, this.mrsId, this.type});
-
-  final CreateMrsController controller = Get.find();
+  MrsIssueSuccessDialog({super.key, this.data, this.mrsId, this.type});
+  final MrsIssueController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +46,11 @@ class CreateMrsSuccessDialog extends GetView {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'MRS Generated with MRS Id ',
+                        'MRS Issued Successfully!! ID: ',
                         style: Styles.black16,
                       ),
                       Text(
-                        "$mrsId",
+                        "MRS$mrsId",
                         style: Styles.green700,
                       ),
                     ],

@@ -952,18 +952,30 @@ class PermitListDataSource extends DataTableSource {
                                                   ?.ptwStatus ==
                                               PermitStatusConstants
                                                   .PTW_REJECTED_BY_APPROVER //124
-
-                                          &&
-                                          varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.add ==
-                                                          UserAccessConstants
-                                                              .kHaveAddAccess)
-                                                  .length >
-                                              0
+                                          ||
+                                          controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus ==
+                                                  PermitStatusConstants
+                                                      .PTW_CANCEL_REQUEST_APPROVED &&
+                                              varUserAccessModel
+                                                      .value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kPermitFeatureId &&
+                                                          e.add ==
+                                                              UserAccessConstants
+                                                                  .kHaveAddAccess)
+                                                      .length >
+                                                  0
                                       ? TableActionButton(
                                           color:
                                               Color.fromARGB(255, 116, 78, 130),

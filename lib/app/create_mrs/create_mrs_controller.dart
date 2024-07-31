@@ -150,6 +150,10 @@ class CreateMrsController extends GetxController {
     // }
   }
 
+  void clearStoreData() {
+    createMrsPresenter.clearValue();
+  }
+
   Future<void> createMrs() async {
     // try {
     // checkform();

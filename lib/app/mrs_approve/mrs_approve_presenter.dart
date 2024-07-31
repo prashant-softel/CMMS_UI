@@ -16,10 +16,12 @@ class MrsApprovePresenter {
       );
   Future<bool> approveMrs({
     approvetoJsonString,
+    int? type,
     required bool isLoading,
   }) async {
     return mrsApproveUsecase.approveMrs(
       approvetoJsonString: approvetoJsonString,
+      type:type,
       isLoading: isLoading,
     );
   }
@@ -36,6 +38,9 @@ class MrsApprovePresenter {
 
   void saveValue({String? mrsId}) async {
     return mrsApproveUsecase.saveValue(mrsId: mrsId);
+  }
+  void clearValue() async {
+    return mrsApproveUsecase.clearValue();
   }
 
   Future<String?> getValue() async => await mrsApproveUsecase.getValue();

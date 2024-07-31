@@ -1,20 +1,17 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/create_mrs/create_mrs_controller.dart';
-import 'package:cmms/app/new_permit/new_permit_controller.dart';
+import 'package:cmms/app/mrs_approve/mrs_approve_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../navigators/app_pages.dart';
+// import '../theme/colors_value.dart';
 
-class CreateMrsSuccessDialog extends GetView {
-  String? createPermitData;
+class MrsApprovalSuccessDialog extends GetView {
   String? data;
-  dynamic mrsId;
+  List<dynamic>? mrsId;
   int? type;
 
-  CreateMrsSuccessDialog(
-      {super.key, this.createPermitData, this.data, this.mrsId, this.type});
-
-  final CreateMrsController controller = Get.find();
+  MrsApprovalSuccessDialog({super.key, this.data, this.mrsId, this.type});
+  final MrsApproveController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +45,11 @@ class CreateMrsSuccessDialog extends GetView {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'MRS Generated with MRS Id ',
+                        'MRS Approved Successfully!! ID: ',
                         style: Styles.black16,
                       ),
                       Text(
-                        "$mrsId",
+                        "MRS$mrsId",
                         style: Styles.green700,
                       ),
                     ],
@@ -85,10 +82,10 @@ class CreateMrsSuccessDialog extends GetView {
                       style: Styles.yellowElevatedButtonStyle,
                       onPressed: () {
                         controller.clearStoreData();
-                        Get.toNamed(Routes.mrsApprovalScreen,
-                            arguments: {'mrsId': mrsId![0], 'type': type});
+                        Get.toNamed(Routes.mrsIssueScreen,
+                            arguments: {'mrsId': mrsId![0]});
                       },
-                      child: const Text('View MRS'),
+                      child: const Text('Issue MRS'),
                     ),
                     type == 1 || type == 2 ? SizedBox(width: 10) : Dimens.box0,
                     type == 1
