@@ -361,14 +361,14 @@ class _PlantStockReportDetailsWebState
 
         totalQuantity += qty;
 
-        if (plantdetails[i].fromActorID == 325) {
+        if (plantdetails[i].fromActorType1 == 'Vendor' && plantdetails[i].toActorType1 == 'Store') {
           isinward[i] = 1;
           total++;
-        } else if (plantdetails[i].fromActorID == 1) {
+        } else if (plantdetails[i].fromActorType1 == 'Store' && plantdetails[i].toActorType1 == 'Task'||plantdetails[i].toActorType1 == 'JobCard') {
           isinternal[i] = 1;
           internaltotoal++;
 
-        } else if (plantdetails[i].fromActorID == 14) {
+        } else if (plantdetails[i].fromActorType1 == 'Task'||plantdetails[i].fromActorType1 == 'JobCard' && plantdetails[i].toActorType1 == 'Store' ) {
           isinternal[i] = -1;
           internaltotoal--;
         } else {
@@ -377,7 +377,7 @@ class _PlantStockReportDetailsWebState
           internaltotoal--;
           total--;
         }
-        if(total!=0 && internaltotoal!=0){
+        if(total!=''&& internaltotoal!=''){
           
           avialableqty=total-internaltotoal;
         }
@@ -431,7 +431,9 @@ class _PlantStockReportDetailsWebState
                 Text(internaltotoal==0? '' :'$internaltotoal', style: Styles.black14),
               ),
               DataCell(
-                Text(avialableqty==0?'':'$avialableqty', style: Styles.black14),
+                Text('$avialableqty', style: Styles.black14),
+
+                // avialableqty==0?'':
               ),
               DataCell(
                 Text(plantdetails[i].lastUpdated ?? '', style: Styles.black14),
