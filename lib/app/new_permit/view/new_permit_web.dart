@@ -2583,10 +2583,52 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                             text:
                                                                 "Re submit Permit",
                                                             onPressed: () {
+                                                              DateTime
+                                                                  currentTime =
+                                                                  DateTime
+                                                                      .now();
+                                                              DateTime
+                                                                  selected =
+                                                                  DateTime.parse(
+                                                                      controller
+                                                                          .startDateTimeCtrlrBuffer);
+                                                              if (currentTime
+                                                                      .isAfter(
+                                                                          selected) ||
+                                                                  currentTime
+                                                                      .isAtSameMomentAs(
+                                                                          selected)) {
+                                                                showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (BuildContext
+                                                                          context) {
+                                                                    return AlertDialog(
+                                                                      title: Text(
+                                                                          "Invalid Start Date & Time"),
+                                                                      content: Text(
+                                                                          "Please select a Start Date & Time in the future."),
+                                                                      actions: <Widget>[
+                                                                        TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.of(context).pop();
+                                                                          },
+                                                                          child:
+                                                                              Text("OK"),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
+                                                                );
+                                                                return null;
+                                                              }else{
                                                               controller.resubmitPermit(
                                                                   fileIds:
                                                                       dropzoneController
                                                                           .fileIds);
+                                                              }
                                                             },
                                                           ),
                                                         ),
