@@ -236,7 +236,9 @@ class JobCardDetailsController extends GetxController {
   Future<void> getMrsListByModule({required int jobId}) async {
     rowItem.value = [];
     cmmrsItems!.value = <CmmrsItems>[];
+    materialUsedAssets!.value = <WorkingAreaList>[];
 
+    // Fetching the list of Mrs by Module
     listMrsByTaskId?.value = await jobCardDetailsPresenter.getMrsListByModule(
           jobId,
           facilityId,
@@ -244,66 +246,83 @@ class JobCardDetailsController extends GetxController {
         ) ??
         [];
 
+    // Populating cmmrsItems
     var _assetsList = listMrsByTaskId!.last!.cmmrsItems;
     for (var asset in _assetsList!) {
       cmmrsItems!.add(asset);
     }
 
+    // Populating materialUsedAssets
     var _usedassetsList = listMrsByTaskId!.value.last!.material_used_by_assets!;
     for (var usedasset in _usedassetsList) {
       materialUsedAssets!.add(usedasset);
     }
+    if (materialUsedAssets!.value.length == 0) {
+      addRowItem();
+    }
 
     // Ensure workingAreaList is populated and not null
     if (workingAreaList != null && workingAreaList!.isNotEmpty) {
-      // Assuming you want to find the first item in workingAreaList
-      var firstWorkingAreaList = workingAreaList!.first;
-      if (firstWorkingAreaList != null) {
-        cmmrsItems?.forEach((element) {
-          var consumedQty = '';
-          var dropDownEqValue = '';
+      Set<String> seenEntries = {}; // Set to keep track of unique entries
 
-          // Find the matching used assets based on asset_id
+      for (var workingArea in workingAreaList!) {
+        if (workingArea != null) {
           var matchedUsedAssets = materialUsedAssets!
-              .where((usedAsset) =>
-                  usedAsset!.asset_id == firstWorkingAreaList.asset_id)
+              .where((usedAsset) => usedAsset!.asset_id == workingArea.asset_id)
               .toList();
 
-          if (matchedUsedAssets.isNotEmpty) {
-            var usedItems = matchedUsedAssets.first!.items
-                ?.where((usedItem) => usedItem.mrs_Item_Id == element?.id)
-                .toList();
-            if (usedItems != null && usedItems.isNotEmpty) {
-              consumedQty = usedItems.first.used_qty.toString();
-              dropDownEqValue = matchedUsedAssets.first!.name!;
+          for (var matchedUsedAsset in matchedUsedAssets) {
+            for (var item in matchedUsedAsset!.items!) {
+              var consumedQty = '';
+              var dropDownEqValue = matchedUsedAsset.name ?? '';
+
+              var cmmrsItem = cmmrsItems!.firstWhere(
+                  (e) => e!.id == item.mrs_Item_Id,
+                  orElse: () => null);
+
+              if (cmmrsItem != null) {
+                consumedQty = item.used_qty.toString();
+
+                // Define unique criteria
+                String entryKey =
+                    '${cmmrsItem.name}-${dropDownEqValue}-${cmmrsItem.serial_number}';
+
+                // Only add if this entry is not already seen
+                if (!seenEntries.contains(entryKey)) {
+                  seenEntries.add(entryKey);
+
+                  rowItem.add([
+                    {"key": "Drop_down", "value": '${cmmrsItem.name}'},
+                    {"key": "Drop_down_eq", "value": dropDownEqValue},
+                    {'key': "Sr_No", "value": cmmrsItem.serial_number ?? ''},
+                    {'key': "code", "value": cmmrsItem.asset_MDM_code ?? ''},
+                    {
+                      'key': "Material_Type",
+                      "value": cmmrsItem.asset_type ?? ''
+                    },
+                    {
+                      'key': "Issued_Qty",
+                      "value": cmmrsItem.issued_qty.toString()
+                    },
+                    {'key': "Used_Qty", "value": cmmrsItem.used_qty.toString()},
+                    {'key': "Consumed_Qty", "value": consumedQty},
+                    {'key': "Action ", "value": ''},
+                  ]);
+
+                  dropdownMapperData[cmmrsItem.name ?? ""] = cmmrsItem;
+                  dropdownMapperDataworkingArea[dropDownEqValue] =
+                      workingAreaList!.firstWhere(
+                    (e) => e.name == dropDownEqValue,
+                    orElse: () => null!,
+                  );
+                }
+              }
             }
           }
-
-          rowItem.add([
-            {"key": "Drop_down", "value": '${element?.name}'},
-            {
-              "key": "Drop_down_eq",
-              "value": dropDownEqValue
-            }, // Set the Drop_down_eq value from usedItems asset_name
-            {'key': "Sr_No", "value": ''},
-            {'key': "code", "value": ''},
-            {'key': "Material_Type", "value": ''},
-            {'key': "Issued_Qty", "value": ''},
-            {'key': "Used_Qty", "value": ''},
-            {'key': "Consumed_Qty", "value": consumedQty},
-            {'key': "Action ", "value": ''},
-          ]);
-
-          dropdownMapperData[element?.name ?? ""] = listMrsByTaskId!
-              .last!.cmmrsItems!
-              .firstWhere((e) => e.serial_number == element?.serial_number,
-                  orElse: null);
-          dropdownMapperDataworkingArea[matchedUsedAssets.first!.name ?? ""] =
-              workingAreaList!.firstWhere(
-                  (e) => e.name == matchedUsedAssets.first!.name,
-                  orElse: null);
-        });
+        }
       }
+      // Debugging: Print row items
+      print('Row items: $rowItem');
     }
 
     _processJsonData();
