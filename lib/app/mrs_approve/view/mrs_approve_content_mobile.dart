@@ -127,6 +127,10 @@ class MrsViewApproveContentMobile extends GetView<MrsApproveController> {
                                     ]),
                               ),
                             ]),
+                        Text(
+                          "Materials  ",
+                          style: Styles.blue700,
+                        ),
                         ListView.builder(
                             //physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -185,8 +189,7 @@ class MrsViewApproveContentMobile extends GetView<MrsApproveController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel.asset_type ??
-                                                      '',
+                                                  mrsViewModel.asset_type ?? '',
                                                   style: Styles.appDarkBlue12),
                                             )
                                           ]),

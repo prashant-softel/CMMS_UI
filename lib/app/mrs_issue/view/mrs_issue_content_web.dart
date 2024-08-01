@@ -394,7 +394,8 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                               .toString())),
                                                           item.asset_type ==
                                                                   "Spare"
-                                                              ? DataCell(
+                                                              ? 
+                                                              DataCell(
                                                                   Padding(
                                                                     padding:
                                                                         const EdgeInsets
