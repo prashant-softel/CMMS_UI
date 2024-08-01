@@ -131,15 +131,10 @@ class EditJobController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           getBlocksList(selectedFacilityId);
         });
-        Future.delayed(Duration(seconds: 1), () {
-          getInventoryCategoryList(selectedFacilityId.toString());
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getInventoryList(
-            facilityId: selectedFacilityId,
-            blockId: selectedBlockId,
-          );
-        });
+        // Future.delayed(Duration(seconds: 1), () {
+        //   getInventoryCategoryList(selectedFacilityId.toString());
+        // });
+
         Future.delayed(Duration(seconds: 1), () {
           getWorkTypeList();
         });
@@ -186,6 +181,14 @@ class EditJobController extends GetxController {
       jobTitleCtrlr.text = jobDetailsModel.value?.jobTitle ?? '';
       jobDescriptionCtrlr.text = jobDetailsModel.value?.jobDescription ?? '';
       selectedBlock.value = jobDetailsModel.value?.blockName ?? "";
+      if (selectedBlock.value != null) {
+        getInventoryCategoryList(selectedFacilityId.toString());
+
+        getInventoryList(
+          facilityId: selectedFacilityId,
+          blockId: jobDetailsModel.value?.blockId,
+        );
+      }
       breakdownTimeCtrlr.text =
           formatDateTimeForUI(jobDetailsModel.value?.breakdownTime);
       toolsRequiredList?.value = jobDetailsModel.value?.toolsRequiredList ?? [];
