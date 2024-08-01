@@ -185,7 +185,7 @@ class JobCardDetailsController extends GetxController {
         facilityId = event;
         if (facilityId > 0) {
           isFacilitySelected.value = true;
-          await getEmployeeList();
+          // await getEmployeeList();
         }
       });
       if (jobCardId.value != 0) {
@@ -201,25 +201,28 @@ class JobCardDetailsController extends GetxController {
         createPlantDetailsTableData();
         createJobDetailsTableData();
         createPermitDetailsTableData();
-        jobCardDetailsModel.value?.lstCmjcEmpList?.forEach((element) {
-          employeesDeployed.value.add([
-            {
-              "key": "Employee Name",
-              "value": "${element.name}",
-              "empId": "${element.id}",
-            },
-            {
-              "key": "Responsibility",
-              "value": "${element.responsibility}",
-            },
-            {
-              "key": "Action",
-              "value": "",
-            }
-          ]);
-          deployedEmployeeMapperData[element.name ?? ""] = employeeList
-              .firstWhere((e) => e!.name == element.name, orElse: null);
-        });
+        if (jobCardDetailsModel != null) {
+          getEmployeeList();
+          jobCardDetailsModel.value?.lstCmjcEmpList?.forEach((element) {
+            employeesDeployed.value.add([
+              {
+                "key": "Employee Name",
+                "value": "${element.name}",
+                "empId": "${element.id}",
+              },
+              {
+                "key": "Responsibility",
+                "value": "${element.responsibility}",
+              },
+              {
+                "key": "Action",
+                "value": "",
+              }
+            ]);
+            deployedEmployeeMapperData[element.name ?? ""] = employeeList
+                .firstWhere((e) => e!.name == element.name, orElse: null);
+          });
+        }
       }
 
       responsibilityCtrlrs.add(TextEditingController());

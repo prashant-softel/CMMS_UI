@@ -12,8 +12,8 @@ import '../../home/widgets/mobile_header_widget.dart';
 import '../../widgets/custom_textfield.dart';
 import '../../widgets/dropdown_web.dart';
 
-class ReturnMrsContentMobile extends GetView<CreateMrsReturnController> {
-  ReturnMrsContentMobile({Key? key}) : super(key: key);
+class CreateReturnMrsContentMobile extends GetView<CreateMrsReturnController> {
+  CreateReturnMrsContentMobile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -666,7 +666,7 @@ class ReturnMrsContentMobile extends GetView<CreateMrsReturnController> {
                                                                                     label: '',
                                                                                     message: '',
                                                                                     onPress: () {
-                                                                                      controller.rowItem.remove(controller.rowItem.value[index]);
+                                                                                      controller.rowFaultyItem.remove(controller.rowItem.value[index]);
                                                                                     },
                                                                                   )
                                                                                 ],
