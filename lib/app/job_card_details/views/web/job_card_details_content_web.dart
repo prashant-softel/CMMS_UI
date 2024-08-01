@@ -1275,14 +1275,11 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       CustomElevatedButton(
                                         text: 'Start',
                                         onPressed: () {
-                                          var permitCondition = controller
-                                                  .permitList
-                                                  ?.firstWhere((element) =>
-                                                      element.permitId != null)
-                                                  .tbT_Done_Check ==
-                                              0;
                                           var employeesNotDeployed = controller
-                                              .employeesDeployed.value.isEmpty;
+                                                  .employeesDeployed
+                                                  .value
+                                                  .length ==
+                                              0;
                                           var anyEmployeeNotSelected = controller
                                               .employeesDeployed.value
                                               .any((employeeList) =>
@@ -1291,11 +1288,15 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                           "Employee Name" &&
                                                       employee['value'] ==
                                                           "Please Select"));
+                                          var permitCondition = controller
+                                                  .permitList
+                                                  ?.firstWhere((element) =>
+                                                      element.permitId != null)
+                                                  .tbT_Done_Check ==
+                                              1;
 
                                           if ((permitCondition &&
-                                                  employeesNotDeployed) ||
-                                              (permitCondition &&
-                                                  anyEmployeeNotSelected)) {
+                                              anyEmployeeNotSelected == true)) {
                                             Get.defaultDialog(
                                               radius: 5,
                                               title: 'Alert',
@@ -1315,15 +1316,19 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                           null)
                                                       .tbT_Done_Check ==
                                                   1) &&
-                                              (employeesNotDeployed ||
-                                                  anyEmployeeNotSelected)) {
+                                              // employeesNotDeployed == true &&
+                                              anyEmployeeNotSelected == false) {
                                             controller.startJobCard(
                                               jcCard:
                                                   controller.jobCardId.value,
                                               fileIds:
                                                   dropzoneController.fileIds,
                                             );
-                                          } else {
+                                          } else if (controller.permitList
+                                                  ?.firstWhere((element) =>
+                                                      element.permitId != null)
+                                                  .tbT_Done_Check ==
+                                              0) {
                                             Get.dialog<void>(TbtDoneBMDialog(
                                               ptw_id: controller
                                                       .jobCardDetailsModel
@@ -1338,7 +1343,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                         },
                                         backgroundColor:
                                             ColorValues.addNewColor,
-                                      )
+                                      ),
 
                                       // CustomElevatedButton(
                                       //   text: 'Update',

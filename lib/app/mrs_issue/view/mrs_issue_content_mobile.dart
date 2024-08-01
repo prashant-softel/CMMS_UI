@@ -5,6 +5,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -113,288 +114,337 @@ class MrsIssueContentMobile extends GetView<MrsIssueController> {
                                         ]),
                                   ),
                                 ]),
-                            ListView.builder(
-                                //physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: controller.mrsDetailsModel.value!
-                                            .cmmrsItems !=
-                                        null
-                                    ? controller.mrsDetailsModel.value!
-                                        .cmmrsItems!.length
-                                    : 0,
-                                itemBuilder: (context, index) {
-                                  final mrsViewModel = (controller
-                                              .mrsDetailsModel
-                                              .value!
+                            Text(
+                              "Materials  ",
+                              style: Styles.blue700,
+                            ),
+                            Expanded(
+                              child: ListView.builder(
+                                  //physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: controller.mrsDetailsModel.value!
                                               .cmmrsItems !=
-                                          null)
+                                          null
                                       ? controller.mrsDetailsModel.value!
-                                          .cmmrsItems![index]
-                                      : GetAssetItemsModel();
-                                  return GestureDetector(
-                                    onTap: () {
-                                      // var _taskId =
-                                      //     controller.scheduleCheckPoint[index]!.id ?? 0;
-                                      // Get.toNamed(Routes.pmTaskView,
-                                      //     arguments: {'pmTaskId': _taskId});
-                                    },
-                                    child: Card(
-                                      color: Colors.lightBlue.shade50,
-                                      elevation: 10,
-                                      shadowColor: Colors.black87,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(children: [
-                                                Text('Material Name:',
-                                                    style:
-                                                        Styles.appDarkGrey12),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                      '${mrsViewModel.asset_name}'
-                                                      '',
+                                          .cmmrsItems!.length
+                                      : 0,
+                                  itemBuilder: (context, index) {
+                                    final mrsViewModel = (controller
+                                                .mrsDetailsModel
+                                                .value!
+                                                .cmmrsItems !=
+                                            null)
+                                        ? controller.mrsDetailsModel.value!
+                                            .cmmrsItems![index]
+                                        : GetAssetItemsModel();
+                                    return GestureDetector(
+                                      onTap: () {
+                                        // var _taskId =
+                                        //     controller.scheduleCheckPoint[index]!.id ?? 0;
+                                        // Get.toNamed(Routes.pmTaskView,
+                                        //     arguments: {'pmTaskId': _taskId});
+                                      },
+                                      child: Card(
+                                        color: Colors.lightBlue.shade50,
+                                        elevation: 10,
+                                        shadowColor: Colors.black87,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(children: [
+                                                  Text('Material Name:',
                                                       style:
-                                                          Styles.appDarkBlue12),
-                                                ),
-                                              ]),
-                                              Row(//
-                                                  children: [
-                                                Text("Asset Type: ",
-                                                    style:
-                                                        Styles.appDarkGrey12),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                      mrsViewModel.asset_type ??
-                                                          '',
+                                                          Styles.appDarkGrey12),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                        '${mrsViewModel.asset_name}'
+                                                        '',
+                                                        style: Styles
+                                                            .appDarkBlue12),
+                                                  ),
+                                                ]),
+                                                Row(//
+                                                    children: [
+                                                  Text("Asset Type: ",
                                                       style:
-                                                          Styles.appDarkBlue12),
-                                                )
-                                              ]),
-                                              Row(children: [
-                                                Text('Available Qty.: ',
-                                                    style:
-                                                        Styles.appDarkGrey12),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                      mrsViewModel.available_qty
-                                                              .toString() ??
-                                                          '',
+                                                          Styles.appDarkGrey12),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                        mrsViewModel
+                                                                .asset_type ??
+                                                            '',
+                                                        style: Styles
+                                                            .appDarkBlue12),
+                                                  )
+                                                ]),
+                                                Row(children: [
+                                                  Text('Available Qty.: ',
                                                       style:
-                                                          Styles.appDarkBlue12),
-                                                )
-                                              ]),
-                                              Row(children: [
-                                                Text('Requested Qty.: ',
-                                                    style:
-                                                        Styles.appDarkGrey12),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                      mrsViewModel.requested_qty
-                                                              .toString() ??
-                                                          '',
+                                                          Styles.appDarkGrey12),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                        mrsViewModel
+                                                                .available_qty
+                                                                .toString() ??
+                                                            '',
+                                                        style: Styles
+                                                            .appDarkBlue12),
+                                                  )
+                                                ]),
+                                                Row(children: [
+                                                  Text('Requested Qty.: ',
                                                       style:
-                                                          Styles.appDarkBlue12),
-                                                )
-                                              ]),
-                                              Row(children: [
-                                                Text('Approved Qyt.: ',
-                                                    style:
-                                                        Styles.appDarkGrey12),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                      mrsViewModel.requested_qty
-                                                              .toString() ??
-                                                          '',
+                                                          Styles.appDarkGrey12),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                        mrsViewModel
+                                                                .requested_qty
+                                                                .toString() ??
+                                                            '',
+                                                        style: Styles
+                                                            .appDarkBlue12),
+                                                  )
+                                                ]),
+                                                Row(children: [
+                                                  Text('Approved Qyt.: ',
                                                       style:
-                                                          Styles.appDarkBlue12),
-                                                )
-                                              ]),
-                                              controller
-                                                          .mrsDetailsModel
-                                                          .value!
-                                                          .cmmrsItems![index]
-                                                          .asset_type ==
-                                                      "Spare"
-                                                  ? Row(children: [
-                                                      Text('Serial Number: ',
-                                                          style: Styles
-                                                              .appDarkGrey12),
-                                                      SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      Form(
-                                                        key: _formKey,
-                                                        child: Padding(
+                                                          Styles.appDarkGrey12),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                        mrsViewModel
+                                                                .requested_qty
+                                                                .toString() ??
+                                                            '',
+                                                        style: Styles
+                                                            .appDarkBlue12),
+                                                  )
+                                                ]),
+                                                controller
+                                                            .mrsDetailsModel
+                                                            .value!
+                                                            .cmmrsItems![index]
+                                                            .asset_type ==
+                                                        "Spare"
+                                                    ? Row(children: [
+                                                        Text('Serial Number: ',
+                                                            style: Styles
+                                                                .appDarkGrey12),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Padding(
                                                           padding:
                                                               const EdgeInsets
                                                                   .all(8.0),
-                                                          child: Container(
-                                                              width:
-                                                                  (Get.width *
-                                                                      .4),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Colors
-                                                                        .black26,
-                                                                    offset:
-                                                                        const Offset(
-                                                                      5.0,
-                                                                      5.0,
-                                                                    ),
-                                                                    blurRadius:
-                                                                        5.0,
-                                                                    spreadRadius:
-                                                                        1.0,
-                                                                  ),
-                                                                ],
-                                                                color: ColorValues
-                                                                    .whiteColor,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                              ),
-                                                              child:
-                                                                  LoginCustomTextfield(
-                                                                validator:
-                                                                    (value) {
-                                                                  if (value ==
-                                                                          null ||
-                                                                      value
-                                                                          .isEmpty) {
-                                                                    return 'This field cannot be empty';
-                                                                  }
-                                                                  return null;
-                                                                },
-                                                                textController: controller
+                                                          child:
+                                                              LoginCustomTextfield(
+                                                            width: (Get.width *
+                                                                .4),
+                                                            textController: controller
                                                                     .mrsDetailsModel
                                                                     .value!
                                                                     .cmmrsItems![
                                                                         index]
-                                                                    .serial_number_controller as TextEditingController,
-                                                              )),
-                                                        ),
-                                                      ),
-                                                    ])
-                                                  : Dimens.box0,
-                                              Row(children: [
-                                                Text('Issued Qty.: ',
-                                                    style:
-                                                        Styles.appDarkGrey12),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Container(
-                                                      width: (Get.width * .4),
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
+                                                                    .serial_number_controller
+                                                                as TextEditingController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              hintText:
+                                                                  'Enter Serial Number',
+                                                              errorText: controller
+                                                                      .errorMessages[
+                                                                  index],
                                                             ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
+                                                            validator: (value) =>
+                                                                controller
+                                                                    .validateField(
+                                                                        value,
+                                                                        index),
+                                                            onChanged: (value) {
+                                                              controller
+                                                                  .clearErrorMessage(
+                                                                      index);
+                                                            },
                                                           ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-                                                      child:
-                                                          LoginCustomTextfield(
-                                                              textController: controller
-                                                                      .mrsDetailsModel
-                                                                      .value!
-                                                                      .cmmrsItems![
-                                                                          index]
-                                                                      .issued_qty_controller
-                                                                  as TextEditingController,
-                                                              onChanged:
-                                                                  (text) {
-                                                                try {
-                                                                  // Validate input using a regular expression
-                                                                  if (!RegExp(
-                                                                          r'^[0-9]+(?:\.[0-9]+)?$')
-                                                                      .hasMatch(
-                                                                          text)) {
-                                                                    // Input is not a valid double
-                                                                    Fluttertoast
-                                                                        .showToast(
-                                                                      msg:
-                                                                          'Enter valid quantity in numbers',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                    );
-                                                                    return; // Exit early
-                                                                  }
+                                                        ),
 
-                                                                  double
-                                                                      parsedValue =
-                                                                      double.parse(
-                                                                          text);
-                                                                  double requestedQty = controller
-                                                                      .mrsDetailsModel
-                                                                      .value!
-                                                                      .cmmrsItems![
-                                                                          index]
-                                                                      .requested_qty!;
+                                                        // Form(
+                                                        //   key: _formKey,
+                                                        //   child:
+                                                        //   Padding(
+                                                        //     padding:
+                                                        //         const EdgeInsets
+                                                        //             .all(8.0),
+                                                        //     child: Container(
+                                                        //         width:
+                                                        //             (Get.width *
+                                                        //                 .4),
+                                                        //         decoration:
+                                                        //             BoxDecoration(
+                                                        //           boxShadow: [
+                                                        //             BoxShadow(
+                                                        //               color: Colors
+                                                        //                   .black26,
+                                                        //               offset:
+                                                        //                   const Offset(
+                                                        //                 5.0,
+                                                        //                 5.0,
+                                                        //               ),
+                                                        //               blurRadius:
+                                                        //                   5.0,
+                                                        //               spreadRadius:
+                                                        //                   1.0,
+                                                        //             ),
+                                                        //           ],
+                                                        //           color: ColorValues
+                                                        //               .whiteColor,
+                                                        //           borderRadius:
+                                                        //               BorderRadius
+                                                        //                   .circular(
+                                                        //                       5),
+                                                        //         ),
+                                                        //         child:
+                                                        //             LoginCustomTextfield(
+                                                        //           validator:
+                                                        //               (value) {
+                                                        //             if (value ==
+                                                        //                     null ||
+                                                        //                 value
+                                                        //                     .isEmpty) {
+                                                        //               return 'This field cannot be empty';
+                                                        //             }
+                                                        //             return null;
+                                                        //           },
+                                                        //           textController: controller
+                                                        //               .mrsDetailsModel
+                                                        //               .value!
+                                                        //               .cmmrsItems![
+                                                        //                   index]
+                                                        //               .serial_number_controller as TextEditingController,
+                                                        //         )),
+                                                        //   ),
+                                                        // ),
+                                                      ])
+                                                    : Dimens.box0,
+                                                Row(children: [
+                                                  Text('Issued Qty.: ',
+                                                      style:
+                                                          Styles.appDarkGrey12),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Container(
+                                                        width: (Get.width * .4),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors
+                                                                  .black26,
+                                                              offset:
+                                                                  const Offset(
+                                                                5.0,
+                                                                5.0,
+                                                              ),
+                                                              blurRadius: 5.0,
+                                                              spreadRadius: 1.0,
+                                                            ),
+                                                          ],
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                                textController: controller
+                                                                        .mrsDetailsModel
+                                                                        .value!
+                                                                        .cmmrsItems![
+                                                                            index]
+                                                                        .issued_qty_controller
+                                                                    as TextEditingController,
+                                                                onChanged:
+                                                                    (text) {
+                                                                  try {
+                                                                    // Validate input using a regular expression
+                                                                    if (!RegExp(
+                                                                            r'^[0-9]+(?:\.[0-9]+)?$')
+                                                                        .hasMatch(
+                                                                            text)) {
+                                                                      // Input is not a valid double
+                                                                      Fluttertoast
+                                                                          .showToast(
+                                                                        msg:
+                                                                            'Enter valid quantity in numbers',
+                                                                        fontSize:
+                                                                            16.0,
+                                                                      );
+                                                                      return; // Exit early
+                                                                    }
 
-                                                                  if (parsedValue >
-                                                                      requestedQty) {
-                                                                    Fluttertoast
-                                                                        .showToast(
-                                                                      msg:
-                                                                          'Enter qty below the approved qty',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                    );
+                                                                    double
+                                                                        parsedValue =
+                                                                        double.parse(
+                                                                            text);
+                                                                    double requestedQty = controller
+                                                                        .mrsDetailsModel
+                                                                        .value!
+                                                                        .cmmrsItems![
+                                                                            index]
+                                                                        .requested_qty!;
+
+                                                                    if (parsedValue >
+                                                                        requestedQty) {
+                                                                      Fluttertoast
+                                                                          .showToast(
+                                                                        msg:
+                                                                            'Enter qty below the approved qty',
+                                                                        fontSize:
+                                                                            16.0,
+                                                                      );
+                                                                    }
+                                                                  } catch (e) {
+                                                                    // Handle the case where parsing fails
+                                                                    print(
+                                                                        'Error: $e');
                                                                   }
-                                                                } catch (e) {
-                                                                  // Handle the case where parsing fails
-                                                                  print(
-                                                                      'Error: $e');
-                                                                }
-                                                              })),
-                                                ),
+                                                                })),
+                                                  ),
+                                                ]),
                                               ]),
-                                            ]),
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }),
+                                    );
+                                  }),
+                            ),
                             // Spacer(),
                             Container(
                               margin: Dimens.edgeInsets15,

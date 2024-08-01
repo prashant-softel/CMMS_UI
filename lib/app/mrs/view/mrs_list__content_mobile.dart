@@ -59,7 +59,10 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                       controller.mrsList[index]!.id ?? 0;
                                   controller.mrsList[index]?.status == 323
                                       ? Get.toNamed(Routes.mrsIssueScreen,
-                                          arguments: {'mrsId': _mrsId})
+                                          arguments: {
+                                              'mrsId': _mrsId,
+                                              'type': 0
+                                            })
                                       : Get.toNamed(Routes.mrsApprovalScreen,
                                           arguments: {
                                               'mrsId': _mrsId,

@@ -86,7 +86,7 @@ class EditMrsReturnController extends GetxController {
   Future<void> setMrsId() async {
     try {
       final _mrsId = await editmrsReturnPresenter.getValue();
-      final _type = await editmrsReturnPresenter.getValue();
+      // final _type = await editmrsReturnPresenter.getValue();
       if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
