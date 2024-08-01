@@ -4491,10 +4491,12 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(JobCardUpdatedDialog(
-      message: parsedJson['message'],
-      jobId: parsedJson['id'],
-    ));
+    Get.dialog<void>(
+        JobCardUpdatedDialog(
+          message: parsedJson['message'],
+          jobId: parsedJson['id'],
+        ),
+        barrierDismissible: false);
     return responseModel;
   }
 
