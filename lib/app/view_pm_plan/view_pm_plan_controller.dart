@@ -102,6 +102,7 @@ class ViewPmPlanController extends GetxController {
       isFormInvalid.value = false;
     }
   }
+
   Future<void> checkformrej() async {
     if (rejectCommentTextFieldCtrlr.text == '') {
       isFormInvalid.value = true;
@@ -161,7 +162,7 @@ class ViewPmPlanController extends GetxController {
   }
 
   Future<void> getHistory(int facilityId) async {
-    int moduleType = 4;
+    int moduleType = 26;
     historyList?.value = await viewPmPlanPresenter.getViewPlanHistory(
           moduleType,
           pmPlanId.value,
