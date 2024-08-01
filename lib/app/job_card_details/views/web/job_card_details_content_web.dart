@@ -1280,14 +1280,18 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   .value
                                                   .length ==
                                               0;
-                                          var anyEmployeeNotSelected = controller
-                                              .employeesDeployed.value
-                                              .any((employeeList) =>
-                                                  employeeList.any((employee) =>
-                                                      employee['key'] ==
-                                                          "Employee Name" &&
-                                                      employee['value'] ==
-                                                          "Please Select"));
+                                          bool anyEmployeeNotSelected = false;
+                                          if (employeesNotDeployed == false) {
+                                            anyEmployeeNotSelected = controller
+                                                .employeesDeployed.value
+                                                .any((employeeList) =>
+                                                    employeeList.any((employee) =>
+                                                        employee['key'] ==
+                                                            "Employee Name" &&
+                                                        employee['value'] ==
+                                                            "Please Select"));
+                                          }
+
                                           var permitCondition = controller
                                                   .permitList
                                                   ?.firstWhere((element) =>
@@ -1296,7 +1300,13 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                               1;
 
                                           if ((permitCondition &&
-                                              anyEmployeeNotSelected == true)) {
+                                                  anyEmployeeNotSelected ==
+                                                      true &&
+                                                  employeesNotDeployed ==
+                                                      false ||
+                                              permitCondition &&
+                                                  employeesNotDeployed ==
+                                                      true)) {
                                             Get.defaultDialog(
                                               radius: 5,
                                               title: 'Alert',
@@ -1317,7 +1327,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                       .tbT_Done_Check ==
                                                   1) &&
                                               // employeesNotDeployed == true &&
-                                              anyEmployeeNotSelected == false) {
+                                              anyEmployeeNotSelected == false &&
+                                              employeesNotDeployed == false) {
                                             controller.startJobCard(
                                               jcCard:
                                                   controller.jobCardId.value,
