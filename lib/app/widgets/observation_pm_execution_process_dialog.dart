@@ -552,7 +552,9 @@ class ObservationPmExecutionViewDialog extends GetView {
 
                                                                                       num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
                                                                                       num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
-                                                                                      num maxAllowedQty = issuedQty - usedQty;
+                                                                                      num intiAllowedQty = usedQty - intialQty;
+
+                                                                                      num maxAllowedQty = issuedQty - intiAllowedQty;
                                                                                       if (txt.isNotEmpty) {
                                                                                         num enteredValue = num.tryParse(txt) ?? 0;
                                                                                         if (enteredValue > maxAllowedQty) {
