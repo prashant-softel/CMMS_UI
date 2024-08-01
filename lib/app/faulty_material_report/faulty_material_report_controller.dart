@@ -48,6 +48,7 @@ class FaultyMaterialReportController extends GetxController {
   RxString insetedFilterText = ''.obs;
   RxString quantityFilterText = ''.obs;
   RxString remarkFilterText = ''.obs;
+  RxString createdByNameFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Assets Name": true,
@@ -55,7 +56,8 @@ class FaultyMaterialReportController extends GetxController {
     // "Replace Serial No.": true,
     "Inseted DateTime": true,
     "quantity": true,
-    "Remark": true
+    "Remark": true,
+    "Created By": true
   });
   final Map<String, double> columnwidth = {
     "Assets Name": 300,
@@ -84,6 +86,7 @@ class FaultyMaterialReportController extends GetxController {
       "Inseted DateTime": insetedFilterText,
       "quantity": quantityFilterText,
       "Remark": remarkFilterText,
+      "Created By": createdByNameFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -161,7 +164,11 @@ class FaultyMaterialReportController extends GetxController {
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
-                false))
+                false) ||
+            (item?.createdByName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase())?? false))
         .toList();
     faultyMaterialReportList.value = filteredList;
   }
