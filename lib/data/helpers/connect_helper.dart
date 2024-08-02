@@ -1471,8 +1471,9 @@ class ConnectHelper {
     print('pmplanApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PmPlanMessageApproveDialog(
-        data: parsedJson['message'], id: parsedJson['id']),
+    Get.dialog<void>(
+        PmPlanMessageApproveDialog(
+            data: parsedJson['message'], id: parsedJson['id']),
         barrierDismissible: false);
 
     return responseModel;
@@ -3037,10 +3038,12 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(JobCardStartedDialog(
-      message: parsedJson['message'],
-      jobId: parsedJson['id'],
-    ));
+    Get.dialog<void>(
+        JobCardStartedDialog(
+          message: parsedJson['message'],
+          jobId: parsedJson['id'],
+        ),
+        barrierDismissible: false);
     return responseModel;
   }
 
@@ -4488,10 +4491,12 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(JobCardUpdatedDialog(
-      message: parsedJson['message'],
-      jobId: parsedJson['id'],
-    ));
+    Get.dialog<void>(
+        JobCardUpdatedDialog(
+          message: parsedJson['message'],
+          jobId: parsedJson['id'],
+        ),
+        barrierDismissible: false);
     return responseModel;
   }
 

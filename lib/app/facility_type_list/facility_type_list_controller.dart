@@ -115,9 +115,17 @@ class FacilityTypeListController extends GetxController {
   ScrollController nameScroll = ScrollController();
   //description
   var descriptionCtrlr = TextEditingController();
+  var latitudeCtrlr = TextEditingController();
+  var longitudeCtrlr = TextEditingController();
   FocusNode descFocus = FocusNode();
   ScrollController descScroll = ScrollController();
+  FocusNode latiFocus = FocusNode();
+  ScrollController latiScroll = ScrollController();
+  FocusNode longiFocus = FocusNode();
+  ScrollController longiScroll = ScrollController();
   Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> islatiInvalid = false.obs;
+  Rx<bool> islongiInvalid = false.obs;
 
   ///address
   var addressCtrlr = TextEditingController();
@@ -432,17 +440,17 @@ class FacilityTypeListController extends GetxController {
     String newValue = list.toString();
     print(" Selected Facility : ");
 //change for check
-   if (value != "Please Select") {
+    if (value != "Please Select") {
       int indexId = ownerList.indexWhere((x) => x?.name == newValue);
-    //  if (indexId > 0) {
-    ownerId = ownerList[indexId]?.id ?? 0;
-    //  }
-    selectedOwner.value = list;
-    isSelectedOwner.value = true;
-    print("index received is : $indexId & owner id  : $ownerId");
-   } else {
-     ownerId=0;
-   }
+      //  if (indexId > 0) {
+      ownerId = ownerList[indexId]?.id ?? 0;
+      //  }
+      selectedOwner.value = list;
+      isSelectedOwner.value = true;
+      print("index received is : $indexId & owner id  : $ownerId");
+    } else {
+      ownerId = 0;
+    }
   }
 
   dynamic onValueChangedCustomer(
@@ -453,14 +461,14 @@ class FacilityTypeListController extends GetxController {
 
     if (value != "Please Select") {
       int indexId = customerList.indexWhere((x) => x?.name == newValue);
-    // if (indexId > 0) {
-    customerId = customerList[indexId]?.id ?? 0;
-    // }
-    selectedCustomer.value = list;
-    isSelectedCustomer.value = true;
-    print("index received is : $indexId & customer id  : $customerId");
+      // if (indexId > 0) {
+      customerId = customerList[indexId]?.id ?? 0;
+      // }
+      selectedCustomer.value = list;
+      isSelectedCustomer.value = true;
+      print("index received is : $indexId & customer id  : $customerId");
     } else {
-      customerId=0;
+      customerId = 0;
     }
   }
 
@@ -472,15 +480,14 @@ class FacilityTypeListController extends GetxController {
 
     if (value != "Please Select") {
       int indexId = operatorList.indexWhere((x) => x?.name == newValue);
-    // if (indexId > 0) {
-    operatorId = operatorList[indexId]?.id ?? 0;
-    // }
-    selectedOperator.value = list;
-    isSelectedOperator.value = true;
-    print("index received is : $indexId & operator id  : $operatorId");
+      // if (indexId > 0) {
+      operatorId = operatorList[indexId]?.id ?? 0;
+      // }
+      selectedOperator.value = list;
+      isSelectedOperator.value = true;
+      print("index received is : $indexId & operator id  : $operatorId");
     } else {
-      operatorId=0;
-      
+      operatorId = 0;
     }
   }
 
@@ -491,15 +498,14 @@ class FacilityTypeListController extends GetxController {
 
     if (value != "Please Select") {
       int indexId = SpvList.indexWhere((x) => x?.name == newValue);
-    // if (indexId > 0) {
-    SpvId = SpvList[indexId]?.id ?? 0;
-    // }
-    selectedSpv.value = list;
-    isSelectedSpv.value = true;
-    print("index received is : $indexId & SPV id  : $SpvId");
+      // if (indexId > 0) {
+      SpvId = SpvList[indexId]?.id ?? 0;
+      // }
+      selectedSpv.value = list;
+      isSelectedSpv.value = true;
+      print("index received is : $indexId & SPV id  : $SpvId");
     } else {
-      SpvId=0;
-      
+      SpvId = 0;
     }
   }
 
@@ -554,6 +560,14 @@ class FacilityTypeListController extends GetxController {
       isDescriptionInvalid.value = true;
       isFormInvalid.value = true;
     }
+    if (latitudeCtrlr.text.trim() == '') {
+      islatiInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (longitudeCtrlr.text.trim() == '') {
+      islongiInvalid.value = true;
+      isFormInvalid.value = true;
+    }
     if (addressCtrlr.text.trim() == '') {
       isAddressInvalid.value = true;
       isFormInvalid.value = true;
@@ -569,9 +583,11 @@ class FacilityTypeListController extends GetxController {
     }
 
     print(
-        "title : ${titleCtrlr.text.trim()} , address: ${addressCtrlr.text.trim()} , zipcode : ${zipcodeCtrlr.text.trim()} , description : ${descriptionCtrlr.text.trim()}, countryid: $selectedCountry , stateId: $selectedState, cityId : $selectedCity, ownerId: $selectedOwner, customerId : $isSelectedCustomer, operatorId: $selectedOperator, spvId : $selectedSpv");
+        "title : ${titleCtrlr.text.trim()} , address: ${addressCtrlr.text.trim()} , zipcode : ${zipcodeCtrlr.text.trim()} , description : ${descriptionCtrlr.text.trim()},latitude:${latitudeCtrlr.text.trim()},longitude:${longitudeCtrlr.text.trim()} countryid: $selectedCountry , stateId: $selectedState, cityId : $selectedCity, ownerId: $selectedOwner, customerId : $isSelectedCustomer, operatorId: $selectedOperator, spvId : $selectedSpv");
     if (titleCtrlr.text.trim() == '' ||
         descriptionCtrlr.text.trim() == '' ||
+        latitudeCtrlr.text.trim() == '' ||
+        longitudeCtrlr.text.trim() == '' ||
         addressCtrlr.text.trim() == '' ||
         zipcodeCtrlr.text.trim() == '' ||
         selectedOwner == '' ||
@@ -591,6 +607,8 @@ class FacilityTypeListController extends GetxController {
       pin = (pin != "" ? zipcodeCtrlr.text.trim() : "0");
       int _zipcode = int.parse(pin);
       String _description = descriptionCtrlr.text.trim();
+      String _latitude = latitudeCtrlr.text.trim();
+      String _longitude = longitudeCtrlr.text.trim();
       CreateFacilityType createCheckpoint = CreateFacilityType(
         id: 0,
         name: _title,
@@ -605,8 +623,8 @@ class FacilityTypeListController extends GetxController {
         zipcode: _zipcode,
         description: _description,
         photoId: 0,
-        latitude: 0.0,
-        longitude: 0.0,
+        latitude: double.tryParse(_latitude) ?? 0.0,
+        longitude: double.tryParse(_longitude) ?? 0.0,
         timezone: "default_hardcoded",
       );
       print("OUT ");
@@ -632,6 +650,9 @@ class FacilityTypeListController extends GetxController {
     titleCtrlr.text = '';
     addressCtrlr.text = '';
     zipcodeCtrlr.text = '';
+    descriptionCtrlr.text = '';
+    latitudeCtrlr.text = '';
+    longitudeCtrlr.text = '';
     descriptionCtrlr.text = '';
     // selectedStateId = 0;
     // selectedCountryId = 0;

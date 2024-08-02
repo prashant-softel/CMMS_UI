@@ -324,6 +324,13 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                     )),
                                     DataColumn(
                                         label: Text(
+                                      "Available Qty.",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    DataColumn(
+                                        label: Text(
                                       "Requested Qty.",
                                       style: TextStyle(
                                           fontSize: 15,
@@ -331,7 +338,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                     )),
                                     DataColumn(
                                         label: Text(
-                                      "issued Qyt.",
+                                      "Issued Qty.",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
@@ -362,6 +369,12 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                                 .value!
                                                 .cmmrsItems![index]
                                                 .asset_type
+                                                .toString())),
+                                            DataCell(Text(controller
+                                                .mrsDetailsModel
+                                                .value!
+                                                .cmmrsItems![index]
+                                                .available_qty
                                                 .toString())),
                                             DataCell(Text(controller
                                                 .mrsDetailsModel

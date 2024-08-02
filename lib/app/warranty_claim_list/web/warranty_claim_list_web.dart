@@ -115,8 +115,11 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                         Spacer(),
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Date Range'),
-                                            Dimens.boxWidth10,
+                                            CustomRichText(
+                                              title: 'Date Range',
+                                              includeAsterisk: false,
+                                            ),
+                                            Dimens.boxWidth2,
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
                                                       .size
@@ -137,7 +140,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                           ],
                                         ),
                                         // Dimens.boxWidth10,
-                                        SizedBox(width:10),
+                                        SizedBox(width: 10),
                                         varUserAccessModel.value.access_list!
                                                     .where((e) =>
                                                         e.feature_id ==
@@ -154,7 +157,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                 onPressed: () {
                                                   // controller.clearStoreData();
                                                   Get.toNamed(Routes
-                                                      .newWarrantyClaimList);
+                                                      .createWarrantyClaimList);
                                                 },
                                                 color: ColorValues.addNewColor,
                                               )
@@ -232,7 +235,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                         width: 300,
                                         height: 40,
                                         // margin: Dimens.edgeInsets0_0_16_0,
-                                        margin: EdgeInsets.only(right:5),
+                                        margin: EdgeInsets.only(right: 5),
                                         child: TextField(
                                           style: GoogleFonts.lato(
                                             textStyle: TextStyle(

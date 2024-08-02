@@ -278,8 +278,8 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                                           .JobAssingedToFilterText,
                                                       200),
                                                   buildDataColumn(
-                                                      "Description",
-                                                      "Description",
+                                                      "Job Title",
+                                                      "Job Title",
                                                       // ColumnSize.L,
                                                       controller
                                                           .DescriptionFilterText,
