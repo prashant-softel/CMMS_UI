@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/job_card_details/views/widgets/tbt_done_dialog.dart';
@@ -501,17 +503,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                 : Dimens.box0,
                             // Dimens.boxHeight10,
                             SizedBox(height: 10),
-                            // controller.listMrsByTaskId!.value
-                            //                 .firstWhereOrNull(
-                            //                   (element) =>
-                            //                       element?.jobCardId != 0 ||
-                            //                       element?.pmId != 0,
-                            //                 )
-                            //                 ?.mrs_return_ID ==
-                            //             0 &&
-                            //         controller.allTrue.value == false &&
-                            //         controller.cmmrsItems!.isNotEmpty
-                            //     ?
+
                             Container(
                               margin: Dimens.edgeInsets20,
                               height: 300,
@@ -823,20 +815,32 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                                                             // maxLines: 1,
                                                                                             textController: TextEditingController(text: mapData["value"] ?? ''),
                                                                                             onChanged: (txt) {
-                                                                                              int intialQty = int.tryParse(mapData['value'] ?? "") ?? 0;
-
+                                                                                              int intialQty = int.tryParse(mapData['intialQty'] ?? "") ?? 0;
                                                                                               num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
-                                                                                              num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
-                                                                                              num maxAllowedQty = issuedQty - usedQty;
+                                                                                              // num assetsid = controller.dropdownMapperData[record[0]['value']]?.asset_item_ID ?? 0;
+                                                                                              // String sr = controller.dropdownMapperData[record[0]['value']]?.serial_number ?? "";
+
+                                                                                              // num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
+                                                                                              // num localUsedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
+                                                                                              // num intiAllowedQty = usedQty - intialQty;
+
+                                                                                              // num maxAllowedQty = issuedQty - intiAllowedQty;
+                                                                                              // num maxAllowedQty = issuedQty - intiAllowedQty;
+                                                                                              mapData["value"] = txt;
+
+                                                                                              var data = controller.rowItem.value.where((element) => element[0]['value'] == record[0]['value']);
+
+                                                                                              int totalconsumed = 0;
+                                                                                              data.forEach((element) {
+                                                                                                totalconsumed = (totalconsumed + (int.tryParse("${element[7]['value']}") ?? 0));
+                                                                                              });
+
                                                                                               if (txt.isNotEmpty) {
-                                                                                                num enteredValue = num.tryParse(txt) ?? 0;
-                                                                                                if (enteredValue > maxAllowedQty) {
-                                                                                                  // If the entered quantity exceeds the allowed maximum, truncate it
+                                                                                                if (totalconsumed > issuedQty) {
                                                                                                   setState(() {
                                                                                                     txt = intialQty.toString();
                                                                                                     mapData['value'] = intialQty.toString();
                                                                                                   });
-                                                                                                  // Optionally, you can show an error message or handle the situation
                                                                                                   Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
                                                                                                 }
                                                                                               } else if (txt.isEmpty) {
