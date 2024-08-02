@@ -280,119 +280,122 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   }
 
   void _updatedailog() {
-    Get.dialog(AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-      ),
-      insetPadding: Dimens.edgeInsets10_0_10_0,
-      contentPadding: EdgeInsets.zero,
-      title: Column(
-        children: [
-          Text(
-            'PM Task Started',
-            textAlign: TextAlign.center,
-            style: Styles.green700,
+    Get.dialog(
+        AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
           ),
-          Divider(
-            color: ColorValues.greyColor,
-          )
-        ],
-      ),
-      content: Builder(builder: (context) {
-        var height = Get.height;
+          insetPadding: Dimens.edgeInsets10_0_10_0,
+          contentPadding: EdgeInsets.zero,
+          title: Column(
+            children: [
+              Text(
+                'PM Task Started',
+                textAlign: TextAlign.center,
+                style: Styles.green700,
+              ),
+              Divider(
+                color: ColorValues.greyColor,
+              )
+            ],
+          ),
+          content: Builder(builder: (context) {
+            var height = Get.height;
 
-        return Container(
-          height: height / 6,
-          width: double.infinity,
-          child: Container(
-            margin: Dimens.edgeInsets20,
-            child: Column(
-              children: [
-                Text(startresponseMessage.value),
-                Dimens.boxHeight10,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+            return Container(
+              height: height / 6,
+              width: double.infinity,
+              child: Container(
+                margin: Dimens.edgeInsets20,
+                child: Column(
                   children: [
-                    // RichText(
-                    //   text: TextSpan(
-                    //       text: 'PM Execution Submitted with',
-                    //       style: Styles.blue700,
-                    //       children: <TextSpan>[
-                    //         TextSpan(text: ' \n     Code', style: Styles.blue700),
-                    //         TextSpan(
-                    //           text: '  2444',
-                    //           style: Styles.redBold15,
-                    //         ),
-                    //       ]),
-                    // ),
-                    // Dimens.boxHeight12,
-                    //  Text("PM Execution Submitted with code PMSC87456"),
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        text: "View Task",
-                        onPressed: () async {
-                          Get.back();
-                          try {
-                            await setScheduleId();
+                    Text(startresponseMessage.value),
+                    Dimens.boxHeight10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // RichText(
+                        //   text: TextSpan(
+                        //       text: 'PM Execution Submitted with',
+                        //       style: Styles.blue700,
+                        //       children: <TextSpan>[
+                        //         TextSpan(text: ' \n     Code', style: Styles.blue700),
+                        //         TextSpan(
+                        //           text: '  2444',
+                        //           style: Styles.redBold15,
+                        //         ),
+                        //       ]),
+                        // ),
+                        // Dimens.boxHeight12,
+                        //  Text("PM Execution Submitted with code PMSC87456"),
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            text: "View Task",
+                            onPressed: () async {
+                              Get.back();
+                              try {
+                                await setScheduleId();
 
-                            if (scheduleId != 0) {
-                              await getPmtaskViewList(
-                                  scheduleId: scheduleId.value,
-                                  isloading: true,
-                                  facilityId: facilityId);
-                              getHistory(facilityId);
-                              getMrsListByModuleTask(taskId: scheduleId.value);
-                              getReAssignedToList(facilityId);
-                            }
-                            // textControllers =
-                            //     List.generate(permitValuesCount, (_) => TextEditingController());
-                            // permitValues = RxList<String>.filled(permitValuesCount, '');
-                          } catch (e) {
-                            print(e);
-                          }
-                        },
-                        backgroundColor: ColorValues.appGreenColor,
-                        textColor: ColorValues.whiteColor,
-                      ),
-                    ),
-                    Dimens.boxWidth10,
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        text: "PM Task List",
-                        onPressed: () {
-                          Get.back();
+                                if (scheduleId != 0) {
+                                  await getPmtaskViewList(
+                                      scheduleId: scheduleId.value,
+                                      isloading: true,
+                                      facilityId: facilityId);
+                                  getHistory(facilityId);
+                                  getMrsListByModuleTask(
+                                      taskId: scheduleId.value);
+                                  getReAssignedToList(facilityId);
+                                }
+                                // textControllers =
+                                //     List.generate(permitValuesCount, (_) => TextEditingController());
+                                // permitValues = RxList<String>.filled(permitValuesCount, '');
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                            backgroundColor: ColorValues.appGreenColor,
+                            textColor: ColorValues.whiteColor,
+                          ),
+                        ),
+                        Dimens.boxWidth10,
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            text: "PM Task List",
+                            onPressed: () {
+                              Get.back();
 
-                          Get.offAndToNamed(Routes.pmTask);
-                        },
-                        backgroundColor: ColorValues.appDarkBlueColor,
-                        textColor: ColorValues.whiteColor,
-                      ),
-                    ),
-                    Dimens.boxWidth10,
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        text: "Execute",
-                        onPressed: () {
-                          Get.back();
+                              Get.offAndToNamed(Routes.pmTask);
+                            },
+                            backgroundColor: ColorValues.appDarkBlueColor,
+                            textColor: ColorValues.whiteColor,
+                          ),
+                        ),
+                        Dimens.boxWidth10,
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            text: "Execute",
+                            onPressed: () {
+                              Get.back();
 
-                          gotoexecution();
-                        },
-                        backgroundColor: ColorValues.appYellowColor,
-                        textColor: ColorValues.whiteColor,
-                      ),
+                              gotoexecution();
+                            },
+                            backgroundColor: ColorValues.appYellowColor,
+                            textColor: ColorValues.whiteColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
-        );
-      }),
-      actions: [],
-    ));
+              ),
+            );
+          }),
+          actions: [],
+        ),
+        barrierDismissible: false);
   }
 
   void onDropdownValueChanged(dynamic list, dynamic value) {
