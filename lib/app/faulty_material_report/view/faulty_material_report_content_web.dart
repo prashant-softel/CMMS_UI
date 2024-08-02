@@ -425,7 +425,11 @@ class FaultyStockReportListDataSource extends DataTableSource {
           (faulty?.remarks ?? '')
               .toString()
               .toLowerCase()
-              .contains(controller.remarkFilterText.value.toLowerCase());
+              .contains(controller.remarkFilterText.value.toLowerCase()) &&
+          (faulty?.createdByName ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.createdByNameFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
@@ -445,6 +449,7 @@ class FaultyStockReportListDataSource extends DataTableSource {
       '${faultyDetails?.lastInsetedDateTime ?? ''}',
       '${faultyDetails?.qty ?? ''}',
       '${faultyDetails?.remarks ?? ''}',
+      '${faultyDetails?.createdByName ?? ''}',
     ];
     var cells = [];
     int i = 0;

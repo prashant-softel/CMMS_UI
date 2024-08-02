@@ -34,6 +34,7 @@ class FaultyMaterialReportModel {
   int? asset_type_ID;
   int? item_category_ID;
   int? actorID;
+  String? createdByName;
 
   FaultyMaterialReportModel(
       {this.actorID,
@@ -62,7 +63,8 @@ class FaultyMaterialReportModel {
       this.replaceSerialNo,
       this.serial_number,
       this.toActorID,
-      this.toActorType});
+      this.toActorType,
+      this.createdByName});
 
   factory FaultyMaterialReportModel.fromJson(Map<String, dynamic> parsedJson) {
     return FaultyMaterialReportModel(
@@ -95,6 +97,7 @@ class FaultyMaterialReportModel {
       asset_Item_Status: parsedJson['asset_Item_Status'],
       assetItemID: parsedJson['assetItemID'],
       actorID: parsedJson['actorID'],
+      createdByName: parsedJson['createdByName'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -125,5 +128,6 @@ class FaultyMaterialReportModel {
         "asset_Item_Status": asset_Item_Status,
         "assetItemID": assetItemID,
         "actorID": actorID,
+        "createdByName": createdByName,
       };
 }
