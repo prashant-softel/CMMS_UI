@@ -84,6 +84,8 @@ class CmmrsItems {
   double? returned_qty;
   double? available_qty;
   double? used_qty;
+  double? draftUsedqty;
+
   double? issued_qty;
   String? approved_date;
   String? issued_date;
@@ -127,7 +129,8 @@ class CmmrsItems {
       this.materialID,
       this.serial_number,
       this.name,
-      this.transaction_id});
+      this.transaction_id,
+      this.draftUsedqty});
 
   factory CmmrsItems.fromJson(Map<String, dynamic> parsedJson) {
     return CmmrsItems(
@@ -159,6 +162,8 @@ class CmmrsItems {
             ? 0.0
             : parsedJson['available_qty'],
         used_qty: parsedJson["used_qty"] == null ? 0.0 : parsedJson['used_qty'],
+        draftUsedqty:
+            parsedJson["used_qty"] == null ? 0.0 : parsedJson['used_qty'],
         issued_qty:
             parsedJson["issued_qty"] == null ? 0.0 : parsedJson['issued_qty'],
         approved_date: parsedJson["approved_date"] == null

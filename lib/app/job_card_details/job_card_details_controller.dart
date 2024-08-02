@@ -169,7 +169,7 @@ class JobCardDetailsController extends GetxController {
       {'key': "Material_Type", "value": ''},
       {'key': "Issued_Qty", "value": ''},
       {'key': "Used_Qty", "value": ''},
-      {'key': "Consumed_Qty", "value": ''},
+      {'key': "Consumed_Qty", "value": '', "intialQty": ''},
       {'key': "Action ", "value": ''},
     ]);
   }
@@ -305,7 +305,11 @@ class JobCardDetailsController extends GetxController {
                       "value": cmmrsItem.issued_qty.toString()
                     },
                     {'key': "Used_Qty", "value": cmmrsItem.used_qty.toString()},
-                    {'key': "Consumed_Qty", "value": consumedQty},
+                    {
+                      'key': "Consumed_Qty",
+                      "value": consumedQty,
+                      "intialQty": consumedQty
+                    },
                     {'key': "Action ", "value": ''},
                   ]);
 
