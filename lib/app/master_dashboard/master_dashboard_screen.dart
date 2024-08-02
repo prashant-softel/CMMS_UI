@@ -254,7 +254,7 @@ class MastersDashboard extends GetView<MastersController> {
                                   //               onTap: () {
                                   //                 controller.goToToolTypeList();
                                   //               });
-                  
+
                                   //       // : Dimens.box0;
                                   //     }))),
                                   //     // OnHover(builder: (((isHovered) {
@@ -447,7 +447,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                   onTap: () {
                                                     controller
                                                         .clearStoreUserIdData();
-                  
+
                                                     controller.goToAddUser();
                                                   });
                                             })))
@@ -485,7 +485,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                   title: "Responsibility",
                                                   onTap: () {
                                                     // controller.clearStoreUserIdData();
-                  
+
                                                     controller
                                                         .goToResponsibility();
                                                   });
@@ -1129,18 +1129,12 @@ class MastersDashboard extends GetView<MastersController> {
                                                   .length >
                                               0
                                           ? _inventoryList(
-                                              tittle: "New Warranty Claim",
+                                              tittle: "Create Warranty Claim",
                                               ontap: () {
                                                 controller
-                                                    .newWarrantyClaimList();
+                                                    .createWarrantyClaimList();
                                               })
                                           : Dimens.box0,
-                                      _inventoryList(
-                                          tittle: "Create Warranty Claim",
-                                          ontap: () {
-                                            controller
-                                                .createWarrantyClaimList();
-                                          }),
                                       varUserAccessModel.value.access_list!
                                                   .where((e) =>
                                                       e.feature_id ==

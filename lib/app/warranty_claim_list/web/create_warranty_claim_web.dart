@@ -95,12 +95,12 @@ class CreateWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                       );
                                     },
                                     child: Text(
-                                      " / Warranty Claim List",
+                                      " / WARRANTY CLAIM LIST",
                                       style: Styles.greyLight14,
                                     ),
                                   ),
                                   Text(
-                                    " / Add Warranty Claim",
+                                    " / ADD WARRANTY CLAIM",
                                     style: Styles.greyLight14,
                                   ),
                                 ],
@@ -203,7 +203,7 @@ class CreateWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                       title:
                                                           'Warranty Brief Description: ',
                                                     ),
-                                                    Dimens.boxWidth10,
+                                                    Dimens.boxWidth2,
                                                     Container(
                                                       decoration: BoxDecoration(
                                                         boxShadow: [
@@ -327,7 +327,7 @@ class CreateWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                             .spaceBetween,
                                                     children: [
                                                       Text(
-                                                        "Select Affected Part ",
+                                                        "Upload Affected Part ",
                                                         style: Styles.blue700,
                                                       ),
                                                       Container(
@@ -896,6 +896,10 @@ class CreateWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                     textController:
                                                                         controller
                                                                             .costOfReplacementTextController,
+                                                                    inputFormatters: [
+                                                                      FilteringTextInputFormatter
+                                                                          .digitsOnly
+                                                                    ],
                                                                   ),
                                                                 ),
                                                               ],
@@ -1215,7 +1219,7 @@ class CreateWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                                                         ),
                                                                                                         Dimens.boxWidth15,
                                                                                                         Text(
-                                                                                                          'Email',
+                                                                                                          'Role',
                                                                                                           style: TextStyle(fontWeight: FontWeight.bold),
                                                                                                         ),
                                                                                                         Dimens.boxWidth15,
@@ -1672,50 +1676,50 @@ class CreateWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                 //     ],
                                                 //   ),
                                                 // ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 30),
-                                                  child: Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 20,
-                                                      ),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Select Approver: '),
-                                                      SizedBox(
-                                                        width: 15,
-                                                      ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            4.2,
-                                                        child: Obx(
-                                                          () =>
-                                                              DropdownWebWidget(
-                                                            dropdownList:
-                                                                controller
-                                                                    .employeeList,
-                                                            isValueSelected:
-                                                                controller
-                                                                    .isemployeeListSelected
-                                                                    .value,
-                                                            selectedValue:
-                                                                controller
-                                                                    .selectedEmployeeList
-                                                                    .value,
-                                                            onValueChanged:
-                                                                controller
-                                                                    .onValueChanged,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
+                                                // Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           top: 30),
+                                                //   child: Row(
+                                                //     children: [
+                                                //       SizedBox(
+                                                //         width: 20,
+                                                //       ),
+                                                //       CustomRichText(
+                                                //           title:
+                                                //               'Select Approver: '),
+                                                //       SizedBox(
+                                                //         width: 15,
+                                                //       ),
+                                                //       SizedBox(
+                                                //         width: MediaQuery.of(
+                                                //                     context)
+                                                //                 .size
+                                                //                 .width /
+                                                //             4.2,
+                                                //         child: Obx(
+                                                //           () =>
+                                                //               DropdownWebWidget(
+                                                //             dropdownList:
+                                                //                 controller
+                                                //                     .employeeList,
+                                                //             isValueSelected:
+                                                //                 controller
+                                                //                     .isemployeeListSelected
+                                                //                     .value,
+                                                //             selectedValue:
+                                                //                 controller
+                                                //                     .selectedEmployeeList
+                                                //                     .value,
+                                                //             onValueChanged:
+                                                //                 controller
+                                                //                     .onValueChanged,
+                                                //           ),
+                                                //         ),
+                                                //       ),
+                                                //     ],
+                                                //   ),
+                                                // ),
                                                 Dimens.boxHeight40,
                                               ],
                                             ),
