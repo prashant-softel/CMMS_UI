@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:cmms/domain/models/employee_model.dart';
+
 List<JobCardDetailsModel> jobCardDetailsModelFromJson(String str) =>
     List<JobCardDetailsModel>.from(
         json.decode(str).map((x) => JobCardDetailsModel.fromJson(x)));
@@ -61,7 +63,7 @@ class JobCardDetailsModel {
   List<LstPermitDetailList>? lstPermitDetailList;
   List<LstCmjcIsolatedDetailList>? lstCmjcIsolatedDetailList;
   List<dynamic>? lstCmjcLotoDetailList;
-  List<SelectedEmployee>? lstCmjcEmpList;
+  List<EmployeeModel>? lstCmjcEmpList;
   List<FilesModel?>? fileList;
   List<FilesModel?>? fileListJc;
   List<ToolList>? toolList;
@@ -91,7 +93,8 @@ class JobCardDetailsModel {
         status_short: json["status_short"],
         created_by: json["created_by"],
         jC_Approved: json["jC_Approved"],
-        lstCmjcJobDetailList: List<LstCmjcJobDetailList>.from(
+        lstCmjcJobDetailList: 
+        List<LstCmjcJobDetailList>.from(
             json["lstCMJCJobDetailList"]
                 .map((x) => LstCmjcJobDetailList.fromJson(x))),
         lstPermitDetailList: List<LstPermitDetailList>.from(
@@ -102,16 +105,16 @@ class JobCardDetailsModel {
                 .map((x) => LstCmjcIsolatedDetailList.fromJson(x))),
         lstCmjcLotoDetailList:
             List<dynamic>.from(json["lstCMJCLotoDetailList"].map((x) => x)),
-        lstCmjcEmpList: List<SelectedEmployee>.from(
-            json["lstCMJCEmpList"].map((x) => SelectedEmployee.fromJson(x))),
+        lstCmjcEmpList: List<EmployeeModel>.from(
+            json["lstCMJCEmpList"].map((x) => EmployeeModel.fromJson(x))),
         fileList: List<FilesModel>.from(
             json["file_list"].map((x) => FilesModel.fromJson(x))),
         fileListJc: List<FilesModel>.from(
             json["file_listJc"].map((x) => FilesModel.fromJson(x))),
         toolList: List<ToolList>.from(
             json["tool_List"].map((x) => ToolList.fromJson(x))),
-        assetcatlist: List<AssetCategories>.from(
-            json["asset_category_name"].map((x) => AssetCategories.fromJson(x))),
+        assetcatlist: List<AssetCategories>.from(json["asset_category_name"]
+            .map((x) => AssetCategories.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -337,25 +340,25 @@ class UploadFiles {
       };
 }
 
-class SelectedEmployee {
-  int? id;
-  String? name;
-  String? responsibility;
+// class SelectedEmployee {
+//   int? id;
+//   String? name;
+//   String? responsibility;
 
-  SelectedEmployee({this.id, this.name, this.responsibility});
+//   SelectedEmployee({this.id, this.name, this.responsibility});
 
-  factory SelectedEmployee.fromJson(Map<String, dynamic> json) =>
-      SelectedEmployee(
-        id: json["id"],
-        name: json["name"],
-        responsibility: json["responsibility"],
-      );
+//   factory SelectedEmployee.fromJson(Map<String, dynamic> json) =>
+//       SelectedEmployee(
+//         id: json["id"],
+//         name: json["name"],
+//         responsibility: json["responsibility"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "responsibility": responsibility,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "responsibility": responsibility,
+//       };
+// }
 
 class AssetCategories {
   String? name;

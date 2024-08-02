@@ -53,8 +53,8 @@ class JobCardDetailsController extends GetxController {
   RxList<int> selectedEmployeeIdList = <int>[].obs;
   RxList<String> responsibilityList = <String>[].obs;
 
-  RxList<SelectedEmployee> employee = <SelectedEmployee>[].obs;
-  SelectedEmployee selectedEmployees = SelectedEmployee();
+  RxList<EmployeeModel> employee = <EmployeeModel>[].obs;
+  EmployeeModel selectedEmployees = EmployeeModel();
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   int selectedEmployeeId = 0;
@@ -189,38 +189,38 @@ class JobCardDetailsController extends GetxController {
         }
       });
       if (jobCardId.value != 0) {
+        getEmployeeList();
+
         jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
               jobCardId: jobCardId.value,
               isLoading: true,
             ) ??
             [];
         getHistory(facilityId);
-        jobCardDetailsModel.value =
-            jobCardList.value.firstWhere((element) => element?.id != null);
+        jobCardDetailsModel.value = jobCardList.value[0];
         jobId.value = jobCardDetailsModel.value?.jobId;
         createPlantDetailsTableData();
         createJobDetailsTableData();
         createPermitDetailsTableData();
         if (jobCardDetailsModel != null) {
-          getEmployeeList();
           jobCardDetailsModel.value?.lstCmjcEmpList?.forEach((element) {
             employeesDeployed.value.add([
               {
                 "key": "Employee Name",
                 "value": "${element.name}",
-                "empId": "${element.id}",
+                // "empId": "${element.id}",
               },
               {
                 "key": "Responsibility",
-                "value": "${element.responsibility}",
+                "value": "",
               },
               {
                 "key": "Action",
                 "value": "",
               }
             ]);
-            deployedEmployeeMapperData[element.name ?? ""] = employeeList
-                .firstWhere((e) => e!.name == element.name, orElse: null);
+            // deployedEmployeeMapperData[element.name ?? ""] = employeeList
+            //     .firstWhere((e) => e!.id == element.id, orElse: () => null);
           });
         }
       }
@@ -245,92 +245,97 @@ class JobCardDetailsController extends GetxController {
           false,
         ) ??
         [];
+    if (listMrsByTaskId?.value.length != 0) {
+      var _assetsList = listMrsByTaskId!.last!.cmmrsItems ?? [];
+      for (var asset in _assetsList!) {
+        cmmrsItems!.add(asset);
+      }
 
-    // Populating cmmrsItems
-    var _assetsList = listMrsByTaskId!.last!.cmmrsItems;
-    for (var asset in _assetsList!) {
-      cmmrsItems!.add(asset);
-    }
+      // Populating materialUsedAssets
+      var _usedassetsList =
+          listMrsByTaskId!.value.last!.material_used_by_assets!;
+      for (var usedasset in _usedassetsList) {
+        materialUsedAssets!.add(usedasset);
+      }
+      if (materialUsedAssets!.value.length == 0) {
+        addRowItem();
+      }
 
-    // Populating materialUsedAssets
-    var _usedassetsList = listMrsByTaskId!.value.last!.material_used_by_assets!;
-    for (var usedasset in _usedassetsList) {
-      materialUsedAssets!.add(usedasset);
-    }
-    if (materialUsedAssets!.value.length == 0) {
-      addRowItem();
-    }
+      // Ensure workingAreaList is populated and not null
+      if (workingAreaList != null && workingAreaList!.isNotEmpty) {
+        Set<String> seenEntries = {}; // Set to keep track of unique entries
 
-    // Ensure workingAreaList is populated and not null
-    if (workingAreaList != null && workingAreaList!.isNotEmpty) {
-      Set<String> seenEntries = {}; // Set to keep track of unique entries
+        for (var workingArea in workingAreaList!) {
+          if (workingArea != null) {
+            var matchedUsedAssets = materialUsedAssets!
+                .where(
+                    (usedAsset) => usedAsset!.asset_id == workingArea.asset_id)
+                .toList();
 
-      for (var workingArea in workingAreaList!) {
-        if (workingArea != null) {
-          var matchedUsedAssets = materialUsedAssets!
-              .where((usedAsset) => usedAsset!.asset_id == workingArea.asset_id)
-              .toList();
+            for (var matchedUsedAsset in matchedUsedAssets) {
+              for (var item in matchedUsedAsset!.items!) {
+                var consumedQty = '';
+                var dropDownEqValue = matchedUsedAsset.name ?? '';
 
-          for (var matchedUsedAsset in matchedUsedAssets) {
-            for (var item in matchedUsedAsset!.items!) {
-              var consumedQty = '';
-              var dropDownEqValue = matchedUsedAsset.name ?? '';
+                var cmmrsItem = cmmrsItems!.firstWhere(
+                    (e) => e!.id == item.mrs_Item_Id,
+                    orElse: () => null);
 
-              var cmmrsItem = cmmrsItems!.firstWhere(
-                  (e) => e!.id == item.mrs_Item_Id,
-                  orElse: () => null);
+                if (cmmrsItem != null) {
+                  consumedQty = item.used_qty.toString();
 
-              if (cmmrsItem != null) {
-                consumedQty = item.used_qty.toString();
+                  // Define unique criteria
+                  String entryKey =
+                      '${cmmrsItem.name}-${dropDownEqValue}-${cmmrsItem.serial_number}';
 
-                // Define unique criteria
-                String entryKey =
-                    '${cmmrsItem.name}-${dropDownEqValue}-${cmmrsItem.serial_number}';
+                  // Only add if this entry is not already seen
+                  if (!seenEntries.contains(entryKey)) {
+                    seenEntries.add(entryKey);
 
-                // Only add if this entry is not already seen
-                if (!seenEntries.contains(entryKey)) {
-                  seenEntries.add(entryKey);
+                    rowItem.add([
+                      {"key": "Drop_down", "value": '${cmmrsItem.name}'},
+                      {"key": "Drop_down_eq", "value": dropDownEqValue},
+                      {'key': "Sr_No", "value": cmmrsItem.serial_number ?? ''},
+                      {'key': "code", "value": cmmrsItem.asset_MDM_code ?? ''},
+                      {
+                        'key': "Material_Type",
+                        "value": cmmrsItem.asset_type ?? ''
+                      },
+                      {
+                        'key': "Issued_Qty",
+                        "value": cmmrsItem.issued_qty.toString()
+                      },
+                      {
+                        'key': "Used_Qty",
+                        "value": cmmrsItem.used_qty.toString()
+                      },
+                      {
+                        'key': "Consumed_Qty",
+                        "value": consumedQty,
+                        "intialQty": consumedQty
+                      },
+                      {'key': "Action ", "value": ''},
+                    ]);
 
-                  rowItem.add([
-                    {"key": "Drop_down", "value": '${cmmrsItem.name}'},
-                    {"key": "Drop_down_eq", "value": dropDownEqValue},
-                    {'key': "Sr_No", "value": cmmrsItem.serial_number ?? ''},
-                    {'key': "code", "value": cmmrsItem.asset_MDM_code ?? ''},
-                    {
-                      'key': "Material_Type",
-                      "value": cmmrsItem.asset_type ?? ''
-                    },
-                    {
-                      'key': "Issued_Qty",
-                      "value": cmmrsItem.issued_qty.toString()
-                    },
-                    {'key': "Used_Qty", "value": cmmrsItem.used_qty.toString()},
-                    {
-                      'key': "Consumed_Qty",
-                      "value": consumedQty,
-                      "intialQty": consumedQty
-                    },
-                    {'key': "Action ", "value": ''},
-                  ]);
-
-                  dropdownMapperData[cmmrsItem.name ?? ""] = cmmrsItem;
-                  dropdownMapperDataworkingArea[dropDownEqValue] =
-                      workingAreaList!.firstWhere(
-                    (e) => e.name == dropDownEqValue,
-                    orElse: () => null!,
-                  );
+                    dropdownMapperData[cmmrsItem.name ?? ""] = cmmrsItem;
+                    dropdownMapperDataworkingArea[dropDownEqValue] =
+                        workingAreaList!.firstWhere(
+                      (e) => e.name == dropDownEqValue,
+                      orElse: () => null!,
+                    );
+                  }
                 }
               }
             }
           }
         }
+        // Debugging: Print row items
+        print('Row items: $rowItem');
       }
-      // Debugging: Print row items
-      print('Row items: $rowItem');
+      _processJsonData();
+      allTrue.value = itemExistsWithZeroDifference.every((element) => element);
     }
-
-    _processJsonData();
-    allTrue.value = itemExistsWithZeroDifference.every((element) => element);
+    // Populating cmmrsItems
   }
 
   void _processJsonData() {
@@ -568,13 +573,13 @@ class JobCardDetailsController extends GetxController {
         });
       }
 
-      List<SelectedEmployee> employees = [];
+      List<EmployeeModel> employees = [];
       employeesDeployed.forEach((element) {
-        SelectedEmployee item = SelectedEmployee(
+        EmployeeModel item = EmployeeModel(
           id: int.parse(
               deployedEmployeeMapperData[element[0]["value"]]?.id.toString() ??
                   '0'),
-          responsibility: element[1]["value"] ?? '0',
+          designation: element[1]["value"] ?? '0',
         );
         employees.add(item);
       });
@@ -653,11 +658,11 @@ class JobCardDetailsController extends GetxController {
       {required int jcCard, List<dynamic>? fileIds}) async {
     await startStopJobCard();
 
-    List<SelectedEmployee> employees = [];
+    List<EmployeeModel> employees = [];
     employeesDeployed.forEach((element) {
-      SelectedEmployee item = SelectedEmployee(
+      EmployeeModel item = EmployeeModel(
         id: deployedEmployeeMapperData[element[0]["value"]]?.id,
-        responsibility: element[1]["value"] ?? '0',
+        designation: element[1]["value"] ?? '0',
       );
       employees.add(item);
     });
@@ -789,11 +794,11 @@ class JobCardDetailsController extends GetxController {
       lotoId = lotoAsset.lotoId ?? 0;
     }
 
-    List<SelectedEmployee> employees = [];
+    List<EmployeeModel> employees = [];
     employeesDeployed.forEach((element) {
-      SelectedEmployee item = SelectedEmployee(
+      EmployeeModel item = EmployeeModel(
         id: deployedEmployeeMapperData[element[0]["value"]]?.id,
-        responsibility: element[1]["value"] ?? '0',
+        designation: element[1]["value"] ?? '0',
       );
       employees.add(item);
     });
@@ -1004,9 +1009,9 @@ class JobCardDetailsController extends GetxController {
       ],
     );
 
-    selectedEmployees = SelectedEmployee(
+    selectedEmployees = EmployeeModel(
       id: selectedEmployeeId,
-      responsibility: responsibility,
+      designation: responsibility,
     );
     employee.add(selectedEmployees);
     employeeTableRows.add(newRow);
