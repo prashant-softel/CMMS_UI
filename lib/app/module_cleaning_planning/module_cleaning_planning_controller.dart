@@ -40,6 +40,7 @@ class ModuleCleaningPlanningController extends GetxController {
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<String> selectedAssignedTo = ''.obs;
   RxInt selectedAssignedToId = 0.obs;
+
   bool openStartDatePicker = false;
   var startDateTc = TextEditingController();
   Rx<bool> isFormInvalid = false.obs;
@@ -243,7 +244,8 @@ class ModuleCleaningPlanningController extends GetxController {
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         title: _mcTitelCtrlr,
         assignedToId: selectedAssignedToId.value,
-        schedules: sch ?? []);
+        schedules: sch ?? [],
+        cleaningType: selectedCleaningId);
 
     var updateMcModelJsonString = [createMcModel.toJson()];
     Map<String, dynamic>? responseCreateMcModel =
@@ -266,7 +268,12 @@ class ModuleCleaningPlanningController extends GetxController {
       mcPlanDetailsModel.value = _mcPlanDetails;
       mcTitelCtrlr.text = mcPlanDetailsModel.value?.title ?? "";
       selectedfrequency.value = mcPlanDetailsModel.value?.frequency ?? '';
+      selectedCleaningType.value =
+          mcPlanDetailsModel.value?.cleaningTypeName ?? '';
+
       selectedAssignedToId.value = mcPlanDetailsModel.value?.assignedToId ?? 0;
+      selectedCleaningId = mcPlanDetailsModel.value?.cleaningType ?? 0;
+
       selectedAssignedTo.value = mcPlanDetailsModel.value?.assignedTo ?? '';
 
       startDateTc.text = mcPlanDetailsModel.value?.startDate ?? '';
