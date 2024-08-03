@@ -267,7 +267,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       Spacer(),
                                       Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Row(
                                             mainAxisAlignment:
