@@ -259,7 +259,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                     // Dimens.boxWidth2,
                                                     SizedBox(width: 2),
                                                     Container(
-                                                      width: Get.width * 0.3,
+                                                      width: Get.width * 0.2,
                                                       child: Text(
                                                           "${controller.jobDetailsModel.value?.equipmentCatList != null ? controller.jobDetailsModel.value?.equipmentCatList?.map<String>((item) => item.equipmentCatName.toString()).toList() : []}",
                                                           style: Styles.blue14,
