@@ -126,7 +126,7 @@ class JobCardDetailsController extends GetxController {
         "value": "Please Select",
       },
       {
-        "key": "Responsibility",
+        "key": "Designation",
         "value": "",
       },
       {
@@ -185,12 +185,11 @@ class JobCardDetailsController extends GetxController {
         facilityId = event;
         if (facilityId > 0) {
           isFacilitySelected.value = true;
-          // await getEmployeeList();
+          await getEmployeeList();
         }
       });
-      if (jobCardId.value != 0) {
-        getEmployeeList();
 
+      if (jobCardId.value != 0) {
         jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
               jobCardId: jobCardId.value,
               isLoading: true,
@@ -202,25 +201,24 @@ class JobCardDetailsController extends GetxController {
         createPlantDetailsTableData();
         createJobDetailsTableData();
         createPermitDetailsTableData();
+
         if (jobCardDetailsModel != null) {
           jobCardDetailsModel.value?.lstCmjcEmpList?.forEach((element) {
             employeesDeployed.value.add([
               {
                 "key": "Employee Name",
                 "value": "${element.name}",
-                // "empId": "${element.id}",
               },
               {
-                "key": "Responsibility",
-                "value": "",
+                "key": "Designation",
+                "value": "${element.designation ?? "No Designation"}",
               },
               {
                 "key": "Action",
                 "value": "",
               }
             ]);
-            // deployedEmployeeMapperData[element.name ?? ""] = employeeList
-            //     .firstWhere((e) => e!.id == element.id, orElse: () => null);
+            deployedEmployeeMapperData[element.name ?? ""] = element;
           });
         }
       }
