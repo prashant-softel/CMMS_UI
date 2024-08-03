@@ -6368,7 +6368,7 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: " paln  Add Successfully...", fontSize: 16.0);
-        Get.offNamed(
+        Get.offAllNamed(
           Routes.moduleCleaningListPlan,
         );
 

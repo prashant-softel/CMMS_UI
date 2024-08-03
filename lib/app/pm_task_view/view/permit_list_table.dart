@@ -16,12 +16,7 @@ class SchedulePermitListTableDialog
   Widget build(BuildContext context) {
     ///
     final fieldNames = [
-      'Permit Site No.',
-      'Permit ID',
-      'Permit Type',
-      'Requested By',
-      'Permit Status',
-      'Request Date',
+      
     ];
 
     ///

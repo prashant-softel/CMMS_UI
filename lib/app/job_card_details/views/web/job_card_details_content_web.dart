@@ -2051,7 +2051,7 @@ class DeployedTeam extends StatelessWidget {
                     "Team Deployed To Carry Out The Job",
                     style: Styles.blue700,
                   ),
-                  controller.jobCardDetailsModel.value!.status == 158 &&
+                  controller.jobCardDetailsModel.value!.status == 158 ||
                           controller.jobCardDetailsModel.value!.status == 156
                       ? Dimens.box0
                       : InkWell(
@@ -2129,16 +2129,11 @@ class DeployedTeam extends StatelessWidget {
                                                     .size
                                                     .width /
                                                 4,
-                                            // controller: controller,
                                             dropdownList:
                                                 controller.employeeList,
                                             selectedValue: mapData["value"],
                                             onValueChanged:
                                                 (list, selectedValue) {
-                                              // if (selectedValue != null) {
-                                              //   controller.updateSelectedOption(
-                                              //       selectedValue);
-                                              // }
                                               mapData["value"] = selectedValue;
                                               controller.deployedEmployeeMapperData[
                                                       selectedValue] =
@@ -2153,7 +2148,7 @@ class DeployedTeam extends StatelessWidget {
                                       ],
                                     ),
                                   )
-                                : (mapData['key'] == "Responsibility")
+                                : (mapData['key'] == "Designation")
                                     ? Padding(
                                         padding: EdgeInsets.only(top: 10),
                                         child: Column(
