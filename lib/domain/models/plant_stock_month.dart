@@ -10,7 +10,7 @@ class PlantStockMonth {
   dynamic facilityName;
   dynamic facilityID;
   dynamic opening;
-  List<PlantDetail> details;
+  List<PlantDetail>? details;
 
   PlantStockMonth({
     this.facilityName,
@@ -24,8 +24,10 @@ class PlantStockMonth {
       facilityName: json['facilityName'],
       facilityID: json['facilityID'],
       opening: json['opening'],
-      details: List<PlantDetail>.from(
-          json['details'].map((x) => PlantDetail.fromJson(x))),
+      details: json['details'] == null
+          ? null
+          : List<PlantDetail>.from(
+              json['details'].map((x) => PlantDetail.fromJson(x))),
     );
   }
 
@@ -34,7 +36,7 @@ class PlantStockMonth {
       'facilityName': facilityName,
       'facilityID': facilityID,
       'opening': opening,
-      'details': List<dynamic>.from(details.map((x) => x.toJson())),
+      'details': List<dynamic>.from(details!.map((x) => x.toJson())),
     };
   }
 }
@@ -55,11 +57,11 @@ class PlantDetail {
   dynamic referenceBy;
   dynamic referenceName;
   dynamic remarks;
-   String? lastUpdated;
+  String? lastUpdated;
   dynamic createdBy;
   String? createdAt;
-  String?toActorType1;
-  String?fromActorType1;
+  String? toActorType1;
+  String? fromActorType1;
 
   PlantDetail({
     this.fromActorID,
@@ -82,30 +84,29 @@ class PlantDetail {
     this.createdAt,
     this.toActorType1,
     this.fromActorType1,
-
   });
 
   factory PlantDetail.fromJson(Map<String, dynamic> json) {
     return PlantDetail(
       fromActorID: json['fromActorID'],
-      fromActorType: "${json['fromActorType']}-${json['fromActorName']}",
-      fromActorType1:json['fromActorType'],
+      fromActorType:
+          "${json['fromActorID']}${json['fromActorType']}-${json['fromActorName']}",
+      fromActorType1: json['fromActorType'],
       fromActorName: json['fromActorName'],
       toActorID: json['toActorID'],
       toActorType: "${json['toActorType']}-${json['toActorName']}",
       toActorType1: json['toActorType'],
-
       toActorName: json['toActorName'],
       assetItemID: json['assetItemID'],
-      assetItemName: json['assetItemName']??"",
+      assetItemName: json['assetItemName'] ?? "",
       assetType: json['asset_type'],
-      qty: json['qty']?.toString(),
+      qty: json['qty'],
       mrsID: json['mrsID'],
       referenceID: json['referenceID'],
       referenceBy: json['referenceBy'],
       referenceName: json['referenceName'],
       remarks: json['remarks'],
-     lastUpdated: "${json['createdBy']}-${json['lastUpdated']}",
+      lastUpdated: "${json['createdBy']}-${json['lastUpdated']}",
       createdBy: json['createdBy'],
       createdAt: json['createdAt'],
     );
