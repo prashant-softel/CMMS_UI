@@ -10,6 +10,7 @@ class MrsListModel {
   dynamic id;
   dynamic requested_by_emp_ID;
   dynamic approver_name;
+  dynamic issued_name;
   String? requestd_date;
   dynamic returnDate;
   String? approval_date;
@@ -32,6 +33,7 @@ class MrsListModel {
       this.approval_date,
       this.approval_status,
       this.approver_name,
+      this.issued_name,
       this.cmmrsItems,
       this.id,
       this.requestd_date,
@@ -57,6 +59,7 @@ class MrsListModel {
       approval_date: parsedJson['approval_date'],
       approval_status: parsedJson['approval_status'],
       approver_name: parsedJson['approver_name'],
+      issued_name: parsedJson['issued_name'],
       id: parsedJson['id'],
       requestd_date: parsedJson['requestd_date'],
       requested_by_emp_ID: parsedJson['requested_by_emp_ID'],
@@ -77,6 +80,7 @@ class MrsListModel {
         "approval_date": approval_date,
         "approval_status": approval_status,
         "approver_name": approver_name,
+        "issued_name": issued_name,
         "id": id,
         "requestd_date": requestd_date,
         "requested_by_emp_ID": requested_by_emp_ID,
