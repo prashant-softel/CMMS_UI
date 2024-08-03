@@ -145,6 +145,7 @@ class _PlantStockReportDetailsWebState
                                       itemBuilder: (context, index) {
                                         final item = controller
                                             .plantStockReportByMonthList[index];
+
                                         return Container(
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
@@ -184,89 +185,124 @@ class _PlantStockReportDetailsWebState
                                                 color:
                                                     ColorValues.greyLightColour,
                                               ),
-                                              Expanded(
-                                                child: DataTable2(
-                                                  minWidth: 2000,
-                                                  columns: [
-                                                    DataColumn2(
-                                                      // size: ColumnSize.M,
-                                                      fixedWidth: 200,
-                                                      label: Text(
-                                                        "From Actor",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      // size: ColumnSize.M,
-                                                      fixedWidth: 200,
-                                                      label: Text(
-                                                        "To Actor",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      // size: ColumnSize.S,
-                                                      fixedWidth: 200,
-                                                      label: Text(
-                                                        "Inward",
-                                                        style: Styles.green17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      // size: ColumnSize.S,
-                                                      fixedWidth: 200,
-                                                      label: Text(
-                                                        "Outward",
-                                                        style: Styles.red17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      // size: ColumnSize.S,
-                                                      fixedWidth: 200,
-                                                      label: Text(
-                                                        "Closing Balance",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      // size: ColumnSize.S,
-                                                      fixedWidth: 130,
-                                                      label: Text(
-                                                        "Internal",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      // size: ColumnSize.S,
-                                                      fixedWidth: 220,
-                                                      label: Text(
-                                                        "Internal Balance",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      // size: ColumnSize.S,
-                                                      fixedWidth: 250,
-                                                      label: Text(
-                                                        "Available Qty For MRS",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      // size: ColumnSize.M,
-                                                      fixedWidth: 200,
-                                                      label: Text(
-                                                        "Last Update By",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                  rows: _buildTableRows(
-                                                    item,
-                                                    item?.details,
-                                                  ),
-                                                ),
-                                              ),
+                                              controller.plantDetailList
+                                                              .isEmpty ==
+                                                          true &&
+                                                      controller.isLoading ==
+                                                          false
+                                                  ? Center(
+                                                      child: Text('No data'))
+                                                  : controller.isLoading
+                                                              .value ==
+                                                          true
+                                                      ? Center(
+                                                          child: Text(
+                                                              "Data Loading......"))
+                                                      : Expanded(
+                                                          child: DataTable2(
+                                                            headingRowHeight:
+                                                                70,
+                                                            minWidth: 1450,
+                                                            columnSpacing: 5,
+                                                            columns: [
+                                                              DataColumn2(
+                                                                // size: ColumnSize.M,
+                                                                fixedWidth: 200,
+                                                                label: Text(
+                                                                  "From Actor",
+                                                                  style: Styles
+                                                                      .blue17,
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // size: ColumnSize.M,
+                                                                fixedWidth: 200,
+                                                                label: Text(
+                                                                  "To Actor",
+                                                                  style: Styles
+                                                                      .blue17,
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // size: ColumnSize.S,
+                                                                fixedWidth: 80,
+                                                                label: Text(
+                                                                  "MRSID",
+                                                                  style: Styles
+                                                                      .blue17,
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // size: ColumnSize.S,
+                                                                fixedWidth: 90,
+                                                                label: Text(
+                                                                  "Inward",
+                                                                  style: Styles
+                                                                      .green17,
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // size: ColumnSize.S,
+                                                                fixedWidth: 100,
+                                                                label: Text(
+                                                                  "Outward",
+                                                                  style: Styles
+                                                                      .red17,
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // size: ColumnSize.S,
+                                                                fixedWidth: 110,
+                                                                label: Text(
+                                                                  "Closing \n Balance",
+                                                                  style: Styles
+                                                                      .blue17,
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // size: ColumnSize.S,
+                                                                fixedWidth: 85,
+                                                                label: Text(
+                                                                  "Issued",
+                                                                  style: Styles
+                                                                      .blue17,
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // size: ColumnSize.S,
+                                                                fixedWidth: 110,
+                                                                label: Text(
+                                                                  "Issued \n Balance",
+                                                                  style: Styles
+                                                                      .blue17,
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // size: ColumnSize.S,
+                                                                fixedWidth: 150,
+                                                                label: Text(
+                                                                  "Available Qty",
+                                                                  style: Styles
+                                                                      .blue17,
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // size: ColumnSize.M,
+                                                                fixedWidth: 210,
+                                                                label: Text(
+                                                                  "Last Update By",
+                                                                  style: Styles
+                                                                      .blue17,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                            rows:
+                                                                _buildTableRows(
+                                                              item,
+                                                              item?.details,
+                                                            ),
+                                                          ),
+                                                        ),
                                               Dimens.boxHeight20,
                                             ],
                                           ),
@@ -328,22 +364,31 @@ class _PlantStockReportDetailsWebState
   List<DataRow> _buildTableRows(
       PlantStockMonth? item, List<PlantDetail>? plantdetails) {
     double opening = item?.opening ?? 0;
+    // double Quantity= plantdetails?[0].qty ?? 0;
     double totalQuantity = 0;
     double internaltotoal = 0;
-    double avialableqty=0;
-  
+    double avialableqty = 0;
+    double issuedbalance = 00.0;
+
     double total = opening;
-    List<int> isinward = List<int>.filled(plantdetails?.length ?? 0, 0);
-    List<int> isoutward = List<int>.filled(plantdetails?.length ?? 0, 0);
-    List<int> isinternal = List<int>.filled(plantdetails?.length ?? 0, 0);
+    List<String> isinward = List<String>.filled(plantdetails?.length ?? 0, '');
+    List<String> isoutward = List<String>.filled(plantdetails?.length ?? 0, '');
+    List<String> isinternal = List<String>.filled(plantdetails?.length ?? 0, '');
 
     List<DataRow> rows = [];
-
+    // if (plantdetails != null) {
+    //   for (int i = 0; i < plantdetails.length; i++) {
+    //     isinternal[i] = plantdetails[i].qty;
+    //     isinward[i] = plantdetails[i].qty;
+    //     isoutward[i] = plantdetails[i].qty;
+    //   }
+    // }
     rows.add(
       DataRow(
         cells: [
           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('Opening Balance', style: Styles.green700)),
+          DataCell(Text('', style: Styles.black14)),
           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('${opening}', style: Styles.black14)),
@@ -356,30 +401,33 @@ class _PlantStockReportDetailsWebState
     );
 
     if (plantdetails != null) {
+      // issuedbalance=plantdetails[0].qty;
       for (int i = 0; i < plantdetails.length; i++) {
-        double qty = double.tryParse(plantdetails[i].qty ?? '') ?? 0.0;
+        if (plantdetails[i].fromActorType1 == 'Vendor' &&
+            plantdetails[i].toActorType1 == 'Store') {
+          isinward[i] = plantdetails[i].qty.toString();
+          total=total+plantdetails[i].qty;
+         
+        } else if (plantdetails[i].fromActorType1 == 'Store' &&
+                plantdetails[i].toActorType1 == 'Task' ||
+            plantdetails[i].toActorType1 == 'JobCard') {
+          isinternal[i] = plantdetails[i].qty.toString();
+           internaltotoal=internaltotoal+plantdetails[i].qty ;
 
-        totalQuantity += qty;
-
-        if (plantdetails[i].fromActorType1 == 'Vendor' && plantdetails[i].toActorType1 == 'Store') {
-          isinward[i] = 1;
-          total++;
-        } else if (plantdetails[i].fromActorType1 == 'Store' && plantdetails[i].toActorType1 == 'Task'||plantdetails[i].toActorType1 == 'JobCard') {
-          isinternal[i] = 1;
-          internaltotoal++;
-
-        } else if (plantdetails[i].fromActorType1 == 'Task'||plantdetails[i].fromActorType1 == 'JobCard' && plantdetails[i].toActorType1 == 'Store' ) {
-          isinternal[i] = -1;
-          internaltotoal--;
-        } else {
-          isoutward[i] = 1;
-          isinternal[i]=-1;
-          internaltotoal--;
-          total--;
-        }
-        if(total!=''&& internaltotoal!=''){
+        } else if (plantdetails[i].fromActorType1 == 'Task' ||
+            plantdetails[i].fromActorType1 == 'JobCard' &&
+                plantdetails[i].toActorType1 == 'Store'||plantdetails[i].toActorType1=='Inventory') {
           
-          avialableqty=total-internaltotoal;
+          isinternal[i] = '-${plantdetails[i].qty}';
+           internaltotoal=internaltotoal-plantdetails[i].qty ;
+        }else {
+          isoutward[i] = plantdetails[i].qty.toString();
+          total=total-plantdetails[i].qty;
+          isinternal[i] = '-${plantdetails[i].qty}';
+          internaltotoal=internaltotoal-plantdetails[i].qty ;
+        }
+        if (total != '' && internaltotoal != '') {
+          avialableqty = total - internaltotoal;
         }
         rows.add(
           DataRow(
@@ -413,22 +461,23 @@ class _PlantStockReportDetailsWebState
                 ),
               ),
               DataCell(
-                Text(isinward[i] != 0 ? isinward[i].toString() : '',
-                    style: Styles.green700),
+                Text(plantdetails[i].mrsID.toString() ?? '',
+                    style: Styles.black14),
               ),
               DataCell(
-                Text(isoutward[i] != 0 ? isoutward[i].toString() : '',
-                    style: Styles.Red700),
+                Text(isinward[i], style: Styles.green700),
+              ),
+              DataCell(
+                Text(isoutward[i], style: Styles.Red700),
               ),
               DataCell(
                 Text('$total', style: Styles.black14),
               ),
               DataCell(
-                Text(isinternal[i] == 0 ? ' ' : isinternal[i].toString(),
-                    style: Styles.black14),
+                Text(isinternal[i], style: Styles.black14),
               ),
               DataCell(
-                Text(internaltotoal==0? '' :'$internaltotoal', style: Styles.black14),
+                Text('$issuedbalance', style: Styles.black14),
               ),
               DataCell(
                 Text('$avialableqty', style: Styles.black14),
@@ -443,20 +492,34 @@ class _PlantStockReportDetailsWebState
         );
       }
     }
+    double Inwardsum = isinward
+      .map((e) => e.isEmpty ? 0.0 : double.parse(e))
+      .reduce((a, b) => a + b);
+
+      double Outwardsum = isoutward
+      .map((e) => e.isEmpty ? 0.0 : double.parse(e))
+      .reduce((a, b) => a + b);
+
+       double internalsum = isinternal
+      .map((e) => e.isEmpty ? 0.0 : double.parse(e))
+      .reduce((a, b) => a + b);
+
     rows.add(
+      
       DataRow(
         cells: [
           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('Total Quantity', style: Styles.green700)),
-          DataCell(Text('${isinward.where((int value) => value==1).length}',
-              style: Styles.green700)),
-          DataCell(Text('${isoutward.where((int value) => value==1).length}',
+          DataCell(Text('', style: Styles.black14)),
+          DataCell(Text('${Inwardsum}', style: Styles.green700)),
+          DataCell(Text('${Outwardsum}',
               style: Styles.Red700)),
           DataCell(Text(' ${total}', style: Styles.black14)),
-          DataCell(Text('${isinternal.fold(0, (prev, element) => prev + element)}',
-              style: Styles.black14)),
+          // DataCell(Text('${isinternal.fold(0, (prev, element) => prev + element)}',
+          // style: Styles.black14)),
+          DataCell(Text('$internalsum', style: Styles.black14)),
           DataCell(Text('$internaltotoal', style: Styles.black14)),
-          DataCell(Text('', style: Styles.black14)),
+          DataCell(Text('$avialableqty', style: Styles.black14)),
           DataCell(Text('', style: Styles.Red700)),
         ],
       ),

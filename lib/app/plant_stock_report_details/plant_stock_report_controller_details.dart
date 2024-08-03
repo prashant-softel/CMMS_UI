@@ -31,6 +31,7 @@ class PlantStockReportDetailsController extends GetxController {
   int facilityID = 0;
   int assetItemID = 0;
   Rx<int> assetID = 0.obs;
+  Rx<bool>isLoading=true.obs; 
 
   Rx<int> type = 0.obs;
   Rx<int> selectedYear = 0.obs;
@@ -161,6 +162,8 @@ class PlantStockReportDetailsController extends GetxController {
             plantDetailList.firstWhere((element) => element?.assetType != null);
         assetType.value = plantDetails?.assetType;
       }
+
     }
+    isLoading.value=false;
   }
 }
