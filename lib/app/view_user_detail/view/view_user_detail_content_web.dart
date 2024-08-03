@@ -169,7 +169,7 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                   // ),
                                 ],
                               ),
-                              Dimens.boxWidth15,
+                              Dimens.boxWidth3,
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -236,7 +236,7 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                   ),
                                 ],
                               ),
-                              Dimens.boxWidth15,
+                              Dimens.boxWidth3,
 
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
