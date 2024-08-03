@@ -214,7 +214,12 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                   ],
                                                 ),
                                                 Dimens.boxHeight10,
-                                                controller.planId == 0
+                                                controller.planId == 0 ||
+                                                        controller
+                                                                .mcPlanDetailsModel
+                                                                .value
+                                                                ?.status ==
+                                                            351
                                                     ? Row(
                                                         children: [
                                                           Dimens.boxWidth10,
