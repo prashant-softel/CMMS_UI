@@ -118,15 +118,53 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                       ),
                                       Spacer(),
                                       Container(
-                                        height: 30,
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () async {},
-                                          text:
-                                              "${controller.pmPlanDetailsModel.value?.status_short ?? ""}",
+                                        // height: 30,
+                                        // width: MediaQuery.of(context)
+                                        //         .size
+                                        //         .width /
+                                        //     5,
+                                        padding: EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                            color: controller.pmPlanDetailsModel
+                                                        .value!.status_id ==
+                                                    405
+                                                ? ColorValues.approveColor
+                                                : controller.pmPlanDetailsModel
+                                                            .value!.status_id ==
+                                                        406
+                                                    ? ColorValues.appRedColor
+                                                    : ColorValues
+                                                        .appLightBlueColor,
+                                            width: 1,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: controller
+                                                          .pmPlanDetailsModel
+                                                          .value!
+                                                          .status_id ==
+                                                      405
+                                                  ? ColorValues.approveColor
+                                                  : controller
+                                                              .pmPlanDetailsModel
+                                                              .value!
+                                                              .status_id ==
+                                                          406
+                                                      ? ColorValues.appRedColor
+                                                      : ColorValues
+                                                          .appLightBlueColor,
+                                            ),
+                                          ],
                                         ),
-                                      ),
+                                        child: Center(
+                                            child: Text(
+                                          '${controller.pmPlanDetailsModel.value?.status_short}',
+                                          style: TextStyle(color: Colors.white),
+                                        )),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -138,7 +176,8 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 50),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.end,
                                     children: [
                                       Column(
                                         crossAxisAlignment:
@@ -197,7 +236,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                              '${controller.pmPlanDetailsModel.value?.plan_id ?? ''}',
+                                              'PMP${controller.pmPlanDetailsModel.value?.plan_id ?? ''}',
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.pmPlanDetailsModel.value?.plan_freq_name ?? ''}',
@@ -302,7 +341,8 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                               "Checklist",
                                               style: TextStyle(
                                                   fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
+                                                  fontWeight:
+                                                      FontWeight.bold),
                                             )),
                                           ],
                                           rows: List<DataRow>.generate(
@@ -360,6 +400,104 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                   ),
                                 ),
                                 Dimens.boxHeight35,
+                                Container(
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 30),
+                                        child: Text('History',
+                                            style: Styles.blackBold16),
+                                      ),
+                                      (controller.historyList != null &&
+                                              controller.historyList!
+                                                  .isNotEmpty)
+                                          ? Container(
+                                              margin: Dimens.edgeInsets20,
+                                              height: ((controller
+                                                          .historyList
+                                                          ?.length ??
+                                                      0) *
+                                                  40) +
+                                                  120,
+                                              child: HistoryTableWidgetWeb(
+                                                historyList:
+                                                    controller.historyList,
+                                              ),
+                                            )
+                                          : Container(
+                                              color: Colors.red,
+                                              child: Text('History is empty'),
+                                            )
+                                    ],
+                                  ),
+                                ),
+                                Dimens.boxHeight15,
+                                Row(
+                                  children: [
+                                    Spacer(),
+                                    controller.pmPlanDetailsModel.value
+                                                ?.status_id ==
+                                            401 &&
+                                        varUserAccessModel
+                                                .value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kPmPlanFeatureId &&
+                                                    e.approve ==
+                                                        UserAccessConstants
+                                                            .kHaveApproveAccess)
+                                                .length >
+                                            0
+                                        ? Container(
+                                            height: 45,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appGreenColor,
+                                              text: "Approve",
+                                              icon: Icons.check,
+                                              onPressed: () {
+                                                Get.dialog(PmPlanApprovedDialog(
+                                                    // id: controller.pmPlanId.value,
+                                                    ));
+                                              },
+                                            ),
+                                          )
+                                        : Dimens.box0,
+                                    Dimens.boxWidth10,
+                                    controller.pmPlanDetailsModel.value
+                                                ?.status_id ==
+                                            401 &&
+                                        varUserAccessModel
+                                                .value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kPmPlanFeatureId &&
+                                                    e.approve ==
+                                                        UserAccessConstants
+                                                            .kHaveApproveAccess)
+                                                .length >
+                                            0
+                                        ? Container(
+                                            height: 45,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.rejectColor,
+                                              text: "Reject",
+                                              icon: Icons.close,
+                                              onPressed: () {
+                                                Get.dialog(
+                                                    PmPlanRejectDialog());
+                                              },
+                                            ),
+                                          )
+                                        : Dimens.box0,
+                                    Spacer()
+                                  ],
+                                ),
+                                Dimens.boxHeight15,
                               ],
                             ),
                           ),
@@ -367,104 +505,6 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 20),
-                  Container(
-                    child: Row(//
-                        children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: Text('History', style: Styles.blackBold16),
-                      ),
-                    ]),
-                  ),
-
-                  ///HISTORY
-                  (controller.historyList != null &&
-                          controller.historyList!.isNotEmpty)
-                      ? Container(
-                          margin: Dimens.edgeInsets20,
-                          height: ((controller.historyList?.length ?? 0) * 40) +
-                              120,
-                          child: //
-                              HistoryTableWidgetWeb(
-                            historyList: controller.historyList,
-                          ),
-                        )
-                      //  )
-                      : //
-                      Dimens.box0,
-                  Row(
-                    children: [
-                      Spacer(),
-                      // Container(
-                      //   height: 45,
-                      //   child: CustomElevatedButton(
-                      //     backgroundColor: ColorValues.printColor,
-                      //     text: "Print",
-                      //     icon: Icons.print,
-                      //     onPressed: () {
-                      //       // Get.dialog(
-                      //       //     GoodsOrderApprovedDialog(
-                      //       //   id: controller.id,
-                      //       // ));
-                      //     },
-                      //   ),
-                      // ),
-                      //  Dimens.boxWidth10,
-                      controller.pmPlanDetailsModel.value?.status_id == 401 &&
-                              varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kPmPlanFeatureId &&
-                                          e.approve ==
-                                              UserAccessConstants
-                                                  .kHaveApproveAccess)
-                                      .length >
-                                  0
-                          ? Container(
-                              height: 45,
-                              child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appGreenColor,
-                                text: "Approve",
-                                icon: Icons.check,
-                                onPressed: () {
-                                  Get.dialog(PmPlanApprovedDialog(
-                                      // id: controller.pmPlanId.value,
-                                      ));
-                                },
-                              ),
-                            )
-                          : Dimens.box0,
-                      Dimens.boxWidth10,
-                      controller.pmPlanDetailsModel.value?.status_id == 401 &&
-                              varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kPmPlanFeatureId &&
-                                          e.approve ==
-                                              UserAccessConstants
-                                                  .kHaveApproveAccess)
-                                      .length >
-                                  0
-                          ? Container(
-                              height: 45,
-                              child: CustomElevatedButton(
-                                backgroundColor: ColorValues.rejectColor,
-                                text: "Reject",
-                                icon: Icons.close,
-                                onPressed: () {
-                                  Get.dialog(PmPlanRejectDialog());
-                                },
-                              ),
-                            )
-                          : Dimens.box0,
-                      Spacer()
-                    ],
-                  ),
-                  Dimens.boxHeight15,
                 ],
               ),
             ),
