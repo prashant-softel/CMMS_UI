@@ -44,10 +44,12 @@ class ModuleCleaningListExecutionMobile
                             return GestureDetector(
                               onTap: () {
                                 // controller.clearStoreData();
-                                int id = mcTaskModel.planId ?? 0;
+                                int id = mcTaskModel.executionId ?? 0;
+                                int planId = mcTaskModel.planId ?? 0;
+
                                 Get.toNamed(
                                   Routes.addModuleCleaningExecutionContentWeb,
-                                  arguments: {'mcid': id},
+                                  arguments: {'mcid': id, 'planId': planId},
                                 );
                               },
                               child: Container(
