@@ -2323,7 +2323,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       child: CustomElevatedButton(
                                         backgroundColor:
                                             ColorValues.appGreenColor,
-                                        text: "Submit For Approval MC",
+                                        text: "Submit",
                                         onPressed: () {
                                           controller.isFormInvalid.value =
                                               false;
@@ -2413,7 +2413,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             },
                                           )),
                                     )
-                                  : controller.jobModel?.id != null &&
+                                  :
+                                   controller.jobModel?.id != null &&
                                           controller.permitId.value == 0
                                       ? Center(
                                           child: Container(
