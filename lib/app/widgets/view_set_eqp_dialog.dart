@@ -1,11 +1,16 @@
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../theme/dimens.dart';
 
 class ViewSetEquipmentDialog extends GetView {
+  int? estimateDurationDays;
+  ViewSetEquipmentDialog({required this.estimateDurationDays});
+
   final ViewMcPlaningController controller = Get.find();
 
   @override
@@ -19,7 +24,7 @@ class ViewSetEquipmentDialog extends GetView {
         title: Row(
           children: [
             Text(
-              "Set Equipments",
+              "Set Equipments $estimateDurationDays",
               style: TextStyle(
                 fontSize: 15,
               ),
@@ -70,7 +75,7 @@ class ViewSetEquipmentDialog extends GetView {
                 ),
                 // padding: EdgeInsets.only(right: 120, top: 10),
                 height: height / 1.5,
-                width: double.infinity,
+                // width: double.infinity,
                 child: SingleChildScrollView(
                   child: Column(
                       children: [
@@ -133,26 +138,28 @@ class ViewSetEquipmentDialog extends GetView {
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: DropdownButton<String>(
-                                        value: e.selectedDay,
-                                        onChanged: (newValue) {
-                                          setState(() {
-                                            e.selectedDay = newValue!;
-                                            e.smbs.forEach((element) {
-                                              element.selectedDay = newValue;
+                                    IgnorePointer(
+                                      child: Expanded(
+                                        child: DropdownButton<String>(
+                                          value: e.selectedDay,
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              e.selectedDay = newValue!;
+                                              e.smbs.forEach((element) {
+                                                element.selectedDay = newValue;
+                                              });
                                             });
-                                          });
-                                        },
-                                        items: controller.days
-                                            .map(
-                                              (map) => DropdownMenuItem(
-                                                child:
-                                                    Text(map.name.toString()),
-                                                value: map.id,
-                                              ),
-                                            )
-                                            .toList(),
+                                          },
+                                          items: controller.days
+                                              .map(
+                                                (map) => DropdownMenuItem(
+                                                  child:
+                                                      Text(map.name.toString()),
+                                                  value: map.id,
+                                                ),
+                                              )
+                                              .toList(),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -171,28 +178,31 @@ class ViewSetEquipmentDialog extends GetView {
                                                     Expanded(
                                                         child: Text(
                                                             "${smbItems.moduleQuantity}")),
-                                                    Expanded(
-                                                      child: DropdownButton<
-                                                          String>(
-                                                        value: smbItems
-                                                            .selectedDay,
-                                                        onChanged: (newValue) {
-                                                          setState(() {
-                                                            smbItems.selectedDay =
-                                                                newValue!;
-                                                          });
-                                                        },
-                                                        items: controller.days
-                                                            .map(
-                                                              (map) =>
-                                                                  DropdownMenuItem(
-                                                                child: Text(map
-                                                                    .name
-                                                                    .toString()),
-                                                                value: map.id,
-                                                              ),
-                                                            )
-                                                            .toList(),
+                                                    IgnorePointer(
+                                                      child: Expanded(
+                                                        child: DropdownButton<
+                                                            String>(
+                                                          value: smbItems
+                                                              .selectedDay,
+                                                          onChanged:
+                                                              (newValue) {
+                                                            setState(() {
+                                                              smbItems.selectedDay =
+                                                                  newValue!;
+                                                            });
+                                                          },
+                                                          items: controller.days
+                                                              .map(
+                                                                (map) =>
+                                                                    DropdownMenuItem(
+                                                                  child: Text(map
+                                                                      .name
+                                                                      .toString()),
+                                                                  value: map.id,
+                                                                ),
+                                                              )
+                                                              .toList(),
+                                                        ),
                                                       ),
                                                     ),
                                                   ],

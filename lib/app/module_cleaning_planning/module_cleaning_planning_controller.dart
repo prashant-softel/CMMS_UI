@@ -101,13 +101,15 @@ class ModuleCleaningPlanningController extends GetxController {
       await setMcId();
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
-        Future.delayed(Duration(seconds: 1), () {
-          getEquipmentModelList(facilityId, true);
-        });
+        if (facilityId > 0) {
+          Future.delayed(Duration(seconds: 1), () {
+            getEquipmentModelList(facilityId, true);
+
+            getAssignedToList();
+          });
+        }
       });
-      Future.delayed(Duration(seconds: 1), () {
-        getAssignedToList();
-      });
+
       if (id != 0) {
         Future.delayed(Duration(seconds: 1), () {
           getMcPlanDetail(planId: id.value, facilityId: facilityId);
