@@ -120,7 +120,20 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                               },
                             ),
 
-                            createContentTile(
+                          ],
+                        ),
+                         GridView.count(
+                          shrinkWrap: true,
+                          primary: false,
+                          padding: Dimens.edgeInsets15,
+                          crossAxisSpacing: 70,
+                          mainAxisSpacing: 6,
+                          crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                          childAspectRatio: Responsive.isMobile(context)
+                              ? (itemWidth / itemHeight)
+                              : 5,
+                          children: <Widget>[
+                             createContentTile(
                                 title: "MIS Checklist",
                                 onTap: () {
                                   controller.createChecklist();
