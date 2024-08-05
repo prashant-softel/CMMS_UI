@@ -351,7 +351,11 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                   // print(
                                                   //     'MC plan Detail:${controller.schedules.toJson()}');
                                                   Get.dialog(
-                                                      ViewSetEquipmentDialog());
+                                                      ViewSetEquipmentDialog(
+                                                    estimateDurationDays:
+                                                        int.tryParse(
+                                                            '${controller.durationInDayCtrlr.text}'),
+                                                  ));
                                                 },
                                                 // color: ColorValues.appDarkBlueColor,
                                                 // onTap: () {

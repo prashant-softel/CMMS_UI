@@ -288,8 +288,8 @@ class ReturnMrsListContentMobile extends GetView<ReturnMrsListController> {
                                                         },
                                                         text: 'Edit MRS',
                                                         icon: Icons.edit,
-                                                        backgroundColor:
-                                                            Colors.blue,
+                                                          backgroundColor:
+                                              ColorValues.editColor,
                                                       ),
                                                     )
                                                   : Dimens.box0
