@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_controller.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
@@ -43,9 +44,11 @@ class ModuleCleaningListExecutionMobile
                             return GestureDetector(
                               onTap: () {
                                 // controller.clearStoreData();
-                                // controller.clearStoreDatatype();
-                                // var _taskId = pmTaskModel.id ?? 0;
-                                // Get.toNamed(Routes.pmTaskView, arguments: {'pmTaskId': _taskId});
+                                int id = mcTaskModel.planId ?? 0;
+                                Get.toNamed(
+                                  Routes.addModuleCleaningExecutionContentWeb,
+                                  arguments: {'mcid': id},
+                                );
                               },
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 10),
