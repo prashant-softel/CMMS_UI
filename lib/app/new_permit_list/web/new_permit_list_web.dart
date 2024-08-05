@@ -650,17 +650,29 @@ class PermitListDataSource extends DataTableSource {
                                         PermitStatusConstants
                                             .PTW_EXTEND_REQUESTED
                                 ? ColorValues.yellowColor
-                                : controller.newPermitList
-                                                .firstWhere(
-                                                  (e) =>
-                                                      "${e?.permitId}" ==
-                                                      "${PermitDetails?.permitId}",
-                                                  orElse: () => NewPermitModel(
-                                                      permitId: 000),
-                                                )
-                                                ?.ptwStatus ==
-                                            PermitStatusConstants
-                                                .PTW_APPROVE //125
+                                : (controller.newPermitList
+                                                    .firstWhere(
+                                                      (e) =>
+                                                          "${e?.permitId}" ==
+                                                          "${PermitDetails?.permitId}",
+                                                      orElse: () =>
+                                                          NewPermitModel(
+                                                              permitId: 000),
+                                                    )
+                                                    ?.ptwStatus ==
+                                                PermitStatusConstants
+                                                    .PTW_APPROVE) && //125
+                                            (controller.newPermitList
+                                                    .firstWhere(
+                                                      (e) =>
+                                                          "${e?.permitId}" ==
+                                                          "${PermitDetails?.permitId}",
+                                                      orElse: () =>
+                                                          NewPermitModel(
+                                                              permitId: 000),
+                                                    )
+                                                    ?.tbT_Done_Check ==
+                                                1) 
                                         ||
                                         controller.newPermitList
                                                 .firstWhere(
@@ -675,7 +687,18 @@ class PermitListDataSource extends DataTableSource {
                                                 .PTW_EXTEND_REQUEST_APPROVE //135
 
                                     ? ColorValues.appGreenColor
-                                    : ColorValues.appRedColor,
+                                    : controller.newPermitList
+                                                .firstWhere(
+                                                  (e) =>
+                                                      "${e?.permitId}" ==
+                                                      "${PermitDetails?.permitId}",
+                                                  orElse: () => NewPermitModel(
+                                                      permitId: 000),
+                                                )
+                                                ?.tbT_Done_Check ==
+                                            0
+                                        ? ColorValues.createsColor
+                                        : ColorValues.appRedColor,
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Text(
