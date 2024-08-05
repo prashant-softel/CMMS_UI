@@ -209,16 +209,24 @@ class _ModuleCleaningListMobileState extends State<ModuleCleaningListMobile> {
                                                             UserAccessConstants
                                                                 .kHaveEditAccess)
                                                     .isNotEmpty &&
-                                                mcPlan.status == 371
+                                                mcPlan.status == 351
                                             ? CustomElevatedButton(
                                                 onPressed: () {
-                                                  controller.clearStoreData();
-                                                  var id = mcPlan.planId ?? 0;
-                                                  Get.toNamed(
-                                                    Routes
-                                                        .addVegetationPlanScreen,
-                                                    arguments: {"vegid": id},
-                                                  );
+                                                  controller
+                                                      .clearStoreDataMcid();
+                                                  controller
+                                                      .clearStoreDataPlanid();
+                                                  int id = mcPlan?.planId ?? 0;
+                                                  if (id != 0) {
+                                                    Get.toNamed(
+                                                        Routes
+                                                            .moduleCleaningPlanning,
+                                                        arguments: {
+                                                          "mcid": id,
+                                                          "planId":
+                                                              mcPlan?.planId
+                                                        });
+                                                  }
                                                 },
                                                 text: 'Edit',
                                                 icon: Icons.edit,

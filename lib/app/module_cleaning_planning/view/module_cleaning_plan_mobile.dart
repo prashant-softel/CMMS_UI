@@ -39,7 +39,7 @@ class _ModuleCleaningPlanMobileState extends State<ModuleCleaningPlanMobile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Add Vegetation Plan",
+                          "Add MC Plan",
                           style: Styles.blackBold18,
                         ),
                       ],
@@ -104,6 +104,24 @@ class _ModuleCleaningPlanMobileState extends State<ModuleCleaningPlanMobile> {
                             ),
                             Dimens.boxHeight15,
                             CustomRichTextMobile(
+                              title: "Frequency: ",
+                            ),
+                            Dimens.boxHeight2,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              child: Obx(
+                                () => DropdownWebWidget(
+                                  dropdownList: controller.frequencyList,
+                                  isValueSelected:
+                                      controller.isSelectedfrequency.value,
+                                  selectedValue:
+                                      controller.selectedfrequency.value,
+                                  onValueChanged: controller.onValueChanged,
+                                ),
+                              ),
+                            ),
+                            Dimens.boxHeight15,
+                            CustomRichTextMobile(
                               title: "Estimated Duration In Days: ",
                             ),
                             Dimens.boxHeight2,
@@ -124,24 +142,6 @@ class _ModuleCleaningPlanMobileState extends State<ModuleCleaningPlanMobile> {
                                   controller.isDurationInvalid.value = true;
                                 }
                               },
-                            ),
-                            Dimens.boxHeight15,
-                            CustomRichTextMobile(
-                              title: "Frequency: ",
-                            ),
-                            Dimens.boxHeight2,
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.1,
-                              child: Obx(
-                                () => DropdownWebWidget(
-                                  dropdownList: controller.frequencyList,
-                                  isValueSelected:
-                                      controller.isSelectedfrequency.value,
-                                  selectedValue:
-                                      controller.selectedfrequency.value,
-                                  onValueChanged: controller.onValueChanged,
-                                ),
-                              ),
                             ),
                             Dimens.boxHeight15,
                             CustomRichTextMobile(
