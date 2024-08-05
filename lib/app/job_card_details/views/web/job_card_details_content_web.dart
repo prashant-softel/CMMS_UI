@@ -228,7 +228,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              Text("Job Card Id:",
+                                              Text("Job Id:",
                                                   style: Styles.black14),
                                               SizedBox(width: 2),
                                               Text(
