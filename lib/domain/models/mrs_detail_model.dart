@@ -71,7 +71,7 @@ class MrsDetailsModel {
             : parsedJson['approver_name'],
         issued_name: parsedJson["issued_name"] == null
             ? ""
-            : parsedJson['approver_name'],
+            : parsedJson['issued_name'],
         id: parsedJson["id"] == null ? 0 : parsedJson['id'],
         status: parsedJson["status"] == null ? 0 : parsedJson['status'],
         status_short: parsedJson["status_short"] == null

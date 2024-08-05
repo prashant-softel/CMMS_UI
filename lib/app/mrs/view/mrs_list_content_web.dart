@@ -364,7 +364,7 @@ class MrsListDataSource extends DataTableSource {
     controller.MrsId.value = MrsDetails?.id ?? 0;
     var cellsBuffer = [
       "mrsId", // '${MrsDetails?.id ?? ''}',
-      "Requested by:${MrsDetails?.requested_by_name ?? ""}\nIssued by:${MrsDetails?.approver_name ?? ""}",
+      "Requested by:${MrsDetails?.requested_by_name ?? ""}\nIssued by:${MrsDetails?.issued_name ?? ""}",
       '${MrsDetails?.requestd_date ?? ''}',
       '${MrsDetails?.activity ?? ''}',
       "${MrsDetails?.whereUsedType.toString().toUpperCase() == 'PMTASK' ? 'PMT' : MrsDetails?.whereUsedType.toString().toUpperCase() == 'JOBCARD' ? 'JC' : ''}${MrsDetails?.whereUsedTypeId ?? ''}",

@@ -723,7 +723,7 @@ class ViewPermitController extends GetxController {
       }
       final _reasonForExtensionComment =
           extendReasonCommentTextFieldCtrlr.text.trim();
-      List<int> dataExtend = [];
+      List<int> dataExtend = [1];
       permitExtendConditionList!.value.forEach((element) {
         if (element!.isChecked!) {
           dataExtend.add(element.id!);
