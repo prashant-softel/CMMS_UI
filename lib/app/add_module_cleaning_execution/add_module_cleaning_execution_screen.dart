@@ -1,5 +1,8 @@
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
+import 'package:cmms/app/add_module_cleaning_execution/view/web/module_cleaning_execution_mobile.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
+import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,8 +11,6 @@ import 'view/web/add_module_cleaning_execution_content_web.dart';
 class AddModuleCleaningExecutionScreen
     extends GetView<AddModuleCleaningExecutionController> {
   AddModuleCleaningExecutionScreen({super.key});
-
-  final controller = Get.find<AddModuleCleaningExecutionController>();
   final HomeController homecontroller = Get.find();
 
   @override
@@ -17,54 +18,76 @@ class AddModuleCleaningExecutionScreen
     return Scaffold(
       appBar: Responsive.isMobile(context)
           ? AppBar(
-              centerTitle: true,
-              elevation: 0,
+              title: HeadingProfileAppBar(
+                title: "MC Execution",
+              ),
             )
           : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer()
+              ? HomeDrawerMobile()
               : null,
-      body: Obx(
-        () => Stack(
-          children: [
-            AnimatedContainer(
-              duration: Duration(milliseconds: 450),
-              margin: EdgeInsets.only(
-                  left: homecontroller.menuButton.value ? 250.0 : 70.0),
-              width: Get.width,
-              height: Get.height,
-              child: Row(
+      body: Responsive.isDesktop(context)
+          ? Obx(
+              () => Stack(
                 children: [
-                  // (Responsive.isMobile(context) || Responsive.isTablet(context))
-                  //     ? Dimens.box0
-                  //     : HomeDrawer(),
-                  Expanded(
-                    child: Column(
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 450),
+                    margin: EdgeInsets.only(
+                      left: homecontroller.menuButton.value ? 250.0 : 70.0,
+                    ),
+                    width: Get.width,
+                    height: Get.height,
+                    child: Row(
                       children: [
-                        if (Responsive.isMobile(context))
-                          Expanded(
-                            child: Align(
-                                alignment: Alignment.center,
-                                child: Text("Data Coming Soon......")),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: AddModuleCleaningExecutionContentWeb(),
+                              )
+                            ],
                           ),
-                        if (Responsive.isDesktop(context))
-                          Expanded(
-                            child: AddModuleCleaningExecutionContentWeb(),
-                          )
+                        ),
                       ],
                     ),
                   ),
+                  AnimatedPositioned(
+                    duration: Duration(milliseconds: 450),
+                    child: HomeDrawer(),
+                  )
                 ],
               ),
-            ),
-            AnimatedPositioned(
-              duration: Duration(milliseconds: 450),
-              child: HomeDrawer(),
-            ),
-          ],
-        ),
-      ),
+            )
+          : Responsive.isMobile(context) || Responsive.isTablet(context)
+              ? Stack(
+                  children: [
+                    AnimatedContainer(
+                      duration: Duration(milliseconds: 450),
+                      margin: EdgeInsets.only(
+                        left: 0,
+                      ),
+                      width: Get.width,
+                      height: Get.height,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: McExecutionMobile(),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              : Center(
+                  child: Text("Data Coming Soon ..."),
+                ),
     );
   }
 }
