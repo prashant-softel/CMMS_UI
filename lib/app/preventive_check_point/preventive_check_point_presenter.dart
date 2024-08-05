@@ -30,12 +30,12 @@ class PreventiveCheckPointPresenter {
           {int? selectedchecklistId,
           bool? isLoading,
           int? facilityId,
-          bool? isExport}) async =>
+          bool? isExport,int?type}) async =>
       await preventiveCheckPointUsecase.getCheckPointlist(
           selectedchecklistId: selectedchecklistId ?? 0,
           isLoading: isLoading ?? false,
           isExport: isExport,
-          facilityId: facilityId);
+          facilityId: facilityId,type:type);
 
   deleteCkeckpoint(String? check_point_id, {required bool isLoading}) async =>
       await preventiveCheckPointUsecase.deleteCkeckpoint(

@@ -26,9 +26,9 @@ class PreventiveCheckPointUsecase {
           {int? selectedchecklistId,
           bool? isLoading,
           int? facilityId,
-          bool? isExport}) async =>
+          bool? isExport,int?type}) async =>
       await repository.getCheckPointlist(
-          selectedchecklistId, isLoading, facilityId, isExport);
+          selectedchecklistId, isLoading, facilityId, isExport,type);
 
   deleteCkeckpoint(
           {required Object check_point_id, required bool isLoading}) async =>

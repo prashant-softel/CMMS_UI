@@ -2527,9 +2527,10 @@ class ConnectHelper {
       {required String auth,
       bool? isLoading,
       int? selectedchecklistId,
+      int? type,
       int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId&facility_id=$facilityId&type=2',
+      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId&facility_id=$facilityId&type=$type',
       Request.get,
       null,
       isLoading ?? false,
