@@ -87,14 +87,36 @@ class PlantDetail {
   });
 
   factory PlantDetail.fromJson(Map<String, dynamic> json) {
+ String fromActorType = json['fromActorType'];
+  String formattedFromActorType;
+
+  if (fromActorType == "JobCard") {
+    formattedFromActorType = "JC${json['fromActorID']}-${json['fromActorName']}";
+  }else if(fromActorType=="Inventory"){
+     formattedFromActorType = "Asset${json['fromActorID']}-${json['fromActorName']}";
+  } else {
+    formattedFromActorType = "${fromActorType}${json['fromActorID']}-${json['fromActorName']}";
+  }
+   String toActorType = json['toActorType'];
+  String formattedtoActorType;
+
+  if (toActorType == "JobCard") {
+    formattedtoActorType = "JC${json['toActorID']}-${json['toActorName']}";
+  }else if(toActorType == "Inventory"){
+    formattedtoActorType = "Asset${json['toActorID']}-${json['toActorName']}";
+  } else {
+    formattedtoActorType = "${toActorType}${json['toActorID']}-${json['toActorName']}";
+  }
+   
     return PlantDetail(
       fromActorID: json['fromActorID'],
-      fromActorType:
-          "${json['fromActorID']}${json['fromActorType']}-${json['fromActorName']}",
+      fromActorType:formattedFromActorType,
+          // "${json['fromActorType']}${json['fromActorID']}-${json['fromActorName']}",
       fromActorType1: json['fromActorType'],
       fromActorName: json['fromActorName'],
       toActorID: json['toActorID'],
-      toActorType: "${json['toActorType']}-${json['toActorName']}",
+      toActorType: formattedtoActorType,
+      // "${json['toActorType']}${json['toActorID']}-${json['toActorName']}",
       toActorType1: json['toActorType'],
       toActorName: json['toActorName'],
       assetItemID: json['assetItemID'],

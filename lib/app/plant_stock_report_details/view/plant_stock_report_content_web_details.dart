@@ -202,7 +202,7 @@ class _PlantStockReportDetailsWebState
                                                           child: DataTable2(
                                                             headingRowHeight:
                                                                 70,
-                                                            minWidth: 1450,
+                                                            minWidth: 1500,
                                                             columnSpacing: 5,
                                                             columns: [
                                                               DataColumn2(
@@ -277,18 +277,27 @@ class _PlantStockReportDetailsWebState
                                                                       .blue17,
                                                                 ),
                                                               ),
+                                                               DataColumn2(
+                                                                // size: ColumnSize.S,
+                                                                fixedWidth: 100,
+                                                                label: Text(
+                                                                  "Faulty",
+                                                                  style: Styles
+                                                                      .blue17,
+                                                                ),
+                                                              ),
                                                               DataColumn2(
                                                                 // size: ColumnSize.S,
                                                                 fixedWidth: 150,
                                                                 label: Text(
-                                                                  "Available Qty",
+                                                                  "Available \n Qty",
                                                                   style: Styles
                                                                       .blue17,
                                                                 ),
                                                               ),
                                                               DataColumn2(
                                                                 // size: ColumnSize.M,
-                                                                fixedWidth: 210,
+                                                                fixedWidth: 110,
                                                                 label: Text(
                                                                   "Last Update By",
                                                                   style: Styles
@@ -364,16 +373,15 @@ class _PlantStockReportDetailsWebState
   List<DataRow> _buildTableRows(
       PlantStockMonth? item, List<PlantDetail>? plantdetails) {
     double opening = item?.opening ?? 0;
-    // double Quantity= plantdetails?[0].qty ?? 0;
-    double totalQuantity = 0;
     double internaltotoal = 0;
     double avialableqty = 0;
-    double issuedbalance = 00.0;
+
 
     double total = opening;
     List<String> isinward = List<String>.filled(plantdetails?.length ?? 0, '');
     List<String> isoutward = List<String>.filled(plantdetails?.length ?? 0, '');
     List<String> isinternal = List<String>.filled(plantdetails?.length ?? 0, '');
+    List<String> isfaulty = List<String>.filled(plantdetails?.length ?? 0, '');
 
     List<DataRow> rows = [];
     // if (plantdetails != null) {
@@ -395,13 +403,13 @@ class _PlantStockReportDetailsWebState
           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('', style: Styles.black14)),
+           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('', style: Styles.black14)),
         ],
       ),
     );
 
     if (plantdetails != null) {
-      // issuedbalance=plantdetails[0].qty;
       for (int i = 0; i < plantdetails.length; i++) {
         if (plantdetails[i].fromActorType1 == 'Vendor' &&
             plantdetails[i].toActorType1 == 'Store') {
@@ -416,10 +424,13 @@ class _PlantStockReportDetailsWebState
 
         } else if (plantdetails[i].fromActorType1 == 'Task' ||
             plantdetails[i].fromActorType1 == 'JobCard' &&
-                plantdetails[i].toActorType1 == 'Store'||plantdetails[i].toActorType1=='Inventory') {
+                plantdetails[i].toActorType1 == 'Store') {
           
           isinternal[i] = '-${plantdetails[i].qty}';
            internaltotoal=internaltotoal-plantdetails[i].qty ;
+        }else if (plantdetails[i].fromActorType1 == 'Inventory' && plantdetails[i].toActorType1=='NonOperational'){
+                isfaulty[i]=plantdetails[i].qty.toString();
+
         }else {
           isoutward[i] = plantdetails[i].qty.toString();
           total=total-plantdetails[i].qty;
@@ -435,6 +446,7 @@ class _PlantStockReportDetailsWebState
               DataCell(
                 InkWell(
                   child: Text(
+                    // plantdetails[i].fromActorType == "JobCard"? "JC" : plantdetails[i].fromActorType?? '',
                     plantdetails[i].fromActorType ?? '',
                     style: Styles.black14,
                   ),
@@ -450,6 +462,7 @@ class _PlantStockReportDetailsWebState
                 InkWell(
                   child: Text(
                     plantdetails[i].toActorType ?? '',
+                    // plantdetails[i].fromActorType == "JobCard"? "JC" : plantdetails[i].fromActorType?? '',
                     style: Styles.black14,
                   ),
                   onTap: () {
@@ -477,8 +490,12 @@ class _PlantStockReportDetailsWebState
                 Text(isinternal[i], style: Styles.black14),
               ),
               DataCell(
-                Text('$issuedbalance', style: Styles.black14),
+                Text('$internaltotoal', style: Styles.black14),
               ),
+              DataCell(
+                Text(isfaulty[i], style: Styles.black14),
+              ),
+              
               DataCell(
                 Text('$avialableqty', style: Styles.black14),
 
@@ -504,6 +521,10 @@ class _PlantStockReportDetailsWebState
       .map((e) => e.isEmpty ? 0.0 : double.parse(e))
       .reduce((a, b) => a + b);
 
+      double Faultysum = isfaulty
+      .map((e) => e.isEmpty ? 0.0 : double.parse(e))
+      .reduce((a, b) => a + b);
+
     rows.add(
       
       DataRow(
@@ -519,6 +540,7 @@ class _PlantStockReportDetailsWebState
           // style: Styles.black14)),
           DataCell(Text('$internalsum', style: Styles.black14)),
           DataCell(Text('$internaltotoal', style: Styles.black14)),
+          DataCell(Text('$Faultysum', style: Styles.black14)),
           DataCell(Text('$avialableqty', style: Styles.black14)),
           DataCell(Text('', style: Styles.Red700)),
         ],
