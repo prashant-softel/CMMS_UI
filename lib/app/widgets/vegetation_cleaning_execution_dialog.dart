@@ -10,10 +10,12 @@ import '../theme/dimens.dart';
 class VegetationExecutionDialog extends GetView<VegExecutionController> {
   final int? scheduleId;
   final int? cleaningDay;
+  final int? is_view;
 
   VegetationExecutionDialog({
     required this.scheduleId,
     required this.cleaningDay,
+    this.is_view,
   });
 
   @override
@@ -189,31 +191,38 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                                       flex: 1,
                                       child: Container(
                                         alignment: Alignment.centerLeft,
-                                        child: Checkbox(
-                                          value: e.isCleanedChecked,
-                                          onChanged: (bool? value) {
-                                            // controller.toggleItemSelection(index);
-                                            setState(
-                                              () {
-                                                e.isCleanedChecked =
-                                                    !e.isCleanedChecked!;
-                                                if (e.isCleanedChecked!) {
-                                                  e.isAbandonedChecked = false;
-                                                }
-                                                e.smbs?.forEach((smbItem) {
-                                                  smbItem.isCleanedSmbCheck =
-                                                      e.isCleanedChecked;
-                                                  if (e.isCleanedChecked!) {
-                                                    smbItem.isAbandonSmbCheck =
+                                        child: IgnorePointer(
+                                          ignoring: is_view == 1 ? true : false,
+                                          child: Checkbox(
+                                            value: e.isCleanedChecked,
+                                            onChanged: (bool? value) {
+                                              setState(
+                                                () {
+                                                  e.isCleanedChecked =
+                                                      !e.isCleanedChecked;
+                                                  if (e.isCleanedChecked) {
+                                                    e.isAbandonedChecked =
                                                         false;
                                                   }
-                                                });
-                                              },
-                                            );
-                                            print(
-                                              'Element Cancel:${e.isCleanedChecked}',
-                                            );
-                                          },
+                                                  e.smbs?.forEach((smbItem) {
+                                                    if (!controller.check
+                                                        .containsKey(
+                                                            smbItem.smbName)) {
+                                                      smbItem.isCleanedSmbCheck =
+                                                          e.isCleanedChecked;
+                                                      if (e.isCleanedChecked) {
+                                                        smbItem.isAbandonSmbCheck =
+                                                            false;
+                                                      }
+                                                    }
+                                                  });
+                                                },
+                                              );
+                                              print(
+                                                'Element Cancel:${e.isCleanedChecked}',
+                                              );
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -221,30 +230,37 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                                       flex: 1,
                                       child: Container(
                                         alignment: Alignment.centerLeft,
-                                        child: Checkbox(
-                                          value: e.isAbandonedChecked,
-                                          onChanged: (bool? value) {
-                                            // controller.toggleItemSelection(index);
-                                            setState(
-                                              () {
-                                                e.isAbandonedChecked =
-                                                    !e.isAbandonedChecked!;
-                                                if (e.isAbandonedChecked!) {
-                                                  e.isCleanedChecked = false;
-                                                }
-                                                e.smbs?.forEach((smbItem) {
-                                                  smbItem.isAbandonSmbCheck =
-                                                      e.isAbandonedChecked;
-                                                  if (e.isAbandonedChecked!) {
-                                                    smbItem.isCleanedSmbCheck =
-                                                        false;
+                                        child: IgnorePointer(
+                                          ignoring: is_view == 1 ? true : false,
+                                          child: Checkbox(
+                                            value: e.isAbandonedChecked,
+                                            onChanged: (bool? value) {
+                                              setState(
+                                                () {
+                                                  e.isAbandonedChecked =
+                                                      !e.isAbandonedChecked;
+                                                  if (e.isAbandonedChecked) {
+                                                    e.isCleanedChecked = false;
                                                   }
-                                                });
-                                              },
-                                            );
-                                            print(
-                                                'Element Cancel:${e.isAbandonedChecked}');
-                                          },
+                                                  e.smbs?.forEach((smbItem) {
+                                                    if (!controller.check
+                                                        .containsKey(
+                                                            smbItem.smbName)) {
+                                                      smbItem.isAbandonSmbCheck =
+                                                          e.isAbandonedChecked;
+                                                      if (e
+                                                          .isAbandonedChecked) {
+                                                        smbItem.isCleanedSmbCheck =
+                                                            false;
+                                                      }
+                                                    }
+                                                  });
+                                                },
+                                              );
+                                              print(
+                                                  'Element Cancel:${e.isAbandonedChecked}');
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -281,24 +297,35 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                                                       child: Container(
                                                         alignment: Alignment
                                                             .centerLeft,
-                                                        child: Checkbox(
-                                                          value: smbItems
-                                                              .isCleanedSmbCheck,
-                                                          onChanged:
-                                                              (bool? value) {
-                                                            setState(() {
-                                                              smbItems.isCleanedSmbCheck =
-                                                                  !smbItems
-                                                                      .isCleanedSmbCheck;
-                                                              if (smbItems
-                                                                  .isCleanedSmbCheck) {
-                                                                smbItems.isAbandonSmbCheck =
-                                                                    false;
-                                                              }
-                                                            });
-                                                            print(
-                                                                'Element Cancel:${e.isCleanedChecked}');
-                                                          },
+                                                        child: IgnorePointer(
+                                                          ignoring: is_view ==
+                                                                      1 ||
+                                                                  controller
+                                                                      .check
+                                                                      .containsKey(
+                                                                          smbItems
+                                                                              .smbName)
+                                                              ? true
+                                                              : false,
+                                                          child: Checkbox(
+                                                            value: smbItems
+                                                                .isCleanedSmbCheck,
+                                                            onChanged:
+                                                                (bool? value) {
+                                                              setState(() {
+                                                                smbItems.isCleanedSmbCheck =
+                                                                    !smbItems
+                                                                        .isCleanedSmbCheck;
+                                                                if (smbItems
+                                                                    .isCleanedSmbCheck) {
+                                                                  smbItems.isAbandonSmbCheck =
+                                                                      false;
+                                                                }
+                                                              });
+                                                              print(
+                                                                  'Element Cancel:${e.isCleanedChecked}');
+                                                            },
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
@@ -307,24 +334,35 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                                                       child: Container(
                                                         alignment: Alignment
                                                             .centerLeft,
-                                                        child: Checkbox(
-                                                          value: smbItems
-                                                              .isAbandonSmbCheck,
-                                                          onChanged:
-                                                              (bool? value) {
-                                                            setState(() {
-                                                              smbItems.isAbandonSmbCheck =
-                                                                  !smbItems
-                                                                      .isAbandonSmbCheck!;
-                                                              if (smbItems
-                                                                  .isAbandonSmbCheck!) {
-                                                                smbItems.isCleanedSmbCheck =
-                                                                    false;
-                                                              }
-                                                            });
-                                                            print(
-                                                                'Element Cancel:${smbItems.isAbandonSmbCheck}');
-                                                          },
+                                                        child: IgnorePointer(
+                                                          ignoring: is_view ==
+                                                                      1 ||
+                                                                  controller
+                                                                      .check
+                                                                      .containsKey(
+                                                                          smbItems
+                                                                              .smbName)
+                                                              ? true
+                                                              : false,
+                                                          child: Checkbox(
+                                                            value: smbItems
+                                                                .isAbandonSmbCheck,
+                                                            onChanged:
+                                                                (bool? value) {
+                                                              setState(() {
+                                                                smbItems.isAbandonSmbCheck =
+                                                                    !smbItems
+                                                                        .isAbandonSmbCheck;
+                                                                if (smbItems
+                                                                    .isAbandonSmbCheck) {
+                                                                  smbItems.isCleanedSmbCheck =
+                                                                      false;
+                                                                }
+                                                              });
+                                                              print(
+                                                                  'Element Cancel:${smbItems.isAbandonSmbCheck}');
+                                                            },
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
@@ -352,57 +390,50 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
             },
           ),
           actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.greenColor,
-                    text: 'Expand',
-                    onPressed: () {},
+            is_view == 1
+                ? Center(
+                    child: Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.redColor,
+                        text: "Cancel",
+                        onPressed: () {
+                          Get.back();
+                        },
+                      ),
+                    ),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          backgroundColor: ColorValues.redColor,
+                          text: "Cancel",
+                          onPressed: () {
+                            Get.back();
+                          },
+                        ),
+                      ),
+                      Dimens.boxWidth20,
+                      Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          backgroundColor: ColorValues.greenColor,
+                          text: 'Submit',
+                          onPressed: () {
+                            controller.updateVegScheduleExecution(
+                              scheduleId: scheduleId,
+                              cleaningDay: cleaningDay,
+                              remark: '${controller.remarkCtrlrWeb.text}',
+                            );
+                            Get.back();
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Dimens.boxWidth20,
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.redColor,
-                    text: "Collapse",
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                ),
-                Dimens.boxWidth20,
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.redColor,
-                    text: "Cancel",
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                ),
-                Dimens.boxWidth20,
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.greenColor,
-                    text: 'Submit',
-                    onPressed: () {
-                      controller.updateVegScheduleExecution(
-                        scheduleId: scheduleId,
-                        cleaningDay: cleaningDay,
-                        remark: '${controller.remarkCtrlrWeb.text}',
-                      );
-                      Get.back();
-                    },
-                  ),
-                ),
-              ],
-            ),
           ],
         );
       }),

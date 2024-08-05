@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
@@ -6,6 +7,28 @@ import 'package:cmms/domain/repositories/repository.dart';
 class VegExecutionUsecase {
   VegExecutionUsecase(this.repository);
   Repository repository;
+
+  Future<List<EmployeeModel?>?> getAssignedToList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getAssignedToList(
+        auth,
+        facilityId,
+        isLoading,
+      );
+
+  Future<bool> assignToVeg({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async =>
+      await repository.assignToVeg(
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
 
   Future<VegExecutionDetailsModel?> getVegExecutionDetail({
     bool? isLoading,
@@ -86,7 +109,7 @@ class VegExecutionUsecase {
         abandoneScheduleJsonString,
         isLoading,
       );
-      
+
   Future<Map<String, dynamic>?> updateVegScheduleExecution({
     updateVegJson,
     required bool isLoading,
@@ -96,6 +119,44 @@ class VegExecutionUsecase {
       isLoading: isLoading,
     );
   }
+
+  Future<bool> vegapproveShecduleExecution({
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegapproveShecduleExecution(
+          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> vegrejectShecduleExecution({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegrejectShecduleExecution(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+
+  Future<bool> endApproveExecution({
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegendApproveExecution(
+          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> endRejectExecution({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegendRejectExecution(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+  Future<bool> abandonedApproveExecution({
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegabandonedApproveExecution(
+          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> abandoneRejectExecution({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegabandoneRejectExecution(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
 
   void savePlanId({String? vegid}) async =>
       repository.saveValue(LocalKeys.vegid, vegid);
@@ -107,4 +168,5 @@ class VegExecutionUsecase {
   Future<String?> getExecutionId() async =>
       await repository.getStringValue(LocalKeys.vegexe);
   void clearExecutionId() => repository.clearData(LocalKeys.vegexe);
+  void clearPermitStoreData() async => repository.clearData(LocalKeys.permitId);
 }
