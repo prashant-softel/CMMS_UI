@@ -49,7 +49,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                     .value
                                                     ?.id !=
                                                 null)
-                                            ? "PMT${controller.mcExecutionDetailsModel.value?.id.toString() ?? ''}"
+                                            ? "MCP${controller.planId}"
                                             : '',
                                       ),
                                       JobDetailField(
@@ -74,6 +74,15 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                 .mcExecutionDetailsModel
                                                 .value
                                                 ?.plannedAt ??
+                                            '',
+                                      ),
+                                      JobDetailField(
+                                        title: 'Execution started by',
+                                        value: controller
+                                                .mcExecutionDetailsModel
+                                                .value
+                                                ?.startedBy
+                                                .toString() ??
                                             '',
                                       ),
                                     ]),
@@ -115,15 +124,6 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                 .mcExecutionDetailsModel
                                                 .value
                                                 ?.abandonedBy
-                                                .toString() ??
-                                            '',
-                                      ),
-                                      JobDetailField(
-                                        title: 'Execution started by',
-                                        value: controller
-                                                .mcExecutionDetailsModel
-                                                .value
-                                                ?.startedBy
                                                 .toString() ??
                                             '',
                                       ),
