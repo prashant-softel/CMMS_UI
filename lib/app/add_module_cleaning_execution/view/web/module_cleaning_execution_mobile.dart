@@ -1,5 +1,7 @@
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/job_details/views/widgets/job_detail_field.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +10,9 @@ import 'package:cmms/app/add_module_cleaning_execution/tbt_done_mc_dialog.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/add_module_cleaning_execution_dialog.dart';
 import 'package:cmms/app/widgets/execution_approve_dialog.dart';
+import 'package:cmms/app/add_module_cleaning_execution/reassign_dailog.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/widgets/abandon_all_dialog.dart';
 
 class McExecutionMobile extends StatefulWidget {
   const McExecutionMobile({Key? key}) : super(key: key);
@@ -569,6 +574,377 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                               ),
                             ),
                           ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            controller.mcExecutionDetailsModel.value?.status ==
+                                        387 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kModuleCleaningexeFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
+                                        0
+                                ? Container(
+                                    height: 28,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.blueColor,
+                                      text: "Re-assign",
+                                      onPressed: () {
+                                        Get.dialog<void>(AssignToMcDialog(
+                                          id: controller.mcExecutionDetailsModel
+                                                  .value?.executionId ??
+                                              0,
+                                        ));
+
+                                        // controller
+                                        //     .startMCExecutionButton();
+                                      },
+                                    ),
+                                  )
+                                : Dimens.box0,
+                            Dimens.boxWidth10,
+                            controller.mcExecutionDetailsModel.value?.status ==
+                                        360 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kModuleCleaningexeFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveEditAccess)
+                                            .length >
+                                        0
+                                ? Container(
+                                    height: 28,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.addNewColor,
+                                      text: "Start",
+                                      onPressed: () {
+                                        Get.dialog<void>(
+                                            CustomCalibrationDialog(
+                                          id: controller.mcExecutionDetailsModel
+                                                  .value?.executionId ??
+                                              0,
+                                          title: controller
+                                                  .mcExecutionDetailsModel
+                                                  .value
+                                                  ?.title ??
+                                              "",
+                                        ));
+
+                                        // controller
+                                        //     .startMCExecutionButton();
+                                      },
+                                    ),
+                                  )
+                                : Dimens.box0,
+                            // : Container(),
+
+                            Dimens.boxWidth10,
+
+                            controller.mcExecutionDetailsModel.value?.status ==
+                                            361 &&
+                                        varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id == UserAccessConstants.kModuleCleaningexeFeatureId &&
+                                                    e.edit ==
+                                                        UserAccessConstants
+                                                            .kHaveEditAccess)
+                                                .length >
+                                            0 ||
+                                    controller.mcExecutionDetailsModel.value?.status == 382 &&
+                                        varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id == UserAccessConstants.kModuleCleaningexeFeatureId &&
+                                                    e.edit ==
+                                                        UserAccessConstants
+                                                            .kHaveEditAccess)
+                                                .length >
+                                            0 ||
+                                    controller.mcExecutionDetailsModel.value?.status == 368 &&
+                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kModuleCleaningexeFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length > 0
+                                ? Container(
+                                    height: 28,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.cancelColor,
+                                      text: "Close",
+                                      onPressed: () {
+                                        controller.allScheduleTrue.value ==
+                                                false
+                                            ? Get.defaultDialog(
+                                                radius: 5,
+                                                title: 'Alert',
+                                                middleText:
+                                                    'Please complete the all schedules',
+                                                textConfirm: 'OK',
+                                                onConfirm: () {
+                                                  Get.back(); // Close the dialog
+                                                },
+                                                buttonColor:
+                                                    ColorValues.appGreenColor,
+                                                confirmTextColor: Colors.white,
+                                              )
+                                            : Get.dialog<void>(CustomCalibrationDialog(
+                                                id: controller
+                                                        .mcExecutionDetailsModel
+                                                        .value
+                                                        ?.executionId ??
+                                                    0,
+                                                title: controller
+                                                        .mcExecutionDetailsModel
+                                                        .value
+                                                        ?.title ??
+                                                    "",
+                                                starttype: 3));
+
+                                        // Get.dialog(EndMCExecutionDialog());
+                                      },
+                                    ),
+                                  )
+                                : Dimens.box0,
+
+                            // SizedBox(
+                            //   width: 10,
+                            // ),
+                            Dimens.boxWidth10,
+
+                            controller.mcExecutionDetailsModel.value?.status ==
+                                            361 &&
+                                        varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kModuleCleaningexeFeatureId &&
+                                                    e.edit ==
+                                                        UserAccessConstants
+                                                            .kHaveEditAccess)
+                                                .length >
+                                            0 ||
+                                    controller.mcExecutionDetailsModel.value
+                                                ?.status ==
+                                            368 &&
+                                        varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kModuleCleaningexeFeatureId &&
+                                                    e.edit ==
+                                                        UserAccessConstants
+                                                            .kHaveEditAccess)
+                                                .length >
+                                            0
+                                ? Container(
+                                    height: 28,
+                                    child: CustomElevatedButton(
+                                      backgroundColor:
+                                          Color.fromARGB(255, 244, 116, 248),
+                                      text: "Abandoned All",
+                                      onPressed: () {
+                                        Get.dialog(AbandonAllDialog(
+                                            id: controller
+                                                .mcExecutionDetailsModel
+                                                .value
+                                                ?.executionId));
+
+                                        // controller
+                                        //     .createEscalationMatrix();
+                                      },
+                                    ),
+                                  )
+                                : Dimens.box0,
+
+                            controller.mcExecutionDetailsModel.value?.status ==
+                                        363 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kModuleCleaningexeFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveEditAccess)
+                                            .length >
+                                        0
+                                ? Container(
+                                    height: 28,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.approveColor,
+                                      text: "Approve",
+                                      onPressed: () {
+                                        Get.dialog(CustonApproveRejectDialog(
+                                          text: "Execution Approve",
+                                          controller: controller,
+                                          buttonText: "Approve",
+                                          style:
+                                              Styles.greenElevatedButtonStyle,
+                                          onPressed: () {
+                                            controller.endApproveExecution(
+                                                controller
+                                                        .mcExecutionDetailsModel
+                                                        .value
+                                                        ?.executionId ??
+                                                    0);
+                                            Get.back();
+                                          },
+                                        ));
+
+                                        // Get.dialog(EndMCExecutionDialog());
+                                      },
+                                    ),
+                                  )
+                                : Dimens.box0,
+                            Dimens.boxWidth10,
+                            controller.mcExecutionDetailsModel.value?.status ==
+                                        363 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kModuleCleaningexeFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveEditAccess)
+                                            .length >
+                                        0
+                                ? Container(
+                                    height: 28,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.cancelColor,
+                                      text: "Reject",
+                                      onPressed: () {
+                                        Get.dialog(CustonApproveRejectDialog(
+                                          text: "Execution Reject",
+                                          controller: controller,
+                                          buttonText: "Reject",
+                                          style:
+                                              Styles.darkRedElevatedButtonStyle,
+                                          onPressed: () {
+                                            controller.endRejectExecution(
+                                                controller
+                                                        .mcExecutionDetailsModel
+                                                        .value
+                                                        ?.executionId ??
+                                                    0);
+                                            Get.back();
+                                          },
+                                        ));
+
+                                        // Get.dialog(EndMCExecutionDialog());
+                                      },
+                                    ),
+                                  )
+                                : Dimens.box0,
+                            controller.mcExecutionDetailsModel.value?.status ==
+                                        364 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kModuleCleaningexeFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveEditAccess)
+                                            .length >
+                                        0
+                                ? Container(
+                                    height: 28,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.approveColor,
+                                      text: "Approve",
+                                      onPressed: () {
+                                        Get.dialog(CustonApproveRejectDialog(
+                                          text: "Abandoned Approve",
+                                          controller: controller,
+                                          buttonText: "Approve",
+                                          style:
+                                              Styles.greenElevatedButtonStyle,
+                                          onPressed: () {
+                                            controller.abandonedApproveExecution(
+                                                controller
+                                                        .mcExecutionDetailsModel
+                                                        .value
+                                                        ?.executionId ??
+                                                    0);
+                                            Get.back();
+                                          },
+                                        ));
+
+                                        // Get.dialog(EndMCExecutionDialog());
+                                      },
+                                    ),
+                                  )
+                                : Dimens.box0,
+                            Dimens.boxWidth10,
+                            controller.mcExecutionDetailsModel.value?.status ==
+                                        364 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kModuleCleaningexeFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveEditAccess)
+                                            .length >
+                                        0
+                                ? Container(
+                                    height: 28,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.cancelColor,
+                                      text: "Reject",
+                                      onPressed: () {
+                                        Get.dialog(CustonApproveRejectDialog(
+                                          text: "Abandoned Reject",
+                                          controller: controller,
+                                          buttonText: "Reject",
+                                          style:
+                                              Styles.darkRedElevatedButtonStyle,
+                                          onPressed: () {
+                                            controller.abandoneRejectExecution(
+                                                controller
+                                                        .mcExecutionDetailsModel
+                                                        .value
+                                                        ?.executionId ??
+                                                    0);
+                                            Get.back();
+                                          },
+                                        ));
+
+                                        // Get.dialog(EndMCExecutionDialog());
+                                      },
+                                    ),
+                                  )
+                                : Dimens.box0,
+
+                            //           varUserAccessModel.value.access_list!
+                            // .where((e) => e.feature_id == 3 && e.edit == 1)
+                            // .length > 0
+                            // &&
+                            // controller.incidentReportDetailsModel
+                            //             .value?.id !=
+                            //         null
+                            //     ? CustomElevatedButton(
+                            //         icon: Icons.edit,
+                            //         backgroundColor: Colors.green,
+                            //         onPressed: () {
+                            //           // controller.saveAsDraft();
+                            //           controller.editIncidentReport(
+                            //               id: controller
+                            //                   .incidentReportDetailsModel
+                            //                   .value
+                            //                   ?.id);
+                            //         },
+                            //         text: 'Edit',
+                            //       )
+                            //     : Container()
+                          ],
                         ),
                       ],
                     ),

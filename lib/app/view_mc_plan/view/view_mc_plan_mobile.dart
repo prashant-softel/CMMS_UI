@@ -374,7 +374,7 @@ class _ViewMcPlanMobileState extends State<ViewMcPlanMobile> {
                                   controller.historyList!.isEmpty
                                       ? Dimens.box0
                                       : Text(
-                                          "PM History ",
+                                          "MC History ",
                                           style: Styles.blue700,
                                         ),
                                   controller.historyList!.isEmpty
