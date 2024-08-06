@@ -116,7 +116,9 @@ class PreventiveCheckPointController extends GetxController {
         Future.delayed(Duration(seconds: 2), () {
           getPreventiveCheckList(facilityId, type.value);
           getCheckPointlist(
-              selectedchecklistId: 0.toString(), facilityId: facilityId);
+              selectedchecklistId: 0.toString(),
+              facilityId: facilityId,
+              type: type.value);
         });
       });
       // }
@@ -259,7 +261,8 @@ class PreventiveCheckPointController extends GetxController {
       Fluttertoast.showToast(
           msg:
               "Please enter required field and Failure waightage must be number beetween 1-100",
-          fontSize: 16.0,timeInSecForIosWeb: 5);
+          fontSize: 16.0,
+          timeInSecForIosWeb: 5);
     } else {
       CheckpointType checkpoint_type = CheckpointType(
           id: checkpointType.value == "Text"
@@ -278,7 +281,8 @@ class PreventiveCheckPointController extends GetxController {
           checkpoint_type: checkpoint_type,
           is_document_required: isToggleOn.value ? 1 : 0,
           id: 0,
-          status: 1);
+          status: 1,
+          type: type.value);
       var checkpointJsonString = [
         createCheckpoint.toJson()
       ]; //createCheckPointToJson([createCheckpoint]);
@@ -296,7 +300,8 @@ class PreventiveCheckPointController extends GetxController {
   Future<void> getCheckPointlist(
       {required String selectedchecklistId,
       required int facilityId,
-      bool? isExport}) async {
+      bool? isExport,
+      int? type}) async {
     preventiveCheckpoint?.value = <CheckPointModel>[];
     BufferPreventiveCheckPoint?.value = <CheckPointModel>[];
 
@@ -307,7 +312,8 @@ class PreventiveCheckPointController extends GetxController {
             ),
             isLoading: isLoading.value,
             facilityId: facilityId,
-            isExport: isExport);
+            isExport: isExport,
+            type: type);
 
     if (_preventiveCheckpoint != null) {
       preventiveCheckpoint!.value = _preventiveCheckpoint;
@@ -355,7 +361,9 @@ class PreventiveCheckPointController extends GetxController {
     checkpointType.value = '';
     Future.delayed(Duration(seconds: 1), () {
       getCheckPointlist(
-          selectedchecklistId: 0.toString(), facilityId: facilityId);
+          selectedchecklistId: 0.toString(),
+          facilityId: facilityId,
+          type: type.value);
     });
     Future.delayed(Duration(seconds: 4), () {
       isSuccess.value = false;
@@ -406,7 +414,8 @@ class PreventiveCheckPointController extends GetxController {
                       Get.back();
                       getCheckPointlist(
                           selectedchecklistId: 0.toString(),
-                          facilityId: facilityId);
+                          facilityId: facilityId,
+                          type: type.value);
                     });
                   },
                   text: 'Yes'),
@@ -429,7 +438,8 @@ class PreventiveCheckPointController extends GetxController {
             cleardata();
             getCheckPointlist(
                 selectedchecklistId: selectedchecklistId.value,
-                facilityId: facilityId);
+                facilityId: facilityId,
+                type: type.value);
           } else {
             // selectedchecklistId=0;
           }
@@ -483,7 +493,8 @@ class PreventiveCheckPointController extends GetxController {
         is_document_required: isToggleOn.value ? 1 : 0,
         failure_weightage: _failurewtg,
         checkpoint_type: checkpoint_type,
-        status: 1);
+        status: 1,
+        type: type.value);
     var checkpointJsonString =
         createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
 
@@ -499,7 +510,8 @@ class PreventiveCheckPointController extends GetxController {
     getCheckPointlist(
         selectedchecklistId: 0.toString(),
         facilityId: facilityId,
-        isExport: true);
+        isExport: true,
+        type: type.value);
   }
 
   void checkFormCheck() {

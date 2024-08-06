@@ -5336,9 +5336,9 @@ class Repository {
               ? Get.offAllNamed(Routes.pmTaskView)
               : type == 1
                   ? Get.offAllNamed(Routes.jobDetails)
-                  // : type == 3
-                  //     ? Get.offAllNamed(Routes.viewAuditTask)
-                  : Get.offAllNamed(Routes.newPermitList);
+                  : type == 3
+                      ? Get.offAllNamed(Routes.viewAuditTask)
+                      : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -6572,6 +6572,7 @@ class Repository {
       return false;
     }
   }
+
   Future<bool> assignToVeg({
     int? assignId,
     int? taskId,
@@ -6598,8 +6599,6 @@ class Repository {
       return false;
     }
   }
-
-
 
   Future<List<EmployeeModel?>?> getAssignedToList(
     String? auth,
@@ -7277,7 +7276,7 @@ class Repository {
   }
 
   Future<List<CheckPointModel?>?> getCheckPointlist(int? selectedchecklistId,
-      bool? isLoading, int? facilityId, bool? isExport) async {
+      bool? isLoading, int? facilityId, bool? isExport, int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       //print({"checkid", selectedchecklistId});
@@ -7285,7 +7284,8 @@ class Repository {
           auth: auth,
           selectedchecklistId: selectedchecklistId ?? 0,
           isLoading: isLoading ?? false,
-          facilityId: facilityId);
+          facilityId: facilityId,
+          type: type);
       //print({"checkpoint list", res.data});
       if (!res.hasError) {
         final jsonPreventiveCheckPointModels = jsonDecode(res.data);
@@ -13930,7 +13930,8 @@ class Repository {
     }
   }
 
-  Future<bool> vegendRejectExecution({bool? isLoading, rejecttoJsonString}) async {
+  Future<bool> vegendRejectExecution(
+      {bool? isLoading, rejecttoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);

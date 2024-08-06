@@ -1512,12 +1512,14 @@ class DataRepository extends DomainRepository {
           {required String auth,
           int? selectedchecklistId,
           bool? isLoading,
-          int? facilityId}) async =>
+          int? facilityId,
+          int? type}) async =>
       await connectHelper.getCheckPointlist(
           auth: auth,
           selectedchecklistId: selectedchecklistId ?? 0,
           isLoading: isLoading ?? false,
-          facilityId: facilityId);
+          facilityId: facilityId,
+          type: type);
 
   Future<ResponseModel> getFacilityList({
     String? auth,
