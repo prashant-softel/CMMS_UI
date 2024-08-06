@@ -418,10 +418,10 @@ class FaultyStockReportListDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.insetedFilterText.value.toLowerCase()) &&
-          (faulty?.qty ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.quantityFilterText.value.toLowerCase()) &&
+          // (faulty?.qty ?? '')
+          //     .toString()
+          //     .toLowerCase()
+          //     .contains(controller.quantityFilterText.value.toLowerCase()) &&
           (faulty?.remarks ?? '')
               .toString()
               .toLowerCase()
@@ -436,56 +436,74 @@ class FaultyStockReportListDataSource extends DataTableSource {
     // print({"filteredFaultyStockList": filteredFaultyStockList});
   }
 
-  @override
-  DataRow? getRow(int index) {
-    // print({"getRow call"});
-    final faultyDetails = filteredFaultyStockList[index];
+@override
+DataRow? getRow(int index) {
+  final faultyDetails = filteredFaultyStockList[index];
 
-    // controller.MrsId.value = MrsDetails?.asset_name ?? 0;
-    var cellsBuffer = [
-      '${faultyDetails?.asset_name ?? ''}',
-      '${faultyDetails?.serial_number ?? ''}',
-      // '${faultyDetails?.replaceSerialNo ?? ''}',
-      '${faultyDetails?.lastInsetedDateTime ?? ''}',
-      '${faultyDetails?.qty ?? ''}',
-      '${faultyDetails?.remarks ?? ''}',
-      '${faultyDetails?.createdByName ?? ''}',
-    ];
-    var cells = [];
-    int i = 0;
+  var cellsBuffer = [
+    '${faultyDetails?.asset_name ?? ''}',
+    '${faultyDetails?.serial_number ?? ''}',
+    '${faultyDetails?.lastInsetedDateTime ?? ''}',
+    '${faultyDetails?.remarks ?? ''}',
+    '${faultyDetails?.createdByName ?? ''}',
+  ];
+  var cells = [];
+  int i = 0;
 
-    for (var entry in controller.columnVisibility.value.entries) {
-      // print({"entry.value entry": entry});
-      if (entry.key == "search") {
-        return null;
-      }
-      if (entry.value) {
-        // print({"entry.value removed": entry.key});
-        cells.add(cellsBuffer[i]);
-      }
-      i++;
+  for (var entry in controller.columnVisibility.value.entries) {
+    if (entry.key == "search") {
+      return null;
     }
-
-    // print({"cell": cells});
-    return DataRow.byIndex(
-      index: index,
-      cells: cells.map((value) {
-        return DataCell(
-          Padding(
-            padding: EdgeInsets.zero,
-            child: Text(value.toString()),
+    if (entry.value) {
+      // Check if the column is "Serial Number"
+      if (entry.key == "Serial Number") {
+        // Align the value for the "Serial Number" column with padding
+        cells.add(
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0), // Adjust padding as needed
+              child: Text(cellsBuffer[i]),
+            ),
           ),
         );
-      }).toList(),
-      //   ],
-      onSelectChanged: (_) {
-        // final _flutterSecureStorage = const FlutterSecureStorage();
-
-        // _flutterSecureStorage.delete(key: "mrsId");
-        // Get.toNamed(Routes.mrsViewScreen, arguments: {'mrsId': MrsDetails?.id});
-      },
-    );
+      }
+      else if(entry.key == "Inserted DateTime"){
+        cells.add(
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0), // Adjust padding as needed
+              child: Text(cellsBuffer[i]),
+            ),
+          ),
+        );
+      }
+      
+       else {
+        // Add the value as it is for other columns
+        cells.add(Text(cellsBuffer[i]));
+      }
+    }
+    i++;
   }
+
+  return DataRow.byIndex(
+    index: index,
+    cells: cells.map((value) {
+      return DataCell(
+        Padding(
+          padding: EdgeInsets.zero,
+          child: value,
+        ),
+      );
+    }).toList(),
+    onSelectChanged: (_) {
+      // Handle row selection if needed
+    },
+  );
+}
+
 
   @override
   int get rowCount => filteredFaultyStockList.length;

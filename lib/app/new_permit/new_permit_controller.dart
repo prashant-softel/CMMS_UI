@@ -20,6 +20,7 @@ import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
+import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cmms/domain/models/equipment_model.dart';
@@ -396,6 +397,7 @@ class NewPermitController extends GetxController {
   Rx<bool> isChecked = false.obs;
   JobDetailsModel? jobModel;
   EndMCExecutionDetailsModel? mcExecutionDetailsModel;
+  VegExecutionDetailsModel? vegExecutionDetailsModel;
   PmtaskViewModel? pmtaskViewModel;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoint;
   int? jcId = 0;
@@ -524,6 +526,7 @@ class NewPermitController extends GetxController {
       JobDetailsModel? jobDetail;
       PmtaskViewModel? pmdetail;
       EndMCExecutionDetailsModel? mcdetail;
+      VegExecutionDetailsModel? vegdetail;
 
       final _permitId = await permitPresenter.getValue();
       final _type = await permitPresenter.getValuee();
@@ -547,7 +550,11 @@ class NewPermitController extends GetxController {
         typee.value = dataFromPreviousScreen['type'];
         jobModel = dataFromPreviousScreen['jobModel'];
         scheduleID.value = dataFromPreviousScreen['scheduleID'];
-        mcExecutionDetailsModel = dataFromPreviousScreen['mcModel'];
+        if (typee.value == 4) {
+          mcExecutionDetailsModel = dataFromPreviousScreen['mcModel'];
+        } else if (typee.value == 5) {
+          vegExecutionDetailsModel = dataFromPreviousScreen['vegModel'];
+        }
         pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];
         permitPresenter.saveValue(permitId: permitId.value.toString());
         permitPresenter.saveValuee(type: typee.value.toString());
@@ -577,6 +584,10 @@ class NewPermitController extends GetxController {
         }
         if (mcdetail != null) {
           mcExecutionDetailsModel = mcdetail;
+          //  scheduleID.value = int.tryParse(_type!) ?? 0;
+        }
+        if (vegdetail != null) {
+          vegExecutionDetailsModel = vegdetail;
           //  scheduleID.value = int.tryParse(_type!) ?? 0;
         }
         isChecked.value = _isChecked ?? false;

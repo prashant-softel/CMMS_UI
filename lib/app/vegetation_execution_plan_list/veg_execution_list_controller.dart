@@ -205,7 +205,7 @@ class VegExecutionListController extends GetxController {
       isLoading.value = false;
     }
 
-    // update(['veg_task_list']);
+    update(['veg_task_list']);
   }
 
   void onValueChanged(dynamic list, dynamic value) {

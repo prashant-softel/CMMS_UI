@@ -303,7 +303,8 @@ class PreventiveMaintenanceExecutionContentWeb
                                               cells: record.map((mapData) {
                                                 return DataCell(
                                                   (mapData['key'] == "dropdown")
-                                                      ? Row(
+                                                      ?
+                                                       Row(
                                                           children: [
                                                             Container(
                                                               height: 25,
