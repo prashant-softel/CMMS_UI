@@ -375,10 +375,10 @@ class AddModuleCleaningExecutionController extends GetxController {
       List<int> abandonedEquipmentIds = [];
       equipmenTasktList.forEach((e) {
         e?.smbs.forEach((element) {
-          if (element.isAbandonSmbCheck!) {
+          if (element.isAbandonSmbCheck! && element.isPending != 0) {
             abandonedEquipmentIds.add(element.smbId ?? 0);
           }
-          if (element.isCleanedSmbCheck!) {
+          if (element.isCleanedSmbCheck! && element.isPending != 0) {
             cleanedEquipmentIds.add(element.smbId!);
           }
         });
@@ -387,15 +387,16 @@ class AddModuleCleaningExecutionController extends GetxController {
 
       UpdateMcScheduleExecutionModel updateMCScheduleExecutionModel =
           UpdateMcScheduleExecutionModel(
-              executionId: mcid.value,
-              scheduleId: scheduleId,
-              cleaningDay: cleaningDay,
-              // waterUsed: int.tryParse('${rowItem.value[0][7]["value"]}'),
-              waterUsed: waterUsed == null ? 0 : waterUsed,
-              remark: remark == null ? "" : remark,
-              // remark: rowItem.value[0][8]["value"],
-              cleanedEquipmentIds: cleanedEquipmentIds,
-              abandonedEquipmentIds: abandonedEquipmentIds);
+        executionId: mcid.value,
+        scheduleId: scheduleId,
+        cleaningDay: cleaningDay,
+        // waterUsed: int.tryParse('${rowItem.value[0][7]["value"]}'),
+        waterUsed: waterUsed == null ? 0 : waterUsed,
+        remark: remark == null ? "" : remark,
+        // remark: rowItem.value[0][8]["value"],
+        cleanedEquipmentIds: cleanedEquipmentIds,
+        abandonedEquipmentIds: abandonedEquipmentIds,
+      );
 
       var updateMCScheduleExecutionJsonString =
           updateMCScheduleExecutionModel.toJson();
