@@ -1,6 +1,7 @@
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/job_details/views/widgets/job_detail_field.dart';
+import 'package:cmms/app/widgets/add_module_cleaning_execution_mobile_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:cmms/app/add_module_cleaning_execution/custom_confirmation_dialog.dart';
 import 'package:cmms/app/add_module_cleaning_execution/tbt_done_mc_dialog.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/widgets/add_module_cleaning_execution_dialog.dart';
 import 'package:cmms/app/widgets/execution_approve_dialog.dart';
 import 'package:cmms/app/add_module_cleaning_execution/reassign_dailog.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
@@ -342,7 +342,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                       "${e?.scheduleId}" ==
                                                                       record[0][
                                                                           'value']);
-                                                              Get.dialog(AddModuleCleaningExecutionDialog(
+                                                              Get.dialog(AddModuleCleaningExecutionMobileDialog(
                                                                   scheduleId:
                                                                       filterdData!
                                                                           .scheduleId,
@@ -441,7 +441,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                       "${e?.scheduleId}" ==
                                                                       record[0][
                                                                           'value']);
-                                                              Get.dialog(AddModuleCleaningExecutionDialog(
+                                                              Get.dialog(AddModuleCleaningExecutionMobileDialog(
                                                                   scheduleId:
                                                                       filterdData!
                                                                           .scheduleId,
