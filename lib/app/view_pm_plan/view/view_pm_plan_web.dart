@@ -426,8 +426,10 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                               ),
                                             )
                                           : Container(
-                                              color: Colors.red,
-                                              child: Text('History is empty'),
+                                              child: Padding(
+                                                padding: const EdgeInsets.fromLTRB(12,0,8,0),
+                                                child: Text('History is empty'),
+                                              ),
                                             )
                                     ],
                                   ),

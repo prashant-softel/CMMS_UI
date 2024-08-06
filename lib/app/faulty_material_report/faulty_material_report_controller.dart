@@ -46,7 +46,7 @@ class FaultyMaterialReportController extends GetxController {
   RxString serialNoFilterText = ''.obs;
   RxString replaceFilterText = ''.obs;
   RxString insetedFilterText = ''.obs;
-  RxString quantityFilterText = ''.obs;
+ // RxString quantityFilterText = ''.obs;
   RxString remarkFilterText = ''.obs;
   RxString createdByNameFilterText = ''.obs;
 
@@ -54,18 +54,18 @@ class FaultyMaterialReportController extends GetxController {
     "Assets Name": true,
     "Serial Number": true,
     // "Replace Serial No.": true,
-    "Inseted DateTime": true,
-    "quantity": true,
+    "Inserted DateTime": true,
+   // "quantity": true,
     "Remark": true,
-    "Created By": true
+    "Returned By": true
   });
   final Map<String, double> columnwidth = {
-    "Assets Name": 300,
-    "Serial Number": 250,
+    "Assets Name": 350,
+    "Serial Number": 200,
     // "Replace Serial No.": 250,
-    "Inseted DateTime": 200,
-    "quantity": 100,
-    "Remark": 300,
+    "Inserted DateTime": 225,
+   // "quantity": 100,
+    "Remark": 150,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -83,10 +83,10 @@ class FaultyMaterialReportController extends GetxController {
       "Assets Name": assetNameFilterText,
       "Serial Number": serialNoFilterText,
       // "Replace Serial No.": replaceFilterText,
-      "Inseted DateTime": insetedFilterText,
-      "quantity": quantityFilterText,
+      "Inserted DateTime": insetedFilterText,
+     // "quantity": quantityFilterText,
       "Remark": remarkFilterText,
-      "Created By": createdByNameFilterText,
+      "Returned By": createdByNameFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
