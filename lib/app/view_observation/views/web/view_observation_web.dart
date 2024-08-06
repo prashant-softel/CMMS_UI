@@ -136,7 +136,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                   ),
                                   Container(
                                     margin: EdgeInsets.symmetric(
-                                      horizontal: 60,
+                                      horizontal: 50,
                                       vertical: 30,
                                     ),
                                     child: Column(
@@ -192,7 +192,8 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             ),
                                                           ],
                                                         ),
-                                                        Dimens.boxWidth10,
+                                                        // Dimens.boxWidth10,
+                                                        SizedBox(width: 10),
                                                         Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
@@ -263,7 +264,8 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                           ],
                                                         ),
                                                         
-                                                        Dimens.boxWidth10,
+                                                        // Dimens.boxWidth10,
+                                                         SizedBox(width: 10),
                                                         Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
@@ -378,7 +380,8 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                         //   ],
                                         // ),
                      
-                                        Dimens.boxHeight20,
+                                        // Dimens.boxHeight20,
+                                         SizedBox(height: 20),
                                         (controller.historyList != null &&
                                                 controller
                                                     .historyList!.isNotEmpty)
