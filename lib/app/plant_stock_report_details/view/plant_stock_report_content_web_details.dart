@@ -134,71 +134,74 @@ class _PlantStockReportDetailsWebState
                                     ),
                                   ),
                                   Dimens.boxHeight20,
-                                  Container(
-                                    color: Color.fromARGB(255, 245, 248, 250),
-                                    height: Get.height * .7,
-                                    width: Get.width * .92,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: controller
-                                          .plantStockReportByMonthList.length,
-                                      itemBuilder: (context, index) {
-                                        final item = controller
-                                            .plantStockReportByMonthList[index];
-
-                                        return Container(
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
+                                  controller.plantDetailList.isEmpty == true &&
+                                          controller.isLoading == false
+                                      ? Center(child: Text('No data'))
+                                      : controller.isLoading.value == true
+                                          ? Center(
+                                              child: Text("Data Loading......"))
+                                          : Container(
                                               color: Color.fromARGB(
-                                                  255, 227, 224, 224),
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Color.fromARGB(
-                                                        255, 236, 234, 234)
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          height: 500,
-                                          margin: EdgeInsets.all(15),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(15),
-                                                child: Text(
-                                                  "Asset Name : ${controller.assetItemName} (${controller.assetType})",
-                                                  style: Styles.blue17,
-                                                ),
-                                              ),
-                                              Divider(
-                                                color:
-                                                    ColorValues.greyLightColour,
-                                              ),
-                                              controller.plantDetailList
-                                                              .isEmpty ==
-                                                          true &&
-                                                      controller.isLoading ==
-                                                          false
-                                                  ? Center(
-                                                      child: Text('No data'))
-                                                  : controller.isLoading
-                                                              .value ==
-                                                          true
-                                                      ? Center(
+                                                  255, 245, 248, 250),
+                                              height: Get.height * .7,
+                                              width: Get.width * .92,
+                                              child: ListView.builder(
+                                                shrinkWrap: true,
+                                                itemCount: controller
+                                                    .plantStockReportByMonthList
+                                                    .length,
+                                                itemBuilder: (context, index) {
+                                                  final item = controller
+                                                          .plantStockReportByMonthList[
+                                                      index];
+
+                                                  return Container(
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 227, 224, 224),
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromARGB(
+                                                                  255,
+                                                                  236,
+                                                                  234,
+                                                                  234)
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    height: 500,
+                                                    margin: EdgeInsets.all(15),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15),
                                                           child: Text(
-                                                              "Data Loading......"))
-                                                      : Expanded(
+                                                            "Asset Name : ${controller.assetItemName} (${controller.assetType})",
+                                                            style:
+                                                                Styles.blue17,
+                                                          ),
+                                                        ),
+                                                        Divider(
+                                                          color: ColorValues
+                                                              .greyLightColour,
+                                                        ),
+                                                        Expanded(
                                                           child: DataTable2(
                                                             headingRowHeight:
                                                                 70,
@@ -277,7 +280,7 @@ class _PlantStockReportDetailsWebState
                                                                       .blue17,
                                                                 ),
                                                               ),
-                                                               DataColumn2(
+                                                              DataColumn2(
                                                                 // size: ColumnSize.S,
                                                                 fixedWidth: 100,
                                                                 label: Text(
@@ -312,13 +315,13 @@ class _PlantStockReportDetailsWebState
                                                             ),
                                                           ),
                                                         ),
-                                              Dimens.boxHeight20,
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
+                                                        Dimens.boxHeight20,
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
                                 ],
                               ),
                             ),
@@ -376,11 +379,11 @@ class _PlantStockReportDetailsWebState
     double internaltotoal = 0;
     double avialableqty = 0;
 
-
     double total = opening;
     List<String> isinward = List<String>.filled(plantdetails?.length ?? 0, '');
     List<String> isoutward = List<String>.filled(plantdetails?.length ?? 0, '');
-    List<String> isinternal = List<String>.filled(plantdetails?.length ?? 0, '');
+    List<String> isinternal =
+        List<String>.filled(plantdetails?.length ?? 0, '');
     List<String> isfaulty = List<String>.filled(plantdetails?.length ?? 0, '');
 
     List<DataRow> rows = [];
@@ -403,7 +406,7 @@ class _PlantStockReportDetailsWebState
           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('', style: Styles.black14)),
-           DataCell(Text('', style: Styles.black14)),
+          DataCell(Text('', style: Styles.black14)),
           DataCell(Text('', style: Styles.black14)),
         ],
       ),
@@ -414,28 +417,25 @@ class _PlantStockReportDetailsWebState
         if (plantdetails[i].fromActorType1 == 'Vendor' &&
             plantdetails[i].toActorType1 == 'Store') {
           isinward[i] = plantdetails[i].qty.toString();
-          total=total+plantdetails[i].qty;
-         
+          total = total + plantdetails[i].qty;
         } else if (plantdetails[i].fromActorType1 == 'Store' &&
                 plantdetails[i].toActorType1 == 'Task' ||
             plantdetails[i].toActorType1 == 'JobCard') {
           isinternal[i] = plantdetails[i].qty.toString();
-           internaltotoal=internaltotoal+plantdetails[i].qty ;
-
+          internaltotoal = internaltotoal + plantdetails[i].qty;
         } else if (plantdetails[i].fromActorType1 == 'Task' ||
             plantdetails[i].fromActorType1 == 'JobCard' &&
                 plantdetails[i].toActorType1 == 'Store') {
-          
           isinternal[i] = '-${plantdetails[i].qty}';
-           internaltotoal=internaltotoal-plantdetails[i].qty ;
-        }else if (plantdetails[i].fromActorType1 == 'Inventory' && plantdetails[i].toActorType1=='NonOperational'){
-                isfaulty[i]=plantdetails[i].qty.toString();
-
-        }else {
+          internaltotoal = internaltotoal - plantdetails[i].qty;
+        } else if (plantdetails[i].fromActorType1 == 'Inventory' &&
+            plantdetails[i].toActorType1 == 'NonOperational') {
+          isfaulty[i] = plantdetails[i].qty.toString();
+        } else {
           isoutward[i] = plantdetails[i].qty.toString();
-          total=total-plantdetails[i].qty;
+          total = total - plantdetails[i].qty;
           isinternal[i] = '-${plantdetails[i].qty}';
-          internaltotoal=internaltotoal-plantdetails[i].qty ;
+          internaltotoal = internaltotoal - plantdetails[i].qty;
         }
         if (total != '' && internaltotoal != '') {
           avialableqty = total - internaltotoal;
@@ -495,7 +495,6 @@ class _PlantStockReportDetailsWebState
               DataCell(
                 Text(isfaulty[i], style: Styles.black14),
               ),
-              
               DataCell(
                 Text('$avialableqty', style: Styles.black14),
 
@@ -510,31 +509,29 @@ class _PlantStockReportDetailsWebState
       }
     }
     double Inwardsum = isinward
-      .map((e) => e.isEmpty ? 0.0 : double.parse(e))
-      .reduce((a, b) => a + b);
+        .map((e) => e.isEmpty ? 0.0 : double.parse(e))
+        .reduce((a, b) => a + b);
 
-      double Outwardsum = isoutward
-      .map((e) => e.isEmpty ? 0.0 : double.parse(e))
-      .reduce((a, b) => a + b);
+    double Outwardsum = isoutward
+        .map((e) => e.isEmpty ? 0.0 : double.parse(e))
+        .reduce((a, b) => a + b);
 
-       double internalsum = isinternal
-      .map((e) => e.isEmpty ? 0.0 : double.parse(e))
-      .reduce((a, b) => a + b);
+    double internalsum = isinternal
+        .map((e) => e.isEmpty ? 0.0 : double.parse(e))
+        .reduce((a, b) => a + b);
 
-      double Faultysum = isfaulty
-      .map((e) => e.isEmpty ? 0.0 : double.parse(e))
-      .reduce((a, b) => a + b);
+    double Faultysum = isfaulty
+        .map((e) => e.isEmpty ? 0.0 : double.parse(e))
+        .reduce((a, b) => a + b);
 
     rows.add(
-      
       DataRow(
         cells: [
           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('Total Quantity', style: Styles.green700)),
           DataCell(Text('', style: Styles.black14)),
           DataCell(Text('${Inwardsum}', style: Styles.green700)),
-          DataCell(Text('${Outwardsum}',
-              style: Styles.Red700)),
+          DataCell(Text('${Outwardsum}', style: Styles.Red700)),
           DataCell(Text(' ${total}', style: Styles.black14)),
           // DataCell(Text('${isinternal.fold(0, (prev, element) => prev + element)}',
           // style: Styles.black14)),

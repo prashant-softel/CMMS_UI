@@ -242,7 +242,7 @@ class CreateObservationController extends GetxController {
   }
 
   void checkObs() {
-    if (incidenttypeId == 0) {
+    if (selectedRiskTypeList.value == '') {
       isRiskTypeListSelected.value = false;
       isFormInvalid.value = true;
     }
@@ -274,11 +274,11 @@ class CreateObservationController extends GetxController {
       isFormInvalid.value = true;
     }
 
-    if (typeOfObsId == 0) {
+    if (selectedTypeOfObs.value == '') {
       isSelectedTypeOfObs.value = false;
       isFormInvalid.value = true;
     }
-    if (sourceOfObsId == 0) {
+    if (selectedSourceOfObs.value == '') {
       isSelectedSourceOfObs.value = false;
       isFormInvalid.value = true;
     }
