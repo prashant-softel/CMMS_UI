@@ -81,7 +81,7 @@ class MCSetEquipmentMobile extends GetView<ModuleCleaningPlanningController> {
                     Divider(
                       thickness: 2,
                     )
-                  ]..addAll(controller.equipmentList.map((e) {
+                  ]..addAll(controller.equipmentList.value.map((e) {
                           return Padding(
                             padding: const EdgeInsets.only(left: 20, right: 20),
                             child: Column(

@@ -183,6 +183,63 @@ class _ModuleCleaningPlanMobileState extends State<ModuleCleaningPlanMobile> {
                             Center(
                               child: InkWell(
                                 onTap: () {
+                                  if (controller.id != 0) {
+                                    var selectedEqp = [];
+                                    controller
+                                        .mcPlanDetailsModel.value?.schedules
+                                        .forEach((schedule) {
+                                      schedule.equipments?.forEach((element) {
+                                        var ee = element;
+                                        ee!.cleaningDay = schedule.cleaningDay;
+                                        ;
+                                        selectedEqp.add(element);
+                                        print(element?.toJson());
+                                      });
+                                    });
+                                    selectedEqp.forEach((element) {
+                                      try {
+                                        var selectedParentIndex = controller
+                                            .equipmentList.value
+                                            .indexWhere((eqp) =>
+                                                eqp?.invId == element.parentId);
+                                        print({
+                                          "selectedParentIndex":
+                                              selectedParentIndex
+                                        });
+                                        if (selectedParentIndex > -1) {
+                                          var selectedChildIndex = controller
+                                                  .equipmentList
+                                                  .value[selectedParentIndex]
+                                                  ?.smbs
+                                                  .indexWhere((smb) =>
+                                                      smb.smbId ==
+                                                      element.id) ??
+                                              -1;
+
+                                          if (selectedChildIndex > -1) {
+                                            var ss = controller
+                                                .equipmentList
+                                                .value[selectedParentIndex]
+                                                ?.smbs[selectedChildIndex];
+                                            ss?.selectedDay =
+                                                "${element.cleaningDay}";
+                                            controller
+                                                    .equipmentList
+                                                    .value[selectedParentIndex]
+                                                    ?.smbs[selectedChildIndex] =
+                                                ss!;
+                                          }
+                                          print({
+                                            "selectedChildIndex":
+                                                selectedChildIndex
+                                          });
+                                        }
+                                      } catch (e) {
+                                        print({"eadfds": e});
+                                      }
+                                    });
+                                  }
+
                                   controller.isFormInvalid.value = false;
                                   // controller.checkForm();
                                   if (controller.isFormInvalid.value) {

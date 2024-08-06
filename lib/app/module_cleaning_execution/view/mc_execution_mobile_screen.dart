@@ -43,14 +43,19 @@ class ModuleCleaningListExecutionMobile
                                 MCTaskListModel();
                             return GestureDetector(
                               onTap: () {
-                                // controller.clearStoreData();
-                                int id = mcTaskModel.executionId ?? 0;
-                                int planId = mcTaskModel.planId ?? 0;
-
-                                Get.toNamed(
-                                  Routes.addModuleCleaningExecutionContentWeb,
-                                  arguments: {'mcid': id, 'planId': planId},
-                                );
+                                int id = mcTaskModel?.executionId ?? 0;
+                                int planId = mcTaskModel?.planId ?? 0;
+                                if (id != 0) {
+                                  controller.clearStoreDataMcid();
+                                  controller.clearStoreDataPlanid();
+                                  Get.toNamed(
+                                      Routes
+                                          .addModuleCleaningExecutionContentWeb,
+                                      arguments: {
+                                        "mcid": id,
+                                        "planId": planId
+                                      });
+                                }
                               },
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 10),
