@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/attendance_screen/attendance_controller.dart';
+import 'package:cmms/app/attendance_screen/view/attendance_mobile.dart';
 import 'package:cmms/app/attendance_screen/view/attendance_web.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
@@ -15,7 +16,9 @@ class AttendanceScreen extends GetView<AttendanceController> {
       child: Scaffold(
         appBar: Responsive.isMobile(context) || Responsive.isTablet(context)
             ? AppBar(
-                title: HeadingProfileAppBar(title: "Attendance"),
+                title: HeadingProfileAppBar(
+                  title: "Mark Attendance",
+                ),
               )
             : null,
         drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
@@ -41,7 +44,7 @@ class AttendanceScreen extends GetView<AttendanceController> {
                       children: [
                         if (Responsive.isMobile(context))
                           Expanded(
-                            child: Text("Data Coming Soon..."),
+                            child: AttendanceMobile(),
                           ),
                         if (Responsive.isDesktop(context))
                           Expanded(
