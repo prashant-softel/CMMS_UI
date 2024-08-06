@@ -155,6 +155,7 @@ class PlantStockReportDetailsController extends GetxController {
       //     (element) => element?.facilityID != 0);
       for (var plantDetail in plantStockReportByMonthList) {
         plantDetailList.value = plantDetail?.details ?? [];
+        isLoading.value=false;
         plantDetails = plantDetailList
             .firstWhere((element) => element?.assetItemName != null);
         assetItemName.value = plantDetails?.assetItemName;
@@ -164,6 +165,7 @@ class PlantStockReportDetailsController extends GetxController {
       }
 
     }
-    isLoading.value=false;
+    
+    
   }
 }

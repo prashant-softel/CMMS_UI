@@ -43,7 +43,7 @@ class StockManagementGoodsOrdersController extends GetxController {
   RxString orderDateFilterText = ''.obs;
   RxString costFilterText = ''.obs;
   RxString currencyFilterText = ''.obs;
-  RxString statusFilterText = ''.obs;
+  // RxString statusFilterText = ''.obs;
 
   RxString vendorFilterText = ''.obs;
 
@@ -57,7 +57,7 @@ class StockManagementGoodsOrdersController extends GetxController {
     "PO Date": true,
     "Total Cost": true,
     "Currency": true,
-    "Status": true,
+    // "Status": true,
 
     // "search": true,
   });
@@ -69,7 +69,7 @@ class StockManagementGoodsOrdersController extends GetxController {
     "PO Date": 223,
     "Total Cost": 153,
     "Currency": 130,
-    "Status": 100
+    // "Status": 100
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -90,7 +90,7 @@ class StockManagementGoodsOrdersController extends GetxController {
       "PO Date": orderDateFilterText,
       "Total Cost": costFilterText,
       "Currency": currencyFilterText,
-      "Status": statusFilterText,
+      // "Status": statusFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -136,12 +136,14 @@ class StockManagementGoodsOrdersController extends GetxController {
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
-                false) ||
-            (item.status
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false))
+                false) 
+            // ||
+            // (item.status
+            //         ?.toString()
+            //         .toLowerCase()
+            //         .contains(keyword.toLowerCase()) ??
+            //     false)
+            )
         .toList();
     goodsOrdersList.value = filteredList;
   }
