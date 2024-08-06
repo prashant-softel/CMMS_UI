@@ -243,7 +243,7 @@ class _NewObservationSummaryWebState extends State<ObservationSummaryWeb> {
                                                       )),
                                                       DataColumn2(
                                                           label: Text(
-                                                        'Significant \nRisk Raised',
+                                                        'Significant \nRisk Open',
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
@@ -252,7 +252,7 @@ class _NewObservationSummaryWebState extends State<ObservationSummaryWeb> {
                                                       )),
                                                       DataColumn2(
                                                           label: Text(
-                                                        'Significant \nRisk Raised',
+                                                        'Significant \nRisk Closed',
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
