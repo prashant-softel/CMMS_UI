@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/veg_execution_screen/veg_execution_screen_controller.dart';
+import 'package:cmms/app/veg_execution_screen/view/veg_execution_mobile.dart';
 import 'package:cmms/app/veg_execution_screen/view/veg_execution_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,9 +42,7 @@ class VegExecutionScreen extends GetView<VegExecutionController> {
                         children: [
                           if (Responsive.isMobile(context))
                             Expanded(
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text("Data Coming Soon......")),
+                              child: VegExecutionMobile(),
                             ),
                           if (Responsive.isDesktop(context))
                             Expanded(

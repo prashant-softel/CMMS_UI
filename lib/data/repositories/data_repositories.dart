@@ -4224,6 +4224,20 @@ class DataRepository extends DomainRepository {
           activity: activity,
           isLoading: isLoading ?? false,
           type: type);
+  Future<ResponseModel> vegscheduleLinkToPermit(
+          {required String auth,
+          scheduleId,
+          permitId,
+          activity,
+          bool? isLoading,
+          type}) async =>
+      await connectHelper.vegscheduleLinkToPermit(
+          auth: auth,
+          scheduleId: scheduleId,
+          permitId: permitId,
+          activity: activity,
+          isLoading: isLoading ?? false,
+          type: type);
   Future<ResponseModel> setPmTask({
     required String auth,
     scheduleId,
@@ -4531,6 +4545,18 @@ class DataRepository extends DomainRepository {
     required bool isLoading,
   }) async =>
       await connectHelper.assignToMC(
+        auth: auth,
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
+  Future<ResponseModel> assignToVeg({
+    required String auth,
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async =>
+      await connectHelper.assignToVeg(
         auth: auth,
         assignId: assignId,
         taskId: taskId,
@@ -5111,6 +5137,69 @@ class DataRepository extends DomainRepository {
       await connectHelper.updateVegScheduleExecution(
         auth: auth,
         updateVegJson: updateVegJson,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> vegrejectShecduleExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegrejectShecduleExecution(
+        auth: auth,
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> vegapproveShecduleExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegapproveShecduleExecution(
+        auth: auth,
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> vegendRejectExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegendRejectExecution(
+        auth: auth,
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> vegendApproveExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegendApproveExecution(
+        auth: auth,
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> vegabandoneRejectExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegabandoneRejectExecution(
+        auth: auth,
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> vegabandonedApproveExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegabandonedApproveExecution(
+        auth: auth,
+        approvetoJsonString: approvetoJsonString,
         isLoading: isLoading ?? false,
       );
 

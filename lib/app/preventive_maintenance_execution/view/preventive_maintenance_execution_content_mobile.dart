@@ -7,7 +7,9 @@ import 'package:cmms/app/preventive_maintenance_execution/view/observation_updat
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/execution_approve_dialog.dart';
+import 'package:cmms/app/widgets/observation_pm_execution_process_dialog.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -126,250 +128,289 @@ class PreventiveMaintenanceExecutionContentMobile
                           "Asset(s) ",
                           style: Styles.blue700,
                         ),
-                        Expanded(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: controller.rowItemclone.value.length,
-                            itemBuilder: (context, index) {
-                              return Card(
-                                color: Colors.lightBlue.shade50,
-                                elevation: 10,
-                                shadowColor: Colors.black87,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
+                        Container(
+                          width: Get.width,
+                          child: Obx(
+                            () => Container(
+                              margin: Dimens.edgeInsets10,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color:
+                                      ColorValues.lightGreyColorWithOpacity35,
+                                  width: 1,
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: controller
-                                        .rowItemclone.value[index]
-                                        .map<Widget>((map) {
-                                      return Column(
-                                        children: [
-                                          map['key'] == "Asset" ||
-                                                  map['key'] == "Checklist"
-                                              ? Column(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: ColorValues.appBlueBackgroundColor,
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                children:
+                                    controller.rowItemclone.value.map((record) {
+                                  return Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color:
+                                            Color.fromARGB(255, 206, 229, 234),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: record.map((mapData) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 4.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                mapData['key'] ?? '',
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              if (mapData['key'] == "Actions")
+                                                Wrap(
+                                                  children: [],
+                                                )
+                                              else if (mapData['key'] ==
+                                                  "executionDone")
+                                                Text(mapData['value'] == "0"
+                                                    ? ""
+                                                    : "${mapData['completed']}")
+                                              else if (mapData['key'] ==
+                                                  "dropdown")
+                                                Row(
                                                   children: [
-                                                    Row(children: [
-                                                      Text('${map['key']!}: ',
-                                                          style: Styles
-                                                              .appDarkGrey12),
-                                                      SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      Expanded(
-                                                        child: Text(
-                                                            '${map['value']!}'
-                                                            '',
-                                                            style: Styles
-                                                                .appDarkBlue12),
-                                                      ),
-                                                    ]),
+                                                    Container(
+                                                      height: 25,
+                                                      width: 70,
+                                                      child: varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kPmExecutionFeatureId &&
+                                                                      e.edit ==
+                                                                          UserAccessConstants
+                                                                              .kHaveEditAccess)
+                                                                  .length >
+                                                              0
+                                                          ? TableActionButton(
+                                                              color: ColorValues
+                                                                  .appDarkBlueColor,
+                                                              message: "Clone",
+                                                              onPress: () {
+                                                                controller.selectedItem = controller
+                                                                    .scheduleCheckPoints
+                                                                    .firstWhere(
+                                                                        (element) =>
+                                                                            "${element.name}" ==
+                                                                            record[0]['value']
+                                                                                .toString(),
+                                                                        orElse:
+                                                                            null);
+
+                                                                var select = controller.scheduleCheckPoints.firstWhere(
+                                                                    (element) =>
+                                                                        element
+                                                                            .name ==
+                                                                        controller
+                                                                            .selectedasset
+                                                                            .value,
+                                                                    orElse:
+                                                                        null);
+                                                                select
+                                                                        .schedule_link_job!
+                                                                        .isNotEmpty
+                                                                    ? controller
+                                                                        .cloneAlertDialog()
+                                                                    : controller.cloneDialog(controller
+                                                                        .selectedasset
+                                                                        .value);
+                                                              },
+                                                            )
+                                                          : Dimens.box0,
+                                                    ),
+                                                    // mapData['executionDone'] ==
+                                                    //         "0"
+                                                    //     ? Dimens.box0
+                                                    //     : Text(
+                                                    //         "Execution Done"),
+                                                    Dimens.boxWidth2,
+                                                    DropdownWebWidget(
+                                                      width: 50,
+                                                      controller: controller,
+                                                      dropdownList: controller
+                                                          .scheduleCheckPointsdrop,
+                                                      selectedValue:
+                                                          mapData["value"],
+                                                      onValueChanged: (list,
+                                                          selectedValue) {
+                                                        controller.selectedasset
+                                                            .value;
+                                                        mapData["value"] =
+                                                            selectedValue;
+
+                                                        controller.selectedasset
+                                                                .value =
+                                                            selectedValue;
+
+                                                        controller.checkdropdownMapperData[
+                                                                selectedValue] =
+                                                            list.firstWhere(
+                                                                (element) =>
+                                                                    element
+                                                                        .name ==
+                                                                    selectedValue,
+                                                                orElse: null);
+                                                      },
+                                                    ),
+                                                    Dimens.boxWidth2,
+                                                    // Spacer(),
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kPmExecutionFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: "Edit",
+                                                            onPress: () {
+                                                              controller
+                                                                      .selectedItem =
+                                                                  null;
+                                                              controller
+                                                                  .rowItemobs
+                                                                  .value = [];
+                                                              controller.selectedItem = controller
+                                                                  .scheduleCheckPoints
+                                                                  .firstWhere((element) =>
+                                                                      "${element.name}" ==
+                                                                      record[0][
+                                                                              'value']
+                                                                          .toString());
+                                                              if (controller
+                                                                      .selectedItem !=
+                                                                  null) {
+                                                                controller
+                                                                    .selectedItem!
+                                                                    .checklist_observation
+                                                                    ?.forEach(
+                                                                        (element) {
+                                                                  controller
+                                                                      .rowItemobs
+                                                                      .value
+                                                                      .add([
+                                                                    {
+                                                                      "key":
+                                                                          "checkpoint",
+                                                                      "id":
+                                                                          '${element.execution_id}',
+                                                                      "value":
+                                                                          '${element.check_point_name}',
+                                                                    },
+                                                                    {
+                                                                      "key":
+                                                                          "requirement",
+                                                                      "value":
+                                                                          '${element.requirement}'
+                                                                    },
+                                                                    {
+                                                                      'key':
+                                                                          "weightage",
+                                                                      "value":
+                                                                          '${element.failure_waightage}'
+                                                                    },
+                                                                    {
+                                                                      'key':
+                                                                          "cpok",
+                                                                      "value":
+                                                                          '${element.cp_ok.value}'
+                                                                    },
+                                                                    {
+                                                                      'key':
+                                                                          "observation",
+                                                                      "value":
+                                                                          '${element.observation}'
+                                                                    },
+                                                                    {
+                                                                      'key':
+                                                                          "uploadimg",
+                                                                      "value":
+                                                                          '',
+                                                                      "uploaded":
+                                                                          ""
+                                                                    },
+                                                                    {
+                                                                      'key':
+                                                                          "type",
+                                                                      'inpute_type':
+                                                                          '${element.check_point_type}',
+                                                                      "value":
+                                                                          '${element.type_text}',
+                                                                      "min":
+                                                                          '${element.min_range}',
+                                                                      "max":
+                                                                          '${element.max_range}'
+                                                                    },
+                                                                    {
+                                                                      'key':
+                                                                          "job_created",
+                                                                      "value":
+                                                                          '${element.linked_job_id.value}',
+                                                                      "cp_ok_value":
+                                                                          '${element.cp_ok.value}',
+                                                                    },
+                                                                  ]);
+                                                                });
+                                                                controller.getMrsListByModuleTask(
+                                                                    taskId: controller
+                                                                        .scheduleId
+                                                                        .value);
+                                                                Get.dialog(
+                                                                    ObservationPmExecutionViewDialog());
+                                                              }
+                                                            })
+                                                        : Dimens.box0
                                                   ],
                                                 )
-                                              : (map['key'] == "executionDone")
-                                                  ? Row(
-                                                      children: [
-                                                        Text('Executed by: ',
-                                                            style: Styles
-                                                                .appDarkGrey12),
-                                                        SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        Expanded(
-                                                          child: Text(
-                                                              '${map['completed']!}'
-                                                              '',
-                                                              style: Styles
-                                                                  .appDarkBlue12),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  : Dimens.box0,
-                                          Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                TableActionButton(
-                                                    color: ColorValues
-                                                        .appDarkBlueColor,
-                                                    icon: Icons.cyclone_sharp,
-                                                    message: "Clone",
-                                                    onPress: () {
-                                                      controller.selectedItem =
-                                                          null;
-                                                      // controller.selectedItem =
-                                                      //     controller
-                                                      //         .scheduleCheckPoints
-                                                      //         .firstWhere((element) =>
-                                                      //             "${element.name}" ==
-                                                      //             record[0]['value']
-                                                      //                 .toString());
-                                                      if (controller
-                                                              .selectedItem !=
-                                                          null) {
-                                                        // controller.selectedItem!
-                                                        //     .checklist_observation
-                                                        //     ?.forEach((element) {
-                                                        //   controller.rowItemobs.value
-                                                        //       .add([
-                                                        //     {
-                                                        //       "key": "checkpoint",
-                                                        //       "id":
-                                                        //           '${element.execution_id}',
-                                                        //       "value":
-                                                        //           '${element.check_point_name}',
-                                                        //     },
-                                                        //     {
-                                                        //       "key": "requirement",
-                                                        //       "value":
-                                                        //           '${element.requirement}'
-                                                        //     },
-                                                        //     {
-                                                        //       'key': "weightage",
-                                                        //       "value":
-                                                        //           '${element.failure_waightage}'
-                                                        //     },
-                                                        //     {
-                                                        //       'key': "cpok",
-                                                        //       "value":
-                                                        //           '${element.cp_ok.value}'
-                                                        //     },
-                                                        //     {
-                                                        //       'key': "observation",
-                                                        //       "value":
-                                                        //           '${element.observation}'
-                                                        //     },
-                                                        //     {
-                                                        //       'key': "uploadimg",
-                                                        //       "value": ''
-                                                        //     },
-                                                        //     {
-                                                        //       'key': "type",
-                                                        //       'inpute_type':
-                                                        //           '${element.check_point_type}',
-                                                        //       "value":
-                                                        //           '${element.type_text}',
-                                                        //       "min":
-                                                        //           '${element.min_range}',
-                                                        //       "max":
-                                                        //           '${element.max_range}'
-                                                        //     },
-                                                        //     {
-                                                        //       'key': "job_created",
-                                                        //       "value":
-                                                        //           '${element.linked_job_id.value}',
-                                                        //     },
-                                                        //   ]);
-                                                        // });
-                                                        // Get.dialog(
-                                                        //     ObservationPmExecutionViewDialog());
-                                                      }
-                                                    }),
-                                                Dimens.boxWidth20,
-                                                TableActionButton(
-                                                    color:
-                                                        ColorValues.editColor,
-                                                    icon: Icons.edit,
-                                                    message: "Edit",
-                                                    onPress: () {
-                                                      controller.selectedItem =
-                                                          null;
-                                                      controller.rowItemobs
-                                                          .value = [];
-                                                      controller.selectedItem = controller
-                                                          .scheduleCheckPoints
-                                                          .firstWhere((element) =>
-                                                              "${element.name}" ==
-                                                              map['value']
-                                                                  .toString());
-                                                      if (controller
-                                                              .selectedItem !=
-                                                          null) {
-                                                        controller.selectedItem!
-                                                            .checklist_observation
-                                                            ?.forEach(
-                                                                (element) {
-                                                          controller
-                                                              .rowItemobs.value
-                                                              .add([
-                                                            {
-                                                              "key":
-                                                                  "checkpoint",
-                                                              "id":
-                                                                  '${element.execution_id}',
-                                                              "value":
-                                                                  '${element.check_point_name}',
-                                                            },
-                                                            {
-                                                              "key":
-                                                                  "requirement",
-                                                              "value":
-                                                                  '${element.requirement}'
-                                                            },
-                                                            {
-                                                              'key':
-                                                                  "weightage",
-                                                              "value":
-                                                                  '${element.failure_waightage}'
-                                                            },
-                                                            {
-                                                              'key': "cpok",
-                                                              "value":
-                                                                  '${element.cp_ok.value}'
-                                                            },
-                                                            {
-                                                              'key':
-                                                                  "observation",
-                                                              "value":
-                                                                  '${element.observation}'
-                                                            },
-                                                            {
-                                                              'key':
-                                                                  "uploadimg",
-                                                              "value": ''
-                                                            },
-                                                            {
-                                                              'key': "type",
-                                                              'inpute_type':
-                                                                  '${element.check_point_type}',
-                                                              "value":
-                                                                  '${element.type_text}',
-                                                              "min":
-                                                                  '${element.min_range}',
-                                                              "max":
-                                                                  '${element.max_range}'
-                                                            },
-                                                            {
-                                                              'key':
-                                                                  "job_created",
-                                                              "value":
-                                                                  '${element.linked_job_id.value}',
-                                                            },
-                                                          ]);
-                                                        });
-                                                        showModalBottomSheet<
-                                                                void>(
-                                                            // context and builder are
-                                                            // required properties in this widget
-                                                            context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    context) {
-                                                              return ObservationUpdateDialog();
-                                                            });
-                                                      }
-                                                    })
-                                              ]),
-                                        ],
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                              );
-                            },
+                                              else
+                                                Flexible(
+                                                  child: Text(
+                                                    mapData['value'] ?? '',
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 5, 92, 163),
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
                           ),
                         ),
                         Dimens.boxHeight10,

@@ -578,7 +578,7 @@ class VegExcutionListDataSource extends DataTableSource {
                                       VegExcutionListDetails?.id ?? 0;
                                   int planId =
                                       VegExcutionListDetails?.planId ?? 0;
-                                  controller.viewVegetation(
+                                  controller.executeVegetation(
                                     executionId,
                                     planId,
                                   );
@@ -601,32 +601,32 @@ class VegExcutionListDataSource extends DataTableSource {
                               //         onPress: () {},
                               //       )
                               // : Dimens.box0,
-                              varUserAccessModel.value.access_list!
-                                          .where((e) =>
-                                              e.feature_id ==
-                                                  UserAccessConstants
-                                                      .kVegetationControlexeFeatureId &&
-                                              e.approve ==
-                                                  UserAccessConstants
-                                                      .kHaveApproveAccess)
-                                          .length >
-                                      0
-                                  ? TableActionButton(
-                                      color: ColorValues.appGreenColor,
-                                      icon: Icons.add,
-                                      message: 'Start/End',
-                                      onPress: () {
-                                        int executionId =
-                                            VegExcutionListDetails?.id ?? 0;
-                                        int planId =
-                                            VegExcutionListDetails?.planId ?? 0;
-                                        controller.executeVegetation(
-                                          executionId,
-                                          planId,
-                                        );
-                                      },
-                                    )
-                                  : Dimens.box0,
+                              // varUserAccessModel.value.access_list!
+                              //             .where((e) =>
+                              //                 e.feature_id ==
+                              //                     UserAccessConstants
+                              //                         .kVegetationControlexeFeatureId &&
+                              //                 e.approve ==
+                              //                     UserAccessConstants
+                              //                         .kHaveApproveAccess)
+                              //             .length >
+                              //         0
+                              //     ? TableActionButton(
+                              //         color: ColorValues.appGreenColor,
+                              //         icon: Icons.add,
+                              //         message: 'Start/End',
+                              //         onPress: () {
+                              //           int executionId =
+                              //               VegExcutionListDetails?.id ?? 0;
+                              //           int planId =
+                              //               VegExcutionListDetails?.planId ?? 0;
+                              //           controller.executeVegetation(
+                              //             executionId,
+                              //             planId,
+                              //           );
+                              //         },
+                              //       )
+                              //     : Dimens.box0,
                             ],
                           )
                         : Text(
@@ -638,7 +638,7 @@ class VegExcutionListDataSource extends DataTableSource {
       onSelectChanged: (_) {
         int executionId = VegExcutionListDetails?.id ?? 0;
         int planId = VegExcutionListDetails?.planId ?? 0;
-        controller.viewVegetation(executionId, planId);
+        controller.executeVegetation(executionId, planId);
       },
     );
   }

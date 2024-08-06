@@ -194,115 +194,147 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                 children: [
                                   Row(
                                     children: [
+                                      // Spacer(),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text("Job Card Id:",
+                                                  style: Styles.black14),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                  " JC${controller.jobCardId.value}",
+                                                  style: Styles.blue14)
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text("Asset Category Name:",
+                                                  style: Styles.black14),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                  " ${controller.jobCardDetailsModel.value?.assetcatlist != null ? controller.jobCardDetailsModel.value?.assetcatlist?.map<String>((item) => item.name.toString()).toList() : []}",
+                                                  maxLines: 3,
+                                                  style: Styles.blue14)
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text("Job Id:",
+                                                  style: Styles.black14),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                  " JOB${controller.jobCardDetailsModel.value?.jobId ?? ""}",
+                                                  style: Styles.blue14)
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text("PTW Id:",
+                                                  style: Styles.black14),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                  " PTW${controller.jobCardDetailsModel.value?.ptwId ?? ""}",
+                                                  style: Styles.blue14)
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text("Created By:",
+                                                  style: Styles.black14),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                  " ${controller.jobCardDetailsModel.value?.created_by ?? ""}",
+                                                  style: Styles.blue14),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      // Dimens.boxWidth10,
+
                                       Spacer(),
                                       Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            ""
-                                            "Job Card Id :",
-                                            style: Styles.black14,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text("Plant Name:",
+                                                  style: Styles.black14),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                  " ${controller.jobCardDetailsModel.value?.created_by ?? ""}",
+                                                  style: Styles.blue14),
+                                            ],
                                           ),
-                                          Text(
-                                            "Asset Category Name :",
-                                            style: Styles.black14,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text("JC Title:",
+                                                  style: Styles.black14),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                  " ${controller.jobCardDetailsModel.value?.title ?? ""}",
+                                                  maxLines: 2,
+                                                  style: Styles.blue14)
+                                            ],
                                           ),
-                                          Text(
-                                            "Job Id :",
-                                            style: Styles.black14,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text("JC Closed By Name:",
+                                                  style: Styles.black14),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                  " ${controller.jobCardDetailsModel.value?.jcClosedByName ?? ""}",
+                                                  style: Styles.blue14)
+                                            ],
                                           ),
-                                          Text(
-                                            "Ptw Id :",
-                                            style: Styles.black14,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text("JC Start By Name:",
+                                                  style: Styles.black14),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                  " ${controller.jobCardDetailsModel.value?.jC_Start_By_Name ?? ""}",
+                                                  style: Styles.blue14)
+                                            ],
                                           ),
-                                          Text(
-                                            "Created By :",
-                                            style: Styles.black14,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text("JC Approved By Name:",
+                                                  style: Styles.black14),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                  " ${controller.jobCardDetailsModel.value?.jcApprovedByName ?? ""}",
+                                                  style: Styles.blue14)
+                                            ],
                                           ),
                                         ],
                                       ),
                                       // Dimens.boxWidth10,
                                       SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                              " JC${controller.jobCardId.value}",
-                                              style: Styles.blue14),
-                                          Container(
-                                            width: 280,
-                                            child: Text(
-                                                " ${controller.jobCardDetailsModel.value?.assetcatlist != null ? controller.jobCardDetailsModel.value?.assetcatlist?.map<String>((item) => item.name.toString()).toList() : []}",
-                                                maxLines: 3,
-                                                style: Styles.blue14),
-                                          ),
-                                          Text(
-                                              " JOB${controller.jobCardDetailsModel.value?.jobId ?? ""}",
-                                              style: Styles.blue14),
-                                          Text(
-                                              " PTW${controller.jobCardDetailsModel.value?.ptwId ?? ""}",
-                                              style: Styles.blue14),
-                                          Text(
-                                              " ${controller.jobCardDetailsModel.value?.created_by ?? ""}",
-                                              style: Styles.blue14),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          Text(
-                                            "Plant Name :",
-                                            style: Styles.black14,
-                                          ),
-                                          Text(
-                                            "Title :",
-                                            style: Styles.black14,
-                                          ),
-                                          Text(
-                                            "JC Closed By Name :",
-                                            style: Styles.black14,
-                                          ),
-                                          Text(
-                                            "JC Start By Name :",
-                                            style: Styles.black14,
-                                          ),
-                                          Text(
-                                            "JC Approved By Name :",
-                                            style: Styles.black14,
-                                          ),
-                                        ],
-                                      ),
-                                      // Dimens.boxWidth10,
-                                      SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                              " ${controller.jobCardDetailsModel.value?.plantName ?? ""}",
-                                              style: Styles.blue14),
-                                          Container(
-                                            width: 400,
-                                            child: Text(
-                                                " ${controller.jobCardDetailsModel.value?.title ?? ""}",
-                                                maxLines: 2,
-                                                style: Styles.blue14),
-                                          ),
-                                          Text(
-                                              " ${controller.jobCardDetailsModel.value?.jcClosedByName ?? ""}",
-                                              style: Styles.blue14),
-                                          Text(
-                                              " ${controller.jobCardDetailsModel.value?.jC_Start_By_Name ?? ""}",
-                                              style: Styles.blue14),
-                                          Text(
-                                              " ${controller.jobCardDetailsModel.value?.jcApprovedByName ?? ""}",
-                                              style: Styles.blue14),
-                                        ],
-                                      ),
+
                                       Spacer(),
                                     ],
                                   ),

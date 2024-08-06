@@ -479,6 +479,9 @@ class Repository {
           } else if (pmTaskId != null && type == 4) {
             scheduleLinkToPermit(
                 pmTaskId, activity, permitForJob[0], true, type);
+          } else if (pmTaskId != null && type == 5) {
+            vegscheduleLinkToPermit(
+                pmTaskId, activity, permitForJob[0], true, type);
           } else {
             scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true, 0);
           }
@@ -6569,6 +6572,34 @@ class Repository {
       return false;
     }
   }
+  Future<bool> assignToVeg({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.assignToVeg(
+        auth: auth,
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+
 
   Future<List<EmployeeModel?>?> getAssignedToList(
     String? auth,
@@ -11807,6 +11838,36 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> vegscheduleLinkToPermit(
+      scheduleId, activity, permitId, bool? isLoading, type) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.vegscheduleLinkToPermit(
+          auth: auth,
+          scheduleId: scheduleId,
+          permitId: permitId,
+          activity: activity,
+          isLoading: isLoading ?? false,
+          type: type);
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'scheduleLinkToPermit');
+        return Map();
+      }
+      return Map();
+    } //
+    catch (error) {
+      Utility.showDialog(error.toString(), 'scheduleLinkToPermit');
+      return Map();
+    }
+  }
+
   Future<Map<String, dynamic>> setPmTask(
     scheduleId,
     bool? isLoading,
@@ -13318,7 +13379,7 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.vegPlanApprovedButton(
         auth: auth,
-        vegApproveJsonString: json.encode(vegApproveJsonString),
+        vegApproveJsonString: vegApproveJsonString,
         isLoading: isLoading ?? false,
       );
 
@@ -13791,6 +13852,153 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<bool> vegapproveShecduleExecution({
+    bool? isLoading,
+    approvetoJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegapproveShecduleExecution(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: json.encode(approvetoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> vegrejectShecduleExecution({
+    bool? isLoading,
+    rejecttoJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegrejectShecduleExecution(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: json.encode(rejecttoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> vegendApproveExecution(
+      {bool? isLoading, approvetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegendApproveExecution(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: json.encode(approvetoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> vegendRejectExecution({bool? isLoading, rejecttoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegendRejectExecution(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: json.encode(rejecttoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> vegabandonedApproveExecution(
+      {bool? isLoading, approvetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegabandonedApproveExecution(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: json.encode(approvetoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> vegabandoneRejectExecution(
+      {bool? isLoading, rejecttoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegabandoneRejectExecution(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: json.encode(rejecttoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
     }
   }
 
