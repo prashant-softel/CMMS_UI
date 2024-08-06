@@ -20,7 +20,7 @@ class ViewSetEquipmentDialog extends GetView {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
-        insetPadding: Dimens.edgeInsets0_0_10_0,
+        insetPadding: EdgeInsets.only(left: 10, right: 10),
         title: Row(
           children: [
             Text(
