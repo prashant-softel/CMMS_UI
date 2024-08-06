@@ -281,7 +281,8 @@ class PreventiveCheckPointController extends GetxController {
           checkpoint_type: checkpoint_type,
           is_document_required: isToggleOn.value ? 1 : 0,
           id: 0,
-          status: 1);
+          status: 1,
+          type: type.value);
       var checkpointJsonString = [
         createCheckpoint.toJson()
       ]; //createCheckPointToJson([createCheckpoint]);
@@ -360,7 +361,9 @@ class PreventiveCheckPointController extends GetxController {
     checkpointType.value = '';
     Future.delayed(Duration(seconds: 1), () {
       getCheckPointlist(
-          selectedchecklistId: 0.toString(), facilityId: facilityId);
+          selectedchecklistId: 0.toString(),
+          facilityId: facilityId,
+          type: type.value);
     });
     Future.delayed(Duration(seconds: 4), () {
       isSuccess.value = false;
@@ -411,7 +414,8 @@ class PreventiveCheckPointController extends GetxController {
                       Get.back();
                       getCheckPointlist(
                           selectedchecklistId: 0.toString(),
-                          facilityId: facilityId);
+                          facilityId: facilityId,
+                          type: type.value);
                     });
                   },
                   text: 'Yes'),
@@ -434,7 +438,8 @@ class PreventiveCheckPointController extends GetxController {
             cleardata();
             getCheckPointlist(
                 selectedchecklistId: selectedchecklistId.value,
-                facilityId: facilityId);
+                facilityId: facilityId,
+                type: type.value);
           } else {
             // selectedchecklistId=0;
           }
@@ -488,7 +493,8 @@ class PreventiveCheckPointController extends GetxController {
         is_document_required: isToggleOn.value ? 1 : 0,
         failure_weightage: _failurewtg,
         checkpoint_type: checkpoint_type,
-        status: 1);
+        status: 1,
+        type: type.value);
     var checkpointJsonString =
         createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
 
@@ -504,7 +510,8 @@ class PreventiveCheckPointController extends GetxController {
     getCheckPointlist(
         selectedchecklistId: 0.toString(),
         facilityId: facilityId,
-        isExport: true);
+        isExport: true,
+        type: type.value);
   }
 
   void checkFormCheck() {

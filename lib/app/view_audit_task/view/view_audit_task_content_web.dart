@@ -835,7 +835,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                   child: Row(
                                                     children: [
                                                       Text(
-                                                        "PM History ",
+                                                        "History ",
                                                         style: Styles.blue700,
                                                       ),
                                                     ],

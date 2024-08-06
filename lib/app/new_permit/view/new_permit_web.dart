@@ -77,7 +77,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                             : controller.typee.value == 2
                                 ? Get.offAllNamed(Routes.pmTaskView,
                                     arguments: {'pmTaskId': taskId})
-                                : controller.typee.value == 3
+                                : controller.typee.value == AppConstants.kAudit
                                     ? Get.offAllNamed(Routes.viewAuditTask,
                                         arguments: {'auditTaskId': taskId})
                                     : controller.typee.value == 4
@@ -107,7 +107,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   "/ PM TASK",
                                   style: Styles.greyLight14,
                                 )
-                              : controller.typee.value == 3
+                              : controller.typee.value == AppConstants.kAudit
                                   ? Text(
                                       "/ AUDIT TASK ",
                                       style: Styles.greyLight14,
@@ -178,7 +178,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   child: controller.typee.value == 2
                                       ? Text('REQUEST A PERMIT FOR PM',
                                           style: Styles.blackBold14)
-                                      : controller.typee.value == 3
+                                      : controller.typee.value ==
+                                              AppConstants.kAudit
                                           ? Text('REQUEST A PERMIT FOR AUDIT',
                                               style: Styles.blackBold14)
                                           : (controller.jobModel?.id != null)
@@ -235,11 +236,20 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 DataCell(
                                                   GestureDetector(
                                                     onTap: () {
-                                                      controller
-                                                          .viewPMTDetails();
+                                                      controller.type ==
+                                                              AppConstants
+                                                                  .kAudit
+                                                          ? controller
+                                                              .viewAudDetails()
+                                                          : controller
+                                                              .viewPMTDetails();
                                                     },
                                                     child: Text(
-                                                      'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
+                                                      controller.typee.value ==
+                                                              AppConstants
+                                                                  .kAudit
+                                                          ? 'AUD${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
+                                                          : 'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
                                                       style: TextStyle(
                                                         decoration:
                                                             TextDecoration
@@ -260,7 +270,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 ),
                                                 DataCell(
                                                   Text(
-                                                      '${controller.pmtaskViewModel?.category_name}',
+                                                      controller.typee.value ==
+                                                              AppConstants
+                                                                  .kAudit
+                                                          ? "NA"
+                                                          : '${controller.pmtaskViewModel?.category_name}',
                                                       overflow: TextOverflow
                                                           .ellipsis),
                                                 ),
@@ -2413,8 +2427,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             },
                                           )),
                                     )
-                                  :
-                                   controller.jobModel?.id != null &&
+                                  : controller.jobModel?.id != null &&
                                           controller.permitId.value == 0
                                       ? Center(
                                           child: Container(

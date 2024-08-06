@@ -4,6 +4,7 @@ class CreateCheckpoint {
   String requirement;
   int is_document_required;
   int status;
+  int? type;
   int id;
   CheckpointType? checkpoint_type;
   int failure_weightage;
@@ -15,7 +16,8 @@ class CreateCheckpoint {
       required this.id,
       required this.failure_weightage,
       required this.is_document_required,
-      this.checkpoint_type});
+      this.checkpoint_type,
+      this.type});
 
   factory CreateCheckpoint.fromJson(Map<String, dynamic> json) =>
       CreateCheckpoint(
@@ -26,6 +28,7 @@ class CreateCheckpoint {
         checkpoint_type: CheckpointType.fromJson(json['checkpoint_type']),
         failure_weightage: json['failure_weightage'],
         id: json['id'],
+        type: json['type'],
         is_document_required: json['is_document_required'],
       );
 
@@ -38,6 +41,7 @@ class CreateCheckpoint {
         'is_document_required': is_document_required,
         "checkpoint_type": checkpoint_type!.toJson(),
         'id': id,
+        'type': type
       };
 }
 

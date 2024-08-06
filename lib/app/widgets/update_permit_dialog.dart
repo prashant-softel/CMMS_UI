@@ -156,7 +156,21 @@ class UpdateNewPermitDialog extends GetView {
                         onPressed: () => Get.offAllNamed(Routes.pmTaskView),
                         child: const Text('View Task'),
                       )
-                    : Dimens.box0,
+                    : type == 3
+                        ? ElevatedButton(
+                            style: Styles.darkBlueElevatedButtonStyle,
+                            onPressed: () =>
+                                Get.offAllNamed(Routes.viewAuditTask),
+                            child: const Text('View Audit'),
+                          )
+                        : type == 4
+                            ? ElevatedButton(
+                                style: Styles.darkBlueElevatedButtonStyle,
+                                onPressed: () => Get.offAllNamed(
+                                    Routes.viewModuleCleaningExecutionScreen),
+                                child: const Text('View MC'),
+                              )
+                            : Dimens.box0,
             Dimens.boxWidth10,
           ]),
         ],

@@ -2026,6 +2026,10 @@ class NewPermitController extends GetxController {
     Get.toNamed(Routes.pmTaskView);
   }
 
+  Future<void> viewAudDetails() async {
+    Get.toNamed(Routes.viewAuditTask);
+  }
+
   Future<void> viewMCTDetails() async {
     Get.toNamed(Routes.addModuleCleaningExecutionContentWeb);
   }

@@ -5336,9 +5336,9 @@ class Repository {
               ? Get.offAllNamed(Routes.pmTaskView)
               : type == 1
                   ? Get.offAllNamed(Routes.jobDetails)
-                  // : type == 3
-                  //     ? Get.offAllNamed(Routes.viewAuditTask)
-                  : Get.offAllNamed(Routes.newPermitList);
+                  : type == 3
+                      ? Get.offAllNamed(Routes.viewAuditTask)
+                      : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -6572,6 +6572,7 @@ class Repository {
       return false;
     }
   }
+
   Future<bool> assignToVeg({
     int? assignId,
     int? taskId,
@@ -6598,8 +6599,6 @@ class Repository {
       return false;
     }
   }
-
-
 
   Future<List<EmployeeModel?>?> getAssignedToList(
     String? auth,
@@ -13931,7 +13930,8 @@ class Repository {
     }
   }
 
-  Future<bool> vegendRejectExecution({bool? isLoading, rejecttoJsonString}) async {
+  Future<bool> vegendRejectExecution(
+      {bool? isLoading, rejecttoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
