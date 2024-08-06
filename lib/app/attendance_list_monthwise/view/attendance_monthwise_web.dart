@@ -171,10 +171,11 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
                                             200,
                                         constraints: BoxConstraints(
                                           minWidth: Get.width,
-                                          maxWidth: Get.width * 5,
+                                          maxWidth: Get.width * 6,
                                         ),
                                         child: DataTable2(
-                                          minWidth: Get.width * 1.2,
+                                          fixedLeftColumns: 1,
+                                          minWidth: Get.width * 5,
                                           border: TableBorder.all(
                                               color: Colors.black),
                                           dataRowHeight: 40,
