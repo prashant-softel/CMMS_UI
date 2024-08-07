@@ -802,7 +802,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                             child: CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.appGreenColor,
-                                              text: "Submit For Approval VEG",
+                                              text: "Submit",
                                               onPressed: () {
                                                 controller.isFormInvalid.value =
                                                     false;

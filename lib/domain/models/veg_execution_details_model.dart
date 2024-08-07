@@ -127,6 +127,8 @@ class VegSchedules {
   String? start_date;
   String? end_date;
   String? remark;
+  String? remark_of_schedule;
+
   int? status;
   String? status_short;
   int? permit_id;
@@ -150,6 +152,7 @@ class VegSchedules {
     this.pending,
     this.waterUsed,
     this.remark,
+    this.remark_of_schedule,
     this.status,
     this.status_short,
     this.equipments,
@@ -173,6 +176,7 @@ class VegSchedules {
       start_date: json['start_date'],
       waterUsed: json['waterUsed'],
       remark: json['remark'] ?? "",
+      remark_of_schedule: json['remark_of_schedule'] ?? "",
       status: json['status'],
       status_short: json['status_short'],
       permit_id: json['permit_id'],
@@ -197,6 +201,7 @@ class VegSchedules {
         'abandoned': abandoned,
         'pending': pending,
         'waterUsed': waterUsed,
+        'remark_of_schedule': remark_of_schedule,
         'remark': remark,
         'status': status,
         'status_short': status_short,

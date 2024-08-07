@@ -26,7 +26,7 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0)),
           ),
-          insetPadding: Dimens.edgeInsets0_0_10_0,
+          insetPadding: EdgeInsets.all(10),
           title: Column(
             children: [
               Row(
@@ -50,7 +50,7 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                       SizedBox(width: 5),
                       LoginCustomTextfield(
                         width: MediaQuery.of(context).size.width * .2,
-                        textController: controller.remarkTextFieldCtrlr,
+                        textController: controller.remarkCtrlrWeb,
                       ),
                     ],
                   ),
@@ -151,11 +151,15 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                                         },
                                         child: Row(
                                           children: [
-                                            Text(
-                                              "${e?.invName}",
-                                              style: TextStyle(
-                                                fontSize: 12.0,
-                                                fontWeight: FontWeight.bold,
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Text(
+                                                "${e?.invName}",
+                                                style: TextStyle(
+                                                  fontSize: 12.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                             Icon(
@@ -276,8 +280,14 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                                                   children: [
                                                     Expanded(
                                                       flex: 2,
-                                                      child: Text(
-                                                        smbItems.smbName ?? "",
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 10),
+                                                        child: Text(
+                                                          smbItems.smbName ??
+                                                              "",
+                                                        ),
                                                       ),
                                                     ),
                                                     Expanded(
