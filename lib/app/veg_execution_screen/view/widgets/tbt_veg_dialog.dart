@@ -94,21 +94,23 @@ class TbtDoneVegDialog extends GetView<VegExecutionController> {
                                 onPressed: () {
                                   Get.back();
                                   controller.clearStoreData();
-                                  // controller.clearJobDetailStoreData();
-                                  // controller.clearTypeStoreData();
-                                  // controller.clearisCheckedtoreData();
-                                  // controller.clearpmTaskValue();
-                                  // controller.clearPermitStoreData();
-                                  // controller.clearmcDetailsStoreData();
-
+                                  controller.clearJobDetailStoreData();
+                                  controller.clearTypeStoreData();
+                                  controller.clearisCheckedtoreData();
+                                  controller.clearpmTaskValue();
+                                  controller.clearPermitStoreData();
+                                  controller.clearmcDetailsStoreData();
                                   Get.toNamed(Routes.createPermit, arguments: {
                                     "permitId": ptw_id,
                                     "isChecked": false,
-                                    "type": 4,
+                                    "type": 5,
                                     "isFromJobDetails": true,
-                                    // "jobModel": controller.jobDetailsModel.value,
-                                    // "pmTaskModel": controller.pmtaskViewModel.value,
-                                    // "mcModel": controller.mcExecutionDetailsModel.value,
+                                    "jobModel":
+                                        controller.jobDetailsModel.value,
+                                    "pmTaskModel":
+                                        controller.pmtaskViewModel.value,
+                                    "mcModel": controller
+                                        .mcExecutionDetailsModel.value,
                                     "scheduleID": 0
                                   });
                                 },

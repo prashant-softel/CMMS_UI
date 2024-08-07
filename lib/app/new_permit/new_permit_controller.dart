@@ -1686,6 +1686,8 @@ class NewPermitController extends GetxController {
         activity: activity,
         isLoading: true,
         type: typee.value,
+        vegplanId: vegExecutionDetailsModel?.planId,
+        vegexid: vegExecutionDetailsModel?.executionId,
       );
       if (responseNewPermitCreatedForJob != null) {
         //  CreateNewPermitDialog();
@@ -1841,10 +1843,13 @@ class NewPermitController extends GetxController {
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.updateNewPermit(
-              newPermit: jobJsonString,
-              resubmit: isChecked.value,
-              isLoading: true,
-              type: typee.value);
+        newPermit: jobJsonString,
+        resubmit: isChecked.value,
+        isLoading: true,
+        type: typee.value,
+        vegplanId: vegExecutionDetailsModel?.planId,
+        vegexid: vegExecutionDetailsModel?.executionId,
+      );
       if (responseUpdatePermit != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
@@ -2038,6 +2043,14 @@ class NewPermitController extends GetxController {
     await permitPresenter.browseFiles(
         fileBytes, fileName.value, type, true, facilityId);
     return true;
+  }
+
+  void clearStoreData() {
+    permitPresenter.clearValue();
+  }
+
+  void clearTypeStoreData() {
+    permitPresenter.clearTypeValue();
   }
 
   void isSuccessDialog() {

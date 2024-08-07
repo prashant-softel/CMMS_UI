@@ -787,7 +787,7 @@ class CalibrationListController extends GetxController {
                     children: [
                       Column(
                         children: [
-                          Text("Previous Calibration"),
+                          Text("Last Calibration"),
                           Text("                         Date:"),
                         ],
                       ),
@@ -829,7 +829,7 @@ class CalibrationListController extends GetxController {
                     children: [
                       Column(
                         children: [
-                          Text("Due Date For Next"),
+                          Text("Due Date For "),
                           Text("             Calibration:"),
                         ],
                       ),
