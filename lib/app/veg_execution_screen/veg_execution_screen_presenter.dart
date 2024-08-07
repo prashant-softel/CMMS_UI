@@ -29,6 +29,17 @@ class VegExecutionPresenter {
     );
   }
 
+  void clearPermitStoreData() async =>
+      vegExecutionUsecase.clearPermitStoreData();
+  void clearmcDetailsStoreData() async =>
+      vegExecutionUsecase.clearmcDetailsStoreData();
+
+  void clearJobDetailStoreData() async =>
+      vegExecutionUsecase.clearJobDetailStoreData();
+  void clearTypeValue() async => vegExecutionUsecase.clearTypeValue();
+  void clearisCheckedValue() async => vegExecutionUsecase.clearisCheckedValue();
+  void clearpmTaskValue() async => vegExecutionUsecase.clearpmTaskValue();
+
   Future<VegExecutionDetailsModel?> getVegExecutionDetail({
     bool? isLoading,
     required int facilityId,
@@ -188,6 +199,5 @@ class VegExecutionPresenter {
       await vegExecutionUsecase.getExecutionId();
   void clearExecutionId() => vegExecutionUsecase.clearExecutionId();
   void clearPlanId() => vegExecutionUsecase.clearPlanId();
-  void clearPermitStoreData() async =>
-      vegExecutionUsecase.clearPermitStoreData();
+ 
 }

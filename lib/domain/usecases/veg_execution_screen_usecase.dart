@@ -169,4 +169,11 @@ class VegExecutionUsecase {
       await repository.getStringValue(LocalKeys.vegexe);
   void clearExecutionId() => repository.clearData(LocalKeys.vegexe);
   void clearPermitStoreData() async => repository.clearData(LocalKeys.permitId);
+  void clearmcDetailsStoreData() async =>
+      repository.clearData(LocalKeys.mcTaskId);
+  void clearJobDetailStoreData() async =>
+      repository.clearData(LocalKeys.jobModel);
+  void clearTypeValue() async => repository.clearData(LocalKeys.types);
+  void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
+  void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
 }

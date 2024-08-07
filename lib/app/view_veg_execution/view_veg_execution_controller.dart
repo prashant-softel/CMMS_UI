@@ -20,7 +20,7 @@ class ViewVegExecutionController extends GetxController {
 
   final HomeController homeController = Get.find();
   Rx<String> selectedFacility = ''.obs;
-  Schedules? selectedSchedule;
+  VegSchedules? selectedSchedule;
 
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
@@ -40,7 +40,7 @@ class ViewVegExecutionController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
+  RxList<VegSchedules?>? listSchedules = <VegSchedules?>[].obs;
   RxList<Equipments?>? listEquipmentsList = <Equipments?>[].obs;
 
   Rx<VegExecutionDetailsModel?> vegExecutionDetailsModel =
