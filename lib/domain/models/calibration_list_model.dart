@@ -20,6 +20,10 @@ class CalibrationListModel {
   String? calibration_status;
   String? last_calibration_date;
   String? next_calibration_due_date;
+  String? calibration_due_date;
+  String? last_calibration_due_date;
+  String? calibration_date;
+
   int? frequency_id;
   String? frequency_name;
   int? vendor_id;
@@ -27,7 +31,6 @@ class CalibrationListModel {
   String? responsible_person;
   String? received_date;
   String? asset_health_status;
-
   CalibrationListModel(
       {this.asset_health_status,
       this.calibration_id,
@@ -45,11 +48,24 @@ class CalibrationListModel {
       this.frequency_name,
       this.next_calibration_due_date,
       this.vendor_id,
-      this.statusID});
+      this.statusID,
+      this.calibration_date,
+      this.calibration_due_date,
+      this.last_calibration_due_date});
 
   factory CalibrationListModel.fromJson(Map<String, dynamic> json) =>
       CalibrationListModel(
         asset_health_status: json['asset_health_status'] ?? '',
+        calibration_date: json['calibration_date'] == null
+            ? json['calibration_date']
+            : Utility.getFormatedyearMonthDay(json['calibration_date']),
+        calibration_due_date: json['calibration_due_date'] == null
+            ? json['calibration_due_date']
+            : Utility.getFormatedyearMonthDay(json['calibration_due_date']),
+        last_calibration_due_date: json['last_calibration_due_date'] == null
+            ? json['last_calibration_due_date']
+            : Utility.getFormatedyearMonthDay(
+                json['last_calibration_due_date']),
         asset_id: json['asset_id'] ?? 0,
         calibration_id: json['calibration_id'] ?? 0,
         statusID: json['statusID'] ?? 0,
@@ -65,9 +81,9 @@ class CalibrationListModel {
         //     : Utility.getFormatedyearMonthDay(json['schedule_start_date']),
 
         schedule_start_date: (json['schedule_start_date'] == null ||
-              json['schedule_start_date'] == '0001-01-01T00:00:00')
-          ? "-"
-          : Utility.getFormatedyearMonthDay(json['schedule_start_date']),
+                json['schedule_start_date'] == '0001-01-01T00:00:00')
+            ? "-"
+            : Utility.getFormatedyearMonthDay(json['schedule_start_date']),
         asset_serial: json['asset_serial'] ?? '',
         calibration_status: json['calibration_status'] ?? '',
         category_name: json['category_name'] ?? '',
@@ -82,6 +98,9 @@ class CalibrationListModel {
       );
   Map<String, dynamic> toJson() => {
         "asset_health_status": asset_health_status,
+        "calibration_date": calibration_date,
+        "calibration_due_date": calibration_due_date,
+        "last_calibration_due_date": last_calibration_due_date,
         "asset_id": asset_id,
         "calibration_id": calibration_id,
         "frequency_id": frequency_id,

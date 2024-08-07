@@ -444,8 +444,8 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> createNewPermitForPm(
-      newPermit, pmTaskId, activity, bool? isLoading, type) async {
+  Future<Map<String, dynamic>> createNewPermitForPm(newPermit, pmTaskId,
+      activity, bool? isLoading, type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createNewPermitForPm(
@@ -480,8 +480,8 @@ class Repository {
             scheduleLinkToPermit(
                 pmTaskId, activity, permitForJob[0], true, type);
           } else if (pmTaskId != null && type == 5) {
-            vegscheduleLinkToPermit(
-                pmTaskId, activity, permitForJob[0], true, type);
+            vegscheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
+                type, vegplanId, vegexid);
           } else {
             scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true, 0);
           }
@@ -499,8 +499,8 @@ class Repository {
   }
 
   //Update New Permit
-  Future<Map<String, dynamic>> updateNewPermit(
-      newPermit, bool? isLoading, bool? resubmit, int? type) async {
+  Future<Map<String, dynamic>> updateNewPermit(newPermit, bool? isLoading,
+      bool? resubmit, int? type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateNewPermit(
@@ -508,7 +508,9 @@ class Repository {
           newPermit: newPermit,
           isLoading: isLoading ?? false,
           resubmit: resubmit,
-          type: type);
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -5338,7 +5340,12 @@ class Repository {
                   ? Get.offAllNamed(Routes.jobDetails)
                   : type == 3
                       ? Get.offAllNamed(Routes.viewAuditTask)
-                      : Get.offAllNamed(Routes.newPermitList);
+                      : type == 4
+                          ? Get.offAllNamed(
+                              Routes.viewModuleCleaningExecutionScreen)
+                          : type == 5
+                              ? Get.offAllNamed(Routes.vegExecutionScreen)
+                              : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -11837,8 +11844,8 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> vegscheduleLinkToPermit(
-      scheduleId, activity, permitId, bool? isLoading, type) async {
+  Future<Map<String, dynamic>> vegscheduleLinkToPermit(scheduleId, activity,
+      permitId, bool? isLoading, type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.vegscheduleLinkToPermit(
@@ -11847,7 +11854,9 @@ class Repository {
           permitId: permitId,
           activity: activity,
           isLoading: isLoading ?? false,
-          type: type);
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
