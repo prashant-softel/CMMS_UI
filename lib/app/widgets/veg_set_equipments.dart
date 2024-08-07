@@ -256,7 +256,7 @@ class VegSetEquipment extends GetView<AddVegetationPlanController> {
                             backgroundColor: ColorValues.greenColor,
                             text: 'Update',
                             onPressed: () {
-                              // controller.updateMcPlan();
+                              controller.updateVegPlan();
                             },
                           ),
                         ),
