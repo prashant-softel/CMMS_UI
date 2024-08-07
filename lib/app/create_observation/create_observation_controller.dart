@@ -83,21 +83,21 @@ class CreateObservationController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           getFacilityList();
         });
-        Future.delayed(Duration(seconds: 1), () {
+        // Future.delayed(Duration(seconds: 1), () {
           getIncidentRiskType(facilityId);
-        });
-        Future.delayed(Duration(seconds: 1), () {
+        // });
+        // Future.delayed(Duration(seconds: 1), () {
           getTypeOfObservationList();
-        });
-        Future.delayed(Duration(seconds: 1), () {
+        // });
+        // Future.delayed(Duration(seconds: 1), () {
           getSourceObservationList();
-        });
+        // });
       });
       if (obsId.value != 0) {
-        Future.delayed(Duration(seconds: 1), () {
+        // Future.delayed(Duration(seconds: 1), () {
           getObsDetail(id: obsId.value);
           getObsHistory(id: obsId.value);
-        });
+        // });
       }
     } catch (e) {}
 
