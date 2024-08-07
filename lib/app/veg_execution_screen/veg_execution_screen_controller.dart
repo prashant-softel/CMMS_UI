@@ -132,7 +132,7 @@ class VegExecutionController extends GetxController {
           {"key": "Cleaned", "value": '${element.cleaned}'},
           {"key": "Abandoned", "value": '${element.abandoned}'},
           {"key": "Pending", "value": '${element.pending}'},
-          {"key": "Remark", "value": '${element.remark}'},
+          {"key": "Remark", "value": '${element.remark_of_schedule}'},
           {"key": "Permit_code", "value": '${element.permit_code}'},
           {"key": "Permit_status", "value": '${element.status_short_ptw}'},
           {"key": "Status", "value": '${element.status_short}'},
@@ -286,7 +286,7 @@ class VegExecutionController extends GetxController {
         scheduleId: scheduleId ?? 0,
         executionId: vegexe.value,
         cleaningDay: cleaningDay ?? 0,
-        remark: remark ?? "",
+        remark: remark == null ? "" : remark,
         cleanedEquipmentIds: cleanedEquipmentIds,
         abandonedEquipmentIds: abandonedEquipmentIds,
       );
