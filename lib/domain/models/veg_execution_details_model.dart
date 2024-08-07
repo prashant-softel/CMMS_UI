@@ -26,7 +26,7 @@ class VegExecutionDetailsModel {
   int? ptw_status;
   int? ptw_tbt_done;
   String? status_short_ptw;
-  List<Schedules>? schedules;
+  List<VegSchedules>? schedules;
 
   VegExecutionDetailsModel({
     this.id,
@@ -78,8 +78,8 @@ class VegExecutionDetailsModel {
         ptw_status: json['ptw_status'],
         ptw_tbt_done: json['ptw_tbt_done'],
         schedules: json["schedules"] != null
-            ? List<Schedules>.from(
-                json["schedules"].map((x) => Schedules.fromJson(x)))
+            ? List<VegSchedules>.from(
+                json["schedules"].map((x) => VegSchedules.fromJson(x)))
             : [],
       );
 
@@ -109,7 +109,7 @@ class VegExecutionDetailsModel {
       };
 }
 
-class Schedules {
+class VegSchedules {
   int? id;
   int? scheduleId;
   int? executionId;
@@ -132,7 +132,7 @@ class Schedules {
   String? status_short_ptw;
   List<Equipments>? equipments;
 
-  Schedules({
+  VegSchedules({
     this.id,
     this.scheduleId,
     this.executionId,
@@ -156,7 +156,7 @@ class Schedules {
     this.status_short_ptw,
   });
 
-  factory Schedules.fromJson(Map<String, dynamic> json) => Schedules(
+  factory VegSchedules.fromJson(Map<String, dynamic> json) => VegSchedules(
       id: json['id'],
       scheduleId: json['scheduleId'],
       executionId: json['executionId'],
@@ -259,6 +259,6 @@ class Equipments {
       };
 }
 
-String vegExecutionModelToJson(Schedules data) => json.encode(data.toJson());
+String vegExecutionModelToJson(VegSchedules data) => json.encode(data.toJson());
 String vegExecutionDetailsModelToJson(Equipments data) =>
     json.encode(data.toJson());
