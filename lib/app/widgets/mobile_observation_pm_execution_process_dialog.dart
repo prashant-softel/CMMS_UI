@@ -66,7 +66,7 @@ class MobileObservationPmExecutionViewDialog
 
   @override
   Widget build(BuildContext context) {
-    return Container(); // Empty container to satisfy GetView
+    return Container();
   }
 
   void showObservationPmExecutionViewBottomSheet(BuildContext context) {
@@ -80,746 +80,512 @@ class MobileObservationPmExecutionViewDialog
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             var height = MediaQuery.of(context).size.height;
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: ColorValues.lightGreyColorWithOpacity35,
-                  width: 1,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: ColorValues.whiteColor,
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              height: height,
-              child: Obx(
-                () => Column(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 1.4,
-                      child: ScrollConfiguration(
-                        behavior: ScrollConfiguration.of(context)
-                            .copyWith(scrollbars: false),
-                        child: SingleChildScrollView(
+            return
+                // Obx(
+                //   () =>
+                Column(
+              children: [
+                Container(
+                  height: Get.height * 02,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: Dimens.edgeInsets10,
+                          // width: MediaQuery.of(context).size.width / 1.2,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: ColorValues.lightGreyColorWithOpacity35,
+                              width: 1,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: ColorValues.appBlueBackgroundColor,
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
                           child: Column(
                             children: [
-                              Container(
-                                margin: Dimens.edgeInsets20,
-                                width: MediaQuery.of(context).size.width / 1.2,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        ColorValues.lightGreyColorWithOpacity35,
-                                    width: 1,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorValues.appBlueBackgroundColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "  ${controller.selectedItem?.checklist_name ?? ""}",
-                                            style: Styles.blue700,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: Get.width,
-                                      child: Obx(
-                                        () => Container(
-                                          margin: Dimens.edgeInsets10,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: ColorValues
-                                                  .lightGreyColorWithOpacity35,
-                                              width: 1,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: ColorValues
-                                                    .appBlueBackgroundColor,
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Column(
-                                            children: controller
-                                                .rowItemobs.value
-                                                .map((record) {
-                                              return Container(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 206, 229, 234),
-                                                  ),
-                                                ),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children:
-                                                      record.map((mapData) {
-                                                    return Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          vertical: 4.0),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Text(
-                                                            mapData['key'] ??
-                                                                '',
-                                                            style: TextStyle(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                            ),
-                                                          ),
-                                                          if (mapData['key'] ==
-                                                              "type")
-                                                            (mapData['inpute_type'] ==
-                                                                    "2")
-                                                                ? Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .all(
-                                                                            8.0),
-                                                                    child:
-                                                                        Column(
-                                                                      children: [
-                                                                        LoginCustomTextfield(
-                                                                            width: (Get.width *
-                                                                                .8),
-                                                                            textController:
-                                                                                new TextEditingController(text: mapData["value"] ?? ''),
-                                                                            onChanged: (txt) {
-                                                                              mapData["value"] = txt;
-                                                                              updateJob(record);
-                                                                              Future.delayed(Duration.zero, () {
-                                                                                setState(() {});
-                                                                              });
-                                                                            }),
-                                                                        Row(
-                                                                          children: [
-                                                                            Text("Min:${mapData["min"]}"),
-                                                                            Dimens.boxWidth15,
-                                                                            Text("Max:${mapData["max"]}")
-                                                                          ],
-                                                                        )
-                                                                      ],
-                                                                    ))
-                                                                : (mapData['inpute_type'] ==
-                                                                        "0")
-                                                                    ? Text(
-                                                                        'Text')
-                                                                    : _rowBoolItem(
-                                                                        int.tryParse(
-                                                                            '${mapData['value']}'),
-                                                                        onCheck:
-                                                                            (val) {
-                                                                        mapData[
-                                                                            'value'] = val ==
-                                                                                true
-                                                                            ? "1"
-                                                                            : "0";
-                                                                        Future.delayed(
-                                                                            Duration.zero,
-                                                                            () {
-                                                                          setState(
-                                                                              () {});
-                                                                        });
-                                                                      }),
-                                                          if (mapData['key'] ==
-                                                              "observation")
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child:
-                                                                  LoginCustomTextfield(
-                                                                width:
-                                                                    (Get.width *
-                                                                        .4),
-                                                                textController:
-                                                                    new TextEditingController(
-                                                                        text: mapData["value"] ??
-                                                                            ''),
-                                                                onChanged:
-                                                                    (txt) {
-                                                                  mapData["value"] =
-                                                                      txt;
-                                                                },
-                                                                maxLine: 5,
-                                                              ),
-                                                            ),
-                                                          if (mapData['key'] ==
-                                                              "cpok")
-                                                            _rowcpOkItem(
-                                                                int.tryParse(
-                                                                    '${mapData['value']}'),
-                                                                onCheck: (val) {
-                                                              mapData['value'] =
-                                                                  val == true
-                                                                      ? "1"
-                                                                      : "0";
-                                                              updateJob(record);
-                                                              Future.delayed(
-                                                                  Duration.zero,
-                                                                  () {
-                                                                setState(() {});
-                                                              });
-                                                            }),
-                                                          if (mapData['key'] ==
-                                                              "job_created")
-                                                            Row(
-                                                              children: [
-                                                                (record[7]['value'] != "1" &&
-                                                                        record[7]['value'] !=
-                                                                            "0" &&
-                                                                        mapData['cp_ok_value'] !=
-                                                                            "1")
-                                                                    ? Text(
-                                                                        'JOB${(record[7]['value'])}')
-                                                                    : ((record[3]['value'] ==
-                                                                            "0")
-                                                                        //     ||
-                                                                        // (record[7]['cp_ok_value'] == "0" && record[3]['value'] == "1")
-                                                                        )
-                                                                        ?
-                                                                        // Obx(() {
-                                                                        //     return
-                                                                        _rowItem(
-                                                                            int.tryParse('${record[7]['value']}'),
-                                                                            onCheck:
-                                                                                (val) {
-                                                                            record[7]['value'] = val == true
-                                                                                ? "1"
-                                                                                : "0";
-                                                                            Future.delayed(Duration.zero,
-                                                                                () {
-                                                                              setState(() {});
-                                                                            });
-
-                                                                            // Update the reactive variable
-                                                                            //  });
-                                                                          })
-                                                                        : Dimens
-                                                                            .box0
-                                                              ],
-                                                            )
-                                                          else
-                                                            Flexible(
-                                                              child: Text(
-                                                                mapData['value'] ??
-                                                                    '',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          5,
-                                                                          92,
-                                                                          163),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        ),
-                                      ),
+                                    Text(
+                                      "  ${controller.selectedItem?.checklist_name ?? ""}",
+                                      style: Styles.blue700,
                                     ),
                                   ],
                                 ),
                               ),
                               Container(
-                                margin: Dimens.edgeInsets10,
-                                width: MediaQuery.of(context).size.width / 1.2,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        ColorValues.lightGreyColorWithOpacity35,
-                                    width: 1,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorValues.appBlueBackgroundColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Material Used For ",
-                                            style: Styles.blue700,
-                                          ),
-                                        ],
+                                width: Get.width,
+                                child: Obx(
+                                  () => Container(
+                                    margin: Dimens.edgeInsets10,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
                                       ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues
+                                              .appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
                                     ),
-                                    Container(
-                                      height: 300,
-                                      child: Obx(() {
-                                        return DataTable2(
-                                          minWidth: 1600,
-                                          dataRowHeight: 70,
-                                          columnSpacing: 10,
-                                          border: TableBorder.all(
-                                            color: Color.fromARGB(
-                                                255, 206, 229, 234),
+                                    child: Column(
+                                      children: controller.rowItemobs.value
+                                          .map((record) {
+                                        return Container(
+                                          padding: const EdgeInsets.all(8.0),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Color.fromARGB(
+                                                  255, 206, 229, 234),
+                                            ),
                                           ),
-                                          columns: [
-                                            DataColumn2(
-                                              fixedWidth: 350,
-                                              label: Text(
-                                                "Material Name",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn2(
-                                              fixedWidth: 150,
-                                              label: Text(
-                                                "Sr No.",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn2(
-                                              fixedWidth: 150,
-                                              label: Text(
-                                                "MDM Code",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn2(
-                                              fixedWidth: 250,
-                                              label: Text(
-                                                "Material Type",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn2(
-                                              fixedWidth: 150,
-                                              label: Text(
-                                                "Issued Qty",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn2(
-                                              fixedWidth: 150,
-                                              label: Text(
-                                                "Consumed By All",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn2(
-                                              fixedWidth: 200,
-                                              label: Text(
-                                                "Consumed By This",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                          ],
-                                          rows: controller.rowItem.value
-                                              .map((record) {
-                                            return DataRow(
-                                              cells: record.map((mapData) {
-                                                return DataCell(
-                                                  (mapData['key'] ==
-                                                          "Drop_down")
-                                                      ? DropdownWebStock(
-                                                          width: MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width,
-                                                          dropdownList:
-                                                              controller
-                                                                  .cmmrsItems!
-                                                                  .where((p0) {
-                                                                    return !controller
-                                                                        .rowItem
-                                                                        .map((p0) => p0[0]
-                                                                            [
-                                                                            "value"])
-                                                                        .contains(
-                                                                            p0!.name);
-                                                                  })
-                                                                  .toList()
-                                                                  .obs,
-                                                          selectedValue:
-                                                              mapData["value"],
-                                                          onValueChanged: (list,
-                                                              selectedValue) {
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: record.map((mapData) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 4.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      mapData['key'] ?? '',
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    if (mapData['key'] ==
+                                                        "observation")
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          width:
+                                                              (Get.width * .4),
+                                                          textController:
+                                                              new TextEditingController(
+                                                                  text: mapData[
+                                                                          "value"] ??
+                                                                      ''),
+                                                          onChanged: (txt) {
                                                             mapData["value"] =
-                                                                selectedValue;
-                                                            controller.dropdownMapperData[
-                                                                    selectedValue] =
-                                                                list.firstWhere(
-                                                              (element) =>
-                                                                  element
-                                                                      .name ==
-                                                                  selectedValue,
-                                                              orElse: null,
-                                                            );
-                                                            Future.delayed(
-                                                                Duration.zero,
-                                                                () {
-                                                              setState(() {});
-                                                            });
+                                                                txt;
                                                           },
-                                                        )
-                                                      : (mapData['key'] ==
-                                                              "Sr_No")
-                                                          ? Text(
-                                                              "${controller.dropdownMapperData[record[0]['value']]?.serial_number ?? ""}")
-                                                          : (mapData['key'] ==
-                                                                  "code")
+                                                          maxLine: 5,
+                                                        ),
+                                                      ),
+                                                    if (mapData['key'] ==
+                                                        "cpok")
+                                                      _rowcpOkItem(
+                                                          int.tryParse(
+                                                              '${mapData['value']}'),
+                                                          onCheck: (val) {
+                                                        mapData['value'] =
+                                                            val == true
+                                                                ? "1"
+                                                                : "0";
+                                                        updateJob(record);
+                                                        Future.delayed(
+                                                            Duration.zero, () {
+                                                          setState(() {});
+                                                        });
+                                                      }),
+                                                    if (mapData['key'] ==
+                                                        "job_created")
+                                                      Row(
+                                                        children: [
+                                                          (record[7][
+                                                                          'value'] !=
+                                                                      "1" &&
+                                                                  record[7][
+                                                                          'value'] !=
+                                                                      "0" &&
+                                                                  mapData['cp_ok_value'] !=
+                                                                      "1")
                                                               ? Text(
-                                                                  "${controller.dropdownMapperData[record[0]['value']]?.asset_MDM_code ?? ""}")
-                                                              : (mapData['key'] ==
-                                                                      "Material_Type")
-                                                                  ? Text(
-                                                                      "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
-                                                                  : (mapData['key'] ==
-                                                                          "Issued_Qty")
-                                                                      ? Text(
-                                                                          "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}")
-                                                                      : (mapData['key'] ==
-                                                                              "Used_Qty")
-                                                                          ? Text(
-                                                                              "${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
-                                                                          : (mapData['key'] == "Consumed_Qty")
-                                                                              ? Padding(
-                                                                                  padding: const EdgeInsets.only(top: 10),
-                                                                                  child: Container(
-                                                                                    decoration: BoxDecoration(
-                                                                                      boxShadow: [
-                                                                                        BoxShadow(
-                                                                                          color: Colors.black26,
-                                                                                          offset: const Offset(5.0, 5.0),
-                                                                                          blurRadius: 5.0,
-                                                                                          spreadRadius: 1.0,
-                                                                                        ),
-                                                                                      ],
-                                                                                      color: ColorValues.whiteColor,
-                                                                                      borderRadius: BorderRadius.circular(5),
-                                                                                    ),
-                                                                                    child: LoginCustomTextfield(
-                                                                                      width: (Get.width * .4),
-                                                                                      keyboardType: TextInputType.number,
-                                                                                      inputFormatters: <TextInputFormatter>[
-                                                                                        FilteringTextInputFormatter.digitsOnly
-                                                                                      ],
-                                                                                      maxLine: 1,
-                                                                                      enabled: controller.listMrsByTaskId!.value.firstWhereOrNull((element) => element?.jobCardId != 0 || element?.pmId != 0)?.mrs_return_ID == 0 && controller.allTrue.value == false ? true : false,
-                                                                                      textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                      onChanged: (txt) {
-                                                                                        int intialQty = int.tryParse(mapData['value'] ?? "") ?? 0;
+                                                                  'JOB${(record[7]['value'])}')
+                                                              : ((record[3][
+                                                                          'value'] ==
+                                                                      "0")
+                                                                  //     ||
+                                                                  // (record[7]['cp_ok_value'] == "0" && record[3]['value'] == "1")
+                                                                  )
+                                                                  ?
+                                                                  // Obx(() {
+                                                                  //     return
+                                                                  _rowItem(
+                                                                      int.tryParse(
+                                                                          '${record[7]['value']}'),
+                                                                      onCheck:
+                                                                          (val) {
+                                                                      record[7][
+                                                                          'value'] = val ==
+                                                                              true
+                                                                          ? "1"
+                                                                          : "0";
+                                                                      Future.delayed(
+                                                                          Duration
+                                                                              .zero,
+                                                                          () {
+                                                                        setState(
+                                                                            () {});
+                                                                      });
 
-                                                                                        num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
-                                                                                        num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
-                                                                                        num intiAllowedQty = usedQty - intialQty;
-
-                                                                                        num maxAllowedQty = issuedQty - intiAllowedQty;
-                                                                                        if (txt.isNotEmpty) {
-                                                                                          num enteredValue = num.tryParse(txt) ?? 0;
-                                                                                          if (enteredValue > maxAllowedQty) {
-                                                                                            setState(() {
-                                                                                              txt = intialQty.toString();
-                                                                                              mapData['value'] = intialQty.toString();
-                                                                                            });
-                                                                                            Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
-                                                                                          }
-                                                                                        } else if (txt.isEmpty) {
-                                                                                          txt = intialQty.toString();
-                                                                                        }
-                                                                                        mapData["value"] = txt;
-                                                                                      },
-                                                                                    ),
-                                                                                  ),
-                                                                                )
-                                                                              : Text(mapData['value'] ?? ''),
-                                                );
-                                              }).toList(),
-                                            );
-                                          }).toList(),
+                                                                      // Update the reactive variable
+                                                                      //  });
+                                                                    })
+                                                                  : Dimens.box0
+                                                        ],
+                                                      )
+                                                    else
+                                                      Flexible(
+                                                        child: Text(
+                                                          mapData['value'] ??
+                                                              '',
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                  ],
+                                                ),
+                                              );
+                                            }).toList(),
+                                          ),
                                         );
-                                      }),
+                                      }).toList(),
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kPmExecutionFeatureId &&
-                                          e.edit ==
-                                              UserAccessConstants
-                                                  .kHaveEditAccess)
-                                      .length >
-                                  0
-                              ? Container(
-                                  height: 35,
-                                  child: CustomElevatedButton(
-                                    backgroundColor: ColorValues.appRedColor,
-                                    text: "Close",
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                  ),
-                                )
-                              : Dimens.box0,
-                          SizedBox(
-                            width: 20,
+                        Container(
+                          margin: Dimens.edgeInsets20,
+                          height: 100,
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: ColorValues.lightGreyColorWithOpacity35,
+                              width: 1,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: ColorValues.appBlueBackgroundColor,
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
                           ),
-                          varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kPmExecutionFeatureId &&
-                                          e.edit ==
-                                              UserAccessConstants
-                                                  .kHaveEditAccess)
-                                      .length >
-                                  0
-                              ? Container(
-                                  height: 35,
-                                  child: CustomElevatedButton(
-                                    backgroundColor:
-                                        ColorValues.appDarkBlueColor,
-                                    text: "Update",
-                                    onPressed: () {
-                                      Get.back();
-                                      controller.transferItem();
-                                      controller.updatePmExecution();
-                                    },
-                                  ),
-                                )
-                              : Dimens.box0,
-                        ],
-                      ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Material Used For ",
+                                      style: Styles.blue700,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Obx(() {
+                                  return DataTable2(
+                                    minWidth: 1600,
+                                    dataRowHeight: 70,
+                                    columnSpacing: 10,
+                                    border: TableBorder.all(
+                                      color: Color.fromARGB(255, 206, 229, 234),
+                                    ),
+                                    columns: [
+                                      DataColumn2(
+                                        fixedWidth: 350,
+                                        label: Text(
+                                          "Material Name",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          "Sr No.",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          "MDM Code",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 250,
+                                        label: Text(
+                                          "Material Type",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          "Issued Qty",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          "Consumed By All",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          "Consumed By This",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                    rows:
+                                        controller.rowItem.value.map((record) {
+                                      return DataRow(
+                                        cells: record.map((mapData) {
+                                          return DataCell(
+                                            (mapData['key'] == "Drop_down")
+                                                ? DropdownWebStock(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    dropdownList: controller
+                                                        .cmmrsItems!
+                                                        .where((p0) {
+                                                          return !controller
+                                                              .rowItem
+                                                              .map((p0) => p0[0]
+                                                                  ["value"])
+                                                              .contains(
+                                                                  p0!.name);
+                                                        })
+                                                        .toList()
+                                                        .obs,
+                                                    selectedValue:
+                                                        mapData["value"],
+                                                    onValueChanged:
+                                                        (list, selectedValue) {
+                                                      mapData["value"] =
+                                                          selectedValue;
+                                                      controller.dropdownMapperData[
+                                                              selectedValue] =
+                                                          list.firstWhere(
+                                                        (element) =>
+                                                            element.name ==
+                                                            selectedValue,
+                                                        orElse: null,
+                                                      );
+                                                      Future.delayed(
+                                                          Duration.zero, () {
+                                                        setState(() {});
+                                                      });
+                                                    },
+                                                  )
+                                                : (mapData['key'] == "Sr_No")
+                                                    ? Text(
+                                                        "${controller.dropdownMapperData[record[0]['value']]?.serial_number ?? ""}")
+                                                    : (mapData['key'] == "code")
+                                                        ? Text(
+                                                            "${controller.dropdownMapperData[record[0]['value']]?.asset_MDM_code ?? ""}")
+                                                        : (mapData['key'] ==
+                                                                "Material_Type")
+                                                            ? Text(
+                                                                "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
+                                                            : (mapData['key'] ==
+                                                                    "Issued_Qty")
+                                                                ? Text(
+                                                                    "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}")
+                                                                : (mapData['key'] ==
+                                                                        "Used_Qty")
+                                                                    ? Text(
+                                                                        "${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
+                                                                    : (mapData['key'] ==
+                                                                            "Consumed_Qty")
+                                                                        ? Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(top: 10),
+                                                                            child:
+                                                                                Container(
+                                                                              decoration: BoxDecoration(
+                                                                                boxShadow: [
+                                                                                  BoxShadow(
+                                                                                    color: Colors.black26,
+                                                                                    offset: const Offset(5.0, 5.0),
+                                                                                    blurRadius: 5.0,
+                                                                                    spreadRadius: 1.0,
+                                                                                  ),
+                                                                                ],
+                                                                                color: ColorValues.whiteColor,
+                                                                                borderRadius: BorderRadius.circular(5),
+                                                                              ),
+                                                                              child: LoginCustomTextfield(
+                                                                                width: (Get.width * .4),
+                                                                                keyboardType: TextInputType.number,
+                                                                                inputFormatters: <TextInputFormatter>[
+                                                                                  FilteringTextInputFormatter.digitsOnly
+                                                                                ],
+                                                                                maxLine: 1,
+                                                                                enabled: controller.listMrsByTaskId!.value.firstWhereOrNull((element) => element?.jobCardId != 0 || element?.pmId != 0)?.mrs_return_ID == 0 && controller.allTrue.value == false ? true : false,
+                                                                                textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                onChanged: (txt) {
+                                                                                  int intialQty = int.tryParse(mapData['value'] ?? "") ?? 0;
+
+                                                                                  num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
+                                                                                  num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
+                                                                                  num intiAllowedQty = usedQty - intialQty;
+
+                                                                                  num maxAllowedQty = issuedQty - intiAllowedQty;
+                                                                                  if (txt.isNotEmpty) {
+                                                                                    num enteredValue = num.tryParse(txt) ?? 0;
+                                                                                    if (enteredValue > maxAllowedQty) {
+                                                                                      setState(() {
+                                                                                        txt = intialQty.toString();
+                                                                                        mapData['value'] = intialQty.toString();
+                                                                                      });
+                                                                                      Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
+                                                                                    }
+                                                                                  } else if (txt.isEmpty) {
+                                                                                    txt = intialQty.toString();
+                                                                                  }
+                                                                                  mapData["value"] = txt;
+                                                                                },
+                                                                              ),
+                                                                            ),
+                                                                          )
+                                                                        : Text(mapData['value'] ??
+                                                                            ''),
+                                          );
+                                        }).toList(),
+                                      );
+                                    }).toList(),
+                                  );
+                                }),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-                    Spacer(),
-                  ],
+                  ),
                 ),
-              ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kPmExecutionFeatureId &&
+                                      e.edit ==
+                                          UserAccessConstants.kHaveEditAccess)
+                                  .length >
+                              0
+                          ? Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appRedColor,
+                                text: "Close",
+                                onPressed: () {
+                                  Get.back();
+                                },
+                              ),
+                            )
+                          : Dimens.box0,
+                      SizedBox(
+                        width: 20,
+                      ),
+                      varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kPmExecutionFeatureId &&
+                                      e.edit ==
+                                          UserAccessConstants.kHaveEditAccess)
+                                  .length >
+                              0
+                          ? Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appDarkBlueColor,
+                                text: "Update",
+                                onPressed: () {
+                                  Get.back();
+                                  controller.transferItem();
+                                  controller.updatePmExecution();
+                                },
+                              ),
+                            )
+                          : Dimens.box0,
+                    ],
+                  ),
+                ),
+
+                //  Spacer(),
+                // Spacer(),
+              ],
+              // ),
             );
           },
         );
       },
     );
-  }
-
-  Widget commonUi(
-    void Function(void Function()) setState,
-    Map<String, String> mapData,
-    List<Map<String, String>> record,
-  ) {
-    switch (mapData['key']) {
-      case 'observation':
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: LoginCustomTextfield(
-            width: (Get.width * .4),
-            textController:
-                new TextEditingController(text: mapData["value"] ?? ''),
-            onChanged: (txt) {
-              mapData["value"] = txt;
-            },
-            maxLine: 5,
-          ),
-        );
-
-      case 'type':
-        return (mapData['inpute_type'] == "2")
-            ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    LoginCustomTextfield(
-                      width: (Get.width * .8),
-                      textController: new TextEditingController(
-                          text: mapData["value"] ?? ''),
-                      onChanged: (txt) {
-                        mapData["value"] = txt;
-                        updateJob(record);
-                        Future.delayed(Duration.zero, () {
-                          setState(() {});
-                        });
-                      },
-                    ),
-                    Row(
-                      children: [
-                        Text("Min:${mapData["min"]}"),
-                        Dimens.boxWidth15,
-                        Text("Max:${mapData["max"]}"),
-                      ],
-                    ),
-                  ],
-                ),
-              )
-            : (mapData['inpute_type'] == "0")
-                ? Text('Text')
-                : _rowBoolItem(int.tryParse('${mapData['value']}'),
-                    onCheck: (val) {
-                    mapData['value'] = val == true ? "1" : "0";
-                    Future.delayed(Duration.zero, () {
-                      setState(() {});
-                    });
-                  });
-
-      case 'job_created':
-        return Row(
-          children: [
-            (record[7]['value'] != "1" &&
-                    record[7]['value'] != "0" &&
-                    mapData['cp_ok_value'] != "1")
-                ? Text('JOB${(record[7]['value'])}')
-                : ((record[3]['value'] == "0"))
-                    ? _rowItem(int.tryParse('${record[7]['value']}'),
-                        onCheck: (val) {
-                        record[7]['value'] = val == true ? "1" : "0";
-                        Future.delayed(Duration.zero, () {
-                          setState(() {});
-                        });
-                      })
-                    : Dimens.box0
-          ],
-        );
-
-      case 'cpok':
-        return _rowcpOkItem(int.tryParse('${mapData['value']}'),
-            onCheck: (val) {
-          mapData['value'] = val == true ? "1" : "0";
-          updateJob(record);
-          Future.delayed(Duration.zero, () {
-            setState(() {});
-          });
-        });
-
-      case 'uploadimg':
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            InkWell(
-              onTap: () async {
-                try {
-                  final result = await FilePicker.platform.pickFiles(
-                    type: FileType.image,
-                  );
-                  if (result != null && result.files.single.bytes != null) {
-                    setState(() {
-                      mapData['uploaded'] = result.files.single.name;
-                      controller.fileName.value = result.files.single.name;
-                      controller.fileBytes = result.files.single.bytes;
-                    });
-                    controller.browseFiles(
-                      fileBytes: controller.fileBytes,
-                    );
-                  } else {
-                    print('No file selected');
-                  }
-                } catch (e) {
-                  print('Error picking file: $e');
-                }
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: ColorValues.appDarkBlueColor,
-                  border: Border.all(
-                    color: ColorValues.appDarkBlueColor,
-                    width: 1,
-                  ),
-                ),
-                child:
-                    Icon(Icons.upload, size: 30, color: ColorValues.whiteColor),
-              ),
-            ),
-            SizedBox(width: 10),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Text(
-                  "${mapData['uploaded'] ?? 'No file selected'}",
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ),
-          ],
-        );
-
-      default:
-        return Text(mapData['value'] ?? '');
-    }
   }
 
   updateJob(List<Map<String, String>> record) {
