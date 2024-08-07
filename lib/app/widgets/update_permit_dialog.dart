@@ -174,8 +174,8 @@ class UpdateNewPermitDialog extends GetView {
                         : type == 4
                             ? ElevatedButton(
                                 style: Styles.darkBlueElevatedButtonStyle,
-                                onPressed: () => Get.offAllNamed(
-                                    Routes.viewModuleCleaningExecutionScreen),
+                                onPressed: () => Get.offAllNamed(Routes
+                                    .addModuleCleaningExecutionContentWeb),
                                 child: const Text('View MC'),
                               )
                             : type == 5
