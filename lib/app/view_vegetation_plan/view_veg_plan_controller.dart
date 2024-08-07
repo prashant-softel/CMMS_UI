@@ -31,6 +31,14 @@ class ViewVegPlanController extends GetxController {
   List<int?> scheduleId = [];
   RxList<Schedules?>? schedules = <Schedules?>[].obs;
   Schedules? selectedSchedules;
+  RxList<VegetationEquipmentModel?> equipmentList =
+      <VegetationEquipmentModel?>[].obs;
+  void dayCount({required int dayCount}) {
+    days = <TypeModel>[].obs;
+    for (int i = 1; i <= dayCount; i++) {
+      days.add(TypeModel(name: 'Day $i', id: "$i"));
+    }
+  }
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;

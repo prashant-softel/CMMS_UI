@@ -495,8 +495,13 @@ class VegExcutionListDataSource extends DataTableSource {
       '${VegExcutionListDetails?.responsibility ?? ''}',
       '${VegExcutionListDetails?.frequency ?? ''}',
       '${VegExcutionListDetails?.noOfDays ?? ''}',
-      '${VegExcutionListDetails?.startDate ?? ''}',
-      '${VegExcutionListDetails?.doneDate ?? ''}',
+      VegExcutionListDetails?.startDate == "0001-01-01"
+          ? "-"
+          : '${VegExcutionListDetails?.startDate ?? ''}',
+      VegExcutionListDetails?.doneDate == "0001-01-01"
+          ? "-"
+          : '${VegExcutionListDetails?.doneDate ?? ''}',
+
       '${VegExcutionListDetails?.status ?? ''}',
 
       'Actions',
