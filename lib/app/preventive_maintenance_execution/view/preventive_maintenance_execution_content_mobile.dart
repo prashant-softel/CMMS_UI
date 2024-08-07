@@ -132,7 +132,7 @@ class PreventiveMaintenanceExecutionContentMobile
                           width: Get.width,
                           child: Obx(
                             () => Container(
-                              margin: Dimens.edgeInsets10,
+                              // margin: Dimens.edgeInsets10,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color:
@@ -166,242 +166,246 @@ class PreventiveMaintenanceExecutionContentMobile
                                         return Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 4.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                          child: Column(
                                             children: [
-                                              Text(
-                                                mapData['key'] ?? '',
-                                                style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              if (mapData['key'] == "Actions")
-                                                Wrap(
-                                                  children: [],
-                                                )
-                                              else if (mapData['key'] ==
-                                                  "executionDone")
-                                                Text(mapData['value'] == "0"
-                                                    ? ""
-                                                    : "${mapData['completed']}")
-                                              else if (mapData['key'] ==
-                                                  "dropdown")
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      height: 25,
-                                                      width: 70,
-                                                      child: varUserAccessModel
-                                                                  .value
-                                                                  .access_list!
-                                                                  .where((e) =>
-                                                                      e.feature_id ==
-                                                                          UserAccessConstants
-                                                                              .kPmExecutionFeatureId &&
-                                                                      e.edit ==
-                                                                          UserAccessConstants
-                                                                              .kHaveEditAccess)
-                                                                  .length >
-                                                              0
-                                                          ? TableActionButton(
-                                                              color: ColorValues
-                                                                  .appDarkBlueColor,
-                                                              message: "Clone",
-                                                              onPress: () {
-                                                                controller.selectedItem = controller
-                                                                    .scheduleCheckPoints
-                                                                    .firstWhere(
-                                                                        (element) =>
-                                                                            "${element.name}" ==
-                                                                            record[0]['value']
-                                                                                .toString(),
-                                                                        orElse:
-                                                                            null);
+                                              mapData['key'] == "Asset" ||
+                                                      mapData['key'] ==
+                                                          "Checklist"
+                                                  ? Column(
+                                                      children: [
+                                                        Row(children: [
+                                                          Text(
+                                                              '${mapData['key']!}: ',
+                                                              style: Styles
+                                                                  .appDarkGrey12),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Expanded(
+                                                            child: Text(
+                                                                '${mapData['value']!}'
+                                                                '',
+                                                                style: Styles
+                                                                    .appDarkBlue12),
+                                                          ),
+                                                        ]),
+                                                      ],
+                                                    )
+                                                  : (mapData['key'] ==
+                                                          "executionDone")
+                                                      ? Row(
+                                                          children: [
+                                                            Text(
+                                                                'Executed by: ',
+                                                                style: Styles
+                                                                    .appDarkGrey12),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Expanded(
+                                                              child: Text(
+                                                                  '${mapData['completed']!}'
+                                                                  '',
+                                                                  style: Styles
+                                                                      .appDarkBlue12),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      : (mapData['key'] ==
+                                                              "dropdown")
+                                                          ? Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                  TableActionButton(
+                                                                      color: ColorValues
+                                                                          .appDarkBlueColor,
+                                                                      icon: Icons
+                                                                          .cyclone_sharp,
+                                                                      message:
+                                                                          "Clone",
+                                                                      onPress:
+                                                                          () {
+                                                                        controller.selectedItem = controller.scheduleCheckPoints.firstWhere(
+                                                                            (element) =>
+                                                                                "${element.name}" ==
+                                                                                record[0]['value'].toString(),
+                                                                            orElse: null);
 
-                                                                var select = controller.scheduleCheckPoints.firstWhere(
-                                                                    (element) =>
-                                                                        element
-                                                                            .name ==
+                                                                        var select = controller.scheduleCheckPoints.firstWhere(
+                                                                            (element) =>
+                                                                                element.name ==
+                                                                                controller.selectedasset.value,
+                                                                            orElse: null);
+                                                                        select.schedule_link_job!.isNotEmpty
+                                                                            ? controller.cloneAlertDialog()
+                                                                            : controller.cloneDialog(controller.selectedasset.value);
+                                                                      }),
+                                                                  DropdownWebWidget(
+                                                                    width: 300,
+                                                                    controller:
+                                                                        controller,
+                                                                    dropdownList:
                                                                         controller
-                                                                            .selectedasset
-                                                                            .value,
-                                                                    orElse:
-                                                                        null);
-                                                                select
-                                                                        .schedule_link_job!
-                                                                        .isNotEmpty
-                                                                    ? controller
-                                                                        .cloneAlertDialog()
-                                                                    : controller.cloneDialog(controller
-                                                                        .selectedasset
-                                                                        .value);
-                                                              },
-                                                            )
-                                                          : Dimens.box0,
-                                                    ),
-                                                    // mapData['executionDone'] ==
-                                                    //         "0"
-                                                    //     ? Dimens.box0
-                                                    //     : Text(
-                                                    //         "Execution Done"),
-                                                    Dimens.boxWidth2,
-                                                    DropdownWebWidget(
-                                                      width: 50,
-                                                      controller: controller,
-                                                      dropdownList: controller
-                                                          .scheduleCheckPointsdrop,
-                                                      selectedValue:
-                                                          mapData["value"],
-                                                      onValueChanged: (list,
-                                                          selectedValue) {
-                                                        controller.selectedasset
-                                                            .value;
-                                                        mapData["value"] =
-                                                            selectedValue;
+                                                                            .scheduleCheckPointsdrop,
+                                                                    selectedValue:
+                                                                        mapData[
+                                                                            "value"],
+                                                                    onValueChanged:
+                                                                        (list,
+                                                                            selectedValue) {
+                                                                      controller
+                                                                          .selectedasset
+                                                                          .value;
+                                                                      mapData["value"] =
+                                                                          selectedValue;
 
-                                                        controller.selectedasset
-                                                                .value =
-                                                            selectedValue;
+                                                                      controller
+                                                                          .selectedasset
+                                                                          .value = selectedValue;
 
-                                                        controller.checkdropdownMapperData[
-                                                                selectedValue] =
-                                                            list.firstWhere(
-                                                                (element) =>
-                                                                    element
-                                                                        .name ==
-                                                                    selectedValue,
-                                                                orElse: null);
-                                                      },
-                                                    ),
-                                                    Dimens.boxWidth2,
-                                                    // Spacer(),
-                                                    varUserAccessModel.value
-                                                                .access_list!
-                                                                .where((e) =>
-                                                                    e.feature_id ==
-                                                                        UserAccessConstants
-                                                                            .kPmExecutionFeatureId &&
-                                                                    e.edit ==
-                                                                        UserAccessConstants
-                                                                            .kHaveEditAccess)
-                                                                .length >
-                                                            0
-                                                        ? TableActionButton(
-                                                            color: ColorValues
-                                                                .editColor,
-                                                            icon: Icons.edit,
-                                                            message: "Edit",
-                                                            onPress: () {
-                                                              controller
-                                                                      .selectedItem =
-                                                                  null;
-                                                              controller
-                                                                  .rowItemobs
-                                                                  .value = [];
-                                                              controller.selectedItem = controller
-                                                                  .scheduleCheckPoints
-                                                                  .firstWhere((element) =>
-                                                                      "${element.name}" ==
-                                                                      record[0][
-                                                                              'value']
-                                                                          .toString());
-                                                              if (controller
-                                                                      .selectedItem !=
-                                                                  null) {
-                                                                controller
-                                                                    .selectedItem!
-                                                                    .checklist_observation
-                                                                    ?.forEach(
-                                                                        (element) {
-                                                                  controller
-                                                                      .rowItemobs
-                                                                      .value
-                                                                      .add([
-                                                                    {
-                                                                      "key":
-                                                                          "checkpoint",
-                                                                      "id":
-                                                                          '${element.execution_id}',
-                                                                      "value":
-                                                                          '${element.check_point_name}',
+                                                                      controller.checkdropdownMapperData[selectedValue] = list.firstWhere(
+                                                                          (element) =>
+                                                                              element.name ==
+                                                                              selectedValue,
+                                                                          orElse:
+                                                                              null);
                                                                     },
-                                                                    {
-                                                                      "key":
-                                                                          "requirement",
-                                                                      "value":
-                                                                          '${element.requirement}'
-                                                                    },
-                                                                    {
-                                                                      'key':
-                                                                          "weightage",
-                                                                      "value":
-                                                                          '${element.failure_waightage}'
-                                                                    },
-                                                                    {
-                                                                      'key':
-                                                                          "cpok",
-                                                                      "value":
-                                                                          '${element.cp_ok.value}'
-                                                                    },
-                                                                    {
-                                                                      'key':
-                                                                          "observation",
-                                                                      "value":
-                                                                          '${element.observation}'
-                                                                    },
-                                                                    {
-                                                                      'key':
-                                                                          "uploadimg",
-                                                                      "value":
-                                                                          '',
-                                                                      "uploaded":
-                                                                          ""
-                                                                    },
-                                                                    {
-                                                                      'key':
-                                                                          "type",
-                                                                      'inpute_type':
-                                                                          '${element.check_point_type}',
-                                                                      "value":
-                                                                          '${element.type_text}',
-                                                                      "min":
-                                                                          '${element.min_range}',
-                                                                      "max":
-                                                                          '${element.max_range}'
-                                                                    },
-                                                                    {
-                                                                      'key':
-                                                                          "job_created",
-                                                                      "value":
-                                                                          '${element.linked_job_id.value}',
-                                                                      "cp_ok_value":
-                                                                          '${element.cp_ok.value}',
-                                                                    },
-                                                                  ]);
-                                                                });
-                                                                controller.getMrsListByModuleTask(
-                                                                    taskId: controller
-                                                                        .scheduleId
-                                                                        .value);
-                                                                Get.dialog(
-                                                                    ObservationPmExecutionViewDialog());
-                                                              }
-                                                            })
-                                                        : Dimens.box0
-                                                  ],
-                                                )
-                                              else
-                                                Flexible(
-                                                  child: Text(
-                                                    mapData['value'] ?? '',
-                                                    style: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 5, 92, 163),
-                                                    ),
-                                                  ),
-                                                ),
+                                                                  ),
+                                                                  TableActionButton(
+                                                                      color: ColorValues
+                                                                          .editColor,
+                                                                      icon: Icons
+                                                                          .edit,
+                                                                      message:
+                                                                          "Edit",
+                                                                      onPress:
+                                                                          () {
+                                                                        controller.selectedItem =
+                                                                            null;
+                                                                        controller
+                                                                            .rowItemobs
+                                                                            .value = [];
+                                                                        controller.selectedItem = controller.scheduleCheckPoints.firstWhere((element) =>
+                                                                            "${element.name}" ==
+                                                                            record[0]['value'].toString());
+                                                                        if (controller.selectedItem !=
+                                                                            null) {
+                                                                          controller
+                                                                              .selectedItem!
+                                                                              .checklist_observation
+                                                                              ?.forEach((element) {
+                                                                            controller.rowItemobs.value.add([
+                                                                              {
+                                                                                "key": "checkpoint",
+                                                                                "id": '${element.execution_id}',
+                                                                                "value": '${element.check_point_name}',
+                                                                              },
+                                                                              {
+                                                                                "key": "requirement",
+                                                                                "value": '${element.requirement}'
+                                                                              },
+                                                                              {
+                                                                                'key': "weightage",
+                                                                                "value": '${element.failure_waightage}'
+                                                                              },
+                                                                              {
+                                                                                'key': "cpok",
+                                                                                "value": '${element.cp_ok.value}'
+                                                                              },
+                                                                              {
+                                                                                'key': "observation",
+                                                                                "value": '${element.observation}'
+                                                                              },
+                                                                              {
+                                                                                'key': "uploadimg",
+                                                                                "value": '',
+                                                                                "uploaded": ""
+                                                                              },
+                                                                              {
+                                                                                'key': "type",
+                                                                                'inpute_type': '${element.check_point_type}',
+                                                                                "value": '${element.type_text}',
+                                                                                "min": '${element.min_range}',
+                                                                                "max": '${element.max_range}'
+                                                                              },
+                                                                              {
+                                                                                'key': "job_created",
+                                                                                "value": '${element.linked_job_id.value}',
+                                                                                "cp_ok_value": '${element.cp_ok.value}',
+                                                                              },
+                                                                            ]);
+                                                                          });
+                                                                          controller.getMrsListByModuleTask(
+                                                                              taskId: controller.scheduleId.value);
+                                                                          Get.dialog(
+                                                                              ObservationPmExecutionViewDialog());
+                                                                        }
+                                                                        // controller.selectedItem =
+                                                                        //     null;
+                                                                        // controller
+                                                                        //     .rowItemobs
+                                                                        //     .value = [];
+                                                                        // controller.selectedItem = controller.scheduleCheckPoints.firstWhere((element) =>
+                                                                        //     "${element.name}" ==
+                                                                        //     mapData['value'].toString());
+                                                                        // if (controller.selectedItem !=
+                                                                        //     null) {
+                                                                        //   controller
+                                                                        //       .selectedItem!
+                                                                        //       .checklist_observation
+                                                                        //       ?.forEach((element) {
+                                                                        //     controller.rowItemobs.value.add([
+                                                                        //       {
+                                                                        //         "key": "checkpoint",
+                                                                        //         "id": '${element.execution_id}',
+                                                                        //         "value": '${element.check_point_name}',
+                                                                        //       },
+                                                                        //       {
+                                                                        //         "key": "requirement",
+                                                                        //         "value": '${element.requirement}'
+                                                                        //       },
+                                                                        //       {
+                                                                        //         'key': "weightage",
+                                                                        //         "value": '${element.failure_waightage}'
+                                                                        //       },
+                                                                        //       {
+                                                                        //         'key': "cpok",
+                                                                        //         "value": '${element.cp_ok.value}'
+                                                                        //       },
+                                                                        //       {
+                                                                        //         'key': "observation",
+                                                                        //         "value": '${element.observation}'
+                                                                        //       },
+                                                                        //       {
+                                                                        //         'key': "uploadimg",
+                                                                        //         "value": ''
+                                                                        //       },
+                                                                        //       {
+                                                                        //         'key': "type",
+                                                                        //         'inpute_type': '${element.check_point_type}',
+                                                                        //         "value": '${element.type_text}',
+                                                                        //         "min": '${element.min_range}',
+                                                                        //         "max": '${element.max_range}'
+                                                                        //       },
+                                                                        //       {
+                                                                        //         'key': "job_created",
+                                                                        //         "value": '${element.linked_job_id.value}',
+                                                                        //       },
+                                                                        //     ]);
+                                                                        //   });
+                                                                        //   showModalBottomSheet<void>(
+                                                                        //       // context and builder are
+                                                                        //       // required properties in this widget
+                                                                        //       context: context,
+                                                                        //       builder: (BuildContext context) {
+                                                                        //         return ObservationUpdateDialog();
+                                                                        //       });
+                                                                        // }
+                                                                      })
+                                                                ])
+                                                          : Dimens.box0
                                             ],
                                           ),
                                         );
@@ -454,6 +458,239 @@ class PreventiveMaintenanceExecutionContentMobile
                                   ),
                           ],
                         ),
+                        controller.listMrsByTaskId!.isEmpty
+                            ? Dimens.box0
+                            : Container(
+                                height: (controller.listMrsByTaskId?.length ??
+                                        0) *
+                                    100.0, // Assuming each item has a height of 100.0
+
+                                child: ListView.builder(
+                                    //physics: const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount:
+                                        controller.listMrsByTaskId != null
+                                            ? controller.listMrsByTaskId!.length
+                                            : 0,
+                                    itemBuilder: (context, index) {
+                                      final pmTaskMrsModel =
+                                          (controller.listMrsByTaskId != null)
+                                              ? controller
+                                                  .listMrsByTaskId![index]
+                                              : MRSListByJobIdModel();
+                                      return GestureDetector(
+                                        onTap: () {
+                                          // var _taskId =
+                                          //     controller.scheduleCheckPoint[index]!.id ?? 0;
+                                          // Get.toNamed(Routes.pmTaskView,
+                                          //     arguments: {'pmTaskId': _taskId});
+                                        },
+                                        child: Card(
+                                          color: Colors.lightBlue.shade50,
+                                          elevation: 10,
+                                          shadowColor: Colors.black87,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(children: [
+                                                    Text(
+                                                        controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.is_mrs_return ==
+                                                                0
+                                                            ? 'MRS ID: '
+                                                            : 'RMRS ID: ',
+                                                        style: Styles
+                                                            .appDarkGrey12),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                          controller
+                                                                      .listMrsByTaskId?[
+                                                                          index]
+                                                                      ?.is_mrs_return ==
+                                                                  0
+                                                              ? 'MRS${pmTaskMrsModel?.mrsId}'
+                                                              : 'RMRS${pmTaskMrsModel?.mrs_return_ID}',
+                                                          style: Styles
+                                                              .appDarkBlue12),
+                                                    ),
+                                                  ]),
+                                                  Row(//
+                                                      children: [
+                                                    Text("MRS Items List: ",
+                                                        style: Styles
+                                                            .appDarkGrey12),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                          pmTaskMrsModel
+                                                                  ?.mrsItems ??
+                                                              '',
+                                                          style: Styles
+                                                              .appDarkBlue12),
+                                                    )
+                                                  ]),
+                                                  Row(children: [
+                                                    Text('Status: ',
+                                                        style: Styles
+                                                            .appDarkGrey12),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                          pmTaskMrsModel
+                                                                  ?.status_short ??
+                                                              '',
+                                                          style: Styles
+                                                              .appDarkBlue12),
+                                                    )
+                                                  ]),
+                                                  Row(//
+                                                      children: [
+                                                    controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.status ==
+                                                                323 ||
+                                                            controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.status ==
+                                                                321 ||
+                                                            controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.status ==
+                                                                324
+                                                        ? Dimens.box0
+                                                        : varUserAccessModel
+                                                                    .value
+                                                                    .access_list!
+                                                                    .where((e) =>
+                                                                        e.feature_id ==
+                                                                            UserAccessConstants
+                                                                                .kMrsFeatureId &&
+                                                                        e.edit ==
+                                                                            UserAccessConstants.kHaveEditAccess)
+                                                                    .length >
+                                                                0
+                                                            ? GestureDetector(
+                                                                onTap: () {
+                                                                  controller
+                                                                      .clearMrsStoreData();
+                                                                  int mrsId =
+                                                                      pmTaskMrsModel
+                                                                              ?.mrsId ??
+                                                                          0;
+                                                                  Get.toNamed(
+                                                                      Routes
+                                                                          .editMrs,
+                                                                      arguments: {
+                                                                        'mrsId':
+                                                                            mrsId
+                                                                      });
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  padding: Dimens
+                                                                      .edgeInsets8_2_8_2,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: ColorValues
+                                                                        .editColor,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                  ),
+                                                                  child: Text(
+                                                                    'Edit',
+                                                                    style: Styles
+                                                                        .white10
+                                                                        .copyWith(
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            : Dimens.box0,
+                                                    Spacer(),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        controller
+                                                            .clearMrsStoreData();
+
+                                                        int mrsId =
+                                                            pmTaskMrsModel
+                                                                    ?.mrsId ??
+                                                                0;
+                                                        int? rmrsId = controller
+                                                            .listMrsByTaskId?[
+                                                                index]
+                                                            ?.mrs_return_ID;
+                                                        controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.is_mrs_return ==
+                                                                0
+                                                            ? Get.toNamed(
+                                                                Routes
+                                                                    .mrsApprovalScreen,
+                                                                arguments: {
+                                                                    'mrsId':
+                                                                        mrsId,
+                                                                    'type': 2
+                                                                  })
+                                                            : Get.toNamed(
+                                                                Routes
+                                                                    .approverReturnMrs,
+                                                                arguments: {
+                                                                    'mrsId':
+                                                                        rmrsId,
+                                                                    'type': 2
+                                                                  });
+                                                      },
+                                                      child: Container(
+                                                        padding: Dimens
+                                                            .edgeInsets8_2_8_2,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: ColorValues
+                                                              .viewColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(4),
+                                                        ),
+                                                        child: Text(
+                                                          'View',
+                                                          style: Styles.white10
+                                                              .copyWith(
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ]),
+                                                ]),
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              ),
                         Dimens.boxHeight10,
                         controller.pmtaskViewModel.value?.permit_id == 0
                             ? Dimens.box0

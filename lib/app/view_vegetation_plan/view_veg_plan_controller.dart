@@ -167,7 +167,7 @@ class ViewVegPlanController extends GetxController {
           rowItem.value.add(
             [
               {"key": "day", "value": '${element.cleaningDay}'},
-              {'key': "noOfBlocks", "value": '${element.blocks}'},
+              {'key': "noOfBlocks", "value": '${element.scheduledArea}'},
               {"key": "noOfInverters", "value": '${element.invs}'},
               {'key': "area", "value": '${element.scheduledArea}'},
             ],
