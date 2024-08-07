@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
+import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +39,8 @@ class CreateObservationController extends GetxController {
   var costTypeCtrlr = TextEditingController();
   var locationOfObservationCtrlr = TextEditingController();
   var discriptionCtrlr = TextEditingController();
-  RxList<IncidentRiskTypeModell> incidentrisktypeList =
-      <IncidentRiskTypeModell>[].obs;
+  RxList<RiskTypeModel> incidentrisktypeList =
+      <RiskTypeModel>[].obs;
   Rx<bool> isRiskTypeListSelected = true.obs;
   Rx<bool> isTypeOfObsListSelected = true.obs;
   Rx<bool> isSourceOfObsListSelected = true.obs;
@@ -317,9 +318,9 @@ class CreateObservationController extends GetxController {
   }
 
   Future<void> getIncidentRiskType(int facilityId) async {
-    incidentrisktypeList.value = <IncidentRiskTypeModell>[];
-    final _irisktypeList = await createObservationPresenter.getIncidentRiskType(
-      facilityId: facilityId,
+    incidentrisktypeList.value = <RiskTypeModel>[];
+    final _irisktypeList = await createObservationPresenter.getRiskTypeList(
+      facility_id: facilityId,
       isLoading: true,
     );
     for (var facilityType_list in _irisktypeList) {
@@ -356,7 +357,7 @@ class CreateObservationController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print("$value");
     switch (list.runtimeType) {
-      case const (RxList<IncidentRiskTypeModell>):
+      case const (RxList<RiskTypeModel>):
         {
           if (value != "Please Select") {
             int statusIndex =
