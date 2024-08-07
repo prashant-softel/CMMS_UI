@@ -25,7 +25,7 @@ class VegPlanMessageApproveDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Vegetaion Plan Approval',
+          'Vegetation Plan Approval',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),

@@ -95,6 +95,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         onTap: () {
                                           var taskId;
                                           var jobId;
+                                          var vegexe;
+                                          var mcid;
                                           controller.type.value == 1
                                               ? Get.offAllNamed(
                                                   Routes.jobDetails,
@@ -105,8 +107,22 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       arguments: {
                                                           'pmTaskId': taskId
                                                         })
-                                                  : Get.offNamed(
-                                                      Routes.newPermitList);
+                                                  : controller.type.value == 5
+                                                      ? Get.offAllNamed(
+                                                          Routes.vegExecutionScreen,
+                                                          arguments: {
+                                                              'vegexe': vegexe,
+                                                              'vegid': 0
+                                                            })
+                                                      : controller.type.value ==
+                                                              4
+                                                          ? Get.offAllNamed(
+                                                              Routes.addModuleCleaningExecutionContentWeb,
+                                                              arguments: {
+                                                                  'mcid': mcid
+                                                                })
+                                                          : Get.offNamed(Routes
+                                                              .newPermitList);
                                         },
                                         child: controller.type.value == 1
                                             ? Text(
@@ -118,10 +134,23 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                     "/ PM TASK",
                                                     style: Styles.greyLight14,
                                                   )
-                                                : Text(
-                                                    "/ PERMIT LIST",
-                                                    style: Styles.greyLight14,
-                                                  )),
+                                                : controller.type.value == 5
+                                                    ? Text(
+                                                        "/ VEG TASK",
+                                                        style:
+                                                            Styles.greyLight14,
+                                                      )
+                                                    : controller.type.value == 4
+                                                        ? Text(
+                                                            "/ MC TASK",
+                                                            style: Styles
+                                                                .greyLight14,
+                                                          )
+                                                        : Text(
+                                                            "/ PERMIT LIST",
+                                                            style: Styles
+                                                                .greyLight14,
+                                                          )),
 
                                     Text(" / VIEW PERMIT",
                                         style: Styles.greyLight14)
