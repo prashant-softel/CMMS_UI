@@ -119,7 +119,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         )
                                       : controller.typee.value == 5
                                           ? Text(
-                                              "/ VEG PLAN ",
+                                              "/ VEG TASK ",
                                               style: Styles.greyLight14,
                                             )
                                           : Text(
@@ -2394,7 +2394,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appGreenColor,
-                                            text: "Submit For Approval VEG",
+                                            text: "Submit",
                                             onPressed: () {
                                               controller.isFormInvalid.value =
                                                   false;
