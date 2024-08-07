@@ -101,14 +101,12 @@ class VegExecutionPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<void> endVegScheduleExecutionButton({
-    int? scheduleId,
-    bool? isLoading,
-  }) async =>
+  Future<void> endVegScheduleExecutionButton(
+          {int? scheduleId, bool? isLoading, closePtwJsonString}) async =>
       await vegExecutionUsecase.endVegScheduleExecutionButton(
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          closePtwJsonString: closePtwJsonString);
 
   Future<Map<String, dynamic>?> abandonVegScheduleButton({
     abandoneScheduleJsonString,
@@ -199,5 +197,4 @@ class VegExecutionPresenter {
       await vegExecutionUsecase.getExecutionId();
   void clearExecutionId() => vegExecutionUsecase.clearExecutionId();
   void clearPlanId() => vegExecutionUsecase.clearPlanId();
- 
 }

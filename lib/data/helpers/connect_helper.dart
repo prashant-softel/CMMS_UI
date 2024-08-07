@@ -2034,8 +2034,10 @@ class ConnectHelper {
                         data: parsedJson['message'],
                         endMCId: parsedJson['id'],
                       ))
-                    : Get.dialog<void>(PermitMessageCloseDialog(
-                        data: parsedJson['message'], jobId: jobId));
+                    : closetype == 5
+                        ? Get.offAllNamed(Routes.vegExecutionScreen)
+                        : Get.dialog<void>(PermitMessageCloseDialog(
+                            data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }

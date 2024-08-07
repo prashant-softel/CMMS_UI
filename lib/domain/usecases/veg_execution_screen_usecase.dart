@@ -91,14 +91,10 @@ class VegExecutionUsecase {
     );
   }
 
-  Future<void> endVegScheduleExecutionButton({
-    int? scheduleId,
-    bool? isLoading,
-  }) async {
+  Future<void> endVegScheduleExecutionButton(
+      {int? scheduleId, bool? isLoading, closePtwJsonString}) async {
     await repository.endVegScheduleExecutionButton(
-      scheduleId,
-      isLoading,
-    );
+        scheduleId, isLoading, closePtwJsonString);
   }
 
   Future<Map<String, dynamic>> abandonVegScheduleButton({
