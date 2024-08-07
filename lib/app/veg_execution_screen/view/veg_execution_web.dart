@@ -104,7 +104,7 @@ class _VegExecutionWebState extends State<VegExecutionWeb> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      'Vegetation Plan Execution1',
+                                      'Vegetation Plan Execution',
                                       style: Styles.blue17,
                                     ),
                                     Spacer(),

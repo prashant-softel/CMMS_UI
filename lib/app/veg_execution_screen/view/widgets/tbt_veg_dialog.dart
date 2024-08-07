@@ -28,14 +28,16 @@ class TbtDoneVegDialog extends GetView<VegExecutionController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Module Cleaning Id:",
+                "VEGETATION ID:",
                 style: TextStyle(
                   fontSize: 15,
                 ),
               ),
-              Dimens.boxWidth10,
+              SizedBox(
+                width: 5,
+              ),
               Text(
-                "MC${id}",
+                "VEG TASK${id}",
                 style: TextStyle(
                     fontSize: 15, color: ColorValues.appDarkBlueColor),
               ),
