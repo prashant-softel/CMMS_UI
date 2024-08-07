@@ -1877,13 +1877,17 @@ class DataRepository extends DomainRepository {
           newPermit,
           bool? isLoading,
           bool? resubmit,
-          int? type}) async =>
+          int? type,
+          vegplanId,
+          vegexid}) async =>
       await connectHelper.updateNewPermit(
           auth: auth,
           newPermit: newPermit,
           isLoading: isLoading ?? false,
           resubmit: resubmit,
-          type: type);
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
   Future<ResponseModel> resubmitPermit(
           {required String auth,
@@ -4230,14 +4234,18 @@ class DataRepository extends DomainRepository {
           permitId,
           activity,
           bool? isLoading,
-          type}) async =>
+          type,
+          vegplanId,
+          vegexid}) async =>
       await connectHelper.vegscheduleLinkToPermit(
           auth: auth,
           scheduleId: scheduleId,
           permitId: permitId,
           activity: activity,
           isLoading: isLoading ?? false,
-          type: type);
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
   Future<ResponseModel> setPmTask({
     required String auth,
     scheduleId,

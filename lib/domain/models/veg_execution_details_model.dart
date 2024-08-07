@@ -12,6 +12,7 @@ class VegExecutionDetailsModel {
   String? assignedTo;
   String? startDate;
   int? noOfDays;
+  int? planId;
   String? plannedBy;
   String? plannedAt;
   String? startedBy;
@@ -31,6 +32,7 @@ class VegExecutionDetailsModel {
   VegExecutionDetailsModel({
     this.id,
     this.executionId,
+    this.planId,
     this.title,
     this.description,
     this.frequency,
@@ -57,6 +59,7 @@ class VegExecutionDetailsModel {
   factory VegExecutionDetailsModel.fromJson(Map<String, dynamic> json) =>
       VegExecutionDetailsModel(
         id: json['id'],
+        planId: json['planId'],
         executionId: json['executionId'],
         title: json['title'],
         description: json['description'],
@@ -85,6 +88,7 @@ class VegExecutionDetailsModel {
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'planId': planId,
         'executionId': executionId,
         'title': title,
         'description': description,

@@ -560,7 +560,7 @@ class CalibrationDataSource extends DataTableSource {
       '${calibrationDetails?.asset_name ?? ''}',
       '${calibrationDetails?.asset_serial ?? ''}',
       '${calibrationDetails?.last_calibration_date ?? ''}',
-      '${calibrationDetails?.schedule_start_date ?? ''}',
+      '${calibrationDetails?.calibration_due_date ?? ''}',
       '${calibrationDetails?.next_calibration_due_date ?? ''}',
       '${calibrationDetails?.frequency_name ?? ''}',
       'Actions',
