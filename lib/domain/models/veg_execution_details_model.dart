@@ -168,7 +168,7 @@ class Schedules {
       pending: json['pending'],
       start_date: json['start_date'],
       waterUsed: json['waterUsed'],
-      remark: json['remark'],
+      remark: json['remark'] ?? "",
       status: json['status'],
       status_short: json['status_short'],
       permit_id: json['permit_id'],

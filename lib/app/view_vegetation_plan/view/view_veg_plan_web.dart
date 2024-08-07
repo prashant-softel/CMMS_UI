@@ -118,7 +118,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                             " ${controller.vegPlanDetailsModel.value!.statusShort ?? ""}",
                                           ),
                                         ),
-                                        Dimens.boxWidth10,
+                                        Dimens.boxWidth2,
                                         Text(
                                           "Id:${controller.vegPlanDetailsModel.value?.planId} ",
                                         ),
@@ -159,7 +159,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        Dimens.boxWidth2,
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -187,7 +187,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                                 title: 'Planning by :'),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        Dimens.boxWidth2,
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -211,15 +211,21 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                             CustomRichText(
                                                 title:
                                                     'Planning Date & Time :'),
+                                            Dimens.boxHeight10,
+                                            CustomRichText(
+                                                title: 'Assigned by :'),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        Dimens.boxWidth2,
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                                 '${controller.vegPlanDetailsModel.value?.createdAt ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                style: Styles.blue17),
+                                            Text(
+                                                '${controller.vegPlanDetailsModel.value?.assignedTo ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                 style: Styles.blue17),
 
                                             // Dimens.boxHeight10,
@@ -254,17 +260,14 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                       ],
                                     ),
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                "Schedule",
-                                                style: Styles.blue700,
-                                              ),
-                                              Spacer(),
-                                            ],
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            "Schedule",
+                                            style: Styles.blue700,
                                           ),
                                         ),
                                         Expanded(
@@ -384,7 +387,6 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                       ],
                                     ),
                                   ),
-                              
                                 ],
                               ),
                             ),
@@ -423,7 +425,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                 },
                               ),
                             ),
-                            Dimens.boxWidth10,
+                            Dimens.boxWidth2,
                             Container(
                               height: 45,
                               child: CustomElevatedButton(
