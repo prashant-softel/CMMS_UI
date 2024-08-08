@@ -112,8 +112,10 @@ class _StatutoryWebState extends State<ObservationListWeb> {
                                         Spacer(),
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Date Range'),
-                                            Dimens.boxWidth10,
+                                            CustomRichText(
+                                                title: 'Date Range',
+                                                includeAsterisk: false),
+                                            Dimens.boxWidth2,
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
                                                       .size
@@ -133,7 +135,7 @@ class _StatutoryWebState extends State<ObservationListWeb> {
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        Dimens.boxWidth3,
                                         ActionButton(
                                           icon: Icons.add,
                                           label: "Add New",
@@ -244,7 +246,7 @@ class _StatutoryWebState extends State<ObservationListWeb> {
                                       Container(
                                         width: 300,
                                         height: 40,
-                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        margin: EdgeInsets.only(right: 10),
                                         child: TextField(
                                           style: GoogleFonts.lato(
                                             textStyle: TextStyle(
@@ -373,6 +375,7 @@ class _StatutoryWebState extends State<ObservationListWeb> {
                                   dropDate != null
                                       ? controller.toDate.value = dropDate
                                       : controller.toDate.value = pickUpDate;
+                                  controller.getobslistbydate();
 
                                   // controller.getPmTaskListByDate();
                                   controller.openFromDateToStartDatePicker =
@@ -468,13 +471,13 @@ class ObservationListDataSource extends DataTableSource {
       '${ObservationListDetails?.type_of_observation ?? ''}',
       '${ObservationListDetails?.source_of_observation ?? ''}',
       '${ObservationListDetails?.risk_type ?? ''}',
-      '${ObservationListDetails?.corrective_action ?? ''}',
+      '${ObservationListDetails?.observation_description ?? ''}',
       '${ObservationListDetails?.responsible_person ?? ''}',
       '${ObservationListDetails?.target_date ?? ''}',
       '${ObservationListDetails?.action_taken ?? ''}',
       '${ObservationListDetails?.closer_date ?? ''}',
       '${ObservationListDetails?.cost_type ?? ''}',
-      '${ObservationListDetails?.status_code ?? ''}',
+      // '${ObservationListDetails?.status_code ?? ''}',
 
       'Actions',
     ];
@@ -506,7 +509,7 @@ class ObservationListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' OBS ${ObservationListDetails?.id}',
+                        ' OBS${ObservationListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(

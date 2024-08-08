@@ -66,30 +66,30 @@ class ObservationListController extends GetxController {
     "Type": true,
     "Source": true,
     "Risk Type": true,
-    "Corrective/Preventive": true,
+    "Observation Made": true,
     "Responsible": true,
     "Target Date": true,
     "Action Taken": true,
     "Closer Date": true,
     "Cost type": true,
-    "Status": true,
+    // "Status": true,
   });
   final Map<String, double> columnwidth = {
-    "Id": 100,
+    "Id": 120,
     "Month": 100,
     "Observation Date": 100,
     "Contractor Name": 180,
     "Location": 150,
-    "Type": 100,
-    "Source": 150,
+    "Type": 180,
+    "Source": 180,
     "Risk Type": 150,
-    "Corrective": 150,
+    "Observation Made": 200,
     "Responsible": 150,
     "Target Date": 150,
     "Action Taken": 150,
     "Closer Date": 150,
     "Cost type": 150,
-    "Status": 150,
+    // "Status": 150,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -111,13 +111,13 @@ class ObservationListController extends GetxController {
       "Type": typeFilterText,
       "Source": sourceFilterText,
       "Risk Type": riskTypeFilterText,
-      "Corrective/Preventive": correctiveFilterText,
+      "Observation Made": correctiveFilterText,
       "Responsible": responsibleFilterText,
       "Target Date": targetDateFilterText,
       "Action Taken": actionTakenFilterText,
       "Closer Date": closerDateFilterText,
       "Cost type": costTypeFilterText,
-      "Status": statusFilterText,
+      // "Status": statusFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -211,6 +211,11 @@ class ObservationListController extends GetxController {
   }
 
   void export() {
+    getObservationDataList(
+        facilityId, formattedTodate1, formattedFromdate1, true);
+  }
+
+  void getobslistbydate() {
     getObservationDataList(
         facilityId, formattedTodate1, formattedFromdate1, true);
   }

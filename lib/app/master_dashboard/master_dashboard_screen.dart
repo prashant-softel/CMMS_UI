@@ -1406,6 +1406,46 @@ class MastersDashboard extends GetView<MastersController> {
                                                     Routes.ComplianceStatus);
                                               })
                                           : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Course Category",
+                                              ontap: () {
+                                               Get.toNamed(
+                                                    Routes.courseCategory);
+                                              })
+                                          : Dimens.box0,
+                                    ],
+                                  ),
+                                   GridView.count(
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    padding: Dimens.edgeInsets15,
+                                    crossAxisSpacing: 70,
+                                    mainAxisSpacing: 6,
+                                    crossAxisCount:
+                                        Responsive.isMobile(context) ? 2 : 5,
+                                    childAspectRatio:
+                                        Responsive.isMobile(context)
+                                            ? (itemWidth / itemHeight)
+                                            : 5,
+                                    children: <Widget>[
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Targeted Group",
+                                            onTap: () {
+                                              Get.toNamed(Routes.targetedGroup);
+                                            });
+                                      }))),
+                                      
                                     ],
                                   ),
                                 ],

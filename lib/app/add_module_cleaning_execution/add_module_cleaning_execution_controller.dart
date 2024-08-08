@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_presenter.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
@@ -338,6 +339,7 @@ class AddModuleCleaningExecutionController extends GetxController {
     final _assignedToList =
         await addModuleCleaningExecutionPresenter.getAssignedToList(
       facilityId: facilityId,
+      featureId: UserAccessConstants.kModuleCleaningplanFeatureId,
     );
 
     if (_assignedToList != null) {

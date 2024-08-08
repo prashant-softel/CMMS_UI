@@ -119,7 +119,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         )
                                       : controller.typee.value == 5
                                           ? Text(
-                                              "/ VEG PLAN ",
+                                              "/ VEG TASK ",
                                               style: Styles.greyLight14,
                                             )
                                           : Text(

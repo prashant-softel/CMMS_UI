@@ -188,7 +188,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Contractor Name'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
                                                                               context)
@@ -230,7 +230,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Risk Type'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               Obx(
                                                                 () =>
                                                                     DropdownWebStock(
@@ -263,7 +263,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Corrective/Preventive Action'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
                                                                               context)
@@ -302,7 +302,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Responsible Person'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
                                                                               context)
@@ -341,7 +341,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Contact Number'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
                                                                               context)
@@ -383,7 +383,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Cost Type'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               Container(
                                                                 decoration:
                                                                     BoxDecoration(
@@ -432,7 +432,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Date of Observation'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               CustomTextFieldForStock(
                                                                 width: MediaQuery.of(
                                                                             context)
@@ -484,7 +484,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Type of Observation'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               Container(
                                                                 decoration:
                                                                     BoxDecoration(
@@ -524,7 +524,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Location of Observation'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
                                                                               context)
@@ -563,7 +563,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Source of Observation'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               Container(
                                                                 decoration:
                                                                     BoxDecoration(
@@ -603,7 +603,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Target Date'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               CustomTextFieldForStock(
                                                                 width: MediaQuery.of(
                                                                             context)
