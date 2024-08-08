@@ -25,7 +25,7 @@ class StartVegExecutionMessageDialog extends GetView {
         title: Text(
           data == "Plan Execution started"
               ? 'Start Vegetation Plan Execution'
-              : 'Start Vegetation Schedule Execution',
+              : 'Start Vegetation Execution',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
