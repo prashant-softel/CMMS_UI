@@ -126,8 +126,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                             ?.statusId ==
                                         218
                                     ? ColorValues.appRedColor
-                                    : controller.calibrationDetailModel.value
-                                                ?.statusId ==
+                                    : controller.calibrationDetailModel.value?.statusId ==
                                             211
                                         ? ColorValues.blueColor
                                         : controller.calibrationDetailModel
@@ -137,20 +136,37 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                             : controller.calibrationDetailModel
                                                         .value?.statusId ==
                                                     213
-                                                ? ColorValues.appYellowColor
+                                                ? ColorValues
+                                                    .rejectedStatusColor
                                                 : controller.calibrationDetailModel
                                                             .value?.statusId ==
                                                         217
-                                                    ? ColorValues.appGreenColor
+                                                    ? ColorValues.closeColor
                                                     : controller
                                                                 .calibrationDetailModel
                                                                 .value
                                                                 ?.statusId ==
                                                             212
                                                         ? ColorValues
-                                                            .appPurpleColor
-                                                        : ColorValues
-                                                            .appDarkBlueColor,
+                                                            .carryfarwordColor
+                                                        : controller
+                                                                    .calibrationDetailModel
+                                                                    .value
+                                                                    ?.statusId ==
+                                                                215
+                                                            ? ColorValues
+                                                                .startColor
+                                                            : controller
+                                                                        .calibrationDetailModel
+                                                                        .value
+                                                                        ?.statusId ==
+                                                                    216
+                                                                ? ColorValues.completeColor
+                                                                : controller.calibrationDetailModel.value?.statusId == 218
+                                                                    ? ColorValues.approveColor
+                                                                    : controller.calibrationDetailModel.value?.statusId == 220
+                                                                        ? ColorValues.rejectedStatusColor
+                                                                        : ColorValues.appDarkBlueColor,
                                 textColor: ColorValues.whiteColor,
                               ),
                             ),
@@ -275,8 +291,11 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                 ],
                               ),
                               controller.calibrationDetailModel.value
-                                          ?.statusId ==
-                                      215
+                                              ?.statusId ==
+                                          215 ||
+                                      controller.calibrationDetailModel.value
+                                              ?.statusId ==
+                                          220
                                   ? Container(
                                       height: Get.height * 0.2,
                                       width: Get.width,
@@ -303,14 +322,20 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                     )
                                   : Dimens.box0,
                               controller.calibrationId.value > 0 &&
+                                      controller.calibrationDetailModel.value
+                                              ?.file_list_calibration !=
+                                          null &&
                                       controller.calibrationDetailModel.value!
-                                              .fileList!.length >
-                                          0
+                                          .file_list_calibration!.isNotEmpty
                                   ? Container(
                                       // width:
                                       //     MediaQuery.of(context).size.width /
                                       //         1.2,
-                                      height: ((controller.file_list!.length) *
+                                      height: ((controller
+                                                  .calibrationDetailModel
+                                                  .value!
+                                                  .file_list_calibration!
+                                                  .length) *
                                               41) +
                                           117,
                                       margin: Dimens.edgeInsets20,
@@ -326,7 +351,134 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                             child: Row(
                                               children: [
                                                 Text(
-                                                  "Uploaded Images ",
+                                                  "Calibration Certificates ",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: DataTable2(
+                                              border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234),
+                                              ),
+                                              dataRowHeight: 40,
+                                              columns: [
+                                                DataColumn(
+                                                  label: Text(
+                                                    "File Description",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "View Image",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller
+                                                        .calibrationDetailModel
+                                                        .value!
+                                                        .file_list_calibration
+                                                        ?.length ??
+                                                    0,
+                                                (index) => DataRow(
+                                                  cells: [
+                                                    DataCell(Text(
+                                                      controller
+                                                              .calibrationDetailModel
+                                                              .value!
+                                                              .file_list_calibration![
+                                                                  index]
+                                                              .description
+                                                              .toString() ??
+                                                          '',
+                                                    )),
+                                                    DataCell(
+                                                      // Text("View Image"),
+                                                      Wrap(
+                                                        children: [
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .appDarkBlueColor,
+                                                            icon: Icons
+                                                                .visibility,
+                                                            message: 'view',
+                                                            onPress: () async {
+                                                              String baseUrl =
+                                                                  'http://172.20.43.9:83/';
+                                                              String fileName = controller
+                                                                      .calibrationDetailModel
+                                                                      .value!
+                                                                      .file_list_calibration![
+                                                                          index]
+                                                                      ?.fileName ??
+                                                                  "";
+                                                              String fullUrl =
+                                                                  baseUrl +
+                                                                      fileName;
+                                                              if (await canLaunch(
+                                                                  fullUrl)) {
+                                                                await launch(
+                                                                    fullUrl);
+                                                              } else {
+                                                                throw 'Could not launch $fullUrl';
+                                                              }
+                                                              // String baseUrl = 'http://172.20.43.9:83/';
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Dimens.box0,
+
+                              controller.calibrationId.value > 0 &&
+                                      controller.calibrationDetailModel.value
+                                              ?.fileList !=
+                                          null &&
+                                      controller.calibrationDetailModel.value!
+                                          .fileList!.isNotEmpty
+                                  ? Container(
+                                      // width:
+                                      //     MediaQuery.of(context).size.width /
+                                      //         1.2,
+                                      height: ((controller.file_list!.length) *
+                                              41) +
+                                          117,
+                                      margin: EdgeInsets.only(
+                                          left: 20, right: 20, top: 10),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.3)),
+                                      ),
+
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "Calibration Certificates And Damaged Files ",
                                                   style: Styles.blue700,
                                                 ),
                                               ],
@@ -644,23 +796,29 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                   214 ||
                                               controller.calibrationDetailModel
                                                       .value?.statusId ==
-                                                  215
+                                                  215 ||
+                                              controller.calibrationDetailModel
+                                                      .value?.statusId ==
+                                                  220
                                           ? false
                                           : true,
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "Any Damages:",
-                                            style: Styles.blackBold15,
-                                          ),
-                                          Dimens.boxWidth10,
-                                          CustomSwitchTroggle(
-                                              value:
-                                                  controller.isToggleOn.value,
-                                              onChanged: (value) {
-                                                controller.toggle();
-                                              }),
-                                        ],
+                                      child: Container(
+                                        margin: EdgeInsets.only(left: 20),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Any Damages:",
+                                              style: Styles.blackBold15,
+                                            ),
+                                            Dimens.boxWidth10,
+                                            CustomSwitchTroggle(
+                                                value:
+                                                    controller.isToggleOn.value,
+                                                onChanged: (value) {
+                                                  controller.toggle();
+                                                }),
+                                          ],
+                                        ),
                                       ))
 
                               // Dimens.boxHeight10,
@@ -867,20 +1025,29 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                           )
                                         : Dimens.box0,
                                     // Dimens.boxWidth20,
-                                    controller.calibrationDetailModel.value
-                                                    ?.statusId ==
-                                                215 &&
-                                            varUserAccessModel
-                                                    .value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id ==
-                                                            UserAccessConstants
-                                                                .kCalibrationFeatureId &&
-                                                        e.add ==
-                                                            UserAccessConstants
-                                                                .kHaveAddAccess)
-                                                    .length >
-                                                0
+                                    controller.calibrationDetailModel.value?.statusId == 215 &&
+                                                varUserAccessModel.value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kCalibrationFeatureId &&
+                                                            e.add ==
+                                                                UserAccessConstants
+                                                                    .kHaveAddAccess)
+                                                        .length >
+                                                    0 ||
+                                            controller.calibrationDetailModel
+                                                        .value?.statusId ==
+                                                    220 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kCalibrationFeatureId &&
+                                                            e.add == UserAccessConstants.kHaveAddAccess)
+                                                        .length >
+                                                    0
                                         ? Container(
                                             height: 35,
                                             //width: (Get.width * .2) - 90,

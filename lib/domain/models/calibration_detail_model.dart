@@ -42,44 +42,45 @@ class CalibrationDetailModel {
   String? assetHealthStatus;
   int? isDamaged;
   List<FileList>? fileList;
+  List<FileList>? file_list_calibration;
 
-  CalibrationDetailModel({
-    this.calibrationId,
-    this.requestApprovedBy,
-    this.requestRejectedBy,
-    this.requestApprovedAt,
-    this.requestRejectedAt,
-    this.approvedBy,
-    this.rejectedBy,
-    this.startedAt,
-    this.statusShort,
-    this.statusLong,
-    this.requestedAt,
-    this.requestedBy,
-    this.completedAt,
-    this.completedBy,
-    this.closedAt,
-    this.closedBy,
-    this.assetId,
-    this.assetName,
-    this.assetSerial,
-    this.categoryName,
-    this.statusId,
-    this.calibrationStatus,
-    this.lastCalibrationDate,
-    this.nextCalibrationDueDate,
-    this.scheduleStartDate,
-    this.lastCalibrationDueDate,
-    this.calibrationDate,
-    this.frequencyId,
-    this.frequencyName,
-    this.vendorName,
-    this.responsiblePerson,
-    this.receivedDate,
-    this.assetHealthStatus,
-    this.isDamaged,
-    this.fileList,
-  });
+  CalibrationDetailModel(
+      {this.calibrationId,
+      this.requestApprovedBy,
+      this.requestRejectedBy,
+      this.requestApprovedAt,
+      this.requestRejectedAt,
+      this.approvedBy,
+      this.rejectedBy,
+      this.startedAt,
+      this.statusShort,
+      this.statusLong,
+      this.requestedAt,
+      this.requestedBy,
+      this.completedAt,
+      this.completedBy,
+      this.closedAt,
+      this.closedBy,
+      this.assetId,
+      this.assetName,
+      this.assetSerial,
+      this.categoryName,
+      this.statusId,
+      this.calibrationStatus,
+      this.lastCalibrationDate,
+      this.nextCalibrationDueDate,
+      this.scheduleStartDate,
+      this.lastCalibrationDueDate,
+      this.calibrationDate,
+      this.frequencyId,
+      this.frequencyName,
+      this.vendorName,
+      this.responsiblePerson,
+      this.receivedDate,
+      this.assetHealthStatus,
+      this.isDamaged,
+      this.fileList,
+      this.file_list_calibration});
 
   factory CalibrationDetailModel.fromJson(Map<String, dynamic> json) {
     return CalibrationDetailModel(
@@ -144,6 +145,10 @@ class CalibrationDetailModel {
       fileList: json['file_list'] != null
           ? List<FileList>.from(
               json['file_list'].map((x) => FileList.fromJson(x)))
+          : [],
+      file_list_calibration: json['file_list_calibration'] != null
+          ? List<FileList>.from(
+              json['file_list_calibration'].map((x) => FileList.fromJson(x)))
           : [],
     );
   }
