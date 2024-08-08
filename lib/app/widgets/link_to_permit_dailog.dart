@@ -238,22 +238,7 @@ class LinkToPermitDialog extends GetView {
                                 },
                                 child: const Text('VEG List'),
                               )
-                            : ElevatedButton(
-                                style: Styles.blueElevatedButtonStyle,
-                                onPressed: () {
-                                  // _controller.getIncidentReportList(
-                                  //     _controller.facilityId,
-                                  //     _controller.formattedTodate,
-                                  //     _controller.formattedFromdate,
-                                  //     false);
-                                  //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                                  Get.offAllNamed(
-                                      Routes.moduleCleaningListExecution,
-                                      arguments: {'type': type});
-                                  Get.back();
-                                },
-                                child: const Text('View Permit'),
-                              ),
+                            : Dimens.box0,
                 Dimens.boxWidth10,
                 ElevatedButton(
                   style: Styles.blueElevatedButtonStyle,
