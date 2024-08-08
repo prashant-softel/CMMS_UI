@@ -559,9 +559,11 @@ class CalibrationDataSource extends DataTableSource {
       '${calibrationDetails?.category_name ?? ''}',
       '${calibrationDetails?.asset_name ?? ''}',
       '${calibrationDetails?.asset_serial ?? ''}',
-      '${calibrationDetails?.last_calibration_date ?? ''}',
+      calibrationDetails?.last_calibration_date == "0001-01-01"
+          ? ""
+          : "${calibrationDetails?.last_calibration_date ?? ""}",
       '${calibrationDetails?.calibration_due_date ?? ''}',
-      '${calibrationDetails?.next_calibration_due_date ?? ''}',
+      '${calibrationDetails?.calibration_date ?? ''}',
       '${calibrationDetails?.frequency_name ?? ''}',
       'Actions',
     ];
@@ -617,11 +619,10 @@ class CalibrationDataSource extends DataTableSource {
                                                 : ColorValues.appDarkBlueColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child:
-                              Text('${calibrationDetails?.calibration_status}',
-                                  style: Styles.white10.copyWith(
-                                    color: Colors.white,
-                                  )),
+                          child: Text('${calibrationDetails?.statusID}',
+                              style: Styles.white10.copyWith(
+                                color: Colors.white,
+                              )),
                         ),
                       ),
                     ],
@@ -629,25 +630,15 @@ class CalibrationDataSource extends DataTableSource {
                 : (value == 'Actions')
                     ? Wrap(children: [
                         controller.calibrationList
-                                        .firstWhere(
-                                          (e) =>
-                                              e?.asset_id ==
-                                              calibrationDetails!.asset_id,
-                                          orElse: () => CalibrationListModel(
-                                              asset_id: 00),
-                                        )
-                                        ?.statusID ==
-                                    0 ||
-                                controller.calibrationList
-                                        .firstWhere(
-                                          (e) =>
-                                              e?.asset_id ==
-                                              calibrationDetails!.asset_id,
-                                          orElse: () => CalibrationListModel(
-                                              asset_id: 00),
-                                        )
-                                        ?.statusID ==
-                                    211
+                                    .firstWhere(
+                                      (e) =>
+                                          e?.asset_id ==
+                                          calibrationDetails!.asset_id,
+                                      orElse: () =>
+                                          CalibrationListModel(asset_id: 00),
+                                    )
+                                    ?.statusID ==
+                                211
                             ? TableActionButton(
                                 color: ColorValues.lightGreenColor,
                                 message: 'Request Calibration',
@@ -659,33 +650,24 @@ class CalibrationDataSource extends DataTableSource {
                                     previousDate:
                                         '${calibrationDetails?.last_calibration_date}',
                                     nextDate:
-                                        '${calibrationDetails?.next_calibration_due_date}',
+                                        '${calibrationDetails?.calibration_due_date}',
                                     calibrationId:
                                         '${calibrationDetails?.asset_id}',
                                   );
                                 },
                               )
                             : Dimens.box0,
+
                         controller.calibrationList
-                                        .firstWhere(
-                                          (e) =>
-                                              e?.asset_id ==
-                                              calibrationDetails!.asset_id,
-                                          orElse: () => CalibrationListModel(
-                                              asset_id: 00),
-                                        )
-                                        ?.statusID ==
-                                    0 ||
-                                controller.calibrationList
-                                        .firstWhere(
-                                          (e) =>
-                                              e?.asset_id ==
-                                              calibrationDetails!.asset_id,
-                                          orElse: () => CalibrationListModel(
-                                              asset_id: 00),
-                                        )
-                                        ?.statusID ==
-                                    211
+                                    .firstWhere(
+                                      (e) =>
+                                          e?.asset_id ==
+                                          calibrationDetails!.asset_id,
+                                      orElse: () =>
+                                          CalibrationListModel(asset_id: 00),
+                                    )
+                                    ?.statusID ==
+                                211
                             ? TableActionButton(
                                 color: ColorValues.startColor,
                                 message: 'Skip Calibration',
@@ -753,13 +735,23 @@ class CalibrationDataSource extends DataTableSource {
         int calibrationId = calibrationDetails?.calibration_id ?? 0;
         if (calibrationId > 0) {
           varUserAccessModel.value.access_list!
-                      .where((e) =>
-                          e.feature_id ==
-                                  UserAccessConstants.kCalibrationFeatureId &&
-                              e.issue == UserAccessConstants.kHaveViewAccess ||
-                          e.approve == UserAccessConstants.kHaveApproveAccess)
-                      .length >
-                  0
+                          .where((e) =>
+                              e.feature_id ==
+                                      UserAccessConstants
+                                          .kCalibrationFeatureId &&
+                                  e.issue ==
+                                      UserAccessConstants.kHaveViewAccess ||
+                              e.approve ==
+                                  UserAccessConstants.kHaveApproveAccess)
+                          .length >
+                      0 &&
+                  controller.calibrationList
+                          .firstWhere(
+                            (e) => e?.asset_id == calibrationDetails!.asset_id,
+                            orElse: () => CalibrationListModel(asset_id: 00),
+                          )
+                          ?.statusID !=
+                      211
               ? Get.toNamed(Routes.calibrationViewScreen,
                   arguments: {'calibrationId': calibrationId})
               : null;
