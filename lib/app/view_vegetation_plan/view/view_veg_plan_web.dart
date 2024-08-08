@@ -6,7 +6,10 @@ import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/history_table_widget_web.dart';
+import 'package:cmms/app/widgets/mc_approve_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:cmms/app/widgets/veg_approve_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -75,7 +78,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                           child: Text(" / VEGETATION PLAN LIST",
                               style: Styles.greyLight14),
                         ),
-                        Text(" / VIEW VEGETATION PLAN ",
+                        Text(" / VIEW VEGETATION PLANh bjnkm",
                             style: Styles.greyLight14)
                       ],
                     ),
@@ -384,6 +387,51 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                             }).toList(),
                                           ),
                                         ),
+                                        (controller.historyList != null &&
+                                                controller
+                                                    .historyList!.isNotEmpty)
+                                            ? Container(
+                                                margin: Dimens.edgeInsets20,
+                                                height: ((controller.historyList
+                                                                ?.length ??
+                                                            0) *
+                                                        40) +
+                                                    120,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: ColorValues
+                                                        .lightGreyColorWithOpacity35,
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                                child: //
+                                                    Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            "Vegetation History ",
+                                                            style:
+                                                                Styles.blue700,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child:
+                                                          HistoryTableWidgetWeb(
+                                                        historyList: controller
+                                                            .historyList,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                       ],
                                     ),
                                   ),
@@ -433,9 +481,12 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                 text: "Approve",
                                 icon: Icons.check,
                                 onPressed: () {
-                                  controller.vegPlanApprovedButton(
+                                  Get.dialog(ApproveVegPlan(
                                     id: controller.id.value,
-                                  );
+                                  ));
+                                  // controller.vegPlanApprovedButton(
+                                  //   id: controller.id.value,
+                                  // );
                                 },
                               ),
                             ),

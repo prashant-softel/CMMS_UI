@@ -689,7 +689,8 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                 text: "Approve",
                                                 icon: Icons.check,
                                                 onPressed: () {
-                                                  Get.dialog(ApproveMcPlan(
+                                                  Get.dialog(
+                                                    ApproveMcPlan(
                                                     id: controller.mcid.value,
                                                   ));
                                                 },
