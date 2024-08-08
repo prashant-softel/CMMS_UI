@@ -181,7 +181,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                               
                                 children: [
                                   Spacer(),
                                   Column(
