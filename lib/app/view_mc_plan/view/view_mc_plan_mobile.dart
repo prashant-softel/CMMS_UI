@@ -66,9 +66,9 @@ class _ViewMcPlanMobileState extends State<ViewMcPlanMobile> {
                                                   "${controller.mcPlanDetailsModel.value?.siteName}",
                                             ),
                                             JobDetailField(
-                                              title: 'Start Date',
+                                              title: 'Planning Date & Time',
                                               value:
-                                                  "${controller.mcPlanDetailsModel.value?.startDate}",
+                                                  "${controller.mcPlanDetailsModel.value?.createdAt}",
                                             ),
                                             JobDetailField(
                                               title: 'Frequency: ',
