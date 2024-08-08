@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/veg_execution_screen/veg_execution_screen_presenter.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
@@ -146,6 +147,7 @@ class VegExecutionController extends GetxController {
     assignedToList.clear();
     final _assignedToList = await vegExecutionPresenter.getAssignedToList(
       facilityId: facilityId.value,
+      featureId: UserAccessConstants.kVegetationControlFeatureId,
     );
 
     if (_assignedToList != null) {
