@@ -542,8 +542,8 @@ class Repository {
   }
 
   /// sesubmit permit
-  Future<Map<String, dynamic>> resubmitPermit(
-      newPermit, bool? isLoading, bool? resubmit, int? type) async {
+  Future<Map<String, dynamic>> resubmitPermit(newPermit, bool? isLoading,
+      bool? resubmit, int? type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.resubmitPermit(
@@ -551,7 +551,9 @@ class Repository {
           newPermit: newPermit,
           isLoading: isLoading ?? false,
           resubmit: resubmit,
-          type: type);
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);

@@ -1894,13 +1894,17 @@ class DataRepository extends DomainRepository {
           newPermit,
           int? type,
           bool? isLoading,
-          bool? resubmit}) async =>
+          bool? resubmit,
+          vegplanId,
+          vegexid}) async =>
       await connectHelper.resubmitPermit(
           auth: auth,
           newPermit: newPermit,
           isLoading: isLoading ?? false,
           type: type,
-          resubmit: resubmit);
+          resubmit: resubmit,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
   Future<ResponseModel> createSOP({
     required String auth,
