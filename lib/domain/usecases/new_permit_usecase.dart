@@ -246,8 +246,11 @@ class NewPermitUsecase {
           {newPermit,
           bool? isLoading,
           required bool resubmit,
-          int? type}) async =>
-      await repository.resubmitPermit(newPermit, isLoading, resubmit, type);
+          int? type,
+          vegplanId,
+          vegexid}) async =>
+      await repository.resubmitPermit(
+          newPermit, isLoading, resubmit, type, vegplanId, vegexid);
 
   Future<NewPermitDetailModel?> getNewPermitDetail({
     bool? isLoading,

@@ -3226,7 +3226,9 @@ class ConnectHelper {
       newPermit,
       bool? isLoading,
       bool? resubmit,
-      int? type}) async {
+      int? type,
+      vegplanId,
+      vegexid}) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3242,7 +3244,11 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(UpdateNewPermitDialog(
-        data: parsedJson['message'], PtwId: parsedJson['id'], type: type));
+        data: parsedJson['message'],
+        PtwId: parsedJson['id'],
+        type: type,
+        vegplanId: vegplanId,
+        vegexid: vegexid));
 
     return responseModel;
   }
