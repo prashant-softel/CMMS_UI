@@ -442,6 +442,29 @@ class VegExecutionController extends GetxController {
     );
   }
 
+  Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
+    clearStoreData();
+    clearJobDetailStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearpmTaskValue();
+    clearPermitStoreData();
+    clearmcDetailsStoreData();
+    Get.toNamed(Routes.createPermit, arguments: {
+      "jobModel": jobDetailsModel.value,
+      "permitId": permitId,
+      "isChecked": isChecked,
+      "type": 5,
+      "isFromJobDetails": true,
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "vegModel": vegExecutionDetailsModel.value,
+      "scheduleID": 0
+    });
+    print('PermitIDForTBt:$permitId');
+    print('PermitIdArgument:$isChecked');
+  }
+
   void clearmcDetailsStoreData() {
     vegExecutionPresenter.clearmcDetailsStoreData();
   }

@@ -63,7 +63,7 @@ class TbtDoneVegDialog extends GetView<VegExecutionController> {
                     ),
                   ],
                 ),
-                padding: EdgeInsets.only(right: 30, top: 10),
+
                 height: height / 4.7,
                 // width: double.infinity,
                 child: GetBuilder<VegExecutionController>(
@@ -71,10 +71,14 @@ class TbtDoneVegDialog extends GetView<VegExecutionController> {
                   builder: (controller) {
                     return Column(
                       children: [
-                        Spacer(),
-                        Text(
-                            "You unable to start the task,Please Complete the TBT first"),
-                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(
+                              "You unable to start the task,Please Complete the TBT first"),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -113,6 +117,8 @@ class TbtDoneVegDialog extends GetView<VegExecutionController> {
                                         controller.pmtaskViewModel.value,
                                     "mcModel": controller
                                         .mcExecutionDetailsModel.value,
+                                    "vegModel": controller
+                                        .vegExecutionDetailsModel.value,
                                     "scheduleID": 0
                                   });
                                 },

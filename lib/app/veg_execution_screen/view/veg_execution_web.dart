@@ -566,6 +566,24 @@ class _VegExecutionWebState extends State<VegExecutionWeb> {
                                                                                                                     message: 'Close',
                                                                                                                   )
                                                                                                                 : Dimens.box0,
+                                                                                                            controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.ptw_status == 124 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.ptw_status == 132
+
+                                                                                                                // controller.pmtaskViewModel.value?.ptw_status == 124 || controller.pmtaskViewModel.value?.ptw_status == 132
+                                                                                                                ? TableActionButton(
+                                                                                                                    color: Color.fromARGB(255, 116, 78, 130),
+                                                                                                                    icon: Icons.ads_click,
+                                                                                                                    message: 'Re-Submit Permit',
+                                                                                                                    onPress: () {
+                                                                                                                      var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                                                                                                      controller.editNewPermit(permitId: filterdData?.permit_id, isChecked: false
+                                                                                                                          // controller
+                                                                                                                          //     .isChecked
+                                                                                                                          //     .value
+                                                                                                                          );
+                                                                                                                    },
+                                                                                                                  )
+                                                                                                                : Dimens.box0,
                                                                                                             controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 724 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 731
                                                                                                                 ? TableActionButton(
                                                                                                                     onPress: () {
@@ -772,15 +790,19 @@ class _VegExecutionWebState extends State<VegExecutionWeb> {
                   controller.vegExecutionDetailsModel.value?.status == 722 &&
                               varUserAccessModel.value.access_list!
                                       .where((e) =>
-                                          e.feature_id ==
+                                          e
+                                                  .feature_id ==
                                               UserAccessConstants
                                                   .kVegetationControlFeatureId &&
-                                          e.edit ==
+                                          e
+                                                  .edit ==
                                               UserAccessConstants
                                                   .kHaveEditAccess)
                                       .length >
-                                  0 ||
-                          controller.vegExecutionDetailsModel.value?.status ==
+                                  0 &&
+                              controller.allScheduleTrue.value == false ||
+                          controller
+                                      .vegExecutionDetailsModel.value?.status ==
                                   368 &&
                               varUserAccessModel.value.access_list!
                                       .where((e) =>
@@ -791,7 +813,8 @@ class _VegExecutionWebState extends State<VegExecutionWeb> {
                                               UserAccessConstants
                                                   .kHaveEditAccess)
                                       .length >
-                                  0
+                                  0 &&
+                              controller.allScheduleTrue.value == false
                       ? Container(
                           height: 30,
                           child: CustomElevatedButton(

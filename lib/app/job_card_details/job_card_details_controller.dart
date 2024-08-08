@@ -424,33 +424,35 @@ class JobCardDetailsController extends GetxController {
     List<TranferItems> items = [];
     rowItem.forEach((element) {
       TranferItems item = TranferItems(
-        assetItemID:
-            dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-        facilityID: facilityId,
-        fromActorID: jobCardId.value,
-        fromActorType: AppConstants.kJobCard,
-        mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-        mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
-        qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
-        refID: jobCardId.value,
-        refType: AppConstants.kJobCard,
-        remarks: "remarks",
-        toActorID: dropdownMapperDataworkingArea[element[1]["value"]] != null
-            //  &&
-            //         dropdownMapperDataworkingArea[element[1]["value"]]
-            //                 .workingAreaId !=
-            //             null &&
-            //         dropdownMapperDataworkingArea[element[1]["value"]]
-            //                 .workingAreaId !=
-            //             0
-            ? dropdownMapperDataworkingArea[element[1]["value"]].asset_id
-            : 0,
-        toActorType: dropdownMapperDataworkingArea[element[1]["value"]] != null
-            ? AppConstants.kInventory
-            : 0,
-        transaction_id:
-            dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
-      );
+          assetItemID:
+              dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+          facilityID: facilityId,
+          fromActorID: jobCardId.value,
+          fromActorType: AppConstants.kJobCard,
+          mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
+          mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
+          qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
+          refID: jobCardId.value,
+          refType: AppConstants.kJobCard,
+          remarks: "remarks",
+          toActorID: dropdownMapperDataworkingArea[element[1]["value"]] != null
+              //  &&
+              //         dropdownMapperDataworkingArea[element[1]["value"]]
+              //                 .workingAreaId !=
+              //             null &&
+              //         dropdownMapperDataworkingArea[element[1]["value"]]
+              //                 .workingAreaId !=
+              //             0
+              ? dropdownMapperDataworkingArea[element[1]["value"]].asset_id
+              : 0,
+          toActorType:
+              dropdownMapperDataworkingArea[element[1]["value"]] != null
+                  ? AppConstants.kInventory
+                  : 0,
+          transaction_id:
+              dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
+          latitude: 0,
+          longitude: 0);
 
       items.add(item);
     });

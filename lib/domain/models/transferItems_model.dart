@@ -17,6 +17,8 @@ class TranferItems {
   int mrsID;
   int mrsItemID;
   int transaction_id;
+  dynamic longitude;
+  dynamic latitude;
   TranferItems(
       {required this.assetItemID,
       required this.facilityID,
@@ -30,7 +32,9 @@ class TranferItems {
       required this.toActorID,
       required this.toActorType,
       required this.mrsItemID,
-      required this.transaction_id});
+      required this.transaction_id,
+      this.latitude,
+      this.longitude});
 
   factory TranferItems.fromJson(Map<String, dynamic> json) => TranferItems(
       assetItemID: json['assetItemID'],
@@ -45,6 +49,8 @@ class TranferItems {
       remarks: json['remarks'],
       toActorID: json['toActorID'],
       toActorType: json['toActorType'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
       transaction_id: json['transaction_id']);
 
   Map<String, dynamic> toJson() => {
@@ -57,6 +63,8 @@ class TranferItems {
         'refType': refType,
         'remarks': remarks,
         'toActorID': toActorID,
+        'longitude': longitude,
+        'latitude': latitude,
         'toActorType': toActorType,
         'mrsID': mrsID,
         'mrsItemID': mrsItemID,

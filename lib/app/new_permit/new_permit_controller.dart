@@ -1953,7 +1953,9 @@ class NewPermitController extends GetxController {
         newPermit: jobJsonString,
         resubmit: true,
         isLoading: true,
-        type: typee.value,
+        type: typee.value,  vegplanId: vegExecutionDetailsModel?.planId,
+        vegexid: vegExecutionDetailsModel?.executionId,
+     
       );
       if (responseNewPermitCreated != null) {
         //  CreateNewPermitDialog();
