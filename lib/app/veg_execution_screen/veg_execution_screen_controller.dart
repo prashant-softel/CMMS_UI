@@ -5,6 +5,7 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/veg_execution_screen/veg_execution_screen_presenter.dart';
+import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
@@ -131,7 +132,7 @@ class VegExecutionController extends GetxController {
           {"key": "Cleaned", "value": '${element.cleaned}'},
           {"key": "Abandoned", "value": '${element.abandoned}'},
           {"key": "Pending", "value": '${element.pending}'},
-          {"key": "Remark", "value": '${element.remark}'},
+          {"key": "Remark", "value": '${element.remark_of_schedule}'},
           {"key": "Permit_code", "value": '${element.permit_code}'},
           {"key": "Permit_status", "value": '${element.status_short_ptw}'},
           {"key": "Status", "value": '${element.status_short}'},
@@ -226,9 +227,15 @@ class VegExecutionController extends GetxController {
 
   Future<void> endVegScheduleExecutionButton(
       {int? scheduleID, int? ptw_id}) async {
+    var _comment = remarkTextFieldCtrlr.text.trim();
+    ClosePermitModel ptwClose = ClosePermitModel(
+        id: ptw_id, comment: _comment, conditionIds: [1, 2, 3, 4], fileIds: []);
+    var closePtwJsonString = ptwClose.toJson();
+
     final _endVegScheduleExecutionBtn =
         await vegExecutionPresenter.endVegScheduleExecutionButton(
       scheduleId: scheduleID,
+      closePtwJsonString: closePtwJsonString,
     );
   }
 
@@ -279,7 +286,7 @@ class VegExecutionController extends GetxController {
         scheduleId: scheduleId ?? 0,
         executionId: vegexe.value,
         cleaningDay: cleaningDay ?? 0,
-        remark: remark ?? "",
+        remark: remark == null ? "" : remark,
         cleanedEquipmentIds: cleanedEquipmentIds,
         abandonedEquipmentIds: abandonedEquipmentIds,
       );

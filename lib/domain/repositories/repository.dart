@@ -5342,7 +5342,7 @@ class Repository {
                       ? Get.offAllNamed(Routes.viewAuditTask)
                       : type == 4
                           ? Get.offAllNamed(
-                              Routes.viewModuleCleaningExecutionScreen)
+                              Routes.addModuleCleaningExecutionContentWeb)
                           : type == 5
                               ? Get.offAllNamed(Routes.vegExecutionScreen)
                               : Get.offAllNamed(Routes.newPermitList);
@@ -13782,9 +13782,7 @@ class Repository {
   }
 
   Future<void> endVegScheduleExecutionButton(
-    int? scheduleId,
-    bool? isLoading,
-  ) async {
+      int? scheduleId, bool? isLoading, closePtwJsonString) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -13796,6 +13794,10 @@ class Repository {
       print('EndScheduleExecutionResponse55: ${res.data}');
 
       if (!res.hasError) {
+        var responseMap = json.decode(res.data);
+        permitCloseButton(closePtwJsonString, isLoading, 0, 5);
+
+        return responseMap;
         //  return _permitIssueModel;
       } else {
         Utility.showDialog(

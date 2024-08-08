@@ -732,8 +732,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                             style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                           )
                                                                                                         : (mapData['key'] == "Actions")
-                                                                                                            ? 
-                                                                                                            Wrap(
+                                                                                                            ? Wrap(
                                                                                                                 children: [
                                                                                                                   controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.permit_id == 0 && controller.mcExecutionDetailsModel.value?.status == 361
                                                                                                                       ? TableActionButton(
@@ -755,7 +754,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                           message: "View Permit",
                                                                                                                           onPress: () {
                                                                                                                             var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
-
+                                                                                                                            controller.clearTypeStoreData();
                                                                                                                             controller.clearPermitStoreData();
                                                                                                                             controller.viewNewPermitList(permitId: filterdData?.permit_id, jobId: controller.jobDetailsModel.value!.id ?? 0);
                                                                                                                           })
@@ -868,7 +867,7 @@ class AddModuleCleaningExecutionContentWeb
 
                                                                                                                             print('filteredData:${filterdData!.scheduleId}');
                                                                                                                             //  selectedData = filterdData;
-                                                                                                                            Get.dialog<void>(CustomCalibrationDialog(id: filterdData.scheduleId ?? 0,ptw_id: filterdData.permit_id, title: filterdData.scheduleId.toString(), starttype: 2));
+                                                                                                                            Get.dialog<void>(CustomCalibrationDialog(id: filterdData.scheduleId ?? 0, ptw_id: filterdData.permit_id, title: filterdData.scheduleId.toString(), starttype: 2));
                                                                                                                             // print({
                                                                                                                             //   'scheduledata:':
                                                                                                                             //       filterdData.scheduleId
@@ -936,7 +935,6 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                       : Dimens.box0,
                                                                                                                 ],
                                                                                                               )
-                                                                                                         
                                                                                                             : Text(mapData['key'] ?? ''),
                                                       );
                                                     }).toList(),

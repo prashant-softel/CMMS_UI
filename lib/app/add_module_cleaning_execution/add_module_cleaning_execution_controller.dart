@@ -273,7 +273,7 @@ class AddModuleCleaningExecutionController extends GetxController {
     int? jobId,
   }) async {
     Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "jobId": jobId, "type": 3});
+        arguments: {"permitId": permitId, "jobId": jobId, "type": 4});
     print({"Permit", permitId, jobId});
   }
 
