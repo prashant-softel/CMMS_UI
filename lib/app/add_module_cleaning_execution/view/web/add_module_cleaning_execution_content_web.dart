@@ -1119,20 +1119,20 @@ class AddModuleCleaningExecutionContentWeb
                                             // ),
                                             Dimens.boxWidth10,
 
-                                            controller.mcExecutionDetailsModel
-                                                                .value?.status ==
-                                                            361 &&
+                                            controller.mcExecutionDetailsModel.value?.status == 361 &&
                                                         varUserAccessModel.value
                                                                 .access_list!
                                                                 .where((e) =>
-                                                                    e.feature_id ==
-                                                                        UserAccessConstants
-                                                                            .kModuleCleaningexeFeatureId &&
+                                                                    e.feature_id == UserAccessConstants.kModuleCleaningexeFeatureId &&
                                                                     e.edit ==
                                                                         UserAccessConstants
                                                                             .kHaveEditAccess)
                                                                 .length >
-                                                            0 ||
+                                                            0 &&
+                                                        controller
+                                                                .allScheduleTrue
+                                                                .value ==
+                                                            false ||
                                                     controller.mcExecutionDetailsModel
                                                                 .value?.status ==
                                                             368 &&
@@ -1140,7 +1140,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                 .access_list!
                                                                 .where((e) => e.feature_id == UserAccessConstants.kModuleCleaningexeFeatureId && e.edit == UserAccessConstants.kHaveEditAccess)
                                                                 .length >
-                                                            0
+                                                            0 &&
+                                                        controller.allScheduleTrue.value == false
                                                 ? Container(
                                                     height: 28,
                                                     child: CustomElevatedButton(

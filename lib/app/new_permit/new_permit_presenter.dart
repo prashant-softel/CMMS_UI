@@ -261,9 +261,16 @@ class NewPermitPresenter {
       {newPermit,
       required bool isLoading,
       required bool resubmit,
-      int? type}) async {
+      int? type,
+      int? vegplanId,
+      int? vegexid}) async {
     return newPermitUsecase.resubmitPermit(
-        newPermit: newPermit, isLoading: isLoading, resubmit: true, type: type);
+        newPermit: newPermit,
+        isLoading: isLoading,
+        resubmit: true,
+        type: type,
+        vegexid: vegexid,
+        vegplanId: vegplanId);
   }
 
   Future<NewPermitDetailModel?> getNewPermitDetail(
