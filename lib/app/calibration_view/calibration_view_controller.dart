@@ -101,11 +101,12 @@ class CalibrationViewController extends GetxController {
     print({"vasddf", _calibrationDetails});
     if (_calibrationDetails != null) {
       calibrationDetailModel.value = _calibrationDetails;
-      file_list?.value = calibrationDetailModel.value?.file_list ?? [];
+      file_list?.value = calibrationDetailModel.value?.fileList ?? [];
       List<int?> fileid = file_list!.map((element) => element!.id).toList();
       print("files while getting ${fileid}");
       files!.addAll(fileid);
-      isToggleOn.value=calibrationDetailModel.value?.is_damaged == 1? true : false;
+      isToggleOn.value =
+          calibrationDetailModel.value?.isDamaged == 1 ? true : false;
     }
   }
 
@@ -201,7 +202,7 @@ class CalibrationViewController extends GetxController {
       String _comment = commentCtrlr.text.trim();
 
       var closeCalibrationtoJsonString = {
-        "calibration_id": calibrationId.value,
+        "id": calibrationId.value,
         "comment": _comment
       }; // commentCalibrationModel.toJson();
       // print({"rejectCalibrationJsonString", closeCalibrationtoJsonString});

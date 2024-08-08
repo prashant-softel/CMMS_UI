@@ -118,7 +118,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                               padding: const EdgeInsets.all(10.0),
                               child: CustomElevatedButton(
                                 text:
-                                    "${controller.calibrationDetailModel.value?.statusShort ?? ""}",
+                                    "${controller.calibrationDetailModel.value?.statusId ?? ""}",
                                 onPressed: () {},
                                 backgroundColor: ColorValues.appYellowColor,
                                 textColor: ColorValues.whiteColor,
@@ -137,7 +137,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Dimens.boxWidth30,
+                                  Spacer(),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
@@ -147,12 +147,17 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       ),
                                       Dimens.boxHeight10,
                                       Text(
-                                        'Last Calibration Date:',
+                                        'Vender Name:',
                                         style: Styles.black17,
                                       ),
                                       Dimens.boxHeight10,
                                       Text(
-                                        'Vender Name:',
+                                        'Started Date:',
+                                        style: Styles.black17,
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Text(
+                                        'Last Done Date:',
                                         style: Styles.black17,
                                       ),
                                       Dimens.boxHeight10,
@@ -162,7 +167,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       ),
                                     ],
                                   ),
-                                  Dimens.boxWidth15,
+                                  Dimens.boxWidth5,
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -172,16 +177,21 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                           style: Styles.blue17),
                                       Dimens.boxHeight10,
                                       Text(
-                                          "${controller.calibrationDetailModel.value?.lastCalibrationDate ?? ""}",
+                                          "${controller.calibrationDetailModel.value?.vendorName ?? ""}",
                                           style: Styles.blue17),
                                       Dimens.boxHeight10,
                                       Text(
-                                          "${controller.calibrationDetailModel.value?.vendorName ?? ""}",
+                                          "${controller.calibrationDetailModel.value?.startedAt ?? ""}",
+                                          style: Styles.blue17),
+                                      Dimens.boxHeight10,
+                                      Text(
+                                          "${controller.calibrationDetailModel.value?.lastCalibrationDate ?? ""}",
                                           style: Styles.blue17),
                                       Dimens.boxHeight10,
                                       Text(
                                           "${controller.calibrationDetailModel.value?.completedAt ?? ""}",
                                           style: Styles.blue17),
+                                      Dimens.boxHeight10,
                                     ],
                                   ),
                                   Spacer(),
@@ -194,22 +204,27 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       ),
                                       Dimens.boxHeight10,
                                       Text(
-                                        'Next Calibration Due Date:',
-                                        style: Styles.black17,
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Text(
                                         'Responsible Person:',
                                         style: Styles.black17,
                                       ),
                                       Dimens.boxHeight10,
                                       Text(
-                                        'Recieved date:',
+                                        'Requested Date:',
+                                        style: Styles.black17,
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Text(
+                                        'Next Calibration Due Date:',
+                                        style: Styles.black17,
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Text(
+                                        'Schedule date:',
                                         style: Styles.black17,
                                       ),
                                     ],
                                   ),
-                                  Dimens.boxWidth15,
+                                  Dimens.boxWidth5,
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -219,18 +234,23 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                           style: Styles.blue17),
                                       Dimens.boxHeight10,
                                       Text(
-                                          "${controller.calibrationDetailModel.value?.nextCalibrationDueDate ?? ""}",
-                                          style: Styles.blue17),
-                                      Dimens.boxHeight10,
-                                      Text(
                                           "${controller.calibrationDetailModel.value?.responsiblePerson ?? ""}",
                                           style: Styles.blue17),
                                       Dimens.boxHeight10,
                                       Text(
-                                          "${controller.calibrationDetailModel.value?.receivedDate ?? ""}",
+                                          "${controller.calibrationDetailModel.value?.requestedAt ?? ""}",
+                                          style: Styles.blue17),
+                                      Dimens.boxHeight10,
+                                      Text(
+                                          "${controller.calibrationDetailModel.value?.nextCalibrationDueDate ?? ""}",
+                                          style: Styles.blue17),
+                                      Dimens.boxHeight10,
+                                      Text(
+                                          "${controller.calibrationDetailModel.value?.calibrationDate ?? ""}",
                                           style: Styles.blue17),
                                     ],
-                                  )
+                                  ),
+                                  Spacer(),
                                 ],
                               ),
                               controller.calibrationDetailModel.value
@@ -263,7 +283,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   : Dimens.box0,
                               controller.calibrationId.value > 0 &&
                                       controller.calibrationDetailModel.value!
-                                              .file_list!.length >
+                                              .fileList!.length >
                                           0
                                   ? Container(
                                       // width:
@@ -577,33 +597,41 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   //  )
                                   : //
                                   Dimens.box0,
-                              controller.calibrationDetailModel.value
-                                          ?.statusId ==
-                                      215
-                                  ?
-                                  //  IgnorePointer(
-                                  //     ignoring: controller
-                                  //             .calibrationDetailModel
-                                  //             .value
-                                  //             ?.statusId ==
-                                  //         214,
-                                  //     child:
-                                  Row(
-                                      children: [
-                                        Text(
-                                          "Any Damages:",
-                                          style: Styles.blackBold15,
-                                        ),
-                                        Dimens.boxWidth10,
-                                        CustomSwitchTroggle(
-                                            value: controller.isToggleOn.value,
-                                            onChanged: (value) {
-                                              controller.toggle();
-                                            }),
-                                      ],
-                                    )
-                                  // )
-                                  : Dimens.box0,
+                              controller.calibrationDetailModel.value?.statusId == 211 ||
+                                      controller.calibrationDetailModel.value
+                                              ?.statusId ==
+                                          212 ||
+                                      controller.calibrationDetailModel.value
+                                              ?.statusId ==
+                                          213 ||
+                                      controller.calibrationDetailModel.value
+                                              ?.statusId ==
+                                          214
+                                  ? Dimens.box0
+                                  : IgnorePointer(
+                                      ignoring: controller
+                                                  .calibrationDetailModel
+                                                  .value
+                                                  ?.statusId ==
+                                              216
+                                          ? true
+                                          : false,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Any Damages:",
+                                            style: Styles.blackBold15,
+                                          ),
+                                          Dimens.boxWidth10,
+                                          CustomSwitchTroggle(
+                                              value:
+                                                  controller.isToggleOn.value,
+                                              onChanged: (value) {
+                                                controller.toggle();
+                                              }),
+                                        ],
+                                      ))
+
                               // Dimens.boxHeight10,
                               // Row(
                               //   children: [
@@ -656,32 +684,36 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                               //     ),
                               //   ],
                               // ),
-                              // controller.calibrationDetailModel.value
-                              //             ?.statusId ==
-                              //         214
-                              //     ?
-                              Container(
-                                margin: Dimens.edgeInsets15,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomRichText(title: "Comment:"),
-                                    Dimens.boxWidth10,
-                                    LoginCustomTextfield(
-                                      width: (Get.width * .6),
-                                      maxLine: 5,
-                                      textController: controller.commentCtrlr,
-                                    ),
-                                  ],
-                                ),
-                              )
-                              // : Dimens.box0,
-                              //  Dimens.boxHeight30,
                               ,
+                              controller.calibrationDetailModel.value
+                                          ?.statusId ==
+                                      214
+                                  ? Dimens.box0
+                                  : Container(
+                                      margin: Dimens.edgeInsets15,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CustomRichText(title: "Comment:"),
+                                          Dimens.boxWidth10,
+                                          LoginCustomTextfield(
+                                            width: (Get.width * .6),
+                                            maxLine: 5,
+                                            textController:
+                                                controller.commentCtrlr,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                              //  : Dimens.box0,
+                              //  Dimens.boxHeight30,
+                              // ,
                               Container(
                                 margin: EdgeInsets.only(bottom: 40, top: 40),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     // Container(
                                     //   height: 35,
@@ -753,6 +785,8 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                     .length >
                                                 0
                                         ? Container(
+                                            margin: EdgeInsets.only(
+                                                right: 20, left: 20),
                                             height: 35,
                                             //width: (Get.width * .2) - 90,
                                             child: CustomElevatedButton(
@@ -766,7 +800,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                             ),
                                           )
                                         : Dimens.box0,
-                                    Dimens.boxWidth20,
+                                    //  Dimens.boxWidth20,
                                     controller.calibrationDetailModel.value
                                                     ?.statusId ==
                                                 212 &&
@@ -783,6 +817,9 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                 0
                                         ? Container(
                                             height: 35,
+                                            margin: EdgeInsets.only(
+                                                right: 20, left: 20),
+
                                             //width: (Get.width * .2) - 90,
                                             child: CustomElevatedButton(
                                               backgroundColor:
@@ -795,7 +832,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                             ),
                                           )
                                         : Dimens.box0,
-                                    Dimens.boxWidth20,
+                                    // Dimens.boxWidth20,
                                     controller.calibrationDetailModel.value
                                                     ?.statusId ==
                                                 215 &&
@@ -841,6 +878,9 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                 0
                                         ? Container(
                                             height: 35,
+                                            margin: EdgeInsets.only(
+                                                right: 20, left: 20),
+
                                             //width: (Get.width * .2) - 90,
                                             child: CustomElevatedButton(
                                               backgroundColor:
@@ -870,6 +910,9 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                 0
                                         ? Container(
                                             height: 35,
+                                            margin: EdgeInsets.only(
+                                                right: 20, left: 20),
+
                                             //width: (Get.width * .2) - 90,
                                             child: CustomElevatedButton(
                                               backgroundColor:
