@@ -11,11 +11,13 @@ class VegExecutionUsecase {
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
+    int? featureId,
     bool? isLoading,
   }) async =>
-      await repository.getAssignedToList(
+      await repository.getAssignedToEmployee(
         auth,
         facilityId,
+        featureId,
         isLoading,
       );
 

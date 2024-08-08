@@ -10,11 +10,13 @@ class VegExecutionPresenter {
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
+    int? featureId,
     bool? isLoading,
   }) async =>
       await vegExecutionUsecase.getAssignedToList(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
+        featureId: featureId ?? 0,
         isLoading: isLoading ?? false,
       );
   Future<bool> assignToVeg({

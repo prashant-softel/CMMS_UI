@@ -37,7 +37,7 @@ class TbtDoneVegDialog extends GetView<VegExecutionController> {
                 width: 5,
               ),
               Text(
-                "VEG TASK${id}",
+                "VE${id}",
                 style: TextStyle(
                     fontSize: 15, color: ColorValues.appDarkBlueColor),
               ),

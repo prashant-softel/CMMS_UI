@@ -71,6 +71,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                         var mcid;
                         var jobId;
                         var vegexe;
+                        var vegplanId;
                         controller.typee.value == 1
                             ? Get.offAllNamed(Routes.jobDetails,
                                 arguments: {'jobId': jobId})
@@ -91,9 +92,10 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             ? Get.offAllNamed(
                                                 Routes.vegExecutionScreen,
                                                 arguments: {
-                                                    'vegexe': vegexe,
-                                                    'vegid': 0
-                                                  })
+                                                  "vegexe": vegexe,
+                                                  "vegid": vegplanId,
+                                                },
+                                              )
                                             : Get.offNamed(
                                                 Routes.newPermitList);
                       },
@@ -609,7 +611,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         DataCell(
                                           InkWell(
                                             onTap: () {
-                                              controller.viewMCTDetails();
+                                              // controller.viewMCTDetails();
                                             },
                                             child: Text(
                                                 'VET${int.tryParse('${controller.vegExecutionDetailsModel?.executionId ?? 0}')}',

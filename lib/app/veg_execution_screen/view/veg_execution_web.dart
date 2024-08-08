@@ -161,12 +161,12 @@ class _VegExecutionWebState extends State<VegExecutionWeb> {
                                             children: [
                                               TitleAndInfo(
                                                 "Plan ID: ",
-                                                "${controller.vegid.value == 0 ? "" : controller.vegid.value}",
+                                                "VC${controller.vegid.value == 0 ? "" : controller.vegid.value}",
                                               ),
                                               Dimens.boxHeight10,
                                               TitleAndInfo(
                                                 "Execution ID: ",
-                                                "${controller.vegExecutionDetailsModel.value?.executionId == null ? "" : controller.vegExecutionDetailsModel.value?.executionId}",
+                                                "VE${controller.vegExecutionDetailsModel.value?.executionId == null ? "" : controller.vegExecutionDetailsModel.value?.executionId}",
                                               ),
                                             ],
                                           ),
