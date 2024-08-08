@@ -78,7 +78,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                           child: Text(" / VEGETATION PLAN LIST",
                               style: Styles.greyLight14),
                         ),
-                        Text(" / VIEW VEGETATION PLANh bjnkm",
+                        Text(" / VIEW VEGETATION PLAN",
                             style: Styles.greyLight14)
                       ],
                     ),
