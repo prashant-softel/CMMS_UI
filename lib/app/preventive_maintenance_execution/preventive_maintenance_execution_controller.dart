@@ -22,7 +22,6 @@ import '../../domain/models/update_pm_task_execution_model.dart';
 import 'preventive_maintenance_execution_presenter.dart';
 
 class PreventiveMaintenanceExecutionController extends GetxController {
-  ///
   PreventiveMaintenanceExecutionController(
     this.preventiveMaintenanceExecutionPresenter,
   );
@@ -89,7 +88,9 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   var returnitemExists = <int>[].obs;
   Rx<bool> allTrue = false.obs;
   Rx<bool> isforminvalid = false.obs;
-  var locationMessage = 'Click the button to get your location'.obs;
+
+  var latitude = 0.0.obs;
+  var longitude = 0.0.obs;
 
   ///fileIDs
   int fileIds = 0;
@@ -217,18 +218,12 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       final _scheduleId =
           await preventiveMaintenanceExecutionPresenter.getValue();
 
-      //  String? _scheduleId = await _flutterSecureStorage.read(key: "pmTaskId");
       if (_scheduleId == null || _scheduleId == '' || _scheduleId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         scheduleId.value = dataFromPreviousScreen['pmTaskId'];
         preventiveMaintenanceExecutionPresenter.saveValue(
             pmTaskId: scheduleId.value.toString());
-
-        // await _flutterSecureStorage.write(
-        //   key: "pmTaskId",
-        //   value: scheduleId.value == null ? '' : scheduleId.value.toString(),
-        // );
       } else {
         scheduleId.value = int.tryParse(_scheduleId) ?? 0;
       }
@@ -238,13 +233,10 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   }
 
   Future<void> getHistory() async {
-    /// TODO: CHANGE THESE VALUES
     int moduleType = 27;
-    //
 
     historyList?.value =
         await preventiveMaintenanceExecutionPresenter.getHistory(
-              // tempModuleType,
               facilityId,
               moduleType,
               scheduleId.value,
@@ -277,7 +269,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
       _permitDetails.schedules?.forEach((element) {
-        //  if (element.completedBy_id == 0) {
         rowItemclone.value.add([
           {
             "key": "Asset",
@@ -296,7 +287,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           },
           {'key': "dropdown", "value": ''},
         ]);
-        // Add to scheduleCheckPoints if completedBy_id != 0
         if (element.completedBy_id != 0) {
           scheduleCheckPointsdrop.value.add(element);
         }
@@ -308,10 +298,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       }
       await getMrsListByModuleTask(taskId: scheduleId ?? 0);
     }
-    // selectedasset.value = scheduleCheckPoints[0].name ?? "";
     update(["getPmtaskViewList"]);
-
-    // print({"checklistObservations", checklistObservations});
   }
 
   Future<void> transferItem() async {
@@ -330,12 +317,11 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           refType: AppConstants.kTask,
           remarks: "remarks",
           toActorID: selectedItem?.assetsID ?? 0,
-          // dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
           toActorType: AppConstants.kInventory,
           transaction_id:
               dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
-          latitude: 0,
-          longitude: 0);
+          latitude: latitude.value,
+          longitude: longitude.value);
 
       items.add(item);
     });
@@ -353,50 +339,30 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Check if location services are enabled
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      //locationMessage.value = 'Location services are disabled.';
       print('Location services are disabled.');
       return;
     }
 
-    // Check for location permissions
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        //locationMessage.value = 'Location permissions are denied.';
         print('Location permissions are denied.');
         return;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      //locationMessage.value = 'Location permissions are permanently denied.';
       print('Location permissions are permanently denied.');
       return;
     }
 
-    // Get the current location
     Position position = await Geolocator.getCurrentPosition();
+    latitude.value = position.latitude;
+    longitude.value = position.longitude;
     print('Current Position: ${position.toString()}');
-    getAddressFromLatLng(position);
-  }
-
-  Future<void> getAddressFromLatLng(Position position) async {
-    try {
-      List<Placemark> placemarks =
-          await placemarkFromCoordinates(position.latitude, position.longitude);
-      Placemark place = placemarks[0];
-      print('Placemark: ${place.toString()}');
-
-      locationMessage.value =
-          '${place.street}, ${place.locality}, ${place.postalCode}, ${place.country}';
-    } catch (e) {
-      locationMessage.value = 'Error: ${e.toString()}';
-      print('Error: ${e.toString()}');
-    }
   }
 
   Future<bool> browseFiles({
@@ -424,13 +390,11 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           pm_files: pmfile);
       addObservations.add(item);
     });
-    // });
+
     List<SchedulesTask> schedule = <SchedulesTask>[];
-    // checklistObservations?.forEach((e) {
     schedule.add(SchedulesTask(
         schedule_id: selectedItem?.schedule_id ?? 0,
         add_observations: addObservations));
-    // });
 
     UpdatePmExecutionMdel updatePmExecutionMdel = UpdatePmExecutionMdel(
         task_id: scheduleId.value,
@@ -444,7 +408,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       isLoading: true,
     );
     _updatedailog();
-    // Get.back();
   }
 
   void cloneDialog(String assets) {
@@ -471,11 +434,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
         return Obx(
           () => Container(
-            // margin: Dimens.edgeInsets15,
-            // padding: Dimens.edgeInsets25,
             height: height / 7,
             width: double.infinity,
-
             child: Column(
               children: [
                 RichText(
@@ -510,7 +470,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                         textColor: ColorValues.whiteColor,
                       ),
                     ),
-                    // Spacer(),
                     Dimens.boxWidth20,
                     Container(
                       height: 35,
@@ -565,12 +524,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
               closePtwJsonString: closePtwJsonString,
               isLoading: true,
               closetype: 1);
-      // if (response == true) {
-      //   final _flutterSecureStorage = const FlutterSecureStorage();
-
-      //   _flutterSecureStorage.delete(key: "pmTaskId");
-      //   Get.offAllNamed(Routes.pmTask);
-      // }
     }
   }
 
@@ -596,15 +549,9 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       content: Builder(builder: (context) {
         var height = Get.height;
 
-        return
-            //  Obx(
-            //   () =>
-            Container(
-          // margin: Dimens.edgeInsets15,
-          // padding: Dimens.edgeInsets25,
+        return Container(
           height: height / 7,
           width: double.infinity,
-
           child: Column(
             children: [
               RichText(
@@ -613,15 +560,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                   text:
                       'The schedule to be cloned contains job(s), do you want to create new job(s) during clone?',
                   style: Styles.blue700,
-                  // children: <TextSpan>[
-                  //   TextSpan(
-                  //     text: '\n ${selectedasset.value}',
-                  //     style: Styles.redBold15,
-                  //   ),
-                  //   TextSpan(
-                  //       text: '? It contain the job',
-                  //       style: Styles.blue700),
-                  // ]
                 ),
               ),
               Dimens.boxHeight12,
@@ -639,7 +577,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                       textColor: ColorValues.whiteColor,
                     ),
                   ),
-                  // Spacer(),
                   Dimens.boxWidth20,
                   Container(
                     height: 35,
@@ -682,7 +619,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
               ),
             ],
           ),
-          // ),
         );
       }),
       actions: [],
@@ -695,7 +631,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     var updatePMTaskExecutionJsonString = {
       "task_id": scheduleId.value,
       "comment": _comment,
-    }; //commentModel.toJson();
+    };
     final response =
         await preventiveMaintenanceExecutionPresenter.UpdatePMTaskExecution(
       updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
@@ -779,20 +715,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // RichText(
-                    //   text: TextSpan(
-                    //       text: 'PM Execution Submitted with',
-                    //       style: Styles.blue700,
-                    //       children: <TextSpan>[
-                    //         TextSpan(text: ' \n     Code', style: Styles.blue700),
-                    //         TextSpan(
-                    //           text: '  2444',
-                    //           style: Styles.redBold15,
-                    //         ),
-                    //       ]),
-                    // ),
-                    // Dimens.boxHeight12,
-                    //  Text("PM Execution Submitted with code PMSC87456"),
                     Container(
                       height: 35,
                       child: CustomElevatedButton(
@@ -824,9 +746,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
                               getHistory();
                             }
-                            // textControllers =
-                            //     List.generate(permitValuesCount, (_) => TextEditingController());
-                            // permitValues = RxList<String>.filled(permitValuesCount, '');
                           } catch (e) {
                             print(e);
                           }
