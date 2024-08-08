@@ -76,7 +76,7 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                               child: Text(" / VEGETATION CONTROL",
                                   style: Styles.greyLight14),
                             ),
-                            Text(" / VEGETATION PLAN EXECUTION",
+                            Text(" / VEGETATION EXECUTION LIST",
                                 style: Styles.greyLight14)
                           ],
                         ),
