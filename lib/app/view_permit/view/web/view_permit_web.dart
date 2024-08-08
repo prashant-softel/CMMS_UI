@@ -97,6 +97,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                           var jobId;
                                           var vegexe;
                                           var mcid;
+                                          var vegplan;
                                           controller.type.value == 1
                                               ? Get.offAllNamed(
                                                   Routes.jobDetails,
@@ -112,7 +113,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                           Routes.vegExecutionScreen,
                                                           arguments: {
                                                               'vegexe': vegexe,
-                                                              'vegid': 0
+                                                              'vegid': vegplan
                                                             })
                                                       : controller.type.value ==
                                                               4
