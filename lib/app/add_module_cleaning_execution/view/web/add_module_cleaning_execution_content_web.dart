@@ -314,10 +314,12 @@ class AddModuleCleaningExecutionContentWeb
                                                 ),
                                                 controller.startedAtDateTimeCtrlrWeb
                                                             .text ==
-                                                        "0001-01-01 05:30:00"
+                                                        "0001-01-01"
                                                     ? Text("")
                                                     : Text(
-                                                        ' ${controller.startedAtDateTimeCtrlrWeb.text}',
+                                                        controller.mcExecutionDetailsModel
+                                            .value?.startDate ??
+                                        '',
                                                         style: Styles.blue17,
                                                       ),
                                               ],
