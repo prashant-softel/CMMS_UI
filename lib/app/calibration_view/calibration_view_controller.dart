@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/calibration_detail_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
 
@@ -24,6 +25,7 @@ class CalibrationViewController extends GetxController {
   Rx<CalibrationDetailModel?> calibrationDetailModel =
       CalibrationDetailModel().obs;
   RxList<FileList?>? file_list = <FileList>[].obs;
+  RxList<FileList?>? file_list_calibration = <FileList>[].obs;
 
   var isToggleOn = false.obs;
   int moduleType = 101;
@@ -31,6 +33,7 @@ class CalibrationViewController extends GetxController {
   var commentCtrlr = TextEditingController();
   Rx<int> calibrationId = 0.obs;
   List<dynamic>? files = [];
+  Rx<bool> isFormInvalid = false.obs;
 
   @override
   void onInit() async {
@@ -105,6 +108,7 @@ class CalibrationViewController extends GetxController {
       List<int?> fileid = file_list!.map((element) => element!.id).toList();
       print("files while getting ${fileid}");
       files!.addAll(fileid);
+
       isToggleOn.value =
           calibrationDetailModel.value?.isDamaged == 1 ? true : false;
     }
@@ -115,6 +119,10 @@ class CalibrationViewController extends GetxController {
   }
 
   completeCalibration({List<dynamic>? fileIds}) async {
+    checkform();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _comment = commentCtrlr.text.trim();
 
     var completeCalibrationtoJsonString = {
@@ -135,6 +143,10 @@ class CalibrationViewController extends GetxController {
 
   rejectRequestCalibration() async {
     {
+      checkform();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _comment = commentCtrlr.text.trim();
 
       CommentModel commentCalibrationModel =
@@ -151,6 +163,10 @@ class CalibrationViewController extends GetxController {
 
   approveRequestCalibration() async {
     {
+      checkform();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _comment = commentCtrlr.text.trim();
 
       CommentModel commentCalibrationModel =
@@ -167,6 +183,10 @@ class CalibrationViewController extends GetxController {
 
   approveCloseCalibration() async {
     {
+      checkform();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _comment = commentCtrlr.text.trim();
 
       CommentModel commentCalibrationModel =
@@ -183,6 +203,10 @@ class CalibrationViewController extends GetxController {
 
   rejectCloseCalibration() async {
     {
+      checkform();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _comment = commentCtrlr.text.trim();
 
       CommentModel commentCalibrationModel =
@@ -199,6 +223,10 @@ class CalibrationViewController extends GetxController {
 
   closeCalibration() async {
     {
+      checkform();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _comment = commentCtrlr.text.trim();
 
       var closeCalibrationtoJsonString = {
@@ -274,6 +302,15 @@ class CalibrationViewController extends GetxController {
       // if (response == true) {
       //   getCalibrationList(facilityId, true);
       // }
+    }
+  }
+
+  void checkform() {
+    if (commentCtrlr.text == '') {
+      Fluttertoast.showToast(msg: 'Enter Comment!');
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
     }
   }
 }
