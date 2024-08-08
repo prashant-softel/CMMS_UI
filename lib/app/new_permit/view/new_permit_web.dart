@@ -609,7 +609,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         DataCell(
                                           InkWell(
                                             onTap: () {
-                                              controller.viewMCTDetails();
+                                              // controller.viewMCTDetails();
                                             },
                                             child: Text(
                                                 'VET${int.tryParse('${controller.vegExecutionDetailsModel?.executionId ?? 0}')}',
