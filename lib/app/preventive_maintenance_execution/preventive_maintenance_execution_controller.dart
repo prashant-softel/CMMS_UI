@@ -12,6 +12,8 @@ import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../domain/models/file_upload_model.dart';
@@ -87,6 +89,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   var returnitemExists = <int>[].obs;
   Rx<bool> allTrue = false.obs;
   Rx<bool> isforminvalid = false.obs;
+  var locationMessage = 'Click the button to get your location'.obs;
 
   ///fileIDs
   int fileIds = 0;
@@ -108,6 +111,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                 facilityId: facilityId);
 
             getHistory();
+            getLocation();
           }
         }
       });
@@ -343,6 +347,56 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       transferItemJsonString: transferItemJsonString,
       isLoading: true,
     );
+  }
+
+  void getLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Check if location services are enabled
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      //locationMessage.value = 'Location services are disabled.';
+      print('Location services are disabled.');
+      return;
+    }
+
+    // Check for location permissions
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        //locationMessage.value = 'Location permissions are denied.';
+        print('Location permissions are denied.');
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      //locationMessage.value = 'Location permissions are permanently denied.';
+      print('Location permissions are permanently denied.');
+      return;
+    }
+
+    // Get the current location
+    Position position = await Geolocator.getCurrentPosition();
+    print('Current Position: ${position.toString()}');
+    getAddressFromLatLng(position);
+  }
+
+  Future<void> getAddressFromLatLng(Position position) async {
+    try {
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+      Placemark place = placemarks[0];
+      print('Placemark: ${place.toString()}');
+
+      locationMessage.value =
+          '${place.street}, ${place.locality}, ${place.postalCode}, ${place.country}';
+    } catch (e) {
+      locationMessage.value = 'Error: ${e.toString()}';
+      print('Error: ${e.toString()}');
+    }
   }
 
   Future<bool> browseFiles({
