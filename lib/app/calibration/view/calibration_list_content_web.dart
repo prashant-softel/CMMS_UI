@@ -616,13 +616,19 @@ class CalibrationDataSource extends DataTableSource {
                                             : calibrationDetails?.statusID ==
                                                     217
                                                 ? ColorValues.appGreenColor
-                                                : ColorValues.appDarkBlueColor,
+                                                : calibrationDetails
+                                                            ?.statusID ==
+                                                        212
+                                                    ? ColorValues.appPurpleColor
+                                                    : ColorValues
+                                                        .appDarkBlueColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: Text('${calibrationDetails?.statusID}',
-                              style: Styles.white10.copyWith(
-                                color: Colors.white,
-                              )),
+                          child:
+                              Text('${calibrationDetails?.calibration_status}',
+                                  style: Styles.white10.copyWith(
+                                    color: Colors.white,
+                                  )),
                         ),
                       ),
                     ],
@@ -632,10 +638,10 @@ class CalibrationDataSource extends DataTableSource {
                         controller.calibrationList
                                     .firstWhere(
                                       (e) =>
-                                          e?.asset_id ==
-                                          calibrationDetails!.asset_id,
-                                      orElse: () =>
-                                          CalibrationListModel(asset_id: 00),
+                                          e?.calibration_id ==
+                                          calibrationDetails!.calibration_id,
+                                      orElse: () => CalibrationListModel(
+                                          calibration_id: 00),
                                     )
                                     ?.statusID ==
                                 211
@@ -647,12 +653,13 @@ class CalibrationDataSource extends DataTableSource {
                                   controller.calibrationRequest(
                                     equipmentName:
                                         '${calibrationDetails?.asset_name}',
+                                    calibrationId:
+                                        '${calibrationDetails?.calibration_id}',
                                     previousDate:
                                         '${calibrationDetails?.last_calibration_date}',
                                     nextDate:
                                         '${calibrationDetails?.calibration_due_date}',
-                                    calibrationId:
-                                        '${calibrationDetails?.asset_id}',
+                                    asset_id: '${calibrationDetails?.asset_id}',
                                   );
                                 },
                               )
@@ -661,10 +668,10 @@ class CalibrationDataSource extends DataTableSource {
                         controller.calibrationList
                                     .firstWhere(
                                       (e) =>
-                                          e?.asset_id ==
-                                          calibrationDetails!.asset_id,
-                                      orElse: () =>
-                                          CalibrationListModel(asset_id: 00),
+                                          e?.calibration_id ==
+                                          calibrationDetails!.calibration_id,
+                                      orElse: () => CalibrationListModel(
+                                          calibration_id: 00),
                                     )
                                     ?.statusID ==
                                 211
@@ -685,10 +692,10 @@ class CalibrationDataSource extends DataTableSource {
                         controller.calibrationList
                                     .firstWhere(
                                       (e) =>
-                                          e?.asset_id ==
-                                          calibrationDetails!.asset_id,
-                                      orElse: () =>
-                                          CalibrationListModel(asset_id: 00),
+                                          e?.calibration_id ==
+                                          calibrationDetails!.calibration_id,
+                                      orElse: () => CalibrationListModel(
+                                          calibration_id: 00),
                                     )
                                     ?.statusID ==
                                 211
@@ -747,8 +754,11 @@ class CalibrationDataSource extends DataTableSource {
                       0 &&
                   controller.calibrationList
                           .firstWhere(
-                            (e) => e?.asset_id == calibrationDetails!.asset_id,
-                            orElse: () => CalibrationListModel(asset_id: 00),
+                            (e) =>
+                                e?.calibration_id ==
+                                calibrationDetails!.calibration_id,
+                            orElse: () =>
+                                CalibrationListModel(calibration_id: 00),
                           )
                           ?.statusID !=
                       211

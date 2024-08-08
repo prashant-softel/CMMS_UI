@@ -118,9 +118,39 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                               padding: const EdgeInsets.all(10.0),
                               child: CustomElevatedButton(
                                 text:
-                                    "${controller.calibrationDetailModel.value?.statusId ?? ""}",
+                                    "${controller.calibrationDetailModel.value?.statusShort ?? ""}",
                                 onPressed: () {},
-                                backgroundColor: ColorValues.appYellowColor,
+                                backgroundColor: controller
+                                            .calibrationDetailModel
+                                            .value
+                                            ?.statusId ==
+                                        218
+                                    ? ColorValues.appRedColor
+                                    : controller.calibrationDetailModel.value
+                                                ?.statusId ==
+                                            211
+                                        ? ColorValues.blueColor
+                                        : controller.calibrationDetailModel
+                                                    .value?.statusId ==
+                                                214
+                                            ? ColorValues.appGreenColor
+                                            : controller.calibrationDetailModel
+                                                        .value?.statusId ==
+                                                    213
+                                                ? ColorValues.appYellowColor
+                                                : controller.calibrationDetailModel
+                                                            .value?.statusId ==
+                                                        217
+                                                    ? ColorValues.appGreenColor
+                                                    : controller
+                                                                .calibrationDetailModel
+                                                                .value
+                                                                ?.statusId ==
+                                                            212
+                                                        ? ColorValues
+                                                            .appPurpleColor
+                                                        : ColorValues
+                                                            .appDarkBlueColor,
                                 textColor: ColorValues.whiteColor,
                               ),
                             ),
@@ -214,11 +244,6 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       ),
                                       Dimens.boxHeight10,
                                       Text(
-                                        'Next Calibration Due Date:',
-                                        style: Styles.black17,
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Text(
                                         'Schedule date:',
                                         style: Styles.black17,
                                       ),
@@ -239,10 +264,6 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       Dimens.boxHeight10,
                                       Text(
                                           "${controller.calibrationDetailModel.value?.requestedAt ?? ""}",
-                                          style: Styles.blue17),
-                                      Dimens.boxHeight10,
-                                      Text(
-                                          "${controller.calibrationDetailModel.value?.nextCalibrationDueDate ?? ""}",
                                           style: Styles.blue17),
                                       Dimens.boxHeight10,
                                       Text(
@@ -598,11 +619,9 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   : //
                                   Dimens.box0,
                               controller.calibrationDetailModel.value?.statusId == 211 ||
-                                      controller.calibrationDetailModel.value
-                                              ?.statusId ==
+                                      controller.calibrationDetailModel.value?.statusId ==
                                           212 ||
-                                      controller.calibrationDetailModel.value
-                                              ?.statusId ==
+                                      controller.calibrationDetailModel.value?.statusId ==
                                           213 ||
                                       controller.calibrationDetailModel.value
                                               ?.statusId ==
@@ -610,12 +629,24 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   ? Dimens.box0
                                   : IgnorePointer(
                                       ignoring: controller
-                                                  .calibrationDetailModel
-                                                  .value
-                                                  ?.statusId ==
-                                              216
-                                          ? true
-                                          : false,
+                                                      .calibrationDetailModel
+                                                      .value
+                                                      ?.statusId ==
+                                                  211 ||
+                                              controller.calibrationDetailModel
+                                                      .value?.statusId ==
+                                                  212 ||
+                                              controller.calibrationDetailModel
+                                                      .value?.statusId ==
+                                                  213 ||
+                                              controller.calibrationDetailModel
+                                                      .value?.statusId ==
+                                                  214 ||
+                                              controller.calibrationDetailModel
+                                                      .value?.statusId ==
+                                                  215
+                                          ? false
+                                          : true,
                                       child: Row(
                                         children: [
                                           Text(
@@ -686,8 +717,11 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                               // ),
                               ,
                               controller.calibrationDetailModel.value
-                                          ?.statusId ==
-                                      214
+                                              ?.statusId ==
+                                          214 ||
+                                      controller.calibrationDetailModel.value
+                                              ?.statusId ==
+                                          221
                                   ? Dimens.box0
                                   : Container(
                                       margin: Dimens.edgeInsets15,
