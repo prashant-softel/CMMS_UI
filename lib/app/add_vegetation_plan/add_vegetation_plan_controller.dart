@@ -195,7 +195,7 @@ class AddVegetationPlanController extends GetxController {
   void updateVegPlan() async {
     Map<int, List<Equipments>> equipmentMap = {};
 
-    // Iterate over the equipment list and accumulate equipments by their selected day
+   
     equipmentList.forEach((equipment) {
       equipment?.smbs?.forEach((smb) {
         if (smb.selectedDay != null) {

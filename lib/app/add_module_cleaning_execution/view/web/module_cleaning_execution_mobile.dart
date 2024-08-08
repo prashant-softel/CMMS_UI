@@ -75,13 +75,6 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                             .value?.plannedAt ??
                                         '',
                                   ),
-                                  JobDetailField(
-                                    title: 'Execution started by',
-                                    value: controller.mcExecutionDetailsModel
-                                            .value?.startedBy
-                                            .toString() ??
-                                        '',
-                                  ),
                                 ],
                               ),
                             ),
@@ -105,13 +98,13 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                   JobDetailField(
                                     title: 'Start Date Time',
                                     value: controller.mcExecutionDetailsModel
-                                            .value?.plannedBy ??
+                                            .value?.startDate ??
                                         '',
                                   ),
                                   JobDetailField(
-                                    title: 'Planning Date Time',
+                                    title: 'Execution started by',
                                     value: controller.mcExecutionDetailsModel
-                                            .value?.abandonedBy
+                                            .value?.startedBy
                                             .toString() ??
                                         '',
                                   ),
