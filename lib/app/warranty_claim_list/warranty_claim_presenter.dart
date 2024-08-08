@@ -3,6 +3,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
@@ -53,7 +54,18 @@ class WarrantyClaimPresenter {
     );
   }
 
- 
+  Future<List<HistoryModel>?> getHistory(
+    moduleType,
+    wcId,
+    facilityId,
+    isLoading,
+  ) async =>
+      await warrantyClaimUsecase.getHistory(
+        moduleType: moduleType,
+        wcId: wcId,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
 
   Future<List<BusinessListModel>> getBusinessList({
     required bool isLoading,

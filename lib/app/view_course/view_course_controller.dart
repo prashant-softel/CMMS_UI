@@ -19,7 +19,7 @@ class ViewCourseController extends GetxController {
   Stream<int> get facilityId$ => _facilityId.stream;
   Rx<TrainingCourseListModel> trainingCourse = TrainingCourseListModel().obs;
   RxBool isLoading = true.obs;
-
+  RxList<ImageDetails> imageDetails = <ImageDetails>[].obs;
   RxList<FileList?>? file_list = <FileList>[].obs;
 
   @override
@@ -59,6 +59,7 @@ class ViewCourseController extends GetxController {
       isLoading: isLoading.value,
     );
     trainingCourse.value = _courseDetails;
+    imageDetails.value = trainingCourse.value.imageDetails ?? [];
     isLoading.value = false;
   }
 

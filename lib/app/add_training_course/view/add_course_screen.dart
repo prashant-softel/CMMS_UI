@@ -1,5 +1,8 @@
 import 'package:cmms/app/add_training_course/add_course_controller.dart';
+import 'package:cmms/app/add_training_course/view/add_course_mobile.dart';
 import 'package:cmms/app/add_training_course/view/add_course_web.dart';
+import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
+import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,40 +16,36 @@ class AddCourseScreen extends GetView<AddCourseController> {
     return Scaffold(
       appBar: Responsive.isMobile(context)
           ? AppBar(
-              centerTitle: true,
-              elevation: 0,
+              title: HeadingProfileAppBar(
+                title: "Add Course",
+              ),
             )
           : null,
-      // drawer: //
-      //     (Responsive.isMobile(context) || Responsive.isTablet(context))
-      //         ? HomeDrawer()
-      //         : null,
+      drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
+          ? HomeDrawerMobile()
+          : null,
       body: Container(
-          width: Get.width,
-          height: Get.height,
-          child: Row(
-            children: [
-              // (Responsive.isMobile(context) || Responsive.isTablet(context))
-              //     ? Dimens.box0
-              //     : HomeDrawer(),
-              Expanded(
-                child: Column(
-                  children: [
-                    if (Responsive.isMobile(context))
-                      Expanded(
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: Text("Data Coming Soon......")),
-                      ),
-                    if (Responsive.isDesktop(context))
-                      Expanded(
-                        child: AddCourseWeb(),
-                      )
-                  ],
-                ),
+        width: Get.width,
+        height: Get.height,
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  if (Responsive.isMobile(context))
+                    Expanded(
+                      child: AddCourseMobile(),
+                    ),
+                  if (Responsive.isDesktop(context))
+                    Expanded(
+                      child: AddCourseWeb(),
+                    )
+                ],
               ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

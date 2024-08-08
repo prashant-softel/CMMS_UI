@@ -30,6 +30,8 @@ class InventoryDetailsModel {
     this.warrantyId,
     this.calibrationDueDate,
     this.manufacturerName,
+    this.expiry_date,
+    this.start_date,
     this.status,
     this.cost,
     this.supplierName,
@@ -47,6 +49,8 @@ class InventoryDetailsModel {
   String? parentName;
   String? customerName;
   String? manufacturerName;
+  String? start_date;
+  String? expiry_date;
   String? ownerName;
   String? operatorName;
   String? serialNumber;
@@ -67,6 +71,8 @@ class InventoryDetailsModel {
         categoryId: json["categoryId"],
         categoryName: json["categoryName"],
         manufacturerName: json['manufacturerName'],
+        start_date: json['start_date'],
+        expiry_date: json['expiry_date'],
         parentId: json["parentId"],
         parentName: json["parentName"],
         customerName: json["customerName"],
