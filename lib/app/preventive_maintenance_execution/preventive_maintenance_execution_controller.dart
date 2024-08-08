@@ -314,23 +314,24 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     List<TranferItems> items = [];
     rowItem.value.forEach((element) {
       TranferItems item = TranferItems(
-        assetItemID:
-            dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-        facilityID: pmtaskViewModel.value?.facility_id ?? 0,
-        fromActorID: scheduleId.value,
-        fromActorType: AppConstants.kTask,
-        mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-        mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
-        qty: int.tryParse(element[6]["value"] ?? '0') ?? 0,
-        refID: scheduleId.value,
-        refType: AppConstants.kTask,
-        remarks: "remarks",
-        toActorID: selectedItem?.assetsID ?? 0,
-        // dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-        toActorType: AppConstants.kInventory,
-        transaction_id:
-            dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
-      );
+          assetItemID:
+              dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+          facilityID: pmtaskViewModel.value?.facility_id ?? 0,
+          fromActorID: scheduleId.value,
+          fromActorType: AppConstants.kTask,
+          mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
+          mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
+          qty: int.tryParse(element[6]["value"] ?? '0') ?? 0,
+          refID: scheduleId.value,
+          refType: AppConstants.kTask,
+          remarks: "remarks",
+          toActorID: selectedItem?.assetsID ?? 0,
+          // dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+          toActorType: AppConstants.kInventory,
+          transaction_id:
+              dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
+          latitude: 0,
+          longitude: 0);
 
       items.add(item);
     });
