@@ -9,6 +9,7 @@ import 'package:cmms/app/view_mc_plan/view/mc_equipment_bottomsheet.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/mc_approve_dialog.dart';
 import 'package:cmms/app/widgets/mc_reject_dialog.dart';
+import 'package:cmms/app/widgets/veg_approve_dialog.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -473,7 +474,7 @@ class _ViewVegPlanMobileState extends State<ViewVegPlanMobile> {
                                   Dimens.boxHeight10,
                                   controller.vegPlanDetailsModel.value
                                                   ?.status ==
-                                              351 &&
+                                              702 &&
                                           varUserAccessModel.value.access_list!
                                                   .where((e) =>
                                                       e.feature_id ==
@@ -496,8 +497,11 @@ class _ViewVegPlanMobileState extends State<ViewVegPlanMobile> {
                                                 text: "Reject",
                                                 icon: Icons.close,
                                                 onPressed: () {
-                                                  Get.dialog(RejectMcPlan(
-                                                    id: controller.id.value,
+                                                  Get.dialog(ApproveVegPlan(
+                                                    id: controller
+                                                        .vegPlanDetailsModel
+                                                        .value!
+                                                        .planId,
                                                   ));
                                                 },
                                               ),
@@ -512,8 +516,11 @@ class _ViewVegPlanMobileState extends State<ViewVegPlanMobile> {
                                                 text: "Approve",
                                                 icon: Icons.check,
                                                 onPressed: () {
-                                                  Get.dialog(ApproveMcPlan(
-                                                    id: controller!.id.value,
+                                                  Get.dialog(ApproveVegPlan(
+                                                    id: controller
+                                                        .vegPlanDetailsModel
+                                                        .value!
+                                                        .planId,
                                                   ));
                                                 },
                                               ),
