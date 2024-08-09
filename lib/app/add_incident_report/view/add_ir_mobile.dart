@@ -1,4 +1,6 @@
 import 'package:cmms/app/add_incident_report/add_incident_report_controller.dart';
+import 'package:cmms/app/add_incident_report/view/detailsOfInjuredPersonMobile.dart';
+import 'package:cmms/app/add_incident_report/view/web/add_incident_report_content_web.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -361,6 +363,85 @@ class _IRMobileState extends State<IRMobile> {
                                   )
                                 : Container(),
                             Dimens.boxHeight2,
+                            DetailsOfInjuredPersonMobile(),
+                            Dimens.boxHeight15,
+
+                            Text(
+                              "Investigation",
+                              style: Styles.blue700,
+                            ),
+                            Dimens.boxHeight15,
+
+                            CustomRichTextMobile(
+                              includeAsterisk: false,
+                              title:
+                                  "What task or type of job was being performed",
+                            ),
+                            Dimens.boxHeight3,
+                            investigationTextfields(context, controller, 1),
+                            Dimens.boxHeight15,
+
+                            CustomRichTextMobile(
+                              includeAsterisk: false,
+                              title:
+                                  "Was the person involved in these activities trained and if so, when?",
+                            ),
+                            Dimens.boxHeight3,
+                            investigationTextfields(context, controller, 2),
+                            Dimens.boxHeight15,
+
+                            CustomRichTextMobile(
+                              includeAsterisk: false,
+                              title:
+                                  "Was the person authorized/licensed to carry out that type of work / use machinery?",
+                            ),
+                            Dimens.boxHeight3,
+                            investigationTextfields(context, controller, 3),
+                            Dimens.boxHeight15,
+
+                            CustomRichTextMobile(
+                              includeAsterisk: false,
+                              title:
+                                  "What instructions had been given? By Whom?",
+                            ),
+                            Dimens.boxHeight3,
+                            investigationTextfields(context, controller, 4),
+                            Dimens.boxHeight15,
+
+                            CustomRichTextMobile(
+                              includeAsterisk: false,
+                              title:
+                                  "What safety equipment and /protection was used/ available?",
+                            ),
+                            Dimens.boxHeight3,
+                            investigationTextfields(context, controller, 5),
+                            Dimens.boxHeight15,
+
+                            CustomRichTextMobile(
+                              includeAsterisk: false,
+                              title:
+                                  "Were correct safe procedures being observed?",
+                            ),
+                            Dimens.boxHeight3,
+                            investigationTextfields(context, controller, 6),
+                            Dimens.boxHeight15,
+
+                            CustomRichTextMobile(
+                              includeAsterisk: false,
+                              title:
+                                  "What unsafe condition contributed to the incident?",
+                            ),
+                            Dimens.boxHeight3,
+                            investigationTextfields(context, controller, 7),
+                            Dimens.boxHeight15,
+
+                            CustomRichTextMobile(
+                              includeAsterisk: false,
+                              title:
+                                  "Did unsafe act/s cause the incident? If yes. Mention the same?",
+                            ),
+                            Dimens.boxHeight3,
+                            investigationTextfields(context, controller, 8),
                           ],
                         ),
                       ),
@@ -410,4 +491,62 @@ Widget buildRadioButton(String severity, Color color, Color textColor,
       ),
     );
   });
+}
+
+investigationTextfields(BuildContext context,
+    AddIncidentReportController controller, int position) {
+  return CustomTextfieldMobile(
+    width: MediaQuery.of(context).size.width / 1.1,
+    textController: position == 1
+        ? controller.typeOfJbTextCtrlr
+        : position == 2
+            ? controller.personInvolvedTextCtrlr
+            : position == 3
+                ? controller.personAuthorizedInvolvedTextCtrlr
+                : position == 4
+                    ? controller.instructionsTextCtrlr
+                    : position == 5
+                        ? controller.SafetyEquipmetsTextCtrlr
+                        : position == 6
+                            ? controller.correctSafeTextCtrlr
+                            : position == 7
+                                ? controller.unsafeConditionsTextCtrlr
+                                : position == 8
+                                    ? controller.unsafeActCauseTextCtrlr
+                                    : null,
+    focusNode: position == 1
+        ? controller.typeOfJbFocusNode
+        : position == 2
+            ? controller.personInvolvedFocusNode
+            : position == 3
+                ? controller.personAuthorizedInvolvedFocusNode
+                : position == 4
+                    ? controller.instructionsFocusNode
+                    : position == 5
+                        ? controller.safetyEquipmentsFocusNode
+                        : position == 6
+                            ? controller.correctSafeFocusNode
+                            : position == 7
+                                ? controller.unsafeConditionsFocusNode
+                                : position == 8
+                                    ? controller.unsafeActCauseFocusNode
+                                    : null,
+    scroll: position == 1
+        ? controller.typeOfJbScrollController
+        : position == 2
+            ? controller.personInvolvedScrollController
+            : position == 3
+                ? controller.personAuthorizedInvolvedScrollController
+                : position == 4
+                    ? controller.instructionsScrollController
+                    : position == 5
+                        ? controller.safetyEquipmentsScrollController
+                        : position == 6
+                            ? controller.correctSafeScrollController
+                            : position == 7
+                                ? controller.unsafeConditionsScrollController
+                                : position == 8
+                                    ? controller.unsafeActCauseScrollController
+                                    : null,
+  );
 }
