@@ -173,33 +173,29 @@ class MobileObservationPmExecutionViewDialog
                                                     // ),
                                                     if (mapData['key'] ==
                                                         "observation")
-                                                      Row(
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
                                                           Text(
                                                             'Observation:',
                                                             style: Styles
                                                                 .appDarkGrey12,
                                                           ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child:
-                                                                LoginCustomTextfield(
-                                                              width:
-                                                                  (Get.width *
-                                                                      .4),
-                                                              textController:
-                                                                  new TextEditingController(
-                                                                      text: mapData[
-                                                                              "value"] ??
-                                                                          ''),
-                                                              onChanged: (txt) {
-                                                                mapData["value"] =
-                                                                    txt;
-                                                              },
-                                                              maxLine: 5,
-                                                            ),
+                                                          LoginCustomTextfield(
+                                                            width: (Get.width *
+                                                                .7),
+                                                            textController:
+                                                                new TextEditingController(
+                                                                    text: mapData[
+                                                                            "value"] ??
+                                                                        ''),
+                                                            onChanged: (txt) {
+                                                              mapData["value"] =
+                                                                  txt;
+                                                            },
+                                                            maxLine: 5,
                                                           ),
                                                         ],
                                                       ),
@@ -413,7 +409,8 @@ class MobileObservationPmExecutionViewDialog
                           ),
                         ),
                         Container(
-                          margin: Dimens.edgeInsets10,
+                          margin:
+                              EdgeInsets.only(left: 10, right: 10, bottom: 5),
                           child: Text(
                             "Material Used For ",
                             style: Styles.blue700,
@@ -423,7 +420,7 @@ class MobileObservationPmExecutionViewDialog
                           width: Get.width,
                           child: Obx(
                             () => Container(
-                              margin: Dimens.edgeInsets10,
+                              margin: EdgeInsets.only(left: 10, right: 10),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color:
@@ -460,16 +457,247 @@ class MobileObservationPmExecutionViewDialog
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(
-                                                '${mapData['key'] ?? ''}:',
-                                                style: Styles.appDarkGrey12,
-                                              ),
-                                              Flexible(
-                                                child: Text(
-                                                    mapData['value'] ?? '',
-                                                    style:
-                                                        Styles.appDarkBlue12),
-                                              ),
+                                              if (mapData['key'] == "Drop_down")
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Material Name:',
+                                                      style:
+                                                          Styles.appDarkGrey12,
+                                                    ),
+                                                    DropdownWebStock(
+                                                      width: (Get.width * .9),
+                                                      dropdownList: controller
+                                                          .cmmrsItems!
+                                                          .where((p0) {
+                                                            return !controller
+                                                                .rowItem
+                                                                .map((p0) => p0[
+                                                                    0]["value"])
+                                                                .contains(
+                                                                    p0!.name);
+                                                          })
+                                                          .toList()
+                                                          .obs,
+                                                      selectedValue:
+                                                          mapData["value"],
+                                                      onValueChanged: (list,
+                                                          selectedValue) {
+                                                        // print('paifcghb:${controller.assetList}');
+                                                        // print({selectedValue: selectedValue});
+                                                        mapData["value"] =
+                                                            selectedValue;
+                                                        controller.dropdownMapperData[
+                                                                selectedValue] =
+                                                            list.firstWhere(
+                                                                (element) =>
+                                                                    element
+                                                                        .name ==
+                                                                    selectedValue,
+                                                                orElse: null);
+                                                        Future.delayed(
+                                                            Duration.zero, () {
+                                                          setState(() {});
+                                                        });
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                              if (mapData['key'] == "Sr_No")
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Sr No.:",
+                                                      style:
+                                                          Styles.appDarkGrey12,
+                                                    ),
+                                                    Text(
+                                                        "${controller.dropdownMapperData[record[0]['value']]?.serial_number ?? ""}"),
+                                                  ],
+                                                ),
+                                              if (mapData['key'] == "code")
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "MDM Code:",
+                                                      style:
+                                                          Styles.appDarkGrey12,
+                                                    ),
+                                                    Text(
+                                                        "${controller.dropdownMapperData[record[0]['value']]?.asset_MDM_code ?? ""}"),
+                                                  ],
+                                                ),
+                                              if (mapData['key'] ==
+                                                  "Material_Type")
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Material Type:",
+                                                      style:
+                                                          Styles.appDarkGrey12,
+                                                    ),
+                                                    Text(
+                                                        "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}"),
+                                                  ],
+                                                ),
+                                              if (mapData['key'] ==
+                                                  "Issued_Qty")
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Issued Qty:",
+                                                      style:
+                                                          Styles.appDarkGrey12,
+                                                    ),
+                                                    Text(
+                                                        "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}"),
+                                                  ],
+                                                ),
+                                              if (mapData['key'] == "Used_Qty")
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Consumed By All:",
+                                                      style:
+                                                          Styles.appDarkGrey12,
+                                                    ),
+                                                    Text(
+                                                        "${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}"),
+                                                  ],
+                                                ),
+                                              if (mapData['key'] ==
+                                                  "Consumed_Qty")
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Consumed By This: ",
+                                                      style:
+                                                          Styles.appDarkGrey12,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 10),
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors
+                                                                  .black26,
+                                                              offset:
+                                                                  const Offset(
+                                                                5.0,
+                                                                5.0,
+                                                              ),
+                                                              blurRadius: 5.0,
+                                                              spreadRadius: 1.0,
+                                                            ),
+                                                          ],
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          width:
+                                                              (Get.width * .4),
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          inputFormatters: <TextInputFormatter>[
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly
+                                                          ],
+                                                          maxLine: 1,
+                                                          enabled: controller
+                                                                          .listMrsByTaskId!
+                                                                          .value
+                                                                          .firstWhereOrNull(
+                                                                            (element) =>
+                                                                                element?.jobCardId != 0 ||
+                                                                                element?.pmId != 0,
+                                                                          )
+                                                                          ?.mrs_return_ID ==
+                                                                      0 &&
+                                                                  controller
+                                                                          .allTrue
+                                                                          .value ==
+                                                                      false
+                                                              ? true
+                                                              : false,
+                                                          textController:
+                                                              new TextEditingController(
+                                                                  text: mapData[
+                                                                          "value"] ??
+                                                                      ''),
+                                                          onChanged: (txt) {
+                                                            int intialQty =
+                                                                int.tryParse(mapData[
+                                                                            'value'] ??
+                                                                        "") ??
+                                                                    0;
+
+                                                            num issuedQty = controller
+                                                                    .dropdownMapperData[
+                                                                        record[0]
+                                                                            [
+                                                                            'value']]
+                                                                    ?.issued_qty ??
+                                                                0;
+                                                            num usedQty = controller
+                                                                    .dropdownMapperData[
+                                                                        record[0]
+                                                                            [
+                                                                            'value']]
+                                                                    ?.used_qty ??
+                                                                0;
+                                                            num intiAllowedQty =
+                                                                usedQty -
+                                                                    intialQty;
+
+                                                            num maxAllowedQty =
+                                                                issuedQty -
+                                                                    intiAllowedQty;
+                                                            if (txt
+                                                                .isNotEmpty) {
+                                                              num enteredValue =
+                                                                  num.tryParse(
+                                                                          txt) ??
+                                                                      0;
+                                                              if (enteredValue >
+                                                                  maxAllowedQty) {
+                                                                // If the entered quantity exceeds the allowed maximum, truncate it
+                                                                setState(() {
+                                                                  txt = intialQty
+                                                                      .toString();
+                                                                  mapData['value'] =
+                                                                      intialQty
+                                                                          .toString();
+                                                                });
+                                                                // Optionally, you can show an error message or handle the situation
+                                                                Fluttertoast
+                                                                    .showToast(
+                                                                        msg:
+                                                                            "Enter appropriate consumed quantity.");
+                                                              }
+                                                            } else if (txt
+                                                                .isEmpty) {
+                                                              txt = intialQty
+                                                                  .toString();
+                                                            }
+                                                            mapData["value"] =
+                                                                txt;
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
                                             ],
                                           ),
                                         );

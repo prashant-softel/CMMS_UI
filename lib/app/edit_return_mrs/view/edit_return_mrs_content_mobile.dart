@@ -667,7 +667,7 @@ class EditReturnMrsContentMobile extends GetView<EditMrsReturnController> {
                                                                                     label: '',
                                                                                     message: '',
                                                                                     onPress: () {
-                                                                                      controller.rowFaultyItem.remove(controller.rowItem.value[index]);
+                                                                                      controller.rowFaultyItem.remove(controller.rowFaultyItem.value[index]);
                                                                                     },
                                                                                   )
                                                                                 ],

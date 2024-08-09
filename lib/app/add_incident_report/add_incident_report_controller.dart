@@ -2331,4 +2331,83 @@ class AddIncidentReportController extends GetxController {
     Get.toNamed(Routes.viewIncidentReportScreen, arguments: {"irId": id});
     print('Argument$id');
   }
+
+  Future pickDateTime(BuildContext context, String type) async {
+    TextEditingController dateTimeController;
+    Rx<DateTime> selectedDateTime;
+
+    // Determine which controller and DateTime to use based on the type
+    if (type == 'incident') {
+      dateTimeController = startDateTimeCtrlr;
+      selectedDateTime = selectedBreakdownTime;
+    } else if (type == 'restoration') {
+      dateTimeController = actionTakenDateTimeCtrlr;
+      selectedDateTime = selectedActionTakenTime;
+    } else {
+      return;
+    }
+
+    var dateTime = selectedDateTime.value;
+    final date = await pickDate(context);
+    if (date == null) {
+      return;
+    }
+
+    final time = await pickTime(context);
+    if (time == null) {
+      return;
+    }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    selectedDateTime.value = dateTime;
+    dateTimeController
+      ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: dateTimeController.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+  }
+
+  Future<DateTime?> pickDate(BuildContext context) async {
+    DateTime? dateTime = selectedtargetDateTime.value;
+
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 10),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime(BuildContext context) async {
+    DateTime dateTime = selectedtargetDateTime.value;
+
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
+  }
 }
