@@ -67,10 +67,6 @@ class _IRMobileState extends State<IRMobile> {
                             Dimens.boxHeight2,
                             CustomTextfieldMobile(
                               width: MediaQuery.of(context).size.width / 1.1,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
                               textController: controller.titleTextCtrlr,
                               errorText: controller.isTitleTextInvalid.value
                                   ? "Required field"
@@ -90,10 +86,6 @@ class _IRMobileState extends State<IRMobile> {
                             Dimens.boxHeight2,
                             CustomTextfieldMobile(
                               width: MediaQuery.of(context).size.width / 1.1,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
                               textController:
                                   controller.incidentreportDescriptionCtrlr,
                               errorText:
@@ -285,15 +277,17 @@ class _IRMobileState extends State<IRMobile> {
                                   title: "ESI Applicability Remark: ",
                                 ),
                                 Dimens.boxWidth2,
-                                Obx(() => Switch(
-                                      activeColor: Colors.green,
-                                      value: controller
-                                          .esiApplicabilityValue.value,
-                                      onChanged: (value) {
-                                        controller.esiApplicabilityValue.value =
-                                            value;
-                                      },
-                                    )),
+                                Obx(
+                                  () => Switch(
+                                    activeColor: Colors.green,
+                                    value:
+                                        controller.esiApplicabilityValue.value,
+                                    onChanged: (value) {
+                                      controller.esiApplicabilityValue.value =
+                                          value;
+                                    },
+                                  ),
+                                ),
                               ],
                             ),
                             Dimens.boxHeight2,
@@ -301,28 +295,72 @@ class _IRMobileState extends State<IRMobile> {
                                 ? CustomTextfieldMobile(
                                     width:
                                         MediaQuery.of(context).size.width / 1.1,
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: <TextInputFormatter>[
-                                      FilteringTextInputFormatter.digitsOnly
-                                    ],
                                     textController: controller
                                         .ESIApplicabilityRemarkTextCtrlr,
-                                    errorText: controller
-                                            .isESIApplicabilityInvalid.value
-                                        ? "Required field"
-                                        : null,
-                                    onChanged: (value) {
-                                      if (value.trim().length > 0) {
-                                        controller.isESIApplicabilityInvalid
-                                            .value = false;
-                                      } else {
-                                        controller.isESIApplicabilityInvalid
-                                            .value = true;
-                                      }
-                                    },
                                   )
                                 : Container(),
-                            Dimens.boxHeight15,
+                            // Dimens.boxHeight2,
+
+                            Row(
+                              children: [
+                                CustomRichTextMobile(
+                                  includeAsterisk: false,
+                                  title: "Legal Applicability Remark: ",
+                                ),
+                                Dimens.boxWidth2,
+                                Obx(
+                                  () => Switch(
+                                    activeColor: Colors.green,
+                                    value: controller
+                                        .legalApplicabilityValue.value,
+                                    onChanged: (value) {
+                                      controller.legalApplicabilityValue.value =
+                                          value;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Dimens.boxHeight2,
+                            controller.legalApplicabilityValue == true
+                                ? CustomTextfieldMobile(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.1,
+                                    textController: controller
+                                        .legalApplicabilityRemarkTextCtrlr,
+                                  )
+                                : Container(),
+                            Dimens.boxHeight2,
+                            Row(
+                              children: [
+                                CustomRichTextMobile(
+                                  includeAsterisk: false,
+                                  title: "Insurance Applicable: ",
+                                ),
+                                Dimens.boxWidth2,
+                                Obx(
+                                  () => Switch(
+                                    activeColor: Colors.green,
+                                    value: controller
+                                        .insuranceApplicableValue.value,
+                                    onChanged: (value) {
+                                      controller.insuranceApplicableValue
+                                          .value = value;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Dimens.boxHeight2,
+                            controller.insuranceApplicableValue == true
+                                ? CustomTextfieldMobile(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.1,
+                                    textController:
+                                        controller.insuranceAvailableTextCtrlr,
+                                  )
+                                : Container(),
+                            Dimens.boxHeight2,
                           ],
                         ),
                       ),
