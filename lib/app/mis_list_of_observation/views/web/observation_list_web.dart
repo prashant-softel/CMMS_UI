@@ -23,10 +23,10 @@ class ObservationListWeb extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ObservationListWeb> createState() => _StatutoryWebState();
+  State<ObservationListWeb> createState() => _ObservationWebState();
 }
 
-class _StatutoryWebState extends State<ObservationListWeb> {
+class _ObservationWebState extends State<ObservationListWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ObservationListController>(
@@ -517,11 +517,15 @@ class ObservationListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                            color: ColorValues.addNewColor,
+                            color: ObservationListDetails!.status_code == 551
+                                ? ColorValues.appGreenColor
+                                : ObservationListDetails.status_code == 554
+                                    ? ColorValues.yellowColor
+                                    : ColorValues.appRedColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '${ObservationListDetails?.short_status}',
+                            '${ObservationListDetails.short_status}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),
@@ -550,30 +554,42 @@ class ObservationListDataSource extends DataTableSource {
                               }
                             },
                           ),
-                          TableActionButton(
-                            color: ColorValues.editColor,
-                            icon: Icons.edit,
-                            message: 'Edit',
-                            onPress: () {
-                              // controller.clearStoreData();
-                              int obsId = ObservationListDetails?.id ?? 0;
-                              if (obsId != 0) {
-                                Get.toNamed(
-                                  Routes.createObservation,
-                                  arguments: {
-                                    'obsId': ObservationListDetails?.id,
+                          ObservationListDetails!.status_code != 552
+                              ? TableActionButton(
+                                  color: ColorValues.editColor,
+                                  icon: Icons.edit,
+                                  message: 'Edit',
+                                  onPress: () {
+                                    // controller.clearStoreData();
+                                    int obsId = ObservationListDetails?.id ?? 0;
+                                    if (obsId != 0) {
+                                      Get.toNamed(
+                                        Routes.createObservation,
+                                        arguments: {
+                                          'obsId': ObservationListDetails?.id,
+                                        },
+                                      );
+                                    }
                                   },
-                                );
-                              }
-                            },
-                          ),
+                                )
+                              : Dimens.box0,
                         ],
                       )
                     : Text(value.toString()),
           ),
         );
       }).toList(),
-      onSelectChanged: (_) {},
+      onSelectChanged: (_) {
+        int obsId = ObservationListDetails?.id ?? 0;
+        if (obsId != 0) {
+          Get.toNamed(
+            Routes.viewObservationScreen,
+            arguments: {
+              'obsId': ObservationListDetails?.id,
+            },
+          );
+        }
+      },
     );
   }
 
