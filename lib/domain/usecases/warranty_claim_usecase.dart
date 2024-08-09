@@ -3,6 +3,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
@@ -28,8 +29,8 @@ class WarrantyClaimUsecase {
         isLoading,
       );
 
-   Future<InventoryDetailsModel?> getInventoryDetail({
-    bool? isLoading,  
+  Future<InventoryDetailsModel?> getInventoryDetail({
+    bool? isLoading,
     required int id,
   }) async =>
       await _repository.getInventoryDetail(
@@ -37,7 +38,7 @@ class WarrantyClaimUsecase {
         isLoading: isLoading ?? false,
       );
 
-   Future<Map<String, dynamic>> saveAsDraft({
+  Future<Map<String, dynamic>> saveAsDraft({
     createWarrantyClaim,
     bool? isLoading,
   }) async =>
@@ -60,17 +61,30 @@ class WarrantyClaimUsecase {
     );
   }
 
+  Future<List<HistoryModel>?> getHistory({
+    moduleType,
+    wcId,
+    facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getHistory(
+        moduleType,
+        wcId,
+        facilityId,
+        isLoading,
+      );
+
   Future<List<InventoryCategoryModel2?>?> getAffectedPartList({
-     bool? isLoading,
-     int? facilityId,
+    bool? isLoading,
+    int? facilityId,
     String? auth,
     // int? blockId,
     // required String categoryIds,
   }) async {
     return _repository.getAffectedPartList(
-       auth,
-        facilityId,
-        isLoading,
+      auth,
+      facilityId,
+      isLoading,
       // blockId: blockId,
       // categoryIds: categoryIds,
     );
@@ -82,10 +96,9 @@ class WarrantyClaimUsecase {
     required int? businessType,
   }) async {
     return _repository.getBusinessList(
-      isLoading: isLoading,
-      businessType: businessType,
-      facilityId: facilityId
-    );
+        isLoading: isLoading,
+        businessType: businessType,
+        facilityId: facilityId);
   }
 
   Future<List<CurrencyListModel>> getUnitCurrencyList(
@@ -104,7 +117,7 @@ class WarrantyClaimUsecase {
     );
   }
 
-   Future<List<EmployeeListModel2>> getEmployeesList(
+  Future<List<EmployeeListModel2>> getEmployeesList(
       {required bool isLoading, required int? facility_id}) async {
     return _repository.getEmployeesList(
       isLoading: isLoading,
@@ -138,7 +151,6 @@ class WarrantyClaimUsecase {
       categoryIds: categoryIds,
       start_date: start_date,
       end_date: end_date,
-
     );
   }
 

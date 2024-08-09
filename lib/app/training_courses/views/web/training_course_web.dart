@@ -450,12 +450,9 @@ class TrainingListDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.CourseNameFilterText.value.toLowerCase()) &&
+          (TrainingCourse?.groupName ?? '').toString().toLowerCase().contains(
+              controller.CategoryNameFilterText.value.toLowerCase()) &&
           (TrainingCourse?.categoryName ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(
-                  controller.CategoryNameFilterText.value.toLowerCase()) &&
-          (TrainingCourse?.groupName ?? '')
               .toString()
               .toLowerCase()
               .contains(controller.GroupNameFilterText.value.toLowerCase()) &&
@@ -557,7 +554,7 @@ class TrainingListDataSource extends DataTableSource {
                                   TableActionButton(
                                     color: ColorValues.deleteColor,
                                     icon: Icons.delete,
-                                    message: 'Edit',
+                                    message: 'Delete',
                                     onPress: () {
                                       controller.isDeleteDialog(
                                         courseName: TrainingCourse?.name,
