@@ -381,7 +381,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     // Get the current location
     Position position = await Geolocator.getCurrentPosition();
     print('Current Position: ${position.toString()}');
-    getAddressFromLatLng(position);
+    //  getAddressFromLatLng(position);
   }
 
   Future<void> getAddressFromLatLng(Position position) async {
