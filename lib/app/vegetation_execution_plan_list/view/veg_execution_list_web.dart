@@ -111,7 +111,7 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                                         Row(
                                           children: [
                                             CustomRichText(title: 'Date Range'),
-                                            Dimens.boxWidth10,
+                                            Dimens.boxWidth2,
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
                                                       .size
