@@ -236,7 +236,13 @@ class SetEquipmentDialog extends GetView {
                         backgroundColor: ColorValues.greenColor,
                         text: 'Submit',
                         onPressed: () {
-                          controller.createMcPlan();
+                          controller.isFormInvalid.value = false;
+                          controller.checkFromModule();
+                          if (controller.isFormInvalid.value) {
+                            return;
+                          } else {
+                            controller.createMcPlan();
+                          }
                         },
                       ),
                     ),

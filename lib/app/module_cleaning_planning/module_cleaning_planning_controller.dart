@@ -362,7 +362,8 @@ class ModuleCleaningPlanningController extends GetxController {
             selectedCleaningId =
                 int.tryParse(cleaningType[cleaningTypeIndex].id ?? '0') ?? 0;
             selectedCleaningType.value = value;
-            isSelectedfrequency.value = true;
+            isSelectedCleaningType.value = true;
+
           } else {
             selectedCleaningId = 0;
           }
@@ -454,23 +455,34 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   void checkFromModule() {
-    if (mcTitelCtrlr.text.trim().length == 0) {
+    if (mcTitelCtrlr.text.trim()=='') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
     }
-    if (selectedfrequency == '') {
+    if (selectedfrequencyId == 0) {
       isSelectedfrequency.value = false;
       isFormInvalid.value = true;
     }
-    if (durationInDayCtrlr.text.trim().length == 0) {
+    
+     if (selectedCleaningId == 0) {
+      isSelectedCleaningType.value = false;
+      isFormInvalid.value = true;
+    }
+      if (selectedAssignedToId == 0) {
+      isAssignedToSelected.value = false;
+      isFormInvalid.value = true;
+    }
+
+
+    if (durationInDayCtrlr.text.trim()=='') {
       isEstimatedInvalid.value = true;
       isFormInvalid.value = true;
     }
 
-    if (startDateTimeCtrlrBuffer.text.trim().length == 0) {
-      isstartdateInvalid.value = true;
-      isFormInvalid = false.obs;
-    }
+    // if (startDateTimeCtrlrBuffer.text.trim().length == 0) {
+    //   isstartdateInvalid.value = true;
+    //   isFormInvalid = false.obs;
+    // }
     if (validTillTimeCtrlr.text.trim().length == 0) {
       isstartdateInvalid.value = true;
       isFormInvalid = false.obs;
