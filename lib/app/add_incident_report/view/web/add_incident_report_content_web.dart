@@ -5824,7 +5824,8 @@ class DetailsOfOtherPerson extends StatelessWidget {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: Obx(
-                                                () => IgnorePointer(
+                                                () => 
+                                                IgnorePointer(
                                                     ignoring: controller
                                                                 .incidentReportDetailsModel
                                                                 .value
@@ -5889,7 +5890,8 @@ class DetailsOfOtherPerson extends StatelessWidget {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                 ),
-                                                child: Obx(() => IgnorePointer(
+                                                child: Obx(() =>
+                                                 IgnorePointer(
                                                       ignoring: controller
                                                                   .incidentReportDetailsModel
                                                                   .value
@@ -5945,7 +5947,8 @@ class DetailsOfOtherPerson extends StatelessWidget {
                                                               5),
                                                     ),
                                                     child:
-                                                        Obx(() => IgnorePointer(
+                                                        Obx(() =>
+                                                         IgnorePointer(
                                                               ignoring: controller
                                                                           .incidentReportDetailsModel
                                                                           .value

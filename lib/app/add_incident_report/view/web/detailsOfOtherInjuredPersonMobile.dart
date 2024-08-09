@@ -6,22 +6,23 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-class DetailsOfInjuredPersonMobile extends StatefulWidget {
-  DetailsOfInjuredPersonMobile({
+class DetailsOfOtherInjuredPersonMobile extends StatefulWidget {
+  DetailsOfOtherInjuredPersonMobile({
     super.key,
   });
 
   @override
-  State<DetailsOfInjuredPersonMobile> createState() =>
-      _DetailsOfInjuredPersonMobileState();
+  State<DetailsOfOtherInjuredPersonMobile> createState() =>
+      _DetailsOfOtherInjuredPersonMobileState();
 }
 
-class _DetailsOfInjuredPersonMobileState
-    extends State<DetailsOfInjuredPersonMobile> {
+class _DetailsOfOtherInjuredPersonMobileState
+    extends State<DetailsOfOtherInjuredPersonMobile> {
   final AddIncidentReportController controller = Get.find();
 
   @override
@@ -33,14 +34,15 @@ class _DetailsOfInjuredPersonMobileState
         children: [
           Row(
             children: [
+              Dimens.boxHeight15,
               Text(
-                "Details of Injured Person",
+                "Details of Other Injured Person",
                 style: Styles.blue700,
               ),
               Spacer(),
               GestureDetector(
                 onTap: () {
-                  controller.addDetailsOfInjuredPersonRowItem();
+                  controller.addDetailsOfOtherInjuredPersonRowItem();
                 },
                 child: Container(
                   height: 25,
@@ -69,7 +71,7 @@ class _DetailsOfInjuredPersonMobileState
           Dimens.boxHeight5,
           ListView.builder(
             shrinkWrap: true,
-            itemCount: controller.rowInjuredPersonItem.length,
+            itemCount: controller.rowOtherInjuredPersonItem.length,
             itemBuilder: (context, index) {
               return Card(
                 color: Color.fromARGB(255, 232, 239, 242),
@@ -82,7 +84,7 @@ class _DetailsOfInjuredPersonMobileState
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: controller.rowInjuredPersonItem[index]
+                    children: controller.rowOtherInjuredPersonItem[index]
                         .map<Widget>((mapData) {
                       return Column(
                         children: [
@@ -176,7 +178,7 @@ class _DetailsOfInjuredPersonMobileState
                                                               .toString();
                                                       // Find the corresponding row in the rowInjuredPersonItem list
                                                       final row = controller
-                                                          .rowInjuredPersonItem
+                                                          .rowOtherInjuredPersonItem
                                                           .firstWhere((row) =>
                                                               row[0]['value'] ==
                                                               selectedValue);
@@ -199,11 +201,11 @@ class _DetailsOfInjuredPersonMobileState
                                     ],
                                   ),
                                 )
-                              : (mapData['key'] == "Gender")
+                              : (mapData['key'] == "Gender ")
                                   ? Padding(
                                       padding: const EdgeInsets.only(
                                           left: 10, right: 10, top: 10),
-                                      child: Row(
+                                      child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
@@ -214,37 +216,65 @@ class _DetailsOfInjuredPersonMobileState
                                           ),
                                           Column(
                                             children: [
-                                              Text(
-                                                "${mapData["value"]}",
-                                              ),
+                                              IgnorePointer(
+                                                  ignoring: controller
+                                                              .incidentReportDetailsModel
+                                                              .value
+                                                              ?.status ==
+                                                          183
+                                                      ? true
+                                                      : false,
+                                                  child: DropdownWebStock(
+                                                    // width:
+                                                    //     MediaQuery.of(context)
+                                                    //             .size
+                                                    //             .width /
+                                                    //         4,
+                                                    dropdownList:
+                                                        controller.genderList,
+                                                    selectedValue:
+                                                        mapData["value"],
+                                                    onValueChanged:
+                                                        (list, selectedValue) {
+                                                      print({
+                                                        selectedValue:
+                                                            selectedValue
+                                                      });
+                                                      mapData["value"] =
+                                                          selectedValue;
+                                                      controller.dropdownGenderMapperData[
+                                                              selectedValue] =
+                                                          list.firstWhere(
+                                                              (element) =>
+                                                                  element
+                                                                      .name ==
+                                                                  selectedValue,
+                                                              orElse: null);
+                                                    },
+                                                  )),
                                             ],
                                           ),
                                         ],
                                       ),
                                     )
                                   : (mapData['key'] == "Action ")
-                                      ? Padding(
-                                          padding: EdgeInsets.only(top: 10),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              TableActionButton(
-                                                color: ColorValues.appRedColor,
-                                                icon: Icons.delete,
-                                                label: '',
-                                                message: '',
-                                                onPress: () {
-                                                  controller
-                                                      .rowInjuredPersonItem
-                                                      .remove(controller
-                                                          .rowInjuredPersonItem
-                                                          .value[index]);
-                                                },
-                                              )
-                                            ],
+                                      ? Center(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 5),
+                                            child: TableActionButton(
+                                              color: ColorValues.appRedColor,
+                                              icon: Icons.delete,
+                                              label: '',
+                                              message: '',
+                                              onPress: () {
+                                                controller
+                                                    .rowOtherInjuredPersonItem
+                                                    .remove(controller
+                                                        .rowOtherInjuredPersonItem
+                                                        .value[index]);
+                                              },
+                                            ),
                                           ),
                                         )
                                       : (mapData['key'] == "Trade/Designation ")
@@ -257,15 +287,30 @@ class _DetailsOfInjuredPersonMobileState
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        "Trade/Designation: ",
-                                                      ),
-                                                      Text(
-                                                        "${mapData["value"]}",
-                                                      ),
-                                                    ],
+                                                  Text(
+                                                    "Trade/Designation: ",
+                                                  ),
+                                                  IgnorePointer(
+                                                    ignoring: controller
+                                                                .incidentReportDetailsModel
+                                                                .value
+                                                                ?.status ==
+                                                            183
+                                                        ? true
+                                                        : false,
+                                                    child: LoginCustomTextfield(
+                                                      keyboardType:
+                                                          TextInputType.text,
+                                                      maxLine: 1,
+                                                      textController:
+                                                          new TextEditingController(
+                                                              text: mapData[
+                                                                      "value"] ??
+                                                                  ''),
+                                                      onChanged: (txt) {
+                                                        mapData["value"] = txt;
+                                                      },
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -277,7 +322,7 @@ class _DetailsOfInjuredPersonMobileState
                                                           left: 10,
                                                           right: 10,
                                                           top: 10),
-                                                  child: Row(
+                                                  child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
                                                     crossAxisAlignment:
@@ -287,9 +332,31 @@ class _DetailsOfInjuredPersonMobileState
                                                       Text(
                                                         "Address: ",
                                                       ),
-                                                      Text(
-                                                        "${mapData["value"]}",
-                                                      ),
+                                                      IgnorePointer(
+                                                        ignoring: controller
+                                                                    .incidentReportDetailsModel
+                                                                    .value
+                                                                    ?.status ==
+                                                                183
+                                                            ? true
+                                                            : false,
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .text,
+                                                          maxLine: 1,
+                                                          textController:
+                                                              new TextEditingController(
+                                                                  text: mapData[
+                                                                          "value"] ??
+                                                                      ''),
+                                                          onChanged: (txt) {
+                                                            mapData["value"] =
+                                                                txt;
+                                                          },
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
                                                 )
@@ -479,7 +546,7 @@ class _DetailsOfInjuredPersonMobileState
                                                                       left: 10,
                                                                       right: 10,
                                                                       top: 10),
-                                                              child: Row(
+                                                              child: Column(
                                                                 mainAxisAlignment:
                                                                     MainAxisAlignment
                                                                         .start,
@@ -490,9 +557,32 @@ class _DetailsOfInjuredPersonMobileState
                                                                   Text(
                                                                     "work experience: ",
                                                                   ),
-                                                                  Text(
-                                                                    "${mapData["value"]}",
-                                                                  ),
+                                                                  IgnorePointer(
+                                                                    ignoring: controller.incidentReportDetailsModel.value?.status ==
+                                                                            183
+                                                                        ? true
+                                                                        : false,
+                                                                    child:
+                                                                        LoginCustomTextfield(
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .number,
+                                                                      inputFormatters: [
+                                                                        FilteringTextInputFormatter
+                                                                            .digitsOnly
+                                                                      ],
+                                                                      maxLine:
+                                                                          1,
+                                                                      textController:
+                                                                          new TextEditingController(
+                                                                              text: mapData["value"] ?? ''),
+                                                                      onChanged:
+                                                                          (txt) {
+                                                                        mapData["value"] =
+                                                                            txt;
+                                                                      },
+                                                                    ),
+                                                                  )
                                                                 ],
                                                               ),
                                                             )
@@ -568,9 +658,11 @@ class _DetailsOfInjuredPersonMobileState
                                                               : (mapData['key'] ==
                                                                       "Exact Location ")
                                                                   ? Padding(
-                                                                      padding: EdgeInsets
-                                                                          .only(
-                                                                              top: 10),
+                                                                      padding: EdgeInsets.only(
+                                                                          top:
+                                                                              10,
+                                                                          left:
+                                                                              10),
                                                                       child:
                                                                           Column(
                                                                         mainAxisAlignment:
@@ -582,7 +674,7 @@ class _DetailsOfInjuredPersonMobileState
                                                                             "Exact Location: ",
                                                                           ),
                                                                           Container(
-                                                                              margin: EdgeInsets.only(left: 10, right: 10),
+                                                                              margin: EdgeInsets.only(right: 10),
                                                                               decoration: BoxDecoration(
                                                                                 boxShadow: [
                                                                                   BoxShadow(
