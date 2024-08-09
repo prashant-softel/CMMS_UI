@@ -2332,8 +2332,22 @@ class AddIncidentReportController extends GetxController {
     print('Argument$id');
   }
 
-  Future pickDateTime(BuildContext context) async {
-    var dateTime = selectedtargetDateTime.value;
+  Future pickDateTime(BuildContext context, String type) async {
+    TextEditingController dateTimeController;
+    Rx<DateTime> selectedDateTime;
+
+    // Determine which controller and DateTime to use based on the type
+    if (type == 'incident') {
+      dateTimeController = startDateTimeCtrlr;
+      selectedDateTime = selectedBreakdownTime;
+    } else if (type == 'restoration') {
+      dateTimeController = actionTakenDateTimeCtrlr;
+      selectedDateTime = selectedActionTakenTime;
+    } else {
+      return;
+    }
+
+    var dateTime = selectedDateTime.value;
     final date = await pickDate(context);
     if (date == null) {
       return;
@@ -2351,12 +2365,12 @@ class AddIncidentReportController extends GetxController {
       time.hour,
       time.minute,
     );
-    selectedtargetDateTime.value = dateTime;
-    startDateTimeCtrlr
+    selectedDateTime.value = dateTime;
+    dateTimeController
       ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
-          offset: startDateTimeCtrlr.text.length,
+          offset: dateTimeController.text.length,
           affinity: TextAffinity.upstream,
         ),
       );
