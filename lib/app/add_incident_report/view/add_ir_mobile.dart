@@ -1,5 +1,6 @@
 import 'package:cmms/app/add_incident_report/add_incident_report_controller.dart';
 import 'package:cmms/app/add_incident_report/view/detailsOfInjuredPersonMobile.dart';
+import 'package:cmms/app/add_incident_report/view/web/detailsOfOtherInjuredPersonMobile.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -367,8 +368,36 @@ class _IRMobileState extends State<IRMobile> {
                                         controller.insuranceAvailableTextCtrlr,
                                   )
                                 : Container(),
-                            Dimens.boxHeight2,
+                            Dimens.boxHeight15,
                             DetailsOfInjuredPersonMobile(),
+                            Dimens.boxHeight2,
+                            Row(
+                              children: [
+                                CustomRichTextMobile(
+                                  includeAsterisk: false,
+                                  title: "Other Injured Person: ",
+                                ),
+                                Dimens.boxWidth2,
+                                Obx(
+                                  () => Switch(
+                                    activeColor: Colors.green,
+                                    value: controller.isToggleOn.value,
+                                    onChanged: (value) {
+                                      controller.isToggleOn.value = value;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            Divider(
+                              thickness: 2,
+                              color: ColorValues.greyLightColour,
+                            ),
+                            controller.isToggleOn.value
+                                ? DetailsOfOtherInjuredPersonMobile()
+                                : Container(),
+
                             Dimens.boxHeight15,
 
                             Text(
