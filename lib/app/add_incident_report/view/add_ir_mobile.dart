@@ -1,22 +1,27 @@
 import 'package:cmms/app/add_incident_report/add_incident_report_controller.dart';
 import 'package:cmms/app/add_incident_report/view/detailsOfInjuredPersonMobile.dart';
-import 'package:cmms/app/add_incident_report/view/web/add_incident_report_content_web.dart';
+import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
-import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textFieldMobile.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
-import 'package:cmms/app/widgets/mc_set_equipment_mobile.dart';
+import 'package:cmms/app/widgets/file_upload_details_widget_mobile.dart';
+import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class IRMobile extends StatefulWidget {
-  const IRMobile({Key? key}) : super(key: key);
+  IRMobile({Key? key}) : super(key: key);
+  final FileUploadController dropzoneController =
+      Get.put(FileUploadController());
 
   @override
   _IRMobileState createState() => _IRMobileState();
@@ -442,6 +447,122 @@ class _IRMobileState extends State<IRMobile> {
                             ),
                             Dimens.boxHeight3,
                             investigationTextfields(context, controller, 8),
+                            Dimens.boxHeight15,
+                            FileUploadWidgetWithDropzone(),
+                            Dimens.boxHeight15,
+                            FileUploadDetailsWidgetMobile(),
+                            Dimens.boxHeight15,
+                            controller.irId.value > 0 &&
+                                    controller.incidentReportDetailsModel.value!
+                                            .fileList!.length >
+                                        0
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: DataTable2(
+                                          border: TableBorder.all(
+                                            color: Color.fromARGB(
+                                                255, 206, 229, 234),
+                                          ),
+                                          dataRowHeight: 40,
+                                          columns: [
+                                            DataColumn2(
+                                              fixedWidth: Get.width * .6,
+                                              label: Text(
+                                                "File Description",
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              fixedWidth: Get.width * .2,
+                                              label: Text(
+                                                "Action",
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller.fileList?.length ?? 0,
+                                            (index) => DataRow(
+                                              cells: [
+                                                DataCell(
+                                                  Text(
+                                                    controller.fileList![index]
+                                                            ?.description
+                                                            .toString() ??
+                                                        '',
+                                                  ),
+                                                ),
+                                                DataCell(
+                                                  Wrap(
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .appDarkBlueColor,
+                                                        icon: Icons.visibility,
+                                                        message: 'view',
+                                                        onPress: () async {
+                                                          // String baseUrl =
+                                                          //     "http://65.0.20.19/CMMS_API/";
+                                                          String baseUrl =
+                                                              'http://172.20.43.9:83/';
+                                                          String fileName =
+                                                              controller
+                                                                      .fileList![
+                                                                          index]
+                                                                      ?.fileName ??
+                                                                  "";
+                                                          String fullUrl =
+                                                              baseUrl +
+                                                                  fileName;
+                                                          if (await canLaunch(
+                                                              fullUrl)) {
+                                                            await launch(
+                                                                fullUrl);
+                                                          } else {
+                                                            throw 'Could not launch $fullUrl';
+                                                          }
+                                                          // String baseUrl = 'http://172.20.43.9:83/';
+                                                        },
+                                                      ),
+                                                      // controller.incidentReportDetailsModel
+                                                      //             .value!.ptwStatus ==
+                                                      //         125
+                                                      //     ? Dimens.box0
+                                                      //     :
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .deleteColor,
+                                                        icon: Icons
+                                                            .delete_outline_outlined,
+                                                        message: 'remove',
+                                                        onPress: () {
+                                                          controller.removeImage(
+                                                              controller
+                                                                  .fileList![
+                                                                      index]
+                                                                  ?.id,
+                                                              index);
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Dimens.box0,
                           ],
                         ),
                       ),
