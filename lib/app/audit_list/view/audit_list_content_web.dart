@@ -770,15 +770,21 @@ class AuditListListDataSource extends DataTableSource {
                             ? Wrap(
                                 children: [
                                   varUserAccessModel.value.access_list!
-                                              .where((e) =>
-                                                  e.feature_id ==
-                                                      UserAccessConstants
-                                                          .kPmExecutionFeatureId &&
-                                                  e.view ==
-                                                      UserAccessConstants
-                                                          .kHaveEditAccess)
-                                              .length >
-                                          0
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kPmExecutionFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveEditAccess)
+                                                  .length >
+                                              0 &&
+                                          (AuditPlanPlanningListDetails
+                                                      ?.short_status ==
+                                                  'Rejected' ||
+                                              AuditPlanPlanningListDetails
+                                                      ?.short_status ==
+                                                  'Schedule')
                                       ? TableActionButton(
                                           color: ColorValues.editColor,
                                           icon: Icons.edit,
@@ -801,15 +807,21 @@ class AuditListListDataSource extends DataTableSource {
                                         )
                                       : Dimens.box0,
                                   varUserAccessModel.value.access_list!
-                                              .where((e) =>
-                                                  e.feature_id ==
-                                                      UserAccessConstants
-                                                          .kAuditPlanFeatureId &&
-                                                  e.delete ==
-                                                      UserAccessConstants
-                                                          .kHaveDeleteAccess)
-                                              .length >
-                                          0
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kAuditPlanFeatureId &&
+                                                      e.delete ==
+                                                          UserAccessConstants
+                                                              .kHaveDeleteAccess)
+                                                  .length >
+                                              0 &&
+                                          (AuditPlanPlanningListDetails
+                                                      ?.short_status ==
+                                                  'Rejected' ||
+                                              AuditPlanPlanningListDetails
+                                                      ?.short_status ==
+                                                  'Schedule')
                                       ? TableActionButton(
                                           color: ColorValues.deleteColor,
                                           icon: Icons.delete,

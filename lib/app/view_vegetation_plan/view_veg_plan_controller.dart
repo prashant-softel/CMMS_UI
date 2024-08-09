@@ -172,7 +172,7 @@ class ViewVegPlanController extends GetxController {
           rowItem.value.add(
             [
               {"key": "day", "value": '${element.cleaningDay}'},
-              {'key': "noOfBlocks", "value": '${element.scheduledArea}'},
+              {'key': "noOfBlocks", "value": '${element.blocks}'},
               {"key": "noOfInverters", "value": '${element.invs}'},
               {'key': "area", "value": '${element.scheduledArea}'},
             ],
@@ -185,7 +185,7 @@ class ViewVegPlanController extends GetxController {
   Future<void> getVegHistory({required int id, required int facilityId}) async {
     /// TODO: CHANGE THESE VALUES
 
-    int moduleType = 2;
+    int moduleType = 321;
     // int tempModuleType = 21;
     //
     historyList?.value = await viewVegPlanPresenter.getHistory(

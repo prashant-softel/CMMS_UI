@@ -1,4 +1,5 @@
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
@@ -43,12 +44,20 @@ class _VegExecutionListMobileState extends State<VegExecutionListMobile> {
                           itemCount: controller.vegTaskList.length,
                           itemBuilder: (context, index) {
                             final vegTaskModel = controller.vegTaskList[index];
+                            VegTaskListModel();
                             return GestureDetector(
                               onTap: () {
-                                controller.clearStoreData();
-                                // int id = vegTaskModel?.id ?? 0;
-                                // int planId = vegTaskModel?.planId ?? 0;
-                                // Get.toNamed(Routes.pmTaskView, arguments: {'pmTaskId': _taskId});
+                                int id = vegTaskModel?.id ?? 0;
+                                int planId = vegTaskModel?.planId ?? 0;
+                                if (id != 0) {
+                                  controller.clearStoreData();
+                                  // controller.clearStoreDataPlanid();
+                                  Get.toNamed(Routes.vegExecutionScreen,
+                                      arguments: {
+                                        "vegexe": id,
+                                        "vegid": planId
+                                      });
+                                }
                               },
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 10),
@@ -75,7 +84,7 @@ class _VegExecutionListMobileState extends State<VegExecutionListMobile> {
                                               ),
                                             ),
                                             Text(
-                                              'VE ${vegTaskModel?.planId ?? 0}',
+                                              'VE ${vegTaskModel?.id ?? 0}',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color:
