@@ -496,7 +496,8 @@ class _VegExecutionWebState extends State<VegExecutionWeb> {
                                                                                                       style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                     )
                                                                                                   : (mapData['key'] == "Actions")
-                                                                                                      ? Wrap(
+                                                                                                      ? 
+                                                                                                      Wrap(
                                                                                                           children: [
                                                                                                             controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.permit_id == 0 && controller.vegExecutionDetailsModel.value?.status == 722
                                                                                                                 ? TableActionButton(
@@ -640,6 +641,7 @@ class _VegExecutionWebState extends State<VegExecutionWeb> {
                                                                                                                 : Dimens.box0,
                                                                                                           ],
                                                                                                         )
+                                                                                                     
                                                                                                       : Text(mapData['key'] ?? ''),
                                                         );
                                                       },
