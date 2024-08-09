@@ -87,7 +87,7 @@ class AddModuleCleaningExecutionContentWeb
                             child: Text(" / MODULE CLEANING EXECUTION LIST",
                                 style: Styles.greyLight14),
                           ),
-                          Text(" / CREATE MODULE CLEANING EXECUTION",
+                          Text(" / MODULE CLEANING EXECUTION",
                               style: Styles.greyLight14)
                         ],
                       ),
@@ -111,7 +111,7 @@ class AddModuleCleaningExecutionContentWeb
                                         Row(
                                           children: [
                                             Text(
-                                              'Create Module Cleaning Execution',
+                                              'Module Cleaning Execution',
                                               style: Styles.black17,
                                             ),
                                             Spacer(),
@@ -227,6 +227,7 @@ class AddModuleCleaningExecutionContentWeb
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
+                                            Spacer(),
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.end,
@@ -313,10 +314,12 @@ class AddModuleCleaningExecutionContentWeb
                                                 ),
                                                 controller.startedAtDateTimeCtrlrWeb
                                                             .text ==
-                                                        "0001-01-01 05:30:00"
+                                                        "0001-01-01"
                                                     ? Text("")
                                                     : Text(
-                                                        ' ${controller.startedAtDateTimeCtrlrWeb.text}',
+                                                        controller.mcExecutionDetailsModel
+                                            .value?.startDate ??
+                                        '',
                                                         style: Styles.blue17,
                                                       ),
                                               ],

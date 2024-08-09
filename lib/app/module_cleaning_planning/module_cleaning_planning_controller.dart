@@ -217,21 +217,27 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   void updateMcPlan() async {
-    int i = -1;
-
-    List<Schedule>? sch =
-        mcPlanDetailsModel.value?.schedules.map<Schedule>((e) {
-      i++;
-      var row = rowItem.value[i];
+    Map<int, List<Equipments>> equipmentMap = {};
+    equipmentList.forEach((equipment) {
+      equipment?.smbs?.forEach((smb) {
+        if (smb.selectedDay != null) {
+          int day = int.tryParse(smb.selectedDay!) ?? 0;
+          if (day > 0) {
+            if (!equipmentMap.containsKey(day)) {
+              equipmentMap[day] = [];
+            }
+            equipmentMap[day]!.add(Equipments(id: smb.smbId));
+          }
+        }
+      });
+    });
+    List<Schedule> sch = equipmentMap.entries.map((entry) {
       return Schedule(
-          cleaningDay: e.cleaningDay,
-          cleaningType: int.tryParse(
-                  "${row[4]['value'] == 'Dry' ? 1 : (row[4]['value'] == 'Wel' ? 2 : null)}") ??
-              null,
-          equipments: e.equipments?.map((e) {
-            return Equipments(id: e?.id);
-          }).toList());
+        cleaningDay: entry.key,
+        equipments: entry.value,
+      );
     }).toList();
+
     print({"sch": sch});
 
     String _durationInDayCtrlr = durationInDayCtrlr.text.trim();

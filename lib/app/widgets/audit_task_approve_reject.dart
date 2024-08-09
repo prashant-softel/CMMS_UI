@@ -57,6 +57,7 @@ class AuditTaskApprovedRejectDialog extends GetView {
                           height: 20,
                         ),
                         TextField(
+
                           controller: controller.approveCommentTextFieldCtrlr,
                           maxLines: 4,
                           decoration: InputDecoration(
@@ -85,6 +86,7 @@ class AuditTaskApprovedRejectDialog extends GetView {
               ElevatedButton(
                 style: Styles.darkRedElevatedButtonStyle,
                 onPressed: () {
+                  clearCommentText();
                   Get.back();
                 },
                 child: const Text('Cancel'),
@@ -115,6 +117,7 @@ class AuditTaskApprovedRejectDialog extends GetView {
                                               .auditTasknDetailModel.value.id);
 
                   // // print('Goods order id:$id');
+                  clearCommentText();
                   Get.back();
                 },
                 child: Text(
@@ -137,4 +140,7 @@ class AuditTaskApprovedRejectDialog extends GetView {
       })),
     );
   }
+  void clearCommentText() {
+  controller.approveCommentTextFieldCtrlr.clear();
+}
 }
