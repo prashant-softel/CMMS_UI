@@ -502,7 +502,7 @@ class VegExcutionListDataSource extends DataTableSource {
           ? "-"
           : '${VegExcutionListDetails?.doneDate ?? ''}',
 
-      '${VegExcutionListDetails?.status ?? ''}',
+      // '${VegExcutionListDetails?.status ?? ''}',
 
       'Actions',
     ];

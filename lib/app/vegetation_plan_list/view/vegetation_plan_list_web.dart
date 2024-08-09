@@ -413,7 +413,7 @@ class VegetationPlanListDataSource extends DataTableSource {
       '${VegetationListDetails?.noOfCleaningDays ?? ''}',
       '${VegetationListDetails?.createdBy ?? ''}',
       '${VegetationListDetails?.frequency ?? ''}',
-      '${VegetationListDetails?.status ?? ''}',
+      // '${VegetationListDetails?.status ?? ''}',
       'Actions',
     ];
     var cells = [];
