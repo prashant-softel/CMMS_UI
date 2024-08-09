@@ -70,8 +70,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                         var taskId;
                         var mcid;
                         var jobId;
-                        var vegexe;
-                        var vegplanId;
+
                         controller.typee.value == 1
                             ? Get.offAllNamed(Routes.jobDetails,
                                 arguments: {'jobId': jobId})
@@ -92,8 +91,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             ? Get.offAllNamed(
                                                 Routes.vegExecutionScreen,
                                                 arguments: {
-                                                  "vegexe": vegexe,
-                                                  "vegid": vegplanId,
+                                                  "vegexe": controller
+                                                      .vegExecutionDetailsModel
+                                                      ?.executionId,
+                                                  "vegid": controller
+                                                      .vegExecutionDetailsModel
+                                                      ?.planId,
                                                 },
                                               )
                                             : Get.offNamed(
