@@ -387,55 +387,50 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                             }).toList(),
                                           ),
                                         ),
-                                        (controller.historyList != null &&
-                                                controller
-                                                    .historyList!.isNotEmpty)
-                                            ? Container(
-                                                margin: Dimens.edgeInsets20,
-                                                height: ((controller.historyList
-                                                                ?.length ??
-                                                            0) *
-                                                        40) +
-                                                    120,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: ColorValues
-                                                        .lightGreyColorWithOpacity35,
-                                                    width: 1,
-                                                  ),
-                                                ),
-                                                child: //
-                                                    Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            "Vegetation History ",
-                                                            style:
-                                                                Styles.blue700,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child:
-                                                          HistoryTableWidgetWeb(
-                                                        historyList: controller
-                                                            .historyList,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                            : Dimens.box0,
                                       ],
                                     ),
                                   ),
-                              
+                                  (controller.historyList != null &&
+                                          controller.historyList!.isNotEmpty)
+                                      ? Container(
+                                          margin: Dimens.edgeInsets20,
+                                          height: ((controller.historyList
+                                                          ?.length ??
+                                                      0) *
+                                                  40) +
+                                              120,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: ColorValues
+                                                  .lightGreyColorWithOpacity35,
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: //
+                                              Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Vegetation History ",
+                                                      style: Styles.blue700,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: HistoryTableWidgetWeb(
+                                                  historyList:
+                                                      controller.historyList,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      : Dimens.box0,
                                 ],
                               ),
                             ),
