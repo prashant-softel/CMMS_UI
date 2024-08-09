@@ -349,6 +349,9 @@ class AddIncidentReportController extends GetxController {
   //Exact location textfield
   Rx<bool> isExactLoactionInvalid = false.obs;
   var exactLocationTextCtrlr = TextEditingController();
+  List<dynamic>? files = [];
+
+  RxList<FileList?>? fileList = <FileList>[].obs;
 
   ///Investigation Team Part
   RxList<InvestigationTeamUpdate?>? investigationTeamList =
@@ -1052,6 +1055,12 @@ class AddIncidentReportController extends GetxController {
       filteredVictimNameList.add(e);
     }
     employee_map[emp_id] = selectedVictimNameIdList;
+  }
+
+  void removeImage(int? num, int index) {
+    files!.remove(num);
+    fileList!.removeAt(index);
+    print('removed file ids ${files}');
   }
 
   void getIncidentInvestigationDoneByList() async {
