@@ -2331,4 +2331,69 @@ class AddIncidentReportController extends GetxController {
     Get.toNamed(Routes.viewIncidentReportScreen, arguments: {"irId": id});
     print('Argument$id');
   }
+
+  Future pickDateTime(BuildContext context) async {
+    var dateTime = selectedtargetDateTime.value;
+    final date = await pickDate(context);
+    if (date == null) {
+      return;
+    }
+
+    final time = await pickTime(context);
+    if (time == null) {
+      return;
+    }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    selectedtargetDateTime.value = dateTime;
+    startDateTimeCtrlr
+      ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: startDateTimeCtrlr.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+  }
+
+  Future<DateTime?> pickDate(BuildContext context) async {
+    DateTime? dateTime = selectedtargetDateTime.value;
+
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 10),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime(BuildContext context) async {
+    DateTime dateTime = selectedtargetDateTime.value;
+
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
+  }
 }

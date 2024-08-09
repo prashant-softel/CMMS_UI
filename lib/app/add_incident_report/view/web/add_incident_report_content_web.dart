@@ -23,25 +23,11 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
 
-  // bool valuefirst = false;
-  // bool _switchValue = false;
-
-  // final controller = Get.find<HomeController>();
-
   @override
   Widget build(BuildContext context) => SelectionArea(
         child: Scaffold(
-          // appBar: AppBar(
-          //   title: HeaderWidget(),
-          //   elevation: 0,
-          //   toolbarHeight: 60,
-          //   automaticallyImplyLeading: false,
-          // ),
           body: Row(
             children: [
-              Responsive.isMobile(context) || Responsive.isTablet(context)
-                  ? Dimens.box0
-                  : Container(),
               Expanded(
                 child: Container(
                   // margin: Dimens.edgeInsets16,
@@ -157,7 +143,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         ),
                                                       ],
                                                     )
-                                                  : Dimens.box0), 
+                                                  : Dimens.box0),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 10, top: 10, right: 10),
@@ -6206,7 +6192,10 @@ class DetailsOfOtherPerson extends StatelessWidget {
                                                                           LoginCustomTextfield(
                                                                         keyboardType:
                                                                             TextInputType.number,
-                                                                            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                                                        inputFormatters: [
+                                                                          FilteringTextInputFormatter
+                                                                              .digitsOnly
+                                                                        ],
                                                                         maxLine:
                                                                             1,
                                                                         textController:
