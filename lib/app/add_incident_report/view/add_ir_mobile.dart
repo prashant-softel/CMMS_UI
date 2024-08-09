@@ -255,8 +255,17 @@ class _IRMobileState extends State<IRMobile> {
                                   Colors.white, context, controller),
                               buildRadioButton('High', Colors.orange,
                                   Colors.white, context, controller),
+                              buildRadioButton('Medium', Colors.yellow,
+                                  Colors.white, context, controller),
+                              buildRadioButton('Low', Colors.green,
+                                  Colors.white, context, controller),
                             ],
-                          )
+                          ),
+                          Dimens.boxHeight15,
+                          CustomRichTextMobile(
+                            title: "Asset Restoration Date & Time: ",
+                          ),
+                          Dimens.boxHeight2,
                         ],
                       ),
                     ),
@@ -271,30 +280,37 @@ class _IRMobileState extends State<IRMobile> {
   }
 }
 
-Widget buildRadioButton(String severity, Color color, Color color2,
+Widget buildRadioButton(String severity, Color color, Color textColor,
     BuildContext context, AddIncidentReportController controller) {
   return Obx(() {
     return Container(
-      height: 35,
-      width: MediaQuery.of(context).size.width / 10,
-      child: RadioListTile(
-        contentPadding: EdgeInsets.zero,
-        dense: true,
-        title: Container(
-            color: color,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10),
+      padding: EdgeInsets.symmetric(vertical: 5),
+      width: MediaQuery.of(context).size.width / 2.5,
+      child: Row(
+        children: [
+          Radio<String>(
+            value: severity,
+            groupValue: controller.selectedSeverity.value,
+            onChanged: (value) {
+              controller.setSelectedSeverity(value!);
+              print('Incident Severity: ${controller.selectedSeverity.value}');
+            },
+            activeColor: color,
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(5),
+              ),
               child: Text(
                 severity,
-                style: TextStyle(color: color2, fontSize: 11),
+                style: TextStyle(color: textColor, fontSize: 14),
               ),
-            )),
-        value: severity,
-        groupValue: controller.selectedSeverity.value,
-        onChanged: (value) {
-          controller.setSelectedSeverity(value as String);
-          print('Incident Severity:${controller.selectedSeverity.value}');
-        },
+            ),
+          ),
+        ],
       ),
     );
   });
