@@ -199,58 +199,53 @@ class _DetailsOfInjuredPersonMobileState
                                     ],
                                   ),
                                 )
-                              : (mapData['key'] == "Gender")
+                              : (mapData['key'] == "Gender ")
                                   ? Padding(
                                       padding: const EdgeInsets.only(
-                                          left: 10, right: 10, top: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                          left: 10, top: 10),
+                                      child: Column(
                                         children: [
-                                          Text(
-                                            "Gender: ",
-                                          ),
-                                          Column(
+                                          Row(
                                             children: [
+                                              Text(
+                                                "Gender: ",
+                                              ),
+                                              Dimens.boxWidth5,
                                               Text(
                                                 "${mapData["value"]}",
                                               ),
                                             ],
                                           ),
+                                          Divider(
+                                            thickness: 2,
+                                            color: ColorValues.greyLightColour,
+                                          ),
                                         ],
                                       ),
                                     )
                                   : (mapData['key'] == "Action ")
-                                      ? Padding(
-                                          padding: EdgeInsets.only(top: 10),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              TableActionButton(
-                                                color: ColorValues.appRedColor,
-                                                icon: Icons.delete,
-                                                label: '',
-                                                message: '',
-                                                onPress: () {
-                                                  controller
-                                                      .rowInjuredPersonItem
-                                                      .remove(controller
-                                                          .rowInjuredPersonItem
-                                                          .value[index]);
-                                                },
-                                              )
-                                            ],
+                                      ? Center(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 5),
+                                            child: TableActionButton(
+                                              color: ColorValues.appRedColor,
+                                              icon: Icons.delete,
+                                              label: '',
+                                              message: '',
+                                              onPress: () {
+                                                controller.rowInjuredPersonItem
+                                                    .remove(controller
+                                                        .rowInjuredPersonItem
+                                                        .value[index]);
+                                              },
+                                            ),
                                           ),
                                         )
                                       : (mapData['key'] == "Trade/Designation ")
                                           ? Padding(
                                               padding: const EdgeInsets.only(
-                                                  left: 10, right: 10, top: 10),
+                                                  left: 10, top: 10),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
@@ -267,6 +262,11 @@ class _DetailsOfInjuredPersonMobileState
                                                       ),
                                                     ],
                                                   ),
+                                                  Divider(
+                                                    thickness: 2,
+                                                    color: ColorValues
+                                                        .greyLightColour,
+                                                  ),
                                                 ],
                                               ),
                                             )
@@ -274,21 +274,29 @@ class _DetailsOfInjuredPersonMobileState
                                               ? Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 10,
-                                                          right: 10,
-                                                          top: 10),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                          left: 10, top: 10),
+                                                  child: Column(
                                                     children: [
-                                                      Text(
-                                                        "Address: ",
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            "Address: ",
+                                                          ),
+                                                          Text(
+                                                            "${mapData["value"]}",
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Text(
-                                                        "${mapData["value"]}",
+                                                      Divider(
+                                                        thickness: 2,
+                                                        color: ColorValues
+                                                            .greyLightColour,
                                                       ),
                                                     ],
                                                   ),
@@ -568,9 +576,11 @@ class _DetailsOfInjuredPersonMobileState
                                                               : (mapData['key'] ==
                                                                       "Exact Location ")
                                                                   ? Padding(
-                                                                      padding: EdgeInsets
-                                                                          .only(
-                                                                              top: 10),
+                                                                      padding: EdgeInsets.only(
+                                                                          top:
+                                                                              10,
+                                                                          left:
+                                                                              10),
                                                                       child:
                                                                           Column(
                                                                         mainAxisAlignment:
@@ -582,7 +592,7 @@ class _DetailsOfInjuredPersonMobileState
                                                                             "Exact Location: ",
                                                                           ),
                                                                           Container(
-                                                                              margin: EdgeInsets.only(left: 10, right: 10),
+                                                                              margin: EdgeInsets.only(right: 10),
                                                                               decoration: BoxDecoration(
                                                                                 boxShadow: [
                                                                                   BoxShadow(
