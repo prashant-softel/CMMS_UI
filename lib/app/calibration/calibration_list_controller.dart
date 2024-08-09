@@ -70,7 +70,7 @@ class CalibrationListController extends GetxController {
     // "Status":true,
   });
   final Map<String, double> columnwidth = {
-    "Calibration Id": 150,
+    "Calibration Id": 200,
     "Equipment Category": 200,
     "Equipment Name": 250,
     "Serial No.": 200,
@@ -231,13 +231,15 @@ class CalibrationListController extends GetxController {
     }
   }
 
-  void requestCalibration(int calibrationId) async {
+  void requestCalibration(
+      {required int calibrationId, required int assetsId}) async {
     String _nextDueDate = nextDueDateController.text.trim();
     // String _previousDate = previousDateController.text.trim();
     RequestCalibrationModel requestCalibrationModel = RequestCalibrationModel(
         vendorId: selectedvenderId,
         nextCalibrationDate: _nextDueDate,
-        assetId: calibrationId);
+        assetId: assetsId,
+        id: calibrationId);
 
     var requestCalibrationJsonString = requestCalibrationModel.toJson();
 
@@ -729,6 +731,7 @@ class CalibrationListController extends GetxController {
     required String previousDate,
     required String nextDate,
     required String calibrationId,
+    required String asset_id,
   }) {
     Get.dialog(AlertDialog(
       shape: RoundedRectangleBorder(
@@ -787,7 +790,7 @@ class CalibrationListController extends GetxController {
                     children: [
                       Column(
                         children: [
-                          Text("Previous Calibration"),
+                          Text("Last Calibration"),
                           Text("                         Date:"),
                         ],
                       ),
@@ -829,7 +832,7 @@ class CalibrationListController extends GetxController {
                     children: [
                       Column(
                         children: [
-                          Text("Due Date For Next"),
+                          Text("Due Date For "),
                           Text("             Calibration:"),
                         ],
                       ),
@@ -928,7 +931,10 @@ class CalibrationListController extends GetxController {
                     CustomElevatedButton(
                       text: "Start",
                       onPressed: () {
-                        requestCalibration(int.tryParse(calibrationId) ?? 0);
+                        requestCalibration(
+                          calibrationId: int.tryParse(calibrationId) ?? 0,
+                          assetsId: int.tryParse(asset_id) ?? 0,
+                        );
                         Get.back();
                       },
                       backgroundColor: ColorValues.appGreenColor,

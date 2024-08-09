@@ -28,14 +28,16 @@ class TbtDoneVegDialog extends GetView<VegExecutionController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Module Cleaning Id:",
+                "VEGETATION ID:",
                 style: TextStyle(
                   fontSize: 15,
                 ),
               ),
-              Dimens.boxWidth10,
+              SizedBox(
+                width: 5,
+              ),
               Text(
-                "MC${id}",
+                "VE${id}",
                 style: TextStyle(
                     fontSize: 15, color: ColorValues.appDarkBlueColor),
               ),
@@ -61,7 +63,7 @@ class TbtDoneVegDialog extends GetView<VegExecutionController> {
                     ),
                   ],
                 ),
-                padding: EdgeInsets.only(right: 30, top: 10),
+
                 height: height / 4.7,
                 // width: double.infinity,
                 child: GetBuilder<VegExecutionController>(
@@ -69,10 +71,14 @@ class TbtDoneVegDialog extends GetView<VegExecutionController> {
                   builder: (controller) {
                     return Column(
                       children: [
-                        Spacer(),
-                        Text(
-                            "You unable to start the task,Please Complete the TBT first"),
-                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(
+                              "You unable to start the task,Please Complete the TBT first"),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -94,21 +100,25 @@ class TbtDoneVegDialog extends GetView<VegExecutionController> {
                                 onPressed: () {
                                   Get.back();
                                   controller.clearStoreData();
-                                  // controller.clearJobDetailStoreData();
-                                  // controller.clearTypeStoreData();
-                                  // controller.clearisCheckedtoreData();
-                                  // controller.clearpmTaskValue();
-                                  // controller.clearPermitStoreData();
-                                  // controller.clearmcDetailsStoreData();
-
+                                  controller.clearJobDetailStoreData();
+                                  controller.clearTypeStoreData();
+                                  controller.clearisCheckedtoreData();
+                                  controller.clearpmTaskValue();
+                                  controller.clearPermitStoreData();
+                                  controller.clearmcDetailsStoreData();
                                   Get.toNamed(Routes.createPermit, arguments: {
                                     "permitId": ptw_id,
                                     "isChecked": false,
-                                    "type": 4,
+                                    "type": 5,
                                     "isFromJobDetails": true,
-                                    // "jobModel": controller.jobDetailsModel.value,
-                                    // "pmTaskModel": controller.pmtaskViewModel.value,
-                                    // "mcModel": controller.mcExecutionDetailsModel.value,
+                                    "jobModel":
+                                        controller.jobDetailsModel.value,
+                                    "pmTaskModel":
+                                        controller.pmtaskViewModel.value,
+                                    "mcModel": controller
+                                        .mcExecutionDetailsModel.value,
+                                    "vegModel": controller
+                                        .vegExecutionDetailsModel.value,
                                     "scheduleID": 0
                                   });
                                 },

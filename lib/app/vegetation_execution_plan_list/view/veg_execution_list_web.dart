@@ -76,7 +76,7 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                               child: Text(" / VEGETATION CONTROL",
                                   style: Styles.greyLight14),
                             ),
-                            Text(" / VEGETATION PLAN EXECUTION",
+                            Text(" / VEGETATION EXECUTION LIST",
                                 style: Styles.greyLight14)
                           ],
                         ),
@@ -495,8 +495,13 @@ class VegExcutionListDataSource extends DataTableSource {
       '${VegExcutionListDetails?.responsibility ?? ''}',
       '${VegExcutionListDetails?.frequency ?? ''}',
       '${VegExcutionListDetails?.noOfDays ?? ''}',
-      '${VegExcutionListDetails?.startDate ?? ''}',
-      '${VegExcutionListDetails?.doneDate ?? ''}',
+      VegExcutionListDetails?.startDate == "0001-01-01"
+          ? "-"
+          : '${VegExcutionListDetails?.startDate ?? ''}',
+      VegExcutionListDetails?.doneDate == "0001-01-01"
+          ? "-"
+          : '${VegExcutionListDetails?.doneDate ?? ''}',
+
       '${VegExcutionListDetails?.status ?? ''}',
 
       'Actions',
@@ -529,7 +534,7 @@ class VegExcutionListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'VE ${VegExcutionListDetails?.id}',
+                        'VE${VegExcutionListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(

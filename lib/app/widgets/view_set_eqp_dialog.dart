@@ -1,8 +1,6 @@
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../theme/dimens.dart';
@@ -10,7 +8,6 @@ import '../theme/dimens.dart';
 class ViewSetEquipmentDialog extends GetView {
   int? estimateDurationDays;
   ViewSetEquipmentDialog({required this.estimateDurationDays});
-
   final ViewMcPlaningController controller = Get.find();
 
   @override
@@ -24,7 +21,7 @@ class ViewSetEquipmentDialog extends GetView {
         title: Row(
           children: [
             Text(
-              "Set Equipments $estimateDurationDays",
+              "View Set Equipments $estimateDurationDays",
               style: TextStyle(
                 fontSize: 15,
               ),
@@ -75,7 +72,7 @@ class ViewSetEquipmentDialog extends GetView {
                 ),
                 // padding: EdgeInsets.only(right: 120, top: 10),
                 height: height / 1.5,
-                // width: double.infinity,
+                width: Get.width * 0.5,
                 child: SingleChildScrollView(
                   child: Column(
                       children: [
@@ -84,29 +81,36 @@ class ViewSetEquipmentDialog extends GetView {
                       child: Row(
                         children: [
                           Expanded(
+                            flex: 4,
                             child: Text(
                               "Assets",
                               style: TextStyle(color: Color(0xff31576D)),
                             ),
                           ),
                           Expanded(
+                            flex: 2,
                             child: Text("Modules",
                                 style: TextStyle(color: Color(0xff31576D))),
                           ),
                           Expanded(
+                              flex: 2,
                               child: Text("Select Day",
                                   style: TextStyle(color: Color(0xff31576D)))),
                         ],
                       ),
+                    ),
+                    Divider(
+                      thickness: 2,
                     )
                   ]..addAll(controller.equipmentList.value.map((e) {
                           return Padding(
-                            padding: const EdgeInsets.only(left: 20),
+                            padding: const EdgeInsets.only(left: 20, right: 20),
                             child: Column(
                               children: [
                                 Row(
                                   children: [
                                     Expanded(
+                                      flex: 4,
                                       child: GestureDetector(
                                         onTap: () {
                                           setState(
@@ -131,6 +135,7 @@ class ViewSetEquipmentDialog extends GetView {
                                       ),
                                     ),
                                     Expanded(
+                                      flex: 2,
                                       child: Text(
                                         "${e.moduleQuantity}",
                                         style: TextStyle(
@@ -140,6 +145,7 @@ class ViewSetEquipmentDialog extends GetView {
                                     ),
                                     IgnorePointer(
                                       child: Expanded(
+                                        flex: 2,
                                         child: DropdownButton<String>(
                                           value: e.selectedDay,
                                           onChanged: (newValue) {
@@ -172,14 +178,17 @@ class ViewSetEquipmentDialog extends GetView {
                                                 return Row(
                                                   children: [
                                                     Expanded(
+                                                        flex: 4,
                                                         child: Text(
                                                             smbItems.smbName ??
                                                                 "")),
                                                     Expanded(
+                                                        flex: 2,
                                                         child: Text(
                                                             "${smbItems.moduleQuantity}")),
                                                     IgnorePointer(
                                                       child: Expanded(
+                                                        flex: 2,
                                                         child: DropdownButton<
                                                             String>(
                                                           value: smbItems
@@ -211,7 +220,10 @@ class ViewSetEquipmentDialog extends GetView {
                                             ),
                                           ),
                                       )
-                                    : Dimens.box0
+                                    : Dimens.box0,
+                                Divider(
+                                  thickness: 1,
+                                )
                               ],
                             ),
                           );
@@ -219,73 +231,6 @@ class ViewSetEquipmentDialog extends GetView {
                 )),
           );
         }),
-        // actions: [
-        //   controller.id == 0
-        //       ? Row(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.greenColor,
-        //                 text: 'Submit',
-        //                 onPressed: () {
-        //                   // controller.createMcPlan();
-        //                 },
-        //               ),
-        //             ),
-        //             Dimens.boxWidth20,
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.redColor,
-        //                 text: "Cancel",
-        //                 onPressed: () {
-        //                   final _flutterSecureStorage =
-        //                       // const FlutterSecureStorage();
-
-        //                       // _flutterSecureStorage.delete(
-        //                       // key: "userId");
-
-        //                       Get.back();
-        //                 },
-        //               ),
-        //             ),
-        //           ],
-        //         )
-        //       : Row(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.redColor,
-        //                 text: "Cancel",
-        //                 onPressed: () {
-        //                   // final _flutterSecureStorage =
-        //                   // const FlutterSecureStorage();
-
-        //                   // _flutterSecureStorage.delete(
-        //                   // key: "userId");
-
-        //                   Get.back();
-        //                 },
-        //               ),
-        //             ),
-        //             Dimens.boxWidth20,
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.greenColor,
-        //                 text: 'Update',
-        //                 onPressed: () {
-        //                   // controller.updateMcPlan();
-        //                 },
-        //               ),
-        //             ),
-        //           ],
-        //         ),
-        // ],
       );
     }));
   }

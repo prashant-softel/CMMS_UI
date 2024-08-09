@@ -11,11 +11,13 @@ class VegExecutionUsecase {
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
+    int? featureId,
     bool? isLoading,
   }) async =>
-      await repository.getAssignedToList(
+      await repository.getAssignedToEmployee(
         auth,
         facilityId,
+        featureId,
         isLoading,
       );
 
@@ -91,14 +93,10 @@ class VegExecutionUsecase {
     );
   }
 
-  Future<void> endVegScheduleExecutionButton({
-    int? scheduleId,
-    bool? isLoading,
-  }) async {
+  Future<void> endVegScheduleExecutionButton(
+      {int? scheduleId, bool? isLoading, closePtwJsonString}) async {
     await repository.endVegScheduleExecutionButton(
-      scheduleId,
-      isLoading,
-    );
+        scheduleId, isLoading, closePtwJsonString);
   }
 
   Future<Map<String, dynamic>> abandonVegScheduleButton({
@@ -169,4 +167,11 @@ class VegExecutionUsecase {
       await repository.getStringValue(LocalKeys.vegexe);
   void clearExecutionId() => repository.clearData(LocalKeys.vegexe);
   void clearPermitStoreData() async => repository.clearData(LocalKeys.permitId);
+  void clearmcDetailsStoreData() async =>
+      repository.clearData(LocalKeys.mcTaskId);
+  void clearJobDetailStoreData() async =>
+      repository.clearData(LocalKeys.jobModel);
+  void clearTypeValue() async => repository.clearData(LocalKeys.types);
+  void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
+  void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
 }

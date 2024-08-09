@@ -1686,6 +1686,8 @@ class NewPermitController extends GetxController {
         activity: activity,
         isLoading: true,
         type: typee.value,
+        vegplanId: vegExecutionDetailsModel?.planId,
+        vegexid: vegExecutionDetailsModel?.executionId,
       );
       if (responseNewPermitCreatedForJob != null) {
         //  CreateNewPermitDialog();
@@ -1841,10 +1843,13 @@ class NewPermitController extends GetxController {
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.updateNewPermit(
-              newPermit: jobJsonString,
-              resubmit: isChecked.value,
-              isLoading: true,
-              type: typee.value);
+        newPermit: jobJsonString,
+        resubmit: isChecked.value,
+        isLoading: true,
+        type: typee.value,
+        vegplanId: vegExecutionDetailsModel?.planId,
+        vegexid: vegExecutionDetailsModel?.executionId,
+      );
       if (responseUpdatePermit != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
@@ -1948,7 +1953,9 @@ class NewPermitController extends GetxController {
         newPermit: jobJsonString,
         resubmit: true,
         isLoading: true,
-        type: typee.value,
+        type: typee.value,  vegplanId: vegExecutionDetailsModel?.planId,
+        vegexid: vegExecutionDetailsModel?.executionId,
+     
       );
       if (responseNewPermitCreated != null) {
         //  CreateNewPermitDialog();
@@ -2026,6 +2033,10 @@ class NewPermitController extends GetxController {
     Get.toNamed(Routes.pmTaskView);
   }
 
+  Future<void> viewAudDetails() async {
+    Get.toNamed(Routes.viewAuditTask);
+  }
+
   Future<void> viewMCTDetails() async {
     Get.toNamed(Routes.addModuleCleaningExecutionContentWeb);
   }
@@ -2034,6 +2045,14 @@ class NewPermitController extends GetxController {
     await permitPresenter.browseFiles(
         fileBytes, fileName.value, type, true, facilityId);
     return true;
+  }
+
+  void clearStoreData() {
+    permitPresenter.clearValue();
+  }
+
+  void clearTypeStoreData() {
+    permitPresenter.clearTypeValue();
   }
 
   void isSuccessDialog() {

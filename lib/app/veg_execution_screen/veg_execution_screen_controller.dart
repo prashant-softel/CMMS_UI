@@ -3,10 +3,13 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/veg_execution_screen/veg_execution_screen_presenter.dart';
+import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/update_vegetation_execution_model.dart';
@@ -32,9 +35,9 @@ class VegExecutionController extends GetxController {
   RxList<VegTaskEquipmentList?> vegTaskEquipment = <VegTaskEquipmentList>[].obs;
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
-  Map<String, Schedules> dropdownMapperData = {};
-  RxList<Schedules?>? schedules = <Schedules?>[].obs;
-  RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
+  Map<String, VegSchedules> dropdownMapperData = {};
+  RxList<VegSchedules?>? schedules = <VegSchedules?>[].obs;
+  RxList<VegSchedules?>? listSchedules = <VegSchedules?>[].obs;
   RxList<int> scheduleId = <int>[].obs;
   RxInt scheduledId = 0.obs;
   Map<String, dynamic> data = {};
@@ -48,8 +51,9 @@ class VegExecutionController extends GetxController {
   Rx<bool> allScheduleTrue = false.obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
-  // Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
-  //   EndMCExecutionDetailsModel().obs;
+
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
+      EndMCExecutionDetailsModel().obs;
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
@@ -129,7 +133,7 @@ class VegExecutionController extends GetxController {
           {"key": "Cleaned", "value": '${element.cleaned}'},
           {"key": "Abandoned", "value": '${element.abandoned}'},
           {"key": "Pending", "value": '${element.pending}'},
-          {"key": "Remark", "value": '${element.remark}'},
+          {"key": "Remark", "value": '${element.remark_of_schedule}'},
           {"key": "Permit_code", "value": '${element.permit_code}'},
           {"key": "Permit_status", "value": '${element.status_short_ptw}'},
           {"key": "Status", "value": '${element.status_short}'},
@@ -143,6 +147,7 @@ class VegExecutionController extends GetxController {
     assignedToList.clear();
     final _assignedToList = await vegExecutionPresenter.getAssignedToList(
       facilityId: facilityId.value,
+      featureId: UserAccessConstants.kVegetationControlFeatureId,
     );
 
     if (_assignedToList != null) {
@@ -224,9 +229,15 @@ class VegExecutionController extends GetxController {
 
   Future<void> endVegScheduleExecutionButton(
       {int? scheduleID, int? ptw_id}) async {
+    var _comment = remarkTextFieldCtrlr.text.trim();
+    ClosePermitModel ptwClose = ClosePermitModel(
+        id: ptw_id, comment: _comment, conditionIds: [1, 2, 3, 4], fileIds: []);
+    var closePtwJsonString = ptwClose.toJson();
+
     final _endVegScheduleExecutionBtn =
         await vegExecutionPresenter.endVegScheduleExecutionButton(
       scheduleId: scheduleID,
+      closePtwJsonString: closePtwJsonString,
     );
   }
 
@@ -277,7 +288,7 @@ class VegExecutionController extends GetxController {
         scheduleId: scheduleId ?? 0,
         executionId: vegexe.value,
         cleaningDay: cleaningDay ?? 0,
-        remark: remark ?? "",
+        remark: remark == null ? "" : remark,
         cleanedEquipmentIds: cleanedEquipmentIds,
         abandonedEquipmentIds: abandonedEquipmentIds,
       );
@@ -409,6 +420,12 @@ class VegExecutionController extends GetxController {
 
   createNewPermit({int? scheduleID}) {
     clearStoreData();
+    clearJobDetailStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearpmTaskValue();
+    clearPermitStoreData();
+    clearmcDetailsStoreData();
     Get.offNamed(
       Routes.createPermit,
       arguments: {
@@ -418,18 +435,63 @@ class VegExecutionController extends GetxController {
         "type": 5,
         "isFromJobDetails": true,
         "pmTaskModel": pmtaskViewModel.value,
-        "mcModel": null,
+        "mcModel": mcExecutionDetailsModel.value,
         "vegModel": vegExecutionDetailsModel.value,
         "scheduleID": scheduleID
       },
     );
   }
 
+  Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
+    clearStoreData();
+    clearJobDetailStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearpmTaskValue();
+    clearPermitStoreData();
+    clearmcDetailsStoreData();
+    Get.toNamed(Routes.createPermit, arguments: {
+      "jobModel": jobDetailsModel.value,
+      "permitId": permitId,
+      "isChecked": isChecked,
+      "type": 5,
+      "isFromJobDetails": true,
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "vegModel": vegExecutionDetailsModel.value,
+      "scheduleID": 0
+    });
+    print('PermitIDForTBt:$permitId');
+    print('PermitIdArgument:$isChecked');
+  }
+
+  void clearmcDetailsStoreData() {
+    vegExecutionPresenter.clearmcDetailsStoreData();
+  }
+
+  void clearJobDetailStoreData() {
+    vegExecutionPresenter.clearJobDetailStoreData();
+  }
+
+  void clearTypeStoreData() {
+    vegExecutionPresenter.clearTypeValue();
+  }
+
+  void clearisCheckedtoreData() {
+    vegExecutionPresenter.clearisCheckedValue();
+  }
+
+  void clearpmTaskValue() {
+    vegExecutionPresenter.clearpmTaskValue();
+  }
+
   Future<void> viewNewPermitList({
     int? permitId,
+    int? jobId,
   }) async {
     Get.toNamed(Routes.viewPermitScreen, arguments: {
       "permitId": permitId,
+      "jobId": jobId,
       "type": 5,
     });
   }

@@ -2034,8 +2034,10 @@ class ConnectHelper {
                         data: parsedJson['message'],
                         endMCId: parsedJson['id'],
                       ))
-                    : Get.dialog<void>(PermitMessageCloseDialog(
-                        data: parsedJson['message'], jobId: jobId));
+                    : closetype == 5
+                        ? Get.offAllNamed(Routes.vegExecutionScreen)
+                        : Get.dialog<void>(PermitMessageCloseDialog(
+                            data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
@@ -2527,9 +2529,10 @@ class ConnectHelper {
       {required String auth,
       bool? isLoading,
       int? selectedchecklistId,
+      int? type,
       int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId&facility_id=$facilityId&type=2',
+      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId&facility_id=$facilityId&type=$type',
       Request.get,
       null,
       isLoading ?? false,
@@ -3188,7 +3191,9 @@ class ConnectHelper {
       newPermit,
       bool? isLoading,
       bool? resubmit,
-      int? type}) async {
+      int? type,
+      vegplanId,
+      vegexid}) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3205,7 +3210,11 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         UpdateNewPermitDialog(
-            data: parsedJson['message'], PtwId: parsedJson['id'], type: type),
+            data: parsedJson['message'],
+            PtwId: parsedJson['id'],
+            type: type,
+            vegplanId: vegplanId,
+            vegexid: vegexid),
         barrierDismissible: false);
 
     return responseModel;
@@ -3217,7 +3226,9 @@ class ConnectHelper {
       newPermit,
       bool? isLoading,
       bool? resubmit,
-      int? type}) async {
+      int? type,
+      vegplanId,
+      vegexid}) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3233,7 +3244,11 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(UpdateNewPermitDialog(
-        data: parsedJson['message'], PtwId: parsedJson['id'], type: type));
+        data: parsedJson['message'],
+        PtwId: parsedJson['id'],
+        type: type,
+        vegplanId: vegplanId,
+        vegexid: vegexid));
 
     return responseModel;
   }
@@ -7306,7 +7321,8 @@ class ConnectHelper {
             data: parsedJson['message'],
             taskId: scheduleId,
             activity: activity,
-            type: type //parsedJson['id']
+            type: type,
+            permitId: permitId //parsedJson['id']
             ),
         barrierDismissible: false);
     print('jcId2:${parsedJson['id']}');
@@ -7319,7 +7335,9 @@ class ConnectHelper {
       permitId,
       activity,
       bool? isLoading,
-      type}) async {
+      type,
+      vegplanId,
+      vegexid}) async {
     var responseModel = await apiWrapper.makeRequest(
       "Vegetation/LinkPermitToVegetation?scheduleId=$scheduleId&permit_id=$permitId",
       Request.put,
@@ -7337,7 +7355,10 @@ class ConnectHelper {
             data: parsedJson['message'],
             taskId: scheduleId,
             activity: activity,
-            type: type //parsedJson['id']
+            type: type,
+            permitId: permitId,
+            vegplanId: vegplanId,
+            vegexid: vegexid //parsedJson['id']
             ),
         barrierDismissible: false);
     print('jcId2:${parsedJson['id']}');

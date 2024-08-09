@@ -15,6 +15,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:html_unescape/html_unescape.dart';
 import '../../domain/models/comment_model.dart';
@@ -95,7 +96,8 @@ class JobCardDetailsController extends GetxController {
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   RxList<WorkingAreaList?>? materialUsedAssets = <WorkingAreaList?>[].obs;
-
+  var latitude = 0.0.obs;
+  var longitude = 0.0.obs;
   int userId = 35;
   int facilityId = 0;
   RxMap plantDetails = {}.obs;
@@ -201,6 +203,7 @@ class JobCardDetailsController extends GetxController {
         createPlantDetailsTableData();
         createJobDetailsTableData();
         createPermitDetailsTableData();
+        getLocation();
 
         if (jobCardDetailsModel != null) {
           jobCardDetailsModel.value?.lstCmjcEmpList?.forEach((element) {
@@ -424,33 +427,35 @@ class JobCardDetailsController extends GetxController {
     List<TranferItems> items = [];
     rowItem.forEach((element) {
       TranferItems item = TranferItems(
-        assetItemID:
-            dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-        facilityID: facilityId,
-        fromActorID: jobCardId.value,
-        fromActorType: AppConstants.kJobCard,
-        mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-        mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
-        qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
-        refID: jobCardId.value,
-        refType: AppConstants.kJobCard,
-        remarks: "remarks",
-        toActorID: dropdownMapperDataworkingArea[element[1]["value"]] != null
-            //  &&
-            //         dropdownMapperDataworkingArea[element[1]["value"]]
-            //                 .workingAreaId !=
-            //             null &&
-            //         dropdownMapperDataworkingArea[element[1]["value"]]
-            //                 .workingAreaId !=
-            //             0
-            ? dropdownMapperDataworkingArea[element[1]["value"]].asset_id
-            : 0,
-        toActorType: dropdownMapperDataworkingArea[element[1]["value"]] != null
-            ? AppConstants.kInventory
-            : 0,
-        transaction_id:
-            dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
-      );
+          assetItemID:
+              dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+          facilityID: facilityId,
+          fromActorID: jobCardId.value,
+          fromActorType: AppConstants.kJobCard,
+          mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
+          mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
+          qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
+          refID: jobCardId.value,
+          refType: AppConstants.kJobCard,
+          remarks: "remarks",
+          toActorID: dropdownMapperDataworkingArea[element[1]["value"]] != null
+              //  &&
+              //         dropdownMapperDataworkingArea[element[1]["value"]]
+              //                 .workingAreaId !=
+              //             null &&
+              //         dropdownMapperDataworkingArea[element[1]["value"]]
+              //                 .workingAreaId !=
+              //             0
+              ? dropdownMapperDataworkingArea[element[1]["value"]].asset_id
+              : 0,
+          toActorType:
+              dropdownMapperDataworkingArea[element[1]["value"]] != null
+                  ? AppConstants.kInventory
+                  : 0,
+          transaction_id:
+              dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
+          latitude: latitude.value,
+          longitude: longitude.value);
 
       items.add(item);
     });
@@ -460,6 +465,36 @@ class JobCardDetailsController extends GetxController {
       transferItemJsonString: transferItemJsonString,
       isLoading: true,
     );
+  }
+
+  void getLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      print('Location services are disabled.');
+      return;
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print('Location permissions are denied.');
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      print('Location permissions are permanently denied.');
+      return;
+    }
+
+    Position position = await Geolocator.getCurrentPosition();
+    latitude.value = position.latitude;
+    longitude.value = position.longitude;
+    print('Current Position: ${position.toString()}');
   }
 
   void createJobDetailsTableData() {

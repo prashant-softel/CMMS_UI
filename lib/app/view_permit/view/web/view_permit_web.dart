@@ -95,6 +95,9 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         onTap: () {
                                           var taskId;
                                           var jobId;
+                                          var vegexe;
+                                          var mcid;
+                                          var vegplan;
                                           controller.type.value == 1
                                               ? Get.offAllNamed(
                                                   Routes.jobDetails,
@@ -105,8 +108,22 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       arguments: {
                                                           'pmTaskId': taskId
                                                         })
-                                                  : Get.offNamed(
-                                                      Routes.newPermitList);
+                                                  : controller.type.value == 5
+                                                      ? Get.offAllNamed(
+                                                          Routes.vegExecutionScreen,
+                                                          arguments: {
+                                                              'vegexe': vegexe,
+                                                              'vegid': vegplan
+                                                            })
+                                                      : controller.type.value ==
+                                                              4
+                                                          ? Get.offAllNamed(
+                                                              Routes.addModuleCleaningExecutionContentWeb,
+                                                              arguments: {
+                                                                  'mcid': mcid
+                                                                })
+                                                          : Get.offNamed(Routes
+                                                              .newPermitList);
                                         },
                                         child: controller.type.value == 1
                                             ? Text(
@@ -118,10 +135,23 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                     "/ PM TASK",
                                                     style: Styles.greyLight14,
                                                   )
-                                                : Text(
-                                                    "/ PERMIT LIST",
-                                                    style: Styles.greyLight14,
-                                                  )),
+                                                : controller.type.value == 5
+                                                    ? Text(
+                                                        "/ VEG TASK",
+                                                        style:
+                                                            Styles.greyLight14,
+                                                      )
+                                                    : controller.type.value == 4
+                                                        ? Text(
+                                                            "/ MC TASK",
+                                                            style: Styles
+                                                                .greyLight14,
+                                                          )
+                                                        : Text(
+                                                            "/ PERMIT LIST",
+                                                            style: Styles
+                                                                .greyLight14,
+                                                          )),
 
                                     Text(" / VIEW PERMIT",
                                         style: Styles.greyLight14)
@@ -797,18 +827,40 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         onTap: () {
                                                           controller
                                                               .clearStoreDataPMtaskId();
-                                                          Get.toNamed(
-                                                            Routes.pmTaskView,
-                                                            arguments: {
-                                                              'pmTaskId': controller
-                                                                  .listAssociatedPm?[
-                                                                      index]
-                                                                  ?.pmId
-                                                            },
-                                                          );
+                                                          controller.type
+                                                                      .value ==
+                                                                  AppConstants
+                                                                      .kAudit
+                                                              ? Get.toNamed(
+                                                                  Routes
+                                                                      .viewAuditTask,
+                                                                  arguments: {
+                                                                      'auditTaskId': controller
+                                                                          .listAssociatedPm?[
+                                                                              index]
+                                                                          ?.pmId,
+                                                                      'type': controller
+                                                                          .type
+                                                                          .value
+                                                                    })
+                                                              : Get.toNamed(
+                                                                  Routes
+                                                                      .pmTaskView,
+                                                                  arguments: {
+                                                                    'pmTaskId': controller
+                                                                        .listAssociatedPm?[
+                                                                            index]
+                                                                        ?.pmId
+                                                                  },
+                                                                );
                                                         },
                                                         child: Text(
-                                                          "PMT${controller.listAssociatedPm?[index]?.pmId.toString() ?? ''}",
+                                                          controller.type
+                                                                      .value ==
+                                                                  AppConstants
+                                                                      .kAudit
+                                                              ? "AUD${controller.listAssociatedPm?[index]?.pmId.toString() ?? ''} "
+                                                              : "PMT${controller.listAssociatedPm?[index]?.pmId.toString() ?? ''}",
                                                           style: TextStyle(
                                                             decoration:
                                                                 TextDecoration
@@ -836,23 +888,33 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                     ),
                                                     DataCell(
                                                       Text(controller
-                                                              .listAssociatedPm?[
-                                                                  index]
-                                                              ?.equipmentCat
-                                                              .toString() ??
-                                                          ''),
+                                                                  .type.value ==
+                                                              AppConstants
+                                                                  .kAudit
+                                                          ? "NA"
+                                                          : controller
+                                                                  .listAssociatedPm?[
+                                                                      index]
+                                                                  ?.equipmentCat
+                                                                  .toString() ??
+                                                              ''),
                                                     ),
                                                     DataCell(
                                                       SingleChildScrollView(
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         child: Text(
-                                                          controller
-                                                                  .listAssociatedPm?[
-                                                                      index]
-                                                                  ?.equipment
-                                                                  .toString() ??
-                                                              '',
+                                                          controller.type
+                                                                      .value ==
+                                                                  AppConstants
+                                                                      .kAudit
+                                                              ? "NA"
+                                                              : controller
+                                                                      .listAssociatedPm?[
+                                                                          index]
+                                                                      ?.equipment
+                                                                      .toString() ??
+                                                                  '',
                                                         ),
                                                       ),
                                                     ),

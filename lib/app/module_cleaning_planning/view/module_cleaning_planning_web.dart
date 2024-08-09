@@ -411,7 +411,8 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                           : Dimens.box0,
                                       controller.id == 0
                                           ? Dimens.box0
-                                          : Container(
+                                          : 
+                                          Container(
                                               margin: Dimens.edgeInsets20,
                                               height: ((controller
                                                           .schedules.length) *
@@ -572,6 +573,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                             ),
                                                           ),
                                                         )
+                                                     
                                                       ],
                                                     ),
                                                   ),
@@ -695,6 +697,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                 ],
                                               ),
                                             ),
+                                   
                                     ],
                                   ),
                                 ),

@@ -444,8 +444,8 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> createNewPermitForPm(
-      newPermit, pmTaskId, activity, bool? isLoading, type) async {
+  Future<Map<String, dynamic>> createNewPermitForPm(newPermit, pmTaskId,
+      activity, bool? isLoading, type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createNewPermitForPm(
@@ -480,8 +480,8 @@ class Repository {
             scheduleLinkToPermit(
                 pmTaskId, activity, permitForJob[0], true, type);
           } else if (pmTaskId != null && type == 5) {
-            vegscheduleLinkToPermit(
-                pmTaskId, activity, permitForJob[0], true, type);
+            vegscheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
+                type, vegplanId, vegexid);
           } else {
             scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true, 0);
           }
@@ -499,8 +499,8 @@ class Repository {
   }
 
   //Update New Permit
-  Future<Map<String, dynamic>> updateNewPermit(
-      newPermit, bool? isLoading, bool? resubmit, int? type) async {
+  Future<Map<String, dynamic>> updateNewPermit(newPermit, bool? isLoading,
+      bool? resubmit, int? type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateNewPermit(
@@ -508,7 +508,9 @@ class Repository {
           newPermit: newPermit,
           isLoading: isLoading ?? false,
           resubmit: resubmit,
-          type: type);
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -540,8 +542,8 @@ class Repository {
   }
 
   /// sesubmit permit
-  Future<Map<String, dynamic>> resubmitPermit(
-      newPermit, bool? isLoading, bool? resubmit, int? type) async {
+  Future<Map<String, dynamic>> resubmitPermit(newPermit, bool? isLoading,
+      bool? resubmit, int? type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.resubmitPermit(
@@ -549,7 +551,9 @@ class Repository {
           newPermit: newPermit,
           isLoading: isLoading ?? false,
           resubmit: resubmit,
-          type: type);
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -5336,9 +5340,14 @@ class Repository {
               ? Get.offAllNamed(Routes.pmTaskView)
               : type == 1
                   ? Get.offAllNamed(Routes.jobDetails)
-                  // : type == 3
-                  //     ? Get.offAllNamed(Routes.viewAuditTask)
-                  : Get.offAllNamed(Routes.newPermitList);
+                  : type == 3
+                      ? Get.offAllNamed(Routes.viewAuditTask)
+                      : type == 4
+                          ? Get.offAllNamed(
+                              Routes.addModuleCleaningExecutionContentWeb)
+                          : type == 5
+                              ? Get.offAllNamed(Routes.vegExecutionScreen)
+                              : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -6572,6 +6581,7 @@ class Repository {
       return false;
     }
   }
+
   Future<bool> assignToVeg({
     int? assignId,
     int? taskId,
@@ -6598,8 +6608,6 @@ class Repository {
       return false;
     }
   }
-
-
 
   Future<List<EmployeeModel?>?> getAssignedToList(
     String? auth,
@@ -7277,7 +7285,7 @@ class Repository {
   }
 
   Future<List<CheckPointModel?>?> getCheckPointlist(int? selectedchecklistId,
-      bool? isLoading, int? facilityId, bool? isExport) async {
+      bool? isLoading, int? facilityId, bool? isExport, int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       //print({"checkid", selectedchecklistId});
@@ -7285,7 +7293,8 @@ class Repository {
           auth: auth,
           selectedchecklistId: selectedchecklistId ?? 0,
           isLoading: isLoading ?? false,
-          facilityId: facilityId);
+          facilityId: facilityId,
+          type: type);
       //print({"checkpoint list", res.data});
       if (!res.hasError) {
         final jsonPreventiveCheckPointModels = jsonDecode(res.data);
@@ -11837,8 +11846,8 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> vegscheduleLinkToPermit(
-      scheduleId, activity, permitId, bool? isLoading, type) async {
+  Future<Map<String, dynamic>> vegscheduleLinkToPermit(scheduleId, activity,
+      permitId, bool? isLoading, type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.vegscheduleLinkToPermit(
@@ -11847,7 +11856,9 @@ class Repository {
           permitId: permitId,
           activity: activity,
           isLoading: isLoading ?? false,
-          type: type);
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
@@ -13284,7 +13295,7 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: " Paln Added Successfully...", fontSize: 16.0);
-        Get.offNamed(
+        Get.offAllNamed(
           Routes.vegetationPlanListScreen,
         );
 
@@ -13773,9 +13784,7 @@ class Repository {
   }
 
   Future<void> endVegScheduleExecutionButton(
-    int? scheduleId,
-    bool? isLoading,
-  ) async {
+      int? scheduleId, bool? isLoading, closePtwJsonString) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -13787,6 +13796,10 @@ class Repository {
       print('EndScheduleExecutionResponse55: ${res.data}');
 
       if (!res.hasError) {
+        var responseMap = json.decode(res.data);
+        permitCloseButton(closePtwJsonString, isLoading, 0, 5);
+
+        return responseMap;
         //  return _permitIssueModel;
       } else {
         Utility.showDialog(
@@ -13930,7 +13943,8 @@ class Repository {
     }
   }
 
-  Future<bool> vegendRejectExecution({bool? isLoading, rejecttoJsonString}) async {
+  Future<bool> vegendRejectExecution(
+      {bool? isLoading, rejecttoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);

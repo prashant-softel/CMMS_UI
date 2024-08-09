@@ -10,11 +10,13 @@ class VegExecutionPresenter {
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
+    int? featureId,
     bool? isLoading,
   }) async =>
       await vegExecutionUsecase.getAssignedToList(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
+        featureId: featureId ?? 0,
         isLoading: isLoading ?? false,
       );
   Future<bool> assignToVeg({
@@ -28,6 +30,17 @@ class VegExecutionPresenter {
       isLoading: isLoading,
     );
   }
+
+  void clearPermitStoreData() async =>
+      vegExecutionUsecase.clearPermitStoreData();
+  void clearmcDetailsStoreData() async =>
+      vegExecutionUsecase.clearmcDetailsStoreData();
+
+  void clearJobDetailStoreData() async =>
+      vegExecutionUsecase.clearJobDetailStoreData();
+  void clearTypeValue() async => vegExecutionUsecase.clearTypeValue();
+  void clearisCheckedValue() async => vegExecutionUsecase.clearisCheckedValue();
+  void clearpmTaskValue() async => vegExecutionUsecase.clearpmTaskValue();
 
   Future<VegExecutionDetailsModel?> getVegExecutionDetail({
     bool? isLoading,
@@ -90,14 +103,12 @@ class VegExecutionPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<void> endVegScheduleExecutionButton({
-    int? scheduleId,
-    bool? isLoading,
-  }) async =>
+  Future<void> endVegScheduleExecutionButton(
+          {int? scheduleId, bool? isLoading, closePtwJsonString}) async =>
       await vegExecutionUsecase.endVegScheduleExecutionButton(
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          closePtwJsonString: closePtwJsonString);
 
   Future<Map<String, dynamic>?> abandonVegScheduleButton({
     abandoneScheduleJsonString,
@@ -188,6 +199,4 @@ class VegExecutionPresenter {
       await vegExecutionUsecase.getExecutionId();
   void clearExecutionId() => vegExecutionUsecase.clearExecutionId();
   void clearPlanId() => vegExecutionUsecase.clearPlanId();
-  void clearPermitStoreData() async =>
-      vegExecutionUsecase.clearPermitStoreData();
 }
