@@ -11,4 +11,12 @@ class DocumentUploadUsecase {
       await repository.getDocumentMaster(
         isLoading: isLoading,
       );
+  Future<Map<String, dynamic>> uploadDocumentNew({
+    uploadDocument,
+    bool? isLoading,
+  }) async =>
+      await repository.uploadDocumentNew(
+        uploadDocument,
+        isLoading,
+      );
 }
