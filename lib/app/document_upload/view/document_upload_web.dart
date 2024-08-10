@@ -142,7 +142,7 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                                             .isSelectedDocumentNameType
                                                             .value,
                                                         selectedValue: controller
-                                                            .selectedDocumentNameType
+                                                            .selecteddocumentNameType
                                                             .value,
                                                         onValueChanged:
                                                             controller
@@ -167,6 +167,8 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                                           'Sub Group Document Name: '),
                                                   Dimens.boxWidth2,
                                                   LoginCustomTextfield(
+                                                    textController:
+                                                        controller.subDocName,
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
@@ -180,7 +182,8 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                                 children: [
                                                   CustomRichText(
                                                       includeAsterisk: false,
-                                                      title: 'Re - New Date: '),
+                                                      title:
+                                                          'Please Mention The ReNew Date: '),
                                                   Dimens.boxWidth2,
                                                   CustomTextFieldForStock(
                                                     width:
@@ -191,16 +194,14 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                                     numberTextField: true,
                                                     onTap: () {
                                                       controller
-                                                              .openUploadDocDateTcDatePicker =
+                                                              .openrenewDateTcDatePicker =
                                                           !controller
-                                                              .openUploadDocDateTcDatePicker;
+                                                              .openrenewDateTcDatePicker;
                                                       controller.update(
                                                           ['stock_Mangement']);
                                                     },
-                                                    textController: controller
-                                                        .uploadDocDateTc,
-                                                    //validate
-
+                                                    textController:
+                                                        controller.renewDateTc,
                                                     onChanged: (value) {},
                                                   ),
                                                 ],
@@ -231,6 +232,7 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                                     FileUploadDetailsWidgetWeb()),
                                           ]),
                                     ),
+                                    Dimens.boxHeight10,
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20),
@@ -244,8 +246,7 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                                   height: 1.0,
                                                   color: Colors.black),
                                             ),
-                                            // controller: controller.commentCtrlr,
-                                            // enabled: controller.isJobCardStarted.value,
+                                            controller: controller.remark,
                                             decoration: InputDecoration(
                                               disabledBorder:
                                                   OutlineInputBorder(
@@ -283,7 +284,7 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                               ],
                             ),
                           ),
-                          if (controller.openUploadDocDateTcDatePicker)
+                          if (controller.openrenewDateTcDatePicker)
                             Positioned(
                               right: 210,
                               top: 110,
@@ -294,10 +295,10 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                 controller: DateRangePickerController(),
                                 selectionChanges: (p0) {
                                   print('po valu ${p0.value.toString()}');
-                                  controller.uploadDocDateTc.text =
+                                  controller.renewDateTc.text =
                                       DateFormat('yyyy-MM-dd').format(p0.value);
-                                  controller.openUploadDocDateTcDatePicker =
-                                      !controller.openUploadDocDateTcDatePicker;
+                                  controller.openrenewDateTcDatePicker =
+                                      !controller.openrenewDateTcDatePicker;
                                   // controller.isPOdateInvalid.value = false;
                                   controller.update(['stock_Mangement']);
                                 },
@@ -319,7 +320,7 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                     backgroundColor: ColorValues.submitColor,
                     text: "Submit",
                     onPressed: () {
-                      // controller.addAttendance();
+                      controller.uploadDocumentNew();
                     },
                   ),
                 ),

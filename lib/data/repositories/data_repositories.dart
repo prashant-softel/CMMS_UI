@@ -2005,6 +2005,16 @@ class DataRepository extends DomainRepository {
         createGo: createGo,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> uploadDocumentNew({
+    required String auth,
+    uploadDocument,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.uploadDocumentNew(
+        auth: auth,
+        uploadDocument: uploadDocument,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> createCompliance(
           {required String auth,
           createCompliance,

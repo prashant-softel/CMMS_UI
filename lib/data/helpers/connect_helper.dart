@@ -3444,6 +3444,28 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> uploadDocumentNew({
+    required String auth,
+    uploadDocument,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/uploadDocument',
+      Request.post,
+      uploadDocument,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
   Future<ResponseModel> createCompliance(
       {required String auth,
       createCompliance,

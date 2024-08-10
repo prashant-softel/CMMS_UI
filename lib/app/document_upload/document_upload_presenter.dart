@@ -9,4 +9,14 @@ class DocumentUploadPresenter {
   }) async {
     return documentUploadUsecase.getDocumentMaster(isLoading: isLoading);
   }
+
+  Future<Map<String, dynamic>?> uploadDocumentNew({
+    uploadDocument,
+    required bool isLoading,
+  }) async {
+    return documentUploadUsecase.uploadDocumentNew(
+      uploadDocument: uploadDocument,
+      isLoading: isLoading,
+    );
+  }
 }
