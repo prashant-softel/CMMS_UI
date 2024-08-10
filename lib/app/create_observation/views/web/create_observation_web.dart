@@ -348,7 +348,10 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                                                  inputFormatters: [
+                                                                    FilteringTextInputFormatter
+                                                                        .digitsOnly
+                                                                  ],
                                                                   keyboardType:
                                                                       TextInputType
                                                                           .number,
@@ -897,7 +900,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   text: 'Submit',
                                   onPressed: () {
                                     controller.isFormInvalid.value = false;
-                                    controller.createObs(1);
+                                    controller.createObs(
+                                        position: 1,
+                                        fileIds: dropzoneController.fileIds);
                                   },
                                 ),
                               )
@@ -908,7 +913,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   text: 'Update',
                                   onPressed: () {
                                     controller.isFormInvalid.value = false;
-                                    controller.createObs(0);
+                                    controller.createObs(
+                                        position: 0,
+                                        fileIds: dropzoneController.fileIds);
                                   },
                                 ),
                               ),
@@ -917,7 +924,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                     )
                 // : Dimens.box0
                 ),
-      
           ),
         );
         // );
