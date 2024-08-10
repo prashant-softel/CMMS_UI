@@ -880,9 +880,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Assets List",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Assets List",
+                                              onTap: () {
                                                 Get.toNamed(
                                                   Routes.inventoryList,
                                                 );
@@ -899,9 +899,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveAddAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Add Assets",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Add Assets",
+                                              onTap: () {
                                                 Get.toNamed(
                                                   Routes.addInventoryScreen,
                                                 );
@@ -917,9 +917,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveAddAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Import Assets",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Import Assets",
+                                              onTap: () {
                                                 controller.clearStoreData();
                                                 Get.toNamed(
                                                     Routes.importInventory,
@@ -954,9 +954,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Assets Category",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Assets Category",
+                                              onTap: () {
                                                 Get.toNamed(
                                                   Routes.inventoryCategory,
                                                 );
@@ -972,9 +972,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Assets Type",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Assets Type",
+                                              onTap: () {
                                                 Get.toNamed(
                                                   Routes
                                                       .inventoryTypeListScreen,
@@ -991,9 +991,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Assets Status",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Assets Status",
+                                              onTap: () {
                                                 controller
                                                     .inventoryStatusScreen();
                                               })
@@ -1059,6 +1059,13 @@ class MastersDashboard extends GetView<MastersController> {
                                                   });
                                             })))
                                           : Dimens.box0,
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Document Upload",
+                                            onTap: () {
+                                              controller.documentUpload();
+                                            });
+                                      }))),
                                       varUserAccessModel.value.access_list!
                                                   .where((e) =>
                                                       e.feature_id ==
@@ -1069,9 +1076,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Document Type",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Document Type",
+                                              onTap: () {
                                                 Get.toNamed(
                                                     Routes.DocumentMaster);
                                               })
@@ -1128,9 +1135,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveAddAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Create Warranty Claim",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Create Warranty Claim",
+                                              onTap: () {
                                                 controller
                                                     .createWarrantyClaimList();
                                               })
@@ -1145,9 +1152,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Calibration List",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Calibration List",
+                                              onTap: () {
                                                 Get.toNamed(
                                                   Routes.calibrationList,
                                                 );
@@ -1163,9 +1170,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "WC Certificates List",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "WC Certificates List",
+                                              onTap: () {
                                                 Get.toNamed(
                                                   Routes
                                                       .warrantyCertificatesList,
@@ -1182,9 +1189,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Warranty Claims List",
-                                              ontap: () => controller
+                                          ? createContentTile(
+                                              title: "Warranty Claims List",
+                                              onTap: () => controller
                                                   .breakdownMaintenance(),
                                             )
                                           : Dimens.box0
@@ -1240,9 +1247,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Grievance Type",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Grievance Type",
+                                              onTap: () {
                                                 controller.grievanceType();
                                               })
                                           : Dimens.box0,
@@ -1256,9 +1263,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Water Type",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Water Type",
+                                              onTap: () {
                                                 controller.waterTypeMaster();
                                               })
                                           : Dimens.box0,
@@ -1272,9 +1279,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Waste Type",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Waste Type",
+                                              onTap: () {
                                                 controller.wasteTypeMaster();
                                               })
                                           : Dimens.box0,
@@ -1288,9 +1295,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Body Injured",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Body Injured",
+                                              onTap: () {
                                                 Get.toNamed(Routes.Bodyinjured);
                                               })
                                           : Dimens.box0,
@@ -1332,13 +1339,6 @@ class MastersDashboard extends GetView<MastersController> {
                                               controller.goToRiskType();
                                             });
                                       }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Document Upload",
-                                            onTap: () {
-                                              controller.documentUpload();
-                                            });
-                                      }))),
                                     ],
                                   ),
 
@@ -1365,9 +1365,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Incident Risk",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Incident Risk",
+                                              onTap: () {
                                                 Get.toNamed(
                                                     Routes.incidentRiskType);
                                               })
@@ -1382,9 +1382,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Statutory Compliance",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Statutory Compliance",
+                                              onTap: () {
                                                 Get.toNamed(
                                                     Routes.StatutoryCompliance);
                                               })
@@ -1399,9 +1399,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Compliance Status",
-                                              ontap: () {
+                                          ? createContentTile(
+                                              title: "Compliance Status",
+                                              onTap: () {
                                                 Get.toNamed(
                                                     Routes.ComplianceStatus);
                                               })
@@ -1416,16 +1416,16 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                          ? _inventoryList(
-                                              tittle: "Course Category",
-                                              ontap: () {
-                                               Get.toNamed(
+                                          ? createContentTile(
+                                              title: "Course Category",
+                                              onTap: () {
+                                                Get.toNamed(
                                                     Routes.courseCategory);
                                               })
                                           : Dimens.box0,
                                     ],
                                   ),
-                                   GridView.count(
+                                  GridView.count(
                                     shrinkWrap: true,
                                     primary: false,
                                     padding: Dimens.edgeInsets15,
@@ -1445,7 +1445,6 @@ class MastersDashboard extends GetView<MastersController> {
                                               Get.toNamed(Routes.targetedGroup);
                                             });
                                       }))),
-                                      
                                     ],
                                   ),
                                 ],
@@ -1489,41 +1488,6 @@ class MastersDashboard extends GetView<MastersController> {
               Center(
             child: Text(
               title,
-              style: TextStyle(
-                  color: ColorValues.whiteColor,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700),
-
-              textAlign: TextAlign.center, // Updated
-            ),
-            // ),
-            // ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  _inventoryList({required String tittle, Function()? ontap}) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: ontap,
-        child: Container(
-          decoration: BoxDecoration(
-            color: ColorValues.skyBlueColor,
-            borderRadius: BorderRadius.circular(2),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          // padding: EdgeInsets.all(9),
-          child:
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              Center(
-            child: Text(
-              tittle,
               style: TextStyle(
                   color: ColorValues.whiteColor,
                   fontSize: 15,
