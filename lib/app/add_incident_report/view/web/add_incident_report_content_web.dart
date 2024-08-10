@@ -1619,7 +1619,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                   TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
             ),
             onTap: () {
-              pickActionTakenDateTime_web(context, 0);
+              controller.pickActionTakenDateTime_web(context, 0);
 
               // : null;
             },
@@ -1639,83 +1639,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
         ),
       ),
     ]);
-  }
-
-//Action Taken Date and Time
-  Future pickActionTakenDateTime_web(BuildContext context, int position) async {
-    var dateTime = controller.selectedActionTakenTime.value;
-
-    final date = await pickActionTakenDate_web(context, position);
-    if (date == null) {
-      return;
-    }
-
-    final time = await pickActionTakenTime_web(context, position);
-    if (time == null) {
-      return;
-    }
-
-    dateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-    controller.selectedActionTakenTime.value;
-
-    controller.actionTakenDateTimeCtrlr
-      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
-      ..selection = TextSelection.fromPosition(
-        TextPosition(
-          offset: controller.actionTakenDateTimeCtrlr.text.length,
-          affinity: TextAffinity.upstream,
-        ),
-      );
-
-    controller.actionTakenDateTimeCtrlrBuffer =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
-    print(
-        'Action TakenDate & Time ${controller.actionTakenDateTimeCtrlrBuffer}');
-  }
-
-  Future<DateTime?> pickActionTakenDate_web(
-      BuildContext context, int position) async {
-    DateTime? dateTime = controller.selectedActionTakenTime.value;
-
-    //final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
-      context: context,
-      initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
-    );
-
-    if (newDate == null) return null;
-
-    return newDate;
-  }
-
-  Future<TimeOfDay?> pickActionTakenTime_web(
-      BuildContext context, int position) async {
-    DateTime dateTime = controller.selectedActionTakenTime.value;
-
-    //final initialTime = TimeOfDay(hour: 12, minute: 0);
-    final newTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        });
-
-    if (newTime == null) {
-      return null;
-    }
-
-    return newTime;
   }
 
   ///
@@ -1897,7 +1820,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                   TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
             ),
             onTap: () {
-              pickDateTime_web(context);
+              controller.pickDateTime_web(context);
 
               // : null;
             },
@@ -1921,86 +1844,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   }
 
 //Start Date and valid Till
-  Future pickDateTime_web(
-    BuildContext context,
-  ) async {
-    var dateTime = controller.selectedBreakdownTime.value;
-
-    final date = await pickDate_web(context);
-    if (date == null) {
-      return;
-    }
-
-    final time = await pickTime_web(context);
-    if (time == null) {
-      return;
-    }
-
-    dateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-    controller.selectedBreakdownTime.value;
-
-    controller.startDateTimeCtrlr
-      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
-      ..selection = TextSelection.fromPosition(
-        TextPosition(
-          offset: controller.startDateTimeCtrlr.text.length,
-          affinity: TextAffinity.upstream,
-        ),
-      );
-    controller.startDateTimeCtrlr.text =
-        DateFormat("yyyy-MM-dd HH:mm").format(dateTime);
-
-    controller.startDateTimeCtrlrBuffer =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
-    print('Incident reportDate & Time ${controller.startDateTimeCtrlrBuffer}');
-  }
-
-  Future<DateTime?> pickDate_web(
-    BuildContext context,
-  ) async {
-    DateTime? dateTime = controller.selectedBreakdownTime.value;
-
-    //final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
-      context: context,
-      initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
-    );
-
-    if (newDate == null) return null;
-
-    return newDate;
-  }
-
-  Future<TimeOfDay?> pickTime_web(
-    BuildContext context,
-  ) async {
-    DateTime dateTime = controller.selectedBreakdownTime.value;
-
-    //final initialTime = TimeOfDay(hour: 12, minute: 0);
-    final newTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        });
-
-    if (newTime == null) {
-      return null;
-    }
-
-    return newTime;
-  }
 
   Widget _buildIncidentReportDescriptionField_web(BuildContext context) {
     return Column(//
@@ -5824,8 +5667,7 @@ class DetailsOfOtherPerson extends StatelessWidget {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: Obx(
-                                                () => 
-                                                IgnorePointer(
+                                                () => IgnorePointer(
                                                     ignoring: controller
                                                                 .incidentReportDetailsModel
                                                                 .value
@@ -5890,8 +5732,7 @@ class DetailsOfOtherPerson extends StatelessWidget {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                 ),
-                                                child: Obx(() =>
-                                                 IgnorePointer(
+                                                child: Obx(() => IgnorePointer(
                                                       ignoring: controller
                                                                   .incidentReportDetailsModel
                                                                   .value
@@ -5947,8 +5788,7 @@ class DetailsOfOtherPerson extends StatelessWidget {
                                                               5),
                                                     ),
                                                     child:
-                                                        Obx(() =>
-                                                         IgnorePointer(
+                                                        Obx(() => IgnorePointer(
                                                               ignoring: controller
                                                                           .incidentReportDetailsModel
                                                                           .value
