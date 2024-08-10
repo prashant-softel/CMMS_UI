@@ -18,6 +18,7 @@ import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -2341,28 +2342,77 @@ class AddIncidentReportController extends GetxController {
     print('Argument$id');
   }
 
-  Future pickDateTime(BuildContext context, String type) async {
-    TextEditingController dateTimeController;
-    Rx<DateTime> selectedDateTime;
+  Widget _buildActionTakenDateTimeField_web(
+    BuildContext context,
+  ) {
+    return Column(//
+        children: [
+      Dimens.boxHeight5,
+      Container(
+        height: MediaQuery.of(context).size.height * 0.050,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ), //BoxShadow
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ), //BoxShadow
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: Responsive.isDesktop(context)
+              ? MediaQuery.of(context).size.width / 3.7
+              : MediaQuery.of(context).size.width / 1.0,
+          child: TextField(
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
+            onTap: () {
+              pickActionTakenDateTime_web(context, 0);
 
-    // Determine which controller and DateTime to use based on the type
-    if (type == 'incident') {
-      dateTimeController = startDateTimeCtrlr;
-      selectedDateTime = selectedBreakdownTime;
-    } else if (type == 'restoration') {
-      dateTimeController = actionTakenDateTimeCtrlr;
-      selectedDateTime = selectedActionTakenTime;
-    } else {
-      return;
-    }
+              // : null;
+            },
+            controller: actionTakenDateTimeCtrlr,
 
-    var dateTime = selectedDateTime.value;
-    final date = await pickDate(context);
+            // :null,
+            autofocus: false,
+            decoration: InputDecoration(
+                fillColor: ColorValues.whiteColor,
+                filled: true,
+                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                suffixIcon: Icon(Icons.calendar_month)),
+          ),
+        ),
+      ),
+    ]);
+  }
+
+//Action Taken Date and Time
+  Future pickActionTakenDateTime_web(BuildContext context, int position) async {
+    var dateTime = selectedActionTakenTime.value;
+
+    final date = await pickActionTakenDate_web(context, position);
     if (date == null) {
       return;
     }
 
-    final time = await pickTime(context);
+    final time = await pickActionTakenTime_web(context, position);
     if (time == null) {
       return;
     }
@@ -2374,25 +2424,32 @@ class AddIncidentReportController extends GetxController {
       time.hour,
       time.minute,
     );
-    selectedDateTime.value = dateTime;
-    dateTimeController
-      ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
+    selectedActionTakenTime.value;
+
+    actionTakenDateTimeCtrlr
+      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
-          offset: dateTimeController.text.length,
+          offset: actionTakenDateTimeCtrlr.text.length,
           affinity: TextAffinity.upstream,
         ),
       );
+
+    actionTakenDateTimeCtrlrBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
+    print('Action TakenDate & Time ${actionTakenDateTimeCtrlrBuffer}');
   }
 
-  Future<DateTime?> pickDate(BuildContext context) async {
-    DateTime? dateTime = selectedtargetDateTime.value;
+  Future<DateTime?> pickActionTakenDate_web(
+      BuildContext context, int position) async {
+    DateTime? dateTime = selectedActionTakenTime.value;
 
+    //final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(DateTime.now().year + 10),
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
     );
 
     if (newDate == null) return null;
@@ -2400,9 +2457,91 @@ class AddIncidentReportController extends GetxController {
     return newDate;
   }
 
-  Future<TimeOfDay?> pickTime(BuildContext context) async {
-    DateTime dateTime = selectedtargetDateTime.value;
+  Future<TimeOfDay?> pickActionTakenTime_web(
+      BuildContext context, int position) async {
+    DateTime dateTime = selectedActionTakenTime.value;
 
+    //final initialTime = TimeOfDay(hour: 12, minute: 0);
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
+  }
+
+  Future pickDateTime_web(
+    BuildContext context,
+  ) async {
+    var dateTime = selectedBreakdownTime.value;
+
+    final date = await pickDate_web(context);
+    if (date == null) {
+      return;
+    }
+
+    final time = await pickTime_web(context);
+    if (time == null) {
+      return;
+    }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    selectedBreakdownTime.value;
+
+    startDateTimeCtrlr
+      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: startDateTimeCtrlr.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+    startDateTimeCtrlr.text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime);
+
+    startDateTimeCtrlrBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
+    print('Incident reportDate & Time ${startDateTimeCtrlrBuffer}');
+  }
+
+  Future<DateTime?> pickDate_web(
+    BuildContext context,
+  ) async {
+    DateTime? dateTime = selectedBreakdownTime.value;
+
+    //final initialDate = DateTime.now();
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime_web(
+    BuildContext context,
+  ) async {
+    DateTime dateTime = selectedBreakdownTime.value;
+
+    //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
         context: context,
         initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),

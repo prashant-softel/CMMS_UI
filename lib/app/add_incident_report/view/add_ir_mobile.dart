@@ -3,9 +3,11 @@ import 'package:cmms/app/add_incident_report/view/detailsOfInjuredPersonMobile.d
 import 'package:cmms/app/add_incident_report/view/web/detailsOfOtherInjuredPersonMobile.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textFieldMobile.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -17,18 +19,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class IRMobile extends StatefulWidget {
-  IRMobile({Key? key}) : super(key: key);
+// class IRMobile extends StatefulWidget {
+//   IRMobile({Key? key}) : super(key: key);
+//   final FileUploadController dropzoneController =
+//       Get.put(FileUploadController());
+
+//   @override
+//   _IRMobileState createState() => _IRMobileState();
+// }
+
+// class _IRMobileState extends State<IRMobile> {
+//   @override
+
+class IRMobile extends GetView<AddIncidentReportController> {
+  IRMobile({super.key});
+
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
 
-  @override
-  _IRMobileState createState() => _IRMobileState();
-}
-
-class _IRMobileState extends State<IRMobile> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AddIncidentReportController>(
@@ -143,7 +155,7 @@ class _IRMobileState extends State<IRMobile> {
                                   ? "Required field"
                                   : null,
                               onTap: () {
-                                controller.pickDateTime(context, 'incident');
+                                controller.pickDateTime_web(context);
                               },
                               onChanged: (value) {
                                 if (value.trim().length > 0) {
@@ -274,7 +286,8 @@ class _IRMobileState extends State<IRMobile> {
                               textController:
                                   controller.actionTakenDateTimeCtrlr,
                               onTap: () {
-                                controller.pickDateTime(context, 'restoration');
+                                controller.pickActionTakenDateTime_web(
+                                    context, 0);
                               },
                             ),
                             Dimens.boxHeight15,
@@ -592,6 +605,94 @@ class _IRMobileState extends State<IRMobile> {
                                     ],
                                   )
                                 : Dimens.box0,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                CustomElevatedButton(
+                                  backgroundColor: ColorValues.appRedColor,
+                                  onPressed: () {
+                                    Get.offAndToNamed(
+                                        Routes.incidentReportListWeb);
+                                  },
+                                  text: 'Cancel',
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                controller.incidentReportDetailsModel.value
+                                                ?.status ==
+                                            182 ||
+                                        controller.incidentReportDetailsModel
+                                                .value?.status ==
+                                            181
+                                    ? CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appDarkBlueColor,
+                                        onPressed: () {
+                                          // showAlertDialog();
+                                          controller.updateIncidentReport(
+                                              fileIds:
+                                                  dropzoneController.fileIds);
+                                        },
+                                        text: 'Update',
+                                      )
+                                    : Dimens.box0,
+                                controller.irId.value == 0
+                                    ? CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appGreenColor,
+                                        onPressed: () {
+                                          // showAlertDialog();
+                                          controller.isFormInvalid.value =
+                                              false;
+                                          controller.createIncidentReport(
+                                              fileIds:
+                                                  dropzoneController.fileIds);
+                                        },
+                                        text: 'Submit',
+                                      )
+                                    : Dimens.box0,
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                controller.incidentReportDetailsModel.value
+                                            ?.status_short ==
+                                        "Rejected"
+                                    ? CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appGreenColor,
+                                        onPressed: () {
+                                          // showAlertDialog();
+                                          controller.createIncidentReport(
+                                              fileIds:
+                                                  dropzoneController.fileIds);
+                                        },
+                                        text: 'Re-Submit',
+                                      )
+                                    : Container(),
+                                controller.incidentReportDetailsModel.value
+                                                ?.status ==
+                                            183 ||
+                                        controller.incidentReportDetailsModel
+                                                .value?.status ==
+                                            185
+                                    ? CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appDarkBlueColor,
+                                        onPressed: () {
+                                          // showAlertDialog();
+                                          controller.updateIRSecondStep(
+                                              fileIds:
+                                                  dropzoneController.fileIds);
+                                        },
+                                        text: 'Update IR',
+                                      )
+                                    : Dimens.box0,
+                              ],
+                            ),
                           ],
                         ),
                       ),
