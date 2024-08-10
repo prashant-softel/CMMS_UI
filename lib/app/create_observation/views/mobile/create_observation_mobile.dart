@@ -379,7 +379,7 @@ class _CreateObservationMobileState extends State<CreateObservationMobile> {
                                   text: 'Submit',
                                   onPressed: () {
                                     controller.isFormInvalid.value = false;
-                                    controller.createObs(1);
+                                    controller.createObs(position: 1);
                                   },
                                 ),
                               )
@@ -390,7 +390,7 @@ class _CreateObservationMobileState extends State<CreateObservationMobile> {
                                   text: 'Update',
                                   onPressed: () {
                                     controller.isFormInvalid.value = false;
-                                    controller.createObs(0);
+                                    controller.createObs(position: 0);
                                   },
                                 ),
                               ),

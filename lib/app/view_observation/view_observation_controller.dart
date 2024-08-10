@@ -43,6 +43,7 @@ class ViewObservationController extends GetxController {
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
   Rx<int> obsId = 0.obs;
+  RxList<FileList?>? file_list = <FileList>[].obs;
   @override
   void onInit() async {
     try {
@@ -109,6 +110,7 @@ class ViewObservationController extends GetxController {
           getObsById.value?.type_of_observation_name ?? '';
       selectedSourceOfObs.value =
           getObsById.value?.source_of_observation_name ?? '';
+      file_list!.value = getObsById.value?.file_list ?? [];
     }
   }
 
@@ -117,6 +119,7 @@ class ViewObservationController extends GetxController {
 
     historyList?.value = await viewObservationPresenter.getHistory(
           moduleType,
+          facilityId,
           id,
           true,
         ) ??
@@ -137,8 +140,7 @@ class ViewObservationController extends GetxController {
     }
   }
 
-  
- void viewObsCloseButton({int? id}) async {
+  void viewObsCloseButton({int? id}) async {
     {
       String _comment = closeCommentTextFieldCtrlr.text.trim();
 
