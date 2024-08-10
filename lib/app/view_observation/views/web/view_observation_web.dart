@@ -67,9 +67,9 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.offNamed(Routes.statutory);
+                                Get.offNamed(Routes.observationListScreen);
                               },
-                              child: Text(" / MIS", style: Styles.greyLight14),
+                              child: Text(" / OBSERVATION LIST", style: Styles.greyLight14),
                             ),
                             Text(
                               " / VIEW OBSERVATION",
@@ -121,7 +121,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                           ),
                                           child: Center(
                                             child: Text(
-                                              "Status ${controller.getObsById.value!.short_status == null ? "" : controller.getObsById.value!.short_status}",
+                                              "${controller.getObsById.value!.short_status == null ? "" : controller.getObsById.value!.short_status}",
                                               style: TextStyle(
                                                 color: Colors.white,
                                               ),
@@ -263,9 +263,9 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             ),
                                                           ],
                                                         ),
-                                                        
+
                                                         // Dimens.boxWidth10,
-                                                         SizedBox(width: 10),
+                                                        SizedBox(width: 10),
                                                         Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
@@ -305,7 +305,6 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                             ),
                                           ),
                                         ),
-                                      
 
                                         // Row(
                                         //   children: [
@@ -379,9 +378,9 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                         //     Spacer(),
                                         //   ],
                                         // ),
-                     
+
                                         // Dimens.boxHeight20,
-                                         SizedBox(height: 20),
+                                        SizedBox(height: 20),
                                         (controller.historyList != null &&
                                                 controller
                                                     .historyList!.isNotEmpty)
@@ -413,7 +412,6 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             style:
                                                                 Styles.blue700,
                                                           ),
-                                                          
                                                         ],
                                                       ),
                                                     ),
@@ -428,20 +426,26 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                 ),
                                               )
                                             : Dimens.box0,
-                                                                 Container(
-                          height: 45,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.rejectColor,
-                            text: "Close",
-                            icon: Icons.close,
-                            onPressed: () {
-                              Get.dialog(ListOfObsCloseDialog(
-                                id: controller.obsId.value,
-                              ));
-                            },
-                          ),
-                        ),
-
+                                        controller.getObsById.value!
+                                                    .status_code !=
+                                                552
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.rejectColor,
+                                                  text: "Close",
+                                                  icon: Icons.close,
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        ListOfObsCloseDialog(
+                                                      id: controller
+                                                          .obsId.value,
+                                                    ));
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                       ],
                                     ),
                                   ),

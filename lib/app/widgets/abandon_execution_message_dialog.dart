@@ -41,7 +41,7 @@ class AbandonMCExecutionMessageDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  Text('${data}',
+                  Text('Abandoned Successfully!',
                       style: TextStyle(color: Colors.green),
                       textAlign: TextAlign.center),
                   // SizedBox(height: 20,),

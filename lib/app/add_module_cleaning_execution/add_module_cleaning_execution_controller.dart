@@ -19,6 +19,7 @@ import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/update_mc_execution_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
@@ -73,6 +74,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   int type = 1;
   var schedule;
   TextEditingController commentCtrlr = TextEditingController();
+  Rx<bool> isFormInvalid = false.obs;
 
   ///Permit Type
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
@@ -427,6 +429,11 @@ class AddModuleCleaningExecutionController extends GetxController {
 
   void abandonAllExecutionButton({int? id}) async {
     {
+      if (commentTextFieldCtrlr.text == '') {
+        // isFormInvalid.value == true;
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = commentTextFieldCtrlr.text.trim();
 
       CommentModel commentAbandonModel =

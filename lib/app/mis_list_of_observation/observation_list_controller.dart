@@ -70,7 +70,7 @@ class ObservationListController extends GetxController {
     "Responsible": true,
     "Target Date": true,
     "Action Taken": true,
-    "Closer Date": true,
+    "Closed Date": true,
     "Cost type": true,
     // "Status": true,
   });
@@ -87,7 +87,7 @@ class ObservationListController extends GetxController {
     "Responsible": 150,
     "Target Date": 150,
     "Action Taken": 150,
-    "Closer Date": 150,
+    "Closed Date": 150,
     "Cost type": 150,
     // "Status": 150,
   };
@@ -115,7 +115,7 @@ class ObservationListController extends GetxController {
       "Responsible": responsibleFilterText,
       "Target Date": targetDateFilterText,
       "Action Taken": actionTakenFilterText,
-      "Closer Date": closerDateFilterText,
+      "Closed Date": closerDateFilterText,
       "Cost type": costTypeFilterText,
       // "Status": statusFilterText,
     };

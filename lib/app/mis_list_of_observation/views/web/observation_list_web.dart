@@ -23,10 +23,10 @@ class ObservationListWeb extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ObservationListWeb> createState() => _StatutoryWebState();
+  State<ObservationListWeb> createState() => _ObservationWebState();
 }
 
-class _StatutoryWebState extends State<ObservationListWeb> {
+class _ObservationWebState extends State<ObservationListWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ObservationListController>(
@@ -461,6 +461,9 @@ class ObservationListDataSource extends DataTableSource {
     final ObservationListDetails = filteredGetObservationList[index];
 
     controller.ObservationId.value = ObservationListDetails?.id ?? 0;
+    String closedDate = ObservationListDetails?.closed_date == "0001-01-01"
+        ? ''
+        : '${ObservationListDetails?.closed_date ?? ''}';
     var cellsBuffer = [
       // '${ObservationListDetails?.id ?? ''}',
       "id",
@@ -468,14 +471,14 @@ class ObservationListDataSource extends DataTableSource {
       '${ObservationListDetails?.date_of_observation ?? ''}',
       '${ObservationListDetails?.contractor_name ?? ''}',
       '${ObservationListDetails?.location_of_observation ?? ''}',
-      '${ObservationListDetails?.type_of_observation ?? ''}',
-      '${ObservationListDetails?.source_of_observation ?? ''}',
+      '${ObservationListDetails?.type_of_observation_name ?? ''}',
+      '${ObservationListDetails?.source_of_observation_name ?? ''}',
       '${ObservationListDetails?.risk_type ?? ''}',
       '${ObservationListDetails?.observation_description ?? ''}',
       '${ObservationListDetails?.responsible_person ?? ''}',
       '${ObservationListDetails?.target_date ?? ''}',
       '${ObservationListDetails?.action_taken ?? ''}',
-      '${ObservationListDetails?.closer_date ?? ''}',
+      closedDate,
       '${ObservationListDetails?.cost_type ?? ''}',
       // '${ObservationListDetails?.status_code ?? ''}',
 
@@ -515,13 +518,20 @@ class ObservationListDataSource extends DataTableSource {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
+                          padding:
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                           decoration: BoxDecoration(
-                            color: ColorValues.addNewColor,
+                            color: ObservationListDetails!.observation_status ==
+                                    "Open"
+                                ? ColorValues.yellowColor
+                                : ObservationListDetails.observation_status ==
+                                        "In Time"
+                                    ? ColorValues.appGreenColor
+                                    : ColorValues.appRedColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '${ObservationListDetails?.short_status}',
+                            '${ObservationListDetails.observation_status}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),
@@ -550,30 +560,42 @@ class ObservationListDataSource extends DataTableSource {
                               }
                             },
                           ),
-                          TableActionButton(
-                            color: ColorValues.editColor,
-                            icon: Icons.edit,
-                            message: 'Edit',
-                            onPress: () {
-                              // controller.clearStoreData();
-                              int obsId = ObservationListDetails?.id ?? 0;
-                              if (obsId != 0) {
-                                Get.toNamed(
-                                  Routes.createObservation,
-                                  arguments: {
-                                    'obsId': ObservationListDetails?.id,
+                          ObservationListDetails!.status_code != 552
+                              ? TableActionButton(
+                                  color: ColorValues.editColor,
+                                  icon: Icons.edit,
+                                  message: 'Edit',
+                                  onPress: () {
+                                    // controller.clearStoreData();
+                                    int obsId = ObservationListDetails?.id ?? 0;
+                                    if (obsId != 0) {
+                                      Get.toNamed(
+                                        Routes.createObservation,
+                                        arguments: {
+                                          'obsId': ObservationListDetails?.id,
+                                        },
+                                      );
+                                    }
                                   },
-                                );
-                              }
-                            },
-                          ),
+                                )
+                              : Dimens.box0,
                         ],
                       )
                     : Text(value.toString()),
           ),
         );
       }).toList(),
-      onSelectChanged: (_) {},
+      onSelectChanged: (_) {
+        int obsId = ObservationListDetails?.id ?? 0;
+        if (obsId != 0) {
+          Get.toNamed(
+            Routes.viewObservationScreen,
+            arguments: {
+              'obsId': ObservationListDetails?.id,
+            },
+          );
+        }
+      },
     );
   }
 

@@ -31,14 +31,18 @@ class GetObservationList {
 
   String? month_of_observation;
   String? short_status;
+  String? observation_status;
   int? status_code;
   String? location_of_observation;
+  String? type_of_observation_name;
+  String? source_of_observation_name;
   String? corrective_action;
   String? days_remaining;
 
   String? risk_type;
   String? action_taken;
   String? closer_date;
+  String? closed_date;
 
   GetObservationList({
     this.id,
@@ -61,12 +65,16 @@ class GetObservationList {
     this.corrective_action,
     this.days_remaining,
     this.location_of_observation,
+    this.type_of_observation_name,
+    this.source_of_observation_name,
     this.month_of_observation,
     this.short_status,
     this.status_code,
+    this.observation_status,
     this.risk_type,
     this.action_taken,
     this.closer_date,
+    this.closed_date,
   });
 
   factory GetObservationList.fromJson(Map<String, dynamic> json) {
@@ -94,10 +102,14 @@ class GetObservationList {
       location_of_observation: json['location_of_observation'],
       month_of_observation: json['month_of_observation'],
       short_status: json['short_status'],
+      observation_status: json['observation_status'],
+      type_of_observation_name: json['type_of_observation_name'],
+      source_of_observation_name: json['source_of_observation_name'],
       status_code: json['status_code'],
       risk_type: json['risk_type'],
       action_taken: json['action_taken'],
       closer_date: Utility.getFormatedyearMonthDay(json['closer_date']),
+      closed_date: Utility.getFormatedyearMonthDay(json['closed_date']),
     );
   }
 
@@ -123,6 +135,10 @@ class GetObservationList {
         'location_of_observation': location_of_observation,
         'month_of_observation': month_of_observation,
         'short_status': short_status,
+        'observation_status': observation_status,
+        'source_of_observation_name': source_of_observation_name,
+        'type_of_observation_name': type_of_observation_name,
+        'closed_date': closed_date,
         'status_code': status_code,
       };
 }

@@ -16,6 +16,7 @@ import 'package:cmms/domain/models/update_vegetation_execution_model.dart';
 import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class VegExecutionController extends GetxController {
@@ -206,6 +207,10 @@ class VegExecutionController extends GetxController {
 
   void abandonVegExecutionButton({int? id}) async {
     {
+      if (commentTextFieldCtrlr.text == '') {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = commentTextFieldCtrlr.text.trim();
       CommentModel commentAbandonModel = CommentModel(
         id: id,
