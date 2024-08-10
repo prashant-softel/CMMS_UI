@@ -24,6 +24,8 @@ abstract class LocalKeys {
   static const auditId = 'auditId';
 
   static const roId = 'roId';
+  static const docUploadId = 'docUploadId';
+
   static const permitId = 'permitId';
   static const mcTaskId = 'mcModel';
 
@@ -106,7 +108,7 @@ abstract class LocalKeys {
   static const statusId = 'status_id';
   static const moduleId = 'module_id';
   static const date = 'date';
-static const assetId = 'assetId';
-static const startdate = 'startdate';
-static const enddate = 'enddate';
+  static const assetId = 'assetId';
+  static const startdate = 'startdate';
+  static const enddate = 'enddate';
 }

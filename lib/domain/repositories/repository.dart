@@ -12,6 +12,7 @@ import 'package:cmms/domain/models/check_list_inspection_model.dart';
 import 'package:cmms/domain/models/complicance_history_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
+import 'package:cmms/domain/models/doc_upload_list_model.dart';
 import 'package:cmms/domain/models/documentmaster_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/escalation_details_model.dart';
@@ -2033,6 +2034,47 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<GetDocUploadListModel>> getDocUploadList({
+    required int? facility_id,
+    bool? isExport,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getDocUploadList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+
+      if (!res.hasError) {
+        final jsonDocUploadListModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<GetDocUploadListModel> _docUploadModelList =
+            jsonDocUploadListModels
+                .map<GetDocUploadListModel>((m) =>
+                    GetDocUploadListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _docUploadModelList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'Doc Upload List');
         return [];
       }
     } catch (error) {

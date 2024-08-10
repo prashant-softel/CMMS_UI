@@ -1080,6 +1080,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getDocUploadList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/getDocuementList', //?facilityID=$facility_id&fromDate=$end_date&toDate=$start_date',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getModuleCleaningListPlan({
     required bool isLoading,
     required String auth,
