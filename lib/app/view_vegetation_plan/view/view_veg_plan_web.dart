@@ -216,7 +216,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                                     'Planning Date & Time :'),
                                             Dimens.boxHeight10,
                                             CustomRichText(
-                                                title: 'Assigned by :'),
+                                                title: 'Assigned to :'),
                                           ],
                                         ),
                                         Dimens.boxWidth2,
