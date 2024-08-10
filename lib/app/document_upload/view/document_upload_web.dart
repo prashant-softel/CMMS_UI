@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
@@ -75,7 +76,7 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                         ),
                         InkWell(
                           onTap: () {
-                            Get.offNamed(Routes.misDashboard);
+                            Get.offNamed(Routes.masterDashboard);
                           },
                           child: Text(" / MASTER", style: Styles.greyLight14),
                         ),
@@ -124,17 +125,30 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                               Row(
                                                 children: [
                                                   CustomRichText(
-                                                      title: 'Document Type: '),
-                                                  Dimens.boxWidth10,
-                                                  LoginCustomTextfield(
-                                                    width:
-                                                        (MediaQuery.of(context)
+                                                      title:
+                                                          'Document Type Name: '),
+                                                  Dimens.boxWidth2,
+                                                  SizedBox(
+                                                    child: Obx(
+                                                      () => DropdownWebStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
                                                                 .size
-                                                                .width *
-                                                            .2),
-                                                    keyboardType:
-                                                        TextInputType.number,
-                                                    onChanged: (value) {},
+                                                                .width /
+                                                            5,
+                                                        dropdownList: controller
+                                                            .documentNameType,
+                                                        isValueSelected: controller
+                                                            .isSelectedDocumentNameType
+                                                            .value,
+                                                        selectedValue: controller
+                                                            .selectedDocumentNameType
+                                                            .value,
+                                                        onValueChanged:
+                                                            controller
+                                                                .onValueChanged,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -146,39 +160,50 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
                                             children: [
-                                              SizedBox(
-                                                height: 6,
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title:
+                                                          'Sub Group Document Name: '),
+                                                  Dimens.boxWidth2,
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                  ),
+                                                ],
                                               ),
-                                              // Row(
-                                              //   children: [
-                                              //     CustomRichText(
-                                              //         title: 'PO Date  : '),
-                                              //     Dimens.boxWidth10,
-                                              //     CustomTextFieldForStock(
-                                              //       width:
-                                              //           MediaQuery.of(context)
-                                              //                   .size
-                                              //                   .width /
-                                              //               5,
-                                              //       numberTextField: true,
-                                              //       onTap: () {
-                                              //         controller
-                                              //                 .openUploadDocDateTcDatePicker =
-                                              //             !controller
-                                              //                 .openUploadDocDateTcDatePicker;
-                                              //         controller.update(
-                                              //             ['stock_Mangement']);
-                                              //       },
-                                              //       textController: controller
-                                              //           .uploadDocDateTc,
-                                              //       //validate
+                                              Dimens.boxHeight10,
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      includeAsterisk: false,
+                                                      title: 'Re - New Date: '),
+                                                  Dimens.boxWidth2,
+                                                  CustomTextFieldForStock(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                    numberTextField: true,
+                                                    onTap: () {
+                                                      controller
+                                                              .openUploadDocDateTcDatePicker =
+                                                          !controller
+                                                              .openUploadDocDateTcDatePicker;
+                                                      controller.update(
+                                                          ['stock_Mangement']);
+                                                    },
+                                                    textController: controller
+                                                        .uploadDocDateTc,
+                                                    //validate
 
-                                              //       onChanged: (value) {},
-                                              //     ),
-                                              //   ],
-                                              // ),
-                                              SizedBox(
-                                                height: 6,
+                                                    onChanged: (value) {},
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
@@ -210,7 +235,7 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20),
                                       child: Row(children: [
-                                        CustomRichText(title: 'Description: '),
+                                        CustomRichText(title: 'Remark: '),
                                         Expanded(
                                           child: TextField(
                                             style: GoogleFonts.lato(
