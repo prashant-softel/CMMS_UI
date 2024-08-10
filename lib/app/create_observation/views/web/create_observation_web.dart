@@ -348,6 +348,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                           .size
                                                                           .width *
                                                                       .2),
+                                                                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                                   keyboardType:
                                                                       TextInputType
                                                                           .number,
