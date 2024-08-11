@@ -611,7 +611,7 @@ class DocUploadListDataSource extends DataTableSource {
                           message: 'view',
                           onPress: () {
                             controller.clearStoreData();
-                            int docUploadId = 5;
+                            int docUploadId = docUploadListDetails?.id ?? 0;
 
                             if (docUploadId != 0) {
                               Get.toNamed(Routes.viewDocUploadScreen,

@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewDocUploadWeb extends StatefulWidget {
   ViewDocUploadWeb({
@@ -145,13 +146,6 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                           ),
                                         ),
                                         DataColumn2(
-                                          fixedWidth: 120,
-                                          label: Text(
-                                            "File ID",
-                                            style: Styles.blue17,
-                                          ),
-                                        ),
-                                        DataColumn2(
                                           fixedWidth: 220,
                                           label: Text(
                                             "Sub Doc Name",
@@ -186,15 +180,19 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                             style: Styles.blue17,
                                           ),
                                         ),
+                                        DataColumn2(
+                                          fixedWidth: 120,
+                                          label: Text(
+                                            "Doc File",
+                                            style: Styles.blue17,
+                                          ),
+                                        ),
                                       ],
                                       rows: controller.viewDocUploadList.map(
                                         (item) {
                                           return DataRow(
                                             cells: [
                                               DataCell(Text('${item.id ?? ""}',
-                                                  style: Styles.black14)),
-                                              DataCell(Text(
-                                                  '${item.fileId ?? ""}',
                                                   style: Styles.black14)),
                                               DataCell(Text(
                                                   '${item.subDocName ?? ""}',
@@ -211,6 +209,30 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                               DataCell(Text(
                                                   '${item.remarks ?? ""}',
                                                   style: Styles.black14)),
+                                              DataCell(TableActionButton(
+                                                color: ColorValues
+                                                    .appDarkBlueColor,
+                                                icon: Icons.visibility,
+                                                message: 'View File',
+                                                onPress: () async {
+                                                  // String baseUrl = "http://65.0.20.19/CMMS_API/";
+                                                  // String baseUrl =
+                                                  //     'http://172.20.43.9:83/';
+                                                  // String fileName = controller
+                                                  //         .file_list![index]
+                                                  //         ?.fileName ??
+                                                  //     "";
+                                                  // String fullUrl =
+                                                  //     baseUrl + fileName;
+                                                  // if (await canLaunch(
+                                                  //     fullUrl)) {
+                                                  //   await launch(fullUrl);
+                                                  // } else {
+                                                  //   throw 'Could not launch $fullUrl';
+                                                  // }
+                                                  // // String baseUrl = 'http://172.20.43.9:83/';
+                                                },
+                                              )),
                                             ],
                                           );
                                         },
