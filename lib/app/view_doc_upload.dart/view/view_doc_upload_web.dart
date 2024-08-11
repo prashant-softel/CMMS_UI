@@ -1,9 +1,7 @@
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_doc_upload.dart/view_doc_upload_controller.dart';
-import 'package:cmms/app/widgets/add_dialog.dart';
-import 'package:cmms/app/widgets/minus_dialog.dart';
-import 'package:cmms/domain/models/water_data_month.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -98,9 +96,36 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          "View Water Data For ${controller.viewDocUploadList.value?.addedAt ?? ""} Month",
+                                          "View Doc Data For ID ${controller.selectedDocUploadId} ",
                                           style: Styles.blackBold16,
                                         ),
+                                        Spacer(),
+                                        Row(
+                                          children: [
+                                            CustomRichText(
+                                                title: 'Date Range',
+                                                includeAsterisk: false),
+                                            Dimens.boxWidth2,
+                                            CustomTextFieldForStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              numberTextField: true,
+                                              onTap: () {
+                                                controller
+                                                        .openFromDateToStartDatePicker =
+                                                    !controller
+                                                        .openFromDateToStartDatePicker;
+                                                controller.update(
+                                                    ['stock_Mangement_Date']);
+                                              },
+                                              hintText:
+                                                  '${controller.startDate.toString()} To ${controller.endDate.toString()}',
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(width: 5),
                                       ],
                                     ),
                                   ),
@@ -111,11 +136,11 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                     width: Get.width * .92,
                                     child: ListView.builder(
                                       shrinkWrap: true,
-                                      // itemCount: controller.viewDocUploadList
-                                      //     .value?.itemData?.length,
+                                      itemCount:
+                                          controller.viewDocUploadList.length,
                                       itemBuilder: (context, index) {
-                                        // final item = controller.viewDocUploadList
-                                        //     .value?.itemData?[index];
+                                        final item =
+                                            controller.viewDocUploadList[index];
                                         return Container(
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
@@ -138,10 +163,6 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                             ],
                                           ),
                                           height: 200,
-                                          // (((item?.details?.length ?? 0) +
-                                          //             2) *
-                                          //         50 +
-                                          //     155),
                                           margin: EdgeInsets.all(15),
                                           child: Column(
                                             crossAxisAlignment:
@@ -151,8 +172,7 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                                 padding:
                                                     const EdgeInsets.all(15),
                                                 child: Text(
-                                                  "ervf3r",
-                                                  // "${controller.viewDocUploadList.value?.itemData?[index].waterType ?? ""}",
+                                                  "${item.subDocName ?? ""}",
                                                   style: Styles.blue17,
                                                 ),
                                               ),
@@ -162,65 +182,103 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                               ),
                                               Expanded(
                                                 child: DataTable2(
+                                                  minWidth: 1400,
                                                   columns: [
                                                     DataColumn2(
-                                                      size: ColumnSize.M,
+                                                      fixedWidth: 50,
                                                       label: Text(
-                                                        "Upload ID",
+                                                        "ID",
                                                         style: Styles.blue17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      size: ColumnSize.L,
+                                                      fixedWidth: 120,
                                                       label: Text(
-                                                        "Doc Master ID",
+                                                        "DCMID",
                                                         style: Styles.blue17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      size: ColumnSize.L,
+                                                      fixedWidth: 120,
                                                       label: Text(
                                                         "File ID",
                                                         style: Styles.blue17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      size: ColumnSize.M,
+                                                      fixedWidth: 220,
                                                       label: Text(
                                                         "Sub Doc Name",
-                                                        style: Styles.green17,
+                                                        style: Styles.blue17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      size: ColumnSize.M,
+                                                      fixedWidth: 200,
                                                       label: Text(
                                                         "Renew Date",
-                                                        style: Styles.red17,
+                                                        style: Styles.blue17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      size: ColumnSize.M,
+                                                      fixedWidth: 200,
                                                       label: Text(
                                                         "Added By",
                                                         style: Styles.blue17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      fixedWidth: 90,
+                                                      fixedWidth: 200,
                                                       label: Text(
-                                                        "added_at",
+                                                        "Added At",
                                                         style: Styles.blue17,
                                                       ),
                                                     ),
                                                     DataColumn2(
-                                                      fixedWidth: 90,
+                                                      fixedWidth: 200,
                                                       label: Text(
-                                                        "remarks",
+                                                        "Remarks",
                                                         style: Styles.blue17,
                                                       ),
                                                     ),
                                                   ],
-                                                  rows: [],
+                                                  rows: [
+                                                    DataRow(
+                                                      cells: [
+                                                        DataCell(Text(
+                                                            '${item.id ?? ""}',
+                                                            style: Styles
+                                                                .black14)),
+                                                        DataCell(Text(
+                                                            '${item.docMasterId ?? ""}',
+                                                            style: Styles
+                                                                .black14)),
+                                                        DataCell(Text(
+                                                            '${item.fileId ?? ""}',
+                                                            style: Styles
+                                                                .black14)),
+                                                        DataCell(Text(
+                                                            '${item.subDocName ?? ""}',
+                                                            style: Styles
+                                                                .black14)),
+                                                        DataCell(Text(
+                                                            '${item.renewDate != null ? DateFormat('yyyy-MM-dd').format(item.renewDate!) : ""}',
+                                                            style: Styles
+                                                                .black14)),
+                                                        DataCell(Text(
+                                                            '${item.addedBy ?? ""}',
+                                                            style: Styles
+                                                                .black14)),
+                                                        DataCell(Text(
+                                                            '${item.addedAt != null ? DateFormat('yyyy-MM-dd').format(item.addedAt!) : ""}',
+                                                            style: Styles
+                                                                .black14)),
+                                                        DataCell(Text(
+                                                            '${item.remarks ?? ""}',
+                                                            style: Styles
+                                                                .black14)),
+                                                      ],
+                                                    )
+                                                  ],
                                                 ),
                                               ),
                                               Dimens.boxHeight20,
@@ -238,22 +296,44 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                       ),
                     ],
                   ),
-                  if (controller.openPurchaseDatePicker)
+                  if (controller.openDocUploadDatePicker)
                     Positioned(
-                      right: 65,
-                      top: 130,
+                      right: 150,
+                      top: 85,
                       child: DatePickerWidget(
-                        minDate: DateTime(DateTime.now().year),
-                        maxDate: DateTime(DateTime.now().year, 13,
-                            0), // last date of this year
-                        controller: DateRangePickerController(),
-                        selectionChanges: (p0) {
-                          print('po valu ${p0.value.toString()}');
-                          controller.purchaseDateTc.text =
-                              DateFormat('yyyy-MM-dd').format(p0.value);
-                          controller.openPurchaseDatePicker =
-                              !controller.openPurchaseDatePicker;
-                          controller.update(['stock_Mangement']);
+                        selectionMode: DateRangePickerSelectionMode.range,
+                        monthCellStyle: DateRangePickerMonthCellStyle(
+                          todayCellDecoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: ColorValues.appDarkBlueColor),
+                        ), // last date of this year
+                        // controller: DateRangePickerController(),
+                        initialSelectedRange: PickerDateRange(
+                          controller.fromDate.value,
+                          controller.toDate.value,
+                        ),
+
+                        onSubmit: (value) {
+                          print('po valu ${value.toString()}');
+                          PickerDateRange? data = value as PickerDateRange;
+
+                          var pickUpDate =
+                              DateTime.parse(data.startDate.toString());
+                          controller.fromDate.value = pickUpDate;
+                          var dropDate =
+                              DateTime.parse(data.endDate.toString());
+                          dropDate != null
+                              ? controller.toDate.value = dropDate
+                              : controller.toDate.value = pickUpDate;
+
+                          // controller.viewDocUploadList();
+                          controller.openFromDateToStartDatePicker =
+                              !controller.openFromDateToStartDatePicker;
+                          controller.update(['stock_Mangement_Date']);
+
+                          // Get.toNamed(
+                          //   Routes.stockManagementGoodsOrdersScreen,
+                          // );
                         },
                       ),
                     ),
@@ -262,189 +342,7 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
             ),
           ),
         );
-        // );
       },
     );
-  }
-
-  List<DataRow> _buildTableRows(ItemData? item, List<Details>? details) {
-    double opening = item?.opening ?? 0;
-    double total = opening;
-    double newTotal = 0;
-    double totalProcurement = 0;
-    double totalConsumption = 0;
-
-    List<DataRow> rows = [];
-
-    rows.add(
-      DataRow(
-        cells: [
-          DataCell(Text('', style: Styles.black14)),
-          DataCell(Text('Opening Balance', style: Styles.green700)),
-          DataCell(Text('', style: Styles.black14)),
-          DataCell(Text('', style: Styles.green700)),
-          DataCell(Text('', style: Styles.Red700)),
-          DataCell(Text('${opening}', style: Styles.black14)),
-          DataCell(Text('', style: Styles.black14)),
-        ],
-      ),
-    );
-    if (details != null) {
-      for (int i = 0; i < details.length; i++) {
-        double procurement = details[i].procuredQty ?? 0.0;
-        double consumption = details[i].consumedQty ?? 0.0;
-        newTotal = (total + procurement) - consumption;
-        rows.add(
-          DataRow(
-            cells: [
-              DataCell(
-                Text(details[i].date ?? '', style: Styles.black14),
-              ),
-              DataCell(
-                Text(details[i].description ?? '', style: Styles.black14),
-              ),
-              DataCell(
-                Text(details[i].transactionType ?? '', style: Styles.black14),
-              ),
-              DataCell(
-                Text("${details[i].procuredQty}", style: Styles.green700),
-              ),
-              DataCell(
-                Text("${details[i].consumedQty}", style: Styles.Red700),
-              ),
-              DataCell(
-                Text("$newTotal", style: Styles.black14),
-              ),
-              DataCell(
-                TableActionButton(
-                  color: ColorValues.editColor,
-                  icon: Icons.edit_outlined,
-                  message: "edit",
-                  onPress: () {
-                    if (details[i].transactionType == "Procurement") {
-                      Get.dialog(
-                        AddDialog(
-                          id: details[i].id,
-                          date: details[i].date,
-                          description: details[i].description,
-                          quantity: details[i].procuredQty.toString(),
-                          waterTypeId: item?.waterTypeId,
-                          waterTypeName: item?.waterType,
-                        ),
-                        barrierDismissible: false,
-                      );
-                    } else {
-                      Get.dialog(
-                        MinusDialog(
-                          id: details[i].id,
-                          date: details[i].date,
-                          description: details[i].description,
-                          quantity: details[i].consumedQty.toString(),
-                          waterTypeId: item?.waterTypeId,
-                          waterTypeName: item?.waterType,
-                        ),
-                        barrierDismissible: false,
-                      );
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
-        );
-        total = newTotal;
-        totalProcurement = totalProcurement + procurement;
-        totalConsumption = totalConsumption + consumption;
-      }
-      // rows.addAll(details
-      //     .map(
-      //       (detail) => DataRow(
-      //         cells: [
-      //           DataCell(
-      //             Text(detail.date ?? '', style: Styles.black14),
-      //           ),
-      //           DataCell(
-      //             Text(detail.description ?? '', style: Styles.black14),
-      //           ),
-      //           DataCell(
-      //             Text(detail.transactionType ?? '', style: Styles.black14),
-      //           ),
-      //           DataCell(
-      //             Text("${detail.procuredQty}", style: Styles.green700),
-      //           ),
-      //           DataCell(
-      //             Text("${detail.consumedQty}", style: Styles.Red700),
-      //           ),
-      //           DataCell(
-      //             Text("", style: Styles.black14),
-      //           ),
-      //           DataCell(
-      //             TableActionButton(
-      //               color: ColorValues.editColor,
-      //               icon: Icons.edit_outlined,
-      //               message: "edit",
-      //               onPress: () {
-      //                 if (detail.transactionType == "Procurement") {
-      //                   Get.dialog(
-      //                     AddDialog(
-      //                       id: detail.id,
-      //                       date: detail.date,
-      //                       description: detail.description,
-      //                       quantity: detail.procuredQty.toString(),
-      //                       waterTypeId: item?.waterTypeId,
-      //                       waterTypeName: item?.waterType,
-      //                     ),
-      //                     barrierDismissible: false,
-      //                   );
-      //                 } else {
-      //                   Get.dialog(
-      //                     MinusDialog(
-      //                       id: detail.id,
-      //                       date: detail.date,
-      //                       description: detail.description,
-      //                       quantity: detail.consumedQty.toString(),
-      //                       waterTypeId: item?.waterTypeId,
-      //                       waterTypeName: item?.waterType,
-      //                     ),
-      //                     barrierDismissible: false,
-      //                   );
-      //                 }
-      //               },
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //     )
-      //     .toList());
-    }
-
-    rows.add(
-      DataRow(
-        cells: [
-          DataCell(
-            Text('', style: Styles.black14),
-          ),
-          DataCell(
-            Text('Closing Balance', style: Styles.Red700),
-          ),
-          DataCell(
-            Text('', style: Styles.black14),
-          ),
-          DataCell(
-            Text('Total: $totalProcurement', style: Styles.green700),
-          ),
-          DataCell(
-            Text('Total: $totalConsumption', style: Styles.Red700),
-          ),
-          DataCell(
-            Text("$total"),
-          ),
-          DataCell(
-            Text('', style: Styles.black14),
-          ),
-        ],
-      ),
-    );
-    return rows;
   }
 }

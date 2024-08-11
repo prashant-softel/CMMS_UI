@@ -13,22 +13,24 @@ class ViewDocUploadController extends GetxController {
   ViewDocUploadPresenter viewDocUploadPresenter;
   final HomeController homecontroller = Get.find();
 
-  bool openPurchaseDatePicker = false;
-  var purchaseDateTc = TextEditingController();
+  bool openDocUploadDatePicker = false;
+  var docUploadDateTc = TextEditingController();
   StreamSubscription<int>? facilityIdStreamSubscription;
   Rx<int> facilityId = 0.obs;
   Rx<int> selectedDocUploadId = 0.obs;
-  Rx<ViewDocUpload?> viewDocUploadList = ViewDocUpload().obs;
+  RxList<ViewDocUpload> viewDocUploadList = <ViewDocUpload>[].obs;
   RxList<double> totalColumn = <double>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
+  bool openFromDateToStartDatePicker = false;
 
   String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
   String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
   String get end_date => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get start_date => DateFormat('yyyy-MM-dd').format(fromDate.value);
-
+  Rx<String> startDate = ''.obs;
+  Rx<String> endDate = ''.obs;
   @override
   void onInit() async {
     await setViewDocUpload();
@@ -60,7 +62,9 @@ class ViewDocUploadController extends GetxController {
       } else {
         selectedDocUploadId.value = int.tryParse(_docUploadId) ?? 0;
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> getPlantStockListByDate() async {
@@ -84,6 +88,14 @@ class ViewDocUploadController extends GetxController {
       end_date: end_date,
       facilityID: facilityID,
     );
+
+    if (_viewDocUploadDetail != null) {
+      // Filter out any null values
+      viewDocUploadList.value =
+          _viewDocUploadDetail.whereType<ViewDocUpload>().toList();
+    } else {
+      viewDocUploadList.clear();
+    }
   }
 
   void clearStoreData() {
