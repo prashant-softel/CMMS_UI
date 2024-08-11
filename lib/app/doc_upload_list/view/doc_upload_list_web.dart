@@ -1,4 +1,4 @@
-import 'package:cmms/app/document_manager/document_manager_controller.dart';
+import 'package:cmms/app/doc_upload_list/doc_upload_list_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -78,7 +78,7 @@ class _DocumentManagerListWebState extends State<DocumentManagerWeb> {
                               onTap: () {
                                 Get.offAllNamed(Routes.docVersionDashboard);
                               },
-                              child: Text(" / Document Version",
+                              child: Text(" / DOCUMENT VERSION",
                                   style: Styles.greyLight14),
                             ),
                             Text(" / DOCUMENT MANAGER",
@@ -156,8 +156,8 @@ class _DocumentManagerListWebState extends State<DocumentManagerWeb> {
                                           onPressed: () {
                                             controller.clearStoreData();
                                             controller.clearStoreData();
-                                            Get.offNamed(Routes
-                                                .GoodsOrdersReqDetailsScreen);
+                                            Get.offNamed(
+                                                Routes.documentUploadScreen);
                                           },
                                           color: ColorValues.addNewColor,
                                         )

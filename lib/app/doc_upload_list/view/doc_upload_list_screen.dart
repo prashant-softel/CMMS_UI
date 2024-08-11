@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import '../document_manager_controller.dart';
-import 'document_manager_web.dart';
+import '../doc_upload_list_controller.dart';
+import 'doc_upload_list_web.dart';
 
 class DocumentManagerScreen extends GetView<DocumentManagerController> {
   DocumentManagerScreen({super.key});

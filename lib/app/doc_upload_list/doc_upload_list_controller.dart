@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:cmms/app/document_manager/document_manager_presenter.dart';
+import 'package:cmms/app/doc_upload_list/doc_upload_list_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/doc_upload_list_model.dart';
 import 'package:flutter/material.dart';

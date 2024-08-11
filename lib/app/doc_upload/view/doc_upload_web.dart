@@ -1,5 +1,5 @@
 import 'package:cmms/app/controllers/file_upload_controller.dart';
-import 'package:cmms/app/document_upload/document_upload_controller.dart';
+import 'package:cmms/app/doc_upload/doc_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -78,7 +78,7 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                           onTap: () {
                             Get.offNamed(Routes.docVersionDashboard);
                           },
-                          child: Text(" / Document Version",
+                          child: Text(" / DOCUMENT VERSION",
                               style: Styles.greyLight14),
                         ),
                         Text(" / DOCUMENT UPLOAD", style: Styles.greyLight14)
