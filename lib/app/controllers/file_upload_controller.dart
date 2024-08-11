@@ -37,9 +37,9 @@ class FileUploadController extends GetxController {
     super.onInit();
   }
 
-  addFiles() async {
+  addFiles({bool? single}) async {
     final FilePickerResult? result = await FilePicker.platform.pickFiles(
-      allowMultiple: true,
+      allowMultiple: single == false ? false : true,
       type: FileType.any,
     );
 
