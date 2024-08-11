@@ -545,7 +545,10 @@ class DocUploadListDataSource extends DataTableSource {
       '${docUploadListDetails?.docMasterId ?? ''}',
       '${docUploadListDetails?.subDocName ?? ''}',
       // '${docUploadListDetails?.status ?? ''}',
-      '${docUploadListDetails?.renewDate ?? ''}',
+
+      docUploadListDetails?.renewDates == null
+          ? ""
+          : '${docUploadListDetails?.renewDates![0] ?? ''}',
       '${docUploadListDetails?.addedAt ?? ''}',
       '${docUploadListDetails?.addedBy ?? ''}',
 
@@ -588,7 +591,7 @@ class DocUploadListDataSource extends DataTableSource {
                             color: ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: docUploadListDetails?.renewDate == null
+                          child: docUploadListDetails?.renewDates == null
                               ? Text(
                                   'New Doc Uploaded',
                                   style: Styles.white10.copyWith(
