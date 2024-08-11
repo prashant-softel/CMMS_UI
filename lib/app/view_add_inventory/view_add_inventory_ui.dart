@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_add_inventory/view/view_calibartion_widget.dart';
 import 'package:cmms/app/view_add_inventory/view/view_manufacturar_tab_widget.dart';
 import 'package:cmms/app/view_add_inventory/view_add_inventory_controller.dart';
@@ -91,7 +92,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                             style: Styles.greyMediumLight12),
                                         GestureDetector(
                                           onTap: () {
-                                            Get.back();
+                                            Get.offNamed(Routes.inventoryList);
                                           },
                                           child: Text(" / ASSETS",
                                               style: Styles.greyMediumLight12),

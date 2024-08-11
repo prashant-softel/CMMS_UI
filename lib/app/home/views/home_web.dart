@@ -415,26 +415,33 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                               isScrollable: true,
                               tabs: [
                                 CustomTabBar(
+                                  width: 240,
                                   label: 'All'.tr,
                                   // icon: Icons.menu,
                                 ),
                                 CustomTabBar(
+                                  width: 240,
+
                                   label: 'Breakdown Maintenance'.tr,
                                   // icon: Icons.menu,
                                 ),
                                 CustomTabBar(
+                                  width: 240,
                                   label: 'Preventive Maintenance'.tr,
                                   // icon: Icons.account_tree_sharp,
                                 ),
                                 CustomTabBar(
+                                  width: 240,
                                   label: 'Module Cleaning'.tr,
                                   // icon: Icons.location_on,
                                 ),
                                 CustomTabBar(
+                                  width: 240,
                                   label: 'Incident Report'.tr,
                                   // icon: Icons.location_on,
                                 ),
                                 CustomTabBar(
+                                  width: 240,
                                   label: 'Stock Management'.tr,
                                   // icon: Icons.location_on,
                                 ),
