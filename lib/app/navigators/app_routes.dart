@@ -65,7 +65,8 @@ abstract class Routes {
   static const masterDashboard = _Paths.masterDashboard;
   static const docVersionDashboard = _Paths.docVersionDashboard;
 
-  
+  static const viewDocUploadScreen = _Paths.viewDocUploadScreen;
+
   static const pmTaskView = _Paths.pmTaskView;
   static const inventory = _Paths.inventory;
   static const inventoryList = _Paths.inventoryList;
@@ -171,8 +172,8 @@ abstract class Routes {
   static const purchaseGoodsorder = _Paths.purchaseGoodsorder;
   static const purchaseGoodsorderView = _Paths.purchaseGoodsorderView;
   static const plantStockReport = _Paths.plantStockReport;
-static const plantStockReportDetails = _Paths.plantStockReportDetails;
-  
+  static const plantStockReportDetails = _Paths.plantStockReportDetails;
+
   static const employeeStockReport = _Paths.employeeStockReport;
   static const transactionReport = _Paths.transactionReport;
 
@@ -181,7 +182,7 @@ static const plantStockReportDetails = _Paths.plantStockReportDetails;
   static const editReturnMrs = _Paths.editReturnMrs;
   static const pmPlanList = _Paths.pmPlanList;
   static const viewPmPlanScreen = _Paths.viewPmPlanScreen;
-  static const typeofobservation = _Paths.typeofobservation;    
+  static const typeofobservation = _Paths.typeofobservation;
   static const trainingSummary = _Paths.trainingSummary;
   static const sourceofobservation = _Paths.sourceofobservation;
   static const risktypemaster = _Paths.risktypemaster;
@@ -313,8 +314,8 @@ abstract class _Paths {
   static const permitTypeScreen = '/permit-type-screen';
   static const masterDashboard = '/master-dashboard';
   static const docVersionDashboard = '/docVersionDashboard';
+  static const viewDocUploadScreen = '/viewDocUploadScreen';
 
-  
   static const pmTaskView = '/pm-task-view-screen';
   static const inventory = '/inventory';
   static const inventoryList = '/inventoryList';
@@ -409,7 +410,7 @@ abstract class _Paths {
       '/view-module-cleaning-execution';
   static const plantStockReport = '/plant-stock-report';
   static const plantStockReportDetails = '/plant-stock-report-details';
-  
+
   static const employeeStockReport = '/employee-stock-report';
   static const transactionReport = '/transaction-report';
 
@@ -475,5 +476,5 @@ abstract class _Paths {
 
   static const materialCategory = '/material-category';
 
-   static const trainingSummary = '/training-summary';
+  static const trainingSummary = '/training-summary';
 }

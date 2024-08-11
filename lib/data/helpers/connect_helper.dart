@@ -9653,6 +9653,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getDocuementListById({
+    required String auth,
+    required int facilityID,
+    required int docUploadId,
+    String? start_date,
+    required String end_date,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/getDocuementListById?facility_id=$facilityID&id=$docUploadId&sub_doc_name=Lease%20Agreement&fromDate=$start_date&toDate=$end_date',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
   //create
   Future<ResponseModel> createSourceOfOb({
     required String auth,

@@ -118,6 +118,7 @@ import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
+import 'package:cmms/domain/models/view_doc_upload.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
@@ -14463,6 +14464,40 @@ class Repository {
               plantStockMonthDetailModelFromJson(res.data);
           // print({"Plant Stock By Months", plantStockMonthDetails[0].details});
           return plantStockMonthDetails;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<List<ViewDocUpload?>?> getDocuementListById({
+    String? start_date,
+    required String end_date,
+    required int facilityID,
+    required int docUploadId,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getDocuementListById(
+        auth: auth,
+        start_date: start_date,
+        end_date: end_date,
+        docUploadId: docUploadId,
+        facilityID: facilityID,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var viewDocUploadDetails = viewDocUploadModelFromJson(res.data);
+          return viewDocUploadDetails;
         }
       } else {
         Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
