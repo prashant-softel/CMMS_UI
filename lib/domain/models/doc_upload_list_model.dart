@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class GetDocUploadListModel {
   int? facilityID;
   String? facilityName;
@@ -47,6 +49,7 @@ class GetDocUploadListModel {
 
   // Method to convert an instance of GetDocUploadListModel to JSON
   Map<String, dynamic> toJson() {
+    final DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
     final Map<String, dynamic> data = new Map<String, dynamic>();
 
     data['facilityID'] = this.facilityID;
@@ -60,13 +63,14 @@ class GetDocUploadListModel {
     if (renewDates != null && renewDates!.isNotEmpty) {
       renewDates = renewDates!.toSet().toList(); // Remove duplicates
       data['renew_date'] =
-          renewDates!.map((date) => date.toIso8601String()).toList();
+          renewDates!.map((date) => dateFormatter.format(date)).toList();
     } else {
       data['renew_date'] = null; // Set to null if empty
     }
 
     data['added_by'] = this.addedBy;
-    data['added_at'] = this.addedAt?.toIso8601String();
+    data['added_at'] =
+        this.addedAt != null ? dateFormatter.format(this.addedAt!) : null;
     data['remarks'] = this.remarks;
 
     return data;
@@ -79,4 +83,32 @@ class GetDocUploadListModel {
       renewDates!.add(date);
     }
   }
+}
+
+// Example usage
+void main() {
+  GetDocUploadListModel docUploadListDetails = GetDocUploadListModel(
+    docMasterId: 123,
+    subDocName: "Document Name",
+    renewDates: [DateTime(2024, 8, 11)],
+    addedAt: DateTime(2024, 8, 10),
+    addedBy: "John Doe",
+  );
+
+  var cellsBuffer = [
+    "id",
+    '${docUploadListDetails.docMasterId ?? ''}',
+    '${docUploadListDetails.subDocName ?? ''}',
+    docUploadListDetails.renewDates == null ||
+            docUploadListDetails.renewDates!.isEmpty
+        ? ""
+        : DateFormat('yyyy-MM-dd').format(docUploadListDetails.renewDates![0]),
+    docUploadListDetails.addedAt != null
+        ? DateFormat('yyyy-MM-dd').format(docUploadListDetails.addedAt!)
+        : '',
+    '${docUploadListDetails.addedBy ?? ''}',
+    'Actions',
+  ];
+
+  print(cellsBuffer);
 }
