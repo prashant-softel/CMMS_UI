@@ -4,8 +4,8 @@ import '../../domain/usecases/document_manager_usecase.dart';
 import '../../domain/usecases/home_usecase.dart';
 import '../home/home_controller.dart';
 import '../home/home_presenter.dart';
-import 'document_manager_controller.dart';
-import 'document_manager_presenter.dart';
+import 'doc_upload_list_controller.dart';
+import 'doc_upload_list_presenter.dart';
 
 class DocumentManagerBinding extends Bindings {
   @override

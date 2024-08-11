@@ -1,6 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/attendance_screen/attendance_controller.dart';
-import 'package:cmms/app/document_upload/view/document_upload_web.dart';
+import 'package:cmms/app/doc_upload/view/doc_upload_web.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,5 @@
-import 'package:cmms/app/document_upload/document_upload_controller.dart';
-import 'package:cmms/app/document_upload/document_upload_presenter.dart';
+import 'package:cmms/app/doc_upload/doc_upload_controller.dart';
+import 'package:cmms/app/doc_upload/doc_upload_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/home_presenter.dart';
 import 'package:cmms/domain/usecases/document_upload_usecase.dart';

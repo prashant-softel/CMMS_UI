@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cmms/app/document_upload/document_upload_presenter.dart';
+import 'package:cmms/app/doc_upload/doc_upload_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/create_document_upload_model.dart';
 import 'package:cmms/domain/models/documentmaster_model.dart';
