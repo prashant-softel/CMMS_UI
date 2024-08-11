@@ -67,7 +67,7 @@ class DocumentUploadController extends GetxController {
           fileId: 2,
           facility_id: facilityId,
           remarks: _remarkDateTc,
-          renewDate: _renewDateTc,
+          renewDate: null,
           subDocName: _subDocNameDateTc);
       var uploadDocumenModelJsonString = uploadDocumentModel.toJson();
       Map<String, dynamic>? responseUploadDocument =

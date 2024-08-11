@@ -34,8 +34,8 @@ class DocumentManagerController extends GetxController {
     "Added By": true,
   });
   final Map<String, double> columnwidth = {
-    "Doc ID": 103,
-    "Doc Name": 320,
+    "Doc ID": 133,
+    "Doc Name": 220,
     "Sub Doc Name": 220,
     "Renew Date": 250,
     "Added At": 250,
