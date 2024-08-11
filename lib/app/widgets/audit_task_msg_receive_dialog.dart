@@ -39,7 +39,9 @@ class AuditTaskViewMsgReceiveDialog extends GetView {
                                   ? "Reject Close Audit Plan"
                                   : type == 8
                                       ? "Audit Plan Start"
-                                      : "Execute Audit Plan",
+                                      : type == 10
+                                          ? "Audit Task Assigned"
+                                          : "Execute Audit Plan",
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),

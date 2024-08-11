@@ -22,6 +22,8 @@ class HomePresenter {
   void pmclearValue() async => homeUsecase.pmclearValue();
   void iRclearValue() async => homeUsecase.iRclearValue();
 
+  void smclearValue() async => homeUsecase.smclearValue();
+  void clearTypeValue() async => homeUsecase.clearTypeValue();
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int? facilityId,

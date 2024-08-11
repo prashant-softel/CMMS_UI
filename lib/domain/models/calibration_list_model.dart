@@ -23,7 +23,7 @@ class CalibrationListModel {
   String? calibration_due_date;
   String? last_calibration_due_date;
   String? calibration_date;
-
+  int? is_damaged;
   int? frequency_id;
   String? frequency_name;
   int? vendor_id;
@@ -51,7 +51,8 @@ class CalibrationListModel {
       this.statusID,
       this.calibration_date,
       this.calibration_due_date,
-      this.last_calibration_due_date});
+      this.last_calibration_due_date,
+      this.is_damaged});
 
   factory CalibrationListModel.fromJson(Map<String, dynamic> json) =>
       CalibrationListModel(
@@ -68,7 +69,7 @@ class CalibrationListModel {
                 json['last_calibration_due_date']),
         asset_id: json['asset_id'] ?? 0,
         calibration_id: json['calibration_id'] ?? 0,
-        statusID: json['statusID'] ?? 0,
+        statusID: json['statusID'] ?? 0, is_damaged: json['is_damaged'],
         asset_name: json['asset_name'] ?? '',
         frequency_id: json['frequency_id'] ?? 0,
         frequency_name: json['frequency_name'] ?? '',
@@ -103,6 +104,7 @@ class CalibrationListModel {
         "last_calibration_due_date": last_calibration_due_date,
         "asset_id": asset_id,
         "calibration_id": calibration_id,
+        "is_damaged": is_damaged,
         "frequency_id": frequency_id,
         "frequency_name": frequency_name,
         "schedule_start_date": schedule_start_date,

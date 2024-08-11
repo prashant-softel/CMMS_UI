@@ -253,7 +253,7 @@ class CalibrationViewController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to start the calibration for',
+                text: 'Are you sure you want to start the calibration for ',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(

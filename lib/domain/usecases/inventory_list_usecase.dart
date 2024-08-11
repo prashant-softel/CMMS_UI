@@ -20,6 +20,7 @@ class InventoryListUsecase {
     );
   }
 
+  void clearValue() async => _repository.clearData(LocalKeys.inventoryId);
   void clearValueimportType() async =>
       _repository.clearData(LocalKeys.importType);
   Future<List<FacilityModel?>?> getFacilityList() async =>

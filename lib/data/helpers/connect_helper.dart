@@ -8013,6 +8013,33 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> assignAuditTask({
+    required String auth,
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/AssignAuditTask?task_id=$taskId&assign_to=$assignId',
+      Request.put,
+      null,
+      isLoading,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+      data: parsedJson['message'],
+      id: parsedJson['id'],
+      type: 10,
+    ));
+    return responseModel;
+  }
+
   Future<ResponseModel> assignToMC({
     required String auth,
     int? assignId,

@@ -87,7 +87,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                           Icons.home,
                                           color: ColorValues.greyLightColor,
                                         ),
-                                        Text(" /DASHBOARD ",
+                                        Text("DASHBOARD ",
                                             style: Styles.greyMediumLight12),
                                         GestureDetector(
                                           onTap: () {

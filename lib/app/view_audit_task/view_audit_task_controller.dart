@@ -1,8 +1,10 @@
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_presenter.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
@@ -39,6 +41,10 @@ class ViewAuditTaskController extends GetxController {
     selectedValue.value = value;
   }
 
+  RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+  Rx<String> selectedAssignedTo = ''.obs;
+  Rx<bool> isAssignedToSelected = true.obs;
+  int selectedAssignedToId = 0;
   var isToggleokOn = false.obs;
 
   Rx<List<List<Map<String, String>>>> rowItemAuditobs =
@@ -116,8 +122,24 @@ class ViewAuditTaskController extends GetxController {
 
     if (_auditTasknDetailModel != null) {
       auditTasknDetailModel.value = _auditTasknDetailModel;
+      getReAssignedToList(auditTasknDetailModel.value.facility_id);
     }
     print({"auditPlandetailss", auditTasknDetailModel.value.id});
+  }
+
+  Future<void> getReAssignedToList(_facilityId) async {
+    final _assignedToList =
+        await viewAuditTaskPresenter.getAssignedToListWOAttend(
+            facilityId: _facilityId,
+            featureId: UserAccessConstants.kAuditExecutionFeatureId,
+            isattendanceneeded: 0);
+
+    if (_assignedToList != null) {
+      for (var _assignedTo in _assignedToList) {
+        assignedToList.add(_assignedTo);
+      }
+      update(["assignedToList"]);
+    }
   }
 
   void auditTaskApprovedButton({int? id}) async {
@@ -497,5 +519,36 @@ class ViewAuditTaskController extends GetxController {
     Get.toNamed(Routes.viewPermitScreen,
         arguments: {"permitId": permitId, "jobId": jobId, "type": 3});
     print({"Permit", permitId, jobId});
+  }
+
+  void onDropdownValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
+      case const (RxList<EmployeeModel>):
+        {
+          int assignedToIndex =
+              assignedToList.indexWhere((x) => x?.name == value);
+          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+          if (selectedAssignedToId != 0) {
+            isAssignedToSelected.value = true;
+          }
+          selectedAssignedTo.value = value;
+        }
+        break;
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
+  }
+
+  assignToAuditTask({required int id}) async {
+    {
+      final response = await viewAuditTaskPresenter.assignToAuditTask(
+        assignId: selectedAssignedToId,
+        taskId: id,
+        isLoading: true,
+      );
+    }
   }
 }

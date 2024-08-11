@@ -565,6 +565,8 @@ class CalibrationDataSource extends DataTableSource {
       '${calibrationDetails?.calibration_due_date ?? ''}',
       '${calibrationDetails?.calibration_date ?? ''}',
       '${calibrationDetails?.frequency_name ?? ''}',
+      calibrationDetails?.is_damaged == 1 ? "YES" : "",
+
       'Actions',
     ];
     var cells = [];

@@ -171,5 +171,9 @@ class AddInventoryPresenter {
         isLoading: isLoading, BusinessType: BusinessType);
   }
 
+  void saveValue({String? inventoryId}) async {
+    return addInventoryUsecase.saveValue(inventoryId: inventoryId);
+  }
+
   Future<String?> getValue() async => await addInventoryUsecase.getValue();
 }

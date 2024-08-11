@@ -269,7 +269,6 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                             text: 'Excel'),
                                       ),
                                       Spacer(),
-                                      
                                       Container(
                                         width: 300,
                                         height: 40,
@@ -487,7 +486,6 @@ class InventoryListDataSource extends DataTableSource {
               .toLowerCase()
               .toUpperCase()
               .toString());
-           
 
       // Add other filter conditions as needed
     }).toList();
@@ -608,6 +606,8 @@ class InventoryListDataSource extends DataTableSource {
                                 icon: Icons.edit,
                                 message: 'Edit',
                                 onPress: () {
+                                  controller.clearStoreData();
+
                                   int inventoryId =
                                       InventoryListDetails?.id ?? 0;
                                   if (inventoryId != 0) {

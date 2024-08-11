@@ -276,7 +276,8 @@ class ViewAddInventoryController extends GetxController {
 
         inventoryId.value = dataFromPreviousScreen['inventoryId'];
 
-        // viewaddInventoryPresenter.saveValue(goId: inventoryId.value.toString());
+        viewaddInventoryPresenter.saveValue(
+            inventoryId: inventoryId.value.toString());
       } else {
         inventoryId.value = int.tryParse(_inventoryId) ?? 0;
       }
