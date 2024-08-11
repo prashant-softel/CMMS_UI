@@ -631,7 +631,15 @@ class InventoryListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      onSelectChanged: (_) {},
+      onSelectChanged: (_) {
+        controller.clearStoreData();
+        int inventoryId = InventoryListDetails?.id ?? 0;
+        if (inventoryId != 0) {
+          Get.toNamed(Routes.viewAddInventoryScreen, arguments: {
+            'inventoryId': inventoryId,
+          });
+        }
+      },
     );
   }
 
