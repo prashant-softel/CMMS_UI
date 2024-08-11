@@ -155,7 +155,6 @@ class _DocumentManagerListWebState extends State<DocumentManagerWeb> {
                                           label: "Add New",
                                           onPressed: () {
                                             controller.clearStoreData();
-                                            controller.clearStoreData();
                                             Get.offNamed(
                                                 Routes.documentUploadScreen);
                                           },
@@ -612,7 +611,7 @@ class DocUploadListDataSource extends DataTableSource {
                           message: 'view',
                           onPress: () {
                             controller.clearStoreData();
-                            int docUploadId = docUploadListDetails?.id ?? 0;
+                            int docUploadId = 5;
 
                             if (docUploadId != 0) {
                               Get.toNamed(Routes.viewDocUploadScreen,

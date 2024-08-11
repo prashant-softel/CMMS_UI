@@ -72,7 +72,7 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                               child: Text(" / DOCUMENT VERSION",
                                   style: Styles.greyLight14),
                             ),
-                            Text(" /VIEW DOCUMENT VERSION",
+                            Text(" / VIEW DOCUMENT VERSION",
                                 style: Styles.greyLight14)
                           ],
                         ),
@@ -134,160 +134,90 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                     color: Color.fromARGB(255, 245, 248, 250),
                                     height: Get.height * .7,
                                     width: Get.width * .92,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount:
-                                          controller.viewDocUploadList.length,
-                                      itemBuilder: (context, index) {
-                                        final item =
-                                            controller.viewDocUploadList[index];
-                                        return Container(
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: Color.fromARGB(
-                                                  255, 227, 224, 224),
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Color.fromARGB(
-                                                        255, 236, 234, 234)
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
+                                    child: DataTable2(
+                                      minWidth: 1400,
+                                      columns: [
+                                        DataColumn2(
+                                          fixedWidth: 100,
+                                          label: Text(
+                                            "DOC ID",
+                                            style: Styles.blue17,
                                           ),
-                                          height: 200,
-                                          margin: EdgeInsets.all(15),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(15),
-                                                child: Text(
-                                                  "${item.subDocName ?? ""}",
-                                                  style: Styles.blue17,
-                                                ),
-                                              ),
-                                              Divider(
-                                                color:
-                                                    ColorValues.greyLightColour,
-                                              ),
-                                              Expanded(
-                                                child: DataTable2(
-                                                  minWidth: 1400,
-                                                  columns: [
-                                                    DataColumn2(
-                                                      fixedWidth: 50,
-                                                      label: Text(
-                                                        "ID",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      fixedWidth: 120,
-                                                      label: Text(
-                                                        "DCMID",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      fixedWidth: 120,
-                                                      label: Text(
-                                                        "File ID",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      fixedWidth: 220,
-                                                      label: Text(
-                                                        "Sub Doc Name",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      fixedWidth: 200,
-                                                      label: Text(
-                                                        "Renew Date",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      fixedWidth: 200,
-                                                      label: Text(
-                                                        "Added By",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      fixedWidth: 200,
-                                                      label: Text(
-                                                        "Added At",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                    DataColumn2(
-                                                      fixedWidth: 200,
-                                                      label: Text(
-                                                        "Remarks",
-                                                        style: Styles.blue17,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                  rows: [
-                                                    DataRow(
-                                                      cells: [
-                                                        DataCell(Text(
-                                                            '${item.id ?? ""}',
-                                                            style: Styles
-                                                                .black14)),
-                                                        DataCell(Text(
-                                                            '${item.docMasterId ?? ""}',
-                                                            style: Styles
-                                                                .black14)),
-                                                        DataCell(Text(
-                                                            '${item.fileId ?? ""}',
-                                                            style: Styles
-                                                                .black14)),
-                                                        DataCell(Text(
-                                                            '${item.subDocName ?? ""}',
-                                                            style: Styles
-                                                                .black14)),
-                                                        DataCell(Text(
-                                                            '${item.renewDate != null ? DateFormat('yyyy-MM-dd').format(item.renewDate!) : ""}',
-                                                            style: Styles
-                                                                .black14)),
-                                                        DataCell(Text(
-                                                            '${item.addedBy ?? ""}',
-                                                            style: Styles
-                                                                .black14)),
-                                                        DataCell(Text(
-                                                            '${item.addedAt != null ? DateFormat('yyyy-MM-dd').format(item.addedAt!) : ""}',
-                                                            style: Styles
-                                                                .black14)),
-                                                        DataCell(Text(
-                                                            '${item.remarks ?? ""}',
-                                                            style: Styles
-                                                                .black14)),
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              Dimens.boxHeight20,
-                                            ],
+                                        ),
+                                        DataColumn2(
+                                          fixedWidth: 120,
+                                          label: Text(
+                                            "File ID",
+                                            style: Styles.blue17,
                                           ),
-                                        );
-                                      },
+                                        ),
+                                        DataColumn2(
+                                          fixedWidth: 220,
+                                          label: Text(
+                                            "Sub Doc Name",
+                                            style: Styles.blue17,
+                                          ),
+                                        ),
+                                        DataColumn2(
+                                          fixedWidth: 200,
+                                          label: Text(
+                                            "Renew Date",
+                                            style: Styles.blue17,
+                                          ),
+                                        ),
+                                        DataColumn2(
+                                          fixedWidth: 200,
+                                          label: Text(
+                                            "Added By",
+                                            style: Styles.blue17,
+                                          ),
+                                        ),
+                                        DataColumn2(
+                                          fixedWidth: 200,
+                                          label: Text(
+                                            "Added At",
+                                            style: Styles.blue17,
+                                          ),
+                                        ),
+                                        DataColumn2(
+                                          fixedWidth: 200,
+                                          label: Text(
+                                            "Remarks",
+                                            style: Styles.blue17,
+                                          ),
+                                        ),
+                                      ],
+                                      rows: controller.viewDocUploadList.map(
+                                        (item) {
+                                          return DataRow(
+                                            cells: [
+                                              DataCell(Text('${item.id ?? ""}',
+                                                  style: Styles.black14)),
+                                              DataCell(Text(
+                                                  '${item.fileId ?? ""}',
+                                                  style: Styles.black14)),
+                                              DataCell(Text(
+                                                  '${item.subDocName ?? ""}',
+                                                  style: Styles.black14)),
+                                              DataCell(Text(
+                                                  '${item.renewDate != null ? DateFormat('yyyy-MM-dd').format(item.renewDate!) : ""}',
+                                                  style: Styles.black14)),
+                                              DataCell(Text(
+                                                  '${item.addedBy ?? ""}',
+                                                  style: Styles.black14)),
+                                              DataCell(Text(
+                                                  '${item.addedAt != null ? DateFormat('yyyy-MM-dd').format(item.addedAt!) : ""}',
+                                                  style: Styles.black14)),
+                                              DataCell(Text(
+                                                  '${item.remarks ?? ""}',
+                                                  style: Styles.black14)),
+                                            ],
+                                          );
+                                        },
+                                      ).toList(),
                                     ),
                                   ),
+                                  Dimens.boxHeight20,
                                 ],
                               ),
                             ),
