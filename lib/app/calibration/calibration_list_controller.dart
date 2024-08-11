@@ -67,7 +67,7 @@ class CalibrationListController extends GetxController {
     "Due Date": true, "Done date": true,
 
     "Frequency": true,
-    // "Status":true,
+    "Is Damage": true,
   });
   final Map<String, double> columnwidth = {
     "Calibration Id": 200,
@@ -80,7 +80,8 @@ class CalibrationListController extends GetxController {
     "Last Done date": 200,
     "Due Date": 200, "Done date": 200,
 
-    "Frequency": 150,
+    "Frequency": 150, "Is Damage": 150,
+
     // "Status",
   };
   Map<String, RxString> filterText = {};
@@ -100,6 +101,7 @@ class CalibrationListController extends GetxController {
   RxString calibrationIdText = ''.obs;
   RxString frequencyFilterText = ''.obs;
   RxString schedulestartFilterText = ''.obs;
+  RxString isDamage = ''.obs;
 
   ///
   @override
@@ -115,7 +117,7 @@ class CalibrationListController extends GetxController {
       "Due Date": dueDateFilterText,
       "Done date": schedulestartFilterText,
 
-      "Frequency": frequencyFilterText,
+      "Frequency": frequencyFilterText, "Is Damage": isDamage,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -854,6 +856,7 @@ class CalibrationListController extends GetxController {
                           ),
                           width: Get.width / 5,
                           child: LoginCustomTextfield(
+                            enabled: false,
                             textController: nextDueDateController,
                             ontap: () {
                               _selectDate(context, 2);

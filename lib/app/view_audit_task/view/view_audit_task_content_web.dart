@@ -4,6 +4,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_audit_task/tbt_done_audit_dialog.dart';
+import 'package:cmms/app/view_audit_task/view/assigntoauditdailog.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_controller.dart';
 import 'package:cmms/app/widgets/audit_execution_process_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -1178,7 +1179,25 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               )
                                             : Dimens.box0,
                                         Dimens.boxWidth5,
-
+                                        Container(
+                                          height: 35,
+                                          child: CustomElevatedButton(
+                                            // icon: Icons.link,
+                                            backgroundColor:
+                                                ColorValues.blueColor,
+                                            text: "Re-assign",
+                                            onPressed: () {
+                                              Get.dialog<void>(
+                                                  AssignToAuditTaskDialog(
+                                                      id: controller
+                                                              .auditTasknDetailModel
+                                                              .value
+                                                              .id ??
+                                                          0));
+                                              //controller.printScreen();
+                                            },
+                                          ),
+                                        ),
                                         controller.auditTasknDetailModel.value.status == 430 &&
                                                     varUserAccessModel.value.access_list!
                                                             .where((e) =>

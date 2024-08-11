@@ -280,17 +280,23 @@ class AddInventoryController extends GetxController {
   Future<void> setUserId() async {
     try {
       final _inventoryId = await addInventoryPresenter.getValue();
+      // final _goType = await addInventoryPresenter.getGoTypeValue();
+
       if (_inventoryId == null ||
           _inventoryId == '' ||
           _inventoryId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         inventoryId.value = dataFromPreviousScreen['inventoryId'];
+
+        addInventoryPresenter.saveValue(
+            inventoryId: inventoryId.value.toString());
       } else {
         inventoryId.value = int.tryParse(_inventoryId) ?? 0;
       }
     } catch (e) {
       print(e.toString() + 'inventoryId');
+      //  Utility.showDialog(e.toString() + 'userId');
     }
   }
 

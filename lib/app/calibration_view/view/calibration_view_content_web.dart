@@ -181,7 +181,6 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                               
                                 children: [
                                   Spacer(),
                                   Column(
@@ -260,7 +259,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       ),
                                       Dimens.boxHeight10,
                                       Text(
-                                        'Schedule date:',
+                                        'Due date:',
                                         style: Styles.black17,
                                       ),
                                     ],
@@ -290,37 +289,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   Spacer(),
                                 ],
                               ),
-                              controller.calibrationDetailModel.value
-                                              ?.statusId ==
-                                          215 ||
-                                      controller.calibrationDetailModel.value
-                                              ?.statusId ==
-                                          220
-                                  ? Container(
-                                      height: Get.height * 0.2,
-                                      width: Get.width,
-                                      padding: EdgeInsets.all(10),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child:
-                                                FileUploadWidgetWithDropzone(),
-                                          ),
-                                          Dimens.boxWidth10,
-                                          Expanded(
-                                            flex: 8,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 15),
-                                              child:
-                                                  FileUploadDetailsWidgetWeb2(),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : Dimens.box0,
+
                               controller.calibrationId.value > 0 &&
                                       controller.calibrationDetailModel.value
                                               ?.file_list_calibration !=
@@ -351,7 +320,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                             child: Row(
                                               children: [
                                                 Text(
-                                                  "Calibration Certificates ",
+                                                  "Assets Calibration Certificates ",
                                                   style: Styles.blue700,
                                                 ),
                                               ],
@@ -568,208 +537,36 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       ),
                                     )
                                   : Dimens.box0,
-                              // Container(
-                              //   margin: Dimens.edgeInsets20,
-                              //   height: 300,
-                              //   decoration: BoxDecoration(
-                              //     border: Border.all(
-                              //       color:
-                              //           ColorValues.lightGreyColorWithOpacity35,
-                              //       width: 1,
-                              //     ),
-                              //     boxShadow: [
-                              //       BoxShadow(
-                              //         color: ColorValues.appBlueBackgroundColor,
-                              //         spreadRadius: 2,
-                              //         blurRadius: 5,
-                              //         offset: Offset(0, 2),
-                              //       ),
-                              //     ],
-                              //   ),
-                              //   child: Column(
-                              //     children: [
-                              //       Padding(
-                              //         padding: const EdgeInsets.all(10.0),
-                              //         child: Row(
-                              //           children: [
-                              //             Text(
-                              //               "Calibration Certificates",
-                              //               style: Styles.blue700,
-                              //             ),
-                              //           ],
-                              //         ),
-                              //       ),
-                              //       Divider(
-                              //         color: ColorValues.greyLightColour,
-                              //       ),
-                              //       Expanded(
-                              //         child: ScrollableTableView(
-                              //           columns: [
-                              //             "Sr.",
-                              //             "View",
-                              //             "File Name",
-                              //             "File Category",
-                              //             "File Size",
-                              //             "Status",
-                              //           ].map((column) {
-                              //             return TableViewColumn(
-                              //               label: column,
-                              //               minWidth: Get.width * 0.15,
-                              //             );
-                              //           }).toList(),
-                              //           rows: [].map((record) {
-                              //             return TableViewRow(
-                              //               height: 90,
-                              //               cells: record.map((value) {
-                              //                 return TableViewCell(
-                              //                   child: Text("no data found"),
-                              //                 );
-                              //               }).toList(),
-                              //             );
-                              //           }).toList(),
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-
-                              // Container(
-                              //   margin: Dimens.edgeInsets20,
-                              //   height: 300,
-                              //   decoration: BoxDecoration(
-                              //     border: Border.all(
-                              //       color:
-                              //           ColorValues.lightGreyColorWithOpacity35,
-                              //       width: 1,
-                              //     ),
-                              //     boxShadow: [
-                              //       BoxShadow(
-                              //         color: ColorValues.appBlueBackgroundColor,
-                              //         spreadRadius: 2,
-                              //         blurRadius: 5,
-                              //         offset: Offset(0, 2),
-                              //       ),
-                              //     ],
-                              //   ),
-                              //   child: Column(
-                              //     children: [
-                              //       Padding(
-                              //         padding: const EdgeInsets.all(10.0),
-                              //         child: Row(
-                              //           children: [
-                              //             Text(
-                              //               "Equipment Image ",
-                              //               style: Styles.blue700,
-                              //             ),
-                              //           ],
-                              //         ),
-                              //       ),
-                              //       Divider(
-                              //         color: ColorValues.greyLightColour,
-                              //       ),
-                              //       Expanded(
-                              //         child: ScrollableTableView(
-                              //           columns: [
-                              //             "Sr.",
-                              //             "View",
-                              //             "File Name",
-                              //             "File Category",
-                              //             "File Size",
-                              //             "Status",
-                              //           ].map((column) {
-                              //             return TableViewColumn(
-                              //               label: column,
-                              //               minWidth: Get.width * 0.15,
-                              //             );
-                              //           }).toList(),
-                              //           rows: [
-                              //             // [
-                              //             //   "1",
-                              //             //   "Milk",
-                              //             //   "20.00",
-                              //             //   "---",
-                              //             //   "status"
-                              //             // ],
-                              //             // [
-                              //             //   "2",
-                              //             //   "Soap",
-                              //             //   "10.00",
-                              //             //   "---",
-                              //             //   "status"
-                              //             // ],
-                              //             // ...List.generate(
-                              //             //   controller.historyLog?.length ?? 0,
-                              //             //   (index) {
-                              //             //     var getHistoryListDetails =
-                              //             //         controller.historyLog?[index];
-                              //             //     return [
-                              //             //       '${getHistoryListDetails?.created_at}',
-                              //             //       '${getHistoryListDetails?.created_by_name ?? ''}',
-                              //             //       '${getHistoryListDetails?.comment ?? ''}',
-                              //             //       '--',
-                              //             //       '${getHistoryListDetails?.status ?? ''}',
-                              //             //     ];
-                              //             //   },
-                              //             // ),
-                              //             // // [
-                              //           ].map((record) {
-                              //             return TableViewRow(
-                              //               height: 90,
-                              //               cells: record.map((value) {
-                              //                 return TableViewCell(
-                              //                   child: Text(value),
-                              //                 );
-                              //               }).toList(),
-                              //             );
-                              //           }).toList(),
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-
-                              (controller.historyList != null &&
-                                      controller.historyList!.isNotEmpty)
+                              controller.calibrationDetailModel.value
+                                              ?.statusId ==
+                                          215 ||
+                                      controller.calibrationDetailModel.value
+                                              ?.statusId ==
+                                          220
                                   ? Container(
-                                      margin: Dimens.edgeInsets20,
-                                      height:
-                                          ((controller.historyList?.length ??
-                                                      0) *
-                                                  40) +
-                                              120,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: ColorValues
-                                              .lightGreyColorWithOpacity35,
-                                          width: 1,
-                                        ),
-                                      ),
-                                      child: //
-                                          Column(
+                                      height: Get.height * 0.2,
+                                      width: Get.width,
+                                      margin:
+                                          EdgeInsets.only(left: 16, right: 16),
+                                      // padding: EdgeInsets.all(10),
+                                      child: Row(
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                              children: [
-                                                Text(
-                                                  "Calibration History ",
-                                                  style: Styles.blue700,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
                                           Expanded(
-                                            child: HistoryTableWidgetWeb(
-                                              historyList:
-                                                  controller.historyList,
-                                            ),
+                                            flex: 2,
+                                            child:
+                                                FileUploadWidgetWithDropzone(),
+                                          ),
+                                          Dimens.boxWidth10,
+                                          Expanded(
+                                            flex: 8,
+                                            child:
+                                                FileUploadDetailsWidgetWeb2(),
                                           ),
                                         ],
                                       ),
                                     )
-                                  //  )
-                                  : //
-                                  Dimens.box0,
+                                  : Dimens.box0,
+                              Dimens.boxHeight10,
                               controller.calibrationDetailModel.value?.statusId == 211 ||
                                       controller.calibrationDetailModel.value?.statusId ==
                                           212 ||
@@ -819,61 +616,55 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                 }),
                                           ],
                                         ),
-                                      ))
+                                      )),
 
-                              // Dimens.boxHeight10,
-                              // Row(
-                              //   children: [
-                              //     Text(
-                              //       "Remarks:",
-                              //       style: Styles.blackBold15,
-                              //     ),
-                              //     Dimens.boxWidth10,
-                              //     Container(
-                              //       width: (Get.width * .5),
-                              //       decoration: BoxDecoration(
-                              //         boxShadow: [
-                              //           BoxShadow(
-                              //             color: Colors.black26,
-                              //             offset: const Offset(
-                              //               5.0,
-                              //               5.0,
-                              //             ),
-                              //             blurRadius: 5.0,
-                              //             spreadRadius: 1.0,
-                              //           ),
-                              //           BoxShadow(
-                              //             color: ColorValues.whiteColor,
-                              //             offset: const Offset(0.0, 0.0),
-                              //             blurRadius: 0.0,
-                              //             spreadRadius: 0.0,
-                              //           ),
-                              //         ],
-                              //         color: ColorValues.whiteColor,
-                              //         borderRadius: BorderRadius.circular(5),
-                              //       ),
-                              //       child: SizedBox(
-                              //         width:
-                              //             MediaQuery.of(context).size.width / 1.1,
-                              //         child: TextField(
-                              //           keyboardType: TextInputType.multiline,
-                              //           enabled: false,
-                              //           maxLines: 5,
-                              //           autofocus: false,
-                              //           decoration: InputDecoration(
-                              //             fillColor: ColorValues.whiteColor,
-                              //             filled: true,
-                              //             contentPadding: Dimens.edgeInsets05_10,
-                              //             border: InputBorder.none,
-                              //             enabledBorder: InputBorder.none,
-                              //             focusedBorder: InputBorder.none,
-                              //           ),
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
-                              ,
+                              (controller.historyList != null &&
+                                      controller.historyList!.isNotEmpty)
+                                  ? Container(
+                                      margin: EdgeInsets.only(
+                                          left: 20,
+                                          right: 20,
+                                          bottom: 20,
+                                          top: 10),
+                                      height:
+                                          ((controller.historyList?.length ??
+                                                      0) *
+                                                  40) +
+                                              120,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: //
+                                          Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "Calibration History ",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: HistoryTableWidgetWeb(
+                                              historyList:
+                                                  controller.historyList,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  //  )
+                                  : //
+                                  Dimens.box0,
+
                               controller.calibrationDetailModel.value
                                               ?.statusId ==
                                           214 ||

@@ -5785,18 +5785,10 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                         .facility_name
                                                         .toString() ??
                                                     '')),
-                                                DataCell(Text(""
-                                                    // '${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].grNo.toString() ?? ''}')
-
-                                                    )),
-                                                DataCell(Text(controller
-                                                        .dashboardSmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .goNo
-                                                        .toString() ??
-                                                    '')),
+                                                DataCell(Text(
+                                                    '${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].grNo.toString() ?? ''}')), // )),
+                                                DataCell(Text(
+                                                    'GO${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].go_id.toString() ?? ''}')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
@@ -5883,28 +5875,29 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                             .remove_red_eye_outlined,
                                                         message: 'View',
                                                         onPress: () {
-                                                          // controller
-                                                          //     .clearStoreData();
-                                                          // controller
-                                                          //     .clearStoreDatatype();
+                                                          controller
+                                                              .clearStoreSmData();
+                                                          controller
+                                                              .clearStoreDatatype();
 
-                                                          // int pmTaskId = controller
-                                                          //         .dashboardSmList
-                                                          //         .value
-                                                          //         ?.cmDashboadDetails
-                                                          //         ?.item_list?[
-                                                          //             index]
-                                                          //         .wo_number ??
-                                                          //     0;
-                                                          // if (pmTaskId != 0) {
-                                                          //   Get.toNamed(
-                                                          //       Routes
-                                                          //           .pmTaskView,
-                                                          //       arguments: {
-                                                          //         'pmTaskId':
-                                                          //             pmTaskId
-                                                          //       });
-                                                          // }
+                                                          int goId = controller
+                                                                  .dashboardSmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .go_id ??
+                                                              0;
+                                                          if (goId != 0) {
+                                                            Get.toNamed(
+                                                              Routes
+                                                                  .receiveGoodsOrders,
+                                                              arguments: {
+                                                                'goId': goId,
+                                                                "goType": 1
+                                                              },
+                                                            );
+                                                          }
                                                         },
                                                       ),
                                                     ],

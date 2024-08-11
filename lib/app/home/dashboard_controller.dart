@@ -514,6 +514,14 @@ class DashboardController extends GetxController {
     homePresenter.iRclearValue();
   }
 
+  void clearStoreSmData() {
+    homePresenter.smclearValue();
+  }
+
+  void clearStoreDatatype() {
+    homePresenter.clearTypeValue();
+  }
+
   void onChartTapped(int index) {
     selectedSection.value = index;
   }
