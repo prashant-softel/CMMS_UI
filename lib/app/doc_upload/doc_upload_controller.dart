@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cmms/app/doc_upload/doc_upload_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/create_document_upload_model.dart';
+import 'package:cmms/domain/models/doc_upload_list_model.dart';
 import 'package:cmms/domain/models/documentmaster_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,9 +28,13 @@ class DocumentUploadController extends GetxController {
   Rx<bool> isSelecteddocumentNameType = true.obs;
   Rx<String> selecteddocumentNameType = ''.obs;
   int selectedDocumentId = 0;
+  GetDocUploadListModel? selectedItem;
+
   @override
   void onInit() async {
     try {
+      await setData();
+
       facilityIdStreamSubscription = homeController.facilityId$.listen(
         (event) async {
           facilityId = event;
@@ -39,6 +45,28 @@ class DocumentUploadController extends GetxController {
       super.onInit();
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> setData() async {
+    try {
+      GetDocUploadListModel? selectedItemDoc;
+
+      final _selectedItem = await documentUploadPresenter.getValue();
+      if (_selectedItem.isNotEmpty) {
+        final jobdetaildata = jsonDecode(_selectedItem);
+        selectedItemDoc = GetDocUploadListModel.fromJson(jobdetaildata);
+      }
+      if (_selectedItem == null ||
+          _selectedItem == '' ||
+          _selectedItem == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+        selectedItem = dataFromPreviousScreen['selectedItem'];
+      } else {
+        selectedItem = selectedItemDoc;
+      }
+    } catch (e) {
+      print(e.toString() + 'userId');
     }
   }
 

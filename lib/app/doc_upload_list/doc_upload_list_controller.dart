@@ -22,6 +22,7 @@ class DocumentManagerController extends GetxController {
   RxString renewDateFilterText = ''.obs;
   RxString addedAtFilterText = ''.obs;
   RxString addedByFilterText = ''.obs;
+  GetDocUploadListModel? selectedItem;
 
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;

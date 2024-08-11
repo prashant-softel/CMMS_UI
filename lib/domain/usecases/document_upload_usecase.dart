@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/documentmaster_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class DocumentUploadUsecase {
@@ -19,4 +20,7 @@ class DocumentUploadUsecase {
         uploadDocument,
         isLoading,
       );
+  Future<String> getValue() async =>
+      await repository.getStringValue(LocalKeys.selectedItem);
 }
+

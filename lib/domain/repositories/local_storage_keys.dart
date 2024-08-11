@@ -32,6 +32,7 @@ abstract class LocalKeys {
   static const isChecked = 'isChecked';
   static const jobModel = 'jobModel';
   static const pmTaskModel = 'pmTaskModel';
+  static const selectedItem = 'selectedItem';
 
   static const selectFacalityDropdowndata = 'selectFacalityDropdowndata';
   static const pmTaskId = 'pmTaskId';
