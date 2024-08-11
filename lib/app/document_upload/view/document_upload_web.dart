@@ -76,9 +76,10 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                         ),
                         InkWell(
                           onTap: () {
-                            Get.offNamed(Routes.masterDashboard);
+                            Get.offNamed(Routes.docVersionDashboard);
                           },
-                          child: Text(" / MASTER", style: Styles.greyLight14),
+                          child: Text(" / Document Version",
+                              style: Styles.greyLight14),
                         ),
                         Text(" / DOCUMENT UPLOAD", style: Styles.greyLight14)
                       ],

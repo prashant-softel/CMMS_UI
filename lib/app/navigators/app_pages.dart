@@ -75,6 +75,8 @@ import 'package:cmms/app/document_master/document_master_binding.dart';
 import 'package:cmms/app/document_master/view/document_master_screen.dart';
 import 'package:cmms/app/document_upload/document_upload_binding.dart';
 import 'package:cmms/app/document_upload/view/document_upload_screen.dart';
+import 'package:cmms/app/document_version_dashboard/doc_version_binding.dart';
+import 'package:cmms/app/document_version_dashboard/doc_version_dashboard_screen.dart';
 import 'package:cmms/app/dsm_charges/dsm_charges_binding.dart';
 import 'package:cmms/app/dsm_charges/view/dsm_charges_screen.dart';
 import 'package:cmms/app/dsm_dashboard/dsm_dashboard_binding.dart';
@@ -1387,6 +1389,11 @@ class AppPages {
       name: _Paths.trainingSummary,
       page: TrainingSummaryScreen.new,
       binding: TrainingSummaryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.docVersionDashboard,
+      page: DocVersionDashboardScreen.new,
+      binding: DocVersionDashbordBinding(),
     ),
   ];
 }

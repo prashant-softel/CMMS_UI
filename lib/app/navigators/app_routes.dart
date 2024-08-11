@@ -63,6 +63,9 @@ abstract class Routes {
   static const viewPermitScreen = _Paths.viewPermitScreen;
   static const permitTypeScreen = _Paths.permitTypeScreen;
   static const masterDashboard = _Paths.masterDashboard;
+  static const docVersionDashboard = _Paths.docVersionDashboard;
+
+  
   static const pmTaskView = _Paths.pmTaskView;
   static const inventory = _Paths.inventory;
   static const inventoryList = _Paths.inventoryList;
@@ -309,6 +312,9 @@ abstract class _Paths {
   static const viewPermitScreen = '/view-permit';
   static const permitTypeScreen = '/permit-type-screen';
   static const masterDashboard = '/master-dashboard';
+  static const docVersionDashboard = '/docVersionDashboard';
+
+  
   static const pmTaskView = '/pm-task-view-screen';
   static const inventory = '/inventory';
   static const inventoryList = '/inventoryList';
