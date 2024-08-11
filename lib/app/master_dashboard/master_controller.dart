@@ -200,11 +200,6 @@ class MastersController extends GetxController {
     );
   }
 
-  Future<void> goToDocumentManager() async {
-    Get.toNamed(
-      Routes.documentManager,
-    );
-  }
 
   Future<void> goToTypeOfObservation() async {
     Get.toNamed(

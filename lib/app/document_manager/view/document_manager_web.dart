@@ -76,10 +76,10 @@ class _DocumentManagerListWebState extends State<DocumentManagerWeb> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.offAllNamed(Routes.masterDashboard);
+                                Get.offAllNamed(Routes.docVersionDashboard);
                               },
-                              child:
-                                  Text(" / MASTERS", style: Styles.greyLight14),
+                              child: Text(" / Document Version",
+                                  style: Styles.greyLight14),
                             ),
                             Text(" / DOCUMENT MANAGER",
                                 style: Styles.greyLight14)

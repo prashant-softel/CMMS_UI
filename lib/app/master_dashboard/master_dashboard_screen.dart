@@ -1040,32 +1040,9 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kMasterFeatureId &&
-                                                      e.view ==
-                                                          UserAccessConstants
-                                                              .kHaveViewAccess)
-                                                  .length >
-                                              0
-                                          ? OnHover(builder: (((isHovered) {
-                                              return createContentTile(
-                                                  title: "Document Manager",
-                                                  onTap: () {
-                                                    controller
-                                                        .goToDocumentManager();
-                                                  });
-                                            })))
-                                          : Dimens.box0,
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Document Upload",
-                                            onTap: () {
-                                              controller.documentUpload();
-                                            });
-                                      }))),
+                                     
+                                    
+                                     
                                       varUserAccessModel.value.access_list!
                                                   .where((e) =>
                                                       e.feature_id ==
