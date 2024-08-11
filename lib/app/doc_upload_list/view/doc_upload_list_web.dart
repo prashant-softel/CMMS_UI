@@ -11,6 +11,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -544,14 +545,13 @@ class DocUploadListDataSource extends DataTableSource {
       "id",
       '${docUploadListDetails?.docMasterId ?? ''}',
       '${docUploadListDetails?.subDocName ?? ''}',
-      // '${docUploadListDetails?.status ?? ''}',
-
       docUploadListDetails?.renewDates == null
           ? ""
-          : '${docUploadListDetails?.renewDates![0] ?? ''}',
-      '${docUploadListDetails?.addedAt ?? ''}',
+          : '${docUploadListDetails?.renewDates!.isNotEmpty == true ? DateFormat('yyyy-MM-dd').format(docUploadListDetails!.renewDates![0]) : ''}',
+      docUploadListDetails?.addedAt != null
+          ? DateFormat('yyyy-MM-dd').format(docUploadListDetails!.addedAt!)
+          : '',
       '${docUploadListDetails?.addedBy ?? ''}',
-
       'Actions',
     ];
     var cells = [];
