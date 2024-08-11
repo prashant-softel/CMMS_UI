@@ -584,18 +584,24 @@ class DocUploadListDataSource extends DataTableSource {
                       ),
                       // Dimens.boxHeight10,
                       Container(
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: ColorValues.addNewColor,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Text(
-                          '${docUploadListDetails?.id}',
-                          style: Styles.white10.copyWith(
-                            color: Colors.white,
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: ColorValues.addNewColor,
+                            borderRadius: BorderRadius.circular(4),
                           ),
-                        ),
-                      ),
+                          child: docUploadListDetails?.renewDate == null
+                              ? Text(
+                                  'New Doc Uploaded',
+                                  style: Styles.white10.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : Text(
+                                  'ReNew Doc Uploaded',
+                                  style: Styles.white10.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                )),
                     ],
                   )
                 : (value == 'Actions')
