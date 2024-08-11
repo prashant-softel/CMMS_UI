@@ -16,18 +16,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class DocumentUploadWeb extends StatefulWidget {
+class DocumentUploadWeb extends GetView<DocumentUploadController> {
   DocumentUploadWeb({
     Key? key,
-  }) : super(key: key);
+  });
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
 
-  @override
-  State<DocumentUploadWeb> createState() => _DocumentUploadWebState();
-}
-
-class _DocumentUploadWebState extends State<DocumentUploadWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DocumentUploadController>(
@@ -320,10 +315,11 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                 Container(
                   height: 45,
                   child: CustomElevatedButton(
-                    backgroundColor: ColorValues.submitColor,
-                    text: "Submit",
+                    backgroundColor: ColorValues.cancelColor,
+                    text: "Cancel",
                     onPressed: () {
-                      controller.uploadDocumentNew();
+                      // controller.clearData();
+                      Get.back();
                     },
                   ),
                 ),
@@ -331,11 +327,11 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                 Container(
                   height: 45,
                   child: CustomElevatedButton(
-                    backgroundColor: ColorValues.cancelColor,
-                    text: "Cancel",
+                    backgroundColor: ColorValues.submitColor,
+                    text: "Upload",
                     onPressed: () {
-                      // controller.clearData();
-                      Get.back();
+                      controller.uploadDocumentNew(
+                          fileIds: dropzoneController.fileIds);
                     },
                   ),
                 ),

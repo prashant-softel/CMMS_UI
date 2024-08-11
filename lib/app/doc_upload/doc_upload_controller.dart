@@ -55,7 +55,7 @@ class DocumentUploadController extends GetxController {
     }
   }
 
-  void uploadDocumentNew() async {
+  void uploadDocumentNew({dynamic fileIds}) async {
     try {
       String _renewDateTc = renewDateTc.text.trim();
       String _remarkDateTc = remark.text.trim();
@@ -64,7 +64,7 @@ class DocumentUploadController extends GetxController {
       UploadDocumentModel uploadDocumentModel = UploadDocumentModel(
           is_renew: 0,
           docMasterId: selectedDocumentId,
-          fileId: 2,
+          fileId: fileIds[0],
           facility_id: facilityId,
           remarks: _remarkDateTc,
           renewDate: null,
