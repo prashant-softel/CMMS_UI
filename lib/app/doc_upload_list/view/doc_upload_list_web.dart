@@ -659,12 +659,19 @@ class DocUploadListDataSource extends DataTableSource {
                           icon: Icons.edit,
                           message: 'Edit',
                           onPress: () {
-                            controller.clearStoreData();
+                            controller.selectedItem =
+                                controller.docUploadList.firstWhere(
+                              (element) =>
+                                  "${element.id}" ==
+                                  docUploadListDetails?.id.toString(),
+                            );
                             int docUploadId = docUploadListDetails?.id ?? 0;
 
                             if (docUploadId != 0) {
                               Get.toNamed(Routes.documentUploadScreen,
-                                  arguments: {"docUploadId": docUploadId});
+                                  arguments: {
+                                    "selectedItem": controller.selectedItem
+                                  });
                             }
                           },
                         )
