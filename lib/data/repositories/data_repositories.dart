@@ -5472,6 +5472,22 @@ class DataRepository extends DomainRepository {
         facilityID: facilityID,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getDocuementListById({
+    required String auth,
+    required int facilityID,
+    required int docUploadId,
+    String? start_date,
+    required String end_date,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getDocuementListById(
+        auth: auth,
+        start_date: start_date,
+        end_date: end_date,
+        docUploadId: docUploadId,
+        facilityID: facilityID,
+        isLoading: isLoading ?? false,
+      );
 
   //create
   Future<ResponseModel> createSourceOfObslist({

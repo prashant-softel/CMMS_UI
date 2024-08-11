@@ -609,10 +609,9 @@ class DocUploadListDataSource extends DataTableSource {
                             int docUploadId = docUploadListDetails?.id ?? 0;
 
                             if (docUploadId != 0) {
-                              Get.toNamed(Routes.documentUploadScreen,
+                              Get.toNamed(Routes.viewDocUploadScreen,
                                   arguments: {
                                     'docUploadId': docUploadId,
-                                    "roType": 1
                                   });
                             }
                           },

@@ -171,6 +171,8 @@ import 'package:cmms/app/vegetation_plan_list/view/vegetation_plan_list_screen.d
 import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
 import 'package:cmms/app/view_course/view/view_course_screen.dart';
 import 'package:cmms/app/view_course/view_course_binding.dart';
+import 'package:cmms/app/view_doc_upload.dart/view/view_doc_upload_screen.dart';
+import 'package:cmms/app/view_doc_upload.dart/view_doc_upload_binding.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view/view_haz_waste_data_screen.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view_haz_waste_data_binding.dart';
 import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
@@ -1394,6 +1396,11 @@ class AppPages {
       name: _Paths.docVersionDashboard,
       page: DocVersionDashboardScreen.new,
       binding: DocVersionDashbordBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewDocUploadScreen,
+      page: ViewDocUploadScreen.new,
+      binding: ViewDocUploadBinding(),
     ),
   ];
 }
