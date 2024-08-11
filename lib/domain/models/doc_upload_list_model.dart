@@ -1,14 +1,3 @@
-import 'dart:convert';
-
-// Function to parse JSON string and return a list of GetDocUploadListModel objects
-List<GetDocUploadListModel> getDocUploadListModelFromJson(String str) =>
-    List<GetDocUploadListModel>.from(
-        json.decode(str).map((x) => GetDocUploadListModel.fromJson(x)));
-
-// Function to convert a list of GetDocUploadListModel objects to a JSON string
-String docUploadListModelToJson(List<GetDocUploadListModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class GetDocUploadListModel {
   int? facilityID;
   String? facilityName;
@@ -16,7 +5,7 @@ class GetDocUploadListModel {
   int? docMasterId;
   int? fileId;
   String? subDocName;
-  DateTime? renewDate;
+  List<DateTime>? renewDates; // Updated to hold a list of renew_date values
   String? addedBy;
   DateTime? addedAt;
   String? remarks;
@@ -29,7 +18,7 @@ class GetDocUploadListModel {
     this.docMasterId,
     this.fileId,
     this.subDocName,
-    this.renewDate,
+    this.renewDates,
     this.addedBy,
     this.addedAt,
     this.remarks,
@@ -45,9 +34,9 @@ class GetDocUploadListModel {
       docMasterId: json['doc_master_id'],
       fileId: json['file_id'],
       subDocName: json['sub_doc_name'],
-      renewDate: json['renew_date'] != null
-          ? DateTime.parse(json['renew_date'])
-          : null,
+      renewDates: json['renew_date'] != null
+          ? [DateTime.parse(json['renew_date'])]
+          : [],
       addedBy: json['added_by'],
       status: json['status'],
       addedAt:
@@ -66,11 +55,28 @@ class GetDocUploadListModel {
     data['doc_master_id'] = this.docMasterId;
     data['file_id'] = this.fileId;
     data['sub_doc_name'] = this.subDocName;
-    data['renew_date'] = this.renewDate?.toIso8601String();
+
+    // Ensure renew_dates are not empty and remove duplicates
+    if (renewDates != null && renewDates!.isNotEmpty) {
+      renewDates = renewDates!.toSet().toList(); // Remove duplicates
+      data['renew_date'] =
+          renewDates!.map((date) => date.toIso8601String()).toList();
+    } else {
+      data['renew_date'] = null; // Set to null if empty
+    }
+
     data['added_by'] = this.addedBy;
     data['added_at'] = this.addedAt?.toIso8601String();
     data['remarks'] = this.remarks;
 
     return data;
+  }
+
+  // Method to add a renew_date to the list
+  void addRenewDate(DateTime date) {
+    renewDates ??= [];
+    if (!renewDates!.contains(date)) {
+      renewDates!.add(date);
+    }
   }
 }
