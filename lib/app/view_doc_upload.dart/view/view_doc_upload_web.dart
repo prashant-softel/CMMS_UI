@@ -23,7 +23,7 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ViewDocUploadController>(
-      id: 'stock_Mangement',
+      id: 'stock_Mangement_Date',
       builder: (controller) {
         return SelectionArea(
           child: Scaffold(
@@ -121,11 +121,11 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                                     ['stock_Mangement_Date']);
                                               },
                                               hintText:
-                                                  '${controller.startDate.toString()} To ${controller.endDate.toString()}',
+                                                  '${controller.start_date} To ${controller.end_date}',
                                             ),
                                           ],
                                         ),
-                                        SizedBox(width: 5),
+                                        SizedBox(width: 10),
                                       ],
                                     ),
                                   ),
@@ -296,44 +296,31 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                       ),
                     ],
                   ),
-                  if (controller.openDocUploadDatePicker)
+                  if (controller.openFromDateToStartDatePicker)
                     Positioned(
-                      right: 150,
-                      top: 85,
+                      right: 40,
+                      top: 180,
                       child: DatePickerWidget(
                         selectionMode: DateRangePickerSelectionMode.range,
                         monthCellStyle: DateRangePickerMonthCellStyle(
                           todayCellDecoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: ColorValues.appDarkBlueColor),
-                        ), // last date of this year
-                        // controller: DateRangePickerController(),
+                        ),
                         initialSelectedRange: PickerDateRange(
                           controller.fromDate.value,
                           controller.toDate.value,
                         ),
-
                         onSubmit: (value) {
-                          print('po valu ${value.toString()}');
-                          PickerDateRange? data = value as PickerDateRange;
-
-                          var pickUpDate =
-                              DateTime.parse(data.startDate.toString());
-                          controller.fromDate.value = pickUpDate;
-                          var dropDate =
-                              DateTime.parse(data.endDate.toString());
-                          dropDate != null
-                              ? controller.toDate.value = dropDate
-                              : controller.toDate.value = pickUpDate;
-
-                          // controller.viewDocUploadList();
-                          controller.openFromDateToStartDatePicker =
-                              !controller.openFromDateToStartDatePicker;
-                          controller.update(['stock_Mangement_Date']);
-
-                          // Get.toNamed(
-                          //   Routes.stockManagementGoodsOrdersScreen,
-                          // );
+                          if (value is PickerDateRange) {
+                            var startDate = value.startDate!;
+                            var endDate = value.endDate ?? startDate;
+                            controller.fromDate.value = startDate;
+                            controller.toDate.value = endDate;
+                            controller.getViewDocUploadListByDate();
+                            controller.openFromDateToStartDatePicker = false;
+                            controller.update(['stock_Mangement_Date']);
+                          }
                         },
                       ),
                     ),

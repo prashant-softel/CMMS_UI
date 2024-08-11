@@ -12,8 +12,6 @@ class ViewDocUploadController extends GetxController {
   );
   ViewDocUploadPresenter viewDocUploadPresenter;
   final HomeController homecontroller = Get.find();
-
-  bool openDocUploadDatePicker = false;
   var docUploadDateTc = TextEditingController();
   StreamSubscription<int>? facilityIdStreamSubscription;
   Rx<int> facilityId = 0.obs;
@@ -24,13 +22,9 @@ class ViewDocUploadController extends GetxController {
   Rx<DateTime> toDate = DateTime.now().obs;
   bool openFromDateToStartDatePicker = false;
 
-  String get formattedFromdate =>
-      DateFormat('dd/MM/yyyy').format(fromDate.value);
-  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
   String get end_date => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get start_date => DateFormat('yyyy-MM-dd').format(fromDate.value);
-  Rx<String> startDate = ''.obs;
-  Rx<String> endDate = ''.obs;
+
   @override
   void onInit() async {
     await setViewDocUpload();
@@ -67,7 +61,7 @@ class ViewDocUploadController extends GetxController {
     }
   }
 
-  Future<void> getPlantStockListByDate() async {
+  Future<void> getViewDocUploadListByDate() async {
     await getDocuementListById(
       facilityID: facilityId.value,
       start_date: start_date,
