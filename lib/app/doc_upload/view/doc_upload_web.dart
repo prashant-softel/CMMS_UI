@@ -224,7 +224,9 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                             Expanded(
                                               flex: 2,
                                               child:
-                                                  FileUploadWidgetWithDropzone(),
+                                                  FileUploadWidgetWithDropzone(
+                                                uploadSingleFile: false,
+                                              ),
                                             ),
                                             Dimens.boxWidth10,
                                             Expanded(
