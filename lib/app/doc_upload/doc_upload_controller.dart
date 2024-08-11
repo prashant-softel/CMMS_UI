@@ -49,26 +49,32 @@ class DocumentUploadController extends GetxController {
   }
 
   Future<void> setData() async {
-    try {
-      GetDocUploadListModel? selectedItemDoc;
+  try {
+    GetDocUploadListModel? selectedItemDoc;
 
-      final _selectedItem = await documentUploadPresenter.getValue();
-      if (_selectedItem.isNotEmpty) {
-        final jobdetaildata = jsonDecode(_selectedItem);
-        selectedItemDoc = GetDocUploadListModel.fromJson(jobdetaildata);
-      }
-      if (_selectedItem == null ||
-          _selectedItem == '' ||
-          _selectedItem == "null") {
-        var dataFromPreviousScreen = Get.arguments;
-        selectedItem = dataFromPreviousScreen['selectedItem'];
-      } else {
-        selectedItem = selectedItemDoc;
-      }
-    } catch (e) {
-      print(e.toString() + 'userId');
+    final _selectedItem = await documentUploadPresenter.getValue();
+    if (_selectedItem.isNotEmpty) {
+      final jobdetaildata = jsonDecode(_selectedItem);
+      selectedItemDoc = GetDocUploadListModel.fromJson(jobdetaildata);
     }
+    if (_selectedItem == null || _selectedItem == '' || _selectedItem == "null") {
+      var dataFromPreviousScreen = Get.arguments;
+      selectedItem = dataFromPreviousScreen['selectedItem'];
+    } else {
+      selectedItem = selectedItemDoc;
+    }
+
+    if (selectedItem != null) {
+      // Bind the data to the controllers
+      selecteddocumentNameType.value = selectedItem!.docMasterId.toString();
+      subDocName.text = selectedItem!.subDocName ?? '';
+      remark.text = selectedItem!.remarks ?? '';
+    }
+  } catch (e) {
+    print(e.toString() + 'userId');
   }
+}
+
 
   Future<void> getDocumentMaster() async {
     documentNameType.clear();
