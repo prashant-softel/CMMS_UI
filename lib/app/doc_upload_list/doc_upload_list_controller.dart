@@ -38,8 +38,8 @@ class DocumentManagerController extends GetxController {
     "Doc Name": 220,
     "Sub Doc Name": 220,
     "Renew Date": 250,
-    "Added At": 250,
-    "Added By": 250,
+    "Added At": 200,
+    "Added By": 100,
   };
 
   Map<String, RxString> filterText = {};
@@ -91,24 +91,57 @@ class DocumentManagerController extends GetxController {
 
   Future<void> getDocUploadList(
       int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
+    // Clear the existing lists
     docUploadList.value = <GetDocUploadListModel>[];
     filteredData.value = <GetDocUploadListModel>[];
 
+    // Fetch the document upload list from the presenter
     final _docUploadList = await documentManagerPresenter.getDocUploadList(
         isLoading: isLoading.value,
         start_date: startDate,
         end_date: endDate,
         facility_id: facilityId,
         isExport: isExport);
-    docUploadList.value = _docUploadList;
+
+    // Create a map to store unique entries
+    Map<String, GetDocUploadListModel> uniqueEntries = {};
+
+    for (var doc in _docUploadList) {
+      // Create a unique key based on doc_master_id and sub_doc_name
+      String key = '${doc.docMasterId}_${doc.subDocName}';
+
+      if (uniqueEntries.containsKey(key)) {
+        // If the entry exists, add the renew_date to the list
+        uniqueEntries[key]!.addRenewDate(doc.renewDates!.first);
+      } else {
+        // If the entry doesn't exist, add it to the map
+        uniqueEntries[key] = doc;
+      }
+    }
+
+    // Convert the map back to a list and assign it to docUploadList
+    docUploadList.value = uniqueEntries.values.toList();
+
+    // Filter out any entries with empty renewDates
+    for (var doc in docUploadList.value) {
+      if (doc.renewDates != null && doc.renewDates!.isEmpty) {
+        doc.renewDates = null; // Set renewDates to null if empty
+      } else if (doc.renewDates != null) {
+        doc.renewDates = doc.renewDates!.toSet().toList(); // Remove duplicates
+      }
+    }
+
+    filteredData.value = docUploadList.value;
     isLoading.value = false;
+
+    // Initialize pagination
     paginationController = PaginationController(
       rowCount: docUploadList.length ?? 0,
       rowsPerPage: 10,
     );
 
+    // Set up table columns if there is data
     if (docUploadList.isNotEmpty) {
-      filteredData.value = docUploadList.value;
       docUploadListModel = docUploadList[0];
       var docUploadListJson = docUploadListModel?.toJson();
       docUploadListTableColumns.value = <String>[];
@@ -159,7 +192,7 @@ class DocumentManagerController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.renewDate
+            (item.renewDates
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
