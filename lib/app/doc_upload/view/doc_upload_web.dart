@@ -221,7 +221,8 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                       ),
                                     ),
                                     controller.selectedItem != null
-                                        ? Container(
+                                        ? 
+                                        Container(
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 50),
                                             width: Get.width * 0.5,
@@ -307,6 +308,7 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                               ],
                                             ),
                                           )
+                                       
                                         : Dimens.box0,
                                     SizedBox(
                                       height: 10,

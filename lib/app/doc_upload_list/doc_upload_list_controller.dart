@@ -97,7 +97,7 @@ class DocumentManagerController extends GetxController {
     filteredData.value = <GetDocUploadListModel>[];
 
     // Fetch the document upload list from the presenter
-  final _docUploadList = await documentManagerPresenter.getDocUploadList(
+    final _docUploadList = await documentManagerPresenter.getDocUploadList(
         isLoading: isLoading.value,
         start_date: startDate,
         end_date: endDate,
@@ -109,7 +109,7 @@ class DocumentManagerController extends GetxController {
 
     for (var doc in _docUploadList) {
       // Create a unique key based on doc_master_id and sub_doc_name
-      String key = '${doc.docMasterId}_${doc.subDocName}';
+      String key = '${doc.doc_master_id}_${doc.subDocName}';
 
       if (uniqueEntries.containsKey(key)) {
         // If the entry exists, add the renew_date to the list
@@ -183,7 +183,7 @@ class DocumentManagerController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.docMasterId
+            (item.doc_master_id
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??

@@ -4,7 +4,7 @@ class GetDocUploadListModel {
   int? facility_id;
   String? facility_name;
   int? id;
-  int? docMasterId;
+  int? doc_master_id;
   int? fileId;
   String? subDocName;
   List<DateTime>? renewDates;
@@ -21,7 +21,7 @@ class GetDocUploadListModel {
     this.facility_id,
     this.facility_name,
     this.id,
-    this.docMasterId,
+    this.doc_master_id,
     this.fileId,
     this.subDocName,
     this.renewDates,
@@ -41,7 +41,7 @@ class GetDocUploadListModel {
       facility_id: json['facility_id'],
       facility_name: json['facility_name'],
       id: json['id'],
-      docMasterId: json['doc_master_id'],
+      doc_master_id: json['doc_master_id'],
       fileId: json['file_id'],
       subDocName: json['sub_doc_name'],
       renewDates: json['renew_date'] != null
@@ -68,7 +68,7 @@ class GetDocUploadListModel {
     data['facility_id'] = this.facility_id;
     data['facility_name'] = this.facility_name;
     data['id'] = this.id;
-    data['doc_master_id'] = this.docMasterId;
+    data['doc_master_id'] = this.doc_master_id;
     data['file_id'] = this.fileId;
     data['sub_doc_name'] = this.subDocName;
 
