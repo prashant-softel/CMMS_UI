@@ -52,184 +52,180 @@ class ViewSetEquipmentDialog extends GetView {
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
 
-          return IgnorePointer(
-            ignoring: false,
-            child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: ColorValues.lightGreyColorWithOpacity35,
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: ColorValues.appBlueBackgroundColor,
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
+          return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: ColorValues.lightGreyColorWithOpacity35,
+                  width: 1,
                 ),
-                // padding: EdgeInsets.only(right: 120, top: 10),
-                height: height / 1.5,
-                width: Get.width * 0.5,
-                child: SingleChildScrollView(
-                  child: Column(
+                boxShadow: [
+                  BoxShadow(
+                    color: ColorValues.appBlueBackgroundColor,
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              // padding: EdgeInsets.only(right: 120, top: 10),
+              height: height / 1.5,
+              width: Get.width * 0.5,
+              child: SingleChildScrollView(
+                child: Column(
+                    children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
                       children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 4,
-                            child: Text(
-                              "Assets",
-                              style: TextStyle(color: Color(0xff31576D)),
-                            ),
+                        Expanded(
+                          flex: 4,
+                          child: Text(
+                            "Assets",
+                            style: TextStyle(color: Color(0xff31576D)),
                           ),
-                          Expanded(
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Text("Modules",
+                              style: TextStyle(color: Color(0xff31576D))),
+                        ),
+                        Expanded(
                             flex: 2,
-                            child: Text("Modules",
-                                style: TextStyle(color: Color(0xff31576D))),
-                          ),
-                          Expanded(
-                              flex: 2,
-                              child: Text("Select Day",
-                                  style: TextStyle(color: Color(0xff31576D)))),
-                        ],
-                      ),
+                            child: Text("Select Day",
+                                style: TextStyle(color: Color(0xff31576D)))),
+                      ],
                     ),
-                    Divider(
-                      thickness: 2,
-                    )
-                  ]..addAll(controller.equipmentList.value.map((e) {
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 4,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          setState(
-                                            () {
-                                              e.isExpanded = !e.isExpanded;
-                                            },
-                                          );
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "${e?.invName}",
-                                              style: TextStyle(
-                                                  fontSize: 12.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Icon(e!.isExpanded
-                                                ? Icons.arrow_drop_down
-                                                : Icons.arrow_drop_up)
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(
-                                        "${e.moduleQuantity}",
-                                        style: TextStyle(
-                                            fontSize: 12.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    IgnorePointer(
-                                      child: Expanded(
-                                        flex: 2,
-                                        child: DropdownButton<String>(
-                                          value: e.selectedDay,
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              e.selectedDay = newValue!;
-                                              e.smbs.forEach((element) {
-                                                element.selectedDay = newValue;
-                                              });
-                                            });
+                  ),
+                  Divider(
+                    thickness: 2,
+                  )
+                ]..addAll(controller.equipmentList.value.map((e) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 4,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(
+                                          () {
+                                            e.isExpanded = !e.isExpanded;
                                           },
-                                          items: controller.days
-                                              .map(
-                                                (map) => DropdownMenuItem(
-                                                  child:
-                                                      Text(map.name.toString()),
-                                                  value: map.id,
-                                                ),
-                                              )
-                                              .toList(),
-                                        ),
+                                        );
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "${e?.invName}",
+                                            style: TextStyle(
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Icon(e!.isExpanded
+                                              ? Icons.arrow_drop_down
+                                              : Icons.arrow_drop_up)
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
-                                e.isExpanded
-                                    ? Column(
-                                        children: []..addAll(
-                                            e.smbs.map(
-                                              (smbItems) {
-                                                return Row(
-                                                  children: [
-                                                    Expanded(
-                                                        flex: 4,
-                                                        child: Text(
-                                                            smbItems.smbName ??
-                                                                "")),
-                                                    Expanded(
-                                                        flex: 2,
-                                                        child: Text(
-                                                            "${smbItems.moduleQuantity}")),
-                                                    IgnorePointer(
-                                                      child: Expanded(
-                                                        flex: 2,
-                                                        child: DropdownButton<
-                                                            String>(
-                                                          value: smbItems
-                                                              .selectedDay,
-                                                          onChanged:
-                                                              (newValue) {
-                                                            setState(() {
-                                                              smbItems.selectedDay =
-                                                                  newValue!;
-                                                            });
-                                                          },
-                                                          items: controller.days
-                                                              .map(
-                                                                (map) =>
-                                                                    DropdownMenuItem(
-                                                                  child: Text(map
-                                                                      .name
-                                                                      .toString()),
-                                                                  value: map.id,
-                                                                ),
-                                                              )
-                                                              .toList(),
-                                                        ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      "${e.moduleQuantity}",
+                                      style: TextStyle(
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: IgnorePointer(
+                                      child: DropdownButton<String>(
+                                        value: e.selectedDay,
+                                        onChanged: (newValue) {
+                                          setState(() {
+                                            e.selectedDay = newValue!;
+                                            e.smbs.forEach((element) {
+                                              element.selectedDay = newValue;
+                                            });
+                                          });
+                                        },
+                                        items: controller.days
+                                            .map(
+                                              (map) => DropdownMenuItem(
+                                                child:
+                                                    Text(map.name.toString()),
+                                                value: map.id,
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              e.isExpanded
+                                  ? Column(
+                                      children: []..addAll(
+                                          e.smbs.map(
+                                            (smbItems) {
+                                              return Row(
+                                                children: [
+                                                  Expanded(
+                                                      flex: 4,
+                                                      child: Text(
+                                                          smbItems.smbName ??
+                                                              "")),
+                                                  Expanded(
+                                                      flex: 2,
+                                                      child: Text(
+                                                          "${smbItems.moduleQuantity}")),
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: IgnorePointer(
+                                                      child: DropdownButton<
+                                                          String>(
+                                                        value: smbItems
+                                                            .selectedDay,
+                                                        onChanged: (newValue) {
+                                                          setState(() {
+                                                            smbItems.selectedDay =
+                                                                newValue!;
+                                                          });
+                                                        },
+                                                        items: controller.days
+                                                            .map(
+                                                              (map) =>
+                                                                  DropdownMenuItem(
+                                                                child: Text(map
+                                                                    .name
+                                                                    .toString()),
+                                                                value: map.id,
+                                                              ),
+                                                            )
+                                                            .toList(),
                                                       ),
                                                     ),
-                                                  ],
-                                                );
-                                              },
-                                            ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
                                           ),
-                                      )
-                                    : Dimens.box0,
-                                Divider(
-                                  thickness: 1,
-                                )
-                              ],
-                            ),
-                          );
-                        }))),
-                )),
-          );
+                                        ),
+                                    )
+                                  : Dimens.box0,
+                              Divider(
+                                thickness: 1,
+                              )
+                            ],
+                          ),
+                        );
+                      }))),
+              ));
         }),
       );
     }));
