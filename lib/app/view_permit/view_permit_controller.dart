@@ -568,13 +568,18 @@ class ViewPermitController extends GetxController {
 
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitApprovedButton(
-              rejectCancelPermitJsonString: rejectCancelPermitJsonString,
-              ptwStatus: ptwStatus,
-              jobId: jobId,
-              type: type,
-              isLoading: true,
-              vegid: lstAssociatedVc![0]!.plan_id,
-              vegexe: lstAssociatedVc![0]!.executionId);
+        rejectCancelPermitJsonString: rejectCancelPermitJsonString,
+        ptwStatus: ptwStatus,
+        jobId: jobId,
+        type: type,
+        isLoading: true,
+        vegid: lstAssociatedVc!.value.length > 0
+            ? lstAssociatedVc![0]!.plan_id
+            : 0,
+        vegexe: lstAssociatedVc!.value.length > 0
+            ? lstAssociatedVc![0]!.executionId
+            : 0,
+      );
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
