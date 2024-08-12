@@ -138,6 +138,7 @@ abstract class Utility {
     var date = DateTime.parse(datetime);
     return Utility.getyearMonthDay(date);
   }
+
   static String getFormatedayMonthYear(String datetime) {
     var date = DateTime.parse(datetime);
     return Utility.getDayMonthYear(date);
@@ -146,6 +147,15 @@ abstract class Utility {
   static String getyearMonthDay(DateTime dateTime) =>
       // '${getOnlyDate(dateTime)}-${DateFormat('MM').format(dateTime)}-${DateFormat.y().format(dateTime)}';
       DateFormat('yyyy-MM-dd').format(dateTime);
+
+  static String getFormattedYearMonthDayTime(String datetime) {
+    var date = DateTime.parse(datetime);
+    return getYearMonthDayTime(date);
+  }
+
+  static String getYearMonthDayTime(DateTime dateTime) {
+    return DateFormat('yyyy-MM-dd HH:mm').format(dateTime);
+  }
 
   /// get formated [DateTime] eg. 12-01-2021
   static String getDayMonthYear(DateTime dateTime) =>

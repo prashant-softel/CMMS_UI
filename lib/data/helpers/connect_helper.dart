@@ -2886,6 +2886,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getEmployeeTrainingList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? featureId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getWorkTypeList({
     String? categoryIds,
     bool? isLoading,
@@ -10160,6 +10179,41 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> approveCourseSchedule({
+    required String auth,
+    approveSchedule,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/ApproveScheduleCourse',
+      Request.put,
+      jsonEncode(approveSchedule),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  Future<ResponseModel> rejectCourseSchedule({
+    required String auth,
+    rejectSchedule,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/RejectScheduleCourse',
+      Request.put,
+      jsonEncode(rejectSchedule),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getScheduleCourseDetails({
     required String auth,
     int? schedule_id,
@@ -10171,6 +10225,24 @@ class ConnectHelper {
       null,
       isLoading ?? true,
       {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> executeScheduleCourse({
+    required String auth,
+    executeCourseJson,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/ExecuteScheduleCourse',
+      Request.post,
+      executeCourseJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );

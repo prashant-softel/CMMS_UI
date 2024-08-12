@@ -16,7 +16,7 @@ class ScheduleCourseListController extends GetxController {
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Schedule Id": true,
     "Course Id": true,
-    "Schedule Date": true,
+    "Training Date": true,
     "Training Company": true,
     "Trainer": true,
     "Mode": true,
@@ -25,7 +25,7 @@ class ScheduleCourseListController extends GetxController {
   final Map<String, double> columnwidth = {
     "Schedule Id": 150,
     "Course Id": 150,
-    "Schedule Date": 190,
+    "Training Date": 190,
     "Training Company": 250,
     "Trainer": 200,
     "Mode": 130,
@@ -136,7 +136,7 @@ class ScheduleCourseListController extends GetxController {
       this.filterText = {
         "Schedule Id": ScheduleIdFilterText,
         "Course Id": CourseIdFilterText,
-        "Schedule Date": ScheduledateFilterText,
+        "Training Date": ScheduledateFilterText,
         "Training Company": TrainingcompanyFilterText,
         "Trainer": trainerFilterText,
         "Mode": modeFilterText,

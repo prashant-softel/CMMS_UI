@@ -26,6 +26,8 @@ class TrainingCourseListModel {
   int? duration;
   int? max_cap;
   String? description;
+  int? status;
+  String? shortStatus;
   List<ImageDetails>? imageDetails;
 
   TrainingCourseListModel({
@@ -41,6 +43,8 @@ class TrainingCourseListModel {
     this.max_cap,
     this.description,
     this.imageDetails,
+    this.status,
+    this.shortStatus,
   });
 
   factory TrainingCourseListModel.fromJson(Map<String, dynamic> json) =>
@@ -56,6 +60,8 @@ class TrainingCourseListModel {
         duration: json["duration"],
         max_cap: json["max_cap"],
         description: json["description"],
+        status: json["status"],
+        shortStatus: json["short_status"],
         imageDetails: json["imageDetails"] != null
             ? List<ImageDetails>.from(
                 json["imageDetails"].map(

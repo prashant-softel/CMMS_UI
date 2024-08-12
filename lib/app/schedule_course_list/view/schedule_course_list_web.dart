@@ -442,13 +442,14 @@ class ScheduleCourseListDataSource extends DataTableSource {
     String schedDate = ScheduleCourse!.scheduleDate != null
         ? ScheduleCourse.scheduleDate.toString()
         : '';
-    if (schedDate.length > 0) {
-      schedDate = schedDate.substring(0, schedDate.length - 9);
-    }
+    // print("Schedule Date: ${ScheduleCourse.scheduleDate}");
+    // if (schedDate.length > 0) {
+    //   schedDate = schedDate.substring(0, schedDate.length - 9);
+    // }
 
     var cellsBuffer = [
-      "id",
-      '${ScheduleCourse.courseID ?? ''}',
+      "SC${ScheduleCourse.scheduleID ?? ""}",
+      'TC${ScheduleCourse.courseID ?? ''}',
       schedDate,
       '${ScheduleCourse.trainingCompany ?? ''}',
       '${ScheduleCourse.trainer ?? 0}',
@@ -476,16 +477,17 @@ class ScheduleCourseListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'id')
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'SC${ScheduleCourse.scheduleID}',
-                      ),
-                    ],
-                  )
-                : (value == 'Actions')
+            child:
+                // child: (value == 'id')
+                //     ? Column(
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           Text(
+                //             'SC${ScheduleCourse.scheduleID}',
+                //           ),
+                //         ],
+                //       )
+                (value == 'Actions')
                     ? Wrap(
                         children: [
                           Column(
@@ -503,21 +505,27 @@ class ScheduleCourseListDataSource extends DataTableSource {
                                         Routes.executeCourse,
                                         arguments: {
                                           "schedule_id":
-                                              ScheduleCourse.scheduleID
+                                              ScheduleCourse.scheduleID,
+                                          "type": 1,
                                         },
                                       );
                                     },
                                   ),
-                                  TableActionButton(
-                                    color: ColorValues.executeColor,
-                                    icon: Icons.arrow_forward,
-                                    message: 'Execute',
-                                    onPress: () {
-                                      Get.toNamed(
-                                        Routes.executeCourse,
-                                      );
-                                    },
-                                  ),
+                                  // TableActionButton(
+                                  //   color: ColorValues.executeColor,
+                                  //   icon: Icons.arrow_forward,
+                                  //   message: 'Execute',
+                                  //   onPress: () {
+                                  //     controller.clearStoreData();
+                                  //     Get.toNamed(
+                                  //       Routes.executeCourse,
+                                  //       arguments: {
+                                  //         "schedule_id":
+                                  //             ScheduleCourse.scheduleID
+                                  //       },
+                                  //     );
+                                  //   },
+                                  // ),
                                 ],
                               ),
                             ],
@@ -532,7 +540,7 @@ class ScheduleCourseListDataSource extends DataTableSource {
         controller.clearStoreData();
         Get.toNamed(
           Routes.executeCourse,
-          arguments: {"schedule_id": ScheduleCourse.scheduleID},
+          arguments: {"schedule_id": ScheduleCourse.scheduleID, "type": 1},
         );
       },
     );

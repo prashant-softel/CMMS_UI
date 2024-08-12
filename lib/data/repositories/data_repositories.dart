@@ -1715,6 +1715,18 @@ class DataRepository extends DomainRepository {
         featureId: featureId,
         isLoading: isLoading,
       );
+  Future<ResponseModel> getEmployeeTrainingList({
+    required String auth,
+    int? facilityId,
+    int? featureId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getEmployeeTrainingList(
+        auth: auth,
+        facilityId: facilityId,
+        featureId: featureId,
+        isLoading: isLoading,
+      );
 
   Future<ResponseModel> getToolsRequiredToWorkTypeList({
     required String auth,
@@ -5776,6 +5788,39 @@ class DataRepository extends DomainRepository {
       await connectHelper.scheduleCourse(
         auth: auth,
         scheduleCourseJson: scheduleCourseJson,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> approveCourseSchedule({
+    required String auth,
+    approveSchedule,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.approveCourseSchedule(
+        auth: auth,
+        approveSchedule: approveSchedule,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> rejectCourseSchedule({
+    required String auth,
+    rejectSchedule,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.rejectCourseSchedule(
+        auth: auth,
+        rejectSchedule: rejectSchedule,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> executeScheduleCourse({
+    auth,
+    executeCourseJson,
+    isLoading,
+  }) async =>
+      await connectHelper.executeScheduleCourse(
+        auth: auth,
+        executeCourseJson: executeCourseJson,
         isLoading: isLoading ?? false,
       );
 
