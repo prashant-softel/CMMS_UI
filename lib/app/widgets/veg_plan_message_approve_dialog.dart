@@ -76,7 +76,7 @@ class VegPlanMessageApproveDialog extends GetView {
               Dimens.boxWidth10,
               Center(
                 child: ElevatedButton(
-                  style: Styles.yellowElevatedButtonStyle,
+                  style: Styles.blueElevatedButtonStyle,
                   onPressed: () {
                     Get.offNamed(
                       Routes.vegExecutionListScreen,
