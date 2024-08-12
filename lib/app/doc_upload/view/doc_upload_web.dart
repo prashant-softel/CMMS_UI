@@ -297,7 +297,6 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                       DateFormat('yyyy-MM-dd').format(p0.value);
                                   controller.openrenewDateTcDatePicker =
                                       !controller.openrenewDateTcDatePicker;
-                                  // controller.isPOdateInvalid.value = false;
                                   controller.update(['stock_Mangement']);
                                 },
                               ),
