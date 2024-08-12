@@ -15,6 +15,7 @@ class ViewDocUploadUsecase {
   void clearValue() async => repository.clearData(LocalKeys.docUploadId);
   Future<List<ViewDocUpload?>?> getDocuementListById({
     String? start_date,
+    String? sub_doc_name,
     required String end_date,
     required int docUploadId,
     required int facilityID,
@@ -22,6 +23,7 @@ class ViewDocUploadUsecase {
   }) async =>
       await repository.getDocuementListById(
         start_date: start_date,
+        sub_doc_name: sub_doc_name,
         end_date: end_date,
         docUploadId: docUploadId,
         facilityID: facilityID,

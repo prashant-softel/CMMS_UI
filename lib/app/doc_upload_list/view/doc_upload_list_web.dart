@@ -522,10 +522,10 @@ class DocUploadListDataSource extends DataTableSource {
           (GoodsOrderList.docMasterId ?? '')
               .toString()
               .contains(controller.addedAtFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.addedAt ?? '')
+          (GoodsOrderList.created_at ?? '')
               .toString()
               .contains(controller.addedByFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.addedBy ?? '')
+          (GoodsOrderList.created_by ?? '')
               .toString()
               .contains(controller.docNameFilterText.value.toLowerCase()) &&
           (GoodsOrderList.subDocName ?? '')
@@ -548,10 +548,10 @@ class DocUploadListDataSource extends DataTableSource {
       docUploadListDetails?.renewDates == null
           ? ""
           : '${docUploadListDetails?.renewDates!.isNotEmpty == true ? DateFormat('yyyy-MM-dd').format(docUploadListDetails!.renewDates![0]) : ''}',
-      docUploadListDetails?.addedAt != null
-          ? DateFormat('yyyy-MM-dd').format(docUploadListDetails!.addedAt!)
+      docUploadListDetails?.created_at != null
+          ? DateFormat('yyyy-MM-dd').format(docUploadListDetails!.created_at!)
           : '',
-      '${docUploadListDetails?.addedBy ?? ''}',
+      '${docUploadListDetails?.created_by ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -613,23 +613,22 @@ class DocUploadListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
                           onPress: () {
-                            controller.clearStoreData();
+                            controller.selectedItem =
+                                controller.docUploadList.firstWhere(
+                              (element) =>
+                                  "${element.id}" ==
+                                  docUploadListDetails?.id.toString(),
+                            );
                             int docUploadId = docUploadListDetails?.id ?? 0;
 
                             if (docUploadId != 0) {
                               Get.toNamed(Routes.viewDocUploadScreen,
                                   arguments: {
+                                    "selectedItem": controller.selectedItem,
                                     'docUploadId': docUploadId,
                                   });
                             }
                           },
-                          // onPress: () {
-                          //   // controller.viewAddGoodsOrdersDetails(
-                          //   //     id: int.tryParse(
-                          //   //         '${record[0]}'));
-                          //   // Get.toNamed(Routes
-                          //   //     .viewGoodsOrders);
-                          // },
                         ),
                         // controller.docUploadList
                         //                 .firstWhere(

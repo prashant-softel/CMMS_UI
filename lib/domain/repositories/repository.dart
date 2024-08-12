@@ -5411,12 +5411,13 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> permitApprovedButton(
-    rejectCancelPermitJsonString,
-    String? ptwStatus,
-    int? jobId,
-    int? type,
-    bool? isLoading,
-  ) async {
+      rejectCancelPermitJsonString,
+      String? ptwStatus,
+      int? jobId,
+      int? type,
+      bool? isLoading,
+      int? vegexe,
+      int? vegid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.permitApprovedButton(
@@ -5444,7 +5445,8 @@ class Repository {
                           ? Get.offAllNamed(
                               Routes.addModuleCleaningExecutionContentWeb)
                           : type == 5
-                              ? Get.offAllNamed(Routes.vegExecutionScreen)
+                              ? Get.offAllNamed(Routes.vegExecutionScreen,
+                                  arguments: {"vegexe": vegexe, "vegid": vegid})
                               : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
@@ -14509,6 +14511,7 @@ class Repository {
     required int facilityID,
     required int docUploadId,
     bool? isLoading,
+    String? sub_doc_name,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -14518,6 +14521,7 @@ class Repository {
         end_date: end_date,
         docUploadId: docUploadId,
         facilityID: facilityID,
+        sub_doc_name: sub_doc_name,
         isLoading: isLoading ?? false,
       );
 
@@ -15586,9 +15590,8 @@ class Repository {
       );
       print(res.data);
       if (!res.hasError) {
-        Fluttertoast.showToast(
-            msg: "Updated Successfully...", fontSize: 16.0);
-            Get.offAllNamed(
+        Fluttertoast.showToast(msg: "Updated Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
           Routes.statutory,
         );
         return true;

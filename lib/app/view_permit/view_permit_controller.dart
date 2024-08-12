@@ -571,7 +571,7 @@ class ViewPermitController extends GetxController {
         ptwStatus: ptwStatus,
         jobId: jobId,
         type: type,
-        isLoading: true,
+        isLoading: true,vegid:,vegexe: 
       );
       if (response == true) {
         //getCalibrationList(facilityId, true);

@@ -5477,6 +5477,7 @@ class DataRepository extends DomainRepository {
     required int facilityID,
     required int docUploadId,
     String? start_date,
+    String? sub_doc_name,
     required String end_date,
     bool? isLoading,
   }) async =>
@@ -5486,6 +5487,7 @@ class DataRepository extends DomainRepository {
         end_date: end_date,
         docUploadId: docUploadId,
         facilityID: facilityID,
+        sub_doc_name: sub_doc_name,
         isLoading: isLoading ?? false,
       );
 

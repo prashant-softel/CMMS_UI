@@ -9688,10 +9688,11 @@ class ConnectHelper {
     required int docUploadId,
     String? start_date,
     required String end_date,
+    String? sub_doc_name,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/getDocuementListById?facility_id=$facilityID&id=$docUploadId&sub_doc_name=Lease%20Agreement&fromDate=$start_date&toDate=$end_date',
+      'MISMaster/getDocuementListById?facility_id=$facilityID&id=$docUploadId&sub_doc_name=$sub_doc_name&fromDate=$start_date&toDate=$end_date',
       Request.get,
       null,
       isLoading ?? false,
