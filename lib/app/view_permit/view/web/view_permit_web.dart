@@ -1084,11 +1084,11 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                 'mcid': controller
                                                                     .lstAssociatedMc?[
                                                                         index]
-                                                                    ?.mc_id
+                                                                    ?.plan_id
                                                               });
                                                         },
                                                         child: Text(
-                                                          "MCT${controller.lstAssociatedMc?[index]?.mc_id.toString() ?? ''}",
+                                                          "MCT${controller.lstAssociatedMc?[index]?.plan_id.toString() ?? ''}",
                                                           style: TextStyle(
                                                             decoration:
                                                                 TextDecoration
@@ -1155,6 +1155,228 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                     DataCell(
                                                       Text(controller
                                                               .lstAssociatedMc?[
+                                                                  index]
+                                                              ?.status_short
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                              //veg linked to ptw
+                              controller.lstAssociatedVc!.isEmpty
+                                  ? Dimens.box0
+                                  : Container(
+                                      margin: Dimens.edgeInsets20,
+                                      height: ((controller.lstAssociatedVc
+                                                      ?.length ??
+                                                  0) *
+                                              50) +
+                                          125,
+                                      // width: MediaQuery.of(context)
+                                      //         .size
+                                      //         .width /
+                                      //     1.2,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: ColorValues
+                                                .appBlueBackgroundColor,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "VEG Task Linked To This Permit",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          // Divider(
+                                          //   color: ColorValues.greyLightColour,
+                                          // ),
+                                          Expanded(
+                                            child: DataTable2(
+                                              border: TableBorder.all(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 229, 234)),
+                                              columns: [
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Task Id",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Task Title",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Equipment\nCategory",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Equipment",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Start Date",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Assigned To",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Status",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller.lstAssociatedVc
+                                                        ?.length ??
+                                                    0,
+                                                (index) => DataRow(
+                                                  cells: [
+                                                    DataCell(
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          controller
+                                                              .clearStoreDataPMtaskId();
+                                                          Get.offAllNamed(
+                                                              Routes
+                                                                  .vegExecutionScreen,
+                                                              arguments: {
+                                                                'vegexe': controller
+                                                                    .lstAssociatedVc?[
+                                                                        index]!
+                                                                    .executionId,
+                                                                'vegid': controller
+                                                                    .lstAssociatedVc?[
+                                                                        index]!
+                                                                    .plan_id,
+                                                              });
+                                                        },
+                                                        child: Text(
+                                                          "VE${controller.lstAssociatedVc?[index]?.plan_id.toString() ?? ''}",
+                                                          style: TextStyle(
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline,
+                                                            decorationStyle:
+                                                                TextDecorationStyle
+                                                                    .solid,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedVc?[
+                                                                  index]
+                                                              ?.title
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedVc?[
+                                                                  index]
+                                                              ?.equipmentCat
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      SingleChildScrollView(
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        child: Text(
+                                                          controller
+                                                                  .lstAssociatedVc?[
+                                                                      index]
+                                                                  ?.equipment
+                                                                  .toString() ??
+                                                              '',
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedVc?[
+                                                                  index]
+                                                              ?.startDate
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedVc?[
+                                                                  index]
+                                                              ?.assignedTo
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedVc?[
                                                                   index]
                                                               ?.status_short
                                                               .toString() ??
@@ -3548,31 +3770,35 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                 //     : Container(),
 
                 /// Permit Cancel By approver & Permit Request
-                varUserAccessModel.value.access_list!
-                                .where((e) =>
-                                    e.feature_id ==
-                                        UserAccessConstants.kPermitFeatureId &&
-                                    e.approve ==
-                                        UserAccessConstants.kHaveApproveAccess)
-                                .length >
-                            0 ||
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPermitFeatureId &&
-                                        e.add ==
-                                            UserAccessConstants.kHaveAddAccess)
-                                    .length >
-                                0 &&
-                            controller
+                (varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kPermitFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0 ||
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kPermitFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0) &&
+                            (controller
                                     .viewPermitDetailsModel.value?.ptwStatus !=
                                 PermitStatusConstants
-                                    .PTW_CANCEL_REQUEST_APPROVED &&
-                            controller
-                                    .viewPermitDetailsModel.value?.ptwStatus !=
-                                PermitStatusConstants
-                                    .PTW_EXTEND_REQUEST_REJECTED
+                                    .PTW_CANCEL_REQUEST_APPROVED) &&
+                        (controller.viewPermitDetailsModel.value?.ptwStatus !=
+                            PermitStatusConstants
+                                .PTW_EXTEND_REQUEST_REJECTED) &&
+                        (controller.viewPermitDetailsModel.value?.ptwStatus !=
+                            PermitStatusConstants.PTW_CLOSED)
                     ? Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Container(

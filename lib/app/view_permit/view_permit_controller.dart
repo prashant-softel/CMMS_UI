@@ -284,6 +284,7 @@ class ViewPermitController extends GetxController {
   RxList<ListAssociatedJob?>? listAssociatedJobs = <ListAssociatedJob?>[].obs;
   RxList<ListAssociatedPm?>? listAssociatedPm = <ListAssociatedPm?>[].obs;
   RxList<ListAssociatedMC?>? lstAssociatedMc = <ListAssociatedMC?>[].obs;
+  RxList<ListAssociatedVC?>? lstAssociatedVc = <ListAssociatedVC?>[].obs;
 
   ///Employee List
   RxList<ListEmployees?>? listEmployee = <ListEmployees?>[].obs; //ListEmployees
@@ -567,12 +568,13 @@ class ViewPermitController extends GetxController {
 
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitApprovedButton(
-        rejectCancelPermitJsonString: rejectCancelPermitJsonString,
-        ptwStatus: ptwStatus,
-        jobId: jobId,
-        type: type,
-        isLoading: true,vegid:,vegexe: 
-      );
+              rejectCancelPermitJsonString: rejectCancelPermitJsonString,
+              ptwStatus: ptwStatus,
+              jobId: jobId,
+              type: type,
+              isLoading: true,
+              vegid: lstAssociatedVc![0]!.plan_id,
+              vegexe: lstAssociatedVc![0]!.executionId);
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
@@ -912,6 +914,9 @@ class ViewPermitController extends GetxController {
       lstAssociatedMc?.value =
           viewPermitDetailsModel.value?.lstAssociatedMC ?? [];
       print({"MC Data of ptw", lstAssociatedMc});
+      lstAssociatedVc?.value =
+          viewPermitDetailsModel.value?.lstAssociatedVC ?? [];
+      print({"MC Data of ptw", lstAssociatedVc});
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
       file_list?.value = viewPermitDetailsModel.value?.file_list ?? [];
       print("File List:");

@@ -61,6 +61,7 @@ class NewPermitDetailModel {
   List<ListAssociatedJob?>? lstAssociatedJobs;
   List<ListAssociatedPm?>? lstAssociatedPM;
   List<ListAssociatedMC?>? lstAssociatedMC;
+  List<ListAssociatedVC?>? lstAssociatedVC;
   List<int?>? category_ids;
 
   ExtendDetails? extendDetails;
@@ -130,6 +131,7 @@ class NewPermitDetailModel {
     this.lstAssociatedJobs,
     this.lstAssociatedPM,
     this.lstAssociatedMC,
+    this.lstAssociatedVC,
     this.extendDetails,
     this.cancelDetails,
     this.closeDetails,
@@ -236,6 +238,10 @@ class NewPermitDetailModel {
         lstAssociatedMC: json["listAssociatedMC"] != null
             ? List<ListAssociatedMC>.from(json["listAssociatedMC"]
                 .map((x) => ListAssociatedMC.fromJson(x)))
+            : [],
+        lstAssociatedVC: json["listAssociatedvc"] != null
+            ? List<ListAssociatedVC>.from(json["listAssociatedvc"]
+                .map((x) => ListAssociatedVC.fromJson(x)))
             : [],
         file_list: json["file_list"] != null
             ? List<FileList>.from(
@@ -605,10 +611,12 @@ class ListAssociatedPm {
         "status_short": status_short,
       };
 }
+
 class ListAssociatedMC {
   ListAssociatedMC(
       {this.permitId,
-      this.mc_id,
+      this.plan_id,
+      this.executionId,
       this.title,
       this.equipmentCat,
       this.equipment,
@@ -618,6 +626,8 @@ class ListAssociatedMC {
       this.startDate});
 
   int? permitId;
+  int? plan_id;
+  int? executionId;
   int? mc_id;
   String? title;
   String? equipmentCat;
@@ -634,7 +644,8 @@ class ListAssociatedMC {
     }
     return ListAssociatedMC(
       permitId: json['permitId'],
-      mc_id: json['mc_id'],
+      plan_id: json['plan_id'],
+      executionId: json['executionId'],
       title: json["title"] ?? '',
       equipmentCat: json['equipmentCat'],
       equipment: json['equipment'],
@@ -647,7 +658,64 @@ class ListAssociatedMC {
 
   Map<String, dynamic> toJson() => {
         "permitId": permitId,
-        "mc_id": mc_id,
+        "plan_id": plan_id,
+        "executionId": executionId,
+        "title": title,
+        "equipmentCat": equipmentCat,
+        "equipment": equipment,
+        "start_date": startDate,
+        "assignedTo": assignedTo,
+        "status": status,
+        "status_short": status_short,
+      };
+}
+class ListAssociatedVC {
+  ListAssociatedVC(
+      {this.permitId,
+      this.plan_id,
+      this.executionId,
+      this.title,
+      this.equipmentCat,
+      this.equipment,
+      this.assignedTo,
+      this.status,
+      this.status_short,
+      this.startDate});
+
+  int? permitId;
+  int? plan_id;
+  int? executionId;
+  String? title;
+  String? equipmentCat;
+  String? equipment;
+  String? startDate;
+  String? assignedTo;
+  int? status;
+  String? status_short;
+
+  factory ListAssociatedVC.fromJson(Map<String, dynamic> json) {
+    String? startDate = json['start_date'];
+    if (startDate != null && startDate.length > 3) {
+      startDate = startDate.substring(0, startDate.length - 3);
+    }
+    return ListAssociatedVC(
+      permitId: json['permitId'],
+      plan_id: json['plan_id'],
+      executionId: json['executionId'],
+      title: json["title"] ?? '',
+      equipmentCat: json['equipmentCat'],
+      equipment: json['equipment'],
+      startDate: startDate ?? "",
+      assignedTo: json['assignedTo'] ?? '',
+      status: json['status'],
+      status_short: json['status_short'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "permitId": permitId,
+        "plan_id": plan_id,
+        "executionId": executionId,
         "title": title,
         "equipmentCat": equipmentCat,
         "equipment": equipment,
