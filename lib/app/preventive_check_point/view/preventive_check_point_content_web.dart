@@ -3,9 +3,11 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../../../domain/models/checkpoint_list_model.dart';
 import '../../constant/constant.dart';
@@ -625,9 +627,174 @@ class PreventiveCheckPointContentWeb
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 20,
+                                          height: 5,
                                         ),
                                       ]),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Visibility(
+                                  visible: controller.type == 4,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(width: 10),
+                                      CustomRichText(
+                                          title: 'Type of Observation'),
+                                      Dimens.boxWidth5,
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5.0),
+                                          child: DropdownWebWidget(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2) -
+                                                30,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                            controller: controller,
+                                            dropdownList:
+                                                controller.typeOfObsList,
+                                            isValueSelected: controller
+                                                .isSelectedTypeOfObs.value,
+                                            selectedValue: controller
+                                                .selectedTypeOfObs.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Visibility(
+                                  visible: controller.type == 4,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(width: 10),
+                                      CustomRichText(title: 'Risk Type'),
+                                      Dimens.boxWidth10,
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5.0),
+                                          child: DropdownWebWidget(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2) -
+                                                30,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                            controller: controller,
+                                            dropdownList:
+                                                controller.incidentrisktypeList,
+                                            isValueSelected: controller
+                                                .isRiskTypeListSelected.value,
+                                            selectedValue: controller
+                                                .selectedRiskTypeList.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Visibility(
+                                  visible: controller.type == 4,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(width: 10),
+                                      CustomRichText(title: 'Cost Type'),
+                                      Dimens.boxWidth10,
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5.0),
+                                          child: DropdownWebWidget(
+                                            width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2) -
+                                                30,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                            controller: controller,
+                                            dropdownList: controller.costType,
+                                            isValueSelected: controller
+                                                .isCostTypeListSelected.value,
+                                            selectedValue: controller
+                                                .selectedCostTypeList.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -917,7 +1084,7 @@ class PreventiveCheckPointContentWeb
                                                   columnSpacing: 10,
                                                   source: dataSource,
 
-                                                  minWidth: 2000,
+                                                  minWidth: 2400,
                                                   showCheckboxColumn: false,
                                                   rowsPerPage:
                                                       10, // Number of rows per page
@@ -1018,6 +1185,9 @@ class CheckPointDataSource extends DataTableSource {
       checkPointDetails?.checkpoint_type == "Range"
           ? '${checkPointDetails?.checkpoint_type}(Min:${checkPointDetails?.min},Max:${checkPointDetails?.max})'
           : "${checkPointDetails?.checkpoint_type}",
+          '${checkPointDetails?.type_of_observation ?? ''}',
+          '${checkPointDetails?.risk_type ?? ''}',
+
       'Actions',
     ];
     var cells = [];
@@ -1087,7 +1257,12 @@ class CheckPointDataSource extends DataTableSource {
                                       1
                                   ? true
                                   : false;
+                                   controller.selectedTypeOfObs.value =
+                                  "${controller.selectedItem?.type_of_observation}";
+                                   controller.selectedRiskTypeList.value =
+                                  "${controller.selectedItem?.risk_type}";
                               controller.isContainerVisible.value = true;
+                              
                             },
                           )
                         : Dimens.box0,

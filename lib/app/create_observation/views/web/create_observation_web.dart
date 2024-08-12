@@ -384,39 +384,71 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   title:
                                                                       'Cost Type'),
                                                               Dimens.boxWidth3,
-                                                              Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5),
+                                                              Obx(
+                                                                () =>
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .costType,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isCostTypeListSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedCostTypeList
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
                                                                 ),
-                                                                child:
-                                                                    LoginCustomTextfield(
-                                                                        width: (MediaQuery.of(context).size.width *
-                                                                            .2),
-                                                                        textController:
-                                                                            controller
-                                                                                .costTypeCtrlr,
-                                                                        //validate
-                                                                        errorController: controller.isCostInvalid.value
-                                                                            ? "Required field"
-                                                                            : null,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          if (value.trim().length >
-                                                                              0) {
-                                                                            controller.isCostInvalid.value =
-                                                                                false;
-                                                                          } else {
-                                                                            controller.isCostInvalid.value =
-                                                                                true;
-                                                                          }
-                                                                        }),
                                                               ),
                                                             ],
                                                           ),
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title:
+                                                          //             'Cost Type'),
+                                                          //     Dimens.boxWidth10,
+                                                          //     Container(
+                                                          //       decoration:
+                                                          //           BoxDecoration(
+                                                          //         borderRadius:
+                                                          //             BorderRadius
+                                                          //                 .circular(
+                                                          //                     5),
+                                                          //       ),
+                                                          //       child:
+                                                          //           LoginCustomTextfield(
+                                                          //               width: (MediaQuery.of(context).size.width *
+                                                          //                   .2),
+                                                          //               textController:
+                                                          //                   controller
+                                                          //                       .costTypeCtrlr,
+                                                          //               //validate
+                                                          //               errorController: controller.isCostInvalid.value
+                                                          //                   ? "Required field"
+                                                          //                   : null,
+                                                          //               onChanged:
+                                                          //                   (value) {
+                                                          //                 if (value.trim().length >
+                                                          //                     0) {
+                                                          //                   controller.isCostInvalid.value =
+                                                          //                       false;
+                                                          //                 } else {
+                                                          //                   controller.isCostInvalid.value =
+                                                          //                       true;
+                                                          //                 }
+                                                          //               }),
+                                                          //     ),
+                                                          //   ],
+                                                          // ),
                                                           Dimens.boxHeight5,
                                                         ],
                                                       ),
@@ -916,7 +948,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                     )
                 // : Dimens.box0
                 ),
-      
           ),
         );
         // );
