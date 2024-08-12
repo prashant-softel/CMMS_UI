@@ -19,4 +19,6 @@ class DocumentUploadPresenter {
       isLoading: isLoading,
     );
   }
+
+  Future<String> getValue() async => await documentUploadUsecase.getValue();
 }
