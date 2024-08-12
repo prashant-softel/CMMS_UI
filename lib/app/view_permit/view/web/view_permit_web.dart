@@ -1088,7 +1088,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                               });
                                                         },
                                                         child: Text(
-                                                          "MCT${controller.lstAssociatedMc?[index]?.plan_id.toString() ?? ''}",
+                                                          "MCT${controller.lstAssociatedMc?[index]?.executionId.toString() ?? ''}",
                                                           style: TextStyle(
                                                             decoration:
                                                                 TextDecoration
@@ -1310,7 +1310,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                               });
                                                         },
                                                         child: Text(
-                                                          "VE${controller.lstAssociatedVc?[index]?.plan_id.toString() ?? ''}",
+                                                          "VE${controller.lstAssociatedVc?[index]?.executionId.toString() ?? ''}",
                                                           style: TextStyle(
                                                             decoration:
                                                                 TextDecoration
