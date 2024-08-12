@@ -9,6 +9,7 @@ import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -28,13 +29,10 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
     return GetBuilder<DocumentUploadController>(
       id: 'stock_Mangement',
       builder: (controller) {
-        return SelectionArea(
-          child: Scaffold(
-            body: Container(
-              color: Color.fromARGB(255, 234, 236, 238),
-              width: Get.width,
-              height: Get.height,
-              child: Column(
+        return Obx(
+          () => SelectionArea(
+            child: Scaffold(
+              body: Column(
                 children: [
                   HeaderWidget(),
                   Container(
@@ -76,7 +74,11 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                           child: Text(" / DOCUMENT VERSION",
                               style: Styles.greyLight14),
                         ),
-                        Text(" / DOCUMENT UPLOAD", style: Styles.greyLight14)
+                        controller.selectedItem == null
+                            ? Text(" / DOCUMENT UPLOAD",
+                                style: Styles.greyLight14)
+                            : Text(" / RENEW DOCUMENT UPLOAD",
+                                style: Styles.greyLight14)
                       ],
                     ),
                   ),
@@ -124,9 +126,12 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                                       title:
                                                           'Document Type Name: '),
                                                   Dimens.boxWidth2,
-                                                  SizedBox(
-                                                    child: Obx(
-                                                      () => DropdownWebStock(
+                                                  IgnorePointer(
+                                                    ignoring: controller
+                                                            .selectedItem !=
+                                                        null,
+                                                    child: SizedBox(
+                                                      child: DropdownWebStock(
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -174,34 +179,39 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                                 ],
                                               ),
                                               Dimens.boxHeight10,
-                                              Row(
-                                                children: [
-                                                  CustomRichText(
-                                                      includeAsterisk: false,
-                                                      title:
-                                                          'Please Mention The ReNew Date: '),
-                                                  Dimens.boxWidth2,
-                                                  CustomTextFieldForStock(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                    numberTextField: true,
-                                                    onTap: () {
-                                                      controller
-                                                              .openrenewDateTcDatePicker =
-                                                          !controller
-                                                              .openrenewDateTcDatePicker;
-                                                      controller.update(
-                                                          ['stock_Mangement']);
-                                                    },
-                                                    textController:
-                                                        controller.renewDateTc,
-                                                    onChanged: (value) {},
-                                                  ),
-                                                ],
-                                              ),
+                                              controller.selectedItem != null
+                                                  ? Row(
+                                                      children: [
+                                                        CustomRichText(
+                                                            includeAsterisk:
+                                                                false,
+                                                            title:
+                                                                'Please Mention The ReNew Date: '),
+                                                        Dimens.boxWidth2,
+                                                        CustomTextFieldForStock(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          numberTextField: true,
+                                                          onTap: () {
+                                                            controller
+                                                                    .openrenewDateTcDatePicker =
+                                                                !controller
+                                                                    .openrenewDateTcDatePicker;
+                                                            controller.update([
+                                                              'stock_Mangement'
+                                                            ]);
+                                                          },
+                                                          textController:
+                                                              controller
+                                                                  .renewDateTc,
+                                                          onChanged: (value) {},
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : Dimens.box0
                                             ],
                                           ),
                                           Spacer(),
@@ -236,6 +246,9 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                           horizontal: 20),
                                       child: Row(children: [
                                         CustomRichText(title: 'Remark: '),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
                                         Expanded(
                                           child: TextField(
                                             style: GoogleFonts.lato(
@@ -279,6 +292,55 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                     ),
                                   ],
                                 ),
+                                Dimens.boxHeight20,
+                                Row(
+                                  children: [
+                                    Spacer(),
+                                    Container(
+                                      height: 45,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.cancelColor,
+                                        text: "Cancel",
+                                        onPressed: () {
+                                          // controller.clearData();
+                                          Get.back();
+                                        },
+                                      ),
+                                    ),
+                                    Dimens.boxWidth10,
+                                    controller.selectedItem == null
+                                        ? Container(
+                                            height: 45,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.submitColor,
+                                              text: "Upload",
+                                              onPressed: () {
+                                                controller.uploadDocumentNew(
+                                                    fileIds: dropzoneController
+                                                        .fileIds);
+                                              },
+                                            ),
+                                          )
+                                        : Container(
+                                            height: 45,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.submitColor,
+                                              text: "ReNew Upload",
+                                              onPressed: () {
+                                                controller
+                                                    .reNewUploadDocumentNew(
+                                                        fileIds:
+                                                            dropzoneController
+                                                                .fileIds);
+                                              },
+                                            ),
+                                          ),
+                                    Spacer(),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -307,36 +369,6 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                   ),
                 ],
               ),
-            ),
-            floatingActionButton: Row(
-              children: [
-                Spacer(),
-                Container(
-                  height: 45,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.cancelColor,
-                    text: "Cancel",
-                    onPressed: () {
-                      // controller.clearData();
-                      Get.back();
-                    },
-                  ),
-                ),
-                Dimens.boxWidth10,
-                
-                Container(
-                  height: 45,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.submitColor,
-                    text: "Upload",
-                    onPressed: () {
-                      controller.uploadDocumentNew(
-                          fileIds: dropzoneController.fileIds);
-                    },
-                  ),
-                ),
-                Spacer(),
-              ],
             ),
           ),
         );
