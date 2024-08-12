@@ -22,11 +22,13 @@ class ViewObservationPresenter {
   Future<String?> getValue() async => await viewObservationUsecase.getValue();
   Future<List<HistoryModel>?> getHistory(
     moduleType,
+    facilityId,
     id,
     isLoading,
   ) async =>
       await viewObservationUsecase.getHistory(
         moduleType: moduleType,
+        facilityId: facilityId,
         id: id,
         isLoading: isLoading,
       );

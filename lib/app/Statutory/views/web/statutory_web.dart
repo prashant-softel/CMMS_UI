@@ -373,7 +373,7 @@ class _StatutoryWebState extends State<StatutoryWeb> {
                                       ? controller.toDate.value = dropDate
                                       : controller.toDate.value = pickUpDate;
 
-                                  // controller.getPmTaskListByDate();
+                                  controller.getstatutorylistbydate();
                                   controller.openFromDateToStartDatePicker =
                                       !controller.openFromDateToStartDatePicker;
                                   controller.update(['stock_Mangement_Date']);

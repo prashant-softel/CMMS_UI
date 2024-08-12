@@ -283,6 +283,7 @@ class ViewPermitController extends GetxController {
 
   RxList<ListAssociatedJob?>? listAssociatedJobs = <ListAssociatedJob?>[].obs;
   RxList<ListAssociatedPm?>? listAssociatedPm = <ListAssociatedPm?>[].obs;
+  RxList<ListAssociatedMC?>? lstAssociatedMc = <ListAssociatedMC?>[].obs;
 
   ///Employee List
   RxList<ListEmployees?>? listEmployee = <ListEmployees?>[].obs; //ListEmployees
@@ -908,6 +909,9 @@ class ViewPermitController extends GetxController {
       listAssociatedPm?.value =
           viewPermitDetailsModel.value?.lstAssociatedPM ?? [];
       print({"12233", listAssociatedPm});
+      lstAssociatedMc?.value =
+          viewPermitDetailsModel.value?.lstAssociatedMC ?? [];
+      print({"MC Data of ptw", lstAssociatedMc});
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
       file_list?.value = viewPermitDetailsModel.value?.file_list ?? [];
       print("File List:");
