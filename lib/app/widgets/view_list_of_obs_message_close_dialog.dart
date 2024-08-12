@@ -23,7 +23,7 @@ class viewListOfobsMessageCloseDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'View List Observation Close',
+          'Observation Close',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),

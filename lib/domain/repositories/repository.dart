@@ -15454,6 +15454,11 @@ class Repository {
       );
       print(res.data);
       if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Updated Successfully...", fontSize: 16.0);
+            Get.offAllNamed(
+          Routes.statutory,
+        );
         return true;
       } //
       else {

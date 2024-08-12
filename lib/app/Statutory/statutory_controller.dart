@@ -103,6 +103,10 @@ class StatutoryController extends GetxController {
     });
     super.onInit();
   }
+  void getstatutorylistbydate() {
+    getStatutoryDataList(
+              facilityId, formattedTodate1, formattedFromdate1, false);
+  }
 
   void search(String keyword) {
     print('Keyword: $keyword');

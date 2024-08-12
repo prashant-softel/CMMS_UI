@@ -77,7 +77,7 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                   controller.clearStoreData();
                                 },
                                 child:
-                                    Text(" / MIS", style: Styles.greyLight14),
+                                    Text(" / STATUTORY LIST", style: Styles.greyLight14),
                               ),
                               controller.srId == 0
                                   ? Text(

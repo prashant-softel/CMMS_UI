@@ -4233,8 +4233,10 @@ class ConnectHelper {
     print('goodsOrderRejecteResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(viewListOfobsMessageCloseDialog(
-        data: parsedJson['message'], id: parsedJson['id']));
+    Get.dialog<void>(
+        viewListOfobsMessageCloseDialog(
+            data: parsedJson['message'], id: parsedJson['id']),
+        barrierDismissible: false);
 
     return responseModel;
   }
