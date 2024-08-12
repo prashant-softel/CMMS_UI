@@ -613,23 +613,22 @@ class DocUploadListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
                           onPress: () {
-                            controller.clearStoreData();
+                            controller.selectedItem =
+                                controller.docUploadList.firstWhere(
+                              (element) =>
+                                  "${element.id}" ==
+                                  docUploadListDetails?.id.toString(),
+                            );
                             int docUploadId = docUploadListDetails?.id ?? 0;
 
                             if (docUploadId != 0) {
                               Get.toNamed(Routes.viewDocUploadScreen,
                                   arguments: {
+                                    "selectedItem": controller.selectedItem,
                                     'docUploadId': docUploadId,
                                   });
                             }
                           },
-                          // onPress: () {
-                          //   // controller.viewAddGoodsOrdersDetails(
-                          //   //     id: int.tryParse(
-                          //   //         '${record[0]}'));
-                          //   // Get.toNamed(Routes
-                          //   //     .viewGoodsOrders);
-                          // },
                         ),
                         // controller.docUploadList
                         //                 .firstWhere(
