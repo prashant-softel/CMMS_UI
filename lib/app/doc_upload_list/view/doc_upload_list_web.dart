@@ -543,7 +543,7 @@ class DocUploadListDataSource extends DataTableSource {
     controller.docUploadId.value = docUploadListDetails?.id ?? 0;
     var cellsBuffer = [
       "id",
-      '${docUploadListDetails?.docMasterId ?? ''}',
+      '${docUploadListDetails?.doc_master_name ?? ''}',
       '${docUploadListDetails?.subDocName ?? ''}',
       docUploadListDetails?.renewDates == null
           ? ""
@@ -630,50 +630,32 @@ class DocUploadListDataSource extends DataTableSource {
                             }
                           },
                         ),
-                        // controller.docUploadList
-                        //                 .firstWhere(
-                        //                   (e) =>
-                        //                       e.id ==
-                        //                       docUploadListDetails!
-                        //                           .id,
-                        //                   orElse: () =>
-                        //                       GetDocUploadListModel(
-                        //                           id: 0),
-                        //                 )
-                        //                 .status ==
-                        //             342 &&
-                        //         varUserAccessModel.value.access_list!
-                        //                 .where((e) =>
-                        //                     e.feature_id ==
-                        //                         UserAccessConstants
-                        //                             .kReqOrderFeatureId &&
-                        //                     e.edit ==
-                        //                         UserAccessConstants
-                        //                             .kHaveEditAccess)
-                        //                 .length >
-                        //             0
-                        // ?
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'Edit',
-                          onPress: () {
-                            controller.selectedItem =
-                                controller.docUploadList.firstWhere(
-                              (element) =>
-                                  "${element.id}" ==
-                                  docUploadListDetails?.id.toString(),
-                            );
-                            int docUploadId = docUploadListDetails?.id ?? 0;
+                        controller.docUploadListModel!.Activation_status ==
+                                'inactive'
+                            ? TableActionButton(
+                                color: ColorValues.editColor,
+                                icon: Icons.edit,
+                                message: 'Edit',
+                                onPress: () {
+                                  controller.selectedItem =
+                                      controller.docUploadList.firstWhere(
+                                    (element) =>
+                                        "${element.id}" ==
+                                        docUploadListDetails?.id.toString(),
+                                  );
+                                  int docUploadId =
+                                      docUploadListDetails?.id ?? 0;
 
-                            if (docUploadId != 0) {
-                              Get.toNamed(Routes.documentUploadScreen,
-                                  arguments: {
-                                    "selectedItem": controller.selectedItem
-                                  });
-                            }
-                          },
-                        )
+                                  if (docUploadId != 0) {
+                                    Get.toNamed(Routes.documentUploadScreen,
+                                        arguments: {
+                                          "selectedItem":
+                                              controller.selectedItem
+                                        });
+                                  }
+                                },
+                              )
+                            : Dimens.box0
                       ])
                     : Text(value.toString()),
           ),

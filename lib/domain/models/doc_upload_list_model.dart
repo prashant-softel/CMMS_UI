@@ -1,21 +1,24 @@
 import 'package:intl/intl.dart';
 
 class GetDocUploadListModel {
-  int? facilityID;
-  String? facilityName;
+  int? facility_id;
+  String? facility_name;
   int? id;
   int? docMasterId;
   int? fileId;
   String? subDocName;
-  List<DateTime>? renewDates; // Updated to hold a list of renew_date values
+  List<DateTime>? renewDates;
   String? created_by;
   DateTime? created_at;
   String? remarks;
   int? status;
+  String? doc_master_name;
+  String? file_path;
+  String? Activation_status;
 
   GetDocUploadListModel({
-    this.facilityID,
-    this.facilityName,
+    this.facility_id,
+    this.facility_name,
     this.id,
     this.docMasterId,
     this.fileId,
@@ -25,13 +28,16 @@ class GetDocUploadListModel {
     this.created_at,
     this.remarks,
     this.status,
+    this.Activation_status,
+    this.doc_master_name,
+    this.file_path,
   });
 
   // Factory method to create a GetDocUploadListModel instance from JSON
   factory GetDocUploadListModel.fromJson(Map<String, dynamic> json) {
     return GetDocUploadListModel(
-      facilityID: json['facilityID'],
-      facilityName: json['facilityName'],
+      facility_id: json['facility_id'],
+      facility_name: json['facility_name'],
       id: json['id'],
       docMasterId: json['doc_master_id'],
       fileId: json['file_id'],
@@ -45,6 +51,9 @@ class GetDocUploadListModel {
           ? DateTime.parse(json['created_at'])
           : null,
       remarks: json['remarks'],
+      Activation_status: json['Activation_status'],
+      doc_master_name: json['doc_master_name'],
+      file_path: json['file_path'],
     );
   }
 
@@ -53,8 +62,8 @@ class GetDocUploadListModel {
     final DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
     final Map<String, dynamic> data = new Map<String, dynamic>();
 
-    data['facilityID'] = this.facilityID;
-    data['facilityName'] = this.facilityName;
+    data['facility_id'] = this.facility_id;
+    data['facility_name'] = this.facility_name;
     data['id'] = this.id;
     data['doc_master_id'] = this.docMasterId;
     data['file_id'] = this.fileId;
@@ -73,6 +82,9 @@ class GetDocUploadListModel {
     data['created_at'] =
         this.created_at != null ? dateFormatter.format(this.created_at!) : null;
     data['remarks'] = this.remarks;
+    data['Activation_status'] = this.Activation_status;
+    data['doc_master_name'] = this.doc_master_name;
+    data['file_path'] = this.file_path;
 
     return data;
   }
@@ -84,32 +96,4 @@ class GetDocUploadListModel {
       renewDates!.add(date);
     }
   }
-}
-
-// Example usage
-void main() {
-  GetDocUploadListModel docUploadListDetails = GetDocUploadListModel(
-    docMasterId: 123,
-    subDocName: "Document Name",
-    renewDates: [DateTime(2024, 8, 11)],
-    created_at: DateTime(2024, 8, 10),
-    created_by: "John Doe",
-  );
-
-  var cellsBuffer = [
-    "id",
-    '${docUploadListDetails.docMasterId ?? ''}',
-    '${docUploadListDetails.subDocName ?? ''}',
-    docUploadListDetails.renewDates == null ||
-            docUploadListDetails.renewDates!.isEmpty
-        ? ""
-        : DateFormat('yyyy-MM-dd').format(docUploadListDetails.renewDates![0]),
-    docUploadListDetails.created_at != null
-        ? DateFormat('yyyy-MM-dd').format(docUploadListDetails.created_at!)
-        : '',
-    '${docUploadListDetails.created_by ?? ''}',
-    'Actions',
-  ];
-
-  print(cellsBuffer);
 }
