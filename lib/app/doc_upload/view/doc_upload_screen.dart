@@ -21,45 +21,47 @@ class DocumentUploadScreen extends GetView<AttendanceController> {
         drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
             ? HomeDrawerMobile() //ResponsiveSideMenu()
             : null,
-        body: Stack(
-          children: [
-            AnimatedContainer(
-              duration: Duration(milliseconds: 450),
-              margin: EdgeInsets.only(
-                left: Responsive.isDesktop(context)
-                    ? homecontroller.menuButton.value
-                        ? 250.0
-                        : 70.0
-                    : 0,
-              ),
-              width: Get.width,
-              height: Get.height,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        if (Responsive.isMobile(context))
-                          Expanded(
-                            child: Text("Data Coming Soon..."),
-                          ),
-                        if (Responsive.isDesktop(context))
-                          Expanded(
-                            child: DocumentUploadWeb(),
-                          )
-                      ],
+        body: Obx(
+          () => Stack(
+            children: [
+              AnimatedContainer(
+                duration: Duration(milliseconds: 450),
+                margin: EdgeInsets.only(
+                  left: Responsive.isDesktop(context)
+                      ? homecontroller.menuButton.value
+                          ? 250.0
+                          : 70.0
+                      : 0,
+                ),
+                width: Get.width,
+                height: Get.height,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          if (Responsive.isMobile(context))
+                            Expanded(
+                              child: Text("Data Coming Soon..."),
+                            ),
+                          if (Responsive.isDesktop(context))
+                            Expanded(
+                              child: DocumentUploadWeb(),
+                            )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Responsive.isDesktop(context)
-                ? AnimatedPositioned(
-                    duration: Duration(milliseconds: 450),
-                    child: HomeDrawer(),
-                  )
-                : Dimens.box0
-          ],
+              Responsive.isDesktop(context)
+                  ? AnimatedPositioned(
+                      duration: Duration(milliseconds: 450),
+                      child: HomeDrawer(),
+                    )
+                  : Dimens.box0
+            ],
+          ),
         ),
       ),
     );

@@ -49,32 +49,33 @@ class DocumentUploadController extends GetxController {
   }
 
   Future<void> setData() async {
-  try {
-    GetDocUploadListModel? selectedItemDoc;
+    try {
+      GetDocUploadListModel? selectedItemDoc;
 
-    final _selectedItem = await documentUploadPresenter.getValue();
-    if (_selectedItem.isNotEmpty) {
-      final jobdetaildata = jsonDecode(_selectedItem);
-      selectedItemDoc = GetDocUploadListModel.fromJson(jobdetaildata);
-    }
-    if (_selectedItem == null || _selectedItem == '' || _selectedItem == "null") {
-      var dataFromPreviousScreen = Get.arguments;
-      selectedItem = dataFromPreviousScreen['selectedItem'];
-    } else {
-      selectedItem = selectedItemDoc;
-    }
+      final _selectedItem = await documentUploadPresenter.getValue();
+      if (_selectedItem.isNotEmpty) {
+        final jobdetaildata = jsonDecode(_selectedItem);
+        selectedItemDoc = GetDocUploadListModel.fromJson(jobdetaildata);
+      }
+      if (_selectedItem == null ||
+          _selectedItem == '' ||
+          _selectedItem == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+        selectedItem = dataFromPreviousScreen['selectedItem'];
+      } else {
+        selectedItem = selectedItemDoc;
+      }
 
-    if (selectedItem != null) {
-      // Bind the data to the controllers
-      selecteddocumentNameType.value = selectedItem!.docMasterId.toString();
-      subDocName.text = selectedItem!.subDocName ?? '';
-      remark.text = selectedItem!.remarks ?? '';
+      if (selectedItem != null) {
+        // Bind the data to the controllers
+        selecteddocumentNameType.value = selectedItem!.docMasterId.toString();
+        subDocName.text = selectedItem!.subDocName ?? '';
+        remark.text = selectedItem!.remarks ?? '';
+      }
+    } catch (e) {
+      print(e.toString() + 'userId');
     }
-  } catch (e) {
-    print(e.toString() + 'userId');
   }
-}
-
 
   Future<void> getDocumentMaster() async {
     documentNameType.clear();
@@ -102,6 +103,32 @@ class DocumentUploadController extends GetxController {
           facility_id: facilityId,
           remarks: _remarkDateTc,
           renewDate: null,
+          subDocName: _subDocNameDateTc);
+      var uploadDocumenModelJsonString = uploadDocumentModel.toJson();
+      Map<String, dynamic>? responseUploadDocument =
+          await documentUploadPresenter.uploadDocumentNew(
+        uploadDocument: uploadDocumenModelJsonString,
+        isLoading: true,
+      );
+      if (responseUploadDocument == null) {}
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void reNewUploadDocumentNew({dynamic fileIds}) async {
+    try {
+      String _renewDateTc = renewDateTc.text.trim();
+      String _remarkDateTc = remark.text.trim();
+      String _subDocNameDateTc = subDocName.text.trim();
+
+      UploadDocumentModel uploadDocumentModel = UploadDocumentModel(
+          is_renew: 1,
+          docMasterId: selectedDocumentId,
+          fileId: fileIds[0],
+          facility_id: facilityId,
+          remarks: _remarkDateTc,
+          renewDate: _renewDateTc,
           subDocName: _subDocNameDateTc);
       var uploadDocumenModelJsonString = uploadDocumentModel.toJson();
       Map<String, dynamic>? responseUploadDocument =
