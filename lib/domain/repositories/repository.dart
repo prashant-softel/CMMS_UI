@@ -5411,12 +5411,13 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> permitApprovedButton(
-    rejectCancelPermitJsonString,
-    String? ptwStatus,
-    int? jobId,
-    int? type,
-    bool? isLoading,
-  ) async {
+      rejectCancelPermitJsonString,
+      String? ptwStatus,
+      int? jobId,
+      int? type,
+      bool? isLoading,
+      int? vegexe,
+      int? vegid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.permitApprovedButton(
@@ -5444,7 +5445,8 @@ class Repository {
                           ? Get.offAllNamed(
                               Routes.addModuleCleaningExecutionContentWeb)
                           : type == 5
-                              ? Get.offAllNamed(Routes.vegExecutionScreen)
+                              ? Get.offAllNamed(Routes.vegExecutionScreen,
+                                  arguments: {"vegexe": vegexe, "vegid": vegid})
                               : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
