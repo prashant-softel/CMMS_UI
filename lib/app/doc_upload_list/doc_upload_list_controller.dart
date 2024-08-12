@@ -173,12 +173,12 @@ class DocumentManagerController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.addedAt
+            (item.created_at
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.addedBy
+            (item.created_by
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??

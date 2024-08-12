@@ -201,10 +201,10 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                                   '${item.renewDate != null ? DateFormat('yyyy-MM-dd').format(item.renewDate!) : ""}',
                                                   style: Styles.black14)),
                                               DataCell(Text(
-                                                  '${item.addedBy ?? ""}',
+                                                  '${item.created_by ?? ""}',
                                                   style: Styles.black14)),
                                               DataCell(Text(
-                                                  '${item.addedAt != null ? DateFormat('yyyy-MM-dd').format(item.addedAt!) : ""}',
+                                                  '${item.created_at != null ? DateFormat('yyyy-MM-dd').format(item.created_at!) : ""}',
                                                   style: Styles.black14)),
                                               DataCell(Text(
                                                   '${item.remarks ?? ""}',

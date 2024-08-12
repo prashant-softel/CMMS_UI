@@ -8,8 +8,8 @@ class GetDocUploadListModel {
   int? fileId;
   String? subDocName;
   List<DateTime>? renewDates; // Updated to hold a list of renew_date values
-  String? addedBy;
-  DateTime? addedAt;
+  String? created_by;
+  DateTime? created_at;
   String? remarks;
   int? status;
 
@@ -21,8 +21,8 @@ class GetDocUploadListModel {
     this.fileId,
     this.subDocName,
     this.renewDates,
-    this.addedBy,
-    this.addedAt,
+    this.created_by,
+    this.created_at,
     this.remarks,
     this.status,
   });
@@ -39,10 +39,11 @@ class GetDocUploadListModel {
       renewDates: json['renew_date'] != null
           ? [DateTime.parse(json['renew_date'])]
           : [],
-      addedBy: json['added_by'],
+      created_by: json['created_by'],
       status: json['status'],
-      addedAt:
-          json['added_at'] != null ? DateTime.parse(json['added_at']) : null,
+      created_at: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : null,
       remarks: json['remarks'],
     );
   }
@@ -68,9 +69,9 @@ class GetDocUploadListModel {
       data['renew_date'] = null; // Set to null if empty
     }
 
-    data['added_by'] = this.addedBy;
-    data['added_at'] =
-        this.addedAt != null ? dateFormatter.format(this.addedAt!) : null;
+    data['created_by'] = this.created_by;
+    data['created_at'] =
+        this.created_at != null ? dateFormatter.format(this.created_at!) : null;
     data['remarks'] = this.remarks;
 
     return data;
@@ -91,8 +92,8 @@ void main() {
     docMasterId: 123,
     subDocName: "Document Name",
     renewDates: [DateTime(2024, 8, 11)],
-    addedAt: DateTime(2024, 8, 10),
-    addedBy: "John Doe",
+    created_at: DateTime(2024, 8, 10),
+    created_by: "John Doe",
   );
 
   var cellsBuffer = [
@@ -103,10 +104,10 @@ void main() {
             docUploadListDetails.renewDates!.isEmpty
         ? ""
         : DateFormat('yyyy-MM-dd').format(docUploadListDetails.renewDates![0]),
-    docUploadListDetails.addedAt != null
-        ? DateFormat('yyyy-MM-dd').format(docUploadListDetails.addedAt!)
+    docUploadListDetails.created_at != null
+        ? DateFormat('yyyy-MM-dd').format(docUploadListDetails.created_at!)
         : '',
-    '${docUploadListDetails.addedBy ?? ''}',
+    '${docUploadListDetails.created_by ?? ''}',
     'Actions',
   ];
 
