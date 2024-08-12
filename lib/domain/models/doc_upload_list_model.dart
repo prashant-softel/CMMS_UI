@@ -14,7 +14,8 @@ class GetDocUploadListModel {
   int? status;
   String? doc_master_name;
   String? file_path;
-  String? Activation_status;
+  int? activation_status;
+  String? description;
 
   GetDocUploadListModel({
     this.facility_id,
@@ -28,9 +29,10 @@ class GetDocUploadListModel {
     this.created_at,
     this.remarks,
     this.status,
-    this.Activation_status,
+    this.activation_status,
     this.doc_master_name,
     this.file_path,
+    this.description,
   });
 
   // Factory method to create a GetDocUploadListModel instance from JSON
@@ -51,9 +53,10 @@ class GetDocUploadListModel {
           ? DateTime.parse(json['created_at'])
           : null,
       remarks: json['remarks'],
-      Activation_status: json['Activation_status'],
+      activation_status: json['activation_status'],
       doc_master_name: json['doc_master_name'],
       file_path: json['file_path'],
+      description: json['description'],
     );
   }
 
@@ -82,9 +85,10 @@ class GetDocUploadListModel {
     data['created_at'] =
         this.created_at != null ? dateFormatter.format(this.created_at!) : null;
     data['remarks'] = this.remarks;
-    data['Activation_status'] = this.Activation_status;
+    data['activation_status'] = this.activation_status;
     data['doc_master_name'] = this.doc_master_name;
     data['file_path'] = this.file_path;
+    data['description'] = this.description;
 
     return data;
   }

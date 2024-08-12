@@ -630,8 +630,14 @@ class DocUploadListDataSource extends DataTableSource {
                             }
                           },
                         ),
-                        controller.docUploadListModel!.Activation_status ==
-                                'inactive'
+                        controller.docUploadList
+                                    .firstWhere(
+                                      (e) => e.id == docUploadListDetails!.id,
+                                      orElse: () =>
+                                          GetDocUploadListModel(id: 0),
+                                    )
+                                    .activation_status ==
+                                0
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,

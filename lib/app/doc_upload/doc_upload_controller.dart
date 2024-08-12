@@ -67,8 +67,8 @@ class DocumentUploadController extends GetxController {
       }
 
       if (selectedItem != null) {
-        // Bind the data to the controllers
-        selecteddocumentNameType.value = selectedItem!.docMasterId.toString();
+        selecteddocumentNameType.value =
+            selectedItem!.doc_master_name.toString();
         subDocName.text = selectedItem!.subDocName ?? '';
         remark.text = selectedItem!.remarks ?? '';
       }
