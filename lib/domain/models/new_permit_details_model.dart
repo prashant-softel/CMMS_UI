@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cmms/domain/models/create_permit_model.dart';
+import 'package:cmms/domain/models/new_permit_details_model.dart';
 
 NewPermitDetailModel newPermitDetailModelFromJson(String str) =>
     NewPermitDetailModel.fromJson(json.decode(str));
@@ -59,6 +60,7 @@ class NewPermitDetailModel {
 
   List<ListAssociatedJob?>? lstAssociatedJobs;
   List<ListAssociatedPm?>? lstAssociatedPM;
+  List<ListAssociatedMC?>? lstAssociatedMC;
   List<int?>? category_ids;
 
   ExtendDetails? extendDetails;
@@ -127,6 +129,7 @@ class NewPermitDetailModel {
     this.lstCategory,
     this.lstAssociatedJobs,
     this.lstAssociatedPM,
+    this.lstAssociatedMC,
     this.extendDetails,
     this.cancelDetails,
     this.closeDetails,
@@ -229,6 +232,10 @@ class NewPermitDetailModel {
         lstAssociatedPM: json["lstAssociatedPM"] != null
             ? List<ListAssociatedPm>.from(json["lstAssociatedPM"]
                 .map((x) => ListAssociatedPm.fromJson(x)))
+            : [],
+        lstAssociatedMC: json["listAssociatedMC"] != null
+            ? List<ListAssociatedMC>.from(json["listAssociatedMC"]
+                .map((x) => ListAssociatedMC.fromJson(x)))
             : [],
         file_list: json["file_list"] != null
             ? List<FileList>.from(
@@ -593,6 +600,58 @@ class ListAssociatedPm {
         "equipmentCat": equipmentCat,
         "equipment": equipment,
         "startDate": startDate,
+        "assignedTo": assignedTo,
+        "status": status,
+        "status_short": status_short,
+      };
+}
+class ListAssociatedMC {
+  ListAssociatedMC(
+      {this.permitId,
+      this.mc_id,
+      this.title,
+      this.equipmentCat,
+      this.equipment,
+      this.assignedTo,
+      this.status,
+      this.status_short,
+      this.startDate});
+
+  int? permitId;
+  int? mc_id;
+  String? title;
+  String? equipmentCat;
+  String? equipment;
+  String? startDate;
+  String? assignedTo;
+  int? status;
+  String? status_short;
+
+  factory ListAssociatedMC.fromJson(Map<String, dynamic> json) {
+    String? startDate = json['start_date'];
+    if (startDate != null && startDate.length > 3) {
+      startDate = startDate.substring(0, startDate.length - 3);
+    }
+    return ListAssociatedMC(
+      permitId: json['permitId'],
+      mc_id: json['mc_id'],
+      title: json["title"] ?? '',
+      equipmentCat: json['equipmentCat'],
+      equipment: json['equipment'],
+      startDate: startDate ?? "",
+      assignedTo: json['assignedTo'] ?? '',
+      status: json['status'],
+      status_short: json['status_short'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "permitId": permitId,
+        "mc_id": mc_id,
+        "title": title,
+        "equipmentCat": equipmentCat,
+        "equipment": equipment,
+        "start_date": startDate,
         "assignedTo": assignedTo,
         "status": status,
         "status_short": status_short,

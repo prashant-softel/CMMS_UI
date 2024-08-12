@@ -122,13 +122,17 @@ class ObservationListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       if (facilityId > 0) {
-        Future.delayed(Duration(seconds: 2), () async {
+        Future.delayed(Duration(seconds: 1), () async {
           await getObservationDataList(
               facilityId, formattedTodate1, formattedFromdate1, false);
         });
       }
     });
     super.onInit();
+  }
+
+  void clearValue() {
+    observationListPresenter.clearValue();
   }
 
   void search(String keyword) {

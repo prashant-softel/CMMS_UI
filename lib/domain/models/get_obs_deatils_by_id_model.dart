@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cmms/app/utils/utility.dart';
-import 'package:cmms/domain/models/new_permit_details_model.dart';
+
 
 GetObservationById getObservationByIdModelFromJson(String str) =>
     GetObservationById.fromJson(json.decode(str));
@@ -54,6 +54,7 @@ class GetObservationById {
     this.target_date,
     this.observation_description,
     this.created_at,
+     this.file_list,
     this.created_by,
     this.updated_at,
     this.updated_by,
@@ -83,8 +84,47 @@ class GetObservationById {
       source_of_observation: json['source_of_observation'],
       source_of_observation_name: json['source_of_observation_name'],
       target_date: Utility.getFormatedyearMonthDay(json['target_date']),
+      file_list: json["fileDetails"] != null
+          ? List<FileList>.from(
+              json["fileDetails"].map((x) => FileList.fromJson(x)))
+          : [],
       type_of_observation: json['type_of_observation'],
       type_of_observation_name: json['type_of_observation_name'],
     );
   }
+}
+class FileList {
+  FileList({
+    this.id,
+    this.fileName,
+    this.fileCategory,
+    this.fileSize,
+    this.status,
+    this.description,
+  });
+
+  int? id;
+  String? fileName;
+  String? fileCategory;
+  int? fileSize;
+  int? status;
+  String? description;
+
+  factory FileList.fromJson(Map<String, dynamic> json) => FileList(
+        id: json["id"],
+        fileName: json["fileName"],
+        fileCategory: json['fileCategory'],
+        fileSize: json['fileSize'],
+        status: json['status'],
+        description: json['description'] ?? '',
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "fileName": fileName,
+        "fileCategory": fileCategory,
+        "fileSize": fileSize,
+        "status": status,
+        "description": description,
+      };
 }

@@ -74,6 +74,17 @@ class VegPlanMessageApproveDialog extends GetView {
                 ),
               ),
               Dimens.boxWidth10,
+              Center(
+                child: ElevatedButton(
+                  style: Styles.yellowElevatedButtonStyle,
+                  onPressed: () {
+                    Get.offNamed(
+                      Routes.vegExecutionListScreen,
+                    );
+                  },
+                  child: const Text('Vegetation Task List'),
+                ),
+              ),
             ],
           )
         ],

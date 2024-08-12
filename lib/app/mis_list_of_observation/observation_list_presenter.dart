@@ -25,4 +25,6 @@ class ObservationListPresenter {
       end_date: end_date,
     );
   }
+
+  void clearValue() async => observationListUsecase.clearValue();
 }
