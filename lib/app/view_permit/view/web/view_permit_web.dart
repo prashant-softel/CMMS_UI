@@ -1084,11 +1084,11 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                 'mcid': controller
                                                                     .lstAssociatedMc?[
                                                                         index]
-                                                                    ?.permitId
+                                                                    ?.mc_id
                                                               });
                                                         },
                                                         child: Text(
-                                                          "MCT${controller.lstAssociatedMc?[index]?.permitId.toString() ?? ''}",
+                                                          "MCT${controller.lstAssociatedMc?[index]?.mc_id.toString() ?? ''}",
                                                           style: TextStyle(
                                                             decoration:
                                                                 TextDecoration

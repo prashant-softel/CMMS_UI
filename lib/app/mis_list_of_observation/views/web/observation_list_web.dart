@@ -551,6 +551,7 @@ class ObservationListDataSource extends DataTableSource {
                               // controller.clearStoreData();
                               int obsId = ObservationListDetails?.id ?? 0;
                               if (obsId != 0) {
+                                controller.clearValue();
                                 Get.toNamed(
                                   Routes.viewObservationScreen,
                                   arguments: {
@@ -588,6 +589,7 @@ class ObservationListDataSource extends DataTableSource {
       onSelectChanged: (_) {
         int obsId = ObservationListDetails?.id ?? 0;
         if (obsId != 0) {
+          controller.clearValue();
           Get.toNamed(
             Routes.viewObservationScreen,
             arguments: {

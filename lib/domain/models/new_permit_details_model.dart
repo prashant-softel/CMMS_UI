@@ -608,6 +608,7 @@ class ListAssociatedPm {
 class ListAssociatedMC {
   ListAssociatedMC(
       {this.permitId,
+      this.mc_id,
       this.title,
       this.equipmentCat,
       this.equipment,
@@ -617,6 +618,7 @@ class ListAssociatedMC {
       this.startDate});
 
   int? permitId;
+  int? mc_id;
   String? title;
   String? equipmentCat;
   String? equipment;
@@ -632,6 +634,7 @@ class ListAssociatedMC {
     }
     return ListAssociatedMC(
       permitId: json['permitId'],
+      mc_id: json['mc_id'],
       title: json["title"] ?? '',
       equipmentCat: json['equipmentCat'],
       equipment: json['equipment'],
@@ -644,6 +647,7 @@ class ListAssociatedMC {
 
   Map<String, dynamic> toJson() => {
         "permitId": permitId,
+        "mc_id": mc_id,
         "title": title,
         "equipmentCat": equipmentCat,
         "equipment": equipment,

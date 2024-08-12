@@ -71,8 +71,8 @@ class _ViewComplianceWebState extends State<ViewComplianceWeb> {
                                 onTap: () {
                                   Get.offNamed(Routes.statutory);
                                 },
-                                child:
-                                    Text(" / MIS", style: Styles.greyLight14),
+                                child: Text(" / STATUTORY LIST",
+                                    style: Styles.greyLight14),
                               ),
                               Text(
                                 " / VIEW STATUTORY COMPLIANCE",
@@ -124,7 +124,7 @@ class _ViewComplianceWebState extends State<ViewComplianceWeb> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                "Status ${controller.getStatutoryById.value!.status_short == null ? "" : controller.getStatutoryById.value!.status_short}",
+                                                "${controller.getStatutoryById.value!.status_short == null ? "" : controller.getStatutoryById.value!.status_short}",
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ),
@@ -269,13 +269,15 @@ class _ViewComplianceWebState extends State<ViewComplianceWeb> {
                     ),
                   ),
                   floatingActionButton: Obx(() => varUserAccessModel
-                              .value.access_list!
-                              .where((e) =>
-                                  e.feature_id ==
-                                      UserAccessConstants.kGoodsFeatureId &&
-                                  e.add == UserAccessConstants.kHaveAddAccess)
-                              .length >
-                          0
+                                  .value.access_list!
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants.kGoodsFeatureId &&
+                                      e.add ==
+                                          UserAccessConstants.kHaveAddAccess)
+                                  .length >
+                              0 &&
+                          controller.getStatutoryById.value!.status_id != 507
                       ? Row(
                           children: [
                             Spacer(),
