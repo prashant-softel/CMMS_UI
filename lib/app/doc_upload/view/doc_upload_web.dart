@@ -323,6 +323,7 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                   ),
                 ),
                 Dimens.boxWidth10,
+                
                 Container(
                   height: 45,
                   child: CustomElevatedButton(
