@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/view_doc_upload.dart/view_doc_upload_presenter.dart';
+import 'package:cmms/domain/models/doc_upload_list_model.dart';
 import 'package:cmms/domain/models/view_doc_upload.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +23,8 @@ class ViewDocUploadController extends GetxController {
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   bool openFromDateToStartDatePicker = false;
+  GetDocUploadListModel? selectedItem;
+  var subDocName = TextEditingController();
 
   String get end_date => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get start_date => DateFormat('yyyy-MM-dd').format(fromDate.value);
@@ -36,6 +40,7 @@ class ViewDocUploadController extends GetxController {
         start_date: start_date,
         end_date: end_date,
         docUploadId: selectedDocUploadId.value,
+        sub_doc_name: subDocName.text.isEmpty ? '' : subDocName.text,
       );
     });
     super.onInit();
@@ -43,19 +48,16 @@ class ViewDocUploadController extends GetxController {
 
   Future<void> setViewDocUpload() async {
     try {
-      String? _docUploadId = await viewDocUploadPresenter.getValue();
+      var dataFromPreviousScreen = Get.arguments;
+      selectedDocUploadId.value = dataFromPreviousScreen['docUploadId'];
+      selectedItem = dataFromPreviousScreen['selectedItem'];
 
-      if (_docUploadId == null ||
-          _docUploadId == '' ||
-          _docUploadId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
-        selectedDocUploadId.value = dataFromPreviousScreen['docUploadId'];
-
-        viewDocUploadPresenter.saveValue(
-            docUploadId: selectedDocUploadId.value.toString());
-      } else {
-        selectedDocUploadId.value = int.tryParse(_docUploadId) ?? 0;
+      if (selectedItem != null) {
+        subDocName.text = selectedItem!.subDocName ?? '';
       }
+
+      viewDocUploadPresenter.saveValue(
+          docUploadId: selectedDocUploadId.value.toString());
     } catch (e) {
       print(e);
     }
@@ -63,11 +65,11 @@ class ViewDocUploadController extends GetxController {
 
   Future<void> getViewDocUploadListByDate() async {
     await getDocuementListById(
-      facilityID: facilityId.value,
-      start_date: start_date,
-      end_date: end_date,
-      docUploadId: selectedDocUploadId.value,
-    );
+        facilityID: facilityId.value,
+        start_date: start_date,
+        end_date: end_date,
+        docUploadId: selectedDocUploadId.value,
+        sub_doc_name: subDocName.text);
   }
 
   Future<void> getDocuementListById({
@@ -77,17 +79,18 @@ class ViewDocUploadController extends GetxController {
     required int facilityID,
     String? sub_doc_name,
   }) async {
+    String? _subDocName = sub_doc_name.toString();
+
     final _viewDocUploadDetail =
         await viewDocUploadPresenter.getDocuementListById(
       docUploadId: docUploadId,
       start_date: start_date,
       end_date: end_date,
       facilityID: facilityID,
-      sub_doc_name: sub_doc_name,
+      sub_doc_name: _subDocName,
     );
 
     if (_viewDocUploadDetail != null) {
-      // Filter out any null values
       viewDocUploadList.value =
           _viewDocUploadDetail.whereType<ViewDocUpload>().toList();
     } else {
