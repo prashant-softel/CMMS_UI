@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/view_doc_upload.dart/view_doc_upload_presenter.dart';
 import 'package:cmms/domain/models/doc_upload_list_model.dart';
@@ -9,11 +8,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class ViewDocUploadController extends GetxController {
-  ViewDocUploadController(
-    this.viewDocUploadPresenter,
-  );
-  ViewDocUploadPresenter viewDocUploadPresenter;
+  ViewDocUploadController(this.viewDocUploadPresenter);
+
+  final ViewDocUploadPresenter viewDocUploadPresenter;
   final HomeController homecontroller = Get.find();
+
   var docUploadDateTc = TextEditingController();
   StreamSubscription<int>? facilityIdStreamSubscription;
   Rx<int> facilityId = 0.obs;
@@ -23,6 +22,7 @@ class ViewDocUploadController extends GetxController {
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   bool openFromDateToStartDatePicker = false;
+
   GetDocUploadListModel? selectedItem;
   var subDocName = TextEditingController();
 
@@ -31,19 +31,15 @@ class ViewDocUploadController extends GetxController {
 
   @override
   void onInit() async {
-    await setViewDocUpload();
-    facilityIdStreamSubscription =
-        homecontroller.facilityId$.listen((event) async {
-      facilityId.value = event;
-      await getDocuementListById(
-        facilityID: facilityId.value,
-        start_date: start_date,
-        end_date: end_date,
-        docUploadId: selectedDocUploadId.value,
-        sub_doc_name: subDocName.text.isEmpty ? '' : subDocName.text,
-      );
-    });
     super.onInit();
+    await setViewDocUpload();
+    if (selectedItem != null) {
+      facilityIdStreamSubscription =
+          homecontroller.facilityId$.listen((event) async {
+        facilityId.value = event;
+        await fetchDocumentList();
+      });
+    }
   }
 
   Future<void> setViewDocUpload() async {
@@ -59,17 +55,32 @@ class ViewDocUploadController extends GetxController {
       viewDocUploadPresenter.saveValue(
           docUploadId: selectedDocUploadId.value.toString());
     } catch (e) {
-      print(e);
+      print("Error in setViewDocUpload: $e");
     }
   }
 
   Future<void> getViewDocUploadListByDate() async {
-    await getDocuementListById(
+    if (selectedItem?.doc_master_id != null) {
+      await getDocuementListById(
         facilityID: facilityId.value,
         start_date: start_date,
         end_date: end_date,
-        docUploadId: selectedDocUploadId.value,
-        sub_doc_name: subDocName.text);
+        docUploadId: selectedItem!.doc_master_id!,
+        sub_doc_name: subDocName.text,
+      );
+    } else {
+      print("doc_master_id is null, cannot fetch document list.");
+    }
+  }
+
+  Future<void> fetchDocumentList() async {
+    await getDocuementListById(
+      facilityID: facilityId.value,
+      start_date: start_date,
+      end_date: end_date,
+      docUploadId: selectedItem?.doc_master_id ?? 0,
+      sub_doc_name: subDocName.text.isEmpty ? '' : subDocName.text,
+    );
   }
 
   Future<void> getDocuementListById({
@@ -79,7 +90,7 @@ class ViewDocUploadController extends GetxController {
     required int facilityID,
     String? sub_doc_name,
   }) async {
-    String? _subDocName = sub_doc_name.toString();
+    final _subDocName = sub_doc_name ?? '';
 
     final _viewDocUploadDetail =
         await viewDocUploadPresenter.getDocuementListById(

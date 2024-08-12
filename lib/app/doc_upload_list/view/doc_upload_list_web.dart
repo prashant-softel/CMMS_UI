@@ -519,7 +519,7 @@ class DocUploadListDataSource extends DataTableSource {
       return (GoodsOrderList.id ?? '')
               .toString()
               .contains(controller.docIdFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.docMasterId ?? '')
+          (GoodsOrderList.doc_master_id ?? '')
               .toString()
               .contains(controller.addedAtFilterText.value.toLowerCase()) &&
           (GoodsOrderList.created_at ?? '')
