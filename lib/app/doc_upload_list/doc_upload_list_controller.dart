@@ -97,7 +97,7 @@ class DocumentManagerController extends GetxController {
     filteredData.value = <GetDocUploadListModel>[];
 
     // Fetch the document upload list from the presenter
-    final _docUploadList = await documentManagerPresenter.getDocUploadList(
+  final _docUploadList = await documentManagerPresenter.getDocUploadList(
         isLoading: isLoading.value,
         start_date: startDate,
         end_date: endDate,
