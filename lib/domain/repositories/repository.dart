@@ -14509,6 +14509,7 @@ class Repository {
     required int facilityID,
     required int docUploadId,
     bool? isLoading,
+    String? sub_doc_name,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -14518,6 +14519,7 @@ class Repository {
         end_date: end_date,
         docUploadId: docUploadId,
         facilityID: facilityID,
+        sub_doc_name: sub_doc_name,
         isLoading: isLoading ?? false,
       );
 
@@ -15586,9 +15588,8 @@ class Repository {
       );
       print(res.data);
       if (!res.hasError) {
-        Fluttertoast.showToast(
-            msg: "Updated Successfully...", fontSize: 16.0);
-            Get.offAllNamed(
+        Fluttertoast.showToast(msg: "Updated Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
           Routes.statutory,
         );
         return true;

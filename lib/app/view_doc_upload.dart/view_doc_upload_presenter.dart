@@ -11,6 +11,7 @@ class ViewDocUploadPresenter {
     required String end_date,
     required int docUploadId,
     required int facilityID,
+    String? sub_doc_name,
     bool? isLoading,
   }) async {
     return viewDocUploadUsecase.getDocuementListById(
@@ -18,6 +19,7 @@ class ViewDocUploadPresenter {
       end_date: end_date,
       docUploadId: docUploadId,
       facilityID: facilityID,
+      sub_doc_name: sub_doc_name,
       isLoading: isLoading ?? false,
     );
   }

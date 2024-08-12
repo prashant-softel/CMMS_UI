@@ -15,8 +15,8 @@ class ViewDocUpload {
   String? facilityName;
   String? subDocName;
   DateTime? renewDate;
-  String? addedBy;
-  DateTime? addedAt;
+  String? created_by;
+  DateTime? created_at;
   String? remarks;
 
   ViewDocUpload({
@@ -27,8 +27,8 @@ class ViewDocUpload {
     this.facilityName,
     this.subDocName,
     this.renewDate,
-    this.addedBy,
-    this.addedAt,
+    this.created_by,
+    this.created_at,
     this.remarks,
   });
 
@@ -42,9 +42,10 @@ class ViewDocUpload {
         renewDate: json['renew_date'] != null
             ? DateTime.parse(json['renew_date'])
             : null,
-        addedBy: json['added_by'],
-        addedAt:
-            json['added_at'] != null ? DateTime.parse(json['added_at']) : null,
+        created_by: json['created_by'],
+        created_at: json['created_at'] != null
+            ? DateTime.parse(json['created_at'])
+            : null,
         remarks: json['remarks'],
       );
 
@@ -56,8 +57,8 @@ class ViewDocUpload {
         'facility_name': facilityName,
         'sub_doc_name': subDocName,
         'renew_date': renewDate?.toIso8601String(),
-        'added_by': addedBy,
-        'added_at': addedAt?.toIso8601String(),
+        'created_by': created_by,
+        'created_at': created_at?.toIso8601String(),
         'remarks': remarks,
       };
 }

@@ -70,17 +70,20 @@ class ViewDocUploadController extends GetxController {
     );
   }
 
-  Future<void> getDocuementListById(
-      {String? start_date,
-      required String end_date,
-      required int docUploadId,
-      required int facilityID}) async {
+  Future<void> getDocuementListById({
+    String? start_date,
+    required String end_date,
+    required int docUploadId,
+    required int facilityID,
+    String? sub_doc_name,
+  }) async {
     final _viewDocUploadDetail =
         await viewDocUploadPresenter.getDocuementListById(
       docUploadId: docUploadId,
       start_date: start_date,
       end_date: end_date,
       facilityID: facilityID,
+      sub_doc_name: sub_doc_name,
     );
 
     if (_viewDocUploadDetail != null) {
