@@ -485,7 +485,7 @@ class ModuleCleaningPlanningController extends GetxController {
     // }
     if (validTillTimeCtrlr.text.trim().length == 0) {
       isstartdateInvalid.value = true;
-      isFormInvalid = false.obs;
+      isFormInvalid = true.obs;
     }
   }
 
