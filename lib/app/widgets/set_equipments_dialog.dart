@@ -238,7 +238,7 @@ class SetEquipmentDialog extends GetView {
                         onPressed: () {
                           controller.isFormInvalid.value = false;
                           controller.checkFromModule();
-                          if (controller.isFormInvalid.value) {
+                          if (!controller.isFormInvalid.value) {
                             return;
                           } else {
                             controller.createMcPlan();
