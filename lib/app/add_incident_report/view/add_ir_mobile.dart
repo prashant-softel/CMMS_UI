@@ -1095,7 +1095,7 @@ class WhyWhyAnalysis extends StatelessWidget {
           ListView.builder(
             shrinkWrap: true,
             itemCount: controller.rowWhyWhyAnalysisItem.length,
-            itemBuilder: (context, index) {
+            itemBuilder: (context, rowIndex) {
               return Card(
                 color: Color.fromARGB(255, 232, 239, 242),
                 elevation: 10,
@@ -1107,93 +1107,68 @@ class WhyWhyAnalysis extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: controller.rowWhyWhyAnalysisItem[index]
+                    children: controller.rowWhyWhyAnalysisItem[rowIndex]
                         .map<Widget>((mapData) {
                       return Column(
                         children: [
-                          (mapData['key'] == "Why ")
-                              ? Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10, top: 10),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text("Why 1"),
-                                          Dimens.boxHeight5,
-                                          LoginCustomTextfield(
-                                            keyboardType: TextInputType.text,
-                                            textController:
-                                                new TextEditingController(
-                                                    text:
-                                                        mapData["value"] ?? ''),
-                                            onChanged: (txt) {
-                                              mapData["value"] = txt;
-                                            },
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : (mapData['key'] == "Cause ")
-                                  ? Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, right: 10, top: 10),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text("Cause 1"),
-                                              Dimens.boxHeight2,
-                                              LoginCustomTextfield(
-                                                keyboardType:
-                                                    TextInputType.text,
-                                                textController:
-                                                    new TextEditingController(
-                                                        text:
-                                                            mapData["value"] ??
-                                                                ''),
-                                                onChanged: (txt) {
-                                                  mapData["value"] = txt;
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : (mapData['key'] == "Action ")
-                                      ? Center(
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 5),
-                                            child: TableActionButton(
-                                              color: ColorValues.appRedColor,
-                                              icon: Icons.delete,
-                                              label: '',
-                                              message: '',
-                                              onPress: () {
-                                                controller.rowWhyWhyAnalysisItem
-                                                    .remove(controller
-                                                        .rowWhyWhyAnalysisItem
-                                                        .value[index]);
-                                              },
-                                            ),
-                                          ),
-                                        )
-                                      : Text(mapData['key'] ?? ''),
+                          if (mapData['key'] == "Why ")
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Why ${rowIndex + 1}"),
+                                  Dimens.boxHeight5,
+                                  LoginCustomTextfield(
+                                    keyboardType: TextInputType.text,
+                                    textController: new TextEditingController(
+                                        text: mapData["value"] ?? ''),
+                                    onChanged: (txt) {
+                                      mapData["value"] = txt;
+                                    },
+                                  )
+                                ],
+                              ),
+                            )
+                          else if (mapData['key'] == "Cause ")
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Cause ${rowIndex + 1}"),
+                                  Dimens.boxHeight2,
+                                  LoginCustomTextfield(
+                                    keyboardType: TextInputType.text,
+                                    textController: new TextEditingController(
+                                        text: mapData["value"] ?? ''),
+                                    onChanged: (txt) {
+                                      mapData["value"] = txt;
+                                    },
+                                  )
+                                ],
+                              ),
+                            )
+                          else if (mapData['key'] == "Action ")
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 5),
+                                child: TableActionButton(
+                                  color: ColorValues.appRedColor,
+                                  icon: Icons.delete,
+                                  label: '',
+                                  message: '',
+                                  onPress: () {
+                                    controller.rowWhyWhyAnalysisItem
+                                        .removeAt(rowIndex);
+                                  },
+                                ),
+                              ),
+                            )
+                          else
+                            Text(mapData['key'] ?? ''),
                         ],
                       );
                     }).toList(),
