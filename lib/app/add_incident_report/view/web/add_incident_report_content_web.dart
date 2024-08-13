@@ -972,8 +972,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           ////Investigation team
                                                           controller.detailInvestigationTeamValue ==
                                                                   true
-                                                              ? 
-                                                              Container(
+                                                              ? Container(
                                                                   width: MediaQuery.of(
                                                                           context)
                                                                       .size
@@ -993,8 +992,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   // constraints: BoxConstraints(
                                                                   //   maxWidth: 1100,
                                                                   // ),
-                                                                  child:
-                                                                   Column(
+                                                                  child: Column(
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
@@ -1132,7 +1130,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       ),
                                                                       Dimens
                                                                           .boxHeight10
-                                                                   
                                                                     ],
                                                                   ),
                                                                 )
@@ -1184,35 +1181,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
 
                                                           ///Root Cause
                                                           Dimens.boxHeight10,
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'RCA Upload Required: '),
-                                                          //     Dimens.boxWidth10,
-                                                          //     // SizedBox(
-                                                          //     //   width:
-                                                          //     //       MediaQuery.of(context)
-                                                          //     //               .size
-                                                          //     //               .width /
-                                                          //     //           5,
-                                                          //     //   child: Obx(
-                                                          //     //     () => Switch(
-                                                          //     //       activeColor:
-                                                          //     //           Colors.green,
-                                                          //     //       value: controller
-                                                          //     //           .rCAUploadRequiredValue
-                                                          //     //           .value,
-                                                          //     //       onChanged: (value) {
-                                                          //     //         controller
-                                                          //     //             .rCAUploadRequiredValue
-                                                          //     //             .value = value;
-                                                          //     //       },
-                                                          //     //     ),
-                                                          //     //   ),
-                                                          //     // )
-                                                          //   ],
-                                                          // ),
+
                                                           Text(
                                                             "RCA  Required",
                                                             style: Styles
@@ -1220,23 +1189,15 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           ),
                                                           Dimens.boxHeight10,
 
-                                                          // controller.rCAUploadRequiredValue ==
-                                                          //         true
-                                                          // ?
                                                           RootCauseAnalysis(),
-                                                          // : Dimens.box0,
 
-                                                          ///Immediate Correction
                                                           ImmediateCorrection(),
 
-                                                          ///Proposed action plan
                                                           AddPrposedAction(),
 
-                                                          /// FILE UPLOAD WIDGET
                                                           Dimens.boxHeight10,
                                                         ],
                                                       ),
-                                              
                                                 Text(
                                                   "Add Photo Of Incident Below ↓",
                                                   style: Styles.black15W400,
@@ -3312,11 +3273,7 @@ class AddPrposedAction extends StatelessWidget {
                                           ),
                                           child: LoginCustomTextfield(
                                             keyboardType: TextInputType.text,
-                                            // inputFormatters: <
-                                            //     TextInputFormatter>[
-                                            //   FilteringTextInputFormatter
-                                            //       .digitsOnly
-                                            // ],
+                                            
                                             maxLine: 1,
                                             textController:
                                                 new TextEditingController(
@@ -3411,7 +3368,8 @@ class AddPrposedAction extends StatelessWidget {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                 ),
-                                                child: DropdownWebStock(
+                                                child:
+                                                 DropdownWebStock(
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
@@ -3437,6 +3395,7 @@ class AddPrposedAction extends StatelessWidget {
                                                             orElse: null);
                                                   },
                                                 ),
+                                            
                                               ),
                                             ],
                                           ),
@@ -3664,6 +3623,7 @@ class AddPrposedAction extends StatelessWidget {
 
     return newTime;
   }
+
 }
 
 ///why why Analysis

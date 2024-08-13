@@ -1,6 +1,7 @@
 import 'package:cmms/app/add_incident_report/add_incident_report_controller.dart';
 import 'package:cmms/app/add_incident_report/view/detailsOfInjuredPersonMobile.dart';
 import 'package:cmms/app/add_incident_report/view/web/detailsOfOtherInjuredPersonMobile.dart';
+import 'package:cmms/app/add_incident_report/view/web/widget_add_prposed_action.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -811,6 +812,17 @@ class IRMobile extends GetView<AddIncidentReportController> {
                             controller.whyWhyAnalysisValue == true
                                 ? WhyWhyAnalysis()
                                 : Dimens.box0,
+                            Dimens.boxHeight15,
+                            Text(
+                              "RCA  Required",
+                              style: Styles.blackBold14,
+                            ),
+                            Dimens.boxHeight15,
+                            RootCauseAnalysis(),
+                            Dimens.boxHeight15,
+                            ImmediateCorrection(),
+                            Dimens.boxHeight15,
+                            WidgetAddPrposedAction(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -1162,6 +1174,248 @@ class WhyWhyAnalysis extends StatelessWidget {
                                   message: '',
                                   onPress: () {
                                     controller.rowWhyWhyAnalysisItem
+                                        .removeAt(rowIndex);
+                                  },
+                                ),
+                              ),
+                            )
+                          else
+                            Text(mapData['key'] ?? ''),
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class RootCauseAnalysis extends StatelessWidget {
+  final AddIncidentReportController controller = Get.find();
+  RootCauseAnalysis({
+    super.key,
+  });
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    return Obx(
+      () => Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                "Root Cause (s)/ Underlying causes",
+                style: Styles.blue700,
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () {
+                  controller.addRootCauseRowItem();
+                },
+                child: Container(
+                  height: 25,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    color: ColorValues.addNewColor,
+                    border: Border.all(
+                      color: ColorValues.lightGreyColorWithOpacity35,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  child: Center(
+                    child: Text(
+                      " + Add ",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w100,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Dimens.boxHeight5,
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: controller.rowRootCauseItem.length,
+            itemBuilder: (context, rowIndex) {
+              return Card(
+                color: Color.fromARGB(255, 232, 239, 242),
+                elevation: 10,
+                shadowColor: Colors.black87,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: controller.rowRootCauseItem[rowIndex]
+                        .map<Widget>((mapData) {
+                      return Column(
+                        children: [
+                          if (mapData['key'] == "Cause ")
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Cause  ${rowIndex + 1}"),
+                                  Dimens.boxHeight5,
+                                  LoginCustomTextfield(
+                                    keyboardType: TextInputType.text,
+                                    maxLine: 1,
+                                    textController: new TextEditingController(
+                                        text: mapData["value"] ?? ''),
+                                    onChanged: (txt) {
+                                      mapData["value"] = txt;
+                                    },
+                                  )
+                                ],
+                              ),
+                            )
+                          else if (mapData['key'] == "Action ")
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 5),
+                                child: TableActionButton(
+                                  color: ColorValues.appRedColor,
+                                  icon: Icons.delete,
+                                  label: '',
+                                  message: '',
+                                  onPress: () {
+                                    controller.rowRootCauseItem
+                                        .removeAt(rowIndex);
+                                  },
+                                ),
+                              ),
+                            )
+                          else
+                            Text(mapData['key'] ?? ''),
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ImmediateCorrection extends StatelessWidget {
+  final AddIncidentReportController controller = Get.find();
+  ImmediateCorrection({
+    super.key,
+  });
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    return Obx(
+      () => Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                "Immediate Correction",
+                style: Styles.blue700,
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () {
+                  controller.addImmediateCorrectionRowItem();
+                },
+                child: Container(
+                  height: 25,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    color: ColorValues.addNewColor,
+                    border: Border.all(
+                      color: ColorValues.lightGreyColorWithOpacity35,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  child: Center(
+                    child: Text(
+                      " + Add ",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w100,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Dimens.boxHeight5,
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: controller.rowImmediateCorrectionItem.length,
+            itemBuilder: (context, rowIndex) {
+              return Card(
+                color: Color.fromARGB(255, 232, 239, 242),
+                elevation: 10,
+                shadowColor: Colors.black87,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: controller.rowImmediateCorrectionItem[rowIndex]
+                        .map<Widget>((mapData) {
+                      return Column(
+                        children: [
+                          if (mapData['key'] == "Correction ")
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Correction ${rowIndex + 1}"),
+                                  Dimens.boxHeight5,
+                                  LoginCustomTextfield(
+                                    keyboardType: TextInputType.text,
+                                    maxLine: 1,
+                                    textController: new TextEditingController(
+                                        text: mapData["value"] ?? ''),
+                                    onChanged: (txt) {
+                                      mapData["value"] = txt;
+                                    },
+                                  )
+                                ],
+                              ),
+                            )
+                          else if (mapData['key'] == "Action ")
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 5),
+                                child: TableActionButton(
+                                  color: ColorValues.appRedColor,
+                                  icon: Icons.delete,
+                                  label: '',
+                                  message: '',
+                                  onPress: () {
+                                    controller.rowImmediateCorrectionItem
                                         .removeAt(rowIndex);
                                   },
                                 ),
