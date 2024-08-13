@@ -818,6 +818,8 @@ class IRMobile extends GetView<AddIncidentReportController> {
                             ),
                             Dimens.boxHeight15,
                             RootCauseAnalysis(),
+                            Dimens.boxHeight15,
+                            ImmediateCorrection(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -1290,6 +1292,125 @@ class RootCauseAnalysis extends StatelessWidget {
                                   message: '',
                                   onPress: () {
                                     controller.rowRootCauseItem
+                                        .removeAt(rowIndex);
+                                  },
+                                ),
+                              ),
+                            )
+                          else
+                            Text(mapData['key'] ?? ''),
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ImmediateCorrection extends StatelessWidget {
+  final AddIncidentReportController controller = Get.find();
+  ImmediateCorrection({
+    super.key,
+  });
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    return Obx(
+      () => Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                "Immediate Correction",
+                style: Styles.blue700,
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () {
+                  controller.addImmediateCorrectionRowItem();
+                },
+                child: Container(
+                  height: 25,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    color: ColorValues.addNewColor,
+                    border: Border.all(
+                      color: ColorValues.lightGreyColorWithOpacity35,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  child: Center(
+                    child: Text(
+                      " + Add ",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w100,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Dimens.boxHeight5,
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: controller.rowImmediateCorrectionItem.length,
+            itemBuilder: (context, rowIndex) {
+              return Card(
+                color: Color.fromARGB(255, 232, 239, 242),
+                elevation: 10,
+                shadowColor: Colors.black87,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: controller.rowImmediateCorrectionItem[rowIndex]
+                        .map<Widget>((mapData) {
+                      return Column(
+                        children: [
+                          if (mapData['key'] == "Correction ")
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  LoginCustomTextfield(
+                                    keyboardType: TextInputType.text,
+                                    maxLine: 1,
+                                    textController: new TextEditingController(
+                                        text: mapData["value"] ?? ''),
+                                    onChanged: (txt) {
+                                      mapData["value"] = txt;
+                                    },
+                                  )
+                                ],
+                              ),
+                            )
+                          else if (mapData['key'] == "Action ")
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 5),
+                                child: TableActionButton(
+                                  color: ColorValues.appRedColor,
+                                  icon: Icons.delete,
+                                  label: '',
+                                  message: '',
+                                  onPress: () {
+                                    controller.rowImmediateCorrectionItem
                                         .removeAt(rowIndex);
                                   },
                                 ),
