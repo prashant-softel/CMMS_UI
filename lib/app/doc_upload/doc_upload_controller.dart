@@ -99,6 +99,7 @@ class DocumentUploadController extends GetxController {
 
       UploadDocumentModel uploadDocumentModel = UploadDocumentModel(
           is_renew: 0,
+          docuemnt_id: 0,
           docMasterId: selectedDocumentId,
           fileId: fileIds[0],
           facility_id: facilityId,
