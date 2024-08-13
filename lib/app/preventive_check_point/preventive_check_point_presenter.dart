@@ -1,3 +1,9 @@
+// ignore: unused_import
+import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/incident_risk_type_model.dart';
+import 'package:cmms/domain/models/risk_type_list_model.dart';
+import 'package:cmms/domain/models/type_of_obs_list_model.dart';
+
 import '../../domain/models/preventive_checklist_model.dart';
 import '../../domain/usecases/preventive_checkpoint_usecase.dart';
 
@@ -25,7 +31,20 @@ class PreventiveCheckPointPresenter {
     );
     return true;
   }
+  Future<List<RiskTypeModel>> getRiskTypeList(
+      {required bool isLoading, required int facility_id}) async {
+    return preventiveCheckPointUsecase.getRiskTypeList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
 
+  Future<List<TypeOfObsListModel?>?> getTypeOfObservationList({
+    required bool isLoading,
+  }) async {
+    return preventiveCheckPointUsecase.getTypeOfObservationList(
+        isLoading: isLoading);
+  }
   getCheckPointlist(
           {int? selectedchecklistId,
           bool? isLoading,
@@ -53,6 +72,7 @@ class PreventiveCheckPointPresenter {
     );
     return true;
   }
+
 
   void saveValue({String? type}) async {
     return preventiveCheckPointUsecase.saveValue(type: type);

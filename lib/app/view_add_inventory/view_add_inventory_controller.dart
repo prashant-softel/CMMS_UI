@@ -326,7 +326,7 @@ class ViewAddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
               "";
       lastCalibrationDateTc.text =
-          editAddInventoryDetailsModel.value?.calibrationDueDate.toString() ??
+          editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
               "";
       selectedStatusNameId = editAddInventoryDetailsModel.value?.statusId ?? 0;
       selectedStatusName.value =

@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DocumentUploadWeb extends GetView<DocumentUploadController> {
   DocumentUploadWeb({
@@ -218,28 +220,121 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: 10, right: 20, left: 20),
-                                      height: Get.height * 0.2,
-                                      width: Get.width,
-                                      child: Row(
-                                          //
-                                          children: [
-                                            Expanded(
-                                              flex: 2,
-                                              child:
-                                                  FileUploadWidgetWithDropzone(
-                                                uploadSingleFile: false,
+                                    controller.selectedItem != null
+                                        ? Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 50),
+                                            width: Get.width * 0.5,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234),
                                               ),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
-                                            Dimens.boxWidth10,
-                                            Expanded(
-                                                flex: 8,
-                                                child:
-                                                    FileUploadDetailsWidgetWeb()),
-                                          ]),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "File Description: ",
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                        controller.selectedItem
+                                                                ?.description ??
+                                                            '',
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 10),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "View Image: ",
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    controller.selectedItem !=
+                                                            null
+                                                        ? IconButton(
+                                                            icon: Icon(Icons
+                                                                .visibility),
+                                                            color: ColorValues
+                                                                .appDarkBlueColor,
+                                                            onPressed:
+                                                                () async {
+                                                              String baseUrl =
+                                                                  'http://172.20.43.9:83/';
+                                                              String fileName =
+                                                                  controller
+                                                                          .selectedItem
+                                                                          ?.file_path ??
+                                                                      "";
+                                                              String fullUrl =
+                                                                  baseUrl +
+                                                                      fileName;
+                                                              if (await canLaunch(
+                                                                  fullUrl)) {
+                                                                await launch(
+                                                                    fullUrl);
+                                                              } else {
+                                                                throw 'Could not launch $fullUrl';
+                                                              }
+                                                            },
+                                                          )
+                                                        : Dimens.box0
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : Dimens.box0,
+                                    SizedBox(
+                                      height: 10,
                                     ),
+                                    controller.selectedItem == null
+                                        ? Container(
+                                            margin: EdgeInsets.only(
+                                                top: 10, right: 20, left: 20),
+                                            height: Get.height * 0.2,
+                                            width: Get.width,
+                                            child: Row(
+                                                //
+                                                children: [
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child:
+                                                        FileUploadWidgetWithDropzone(
+                                                      uploadSingleFile: false,
+                                                    ),
+                                                  ),
+                                                  Dimens.boxWidth10,
+                                                  Expanded(
+                                                      flex: 8,
+                                                      child:
+                                                          FileUploadDetailsWidgetWeb()),
+                                                ]),
+                                          )
+                                        : Dimens.box0,
                                     Dimens.boxHeight10,
                                     Padding(
                                       padding: const EdgeInsets.symmetric(

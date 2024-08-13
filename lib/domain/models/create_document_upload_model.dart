@@ -11,6 +11,7 @@ class UploadDocumentModel {
   String? subDocName;
   String? renewDate;
   String? remarks;
+  int? docuemnt_id;
 
   UploadDocumentModel({
     this.facility_id,
@@ -20,6 +21,7 @@ class UploadDocumentModel {
     this.renewDate,
     this.remarks,
     this.is_renew,
+    this.docuemnt_id,
   });
 
   factory UploadDocumentModel.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class UploadDocumentModel {
       subDocName: json['sub_doc_name'],
       renewDate: json['renew_date'],
       remarks: json['Remarks'],
+      docuemnt_id: json['docuemnt_id'],
     );
   }
 
@@ -42,5 +45,6 @@ class UploadDocumentModel {
         'sub_doc_name': subDocName,
         'renew_date': renewDate,
         'Remarks': remarks,
+        'docuemnt_id': docuemnt_id,
       };
 }

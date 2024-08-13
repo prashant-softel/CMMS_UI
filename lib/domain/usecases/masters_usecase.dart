@@ -12,4 +12,6 @@ class MastersUsecase {
   void clearValue() async => _repository.clearData(LocalKeys.importType);
   void clearStoreUserIdData() async =>
       _repository.clearData(LocalKeys.userDetailId);
+  void clearAssetsIdStoreData() async =>
+      _repository.clearData(LocalKeys.inventoryId);
 }

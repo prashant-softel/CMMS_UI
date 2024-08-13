@@ -24,6 +24,8 @@ class CheckPointModel {
   String? checkpoint_type;
   dynamic min;
   dynamic max;
+  String? type_of_observation;
+  String? risk_type;
 
   String? created_at;
 
@@ -48,7 +50,9 @@ class CheckPointModel {
       this.max,
       this.min,
       this.updated_at,
-      this.updated_by_name});
+      this.updated_by_name,
+      this.type_of_observation,
+      this.risk_type});
 
   factory CheckPointModel.fromJson(Map<String, dynamic> json) =>
       CheckPointModel(
@@ -70,6 +74,8 @@ class CheckPointModel {
         requirement: json['requirement'],
         updated_by_id: json['updated_by_id'],
         status: json['status'],
+        type_of_observation: json['type_of_observation'],
+        risk_type: json['risk_type'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -91,5 +97,7 @@ class CheckPointModel {
         "requirement": requirement,
         "updated_by_id": updated_by_id,
         "status": status,
+        "type_of_observation": type_of_observation,
+        "risk_type": risk_type,
       };
 }

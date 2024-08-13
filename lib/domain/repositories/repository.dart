@@ -870,7 +870,7 @@ class Repository {
         Fluttertoast.showToast(
             msg: " Document Uploaded Successfully...", fontSize: 16.0);
         Get.offAllNamed(
-          Routes.documentUploadScreen,
+          Routes.documentManager,
         );
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Upload Document');

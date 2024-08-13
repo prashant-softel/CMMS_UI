@@ -97,8 +97,8 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          "View Doc Data For ID ${controller.selectedDocUploadId} ",
-                                          style: Styles.blackBold16,
+                                          "View Doc Data For :  ${controller.selectedItem != null ? controller.selectedItem!.doc_master_name : 'Unknown'} ",
+                                          style: Styles.blue17,
                                         ),
                                         Spacer(),
                                         Row(
@@ -215,22 +215,20 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                                 icon: Icons.visibility,
                                                 message: 'View File',
                                                 onPress: () async {
-                                                  // String baseUrl = "http://65.0.20.19/CMMS_API/";
-                                                  // String baseUrl =
-                                                  //     'http://172.20.43.9:83/';
-                                                  // String fileName = controller
-                                                  //         .file_list![index]
-                                                  //         ?.fileName ??
-                                                  //     "";
-                                                  // String fullUrl =
-                                                  //     baseUrl + fileName;
-                                                  // if (await canLaunch(
-                                                  //     fullUrl)) {
-                                                  //   await launch(fullUrl);
-                                                  // } else {
-                                                  //   throw 'Could not launch $fullUrl';
-                                                  // }
-                                                  // // String baseUrl = 'http://172.20.43.9:83/';
+                                                  String baseUrl =
+                                                      'http://172.20.43.9:83/';
+                                                  String fileName = controller
+                                                          .selectedItem
+                                                          ?.file_path ??
+                                                      "";
+                                                  String fullUrl =
+                                                      baseUrl + fileName;
+                                                  if (await canLaunch(
+                                                      fullUrl)) {
+                                                    await launch(fullUrl);
+                                                  } else {
+                                                    throw 'Could not launch $fullUrl';
+                                                  }
                                                 },
                                               )),
                                             ],
@@ -240,6 +238,85 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                     ),
                                   ),
                                   Dimens.boxHeight20,
+                                  Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 50),
+                                    width: Get.width * 0.5,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color:
+                                            Color.fromARGB(255, 206, 229, 234),
+                                      ),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "File Description: ",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                controller.selectedItem
+                                                        ?.description ??
+                                                    '',
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 10),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "View Image: ",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            controller.selectedItem != null
+                                                ? IconButton(
+                                                    icon:
+                                                        Icon(Icons.visibility),
+                                                    color: ColorValues
+                                                        .appDarkBlueColor,
+                                                    onPressed: () async {
+                                                      String baseUrl =
+                                                          'http://172.20.43.9:83/';
+                                                      String fileName =
+                                                          controller
+                                                                  .selectedItem
+                                                                  ?.file_path ??
+                                                              "";
+                                                      String fullUrl =
+                                                          baseUrl + fileName;
+                                                      if (await canLaunch(
+                                                          fullUrl)) {
+                                                        await launch(fullUrl);
+                                                      } else {
+                                                        throw 'Could not launch $fullUrl';
+                                                      }
+                                                    },
+                                                  )
+                                                : Dimens.box0
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
