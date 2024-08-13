@@ -401,6 +401,8 @@ class AddInventoryController extends GetxController {
 
       selectedfrequency.value =
           editAddInventoryDetailsModel.value?.calibrationFreqType ?? "";
+      selectedfrequencyId =
+          editAddInventoryDetailsModel.value?.calibrationFrequency ?? 0;
 
       calibrationRemaingCtrlr.text =
           "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationReminderDays ?? 0}")}";

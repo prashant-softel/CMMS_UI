@@ -1,4 +1,3 @@
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/dashboard_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
@@ -6,10 +5,8 @@ import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
-import 'package:data_table_2/data_table_2.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 // import 'package:pie_chart/pie_chart.dart';
@@ -76,288 +73,6 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                     child: DefaultTabController(
                       length: 6,
                       child: Column(children: [
-                        // Container(
-                        //   height: 50,
-                        //   decoration: BoxDecoration(
-                        //     border: Border.all(
-                        //       color: Color.fromARGB(255, 227, 224, 224),
-                        //       width: 1,
-                        //     ),
-                        //     boxShadow: [
-                        //       BoxShadow(
-                        //         color: Color.fromARGB(255, 236, 234, 234)
-                        //             .withOpacity(0.5),
-                        //         spreadRadius: 2,
-                        //         blurRadius: 5,
-                        //         offset: Offset(0, 2),
-                        //       ),
-                        //     ],
-                        //   ),
-                        //   child: Row(
-                        //     children: [
-                        //       // Icon(
-                        //       //   Icons.home,
-                        //       //   color: ColorValues.greyLightColor,
-                        //       // ),
-                        //       // Text(
-                        //       //   "DASHBOARD",
-                        //       //   style: Styles.greyLight14,
-                        //       // ),
-                        //       // Spacer(),
-                        //       Padding(
-                        //         padding: const EdgeInsets.only(
-                        //             left: 50,
-                        //             bottom:
-                        //                 5), // Reduced top and bottom padding
-                        //         child:
-                        // Row(
-                        //           children: [
-                        //             Text('Select Plant',
-                        //                 style: Styles.black13W400),
-                        //             // Dimens.boxWidth10,
-                        //             SizedBox(width: 10),
-                        //             Obx(
-                        //               () => SizedBox(
-                        //                 width:
-                        //                     MediaQuery.of(context).size.width /
-                        //                         6,
-                        //                 child: Container(
-                        //                   decoration: BoxDecoration(
-                        //                     border: Border.all(
-                        //                         color: Colors.transparent),
-                        //                     borderRadius:
-                        //                         BorderRadius.circular(5),
-                        //                   ),
-                        //                   child:
-                        //                       DashCustomMultiSelectDialogField(
-                        //                     title: 'Select Facility',
-                        //                     initialValue: controller
-                        //                         .homecontroller.facilityList
-                        //                         .where((facility) =>
-                        //                             facility != null)
-                        //                         .map((facility) => facility!.id)
-                        //                         .toList(),
-                        //                     items: controller
-                        //                         .homecontroller.facilityList
-                        //                         .where((facility) =>
-                        //                             facility != null)
-                        //                         .map(
-                        //                           (facility) => MultiSelectItem(
-                        //                             facility!.id,
-                        //                             facility.name ?? '',
-                        //                           ),
-                        //                         )
-                        //                         .toList(),
-                        //                     onConfirm: (selectedOptionsList) {
-                        //                       controller.selectedMultiFacility(
-                        //                           selectedOptionsList
-                        //                               .cast<int>());
-                        //                       print(
-                        //                           'Equipment list ${controller.homecontroller.selectedFacilityIdList}');
-                        //                     },
-                        //                     // titleTextStyle: TextStyle(
-                        //                     //     fontSize:
-                        //                     //         12), // Reduced font size
-                        //                     // chipTextStyle: TextStyle(
-                        //                     //     fontSize:
-                        //                     //         12), // Reduced font size
-                        //                   ),
-                        //                 ),
-                        //               ),
-                        //             )
-                        //           ],
-                        //         ),
-                        //       ),
-                        //       //  Spacer(),
-                        //      // Dimens.boxWidth10,
-                        //       SizedBox(width: 10),
-                        //
-
-                        //       if (Responsive.isDesktop(context))
-                        //         Icon(Icons.notifications_active,
-                        //             color: ColorValues.greyLightColor),
-                        //       Card(
-                        //         elevation: 5,
-                        //         shape: RoundedRectangleBorder(
-                        //           borderRadius: BorderRadius.circular(25.0),
-                        //         ),
-                        //         color: ColorValues.blueMediumColor,
-                        //         child: Padding(
-                        //           padding: const EdgeInsets.all(5.0),
-                        //           child: Row(
-                        //             children: [
-                        //               CircleAvatar(
-                        //                 radius: 15,
-                        //                 backgroundColor:
-                        //                     Color.fromARGB(255, 206, 200, 200),
-                        //                 child: Icon(Icons.person,
-                        //                     color: ColorValues.blueMediumColor),
-                        //               ), // icon
-                        //               if (Responsive.isDesktop(context))
-                        //                 SizedBox(
-                        //                     width:
-                        //                         5), // space between icon and text
-                        //               if (Responsive.isDesktop(context))
-                        //                 GestureDetector(
-                        //                   onTap: () {
-                        //                     print(
-                        //                         "${varUserAccessModel.value.user_name ?? ""}");
-                        //                   },
-                        //                   child: Text(
-                        //                     "${varUserAccessModel.value.user_name}",
-                        //                     style: TextStyle(
-                        //                       color: Colors.black, // text color
-                        //                       fontSize: 12, // text size
-                        //                       fontWeight: FontWeight
-                        //                           .w500, // text weight
-                        //                     ),
-                        //                   ),
-                        //                 ),
-                        //               GestureDetector(
-                        //                 onTap: () {
-                        //                   Get.dialog(
-                        //                     Stack(children: [
-                        //                       Positioned(
-                        //                         right: 1,
-                        //                         top: 70,
-                        //                         child: Container(
-                        //                           width: 200,
-                        //                           child: AlertDialog(
-                        //                             insetPadding:
-                        //                                 EdgeInsets.symmetric(
-                        //                                     horizontal: 5.w),
-                        //                             contentPadding:
-                        //                                 EdgeInsets.all(20),
-                        //                             backgroundColor: ColorValues
-                        //                                 .appDarkBlueColor,
-                        //                             content: Column(
-                        //                                 // mainAxisSize: MainAxisSize.min,
-                        //                                 children: [
-                        //                                   GestureDetector(
-                        //                                     onTap: () {
-                        //                                       controller
-                        //                                           .clearStoreData();
-
-                        //                                       Get.toNamed(
-                        //                                           Routes
-                        //                                               .profile,
-                        //                                           arguments: {
-                        //                                             'userId': varUserAccessModel
-                        //                                                 .value
-                        //                                                 .user_id,
-                        //                                           });
-                        //                                     },
-                        //                                     child: Row(
-                        //                                       children: [
-                        //                                         Icon(
-                        //                                           Icons.person,
-                        //                                           color: Color(
-                        //                                               0xffD2D0D0),
-                        //                                         ),
-                        //                                         SizedBox(
-                        //                                           width: 10,
-                        //                                         ),
-                        //                                         Text("Profile",
-                        //                                             style:
-                        //                                                 TextStyle(
-                        //                                               color: Color(
-                        //                                                   0xffD2D0D0),
-                        //                                               fontSize:
-                        //                                                   13,
-                        //                                               fontWeight:
-                        //                                                   FontWeight
-                        //                                                       .w600,
-                        //                                             )),
-                        //                                       ],
-                        //                                     ),
-                        //                                   ),
-                        //                                   Divider(
-                        //                                     color: Color(
-                        //                                         0xffD2D0D0),
-                        //                                   ),
-                        //                                   GestureDetector(
-                        //                                     onTap: () {
-                        //                                       Get.toNamed(
-                        //                                         Routes.setting,
-                        //                                       );
-                        //                                     },
-                        //                                     child: Row(
-                        //                                       children: [
-                        //                                         Icon(
-                        //                                           Icons
-                        //                                               .settings,
-                        //                                           color: Color(
-                        //                                               0xffD2D0D0),
-                        //                                         ),
-                        //                                         SizedBox(
-                        //                                           width: 10,
-                        //                                         ),
-                        //                                         Text("Settings",
-                        //                                             style:
-                        //                                                 TextStyle(
-                        //                                               color: Color(
-                        //                                                   0xffD2D0D0),
-                        //                                               fontSize:
-                        //                                                   13,
-                        //                                               fontWeight:
-                        //                                                   FontWeight
-                        //                                                       .w600,
-                        //                                             )),
-                        //                                       ],
-                        //                                     ),
-                        //                                   ),
-                        //                                   Divider(
-                        //                                     color: Color(
-                        //                                         0xffD2D0D0),
-                        //                                   ),
-                        //                                   GestureDetector(
-                        //                                     onTap: () {
-                        //                                       _isDeleteDialog();
-                        //                                     },
-                        //                                     child: Row(
-                        //                                       children: [
-                        //                                         Icon(
-                        //                                           Icons.logout,
-                        //                                           color: Color(
-                        //                                               0xffD2D0D0),
-                        //                                         ),
-                        //                                         SizedBox(
-                        //                                           width: 10,
-                        //                                         ),
-                        //                                         Text("Log Out",
-                        //                                             style:
-                        //                                                 TextStyle(
-                        //                                               color: Color(
-                        //                                                   0xffD2D0D0),
-                        //                                               fontSize:
-                        //                                                   13,
-                        //                                               fontWeight:
-                        //                                                   FontWeight
-                        //                                                       .w600,
-                        //                                             )),
-                        //                                       ],
-                        //                                     ),
-                        //                                   )
-                        //                                 ]),
-                        //                           ),
-                        //                         ),
-                        //                       ),
-                        //                     ]),
-                        //                   );
-                        //                 },
-                        //                 child: Icon(
-                        //                     Icons.keyboard_arrow_down_outlined,
-                        //                     color: ColorValues.blackColor),
-                        //               ),
-                        //             ],
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       // Dimens.boxWidth10,
-                        //       SizedBox(width: 10),
-                        //     ],
-                        //   ),
-                        // ),
                         Obx(
                           () => Row(
                             children: [
@@ -390,12 +105,6 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                                     print(
                                         'Equipment list ${controller.homecontroller.selectedFacilityIdList}');
                                   },
-                                  // titleTextStyle: TextStyle(
-                                  //     fontSize:
-                                  //         12), // Reduced font size
-                                  // chipTextStyle: TextStyle(
-                                  //     fontSize:
-                                  //         12), // Reduced font size
                                 ),
                               ),
                               IconButton(
@@ -421,26 +130,7 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                               tabs: [
                                 CustomTabBar(
                                   width: 100,
-
                                   label: 'All'.tr,
-                                  // decoration: BoxDecoration(
-                                  //   color:
-                                  //       const Color.fromARGB(255, 51, 95, 157),
-                                  //   border: Border.all(
-                                  //     color: Color.fromARGB(255, 88, 45, 45),
-                                  //     width: 1,
-                                  //   ),
-                                  //   boxShadow: [
-                                  //     BoxShadow(
-                                  //       color: Color.fromARGB(255, 159, 85, 85)
-                                  //           .withOpacity(0.5),
-                                  //       spreadRadius: 2,
-                                  //       blurRadius: 5,
-                                  //       offset: Offset(0, 2),
-                                  //     ),
-                                  //   ],
-                                  // ),
-                                  // icon: Icons.menu,
                                 ),
                                 CustomTabBar(
                                   // width: 100,
@@ -1086,6 +776,264 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                                                   ),
                                                 ],
                                               )),
+                                          SizedBox(height: 10),
+                                          Container(
+                                            height: 400,
+                                            child: ListView.builder(
+                                                //physics: const NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount:
+                                                    controller.allItems != null
+                                                        ? controller
+                                                            .allItems.length
+                                                        : 0,
+                                                itemBuilder: (context, index) {
+                                                  final alldetail =
+                                                      (controller.allItems !=
+                                                              null)
+                                                          ? controller
+                                                              .allItems[index]
+                                                          : Itemlist();
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      controller
+                                                          .clearStoreData();
+                                                      controller
+                                                          .clearStoreDatatype();
+                                                      var _taskId = controller
+                                                              .dashboardPmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list![
+                                                                  index]
+                                                              .wo_number ??
+                                                          0;
+                                                      // Get.toNamed(Routes.pmTaskView,
+                                                      //     arguments: {'pmTaskId': _taskId});
+                                                    },
+                                                    child: Card(
+                                                      color: Colors
+                                                          .lightBlue.shade50,
+                                                      elevation: 10,
+                                                      shadowColor:
+                                                          Colors.black87,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10.0),
+                                                        child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Row(children: [
+                                                                Text(
+                                                                  'Site Name: ',
+                                                                  style: const TextStyle(
+                                                                      color: ColorValues
+                                                                          .blackColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    '${alldetail?.facility_name}'
+                                                                    '',
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Spacer(),
+                                                                Text(
+                                                                  'WO Number: ',
+                                                                  style: const TextStyle(
+                                                                      color: ColorValues
+                                                                          .blackColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    alldetail
+                                                                            ?.wo_number ??
+                                                                        '',
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ]),
+
+                                                              Row(children: [
+                                                                Text(
+                                                                  'WO Description: ',
+                                                                  style: const TextStyle(
+                                                                      color: ColorValues
+                                                                          .blackColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    "${alldetail?.wo_decription ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ]),
+
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Status: ',
+                                                                    style: const TextStyle(
+                                                                        color: ColorValues
+                                                                            .blackColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  ),
+                                                                  Text(
+                                                                    "${alldetail?.status_long ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Asset Category: ',
+                                                                    style: const TextStyle(
+                                                                        color: ColorValues
+                                                                            .blackColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w500),
+                                                                  ),
+                                                                  Text(
+                                                                    "${alldetail?.asset_category ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+
+                                                              // Row(children: [
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Asset Name: ',
+                                                                    style: const TextStyle(
+                                                                        color: ColorValues
+                                                                            .blackColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  ),
+                                                                  Text(
+                                                                    "${alldetail?.asset_name ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              // Spacer(),
+                                                              // Expanded(
+                                                              //   child: Column(
+                                                              //     crossAxisAlignment:
+                                                              //         CrossAxisAlignment
+                                                              //             .start,
+                                                              //     children: [
+                                                              //       Text(
+                                                              //         'Start Date',
+                                                              //         style: const TextStyle(
+                                                              //             color: ColorValues
+                                                              //                 .blackColor,
+                                                              //             fontWeight:
+                                                              //                 FontWeight.w500),
+                                                              //       ),
+                                                              //       Text(
+                                                              //         "${bmdetail?.start_date ?? ''}",
+                                                              //         style:
+                                                              //             const TextStyle(
+                                                              //           color: ColorValues
+                                                              //               .navyBlueColor,
+                                                              //           fontWeight:
+                                                              //               FontWeight
+                                                              //                   .bold,
+                                                              //         ),
+                                                              //       )
+                                                              //     ],
+                                                              //   ),
+                                                              // )
+
+                                                              // ]),
+                                                            ]),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }),
+                                          ),
                                         ],
                                       ),
                                       Dimens.boxHeight10,
@@ -1673,9 +1621,7 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                                                                 ),
                                                               ),
                                                             ),
-                                                          ]),
-                                                          Row(//
-                                                              children: [
+                                                            Spacer(),
                                                             Text(
                                                               'WO Number: ',
                                                               style: const TextStyle(
@@ -1703,6 +1649,7 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                                                               ),
                                                             )
                                                           ]),
+
                                                           Row(children: [
                                                             Text(
                                                               'WO Description: ',
@@ -1730,64 +1677,62 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                                                               ),
                                                             )
                                                           ]),
-                                                          Row(children: [
-                                                            Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  'Status: ',
-                                                                  style: const TextStyle(
-                                                                      color: ColorValues
-                                                                          .blackColor,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w400),
-                                                                ),
-                                                                Text(
-                                                                  "${bmdetail?.status ?? ''}",
-                                                                  style:
-                                                                      const TextStyle(
+
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'Status: ',
+                                                                style: const TextStyle(
                                                                     color: ColorValues
-                                                                        .navyBlueColor,
+                                                                        .blackColor,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .bold,
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                            Spacer(),
-                                                            Expanded(
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    'Asset Category: ',
-                                                                    style: const TextStyle(
-                                                                        color: ColorValues
-                                                                            .blackColor,
-                                                                        fontWeight:
-                                                                            FontWeight.w500),
-                                                                  ),
-                                                                  Text(
-                                                                    "${bmdetail?.asset_category ?? ''}",
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      color: ColorValues
-                                                                          .navyBlueColor,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                  )
-                                                                ],
+                                                                            .w400),
                                                               ),
-                                                            )
-                                                          ]),
+                                                              Text(
+                                                                "${bmdetail?.status_long ?? ''}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorValues
+                                                                      .navyBlueColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'Asset Category: ',
+                                                                style: const TextStyle(
+                                                                    color: ColorValues
+                                                                        .blackColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
+                                                              ),
+                                                              Text(
+                                                                "${bmdetail?.asset_category ?? ''}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorValues
+                                                                      .navyBlueColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+
                                                           // Row(children: [
                                                           Column(
                                                             crossAxisAlignment:
@@ -2341,6 +2286,277 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                                                   ),
                                                 ],
                                               )),
+                                          SizedBox(height: 10),
+                                          Container(
+                                            height: 400,
+                                            child: ListView.builder(
+                                                //physics: const NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount: controller
+                                                            .dashboardPmList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list !=
+                                                        null
+                                                    ? controller
+                                                        .dashboardPmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list!
+                                                        .length
+                                                    : 0,
+                                                itemBuilder: (context, index) {
+                                                  final pmdetail = (controller
+                                                              .dashboardPmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list !=
+                                                          null)
+                                                      ? controller
+                                                          .dashboardPmList
+                                                          .value
+                                                          ?.cmDashboadDetails
+                                                          ?.item_list![index]
+                                                      : Itemlist();
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      controller
+                                                          .clearStoreData();
+                                                      controller
+                                                          .clearStoreDatatype();
+                                                      var _taskId = controller
+                                                              .dashboardPmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list![
+                                                                  index]
+                                                              .wo_number ??
+                                                          0;
+                                                      // Get.toNamed(Routes.pmTaskView,
+                                                      //     arguments: {'pmTaskId': _taskId});
+                                                    },
+                                                    child: Card(
+                                                      color: Colors
+                                                          .lightBlue.shade50,
+                                                      elevation: 10,
+                                                      shadowColor:
+                                                          Colors.black87,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10.0),
+                                                        child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Row(children: [
+                                                                Text(
+                                                                  'Site Name: ',
+                                                                  style: const TextStyle(
+                                                                      color: ColorValues
+                                                                          .blackColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    '${pmdetail?.facility_name}'
+                                                                    '',
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Spacer(),
+                                                                Text(
+                                                                  'WO Number: ',
+                                                                  style: const TextStyle(
+                                                                      color: ColorValues
+                                                                          .blackColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    pmdetail?.wo_number ??
+                                                                        '',
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ]),
+
+                                                              Row(children: [
+                                                                Text(
+                                                                  'WO Description: ',
+                                                                  style: const TextStyle(
+                                                                      color: ColorValues
+                                                                          .blackColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    "${pmdetail?.wo_decription ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ]),
+
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Status: ',
+                                                                    style: const TextStyle(
+                                                                        color: ColorValues
+                                                                            .blackColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  ),
+                                                                  Text(
+                                                                    "${pmdetail?.status_long ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Asset Category: ',
+                                                                    style: const TextStyle(
+                                                                        color: ColorValues
+                                                                            .blackColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w500),
+                                                                  ),
+                                                                  Text(
+                                                                    "${pmdetail?.asset_category ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+
+                                                              // Row(children: [
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Asset Name: ',
+                                                                    style: const TextStyle(
+                                                                        color: ColorValues
+                                                                            .blackColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  ),
+                                                                  Text(
+                                                                    "${pmdetail?.asset_name ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              // Spacer(),
+                                                              // Expanded(
+                                                              //   child: Column(
+                                                              //     crossAxisAlignment:
+                                                              //         CrossAxisAlignment
+                                                              //             .start,
+                                                              //     children: [
+                                                              //       Text(
+                                                              //         'Start Date',
+                                                              //         style: const TextStyle(
+                                                              //             color: ColorValues
+                                                              //                 .blackColor,
+                                                              //             fontWeight:
+                                                              //                 FontWeight.w500),
+                                                              //       ),
+                                                              //       Text(
+                                                              //         "${bmdetail?.start_date ?? ''}",
+                                                              //         style:
+                                                              //             const TextStyle(
+                                                              //           color: ColorValues
+                                                              //               .navyBlueColor,
+                                                              //           fontWeight:
+                                                              //               FontWeight
+                                                              //                   .bold,
+                                                              //         ),
+                                                              //       )
+                                                              //     ],
+                                                              //   ),
+                                                              // )
+
+                                                              // ]),
+                                                            ]),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }),
+                                          ),
                                         ],
                                       ),
                                       // Dimens.boxHeight10,
@@ -2642,6 +2858,274 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                                                 ),
                                               ],
                                             ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Container(
+                                            height: 400,
+                                            child: ListView.builder(
+                                                //physics: const NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount: controller
+                                                            .dashboardIrList
+                                                            .value
+                                                            ?.cmDashboadDetails
+                                                            ?.item_list !=
+                                                        null
+                                                    ? controller
+                                                        .dashboardIrList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list!
+                                                        .length
+                                                    : 0,
+                                                itemBuilder: (context, index) {
+                                                  final irdetail = (controller
+                                                              .dashboardIrList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list !=
+                                                          null)
+                                                      ? controller
+                                                          .dashboardIrList
+                                                          .value
+                                                          ?.cmDashboadDetails
+                                                          ?.item_list![index]
+                                                      : Itemlist();
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      controller
+                                                          .clearStoreData();
+                                                      controller
+                                                          .clearStoreDatatype();
+                                                      var _taskId = controller
+                                                              .dashboardIrList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list![
+                                                                  index]
+                                                              .wo_number ??
+                                                          0;
+                                                      // Get.toNamed(Routes.pmTaskView,
+                                                      //     arguments: {'pmTaskId': _taskId});
+                                                    },
+                                                    child: Card(
+                                                      color: Colors
+                                                          .lightBlue.shade50,
+                                                      elevation: 10,
+                                                      shadowColor:
+                                                          Colors.black87,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10.0),
+                                                        child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Row(children: [
+                                                                Text(
+                                                                  'ID: ',
+                                                                  style: const TextStyle(
+                                                                      color: ColorValues
+                                                                          .blackColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    '${irdetail?.wo_number}'
+                                                                    '',
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ]),
+                                                              Row(//
+                                                                  children: [
+                                                                Text(
+                                                                  'Title: ',
+                                                                  style: const TextStyle(
+                                                                      color: ColorValues
+                                                                          .blackColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    irdetail?.title ??
+                                                                        '',
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ]),
+                                                              Row(children: [
+                                                                Text(
+                                                                  'Description: ',
+                                                                  style: const TextStyle(
+                                                                      color: ColorValues
+                                                                          .blackColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    "${irdetail?.wo_decription ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ]),
+                                                              //   Row(children: [
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Type Of Incident: ',
+                                                                    style: const TextStyle(
+                                                                        color: ColorValues
+                                                                            .blackColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  ),
+                                                                  Text(
+                                                                    "${irdetail?.type_of_incident ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              //  Spacer(),
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Location: ',
+                                                                    style: const TextStyle(
+                                                                        color: ColorValues
+                                                                            .blackColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w500),
+                                                                  ),
+                                                                  Text(
+                                                                    "${irdetail?.location_of_incident ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              // ]),
+                                                              // Row(children: [
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Incident Date & Time: ',
+                                                                    style: const TextStyle(
+                                                                        color: ColorValues
+                                                                            .blackColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  ),
+                                                                  Text(
+                                                                    "${irdetail?.incident_datetime ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Restoration Date & Time: ',
+                                                                    style: const TextStyle(
+                                                                        color: ColorValues
+                                                                            .blackColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  ),
+                                                                  Text(
+                                                                    "${irdetail?.restoration_datetime ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ]),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }),
                                           ),
                                         ],
                                       ),
@@ -3601,6 +4085,469 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                                       ),
                                       // Dimens.boxHeight10,
                                       SizedBox(height: 10),
+                                      Container(
+                                        height: 400,
+                                        child: ListView.builder(
+                                            //physics: const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list !=
+                                                    null
+                                                ? controller
+                                                    .dashboardSmList
+                                                    .value
+                                                    ?.cmDashboadDetails
+                                                    ?.item_list!
+                                                    .length
+                                                : 0,
+                                            itemBuilder: (context, index) {
+                                              final smdetail = (controller
+                                                          .dashboardSmList
+                                                          .value
+                                                          ?.cmDashboadDetails
+                                                          ?.item_list !=
+                                                      null)
+                                                  ? controller
+                                                      .dashboardSmList
+                                                      .value
+                                                      ?.cmDashboadDetails
+                                                      ?.item_list![index]
+                                                  : Itemlist();
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  controller.clearStoreData();
+                                                  controller
+                                                      .clearStoreDatatype();
+                                                  var _taskId = controller
+                                                          .dashboardSmList
+                                                          .value
+                                                          ?.cmDashboadDetails
+                                                          ?.item_list![index]
+                                                          .wo_number ??
+                                                      0;
+                                                  // Get.toNamed(Routes.pmTaskView,
+                                                  //     arguments: {'pmTaskId': _taskId});
+                                                },
+                                                child: Card(
+                                                  color:
+                                                      Colors.lightBlue.shade50,
+                                                  elevation: 10,
+                                                  shadowColor: Colors.black87,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
+                                                    child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(children: [
+                                                            Text(
+                                                              'Site Name: ',
+                                                              style: const TextStyle(
+                                                                  color: ColorValues
+                                                                      .blackColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Expanded(
+                                                              child: Text(
+                                                                '${smdetail?.facility_name}'
+                                                                '',
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorValues
+                                                                      .navyBlueColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                          Row(children: [
+                                                            Text(
+                                                              'GR No:',
+                                                              style: const TextStyle(
+                                                                  color: ColorValues
+                                                                      .blackColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Text(
+                                                              "${smdetail?.grNo ?? ''}",
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: ColorValues
+                                                                    .navyBlueColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            ),
+                                                            Spacer(),
+                                                            Text(
+                                                              'GO No',
+                                                              style: const TextStyle(
+                                                                  color: ColorValues
+                                                                      .blackColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Text(
+                                                              "GO${smdetail?.go_id ?? ''}",
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: ColorValues
+                                                                    .navyBlueColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            )
+                                                          ]),
+
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'Status: ',
+                                                                style: const TextStyle(
+                                                                    color: ColorValues
+                                                                        .blackColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                              Text(
+                                                                "${smdetail?.status_long ?? ''}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorValues
+                                                                      .navyBlueColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+
+                                                          Container(
+                                                            width: Get.width,
+                                                            child: Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'Product Name: ',
+                                                                  style: const TextStyle(
+                                                                      color: ColorValues
+                                                                          .blackColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    "${smdetail?.product_name ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          // Row(children: [
+                                                          Row(children: [
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'GR Date: ',
+                                                                  style: const TextStyle(
+                                                                      color: ColorValues
+                                                                          .blackColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                                Text(
+                                                                  "${smdetail?.gr_date ?? ''}",
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    color: ColorValues
+                                                                        .navyBlueColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Expanded(
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'GO Date: ',
+                                                                    style: const TextStyle(
+                                                                        color: ColorValues
+                                                                            .blackColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  ),
+                                                                  Text(
+                                                                    "${smdetail?.go_date ?? ''}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      color: ColorValues
+                                                                          .navyBlueColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            )
+                                                          ]),
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'Requested Quantity: ',
+                                                                style: const TextStyle(
+                                                                    color: ColorValues
+                                                                        .blackColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 5,
+                                                              ),
+                                                              Text(
+                                                                "${smdetail?.requested_qty ?? ''}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorValues
+                                                                      .navyBlueColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                'Order Quantity: ',
+                                                                style: const TextStyle(
+                                                                    color: ColorValues
+                                                                        .blackColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 5,
+                                                              ),
+                                                              Text(
+                                                                "${smdetail?.ordered_qty ?? ''}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorValues
+                                                                      .navyBlueColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'Unit Amount: ',
+                                                                style: const TextStyle(
+                                                                    color: ColorValues
+                                                                        .blackColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                              Text(
+                                                                "${smdetail?.unit_amount ?? ''}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorValues
+                                                                      .navyBlueColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'Total Amount: ',
+                                                                style: const TextStyle(
+                                                                    color: ColorValues
+                                                                        .blackColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                              Text(
+                                                                "${smdetail?.total_amount ?? ''}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorValues
+                                                                      .navyBlueColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'GRN Date: ',
+                                                                style: const TextStyle(
+                                                                    color: ColorValues
+                                                                        .blackColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                              Text(
+                                                                "${smdetail?.grn_date ?? ''}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorValues
+                                                                      .navyBlueColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'GRN Quntity: ',
+                                                                style: const TextStyle(
+                                                                    color: ColorValues
+                                                                        .blackColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                              Text(
+                                                                "${smdetail?.grn_qty ?? ''}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: ColorValues
+                                                                      .navyBlueColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+
+                                                          // Spacer(),
+                                                          // Expanded(
+                                                          //   child: Column(
+                                                          //     crossAxisAlignment:
+                                                          //         CrossAxisAlignment
+                                                          //             .start,
+                                                          //     children: [
+                                                          //       Text(
+                                                          //         'Start Date',
+                                                          //         style: const TextStyle(
+                                                          //             color: ColorValues
+                                                          //                 .blackColor,
+                                                          //             fontWeight:
+                                                          //                 FontWeight.w500),
+                                                          //       ),
+                                                          //       Text(
+                                                          //         "${bmdetail?.start_date ?? ''}",
+                                                          //         style:
+                                                          //             const TextStyle(
+                                                          //           color: ColorValues
+                                                          //               .navyBlueColor,
+                                                          //           fontWeight:
+                                                          //               FontWeight
+                                                          //                   .bold,
+                                                          //         ),
+                                                          //       )
+                                                          //     ],
+                                                          //   ),
+                                                          // )
+
+                                                          // ]),
+                                                        ]),
+                                                  ),
+                                                ),
+                                              );
+                                            }),
+                                      ),
                                     ],
                                   ),
                                 ),

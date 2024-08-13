@@ -200,7 +200,6 @@ class MastersController extends GetxController {
     );
   }
 
-
   Future<void> goToTypeOfObservation() async {
     Get.toNamed(
       Routes.typeofobservation,
@@ -347,6 +346,10 @@ class MastersController extends GetxController {
 
   void clearStoreUserIdData() {
     mastersPresenter.clearStoreUserIdData();
+  }
+
+  void clearAssetsIdStoreData() {
+    mastersPresenter.clearAssetsIdStoreData();
   }
 
   Future<void> documentUpload() async {
