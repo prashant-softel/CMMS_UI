@@ -972,7 +972,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           ////Investigation team
                                                           controller.detailInvestigationTeamValue ==
                                                                   true
-                                                              ? Container(
+                                                              ? 
+                                                              Container(
                                                                   width: MediaQuery.of(
                                                                           context)
                                                                       .size
@@ -992,7 +993,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   // constraints: BoxConstraints(
                                                                   //   maxWidth: 1100,
                                                                   // ),
-                                                                  child: Column(
+                                                                  child:
+                                                                   Column(
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
@@ -1026,7 +1028,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                             ],
                                                                           ),
                                                                           Dimens
-                                                                              .boxWidth50,
+                                                                              .boxWidth20,
                                                                           Row(
                                                                             children: [
                                                                               CustomRichText(title: 'Designation: '),
@@ -1080,7 +1082,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                                   Dimens.boxWidth180,
                                                                                   Text('Name'),
                                                                                   SizedBox(
-                                                                                    width: 310,
+                                                                                    width: 50,
                                                                                   ),
                                                                                   Text('Designation'),
                                                                                   Dimens.boxWidth200,
@@ -1130,6 +1132,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       ),
                                                                       Dimens
                                                                           .boxHeight10
+                                                                   
                                                                     ],
                                                                   ),
                                                                 )
@@ -1233,6 +1236,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           Dimens.boxHeight10,
                                                         ],
                                                       ),
+                                              
                                                 Text(
                                                   "Add Photo Of Incident Below ↓",
                                                   style: Styles.black15W400,
@@ -1577,9 +1581,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     );
   }
 
-  ///Below All For WEB
-  ///
-  /// Action Taken date and Time
   Widget _buildActionTakenDateTimeField_web(
     BuildContext context,
   ) {

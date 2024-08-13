@@ -360,20 +360,17 @@ class AddIncidentReportController extends GetxController {
 
   var investigationTeam = <InvestigationTeam>[].obs;
   void updateInvestigationTeamText(
-      String srNumber,
-      String name,
-      // String required_by_data,
-
-      String designation) {
-    // for (int i = 1; i <= investigationTeam.length; i++) {
+      String srNumber, String name, String designation) {
     investigationTeam.add(InvestigationTeam(
         srNumber: '${investigationTeam.length + 1}.',
         name: name,
-        // required_by_date: required_by_data,
-        // is_required: is_required
-
         designation: designation));
-    // }
+  }
+
+  void clearTextFields() {
+    investigationTeamSrNumberTextFieldController.clear();
+    investigationTeamNameTextFieldController.clear();
+    investigationTeamDesignationTextFieldController.clear();
   }
 
 //RCA text
@@ -567,10 +564,10 @@ class AddIncidentReportController extends GetxController {
         getTypePermitList(facilityId);
       });
       Future.delayed(Duration(seconds: 1), () async {
-        getInventoryList();
+        // getInventoryList();
       });
       Future.delayed(Duration(seconds: 1), () async {
-        getIncidentInvestigationDoneByList();
+        // getIncidentInvestigationDoneByList();
       });
       Future.delayed(Duration(seconds: 1), () async {
         getIncidentInvestigationVerificationDoneByList();
