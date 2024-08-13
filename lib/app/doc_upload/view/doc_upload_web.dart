@@ -9,6 +9,7 @@ import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -169,14 +170,19 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                                       title:
                                                           'Sub Group Document Name: '),
                                                   Dimens.boxWidth2,
-                                                  LoginCustomTextfield(
-                                                    textController:
-                                                        controller.subDocName,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            5,
+                                                  IgnorePointer(
+                                                    ignoring: controller
+                                                            .selectedItem !=
+                                                        null,
+                                                    child: LoginCustomTextfield(
+                                                      textController:
+                                                          controller.subDocName,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
