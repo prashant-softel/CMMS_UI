@@ -3273,11 +3273,7 @@ class AddPrposedAction extends StatelessWidget {
                                           ),
                                           child: LoginCustomTextfield(
                                             keyboardType: TextInputType.text,
-                                            // inputFormatters: <
-                                            //     TextInputFormatter>[
-                                            //   FilteringTextInputFormatter
-                                            //       .digitsOnly
-                                            // ],
+                                            
                                             maxLine: 1,
                                             textController:
                                                 new TextEditingController(
@@ -3372,7 +3368,8 @@ class AddPrposedAction extends StatelessWidget {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                 ),
-                                                child: DropdownWebStock(
+                                                child:
+                                                 DropdownWebStock(
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
@@ -3398,6 +3395,7 @@ class AddPrposedAction extends StatelessWidget {
                                                             orElse: null);
                                                   },
                                                 ),
+                                            
                                               ),
                                             ],
                                           ),
@@ -3625,6 +3623,7 @@ class AddPrposedAction extends StatelessWidget {
 
     return newTime;
   }
+
 }
 
 ///why why Analysis

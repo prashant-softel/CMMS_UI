@@ -1,6 +1,7 @@
 import 'package:cmms/app/add_incident_report/add_incident_report_controller.dart';
 import 'package:cmms/app/add_incident_report/view/detailsOfInjuredPersonMobile.dart';
 import 'package:cmms/app/add_incident_report/view/web/detailsOfOtherInjuredPersonMobile.dart';
+import 'package:cmms/app/add_incident_report/view/web/widget_add_prposed_action.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -820,6 +821,8 @@ class IRMobile extends GetView<AddIncidentReportController> {
                             RootCauseAnalysis(),
                             Dimens.boxHeight15,
                             ImmediateCorrection(),
+                            Dimens.boxHeight15,
+                            WidgetAddPrposedAction(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -1388,6 +1391,8 @@ class ImmediateCorrection extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  Text("Correction ${rowIndex + 1}"),
+                                  Dimens.boxHeight5,
                                   LoginCustomTextfield(
                                     keyboardType: TextInputType.text,
                                     maxLine: 1,
