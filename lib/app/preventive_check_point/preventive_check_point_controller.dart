@@ -4,6 +4,9 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/risk_type_list_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
+import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -42,8 +45,24 @@ class PreventiveCheckPointController extends GetxController {
   var requirementCtrlr = TextEditingController();
   var failurewtgCtrlr = TextEditingController();
   int selectedEquipmentId = 0;
+
+  RxList<RiskTypeModel> incidentrisktypeList = <RiskTypeModel>[].obs;
+  Rx<bool> isRiskTypeListSelected = true.obs;
+  Rx<bool> isCostTypeListSelected = true.obs;
+  Rx<String> selectedRiskTypeList = ''.obs;
+  Rx<String> selectedCostTypeList = ''.obs;
   Rx<String> selectedchecklistId = "".obs;
+  int typeOfObsId = 0;
+  int incidenttypeId = 0;
+  Rx<bool> isTypeOfObsListSelected = true.obs;
+  RxList<TypeOfObsListModel?> typeOfObsList = <TypeOfObsListModel>[].obs;
+  Rx<bool> isSelectedTypeOfObs = true.obs;
+  Rx<String> selectedTypeOfObs = ''.obs;
   RxList<CheckPointModel?>? preventiveCheckpoint = <CheckPointModel?>[].obs;
+  RxList<GenderModel?>? costType = <GenderModel?>[
+    GenderModel(id: 1, name: "Capex"),
+    GenderModel(id: 2, name: "Opex"),
+  ].obs;
   RxList<CheckPointModel?>? BufferPreventiveCheckPoint =
       <CheckPointModel?>[].obs;
   CheckPointModel? preventiveCheckpointmodel;
@@ -65,6 +84,8 @@ class PreventiveCheckPointController extends GetxController {
     "Upload Image?": true,
     "Failure Weightage": true,
     "Type": true,
+    "Type of Observation": true,
+    "Risk Type": true,
 
     // "search": true,
   });
@@ -77,6 +98,8 @@ class PreventiveCheckPointController extends GetxController {
     "Upload Image?": 200,
     "Failure Weightage": 170,
     "Type": 200,
+    "Type of Observation": 200,
+    "Risk Type": 200,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -94,6 +117,8 @@ class PreventiveCheckPointController extends GetxController {
   RxString failerFilterText = ''.obs;
   RxString imageFilterText = ''.obs;
   RxString typeFilterText = ''.obs;
+  RxString typeObsFilterText = ''.obs;
+  RxString typeRiskFilterText = ''.obs;
 
   Rx<bool> isLoading = true.obs;
   @override
@@ -109,7 +134,10 @@ class PreventiveCheckPointController extends GetxController {
         "Upload Image?": imageFilterText,
         "Failure Weightage": failerFilterText,
         "Type": typeFilterText,
+        "Type of Observation": typeObsFilterText,
+        "Risk Type": typeRiskFilterText,
       };
+
       // if (type.value != 0) {
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
@@ -119,6 +147,12 @@ class PreventiveCheckPointController extends GetxController {
               selectedchecklistId: 0.toString(),
               facilityId: facilityId,
               type: type.value);
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getIncidentRiskType(facilityId);
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getTypeOfObservationList();
         });
       });
       // }
@@ -274,15 +308,18 @@ class PreventiveCheckPointController extends GetxController {
           min: _min);
 
       CreateCheckpoint createCheckpoint = CreateCheckpoint(
-          check_point: _checkPoint,
-          requirement: _requirement,
-          checklist_id: _checklistId,
-          failure_weightage: _failurewtg,
-          checkpoint_type: checkpoint_type,
-          is_document_required: isToggleOn.value ? 1 : 0,
-          id: 0,
-          status: 1,
-          type: type.value);
+        check_point: _checkPoint,
+        requirement: _requirement,
+        checklist_id: _checklistId,
+        failure_weightage: _failurewtg,
+        checkpoint_type: checkpoint_type,
+        is_document_required: isToggleOn.value ? 1 : 0,
+        id: 0,
+        status: 1,
+        type: type.value,
+        type_of_observation: typeOfObsId,
+        risk_type: incidenttypeId,
+      );
       var checkpointJsonString = [
         createCheckpoint.toJson()
       ]; //createCheckPointToJson([createCheckpoint]);
@@ -426,6 +463,30 @@ class PreventiveCheckPointController extends GetxController {
     );
   }
 
+  Future<void> getIncidentRiskType(int facilityId) async {
+    incidentrisktypeList.value = <RiskTypeModel>[];
+    final _irisktypeList = await preventiveCheckPointPresenter.getRiskTypeList(
+      facility_id: facilityId,
+      isLoading: true,
+    );
+    for (var facilityType_list in _irisktypeList) {
+      incidentrisktypeList.add(facilityType_list);
+    }
+  }
+
+  Future<void> getTypeOfObservationList() async {
+    typeOfObsList.clear();
+    final list = await preventiveCheckPointPresenter.getTypeOfObservationList(
+      isLoading: isLoading.value,
+    );
+    if (list != null) {
+      isLoading.value = false;
+      for (var _typeOfObsList in list) {
+        typeOfObsList.add(_typeOfObsList);
+      }
+    }
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case const (RxList<PreventiveCheckListModel>):
@@ -445,6 +506,37 @@ class PreventiveCheckPointController extends GetxController {
           }
         }
 
+        break;
+      case const (RxList<TypeOfObsListModel>):
+        {
+          if (value != "Please Select") {
+            int typeOfObsIndex =
+                typeOfObsList.indexWhere((x) => x?.name == value);
+            typeOfObsId = typeOfObsList[typeOfObsIndex]?.id ?? 0;
+            selectedTypeOfObs.value = value;
+            isTypeOfObsListSelected.value = true;
+            isSelectedTypeOfObs.value = true;
+            print(
+                "selectedBusinessTypeId: ${typeOfObsId} \n ${selectedTypeOfObs}");
+          } else {
+            typeOfObsId = 0;
+          }
+        }
+        break;
+      case const (RxList<RiskTypeModel>):
+        {
+          if (value != "Please Select") {
+            int statusIndex =
+                incidentrisktypeList.indexWhere((x) => x?.name == value);
+            incidenttypeId = incidentrisktypeList[statusIndex]?.id ?? 0;
+            selectedRiskTypeList.value = value;
+            isRiskTypeListSelected.value = true;
+            print(
+                "selectedBusinessTypeId: ${incidenttypeId} \n ${selectedRiskTypeList}");
+          } else {
+            incidenttypeId = 0;
+          }
+        }
         break;
 
       default:
@@ -486,15 +578,18 @@ class PreventiveCheckPointController extends GetxController {
         min: _min);
 
     CreateCheckpoint createCheckpoint = CreateCheckpoint(
-        check_point: _checkPoint,
-        requirement: _requirement,
-        checklist_id: _checklistId,
-        id: checkPontId,
-        is_document_required: isToggleOn.value ? 1 : 0,
-        failure_weightage: _failurewtg,
-        checkpoint_type: checkpoint_type,
-        status: 1,
-        type: type.value);
+      check_point: _checkPoint,
+      requirement: _requirement,
+      checklist_id: _checklistId,
+      id: checkPontId,
+      is_document_required: isToggleOn.value ? 1 : 0,
+      failure_weightage: _failurewtg,
+      checkpoint_type: checkpoint_type,
+      status: 1,
+      type: type.value,
+      type_of_observation: typeOfObsId,
+      risk_type: incidenttypeId,
+    );
     var checkpointJsonString =
         createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
 
@@ -529,6 +624,18 @@ class PreventiveCheckPointController extends GetxController {
     }
     if (requirementCtrlr.text == '') {
       isRequiremetInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (selectedTypeOfObs == '') {
+      isSelectedTypeOfObs.value = false;
+      isFormInvalid.value = true;
+    }
+    if (selectedRiskTypeList == '') {
+      isRiskTypeListSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (selectedCostTypeList == '') {
+      isCostTypeListSelected.value = false;
       isFormInvalid.value = true;
     }
 

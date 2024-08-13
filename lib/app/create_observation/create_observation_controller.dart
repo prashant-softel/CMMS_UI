@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/source_of_obs_list_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,6 +47,12 @@ class CreateObservationController extends GetxController {
   int selectedRiskTypeId = 0;
   int incidenttypeId = 0;
   int typeOfObsId = 0;
+  RxList<GenderModel?>? costType = <GenderModel?>[
+    GenderModel(id: 1, name: "Capex"),
+    GenderModel(id: 2, name: "Opex"),
+  ].obs;
+  Rx<bool> isCostTypeListSelected = true.obs;
+   Rx<String> selectedCostTypeList = ''.obs;
   RxList<TypeOfObsListModel?> typeOfObsList = <TypeOfObsListModel>[].obs;
   Rx<String> selectedTypeOfObs = ''.obs;
   Rx<bool> isSelectedTypeOfObs = true.obs;
@@ -136,7 +143,7 @@ class CreateObservationController extends GetxController {
       contractorNameCtrlr.text = getObsById.value?.contractor_name ?? "";
       correctivePreventiveCtrlr.text =
           getObsById.value?.preventive_action ?? "";
-      costTypeCtrlr.text = getObsById.value?.cost_type ?? "";
+      selectedCostTypeList.value = getObsById.value?.cost_type ?? "";
       discriptionCtrlr.text = getObsById.value?.observation_description ?? "";
       locationOfObservationCtrlr.text =
           getObsById.value?.location_of_observation ?? "";
@@ -205,7 +212,7 @@ class CreateObservationController extends GetxController {
         facility_id: facilityId,
         contact_number: _contactNumberCtrlr,
         contractor_name: _contractorNameCtrlr,
-        cost_type: _costTypeCtrlr,
+        cost_type: selectedCostTypeList.value,
         date_of_observation: _obsDateTc,
         location_of_observation: _locationOfObservationCtrlr,
         observation_description: _discriptionCtrlr,
