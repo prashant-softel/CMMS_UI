@@ -9,4 +9,7 @@ class MastersPresenter {
       await mastersUsecase.getFacilityList();
   void clearValue() async => mastersUsecase.clearValue();
   void clearStoreUserIdData() async => mastersUsecase.clearStoreUserIdData();
+  void clearAssetsIdStoreData() {
+    mastersUsecase.clearAssetsIdStoreData();
+  }
 }

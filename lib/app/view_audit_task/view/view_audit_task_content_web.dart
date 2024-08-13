@@ -1179,25 +1179,40 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               )
                                             : Dimens.box0,
                                         Dimens.boxWidth5,
-                                        Container(
-                                          height: 35,
-                                          child: CustomElevatedButton(
-                                            // icon: Icons.link,
-                                            backgroundColor:
-                                                ColorValues.blueColor,
-                                            text: "Re-assign",
-                                            onPressed: () {
-                                              Get.dialog<void>(
-                                                  AssignToAuditTaskDialog(
-                                                      id: controller
-                                                              .auditTasknDetailModel
-                                                              .value
-                                                              .id ??
-                                                          0));
-                                              //controller.printScreen();
-                                            },
-                                          ),
-                                        ),
+                                        controller.auditTasknDetailModel.value
+                                                        .status ==
+                                                    421 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditExecutionFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveAddAccess)
+                                                        .length >
+                                                    0
+                                            ? Container(
+                                                height: 35,
+                                                child: CustomElevatedButton(
+                                                  // icon: Icons.link,
+                                                  backgroundColor:
+                                                      ColorValues.blueColor,
+                                                  text: "Re-assign",
+                                                  onPressed: () {
+                                                    Get.dialog<void>(
+                                                        AssignToAuditTaskDialog(
+                                                            id: controller
+                                                                    .auditTasknDetailModel
+                                                                    .value
+                                                                    .id ??
+                                                                0));
+                                                    //controller.printScreen();
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         controller.auditTasknDetailModel.value.status == 430 &&
                                                     varUserAccessModel.value.access_list!
                                                             .where((e) =>

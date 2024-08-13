@@ -167,6 +167,8 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                                 icon: Icons.add,
                                                 label: "Add New",
                                                 onPressed: () {
+                                                  controller.clearStoreData();
+
                                                   Get.offNamed(Routes
                                                       .addInventoryScreen);
                                                 },
