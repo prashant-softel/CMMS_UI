@@ -12,4 +12,6 @@ class MastersPresenter {
   void clearAssetsIdStoreData() {
     mastersUsecase.clearAssetsIdStoreData();
   }
+  void clearWarrantyValue() async => mastersUsecase.clearWarrantyValue();
+  void clearWarrantyTypeValue() async => mastersUsecase.clearWarrantyTypeValue();
 }

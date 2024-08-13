@@ -39,6 +39,7 @@ class CreateWarrantyClaimModel {
 
   CreateWarrantyClaimModel(
       {this.facilityId,
+      this.id,
       this.equipmentId,
       this.goodsOrderId,
       // this.affectedPart,
@@ -67,6 +68,7 @@ class CreateWarrantyClaimModel {
 
   factory CreateWarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
       CreateWarrantyClaimModel(
+        id: json["id"],
         facilityId: json["facilityId"],
         equipmentId: json["equipmentId"],
         goodsOrderId: json["goodsOrderId"],
@@ -108,6 +110,7 @@ class CreateWarrantyClaimModel {
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "facilityId": facilityId,
         "equipmentId": equipmentId,
         "goodsOrderId": goodsOrderId,

@@ -696,7 +696,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                             label:
                                                                 'Applied At:',
                                                             hintText:
-                                                                '${controller.editWarrantyClaimDetailsModel.value?.current_time}',
+                                                                '${controller.editWarrantyClaimDetailsModel.value?.date_of_claim}',
                                                           ),
                                                           CustomTextField(
                                                             textController:

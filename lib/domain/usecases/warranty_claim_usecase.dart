@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
+import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 
 import '../models/facility_model.dart';
@@ -29,6 +30,15 @@ class WarrantyClaimUsecase {
         isLoading,
       );
 
+  Future<ViewWarrantyClaimModel?> getViewWarrantyClaimDetail({
+    bool? isLoading,
+    required int wc_id,
+  }) async =>
+      await _repository.getViewWarrantyClaimDetail(
+        wc_id: wc_id,
+        isLoading: isLoading ?? false,
+      );
+
   Future<InventoryDetailsModel?> getInventoryDetail({
     bool? isLoading,
     required int id,
@@ -44,6 +54,15 @@ class WarrantyClaimUsecase {
   }) async =>
       await _repository.createWarrantyClaim(
         createWarrantyClaim,
+        isLoading,
+      );
+
+  Future<Map<String, dynamic>> updateWarrantyClaim({
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await _repository.updateWarrantyClaim(
+        updateWarrantyClaim,
         isLoading,
       );
 
@@ -174,8 +193,46 @@ class WarrantyClaimUsecase {
     );
   }
 
+  Future<Map<String, dynamic>> wcApprovedButton({
+    WCApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.wcApprovedButton(
+        WCApproveJsonString,
+        isLoading,
+      );
+
+  Future<Map<String, dynamic>> wcRejectdButton({
+    WCRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.wcRejectdButton(
+        WCRejectJsonString,
+        isLoading,
+      );
+
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
+  Future<String?> getValue() async => await _repository.getStringValue(
+        LocalKeys.wc_id,
+      );
+  void saveValue({String? wc_id}) async => _repository.saveValue(
+        LocalKeys.wc_id,
+        wc_id,
+      );
+  void clearValue() async => _repository.clearData(
+        LocalKeys.wc_id,
+      );
+  Future<String?> getTypeValue() async => await _repository.getStringValue(
+        LocalKeys.wc_type,
+      );
+  void saveTypeValue({String? wc_type}) async => _repository.saveValue(
+        LocalKeys.wc_type,
+        wc_type,
+      );
+  void clearTypeValue() async => _repository.clearData(
+        LocalKeys.wc_type,
+      );
   // Future<String?> getUserAccessList() async =>
   //     await _repository.getUserAccessData(LocalKeys.userAccess);
 }

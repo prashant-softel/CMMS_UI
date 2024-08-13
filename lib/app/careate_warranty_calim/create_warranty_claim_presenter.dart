@@ -7,12 +7,13 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
+import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/usecases/warranty_claim_usecase.dart';
 import '../../domain/models/facility_model.dart';
 
-class WarrantyClaimPresenter {
-  WarrantyClaimPresenter(this.warrantyClaimUsecase);
+class CreateWarrantyClaimPresenter {
+  CreateWarrantyClaimPresenter(this.warrantyClaimUsecase);
   WarrantyClaimUsecase warrantyClaimUsecase;
 
   Future<void> generateToken() async {
@@ -29,6 +30,16 @@ class WarrantyClaimPresenter {
     );
   }
 
+  Future<ViewWarrantyClaimModel?> getViewWarrantyClaimDetail({
+    bool? isLoading,
+    required int wc_id,
+  }) async {
+    return warrantyClaimUsecase.getViewWarrantyClaimDetail(
+      wc_id: wc_id,
+      isLoading: isLoading ?? false,
+    );
+  }
+
   Future<Map<String, dynamic>?> saveAsDraft({
     createWarrantyClaim,
     required bool isLoading,
@@ -39,8 +50,15 @@ class WarrantyClaimPresenter {
     );
   }
 
-  void clearValue() async => warrantyClaimUsecase.clearValue();
-  void clearTypeValue() async => warrantyClaimUsecase.clearTypeValue();
+  Future<Map<String, dynamic>?> updateWarrantyClaim({
+    updateWarrantyClaim,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.updateWarrantyClaim(
+      updateWarrantyClaim: updateWarrantyClaim,
+      isLoading: isLoading,
+    );
+  }
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
@@ -173,8 +191,44 @@ class WarrantyClaimPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> wcApprovedButton({
+    WCApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.wcApprovedButton(
+      WCApproveJsonString: WCApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> wcRejectdButton({
+    WCRejectJsonString,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.wcRejectdButton(
+      WCRejectJsonString: WCRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await warrantyClaimUsecase.getFacilityList();
+
+  void saveValue({String? wc_id}) async {
+    return warrantyClaimUsecase.saveValue(wc_id: wc_id);
+  }
+
+  void clearValue() async => warrantyClaimUsecase.clearValue();
+
+  Future<String?> getValue() async => await warrantyClaimUsecase.getValue();
+  void saveTypeValue({String? wc_type}) async {
+    return warrantyClaimUsecase.saveTypeValue(wc_type: wc_type);
+  }
+
+  void clearTypeValue() async => warrantyClaimUsecase.clearTypeValue();
+
+  Future<String?> getTypeValue() async =>
+      await warrantyClaimUsecase.getTypeValue();
 
   // Future<String?> getUserAccessList() async =>
   //     await warrantyClaimUsecase.getUserAccessList();
