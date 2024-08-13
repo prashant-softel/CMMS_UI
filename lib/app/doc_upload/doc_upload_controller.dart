@@ -28,6 +28,7 @@ class DocumentUploadController extends GetxController {
   Rx<bool> isSelecteddocumentNameType = true.obs;
   Rx<String> selecteddocumentNameType = ''.obs;
   int selectedDocumentId = 0;
+
   GetDocUploadListModel? selectedItem;
 
   @override
@@ -98,6 +99,7 @@ class DocumentUploadController extends GetxController {
 
       UploadDocumentModel uploadDocumentModel = UploadDocumentModel(
           is_renew: 0,
+          docuemnt_id: 0,
           docMasterId: selectedDocumentId,
           fileId: fileIds[0],
           facility_id: facilityId,
@@ -121,22 +123,29 @@ class DocumentUploadController extends GetxController {
       String _renewDateTc = renewDateTc.text.trim();
       String _remarkDateTc = remark.text.trim();
       String _subDocNameDateTc = subDocName.text.trim();
+      dynamic fileIdToUse = selectedItem?.fileId ?? fileIds[0];
+      int docMasterIdToUse = selectedItem?.doc_master_id ?? selectedDocumentId;
+      int docIdToUse = selectedItem?.id ?? selectedDocumentId;
 
       UploadDocumentModel uploadDocumentModel = UploadDocumentModel(
           is_renew: 1,
-          docMasterId: selectedDocumentId,
-          fileId: fileIds[0],
+          docMasterId: docMasterIdToUse,
+          fileId: fileIdToUse,
           facility_id: facilityId,
           remarks: _remarkDateTc,
           renewDate: _renewDateTc,
-          subDocName: _subDocNameDateTc);
+          subDocName: _subDocNameDateTc,
+          docuemnt_id: docIdToUse);
+
       var uploadDocumenModelJsonString = uploadDocumentModel.toJson();
       Map<String, dynamic>? responseUploadDocument =
           await documentUploadPresenter.uploadDocumentNew(
         uploadDocument: uploadDocumenModelJsonString,
         isLoading: true,
       );
-      if (responseUploadDocument == null) {}
+      if (responseUploadDocument == null) {
+        // Handle the case where the response is null
+      }
     } catch (e) {
       print(e);
     }
