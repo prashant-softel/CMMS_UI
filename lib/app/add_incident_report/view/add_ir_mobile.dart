@@ -1052,168 +1052,90 @@ class WhyWhyAnalysis extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return 
-    Obx(
-      () => Container(
-        margin: Dimens.edgeInsets20,
-        //  height: 300,
-        height: ((controller.rowWhyWhyAnalysisItem.value.length) * 70) + 150,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: ColorValues.lightGreyColorWithOpacity35,
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 237, 240, 242),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Stack(
-          children: [
-            Column(children: [
-              // Column(
-              //     children: []..addAll(controller.rowItem.value.map((e) {
-              //         return Text(jsonEncode(e));
-              //       }))),
-              // Text(jsonEncode(controller.dropdownMapperData)),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Why Why Analysis",
-                      style: Styles.blue700,
+    return Obx(
+      () => Column(
+        children: [
+          Row(
+            children: [
+              Dimens.boxHeight15,
+              Text(
+                "Why Why Analysis",
+                style: Styles.blue700,
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () {
+                  controller.addWhyWhyAnalysisRowItem();
+                },
+                child: Container(
+                  height: 25,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    color: ColorValues.addNewColor,
+                    border: Border.all(
+                      color: ColorValues.lightGreyColorWithOpacity35,
+                      width: 1,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        controller.addWhyWhyAnalysisRowItem();
-                      },
-                      child: Container(
-                        height: 25,
-                        width: 70,
-                        decoration: BoxDecoration(
-                          color: ColorValues.addNewColor,
-                          border: Border.all(
-                            color: ColorValues.lightGreyColorWithOpacity35,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                        ),
-                        child: Center(
-                          child: Text(
-                            " + Add ",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  child: Center(
+                    child: Text(
+                      " + Add ",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w100,
+                          color: Colors.white),
                     ),
-                  ],
+                  ),
                 ),
               ),
-              Expanded(
-                child: DataTable2(
-                  // minWidth: 2000,
-                  dataRowHeight: 70,
-                  columnSpacing: 10,
-                  border: TableBorder.all(
-                      color: Color.fromARGB(255, 206, 229, 234)),
-                  columns: [
-                    DataColumn2(
-                        // fixedWidth: 550,
-                        label: Text(
-                      "Why ",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        // fixedWidth: 550,
-                        label: Text(
-                      "Cause ",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        fixedWidth: 150,
-                        label: Text(
-                          "Action ",
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        )),
-                  ],
-                  rows: controller.rowWhyWhyAnalysisItem.value
-                      .asMap()
-                      .entries
-                      .map((entry) {
-                    int serialNumber = entry.key + 1;
-
-                    List<dynamic> record = entry.value;
-                    return DataRow(
-                      // height: 130,
-                      cells: record.map((mapData) {
-                        return DataCell(
+            ],
+          ),
+          Dimens.boxHeight5,
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: controller.rowWhyWhyAnalysisItem.length,
+            itemBuilder: (context, index) {
+              return Card(
+                color: Color.fromARGB(255, 232, 239, 242),
+                elevation: 10,
+                shadowColor: Colors.black87,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: controller.rowWhyWhyAnalysisItem[index]
+                        .map<Widget>((mapData) {
+                      return Column(
+                        children: [
                           (mapData['key'] == "Why ")
                               ? Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 10,
-                                  ),
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10, top: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Row(
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text("Why $serialNumber"),
-                                          SizedBox(
-                                            width: 6,
-                                          ),
-                                          Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.28,
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: LoginCustomTextfield(
-                                                keyboardType:
-                                                    TextInputType.text,
-                                                // inputFormatters: <
-                                                //     TextInputFormatter>[
-                                                //   FilteringTextInputFormatter
-                                                //       .digitsOnly
-                                                // ],
-                                                maxLine: 1,
-                                                textController:
-                                                    new TextEditingController(
-                                                        text:
-                                                            mapData["value"] ??
-                                                                ''),
-                                                onChanged: (txt) {
-                                                  mapData["value"] = txt;
-                                                },
-                                              )),
+                                          Text("Why 1"),
+                                          Dimens.boxHeight5,
+                                          LoginCustomTextfield(
+                                            keyboardType: TextInputType.text,
+                                            textController:
+                                                new TextEditingController(
+                                                    text:
+                                                        mapData["value"] ?? ''),
+                                            onChanged: (txt) {
+                                              mapData["value"] = txt;
+                                            },
+                                          )
                                         ],
                                       ),
                                     ],
@@ -1221,44 +1143,23 @@ class WhyWhyAnalysis extends StatelessWidget {
                                 )
                               : (mapData['key'] == "Cause ")
                                   ? Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 10, left: 20),
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10, top: 10),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.28,
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: LoginCustomTextfield(
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text("Cause 1"),
+                                              Dimens.boxHeight2,
+                                              LoginCustomTextfield(
                                                 keyboardType:
                                                     TextInputType.text,
-                                                // inputFormatters: <
-                                                //     TextInputFormatter>[
-                                                //   FilteringTextInputFormatter
-                                                //       .digitsOnly
-                                                // ],
-                                                maxLine: 1,
                                                 textController:
                                                     new TextEditingController(
                                                         text:
@@ -1267,45 +1168,42 @@ class WhyWhyAnalysis extends StatelessWidget {
                                                 onChanged: (txt) {
                                                   mapData["value"] = txt;
                                                 },
-                                              )),
+                                              )
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     )
                                   : (mapData['key'] == "Action ")
-                                      ? Padding(
-                                          padding: EdgeInsets.only(top: 10),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              TableActionButton(
-                                                color: ColorValues.appRedColor,
-                                                icon: Icons.delete,
-                                                label: '',
-                                                message: '',
-                                                onPress: () {
-                                                  controller
-                                                      .rowWhyWhyAnalysisItem
-                                                      .remove(record);
-                                                },
-                                              )
-                                            ],
+                                      ? Center(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 5),
+                                            child: TableActionButton(
+                                              color: ColorValues.appRedColor,
+                                              icon: Icons.delete,
+                                              label: '',
+                                              message: '',
+                                              onPress: () {
+                                                controller.rowWhyWhyAnalysisItem
+                                                    .remove(controller
+                                                        .rowWhyWhyAnalysisItem
+                                                        .value[index]);
+                                              },
+                                            ),
                                           ),
                                         )
                                       : Text(mapData['key'] ?? ''),
-                        );
-                      }).toList(),
-                    );
-                  }).toList(),
+                        ],
+                      );
+                    }).toList(),
+                  ),
                 ),
-              ),
-            ]),
-          ],
-        ),
+              );
+            },
+          ),
+        ],
       ),
     );
- 
   }
 }
