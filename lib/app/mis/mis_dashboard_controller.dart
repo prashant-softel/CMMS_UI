@@ -100,6 +100,9 @@ class MisDashboardController extends GetxController {
   void goToObservationSummary() {
     Get.offNamed(Routes.observationSummary);
   }
+    void goToMisSummary() {
+    Get.offNamed(Routes.misSummary);
+  }
 
   Future<void> createChecklist() async {
     misDashboardPresenter.clearValue();

@@ -116,6 +116,8 @@ import 'package:cmms/app/mis/mis_dashboard_binding.dart';
 import 'package:cmms/app/mis/view/mis_dashboard_screen.dart';
 import 'package:cmms/app/mis_list_of_observation/observation_list_binding.dart';
 import 'package:cmms/app/mis_list_of_observation/views/observation_list_screen.dart';
+import 'package:cmms/app/mis_summary/mis_summary_binding.dart';
+import 'package:cmms/app/mis_summary/views/mis_summary_screen.dart';
 import 'package:cmms/app/mis_task/mis_task_binding.dart';
 import 'package:cmms/app/mis_task/view/mis_task_screen.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
@@ -1382,6 +1384,11 @@ class AppPages {
       name: _Paths.observationSummary,
       page: ObservationSummaryScreen.new,
       binding: ObservationSummaryBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.misSummary,
+      page: MisSummaryScreen.new,
+      binding: MisSummaryBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.trainingSummary,

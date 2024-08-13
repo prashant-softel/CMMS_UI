@@ -147,6 +147,14 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                   // );
                                   controller.checkPoint();
                                 }),
+                                   createContentTile(
+                                title: "MIS Summary",
+                                onTap: () {
+                                  // Get.toNamed(
+                                  //   Routes.preventive_checkPoint,
+                                  // );
+                                  controller.goToMisSummary();
+                                }),
                           ],
                         ),
                         GridView.count(
