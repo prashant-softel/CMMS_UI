@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 List<UserListModel> userListModelFromJson(String str) =>
     List<UserListModel>.from(
         json.decode(str).map((x) => UserListModel.fromJson(x)));
@@ -10,7 +9,21 @@ String userListModelToJson(List<UserListModel> data) =>
 
 class UserListModel {
   int? id;
+  String? secondaryName;
+  String? firstName;
+  String? lastName;
+  String? dateOfBirth;
   String? full_name;
+  String? gender;
+  String? bloodGroup;
+  String? mobileNumber;
+  String? landlineNumber;
+  int? zipcode;
+  int? isemployee;
+  String? country;
+  String? city;
+  String? state;
+  String? joiningdate;
   String? name;
   String? role_name;
   String? contact_no;
@@ -22,24 +35,52 @@ class UserListModel {
   String? photoPath;
   List<Facility>? facilities;
 
-  UserListModel(
-      {this.id,
-      this.contact_no,
-      this.full_name,
-      this.role_name,
-      this.created_at,
-      this.updated_at,
-      this.name,
-      this.photoId,
-      this.photoPath,
-      this.role_id,
-      this.status,
-      this.facilities,
+  UserListModel({
+    this.id,
+    this.secondaryName,
+    this.firstName,
+    this.lastName,
+    this.dateOfBirth,
+    this.gender,
+    this.bloodGroup,
+    this.mobileNumber,
+    this.landlineNumber,
+    this.zipcode,
+    this.isemployee,
+    this.country,
+    this.city,
+    this.state,
+    this.joiningdate,
+    this.contact_no,
+    this.full_name,
+    this.role_name,
+    this.created_at,
+    this.updated_at,
+    this.name,
+    this.photoId,
+    this.photoPath,
+    this.role_id,
+    this.status,
+    this.facilities,
   });
 
   factory UserListModel.fromJson(Map<String, dynamic> json) => UserListModel(
         id: json['id'],
+        secondaryName: json['secondaryName'],
+        firstName: json['firstName'],
+        lastName: json['lastName'],
         full_name: json['full_name'],
+        dateOfBirth: json['dateOfBirth'],
+        gender: json['gender'],
+        bloodGroup: json['bloodGroup'],
+        mobileNumber: json['mobileNumber'],
+        landlineNumber: json['landlineNumber'],
+        country: json['country'],
+        state: json['state'],
+        city: json['city'],
+        zipcode: json['zipcodes'],
+        isemployee: json['employees'],
+        joiningdate: json['joining_dates'],
         contact_no: json['contact_no'],
         role_name: json['role_name'],
         created_at: json['createdAt'],
@@ -59,6 +100,20 @@ class UserListModel {
         "id": id,
         "user_name": name,
         "full_name": full_name,
+        "secondaryName": secondaryName,
+        "firstName": firstName,
+        "lastName": lastName,
+        "dateOfBirth": dateOfBirth,
+        "gender": gender,
+        "bloodGroup": bloodGroup,
+        "mobileNumber": mobileNumber,
+        "landlineNumber": landlineNumber,
+        "country": country,
+        "state": state,
+        "city": city,
+        "zipcodes": zipcode,
+        "employees": isemployee,
+        "joining_dates": joiningdate,
         "contact_no": contact_no,
         "role_name": role_name,
         "CreatedAt": created_at,

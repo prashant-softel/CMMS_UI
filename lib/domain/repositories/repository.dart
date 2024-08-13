@@ -9265,13 +9265,13 @@ class Repository {
                 (m) => UserListModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
         String jsonData = userListModelToJson(_UserListModelList);
+
         if (isExport == true) {
           List<dynamic> jsonDataList = jsonDecode(jsonData);
 
           List<List<dynamic>> data = [
             [
               'Username',
-              'Password',
               'Secondary Email',
               'First Name',
               'Last Name',
@@ -9287,33 +9287,35 @@ class Repository {
               'Role',
               'Is Employee',
               'Joining Date',
-              'Plant Associated',
-              'Report To',
+              'Facilities'
             ],
-            ...jsonDataList
-                .map((userListJson) => [
-                      userListJson['user_name'].toString(),
-                      "-",
-                      userListJson['secondaryName'].toString(),
-                      userListJson['firstName'],
-                      userListJson['lastName'],
-                      userListJson['dateOfBirth'],
-                      userListJson['gender'],
-                      userListJson['bloodGroup'],
-                      userListJson['mobileNumber'],
-                      userListJson['landlineNumber'],
-                      userListJson['country'],
-                      userListJson['state'],
-                      userListJson['city'],
-                      userListJson['zipcodes'],
-                      userListJson['role_name'],
-                      userListJson['employees'] == 1 ? 'Yes' : 'No',
-                      userListJson['joining_dates'],
-                      '-',
-                      '-'
-                    ])
-                .toList(),
+            ...jsonDataList.map((userListJson) {
+              String facilities = (userListJson['facilities'] as List<dynamic>)
+                  .map((facility) => facility['name'].toString())
+                  .join(', ');
+
+              return [
+                userListJson['user_name'].toString(),
+                userListJson['secondaryName'].toString(),
+                userListJson['firstName'].toString(),
+                userListJson['lastName'].toString(),
+                userListJson['dateOfBirth'],
+                userListJson['gender'],
+                userListJson['bloodGroup'],
+                userListJson['mobileNumber'],
+                userListJson['landlineNumber'],
+                userListJson['country'],
+                userListJson['state'],
+                userListJson['city'],
+                userListJson['zipcodes'], // Convert to string
+                userListJson['role_name'],
+                userListJson['employees'] == 1 ? 'Yes' : 'No',
+                userListJson['joining_dates'],
+                facilities
+              ];
+            }).toList(),
           ];
+
           Map<String, List<List<dynamic>>> userData = {
             'Sheet1': data,
           };
