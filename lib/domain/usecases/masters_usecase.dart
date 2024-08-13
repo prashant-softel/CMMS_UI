@@ -14,4 +14,10 @@ class MastersUsecase {
       _repository.clearData(LocalKeys.userDetailId);
   void clearAssetsIdStoreData() async =>
       _repository.clearData(LocalKeys.inventoryId);
+  void clearWarrantyValue() async => _repository.clearData(
+        LocalKeys.wc_id,
+      );
+  void clearWarrantyTypeValue() async => _repository.clearData(
+        LocalKeys.wc_type,
+      );
 }

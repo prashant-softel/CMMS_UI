@@ -231,6 +231,7 @@ class TrainingCourseMobile extends StatelessWidget {
                                                 controller.clearStoreData();
                                                 controller.scheduleCourse(
                                                   courseId: course?.id ?? 0,
+                                                  scheduleId: course?.id ?? 0,
                                                 );
                                               },
                                               text: 'Schedule',

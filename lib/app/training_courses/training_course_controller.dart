@@ -205,6 +205,8 @@ class TrainingController extends GetxController {
 
   void clearStoreData() {
     trainingPresenter.clearValue();
+    trainingPresenter.clearScheduleValue();
+    trainingPresenter.clearTypeValue();
   }
 
   Future<void> addNewCourse() async {
@@ -222,9 +224,20 @@ class TrainingController extends GetxController {
     Get.toNamed(Routes.addCourse, arguments: {'courseId': courseId});
   }
 
-  Future<void> scheduleCourse({required int courseId}) async {
+  Future<void> scheduleCourse({required int courseId, required int scheduleId}) async {
     clearStoreData();
-    Get.toNamed(Routes.scheduleCourse, arguments: {'courseId': courseId});
+    Get.toNamed(Routes.scheduleCourse, arguments: {'courseId': courseId, 'scheduleId': scheduleId});
+  }
+
+  Future<void> viewScheduleCourse({required int scheduleId}) async {
+    clearStoreData();
+    Get.toNamed(
+      Routes.executeCourse,
+      arguments: {
+        'schedule_id': scheduleId,
+        "type": 2,
+      },
+    );
   }
 
   void geTrainingCourseListByDate() {

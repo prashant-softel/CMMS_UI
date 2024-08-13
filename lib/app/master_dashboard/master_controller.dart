@@ -285,6 +285,7 @@ class MastersController extends GetxController {
   }
 
   Future<void> createWarrantyClaimList() async {
+    clearWarrantyValue();
     Get.toNamed(
       Routes.createWarrantyClaimList,
     );
@@ -350,6 +351,11 @@ class MastersController extends GetxController {
 
   void clearAssetsIdStoreData() {
     mastersPresenter.clearAssetsIdStoreData();
+  }
+
+  void clearWarrantyValue() {
+    mastersPresenter.clearWarrantyValue();
+    mastersPresenter.clearWarrantyTypeValue();
   }
 
   Future<void> documentUpload() async {

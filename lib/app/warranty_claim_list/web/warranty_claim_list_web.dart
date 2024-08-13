@@ -155,7 +155,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                 icon: Icons.add,
                                                 label: "Add Warranty Claim",
                                                 onPressed: () {
-                                                  // controller.clearStoreData();
+                                                  controller.clearStoreData();
                                                   Get.toNamed(Routes
                                                       .createWarrantyClaimList);
                                                 },

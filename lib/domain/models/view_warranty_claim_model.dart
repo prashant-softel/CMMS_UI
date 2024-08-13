@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 ViewWarrantyClaimModel viewWarrantyClaimDetailModelFromJson(String str) =>
     ViewWarrantyClaimModel.fromJson(json.decode(str));
 
@@ -13,26 +15,30 @@ String viewWarrantyClaimDetailModelToJson(ViewWarrantyClaimModel data) =>
 class ViewWarrantyClaimModel {
   ViewWarrantyClaimModel({
     this.wc_id,
-    this.approxdailyloss,
     this.facility_id,
     this.facility_name,
     this.site_wc_number,
     this.warranty_claim_title,
-    this.wstart_date,
-    this.wend_date,
+    this.date_of_claim,
+    this.equipment_category_id,
     this.equipment_category,
+    this.equipment_id,
     this.equipment_name,
     this.equipment_sr_no,
+    this.supplier_id,
+    this.severity,
     this.supplier_name,
     this.good_order_id,
     this.order_reference_number,
     this.warranty_description,
-    this.affectedParts,
     this.affected_sr_no,
+    this.manufacture_name,
     this.failure_time,
     this.estimated_cost,
     this.quantity,
     this.cost_of_replacement,
+    this.approxdailyloss,
+    this.currencyId,
     this.currency,
     this.corrective_action_by_buyer,
     this.request_to_supplier,
@@ -43,38 +49,44 @@ class ViewWarrantyClaimModel {
     this.closed_at,
     this.status,
     this.log,
-    this.equipment_id,
-    this.currencyId,
+    this.status_short,
+    this.status_long,
+    this.wstart_date,
+    this.wend_date,
     this.additionalEmailEmployees,
     this.externalEmails,
     this.supplierActions,
-    this.severity,
-    this.current_time
+    this.affectedPartsImages,
+    this.images,
+    this.approverId,
+    this.affectedParts,
   });
 
   int? wc_id;
-  int? approxdailyloss;
   int? facility_id;
   String? facility_name;
   int? site_wc_number;
   String? warranty_claim_title;
-  DateTime? wstart_date;
-  DateTime? current_time;
-  DateTime? wend_date;
+  String? date_of_claim;
+  int? equipment_category_id;
   String? equipment_category;
+  int? equipment_id;
   String? equipment_name;
   String? equipment_sr_no;
+  int? supplier_id;
+  String? severity;
   String? supplier_name;
   String? good_order_id;
   String? order_reference_number;
   String? warranty_description;
-  String? severity;
-
   String? affected_sr_no;
-  DateTime? failure_time;
+  String? manufacture_name;
+  String? failure_time;
   int? estimated_cost;
   int? quantity;
   String? cost_of_replacement;
+  int? approxdailyloss;
+  int? currencyId;
   String? currency;
   String? corrective_action_by_buyer;
   String? request_to_supplier;
@@ -85,48 +97,50 @@ class ViewWarrantyClaimModel {
   String? closed_at;
   int? status;
   String? log;
-  int? equipment_id;
-  int? currencyId;
-  int? approverId;
-  List<AffectedParts?>? affectedParts;
+  String? status_short;
+  String? status_long;
+  String? wstart_date;
+  String? wend_date;
   List<AdditionalEmailsEmployeesList?>? additionalEmailEmployees;
   List<ExternalsEmailsList?>? externalEmails;
   List<SuppliersActionsList?>? supplierActions;
+  List<AffectedPartImages?>? affectedPartsImages;
+  List<AffectedPartImages?>? images;
+
+  int? approverId;
+  List<AffectedParts?>? affectedParts;
 
   factory ViewWarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
       ViewWarrantyClaimModel(
         wc_id: json["wc_id"],
-        current_time: json["date_of_claim"],
-        approxdailyloss: json["approxdailyloss"],
-        severity: json["severity"],
         facility_id: json["facility_id"],
         facility_name: json["facility_name"],
         site_wc_number: json['site_wc_number'],
         warranty_claim_title: json["warranty_claim_title"],
-        wstart_date: json['warrantyStartDate'] == null
-            ? null
-            : DateTime.parse(json['warrantyStartDate'] as String),
-        wend_date: json['warrantyEndDate'] == null
-            ? null
-            : DateTime.parse(json['warrantyEndDate'] as String),
+        date_of_claim: json["date_of_claim"] != null
+            ? Utility.getFormatedyearMonthDay(json["date_of_claim"])
+            : null,
+        equipment_category_id: json["equipment_category_id"],
         equipment_category: json["equipment_category"],
+        equipment_id: json['equipment_id'],
         equipment_name: json["equipment_name"],
         equipment_sr_no: json["equipment_sr_no"],
+        supplier_id: json['supplier_id'],
+        severity: json["severity"],
         supplier_name: json["supplier_name"],
         good_order_id: json["good_order_id"],
         order_reference_number: json["order_reference_number"],
         warranty_description: json["warranty_description"],
-        affectedParts: json["affectedParts"] != null
-            ? List<AffectedParts>.from(
-                json["affectedParts"]?.map((x) => AffectedParts.fromJson(x)))
-            : [],
         affected_sr_no: json['affected_sr_no'],
+        manufacture_name: json['manufacture_name'],
         failure_time: json['failure_time'] == null
             ? null
-            : DateTime.parse(json['failure_time'] as String),
+            : Utility.getFormattedYearMonthDayTime(json['failure_time']),
         estimated_cost: json["estimated_cost"],
         quantity: json["quantity"],
         cost_of_replacement: json['cost_of_replacement'],
+        approxdailyloss: json["approxdailyloss"],
+        currencyId: json['currencyId'],
         currency: json['currency'],
         corrective_action_by_buyer: json['corrective_action_by_buyer'],
         request_to_supplier: json['request_to_supplier'],
@@ -137,24 +151,40 @@ class ViewWarrantyClaimModel {
         closed_at: json['closed_at'] ?? '',
         status: json["status"],
         log: json['log'] ?? '',
-        equipment_id: json['equipment_id'],
-        currencyId: json['currencyId'],
-        // approverId: json['approverId'],
+        status_short: json['status_short'] ?? '',
+        status_long: json['status_long'] ?? '',
+        wstart_date: json['warrantyStartDate'] == null
+            ? null
+            : Utility.getFormatedyearMonthDay(json['warrantyStartDate']),
+        wend_date: json['warrantyEndDate'] == null
+            ? null
+            : Utility.getFormatedyearMonthDay(json['warrantyEndDate']),
         additionalEmailEmployees: json["additionalEmailEmployees"] != null
             ? List<AdditionalEmailsEmployeesList>.from(
                 json["additionalEmailEmployees"]
                     .map((x) => AdditionalEmailsEmployeesList.fromJson(x)))
             : [],
-
         externalEmails: json["externalEmails"] != null
             ? List<ExternalsEmailsList>.from(json["externalEmails"]
                 ?.map((x) => ExternalsEmailsList.fromJson(x)))
             : [],
-
         supplierActions: json["supplierActions"] != null
             ? List<SuppliersActionsList>.from(json["supplierActions"]
                 ?.map((x) => SuppliersActionsList.fromJson(x)))
             : [],
+        affectedPartsImages: json["affectedPartsImages"] != null
+            ? List<AffectedPartImages>.from(json["affectedPartsImages"]
+                ?.map((x) => AffectedPartImages.fromJson(x)))
+            : [],
+        images: json["images"] != null
+            ? List<AffectedPartImages>.from(
+                json["images"]?.map((x) => AffectedPartImages.fromJson(x)))
+            : [],
+        affectedParts: json["affectedParts"] != null
+            ? List<AffectedParts>.from(
+                json["affectedParts"]?.map((x) => AffectedParts.fromJson(x)))
+            : [],
+        approverId: json['approverId'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -165,8 +195,8 @@ class ViewWarrantyClaimModel {
         "facility_name": facility_name,
         "site_wc_number": site_wc_number,
         "warranty_claim_title": warranty_claim_title,
-        "warrantyStartDate": wstart_date?.toIso8601String(),
-        "warrantyEndDate": wend_date?.toIso8601String(),
+        "warrantyStartDate": wstart_date,
+        "warrantyEndDate": wend_date,
         "equipment_category": equipment_category,
         "equipment_name": equipment_name,
         "equipment_sr_no": equipment_sr_no,
@@ -176,7 +206,8 @@ class ViewWarrantyClaimModel {
         "warranty_description": warranty_description,
 
         "affected_sr_no": affected_sr_no,
-        "failure_time": failure_time?.toIso8601String(),
+        "manufacture_name": manufacture_name,
+        "failure_time": failure_time,
         "estimated_cost": estimated_cost,
         "quantity": quantity,
         "cost_of_replacement": cost_of_replacement,
@@ -188,7 +219,7 @@ class ViewWarrantyClaimModel {
         "approver_name": approver_name,
         "last_updated_at": last_updated_at,
         "closed_at": closed_at,
-        "affectedParts": List<dynamic>.from(affectedParts!.map((x) => x)),
+        // "affectedParts": List<dynamic>.from(affectedParts!.map((x) => x)),
         "status": status,
         "log": log,
         "equipment_id": equipment_id,
@@ -205,20 +236,28 @@ class ExternalsEmailsList {
   ExternalsEmailsList({
     this.name,
     this.email,
+    this.role,
+    this.mobile,
   });
 
   String? name;
   String? email;
+  String? role;
+  int? mobile;
 
   factory ExternalsEmailsList.fromJson(Map<String, dynamic> json) =>
       ExternalsEmailsList(
         name: json["name"],
         email: json["email"],
+        role: json["role"],
+        mobile: json["mobile"],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "email": email,
+        "role": role,
+        "mobile": mobile,
       };
 }
 
@@ -289,6 +328,20 @@ class SuppliersActionsList {
         "is_required": is_required,
         "required_by_date": required_by_date,
       };
+}
+
+class AffectedPartImages {
+  int? file_id;
+  String? description;
+  String? fileName;
+
+  AffectedPartImages({this.file_id, this.description, this.fileName});
+  factory AffectedPartImages.fromJson(Map<String, dynamic> json) =>
+      AffectedPartImages(
+        file_id: json["file_id"],
+        description: json["description"],
+        fileName: json["fileName"],
+      );
 }
 
 String addExternalsEmailsListToJson(ExternalsEmailsList data) =>

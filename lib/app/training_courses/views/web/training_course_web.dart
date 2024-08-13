@@ -476,7 +476,7 @@ class TrainingListDataSource extends DataTableSource {
   DataRow? getRow(int index) {
     final TrainingCourse = filteredTrainingCourseList[index];
     var cellsBuffer = [
-      "id",
+      'TC${TrainingCourse?.id ?? ''}',
       '${TrainingCourse?.name ?? ''}',
       '${TrainingCourse?.groupName ?? ''}',
       '${TrainingCourse?.categoryName ?? ''}',
@@ -506,16 +506,17 @@ class TrainingListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'id')
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'CO${TrainingCourse?.id}',
-                      ),
-                    ],
-                  )
-                : (value == 'Actions')
+            child:
+                // (value == 'id')
+                //     ? Column(
+                //         // crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           Text(
+                //             'TC${TrainingCourse?.id}',
+                //           ),
+                //         ],
+                //       )
+                (value == 'Actions')
                     ? Wrap(
                         children: [
                           Column(
@@ -532,25 +533,77 @@ class TrainingListDataSource extends DataTableSource {
                                           courseId: TrainingCourse?.id ?? 0);
                                     },
                                   ),
-                                  TableActionButton(
-                                    color: ColorValues.editColor,
-                                    icon: Icons.edit,
-                                    message: 'Edit',
-                                    onPress: () {
-                                      controller.editCourse(
-                                          courseId: TrainingCourse?.id ?? 0);
-                                    },
-                                  ),
-                                  TableActionButton(
-                                    color: Colors.lightGreen,
-                                    icon: Icons.calendar_month_outlined,
-                                    message: "Schedule",
-                                    onPress: () {
-                                      controller.scheduleCourse(
-                                        courseId: TrainingCourse?.id ?? 0,
-                                      );
-                                    },
-                                  ),
+                                  controller.courseList
+                                              .firstWhereOrNull((element) =>
+                                                  element?.id ==
+                                                  TrainingCourse?.id)
+                                              ?.status ==
+                                          471
+                                      ? TableActionButton(
+                                          color: ColorValues.editColor,
+                                          icon: Icons.edit,
+                                          message: 'Edit',
+                                          onPress: () {
+                                            controller.editCourse(
+                                                courseId:
+                                                    TrainingCourse?.id ?? 0);
+                                          },
+                                        )
+                                      : Dimens.box0,
+                                  controller.courseList
+                                              .firstWhereOrNull((element) =>
+                                                  element?.id ==
+                                                  TrainingCourse?.id)
+                                              ?.status ==
+                                          471
+                                      ? TableActionButton(
+                                          color: Colors.lightGreen,
+                                          icon: Icons.calendar_month_outlined,
+                                          message: "Schedule",
+                                          onPress: () {
+                                            controller.scheduleCourse(
+                                              courseId: TrainingCourse?.id ?? 0,
+                                              scheduleId: 0,
+                                            );
+                                          },
+                                        )
+                                      : Dimens.box0,
+                                  controller.courseList
+                                              .firstWhereOrNull((element) =>
+                                                  element?.id ==
+                                                  TrainingCourse?.id)
+                                              ?.status ==
+                                          472
+                                      ? TableActionButton(
+                                          color: ColorValues.appLightBlueColor,
+                                          icon: Icons.remove_red_eye,
+                                          message: "View Schedule",
+                                          onPress: () {
+                                            controller.viewScheduleCourse(
+                                              scheduleId:
+                                                  TrainingCourse?.id ?? 0,
+                                            );
+                                          },
+                                        )
+                                      : Dimens.box0,
+                                  controller.courseList
+                                              .firstWhereOrNull((element) =>
+                                                  element?.id ==
+                                                  TrainingCourse?.id)
+                                              ?.status ==
+                                          472
+                                      ? TableActionButton(
+                                          color: ColorValues.editColor,
+                                          icon: Icons.edit,
+                                          message: "Edit Schedule",
+                                          onPress: () {
+                                            controller.scheduleCourse(
+                                              courseId: TrainingCourse?.id ?? 0,
+                                              scheduleId: 3,
+                                            );
+                                          },
+                                        )
+                                      : Dimens.box0,
                                   TableActionButton(
                                     color: ColorValues.deleteColor,
                                     icon: Icons.delete,

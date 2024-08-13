@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 List<ScheduleCourseListModel> scheduleCourseListFromJson(String str) =>
     List<ScheduleCourseListModel>.from(
       json.decode(str).map(
@@ -48,7 +50,9 @@ class ScheduleCourseListModel {
     return ScheduleCourseListModel(
       scheduleID: json['scheduleID'],
       courseID: json['courseID'],
-      scheduleDate: json['scheduleDate'],
+      scheduleDate: json['scheduleDate'] != null
+          ? Utility.getFormattedYearMonthDayTime(json['scheduleDate'])
+          : "",
       trainingCompany: json['trainingCompany'],
       trainer: json['trainer'],
       mode: json['mode'],

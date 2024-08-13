@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/careate_warranty_calim/create_warranty_claim_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_presenter.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_warranty_claim_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
@@ -12,6 +13,8 @@ import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
+import 'package:cmms/domain/models/update_warranty_claim_model.dart';
+import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,9 +25,9 @@ import '../../domain/models/facility_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cmms/domain/models/history_model.dart';
 
-class WarrantyClaimController extends GetxController {
-  WarrantyClaimController(this.warrantyClaimPresenter);
-  WarrantyClaimPresenter warrantyClaimPresenter;
+class CreateWarrantyClaimController extends GetxController {
+  CreateWarrantyClaimController(this.warrantyClaimPresenter);
+  CreateWarrantyClaimPresenter warrantyClaimPresenter;
 
   final HomeController homeController = Get.find();
   FocusNode immcoracFocus = FocusNode();
@@ -33,7 +36,11 @@ class WarrantyClaimController extends GetxController {
   ScrollController wdescScroll = ScrollController();
   FocusNode wtitleFocus = FocusNode();
   ScrollController wtitleScroll = ScrollController();
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
+
   var itemCount = 0.obs;
+  RxInt type = 0.obs;
 
   //Additional Email work
   var rowList = <String>[].obs;
@@ -91,6 +98,8 @@ class WarrantyClaimController extends GetxController {
     // Toggle the checkbox state
   }
 
+  Rx<ViewWarrantyClaimModel?> viewWarrantyClaimDetailsModel =
+      ViewWarrantyClaimModel().obs;
   final TextEditingController serialNoTextFieldController =
       TextEditingController();
   final TextEditingController nameTextFieldController = TextEditingController();
@@ -99,6 +108,9 @@ class WarrantyClaimController extends GetxController {
       TextEditingController();
   final TextEditingController mobileTextFieldController =
       TextEditingController();
+
+  RxList<AffectedPartImages?> affectedPartImages = <AffectedPartImages>[].obs;
+  RxList<AffectedPartImages?> images = <AffectedPartImages>[].obs;
 
   /// default date controller
   Rx<DateTime> dateController = DateTime.now().obs;
@@ -320,22 +332,45 @@ class WarrantyClaimController extends GetxController {
   Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
-    this.filterText = {
-      "Id": warrantyClaimIdFilterText,
-      "Warranty Claim Title": wcTitleFilterText,
-      "Date Of Claim": dateOfClaimFilterText,
-      "Equipment Serial No.": equipmentSrNoFilterText,
-      "Equipment Category": equipmentCategoryFilterText,
-      "Equipment Name": equipmentNameFilterText,
-      "Estimated Cost": estimatedCostFilterText,
-      "Status": statusFilterText
-    };
+    await setId();
+
     facilityIdStreamSubscription =
         homeController.facilityId$.listen((event) async {
       facilityId = event;
-      await getWarrantyClaimList(
-          facilityId, formattedTodate, formattedFromdate);
     });
+
+    Future.delayed(Duration(seconds: 1), () {
+      if (wc_id.value != 0) {
+        getViewWarrantyClaimDetail(wc_id: wc_id.value);
+      }
+      // getFacilityList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getInventoryList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getAffectedPartList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getInventoryCategoryList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getBusinessList(facilityId);
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getUnitCurrencyList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getEmployeeList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getEmployeesList();
+      getHistory(facilityId: facilityId, wcId: wc_id.value);
+    });
+    if (wc_id == 0) {
+      addRowItem();
+    }
+
     immcoracFocus.addListener(() {
       if (!immcoracFocus.hasFocus) {
         immcoracScroll.jumpTo(0.0);
@@ -357,6 +392,121 @@ class WarrantyClaimController extends GetxController {
       }
     });
     super.onInit();
+  }
+
+  Future<void> setId() async {
+    try {
+      final _wc_id = await warrantyClaimPresenter.getValue();
+      final _type = await warrantyClaimPresenter.getTypeValue();
+      if (_wc_id == null || _wc_id == "" || _wc_id == 0) {
+        var dataFromPrevioursScreen = Get.arguments;
+        wc_id.value = dataFromPrevioursScreen['wc_id'];
+        type.value = dataFromPrevioursScreen['type'];
+        warrantyClaimPresenter.saveValue(wc_id: wc_id.value.toString());
+        warrantyClaimPresenter.saveTypeValue(wc_type: type.value.toString());
+      } else {
+        wc_id.value = int.tryParse(_wc_id) ?? 0;
+        type.value = int.tryParse(_type ?? "") ?? 0;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void clearStoreData() {
+    warrantyClaimPresenter.clearValue();
+    warrantyClaimPresenter.clearTypeValue();
+  }
+
+  Future<void> getViewWarrantyClaimDetail({required int wc_id}) async {
+    final _viewWarrantyClaimDetails =
+        await warrantyClaimPresenter.getViewWarrantyClaimDetail(
+      wc_id: wc_id,
+    );
+
+    if (_viewWarrantyClaimDetails != null) {
+      viewWarrantyClaimDetailsModel.value = _viewWarrantyClaimDetails;
+      warrantyClaimTitleTextController.text =
+          viewWarrantyClaimDetailsModel.value?.warranty_claim_title ?? "";
+      warrantyClaimBriefDescTextController.text =
+          viewWarrantyClaimDetailsModel.value?.warranty_description ?? "";
+      selectedEquipmentCategory.value =
+          viewWarrantyClaimDetailsModel.value?.equipment_category ?? "";
+      selectedInventoryCategoryId =
+          viewWarrantyClaimDetailsModel.value?.equipment_category_id ?? 0;
+      selectedEquipmentName.value =
+          viewWarrantyClaimDetailsModel.value?.equipment_name ?? "";
+      selectedEquipmentnameId =
+          viewWarrantyClaimDetailsModel.value?.equipment_id ?? 0;
+      failureDateTimeCtrlrWeb.text =
+          viewWarrantyClaimDetailsModel.value?.failure_time ?? "";
+      failureDateTimeCtrlrWebBuffer =
+          viewWarrantyClaimDetailsModel.value?.failure_time ?? "";
+      approxdailylosstxtcontroller.text =
+          viewWarrantyClaimDetailsModel.value?.approxdailyloss.toString() ?? "";
+      currentStartDateCtrlrWeb.text =
+          viewWarrantyClaimDetailsModel.value?.date_of_claim ?? "";
+      currentStartDateCtrlrWebBuffer =
+          viewWarrantyClaimDetailsModel.value?.date_of_claim ?? "";
+      affectedSerialNoTextController.text =
+          viewWarrantyClaimDetailsModel.value?.affected_sr_no ?? "";
+      manufacturerNameTextController.text =
+          viewWarrantyClaimDetailsModel.value?.manufacture_name ?? "";
+      orderReferenceNoTextController.text =
+          viewWarrantyClaimDetailsModel.value?.order_reference_number ?? "";
+      warrantyStartDateTimeCtrlrWeb.text =
+          viewWarrantyClaimDetailsModel.value?.wstart_date ?? "";
+      warrantyStartDateTimeCtrlrWebBuffer =
+          viewWarrantyClaimDetailsModel.value?.wstart_date ?? "";
+      warrantyEndDateTimeCtrlrWeb.text =
+          viewWarrantyClaimDetailsModel.value?.wend_date ?? "";
+      warrantyEndDateTimeCtrlrWebBuffer =
+          viewWarrantyClaimDetailsModel.value?.wend_date ?? "";
+      costOfReplacementTextController.text =
+          viewWarrantyClaimDetailsModel.value?.cost_of_replacement ?? "";
+      immediateCorrectiveActionTextController.text =
+          viewWarrantyClaimDetailsModel.value?.corrective_action_by_buyer ?? "";
+      requestManufactureTextController.text =
+          viewWarrantyClaimDetailsModel.value?.request_to_supplier ?? "";
+      selectedSeverity.value =
+          viewWarrantyClaimDetailsModel.value?.severity ?? "";
+      setSelectedSeverity(selectedSeverity.value);
+      selectedUnitCurrency.value =
+          viewWarrantyClaimDetailsModel.value?.currency ?? "";
+      selectedCurrencyId = viewWarrantyClaimDetailsModel.value?.currencyId ?? 0;
+      if (viewWarrantyClaimDetailsModel.value?.additionalEmailEmployees !=
+          null) {
+        selectedEmployeeNameIdList.value = viewWarrantyClaimDetailsModel
+            .value!.additionalEmailEmployees!
+            .map((employee) => employee?.user_id ?? 0)
+            .toList();
+      }
+      if (viewWarrantyClaimDetailsModel.value!.supplierActions!.isNotEmpty) {
+        supplierActions.value =
+            viewWarrantyClaimDetailsModel.value!.supplierActions!.map((action) {
+          return SupplierActions(
+            name: action?.name,
+            required_by_date: action?.required_by_date,
+            srNumber: action?.srNumber,
+          );
+        }).toList();
+      }
+      if (viewWarrantyClaimDetailsModel.value!.externalEmails!.isNotEmpty) {
+        externalEmails.value =
+            viewWarrantyClaimDetailsModel.value!.externalEmails!.map((action) {
+          return ExternalEmails(
+            name: action?.name,
+            email: action?.email,
+            role: action?.role,
+            mobile: action?.mobile,
+          );
+        }).toList();
+      }
+      getInventoryDetail();
+      images.value = viewWarrantyClaimDetailsModel.value?.images ?? [];
+      affectedPartImages.value =
+          viewWarrantyClaimDetailsModel.value?.affectedPartsImages ?? [];
+    }
   }
 
   Future<void> getFacilityList() async {
@@ -420,7 +570,7 @@ class WarrantyClaimController extends GetxController {
   //   }
   // }
 
-  void employeesNameSelected(_selectedEmployeesNameIds) {
+  void employeesNameSelected(_selectedEmployeesNameIds) async {
     selectedEmployeeNameIdList.value = <int>[];
     for (var _selectedEmployeesId in _selectedEmployeesNameIds) {
       selectedEmployeeNameIdList.add(_selectedEmployeesId);
@@ -462,7 +612,7 @@ class WarrantyClaimController extends GetxController {
   }
 
   Future<void> getHistory({required int wcId, required int facilityId}) async {
-    int moduleType = 3;
+    int moduleType = 121;
     historyList?.value = await warrantyClaimPresenter.getHistory(
           moduleType,
           facilityId,
@@ -1192,23 +1342,127 @@ class WarrantyClaimController extends GetxController {
     }
   }
 
-  Future<void> viewWarrantyClaim({int? wc_id}) async {
-    clearStoreData();
-    Get.toNamed(Routes.createWarrantyClaimList,
-        arguments: {"wc_id": wc_id, "type": 1});
-    print('Argument$wc_id');
+  void updateWarrantyClaim({
+    List<dynamic>? fileIds,
+    List<dynamic>? affectedFileIds,
+  }) async {
+    {
+      String _warrantyClaimTitle =
+          htmlEscape.convert(warrantyClaimTitleTextController.text.trim());
+      String _description =
+          htmlEscape.convert(warrantyClaimBriefDescTextController.text.trim());
+      String _immediateCorrectiveByBuyer = htmlEscape
+          .convert(immediateCorrectiveActionTextController.text.trim());
+      String _requestToBuyer =
+          htmlEscape.convert(requestManufactureTextController.text.trim());
+      // String _costOfReplacement =
+      //     htmlEscape.convert(costOfReplacementTextController.text.trim());
+      String _orderReferenceNo =
+          htmlEscape.convert(orderReferenceNoTextController.text.trim());
+      String _affectedSerialNo =
+          htmlEscape.convert(affectedSerialNoTextController.text.trim());
+
+      int costOfReplacement =
+          int.parse(costOfReplacementTextController.text.trim());
+      int approxdailyloss = int.parse(approxdailylosstxtcontroller.text.trim());
+      late List<ExternalEmails> external_emails_list = [];
+      externalEmails.forEach((e) {
+        external_emails_list.add(ExternalEmails(
+            name: e.name, role: e.role, email: e.email, mobile: e.mobile));
+      });
+
+      // print('EquipmentCategoryId:$idList');
+      late List<SupplierActions> supplier_action_list = [];
+
+      supplierActions.forEach((e) {
+        supplier_action_list.add(SupplierActions(
+          srNumber: e.srNumber,
+          name: e.name,
+          required_by_date: e.required_by_date,
+          // is_required: e.is_required
+        ));
+      });
+      CreateWarrantyClaimModel updatewarrantyClaimModel =
+          CreateWarrantyClaimModel(
+        id: wc_id.value,
+        facilityId: facilityId,
+        equipmentId: selectedEquipmentnameId,
+        goodsOrderId: 14205,
+        affectedParts: affectedFileIds ?? [],
+        orderReference: _orderReferenceNo,
+        affectedSrNo: _affectedSerialNo,
+        costOfReplacement: costOfReplacement,
+        currencyId: selectedCurrencyId,
+        approxdailyloss: approxdailyloss,
+        severity: selectedSeverity.value,
+        currentTime: currentStartDateCtrlrWebBuffer,
+        warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
+        warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
+        warrantyClaimTitle: _warrantyClaimTitle,
+        warrantyDescription: _description,
+        correctiveActionByBuyer: _immediateCorrectiveByBuyer,
+        requestToSupplier: _requestToBuyer,
+        approverId: selectedApproverId, //
+        failureTime: failureDateTimeCtrlrWebBuffer,
+        additionalEmailEmployees: selectedEmployeeNameIdList,
+        externalEmails: external_emails_list,
+        supplierActions: supplier_action_list,
+        status: 1,
+        uploadfile_ids: fileIds ?? [],
+        comment: commentCtrl.text,
+      );
+
+      var warrantyClaimJsonString = updatewarrantyClaimModel.toJson();
+      Map<String, dynamic>? responseUpdateWarrantyClaim =
+          await warrantyClaimPresenter.updateWarrantyClaim(
+        updateWarrantyClaim: warrantyClaimJsonString,
+        isLoading: true,
+      );
+      if (responseUpdateWarrantyClaim == null) {}
+      print('Update Warranty Claim data: $warrantyClaimJsonString');
+    }
   }
 
-  void clearStoreData() {
-    warrantyClaimPresenter.clearValue();
-    warrantyClaimPresenter.clearTypeValue();
+  void wcApprovedButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentWCAproveModel =
+          CommentModel(id: id, comment: _comment);
+
+      var WCApproveJsonString = commentWCAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await warrantyClaimPresenter.wcApprovedButton(
+        WCApproveJsonString: WCApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offNamed(Routes.warrantyClaimListWeb);
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
 
-  Future<void> editWarrantyClaim({int? wc_id}) async {
-    clearStoreData();
-    Get.toNamed(Routes.createWarrantyClaimList,
-        arguments: {"wc_id": wc_id, "type": 0});
-    print('EditArgument$wc_id');
+  void wcRejectdButton({int? id}) async {
+    {
+      String _comment = rejectCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentWCRejectModel =
+          CommentModel(id: id, comment: _comment);
+
+      var WCRejectJsonString = commentWCRejectModel.toJson();
+
+      Map<String, dynamic>? response =
+          await warrantyClaimPresenter.wcRejectdButton(
+        WCRejectJsonString: WCRejectJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+        Get.offNamed(Routes.warrantyClaimListWeb);
+      }
+    }
   }
 
   void getWarrantyClaimtListByDate() {

@@ -13,6 +13,8 @@ abstract class LocalKeys {
   static const irId = 'irId';
   static const srId = 'srId';
   static const obsId = 'obsId';
+  static const wc_id = 'wc_id';
+  static const wc_type = 'wc_type';
 
   static const reNew = 'reNew';
   static const compliance_id = 'compliance_id';
@@ -21,6 +23,7 @@ abstract class LocalKeys {
   static const roType = 'roType';
   static const types = 'types';
   static const type = 'type';
+  static const viewtype = 'viewtype';
   static const auditId = 'auditId';
 
   static const roId = 'roId';

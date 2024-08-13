@@ -1,3 +1,6 @@
+import 'package:cmms/app/app.dart';
+import 'package:get/get.dart';
+
 class ScheduleCourseDetails {
   int? scheduleId;
   int? facility_id;
@@ -29,7 +32,9 @@ class ScheduleCourseDetails {
       ScheduleCourseDetails(
         scheduleId: json["scheduleID"],
         facility_id: json["facility_id"],
-        date_of_Training: json["date_of_Trainig"],
+        date_of_Training: json["date_of_Trainig"] != null
+            ? Utility.getFormattedYearMonthDayTime(json["date_of_Training"])
+            : "",
         training_course: json["training_course"],
         trainer: json["trainer"],
         mode: json["mode"],
@@ -47,6 +52,20 @@ class ScheduleCourseDetails {
               )
             : [],
       );
+
+  Map<String, dynamic> toJson() => {
+        'scheduleID': scheduleId,
+        'facility_id': facility_id,
+        'date_of_Trainig': date_of_Training,
+        'training_course': training_course,
+        'trainer': trainer,
+        'mode': mode,
+        'venue': venue,
+        'training_Agency': training_agency,
+        'hfE_Epmloyee': hfe_Employee,
+        'internal_employee': internal_employee?.map((e) => e.toJson()).toList(),
+        'external_employee': external_employee?.map((e) => e.toJson()).toList(),
+      };
 }
 
 class Employee {
@@ -54,7 +73,7 @@ class Employee {
   String? name;
   String? email;
   int? mobile;
-  int? attendend;
+  RxBool attendend;
   String? rsvp;
   String? notes;
 
@@ -63,7 +82,7 @@ class Employee {
     this.name,
     this.email,
     this.mobile,
-    this.attendend,
+    required this.attendend,
     this.rsvp,
     this.notes,
   });
@@ -73,8 +92,18 @@ class Employee {
         name: json["name"],
         email: json["email"],
         mobile: json["mobile"],
-        attendend: json["attendend"],
+        attendend: json["attended"] == 1 ? RxBool(true) : RxBool(false),
         rsvp: json["rsvp"],
         notes: json["notes"],
       );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'email': email,
+        'mobile': mobile,
+        'attended': attendend.value ? 1 : 0,
+        'rsvp': rsvp,
+        'notes': notes,
+      };
 }

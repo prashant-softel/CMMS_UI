@@ -4239,6 +4239,34 @@ class Repository {
     }
   }
 
+  Future<List<EmployeeListModel>> getEmployeeTrainingList({
+    required int? facility_id,
+    int? featureId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getAssignedToEmployee(
+        facilityId: facility_id,
+        featureId: featureId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Employee List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var employeeList = employeeListModelFromJson(res.data);
+        return employeeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
   Future<List<EmployeeListModel>> getPermitIssuerList({
     required int? facility_id,
     // int? blockId,
@@ -15280,6 +15308,86 @@ class Repository {
       final res = await _dataRepository.scheduleCourse(
         auth: auth,
         scheduleCourseJson: scheduleCourseJson,
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Add Course Response: ${resourceData}');
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+          msg: "Course Scheduled Successfully",
+          fontSize: 16.0,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Add Course');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> approveCourseSchedule(
+    approveSchedule,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.approveCourseSchedule(
+        auth: auth,
+        approveSchedule: approveSchedule,
+        isLoading: isLoading ?? false,
+      );
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'approve schedule course');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> rejectCourseSchedule(
+    rejectSchedule,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.rejectCourseSchedule(
+        auth: auth,
+        rejectSchedule: rejectSchedule,
+        isLoading: isLoading ?? false,
+      );
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'approve schedule course');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> executeCourse({
+    executeCourseJson,
+    isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.executeScheduleCourse(
+        auth: auth,
+        executeCourseJson: executeCourseJson,
         isLoading: isLoading ?? false,
       );
       var resourceData = res.data;
