@@ -461,11 +461,12 @@ class _WidgetAddPrposedActionState extends State<WidgetAddPrposedAction> {
                                                               label: '',
                                                               message: '',
                                                               onPress: () {
-                                                                controller
-                                                                    .rowOtherInjuredPersonItem
-                                                                    .remove(controller
-                                                                        .rowOtherInjuredPersonItem
-                                                                        .value[index]);
+                                                                setState(() {
+                                                                  controller
+                                                                      .rowItem
+                                                                      .removeAt(
+                                                                          index);
+                                                                });
                                                               },
                                                             ),
                                                           ),
