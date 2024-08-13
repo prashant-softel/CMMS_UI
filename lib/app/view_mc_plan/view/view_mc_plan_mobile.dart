@@ -470,6 +470,7 @@ class _ViewMcPlanMobileState extends State<ViewMcPlanMobile> {
                                               ),
                                             );
                                           }),
+                                 
                                   Dimens.boxHeight10,
                                   controller.mcPlanDetailsModel.value?.status ==
                                               351 &&

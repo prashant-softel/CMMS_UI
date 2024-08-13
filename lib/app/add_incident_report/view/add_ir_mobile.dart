@@ -16,6 +16,7 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_mobile.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -823,6 +824,110 @@ class IRMobile extends GetView<AddIncidentReportController> {
                             ImmediateCorrection(),
                             Dimens.boxHeight15,
                             WidgetAddPrposedAction(),
+                            Dimens.boxHeight15,
+
+                            controller.incidentReportDetailsModel.value
+                                            ?.status ==
+                                        181 ||
+                                    controller.irId.value == 0
+                                ? Dimens.box0
+                                : Text(
+                                    "IR History ",
+                                    style: Styles.blue700,
+                                  ),
+                            controller.historyList!.isEmpty
+                                ? Dimens.box0
+                                : ListView.builder(
+                                    //physics: const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: controller.historyList! != null
+                                        ? controller.historyList!.length
+                                        : 0,
+                                    itemBuilder: (context, index) {
+                                      final pmTaskHistoryModel =
+                                          (controller.historyList! != null)
+                                              ? controller.historyList![index]
+                                              : HistoryModel();
+                                      return Card(
+                                        color: Colors.lightBlue.shade50,
+                                        elevation: 10,
+                                        shadowColor: Colors.black87,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(children: [
+                                                  Text('Time Stamp: ',
+                                                      style:
+                                                          Styles.appDarkGrey12),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                        '${pmTaskHistoryModel?.createdAt?.result}'
+                                                        '',
+                                                        style: Styles
+                                                            .appDarkBlue12),
+                                                  ),
+                                                ]),
+                                                Row(//
+                                                    children: [
+                                                  Text('Posted By: ',
+                                                      style:
+                                                          Styles.appDarkGrey12),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                        pmTaskHistoryModel
+                                                                ?.createdByName ??
+                                                            '',
+                                                        style: Styles
+                                                            .appDarkBlue12),
+                                                  )
+                                                ]),
+                                                Row(children: [
+                                                  Text('Comments: ',
+                                                      style:
+                                                          Styles.appDarkGrey12),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                        "${pmTaskHistoryModel?.comment ?? ''}",
+                                                        style: Styles
+                                                            .appDarkBlue12),
+                                                  )
+                                                ]),
+                                                Row(children: [
+                                                  Text('Status: ',
+                                                      style:
+                                                          Styles.appDarkGrey12),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                        "${pmTaskHistoryModel?.status_name ?? ''}",
+                                                        style: Styles
+                                                            .appDarkBlue12),
+                                                  )
+                                                ]),
+                                              ]),
+                                        ),
+                                      );
+                                    }),
+                            Dimens.boxHeight15,
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
