@@ -567,10 +567,10 @@ class AddIncidentReportController extends GetxController {
         getTypePermitList(facilityId);
       });
       Future.delayed(Duration(seconds: 1), () async {
-        getInventoryList();
+        // getInventoryList();
       });
       Future.delayed(Duration(seconds: 1), () async {
-        getIncidentInvestigationDoneByList();
+        // getIncidentInvestigationDoneByList();
       });
       Future.delayed(Duration(seconds: 1), () async {
         getIncidentInvestigationVerificationDoneByList();

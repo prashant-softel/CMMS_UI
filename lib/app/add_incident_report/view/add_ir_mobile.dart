@@ -9,6 +9,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/custom_textFieldMobile.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_mobile.dart';
@@ -605,6 +606,177 @@ class IRMobile extends GetView<AddIncidentReportController> {
                                     ],
                                   )
                                 : Dimens.box0,
+                            controller
+                                            .incidentReportDetailsModel.value?.status ==
+                                        181 ||
+                                    controller.incidentReportDetailsModel.value
+                                            ?.status ==
+                                        182 ||
+                                    controller.irId.value == 0
+                                ? Dimens.box0
+                                : Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      IgnorePointer(
+                                        child: Column(
+                                          // Changed from Row to Column for mobile view
+                                          crossAxisAlignment: CrossAxisAlignment
+                                              .start, // Align items to the start
+                                          children: [
+                                            CustomRichText(
+                                                title:
+                                                    'Detail Investigation Required: '),
+                                            SizedBox(
+                                                height:
+                                                    8), // Adjusted spacing for mobile
+                                            Obx(
+                                              () => Switch(
+                                                activeColor: Colors.green,
+                                                value: controller
+                                                    .detailInvestigationTeamValue
+                                                    .value,
+                                                onChanged: (value) {
+                                                  controller
+                                                      .detailInvestigationTeamValue
+                                                      .value = value;
+                                                  print(
+                                                      'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      controller.detailInvestigationTeamValue
+                                                  .value ==
+                                              true
+                                          ? Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.grey
+                                                        .withOpacity(.3)),
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 5),
+                                                    child: Text(
+                                                      "Investigation Team",
+                                                      style: Styles.blue700,
+                                                    ),
+                                                  ),
+                                                  Dimens.boxHeight15,
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 10),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        CustomRichText(
+                                                            title: 'Name: '),
+                                                        Dimens.boxHeight2,
+                                                        CustomTextfieldMobile(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              1.1,
+                                                          textController: controller
+                                                              .investigationTeamNameTextFieldController,
+                                                        ),
+                                                        Dimens.boxHeight15,
+                                                        CustomRichText(
+                                                            title:
+                                                                'Designation: '),
+                                                        Dimens.boxHeight2,
+                                                        CustomTextfieldMobile(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              1.1,
+                                                          textController: controller
+                                                              .investigationTeamDesignationTextFieldController,
+                                                        ),
+                                                        SizedBox(height: 10),
+                                                        Center(
+                                                          child: ElevatedButton(
+                                                            child: Text(
+                                                              'Add',
+                                                              style: TextStyle(
+                                                                  color: ColorValues
+                                                                      .whiteColor),
+                                                            ),
+                                                            onPressed: () {
+                                                              controller
+                                                                  .updateInvestigationTeamText(
+                                                                controller
+                                                                    .investigationTeamSrNumberTextFieldController
+                                                                    .text,
+                                                                controller
+                                                                    .investigationTeamNameTextFieldController
+                                                                    .text,
+                                                                controller
+                                                                    .investigationTeamDesignationTextFieldController
+                                                                    .text,
+                                                              );
+                                                              controller
+                                                                  .investigationTeamSrNumberTextFieldController
+                                                                  .clear();
+                                                              controller
+                                                                  .investigationTeamNameTextFieldController
+                                                                  .clear();
+                                                              controller
+                                                                  .investigationTeamDesignationTextFieldController
+                                                                  .clear();
+                                                              print(
+                                                                  'Investigation Data${controller.investigationTeam.length}');
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Dimens.boxHeight15,
+                                                ],
+                                              ),
+                                            )
+                                          : Dimens.box0,
+                                      IgnorePointer(
+                                        child: Row(
+                                          children: [
+                                            CustomRichText(
+                                                title:
+                                                    'Why Why Analysis Required: '),
+                                            SizedBox(height: 8),
+                                            Obx(
+                                              () => Switch(
+                                                activeColor: Colors.green,
+                                                value: controller
+                                                    .whyWhyAnalysisValue.value,
+                                                onChanged: (value) {
+                                                  controller.whyWhyAnalysisValue
+                                                      .value = value;
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -742,6 +914,40 @@ Widget buildRadioButton(String severity, Color color, Color textColor,
       ),
     );
   });
+}
+
+Widget investigationTeamData(
+  String? serialNumber,
+  String? name,
+  String? designation,
+  BuildContext context,
+) {
+  return Container(
+    padding: EdgeInsets.symmetric(vertical: 8), // Added padding for spacing
+    child: Row(
+      mainAxisAlignment:
+          MainAxisAlignment.spaceBetween, // Align elements properly
+      children: [
+        Text('$serialNumber'),
+        SizedBox(width: 10),
+        Flexible(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.3,
+            child:
+                Center(child: Text('$name', overflow: TextOverflow.ellipsis)),
+          ),
+        ),
+        SizedBox(width: 10),
+        Flexible(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.3,
+            child: Center(
+                child: Text('$designation', overflow: TextOverflow.ellipsis)),
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 investigationTextfields(BuildContext context,
