@@ -719,29 +719,40 @@ class IRMobile extends GetView<AddIncidentReportController> {
                                                                       .whiteColor),
                                                             ),
                                                             onPressed: () {
-                                                              controller
-                                                                  .updateInvestigationTeamText(
+                                                              if (controller
+                                                                      .investigationTeamNameTextFieldController
+                                                                      .text
+                                                                      .isEmpty ||
+                                                                  controller
+                                                                      .investigationTeamDesignationTextFieldController
+                                                                      .text
+                                                                      .isEmpty) {
+                                                                Get.snackbar(
+                                                                  'Error',
+                                                                  'Both Name and Designation fields must be filled out',
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .red,
+                                                                  colorText:
+                                                                      Colors
+                                                                          .white,
+                                                                );
+                                                              } else {
                                                                 controller
-                                                                    .investigationTeamSrNumberTextFieldController
-                                                                    .text,
+                                                                    .updateInvestigationTeamText(
+                                                                  controller
+                                                                      .investigationTeamSrNumberTextFieldController
+                                                                      .text,
+                                                                  controller
+                                                                      .investigationTeamNameTextFieldController
+                                                                      .text,
+                                                                  controller
+                                                                      .investigationTeamDesignationTextFieldController
+                                                                      .text,
+                                                                );
                                                                 controller
-                                                                    .investigationTeamNameTextFieldController
-                                                                    .text,
-                                                                controller
-                                                                    .investigationTeamDesignationTextFieldController
-                                                                    .text,
-                                                              );
-                                                              controller
-                                                                  .investigationTeamSrNumberTextFieldController
-                                                                  .clear();
-                                                              controller
-                                                                  .investigationTeamNameTextFieldController
-                                                                  .clear();
-                                                              controller
-                                                                  .investigationTeamDesignationTextFieldController
-                                                                  .clear();
-                                                              print(
-                                                                  'Investigation Data${controller.investigationTeam.length}');
+                                                                    .clearTextFields(); // Clears the text fields
+                                                              }
                                                             },
                                                           ),
                                                         ),
@@ -749,6 +760,25 @@ class IRMobile extends GetView<AddIncidentReportController> {
                                                     ),
                                                   ),
                                                   Dimens.boxHeight15,
+                                                  // Display the list of added team members
+                                                  Obx(() => ListView.builder(
+                                                        shrinkWrap: true,
+                                                        itemCount: controller
+                                                            .investigationTeam
+                                                            .length,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          final item = controller
+                                                                  .investigationTeam[
+                                                              index];
+                                                          return ListTile(
+                                                            title: Text(
+                                                                'Name: ${item.name}'),
+                                                            subtitle: Text(
+                                                                'Designation: ${item.designation}'),
+                                                          );
+                                                        },
+                                                      )),
                                                 ],
                                               ),
                                             )
@@ -777,6 +807,10 @@ class IRMobile extends GetView<AddIncidentReportController> {
                                     ],
                                   ),
 
+                            Dimens.boxHeight15,
+                            controller.whyWhyAnalysisValue == true
+                                ? WhyWhyAnalysis()
+                                : Dimens.box0,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -1006,4 +1040,272 @@ investigationTextfields(BuildContext context,
                                     ? controller.unsafeActCauseScrollController
                                     : null,
   );
+}
+
+class WhyWhyAnalysis extends StatelessWidget {
+  final AddIncidentReportController controller = Get.find();
+  WhyWhyAnalysis({
+    super.key,
+  });
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    return 
+    Obx(
+      () => Container(
+        margin: Dimens.edgeInsets20,
+        //  height: 300,
+        height: ((controller.rowWhyWhyAnalysisItem.value.length) * 70) + 150,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: ColorValues.lightGreyColorWithOpacity35,
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(255, 237, 240, 242),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            Column(children: [
+              // Column(
+              //     children: []..addAll(controller.rowItem.value.map((e) {
+              //         return Text(jsonEncode(e));
+              //       }))),
+              // Text(jsonEncode(controller.dropdownMapperData)),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Why Why Analysis",
+                      style: Styles.blue700,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        controller.addWhyWhyAnalysisRowItem();
+                      },
+                      child: Container(
+                        height: 25,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          color: ColorValues.addNewColor,
+                          border: Border.all(
+                            color: ColorValues.lightGreyColorWithOpacity35,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            " + Add ",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: DataTable2(
+                  // minWidth: 2000,
+                  dataRowHeight: 70,
+                  columnSpacing: 10,
+                  border: TableBorder.all(
+                      color: Color.fromARGB(255, 206, 229, 234)),
+                  columns: [
+                    DataColumn2(
+                        // fixedWidth: 550,
+                        label: Text(
+                      "Why ",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 550,
+                        label: Text(
+                      "Cause ",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        fixedWidth: 150,
+                        label: Text(
+                          "Action ",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        )),
+                  ],
+                  rows: controller.rowWhyWhyAnalysisItem.value
+                      .asMap()
+                      .entries
+                      .map((entry) {
+                    int serialNumber = entry.key + 1;
+
+                    List<dynamic> record = entry.value;
+                    return DataRow(
+                      // height: 130,
+                      cells: record.map((mapData) {
+                        return DataCell(
+                          (mapData['key'] == "Why ")
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                    top: 10,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text("Why $serialNumber"),
+                                          SizedBox(
+                                            width: 6,
+                                          ),
+                                          Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.28,
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: LoginCustomTextfield(
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                // inputFormatters: <
+                                                //     TextInputFormatter>[
+                                                //   FilteringTextInputFormatter
+                                                //       .digitsOnly
+                                                // ],
+                                                maxLine: 1,
+                                                textController:
+                                                    new TextEditingController(
+                                                        text:
+                                                            mapData["value"] ??
+                                                                ''),
+                                                onChanged: (txt) {
+                                                  mapData["value"] = txt;
+                                                },
+                                              )),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : (mapData['key'] == "Cause ")
+                                  ? Padding(
+                                      padding:
+                                          EdgeInsets.only(top: 10, left: 20),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.28,
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: LoginCustomTextfield(
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                // inputFormatters: <
+                                                //     TextInputFormatter>[
+                                                //   FilteringTextInputFormatter
+                                                //       .digitsOnly
+                                                // ],
+                                                maxLine: 1,
+                                                textController:
+                                                    new TextEditingController(
+                                                        text:
+                                                            mapData["value"] ??
+                                                                ''),
+                                                onChanged: (txt) {
+                                                  mapData["value"] = txt;
+                                                },
+                                              )),
+                                        ],
+                                      ),
+                                    )
+                                  : (mapData['key'] == "Action ")
+                                      ? Padding(
+                                          padding: EdgeInsets.only(top: 10),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              TableActionButton(
+                                                color: ColorValues.appRedColor,
+                                                icon: Icons.delete,
+                                                label: '',
+                                                message: '',
+                                                onPress: () {
+                                                  controller
+                                                      .rowWhyWhyAnalysisItem
+                                                      .remove(record);
+                                                },
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      : Text(mapData['key'] ?? ''),
+                        );
+                      }).toList(),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ]),
+          ],
+        ),
+      ),
+    );
+ 
+  }
 }

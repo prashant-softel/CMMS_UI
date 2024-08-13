@@ -972,7 +972,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           ////Investigation team
                                                           controller.detailInvestigationTeamValue ==
                                                                   true
-                                                              ? Container(
+                                                              ? 
+                                                              Container(
                                                                   width: MediaQuery.of(
                                                                           context)
                                                                       .size
@@ -992,7 +993,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   // constraints: BoxConstraints(
                                                                   //   maxWidth: 1100,
                                                                   // ),
-                                                                  child: Column(
+                                                                  child:
+                                                                   Column(
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
@@ -1130,6 +1132,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       ),
                                                                       Dimens
                                                                           .boxHeight10
+                                                                   
                                                                     ],
                                                                   ),
                                                                 )
