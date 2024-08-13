@@ -221,8 +221,7 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                       ),
                                     ),
                                     controller.selectedItem != null
-                                        ? 
-                                        Container(
+                                        ? Container(
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 50),
                                             width: Get.width * 0.5,
@@ -308,33 +307,34 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                               ],
                                             ),
                                           )
-                                       
                                         : Dimens.box0,
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: 10, right: 20, left: 20),
-                                      height: Get.height * 0.2,
-                                      width: Get.width,
-                                      child: Row(
-                                          //
-                                          children: [
-                                            Expanded(
-                                              flex: 2,
-                                              child:
-                                                  FileUploadWidgetWithDropzone(
-                                                uploadSingleFile: false,
-                                              ),
-                                            ),
-                                            Dimens.boxWidth10,
-                                            Expanded(
-                                                flex: 8,
-                                                child:
-                                                    FileUploadDetailsWidgetWeb()),
-                                          ]),
-                                    ),
+                                    controller.selectedItem == null
+                                        ? Container(
+                                            margin: EdgeInsets.only(
+                                                top: 10, right: 20, left: 20),
+                                            height: Get.height * 0.2,
+                                            width: Get.width,
+                                            child: Row(
+                                                //
+                                                children: [
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child:
+                                                        FileUploadWidgetWithDropzone(
+                                                      uploadSingleFile: false,
+                                                    ),
+                                                  ),
+                                                  Dimens.boxWidth10,
+                                                  Expanded(
+                                                      flex: 8,
+                                                      child:
+                                                          FileUploadDetailsWidgetWeb()),
+                                                ]),
+                                          )
+                                        : Dimens.box0,
                                     Dimens.boxHeight10,
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
