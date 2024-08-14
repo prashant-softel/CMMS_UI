@@ -369,13 +369,17 @@ class _NewTrainingSummaryWebState extends State<TrainingSummaryWeb> {
                               : controller.toDate.value = pickUpDate;
 
                           controller.getTrainingSummaryByDate();
-                          controller.openFromDateToStartDatePicker =
-                              !controller.openFromDateToStartDatePicker;
+                          controller.openFromDateToStartDatePicker = false;
+
                           controller.update(['training_summary_list']);
 
                           // Get.toNamed(
                           //   Routes.stockManagementGoodsOrdersScreen,
                           // );
+                        },
+                        onCancel: () {
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['training_summary_list']);
                         },
                       ),
                     ),

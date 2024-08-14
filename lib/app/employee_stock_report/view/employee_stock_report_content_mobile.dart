@@ -60,13 +60,12 @@ class EmployeeSockContentMobile extends GetView<EmployeeStockReportController> {
                                 : controller.toDate.value = pickUpDate;
 
                             //  controller.getPmTaskListByDate();
-                            controller.openFromDateToStartDatePicker =
-                                !controller.openFromDateToStartDatePicker;
+                            controller.openFromDateToStartDatePicker = false;
                             controller.update(['Employee_Stock']);
-
-                            // Get.toNamed(
-                            //   Routes.stockManagementGoodsOrdersScreen,
-                            // );
+                          },
+                          onCancel: () {
+                            controller.openFromDateToStartDatePicker = false;
+                            controller.update(['Employee_Stock']);
                           },
                         );
                       },

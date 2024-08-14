@@ -57,7 +57,6 @@ class ViewAuditTaskController extends GetxController {
   void onInit() async {
     try {
       await setauditTaskId();
-      getHistory();
 
       if (auditTaskId != 0) {
         print({"fghvjbggjhjgk", auditTaskId});
@@ -76,12 +75,12 @@ class ViewAuditTaskController extends GetxController {
     int moduleType = 41;
     //
     historyList?.value = await viewAuditTaskPresenter.getHistory(
-          // tempModuleType,
-          // tempJobCardId,
-          moduleType,
-          auditTaskId.value,
-          true,
-        ) ??
+            // tempModuleType,
+            // tempJobCardId,
+            moduleType,
+            auditTaskId.value,
+            true,
+            auditTasknDetailModel.value.facility_id) ??
         [];
     update(["historyList"]);
   }
@@ -123,6 +122,7 @@ class ViewAuditTaskController extends GetxController {
     if (_auditTasknDetailModel != null) {
       auditTasknDetailModel.value = _auditTasknDetailModel;
       getReAssignedToList(auditTasknDetailModel.value.facility_id);
+      getHistory();
     }
     print({"auditPlandetailss", auditTasknDetailModel.value.id});
   }

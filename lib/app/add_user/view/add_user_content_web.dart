@@ -215,7 +215,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                     141),
                                                           ),
                                                           // Dimens.boxHeight10,
-                                                          SizedBox(height:10),
+                                                          SizedBox(height: 10),
                                                           Text("Upload Photo",
                                                               style: Styles
                                                                   .greyMediumLight12)
@@ -265,7 +265,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                         //     margin: Dimens.edgeInsets30_0_0_0,
                                         //     child:
                                         // Dimens.boxWidth30,
-                                         SizedBox(width:30),
+                                        SizedBox(width: 30),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
@@ -275,8 +275,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                 CustomRichText(
                                                     title: 'Login ID: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
-                                               Container(
+                                                SizedBox(width: 10),
+                                                Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -345,13 +345,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'First Name: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -416,14 +416,14 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title:
                                                         'Secondary E-mail: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -493,13 +493,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Gender: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -576,13 +576,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Mobile Number: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -654,13 +654,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Country: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -701,13 +701,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
 
                                             Row(
                                               children: [
                                                 CustomRichText(title: 'City: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -747,12 +747,12 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(title: 'Role: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -792,13 +792,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Company Name: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -851,8 +851,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title: 'Password: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -959,13 +959,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Last Name: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -1030,14 +1030,14 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
 
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Date of Birth: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -1120,13 +1120,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Date of Joining: '),
                                                 // Dimens.boxWidth10,
-                                            SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -1211,7 +1211,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 Text(
@@ -1223,8 +1223,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                     fontSize: Dimens.sixteen,
                                                   ),
                                                 ),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -1294,13 +1294,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'State: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -1340,12 +1340,12 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(children: [
                                               CustomRichText(
                                                   title: 'Zip Code: '),
-                                              // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                              // Dimens.boxWidth10,
+                                              SizedBox(width: 10),
                                               Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -1412,13 +1412,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   )),
                                             ]),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Blood Group: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -1458,13 +1458,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Designation: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -1611,7 +1611,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                         .analytics_outlined),
                                                                     // Dimens
                                                                     //     .boxWidth5,
-                                            SizedBox(width:5), 
+                                                                    SizedBox(
+                                                                        width:
+                                                                            5),
                                                                     Text(
                                                                         'Plant Access'),
                                                                   ],
@@ -1627,7 +1629,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                         .account_tree_outlined),
                                                                     // Dimens
                                                                     //     .boxWidth5,
-                                                                     SizedBox(width:5),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            5),
 
                                                                     Text(
                                                                       'Access Level',
@@ -1645,7 +1649,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                         .notifications),
                                                                     // Dimens
                                                                     //     .boxWidth5,
-                                                                     SizedBox(width:5),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            5),
                                                                     Text(
                                                                       'Notification',
                                                                     ),
@@ -1976,7 +1982,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                                               //       controller.update();
                                                                                                               //     }),
                                                                                                               // Dimens.boxWidth5,
-                                                                                                               SizedBox(width:5),
+                                                                                                              SizedBox(width: 5),
                                                                                                               Expanded(child: Text("${getAccesslevelDetails?.feature_name}"))
                                                                                                             ],
                                                                                                           );
@@ -2207,7 +2213,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         .updateUser()
                                                         .then((value) {
                                                       // Get.toNamed(
-                                                          // Routes.userList);
+                                                      // Routes.userList);
                                                       if (value == true) {
                                                         // controller.userId.value = 0;
                                                         controller
@@ -2220,7 +2226,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                 ),
                                               ),
                                         // Dimens.boxWidth20,
-                                         SizedBox(width:20),
+                                        SizedBox(width: 20),
                                         Container(
                                           height: 35,
                                           child: CustomElevatedButton(
@@ -2267,6 +2273,10 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                           controller.isdobInvalid.value = false;
                           controller.update(['stock_Mangement']);
                         },
+                        onCancel: () {
+                          controller.openDobDatePicker = false;
+                          controller.update(['stock_Mangement']);
+                        },
                       ),
                     ),
                   if (controller.openDoJDatePicker)
@@ -2285,6 +2295,10 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                           controller.openDoJDatePicker =
                               !controller.openDoJDatePicker;
                           controller.isDateofJoiningInvalid.value = false;
+                          controller.update(['stock_Mangement']);
+                        },
+                        onCancel: () {
+                          controller.openDoJDatePicker = false;
                           controller.update(['stock_Mangement']);
                         },
                       ),

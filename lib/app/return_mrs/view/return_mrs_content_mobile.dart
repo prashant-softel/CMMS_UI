@@ -288,8 +288,9 @@ class ReturnMrsListContentMobile extends GetView<ReturnMrsListController> {
                                                         },
                                                         text: 'Edit MRS',
                                                         icon: Icons.edit,
-                                                          backgroundColor:
-                                              ColorValues.editColor,
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .editColor,
                                                       ),
                                                     )
                                                   : Dimens.box0
@@ -331,6 +332,10 @@ class ReturnMrsListContentMobile extends GetView<ReturnMrsListController> {
                             controller.openFromDateToStartDatePicker = false;
                             controller.update(['mrslist']);
                           }
+                        },
+                        onCancel: () {
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['mrslist']);
                         },
                       ),
                     ),

@@ -16,23 +16,23 @@ class PreventiveTaskContentMobile
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PreventiveMaintenanceTaskController>(
-      id: 'PreventiveMaintenanceTask',
-      builder: (controller) {
-        return Scaffold(
-          body: Obx(
-            () => Stack(
-              children: [
-                Container(
-                  child: Column(
-                    children: [
-                      Dimens.boxHeight10,
-                      HeaderWidgetMobile(
-                        onPressed: () {
-                          controller.openFromDateToStartDatePicker = !controller.openFromDateToStartDatePicker;
-                          controller.update(['PreventiveMaintenanceTask']);
-                        },
-                      ),
-                    
+        id: 'PreventiveMaintenanceTask',
+        builder: (controller) {
+          return Scaffold(
+            body: Obx(
+              () => Stack(
+                children: [
+                  Container(
+                    child: Column(
+                      children: [
+                        Dimens.boxHeight10,
+                        HeaderWidgetMobile(
+                          onPressed: () {
+                            controller.openFromDateToStartDatePicker =
+                                !controller.openFromDateToStartDatePicker;
+                            controller.update(['PreventiveMaintenanceTask']);
+                          },
+                        ),
                         Expanded(
                           child: ListView.builder(
                               //physics: const NeverScrollableScrollPhysics(),
@@ -41,9 +41,10 @@ class PreventiveTaskContentMobile
                                   ? controller.pmTaskList.length
                                   : 0,
                               itemBuilder: (context, index) {
-                                final pmTaskModel = (controller.pmTaskList != null)
-                                    ? controller.pmTaskList[index]
-                                    : PmTaskListModel();
+                                final pmTaskModel =
+                                    (controller.pmTaskList != null)
+                                        ? controller.pmTaskList[index]
+                                        : PmTaskListModel();
                                 return GestureDetector(
                                   onTap: () {
                                     controller.clearStoreData();
@@ -54,13 +55,15 @@ class PreventiveTaskContentMobile
                                         arguments: {'pmTaskId': _taskId});
                                   },
                                   child: Container(
-                                    margin: EdgeInsets.only(left: 10, right: 10),
+                                    margin:
+                                        EdgeInsets.only(left: 10, right: 10),
                                     child: Card(
                                       color: Colors.lightBlue.shade50,
                                       elevation: 10,
                                       shadowColor: Colors.black87,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20.0),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(10.0),
@@ -73,25 +76,27 @@ class PreventiveTaskContentMobile
                                                   Text(
                                                     'Task Id: ',
                                                     style: const TextStyle(
-                                                        color:
-                                                            ColorValues.blackColor,
+                                                        color: ColorValues
+                                                            .blackColor,
                                                         fontWeight:
                                                             FontWeight.w400),
                                                   ),
                                                   Text(
                                                     'PMT${pmTaskModel?.id ?? 0}',
                                                     style: const TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      color:
-                                                          ColorValues.navyBlueColor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: ColorValues
+                                                          .navyBlueColor,
                                                     ),
                                                   ),
                                                   Spacer(),
                                                   Container(
-                                                    padding:
-                                                        Dimens.edgeInsets8_2_8_2,
+                                                    padding: Dimens
+                                                        .edgeInsets8_2_8_2,
                                                     decoration: BoxDecoration(
-                                                      color: controller.pmTaskList
+                                                      color: controller
+                                                                  .pmTaskList
                                                                   .firstWhere(
                                                                     (e) =>
                                                                         e?.id ==
@@ -105,15 +110,14 @@ class PreventiveTaskContentMobile
                                                               164
                                                           ? ColorValues
                                                               .linktopermitColor
-                                                          : controller.pmTaskList
+                                                          : controller
+                                                                      .pmTaskList
                                                                       .firstWhere(
                                                                         (e) =>
                                                                             e?.id ==
-                                                                            pmTaskModel
-                                                                                ?.id,
+                                                                            pmTaskModel?.id,
                                                                         orElse: () =>
-                                                                            PmTaskListModel(
-                                                                                id: 00),
+                                                                            PmTaskListModel(id: 00),
                                                                       )
                                                                       ?.status ==
                                                                   162
@@ -135,26 +139,21 @@ class PreventiveTaskContentMobile
                                                                   : controller
                                                                               .pmTaskList
                                                                               .firstWhere(
-                                                                                (e) =>
-                                                                                    e?.id ==
-                                                                                    pmTaskModel?.id,
-                                                                                orElse: () =>
-                                                                                    PmTaskListModel(id: 00),
+                                                                                (e) => e?.id == pmTaskModel?.id,
+                                                                                orElse: () => PmTaskListModel(id: 00),
                                                                               )
                                                                               ?.status ==
                                                                           167
                                                                       ? ColorValues
                                                                           .approveStatusColor
-                                                                      : controller
-                                                                                  .pmTaskList
+                                                                      : controller.pmTaskList
                                                                                   .firstWhere(
                                                                                     (e) => e?.id == pmTaskModel?.id,
                                                                                     orElse: () => PmTaskListModel(id: 00),
                                                                                   )
                                                                                   ?.status ==
                                                                               165
-                                                                          ? ColorValues
-                                                                              .closeColor
+                                                                          ? ColorValues.closeColor
                                                                           : controller.pmTaskList
                                                                                       .firstWhere(
                                                                                         (e) => e?.id == pmTaskModel?.id,
@@ -173,12 +172,13 @@ class PreventiveTaskContentMobile
                                                                                   ? ColorValues.rejectedStatusColor
                                                                                   : ColorValues.addNewColor,
                                                       borderRadius:
-                                                          BorderRadius.circular(4),
+                                                          BorderRadius.circular(
+                                                              4),
                                                     ),
                                                     child: Text(
                                                       '${pmTaskModel?.status_short}',
-                                                      style:
-                                                          Styles.white10.copyWith(
+                                                      style: Styles.white10
+                                                          .copyWith(
                                                         color: Colors.white,
                                                       ),
                                                     ),
@@ -189,8 +189,10 @@ class PreventiveTaskContentMobile
                                                 Text(
                                                   'Task Title: ',
                                                   style: const TextStyle(
-                                                      color: ColorValues.blackColor,
-                                                      fontWeight: FontWeight.w400),
+                                                      color: ColorValues
+                                                          .blackColor,
+                                                      fontWeight:
+                                                          FontWeight.w400),
                                                 ),
                                                 SizedBox(
                                                   width: 5,
@@ -200,9 +202,10 @@ class PreventiveTaskContentMobile
                                                     '${pmTaskModel?.name}'
                                                     '',
                                                     style: const TextStyle(
-                                                      color:
-                                                          ColorValues.navyBlueColor,
-                                                      fontWeight: FontWeight.bold,
+                                                      color: ColorValues
+                                                          .navyBlueColor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
@@ -212,20 +215,24 @@ class PreventiveTaskContentMobile
                                                 Text(
                                                   'Category: ',
                                                   style: const TextStyle(
-                                                      color: ColorValues.blackColor,
-                                                      fontWeight: FontWeight.w400),
+                                                      color: ColorValues
+                                                          .blackColor,
+                                                      fontWeight:
+                                                          FontWeight.w400),
                                                 ),
                                                 SizedBox(
                                                   width: 5,
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    pmTaskModel?.category_name ??
+                                                    pmTaskModel
+                                                            ?.category_name ??
                                                         '',
                                                     style: const TextStyle(
-                                                      color:
-                                                          ColorValues.navyBlueColor,
-                                                      fontWeight: FontWeight.bold,
+                                                      color: ColorValues
+                                                          .navyBlueColor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                 )
@@ -234,8 +241,10 @@ class PreventiveTaskContentMobile
                                                 Text(
                                                   'Frequency: ',
                                                   style: const TextStyle(
-                                                      color: ColorValues.blackColor,
-                                                      fontWeight: FontWeight.w400),
+                                                      color: ColorValues
+                                                          .blackColor,
+                                                      fontWeight:
+                                                          FontWeight.w400),
                                                 ),
                                                 SizedBox(
                                                   width: 5,
@@ -244,9 +253,10 @@ class PreventiveTaskContentMobile
                                                   child: Text(
                                                     "${pmTaskModel?.frequency_name ?? ''}",
                                                     style: const TextStyle(
-                                                      color:
-                                                          ColorValues.navyBlueColor,
-                                                      fontWeight: FontWeight.bold,
+                                                      color: ColorValues
+                                                          .navyBlueColor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                 )
@@ -269,7 +279,8 @@ class PreventiveTaskContentMobile
                                                       style: const TextStyle(
                                                         color: ColorValues
                                                             .navyBlueColor,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     )
                                                   ],
@@ -278,7 +289,8 @@ class PreventiveTaskContentMobile
                                                 Expanded(
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Text(
                                                         'Next Due Date',
@@ -286,7 +298,8 @@ class PreventiveTaskContentMobile
                                                             color: ColorValues
                                                                 .blackColor,
                                                             fontWeight:
-                                                                FontWeight.w500),
+                                                                FontWeight
+                                                                    .w500),
                                                       ),
                                                       Text(
                                                         "${pmTaskModel?.due_date ?? ''}",
@@ -319,7 +332,8 @@ class PreventiveTaskContentMobile
                                                       style: const TextStyle(
                                                         color: ColorValues
                                                             .navyBlueColor,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     )
                                                   ],
@@ -328,7 +342,8 @@ class PreventiveTaskContentMobile
                                                 Expanded(
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Text(
                                                         'PTW Linked',
@@ -336,7 +351,8 @@ class PreventiveTaskContentMobile
                                                             color: ColorValues
                                                                 .blackColor,
                                                             fontWeight:
-                                                                FontWeight.w500),
+                                                                FontWeight
+                                                                    .w500),
                                                       ),
                                                       Text(
                                                         "${pmTaskModel?.permit_code ?? ''}",
@@ -361,38 +377,43 @@ class PreventiveTaskContentMobile
                       ],
                     ),
                   ),
-                if (controller.openFromDateToStartDatePicker)
-                        Positioned(
-                          top:50,
-                          left: 10,
-                          right:10,
-                          child: DatePickerWidget(
-                            selectionMode: DateRangePickerSelectionMode.range,
-                            monthCellStyle: DateRangePickerMonthCellStyle(
-                              todayCellDecoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: ColorValues.appDarkBlueColor,
-                              ),
-                            ),
-                            initialSelectedRange: PickerDateRange(
-                              controller.fromDate.value,
-                              controller.toDate.value,
-                            ),
-                            onSubmit: (value) {
-                              print('Selected date range: ${value.toString()}');
-                              if (value is PickerDateRange) {
-                                controller.fromDate.value = value.startDate!;
-                                controller.toDate.value = (value.endDate ?? value.startDate)!;
-                                controller.getPmTaskListByDate();
-                                controller.openFromDateToStartDatePicker = false;
-                                controller.update(['PreventiveMaintenanceTask']);
-                              }
-                            },
+                  if (controller.openFromDateToStartDatePicker)
+                    Positioned(
+                      top: 50,
+                      left: 10,
+                      right: 10,
+                      child: DatePickerWidget(
+                        selectionMode: DateRangePickerSelectionMode.range,
+                        monthCellStyle: DateRangePickerMonthCellStyle(
+                          todayCellDecoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ColorValues.appDarkBlueColor,
                           ),
                         ),
-                        Dimens.boxHeight10,
-              ],
-            ),
+                        initialSelectedRange: PickerDateRange(
+                          controller.fromDate.value,
+                          controller.toDate.value,
+                        ),
+                        onSubmit: (value) {
+                          print('Selected date range: ${value.toString()}');
+                          if (value is PickerDateRange) {
+                            controller.fromDate.value = value.startDate!;
+                            controller.toDate.value =
+                                (value.endDate ?? value.startDate)!;
+                            controller.getPmTaskListByDate();
+                            controller.openFromDateToStartDatePicker = false;
+                            controller.update(['PreventiveMaintenanceTask']);
+                          }
+                        },
+                        onCancel: () {
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['PreventiveMaintenanceTask']);
+                        },
+                      ),
+                    ),
+                  Dimens.boxHeight10,
+                ],
+              ),
             ),
             //
           );

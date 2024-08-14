@@ -400,13 +400,16 @@ class _ModuleCleaningListExecutionState
                                       : controller.toDate.value = pickUpDate;
 
                                   controller.getMcExcustionListByDate();
-                                  controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
-                                  controller.update(['stock_Mangement_Date']);
 
-                                  // Get.toNamed(
-                                  //   Routes.stockManagementGoodsOrdersScreen,
-                                  // );
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
+                                },
+
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
                                 },
                               ),
                             ),

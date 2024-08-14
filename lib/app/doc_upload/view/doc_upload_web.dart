@@ -462,6 +462,10 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                       !controller.openrenewDateTcDatePicker;
                                   controller.update(['stock_Mangement']);
                                 },
+                                onCancel: () {
+                                  controller.openrenewDateTcDatePicker = false;
+                                  controller.update(['stock_Mangement_Date']);
+                                },
                               ),
                             ),
                         ],

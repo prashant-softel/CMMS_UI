@@ -112,7 +112,7 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                                 padding: EdgeInsets.zero,
                                 onPressed: () {
                                   controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
+                                      false;
                                   controller.update(['dashboard']);
                                 },
                               ),
@@ -4591,13 +4591,16 @@ class _DashBoardHomeMobileState extends State<DashBoardHomeMobile>
                           ? controller.toDate.value = dropDate
                           : controller.toDate.value = pickUpDate;
                       controller.getDashBordListByDate();
-                      controller.openFromDateToStartDatePicker =
-                          !controller.openFromDateToStartDatePicker;
+                      controller.openFromDateToStartDatePicker = false;
                       controller.update(['dashboard']);
 
                       // Get.toNamed(
                       //   Routes.stockManagementGoodsOrdersScreen,
                       // );
+                    },
+                    onCancel: () {
+                      controller.openFromDateToStartDatePicker = false;
+                      controller.update(['dashboard']);
                     },
                   ),
                 ),

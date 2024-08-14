@@ -309,6 +309,10 @@ class _VegExecutionListMobileState extends State<VegExecutionListMobile> {
                           controller.update(['veg_task_list']);
                         }
                       },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['veg_task_list']);
+                      },
                     ),
                   ),
                 Dimens.boxHeight10,

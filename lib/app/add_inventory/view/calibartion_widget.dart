@@ -306,6 +306,10 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                         !controller.openLastCalibrationDatePicker;
                     controller.update(['calibration_tab']);
                   },
+                  onCancel: () {
+                    controller.openLastCalibrationDatePicker = false;
+                    controller.update(['calibration_tab']);
+                  },
                 ),
               ),
           ]),
