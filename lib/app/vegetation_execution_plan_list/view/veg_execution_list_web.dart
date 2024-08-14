@@ -392,7 +392,12 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
 
                                   controller.getVegExcustionListByDate();
                                   controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
                                   controller.update(['stock_Mangement_Date']);
                                 },
                               ),

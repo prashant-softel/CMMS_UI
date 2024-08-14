@@ -308,13 +308,16 @@ class _FaultyMaterialReportContentWebState
                                   : controller.toDate.value = pickUpDate;
 
                               controller.getPlantStockListByDate();
-                              controller.openFromDateToStartDatePicker =
-                                  !controller.openFromDateToStartDatePicker;
+                              controller.openFromDateToStartDatePicker = false;
                               controller.update(['stock_Mangement_Date']);
 
                               // Get.toNamed(
                               //   Routes.stockManagementGoodsOrdersScreen,
                               // );
+                            },
+                            onCancel: () {
+                              controller.openFromDateToStartDatePicker = false;
+                              controller.update(['stock_Mangement_Date']);
                             },
                           ),
                         ),
@@ -436,74 +439,72 @@ class FaultyStockReportListDataSource extends DataTableSource {
     // print({"filteredFaultyStockList": filteredFaultyStockList});
   }
 
-@override
-DataRow? getRow(int index) {
-  final faultyDetails = filteredFaultyStockList[index];
+  @override
+  DataRow? getRow(int index) {
+    final faultyDetails = filteredFaultyStockList[index];
 
-  var cellsBuffer = [
-    '${faultyDetails?.asset_name ?? ''}',
-    '${faultyDetails?.serial_number ?? ''}',
-    '${faultyDetails?.lastInsetedDateTime ?? ''}',
-    '${faultyDetails?.remarks ?? ''}',
-    '${faultyDetails?.createdByName ?? ''}',
-  ];
-  var cells = [];
-  int i = 0;
+    var cellsBuffer = [
+      '${faultyDetails?.asset_name ?? ''}',
+      '${faultyDetails?.serial_number ?? ''}',
+      '${faultyDetails?.lastInsetedDateTime ?? ''}',
+      '${faultyDetails?.remarks ?? ''}',
+      '${faultyDetails?.createdByName ?? ''}',
+    ];
+    var cells = [];
+    int i = 0;
 
-  for (var entry in controller.columnVisibility.value.entries) {
-    if (entry.key == "search") {
-      return null;
-    }
-    if (entry.value) {
-      // Check if the column is "Serial Number"
-      if (entry.key == "Serial Number") {
-        // Align the value for the "Serial Number" column with padding
-        cells.add(
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30.0), // Adjust padding as needed
-              child: Text(cellsBuffer[i]),
+    for (var entry in controller.columnVisibility.value.entries) {
+      if (entry.key == "search") {
+        return null;
+      }
+      if (entry.value) {
+        // Check if the column is "Serial Number"
+        if (entry.key == "Serial Number") {
+          // Align the value for the "Serial Number" column with padding
+          cells.add(
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 30.0), // Adjust padding as needed
+                child: Text(cellsBuffer[i]),
+              ),
             ),
+          );
+        } else if (entry.key == "Inserted DateTime") {
+          cells.add(
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 30.0), // Adjust padding as needed
+                child: Text(cellsBuffer[i]),
+              ),
+            ),
+          );
+        } else {
+          // Add the value as it is for other columns
+          cells.add(Text(cellsBuffer[i]));
+        }
+      }
+      i++;
+    }
+
+    return DataRow.byIndex(
+      index: index,
+      cells: cells.map((value) {
+        return DataCell(
+          Padding(
+            padding: EdgeInsets.zero,
+            child: value,
           ),
         );
-      }
-      else if(entry.key == "Inserted DateTime"){
-        cells.add(
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30.0), // Adjust padding as needed
-              child: Text(cellsBuffer[i]),
-            ),
-          ),
-        );
-      }
-      
-       else {
-        // Add the value as it is for other columns
-        cells.add(Text(cellsBuffer[i]));
-      }
-    }
-    i++;
+      }).toList(),
+      onSelectChanged: (_) {
+        // Handle row selection if needed
+      },
+    );
   }
-
-  return DataRow.byIndex(
-    index: index,
-    cells: cells.map((value) {
-      return DataCell(
-        Padding(
-          padding: EdgeInsets.zero,
-          child: value,
-        ),
-      );
-    }).toList(),
-    onSelectChanged: (_) {
-      // Handle row selection if needed
-    },
-  );
-}
-
 
   @override
   int get rowCount => filteredFaultyStockList.length;

@@ -483,6 +483,10 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                             controller.update(['stock_Mangement_Date']);
                           }
                         },
+                        onCancel: () {
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['stock_Mangement_Date']);
+                        },
                       ),
                     ),
                 ],

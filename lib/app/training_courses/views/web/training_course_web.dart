@@ -362,8 +362,11 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                               ? controller.toDate.value = dropDate
                               : controller.toDate.value = pickUpDate;
                           controller.geTrainingCourseListByDate();
-                          controller.openFromDateToStartDatePicker =
-                              !controller.openFromDateToStartDatePicker;
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['stock_Mangement_Date']);
+                        },
+                        onCancel: () {
+                          controller.openFromDateToStartDatePicker = false;
                           controller.update(['stock_Mangement_Date']);
                         },
                       ),

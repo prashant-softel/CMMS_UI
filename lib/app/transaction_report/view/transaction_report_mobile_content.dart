@@ -59,13 +59,16 @@ class TransactionReportContentMobile
                                 : controller.toDate.value = pickUpDate;
 
                             //  controller.getPmTaskListByDate();
-                            controller.openFromDateToStartDatePicker =
-                                !controller.openFromDateToStartDatePicker;
+                            controller.openFromDateToStartDatePicker = false;
                             controller.update(['stock_Mangement_Date']);
 
                             // Get.toNamed(
                             //   Routes.stockManagementGoodsOrdersScreen,
                             // );
+                          },
+                          onCancel: () {
+                            controller.openFromDateToStartDatePicker = false;
+                            controller.update(['stock_Mangement_Date']);
                           },
                         );
                       },

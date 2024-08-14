@@ -678,6 +678,10 @@ class CreateAuditWeb extends GetView<CreateAuditController> {
 
                                 controller.update(['stock_Mangement']);
                               },
+                              onCancel: () {
+                                controller.openStartDatePicker = false;
+                                controller.update(['stock_Mangement']);
+                              },
                             ),
                           ),
                       ],

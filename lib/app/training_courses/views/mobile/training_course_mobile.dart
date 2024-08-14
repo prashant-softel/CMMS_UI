@@ -292,8 +292,12 @@ class TrainingCourseMobile extends StatelessWidget {
                         var dropDate = DateTime.parse(data.endDate.toString());
                         controller.toDate.value = dropDate;
                         controller.geTrainingCourseListByDate();
-                        controller.openFromDateToStartDatePicker =
-                            !controller.openFromDateToStartDatePicker;
+                        controller.openFromDateToStartDatePicker = false;
+
+                        controller.update(['training_list']);
+                      },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
                         controller.update(['training_list']);
                       },
                     ),

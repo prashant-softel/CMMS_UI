@@ -87,8 +87,10 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                               style: Styles.greyLight14),
                         ),
                         controller.pmPlanId != 0
-                        ? Text(" / UPDATE PM PLAN", style: Styles.greyLight14)
-                        : Text(" / CREATE PM PLAN", style: Styles.greyLight14)
+                            ? Text(" / UPDATE PM PLAN",
+                                style: Styles.greyLight14)
+                            : Text(" / CREATE PM PLAN",
+                                style: Styles.greyLight14)
                       ],
                     ),
                   ),
@@ -566,9 +568,13 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                   print('po valu ${p0.value.toString()}');
                                   controller.startDateDateTc.text =
                                       DateFormat('yyyy-MM-dd').format(p0.value);
-                                  controller.openStartDatePicker =
-                                      !controller.openStartDatePicker;
+
+                                  controller.openStartDatePicker = false;
                                   controller.isStartdateInvalid.value = false;
+                                  controller.update(['stock_Mangement']);
+                                },
+                                onCancel: () {
+                                  controller.openStartDatePicker = false;
                                   controller.update(['stock_Mangement']);
                                 },
                               ),

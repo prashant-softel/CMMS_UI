@@ -35,7 +35,8 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                         shrinkWrap: true,
                         itemCount: controller.jobList?.length ?? 0,
                         itemBuilder: (context, index) {
-                          final jobcardModel = controller.jobList?[index] ?? JobCardModel();
+                          final jobcardModel =
+                              controller.jobList?[index] ?? JobCardModel();
                           return GestureDetector(
                             onTap: () {
                               controller.clearStoreData();
@@ -59,7 +60,8 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
@@ -81,8 +83,10 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                                           Container(
                                             padding: Dimens.edgeInsets8_2_8_2,
                                             decoration: BoxDecoration(
-                                              color: _getStatusColor(jobcardModel.currentStatus),
-                                              borderRadius: BorderRadius.circular(4),
+                                              color: _getStatusColor(
+                                                  jobcardModel.currentStatus),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
                                             ),
                                             child: Text(
                                               '${jobcardModel.statusShort}',
@@ -107,7 +111,8 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                                             child: Text(
                                               'Job${jobcardModel.jobId ?? ''}',
                                               style: TextStyle(
-                                                color: ColorValues.navyBlueColor,
+                                                color:
+                                                    ColorValues.navyBlueColor,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
@@ -128,7 +133,8 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                                             child: Text(
                                               jobcardModel.permit_no ?? '',
                                               style: TextStyle(
-                                                color: ColorValues.navyBlueColor,
+                                                color:
+                                                    ColorValues.navyBlueColor,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
@@ -147,9 +153,11 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                                           SizedBox(width: 5),
                                           Expanded(
                                             child: Text(
-                                              jobcardModel.job_assinged_to ?? '',
+                                              jobcardModel.job_assinged_to ??
+                                                  '',
                                               style: TextStyle(
-                                                color: ColorValues.navyBlueColor,
+                                                color:
+                                                    ColorValues.navyBlueColor,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
@@ -159,7 +167,8 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                                       Row(
                                         children: [
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 'Description:',
@@ -171,7 +180,8 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                                               Text(
                                                 jobcardModel.description ?? '',
                                                 style: TextStyle(
-                                                  color: ColorValues.navyBlueColor,
+                                                  color:
+                                                      ColorValues.navyBlueColor,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                                 overflow: TextOverflow.ellipsis,
@@ -183,7 +193,8 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                                       Row(
                                         children: [
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 'Start Time:',
@@ -195,7 +206,8 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                                               Text(
                                                 jobcardModel.start_time ?? '',
                                                 style: TextStyle(
-                                                  color: ColorValues.navyBlueColor,
+                                                  color:
+                                                      ColorValues.navyBlueColor,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -206,7 +218,8 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                                       Row(
                                         children: [
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 'End Time:',
@@ -218,7 +231,8 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                                               Text(
                                                 jobcardModel.end_time ?? '',
                                                 style: TextStyle(
-                                                  color: ColorValues.navyBlueColor,
+                                                  color:
+                                                      ColorValues.navyBlueColor,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -237,37 +251,41 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                     ),
                   ],
                 ),
-       if (controller.openFromDateToStartDatePicker)
-                   Positioned(
-                     top:50,
-                          left: 10,
-                          right:10,
-                      child: DatePickerWidget(
-                        selectionMode: DateRangePickerSelectionMode.range,
-                        monthCellStyle: DateRangePickerMonthCellStyle(
-                          todayCellDecoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: ColorValues.appDarkBlueColor,
-                          ),
+                if (controller.openFromDateToStartDatePicker)
+                  Positioned(
+                    top: 50,
+                    left: 10,
+                    right: 10,
+                    child: DatePickerWidget(
+                      selectionMode: DateRangePickerSelectionMode.range,
+                      monthCellStyle: DateRangePickerMonthCellStyle(
+                        todayCellDecoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: ColorValues.appDarkBlueColor,
                         ),
-                        initialSelectedRange: PickerDateRange(
-                          controller.fromDate.value,
-                          controller.toDate.value,
-                        ),
-                        onSubmit: (value) {
-                          print('Selected date range: ${value.toString()}');
-                          if (value is PickerDateRange) {
-                            var pickUpDate = value.startDate ?? DateTime.now();
-                            var dropDate = value.endDate ?? pickUpDate;
-                            controller.fromDate.value = pickUpDate;
-                            controller.toDate.value = dropDate;
-                            controller.getjobcardListByDate();
-                            controller.openFromDateToStartDatePicker = false;
-                            controller.update(['PreventiveMaintenanceTask']);
-                          }
-                        },
                       ),
+                      initialSelectedRange: PickerDateRange(
+                        controller.fromDate.value,
+                        controller.toDate.value,
+                      ),
+                      onSubmit: (value) {
+                        print('Selected date range: ${value.toString()}');
+                        if (value is PickerDateRange) {
+                          var pickUpDate = value.startDate ?? DateTime.now();
+                          var dropDate = value.endDate ?? pickUpDate;
+                          controller.fromDate.value = pickUpDate;
+                          controller.toDate.value = dropDate;
+                          controller.getjobcardListByDate();
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['PreventiveMaintenanceTask']);
+                        }
+                      },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['PreventiveMaintenanceTask']);
+                      },
                     ),
+                  ),
               ],
             ),
           ),
