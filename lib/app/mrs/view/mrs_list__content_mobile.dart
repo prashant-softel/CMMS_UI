@@ -375,6 +375,10 @@ class MrsListContentMobile extends GetView<MrsListController> {
                           controller.update(['mrslist']);
                         }
                       },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['mrslist']);
+                      },
                     ),
                   ),
                 Dimens.boxHeight10,

@@ -478,13 +478,16 @@ class _NewObservationSummaryWebState extends State<ObservationSummaryWeb> {
                               : controller.toDate.value = pickUpDate;
 
                           controller.getObservationSummaryByDate();
-                          controller.openFromDateToStartDatePicker =
-                              !controller.openFromDateToStartDatePicker;
+                          controller.openFromDateToStartDatePicker = false;
                           controller.update(['observation_summary_list']);
 
                           // Get.toNamed(
                           //   Routes.stockManagementGoodsOrdersScreen,
                           // );
+                        },
+                        onCancel: () {
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['observation_summary_list']);
                         },
                       ),
                     ),

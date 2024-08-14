@@ -266,8 +266,11 @@ class _VegetationPlanListMobileState extends State<VegetationPlanListMobile> {
                         var dropDate = DateTime.parse(data.endDate.toString());
                         controller.toDate.value = dropDate;
                         controller.getVegListByDate();
-                        controller.openFromDateToStartDatePicker =
-                            !controller.openFromDateToStartDatePicker;
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['stock_Mangement_Date']);
+                      },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
                         controller.update(['stock_Mangement_Date']);
                       },
                     ),

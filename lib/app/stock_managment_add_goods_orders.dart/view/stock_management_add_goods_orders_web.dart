@@ -749,7 +749,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             DateFormat('yyyy-MM-dd')
                                                 .format(p0.value);
                                         controller.openPurchaseDatePicker =
-                                            !controller.openPurchaseDatePicker;
+                                            false;
+
+                                        controller.update(['stock_Mangement']);
+                                      },
+                                      onCancel: () {
+                                        controller.openPurchaseDatePicker =
+                                            false;
                                         controller.update(['stock_Mangement']);
                                       },
                                     ),
@@ -772,6 +778,11 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             !controller.openChallanDatePicker;
                                         controller.update(['stock_Mangement']);
                                       },
+                                      onCancel: () {
+                                        controller.openChallanDatePicker =
+                                            false;
+                                        controller.update(['stock_Mangement']);
+                                      },
                                     ),
                                   ),
                                 if (controller.openPODatePicker)
@@ -788,10 +799,14 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         controller.poDateDateTc.text =
                                             DateFormat('yyyy-MM-dd')
                                                 .format(p0.value);
-                                        controller.openPODatePicker =
-                                            !controller.openPODatePicker;
+
+                                        controller.openPODatePicker = false;
                                         controller.isPOdateInvalid.value =
                                             false;
+                                        controller.update(['stock_Mangement']);
+                                      },
+                                      onCancel: () {
+                                        controller.openPODatePicker = false;
                                         controller.update(['stock_Mangement']);
                                       },
                                     ),
@@ -808,8 +823,12 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         controller.receivedDateTc.text =
                                             DateFormat('yyyy-MM-dd')
                                                 .format(p0.value);
-                                        controller.openReceivedPicker =
-                                            !controller.openReceivedPicker;
+                                        controller.openReceivedPicker = false;
+
+                                        controller.update(['stock_Mangement']);
+                                      },
+                                      onCancel: () {
+                                        controller.openReceivedPicker = false;
                                         controller.update(['stock_Mangement']);
                                       },
                                     ),

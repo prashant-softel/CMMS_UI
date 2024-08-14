@@ -361,8 +361,12 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                         '0001-01-01T00:00:00') {
                       controller.lastCalibrationDateTc.text = '';
                     }
-                    controller.openLastCalibrationDatePicker =
-                        !controller.openLastCalibrationDatePicker;
+                    controller.openLastCalibrationDatePicker = false;
+
+                    controller.update(['calibration_tab']);
+                  },
+                  onCancel: () {
+                    controller.openLastCalibrationDatePicker = false;
                     controller.update(['calibration_tab']);
                   },
                 ),

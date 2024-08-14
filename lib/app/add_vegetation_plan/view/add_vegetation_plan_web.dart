@@ -773,7 +773,6 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                                   ),
                                                                 ),
                                                               ),
-                                                            
                                                             ],
                                                           ),
                                                         ),
@@ -1143,6 +1142,12 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                     .format(p0.value);
                                             controller.openStartDatePicker =
                                                 !controller.openStartDatePicker;
+                                            controller
+                                                .update(['stock_Mangement']);
+                                          },
+                                          onCancel: () {
+                                            controller.openStartDatePicker =
+                                                false;
                                             controller
                                                 .update(['stock_Mangement']);
                                           },

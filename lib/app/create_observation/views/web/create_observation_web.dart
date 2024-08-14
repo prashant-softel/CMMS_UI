@@ -865,9 +865,13 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                     controller.obsDateTc.text =
                                         DateFormat('yyyy-MM-dd')
                                             .format(p0.value);
-                                    controller.openObsDatePicker =
-                                        !controller.openObsDatePicker;
+                                    controller.openObsDatePicker = false;
+
                                     controller.isObsDateTcInvalid.value = false;
+                                    controller.update(['stock_Mangement']);
+                                  },
+                                  onCancel: () {
+                                    controller.openObsDatePicker = false;
                                     controller.update(['stock_Mangement']);
                                   },
                                 ),
@@ -884,11 +888,15 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                     controller.targetDateTc.text =
                                         DateFormat('yyyy-MM-dd')
                                             .format(p0.value);
-                                    controller.openTargetObsDatePicker =
-                                        !controller.openTargetObsDatePicker;
+                                    controller.openTargetObsDatePicker = false;
+
                                     controller.isTargetDateInvalid.value =
                                         false;
                                     controller.update(['stock_Mangement']);
+                                  },
+                                  onCancel: () {
+                                    controller.openTargetObsDatePicker = false;
+                                    controller.update(['stock_Mangement_Date']);
                                   },
                                 ),
                               ),

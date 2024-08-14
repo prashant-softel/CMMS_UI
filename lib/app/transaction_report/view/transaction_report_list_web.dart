@@ -520,13 +520,18 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                       : controller.toDate.value = pickUpDate;
 
                                   controller.getTransactionListByDate();
-                                  controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
+                                    controller.openFromDateToStartDatePicker =
+                                      false;
                                   controller.update(['stock_Mangement_Date']);
 
                                   // Get.toNamed(
                                   //   Routes.stockManagementGoodsOrdersScreen,
                                   // );
+                                },
+                                 onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
                                 },
                               ),
                             ),

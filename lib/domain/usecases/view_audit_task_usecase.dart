@@ -98,13 +98,13 @@ class ViewAuditTaskUsecase {
       );
   Future<List<HistoryModel>?> getHistory({
     moduleType,
-    id,
+    id,facility_id,
     bool? isLoading,
   }) async =>
       await repository.getHistory(
         moduleType,
         id,
-        0,
+        facility_id,
         isLoading,
       );
   Future<Map<String, dynamic>?> startAuditTask({

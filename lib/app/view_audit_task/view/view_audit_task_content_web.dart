@@ -217,10 +217,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               //   'Created By :',
                                               //   style: Styles.black17,
                                               // ),
-                                              Text(
-                                                'Approved By :',
-                                                style: Styles.black17,
-                                              ),
+                                              // Text(
+                                              //   'Approved By :',
+                                              //   style: Styles.black17,
+                                              // ),
                                               Text(
                                                 'Checklist :',
                                                 style: Styles.black17,
@@ -239,7 +239,9 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               ),
                                             ],
                                           ),
-                                          Dimens.boxWidth10,
+                                          SizedBox(
+                                            width: 5,
+                                          ),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -259,9 +261,9 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               // Text(
                                               //     "hard cod", // '${controller.auditTasknDetailModel.value?.created_by_name ?? ''}',
                                               //     style: Styles.blue17),
-                                              Text(
-                                                  '${controller.auditTasknDetailModel.value.approved_by ?? ""}',
-                                                  style: Styles.blue17),
+                                              // Text(
+                                              //     '${controller.auditTasknDetailModel.value.approved_by ?? ""}',
+                                              //     style: Styles.blue17),
                                               Text(
                                                   '${controller.auditTasknDetailModel.value.schedules?[0]?.checklist_name ?? ""}',
                                                   style: Styles.blue17),
@@ -285,10 +287,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               //   'Created At :',
                                               //   style: Styles.black17,
                                               // ),
-                                              Text(
-                                                'Approved At :',
-                                                style: Styles.black17,
-                                              ),
+                                              // Text(
+                                              //   'Approved At :',
+                                              //   style: Styles.black17,
+                                              // ),
                                               Text(
                                                 'Schedule Date :',
                                                 style: Styles.black17,
@@ -308,7 +310,9 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               ),
                                             ],
                                           ),
-                                          Dimens.boxWidth10,
+                                          SizedBox(
+                                            width: 5,
+                                          ),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -316,9 +320,15 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               // Text(
                                               //     "hard", //  '${controller.auditTasknDetailModel.value?.created_at ?? ""}',
                                               //     style: Styles.blue17),
-                                              Text(
-                                                  '${controller.auditTasknDetailModel.value.approved_at ?? ""}',
-                                                  style: Styles.blue17),
+                                              // Text(
+                                              //     controller
+                                              //                 .auditTasknDetailModel
+                                              //                 .value
+                                              //                 .approved_at ==
+                                              //             "0001-01-01"
+                                              //         ? ""
+                                              //         : '${controller.auditTasknDetailModel.value.approved_at ?? ""}',
+                                              //     style: Styles.blue17),
                                               Text(
                                                   '${controller.auditTasknDetailModel.value.schedule_Date ?? ""}',
                                                   style: Styles.blue17),
@@ -408,7 +418,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 DataColumn2(
                                                     fixedWidth: 150,
                                                     label: Text(
-                                                      "CP ok?",
+                                                      "Accept",
                                                       style: TextStyle(
                                                           fontSize: 15,
                                                           fontWeight:
@@ -489,8 +499,8 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                                       index]
                                                                   .cp_ok ==
                                                               1
-                                                          ? "OK"
-                                                          : "Not OK",
+                                                          ? "YES"
+                                                          : "NO",
                                                       style: controller
                                                                   .auditTasknDetailModel
                                                                   .value

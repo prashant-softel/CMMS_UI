@@ -387,13 +387,19 @@ class _PreventiveMaintenanceTaskContentWebState
 
                                 controller.getPmTaskListByDate();
                                 controller.openFromDateToStartDatePicker =
-                                    !controller.openFromDateToStartDatePicker;
+                                    false;
                                 controller
                                     .update(['PreventiveMaintenanceTask']);
 
                                 // Get.toNamed(
                                 //   Routes.stockManagementGoodsOrdersScreen,
                                 // );
+                              },
+                              onCancel: () {
+                                controller.openFromDateToStartDatePicker =
+                                    false;
+                                controller
+                                    .update(['PreventiveMaintenanceTask']);
                               },
                             ),
                           ),

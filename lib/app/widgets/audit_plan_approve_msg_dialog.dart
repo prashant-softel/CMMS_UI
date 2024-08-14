@@ -87,6 +87,7 @@ class AuditPlanMessageApproveDialog extends GetView {
                               auditPlanId: controller.auditId.value,
                               facilityId: controller.facilityId,
                               isloading: true);
+                          await controller.getHistory(controller.facilityId);
                         }
                       } catch (e) {
                         print(e);
