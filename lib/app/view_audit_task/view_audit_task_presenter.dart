@@ -111,15 +111,12 @@ class ViewAuditTaskPresenter {
   }
 
   Future<List<HistoryModel>?> getHistory(
-    moduleType,
-    id,
-    isLoading,
-  ) async =>
+          moduleType, id, isLoading, facility_id) async =>
       await viewAuditTaskUsecase.getHistory(
-        moduleType: moduleType,
-        id: id,
-        isLoading: isLoading,
-      );
+          moduleType: moduleType,
+          id: id,
+          isLoading: isLoading,
+          facility_id: facility_id);
   Future<Map<String, dynamic>?> startAuditTask({
     int? auditTaskId,
     bool? isLoading,

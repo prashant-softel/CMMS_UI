@@ -243,7 +243,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               '${controller.auditPlanDetailModel.value?.description ?? ""}',
                                               style: Styles.blue17),
                                           Text(
-                                              '${controller.auditPlanDetailModel.value?.assignedTo ?? ''}',
+                                              '${controller.auditPlanDetailModel.value?.created_by ?? ''}',
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.approved_by ?? ""}',
@@ -287,7 +287,13 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               '${controller.auditPlanDetailModel.value?.assignedTo ?? ''}',
                                               style: Styles.blue17),
                                           Text(
-                                              '${controller.auditPlanDetailModel.value?.approved_Date ?? ''}',
+                                              controller
+                                                          .auditPlanDetailModel
+                                                          .value
+                                                          ?.approved_Date ==
+                                                      "0001-01-01"
+                                                  ? ""
+                                                  : '${controller.auditPlanDetailModel.value?.approved_Date ?? ''}',
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.schedule_Date ?? ''}',
