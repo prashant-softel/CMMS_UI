@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:typed_data';
 import 'package:cmms/app/widgets/add_material_popup.dart';
 import 'package:cmms/app/widgets/attendance_popup.dart';
+import 'package:cmms/app/widgets/audit_task_msg_receive_dialog.dart';
 import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
@@ -3760,6 +3761,11 @@ class Repository {
           var responseMap = json.decode(res.data);
           if (ptw_req == true) {
             permitCloseButton(closePtwJsonString, isLoading, 0, 3);
+          } else {
+            var res = resourceData;
+            var parsedJson = json.decode(res);
+            Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+                type: 4, data: parsedJson['message'], id: parsedJson['id']));
           }
 
           return responseMap;
