@@ -412,7 +412,9 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                           ],
                                                         ),
                                                       )
-                                                    : Container(
+                                                    : Dimens.box0,
+                                                controller.wc_id.value != 0
+                                                    ? Container(
                                                         margin:
                                                             Dimens.edgeInsets20,
                                                         height: ((controller
@@ -535,7 +537,8 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
+                                                      )
+                                                    : Dimens.box0,
                                                 Dimens.boxHeight10,
                                                 Row(
                                                   mainAxisAlignment:
@@ -1962,7 +1965,9 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                           ],
                                                         ),
                                                       )
-                                                    : Container(
+                                                    : Dimens.box0,
+                                                controller.wc_id.value != 0
+                                                    ? Container(
                                                         margin:
                                                             Dimens.edgeInsets20,
                                                         height: ((controller
@@ -2085,7 +2090,8 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
+                                                      )
+                                                    : Dimens.box0,
                                                 controller.type.value == 0
                                                     ? Center(
                                                         child: Padding(

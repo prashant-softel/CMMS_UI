@@ -14,10 +14,10 @@ Future<void> exportToExcel(
   List<int> bytes = excel.save()!;
 
   Uint8List uint8list = Uint8List.fromList(bytes);
-  // html.Blob blob = html.Blob([uint8list]);
-  // final url = html.Url.createObjectUrlFromBlob(blob);
-  // downloadFile(url, fileName);
-  // html.Url.revokeObjectUrl(url);
+  html.Blob blob = html.Blob([uint8list]);
+  final url = html.Url.createObjectUrlFromBlob(blob);
+  downloadFile(url, fileName);
+  html.Url.revokeObjectUrl(url);
 }
 
 Excel createExcel() {

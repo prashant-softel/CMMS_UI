@@ -342,6 +342,7 @@ class CreateWarrantyClaimController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       if (wc_id.value != 0) {
         getViewWarrantyClaimDetail(wc_id: wc_id.value);
+        getHistory(facilityId: facilityId, wcId: wc_id.value);
       }
       // getFacilityList();
     });
@@ -365,7 +366,6 @@ class CreateWarrantyClaimController extends GetxController {
     });
     Future.delayed(Duration(seconds: 1), () {
       getEmployeesList();
-      getHistory(facilityId: facilityId, wcId: wc_id.value);
     });
     if (wc_id == 0) {
       addRowItem();
@@ -1128,6 +1128,7 @@ class CreateWarrantyClaimController extends GetxController {
 
       CreateWarrantyClaimModel createwarrantyClaimModel =
           CreateWarrantyClaimModel(
+        id: wc_id.value,
         facilityId: facilityId,
         equipmentId: selectedEquipmentnameId,
         goodsOrderId: 14205,

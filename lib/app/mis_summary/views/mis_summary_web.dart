@@ -26,7 +26,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
         child: Stack(
           children: [
             Column(
-              
               children: [
                 HeaderWidget(),
                 Container(
@@ -81,17 +80,15 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                       Expanded(
                         child: Card(
                           child: Container(
-                            color: Color.fromARGB(255, 221, 233, 236),
+                           
                             child: Column(
-                                crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
-                                      crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                    
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "SPV NAME:-",
@@ -198,127 +195,138 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                         ),
                       ),
                       Expanded(
-                        child: Container(
-                          color: Color.fromARGB(255, 245, 248, 250),
-                          width: Get.width,
-                          height: Get.height,
-                          child: DataTable2(
-                              headingRowHeight: 45,
-                              dataRowHeight: 40,
-                              // columnSpacing: 12,
-                              // horizontalMargin: 5,
-                              headingRowColor: MaterialStateColor.resolveWith(
-                                (states) {
-                                  return ColorValues.lightGreyColor;
-                                },
-                              ),
-                              minWidth: 2500,
-                              columns: [
-                                DataColumn2(
-                                  fixedWidth: 150,
-                                  label: Text(
-                                    'Compliances',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
+                        child: Obx(
+                          () => Container(
+                            color: Color.fromARGB(255, 245, 248, 250),
+                            width: Get.width,
+                            height: Get.height,
+                            child: DataTable2(
+                                headingRowHeight: 45,
+                                dataRowHeight: 40,
+                                // columnSpacing: 12,
+                                // horizontalMargin: 5,
+                                headingRowColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                    return ColorValues.lightGreyColor;
+                                  },
                                 ),
-                                DataColumn2(
-                                  fixedWidth: 250,
-                                  label: Text(
-                                    'Status of NOC',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 250,
-                                  label: Text(
-                                    'Date of Received/Applied',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 200,
-                                  label: Text(
-                                    'Validity in months',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 150,
-                                  label: Text(
-                                    'Expires On',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 150,
-                                  label: Text(
-                                    'Days left',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 180,
-                                  label: Text(
-                                    'Status of Expire',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                              ],
-                              rows: [
-                                DataRow2(
-                                  cells: [
-                                    DataCell(
-                                      Text(
-                                        "Fire NOC",
-                                        style: Styles.black15,
-                                      ),
+                                minWidth: 2500,
+                                columns: [
+                                  DataColumn2(
+                                    fixedWidth: 150,
+                                    label: Text(
+                                      'Compliances',
+                                      style: Styles.blackBold14,
                                     ),
-                                    DataCell(
-                                      Text(
-                                        "Aplied for renewal",
-                                        style: Styles.black15,
-                                      ),
+                                    // size: ColumnSize.L,
+                                  ),
+                                  DataColumn2(
+                                    fixedWidth: 250,
+                                    label: Text(
+                                      'Status of NOC',
+                                      style: Styles.blackBold14,
                                     ),
-                                    DataCell(
-                                      Text(
-                                        "",
-                                        style: Styles.black15,
-                                      ),
+                                    // size: ColumnSize.L,
+                                  ),
+                                  DataColumn2(
+                                    fixedWidth: 250,
+                                    label: Text(
+                                      'Date of Received/Applied',
+                                      style: Styles.blackBold14,
                                     ),
-                                    DataCell(
-                                      Text(
-                                        "",
-                                        style: Styles.black15,
-                                      ),
+                                    // size: ColumnSize.L,
+                                  ),
+                                  DataColumn2(
+                                    fixedWidth: 200,
+                                    label: Text(
+                                      'Validity in months',
+                                      style: Styles.blackBold14,
                                     ),
-                                    DataCell(
-                                      Text(
-                                        "",
-                                        style: Styles.black15,
-                                      ),
+                                    // size: ColumnSize.L,
+                                  ),
+                                  DataColumn2(
+                                    fixedWidth: 150,
+                                    label: Text(
+                                      'Expires On',
+                                      style: Styles.blackBold14,
                                     ),
-                                    DataCell(
-                                      Text(
-                                        "",
-                                        style: Styles.black15,
-                                      ),
+                                    // size: ColumnSize.L,
+                                  ),
+                                  DataColumn2(
+                                    fixedWidth: 150,
+                                    label: Text(
+                                      'Days left',
+                                      style: Styles.blackBold14,
                                     ),
-                                    DataCell(
-                                      Text(
-                                        "",
-                                        style: Styles.black15,
-                                      ),
+                                    // size: ColumnSize.L,
+                                  ),
+                                  DataColumn2(
+                                    fixedWidth: 180,
+                                    label: Text(
+                                      'Status of Expire',
+                                      style: Styles.blackBold14,
                                     ),
-                                  ],
-                                ),
-                              ]),
+                                    // size: ColumnSize.L,
+                                  ),
+                                ],
+                                rows: [
+                                  for (var item in controller.getStatutoryList)
+                                    DataRow2(
+                                      cells: [
+                                        DataCell(
+                                          Text(
+                                            item.compilanceName
+                                                .toString(), // assuming fireNOC is a property of your item
+                                            style: Styles.black15,
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            item.compilanceName
+                                                .toString(), // assuming appliedForRenewal is a property of your item
+                                            style: Styles.black15,
+                                          ),
+                                        ),
+                                        // populate the rest of the cells with actual data
+                                        DataCell(
+                                          Text(
+                                            item.compilanceName
+                                                .toString(), // assuming data1 is a property of your item
+                                            style: Styles.black15,
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            item.compilanceName
+                                                .toString(), // assuming data2 is a property of your item
+                                            style: Styles.black15,
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            item.compilanceName
+                                                .toString(), // assuming data3 is a property of your item
+                                            style: Styles.black15,
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            item.compilanceName
+                                                .toString(), // assuming data4 is a property of your item
+                                            style: Styles.black15,
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            item.compilanceName
+                                                .toString(), // assuming data5 is a property of your item
+                                            style: Styles.black15,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                ]),
+                          ),
                         ),
                       ),
                       Expanded(
@@ -540,7 +548,7 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                     ),
                                   ],
                                 ),
-                                 DataRow2(
+                                DataRow2(
                                   cells: [
                                     DataCell(
                                       Text(
@@ -1066,10 +1074,9 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
-                                 DataRow2(
+                                DataRow2(
                                   cells: [
                                     DataCell(
                                       Text(
@@ -1157,7 +1164,7 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                     ),
                                   ],
                                 ),
-                                 DataRow2(
+                                DataRow2(
                                   cells: [
                                     DataCell(
                                       Text(
@@ -1243,7 +1250,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -1332,7 +1338,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -1421,7 +1426,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -1510,10 +1514,9 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
-                                 DataRow2(
+                                DataRow2(
                                   cells: [
                                     DataCell(
                                       Text(
@@ -1599,7 +1602,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -1688,7 +1690,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -1777,7 +1778,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -1866,7 +1866,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -1955,7 +1954,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -2045,7 +2043,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -2134,7 +2131,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -2223,7 +2219,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -2312,7 +2307,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -2401,7 +2395,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -2490,7 +2483,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -2579,7 +2571,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -2668,7 +2659,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -2757,7 +2747,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -2846,7 +2835,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -2935,7 +2923,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -3024,7 +3011,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -3113,7 +3099,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -3202,7 +3187,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -3291,7 +3275,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -3380,7 +3363,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -3469,7 +3451,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -3558,7 +3539,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -3647,7 +3627,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -3736,7 +3715,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -3825,7 +3803,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -3914,7 +3891,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -4003,7 +3979,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -4092,7 +4067,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -4181,7 +4155,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -4270,7 +4243,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -4359,7 +4331,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -4448,7 +4419,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -4537,7 +4507,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -4626,7 +4595,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -4715,7 +4683,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -4804,11 +4771,10 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
-                                  specificRowHeight:60,
+                                  specificRowHeight: 60,
                                   cells: [
                                     DataCell(
                                       Text(
@@ -4894,7 +4860,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -4983,7 +4948,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -5072,7 +5036,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -5161,7 +5124,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -5250,7 +5212,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -5339,7 +5300,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -5428,7 +5388,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -5517,7 +5476,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -5606,7 +5564,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -5695,7 +5652,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -5784,7 +5740,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -5873,7 +5828,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -5962,7 +5916,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -6051,7 +6004,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -6140,7 +6092,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -6229,7 +6180,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -6319,7 +6269,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -6408,7 +6357,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -6497,7 +6445,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -6586,7 +6533,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -6676,10 +6622,9 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
-                                 DataRow2(
+                                DataRow2(
                                   cells: [
                                     DataCell(
                                       Text(
@@ -6765,7 +6710,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -6854,7 +6798,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -6943,7 +6886,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -7032,7 +6974,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -7121,7 +7062,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 DataRow2(
@@ -7210,7 +7150,6 @@ class _NewMisSummaryWebState extends State<MisSummaryWeb> {
                                         style: Styles.black15,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                               ]),
