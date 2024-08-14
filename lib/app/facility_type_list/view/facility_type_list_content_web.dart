@@ -1701,7 +1701,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               DataColumn2(
                                                   // fixedWidth: 150,
                                                   label: Text(
-                                                "Plant Name",
+                                                "Facility Name",
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
