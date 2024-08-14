@@ -29,8 +29,8 @@ class AttendanceMonthwiseListMobile
                     children: [
                       HeaderWidgetMobile(
                         onPressed: () {
-                          controller.openFromDateToStartDatePicker.value =
-                              !controller.openFromDateToStartDatePicker.value;
+                          controller.openFromDateToStartDatePicker =
+                              !controller.openFromDateToStartDatePicker;
                           controller.update(['attendance-list-month']);
                         },
                       ),
@@ -78,7 +78,7 @@ class AttendanceMonthwiseListMobile
                     ],
                   ),
                 ),
-                if (controller.openFromDateToStartDatePicker.value)
+                if (controller.openFromDateToStartDatePicker)
                   Positioned(
                     top: 50,
                     left: 10,
@@ -106,8 +106,11 @@ class AttendanceMonthwiseListMobile
                             ? controller.toDate.value = dropDate
                             : controller.toDate.value = pickUpDate;
                         controller.getAttendanceListByDate();
-                        controller.openFromDateToStartDatePicker.value =
-                            !controller.openFromDateToStartDatePicker.value;
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['stock_Mangement_Date']);
+                      },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
                         controller.update(['stock_Mangement_Date']);
                       },
                     ),

@@ -300,6 +300,10 @@ class ModuleCleaningListExecutionMobile
                           controller.update(['McExecution']);
                         }
                       },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['McExecution']);
+                      },
                     ),
                   ),
                 Dimens.boxHeight10,

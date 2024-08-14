@@ -212,6 +212,10 @@ class PmPlanContentMobile extends GetView<PmPlanListController> {
                           controller.update(['PreventiveMaintenanceTask']);
                         }
                       },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['PreventiveMaintenanceTask']);
+                      },
                     ),
                   ),
                 Dimens.boxHeight10,

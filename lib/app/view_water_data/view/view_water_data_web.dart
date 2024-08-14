@@ -249,8 +249,13 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                           print('po valu ${p0.value.toString()}');
                           controller.purchaseDateTc.text =
                               DateFormat('yyyy-MM-dd').format(p0.value);
-                          controller.openPurchaseDatePicker =
-                              !controller.openPurchaseDatePicker;
+
+                          controller.openPurchaseDatePicker = false;
+
+                          controller.update(['stock_Mangement']);
+                        },
+                        onCancel: () {
+                          controller.openPurchaseDatePicker = false;
                           controller.update(['stock_Mangement']);
                         },
                       ),

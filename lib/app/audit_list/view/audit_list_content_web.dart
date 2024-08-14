@@ -423,12 +423,17 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
 
                                   controller.getAuditListByDate();
                                   controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
+                                      false;
                                   controller.update(['stock_Mangement_Date']);
 
                                   // Get.toNamed(
                                   //   Routes.stockManagementGoodsOrdersScreen,
                                   // );
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
                                 },
                               ),
                             ),

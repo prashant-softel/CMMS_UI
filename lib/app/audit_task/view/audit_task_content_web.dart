@@ -124,7 +124,7 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                         children: [
                                           CustomRichText(title: 'Date Range'),
                                           // Dimens.boxWidth10,
-                                          SizedBox(width:10),
+                                          SizedBox(width: 10),
                                           CustomTextFieldForStock(
                                             width: MediaQuery.of(context)
                                                     .size
@@ -404,6 +404,11 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                 // Get.toNamed(
                                 //   Routes.stockManagementGoodsOrdersScreen,
                                 // );
+                              },
+                              onCancel: () {
+                                controller.openFromDateToStartDatePicker =
+                                    false;
+                                controller.update(['AuditTask']);
                               },
                             ),
                           ),

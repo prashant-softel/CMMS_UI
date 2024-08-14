@@ -272,8 +272,11 @@ class _ModuleCleaningListMobileState extends State<ModuleCleaningListMobile> {
                         var dropDate = DateTime.parse(data.endDate.toString());
                         controller.toDate.value = dropDate;
                         controller.mcPlanListByDate();
-                        controller.openFromDateToStartDatePicker =
-                            !controller.openFromDateToStartDatePicker;
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['stock_Mangement_Date']);
+                      },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
                         controller.update(['stock_Mangement_Date']);
                       },
                     ),

@@ -72,7 +72,7 @@ class AddMCExecutionDialog extends GetView {
                                 children: [
                                   Text('Plan Id', style: Styles.black17),
                                   // Dimens.boxHeight5,
-                                   SizedBox(height: 5),
+                                  SizedBox(height: 5),
                                   Text(
                                     '${planId}',
                                     style: Styles.blue17,
@@ -85,7 +85,7 @@ class AddMCExecutionDialog extends GetView {
                                   Text('Start Date Time',
                                       style: Styles.black17),
                                   // Dimens.boxHeight5,
-                                   SizedBox(height: 5),
+                                  SizedBox(height: 5),
                                   CustomTextFieldForStock(
                                     width:
                                         MediaQuery.of(context).size.width / 8,
@@ -143,7 +143,7 @@ class AddMCExecutionDialog extends GetView {
                           ],
                         ),
                         // Dimens.boxHeight30
-                         SizedBox(height:30),
+                        SizedBox(height: 30),
                       ],
                     ),
                   ),
@@ -162,7 +162,12 @@ class AddMCExecutionDialog extends GetView {
                               DateFormat('yyyy-MM-dd').format(p0.value);
                           _controller.openStartDatePicker =
                               !controller.openStartDatePicker;
+
                           _controller.update(['stock_Mangement']);
+                        },
+                        onCancel: () {
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['stock_Mangement']);
                         },
                       ),
                     ),

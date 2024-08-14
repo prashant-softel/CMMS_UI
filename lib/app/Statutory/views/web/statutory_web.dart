@@ -112,7 +112,9 @@ class _StatutoryWebState extends State<StatutoryWeb> {
                                         Spacer(),
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Date Range',includeAsterisk: false),
+                                            CustomRichText(
+                                                title: 'Date Range',
+                                                includeAsterisk: false),
                                             Dimens.boxWidth2,
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
@@ -375,12 +377,17 @@ class _StatutoryWebState extends State<StatutoryWeb> {
 
                                   controller.getstatutorylistbydate();
                                   controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
+                                      false;
                                   controller.update(['stock_Mangement_Date']);
 
                                   // Get.toNamed(
                                   //   Routes.stockManagementGoodsOrdersScreen,
                                   // );
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
                                 },
                               ),
                             ),

@@ -68,8 +68,9 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromARGB(255, 236, 234, 234)
-                                            .withOpacity(0.5),
+                                        color:
+                                            Color.fromARGB(255, 236, 234, 234)
+                                                .withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 5,
                                         offset: Offset(0, 2),
@@ -79,7 +80,8 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                   margin: EdgeInsets.only(
                                       left: 20, right: 20, bottom: 10, top: 20),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Dimens.boxHeight10,
                                       Row(
@@ -102,7 +104,8 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text("Date", style: Styles.blue17),
+                                              Text("Date",
+                                                  style: Styles.blue17),
                                               Dimens.boxHeight5,
                                               Text("1 April",
                                                   style: Styles.black14),
@@ -197,15 +200,18 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                               Dimens.boxHeight5,
                                               Text(""),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.green700),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.green700),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("")
                                             ],
@@ -222,11 +228,13 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
-                                              Text("-100", style: Styles.Red700),
+                                              Text("-100",
+                                                  style: Styles.Red700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
-                                              Text("-100", style: Styles.Red700),
+                                              Text("-100",
+                                                  style: Styles.Red700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
@@ -238,21 +246,29 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text("Total", style: Styles.blue17),
+                                              Text("Total",
+                                                  style: Styles.blue17),
                                               Dimens.boxHeight5,
-                                              Text("2000", style: Styles.black14),
+                                              Text("2000",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200 ", style: Styles.black14),
+                                              Text("200 ",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200 ", style: Styles.black14),
+                                              Text("200 ",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("3000", style: Styles.black14),
+                                              Text("3000",
+                                                  style: Styles.black14),
                                             ],
                                           ),
                                           Spacer(),
@@ -360,8 +376,9 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromARGB(255, 236, 234, 234)
-                                            .withOpacity(0.5),
+                                        color:
+                                            Color.fromARGB(255, 236, 234, 234)
+                                                .withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 5,
                                         offset: Offset(0, 2),
@@ -371,7 +388,8 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                   margin: EdgeInsets.only(
                                       left: 20, right: 20, bottom: 10, top: 20),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Dimens.boxHeight10,
                                       Row(
@@ -393,7 +411,8 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text("Date", style: Styles.blue17),
+                                              Text("Date",
+                                                  style: Styles.blue17),
                                               Dimens.boxHeight5,
                                               Text("1 April",
                                                   style: Styles.black14),
@@ -488,15 +507,18 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                               Dimens.boxHeight5,
                                               Text(""),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.green700),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.green700),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("")
                                             ],
@@ -513,11 +535,13 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
-                                              Text("-100", style: Styles.Red700),
+                                              Text("-100",
+                                                  style: Styles.Red700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
-                                              Text("-100", style: Styles.Red700),
+                                              Text("-100",
+                                                  style: Styles.Red700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
@@ -529,21 +553,29 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text("Total", style: Styles.blue17),
+                                              Text("Total",
+                                                  style: Styles.blue17),
                                               Dimens.boxHeight5,
-                                              Text("2000", style: Styles.black14),
+                                              Text("2000",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200 ", style: Styles.black14),
+                                              Text("200 ",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200 ", style: Styles.black14),
+                                              Text("200 ",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("3000", style: Styles.black14),
+                                              Text("3000",
+                                                  style: Styles.black14),
                                             ],
                                           ),
                                           Spacer(),
@@ -651,8 +683,9 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromARGB(255, 236, 234, 234)
-                                            .withOpacity(0.5),
+                                        color:
+                                            Color.fromARGB(255, 236, 234, 234)
+                                                .withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 5,
                                         offset: Offset(0, 2),
@@ -662,7 +695,8 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                   margin: EdgeInsets.only(
                                       left: 20, right: 20, bottom: 10, top: 20),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Dimens.boxHeight10,
                                       Row(
@@ -684,7 +718,8 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text("Date", style: Styles.blue17),
+                                              Text("Date",
+                                                  style: Styles.blue17),
                                               Dimens.boxHeight5,
                                               Text("1 April",
                                                   style: Styles.black14),
@@ -779,15 +814,18 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                               Dimens.boxHeight5,
                                               Text(""),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.green700),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.green700),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("")
                                             ],
@@ -804,11 +842,13 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
-                                              Text("-100", style: Styles.Red700),
+                                              Text("-100",
+                                                  style: Styles.Red700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
-                                              Text("-100", style: Styles.Red700),
+                                              Text("-100",
+                                                  style: Styles.Red700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
@@ -820,21 +860,29 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text("Total", style: Styles.blue17),
+                                              Text("Total",
+                                                  style: Styles.blue17),
                                               Dimens.boxHeight5,
-                                              Text("2000", style: Styles.black14),
+                                              Text("2000",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200 ", style: Styles.black14),
+                                              Text("200 ",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200 ", style: Styles.black14),
+                                              Text("200 ",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("3000", style: Styles.black14),
+                                              Text("3000",
+                                                  style: Styles.black14),
                                             ],
                                           ),
                                           Spacer(),
@@ -942,8 +990,9 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromARGB(255, 236, 234, 234)
-                                            .withOpacity(0.5),
+                                        color:
+                                            Color.fromARGB(255, 236, 234, 234)
+                                                .withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 5,
                                         offset: Offset(0, 2),
@@ -953,7 +1002,8 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                   margin: EdgeInsets.only(
                                       left: 20, right: 20, bottom: 10, top: 20),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Dimens.boxHeight10,
                                       Row(
@@ -975,7 +1025,8 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text("Date", style: Styles.blue17),
+                                              Text("Date",
+                                                  style: Styles.blue17),
                                               Dimens.boxHeight5,
                                               Text("1 April",
                                                   style: Styles.black14),
@@ -1070,15 +1121,18 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                               Dimens.boxHeight5,
                                               Text(""),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.green700),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.green700),
                                               Dimens.boxHeight5,
-                                              Text("100", style: Styles.green700),
+                                              Text("100",
+                                                  style: Styles.green700),
                                               Dimens.boxHeight5,
                                               Text("")
                                             ],
@@ -1095,11 +1149,13 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
-                                              Text("-100", style: Styles.Red700),
+                                              Text("-100",
+                                                  style: Styles.Red700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
-                                              Text("-100", style: Styles.Red700),
+                                              Text("-100",
+                                                  style: Styles.Red700),
                                               Dimens.boxHeight5,
                                               Text("0", style: Styles.Red700),
                                               Dimens.boxHeight5,
@@ -1111,21 +1167,29 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text("Total", style: Styles.blue17),
+                                              Text("Total",
+                                                  style: Styles.blue17),
                                               Dimens.boxHeight5,
-                                              Text("2000", style: Styles.black14),
+                                              Text("2000",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200 ", style: Styles.black14),
+                                              Text("200 ",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200 ", style: Styles.black14),
+                                              Text("200 ",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("200", style: Styles.black14),
+                                              Text("200",
+                                                  style: Styles.black14),
                                               Dimens.boxHeight5,
-                                              Text("3000", style: Styles.black14),
+                                              Text("3000",
+                                                  style: Styles.black14),
                                             ],
                                           ),
                                           Spacer(),
@@ -1240,6 +1304,10 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                       DateFormat('yyyy-MM-dd').format(p0.value);
                                   controller.openPurchaseDatePicker =
                                       !controller.openPurchaseDatePicker;
+                                  controller.update(['stock_Mangement']);
+                                },
+                                onCancel: () {
+                                  controller.openPurchaseDatePicker = false;
                                   controller.update(['stock_Mangement']);
                                 },
                               ),

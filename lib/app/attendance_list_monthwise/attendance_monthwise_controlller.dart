@@ -10,7 +10,7 @@ class AttendanceListMonthController extends GetxController {
   AttendanceListMonthController(this.attendanceListMonthPresenter);
   AttendanceListMonthPresenter attendanceListMonthPresenter;
 
-  RxBool openFromDateToStartDatePicker = false.obs;
+  bool openFromDateToStartDatePicker = false;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 30)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>

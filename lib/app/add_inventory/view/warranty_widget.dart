@@ -413,6 +413,10 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                           !controller.openStartDatePicker;
                       controller.update(['warranty_tab']);
                     },
+                    onCancel: () {
+                      controller.openStartDatePicker = false;
+                      controller.update(['warranty_tab']);
+                    },
                   ),
                 ),
               if (controller.openExpiryDatePicker)
@@ -446,6 +450,10 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                             !controller.openExpiryDatePicker;
                         controller.update(['warranty_tab']);
                       }
+                    },
+                    onCancel: () {
+                      controller.openExpiryDatePicker = false;
+                      controller.update(['warranty_tab']);
                     },
                   ),
                 ),

@@ -482,6 +482,10 @@ class ObservationListMobile extends GetView<ObservationListController> {
                             controller.update(['PreventiveMaintenanceTask']);
                           }
                         },
+                        onCancel: () {
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['PreventiveMaintenanceTask']);
+                        },
                       ),
                     ),
                   SizedBox(height: 10),

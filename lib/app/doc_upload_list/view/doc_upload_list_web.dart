@@ -396,17 +396,15 @@ class _DocumentManagerListWebState extends State<DocumentManagerWeb> {
                                     DateRangePickerSelectionMode.range,
                                 monthCellStyle: DateRangePickerMonthCellStyle(
                                   todayCellDecoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: ColorValues.appDarkBlueColor),
-                                ), // last date of this year
-                                // controller: DateRangePickerController(),
+                                    shape: BoxShape.circle,
+                                    color: ColorValues.appDarkBlueColor,
+                                  ),
+                                ),
                                 initialSelectedRange: PickerDateRange(
                                   controller.fromDate.value,
                                   controller.toDate.value,
                                 ),
-
                                 onSubmit: (value) {
-                                  print('po valu ${value.toString()}');
                                   PickerDateRange? data =
                                       value as PickerDateRange;
 
@@ -421,12 +419,13 @@ class _DocumentManagerListWebState extends State<DocumentManagerWeb> {
 
                                   controller.getROListByDate();
                                   controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
+                                      false;
                                   controller.update(['stock_Mangement_Date']);
-
-                                  // Get.toNamed(
-                                  //   Routes.stockManagementGoodsOrdersScreen,
-                                  // );
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
                                 },
                               ),
                             ),
