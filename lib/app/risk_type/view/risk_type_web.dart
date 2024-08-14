@@ -35,7 +35,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -59,10 +60,10 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.offNamed(Routes.misDashboard);
+                        Get.offNamed(Routes.masterDashboard);
                       },
                       child: Text(
-                        " / HSE REPORT",
+                        " / MASTERS",
                         style: Styles.greyLight14,
                       ),
                     ),
@@ -73,22 +74,22 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Risk Type'
-                          : 'Open Create Risk Type',
-                    );
-                  }),
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.only(left: 10, top: 10),
+              //   child: ElevatedButton(
+              //     style: Styles.navyBlueElevatedButtonStyle,
+              //     onPressed: () {
+              //       controller.toggleContainer();
+              //     },
+              //     child: Obx(() {
+              //       return Text(
+              //         controller.isContainerVisible.value
+              //             ? 'Close Create Risk Type'
+              //             : 'Open Create Risk Type',
+              //       );
+              //     }),
+              //   ),
+              // ),
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +99,7 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                     //             .length >
                     //         0
                     //     ?
-      
+
                     Visibility(
                       visible: controller.isContainerVisible.value,
                       child: Container(
@@ -164,7 +165,7 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                             //   "Title",
                                             //   style: Styles.blackBold16,
                                             // ),
-      
+
                                             Expanded(
                                                 child: CustomRichText(
                                                     title: 'Risk Name ')),
@@ -186,7 +187,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -202,8 +204,10 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                     fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                                controller: controller.titleCtrlr,
-                                                focusNode: controller.rnameFocus,
+                                                controller:
+                                                    controller.titleCtrlr,
+                                                focusNode:
+                                                    controller.rnameFocus,
                                                 scrollController:
                                                     controller.rnameScroll,
                                                 keyboardType:
@@ -213,8 +217,9 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                   fillColor:
                                                       ColorValues.whiteColor,
                                                   filled: true,
-                                                  contentPadding: EdgeInsets.only(
-                                                      left: 5, right: 5),
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 5, right: 5),
                                                   border: InputBorder.none,
                                                   enabledBorder:
                                                       OutlineInputBorder(
@@ -240,7 +245,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -252,7 +258,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -311,7 +318,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -329,7 +337,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                     color: Colors.black),
                                                 controller:
                                                     controller.descriptionCtrlr,
-                                                focusNode: controller.rdescFocus,
+                                                focusNode:
+                                                    controller.rdescFocus,
                                                 scrollController:
                                                     controller.rdescScroll,
                                                 keyboardType:
@@ -339,8 +348,9 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                   fillColor:
                                                       ColorValues.whiteColor,
                                                   filled: true,
-                                                  contentPadding: EdgeInsets.only(
-                                                      left: 5, right: 5),
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 5, right: 5),
                                                   border: InputBorder.none,
                                                   enabledBorder:
                                                       OutlineInputBorder(
@@ -367,7 +377,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -380,7 +391,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -413,7 +425,7 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                       ]),
                                 ),
                               ),
-      
+
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -421,9 +433,11 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                     width: (Get.width * .1),
                                     height: 40,
                                     child: CustomElevatedButton(
-                                        backgroundColor: ColorValues.appRedColor,
+                                        backgroundColor:
+                                            ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.toggleContainer();
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -441,7 +455,9 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
-                                                controller.createRiskType().then(
+                                                controller
+                                                    .createRiskType()
+                                                    .then(
                                                   (value) {
                                                     print("CREATE");
                                                     print("value,$value");
@@ -463,8 +479,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
                                               controller
-                                                  .updateRiskType(
-                                                      controller.selectedItem?.id)
+                                                  .updateRiskType(controller
+                                                      .selectedItem?.id)
                                                   .then(
                                                 (value) {
                                                   print("UPDATE");
@@ -486,7 +502,7 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                         ),
                       ),
                     ),
-      
+
                     Expanded(
                       child: Container(
                         width: Get.width * 7,
@@ -524,19 +540,22 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
-                                          enabledBorder: const OutlineInputBorder(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          focusedBorder: const OutlineInputBorder(
+                                          focusedBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          contentPadding: Dimens.edgeInsets05_10,
+                                          contentPadding:
+                                              Dimens.edgeInsets05_10,
                                           hintText: 'search'.tr,
                                           hintStyle: Styles.grey16,
                                         ),
@@ -545,11 +564,11 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                   ],
                                 ),
                               ),
-      
+
                               // Row(
                               //   children: [
                               //     Spacer(),
-      
+
                               //   ],
                               // ),
                               SizedBox(
@@ -622,19 +641,21 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                   (element) =>
                                                       "${element.id}" ==
                                                       controller
-                                                          .riskTypeList[index].id
+                                                          .riskTypeList[index]
+                                                          .id
                                                           .toString(),
                                                 );
-      
+
                                                 controller.titleCtrlr.text =
-                                                    controller
-                                                            .selectedItem?.name ??
-                                                        '';
-                                                controller.descriptionCtrlr.text =
                                                     controller.selectedItem
-                                                            ?.description ??
+                                                            ?.name ??
                                                         '';
-      
+                                                controller.descriptionCtrlr
+                                                    .text = controller
+                                                        .selectedItem
+                                                        ?.description ??
+                                                    '';
+
                                                 controller.isContainerVisible
                                                     .value = true;
                                               },
