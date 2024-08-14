@@ -249,7 +249,7 @@ class ExternalsEmailsList {
       ExternalsEmailsList(
         name: json["name"],
         email: json["email"],
-        role: json["role"],
+        role: json["rolename"],
         mobile: json["mobile"],
       );
 

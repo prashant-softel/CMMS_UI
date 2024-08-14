@@ -1810,6 +1810,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                               () {
                                                                             controller.updateSupplierActionText(
                                                                               controller.supplierActionTextFieldController.text,
+                                                                              controller.isCheckedRequire.value == true ? 1 : 0,
                                                                               controller.supplierActionDateTimeCtrlrWeb.text,
                                                                               controller.supplierActionSrNumberTextFieldController.text,
                                                                             );
@@ -1898,7 +1899,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                               ),
                                                                               DataCell(
                                                                                 Checkbox(
-                                                                                  value: true,
+                                                                                  value: supplier.is_required == 1,
                                                                                   onChanged: null,
                                                                                 ),
                                                                               ),
