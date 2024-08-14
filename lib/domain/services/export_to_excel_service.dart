@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-// import 'dart:html' as html;
+import 'dart:html' as html;
 import 'package:excel/excel.dart';
 
 Future<void> exportToExcel(
@@ -35,7 +35,7 @@ void populateExcelWithData(Sheet sheet, List<List<dynamic>> data) {
 }
 
 void downloadFile(String url, String fileName) {
-  // html.AnchorElement(href: url)
-  //   ..setAttribute("download", fileName)
-  //   ..click();
+  html.AnchorElement(href: url)
+    ..setAttribute("download", fileName)
+    ..click();
 }
