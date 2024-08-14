@@ -108,9 +108,9 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                           InkWell(
                                             onTap: () {
                                               Get.offNamed(
-                                                  Routes.masterDashboard);
+                                                  Routes.inventoryList);
                                             },
-                                            child: Text(" / MASTER",
+                                            child: Text(" / ASSET LIST",
                                                 style: Styles.greyLight14),
                                           ),
                                           Text(
