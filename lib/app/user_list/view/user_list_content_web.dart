@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
@@ -25,6 +26,8 @@ class UserListContentWeb extends StatefulWidget {
 }
 
 class _UserListContentWebState extends State<UserListContentWeb> {
+  final homecontroller = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<UserListController>(
