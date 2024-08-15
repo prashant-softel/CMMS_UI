@@ -715,7 +715,7 @@ class AddUserController extends GetxController {
     notificationList.forEach((e) {
       notificationlist.add(SaveNotificationList(
           notification_id: e?.notification_id.value ?? 0,
-          user_flag: e?.default_flag.value ?? 0,
+          user_flag: e?.user_flag.value ?? 0,
           can_change: e?.can_change.value ?? 0));
     });
 

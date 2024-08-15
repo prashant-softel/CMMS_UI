@@ -21,10 +21,6 @@ class ViewUserDetailController extends GetxController {
       GetNotificationModel().obs;
   RxList<NotificationList?> notificationListByUserId = <NotificationList>[].obs;
 
-  //int selectedRoleId = 0;
-  // Rx<AccessLevelModel?> accessLevelModel = AccessLevelModel().obs;
-  // RxList<AccessLevel?> accesslevel = <AccessLevel>[].obs;
-
   @override
   void onInit() async {
     try {
@@ -65,7 +61,7 @@ class ViewUserDetailController extends GetxController {
       plantListModel.value = _userDetailModel.plant_list ?? [];
       // selectedRoleId = userDetailModel.value?.role_id ?? 0;
       await getUserAccessListById(userId: userId, isloading: true);
-      // await getUserNotificationListById(userId: userId, isloading: true);
+      await getUserNotificationListById(userId: userId, isloading: true);
 
       // await getRoleAccessList(roleId: selectedRoleId, isloading: true);
     }
@@ -91,13 +87,4 @@ class ViewUserDetailController extends GetxController {
       accessList.value = accessListModel.value?.access_list ?? [];
     }
   }
-  // Future<void> getRoleAccessList({int? roleId, bool? isloading}) async {
-  //   final _accessLevelModel = await viewUserDetailPresenter.getRoleAccessList(
-  //       roleId: roleId, isLoading: isloading);
-
-  //   if (_accessLevelModel != null) {
-  //     accessLevelModel.value = _accessLevelModel;
-  //     accesslevel.value = accessLevelModel.value?.access_list ?? [];
-  //   }
-  // }
 }

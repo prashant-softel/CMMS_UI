@@ -2077,20 +2077,26 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                                 .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
                                                                                                       TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
                                                                                                       TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
-                                                                                                            if (getnotificationListDetails?.can_change.value == 1) {
-                                                                                                              getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
-                                                                                                            }
-                                                                                                          });
-                                                                                                        }),
+                                                                                                        child: IgnorePointer(
+                                                                                                          ignoring: true,
+                                                                                                          child: Obx(() {
+                                                                                                            return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
+                                                                                                              if (getnotificationListDetails?.can_change.value == 1) {
+                                                                                                                getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
+                                                                                                              }
+                                                                                                            });
+                                                                                                          }),
+                                                                                                        ),
                                                                                                       ),
                                                                                                       TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
+                                                                                                        child: IgnorePointer(
+                                                                                                          ignoring: true,
+                                                                                                          child: Obx(() {
+                                                                                                            return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
+                                                                                                              getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
+                                                                                                            });
+                                                                                                          }),
+                                                                                                        ),
                                                                                                       ),
                                                                                                       TableViewCell(child: Obx(() {
                                                                                                         return controller.rowItem(getnotificationListDetails?.user_flag.value, onCheck: (val) {
