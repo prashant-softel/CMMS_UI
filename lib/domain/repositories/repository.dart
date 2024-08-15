@@ -9223,7 +9223,7 @@ class Repository {
     }
   }
 
-  Future<GetNotificationByUserIdModel?> getUserNotificationListById(
+  Future<GetNotificationModel?> getUserNotificationListById(
     int? userId,
     bool? isLoading,
   ) async {
@@ -9235,8 +9235,8 @@ class Repository {
         isLoading: isLoading,
       );
       if (!res.hasError) {
-        final GetNotificationByUserIdModel _getNotificationByUserIdModel =
-            getNotificationByUserIdModelFromJson(res.data);
+        final GetNotificationModel _getNotificationByUserIdModel =
+            getNotificationModelFromJson(res.data);
         return _getNotificationByUserIdModel;
       } //
       else {
@@ -9520,32 +9520,34 @@ class Repository {
     }
   }
 
-  Future<bool> addUser({bool? isLoading, adduserJsonString}) async {
+  Future<Map<String, dynamic>> addUser(
+      {bool? isLoading, adduserJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.addUser(
           auth: auth,
           isLoading: isLoading,
           adduserJsonString: adduserJsonString);
-      print({"resp", res.data});
+      // print({"resp", res.data});
       if (!res.hasError) {
-        // Get.offNamed(Routes.userList);
-        Get.offAndToNamed(Routes.userList);
-
-        //   print("hellooooo");
-        return true;
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), ' addUser');
-        return false;
+        return Map();
       }
+      return Map();
     } catch (error) {
       print(error.toString());
-      return false;
+      return Map();
     }
   }
 
-  Future<bool> updateUser({bool? isLoading, adduserJsonString}) async {
+  Future<Map<String, dynamic>> updateUser(
+      {bool? isLoading, adduserJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateUser(
@@ -9554,16 +9556,19 @@ class Repository {
           adduserJsonString: adduserJsonString);
       print({"resp", res.data});
       if (!res.hasError) {
-        Get.offAllNamed(Routes.userList);
-        return true;
-      } //
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } ////
       else {
         Utility.showDialog(res.errorCode.toString(), ' updateUser');
-        return false;
+        return Map();
       }
+      return Map();
     } catch (error) {
       print(error.toString());
-      return false;
+      return Map();
     }
   }
 

@@ -84,7 +84,7 @@ class AddUserUsecase {
         userId,
         isLoading,
       );
-  Future<GetNotificationByUserIdModel?> getUserNotificationListById({
+  Future<GetNotificationModel?> getUserNotificationListById({
     int? userId,
     bool? isLoading,
   }) async =>
@@ -110,7 +110,7 @@ class AddUserUsecase {
         facilityId: facilityId,
         isLoading: isLoading,
       );
-  Future<bool> addUser({
+  Future<Map<String, dynamic>> addUser({
     adduserJsonString,
     bool? isLoading,
   }) async =>
@@ -124,7 +124,7 @@ class AddUserUsecase {
         userId,
         isLoading,
       );
-  Future<bool> updateUser({
+  Future<Map<String, dynamic>> updateUser({
     adduserJsonString,
     bool? isLoading,
   }) async =>
