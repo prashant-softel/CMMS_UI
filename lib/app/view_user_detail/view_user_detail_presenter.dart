@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
+import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
 
@@ -24,7 +25,7 @@ class ViewUserDetailPresenter {
         roleId: roleId,
         isLoading: isLoading,
       );
-  Future<GetNotificationByUserIdModel?> getUserNotificationListById({
+  Future<GetNotificationModel?> getUserNotificationListById({
     int? userId,
     bool? isLoading,
   }) async =>
