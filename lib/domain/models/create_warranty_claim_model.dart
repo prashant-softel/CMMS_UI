@@ -171,27 +171,27 @@ class ExternalEmails {
 class SupplierActions {
   SupplierActions({
     this.name,
-    // this.is_required,
+    this.is_required,
     this.required_by_date,
     this.srNumber,
   });
 
   String? name;
-  // bool? is_required;
+  int? is_required;
   String? required_by_date;
   String? srNumber;
 
   factory SupplierActions.fromJson(Map<String, dynamic> json) =>
       SupplierActions(
         name: json["name"],
-        // is_required: json["is_required"],
+        is_required: json["is_required"],
         required_by_date: json["required_by_date"],
         srNumber: json['srNumber'],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
-        // "is_required": is_required,
+        "is_required": is_required,
         "required_by_date": required_by_date,
         "srNumber": srNumber
       };

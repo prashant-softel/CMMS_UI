@@ -68,13 +68,14 @@ class CreateWarrantyClaimController extends GetxController {
   var supplierActions = <SupplierActions>[].obs;
   void updateSupplierActionText(
     String name,
+    int is_required,
     String required_by_data,
     String srNumber,
   ) {
     supplierActions.add(SupplierActions(
       name: name,
       required_by_date: required_by_data,
-      // is_required: is_required
+      is_required: is_required,
       srNumber: srNumber,
     ));
   }
@@ -486,6 +487,7 @@ class CreateWarrantyClaimController extends GetxController {
             viewWarrantyClaimDetailsModel.value!.supplierActions!.map((action) {
           return SupplierActions(
             name: action?.name,
+            is_required: action?.is_required,
             required_by_date: action?.required_by_date,
             srNumber: action?.srNumber,
           );
@@ -1113,6 +1115,7 @@ class CreateWarrantyClaimController extends GetxController {
       supplierActions.forEach((e) {
         supplier_action_list.add(SupplierActions(
           srNumber: e.srNumber,
+          is_required: e.is_required,
           name: e.name,
           required_by_date: e.required_by_date,
           // is_required: e.is_required
