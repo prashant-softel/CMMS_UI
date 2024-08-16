@@ -881,6 +881,15 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
+    // Add static description after Work description
+    String staticDescription =
+        "This is a static description text that explains the work done or provides additional details.";
+    page.graphics.drawString(staticDescription, contentFont,
+        bounds:
+            Rect.fromLTWH(30, currentY + 5, pageSize.width - 60, rowHeight * 2),
+        format: PdfStringFormat(alignment: PdfTextAlignment.left));
+    currentY += rowHeight * 2;
+
     // Material consumption section
     currentY += 10;
     page.graphics.drawRectangle(
