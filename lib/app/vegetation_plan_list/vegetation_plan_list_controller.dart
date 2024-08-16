@@ -41,7 +41,7 @@ class VegetationPlanListController extends GetxController {
     'No of Days': true,
     'Created By': true,
     'Frequency': true,
-    'Status': true,
+    // 'Status': true,
     // "search": true,
   });
 
@@ -73,7 +73,7 @@ class VegetationPlanListController extends GetxController {
       'No of Days': noOfDaysFilterText,
       'Created By': createdByFilterText,
       'Frequency': frequencyFilterText,
-      "Status": statusFilterText,
+      //"Status": statusFilterText,
     };
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;

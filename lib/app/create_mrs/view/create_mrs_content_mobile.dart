@@ -173,13 +173,14 @@ class AddMrsContentMobile extends GetView<CreateMrsController> {
                                           ],
                                         ),
                                         Dimens.boxHeight5,
-                                       ListView.builder(
+                                        ListView.builder(
                                           shrinkWrap: true,
                                           itemCount:
                                               controller.rowItem.value.length,
                                           itemBuilder: (context, index) {
                                             return Card(
-                                              color: Colors.lightBlue.shade50,
+                                              color: Color.fromARGB(
+                                                  255, 232, 239, 242),
                                               elevation: 10,
                                               shadowColor: Colors.black87,
                                               shape: RoundedRectangleBorder(
@@ -200,121 +201,152 @@ class AddMrsContentMobile extends GetView<CreateMrsController> {
                                                         (mapData['key'] ==
                                                                 "Drop_down")
                                                             ? Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                                "Material Name:"),
-                                                            Dimens
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                      "Material Name:"),
+                                                                  Dimens
                                                                       .boxHeight2,
-                                                            DropdownWebWidget(
-                                                              dropdownList:
-                                                                  controller
-                                                                      .assetItemList,
-                                                              selectedValue:
-                                                                  mapData[
-                                                                      "value"],
-                                                              onValueChanged:
+                                                                  DropdownWebWidget(
+                                                                    dropdownList:
+                                                                        controller
+                                                                            .assetItemList,
+                                                                    selectedValue:
+                                                                        mapData[
+                                                                            "value"],
+                                                                    onValueChanged:
                                                                         (list,
-                                                                  selectedValue) {
-// print({
+                                                                            selectedValue) {
+                                                                      // print({
                                                                       //   selectedValue:
                                                                       //       selectedValue
                                                                       // });
-                                                                mapData["value"] =
-                                                                    selectedValue;
-                                                                controller.dropdownMapperData[selectedValue] = list.firstWhere(
-                                                                  (element) =>
-                                                                      element.name ==
-                                                                      selectedValue,
-                                                                  orElse:
-                                                                      null);
-                                                              },
-                                                            ),
-                                                          ],
-                                                        )
+                                                                      mapData["value"] =
+                                                                          selectedValue;
+                                                                      controller.dropdownMapperData[selectedValue] = list.firstWhere(
+                                                                          (element) =>
+                                                                              element.name ==
+                                                                              selectedValue,
+                                                                          orElse:
+                                                                              null);
+                                                                    },
+                                                                  ),
+                                                                ],
+                                                              )
                                                             : (mapData['key'] ==
                                                                     "Requested_Qty")
                                                                 ? Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                                "Requested Qty:"),
-                                                            Dimens
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                          "Requested Qty:"),
+                                                                      Dimens
                                                                           .boxHeight2,
-                                                            Container(
-// padding: EdgeInsets.all(value),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Colors.black26,
-                                                                    offset: const Offset(
-                                                                            5.0,
-                                                                                                                                                    5.0,
-                                                                    ),
+                                                                      Container(
+                                                                          // padding: EdgeInsets.all(value),
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: Colors.black26,
+                                                                                offset: const Offset(
+                                                                                  5.0,
+                                                                                  5.0,
+                                                                                ),
                                                                                 blurRadius: 5.0,
                                                                                 spreadRadius: 1.0,
-                                                                  ),
-                                                                ],
-                                                                color:
+                                                                              ),
+                                                                            ],
+                                                                            color:
                                                                                 ColorValues.whiteColor,
-                                                                borderRadius:
-                                                                    BorderRadius.circular(5),
-                                                              ),
-                                                              child:
-                                                                  LoginCustomTextfield(
-                                                                inputFormatters: <TextInputFormatter>[
-                                                                  FilteringTextInputFormatter.digitsOnly
-                                                                ],
-                                                                maxLine:
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(5),
+                                                                          ),
+                                                                          child:
+                                                                              LoginCustomTextfield(
+                                                                            inputFormatters: <TextInputFormatter>[
+                                                                              FilteringTextInputFormatter.digitsOnly
+                                                                            ],
+                                                                            maxLine:
                                                                                 1,
-                                                                textController:
-                                                                    new TextEditingController(text: mapData["value"] ?? ''),
-                                                                onChanged:
-                                                                    (txt) {
-                                                                  mapData["value"] = txt;
-                                                                  },
-                                                              )),
-                                                          ],
-                                                        )
+                                                                            textController:
+                                                                                new TextEditingController(text: mapData["value"] ?? ''),
+                                                                            onChanged:
+                                                                                (txt) {
+                                                                              mapData["value"] = txt;
+                                                                            },
+                                                                          ))
+                                                                    ],
+                                                                  )
                                                                 : (mapData['key'] ==
                                                                         "Action ")
                                                                     ? Padding(
-                                                          padding:
-                                                              EdgeInsets.only(top: 10),
-                                                          child:
+                                                                        padding:
+                                                                            EdgeInsets.only(top: 10),
+                                                                        child:
                                                                             Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment.start,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment.start,
-                                                            children: [
-                                                              TableActionButton(
-                                                                color: ColorValues.appRedColor,
-                                                                icon: Icons.delete,
-                                                                label: '',
-                                                                message: '',
-                                                                onPress: () {
-                                                                  controller.rowItem.remove(controller.rowItem.value[index]);
-                                                                },
-                                                              )
-                                                            ],
-                                                          ),
-                                                        )
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.start,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            TableActionButton(
+                                                                              color: ColorValues.appRedColor,
+                                                                              icon: Icons.delete,
+                                                                              label: '',
+                                                                              message: '',
+                                                                              onPress: () {
+                                                                                controller.rowItem.remove(controller.rowItem.value[index]);
+                                                                              },
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                      )
                                                                     : (mapData['key'] ==
                                                                             "Available_Qty")
-                                                                        ? Text(
-                                                                            "${controller.dropdownMapperData.value[controller.rowItem.value[0]]?.available_qty ?? ""}")
+                                                                        ? Row(
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              Text("Available Qty: "),
+                                                                              Dimens.boxWidth2,
+                                                                              Obx(
+                                                                                () {
+                                                                                  final employeeName = controller.rowItem[index][0]['value'];
+                                                                                  final designation = controller.dropdownMapperData[employeeName]?.available_qty ?? "";
+                                                                                  return Text(designation.toString());
+                                                                                },
+                                                                              ),
+                                                                            ],
+                                                                          )
+
+                                                                        // ? Text(
+                                                                        //     "${controller.dropdownMapperData.value[controller.rowItem.value[0]]?.available_qty ?? ""}")
                                                                         : (mapData['key'] ==
                                                                                 "Material_Type")
-                                                                            ? Text(
-                                                                                "${controller.dropdownMapperData.value[controller.rowItem.value[0]]?.asset_type ?? ""}")
+                                                                            ?
+                                                                            // ? Text(
+                                                                            //     "${controller.dropdownMapperData.value[controller.rowItem.value[0]]?.asset_type ?? ""}")
+                                                                            Row(
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Text("Material Type: "),
+                                                                                  Dimens.boxWidth2,
+                                                                                  Obx(
+                                                                                    () {
+                                                                                      final employeeName = controller.rowItem[index][0]['value'];
+                                                                                      final designation = controller.dropdownMapperData[employeeName]?.asset_type ?? "";
+                                                                                      return Text(designation.toString());
+                                                                                    },
+                                                                                  ),
+                                                                                ],
+                                                                              )
                                                                             : Text(mapData['key'] ??
-                                                                ''),
+                                                                                ''),
                                                       ],
                                                     );
                                                   }).toList(),

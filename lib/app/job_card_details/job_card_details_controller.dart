@@ -15,6 +15,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:html_unescape/html_unescape.dart';
 import '../../domain/models/comment_model.dart';
@@ -53,8 +54,8 @@ class JobCardDetailsController extends GetxController {
   RxList<int> selectedEmployeeIdList = <int>[].obs;
   RxList<String> responsibilityList = <String>[].obs;
 
-  RxList<SelectedEmployee> employee = <SelectedEmployee>[].obs;
-  SelectedEmployee selectedEmployees = SelectedEmployee();
+  RxList<EmployeeModel> employee = <EmployeeModel>[].obs;
+  EmployeeModel selectedEmployees = EmployeeModel();
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   int selectedEmployeeId = 0;
@@ -94,7 +95,9 @@ class JobCardDetailsController extends GetxController {
 
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
-
+  RxList<WorkingAreaList?>? materialUsedAssets = <WorkingAreaList?>[].obs;
+  var latitude = 0.0.obs;
+  var longitude = 0.0.obs;
   int userId = 35;
   int facilityId = 0;
   RxMap plantDetails = {}.obs;
@@ -125,7 +128,7 @@ class JobCardDetailsController extends GetxController {
         "value": "Please Select",
       },
       {
-        "key": "Responsibility",
+        "key": "Designation",
         "value": "",
       },
       {
@@ -168,7 +171,7 @@ class JobCardDetailsController extends GetxController {
       {'key': "Material_Type", "value": ''},
       {'key': "Issued_Qty", "value": ''},
       {'key': "Used_Qty", "value": ''},
-      {'key': "Consumed_Qty", "value": ''},
+      {'key': "Consumed_Qty", "value": '', "intialQty": ''},
       {'key': "Action ", "value": ''},
     ]);
   }
@@ -187,6 +190,7 @@ class JobCardDetailsController extends GetxController {
           await getEmployeeList();
         }
       });
+
       if (jobCardId.value != 0) {
         jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
               jobCardId: jobCardId.value,
@@ -194,30 +198,32 @@ class JobCardDetailsController extends GetxController {
             ) ??
             [];
         getHistory(facilityId);
-        jobCardDetailsModel.value =
-            jobCardList.value.firstWhere((element) => element?.id != null);
+        jobCardDetailsModel.value = jobCardList.value[0];
+        jobId.value = jobCardDetailsModel.value?.jobId;
         createPlantDetailsTableData();
         createJobDetailsTableData();
         createPermitDetailsTableData();
-        jobCardDetailsModel.value?.lstCmjcEmpList?.forEach((element) {
-          employeesDeployed.value.add([
-            {
-              "key": "Employee Name",
-              "value": "${element.name}",
-              "empId": "${element.id}",
-            },
-            {
-              "key": "Responsibility",
-              "value": "${element.responsibility}",
-            },
-            {
-              "key": "Action",
-              "value": "",
-            }
-          ]);
-          deployedEmployeeMapperData[element.name ?? ""] = employeeList
-              .firstWhere((e) => e!.name == element.name, orElse: null);
-        });
+        getLocation();
+
+        if (jobCardDetailsModel != null) {
+          jobCardDetailsModel.value?.lstCmjcEmpList?.forEach((element) {
+            employeesDeployed.value.add([
+              {
+                "key": "Employee Name",
+                "value": "${element.name}",
+              },
+              {
+                "key": "Designation",
+                "value": "${element.designation ?? "No Designation"}",
+              },
+              {
+                "key": "Action",
+                "value": "",
+              }
+            ]);
+            deployedEmployeeMapperData[element.name ?? ""] = element;
+          });
+        }
       }
 
       responsibilityCtrlrs.add(TextEditingController());
@@ -231,20 +237,106 @@ class JobCardDetailsController extends GetxController {
   Future<void> getMrsListByModule({required int jobId}) async {
     rowItem.value = [];
     cmmrsItems!.value = <CmmrsItems>[];
+    materialUsedAssets!.value = <WorkingAreaList>[];
 
+    // Fetching the list of Mrs by Module
     listMrsByTaskId?.value = await jobCardDetailsPresenter.getMrsListByModule(
           jobId,
           facilityId,
           false,
         ) ??
         [];
-    var _assetsList = listMrsByTaskId!.last!.cmmrsItems;
-    for (var asset in _assetsList!) {
-      cmmrsItems!.add(asset);
+    if (listMrsByTaskId?.value.length != 0) {
+      var _assetsList = listMrsByTaskId!.last!.cmmrsItems ?? [];
+      for (var asset in _assetsList!) {
+        cmmrsItems!.add(asset);
+      }
+
+      // Populating materialUsedAssets
+      var _usedassetsList =
+          listMrsByTaskId!.value.last!.material_used_by_assets!;
+      for (var usedasset in _usedassetsList) {
+        materialUsedAssets!.add(usedasset);
+      }
+      if (materialUsedAssets!.value.length == 0) {
+        addRowItem();
+      }
+
+      // Ensure workingAreaList is populated and not null
+      if (workingAreaList != null && workingAreaList!.isNotEmpty) {
+        Set<String> seenEntries = {}; // Set to keep track of unique entries
+
+        for (var workingArea in workingAreaList!) {
+          if (workingArea != null) {
+            var matchedUsedAssets = materialUsedAssets!
+                .where(
+                    (usedAsset) => usedAsset!.asset_id == workingArea.asset_id)
+                .toList();
+
+            for (var matchedUsedAsset in matchedUsedAssets) {
+              for (var item in matchedUsedAsset!.items!) {
+                var consumedQty = '';
+                var dropDownEqValue = matchedUsedAsset.name ?? '';
+
+                var cmmrsItem = cmmrsItems!.firstWhere(
+                    (e) => e!.id == item.mrs_Item_Id,
+                    orElse: () => null);
+
+                if (cmmrsItem != null) {
+                  consumedQty = item.used_qty.toString();
+
+                  // Define unique criteria
+                  String entryKey =
+                      '${cmmrsItem.name}-${dropDownEqValue}-${cmmrsItem.serial_number}';
+
+                  // Only add if this entry is not already seen
+                  if (!seenEntries.contains(entryKey)) {
+                    seenEntries.add(entryKey);
+
+                    rowItem.add([
+                      {"key": "Drop_down", "value": '${cmmrsItem.name}'},
+                      {"key": "Drop_down_eq", "value": dropDownEqValue},
+                      {'key': "Sr_No", "value": cmmrsItem.serial_number ?? ''},
+                      {'key': "code", "value": cmmrsItem.asset_MDM_code ?? ''},
+                      {
+                        'key': "Material_Type",
+                        "value": cmmrsItem.asset_type ?? ''
+                      },
+                      {
+                        'key': "Issued_Qty",
+                        "value": cmmrsItem.issued_qty.toString()
+                      },
+                      {
+                        'key': "Used_Qty",
+                        "value": cmmrsItem.used_qty.toString()
+                      },
+                      {
+                        'key': "Consumed_Qty",
+                        "value": consumedQty,
+                        "intialQty": consumedQty
+                      },
+                      {'key': "Action ", "value": ''},
+                    ]);
+
+                    dropdownMapperData[cmmrsItem.name ?? ""] = cmmrsItem;
+                    dropdownMapperDataworkingArea[dropDownEqValue] =
+                        workingAreaList!.firstWhere(
+                      (e) => e.name == dropDownEqValue,
+                      orElse: () => null!,
+                    );
+                  }
+                }
+              }
+            }
+          }
+        }
+        // Debugging: Print row items
+        print('Row items: $rowItem');
+      }
+      _processJsonData();
+      allTrue.value = itemExistsWithZeroDifference.every((element) => element);
     }
-    _processJsonData();
-    allTrue.value = itemExistsWithZeroDifference.every((element) => element);
-    addRowItem();
+    // Populating cmmrsItems
   }
 
   void _processJsonData() {
@@ -295,7 +387,9 @@ class JobCardDetailsController extends GetxController {
         }
         update(["employeeList"]);
       }
-      addEmployeesDeployed();
+      if (jobCardDetailsModel.value!.lstCmjcEmpList!.isEmpty) {
+        addEmployeesDeployed();
+      }
     }
   }
 
@@ -333,32 +427,74 @@ class JobCardDetailsController extends GetxController {
     List<TranferItems> items = [];
     rowItem.forEach((element) {
       TranferItems item = TranferItems(
-        assetItemID:
-            dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-        facilityID: facilityId,
-        fromActorID: jobCardId.value,
-        fromActorType: AppConstants.kJobCard,
-        mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-        mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
-        qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
-        refID: jobCardId.value,
-        refType: AppConstants.kJobCard,
-        remarks: "remarks",
-        toActorID:
-            dropdownMapperDataworkingArea[element[1]["value"]].workingAreaId ??
-                0,
-        toActorType: AppConstants.kInventory,
-        transaction_id:
-            dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
-      );
+          assetItemID:
+              dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+          facilityID: facilityId,
+          fromActorID: jobCardId.value,
+          fromActorType: AppConstants.kJobCard,
+          mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
+          mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
+          qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
+          refID: jobCardId.value,
+          refType: AppConstants.kJobCard,
+          remarks: "remarks",
+          toActorID: dropdownMapperDataworkingArea[element[1]["value"]] != null
+              //  &&
+              //         dropdownMapperDataworkingArea[element[1]["value"]]
+              //                 .workingAreaId !=
+              //             null &&
+              //         dropdownMapperDataworkingArea[element[1]["value"]]
+              //                 .workingAreaId !=
+              //             0
+              ? dropdownMapperDataworkingArea[element[1]["value"]].asset_id
+              : 0,
+          toActorType:
+              dropdownMapperDataworkingArea[element[1]["value"]] != null
+                  ? AppConstants.kInventory
+                  : 0,
+          transaction_id:
+              dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
+          latitude: latitude.value,
+          longitude: longitude.value);
 
       items.add(item);
     });
+
     var transferItemJsonString = items;
     var responsetransferItem = await jobCardDetailsPresenter.transferItem(
       transferItemJsonString: transferItemJsonString,
       isLoading: true,
     );
+  }
+
+  void getLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      print('Location services are disabled.');
+      return;
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print('Location permissions are denied.');
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      print('Location permissions are permanently denied.');
+      return;
+    }
+
+    Position position = await Geolocator.getCurrentPosition();
+    latitude.value = position.latitude;
+    longitude.value = position.longitude;
+    print('Current Position: ${position.toString()}');
   }
 
   void createJobDetailsTableData() {
@@ -470,13 +606,13 @@ class JobCardDetailsController extends GetxController {
         });
       }
 
-      List<SelectedEmployee> employees = [];
+      List<EmployeeModel> employees = [];
       employeesDeployed.forEach((element) {
-        SelectedEmployee item = SelectedEmployee(
+        EmployeeModel item = EmployeeModel(
           id: int.parse(
               deployedEmployeeMapperData[element[0]["value"]]?.id.toString() ??
                   '0'),
-          responsibility: element[1]["value"] ?? '0',
+          designation: element[1]["value"] ?? '0',
         );
         employees.add(item);
       });
@@ -555,11 +691,11 @@ class JobCardDetailsController extends GetxController {
       {required int jcCard, List<dynamic>? fileIds}) async {
     await startStopJobCard();
 
-    List<SelectedEmployee> employees = [];
+    List<EmployeeModel> employees = [];
     employeesDeployed.forEach((element) {
-      SelectedEmployee item = SelectedEmployee(
+      EmployeeModel item = EmployeeModel(
         id: deployedEmployeeMapperData[element[0]["value"]]?.id,
-        responsibility: element[1]["value"] ?? '0',
+        designation: element[1]["value"] ?? '0',
       );
       employees.add(item);
     });
@@ -691,11 +827,11 @@ class JobCardDetailsController extends GetxController {
       lotoId = lotoAsset.lotoId ?? 0;
     }
 
-    List<SelectedEmployee> employees = [];
+    List<EmployeeModel> employees = [];
     employeesDeployed.forEach((element) {
-      SelectedEmployee item = SelectedEmployee(
+      EmployeeModel item = EmployeeModel(
         id: deployedEmployeeMapperData[element[0]["value"]]?.id,
-        responsibility: element[1]["value"] ?? '0',
+        designation: element[1]["value"] ?? '0',
       );
       employees.add(item);
     });
@@ -906,9 +1042,9 @@ class JobCardDetailsController extends GetxController {
       ],
     );
 
-    selectedEmployees = SelectedEmployee(
+    selectedEmployees = EmployeeModel(
       id: selectedEmployeeId,
-      responsibility: responsibility,
+      designation: responsibility,
     );
     employee.add(selectedEmployees);
     employeeTableRows.add(newRow);

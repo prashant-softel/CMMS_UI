@@ -3,6 +3,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
@@ -38,6 +39,8 @@ class WarrantyClaimPresenter {
     );
   }
 
+  void clearValue() async => warrantyClaimUsecase.clearValue();
+  void clearTypeValue() async => warrantyClaimUsecase.clearTypeValue();
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
@@ -53,7 +56,18 @@ class WarrantyClaimPresenter {
     );
   }
 
- 
+  Future<List<HistoryModel>?> getHistory(
+    moduleType,
+    wcId,
+    facilityId,
+    isLoading,
+  ) async =>
+      await warrantyClaimUsecase.getHistory(
+        moduleType: moduleType,
+        wcId: wcId,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
 
   Future<List<BusinessListModel>> getBusinessList({
     required bool isLoading,
@@ -62,7 +76,7 @@ class WarrantyClaimPresenter {
   }) async {
     return warrantyClaimUsecase.getBusinessList(
       isLoading: isLoading,
-      facilityId:facilityId,
+      facilityId: facilityId,
       businessType: businessType,
     );
   }
@@ -98,14 +112,13 @@ class WarrantyClaimPresenter {
   }
 
   Future<InventoryDetailsModel?> getInventoryDetail({
-  
-    bool? isLoading,  
+    bool? isLoading,
     required int id,
   }) async {
-      return warrantyClaimUsecase.getInventoryDetail(
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+    return warrantyClaimUsecase.getInventoryDetail(
+      id: id,
+      isLoading: isLoading ?? false,
+    );
   }
 
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({

@@ -118,11 +118,13 @@ class AddModuleCleaningExecutionUsecase {
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
+    int? featureId,
     bool? isLoading,
   }) async =>
-      await _repository.getAssignedToList(
+      await _repository.getAssignedToEmployee(
         auth,
         facilityId,
+        featureId,
         isLoading,
       );
   Future<bool> assignToMC({

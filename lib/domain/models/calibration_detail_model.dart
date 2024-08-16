@@ -1,10 +1,11 @@
 import 'dart:convert';
-
 import 'package:cmms/app/utils/utility.dart';
 
+// Converts JSON string to CalibrationDetailModel
 CalibrationDetailModel calibrationDetailModelFromJson(String str) =>
     CalibrationDetailModel.fromJson(json.decode(str));
 
+// The CalibrationDetailModel class
 class CalibrationDetailModel {
   int? calibrationId;
   String? requestApprovedBy;
@@ -14,30 +15,34 @@ class CalibrationDetailModel {
   dynamic approvedBy;
   dynamic rejectedBy;
   String? startedAt;
-  dynamic statusShort;
-  dynamic statusLong;
-  dynamic requestedAt;
+  String? statusShort;
+  String? statusLong;
+  String? requestedAt;
   dynamic requestedBy;
-  dynamic completedAt;
+  String? completedAt;
   dynamic completedBy;
-  dynamic closedAt;
+  String? closedAt;
   dynamic closedBy;
   int? assetId;
-  dynamic assetName;
-  dynamic assetSerial;
-  dynamic categoryName;
+  String? assetName;
+  String? assetSerial;
+  String? categoryName;
   int? statusId;
-  dynamic calibrationStatus;
-  dynamic lastCalibrationDate;
-  dynamic nextCalibrationDueDate;
+  String? calibrationStatus;
+  String? lastCalibrationDate;
+  String? nextCalibrationDueDate;
+  String? scheduleStartDate;
+  String? lastCalibrationDueDate;
+  String? calibrationDate;
   int? frequencyId;
-  dynamic frequencyName;
-  dynamic vendorName;
-  dynamic responsiblePerson;
-  dynamic receivedDate;
-  dynamic assetHealthStatus;
-  int? is_damaged;
-  List<FileList>? file_list;
+  String? frequencyName;
+  String? vendorName;
+  String? responsiblePerson;
+  String? receivedDate;
+  String? assetHealthStatus;
+  int? isDamaged;
+  List<FileList>? fileList;
+  List<FileList>? file_list_calibration;
 
   CalibrationDetailModel(
       {this.calibrationId,
@@ -64,47 +69,47 @@ class CalibrationDetailModel {
       this.calibrationStatus,
       this.lastCalibrationDate,
       this.nextCalibrationDueDate,
+      this.scheduleStartDate,
+      this.lastCalibrationDueDate,
+      this.calibrationDate,
       this.frequencyId,
       this.frequencyName,
       this.vendorName,
       this.responsiblePerson,
       this.receivedDate,
       this.assetHealthStatus,
-      this.is_damaged,this.file_list});
+      this.isDamaged,
+      this.fileList,
+      this.file_list_calibration});
 
   factory CalibrationDetailModel.fromJson(Map<String, dynamic> json) {
     return CalibrationDetailModel(
       calibrationId: json['calibration_id'],
-      is_damaged: json['is_damaged'] ?? 0,
-      file_list: json["file_list"] != null
-          ? List<FileList>.from(
-              json["file_list"].map((x) => FileList.fromJson(x)))
-          : [],
       requestApprovedBy: json['request_approved_by'],
       requestRejectedBy: json['request_rejected_by'],
       requestApprovedAt: json['request_approved_at'] == null
-          ? json['request_approved_at']
+          ? null
           : Utility.getFormatedyearMonthDay(json['request_approved_at']),
       requestRejectedAt: json['request_rejected_at'] == null
-          ? json['request_rejected_at']
+          ? null
           : Utility.getFormatedyearMonthDay(json['request_rejected_at']),
       approvedBy: json['approved_by'],
       rejectedBy: json['rejected_by'],
       startedAt: json['started_at'] == null
-          ? json['started_at']
+          ? null
           : Utility.getFormatedyearMonthDay(json['started_at']),
       statusShort: json['status_short'],
       statusLong: json['status_long'],
       requestedAt: json['requested_at'] == null
-          ? json['requested_at']
+          ? null
           : Utility.getFormatedyearMonthDay(json['requested_at']),
       requestedBy: json['requested_by'],
       completedAt: json['completed_at'] == null
-          ? json['completed_at']
+          ? null
           : Utility.getFormatedyearMonthDay(json['completed_at']),
       completedBy: json['completed_by'],
       closedAt: json['closed_at'] == null
-          ? json['closed_at']
+          ? null
           : Utility.getFormatedyearMonthDay(json['closed_at']),
       closedBy: json['closed_by'],
       assetId: json['asset_id'],
@@ -113,21 +118,51 @@ class CalibrationDetailModel {
       categoryName: json['category_name'],
       statusId: json['statusID'],
       calibrationStatus: json['calibration_status'],
-      lastCalibrationDate: json['last_calibration_date'],
-      nextCalibrationDueDate: json['next_calibration_due_date'],
+      lastCalibrationDate: json['last_calibration_date'] == null
+          ? null
+          : Utility.getFormatedyearMonthDay(json['last_calibration_date']),
+      nextCalibrationDueDate: json['next_calibration_due_date'] == null
+          ? null
+          : Utility.getFormatedyearMonthDay(json['next_calibration_due_date']),
       frequencyId: json['frequency_id'],
       frequencyName: json['frequency_name'],
       vendorName: json['vendor_name'],
+      scheduleStartDate: json['schedule_start_date'] == null
+          ? null
+          : Utility.getFormatedyearMonthDay(json['schedule_start_date']),
+      calibrationDate: json['calibration_due_date'] == null
+          ? null
+          : Utility.getFormatedyearMonthDay(json['calibration_due_date']),
+      lastCalibrationDueDate: json['last_calibration_due_date'] == null
+          ? null
+          : Utility.getFormatedyearMonthDay(json['last_calibration_due_date']),
       responsiblePerson: json['responsible_person'],
       receivedDate: json['received_date'] == null
-          ? json['received_date']
+          ? null
           : Utility.getFormatedyearMonthDay(json['received_date']),
       assetHealthStatus: json['asset_health_status'],
+      isDamaged: json['is_damaged'] ?? 0,
+      fileList: json['file_list'] != null
+          ? List<FileList>.from(
+              json['file_list'].map((x) => FileList.fromJson(x)))
+          : [],
+      file_list_calibration: json['file_list_calibration'] != null
+          ? List<FileList>.from(
+              json['file_list_calibration'].map((x) => FileList.fromJson(x)))
+          : [],
     );
   }
 }
 
+// The FileList class
 class FileList {
+  int? id;
+  String? fileName;
+  String? fileCategory;
+  int? fileSize;
+  int? status;
+  String? description;
+
   FileList({
     this.id,
     this.fileName,
@@ -137,16 +172,9 @@ class FileList {
     this.description,
   });
 
-  int? id;
-  String? fileName;
-  String? fileCategory;
-  int? fileSize;
-  int? status;
-  String? description;
-
   factory FileList.fromJson(Map<String, dynamic> json) => FileList(
-        id: json["id"],
-        fileName: json["fileName"],
+        id: json['id'],
+        fileName: json['fileName'],
         fileCategory: json['fileCategory'],
         fileSize: json['fileSize'],
         status: json['status'],
@@ -154,11 +182,11 @@ class FileList {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "fileName": fileName,
-        "fileCategory": fileCategory,
-        "fileSize": fileSize,
-        "status": status,
-        "description": description,
+        'id': id,
+        'fileName': fileName,
+        'fileCategory': fileCategory,
+        'fileSize': fileSize,
+        'status': status,
+        'description': description,
       };
 }

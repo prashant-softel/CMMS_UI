@@ -165,6 +165,19 @@ class HomeDrawer extends GetView<HomeController> {
                                 width: 40,
                                 height: 16,
                                 color: Color(0xffD2D0D0),
+                                title: "Document Manager",
+                                icon: "assets/files/inventory.png",
+                                press: () {
+                                  Get.offAllNamed(Routes.docVersionDashboard);
+                                },
+                              ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
                                 title: "Masters",
                                 icon: "assets/files/inventory.png",
                                 press: () {

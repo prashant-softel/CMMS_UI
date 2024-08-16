@@ -188,7 +188,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Contractor Name'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
                                                                               context)
@@ -230,7 +230,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Risk Type'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               Obx(
                                                                 () =>
                                                                     DropdownWebStock(
@@ -263,7 +263,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Corrective/Preventive Action'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
                                                                               context)
@@ -302,7 +302,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Responsible Person'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
                                                                               context)
@@ -341,13 +341,17 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Contact Number'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
                                                                               context)
                                                                           .size
                                                                           .width *
                                                                       .2),
+                                                                  inputFormatters: [
+                                                                    FilteringTextInputFormatter
+                                                                        .digitsOnly
+                                                                  ],
                                                                   keyboardType:
                                                                       TextInputType
                                                                           .number,
@@ -383,40 +387,72 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Cost Type'),
-                                                              Dimens.boxWidth10,
-                                                              Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5),
+                                                              Dimens.boxWidth3,
+                                                              Obx(
+                                                                () =>
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .costType,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isCostTypeListSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedCostTypeList
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
                                                                 ),
-                                                                child:
-                                                                    LoginCustomTextfield(
-                                                                        width: (MediaQuery.of(context).size.width *
-                                                                            .2),
-                                                                        textController:
-                                                                            controller
-                                                                                .costTypeCtrlr,
-                                                                        //validate
-                                                                        errorController: controller.isCostInvalid.value
-                                                                            ? "Required field"
-                                                                            : null,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          if (value.trim().length >
-                                                                              0) {
-                                                                            controller.isCostInvalid.value =
-                                                                                false;
-                                                                          } else {
-                                                                            controller.isCostInvalid.value =
-                                                                                true;
-                                                                          }
-                                                                        }),
                                                               ),
                                                             ],
                                                           ),
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title:
+                                                          //             'Cost Type'),
+                                                          //     Dimens.boxWidth10,
+                                                          //     Container(
+                                                          //       decoration:
+                                                          //           BoxDecoration(
+                                                          //         borderRadius:
+                                                          //             BorderRadius
+                                                          //                 .circular(
+                                                          //                     5),
+                                                          //       ),
+                                                          //       child:
+                                                          //           LoginCustomTextfield(
+                                                          //               width: (MediaQuery.of(context).size.width *
+                                                          //                   .2),
+                                                          //               textController:
+                                                          //                   controller
+                                                          //                       .costTypeCtrlr,
+                                                          //               //validate
+                                                          //               errorController: controller.isCostInvalid.value
+                                                          //                   ? "Required field"
+                                                          //                   : null,
+                                                          //               onChanged:
+                                                          //                   (value) {
+                                                          //                 if (value.trim().length >
+                                                          //                     0) {
+                                                          //                   controller.isCostInvalid.value =
+                                                          //                       false;
+                                                          //                 } else {
+                                                          //                   controller.isCostInvalid.value =
+                                                          //                       true;
+                                                          //                 }
+                                                          //               }),
+                                                          //     ),
+                                                          //   ],
+                                                          // ),
                                                           Dimens.boxHeight5,
                                                         ],
                                                       ),
@@ -432,7 +468,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Date of Observation'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               CustomTextFieldForStock(
                                                                 width: MediaQuery.of(
                                                                             context)
@@ -484,7 +520,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Type of Observation'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               Container(
                                                                 decoration:
                                                                     BoxDecoration(
@@ -524,7 +560,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Location of Observation'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
                                                                               context)
@@ -563,7 +599,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Source of Observation'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               Container(
                                                                 decoration:
                                                                     BoxDecoration(
@@ -603,7 +639,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               CustomRichText(
                                                                   title:
                                                                       'Target Date'),
-                                                              Dimens.boxWidth10,
+                                                              Dimens.boxWidth3,
                                                               CustomTextFieldForStock(
                                                                 width: MediaQuery.of(
                                                                             context)
@@ -829,9 +865,13 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                     controller.obsDateTc.text =
                                         DateFormat('yyyy-MM-dd')
                                             .format(p0.value);
-                                    controller.openObsDatePicker =
-                                        !controller.openObsDatePicker;
+                                    controller.openObsDatePicker = false;
+
                                     controller.isObsDateTcInvalid.value = false;
+                                    controller.update(['stock_Mangement']);
+                                  },
+                                  onCancel: () {
+                                    controller.openObsDatePicker = false;
                                     controller.update(['stock_Mangement']);
                                   },
                                 ),
@@ -848,11 +888,15 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                     controller.targetDateTc.text =
                                         DateFormat('yyyy-MM-dd')
                                             .format(p0.value);
-                                    controller.openTargetObsDatePicker =
-                                        !controller.openTargetObsDatePicker;
+                                    controller.openTargetObsDatePicker = false;
+
                                     controller.isTargetDateInvalid.value =
                                         false;
                                     controller.update(['stock_Mangement']);
+                                  },
+                                  onCancel: () {
+                                    controller.openTargetObsDatePicker = false;
+                                    controller.update(['stock_Mangement_Date']);
                                   },
                                 ),
                               ),
@@ -883,7 +927,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                             backgroundColor: ColorValues.cancelColor,
                             text: 'Cancel',
                             onPressed: () {
-                              Get.toNamed(Routes.complianceScreen);
+                              Get.toNamed(Routes.misDashboard);
                             },
                           ),
                         ),
@@ -896,7 +940,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   text: 'Submit',
                                   onPressed: () {
                                     controller.isFormInvalid.value = false;
-                                    controller.createObs(1);
+                                    controller.createObs(
+                                        position: 1,
+                                        fileIds: dropzoneController.fileIds);
                                   },
                                 ),
                               )
@@ -907,7 +953,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   text: 'Update',
                                   onPressed: () {
                                     controller.isFormInvalid.value = false;
-                                    controller.createObs(0);
+                                    controller.createObs(
+                                        position: 0,
+                                        fileIds: dropzoneController.fileIds);
                                   },
                                 ),
                               ),
@@ -916,7 +964,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                     )
                 // : Dimens.box0
                 ),
-      
           ),
         );
         // );

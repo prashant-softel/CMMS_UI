@@ -436,7 +436,7 @@ class PreventiveListController extends GetxController {
         facility_id: facilityId,
         frequency_id: selectedfrequencyId,
         status: 1,
-        type: 1,
+        type: type.value,
         id: checklistId,
         checklist_number: _checklistNumber);
     var checklistJsonString =

@@ -69,7 +69,9 @@ class AddJobModel {
         "breakdown_time": breakdownTime,
         "AssetsIds": List<dynamic>.from(assetsIds.map((x) => x)),
         "WorkType_Ids": List<dynamic>.from(workTypeIds.map((x) => x)),
-        "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
+        "uploadfile_ids": uploadfile_ids != null
+            ? List<dynamic>.from(uploadfile_ids!.map((x) => x))
+            : null,
       };
 }
 

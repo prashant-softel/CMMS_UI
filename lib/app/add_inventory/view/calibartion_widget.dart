@@ -2,7 +2,9 @@ import 'package:cmms/app/add_inventory/add_inventory_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/file_upload2_details_widget.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_dropzone2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 
 import 'package:cmms/app/widgets/stock_dropdown.dart';
@@ -261,13 +263,13 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                                     Expanded(
                                                       flex: 2,
                                                       child:
-                                                          FileUploadWidgetWithDropzone(),
+                                                          FileUploadWidgetWithDropzone2(),
                                                     ),
                                                     SizedBox(width: 10),
                                                     Expanded(
                                                         flex: 8,
                                                         child:
-                                                            FileUploadDetailsWidgetWeb()),
+                                                            FileUpload2DetailsWidgetWeb()),
                                                   ],
                                                 ),
                                               ),
@@ -302,6 +304,10 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                         DateFormat('yyyy-MM-dd').format(p0.value);
                     controller.openLastCalibrationDatePicker =
                         !controller.openLastCalibrationDatePicker;
+                    controller.update(['calibration_tab']);
+                  },
+                  onCancel: () {
+                    controller.openLastCalibrationDatePicker = false;
                     controller.update(['calibration_tab']);
                   },
                 ),

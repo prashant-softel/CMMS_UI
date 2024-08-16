@@ -157,6 +157,8 @@ class ModuleCleaningDashboardScreen
                                         ? _moduleCleaningList(
                                             tittle: "Add Plan",
                                             ontap: () {
+                                              controller.clearStoreDataMcid();
+                                              controller.clearStoreDataPlanid();
                                               Get.offNamed(
                                                 Routes.moduleCleaningPlanning,
                                               );

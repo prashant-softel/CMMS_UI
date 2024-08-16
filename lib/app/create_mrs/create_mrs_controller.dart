@@ -150,6 +150,10 @@ class CreateMrsController extends GetxController {
     // }
   }
 
+  void clearStoreData() {
+    createMrsPresenter.clearValue();
+  }
+
   Future<void> createMrs() async {
     // try {
     // checkform();
@@ -201,14 +205,15 @@ class CreateMrsController extends GetxController {
       Map<String, dynamic>? responseCreateMrs =
           await createMrsPresenter.createMrs(
         createMrsJsonString: createMrsJsonString,
+        type: type.value,
         isLoading: true,
       );
-      if (responseCreateMrs == null) {
-      } else {
-        Get.offAllNamed(
-          Routes.mrsListScreen,
-        );
-      }
+      // if (responseCreateMrs == null) {
+      // } else {
+      //   Get.offAllNamed(
+      //     Routes.mrsListScreen,
+      //   );
+      // }
       // } catch (e) {
       //   print(e);
       // }

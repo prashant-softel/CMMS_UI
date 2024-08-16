@@ -300,12 +300,43 @@ class EditMrsContentMobile extends GetView<EditMrsController> {
                                                                       )
                                                                     : (mapData['key'] ==
                                                                             "Available_Qty")
-                                                                        ? Text(
-                                                                            "${controller.dropdownMapperData.value[controller.rowItem.value[0]]?.available_qty ?? ""}")
+                                                                        ? Row(
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              Text("Available Qty: "),
+                                                                              Dimens.boxWidth2,
+                                                                              Obx(
+                                                                                () {
+                                                                                  final employeeName = controller.rowItem[index][0]['value'];
+                                                                                  final designation = controller.dropdownMapperData[employeeName]?.available_qty ?? "";
+                                                                                  return Text(designation.toString());
+                                                                                },
+                                                                              ),
+                                                                            ],
+                                                                          )
+
+                                                                        // ? Text(
+                                                                        //     "${controller.dropdownMapperData.value[controller.rowItem.value[0]]?.available_qty ?? ""}")
                                                                         : (mapData['key'] ==
                                                                                 "Material_Type")
-                                                                            ? Text(
-                                                                                "${controller.dropdownMapperData.value[controller.rowItem.value[0]]?.asset_type ?? ""}")
+                                                                            ?
+                                                                            // ? Text(
+                                                                            //     "${controller.dropdownMapperData.value[controller.rowItem.value[0]]?.asset_type ?? ""}")
+                                                                            Row(
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Text("Material Type: "),
+                                                                                  Dimens.boxWidth2,
+                                                                                  Obx(
+                                                                                    () {
+                                                                                      final employeeName = controller.rowItem[index][0]['value'];
+                                                                                      final designation = controller.dropdownMapperData[employeeName]?.asset_type ?? "";
+                                                                                      return Text(designation.toString());
+                                                                                    },
+                                                                                  ),
+                                                                                ],
+                                                                              )
                                                                             : Text(mapData['key'] ??
                                                                                 ''),
                                                       ],

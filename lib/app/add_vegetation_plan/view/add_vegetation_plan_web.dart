@@ -8,7 +8,10 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/veg_set_equipments.dart';
+import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -164,9 +167,8 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                                       .black26,
                                                                   offset:
                                                                       const Offset(
-                                                                    5.0,
-                                                                    5.0,
-                                                                  ),
+                                                                          5.0,
+                                                                          5.0),
                                                                   blurRadius:
                                                                       5.0,
                                                                   spreadRadius:
@@ -329,7 +331,6 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                           ),
                                                         ],
                                                       ),
-                                                  
                                                       Dimens.boxHeight10,
                                                     ],
                                                   ),
@@ -498,9 +499,8 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                                       .black26,
                                                                   offset:
                                                                       const Offset(
-                                                                    5.0,
-                                                                    5.0,
-                                                                  ),
+                                                                          5.0,
+                                                                          5.0),
                                                                   blurRadius:
                                                                       5.0,
                                                                   spreadRadius:
@@ -550,6 +550,9 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                                       .value = true;
                                                                 }
                                                               },
+                                                              enabled: controller
+                                                                  .isDurationEditable
+                                                                  .value,
                                                             ),
                                                           ),
                                                         ],
@@ -622,7 +625,7 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                 : Container(
                                                     margin: Dimens.edgeInsets20,
                                                     height: ((controller
-                                                                .schedules
+                                                                .schedules!
                                                                 .length) *
                                                             40) +
                                                         200,
@@ -646,8 +649,8 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsets.all(
-                                                                  10.0),
+                                                              const EdgeInsets
+                                                                  .all(10.0),
                                                           child: Row(
                                                             children: [
                                                               Text(
@@ -759,15 +762,13 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                                   child: Center(
                                                                     child: Text(
                                                                       "Set Equipments",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            18,
-                                                                        fontWeight:
-                                                                            FontWeight.w100,
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              18,
+                                                                          fontWeight: FontWeight
+                                                                              .w100,
+                                                                          color:
+                                                                              Colors.white),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -775,194 +776,349 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                             ],
                                                           ),
                                                         ),
+                                                        Expanded(
+                                                          child: DataTable2(
+                                                            border: TableBorder.all(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        206,
+                                                                        229,
+                                                                        234)),
+                                                            columns: [
+                                                              DataColumn2(
+                                                                //fixedWidth: 150,
+                                                                label: Text(
+                                                                  'Day',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // fixedWidth: 150,
+                                                                label: Text(
+                                                                  'No. of Blocks',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // fixedWidth: 300,
+                                                                label: Text(
+                                                                  'No of Inverters',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                              DataColumn2(
+                                                                // fixedWidth: 300,
+                                                                label: Text(
+                                                                  'Grass Cutting Area',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                            rows: controller
+                                                                .rowItem.value
+                                                                .map((record) {
+                                                              return DataRow(
+                                                                // height: 130,
+                                                                cells: record.map(
+                                                                    (mapData) {
+                                                                  return DataCell(
+                                                                    (mapData['key'] ==
+                                                                            "cleaningType")
+                                                                        ? Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(
+                                                                              left: 10,
+                                                                              right: 10,
+                                                                              top: 10,
+                                                                            ),
+                                                                            child:
+                                                                                Column(
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [
+                                                                                IgnorePointer(
+                                                                                  child: DropdownWebStock(
+                                                                                    width: MediaQuery.of(context).size.width,
+                                                                                    dropdownList: controller.cleaningType,
+                                                                                    selectedValue: mapData["value"],
+                                                                                    onValueChanged: (list, selectedValue) {
+                                                                                      mapData["value"] = selectedValue;
+                                                                                      controller.typedropdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
+                                                                                    },
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          )
+                                                                        : (mapData['key'] ==
+                                                                                "")
+                                                                            ? Text(mapData['value'] ??
+                                                                                "")
+                                                                            : Text(mapData['value'] ??
+                                                                                ''),
+                                                                  );
+                                                                }).toList(),
+                                                              );
+                                                            }).toList(),
+                                                          ),
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
-                                            // controller.vegid == 0
-                                            //     ? Dimens.box0
-                                            //     : Container(
-                                            //         margin: Dimens.edgeInsets20,
-                                            //         height: ((controller
-                                            //                     .schedules
-                                            //                     .length) *
-                                            //                 40) +
-                                            //             200,
-                                            //         decoration: BoxDecoration(
-                                            //           border: Border.all(
-                                            //             color: ColorValues
-                                            //                 .lightGreyColorWithOpacity35,
-                                            //             width: 1,
-                                            //           ),
-                                            //           boxShadow: [
-                                            //             BoxShadow(
-                                            //               color: ColorValues
-                                            //                   .appBlueBackgroundColor,
-                                            //               spreadRadius: 2,
-                                            //               blurRadius: 5,
-                                            //               offset: Offset(0, 2),
-                                            //             ),
-                                            //           ],
-                                            //         ),
-                                            //         child: Column(
+                                            // Container(
+                                            //   margin: Dimens.edgeInsets20,
+                                            //   decoration: BoxDecoration(
+                                            //     border: Border.all(
+                                            //       color: ColorValues
+                                            //           .lightGreyColorWithOpacity35,
+                                            //       width: 1,
+                                            //     ),
+                                            //     boxShadow: [
+                                            //       BoxShadow(
+                                            //         color: ColorValues
+                                            //             .appBlueBackgroundColor,
+                                            //         spreadRadius: 2,
+                                            //         blurRadius: 5,
+                                            //         offset: Offset(0, 2),
+                                            //       ),
+                                            //     ],
+                                            //   ),
+                                            //   child: Column(
+                                            //     children: [
+                                            //       Padding(
+                                            //         padding:
+                                            //             EdgeInsets.all(10.0),
+                                            //         child: Row(
                                             //           children: [
-                                            //             Padding(
-                                            //               padding:
-                                            //                   const EdgeInsets
-                                            //                       .all(10.0),
-                                            //               child: Row(
-                                            //                 children: [
-                                            //                   Text(
-                                            //                     "Schedule",
-                                            //                     style: Styles
-                                            //                         .blue700,
-                                            //                   ),
-                                            //                   Spacer(),
-                                            //                   GestureDetector(
-                                            //                     onTap: () {},
-                                            //                     child:
-                                            //                         Container(
-                                            //                       height: 30,
-                                            //                       width: 150,
-                                            //                       decoration:
-                                            //                           BoxDecoration(
-                                            //                         color: ColorValues
-                                            //                             .addNewColor,
-                                            //                         border:
-                                            //                             Border
-                                            //                                 .all(
-                                            //                           color: ColorValues
-                                            //                               .lightGreyColorWithOpacity35,
-                                            //                           width: 1,
-                                            //                         ),
-                                            //                         borderRadius:
-                                            //                             BorderRadius.all(
-                                            //                                 Radius.circular(5)),
-                                            //                       ),
-                                            //                       child: Center(
-                                            //                         child: Text(
-                                            //                           "Set Equipments",
-                                            //                           style: TextStyle(
-                                            //                               fontSize:
-                                            //                                   18,
-                                            //                               fontWeight: FontWeight
-                                            //                                   .w100,
-                                            //                               color:
-                                            //                                   Colors.white),
-                                            //                         ),
-                                            //                       ),
-                                            //                     ),
-                                            //                   )
-                                            //                 ],
-                                            //               ),
+                                            //             Text(
+                                            //               "Schedule",
+                                            //               style: Styles.blue700,
                                             //             ),
-                                            //             Expanded(
-                                            //               child: DataTable(
-                                            //                 border: TableBorder.all(
-                                            //                     color: Color
-                                            //                         .fromARGB(
-                                            //                             255,
-                                            //                             206,
-                                            //                             229,
-                                            //                             234)),
-                                            //                 columns: [
-                                            //                   DataColumn(
-                                            //                     label: Text(
-                                            //                       "Day",
-                                            //                       style: TextStyle(
-                                            //                           fontSize:
-                                            //                               15,
-                                            //                           fontWeight:
-                                            //                               FontWeight
-                                            //                                   .bold),
-                                            //                     ),
+                                            //             Spacer(),
+                                            //             InkWell(
+                                            //               onTap: () {
+                                            //                 var selectedEqp =
+                                            //                     [];
+                                            //                 controller
+                                            //                     .vegPlanDetailsModel
+                                            //                     .value
+                                            //                     ?.schedules
+                                            //                     ?.forEach(
+                                            //                         (schedule) {
+                                            //                   schedule
+                                            //                       .equipments
+                                            //                       ?.forEach(
+                                            //                           (element) {
+                                            //                     var ee =
+                                            //                         element;
+                                            //                     ee!.cleaningDay =
+                                            //                         schedule
+                                            //                             .cleaningDay;
+                                            //                     selectedEqp.add(
+                                            //                         element);
+                                            //                     print(element
+                                            //                         ?.toJson());
+                                            //                   });
+                                            //                 });
+                                            //                 selectedEqp.forEach(
+                                            //                     (element) {
+                                            //                   try {
+                                            //                     var selectedParentIndex =
+                                            //                         controller
+                                            //                             .equipmentList
+                                            //                             .indexWhere(
+                                            //                       (eqp) =>
+                                            //                           eqp?.invId ==
+                                            //                           element
+                                            //                               .parentId,
+                                            //                     );
+                                            //                     print({
+                                            //                       "selectedParentIndex":
+                                            //                           selectedParentIndex
+                                            //                     });
+                                            //                     if (selectedParentIndex >
+                                            //                         -1) {
+                                            //                       var selectedChildIndex = controller
+                                            //                               .equipmentList
+                                            //                               .value[
+                                            //                                   selectedParentIndex]!
+                                            //                               .smbs
+                                            //                               ?.indexWhere((smb) =>
+                                            //                                   smb.smbId ==
+                                            //                                   element.id) ??
+                                            //                           -1;
+                                            //                       if (selectedChildIndex >
+                                            //                           -1) {
+                                            //                         var ss = controller
+                                            //                             .equipmentList[
+                                            //                                 selectedParentIndex]
+                                            //                             ?.smbs?[selectedChildIndex];
+                                            //                         ss?.selectedDay =
+                                            //                             "${element.cleaningDay}";
+                                            //                         controller
+                                            //                             .equipmentList[
+                                            //                                 selectedParentIndex]!
+                                            //                             .smbs?[selectedChildIndex] = ss!;
+                                            //                       }
+                                            //                       print({
+                                            //                         "selectedChildIndex":
+                                            //                             selectedChildIndex
+                                            //                       });
+                                            //                     }
+                                            //                   } catch (e) {
+                                            //                     print({
+                                            //                       "eadfds": e
+                                            //                     });
+                                            //                   }
+                                            //                 });
+                                            //                 controller.dayCount(
+                                            //                     dayCount:
+                                            //                         int.tryParse(
+                                            //                                 '${controller.durationInDayCtrlr.text}') ??
+                                            //                             0);
+                                            //                 Get.dialog(
+                                            //                   VegSetEquipment(
+                                            //                     estimateDurationDays:
+                                            //                         int.tryParse(
+                                            //                             '${controller.durationInDayCtrlr.text}'),
                                             //                   ),
-                                            //                   DataColumn(
-                                            //                     //fixedWidth: 150,
-                                            //                     label: Text(
-                                            //                       'No. of Inverters',
-                                            //                       style: TextStyle(
-                                            //                           fontSize:
-                                            //                               15,
-                                            //                           fontWeight:
-                                            //                               FontWeight
-                                            //                                   .bold),
-                                            //                     ),
+                                            //                 );
+                                            //               },
+                                            //               child: Container(
+                                            //                 height: 30,
+                                            //                 width: 150,
+                                            //                 decoration:
+                                            //                     BoxDecoration(
+                                            //                   color: ColorValues
+                                            //                       .addNewColor,
+                                            //                   border:
+                                            //                       Border.all(
+                                            //                     color: ColorValues
+                                            //                         .lightGreyColorWithOpacity35,
+                                            //                     width: 1,
                                             //                   ),
-                                            //                   DataColumn(
-                                            //                     label: Text(
-                                            //                       'No. of SMBs',
-                                            //                       style: TextStyle(
-                                            //                           fontSize:
-                                            //                               15,
-                                            //                           fontWeight:
-                                            //                               FontWeight
-                                            //                                   .bold),
-                                            //                     ),
+                                            //                   borderRadius:
+                                            //                       BorderRadius
+                                            //                           .all(Radius
+                                            //                               .circular(
+                                            //                                   5)),
+                                            //                 ),
+                                            //                 child: Center(
+                                            //                   child: Text(
+                                            //                     "Set Equipments",
+                                            //                     style: TextStyle(
+                                            //                         fontSize:
+                                            //                             18,
+                                            //                         fontWeight:
+                                            //                             FontWeight
+                                            //                                 .w100,
+                                            //                         color: Colors
+                                            //                             .white),
                                             //                   ),
-                                            //                   DataColumn(
-                                            //                     // fixedWidth: 300,
-                                            //                     label: Text(
-                                            //                       'No of modules',
-                                            //                       style: TextStyle(
-                                            //                           fontSize:
-                                            //                               15,
-                                            //                           fontWeight:
-                                            //                               FontWeight
-                                            //                                   .bold),
-                                            //                     ),
-                                            //                   ),
-                                            //                   DataColumn(
-                                            //                     // fixedWidth: 300,
-                                            //                     label: Text(
-                                            //                       'Type',
-                                            //                       style: TextStyle(
-                                            //                           fontSize:
-                                            //                               15,
-                                            //                           fontWeight:
-                                            //                               FontWeight
-                                            //                                   .bold),
-                                            //                     ),
-                                            //                   ),
-                                            //                 ],
-                                            //                 rows: controller
-                                            //                     .rowItem.value
-                                            //                     .map((record) {
-                                            //                   return DataRow(
-                                            //                     // height: 130,
-                                            //                     cells: record.map(
-                                            //                         (mapData) {
-                                            //                       return DataCell(
-                                            //                         (mapData['key'] ==
-                                            //                                 "cleaningType")
-                                            //                             ? Padding(
-                                            //                                 padding:
-                                            //                                     const EdgeInsets.only(
-                                            //                                   left: 10,
-                                            //                                   right: 10,
-                                            //                                   top: 10,
-                                            //                                 ),
-                                            //                                 child:
-                                            //                                     Column(
-                                            //                                   mainAxisAlignment: MainAxisAlignment.start,
-                                            //                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                            //                                   children: [],
-                                            //                                 ),
-                                            //                               )
-                                            //                             : (mapData['key'] ==
-                                            //                                     "")
-                                            //                                 ? Text(mapData['value'] ??
-                                            //                                     "")
-                                            //                                 : Text(mapData['value'] ??
-                                            //                                     ''),
-                                            //                       );
-                                            //                     }).toList(),
-                                            //                   );
-                                            //                 }).toList(),
+                                            //                 ),
                                             //               ),
                                             //             ),
                                             //           ],
                                             //         ),
                                             //       ),
+                                            //       SingleChildScrollView(
+                                            //         scrollDirection:
+                                            //             Axis.horizontal,
+                                            //         child: Padding(
+                                            //           padding:
+                                            //               const EdgeInsets.all(
+                                            //                   10.0),
+                                            //           child: DataTable2(
+                                            //             border: TableBorder.all(
+                                            //                 color:
+                                            //                     Color.fromARGB(
+                                            //                         255,
+                                            //                         206,
+                                            //                         229,
+                                            //                         234)),
+                                            //             columns: [
+                                            //               DataColumn2(
+                                            //                 label: Text(
+                                            //                   "Day",
+                                            //                   style: TextStyle(
+                                            //                       fontSize: 15,
+                                            //                       fontWeight:
+                                            //                           FontWeight
+                                            //                               .bold),
+                                            //                 ),
+                                            //               ),
+                                            //               DataColumn2(
+                                            //                 label: Text(
+                                            //                   'No. of Blocks',
+                                            //                   style: TextStyle(
+                                            //                       fontSize: 15,
+                                            //                       fontWeight:
+                                            //                           FontWeight
+                                            //                               .bold),
+                                            //                 ),
+                                            //               ),
+                                            //               DataColumn2(
+                                            //                 label: Text(
+                                            //                   'No. of Inverters',
+                                            //                   style: TextStyle(
+                                            //                       fontSize: 15,
+                                            //                       fontWeight:
+                                            //                           FontWeight
+                                            //                               .bold),
+                                            //                 ),
+                                            //               ),
+                                            //               DataColumn2(
+                                            //                 label: Text(
+                                            //                   'Area',
+                                            //                   style: TextStyle(
+                                            //                       fontSize: 15,
+                                            //                       fontWeight:
+                                            //                           FontWeight
+                                            //                               .bold),
+                                            //                 ),
+                                            //               ),
+                                            //             ],
+                                            //             rows: controller
+                                            //                 .rowItem.value
+                                            //                 .map((record) {
+                                            //               return DataRow(
+                                            //                 cells: record
+                                            //                     .map((mapData) {
+                                            //                   return DataCell(
+                                            //                     Text(mapData[
+                                            //                             'value'] ??
+                                            //                         ''),
+                                            //                   );
+                                            //                 }).toList(),
+                                            //               );
+                                            //             }).toList(),
+                                            //           ),
+                                            //         ),
+                                            //       ),
+                                            //     ],
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -986,6 +1142,12 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                     .format(p0.value);
                                             controller.openStartDatePicker =
                                                 !controller.openStartDatePicker;
+                                            controller
+                                                .update(['stock_Mangement']);
+                                          },
+                                          onCancel: () {
+                                            controller.openStartDatePicker =
+                                                false;
                                             controller
                                                 .update(['stock_Mangement']);
                                           },

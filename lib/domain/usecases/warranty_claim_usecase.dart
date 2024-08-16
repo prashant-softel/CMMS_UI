@@ -3,9 +3,11 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
+import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 
 import '../models/facility_model.dart';
@@ -28,8 +30,17 @@ class WarrantyClaimUsecase {
         isLoading,
       );
 
-   Future<InventoryDetailsModel?> getInventoryDetail({
-    bool? isLoading,  
+  Future<ViewWarrantyClaimModel?> getViewWarrantyClaimDetail({
+    bool? isLoading,
+    required int wc_id,
+  }) async =>
+      await _repository.getViewWarrantyClaimDetail(
+        wc_id: wc_id,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<InventoryDetailsModel?> getInventoryDetail({
+    bool? isLoading,
     required int id,
   }) async =>
       await _repository.getInventoryDetail(
@@ -37,12 +48,29 @@ class WarrantyClaimUsecase {
         isLoading: isLoading ?? false,
       );
 
-   Future<Map<String, dynamic>> saveAsDraft({
+  Future<Map<String, dynamic>> saveAsDraft({
     createWarrantyClaim,
     bool? isLoading,
   }) async =>
       await _repository.createWarrantyClaim(
         createWarrantyClaim,
+        isLoading,
+      );
+
+  Future<Map<String, dynamic>> updateWarrantyClaim({
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await _repository.updateWarrantyClaim(
+        updateWarrantyClaim,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> resubmitWarrantyClaim({
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await _repository.resubmitWarrantyClaim(
+        updateWarrantyClaim,
         isLoading,
       );
 
@@ -60,17 +88,30 @@ class WarrantyClaimUsecase {
     );
   }
 
+  Future<List<HistoryModel>?> getHistory({
+    moduleType,
+    wcId,
+    facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getHistory(
+        moduleType,
+        wcId,
+        facilityId,
+        isLoading,
+      );
+
   Future<List<InventoryCategoryModel2?>?> getAffectedPartList({
-     bool? isLoading,
-     int? facilityId,
+    bool? isLoading,
+    int? facilityId,
     String? auth,
     // int? blockId,
     // required String categoryIds,
   }) async {
     return _repository.getAffectedPartList(
-       auth,
-        facilityId,
-        isLoading,
+      auth,
+      facilityId,
+      isLoading,
       // blockId: blockId,
       // categoryIds: categoryIds,
     );
@@ -82,10 +123,9 @@ class WarrantyClaimUsecase {
     required int? businessType,
   }) async {
     return _repository.getBusinessList(
-      isLoading: isLoading,
-      businessType: businessType,
-      facilityId: facilityId
-    );
+        isLoading: isLoading,
+        businessType: businessType,
+        facilityId: facilityId);
   }
 
   Future<List<CurrencyListModel>> getUnitCurrencyList(
@@ -104,7 +144,7 @@ class WarrantyClaimUsecase {
     );
   }
 
-   Future<List<EmployeeListModel2>> getEmployeesList(
+  Future<List<EmployeeListModel2>> getEmployeesList(
       {required bool isLoading, required int? facility_id}) async {
     return _repository.getEmployeesList(
       isLoading: isLoading,
@@ -138,7 +178,6 @@ class WarrantyClaimUsecase {
       categoryIds: categoryIds,
       start_date: start_date,
       end_date: end_date,
-
     );
   }
 
@@ -162,8 +201,46 @@ class WarrantyClaimUsecase {
     );
   }
 
+  Future<Map<String, dynamic>> wcApprovedButton({
+    WCApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.wcApprovedButton(
+        WCApproveJsonString,
+        isLoading,
+      );
+
+  Future<Map<String, dynamic>> wcRejectdButton({
+    WCRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.wcRejectdButton(
+        WCRejectJsonString,
+        isLoading,
+      );
+
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
+  Future<String?> getValue() async => await _repository.getStringValue(
+        LocalKeys.wc_id,
+      );
+  void saveValue({String? wc_id}) async => _repository.saveValue(
+        LocalKeys.wc_id,
+        wc_id,
+      );
+  void clearValue() async => _repository.clearData(
+        LocalKeys.wc_id,
+      );
+  Future<String?> getTypeValue() async => await _repository.getStringValue(
+        LocalKeys.wc_type,
+      );
+  void saveTypeValue({String? wc_type}) async => _repository.saveValue(
+        LocalKeys.wc_type,
+        wc_type,
+      );
+  void clearTypeValue() async => _repository.clearData(
+        LocalKeys.wc_type,
+      );
   // Future<String?> getUserAccessList() async =>
   //     await _repository.getUserAccessData(LocalKeys.userAccess);
 }

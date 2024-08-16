@@ -404,13 +404,17 @@ class EmployeeStockReportContentWeb
                                     controller
                                         .getEmployeeReportListListByDate();
                                     controller.openFromDateToStartDatePicker =
-                                        !controller
-                                            .openFromDateToStartDatePicker;
+                                        false;
                                     controller.update(['employeeReport']);
 
                                     // Get.toNamed(
                                     //   Routes.stockManagementGoodsOrdersScreen,
                                     // );
+                                  },
+                                  onCancel: () {
+                                    controller.openFromDateToStartDatePicker =
+                                        false;
+                                    controller.update(['employeeReport']);
                                   },
                                 ),
                               ),

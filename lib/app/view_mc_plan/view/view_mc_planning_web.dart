@@ -351,7 +351,11 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                   // print(
                                                   //     'MC plan Detail:${controller.schedules.toJson()}');
                                                   Get.dialog(
-                                                      ViewSetEquipmentDialog());
+                                                      ViewSetEquipmentDialog(
+                                                    estimateDurationDays:
+                                                        int.tryParse(
+                                                            '${controller.durationInDayCtrlr.text}'),
+                                                  ));
                                                 },
                                                 // color: ColorValues.appDarkBlueColor,
                                                 // onTap: () {
@@ -384,6 +388,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                   ),
                                                 ),
                                               )
+                                           
                                             ],
                                           ),
                                         ),
@@ -684,7 +689,8 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                 text: "Approve",
                                                 icon: Icons.check,
                                                 onPressed: () {
-                                                  Get.dialog(ApproveMcPlan(
+                                                  Get.dialog(
+                                                    ApproveMcPlan(
                                                     id: controller.mcid.value,
                                                   ));
                                                 },

@@ -430,8 +430,12 @@ class WaterDataListWeb extends GetView<WaterDataListController> {
                             print('po valu ${p0.value.toString()}');
                             controller.waterDateTc.text =
                                 DateFormat('yyyy-MM-dd').format(p0.value);
-                            controller.openFromDateToStartDatePicker =
-                                !controller.openFromDateToStartDatePicker;
+                            controller.openFromDateToStartDatePicker = false;
+
+                            controller.update(['stock_Mangement_Date']);
+                          },
+                          onCancel: () {
+                            controller.openFromDateToStartDatePicker = false;
                             controller.update(['stock_Mangement_Date']);
                           },
                         ),

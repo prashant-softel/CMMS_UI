@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
+
 JobDetailsModel jobDetailsModelFromJson(String str) =>
     JobDetailsModel.fromJson(json.decode(str));
 
@@ -166,8 +168,8 @@ class JobDetailsModel {
         "latestJCStatusShort": latestJCStatusShort,
         "equipment_cat_list":
             List<dynamic>.from(equipmentCatList?.map((x) => x.toJson()) ?? []),
-        "working_area_name_list":
-            List<dynamic>.from(workingAreaList?.map((x) => x.toJson()) ?? []),
+        // "working_area_name_list":
+        //     List<dynamic>.from(workingAreaList?.map((x) => x.toJson()) ?? []),
         "work_type_list":
             List<dynamic>.from(workTypeList?.map((x) => x.toJson()) ?? []),
         "associated_permit_list": List<dynamic>.from(
@@ -256,27 +258,47 @@ class EquipmentCatList {
 }
 
 class WorkingAreaList {
-  WorkingAreaList({
-    required this.workingAreaId,
-    required this.name,
-  });
+  int? asset_id;
+  String? name;
+  List<UsedItems>? items;
+  WorkingAreaList({this.asset_id, this.items, this.name});
 
-  int workingAreaId;
-  String name;
+  factory WorkingAreaList.fromJson(Map<String, dynamic> parsedJson) {
+    var list = parsedJson['items'] == null ? [] : parsedJson['items'] as List;
+    List<UsedItems> usedItems = list.map((i) => UsedItems.fromJson(i)).toList();
 
-  factory WorkingAreaList.fromJson(Map<String, dynamic> json) =>
-      WorkingAreaList(
-        workingAreaId: json["workingArea_id"],
-        name: json["workingArea_name"],
-      );
+    return WorkingAreaList(
+        asset_id: parsedJson["asset_id"] == null ? 0 : parsedJson['asset_id'],
+        name: parsedJson["asset_name"],
+        items: usedItems);
+  }
 
-  Map<String, dynamic> toJson() => {
-        "workingArea_id": workingAreaId,
-        "workingArea_name": name,
-      };
-
-  ///
+  // map(DataCell Function(dynamic mapData) param0) {}
 }
+
+// class WorkingAreaList {
+//   WorkingAreaList({
+//     required this.workingAreaId,
+//     required this.name,
+//   });
+
+//   int workingAreaId;
+//   String name;
+//   List<UsedItems>? items;
+
+//   factory WorkingAreaList.fromJson(Map<String, dynamic> json) =>
+//       WorkingAreaList(
+//         workingAreaId: json["asset_id"],
+//         name: json["asset_name"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "asset_id": workingAreaId,
+//         "asset_name": name,
+//       };
+
+//   ///
+// }
 
 class WorkTypeList {
   int? workTypeId;
@@ -309,11 +331,12 @@ class JobAssociatedModel {
       // this.description,
       this.jobAssingedTo,
       this.jobCardDate,
-      // this.start_time,
+      this.permitStatus,
       this.endTime,
       this.status,
       this.approvedStatus,
-      this.status_short});
+      this.status_short,
+      this.permit_status_short});
 
   // int? id;
   int? jobCardId;
@@ -321,10 +344,10 @@ class JobAssociatedModel {
   int? jobId;
   int? permitId;
   String? permitNo;
-
+  int? permitStatus;
   String? jobAssingedTo;
   String? jobCardDate;
-
+  String? permit_status_short;
   String? endTime;
   int? status;
   int? approvedStatus;
@@ -332,9 +355,10 @@ class JobAssociatedModel {
 
   factory JobAssociatedModel.fromJson(Map<String, dynamic> json) =>
       JobAssociatedModel(
-        // id: json["id"] == null ? 0 : json['id'],
+        permitStatus: json["permitStatus"] == null ? 0 : json['permitStatus'],
         jobCardId: json["jobCardId"] == null ? 0 : json['jobCardId'],
         jobCardNo: json["jobCardNo"] == null ? "" : json['jobCardNo'],
+        permit_status_short: json['permit_status_short'],
         jobId: json["jobId"] == null ? 0 : json['jobId'],
         permitId: json["permitId"] == null ? 0 : json['permitId'],
         permitNo: json["permitNo"] == null ? "" : json['permitNo'],
@@ -349,9 +373,10 @@ class JobAssociatedModel {
       );
 
   Map<String, dynamic> toJson() => {
-        // "id": id,
+        "permitStatus": permitStatus,
         "jobCardId": jobCardId,
         "jobCardNo": jobCardNo,
+        "permit_status_short": permit_status_short,
         "jobId": jobId,
         "permitId": permitId,
         "permitNo": permitNo,

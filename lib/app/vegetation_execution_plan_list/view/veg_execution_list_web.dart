@@ -76,7 +76,7 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                               child: Text(" / VEGETATION CONTROL",
                                   style: Styles.greyLight14),
                             ),
-                            Text(" / VEGETATION PLAN EXECUTION",
+                            Text(" / VEGETATION EXECUTION LIST",
                                 style: Styles.greyLight14)
                           ],
                         ),
@@ -111,7 +111,7 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                                         Row(
                                           children: [
                                             CustomRichText(title: 'Date Range'),
-                                            Dimens.boxWidth10,
+                                            Dimens.boxWidth2,
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
                                                       .size
@@ -392,7 +392,12 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
 
                                   controller.getVegExcustionListByDate();
                                   controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
                                   controller.update(['stock_Mangement_Date']);
                                 },
                               ),
@@ -495,9 +500,14 @@ class VegExcutionListDataSource extends DataTableSource {
       '${VegExcutionListDetails?.responsibility ?? ''}',
       '${VegExcutionListDetails?.frequency ?? ''}',
       '${VegExcutionListDetails?.noOfDays ?? ''}',
-      '${VegExcutionListDetails?.startDate ?? ''}',
-      '${VegExcutionListDetails?.doneDate ?? ''}',
-      '${VegExcutionListDetails?.status ?? ''}',
+      VegExcutionListDetails?.startDate == "0001-01-01"
+          ? "-"
+          : '${VegExcutionListDetails?.startDate ?? ''}',
+      VegExcutionListDetails?.doneDate == "0001-01-01"
+          ? "-"
+          : '${VegExcutionListDetails?.doneDate ?? ''}',
+
+      // '${VegExcutionListDetails?.status ?? ''}',
 
       'Actions',
     ];
@@ -529,7 +539,7 @@ class VegExcutionListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'VE ${VegExcutionListDetails?.id}',
+                        'VE${VegExcutionListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -578,7 +588,7 @@ class VegExcutionListDataSource extends DataTableSource {
                                       VegExcutionListDetails?.id ?? 0;
                                   int planId =
                                       VegExcutionListDetails?.planId ?? 0;
-                                  controller.viewVegetation(
+                                  controller.executeVegetation(
                                     executionId,
                                     planId,
                                   );
@@ -601,32 +611,32 @@ class VegExcutionListDataSource extends DataTableSource {
                               //         onPress: () {},
                               //       )
                               // : Dimens.box0,
-                              varUserAccessModel.value.access_list!
-                                          .where((e) =>
-                                              e.feature_id ==
-                                                  UserAccessConstants
-                                                      .kVegetationControlexeFeatureId &&
-                                              e.approve ==
-                                                  UserAccessConstants
-                                                      .kHaveApproveAccess)
-                                          .length >
-                                      0
-                                  ? TableActionButton(
-                                      color: ColorValues.appGreenColor,
-                                      icon: Icons.add,
-                                      message: 'Start/End',
-                                      onPress: () {
-                                        int executionId =
-                                            VegExcutionListDetails?.id ?? 0;
-                                        int planId =
-                                            VegExcutionListDetails?.planId ?? 0;
-                                        controller.executeVegetation(
-                                          executionId,
-                                          planId,
-                                        );
-                                      },
-                                    )
-                                  : Dimens.box0,
+                              // varUserAccessModel.value.access_list!
+                              //             .where((e) =>
+                              //                 e.feature_id ==
+                              //                     UserAccessConstants
+                              //                         .kVegetationControlexeFeatureId &&
+                              //                 e.approve ==
+                              //                     UserAccessConstants
+                              //                         .kHaveApproveAccess)
+                              //             .length >
+                              //         0
+                              //     ? TableActionButton(
+                              //         color: ColorValues.appGreenColor,
+                              //         icon: Icons.add,
+                              //         message: 'Start/End',
+                              //         onPress: () {
+                              //           int executionId =
+                              //               VegExcutionListDetails?.id ?? 0;
+                              //           int planId =
+                              //               VegExcutionListDetails?.planId ?? 0;
+                              //           controller.executeVegetation(
+                              //             executionId,
+                              //             planId,
+                              //           );
+                              //         },
+                              //       )
+                              //     : Dimens.box0,
                             ],
                           )
                         : Text(
@@ -638,7 +648,7 @@ class VegExcutionListDataSource extends DataTableSource {
       onSelectChanged: (_) {
         int executionId = VegExcutionListDetails?.id ?? 0;
         int planId = VegExcutionListDetails?.planId ?? 0;
-        controller.viewVegetation(executionId, planId);
+        controller.executeVegetation(executionId, planId);
       },
     );
   }

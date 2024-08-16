@@ -30,7 +30,7 @@ class MrsListContentWeb extends StatelessWidget {
         id: 'stock_Mangement_Date',
         builder: (controller) {
           return Obx(() {
-            final dataSource = MrsListDataSource(controller);
+            // final dataSource = MrsListDataSource(controller);
             return SelectionArea(
               child: Column(children: [
                 HeaderWidget(),
@@ -105,7 +105,9 @@ class MrsListContentWeb extends StatelessWidget {
                                   Spacer(),
                                   Row(
                                     children: [
-                                      CustomRichText(title: 'Date Range'),
+                                      CustomRichText(
+                                          title: 'Date Range',
+                                          includeAsterisk: false),
                                       Dimens.boxWidth2,
                                       CustomTextFieldForStock(
                                         width:
@@ -265,13 +267,16 @@ class MrsListContentWeb extends StatelessWidget {
                                 : controller.toDate.value = pickUpDate;
 
                             controller.getMrsListByDate();
-                            controller.openFromDateToStartDatePicker =
-                                !controller.openFromDateToStartDatePicker;
+                            controller.openFromDateToStartDatePicker = false;
                             controller.update(['stock_Mangement_Date']);
 
                             // Get.toNamed(
                             //   Routes.stockManagementGoodsOrdersScreen,
                             // );
+                          },
+                          onCancel: () {
+                            controller.openFromDateToStartDatePicker = false;
+                            controller.update(['stock_Mangement_Date']);
                           },
                         ),
                       ),
@@ -362,7 +367,7 @@ class MrsListDataSource extends DataTableSource {
     controller.MrsId.value = MrsDetails?.id ?? 0;
     var cellsBuffer = [
       "mrsId", // '${MrsDetails?.id ?? ''}',
-      "Requested by:${MrsDetails?.requested_by_name ?? ""}\nIssued by:${MrsDetails?.approver_name ?? ""}",
+      "Requested by:${MrsDetails?.requested_by_name ?? ""}\nIssued by:${MrsDetails?.issued_name ?? ""}",
       '${MrsDetails?.requestd_date ?? ''}',
       '${MrsDetails?.activity ?? ''}',
       "${MrsDetails?.whereUsedType.toString().toUpperCase() == 'PMTASK' ? 'PMT' : MrsDetails?.whereUsedType.toString().toUpperCase() == 'JOBCARD' ? 'JC' : ''}${MrsDetails?.whereUsedTypeId ?? ''}",
@@ -496,7 +501,7 @@ class MrsListDataSource extends DataTableSource {
 
                             // _flutterSecureStorage.delete(key: "mrsId");
                             int mrsId = MrsDetails?.id ?? 0;
-                            Get.toNamed(Routes.mrsViewScreen,
+                            Get.toNamed(Routes.mrsApprovalScreen,
                                 arguments: {'mrsId': mrsId, 'type': 0});
                           },
                         ),
@@ -516,8 +521,8 @@ class MrsListDataSource extends DataTableSource {
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
-                                        ?.status !=
-                                    324
+                                        ?.status ==
+                                    321
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,
@@ -534,40 +539,40 @@ class MrsListDataSource extends DataTableSource {
                                       arguments: {'mrsId': mrsId, 'type': 0});
                                 })
                             : Dimens.box0,
-                        controller.mrsList
-                                        .firstWhere(
-                                          (e) => e?.id == MrsDetails!.id,
-                                          orElse: () => MrsListModel(id: 00),
-                                        )
-                                        ?.status ==
-                                    321 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kMrsFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.approveColor,
-                                icon: Icons.check,
-                                message: 'Approve',
-                                onPress: () {
-                                  controller.clearStoreData();
+                        // controller.mrsList
+                        //                 .firstWhere(
+                        //                   (e) => e?.id == MrsDetails!.id,
+                        //                   orElse: () => MrsListModel(id: 00),
+                        //                 )
+                        //                 ?.status ==
+                        //             321 &&
+                        //         varUserAccessModel.value.access_list!
+                        //                 .where((e) =>
+                        //                     e.feature_id ==
+                        //                         UserAccessConstants
+                        //                             .kMrsFeatureId &&
+                        //                     e.approve ==
+                        //                         UserAccessConstants
+                        //                             .kHaveApproveAccess)
+                        //                 .length >
+                        //             0
+                        //     ? TableActionButton(
+                        //         color: ColorValues.approveColor,
+                        //         icon: Icons.check,
+                        //         message: 'Approve',
+                        //         onPress: () {
+                        //           controller.clearStoreData();
 
-                                  // final _flutterSecureStorage =
-                                  //     const FlutterSecureStorage();
+                        //           // final _flutterSecureStorage =
+                        //           //     const FlutterSecureStorage();
 
-                                  // _flutterSecureStorage.delete(key: "mrsId");
-                                  int mrsId = MrsDetails?.id ?? 0;
-                                  Get.toNamed(Routes.mrsApprovalScreen,
-                                      arguments: {'mrsId': mrsId});
-                                },
-                              )
-                            : Dimens.box0,
+                        //           // _flutterSecureStorage.delete(key: "mrsId");
+                        //           int mrsId = MrsDetails?.id ?? 0;
+                        //           Get.toNamed(Routes.mrsApprovalScreen,
+                        //               arguments: {'mrsId': mrsId});
+                        //         },
+                        //       )
+                        //     : Dimens.box0,
                         controller.mrsList
                                         .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
@@ -598,44 +603,44 @@ class MrsListDataSource extends DataTableSource {
                                   // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
                                   Get.toNamed(Routes.mrsIssueScreen,
-                                      arguments: {'mrsId': mrsId});
+                                      arguments: {'mrsId': mrsId, 'type': 0});
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList
-                                        .firstWhere(
-                                          (e) => e?.id == MrsDetails!.id,
-                                          orElse: () => MrsListModel(id: 00),
-                                        )
-                                        ?.status ==
-                                    321 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kMrsFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.rejectColor,
-                                icon: Icons.close,
-                                message: 'Reject',
-                                onPress: () {
-                                  controller.clearStoreData();
+                        // controller.mrsList
+                        //                 .firstWhere(
+                        //                   (e) => e?.id == MrsDetails!.id,
+                        //                   orElse: () => MrsListModel(id: 00),
+                        //                 )
+                        //                 ?.status ==
+                        //             321 &&
+                        //         varUserAccessModel.value.access_list!
+                        //                 .where((e) =>
+                        //                     e.feature_id ==
+                        //                         UserAccessConstants
+                        //                             .kMrsFeatureId &&
+                        //                     e.approve ==
+                        //                         UserAccessConstants
+                        //                             .kHaveApproveAccess)
+                        //                 .length >
+                        //             0
+                        //     ? TableActionButton(
+                        //         color: ColorValues.rejectColor,
+                        //         icon: Icons.close,
+                        //         message: 'Reject',
+                        //         onPress: () {
+                        //           controller.clearStoreData();
 
-                                  // final _flutterSecureStorage =
-                                  //     const FlutterSecureStorage();
+                        //           // final _flutterSecureStorage =
+                        //           //     const FlutterSecureStorage();
 
-                                  // _flutterSecureStorage.delete(key: "mrsId");
-                                  int mrsId = MrsDetails?.id ?? 0;
-                                  Get.toNamed(Routes.mrsApprovalScreen,
-                                      arguments: {'mrsId': mrsId});
-                                },
-                              )
-                            : Dimens.box0,
+                        //           // _flutterSecureStorage.delete(key: "mrsId");
+                        //           int mrsId = MrsDetails?.id ?? 0;
+                        //           Get.toNamed(Routes.mrsApprovalScreen,
+                        //               arguments: {'mrsId': mrsId});
+                        //         },
+                        //       )
+                        //     : Dimens.box0,
                         // controller.mrsList
                         //                 .firstWhere(
                         //                   (e) => e?.id == MrsDetails!.id,
@@ -757,7 +762,7 @@ class MrsListDataSource extends DataTableSource {
 
         // _flutterSecureStorage.delete(key: "mrsId");
         Get.toNamed(
-          Routes.mrsViewScreen,
+          Routes.mrsApprovalScreen,
           arguments: {'mrsId': MrsDetails?.id, 'type': 0},
         );
       },

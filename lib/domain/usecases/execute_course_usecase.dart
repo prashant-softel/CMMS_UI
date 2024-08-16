@@ -15,6 +15,34 @@ class ExecuteCourseUsecase {
         isLoading: isLoading,
       );
 
+  Future<Map<String, dynamic>> executeCourse({
+    executeCourseJson,
+    isLoading,
+  }) async {
+    return await repository.executeCourse(
+      executeCourseJson: executeCourseJson,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>> approveCourseSchedule({
+    approveSchedule,
+    bool? isLoading,
+  }) async =>
+      await repository.approveCourseSchedule(
+        approveSchedule,
+        isLoading,
+      );
+
+  Future<Map<String, dynamic>> rejectCourseSchedule({
+    rejectSchedule,
+    bool? isLoading,
+  }) async =>
+      await repository.rejectCourseSchedule(
+        rejectSchedule,
+        isLoading,
+      );
+
   void saveValue({String? schedule_id}) async => repository.saveValue(
         LocalKeys.schedule_id,
         schedule_id,
@@ -24,5 +52,15 @@ class ExecuteCourseUsecase {
       );
   void clearValue() async => repository.clearData(
         LocalKeys.schedule_id,
+      );
+  void saveTypeValue({String? type}) async => repository.saveValue(
+        LocalKeys.viewtype,
+        type,
+      );
+  Future<String?> getTypeValue() async => await repository.getStringValue(
+        LocalKeys.viewtype,
+      );
+  void clearTypeValue() async => repository.clearData(
+        LocalKeys.viewtype,
       );
 }

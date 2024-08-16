@@ -53,6 +53,8 @@ class PlantStockReportController extends GetxController {
   RxString inwardFilterText = ''.obs;
   RxString outwardFilterText = ''.obs;
   RxString balanceFilterText = ''.obs;
+  RxString actionFilterText = ''.obs;
+  
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Assets Name": true,
@@ -62,6 +64,7 @@ class PlantStockReportController extends GetxController {
     "Inward": true,
     "Outward": true,
     "Balance": true,
+    "Action": true,
   });
   final Map<String, double> columnwidth = {
     "Assets Name": 350,
@@ -71,6 +74,7 @@ class PlantStockReportController extends GetxController {
     "Inward": 150,
     "Outward": 150,
     "Balance": 150,
+    "Action":100,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -137,6 +141,7 @@ class PlantStockReportController extends GetxController {
       "Inward": inwardFilterText,
       "Outward": outwardFilterText,
       "Balance": balanceFilterText,
+      "Action":actionFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -236,8 +241,18 @@ class PlantStockReportController extends GetxController {
     // print({"selectedfrequency": selectedfrequency});
   }
 
+
   void export() {
     getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, true,
         selectedAssetsNameIdList.value);
+  }
+   void clearStoreData() {
+    pantStockReportPresenter.clearValue();
+  }
+   void clearStorestartData() {
+    pantStockReportPresenter.clearstartValue();
+  }
+   void clearStoreendData() {
+    pantStockReportPresenter.clearendValue();
   }
 }

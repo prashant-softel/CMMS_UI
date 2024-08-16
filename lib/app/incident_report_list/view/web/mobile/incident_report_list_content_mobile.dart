@@ -1,7 +1,10 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +77,7 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                                         padding: const EdgeInsets.all(10.0),
                                         child: Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                              CrossAxisAlignment.center,
                                           children: [
                                             Row(
                                               children: [
@@ -160,194 +163,289 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                                                         ''),
                                               ],
                                             ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                varUserAccessModel.value
+                                                                    .access_list!
+                                                                    .where((e) =>
+                                                                        e.feature_id ==
+                                                                            UserAccessConstants
+                                                                                .kIncidentReportFeatureId &&
+                                                                        e.approve ==
+                                                                            UserAccessConstants
+                                                                                .kHaveApproveAccess)
+                                                                    .length >
+                                                                0 &&
+                                                            incidentReportListModel!
+                                                                    .status ==
+                                                                181 ||
+                                                        // incidentReportListModel!.status == 182 ||
+                                                        varUserAccessModel.value
+                                                                    .access_list!
+                                                                    .where((e) =>
+                                                                        e.feature_id ==
+                                                                            UserAccessConstants
+                                                                                .kIncidentReportFeatureId &&
+                                                                        e.approve ==
+                                                                            UserAccessConstants
+                                                                                .kHaveApproveAccess)
+                                                                    .length >
+                                                                0 &&
+                                                            incidentReportListModel!
+                                                                    .status ==
+                                                                184
+                                                    ? TableActionButton(
+                                                        color: ColorValues
+                                                            .approveColor,
+                                                        icon: Icons.check,
+                                                        message: 'Approve IR',
+
+                                                        onPress: () {
+                                                          controller
+                                                              .clearStoreData();
+
+                                                          int irId =
+                                                              incidentReportListModel
+                                                                      .id ??
+                                                                  0;
+                                                          if (irId != 0) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .viewIncidentReportScreen,
+                                                                arguments: {
+                                                                  'irId':
+                                                                      incidentReportListModel
+                                                                          .id,
+                                                                });
+                                                          }
+                                                        },
+                                                        // onPress: () {
+                                                        //   controller.viewIncidentReport(
+                                                        //       id: incidentReportListModel?.id);
+                                                        //   // print('record:${int.tryParse('${record[0]}')}');
+                                                        // },
+                                                      )
+                                                    : Dimens.box0,
+
+                                                ///Edit button
+                                                varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kIncidentReportFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0 &&
+                                                        incidentReportListModel!
+                                                                .status ==
+                                                            181
+                                                    ? TableActionButton(
+                                                        color: ColorValues
+                                                            .appYellowColor,
+                                                        icon: Icons.edit,
+                                                        message: 'Edit',
+                                                        onPress: () {
+                                                          controller
+                                                              .clearStoreData();
+
+                                                          int irId =
+                                                              incidentReportListModel
+                                                                      .id ??
+                                                                  0;
+                                                          if (irId != 0) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .addIncidentReportContentWeb,
+                                                                arguments: {
+                                                                  'irId':
+                                                                      incidentReportListModel
+                                                                          .id,
+                                                                });
+                                                          }
+                                                        },
+                                                      )
+                                                    : Dimens.box0,
+                                                varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                            UserAccessConstants
+                                                                                .kIncidentReportFeatureId &&
+                                                                        e.add ==
+                                                                            UserAccessConstants
+                                                                                .kHaveAddAccess ||
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0 &&
+                                                        incidentReportListModel!
+                                                                .status ==
+                                                            182
+                                                    ? TableActionButton(
+                                                        color: Color.fromARGB(
+                                                            255, 116, 78, 130),
+                                                        icon: Icons.ads_click,
+                                                        message: 'Re - Submit',
+                                                        onPress: () {
+                                                          controller
+                                                              .clearStoreData();
+
+                                                          int irId =
+                                                              incidentReportListModel
+                                                                      .id ??
+                                                                  0;
+                                                          if (irId != 0) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .addIncidentReportContentWeb,
+                                                                arguments: {
+                                                                  'irId':
+                                                                      incidentReportListModel
+                                                                          .id,
+                                                                });
+                                                          }
+                                                        },
+                                                      )
+                                                    : Dimens.box0,
+
+//IR 2nd step button
+                                                varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kIncidentReportFeatureId &&
+                                                                    e.add ==
+                                                                        UserAccessConstants
+                                                                            .kHaveAddAccess)
+                                                                .length >
+                                                            0 &&
+                                                        incidentReportListModel!
+                                                                .status ==
+                                                            183
+                                                    ? TableActionButton(
+                                                        color: Color.fromARGB(
+                                                            136, 107, 152, 211),
+                                                        icon: Icons
+                                                            .start_outlined,
+                                                        message: 'IR 2nd Step',
+                                                        onPress: () {
+                                                          controller
+                                                              .clearStoreData();
+
+                                                          int irId =
+                                                              incidentReportListModel
+                                                                      .id ??
+                                                                  0;
+                                                          if (irId != 0) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .addIncidentReportContentWeb,
+                                                                arguments: {
+                                                                  'irId':
+                                                                      incidentReportListModel
+                                                                          .id,
+                                                                });
+                                                          }
+                                                        },
+                                                      )
+                                                    : Dimens.box0,
+
+                                                varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kIncidentReportFeatureId &&
+                                                                    e.add ==
+                                                                        UserAccessConstants
+                                                                            .kHaveAddAccess)
+                                                                .length >
+                                                            0 &&
+                                                        incidentReportListModel!
+                                                                .status ==
+                                                            185
+                                                    ? TableActionButton(
+                                                        color: Color.fromARGB(
+                                                            255, 116, 78, 130),
+                                                        icon: Icons.ads_click,
+                                                        message: 'Re - Submit',
+                                                        onPress: () {
+                                                          controller
+                                                              .clearStoreData();
+
+                                                          int irId =
+                                                              incidentReportListModel
+                                                                      .id ??
+                                                                  0;
+                                                          if (irId != 0) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .addIncidentReportContentWeb,
+                                                                arguments: {
+                                                                  'irId':
+                                                                      incidentReportListModel
+                                                                          .id,
+                                                                });
+                                                          }
+                                                        },
+                                                      )
+                                                    : Dimens.box0,
+
+                                                // Approve/Reject
+                                                varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kIncidentReportFeatureId &&
+                                                                    e.approve ==
+                                                                        UserAccessConstants
+                                                                            .kHaveApproveAccess)
+                                                                .length >
+                                                            0 &&
+                                                        controller
+                                                                .incidentReportList
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      e?.id ==
+                                                                      incidentReportListModel!
+                                                                          .id,
+                                                                  orElse: () =>
+                                                                      IncidentReportListModel(
+                                                                          id: 00),
+                                                                )
+                                                                ?.status ==
+                                                            "Submitted"
+                                                    ? TableActionButton(
+                                                        color: ColorValues
+                                                            .appGreenColor,
+                                                        icon: Icons.check,
+                                                        message:
+                                                            'Approve/Reject',
+                                                        onPress: () {
+                                                          // Get.dialog(PermitApprovedDialog(
+                                                          //     permitId:
+                                                          //         _newPermitList[0]));
+                                                          // controller.incidentReportApproveButton(incidentId: record[0]);
+                                                          controller
+                                                              .viewIncidentReport(
+                                                                  id: incidentReportListModel
+                                                                      ?.id);
+                                                        },
+                                                      )
+                                                    : Dimens.box0,
+                                              ],
+                                            )
                                           ],
                                         ),
                                       ),
-
-                                      // Padding(
-                                      //   padding: const EdgeInsets.all(10.0),
-                                      //   child: Column(children: [
-                                      //     Row(
-                                      //       crossAxisAlignment:
-                                      //           CrossAxisAlignment.start,
-                                      //       children: [
-                                      //         ///start date: 2023-07-01, End date: 2023-12-31
-                                      //         Column(
-                                      //           crossAxisAlignment:
-                                      //               CrossAxisAlignment.start,
-                                      //           children: [
-                                      //             Text(
-                                      //               'Id : ',
-                                      //               style: const TextStyle(
-                                      //                   color: ColorValues
-                                      //                       .blackColor,
-                                      //                   fontWeight:
-                                      //                       FontWeight.w400),
-                                      //             ),
-                                      //             Text(
-                                      //               'Title :',
-                                      //               style: const TextStyle(
-                                      //                   color: ColorValues
-                                      //                       .blackColor,
-                                      //                   fontWeight:
-                                      //                       FontWeight.w400),
-                                      //             ),
-                                      //             Text(
-                                      //               'Block Name :',
-                                      //               style: const TextStyle(
-                                      //                   color: ColorValues
-                                      //                       .blackColor,
-                                      //                   fontWeight:
-                                      //                       FontWeight.w400),
-                                      //             ),
-                                      //             Text(
-                                      //               'Equipment Name :',
-                                      //               style: const TextStyle(
-                                      //                   color: ColorValues
-                                      //                       .blackColor,
-                                      //                   fontWeight:
-                                      //                       FontWeight.w400),
-                                      //             ),
-                                      //             Text(
-                                      //               'Approved By :',
-                                      //               style: const TextStyle(
-                                      //                   color: ColorValues
-                                      //                       .blackColor,
-                                      //                   fontWeight:
-                                      //                       FontWeight.w400),
-                                      //             ),
-                                      //             Text(
-                                      //               'Approved At :',
-                                      //               style: const TextStyle(
-                                      //                   color: ColorValues
-                                      //                       .blackColor,
-                                      //                   fontWeight:
-                                      //                       FontWeight.w400),
-                                      //             ),
-                                      //             Text(
-                                      //               'Reported At: ',
-                                      //               style: const TextStyle(
-                                      //                   color: ColorValues
-                                      //                       .blackColor,
-                                      //                   fontWeight:
-                                      //                       FontWeight.w400),
-                                      //             ),
-                                      //             Text(
-                                      //               'Reported By:',
-                                      //               style: const TextStyle(
-                                      //                   color: ColorValues
-                                      //                       .blackColor,
-                                      //                   fontWeight:
-                                      //                       FontWeight.w400),
-                                      //             ),
-                                      //           ],
-                                      //         ),
-                                      //         Dimens.boxWidth20,
-                                      //         Column(
-                                      //           crossAxisAlignment:
-                                      //               CrossAxisAlignment.start,
-                                      //           children: [
-                                      //             Text(
-                                      //               "IR${incidentReportListModel?.id}",
-                                      //               style: const TextStyle(
-                                      //                 fontWeight:
-                                      //                     FontWeight.bold,
-                                      //                 color: ColorValues
-                                      //                     .navyBlueColor,
-                                      //               ),
-                                      //             ),
-                                      //             Text(
-                                      //               "${incidentReportListModel?.title}",
-                                      //               style: const TextStyle(
-                                      //                 fontWeight:
-                                      //                     FontWeight.bold,
-                                      //                 color: ColorValues
-                                      //                     .navyBlueColor,
-                                      //               ),
-                                      //             ),
-                                      //             Text(
-                                      //               "${incidentReportListModel?.title}",
-                                      //               style: const TextStyle(
-                                      //                 fontWeight:
-                                      //                     FontWeight.bold,
-                                      //                 color: ColorValues
-                                      //                     .navyBlueColor,
-                                      //               ),
-                                      //             ),
-                                      //             Text(
-                                      //               "${incidentReportListModel?.equipment_name}",
-                                      //               style: const TextStyle(
-                                      //                 fontWeight:
-                                      //                     FontWeight.bold,
-                                      //                 color: ColorValues
-                                      //                     .navyBlueColor,
-                                      //               ),
-                                      //             ),
-                                      //             Text(
-                                      //               "${incidentReportListModel?.approved_by}",
-                                      //               style: const TextStyle(
-                                      //                 fontWeight:
-                                      //                     FontWeight.bold,
-                                      //                 color: ColorValues
-                                      //                     .navyBlueColor,
-                                      //               ),
-                                      //             ),
-                                      //             Text(
-                                      //               "${incidentReportListModel?.approved_at}",
-                                      //               style: const TextStyle(
-                                      //                 fontWeight:
-                                      //                     FontWeight.bold,
-                                      //                 color: ColorValues
-                                      //                     .navyBlueColor,
-                                      //               ),
-                                      //             ),
-                                      //             Text(
-                                      //               "${incidentReportListModel?.reported_at}",
-                                      //               style: const TextStyle(
-                                      //                 fontWeight:
-                                      //                     FontWeight.bold,
-                                      //                 color: ColorValues
-                                      //                     .navyBlueColor,
-                                      //               ),
-                                      //             ),
-                                      //             Text(
-                                      //               "${incidentReportListModel?.reported_by_name}",
-                                      //               style: const TextStyle(
-                                      //                 fontWeight:
-                                      //                     FontWeight.bold,
-                                      //                 color: ColorValues
-                                      //                     .navyBlueColor,
-                                      //               ),
-                                      //             ),
-                                      //           ],
-                                      //         ),
-                                      //         Spacer(),
-                                      //         Container(
-                                      //           padding: EdgeInsets.symmetric(
-                                      //               horizontal: 8.0,
-                                      //               vertical: 2.0),
-                                      //           decoration: BoxDecoration(
-                                      //             color: Colors
-                                      //                 .blue, // Use your desired color here
-                                      //             borderRadius:
-                                      //                 BorderRadius.circular(4),
-                                      //           ),
-                                      //           child: Text(
-                                      //             '${incidentReportListModel?.status_short ?? ''}', // Ensure the text is non-null
-                                      //             overflow:
-                                      //                 TextOverflow.ellipsis,
-                                      //             style: TextStyle(
-                                      //               fontSize:
-                                      //                   10, // Adjust font size as per your Styles.white10
-                                      //               color: Colors
-                                      //                   .white, // Ensure the color is white
-                                      //             ),
-                                      //           ),
-                                      //         ),
-                                      //       ],
-                                      //     ),
-                                      //   ]),
-                                      // ),
                                     ),
                                   ),
                                 );
@@ -384,6 +482,10 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                             controller.openFromDateToStartDatePicker = false;
                             controller.update(['stock_Mangement_Date']);
                           }
+                        },
+                        onCancel: () {
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['stock_Mangement_Date']);
                         },
                       ),
                     ),

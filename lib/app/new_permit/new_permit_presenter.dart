@@ -208,6 +208,9 @@ class NewPermitPresenter {
     return true;
   }
 
+  void clearValue() async => newPermitUsecase.clearValue();
+  void clearTypeValue() async => newPermitUsecase.clearTypeValue();
+
   Future<Map<String, dynamic>?> createNewPermitForJob({
     newPermit,
     required int jobId,
@@ -225,34 +228,49 @@ class NewPermitPresenter {
       required int pmTaskId,
       String? activity,
       required bool isLoading,
-      int? type}) async {
+      int? type,
+      int? vegplanId,
+      int? vegexid}) async {
     return newPermitUsecase.createNewPermitForPm(
         newPermit: newPermit,
         pmTaskId: pmTaskId,
         activity: activity,
         isLoading: isLoading,
-        type: type);
+        type: type,
+        vegexid: vegexid,
+        vegplanId: vegplanId);
   }
 
   Future<Map<String, dynamic>?> updateNewPermit(
       {newPermit,
       required bool isLoading,
       required bool resubmit,
-      int? type}) async {
+      int? type,
+      int? vegplanId,
+      int? vegexid}) async {
     return newPermitUsecase.updateNewPermit(
         type: type,
         newPermit: newPermit,
         isLoading: isLoading,
-        resubmit: resubmit);
+        resubmit: resubmit,
+        vegexid: vegexid,
+        vegplanId: vegplanId);
   }
 
   Future<Map<String, dynamic>?> resubmitPermit(
       {newPermit,
       required bool isLoading,
       required bool resubmit,
-      int? type}) async {
+      int? type,
+      int? vegplanId,
+      int? vegexid}) async {
     return newPermitUsecase.resubmitPermit(
-        newPermit: newPermit, isLoading: isLoading, resubmit: true, type: type);
+        newPermit: newPermit,
+        isLoading: isLoading,
+        resubmit: true,
+        type: type,
+        vegexid: vegexid,
+        vegplanId: vegplanId);
   }
 
   Future<NewPermitDetailModel?> getNewPermitDetail(

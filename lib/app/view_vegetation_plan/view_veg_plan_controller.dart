@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/view_vegetation_plan/view_veg_plan_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/veg_plan_detail_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
@@ -31,6 +32,16 @@ class ViewVegPlanController extends GetxController {
   List<int?> scheduleId = [];
   RxList<Schedules?>? schedules = <Schedules?>[].obs;
   Schedules? selectedSchedules;
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+
+  RxList<VegetationEquipmentModel?> equipmentList =
+      <VegetationEquipmentModel?>[].obs;
+  void dayCount({required int dayCount}) {
+    days = <TypeModel>[].obs;
+    for (int i = 1; i <= dayCount; i++) {
+      days.add(TypeModel(name: 'Day $i', id: "$i"));
+    }
+  }
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
@@ -74,8 +85,10 @@ class ViewVegPlanController extends GetxController {
       if (id != 0) {
         Future.delayed(Duration(seconds: 1), () {
           getVegPlanDetail(planId: id.value, facilityId: facilityId);
+          getVegHistory(id: id.value, facilityId: facilityId);
         });
       }
+
       Future.delayed(Duration(seconds: 1), () {
         getVegEquipmentModelList(facilityId, true);
       });
@@ -167,6 +180,25 @@ class ViewVegPlanController extends GetxController {
         },
       );
     }
+  }
+
+  Future<void> getVegHistory({required int id, required int facilityId}) async {
+    /// TODO: CHANGE THESE VALUES
+
+    int moduleType = 321;
+    // int tempModuleType = 21;
+    //
+    historyList?.value = await viewVegPlanPresenter.getHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          id,
+          facilityId,
+
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   void vegPlanApprovedButton({int? id}) async {

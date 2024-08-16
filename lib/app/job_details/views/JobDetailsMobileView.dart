@@ -672,7 +672,8 @@ Widget _content(context, controller) {
                                                         "";
                                                     print({"mrsId": mrsId});
                                                     Get.toNamed(
-                                                        Routes.mrsViewScreen,
+                                                        Routes
+                                                            .mrsApprovalScreen,
                                                         arguments: {
                                                           'mrsId': int.tryParse(
                                                               "$mrsId"),

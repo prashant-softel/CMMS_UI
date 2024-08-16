@@ -784,6 +784,22 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getDocUploadList({
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getDocUploadList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+      start_date: start_date,
+      end_date: end_date,
+    );
+  }
+
   Future<ResponseModel> getModuleCleaningListPlan({
     int? facility_id,
     required bool isLoading,
@@ -1512,12 +1528,14 @@ class DataRepository extends DomainRepository {
           {required String auth,
           int? selectedchecklistId,
           bool? isLoading,
-          int? facilityId}) async =>
+          int? facilityId,
+          int? type}) async =>
       await connectHelper.getCheckPointlist(
           auth: auth,
           selectedchecklistId: selectedchecklistId ?? 0,
           isLoading: isLoading ?? false,
-          facilityId: facilityId);
+          facilityId: facilityId,
+          type: type);
 
   Future<ResponseModel> getFacilityList({
     String? auth,
@@ -1692,6 +1710,18 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.getAssignedToEmployee(
+        auth: auth,
+        facilityId: facilityId,
+        featureId: featureId,
+        isLoading: isLoading,
+      );
+  Future<ResponseModel> getEmployeeTrainingList({
+    required String auth,
+    int? facilityId,
+    int? featureId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getEmployeeTrainingList(
         auth: auth,
         facilityId: facilityId,
         featureId: featureId,
@@ -1875,26 +1905,34 @@ class DataRepository extends DomainRepository {
           newPermit,
           bool? isLoading,
           bool? resubmit,
-          int? type}) async =>
+          int? type,
+          vegplanId,
+          vegexid}) async =>
       await connectHelper.updateNewPermit(
           auth: auth,
           newPermit: newPermit,
           isLoading: isLoading ?? false,
           resubmit: resubmit,
-          type: type);
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
   Future<ResponseModel> resubmitPermit(
           {required String auth,
           newPermit,
           int? type,
           bool? isLoading,
-          bool? resubmit}) async =>
+          bool? resubmit,
+          vegplanId,
+          vegexid}) async =>
       await connectHelper.resubmitPermit(
           auth: auth,
           newPermit: newPermit,
           isLoading: isLoading ?? false,
           type: type,
-          resubmit: resubmit);
+          resubmit: resubmit,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
   Future<ResponseModel> createSOP({
     required String auth,
@@ -1932,11 +1970,15 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> createEscalationMatrix({
     required String auth,
     createEscalationMatrix,
+    required int moduleId,
+    required int statusId,
     bool? isLoading,
   }) async =>
       await connectHelper.createEscalationMatrix(
         auth: auth,
         createEscalationMatrix: createEscalationMatrix,
+        moduleId: moduleId,
+        statusId: statusId,
         isLoading: isLoading ?? false,
       );
 
@@ -1993,6 +2035,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.createGoodsOrder(
         auth: auth,
         createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> uploadDocumentNew({
+    required String auth,
+    uploadDocument,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.uploadDocumentNew(
+        auth: auth,
+        uploadDocument: uploadDocument,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> createCompliance(
@@ -2134,6 +2186,16 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.updateWarrantyClaim(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> resubmitWarrantyClaim({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.resubmitWarrantyClaim(
         auth: auth,
         updateWarrantyClaim: updateWarrantyClaim,
         isLoading: isLoading ?? false,
@@ -2446,6 +2508,7 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
   Future<ResponseModel> getViewPlanHistory({
     String? auth,
     int? pmPlanId,
@@ -3829,11 +3892,13 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> createMrs({
     required String auth,
     createMrsJsonString,
+    type,
     bool? isLoading,
   }) async =>
       await connectHelper.createMrs(
         auth: auth,
         createMrsJsonString: createMrsJsonString,
+        type: type,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> createPmPlan({
@@ -4080,11 +4145,13 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> approveMrs({
     auth,
     bool? isLoading,
+    int? type,
     approvetoJsonString,
   }) async {
     var response = await connectHelper.approveMrs(
         auth: auth,
         isLoading: isLoading,
+        type: type,
         approvetoJsonString: approvetoJsonString);
     return response;
   }
@@ -4159,13 +4226,13 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  Future<ResponseModel> issueMrs({
-    auth,
-    bool? isLoading,
-    issuetoJsonString,
-  }) async {
+  Future<ResponseModel> issueMrs(
+      {auth, bool? isLoading, issuetoJsonString, int? type}) async {
     var response = await connectHelper.issueMrs(
-        auth: auth, isLoading: isLoading, issuetoJsonString: issuetoJsonString);
+        auth: auth,
+        isLoading: isLoading,
+        type: type,
+        issuetoJsonString: issuetoJsonString);
     return response;
   }
 
@@ -4217,6 +4284,24 @@ class DataRepository extends DomainRepository {
           activity: activity,
           isLoading: isLoading ?? false,
           type: type);
+  Future<ResponseModel> vegscheduleLinkToPermit(
+          {required String auth,
+          scheduleId,
+          permitId,
+          activity,
+          bool? isLoading,
+          type,
+          vegplanId,
+          vegexid}) async =>
+      await connectHelper.vegscheduleLinkToPermit(
+          auth: auth,
+          scheduleId: scheduleId,
+          permitId: permitId,
+          activity: activity,
+          isLoading: isLoading ?? false,
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
   Future<ResponseModel> setPmTask({
     required String auth,
     scheduleId,
@@ -4517,6 +4602,18 @@ class DataRepository extends DomainRepository {
         taskId: taskId,
         isLoading: isLoading,
       );
+  Future<ResponseModel> assignAuditTask({
+    required String auth,
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async =>
+      await connectHelper.assignAuditTask(
+        auth: auth,
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
   Future<ResponseModel> assignToMC({
     required String auth,
     int? assignId,
@@ -4524,6 +4621,18 @@ class DataRepository extends DomainRepository {
     required bool isLoading,
   }) async =>
       await connectHelper.assignToMC(
+        auth: auth,
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
+  Future<ResponseModel> assignToVeg({
+    required String auth,
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async =>
+      await connectHelper.assignToVeg(
         auth: auth,
         assignId: assignId,
         taskId: taskId,
@@ -5107,6 +5216,69 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> vegrejectShecduleExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegrejectShecduleExecution(
+        auth: auth,
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> vegapproveShecduleExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegapproveShecduleExecution(
+        auth: auth,
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> vegendRejectExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegendRejectExecution(
+        auth: auth,
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> vegendApproveExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegendApproveExecution(
+        auth: auth,
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> vegabandoneRejectExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegabandoneRejectExecution(
+        auth: auth,
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> vegabandonedApproveExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegabandonedApproveExecution(
+        auth: auth,
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> createIncidentRiskType({
     auth,
     bool? isLoading,
@@ -5324,6 +5496,24 @@ class DataRepository extends DomainRepository {
         end_date: end_date,
         assetItemID: assetItemID,
         facilityID: facilityID,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getDocuementListById({
+    required String auth,
+    required int facilityID,
+    required int docUploadId,
+    String? start_date,
+    String? sub_doc_name,
+    required String end_date,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getDocuementListById(
+        auth: auth,
+        start_date: start_date,
+        end_date: end_date,
+        docUploadId: docUploadId,
+        facilityID: facilityID,
+        sub_doc_name: sub_doc_name,
         isLoading: isLoading ?? false,
       );
 
@@ -5612,6 +5802,39 @@ class DataRepository extends DomainRepository {
       await connectHelper.scheduleCourse(
         auth: auth,
         scheduleCourseJson: scheduleCourseJson,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> approveCourseSchedule({
+    required String auth,
+    approveSchedule,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.approveCourseSchedule(
+        auth: auth,
+        approveSchedule: approveSchedule,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> rejectCourseSchedule({
+    required String auth,
+    rejectSchedule,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.rejectCourseSchedule(
+        auth: auth,
+        rejectSchedule: rejectSchedule,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> executeScheduleCourse({
+    auth,
+    executeCourseJson,
+    isLoading,
+  }) async =>
+      await connectHelper.executeScheduleCourse(
+        auth: auth,
+        executeCourseJson: executeCourseJson,
         isLoading: isLoading ?? false,
       );
 

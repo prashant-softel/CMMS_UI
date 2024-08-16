@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
@@ -14,7 +15,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: Dimens.edgeInsets16_0_16_0,
+      padding: EdgeInsets.fromLTRB(7.w, 0.h, 16.w, 0.h),
       color: Colors.grey.withOpacity(.2),
       height: Dimens.fiftyFive,
       child: Row(

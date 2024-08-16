@@ -1,3 +1,6 @@
+import 'package:cmms/domain/models/incident_risk_type_model.dart';
+import 'package:cmms/domain/models/risk_type_list_model.dart';
+import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -26,15 +29,29 @@ class PreventiveCheckPointUsecase {
           {int? selectedchecklistId,
           bool? isLoading,
           int? facilityId,
-          bool? isExport}) async =>
+          bool? isExport,int?type}) async =>
       await repository.getCheckPointlist(
-          selectedchecklistId, isLoading, facilityId, isExport);
+          selectedchecklistId, isLoading, facilityId, isExport,type);
 
   deleteCkeckpoint(
           {required Object check_point_id, required bool isLoading}) async =>
       await repository.deleteCkeckpoint(
         check_point_id,
         isLoading,
+      );
+
+      Future<List<RiskTypeModel>> getRiskTypeList(
+      {required bool isLoading, required int facility_id}) async {
+    return repository.getRiskTypeList(
+      isLoading: isLoading,
+       facility_id: facility_id,
+    );
+  }
+  Future<List<TypeOfObsListModel?>?> getTypeOfObservationList({
+    bool isLoading = true,
+  }) async =>
+      await repository.getTypeOfObservationList(
+        isLoading: isLoading,
       );
   Future<bool> updateCheckPoint({
     checkpointJsonString,

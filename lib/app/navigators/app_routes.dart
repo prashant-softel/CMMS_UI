@@ -63,6 +63,10 @@ abstract class Routes {
   static const viewPermitScreen = _Paths.viewPermitScreen;
   static const permitTypeScreen = _Paths.permitTypeScreen;
   static const masterDashboard = _Paths.masterDashboard;
+  static const docVersionDashboard = _Paths.docVersionDashboard;
+
+  static const viewDocUploadScreen = _Paths.viewDocUploadScreen;
+
   static const pmTaskView = _Paths.pmTaskView;
   static const inventory = _Paths.inventory;
   static const inventoryList = _Paths.inventoryList;
@@ -114,7 +118,6 @@ abstract class Routes {
   static const addassetMaster = _Paths.addassetMaster;
   static const incidentReportListWeb = _Paths.incidentReportListWeb;
   static const addIncidentReportContentWeb = _Paths.addIncidentReportContentWeb;
-  static const mrsViewScreen = _Paths.mrsViewScreen;
   static const mrsApprovalScreen = _Paths.mrsApprovalScreen;
   static const mrsIssueScreen = _Paths.mrsIssueScreen;
   static const mrsReturnScreen = _Paths.mrsReturnScreen;
@@ -131,7 +134,6 @@ abstract class Routes {
   static const DocumentMaster = _Paths.DocumentMaster;
   static const viewObservationScreen = _Paths.viewObservationScreen;
   static const observationSummary = _Paths.observationSummary;
-  static const grievanceSummary = _Paths.grievanceSummary;
   static const misSummary = _Paths.misSummary;
 
   
@@ -173,8 +175,8 @@ abstract class Routes {
   static const purchaseGoodsorder = _Paths.purchaseGoodsorder;
   static const purchaseGoodsorderView = _Paths.purchaseGoodsorderView;
   static const plantStockReport = _Paths.plantStockReport;
-static const plantStockReportDetails = _Paths.plantStockReportDetails;
-  
+  static const plantStockReportDetails = _Paths.plantStockReportDetails;
+
   static const employeeStockReport = _Paths.employeeStockReport;
   static const transactionReport = _Paths.transactionReport;
 
@@ -183,7 +185,7 @@ static const plantStockReportDetails = _Paths.plantStockReportDetails;
   static const editReturnMrs = _Paths.editReturnMrs;
   static const pmPlanList = _Paths.pmPlanList;
   static const viewPmPlanScreen = _Paths.viewPmPlanScreen;
-  static const typeofobservation = _Paths.typeofobservation;    
+  static const typeofobservation = _Paths.typeofobservation;
   static const trainingSummary = _Paths.trainingSummary;
   static const sourceofobservation = _Paths.sourceofobservation;
   static const risktypemaster = _Paths.risktypemaster;
@@ -314,6 +316,9 @@ abstract class _Paths {
   static const viewPermitScreen = '/view-permit';
   static const permitTypeScreen = '/permit-type-screen';
   static const masterDashboard = '/master-dashboard';
+  static const docVersionDashboard = '/docVersionDashboard';
+  static const viewDocUploadScreen = '/viewDocUploadScreen';
+
   static const pmTaskView = '/pm-task-view-screen';
   static const inventory = '/inventory';
   static const inventoryList = '/inventoryList';
@@ -354,7 +359,6 @@ abstract class _Paths {
   static const addassetMaster = '/add-Material-List';
   static const incidentReportListWeb = '/incident-report-list';
   static const addIncidentReportContentWeb = '/add-incident-report';
-  static const mrsViewScreen = '/mrs-view';
   static const mrsApprovalScreen = '/mrs-approval';
   static const mrsIssueScreen = '/mrs-issue';
   static const mrsReturnScreen = '/mrs-return';
@@ -371,7 +375,6 @@ abstract class _Paths {
   static const DocumentMaster = '/Document-Master';
   static const viewObservationScreen = '/viewObservationScreen';
   static const observationSummary = '/observation-summary';
-  static const grievanceSummary = '/grievance-summary';
   static const misSummary='/mis-summary';
 
   static const documentUploadScreen = '/documentUploadScreen';
@@ -411,7 +414,7 @@ abstract class _Paths {
       '/view-module-cleaning-execution';
   static const plantStockReport = '/plant-stock-report';
   static const plantStockReportDetails = '/plant-stock-report-details';
-  
+
   static const employeeStockReport = '/employee-stock-report';
   static const transactionReport = '/transaction-report';
 
@@ -423,7 +426,7 @@ abstract class _Paths {
   static const typeofobservation = '/type-of-observation';
   static const sourceofobservation = '/source-of-observation';
   static const risktypemaster = '/risk-type-master';
-  static const viewMcPlaning = '/view-mc-planing';
+  static const viewMcPlaning = '/view-mc-planning';
   static const print = '/print';
   static const hotoListScreenContentWeb = '/hoto-list-screen';
   static const auditListScreen = '/audit-list-screen';
@@ -477,5 +480,5 @@ abstract class _Paths {
 
   static const materialCategory = '/material-category';
 
-   static const trainingSummary = '/training-summary';
+  static const trainingSummary = '/training-summary';
 }

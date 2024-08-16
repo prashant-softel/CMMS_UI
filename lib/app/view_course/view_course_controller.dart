@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/view_course/view_course_presenter.dart';
-import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -19,8 +18,8 @@ class ViewCourseController extends GetxController {
   Stream<int> get facilityId$ => _facilityId.stream;
   Rx<TrainingCourseListModel> trainingCourse = TrainingCourseListModel().obs;
   RxBool isLoading = true.obs;
+  RxList<ImageDetails> imageDetails = <ImageDetails>[].obs;
 
-  RxList<FileList?>? file_list = <FileList>[].obs;
 
   @override
   void onInit() async {
@@ -59,6 +58,7 @@ class ViewCourseController extends GetxController {
       isLoading: isLoading.value,
     );
     trainingCourse.value = _courseDetails;
+    imageDetails.value = trainingCourse.value.imageDetails ?? [];
     isLoading.value = false;
   }
 

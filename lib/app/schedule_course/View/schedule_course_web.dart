@@ -312,7 +312,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                         Row(
                                           children: [
                                             CustomRichText(
-                                                title: "HFE Employee: "),
+                                                title: "Responsible HFE Employee: "),
                                             Dimens.boxWidth10,
                                             Container(
                                               decoration: BoxDecoration(
@@ -452,15 +452,16 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                             minHeight: 60,
                                           ),
                                           child: DataTable2(
+                                            columnSpacing: 10,
                                             border: TableBorder.all(
                                               color:
                                                   Colors.grey.withOpacity(0.3),
                                             ),
                                             columns: [
                                               DataColumn2(
-                                                fixedWidth: 130,
+                                                fixedWidth: 80,
                                                 label: Text(
-                                                  "Employee ID",
+                                                  "Emp Id",
                                                 ),
                                               ),
                                               DataColumn2(
@@ -488,7 +489,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                 ),
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 100,
+                                                fixedWidth: 80,
                                                 label: Text(
                                                   "Action",
                                                 ),
@@ -506,7 +507,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                   cells: [
                                                     DataCell(
                                                       Text(
-                                                        '${employeeNameDetails?.id ?? ''}',
+                                                        'EMP ${employeeNameDetails?.id ?? ''}',
                                                       ),
                                                     ),
                                                     DataCell(
@@ -606,6 +607,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                             minHeight: 60,
                                           ),
                                           child: DataTable2(
+                                            columnSpacing: 10,
                                             border: TableBorder.all(
                                               color:
                                                   Colors.grey.withOpacity(0.3),
@@ -630,19 +632,19 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                 ),
                                               ),
                                               DataColumn2(
-                                                size: ColumnSize.S,
-                                                label: Text(
-                                                  "Designation",
-                                                ),
-                                              ),
-                                              DataColumn2(
                                                 size: ColumnSize.L,
                                                 label: Text(
                                                   "Company",
                                                 ),
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 100,
+                                                size: ColumnSize.S,
+                                                label: Text(
+                                                  "Designation",
+                                                ),
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 80,
                                                 label: Text(
                                                   "Action",
                                                 ),
@@ -673,12 +675,12 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                     ),
                                                     DataCell(
                                                       Text(
-                                                        '${employee.designation ?? ''}',
+                                                        '${employee.companyName ?? ''}',
                                                       ),
                                                     ),
                                                     DataCell(
                                                       Text(
-                                                        '${employee.companyName ?? ''}',
+                                                        '${employee.designation ?? ''}',
                                                       ),
                                                     ),
                                                     DataCell(
@@ -764,15 +766,17 @@ class ScheduleWeb extends GetView<ScheduleController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Spacer(),
-          // Container(
-          //   height: 35,
-          //   child: CustomElevatedButton(
-          //     backgroundColor: ColorValues.addNewColor,
-          //     text: 'Send Invitation',
-          //     onPressed: () {},
-          //   ),
-          // ),
-          // Dimens.boxWidth20,
+          Container(
+            height: 35,
+            child: CustomElevatedButton(
+              backgroundColor: ColorValues.redColor,
+              text: "Cancel",
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ),
+          Dimens.boxWidth10,
           Container(
             height: 35,
             child: CustomElevatedButton(
@@ -781,17 +785,6 @@ class ScheduleWeb extends GetView<ScheduleController> {
               onPressed: () {
                 controller.isFormInvalid.value = false;
                 controller.scheduleCourse(fileIds: dropzoneController.fileIds);
-              },
-            ),
-          ),
-          Dimens.boxWidth20,
-          Container(
-            height: 35,
-            child: CustomElevatedButton(
-              backgroundColor: ColorValues.redColor,
-              text: "Cancel",
-              onPressed: () {
-                Get.back();
               },
             ),
           ),
@@ -1253,8 +1246,50 @@ class ScheduleWeb extends GetView<ScheduleController> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomRichText(title: "Designation: "),
+                        CustomRichText(title: "Company: "),
                         Dimens.boxWidth10,
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: const Offset(
+                                  5.0,
+                                  5.0,
+                                ),
+                                blurRadius: 5.0,
+                                spreadRadius: 1.0,
+                              ),
+                            ],
+                            color: ColorValues.whiteColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: LoginCustomTextfield(
+                            width: (Get.width * .18),
+                            keyboardType: TextInputType.text,
+                            maxLine: 1,
+                            textController: controller.company,
+                            focusNode: controller.companyFocus,
+                            scrollController: controller.companyScroll,
+                            errorController: controller.isCompanyInvalid.value
+                                ? "Required field"
+                                : null,
+                            onChanged: (value) {
+                              if (value.trim().length > 1) {
+                                controller.isCompanyInvalid.value = false;
+                              } else {
+                                controller.isCompanyInvalid.value = true;
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    Dimens.boxHeight10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomRichText(title: "Designation: "),
                         Container(
                           decoration: BoxDecoration(
                             boxShadow: [
@@ -1296,49 +1331,6 @@ class ScheduleWeb extends GetView<ScheduleController> {
                         ),
                       ],
                     ),
-                    Dimens.boxHeight10,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomRichText(title: "Company: "),
-                        Dimens.boxWidth10,
-                        Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: const Offset(
-                                  5.0,
-                                  5.0,
-                                ),
-                                blurRadius: 5.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                            color: ColorValues.whiteColor,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: LoginCustomTextfield(
-                            width: (Get.width * .18),
-                            keyboardType: TextInputType.text,
-                            maxLine: 1,
-                            textController: controller.company,
-                            focusNode: controller.companyFocus,
-                            scrollController: controller.companyScroll,
-                            errorController: controller.isCompanyInvalid.value
-                                ? "Required field"
-                                : null,
-                            onChanged: (value) {
-                              if (value.trim().length > 1) {
-                                controller.isCompanyInvalid.value = false;
-                              } else {
-                                controller.isCompanyInvalid.value = true;
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               );
@@ -1352,11 +1344,11 @@ class ScheduleWeb extends GetView<ScheduleController> {
                   Container(
                     height: 35,
                     child: CustomElevatedButton(
-                      backgroundColor: ColorValues.addNewColor,
-                      text: "Add",
+                      text: "cancel",
+                      backgroundColor: ColorValues.deleteColor,
                       onPressed: () {
-                        controller.isExternalEmployeeInvalid.value = false;
-                        controller.addExternalEmployee();
+                        controller.clear();
+                        Get.back();
                       },
                     ),
                   ),
@@ -1364,11 +1356,11 @@ class ScheduleWeb extends GetView<ScheduleController> {
                   Container(
                     height: 35,
                     child: CustomElevatedButton(
-                      text: "Cancle",
-                      backgroundColor: ColorValues.deleteColor,
+                      backgroundColor: ColorValues.addNewColor,
+                      text: "Add",
                       onPressed: () {
-                        controller.clear();
-                        Get.back();
+                        controller.isExternalEmployeeInvalid.value = false;
+                        controller.addExternalEmployee();
                       },
                     ),
                   ),

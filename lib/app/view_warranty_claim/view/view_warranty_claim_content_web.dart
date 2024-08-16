@@ -581,52 +581,52 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                         // )
                                       ],
                                     ),
-                                    CustomTextField(
-                                      textController: controller
-                                          .warrantyStartDateTextController,
-                                      readOnly: true,
-                                      hintText: controller
-                                                  .viewWarrantyClaimDetailsModel
-                                                  .value
-                                                  ?.wstart_date !=
-                                              null
-                                          ? DateFormat('yyyy-MM-dd').format(
-                                              controller
-                                                  .viewWarrantyClaimDetailsModel
-                                                  .value!
-                                                  .wstart_date!)
-                                          : '',
-                                      label: 'Warranty Start Date: ',
-                                      suffixIcon: Icon(
-                                        Icons.calendar_month,
-                                      ),
-                                      // onTap: () {
-                                      //   pickDateTime2_web(context);
-                                      // },
-                                    ),
-                                    CustomTextField(
-                                      readOnly: true,
-                                      hintText: controller
-                                                  .viewWarrantyClaimDetailsModel
-                                                  .value
-                                                  ?.wend_date !=
-                                              null
-                                          ? DateFormat('yyyy-MM-dd').format(
-                                              controller
-                                                  .viewWarrantyClaimDetailsModel
-                                                  .value!
-                                                  .wend_date!)
-                                          : '',
-                                      label: 'Warranty End Date: ',
-                                      textController:
-                                          controller.startDateTimeCtrlr3,
-                                      suffixIcon: Icon(
-                                        Icons.calendar_month,
-                                      ),
-                                      // onTap: () {
-                                      //   pickDateTime3_web(context);
-                                      // },
-                                    ),
+                                    // CustomTextField(
+                                    //   textController: controller
+                                    //       .warrantyStartDateTextController,
+                                    //   readOnly: true,
+                                    //   hintText: controller
+                                    //               .viewWarrantyClaimDetailsModel
+                                    //               .value
+                                    //               ?.wstart_date !=
+                                    //           null
+                                    //       ? DateFormat('yyyy-MM-dd').format(
+                                    //           controller
+                                    //               .viewWarrantyClaimDetailsModel
+                                    //               .value!
+                                    //               .wstart_date!)
+                                    //       : '',
+                                    //   label: 'Warranty Start Date: ',
+                                    //   suffixIcon: Icon(
+                                    //     Icons.calendar_month,
+                                    //   ),
+                                    //   // onTap: () {
+                                    //   //   pickDateTime2_web(context);
+                                    //   // },
+                                    // ),
+                                    // CustomTextField(
+                                    //   readOnly: true,
+                                    //   hintText: controller
+                                    //               .viewWarrantyClaimDetailsModel
+                                    //               .value
+                                    //               ?.wend_date !=
+                                    //           null
+                                    //       ? DateFormat('yyyy-MM-dd').format(
+                                    //           controller
+                                    //               .viewWarrantyClaimDetailsModel
+                                    //               .value!
+                                    //               .wend_date!)
+                                    //       : '',
+                                    //   label: 'Warranty End Date: ',
+                                    //   textController:
+                                    //       controller.startDateTimeCtrlr3,
+                                    //   suffixIcon: Icon(
+                                    //     Icons.calendar_month,
+                                    //   ),
+                                    //   // onTap: () {
+                                    //   //   pickDateTime3_web(context);
+                                    //   // },
+                                    // ),
                                     CustomTextField(
                                       textController: controller
                                           .warrantyClaimTitleTextController,

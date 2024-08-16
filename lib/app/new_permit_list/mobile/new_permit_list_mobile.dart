@@ -19,7 +19,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NewPermitListController>(
-       id: 'stock_Mangement_Date',
+      id: 'stock_Mangement_Date',
       builder: (controller) {
         return Scaffold(
           body: Obx(() => Stack(
@@ -317,7 +317,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                           controller.fromDate.value,
                           controller.toDate.value,
                         ),
-                      onSubmit: (value) {
+                        onSubmit: (value) {
                           print('po valu ${value.toString()}');
                           PickerDateRange? data = value as PickerDateRange;
 
@@ -331,14 +331,16 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                               : controller.toDate.value = pickUpDate;
 
                           controller.getNewPermitListByDate();
-                          controller.openFromDateToStartDatePicker =
-                              !controller.openFromDateToStartDatePicker;
+                          controller.openFromDateToStartDatePicker = false;
                           controller.update(['stock_Mangement_Date']);
 
                           // Get.toNamed(
                           //   Routes.stockManagementGoodsOrdersScreen,
                           // );
-                        
+                        },
+                        onCancel: () {
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['stock_Mangement_Date']);
                         },
                       ),
                     ),

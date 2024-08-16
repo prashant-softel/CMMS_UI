@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -141,7 +142,8 @@ class _PlantStockReportContentWebState
                                     Spacer(),
                                     Row(
                                       children: [
-                                        CustomRichText(title: 'Date Range',
+                                        CustomRichText(
+                                            title: 'Date Range',
                                             includeAsterisk: false),
                                         Dimens.boxWidth2,
                                         CustomTextFieldForStock(
@@ -398,13 +400,16 @@ class _PlantStockReportContentWebState
                                   : controller.toDate.value = pickUpDate;
 
                               controller.getPlantStockListByDate();
-                              controller.openFromDateToStartDatePicker =
-                                  !controller.openFromDateToStartDatePicker;
+                              controller.openFromDateToStartDatePicker = false;
                               controller.update(['stock_Mangement_Date']);
 
                               // Get.toNamed(
                               //   Routes.stockManagementGoodsOrdersScreen,
                               // );
+                            },
+                            onCancel: () {
+                              controller.openFromDateToStartDatePicker = false;
+                              controller.update(['stock_Mangement_Date']);
                             },
                           ),
                         ),
@@ -540,6 +545,7 @@ class PlantListDataSource extends DataTableSource {
       '${PlantDetails?.inward ?? ''}',
       '${PlantDetails?.outward ?? ''}',
       '${PlantDetails?.balance ?? ''}',
+      'Actions',
     ];
     var cells = [];
     int i = 0;
@@ -555,20 +561,54 @@ class PlantListDataSource extends DataTableSource {
       }
       i++;
     }
+    // cells.add('Actions');
 
     // print({"cell": cells});
     return DataRow.byIndex(
       index: index,
+
       cells: cells.map((value) {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: Text(value.toString()),
+            // child: Text(value.toString()),
+            child: value == 'Actions'
+                ? TableActionButton(
+                    color: ColorValues.viewColor,
+                    icon: Icons.remove_red_eye_outlined,
+                    message: 'view',
+                    onPress: () {
+                      controller.clearStorestartData();
+                      controller.clearStoreendData();
+                      controller.clearStoreData();
+                      int assetId = PlantDetails?.assetItemID ?? 0;
+                      if (assetId != 0) {
+                        Get.toNamed(Routes.plantStockReportDetails, arguments: {
+                          'assetId': assetId,
+                          'startdate': controller.formattedFromdate1,
+                          'enddate': controller.formattedTodate1,
+                        });
+                      }
+                    },
+                  )
+                : Text(value.toString()),
           ),
         );
       }).toList(),
       //   ],
       onSelectChanged: (_) {
+        controller.clearStoreData();
+        controller.clearStorestartData();
+        controller.clearStoreendData();
+        int assetId = PlantDetails?.assetItemID ?? 0;
+        if (assetId != 0) {
+          Get.toNamed(Routes.plantStockReportDetails, arguments: {
+            'assetId': assetId,
+            'startdate': controller.formattedFromdate1,
+            'enddate': controller.formattedTodate1,
+          });
+        }
+
         // final _flutterSecureStorage = const FlutterSecureStorage();
 
         // _flutterSecureStorage.delete(key: "mrsId");

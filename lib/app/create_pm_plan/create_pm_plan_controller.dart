@@ -128,9 +128,11 @@ class CreatePmPlanController extends GetxController {
       // Utility.showDialog(e.toString() + 'pmPlanId');
     }
   }
-void clearStoreData() {
+
+  void clearStoreData() {
     createPmPlanPresenter.clearValue();
   }
+
   Future<void> getPmPlanDetails(
       {int? pmPlanId, bool? isloading, required int facilityId}) async {
     final _pmPlanDetailsModel = await createPmPlanPresenter.getPmPlanDetails(
@@ -163,17 +165,24 @@ void clearStoreData() {
             // orElse: () => null,
           );
           print("hsdfbhjgfhsbgfhdsbshj");
-          selectedInventoryNameList.value.add(inventoryModel);
-          rowItem.value.add([
-            {"key": "assetName", "value": '${element.name}'},
-            {'key': "assetsId", "value": '${element.id}'},
-            {'key': "parentAsset", "value": '${element.parentName}'},
-            {'key': "qty", "value": '${element.module_qty}'},
-            {
-              'key': "checklist",
-              "value": '${element.checklist_name}',
-            },
-          ]);
+          if (preventiveCheckList != null) {
+            selectedInventoryNameList.value.add(inventoryModel);
+            rowItem.value.add([
+              {"key": "assetName", "value": '${element.name}'},
+              {'key': "assetsId", "value": '${element.id}'},
+              {'key': "parentAsset", "value": '${element.parentName}'},
+              {'key': "qty", "value": '${element.module_qty}'},
+              {
+                'key': "checklist",
+                "value": '${element.checklist_name}',
+                // "id": '${element.checklist_id}'
+              },
+            ]);
+            checkdropdownMapperData[element.checklist_name ?? ""] =
+                preventiveCheckList.firstWhere(
+                    (e) => e?.name == element.checklist_name,
+                    orElse: null)!;
+          }
         });
       }
 
@@ -273,7 +282,7 @@ void clearStoreData() {
           {
             'key': "checklist",
             "value": (aa.length > 0 ? '${aa[4]["value"]}' : ''),
-            // "id": (aa.length > 0 ? '${aa[4]["id"]}' : '')
+            "id": (aa.length > 0 ? '${aa[4]["id"]}' : '')
           },
         ]);
       });

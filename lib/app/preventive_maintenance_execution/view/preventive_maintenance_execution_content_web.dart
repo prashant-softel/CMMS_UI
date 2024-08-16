@@ -303,7 +303,8 @@ class PreventiveMaintenanceExecutionContentWeb
                                               cells: record.map((mapData) {
                                                 return DataCell(
                                                   (mapData['key'] == "dropdown")
-                                                      ? Row(
+                                                      ?
+                                                       Row(
                                                           children: [
                                                             Container(
                                                               height: 25,
@@ -707,7 +708,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                                 "";
                                                                         controller.listMrsByTaskId?[index]?.is_mrs_return ==
                                                                                 0
-                                                                            ? Get.toNamed(Routes.mrsViewScreen, arguments: {
+                                                                            ? Get.toNamed(Routes.mrsApprovalScreen, arguments: {
                                                                                 'mrsId': int.tryParse("$mrsId"),
                                                                                 'type': 2
                                                                               })
@@ -904,7 +905,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                         .appGreenColor,
                                                     confirmTextColor:
                                                         Colors.white,
-                                                  )
+                                                    barrierDismissible: false)
                                                 : controller.listMrsByTaskId!
                                                                 .value
                                                                 .firstWhereOrNull(
@@ -935,7 +936,8 @@ class PreventiveMaintenanceExecutionContentWeb
                                                             .appGreenColor,
                                                         confirmTextColor:
                                                             Colors.white,
-                                                      )
+                                                        barrierDismissible:
+                                                            false)
                                                     : controller
                                                         .closePmTaskExecution();
                                           }),

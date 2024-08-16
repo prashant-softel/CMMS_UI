@@ -283,6 +283,8 @@ class ViewPermitController extends GetxController {
 
   RxList<ListAssociatedJob?>? listAssociatedJobs = <ListAssociatedJob?>[].obs;
   RxList<ListAssociatedPm?>? listAssociatedPm = <ListAssociatedPm?>[].obs;
+  RxList<ListAssociatedMC?>? lstAssociatedMc = <ListAssociatedMC?>[].obs;
+  RxList<ListAssociatedVC?>? lstAssociatedVc = <ListAssociatedVC?>[].obs;
 
   ///Employee List
   RxList<ListEmployees?>? listEmployee = <ListEmployees?>[].obs; //ListEmployees
@@ -571,6 +573,12 @@ class ViewPermitController extends GetxController {
         jobId: jobId,
         type: type,
         isLoading: true,
+        vegid: lstAssociatedVc!.value.length > 0
+            ? lstAssociatedVc![0]!.plan_id
+            : 0,
+        vegexe: lstAssociatedVc!.value.length > 0
+            ? lstAssociatedVc![0]!.executionId
+            : 0,
       );
       if (response == true) {
         //getCalibrationList(facilityId, true);
@@ -723,7 +731,7 @@ class ViewPermitController extends GetxController {
       }
       final _reasonForExtensionComment =
           extendReasonCommentTextFieldCtrlr.text.trim();
-      List<int> dataExtend = [];
+      List<int> dataExtend = [1];
       permitExtendConditionList!.value.forEach((element) {
         if (element!.isChecked!) {
           dataExtend.add(element.id!);
@@ -908,6 +916,12 @@ class ViewPermitController extends GetxController {
       listAssociatedPm?.value =
           viewPermitDetailsModel.value?.lstAssociatedPM ?? [];
       print({"12233", listAssociatedPm});
+      lstAssociatedMc?.value =
+          viewPermitDetailsModel.value?.lstAssociatedMC ?? [];
+      print({"MC Data of ptw", lstAssociatedMc});
+      lstAssociatedVc?.value =
+          viewPermitDetailsModel.value?.lstAssociatedVC ?? [];
+      print({"MC Data of ptw", lstAssociatedVc});
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
       file_list?.value = viewPermitDetailsModel.value?.file_list ?? [];
       print("File List:");

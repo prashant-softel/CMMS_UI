@@ -3,6 +3,7 @@ import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/execute_course/execute_course_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/veg_execution_screen/view/widgets/veg_schedule_approve_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
@@ -60,16 +61,27 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                         style: Styles.greyLight14,
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        controller.clearStoreData();
-                        Get.offNamed(Routes.scheduleCourseList);
-                      },
-                      child: Text(
-                        " / Schedule Course".toUpperCase(),
-                        style: Styles.greyLight14,
-                      ),
-                    ),
+                    controller.type.value == 1
+                        ? InkWell(
+                            onTap: () {
+                              controller.clearStoreData();
+                              Get.offNamed(Routes.scheduleCourseList);
+                            },
+                            child: Text(
+                              " / Schedule Course".toUpperCase(),
+                              style: Styles.greyLight14,
+                            ),
+                          )
+                        : InkWell(
+                            onTap: () {
+                              controller.clearStoreData();
+                              Get.offNamed(Routes.trainingCourse);
+                            },
+                            child: Text(
+                              " / Training Course".toUpperCase(),
+                              style: Styles.greyLight14,
+                            ),
+                          ),
                     Text(
                       " / Execute Course".toUpperCase(),
                       style: Styles.greyLight14,
@@ -130,7 +142,7 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                             ),
                                             Dimens.boxHeight10,
                                             TitleAndInfo(
-                                              "Venu:",
+                                              "Venue:",
                                               "${controller.scheduleCourseDetails.value.venue ?? ""}",
                                             ),
                                           ],
@@ -222,24 +234,26 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                                 "Contact No",
                                               ),
                                             ),
-                                            DataColumn2(
-                                              size: ColumnSize.S,
-                                              label: Text(
-                                                "RSVP",
+                                            if (controller.type.value == 1) ...[
+                                              DataColumn2(
+                                                size: ColumnSize.S,
+                                                label: Text(
+                                                  "RSVP",
+                                                ),
                                               ),
-                                            ),
-                                            DataColumn2(
-                                              size: ColumnSize.S,
-                                              label: Text(
-                                                "Attended",
+                                              DataColumn2(
+                                                size: ColumnSize.S,
+                                                label: Text(
+                                                  "Attended",
+                                                ),
                                               ),
-                                            ),
-                                            DataColumn2(
-                                              size: ColumnSize.L,
-                                              label: Text(
-                                                "Note",
+                                              DataColumn2(
+                                                size: ColumnSize.L,
+                                                label: Text(
+                                                  "Note",
+                                                ),
                                               ),
-                                            ),
+                                            ]
                                           ],
                                           rows: List<DataRow>.generate(
                                             controller.internal_employee.length,
@@ -264,35 +278,37 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                                       '${employeeNameDetails.mobile ?? ''}',
                                                     ),
                                                   ),
-                                                  DataCell(
-                                                    Checkbox(
-                                                      value: false,
-                                                      onChanged: (value) {
-                                                        value == true
-                                                            ? false
-                                                            : true;
-                                                      },
+                                                  if (controller.type.value ==
+                                                      1) ...[
+                                                    DataCell(
+                                                      Text(
+                                                        "${employeeNameDetails.rsvp ?? "Undefined"}",
+                                                      ),
                                                     ),
-                                                  ),
-                                                  DataCell(
-                                                    Checkbox(
-                                                      value: false,
-                                                      onChanged: (value) {
-                                                        value == true
-                                                            ? false
-                                                            : true;
-                                                      },
+                                                    DataCell(
+                                                      Checkbox(
+                                                        value:
+                                                            employeeNameDetails
+                                                                .attendend
+                                                                .value,
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          controller.isPresent(
+                                                            index,
+                                                            1,
+                                                          );
+                                                        },
+                                                      ),
                                                     ),
-                                                  ),
-                                                  DataCell(
-                                                    // Text(""),
-                                                    _buildTextField_web(
-                                                      context,
-                                                      controller
-                                                              .noteListInternal[
-                                                          index],
+                                                    DataCell(
+                                                      _buildTextField_web(
+                                                        context,
+                                                        controller
+                                                                .noteListInternal[
+                                                            index],
+                                                      ),
                                                     ),
-                                                  ),
+                                                  ]
                                                 ],
                                               );
                                             },
@@ -355,27 +371,23 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                             DataColumn2(
                                               size: ColumnSize.M,
                                               label: Text(
-                                                "Number",
+                                                "Contact No",
                                               ),
                                             ),
-                                            DataColumn2(
-                                              size: ColumnSize.S,
-                                              label: Text(
-                                                "RSVP",
+                                            if (controller.type.value == 1) ...[
+                                              DataColumn2(
+                                                size: ColumnSize.S,
+                                                label: Text("RSVP"),
                                               ),
-                                            ),
-                                            DataColumn2(
-                                              size: ColumnSize.S,
-                                              label: Text(
-                                                "Attended",
+                                              DataColumn2(
+                                                size: ColumnSize.S,
+                                                label: Text("Attended"),
                                               ),
-                                            ),
-                                            DataColumn2(
-                                              size: ColumnSize.L,
-                                              label: Text(
-                                                "Note",
+                                              DataColumn2(
+                                                size: ColumnSize.L,
+                                                label: Text("Note"),
                                               ),
-                                            ),
+                                            ],
                                           ],
                                           rows: List<DataRow>.generate(
                                             controller.external_employee.length,
@@ -399,34 +411,31 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                                       '${employee.mobile ?? ''}',
                                                     ),
                                                   ),
-                                                  DataCell(
-                                                    Checkbox(
-                                                      value: false,
-                                                      onChanged: (value) {
-                                                        value == true
-                                                            ? false
-                                                            : true;
-                                                      },
+                                                  if (controller.type.value ==
+                                                      1) ...[
+                                                    DataCell(
+                                                      Text(
+                                                          "${employee.rsvp ?? 'Undefined'}"),
                                                     ),
-                                                  ),
-                                                  DataCell(
-                                                    Checkbox(
-                                                      value: false,
-                                                      onChanged: (value) {
-                                                        value == true
-                                                            ? false
-                                                            : true;
-                                                      },
+                                                    DataCell(
+                                                      Checkbox(
+                                                        value: employee
+                                                            .attendend.value,
+                                                        onChanged: (value) {
+                                                          controller.isPresent(
+                                                              index, 2);
+                                                        },
+                                                      ),
                                                     ),
-                                                  ),
-                                                  DataCell(
-                                                    _buildTextField_web(
-                                                      context,
-                                                      controller
-                                                              .noteListExternal[
-                                                          index],
+                                                    DataCell(
+                                                      _buildTextField_web(
+                                                        context,
+                                                        controller
+                                                                .noteListExternal[
+                                                            index],
+                                                      ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ],
                                               );
                                             },
@@ -436,43 +445,53 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                     ],
                                   ),
                                 ),
-                                Center(
-                                  child: Container(
-                                    height: Get.height * 0.2,
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.2,
-                                    constraints: BoxConstraints(maxWidth: 1400),
-                                    padding: EdgeInsets.all(10),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 2,
-                                          child: FileUploadWidgetWithDropzone(),
-                                        ),
-                                        Dimens.boxWidth10,
-                                        Expanded(
-                                          flex: 8,
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 15),
-                                            child:
-                                                FileUploadDetailsWidgetWeb2(),
+                                controller.type.value == 1
+                                    ? Center(
+                                        child: Container(
+                                          height: Get.height * 0.2,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.2,
+                                          constraints:
+                                              BoxConstraints(maxWidth: 1400),
+                                          padding: EdgeInsets.all(10),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 2,
+                                                child:
+                                                    FileUploadWidgetWithDropzone(),
+                                              ),
+                                              Dimens.boxWidth10,
+                                              Expanded(
+                                                flex: 8,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 15),
+                                                  child:
+                                                      FileUploadDetailsWidgetWeb2(),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20),
-                                  child: Row(
-                                    children: [
-                                      CustomRichText(title: "Comments: "),
-                                      Dimens.boxWidth10,
-                                      _buildCommentFieldWeb(context),
-                                    ],
-                                  ),
-                                ),
+                                      )
+                                    : Dimens.box0,
+                                controller.type.value == 1
+                                    ? Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 20),
+                                        child: Row(
+                                          children: [
+                                            CustomRichText(title: "Comments: "),
+                                            Dimens.boxWidth10,
+                                            _buildCommentFieldWeb(context),
+                                          ],
+                                        ),
+                                      )
+                                    : Dimens.box0,
                                 Dimens.boxHeight20,
                               ],
                             ),
@@ -487,31 +506,91 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
           ),
         ),
       ),
-      floatingActionButton: Row(
-        children: [
-          Spacer(),
-          Container(
-            height: 35,
-            child: CustomElevatedButton(
-              backgroundColor: ColorValues.greenColor,
-              text: 'Execute',
-              onPressed: () {},
+      floatingActionButton: controller.type.value == 1
+          ? Row(
+              children: [
+                Spacer(),
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    backgroundColor: ColorValues.redColor,
+                    text: "Cancel",
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                ),
+                Dimens.boxWidth10,
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    backgroundColor: ColorValues.greenColor,
+                    text: 'Execute',
+                    onPressed: () {
+                      controller.execute();
+                    },
+                  ),
+                ),
+                Spacer(),
+              ],
+            )
+          : Row(
+              children: [
+                Spacer(),
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    backgroundColor: ColorValues.greenColor,
+                    text: 'Approve',
+                    onPressed: () {
+                      Get.dialog(
+                        CustomScheduleApproveRejectDialog(
+                          text: "Schedule Approve",
+                          controller: controller,
+                          buttonText: "Approve",
+                          style: Styles.greenElevatedButtonStyle,
+                          onPressed: () {
+                            controller.approveCourseSchedule(
+                              controller
+                                      .scheduleCourseDetails.value.scheduleId ??
+                                  0,
+                            );
+                            Get.offNamed(Routes.trainingCourse);
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Dimens.boxWidth10,
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    backgroundColor: ColorValues.redColor,
+                    text: "Reject",
+                    onPressed: () {
+                      Get.dialog(
+                        CustomScheduleApproveRejectDialog(
+                          text: "Schedule Reject",
+                          controller: controller,
+                          buttonText: "Reject",
+                          style: Styles.darkRedElevatedButtonStyle,
+                          onPressed: () {
+                            controller.rejectCourseSchedule(
+                              controller
+                                      .scheduleCourseDetails.value.scheduleId ??
+                                  0,
+                            );
+                            Get.offNamed(Routes.trainingCourse);
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Spacer(),
+              ],
             ),
-          ),
-          Dimens.boxWidth10,
-          Container(
-            height: 35,
-            child: CustomElevatedButton(
-              backgroundColor: ColorValues.redColor,
-              text: "Cancel",
-              onPressed: () {
-                Get.back();
-              },
-            ),
-          ),
-          Spacer(),
-        ],
-      ),
     );
   }
 

@@ -1,5 +1,4 @@
 import 'package:cmms/domain/models/plant_stock_month.dart';
-import 'package:cmms/domain/models/water_data_month.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -24,8 +23,23 @@ class PlantStockReportDetailsUsecase {
       );
 
 
-  // void saveValue({String? roId}) async =>
-  //     repository.saveValue(LocalKeys.assetID, assetID);
-  // Future<String?> getValue() async =>
-  //     await repository.getStringValue(LocalKeys.assetID);
+void saveValue({String? assetId}) async {
+  repository.saveValue(LocalKeys.assetId, assetId);
+}
+void savestartValue({String? startdate}) async {
+  repository.saveValue(LocalKeys.startdate, startdate);
+}
+void saveendValue({String? enddate}) async {
+  repository.saveValue(LocalKeys.enddate, enddate);
+}
+
+Future<String?> getValue() async {
+  return await repository.getStringValue(LocalKeys.assetId);
+}
+Future<String?> getStartdateValue() async {
+  return await repository.getStringValue(LocalKeys.startdate);
+}
+Future<String?> getEnddateValue() async {
+  return await repository.getStringValue(LocalKeys.enddate);
+}
 }

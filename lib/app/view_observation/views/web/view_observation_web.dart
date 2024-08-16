@@ -5,9 +5,11 @@ import 'package:cmms/app/widgets/close_goods_order_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/list_of_obs_dialog.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewObservationWeb extends StatefulWidget {
   ViewObservationWeb({
@@ -67,9 +69,10 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.offNamed(Routes.statutory);
+                                Get.offNamed(Routes.observationListScreen);
                               },
-                              child: Text(" / MIS", style: Styles.greyLight14),
+                              child: Text(" / OBSERVATION LIST",
+                                  style: Styles.greyLight14),
                             ),
                             Text(
                               " / VIEW OBSERVATION",
@@ -121,7 +124,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                           ),
                                           child: Center(
                                             child: Text(
-                                              "Status ${controller.getObsById.value!.short_status == null ? "" : controller.getObsById.value!.short_status}",
+                                              "${controller.getObsById.value!.short_status == null ? "" : controller.getObsById.value!.short_status}",
                                               style: TextStyle(
                                                 color: Colors.white,
                                               ),
@@ -136,7 +139,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                   ),
                                   Container(
                                     margin: EdgeInsets.symmetric(
-                                      horizontal: 60,
+                                      horizontal: 50,
                                       vertical: 30,
                                     ),
                                     child: Column(
@@ -192,7 +195,8 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             ),
                                                           ],
                                                         ),
-                                                        Dimens.boxWidth10,
+                                                        // Dimens.boxWidth10,
+                                                        SizedBox(width: 10),
                                                         Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
@@ -262,8 +266,9 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             ),
                                                           ],
                                                         ),
-                                                        
-                                                        Dimens.boxWidth10,
+
+                                                        // Dimens.boxWidth10,
+                                                        SizedBox(width: 10),
                                                         Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
@@ -303,7 +308,135 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                             ),
                                           ),
                                         ),
-                                      
+                                        SizedBox(height: 20),
+                                         Container(
+                                          margin: Dimens.edgeInsets20,
+                                          height:
+                                              ((controller.file_list?.length ??
+                                                          0) *
+                                                      40) +
+                                                  130,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: ColorValues
+                                                  .lightGreyColorWithOpacity35,
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: ColorValues
+                                                    .appBlueBackgroundColor,
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      'Files Uploaded',
+                                                      style: Styles.blue700,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: DataTable2(
+                                                  border: TableBorder.all(
+                                                    color: Color.fromARGB(
+                                                        255, 206, 229, 234),
+                                                  ),
+                                                  columns: [
+                                                    DataColumn(
+                                                      label: Text(
+                                                        "File Description",
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    DataColumn(
+                                                      label: Text(
+                                                        "View File",
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                  rows: List<DataRow>.generate(
+                                                    controller.file_list
+                                                            ?.length ??
+                                                        0,
+                                                    (index) => DataRow(
+                                                      cells: [
+                                                        DataCell(Text(
+                                                          controller
+                                                                  .file_list![
+                                                                      index]
+                                                                  ?.description
+                                                                  .toString() ??
+                                                              '',
+                                                        )),
+                                                        DataCell(
+                                                          // Text("View Image"),
+                                                          Wrap(
+                                                            children: [
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .appDarkBlueColor,
+                                                                icon: Icons
+                                                                    .visibility,
+                                                                message:
+                                                                    'View Attachment',
+                                                                onPress:
+                                                                    () async {
+                                                                  // String baseUrl =
+                                                                  //     "http://65.0.20.19/CMMS_API/";
+                                                                  String
+                                                                      baseUrl =
+                                                                      'http://172.20.43.9:83/';
+                                                                  String
+                                                                      fileName =
+                                                                      controller
+                                                                              .file_list![index]
+                                                                              ?.fileName ??
+                                                                          "";
+                                                                  String
+                                                                      fullUrl =
+                                                                      baseUrl +
+                                                                          fileName;
+                                                                  if (await canLaunch(
+                                                                      fullUrl)) {
+                                                                    await launch(
+                                                                        fullUrl);
+                                                                  } else {
+                                                                    throw 'Could not launch $fullUrl';
+                                                                  }
+                                                                  // String baseUrl = 'http://172.20.43.9:83/';
+                                                                },
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
 
                                         // Row(
                                         //   children: [
@@ -377,8 +510,9 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                         //     Spacer(),
                                         //   ],
                                         // ),
-                     
-                                        Dimens.boxHeight20,
+
+                                        // Dimens.boxHeight20,
+                                        SizedBox(height: 20),
                                         (controller.historyList != null &&
                                                 controller
                                                     .historyList!.isNotEmpty)
@@ -406,11 +540,10 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                       child: Row(
                                                         children: [
                                                           Text(
-                                                            "Statutory Compliance History ",
+                                                            "Observation History ",
                                                             style:
                                                                 Styles.blue700,
                                                           ),
-                                                          
                                                         ],
                                                       ),
                                                     ),
@@ -425,20 +558,26 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                 ),
                                               )
                                             : Dimens.box0,
-                                                                 Container(
-                          height: 45,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.rejectColor,
-                            text: "Close",
-                            icon: Icons.close,
-                            onPressed: () {
-                              Get.dialog(ListOfObsCloseDialog(
-                                id: controller.obsId.value,
-                              ));
-                            },
-                          ),
-                        ),
-
+                                        controller.getObsById.value!
+                                                    .status_code !=
+                                                552
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.rejectColor,
+                                                  text: "Close",
+                                                  icon: Icons.close,
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        ListOfObsCloseDialog(
+                                                      id: controller
+                                                          .obsId.value,
+                                                    ));
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                       ],
                                     ),
                                   ),

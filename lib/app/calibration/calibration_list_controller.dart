@@ -67,10 +67,10 @@ class CalibrationListController extends GetxController {
     "Due Date": true, "Done date": true,
 
     "Frequency": true,
-    // "Status":true,
+    "Is Damage": true,
   });
   final Map<String, double> columnwidth = {
-    "Calibration Id": 150,
+    "Calibration Id": 200,
     "Equipment Category": 200,
     "Equipment Name": 250,
     "Serial No.": 200,
@@ -80,7 +80,8 @@ class CalibrationListController extends GetxController {
     "Last Done date": 200,
     "Due Date": 200, "Done date": 200,
 
-    "Frequency": 150,
+    "Frequency": 150, "Is Damage": 150,
+
     // "Status",
   };
   Map<String, RxString> filterText = {};
@@ -100,6 +101,7 @@ class CalibrationListController extends GetxController {
   RxString calibrationIdText = ''.obs;
   RxString frequencyFilterText = ''.obs;
   RxString schedulestartFilterText = ''.obs;
+  RxString isDamage = ''.obs;
 
   ///
   @override
@@ -115,7 +117,7 @@ class CalibrationListController extends GetxController {
       "Due Date": dueDateFilterText,
       "Done date": schedulestartFilterText,
 
-      "Frequency": frequencyFilterText,
+      "Frequency": frequencyFilterText, "Is Damage": isDamage,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -231,13 +233,15 @@ class CalibrationListController extends GetxController {
     }
   }
 
-  void requestCalibration(int calibrationId) async {
+  void requestCalibration(
+      {required int calibrationId, required int assetsId}) async {
     String _nextDueDate = nextDueDateController.text.trim();
     // String _previousDate = previousDateController.text.trim();
     RequestCalibrationModel requestCalibrationModel = RequestCalibrationModel(
         vendorId: selectedvenderId,
         nextCalibrationDate: _nextDueDate,
-        assetId: calibrationId);
+        assetId: assetsId,
+        id: calibrationId);
 
     var requestCalibrationJsonString = requestCalibrationModel.toJson();
 
@@ -729,6 +733,7 @@ class CalibrationListController extends GetxController {
     required String previousDate,
     required String nextDate,
     required String calibrationId,
+    required String asset_id,
   }) {
     Get.dialog(AlertDialog(
       shape: RoundedRectangleBorder(
@@ -787,7 +792,7 @@ class CalibrationListController extends GetxController {
                     children: [
                       Column(
                         children: [
-                          Text("Previous Calibration"),
+                          Text("Last Calibration"),
                           Text("                         Date:"),
                         ],
                       ),
@@ -829,7 +834,7 @@ class CalibrationListController extends GetxController {
                     children: [
                       Column(
                         children: [
-                          Text("Due Date For Next"),
+                          Text("Due Date For "),
                           Text("             Calibration:"),
                         ],
                       ),
@@ -851,6 +856,7 @@ class CalibrationListController extends GetxController {
                           ),
                           width: Get.width / 5,
                           child: LoginCustomTextfield(
+                            enabled: false,
                             textController: nextDueDateController,
                             ontap: () {
                               _selectDate(context, 2);
@@ -928,7 +934,10 @@ class CalibrationListController extends GetxController {
                     CustomElevatedButton(
                       text: "Start",
                       onPressed: () {
-                        requestCalibration(int.tryParse(calibrationId) ?? 0);
+                        requestCalibration(
+                          calibrationId: int.tryParse(calibrationId) ?? 0,
+                          assetsId: int.tryParse(asset_id) ?? 0,
+                        );
                         Get.back();
                       },
                       backgroundColor: ColorValues.appGreenColor,

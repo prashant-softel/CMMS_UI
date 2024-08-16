@@ -10,16 +10,21 @@ class LinkToPermitDialog extends GetView {
   String? approveIncidentReportData;
   String? data;
   int? taskId;
-
+  int? permitId;
   String? activity;
   int? type;
+  int? vegexid;
+  int? vegplanId;
   LinkToPermitDialog(
       {super.key,
       this.approveIncidentReportData,
       this.data,
       this.taskId,
       this.activity,
-      this.type});
+      this.type,
+      this.permitId,
+      this.vegplanId,
+      this.vegexid});
   final NewPermitController controller = Get.find();
 
   @override
@@ -123,24 +128,45 @@ class LinkToPermitDialog extends GetView {
                             },
                             child: const Text('View MC'),
                           )
-                        : ElevatedButton(
-                            style: Styles.greenElevatedButtonStyle,
-                            onPressed: () {
-                              // _controller.getIncidentReportList(
-                              //     _controller.facilityId,
-                              //     _controller.formattedTodate,
-                              //     _controller.formattedFromdate,
-                              //     false);
-                              //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                        : type == 5
+                            ? ElevatedButton(
+                                style: Styles.greenElevatedButtonStyle,
+                                onPressed: () {
+                                  // _controller.getIncidentReportList(
+                                  //     _controller.facilityId,
+                                  //     _controller.formattedTodate,
+                                  //     _controller.formattedFromdate,
+                                  //     false);
+                                  //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                                  Get.back();
+                                  Get.offAllNamed(
+                                    Routes.vegExecutionScreen,
+                                    arguments: {
+                                      "vegexe": vegexid,
+                                      "vegid": vegplanId,
+                                    },
+                                  );
+                                },
+                                child: const Text('View VEG'),
+                              )
+                            : ElevatedButton(
+                                style: Styles.greenElevatedButtonStyle,
+                                onPressed: () {
+                                  // _controller.getIncidentReportList(
+                                  //     _controller.facilityId,
+                                  //     _controller.formattedTodate,
+                                  //     _controller.formattedFromdate,
+                                  //     false);
+                                  //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
 
-                              Get.offAllNamed(Routes.pmTaskView,
-                                  arguments: {'pmTaskId': taskId});
-                              Get.back();
-                            },
-                            child: const Text('View Task'),
-                          ),
+                                  Get.offAllNamed(Routes.pmTaskView,
+                                      arguments: {'pmTaskId': taskId});
+                                  Get.back();
+                                },
+                                child: const Text('View Task'),
+                              ),
                 Dimens.boxWidth10,
-                type == 3 || type == 4
+                type == 3 || type == 4 || type == 5
                     ? Dimens.box0
                     : ElevatedButton(
                         style: Styles.yellowElevatedButtonStyle,
@@ -196,7 +222,42 @@ class LinkToPermitDialog extends GetView {
                             },
                             child: const Text('MC List'),
                           )
-                        : Dimens.box0,
+                        : type == 5
+                            ? ElevatedButton(
+                                style: Styles.yellowElevatedButtonStyle,
+                                onPressed: () {
+                                  // _controller.getIncidentReportList(
+                                  //     _controller.facilityId,
+                                  //     _controller.formattedTodate,
+                                  //     _controller.formattedFromdate,
+                                  //     false);
+                                  //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                                  Get.offAllNamed(Routes.vegExecutionListScreen,
+                                      arguments: {'type': type});
+                                  Get.back();
+                                },
+                                child: const Text('VEG List'),
+                              )
+                            : Dimens.box0,
+                Dimens.boxWidth10,
+                ElevatedButton(
+                  style: Styles.blueElevatedButtonStyle,
+                  onPressed: () {
+                    controller.clearStoreData();
+                    controller.clearTypeStoreData();
+                    // _controller.getIncidentReportList(
+                    //     _controller.facilityId,
+                    //     _controller.formattedTodate,
+                    //     _controller.formattedFromdate,
+                    //     false);
+                    //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                    Get.offAllNamed(Routes.viewPermitScreen,
+                        arguments: {"permitId": permitId, "type": type});
+
+                    Get.back();
+                  },
+                  child: const Text('View Permit'),
+                ),
                 Spacer()
               ],
             ),

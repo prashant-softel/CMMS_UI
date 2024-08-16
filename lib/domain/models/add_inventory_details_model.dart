@@ -73,76 +73,79 @@ class AddInventoryDetailsModel {
   String? asset_description;
   String? warrantyType;
   String? warranty_term_type;
+  String? warrantyStatus;
+  List<FileList>? calibration_file;
 
-  AddInventoryDetailsModel({
-    this.id,
-    this.name,
-    this.facilityId,
-    this.facilityName,
-    this.blockId,
-    this.blockName,
-    this.description,
-    this.typeId,
-    this.type,
-    this.categoryId,
-    this.categoryName,
-    this.parentId,
-    this.parentName,
-    this.parentSerial,
-    this.customerId,
-    this.customerName,
-    this.ownerId,
-    this.ownerName,
-    this.operatorId,
-    this.operatorName,
-    this.manufacturerId,
-    this.manufacturerName,
-    this.supplierId,
-    this.supplierName,
-    this.acCapacity,
-    this.dcCapacity,
-    this.model,
-    this.serialNumber,
-    this.cost,
-    this.currency,
-    this.moduleQuantity,
-    this.calibrationFrequency,
-    this.calibrationFreqType,
-    this.calibrationReminderDays,
-    this.calibrationLastDate,
-    this.calibrationDueDate,
-    this.specialTool,
-    this.specialToolEmp,
-    this.warrantyId,
-    this.warrantyDescription,
-    this.certificateNumber,
-    this.warrantyTypeId,
-    this.warrantyTypeName,
-    this.warrantyProviderId,
-    this.warrantyProviderName,
-    this.warrantyTermTypeId,
-    this.warrantyTermTypeName,
-    this.attachments,
-    this.multiplier,
-    this.statusId,
-    this.status,
-    this.statusShort,
-    this.statusLong,
-    this.importedAt,
-    this.importedBy,
-    this.addedAt,
-    this.addedBy,
-    this.updatedAt,
-    this.updatedBy,
-    this.deletedAt,
-    this.deletedBy,
-    this.asset_description,
-    this.expiry_date,
-    this.start_date,
-    this.parent_equipment_no,
-    this.warrantyType,
-    this.warranty_term_type,
-  });
+  AddInventoryDetailsModel(
+      {this.id,
+      this.name,
+      this.calibration_file,
+      this.facilityId,
+      this.facilityName,
+      this.blockId,
+      this.blockName,
+      this.description,
+      this.typeId,
+      this.type,
+      this.categoryId,
+      this.categoryName,
+      this.parentId,
+      this.parentName,
+      this.parentSerial,
+      this.customerId,
+      this.customerName,
+      this.ownerId,
+      this.ownerName,
+      this.operatorId,
+      this.operatorName,
+      this.manufacturerId,
+      this.manufacturerName,
+      this.supplierId,
+      this.supplierName,
+      this.acCapacity,
+      this.dcCapacity,
+      this.model,
+      this.serialNumber,
+      this.cost,
+      this.currency,
+      this.moduleQuantity,
+      this.calibrationFrequency,
+      this.calibrationFreqType,
+      this.calibrationReminderDays,
+      this.calibrationLastDate,
+      this.calibrationDueDate,
+      this.specialTool,
+      this.specialToolEmp,
+      this.warrantyId,
+      this.warrantyDescription,
+      this.certificateNumber,
+      this.warrantyTypeId,
+      this.warrantyTypeName,
+      this.warrantyProviderId,
+      this.warrantyProviderName,
+      this.warrantyTermTypeId,
+      this.warrantyTermTypeName,
+      this.attachments,
+      this.multiplier,
+      this.statusId,
+      this.status,
+      this.statusShort,
+      this.statusLong,
+      this.importedAt,
+      this.importedBy,
+      this.addedAt,
+      this.addedBy,
+      this.updatedAt,
+      this.updatedBy,
+      this.deletedAt,
+      this.deletedBy,
+      this.asset_description,
+      this.expiry_date,
+      this.start_date,
+      this.parent_equipment_no,
+      this.warrantyType,
+      this.warranty_term_type,
+      this.warrantyStatus});
 
   // Factory method to create a AddInventoryDetailsModel instance from JSON
   factory AddInventoryDetailsModel.fromJson(Map<String, dynamic> json) {
@@ -181,6 +184,10 @@ class AddInventoryDetailsModel {
       calibrationFrequency: json['calibrationFrequency'],
       calibrationFreqType: json['calibrationFreqType'],
       calibrationReminderDays: json['calibrationReminderDays'],
+      calibration_file: json['calibration_file'] != null
+          ? List<FileList>.from(
+              json['calibration_file'].map((x) => FileList.fromJson(x)))
+          : [],
       // calibrationLastDate:
       //     Utility.getFormatedyearMonthDay(json['calibrationLastDate']),
       // // calibrationLastDate: DateTime.parse(json['calibrationLastDate']),
@@ -188,21 +195,20 @@ class AddInventoryDetailsModel {
       //     Utility.getFormatedyearMonthDay(json['calibrationDueDate']),
       // expiry_date: Utility.getFormatedyearMonthDay(json['expiry_date']),
       // start_date: Utility.getFormatedyearMonthDay(json['start_date']),
-calibrationLastDate: json['calibrationLastDate'] != null 
-    ? Utility.getFormatedyearMonthDay(json['calibrationLastDate']) 
-    : 'default_value', 
-calibrationDueDate: json['calibrationDueDate'] != null 
-    ? Utility.getFormatedyearMonthDay(json['calibrationDueDate']) 
-    : 'default_value', 
+      calibrationLastDate: json['calibrationLastDate'] != null
+          ? Utility.getFormatedyearMonthDay(json['calibrationLastDate'])
+          : 'default_value',
+      calibrationDueDate: json['calibrationDueDate'] != null
+          ? Utility.getFormatedyearMonthDay(json['calibrationDueDate'])
+          : 'default_value',
 
-expiry_date: json['expiry_date'] != null 
-    ? Utility.getFormatedyearMonthDay(json['expiry_date']) 
-    : 'default_value',
+      expiry_date: json['expiry_date'] != null
+          ? Utility.getFormatedyearMonthDay(json['expiry_date'])
+          : 'default_value',
 
-start_date: json['start_date'] != null 
-    ? Utility.getFormatedyearMonthDay(json['start_date']) 
-    : 'default_value', 
-
+      start_date: json['start_date'] != null
+          ? Utility.getFormatedyearMonthDay(json['start_date'])
+          : 'default_value',
 
       // calibrationDueDate: DateTime.parse(json['calibrationDueDate']),
       specialTool: json['specialTool'],
@@ -235,6 +241,44 @@ start_date: json['start_date'] != null
       asset_description: json['asset_description'],
       warrantyType: json['warrantyType'],
       warranty_term_type: json['warranty_term_type'],
+      warrantyStatus: json['warrantyStatus'],
     );
   }
+}
+
+// The FileList class
+class FileList {
+  int? id;
+  String? fileName;
+  String? fileCategory;
+  int? fileSize;
+  int? status;
+  String? description;
+
+  FileList({
+    this.id,
+    this.fileName,
+    this.fileCategory,
+    this.fileSize,
+    this.status,
+    this.description,
+  });
+
+  factory FileList.fromJson(Map<String, dynamic> json) => FileList(
+        id: json['id'],
+        fileName: json['fileName'],
+        fileCategory: json['fileCategory'],
+        fileSize: json['fileSize'],
+        status: json['status'],
+        description: json['description'] ?? '',
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'fileName': fileName,
+        'fileCategory': fileCategory,
+        'fileSize': fileSize,
+        'status': status,
+        'description': description,
+      };
 }

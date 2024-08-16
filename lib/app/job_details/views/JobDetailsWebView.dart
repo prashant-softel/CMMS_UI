@@ -259,7 +259,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                     // Dimens.boxWidth2,
                                                     SizedBox(width: 2),
                                                     Container(
-                                                      width: Get.width * 0.3,
+                                                      width: Get.width * 0.2,
                                                       child: Text(
                                                           "${controller.jobDetailsModel.value?.equipmentCatList != null ? controller.jobDetailsModel.value?.equipmentCatList?.map<String>((item) => item.equipmentCatName.toString()).toList() : []}",
                                                           style: Styles.blue14,
@@ -513,6 +513,16 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                       .bold),
                                                         )),
                                                     DataColumn2(
+                                                        fixedWidth: 150,
+                                                        label: Text(
+                                                          "Permit Status",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                    DataColumn2(
                                                         // fixedWidth: 300,
                                                         label: Text(
                                                       "Job Card Date",
@@ -561,6 +571,12 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                   ?.permitId
                                                                   .toString() ??
                                                               ''))),
+                                                      DataCell(Text((controller
+                                                              .jobAssociatedModelsList?[
+                                                                  index]
+                                                              ?.permit_status_short
+                                                              .toString() ??
+                                                          ''))),
                                                       DataCell(Text(controller
                                                               .jobAssociatedModelsList?[
                                                                   index]
@@ -674,6 +690,42 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                             0);
                                                                   })
                                                               : Container(),
+                                                          controller
+                                                                          .jobAssociatedModelsList?[
+                                                                              index]
+                                                                          ?.permitStatus ==
+                                                                      124 ||
+                                                                  controller
+                                                                          .jobAssociatedModelsList?[
+                                                                              index]
+                                                                          ?.permitStatus ==
+                                                                      132
+                                                              ? TableActionButton(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          116,
+                                                                          78,
+                                                                          130),
+                                                                  icon: Icons
+                                                                      .ads_click,
+                                                                  message:
+                                                                      'Re-Submit Permit',
+                                                                  onPress: () {
+                                                                    controller.editNewPermit(
+                                                                        permitId: controller
+                                                                            .jobAssociatedModelsList?[
+                                                                                index]
+                                                                            ?.permitId,
+                                                                        isChecked:
+                                                                            false
+                                                                        // controller
+                                                                        //     .isChecked
+                                                                        //     .value
+                                                                        );
+                                                                  },
+                                                                )
+                                                              : Dimens.box0
                                                           // TableActionButton(
                                                           //     color: ColorValues
                                                           //         .appYellowColor,
@@ -816,16 +868,17 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                               FontWeight.bold),
                                                     )),
                                                     DataColumn2(
-                                                        //  fixedWidth: 300,
+                                                        fixedWidth: 250,
                                                         label: Text(
-                                                      "Status",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    )),
+                                                          "Status",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
                                                     DataColumn2(
-                                                        fixedWidth: 300,
+                                                        fixedWidth: 200,
                                                         label: Text(
                                                           'Action',
                                                           style: TextStyle(
@@ -897,7 +950,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                 rmrsId == "0"
                                                                     ? Get.toNamed(
                                                                         Routes
-                                                                            .mrsViewScreen,
+                                                                            .mrsApprovalScreen,
                                                                         arguments: {
                                                                             'mrsId':
                                                                                 int.tryParse("$mrsId"),

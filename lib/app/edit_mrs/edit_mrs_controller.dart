@@ -82,7 +82,9 @@ class EditMrsController extends GetxController {
         var dataFromPreviousScreen = Get.arguments;
 
         mrsId.value = dataFromPreviousScreen['mrsId'];
-        type.value = dataFromPreviousScreen['type'];
+        // type.value = dataFromPreviousScreen['type'];
+        String? typeValue = dataFromPreviousScreen['type'];
+
         editMrsPresenter.saveValue(mrsId: mrsId.value.toString());
         editMrsPresenter.saveValuee(type: type.value.toString());
       } else {
@@ -115,7 +117,7 @@ class EditMrsController extends GetxController {
           [
             {"key": "Drop_down", "value": '${element.asset_name}'},
             {'key': "Material_Type", "value": ''},
-            {'key': "Image", "value": '${element.approved_date}'},
+            // {'key': "Image", "value": '${element.approved_date}'},
             {'key': "Available_Qty", "value": ''},
             {'key': "Requested_Qty", "value": '${element.requested_qty}'},
             {'key': "Action ", "value": ''},
@@ -154,7 +156,7 @@ class EditMrsController extends GetxController {
     rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "Material_Type", "value": ''},
-      {'key': "Image", "value": ''},
+      // {'key': "Image", "value": ''},
       {'key': "Available_Qty", "value": ''},
       {'key': "Requested_Qty", "value": ''},
       {'key': "Action ", "value": ''},
@@ -214,7 +216,7 @@ class EditMrsController extends GetxController {
             equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
             asset_type_ID:
                 dropdownMapperData[element[0]["value"]]?.asset_type_ID,
-            requested_qty: int.tryParse(element[4]["value"] ?? '0'),
+            requested_qty: int.tryParse(element[3]["value"] ?? '0'),
           );
           items.add(item);
         });

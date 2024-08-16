@@ -72,7 +72,7 @@ class AffectedPartUploadController extends GetxController {
       "facility_id": "380",
       "module_id": "1",
       "id": "3263",
-      "affected_parts": descriptionController.text,
+      "description": descriptionController.text,
     };
 
     var fieldsData = requestFields.entries

@@ -105,14 +105,14 @@ class ObservationPMTaskViewDialog extends GetView {
                                         color:
                                             Color.fromARGB(255, 206, 229, 234)),
                                     columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
+                                      // DataColumn2(
+                                      //     fixedWidth: 100,
+                                      //     label: Text(
+                                      //       "Sr.No.",
+                                      //       style: TextStyle(
+                                      //           fontSize: 15,
+                                      //           fontWeight: FontWeight.bold),
+                                      //     )),
                                       DataColumn2(
                                           fixedWidth: 150,
                                           label: Text(
@@ -124,7 +124,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                       DataColumn2(
                                           fixedWidth: 300,
                                           label: Text(
-                                            "Check Point",
+                                            "Check Point Name",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -148,7 +148,15 @@ class ObservationPMTaskViewDialog extends GetView {
                                       DataColumn2(
                                           fixedWidth: 150,
                                           label: Text(
-                                            "CP ok?",
+                                            "CP OK?",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      DataColumn2(
+                                          fixedWidth: 300,
+                                          label: Text(
+                                            "Observation",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -164,7 +172,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                       DataColumn2(
                                           fixedWidth: 180,
                                           label: Text(
-                                            "Type",
+                                            "Input Type",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -177,14 +185,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                       //           fontSize: 15,
                                       //           fontWeight: FontWeight.bold),
                                       //     )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "Observation",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
+
                                       DataColumn2(
                                           fixedWidth: 100,
                                           label: Text(
@@ -200,7 +201,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                           0,
                                       (index) => DataRow(
                                         cells: [
-                                          DataCell(Text('${index + 1}')),
+                                          // DataCell(Text('${index + 1}')),
                                           DataCell(Text(controller
                                                   .selectedItem
                                                   ?.checklist_observation?[
@@ -245,6 +246,12 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 ? Styles.greencolor16
                                                 : Styles.redcolor16,
                                           )),
+                                          DataCell(Text(controller
+                                                  .selectedItem
+                                                  ?.checklist_observation?[
+                                                      index]
+                                                  .observation ??
+                                              '')),
                                           DataCell(
                                             Center(
                                               child: TableActionButton(
@@ -254,7 +261,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 onPress: () async {
                                                   String baseUrl =
                                                       //     'http://65.0.20.19/CMMS_API/';
-                                                      'http://172.20.43.18:82/';
+                                                      'http://172.20.43.9:83/';
                                                   String imageUrl =
                                                       "${controller.selectedItem?.checklist_observation![index].files?[index].file_path}";
                                                   String fullUrl =
@@ -305,12 +312,6 @@ class ObservationPMTaskViewDialog extends GetView {
                                                       ],
                                                     ))
                                                   : DataCell(Text('Text')),
-                                          DataCell(Text(controller
-                                                  .selectedItem
-                                                  ?.checklist_observation?[
-                                                      index]
-                                                  .observation ??
-                                              '')),
                                           controller
                                                       .selectedItem
                                                       ?.checklist_observation?[
@@ -665,7 +666,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                                 0
                                                             ? Get.toNamed(
                                                                 Routes
-                                                                    .mrsViewScreen,
+                                                                    .mrsApprovalScreen,
                                                                 arguments: {
                                                                     'mrsId': int
                                                                         .tryParse(
@@ -730,17 +731,17 @@ class ObservationPMTaskViewDialog extends GetView {
                   SizedBox(
                     width: 15,
                   ),
-                  Container(
-                    height: 35,
-                    child: CustomElevatedButton(
-                      icon: Icons.print,
-                      backgroundColor: ColorValues.linktopermitColor,
-                      text: "Print",
-                      onPressed: () {
-                        //controller.printScreen();
-                      },
-                    ),
-                  ),
+                  // Container(
+                  //   height: 35,
+                  //   child: CustomElevatedButton(
+                  //     icon: Icons.print,
+                  //     backgroundColor: ColorValues.linktopermitColor,
+                  //     text: "Print",
+                  //     onPressed: () {
+                  //       //controller.printScreen();
+                  //     },
+                  //   ),
+                  // ),
                   SizedBox(
                     width: 20,
                   ),

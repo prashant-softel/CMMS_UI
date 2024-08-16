@@ -13,7 +13,6 @@ class AbandonMCExecutionMessageDialog extends GetView {
   AbandonMCExecutionMessageDialog({super.key, this.createData, this.data});
   final ModuleCleaningListExecutionController _controller = Get.find();
 
-
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(builder: ((context, setState) {
@@ -42,9 +41,10 @@ class AbandonMCExecutionMessageDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  Text(
-                      '${data}', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
-                      // SizedBox(height: 20,),
+                  Text('Abandoned Successfully!',
+                      style: TextStyle(color: Colors.green),
+                      textAlign: TextAlign.center),
+                  // SizedBox(height: 20,),
                   // Row(
                   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   //     children: [
@@ -79,7 +79,11 @@ class AbandonMCExecutionMessageDialog extends GetView {
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 Get.offAllNamed(Routes.moduleCleaningListExecution);
-                _controller.getMCTaskList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, false);
+                _controller.getMCTaskList(
+                    _controller.facilityId,
+                    _controller.formattedTodate,
+                    _controller.formattedFromdate,
+                    false);
                 Get.back();
               },
               child: const Text('Ok'),

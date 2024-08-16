@@ -62,8 +62,8 @@ class PmPlanListController extends GetxController {
 
   Rx<int> pmPlanId = 0.obs;
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    "PM PlanID": true,
-    "PM Plan Title": true,
+    "Plan ID": true,
+    "Plan Title": true,
     "Start Date": true,
     "Next Schedule Date": true,
     "Frequency ": true,
@@ -71,8 +71,8 @@ class PmPlanListController extends GetxController {
   });
 
   final Map<String, double> columnwidth = {
-    "PM PlanID": 200,
-    "PM Plan Title": 350,
+    "Plan ID": 180,
+    "Plan Title": 350,
     "Start Date": 200,
     "Next Schedule Date": 200,
     "Frequency ": 150,
@@ -90,8 +90,8 @@ class PmPlanListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
-      "PM PlanID": idFilterText,
-      "PM Plan Title": tittleFilterText,
+      "Plan ID": idFilterText,
+      "Plan Title": tittleFilterText,
       "Start Date": lastDoneDateFilterText,
       "Next Schedule Date": nextScheduleDateFilterText,
       "Frequency ": frequencyFilterText,
@@ -146,12 +146,17 @@ class PmPlanListController extends GetxController {
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.status_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false))
         .toList();
     pmPlanList.value = filteredList;
   }
 
-  Future<void>getPmPlanList(int facilityId, dynamic startDate, dynamic endDate,
+  Future<void> getPmPlanList(int facilityId, dynamic startDate, dynamic endDate,
       bool? isExport) async {
     pmPlanList.value = <PmPlanListModel>[];
     filteredData.value = <PmPlanListModel>[];

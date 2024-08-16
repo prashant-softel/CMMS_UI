@@ -51,7 +51,7 @@ class ViewAddInventoryUsecase {
 
   void saveValue({String? inventoryId}) async =>
       _repository.saveValue(LocalKeys.inventoryId, inventoryId);
-// getmanufacturerList
+  // getmanufacturerList
   Future<List<ManufacturerModel>> getmanufacturerList({
     required bool isLoading,
     required int? BusinessType,
@@ -124,10 +124,9 @@ class ViewAddInventoryUsecase {
     required int? businessType,
   }) async {
     return _repository.getBusinessList(
-      isLoading: isLoading,
-      businessType: businessType,
-      facilityId: facilityId
-    );
+        isLoading: isLoading,
+        businessType: businessType,
+        facilityId: facilityId);
   }
 
   Future<List<CurrencyListModel>> getUnitCurrencyList(

@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
@@ -6,6 +7,30 @@ import 'package:cmms/domain/repositories/repository.dart';
 class VegExecutionUsecase {
   VegExecutionUsecase(this.repository);
   Repository repository;
+
+  Future<List<EmployeeModel?>?> getAssignedToList({
+    String? auth,
+    int? facilityId,
+    int? featureId,
+    bool? isLoading,
+  }) async =>
+      await repository.getAssignedToEmployee(
+        auth,
+        facilityId,
+        featureId,
+        isLoading,
+      );
+
+  Future<bool> assignToVeg({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async =>
+      await repository.assignToVeg(
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
 
   Future<VegExecutionDetailsModel?> getVegExecutionDetail({
     bool? isLoading,
@@ -68,14 +93,10 @@ class VegExecutionUsecase {
     );
   }
 
-  Future<void> endVegScheduleExecutionButton({
-    int? scheduleId,
-    bool? isLoading,
-  }) async {
+  Future<void> endVegScheduleExecutionButton(
+      {int? scheduleId, bool? isLoading, closePtwJsonString}) async {
     await repository.endVegScheduleExecutionButton(
-      scheduleId,
-      isLoading,
-    );
+        scheduleId, isLoading, closePtwJsonString);
   }
 
   Future<Map<String, dynamic>> abandonVegScheduleButton({
@@ -86,7 +107,7 @@ class VegExecutionUsecase {
         abandoneScheduleJsonString,
         isLoading,
       );
-      
+
   Future<Map<String, dynamic>?> updateVegScheduleExecution({
     updateVegJson,
     required bool isLoading,
@@ -96,6 +117,44 @@ class VegExecutionUsecase {
       isLoading: isLoading,
     );
   }
+
+  Future<bool> vegapproveShecduleExecution({
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegapproveShecduleExecution(
+          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> vegrejectShecduleExecution({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegrejectShecduleExecution(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+
+  Future<bool> endApproveExecution({
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegendApproveExecution(
+          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> endRejectExecution({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegendRejectExecution(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+  Future<bool> abandonedApproveExecution({
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegabandonedApproveExecution(
+          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> abandoneRejectExecution({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.vegabandoneRejectExecution(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
 
   void savePlanId({String? vegid}) async =>
       repository.saveValue(LocalKeys.vegid, vegid);
@@ -107,4 +166,12 @@ class VegExecutionUsecase {
   Future<String?> getExecutionId() async =>
       await repository.getStringValue(LocalKeys.vegexe);
   void clearExecutionId() => repository.clearData(LocalKeys.vegexe);
+  void clearPermitStoreData() async => repository.clearData(LocalKeys.permitId);
+  void clearmcDetailsStoreData() async =>
+      repository.clearData(LocalKeys.mcTaskId);
+  void clearJobDetailStoreData() async =>
+      repository.clearData(LocalKeys.jobModel);
+  void clearTypeValue() async => repository.clearData(LocalKeys.types);
+  void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
+  void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
 }

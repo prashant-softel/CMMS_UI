@@ -200,9 +200,9 @@ class ViewCourseWeb extends GetView<ViewCourseController> {
                                 Dimens.boxHeight15,
                                 Container(
                                   margin: Dimens.edgeInsets20,
-                                  height: ((controller.file_list?.length ?? 0) *
-                                          40) +
-                                      130,
+                                  height:
+                                      ((controller.imageDetails.length) * 40) +
+                                          130,
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color: ColorValues
@@ -259,14 +259,13 @@ class ViewCourseWeb extends GetView<ViewCourseController> {
                                             ),
                                           ],
                                           rows: List<DataRow>.generate(
-                                            controller.file_list?.length ?? 0,
+                                            controller.imageDetails.length,
                                             (index) => DataRow(
                                               cells: [
                                                 DataCell(Text(
-                                                  controller.file_list![index]
-                                                          ?.description
-                                                          .toString() ??
-                                                      '',
+                                                  controller.imageDetails[index]
+                                                      .description
+                                                      .toString(),
                                                 )),
                                                 DataCell(
                                                   // Text("View Image"),
@@ -279,15 +278,13 @@ class ViewCourseWeb extends GetView<ViewCourseController> {
                                                         message:
                                                             'view attachment',
                                                         onPress: () async {
-                                                          // String baseUrl =
-                                                          //     "http://65.0.20.19/CMMS_API/";
                                                           String baseUrl =
                                                               'http://172.20.43.9:83/';
                                                           String fileName =
                                                               controller
-                                                                      .file_list![
+                                                                      .imageDetails[
                                                                           index]
-                                                                      ?.fileName ??
+                                                                      .name ??
                                                                   "";
                                                           String fullUrl =
                                                               baseUrl +
@@ -338,17 +335,17 @@ class ViewCourseWeb extends GetView<ViewCourseController> {
               ),
             ),
             Dimens.boxWidth10,
-            Container(
-              height: 45,
-              child: CustomElevatedButton(
-                backgroundColor: ColorValues.addNewColor,
-                icon: Icons.schedule_outlined,
-                text: 'Schedule',
-                onPressed: () {
-                  Get.toNamed(Routes.scheduleCourse);
-                },
-              ),
-            ),
+            // Container(
+            //   height: 45,
+            //   child: CustomElevatedButton(
+            //     backgroundColor: ColorValues.addNewColor,
+            //     icon: Icons.schedule_outlined,
+            //     text: 'Schedule',
+            //     onPressed: () {
+            //       Get.toNamed(Routes.scheduleCourse);
+            //     },
+            //   ),
+            // ),
             Spacer(),
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:cmms/app/careate_warranty_calim/create_warranty_claim_controller.dart';
 import 'package:get/get.dart';
 
 import '../navigators/app_pages.dart';
@@ -13,7 +14,7 @@ class WCMessageRejectDialog extends GetView {
   List<dynamic>? id;
 
   WCMessageRejectDialog({super.key, this.data, this.id});
-  final ViewWarrantyClaimController controller = Get.find();
+  final CreateWarrantyClaimController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

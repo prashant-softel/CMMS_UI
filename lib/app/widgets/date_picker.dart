@@ -16,6 +16,7 @@ class DatePickerWidget extends GetView {
     this.monthCellStyle,
     this.onSubmit,
     this.showActionButtons = true,
+    required this.onCancel,
   });
 
   final Function(DateRangePickerSelectionChangedArgs)? selectionChanges;
@@ -28,7 +29,8 @@ class DatePickerWidget extends GetView {
   final DateRangePickerSelectionMode selectionMode;
   final dynamic monthCellStyle;
   final bool showActionButtons;
-  dynamic Function(Object?)? onSubmit;
+  final dynamic Function(Object?)? onSubmit;
+  final VoidCallback onCancel;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -44,8 +46,8 @@ class DatePickerWidget extends GetView {
             textAlign: TextAlign.center,
             textStyle: Styles.blackBold16,
           ),
-          minDate: DateTime(DateTime.now().year, -100000),
-          maxDate: DateTime(DateTime.now().year, 100000, 0),
+          minDate: minDate ?? DateTime(DateTime.now().year, -100000),
+          maxDate: maxDate ?? DateTime(DateTime.now().year, 100000, 0),
           selectionColor: ColorValues.primaryColor,
           todayHighlightColor: ColorValues.primaryColor,
           backgroundColor: ColorValues.whiteColor,
@@ -58,9 +60,7 @@ class DatePickerWidget extends GetView {
           initialSelectedRange: initialSelectedRange,
           showActionButtons: showActionButtons,
           onSubmit: onSubmit,
-          onCancel: () {
-            Get.back();
-          },
+          onCancel: onCancel,
         ),
       );
 }

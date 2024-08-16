@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../theme/dimens.dart';
 
 class ViewSetEquipmentDialog extends GetView {
+  int? estimateDurationDays;
+  ViewSetEquipmentDialog({required this.estimateDurationDays});
   final ViewMcPlaningController controller = Get.find();
 
   @override
@@ -19,7 +21,7 @@ class ViewSetEquipmentDialog extends GetView {
         title: Row(
           children: [
             Text(
-              "Set Equipments",
+              "View Set Equipments $estimateDurationDays",
               style: TextStyle(
                 fontSize: 15,
               ),
@@ -50,90 +52,98 @@ class ViewSetEquipmentDialog extends GetView {
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
 
-          return IgnorePointer(
-            ignoring: false,
-            child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: ColorValues.lightGreyColorWithOpacity35,
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: ColorValues.appBlueBackgroundColor,
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
+          return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: ColorValues.lightGreyColorWithOpacity35,
+                  width: 1,
                 ),
-                // padding: EdgeInsets.only(right: 120, top: 10),
-                height: height / 1.5,
-                width: double.infinity,
-                child: SingleChildScrollView(
-                  child: Column(
+                boxShadow: [
+                  BoxShadow(
+                    color: ColorValues.appBlueBackgroundColor,
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              // padding: EdgeInsets.only(right: 120, top: 10),
+              height: height / 1.5,
+              width: Get.width * 0.5,
+              child: SingleChildScrollView(
+                child: Column(
+                    children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
                       children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "Assets",
-                              style: TextStyle(color: Color(0xff31576D)),
-                            ),
+                        Expanded(
+                          flex: 4,
+                          child: Text(
+                            "Assets",
+                            style: TextStyle(color: Color(0xff31576D)),
                           ),
-                          Expanded(
-                            child: Text("Modules",
-                                style: TextStyle(color: Color(0xff31576D))),
-                          ),
-                          Expanded(
-                              child: Text("Select Day",
-                                  style: TextStyle(color: Color(0xff31576D)))),
-                        ],
-                      ),
-                    )
-                  ]..addAll(controller.equipmentList.value.map((e) {
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          setState(
-                                            () {
-                                              e.isExpanded = !e.isExpanded;
-                                            },
-                                          );
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "${e?.invName}",
-                                              style: TextStyle(
-                                                  fontSize: 12.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Icon(e!.isExpanded
-                                                ? Icons.arrow_drop_down
-                                                : Icons.arrow_drop_up)
-                                          ],
-                                        ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Text("Modules",
+                              style: TextStyle(color: Color(0xff31576D))),
+                        ),
+                        Expanded(
+                            flex: 2,
+                            child: Text("Select Day",
+                                style: TextStyle(color: Color(0xff31576D)))),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    thickness: 2,
+                  )
+                ]..addAll(controller.equipmentList.value.map((e) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 4,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(
+                                          () {
+                                            e.isExpanded = !e.isExpanded;
+                                          },
+                                        );
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "${e?.invName}",
+                                            style: TextStyle(
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Icon(e!.isExpanded
+                                              ? Icons.arrow_drop_down
+                                              : Icons.arrow_drop_up)
+                                        ],
                                       ),
                                     ),
-                                    Expanded(
-                                      child: Text(
-                                        "${e.moduleQuantity}",
-                                        style: TextStyle(
-                                            fontSize: 12.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      "${e.moduleQuantity}",
+                                      style: TextStyle(
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                    Expanded(
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: IgnorePointer(
                                       child: DropdownButton<String>(
                                         value: e.selectedDay,
                                         onChanged: (newValue) {
@@ -155,23 +165,28 @@ class ViewSetEquipmentDialog extends GetView {
                                             .toList(),
                                       ),
                                     ),
-                                  ],
-                                ),
-                                e.isExpanded
-                                    ? Column(
-                                        children: []..addAll(
-                                            e.smbs.map(
-                                              (smbItems) {
-                                                return Row(
-                                                  children: [
-                                                    Expanded(
-                                                        child: Text(
-                                                            smbItems.smbName ??
-                                                                "")),
-                                                    Expanded(
-                                                        child: Text(
-                                                            "${smbItems.moduleQuantity}")),
-                                                    Expanded(
+                                  ),
+                                ],
+                              ),
+                              e.isExpanded
+                                  ? Column(
+                                      children: []..addAll(
+                                          e.smbs.map(
+                                            (smbItems) {
+                                              return Row(
+                                                children: [
+                                                  Expanded(
+                                                      flex: 4,
+                                                      child: Text(
+                                                          smbItems.smbName ??
+                                                              "")),
+                                                  Expanded(
+                                                      flex: 2,
+                                                      child: Text(
+                                                          "${smbItems.moduleQuantity}")),
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: IgnorePointer(
                                                       child: DropdownButton<
                                                           String>(
                                                         value: smbItems
@@ -195,87 +210,23 @@ class ViewSetEquipmentDialog extends GetView {
                                                             .toList(),
                                                       ),
                                                     ),
-                                                  ],
-                                                );
-                                              },
-                                            ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
                                           ),
-                                      )
-                                    : Dimens.box0
-                              ],
-                            ),
-                          );
-                        }))),
-                )),
-          );
+                                        ),
+                                    )
+                                  : Dimens.box0,
+                              Divider(
+                                thickness: 1,
+                              )
+                            ],
+                          ),
+                        );
+                      }))),
+              ));
         }),
-        // actions: [
-        //   controller.id == 0
-        //       ? Row(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.greenColor,
-        //                 text: 'Submit',
-        //                 onPressed: () {
-        //                   // controller.createMcPlan();
-        //                 },
-        //               ),
-        //             ),
-        //             Dimens.boxWidth20,
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.redColor,
-        //                 text: "Cancel",
-        //                 onPressed: () {
-        //                   final _flutterSecureStorage =
-        //                       // const FlutterSecureStorage();
-
-        //                       // _flutterSecureStorage.delete(
-        //                       // key: "userId");
-
-        //                       Get.back();
-        //                 },
-        //               ),
-        //             ),
-        //           ],
-        //         )
-        //       : Row(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.redColor,
-        //                 text: "Cancel",
-        //                 onPressed: () {
-        //                   // final _flutterSecureStorage =
-        //                   // const FlutterSecureStorage();
-
-        //                   // _flutterSecureStorage.delete(
-        //                   // key: "userId");
-
-        //                   Get.back();
-        //                 },
-        //               ),
-        //             ),
-        //             Dimens.boxWidth20,
-        //             Container(
-        //               height: 35,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.greenColor,
-        //                 text: 'Update',
-        //                 onPressed: () {
-        //                   // controller.updateMcPlan();
-        //                 },
-        //               ),
-        //             ),
-        //           ],
-        //         ),
-        // ],
       );
     }));
   }

@@ -578,7 +578,7 @@ class PmPlanDataSource extends DataTableSource {
                                                     .kPmPlanFeatureId &&
                                             e.edit ==
                                                 UserAccessConstants
-                                                    .kHaveDeleteAccess)
+                                                    .kHaveEditAccess)
                                         .length >
                                     0
                             ? TableActionButton(
@@ -635,25 +635,47 @@ class PmPlanDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPmPlanFeatureId &&
-                                        e.delete ==
-                                            UserAccessConstants
-                                                .kHaveDeleteAccess)
-                                    .length >
-                                0
+                        (controller.pmPlanList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.plan_id ==
+                                              pmPlanDetails?.plan_id,
+                                          orElse: () =>
+                                              PmPlanListModel(plan_id: 00),
+                                        )
+                                        ?.status_id !=
+                                    405 &&
+                                controller.pmPlanList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.plan_id ==
+                                              pmPlanDetails?.plan_id,
+                                          orElse: () =>
+                                              PmPlanListModel(plan_id: 00),
+                                        )
+                                        ?.status_id !=
+                                    406 &&
+                                varUserAccessModel.value.access_list!
+                                        .where(
+                                          (e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kPmPlanFeatureId &&
+                                              e.delete ==
+                                                  UserAccessConstants
+                                                      .kHaveDeleteAccess,
+                                        )
+                                        .length >
+                                    0)
                             ? TableActionButton(
                                 color: ColorValues.deleteColor,
                                 icon: Icons.delete,
                                 message: 'Delete',
                                 onPress: () {
                                   controller.isDeleteDialog(
-                                      planName: pmPlanDetails?.plan_name,
-                                      planId:
-                                          pmPlanDetails?.plan_id.toString());
+                                    planName: pmPlanDetails?.plan_name,
+                                    planId: pmPlanDetails?.plan_id.toString(),
+                                  );
                                 },
                               )
                             : Dimens.box0

@@ -879,7 +879,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                                 mrsId =
                                                                                 controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
                                                                             controller.listMrsByTaskId?[index]?.is_mrs_return == 0
-                                                                                ? Get.toNamed(Routes.mrsViewScreen, arguments: {
+                                                                                ? Get.toNamed(Routes.mrsApprovalScreen, arguments: {
                                                                                     'mrsId': int.tryParse("$mrsId"),
                                                                                     'type': 2
                                                                                   })
@@ -990,18 +990,18 @@ class PreventiveMaintenanceTaskViewContentWeb
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Container(
-                    //   height: 35,
-                    //   child: CustomElevatedButton(
-                    //     icon: Icons.print,
-                    //     backgroundColor: ColorValues.linktopermitColor,
-                    //     text: "print",
-                    //     onPressed: () {
-                    //       // controller.generateInvoice();
-                    //     },
-                    //   ),
-                    // ),
-                    // Dimens.boxWidth10,
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        icon: Icons.print,
+                        backgroundColor: ColorValues.linktopermitColor,
+                        text: "print",
+                        onPressed: () {
+                          controller.generateInvoice();
+                        },
+                      ),
+                    ),
+                    Dimens.boxWidth10,
                     controller.pmtaskViewModel.value?.status == 161
                         ? Container(
                             height: 35,

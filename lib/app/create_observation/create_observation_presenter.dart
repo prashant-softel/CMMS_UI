@@ -2,6 +2,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
+import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:cmms/domain/usecases/create_observation_usecase.dart';
@@ -21,11 +22,11 @@ class CreateObservationPresenter {
   }
 
   void clearValue() async => createObservationUsecase.clearValue();
-  Future<List<IncidentRiskTypeModell>> getIncidentRiskType(
-      {required bool isLoading, required int facilityId}) async {
-    return createObservationUsecase.getIncidentRiskType(
+  Future<List<RiskTypeModel>> getRiskTypeList(
+      {required bool isLoading, required int facility_id}) async {
+    return createObservationUsecase.getRiskTypeList(
       isLoading: isLoading,
-      facilityId: facilityId,
+      facility_id: facility_id,
     );
   }
 

@@ -204,9 +204,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       await setUserId();
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
-        Future.delayed(Duration(seconds: 1), () {
-          getFacilityList();
-        });
+        //   Future.delayed(Duration(seconds: 1), () {
+        //     getFacilityList();
+        //   });
       });
       Future.delayed(Duration(seconds: 2), () async {
         await getRequestOrderList(

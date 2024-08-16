@@ -537,25 +537,39 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                                       FilteringTextInputFormatter.digitsOnly
                                                                                     ],
                                                                                     maxLine: 1,
+                                                                                    enabled: controller.listMrsByTaskId!.value
+                                                                                                    .firstWhereOrNull(
+                                                                                                      (element) => element?.jobCardId != 0 || element?.pmId != 0,
+                                                                                                    )
+                                                                                                    ?.mrs_return_ID ==
+                                                                                                0 &&
+                                                                                            controller.allTrue.value == false
+                                                                                        ? true
+                                                                                        : false,
                                                                                     textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                     onChanged: (txt) {
+                                                                                      int intialQty = int.tryParse(mapData['value'] ?? "") ?? 0;
+
+                                                                                      num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
+                                                                                      num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
+                                                                                      num intiAllowedQty = usedQty - intialQty;
+
+                                                                                      num maxAllowedQty = issuedQty - intiAllowedQty;
+                                                                                      if (txt.isNotEmpty) {
+                                                                                        num enteredValue = num.tryParse(txt) ?? 0;
+                                                                                        if (enteredValue > maxAllowedQty) {
+                                                                                          // If the entered quantity exceeds the allowed maximum, truncate it
+                                                                                          setState(() {
+                                                                                            txt = intialQty.toString();
+                                                                                            mapData['value'] = intialQty.toString();
+                                                                                          });
+                                                                                          // Optionally, you can show an error message or handle the situation
+                                                                                          Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
+                                                                                        }
+                                                                                      } else if (txt.isEmpty) {
+                                                                                        txt = intialQty.toString();
+                                                                                      }
                                                                                       mapData["value"] = txt;
-
-                                                                                      // Ensure the entered value is less than or equal to the issued qty
-                                                                                      //   num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
-                                                                                      //   num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
-                                                                                      //   int consumedQty = int.tryParse(txt) ?? 0;
-
-                                                                                      //   if (consumedQty <= (issuedQty - usedQty)) {
-                                                                                      //     mapData["value"] = txt;
-                                                                                      //   } else {
-                                                                                      //     // If the entered quantity exceeds the issued quantity, show an error message or handle it accordingly
-                                                                                      //     Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
-                                                                                      //     // Reset the consumed quantity to the previous valid value
-                                                                                      //     setState(() {
-                                                                                      //       mapData["value"] = mapData["value"]!;
-                                                                                      //     });
-                                                                                      //   }
                                                                                     },
                                                                                   ),
                                                                                 ),

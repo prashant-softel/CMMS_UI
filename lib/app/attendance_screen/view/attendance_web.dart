@@ -327,10 +327,11 @@ class AttendanceWeb extends GetView<AttendanceController> {
           Container(
             height: 45,
             child: CustomElevatedButton(
-              backgroundColor: ColorValues.submitColor,
-              text: "Submit",
+              backgroundColor: ColorValues.cancelColor,
+              text: "Close",
               onPressed: () {
-                controller.addAttendance();
+                controller.clearData();
+                Get.offNamed(Routes.admin_dashboard);
               },
             ),
           ),
@@ -338,11 +339,10 @@ class AttendanceWeb extends GetView<AttendanceController> {
           Container(
             height: 45,
             child: CustomElevatedButton(
-              backgroundColor: ColorValues.cancelColor,
-              text: "Close",
+              backgroundColor: ColorValues.submitColor,
+              text: "Submit",
               onPressed: () {
-                controller.clearData();
-                Get.offNamed(Routes.admin_dashboard);
+                controller.addAttendance();
               },
             ),
           ),
@@ -355,7 +355,7 @@ class AttendanceWeb extends GetView<AttendanceController> {
   Widget _buildTimeField_web({
     required BuildContext context,
     required int index,
-    required int position, // 1= in time and 2 = out time
+    required int position, // 1 = in time and 2 = out time
     required TextEditingController textcontroller,
   }) {
     return Column(

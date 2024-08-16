@@ -256,11 +256,12 @@ class NewPermitListController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.ptwStatus?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.current_status_short
+                    ?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
             (item?.requestDatetime?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false))
         .toList();
 
-    newPermitList.value = filteredData;
+    newPermitList.value = filteredList;
 
     // newPermitList.value = filteredData
     //     .where((item) =>
@@ -389,7 +390,7 @@ class NewPermitListController extends GetxController {
     clearTypeStoreData();
     clearisCheckedtoreData();
     Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "type": 3});
+        arguments: {"permitId": permitId, "type": 0});
   }
 
   Future<void> cancelPermitList({int? permitId}) async {

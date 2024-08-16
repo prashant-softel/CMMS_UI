@@ -4,6 +4,8 @@ import 'package:cmms/app/add_inventory/view/manufacturar_tab_widget.dart';
 import 'package:cmms/app/add_inventory/view/warranty_widget.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
+import 'package:cmms/app/controllers/file_upload_controller2.dart';
+import 'package:cmms/app/controllers/file_upload_controller3.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -25,6 +27,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
   final HomeController homecontroller = Get.find();
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
+  final FileUploadController2 dropzoneController2 =
+      Get.put(FileUploadController2());
+  final FileUploadController3 dropzoneController3 =
+      Get.put(FileUploadController3());
   @override
   Widget build(BuildContext context) => SelectionArea(
         child: SelectionArea(
@@ -102,9 +108,9 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                           InkWell(
                                             onTap: () {
                                               Get.offNamed(
-                                                  Routes.masterDashboard);
+                                                  Routes.inventoryList);
                                             },
-                                            child: Text(" / MASTER",
+                                            child: Text(" / ASSET LIST",
                                                 style: Styles.greyLight14),
                                           ),
                                           Text(
@@ -575,10 +581,10 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                   child: LoginCustomTextfield(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <TextInputFormatter>[
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
-                                                    ],
+                                                    // inputFormatters: <TextInputFormatter>[
+                                                    //   FilteringTextInputFormatter
+                                                    //       .digitsOnly
+                                                    // ],
                                                     textController: controller
                                                         .serialNoCtrlr,
                                                     // errorController: controller

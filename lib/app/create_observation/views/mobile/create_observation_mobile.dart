@@ -220,7 +220,11 @@ class _CreateObservationMobileState extends State<CreateObservationMobile> {
                                               false;
                                           controller
                                               .update(['stock_Mangement']);
-                                          Navigator.pop(context);
+                                        },
+                                        onCancel: () {
+                                          controller.openObsDatePicker = false;
+                                          controller
+                                              .update(['stock_Mangement']);
                                         },
                                       ),
                                     );
@@ -315,13 +319,19 @@ class _CreateObservationMobileState extends State<CreateObservationMobile> {
                                           controller.targetDateTc.text =
                                               DateFormat('yyyy-MM-dd')
                                                   .format(p0.value);
+
                                           controller.openTargetDatePicker =
-                                              !controller.openTargetDatePicker;
+                                              false;
                                           controller.isTargetDateInvalid.value =
                                               false;
                                           controller
                                               .update(['stock_Mangement']);
-                                          Navigator.pop(context);
+                                        },
+                                        onCancel: () {
+                                          controller.openTargetDatePicker =
+                                              false;
+                                          controller
+                                              .update(['stock_Mangement']);
                                         },
                                       ),
                                     );
@@ -379,7 +389,7 @@ class _CreateObservationMobileState extends State<CreateObservationMobile> {
                                   text: 'Submit',
                                   onPressed: () {
                                     controller.isFormInvalid.value = false;
-                                    controller.createObs(1);
+                                    controller.createObs(position: 1);
                                   },
                                 ),
                               )
@@ -390,7 +400,7 @@ class _CreateObservationMobileState extends State<CreateObservationMobile> {
                                   text: 'Update',
                                   onPressed: () {
                                     controller.isFormInvalid.value = false;
-                                    controller.createObs(0);
+                                    controller.createObs(position: 0);
                                   },
                                 ),
                               ),

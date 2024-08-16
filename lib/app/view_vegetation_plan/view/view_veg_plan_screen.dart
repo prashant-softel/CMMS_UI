@@ -20,7 +20,7 @@ class ViewVegPlanScreen extends GetView<ViewVegPlanController> {
       appBar: Responsive.isMobile(context)
           ? AppBar(
               title: HeadingProfileAppBar(
-                title: "View Vegetation Plan",
+                title: "VIEW VEG",
               ),
             )
           : null,

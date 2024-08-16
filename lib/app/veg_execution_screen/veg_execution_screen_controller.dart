@@ -2,13 +2,21 @@
 
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/veg_execution_screen/veg_execution_screen_presenter.dart';
+import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/update_vegetation_execution_model.dart';
 import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class VegExecutionController extends GetxController {
@@ -22,15 +30,15 @@ class VegExecutionController extends GetxController {
   RxInt facilityId = 0.obs;
   RxInt vegexe = 0.obs;
   RxInt vegid = 0.obs;
-
+  TextEditingController commentCtrlr = TextEditingController();
   Rx<VegExecutionDetailsModel?> vegExecutionDetailsModel =
       VegExecutionDetailsModel().obs;
   RxList<VegTaskEquipmentList?> vegTaskEquipment = <VegTaskEquipmentList>[].obs;
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
-  Map<String, Schedules> dropdownMapperData = {};
-  RxList<Schedules?>? schedules = <Schedules?>[].obs;
-  RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
+  Map<String, VegSchedules> dropdownMapperData = {};
+  RxList<VegSchedules?>? schedules = <VegSchedules?>[].obs;
+  RxList<VegSchedules?>? listSchedules = <VegSchedules?>[].obs;
   RxList<int> scheduleId = <int>[].obs;
   RxInt scheduledId = 0.obs;
   Map<String, dynamic> data = {};
@@ -39,6 +47,18 @@ class VegExecutionController extends GetxController {
       TextEditingController();
   TextEditingController remarkTextFieldCtrlr = TextEditingController();
   TextEditingController remarkCtrlrWeb = TextEditingController();
+  Map<String, String> check = <String, String>{};
+  int count = 0;
+  Rx<bool> allScheduleTrue = false.obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
+  Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
+
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
+      EndMCExecutionDetailsModel().obs;
+  RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+  Rx<String> selectedAssignedTo = ''.obs;
+  Rx<bool> isAssignedToSelected = true.obs;
+  int selectedAssignedToId = 0;
 
   @override
   void onInit() async {
@@ -55,6 +75,7 @@ class VegExecutionController extends GetxController {
           executionId: vegexe.value,
           facilityId: facilityId.value,
         );
+        await getAssignedToList();
       });
     } catch (e) {
       print(e);
@@ -100,6 +121,11 @@ class VegExecutionController extends GetxController {
       listSchedules?.value = vegExecutionDetailsModel.value?.schedules ?? [];
       scheduleId.value =
           listSchedules!.map((element) => element?.scheduleId ?? 0).toList();
+      // vegid.value = vegExecutionDetailsModel.value?.id ?? 0;
+      bool allStatus383 =
+          listSchedules!.every((element) => element?.status == 731);
+
+      allScheduleTrue.value = allStatus383;
       vegExecutionDetailsModel.value?.schedules?.forEach((element) {
         rowItem.value.add([
           {"key": "Schedule Id", "value": '${element.scheduleId}'},
@@ -108,13 +134,27 @@ class VegExecutionController extends GetxController {
           {"key": "Cleaned", "value": '${element.cleaned}'},
           {"key": "Abandoned", "value": '${element.abandoned}'},
           {"key": "Pending", "value": '${element.pending}'},
-          {"key": "Type", "value": '${element.cleaningTypeName}'},
-          {"key": "Water Used", "value": '${element.waterUsed}'},
-          {"key": "Remark", "value": '${element.remark}'},
+          {"key": "Remark", "value": '${element.remark_of_schedule}'},
+          {"key": "Permit_code", "value": '${element.permit_code}'},
+          {"key": "Permit_status", "value": '${element.status_short_ptw}'},
           {"key": "Status", "value": '${element.status_short}'},
           {'key': "Actions", "value": ''},
         ]);
       });
+    }
+  }
+
+  Future<void> getAssignedToList() async {
+    assignedToList.clear();
+    final _assignedToList = await vegExecutionPresenter.getAssignedToList(
+      facilityId: facilityId.value,
+      featureId: UserAccessConstants.kVegetationControlFeatureId,
+    );
+
+    if (_assignedToList != null) {
+      for (var assignedTo in _assignedToList) {
+        assignedToList.add(assignedTo);
+      }
     }
   }
 
@@ -129,6 +169,25 @@ class VegExecutionController extends GetxController {
     );
     if (_vegTaskEquipmentList.isNotEmpty) {
       vegTaskEquipment.value = _vegTaskEquipmentList;
+      check.clear();
+
+      for (var equipment in vegTaskEquipment) {
+        for (var smb in equipment?.smbs ?? []) {
+          if (smb.isAbandonSmbCheck) {
+            check["${smb.smbName}"] = "abandon";
+            count++;
+          } else if (smb.isCleanedSmbCheck) {
+            check["${smb.smbName}"] = "cleaned";
+            count++;
+          } else {
+            print("${smb.smbName} execution remaining");
+          }
+        }
+        if (count == 0) {
+          check["${equipment?.invName}"] = "remaining";
+        }
+        count = 0;
+      }
     }
   }
 
@@ -148,6 +207,10 @@ class VegExecutionController extends GetxController {
 
   void abandonVegExecutionButton({int? id}) async {
     {
+      if (commentTextFieldCtrlr.text == '') {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = commentTextFieldCtrlr.text.trim();
       CommentModel commentAbandonModel = CommentModel(
         id: id,
@@ -169,10 +232,17 @@ class VegExecutionController extends GetxController {
     );
   }
 
-  Future<void> endVegScheduleExecutionButton({int? scheduleID}) async {
+  Future<void> endVegScheduleExecutionButton(
+      {int? scheduleID, int? ptw_id}) async {
+    var _comment = remarkTextFieldCtrlr.text.trim();
+    ClosePermitModel ptwClose = ClosePermitModel(
+        id: ptw_id, comment: _comment, conditionIds: [1, 2, 3, 4], fileIds: []);
+    var closePtwJsonString = ptwClose.toJson();
+
     final _endVegScheduleExecutionBtn =
         await vegExecutionPresenter.endVegScheduleExecutionButton(
       scheduleId: scheduleID,
+      closePtwJsonString: closePtwJsonString,
     );
   }
 
@@ -194,6 +264,7 @@ class VegExecutionController extends GetxController {
   void clearStoreData() {
     vegExecutionPresenter.clearExecutionId();
     vegExecutionPresenter.clearPlanId();
+    clearPermitStoreData();
   }
 
   void updateVegScheduleExecution({
@@ -222,7 +293,7 @@ class VegExecutionController extends GetxController {
         scheduleId: scheduleId ?? 0,
         executionId: vegexe.value,
         cleaningDay: cleaningDay ?? 0,
-        remark: remark ?? "",
+        remark: remark == null ? "" : remark,
         cleanedEquipmentIds: cleanedEquipmentIds,
         abandonedEquipmentIds: abandonedEquipmentIds,
       );
@@ -233,6 +304,220 @@ class VegExecutionController extends GetxController {
         isLoading: true,
       );
       print('Update MC Schedule Execution data: $updateVegJson');
+    }
+  }
+
+  approveShecduleExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var approvetoJsonString = commentModel.toJson();
+      final response = await vegExecutionPresenter.vegapproveShecduleExecution(
+        approvetoJsonString: approvetoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.vegExecutionListScreen);
+      }
+    }
+  }
+
+  rejectShecduleExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var rejecttoJsonString = commentModel.toJson();
+      final response = await vegExecutionPresenter.vegrejectShecduleExecution(
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.vegExecutionListScreen);
+      }
+    }
+  }
+
+  endApproveExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var approvetoJsonString = commentModel.toJson();
+      final response = await vegExecutionPresenter.endApproveExecution(
+        approvetoJsonString: approvetoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.vegExecutionListScreen);
+      }
+    }
+  }
+
+  endRejectExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var rejecttoJsonString = commentModel.toJson();
+      final response = await vegExecutionPresenter.endRejectExecution(
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.vegExecutionListScreen);
+      }
+    }
+  }
+
+  abandonedApproveExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var approvetoJsonString = commentModel.toJson();
+      final response = await vegExecutionPresenter.abandonedApproveExecution(
+        approvetoJsonString: approvetoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.vegExecutionListScreen);
+      }
+    }
+  }
+
+  abandoneRejectExecution(int id) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+
+      var rejecttoJsonString = commentModel.toJson();
+      final response = await vegExecutionPresenter.abandoneRejectExecution(
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.vegExecutionListScreen);
+      }
+    }
+  }
+
+  assignToVeg({required int id}) async {
+    {
+      final response = await vegExecutionPresenter.assignToVeg(
+        assignId: selectedAssignedToId,
+        taskId: id,
+        isLoading: true,
+      );
+    }
+  }
+
+  void clearPermitStoreData() {
+    vegExecutionPresenter.clearPermitStoreData();
+  }
+
+  createNewPermit({int? scheduleID}) {
+    clearStoreData();
+    clearJobDetailStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearpmTaskValue();
+    clearPermitStoreData();
+    clearmcDetailsStoreData();
+    Get.offNamed(
+      Routes.createPermit,
+      arguments: {
+        "jobModel": jobDetailsModel.value,
+        "permitId": 0,
+        "isChecked": false,
+        "type": 5,
+        "isFromJobDetails": true,
+        "pmTaskModel": pmtaskViewModel.value,
+        "mcModel": mcExecutionDetailsModel.value,
+        "vegModel": vegExecutionDetailsModel.value,
+        "scheduleID": scheduleID
+      },
+    );
+  }
+
+  Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
+    clearStoreData();
+    clearJobDetailStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearpmTaskValue();
+    clearPermitStoreData();
+    clearmcDetailsStoreData();
+    Get.toNamed(Routes.createPermit, arguments: {
+      "jobModel": jobDetailsModel.value,
+      "permitId": permitId,
+      "isChecked": isChecked,
+      "type": 5,
+      "isFromJobDetails": true,
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "vegModel": vegExecutionDetailsModel.value,
+      "scheduleID": 0
+    });
+    print('PermitIDForTBt:$permitId');
+    print('PermitIdArgument:$isChecked');
+  }
+
+  void clearmcDetailsStoreData() {
+    vegExecutionPresenter.clearmcDetailsStoreData();
+  }
+
+  void clearJobDetailStoreData() {
+    vegExecutionPresenter.clearJobDetailStoreData();
+  }
+
+  void clearTypeStoreData() {
+    vegExecutionPresenter.clearTypeValue();
+  }
+
+  void clearisCheckedtoreData() {
+    vegExecutionPresenter.clearisCheckedValue();
+  }
+
+  void clearpmTaskValue() {
+    vegExecutionPresenter.clearpmTaskValue();
+  }
+
+  Future<void> viewNewPermitList({
+    int? permitId,
+    int? jobId,
+  }) async {
+    Get.toNamed(Routes.viewPermitScreen, arguments: {
+      "permitId": permitId,
+      "jobId": jobId,
+      "type": 5,
+    });
+  }
+
+  void onValueChanged(dynamic list, dynamic value) {
+    print('Valuesd:${value}');
+    switch (list.runtimeType) {
+      case const (RxList<EmployeeModel>):
+        {
+          int assignedToIndex =
+              assignedToList.indexWhere((x) => x?.name == value);
+          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+          if (selectedAssignedToId != 0) {
+            isAssignedToSelected.value = true;
+          }
+          selectedAssignedTo.value = value;
+        }
+        break;
+      default:
+        {}
+        break;
     }
   }
 }

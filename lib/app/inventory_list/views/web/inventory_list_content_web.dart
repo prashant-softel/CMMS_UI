@@ -167,6 +167,8 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                                 icon: Icons.add,
                                                 label: "Add New",
                                                 onPressed: () {
+                                                  controller.clearStoreData();
+
                                                   Get.offNamed(Routes
                                                       .addInventoryScreen);
                                                 },
@@ -269,7 +271,6 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                             text: 'Excel'),
                                       ),
                                       Spacer(),
-                                      
                                       Container(
                                         width: 300,
                                         height: 40,
@@ -487,7 +488,6 @@ class InventoryListDataSource extends DataTableSource {
               .toLowerCase()
               .toUpperCase()
               .toString());
-           
 
       // Add other filter conditions as needed
     }).toList();
@@ -608,6 +608,8 @@ class InventoryListDataSource extends DataTableSource {
                                 icon: Icons.edit,
                                 message: 'Edit',
                                 onPress: () {
+                                  controller.clearStoreData();
+
                                   int inventoryId =
                                       InventoryListDetails?.id ?? 0;
                                   if (inventoryId != 0) {
@@ -631,7 +633,15 @@ class InventoryListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      onSelectChanged: (_) {},
+      onSelectChanged: (_) {
+        controller.clearStoreData();
+        int inventoryId = InventoryListDetails?.id ?? 0;
+        if (inventoryId != 0) {
+          Get.toNamed(Routes.viewAddInventoryScreen, arguments: {
+            'inventoryId': inventoryId,
+          });
+        }
+      },
     );
   }
 

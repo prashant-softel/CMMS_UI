@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_presenter.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
 import 'package:cmms/domain/models/escalation_details_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
@@ -179,7 +180,7 @@ class AddEscalationMatrixController extends GetxController {
             "value": '${element.role_name}',
           },
           {
-            'key': "Action ",
+            'key': "Action",
             "value": '',
           },
         ]);
@@ -297,10 +298,26 @@ class AddEscalationMatrixController extends GetxController {
     Map<String, dynamic>? responseCreateEscalationMatrixModel =
         await addEscalationPresenter.createEscalationMatrix(
       createEscalationMatrix: escalationMatrixJsonString,
+      moduleId: module_id.value,
+      statusId: status_id.value,
       isLoading: true,
     );
 
     if (responseCreateEscalationMatrixModel == null) {}
     print('Add Escalation Matrix   data: $escalationMatrixJsonString');
+  }
+
+  Future<void> viewEscalationMatrix({
+    required int moudle_id,
+    required int status_id,
+  }) async {
+    clearStoreData();
+    Get.toNamed(
+      Routes.viewEscalatiomMatrixContentWeb,
+      arguments: {
+        "module_id": moudle_id,
+        "status_id": status_id,
+      },
+    );
   }
 }

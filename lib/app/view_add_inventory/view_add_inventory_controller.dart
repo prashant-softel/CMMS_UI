@@ -276,7 +276,8 @@ class ViewAddInventoryController extends GetxController {
 
         inventoryId.value = dataFromPreviousScreen['inventoryId'];
 
-        // viewaddInventoryPresenter.saveValue(goId: inventoryId.value.toString());
+        viewaddInventoryPresenter.saveValue(
+            inventoryId: inventoryId.value.toString());
       } else {
         inventoryId.value = int.tryParse(_inventoryId) ?? 0;
       }
@@ -325,7 +326,7 @@ class ViewAddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
               "";
       lastCalibrationDateTc.text =
-          editAddInventoryDetailsModel.value?.calibrationDueDate.toString() ??
+          editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
               "";
       selectedStatusNameId = editAddInventoryDetailsModel.value?.statusId ?? 0;
       selectedStatusName.value =

@@ -26,6 +26,7 @@ class AddVegetationPlanController extends GetxController {
   Rx<DateTime> selectedStartTime = DateTime.now().obs;
   Rx<VegPlanDetailModel?> vegPlanDetailsModel = VegPlanDetailModel().obs;
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+  RxBool isDurationEditable = true.obs; // New observable to control editability
 
   RxBool isAssignedToSelected = true.obs;
   RxString selectedAssignedTo = ''.obs;
@@ -191,6 +192,59 @@ class AddVegetationPlanController extends GetxController {
     print('Create  Create GO  data: $createVegModelJsonString');
   }
 
+  void updateVegPlan() async {
+    Map<int, List<Equipments>> equipmentMap = {};
+
+   
+    equipmentList.forEach((equipment) {
+      equipment?.smbs?.forEach((smb) {
+        if (smb.selectedDay != null) {
+          int day = int.tryParse(smb.selectedDay!) ?? 0;
+          if (day > 0) {
+            if (!equipmentMap.containsKey(day)) {
+              equipmentMap[day] = [];
+            }
+            equipmentMap[day]!.add(Equipments(id: smb.smbId));
+          }
+        }
+      });
+    });
+
+    // Convert the equipmentMap to a list of schedules
+    List<Schedule> sch = equipmentMap.entries.map((entry) {
+      return Schedule(
+        cleaningDay: entry.key,
+        equipments: entry.value,
+      );
+    }).toList();
+
+    print({"sch": sch});
+
+    String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
+    String _vegTitleController = vegTitleController.text.trim();
+    String _startDate = startDateTc.text.trim();
+
+    CreateVegPlanModel createVegModel = CreateVegPlanModel(
+      planId: vegid.value,
+      facilityId: facilityId,
+      startDate: _startDate,
+      frequencyId: selectedfrequencyId,
+      noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
+      title: _vegTitleController,
+      assignedTo: selectedAssignedToId.value,
+      schedules: sch,
+    );
+
+    var updateVegModelJsonString = [createVegModel.toJson()];
+    Map<String, dynamic>? responseCreateVegModel =
+        await addVegetationPresenter.updateVegPlan(
+      updateVegPlans: updateVegModelJsonString,
+      isLoading: true,
+    );
+    if (responseCreateVegModel == null) {}
+    print('update MC   data: $updateVegModelJsonString');
+  }
+
   Future<void> getVegPlanDetail({
     required int planId,
     required int facilityId,
@@ -229,6 +283,12 @@ class AddVegetationPlanController extends GetxController {
     }
   }
 
+  RxList<TypeModel> cleaningType = <TypeModel>[
+    TypeModel(name: "Please Select", id: "0"),
+    TypeModel(name: 'Dry', id: "1"),
+    TypeModel(name: 'Wet', id: "2"),
+  ].obs;
+
   Future<void> getFrequencyList() async {
     final list = await addVegetationPresenter.getFrequencyList(isLoading: true);
 
@@ -264,6 +324,13 @@ class AddVegetationPlanController extends GetxController {
             selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
             selectedfrequency.value = value;
             isSelectedfrequency.value = true;
+
+            if (value == "Daily") {
+              durationInDayCtrlr.text = '1';
+              isDurationEditable.value = false;
+            } else {
+              isDurationEditable.value = true;
+            }
           } else {
             selectedfrequencyId = 0;
           }

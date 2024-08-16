@@ -120,7 +120,53 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                 text:
                                     "${controller.calibrationDetailModel.value?.statusShort ?? ""}",
                                 onPressed: () {},
-                                backgroundColor: ColorValues.appYellowColor,
+                                backgroundColor: controller
+                                            .calibrationDetailModel
+                                            .value
+                                            ?.statusId ==
+                                        218
+                                    ? ColorValues.appRedColor
+                                    : controller.calibrationDetailModel.value?.statusId ==
+                                            211
+                                        ? ColorValues.blueColor
+                                        : controller.calibrationDetailModel
+                                                    .value?.statusId ==
+                                                214
+                                            ? ColorValues.appGreenColor
+                                            : controller.calibrationDetailModel
+                                                        .value?.statusId ==
+                                                    213
+                                                ? ColorValues
+                                                    .rejectedStatusColor
+                                                : controller.calibrationDetailModel
+                                                            .value?.statusId ==
+                                                        217
+                                                    ? ColorValues.closeColor
+                                                    : controller
+                                                                .calibrationDetailModel
+                                                                .value
+                                                                ?.statusId ==
+                                                            212
+                                                        ? ColorValues
+                                                            .carryfarwordColor
+                                                        : controller
+                                                                    .calibrationDetailModel
+                                                                    .value
+                                                                    ?.statusId ==
+                                                                215
+                                                            ? ColorValues
+                                                                .startColor
+                                                            : controller
+                                                                        .calibrationDetailModel
+                                                                        .value
+                                                                        ?.statusId ==
+                                                                    216
+                                                                ? ColorValues.completeColor
+                                                                : controller.calibrationDetailModel.value?.statusId == 218
+                                                                    ? ColorValues.approveColor
+                                                                    : controller.calibrationDetailModel.value?.statusId == 220
+                                                                        ? ColorValues.rejectedStatusColor
+                                                                        : ColorValues.appDarkBlueColor,
                                 textColor: ColorValues.whiteColor,
                               ),
                             ),
@@ -135,9 +181,8 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Dimens.boxWidth30,
+                                  Spacer(),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
@@ -147,12 +192,17 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       ),
                                       Dimens.boxHeight10,
                                       Text(
-                                        'Last Calibration Date:',
+                                        'Vender Name:',
                                         style: Styles.black17,
                                       ),
                                       Dimens.boxHeight10,
                                       Text(
-                                        'Vender Name:',
+                                        'Started Date:',
+                                        style: Styles.black17,
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Text(
+                                        'Last Done Date:',
                                         style: Styles.black17,
                                       ),
                                       Dimens.boxHeight10,
@@ -162,7 +212,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       ),
                                     ],
                                   ),
-                                  Dimens.boxWidth15,
+                                  Dimens.boxWidth5,
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -172,16 +222,21 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                           style: Styles.blue17),
                                       Dimens.boxHeight10,
                                       Text(
-                                          "${controller.calibrationDetailModel.value?.lastCalibrationDate ?? ""}",
+                                          "${controller.calibrationDetailModel.value?.vendorName ?? ""}",
                                           style: Styles.blue17),
                                       Dimens.boxHeight10,
                                       Text(
-                                          "${controller.calibrationDetailModel.value?.vendorName ?? ""}",
+                                          "${controller.calibrationDetailModel.value?.startedAt ?? ""}",
+                                          style: Styles.blue17),
+                                      Dimens.boxHeight10,
+                                      Text(
+                                          "${controller.calibrationDetailModel.value?.lastCalibrationDate ?? ""}",
                                           style: Styles.blue17),
                                       Dimens.boxHeight10,
                                       Text(
                                           "${controller.calibrationDetailModel.value?.completedAt ?? ""}",
                                           style: Styles.blue17),
+                                      Dimens.boxHeight10,
                                     ],
                                   ),
                                   Spacer(),
@@ -194,22 +249,22 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       ),
                                       Dimens.boxHeight10,
                                       Text(
-                                        'Next Calibration Due Date:',
-                                        style: Styles.black17,
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Text(
                                         'Responsible Person:',
                                         style: Styles.black17,
                                       ),
                                       Dimens.boxHeight10,
                                       Text(
-                                        'Recieved date:',
+                                        'Requested Date:',
+                                        style: Styles.black17,
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Text(
+                                        'Due date:',
                                         style: Styles.black17,
                                       ),
                                     ],
                                   ),
-                                  Dimens.boxWidth15,
+                                  Dimens.boxWidth5,
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -219,57 +274,37 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                           style: Styles.blue17),
                                       Dimens.boxHeight10,
                                       Text(
-                                          "${controller.calibrationDetailModel.value?.nextCalibrationDueDate ?? ""}",
-                                          style: Styles.blue17),
-                                      Dimens.boxHeight10,
-                                      Text(
                                           "${controller.calibrationDetailModel.value?.responsiblePerson ?? ""}",
                                           style: Styles.blue17),
                                       Dimens.boxHeight10,
                                       Text(
-                                          "${controller.calibrationDetailModel.value?.receivedDate ?? ""}",
+                                          "${controller.calibrationDetailModel.value?.requestedAt ?? ""}",
+                                          style: Styles.blue17),
+                                      Dimens.boxHeight10,
+                                      Text(
+                                          "${controller.calibrationDetailModel.value?.calibrationDate ?? ""}",
                                           style: Styles.blue17),
                                     ],
-                                  )
+                                  ),
+                                  Spacer(),
                                 ],
                               ),
-                              controller.calibrationDetailModel.value
-                                          ?.statusId ==
-                                      215
-                                  ? Container(
-                                      height: Get.height * 0.2,
-                                      width: Get.width,
-                                      padding: EdgeInsets.all(10),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child:
-                                                FileUploadWidgetWithDropzone(),
-                                          ),
-                                          Dimens.boxWidth10,
-                                          Expanded(
-                                            flex: 8,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 15),
-                                              child:
-                                                  FileUploadDetailsWidgetWeb2(),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : Dimens.box0,
+
                               controller.calibrationId.value > 0 &&
+                                      controller.calibrationDetailModel.value
+                                              ?.file_list_calibration !=
+                                          null &&
                                       controller.calibrationDetailModel.value!
-                                              .file_list!.length >
-                                          0
+                                          .file_list_calibration!.isNotEmpty
                                   ? Container(
                                       // width:
                                       //     MediaQuery.of(context).size.width /
                                       //         1.2,
-                                      height: ((controller.file_list!.length) *
+                                      height: ((controller
+                                                  .calibrationDetailModel
+                                                  .value!
+                                                  .file_list_calibration!
+                                                  .length) *
                                               41) +
                                           117,
                                       margin: Dimens.edgeInsets20,
@@ -285,7 +320,134 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                             child: Row(
                                               children: [
                                                 Text(
-                                                  "Uploaded Images ",
+                                                  "Assets Calibration Certificates ",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: DataTable2(
+                                              border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234),
+                                              ),
+                                              dataRowHeight: 40,
+                                              columns: [
+                                                DataColumn(
+                                                  label: Text(
+                                                    "File Description",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "View Image",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller
+                                                        .calibrationDetailModel
+                                                        .value!
+                                                        .file_list_calibration
+                                                        ?.length ??
+                                                    0,
+                                                (index) => DataRow(
+                                                  cells: [
+                                                    DataCell(Text(
+                                                      controller
+                                                              .calibrationDetailModel
+                                                              .value!
+                                                              .file_list_calibration![
+                                                                  index]
+                                                              .description
+                                                              .toString() ??
+                                                          '',
+                                                    )),
+                                                    DataCell(
+                                                      // Text("View Image"),
+                                                      Wrap(
+                                                        children: [
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .appDarkBlueColor,
+                                                            icon: Icons
+                                                                .visibility,
+                                                            message: 'view',
+                                                            onPress: () async {
+                                                              String baseUrl =
+                                                                  'http://172.20.43.9:83/';
+                                                              String fileName = controller
+                                                                      .calibrationDetailModel
+                                                                      .value!
+                                                                      .file_list_calibration![
+                                                                          index]
+                                                                      ?.fileName ??
+                                                                  "";
+                                                              String fullUrl =
+                                                                  baseUrl +
+                                                                      fileName;
+                                                              if (await canLaunch(
+                                                                  fullUrl)) {
+                                                                await launch(
+                                                                    fullUrl);
+                                                              } else {
+                                                                throw 'Could not launch $fullUrl';
+                                                              }
+                                                              // String baseUrl = 'http://172.20.43.9:83/';
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Dimens.box0,
+
+                              controller.calibrationId.value > 0 &&
+                                      controller.calibrationDetailModel.value
+                                              ?.fileList !=
+                                          null &&
+                                      controller.calibrationDetailModel.value!
+                                          .fileList!.isNotEmpty
+                                  ? Container(
+                                      // width:
+                                      //     MediaQuery.of(context).size.width /
+                                      //         1.2,
+                                      height: ((controller.file_list!.length) *
+                                              41) +
+                                          117,
+                                      margin: EdgeInsets.only(
+                                          left: 20, right: 20, top: 10),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.3)),
+                                      ),
+
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "Calibration Certificates And Damaged Files ",
                                                   style: Styles.blue700,
                                                 ),
                                               ],
@@ -375,170 +537,95 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                       ),
                                     )
                                   : Dimens.box0,
-                              // Container(
-                              //   margin: Dimens.edgeInsets20,
-                              //   height: 300,
-                              //   decoration: BoxDecoration(
-                              //     border: Border.all(
-                              //       color:
-                              //           ColorValues.lightGreyColorWithOpacity35,
-                              //       width: 1,
-                              //     ),
-                              //     boxShadow: [
-                              //       BoxShadow(
-                              //         color: ColorValues.appBlueBackgroundColor,
-                              //         spreadRadius: 2,
-                              //         blurRadius: 5,
-                              //         offset: Offset(0, 2),
-                              //       ),
-                              //     ],
-                              //   ),
-                              //   child: Column(
-                              //     children: [
-                              //       Padding(
-                              //         padding: const EdgeInsets.all(10.0),
-                              //         child: Row(
-                              //           children: [
-                              //             Text(
-                              //               "Calibration Certificates",
-                              //               style: Styles.blue700,
-                              //             ),
-                              //           ],
-                              //         ),
-                              //       ),
-                              //       Divider(
-                              //         color: ColorValues.greyLightColour,
-                              //       ),
-                              //       Expanded(
-                              //         child: ScrollableTableView(
-                              //           columns: [
-                              //             "Sr.",
-                              //             "View",
-                              //             "File Name",
-                              //             "File Category",
-                              //             "File Size",
-                              //             "Status",
-                              //           ].map((column) {
-                              //             return TableViewColumn(
-                              //               label: column,
-                              //               minWidth: Get.width * 0.15,
-                              //             );
-                              //           }).toList(),
-                              //           rows: [].map((record) {
-                              //             return TableViewRow(
-                              //               height: 90,
-                              //               cells: record.map((value) {
-                              //                 return TableViewCell(
-                              //                   child: Text("no data found"),
-                              //                 );
-                              //               }).toList(),
-                              //             );
-                              //           }).toList(),
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-
-                              // Container(
-                              //   margin: Dimens.edgeInsets20,
-                              //   height: 300,
-                              //   decoration: BoxDecoration(
-                              //     border: Border.all(
-                              //       color:
-                              //           ColorValues.lightGreyColorWithOpacity35,
-                              //       width: 1,
-                              //     ),
-                              //     boxShadow: [
-                              //       BoxShadow(
-                              //         color: ColorValues.appBlueBackgroundColor,
-                              //         spreadRadius: 2,
-                              //         blurRadius: 5,
-                              //         offset: Offset(0, 2),
-                              //       ),
-                              //     ],
-                              //   ),
-                              //   child: Column(
-                              //     children: [
-                              //       Padding(
-                              //         padding: const EdgeInsets.all(10.0),
-                              //         child: Row(
-                              //           children: [
-                              //             Text(
-                              //               "Equipment Image ",
-                              //               style: Styles.blue700,
-                              //             ),
-                              //           ],
-                              //         ),
-                              //       ),
-                              //       Divider(
-                              //         color: ColorValues.greyLightColour,
-                              //       ),
-                              //       Expanded(
-                              //         child: ScrollableTableView(
-                              //           columns: [
-                              //             "Sr.",
-                              //             "View",
-                              //             "File Name",
-                              //             "File Category",
-                              //             "File Size",
-                              //             "Status",
-                              //           ].map((column) {
-                              //             return TableViewColumn(
-                              //               label: column,
-                              //               minWidth: Get.width * 0.15,
-                              //             );
-                              //           }).toList(),
-                              //           rows: [
-                              //             // [
-                              //             //   "1",
-                              //             //   "Milk",
-                              //             //   "20.00",
-                              //             //   "---",
-                              //             //   "status"
-                              //             // ],
-                              //             // [
-                              //             //   "2",
-                              //             //   "Soap",
-                              //             //   "10.00",
-                              //             //   "---",
-                              //             //   "status"
-                              //             // ],
-                              //             // ...List.generate(
-                              //             //   controller.historyLog?.length ?? 0,
-                              //             //   (index) {
-                              //             //     var getHistoryListDetails =
-                              //             //         controller.historyLog?[index];
-                              //             //     return [
-                              //             //       '${getHistoryListDetails?.created_at}',
-                              //             //       '${getHistoryListDetails?.created_by_name ?? ''}',
-                              //             //       '${getHistoryListDetails?.comment ?? ''}',
-                              //             //       '--',
-                              //             //       '${getHistoryListDetails?.status ?? ''}',
-                              //             //     ];
-                              //             //   },
-                              //             // ),
-                              //             // // [
-                              //           ].map((record) {
-                              //             return TableViewRow(
-                              //               height: 90,
-                              //               cells: record.map((value) {
-                              //                 return TableViewCell(
-                              //                   child: Text(value),
-                              //                 );
-                              //               }).toList(),
-                              //             );
-                              //           }).toList(),
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
+                              controller.calibrationDetailModel.value
+                                              ?.statusId ==
+                                          215 ||
+                                      controller.calibrationDetailModel.value
+                                              ?.statusId ==
+                                          220
+                                  ? Container(
+                                      height: Get.height * 0.2,
+                                      width: Get.width,
+                                      margin:
+                                          EdgeInsets.only(left: 16, right: 16),
+                                      // padding: EdgeInsets.all(10),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child:
+                                                FileUploadWidgetWithDropzone(),
+                                          ),
+                                          Dimens.boxWidth10,
+                                          Expanded(
+                                            flex: 8,
+                                            child:
+                                                FileUploadDetailsWidgetWeb2(),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Dimens.box0,
+                              Dimens.boxHeight10,
+                              controller.calibrationDetailModel.value?.statusId == 211 ||
+                                      controller.calibrationDetailModel.value?.statusId ==
+                                          212 ||
+                                      controller.calibrationDetailModel.value?.statusId ==
+                                          213 ||
+                                      controller.calibrationDetailModel.value
+                                              ?.statusId ==
+                                          214
+                                  ? Dimens.box0
+                                  : IgnorePointer(
+                                      ignoring: controller
+                                                      .calibrationDetailModel
+                                                      .value
+                                                      ?.statusId ==
+                                                  211 ||
+                                              controller.calibrationDetailModel
+                                                      .value?.statusId ==
+                                                  212 ||
+                                              controller.calibrationDetailModel
+                                                      .value?.statusId ==
+                                                  213 ||
+                                              controller.calibrationDetailModel
+                                                      .value?.statusId ==
+                                                  214 ||
+                                              controller.calibrationDetailModel
+                                                      .value?.statusId ==
+                                                  215 ||
+                                              controller.calibrationDetailModel
+                                                      .value?.statusId ==
+                                                  220
+                                          ? false
+                                          : true,
+                                      child: Container(
+                                        margin: EdgeInsets.only(left: 20),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Any Damages:",
+                                              style: Styles.blackBold15,
+                                            ),
+                                            Dimens.boxWidth10,
+                                            CustomSwitchTroggle(
+                                                value:
+                                                    controller.isToggleOn.value,
+                                                onChanged: (value) {
+                                                  controller.toggle();
+                                                }),
+                                          ],
+                                        ),
+                                      )),
 
                               (controller.historyList != null &&
                                       controller.historyList!.isNotEmpty)
                                   ? Container(
-                                      margin: Dimens.edgeInsets20,
+                                      margin: EdgeInsets.only(
+                                          left: 20,
+                                          right: 20,
+                                          bottom: 20,
+                                          top: 10),
                                       height:
                                           ((controller.historyList?.length ??
                                                       0) *
@@ -577,111 +664,39 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   //  )
                                   : //
                                   Dimens.box0,
+
                               controller.calibrationDetailModel.value
-                                          ?.statusId ==
-                                      215
-                                  ?
-                                  //  IgnorePointer(
-                                  //     ignoring: controller
-                                  //             .calibrationDetailModel
-                                  //             .value
-                                  //             ?.statusId ==
-                                  //         214,
-                                  //     child:
-                                  Row(
-                                      children: [
-                                        Text(
-                                          "Any Damages:",
-                                          style: Styles.blackBold15,
-                                        ),
-                                        Dimens.boxWidth10,
-                                        CustomSwitchTroggle(
-                                            value: controller.isToggleOn.value,
-                                            onChanged: (value) {
-                                              controller.toggle();
-                                            }),
-                                      ],
-                                    )
-                                  // )
-                                  : Dimens.box0,
-                              // Dimens.boxHeight10,
-                              // Row(
-                              //   children: [
-                              //     Text(
-                              //       "Remarks:",
-                              //       style: Styles.blackBold15,
-                              //     ),
-                              //     Dimens.boxWidth10,
-                              //     Container(
-                              //       width: (Get.width * .5),
-                              //       decoration: BoxDecoration(
-                              //         boxShadow: [
-                              //           BoxShadow(
-                              //             color: Colors.black26,
-                              //             offset: const Offset(
-                              //               5.0,
-                              //               5.0,
-                              //             ),
-                              //             blurRadius: 5.0,
-                              //             spreadRadius: 1.0,
-                              //           ),
-                              //           BoxShadow(
-                              //             color: ColorValues.whiteColor,
-                              //             offset: const Offset(0.0, 0.0),
-                              //             blurRadius: 0.0,
-                              //             spreadRadius: 0.0,
-                              //           ),
-                              //         ],
-                              //         color: ColorValues.whiteColor,
-                              //         borderRadius: BorderRadius.circular(5),
-                              //       ),
-                              //       child: SizedBox(
-                              //         width:
-                              //             MediaQuery.of(context).size.width / 1.1,
-                              //         child: TextField(
-                              //           keyboardType: TextInputType.multiline,
-                              //           enabled: false,
-                              //           maxLines: 5,
-                              //           autofocus: false,
-                              //           decoration: InputDecoration(
-                              //             fillColor: ColorValues.whiteColor,
-                              //             filled: true,
-                              //             contentPadding: Dimens.edgeInsets05_10,
-                              //             border: InputBorder.none,
-                              //             enabledBorder: InputBorder.none,
-                              //             focusedBorder: InputBorder.none,
-                              //           ),
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
-                              // controller.calibrationDetailModel.value
-                              //             ?.statusId ==
-                              //         214
-                              //     ?
-                              Container(
-                                margin: Dimens.edgeInsets15,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomRichText(title: "Comment:"),
-                                    Dimens.boxWidth10,
-                                    LoginCustomTextfield(
-                                      width: (Get.width * .6),
-                                      maxLine: 5,
-                                      textController: controller.commentCtrlr,
+                                              ?.statusId ==
+                                          214 ||
+                                      controller.calibrationDetailModel.value
+                                              ?.statusId ==
+                                          221
+                                  ? Dimens.box0
+                                  : Container(
+                                      margin: Dimens.edgeInsets15,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CustomRichText(title: "Comment:"),
+                                          Dimens.boxWidth10,
+                                          LoginCustomTextfield(
+                                            width: (Get.width * .6),
+                                            maxLine: 5,
+                                            textController:
+                                                controller.commentCtrlr,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ),
-                              )
-                              // : Dimens.box0,
+                              //  : Dimens.box0,
                               //  Dimens.boxHeight30,
-                              ,
+                              // ,
                               Container(
                                 margin: EdgeInsets.only(bottom: 40, top: 40),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     // Container(
                                     //   height: 35,
@@ -753,6 +768,8 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                     .length >
                                                 0
                                         ? Container(
+                                            margin: EdgeInsets.only(
+                                                right: 20, left: 20),
                                             height: 35,
                                             //width: (Get.width * .2) - 90,
                                             child: CustomElevatedButton(
@@ -766,7 +783,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                             ),
                                           )
                                         : Dimens.box0,
-                                    Dimens.boxWidth20,
+                                    //  Dimens.boxWidth20,
                                     controller.calibrationDetailModel.value
                                                     ?.statusId ==
                                                 212 &&
@@ -783,6 +800,9 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                 0
                                         ? Container(
                                             height: 35,
+                                            margin: EdgeInsets.only(
+                                                right: 20, left: 20),
+
                                             //width: (Get.width * .2) - 90,
                                             child: CustomElevatedButton(
                                               backgroundColor:
@@ -795,21 +815,30 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                             ),
                                           )
                                         : Dimens.box0,
-                                    Dimens.boxWidth20,
-                                    controller.calibrationDetailModel.value
-                                                    ?.statusId ==
-                                                215 &&
-                                            varUserAccessModel
-                                                    .value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id ==
-                                                            UserAccessConstants
-                                                                .kCalibrationFeatureId &&
-                                                        e.add ==
-                                                            UserAccessConstants
-                                                                .kHaveAddAccess)
-                                                    .length >
-                                                0
+                                    // Dimens.boxWidth20,
+                                    controller.calibrationDetailModel.value?.statusId == 215 &&
+                                                varUserAccessModel.value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kCalibrationFeatureId &&
+                                                            e.add ==
+                                                                UserAccessConstants
+                                                                    .kHaveAddAccess)
+                                                        .length >
+                                                    0 ||
+                                            controller.calibrationDetailModel
+                                                        .value?.statusId ==
+                                                    220 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kCalibrationFeatureId &&
+                                                            e.add == UserAccessConstants.kHaveAddAccess)
+                                                        .length >
+                                                    0
                                         ? Container(
                                             height: 35,
                                             //width: (Get.width * .2) - 90,
@@ -841,6 +870,9 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                 0
                                         ? Container(
                                             height: 35,
+                                            margin: EdgeInsets.only(
+                                                right: 20, left: 20),
+
                                             //width: (Get.width * .2) - 90,
                                             child: CustomElevatedButton(
                                               backgroundColor:
@@ -870,6 +902,9 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                 0
                                         ? Container(
                                             height: 35,
+                                            margin: EdgeInsets.only(
+                                                right: 20, left: 20),
+
                                             //width: (Get.width * .2) - 90,
                                             child: CustomElevatedButton(
                                               backgroundColor:

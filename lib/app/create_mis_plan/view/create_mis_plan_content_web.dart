@@ -45,8 +45,8 @@ class _CreateMisPlanWebState extends State<CreateMisPlanWeb> {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color:
-                              Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                          color: Color.fromARGB(255, 236, 234, 234)
+                              .withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
                           offset: Offset(0, 2),
@@ -72,8 +72,8 @@ class _CreateMisPlanWebState extends State<CreateMisPlanWeb> {
                             onTap: () {
                               Get.offNamed(Routes.misDashboard);
                             },
-                            child:
-                                Text(" / MIS", style: Styles.greyMediumLight12)),
+                            child: Text(" / MIS",
+                                style: Styles.greyMediumLight12)),
                         Text(" / CREATE CHECKLIST PLAN",
                             style: Styles.greyMediumLight12)
                       ],
@@ -171,15 +171,17 @@ class _CreateMisPlanWebState extends State<CreateMisPlanWeb> {
                                       ),
                                       SizedBox(
                                         child: DropdownWebStock(
-                                          width:
-                                              (MediaQuery.of(context).size.width *
-                                                  .3),
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .3),
                                           controller: controller,
-                                          dropdownList: controller.frequencyList,
+                                          dropdownList:
+                                              controller.frequencyList,
                                           isValueSelected: controller
                                               .isSelectedfrequency.value,
-                                          selectedValue:
-                                              controller.selectedfrequency.value,
+                                          selectedValue: controller
+                                              .selectedfrequency.value,
                                           onValueChanged:
                                               controller.onValueChanged,
                                         ),
@@ -201,15 +203,16 @@ class _CreateMisPlanWebState extends State<CreateMisPlanWeb> {
                                           )),
                                       SizedBox(
                                         child: DropdownWebStock(
-                                          width:
-                                              (MediaQuery.of(context).size.width *
-                                                  .3),
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .3),
                                           controller: controller,
                                           dropdownList: controller.checkList,
                                           isValueSelected: controller
                                               .isSelectedchecklist.value,
-                                          selectedValue:
-                                              controller.selectedchecklist.value,
+                                          selectedValue: controller
+                                              .selectedchecklist.value,
                                           onValueChanged:
                                               controller.onValueChanged,
                                         ),
@@ -230,7 +233,8 @@ class _CreateMisPlanWebState extends State<CreateMisPlanWeb> {
                                           )),
                                       Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           border: Border.all(
                                             color: Color.fromARGB(
                                                 255, 227, 224, 224),
@@ -278,7 +282,8 @@ class _CreateMisPlanWebState extends State<CreateMisPlanWeb> {
                                         onTap: () {
                                           controller.openStartDatePicker =
                                               !controller.openStartDatePicker;
-                                          controller.update(['stock_Mangement']);
+                                          controller
+                                              .update(['stock_Mangement']);
                                         },
                                         textController:
                                             controller.startDateDateTc,
@@ -300,7 +305,8 @@ class _CreateMisPlanWebState extends State<CreateMisPlanWeb> {
                                           )),
                                       Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           border: Border.all(
                                             color: Color.fromARGB(
                                                 255, 227, 224, 224),
@@ -334,7 +340,8 @@ class _CreateMisPlanWebState extends State<CreateMisPlanWeb> {
                                     children: [
                                       Spacer(),
                                       CustomElevatedButton(
-                                        backgroundColor: ColorValues.appRedColor,
+                                        backgroundColor:
+                                            ColorValues.appRedColor,
                                         text: 'cancel',
                                         onPressed: () {
                                           // controller.AddInventory();
@@ -378,8 +385,12 @@ class _CreateMisPlanWebState extends State<CreateMisPlanWeb> {
                                   print('po valu ${p0.value.toString()}');
                                   controller.startDateDateTc.text =
                                       DateFormat('yyyy-MM-dd').format(p0.value);
-                                  controller.openStartDatePicker =
-                                      !controller.openStartDatePicker;
+
+                                  controller.openStartDatePicker = false;
+                                  controller.update(['stock_Mangement']);
+                                },
+                                onCancel: () {
+                                  controller.openStartDatePicker = false;
                                   controller.update(['stock_Mangement']);
                                 },
                               ),
