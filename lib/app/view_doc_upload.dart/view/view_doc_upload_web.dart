@@ -278,42 +278,42 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                           ],
                                         ),
                                         SizedBox(height: 10),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "View Image: ",
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            controller.selectedItem != null
-                                                ? IconButton(
-                                                    icon:
-                                                        Icon(Icons.visibility),
-                                                    color: ColorValues
-                                                        .appDarkBlueColor,
-                                                    onPressed: () async {
-                                                      String baseUrl =
-                                                          'http://172.20.43.9:83/';
-                                                      String fileName =
-                                                          controller
-                                                                  .selectedItem
-                                                                  ?.file_path ??
-                                                              "";
-                                                      String fullUrl =
-                                                          baseUrl + fileName;
-                                                      if (await canLaunch(
-                                                          fullUrl)) {
-                                                        await launch(fullUrl);
-                                                      } else {
-                                                        throw 'Could not launch $fullUrl';
-                                                      }
-                                                    },
-                                                  )
-                                                : Dimens.box0
-                                          ],
-                                        ),
+                                        // Row(
+                                        //   children: [
+                                        //     Text(
+                                        //       "View Image: ",
+                                        //       style: TextStyle(
+                                        //         fontSize: 15,
+                                        //         fontWeight: FontWeight.bold,
+                                        //       ),
+                                        //     ),
+                                        //     controller.selectedItem != null
+                                        //         ? IconButton(
+                                        //             icon:
+                                        //                 Icon(Icons.visibility),
+                                        //             color: ColorValues
+                                        //                 .appDarkBlueColor,
+                                        //             onPressed: () async {
+                                        //               String baseUrl =
+                                        //                   'http://172.20.43.9:83/';
+                                        //               String fileName =
+                                        //                   controller
+                                        //                           .selectedItem
+                                        //                           ?.file_path ??
+                                        //                       "";
+                                        //               String fullUrl =
+                                        //                   baseUrl + fileName;
+                                        //               if (await canLaunch(
+                                        //                   fullUrl)) {
+                                        //                 await launch(fullUrl);
+                                        //               } else {
+                                        //                 throw 'Could not launch $fullUrl';
+                                        //               }
+                                        //             },
+                                        //           )
+                                        //         : Dimens.box0
+                                        //   ],
+                                        // ),
                                       ],
                                     ),
                                   )
