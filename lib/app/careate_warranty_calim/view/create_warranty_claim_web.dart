@@ -189,10 +189,15 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                           ? ColorValues
                                                               .yellowColor
                                                           : controller
-                                                                      .viewWarrantyClaimDetailsModel
-                                                                      .value
-                                                                      ?.status ==
-                                                                  194
+                                                                          .viewWarrantyClaimDetailsModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      194 ||
+                                                                  controller
+                                                                          .viewWarrantyClaimDetailsModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      200
                                                               ? ColorValues
                                                                   .appGreenColor
                                                               : controller
@@ -219,7 +224,11 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         .viewWarrantyClaimDetailsModel
                                                                         .value
                                                                         ?.status ==
-                                                                    194
+                                                                    194 || controller
+                                                                        .viewWarrantyClaimDetailsModel
+                                                                        .value
+                                                                        ?.status ==
+                                                                    200
                                                                 ? ColorValues
                                                                     .appGreenColor
                                                                 : controller
@@ -2291,37 +2300,32 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                   ),
                                                 ),
                                                 Dimens.boxHeight10,
-                                                controller.type.value == 0
-                                                    ? Container(
-                                                        height:
-                                                            Get.height * 0.2,
-                                                        width: Get.width,
-                                                        padding:
-                                                            EdgeInsets.all(10),
-                                                        child: Row(
-                                                          children: [
-                                                            Expanded(
-                                                              flex: 2,
-                                                              child:
-                                                                  FileUploadWidgetWithDropzone(),
-                                                            ),
-                                                            Dimens.boxWidth5,
-                                                            Expanded(
-                                                              flex: 8,
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        top:
-                                                                            15),
-                                                                child:
-                                                                    FileUploadDetailsWidgetWeb(),
-                                                              ),
-                                                            ),
-                                                          ],
+                                                Container(
+                                                  height: Get.height * 0.2,
+                                                  width: Get.width,
+                                                  padding: EdgeInsets.all(10),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child:
+                                                            FileUploadWidgetWithDropzone(),
+                                                      ),
+                                                      Dimens.boxWidth5,
+                                                      Expanded(
+                                                        flex: 8,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  top: 15),
+                                                          child:
+                                                              FileUploadDetailsWidgetWeb(),
                                                         ),
-                                                      )
-                                                    : Dimens.box0,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
                                                 controller.wc_id.value != 0
                                                     ? Container(
                                                         margin:
@@ -2448,29 +2452,26 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                         ),
                                                       )
                                                     : Dimens.box0,
-                                                controller.type.value == 0
-                                                    ? Center(
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 60,
-                                                                  right: 60),
-                                                          child: Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Comments: '),
-                                                              Expanded(
-                                                                child:
-                                                                    _buildWorkPermitCommentTextField_web(
-                                                                        context),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                Center(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 60,
+                                                            right: 60),
+                                                    child: Row(
+                                                      children: [
+                                                        CustomRichText(
+                                                            title:
+                                                                'Comments: '),
+                                                        Expanded(
+                                                          child:
+                                                              _buildWorkPermitCommentTextField_web(
+                                                                  context),
                                                         ),
-                                                      )
-                                                    : Dimens.box0,
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
                                                 Dimens.boxHeight10,
                                                 controller
                                                         .historyList!.isNotEmpty
@@ -2771,34 +2772,22 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Spacer(),
-                      controller.viewWarrantyClaimDetailsModel.value?.status ==
-                              194
-                          ? Container(
-                              height: 35,
-                              child: CustomElevatedButton(
-                                icon: Icons.print_outlined,
-                                backgroundColor: ColorValues.appDarkBlueColor,
-                                text: "Print",
-                                onPressed: () {
-                                  // controller.printScreen();
-                                },
-                              ),
-                            )
-                          : Dimens.box0,
-                      Dimens.boxWidth10,
                       varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kWarrantyClaimFeatureId &&
-                                          e.approve ==
-                                              UserAccessConstants
-                                                  .kHaveApproveAccess)
-                                      .length >
-                                  0 &&
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kWarrantyClaimFeatureId &&
+                                              e.approve ==
+                                                  UserAccessConstants
+                                                      .kHaveApproveAccess)
+                                          .length >
+                                      0 &&
+                                  controller.viewWarrantyClaimDetailsModel.value
+                                          ?.status ==
+                                      192 ||
                               controller.viewWarrantyClaimDetailsModel.value
                                       ?.status ==
-                                  192
+                                  199
                           ? Container(
                               height: 28,
                               child: CustomElevatedButton(
@@ -2815,18 +2804,21 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                           : Dimens.box0,
                       Dimens.boxWidth10,
                       varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kWarrantyClaimFeatureId &&
-                                          e.approve ==
-                                              UserAccessConstants
-                                                  .kHaveApproveAccess)
-                                      .length >
-                                  0 &&
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kWarrantyClaimFeatureId &&
+                                              e.approve ==
+                                                  UserAccessConstants
+                                                      .kHaveApproveAccess)
+                                          .length >
+                                      0 &&
+                                  controller.viewWarrantyClaimDetailsModel.value
+                                          ?.status ==
+                                      192 ||
                               controller.viewWarrantyClaimDetailsModel.value
                                       ?.status ==
-                                  192
+                                  199
                           ? Container(
                               height: 28,
                               child: CustomElevatedButton(
@@ -2837,6 +2829,52 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                   Get.dialog(RejectWCDialog(
                                     id: controller.wc_id.value,
                                   ));
+                                },
+                              ),
+                            )
+                          : Dimens.box0,
+                      // controller.viewWarrantyClaimDetailsModel.value?.status ==
+                      //         194
+                      //     ? Container(
+                      //         height: 28,
+                      //         child: CustomElevatedButton(
+                      //           icon: Icons.print_outlined,
+                      //           backgroundColor: ColorValues.appDarkBlueColor,
+                      //           text: "Print",
+                      //           onPressed: () {
+                      //             // controller.printScreen();
+                      //           },
+                      //         ),
+                      //       )
+                      //     : Dimens.box0,
+                      // Dimens.boxWidth10,
+                      controller.viewWarrantyClaimDetailsModel.value?.status ==
+                              194
+                          ? Container(
+                              height: 28,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                text: "Update",
+                                onPressed: () {
+                                  controller.updateWarranty(
+                                    fileIds: dropzoneController.fileIds,
+                                  );
+                                },
+                              ),
+                            )
+                          : Dimens.box0,
+                      Dimens.boxWidth10,
+                      controller.viewWarrantyClaimDetailsModel.value?.status ==
+                              194
+                          ? Container(
+                              height: 28,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appRedColor,
+                                text: "Close",
+                                onPressed: () {
+                                  controller.closeWarranty(
+                                    fileIds: dropzoneController.fileIds,
+                                  );
                                 },
                               ),
                             )

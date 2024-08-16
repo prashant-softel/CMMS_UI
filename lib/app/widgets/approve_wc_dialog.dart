@@ -79,7 +79,7 @@ class ApproveWCDialog extends GetView {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             // Dimens.boxWidth10,
-             SizedBox(width: 10),
+            SizedBox(width: 10),
             ElevatedButton(
               style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
@@ -88,11 +88,13 @@ class ApproveWCDialog extends GetView {
               child: const Text('Cancel'),
             ),
             // Dimens.boxWidth20,
-             SizedBox(width:20),
+            SizedBox(width: 20),
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                _controller.wcApprovedButton(id: id);
+                _controller.viewWarrantyClaimDetailsModel.value?.status == 199
+                    ? _controller.closeWCApprovedButton(id: id)
+                    : _controller.wcApprovedButton(id: id);
                 print('Wc:$id');
                 Get.back();
               },

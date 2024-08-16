@@ -544,7 +544,18 @@ class WarrantyClaimListDataSource extends DataTableSource {
                                                         wc_id: 00),
                                               )
                                               ?.status_code ==
-                                          194
+                                          194 || controller.warrantyClaimList
+                                              .firstWhere(
+                                                (e) =>
+                                                    e?.wc_id ==
+                                                    WarrantyClaimListDetails!
+                                                        .wc_id,
+                                                orElse: () =>
+                                                    WarrantyClaimModel(
+                                                        wc_id: 00),
+                                              )
+                                              ?.status_code ==
+                                          200
                                       ? ColorValues.appGreenColor
                                       : controller.warrantyClaimList
                                                   .firstWhere(

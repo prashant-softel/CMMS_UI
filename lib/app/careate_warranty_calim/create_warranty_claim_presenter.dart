@@ -59,6 +59,7 @@ class CreateWarrantyClaimPresenter {
       isLoading: isLoading,
     );
   }
+
   Future<Map<String, dynamic>?> resubmitWarrantyClaim({
     updateWarrantyClaim,
     required bool isLoading,
@@ -216,6 +217,46 @@ class CreateWarrantyClaimPresenter {
   }) async {
     return warrantyClaimUsecase.wcRejectdButton(
       WCRejectJsonString: WCRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> closeWCApprovedButton({
+    WCApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.closeWCApprovedButton(
+      WCApproveJsonString: WCApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> closeWCRejectdButton({
+    WCRejectJsonString,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.closeWCRejectdButton(
+      WCRejectJsonString: WCRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> updateWarranty({
+    updateWarrantyClaim,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.updateWarranty(
+      updateWarrantyClaim: updateWarrantyClaim,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> closeWarranty({
+    updateWarrantyClaim,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.closeWarranty(
+      updateWarrantyClaim: updateWarrantyClaim,
       isLoading: isLoading,
     );
   }

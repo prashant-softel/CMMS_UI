@@ -13,6 +13,7 @@ import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
+import 'package:cmms/domain/models/update_warranty_claim.dart';
 import 'package:cmms/domain/models/update_warranty_claim_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
@@ -379,7 +380,9 @@ class CreateWarrantyClaimController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getEmployeeList();
     });
-    Future.delayed(Duration(seconds: 1), () {});
+    Future.delayed(Duration(seconds: 1), () {
+      getEmployeesList();
+    });
     if (wc_id == 0) {
       addRowItem();
     }
@@ -494,7 +497,7 @@ class CreateWarrantyClaimController extends GetxController {
             .map((employee) => employee?.user_id ?? 0)
             .toList();
       }
-      await employeesNameSelected(idList);
+      employeesNameSelected(idList);
       if (viewWarrantyClaimDetailsModel.value!.supplierActions!.isNotEmpty) {
         supplierActions.value =
             viewWarrantyClaimDetailsModel.value!.supplierActions!.map((action) {
@@ -1539,6 +1542,81 @@ class CreateWarrantyClaimController extends GetxController {
         //getCalibrationList(facilityId, true);
       }
     }
+  }
+
+  void closeWCApprovedButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentWCAproveModel =
+          CommentModel(id: id, comment: _comment);
+
+      var WCApproveJsonString = commentWCAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await warrantyClaimPresenter.closeWCApprovedButton(
+        WCApproveJsonString: WCApproveJsonString,
+        isLoading: true,
+      );
+      // Get.offAllNamed(Routes.warrantyClaimListWeb);
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void closeWCRejectdButton({int? id}) async {
+    {
+      String _comment = rejectCommentTextFieldCtrlr.text.trim();
+      CommentModel commentWCRejectModel =
+          CommentModel(id: id, comment: _comment);
+      var WCRejectJsonString = commentWCRejectModel.toJson();
+      Map<String, dynamic>? response =
+          await warrantyClaimPresenter.closeWCRejectdButton(
+        WCRejectJsonString: WCRejectJsonString,
+        isLoading: true,
+      );
+      Get.offAllNamed(Routes.warrantyClaimListWeb);
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void updateWarranty({
+    List<dynamic>? fileIds,
+  }) async {
+    UpdateWarrantyClaim update = UpdateWarrantyClaim(
+      id: wc_id.value,
+      facilityId: facilityId,
+      uploadfile_ids: fileIds,
+      comment: commentCtrl.text,
+    );
+    var updateJson = update.toJson();
+    Map<String, dynamic>? responseUpdateWarrantyClaim =
+        await warrantyClaimPresenter.updateWarranty(
+      updateWarrantyClaim: updateJson,
+      isLoading: true,
+    );
+    print('Update Warranty Claim data: $responseUpdateWarrantyClaim');
+  }
+
+  void closeWarranty({
+    List<dynamic>? fileIds,
+  }) async {
+    UpdateWarrantyClaim update = UpdateWarrantyClaim(
+      id: wc_id.value,
+      facilityId: facilityId,
+      uploadfile_ids: fileIds,
+      comment: commentCtrl.text,
+    );
+    var updateJson = update.toJson();
+    Map<String, dynamic>? responseUpdateWarrantyClaim =
+        await warrantyClaimPresenter.closeWarranty(
+      updateWarrantyClaim: updateJson,
+      isLoading: true,
+    );
+    print('close Warranty Claim data: $responseUpdateWarrantyClaim');
   }
 
   void getWarrantyClaimtListByDate() {
