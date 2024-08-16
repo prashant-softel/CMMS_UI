@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:cmms/app/add_user/view/add_user_msg_dialog.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -106,10 +109,9 @@ class AddUserController extends GetxController {
 
   Rx<GetNotificationModel?> notificationModel = GetNotificationModel().obs;
   RxList<NotificationList?> notificationList = <NotificationList>[].obs;
-  Rx<GetNotificationByUserIdModel?> notificationByUserIdModel =
-      GetNotificationByUserIdModel().obs;
-  RxList<NotificationListByUserId?> notificationListByUserId =
-      <NotificationListByUserId>[].obs;
+  // Rx<GetNotificationModel?> notificationByUserIdModel =
+  //     GetNotificationModel().obs;
+  // RxList<NotificationList?> notificationListByUserId = <NotificationList>[].obs;
   RxList<DesignationModel?>? designationList = <DesignationModel?>[].obs;
   RxList<String> moduleNameList = <String>[].obs;
   var selectedImageBytes = Rx<Uint8List>(Uint8List(0));
@@ -441,9 +443,8 @@ class AddUserController extends GetxController {
     final _notificationListModel = await addUserPresenter
         .getUserNotificationListById(userId: userId, isLoading: isloading);
     if (_notificationListModel != null) {
-      notificationByUserIdModel.value = _notificationListModel;
-      notificationListByUserId.value =
-          notificationByUserIdModel.value?.notification_list ?? [];
+      notificationModel.value = _notificationListModel;
+      notificationList.value = notificationModel.value?.notification_list ?? [];
     }
   }
 
@@ -657,7 +658,7 @@ class AddUserController extends GetxController {
     }
   }
 
-  void saveAccessLevel() async {
+  void saveAccessLevel(int? resUserId) async {
     List<SaveAccessList> accesslist = <SaveAccessList>[];
     // userId == null
     //     ?
@@ -684,7 +685,9 @@ class AddUserController extends GetxController {
     //         view: e?.view.value ?? 0));
     //   });
     SaveAccessLevelModel saveAccessLevelModel = SaveAccessLevelModel(
-        user_id: userId.value, // varUserAccessModel.value.user_id ?? 0,
+        user_id: userId.value == 0
+            ? resUserId ?? 0
+            : userId.value, // varUserAccessModel.value.user_id ?? 0,
         access_list: accesslist);
     var accessLevelJsonString = saveAccessLevelModel.toJson();
     print({"accessLevelJsonString", accessLevelJsonString});
@@ -694,7 +697,9 @@ class AddUserController extends GetxController {
         accessLevelJsonString: accessLevelJsonString,
         isLoading: true,
       );
-      saveNotification();
+      // if (responsePmMapCreated != null) {
+      //   saveNotification();
+      // }
       // userId = 0;
       // Get.offNamed(
       //   Routes.userList,
@@ -705,22 +710,20 @@ class AddUserController extends GetxController {
     }
   }
 
-  void saveNotification() async {
+  void saveNotification(int? resUserId, String? msg) async {
     List<SaveNotificationList> notificationlist = <SaveNotificationList>[];
-    userId == null
-        ? notificationList.forEach((e) {
-            notificationlist.add(SaveNotificationList(
-                notification_id: e?.notification_id.value ?? 0,
-                user_flag: e?.user_flag.value ?? 0));
-          })
-        : notificationListByUserId.forEach((e) {
-            notificationlist.add(SaveNotificationList(
-                notification_id: e?.notification_id.value ?? 0,
-                user_flag: e?.user_flag.value ?? 0));
-          });
+    notificationList.forEach((e) {
+      notificationlist.add(SaveNotificationList(
+          notification_id: e?.notification_id.value ?? 0,
+          user_flag: e?.user_flag.value ?? 0,
+          can_change: e?.can_change.value ?? 0));
+    });
+
     SaveUserNotificationModel saveUserNotificationModel =
         SaveUserNotificationModel(
-            user_id: userId.value, // varUserAccessModel.value.user_id ?? 0,
+            user_id: userId.value == 0
+                ? resUserId ?? 0
+                : userId.value, // varUserAccessModel.value.user_id ?? 0,
             notification_list: notificationlist);
     var saveNotificationJsonString = saveUserNotificationModel.toJson();
     print({"saveNotificationJsonString", saveNotificationJsonString});
@@ -730,22 +733,23 @@ class AddUserController extends GetxController {
         saveNotificationJsonString: saveNotificationJsonString,
         isLoading: true,
       );
-      final _flutterSecureStorage = const FlutterSecureStorage();
-
-      _flutterSecureStorage.delete(key: "userId");
-      Get.offAllNamed(
-        Routes.userList,
-      );
+      if (responseSaveNotification != null) {
+        // Utility.showDialog(msg, '');
+        Get.dialog<void>(AddUserMessageApproveDialog(
+            data: msg,
+            id: userId.value == 0 ? resUserId ?? 0 : userId.value,
+            position: userId.value == 0 ? 1 : 2));
+      }
     } else {
       Fluttertoast.showToast(
           msg: "Unable to update the  notification", fontSize: 16.0);
     }
   }
 
-  Future<bool> addUser() async {
+  Future<void> addUser() async {
     checkForm();
     if (isFormInvalid.value) {
-      return true;
+      return;
     }
 
     List<AddAccessList> add_accessList = <AddAccessList>[];
@@ -822,14 +826,24 @@ class AddUserController extends GetxController {
     var adduserJsonString = [adduser.toJson()];
 
     print({"adduserJsonString", adduserJsonString});
-    await addUserPresenter.addUser(
+    Map<String, dynamic>? responseAddUser = await addUserPresenter.addUser(
       adduserJsonString: adduserJsonString,
       isLoading: true,
     );
-    return true;
+    if (responseAddUser != null) {
+      var resUserId = 0;
+      var msg = '';
+      if (responseAddUser["id"] != null && responseAddUser["id"].isNotEmpty) {
+        resUserId = responseAddUser["id"][0];
+        msg = responseAddUser['message'];
+        saveAccessLevel(resUserId);
+        saveNotification(resUserId, msg);
+      }
+    }
+    // return true;
   }
 
-  Future<bool> updateUser() async {
+  Future<void> updateUser() async {
     // checkForm();
     // if (isFormInvalid.value) {
     //   return true;
@@ -895,12 +909,21 @@ class AddUserController extends GetxController {
     var adduserJsonString = adduser.toJson();
 
     print({"adduserJsonString", adduserJsonString});
-    await addUserPresenter.updateUser(
+    Map<String, dynamic>? responseAddUser = await addUserPresenter.updateUser(
       adduserJsonString: adduserJsonString,
       isLoading: true,
     );
-    
-    return true;
+    if (responseAddUser != null) {
+      var resUserId = 0;
+      var msg = '';
+      if (responseAddUser["id"] != null && responseAddUser["id"].isNotEmpty) {
+        resUserId = responseAddUser["id"][0];
+        msg = responseAddUser['message'];
+        saveAccessLevel(resUserId);
+        saveNotification(resUserId, msg);
+      }
+    }
+    // return true;
   }
 
   AddfacilityListAlertBox() {

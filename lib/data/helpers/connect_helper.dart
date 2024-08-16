@@ -5670,10 +5670,10 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    var res = responseModel.data;
-    var parsedJson = json.decode(res);
-    String message = parsedJson["message"];
-    Utility.showDialog(message, '');
+    // var res = responseModel.data;
+    // var parsedJson = json.decode(res);
+    // String message = parsedJson["message"];
+    // Utility.showDialog(message, '');
 
     return responseModel;
   }
@@ -10196,6 +10196,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> rejectCourseSchedule({
     required String auth,
     rejectSchedule,

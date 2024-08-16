@@ -2069,7 +2069,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                         ].map((column) {
                                                                                           return TableViewColumn(
                                                                                             label: column,
-                                                                                            minWidth: Get.width * 0.17,
+                                                                                            minWidth: Get.width * 0.12,
                                                                                           );
                                                                                         }).toList(),
                                                                                         rows: true
@@ -2077,22 +2077,33 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                                 .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
                                                                                                       TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
                                                                                                       TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
+                                                                                                        child: IgnorePointer(
+                                                                                                          ignoring: true,
+                                                                                                          child: Obx(() {
+                                                                                                            return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
+                                                                                                              if (getnotificationListDetails?.can_change.value == 1) {
+                                                                                                                getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
+                                                                                                              }
+                                                                                                            });
+                                                                                                          }),
+                                                                                                        ),
                                                                                                       ),
                                                                                                       TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
+                                                                                                        child: IgnorePointer(
+                                                                                                          ignoring: true,
+                                                                                                          child: Obx(() {
+                                                                                                            return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
+                                                                                                              getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
+                                                                                                            });
+                                                                                                          }),
+                                                                                                        ),
                                                                                                       ),
                                                                                                       TableViewCell(child: Obx(() {
-                                                                                                        return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
-                                                                                                          getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
+                                                                                                        return controller.rowItem(getnotificationListDetails?.user_flag.value, onCheck: (val) {
+                                                                                                          if (getnotificationListDetails?.can_change.value == 1) {
+                                                                                                            // Ensure can_change is 1 before changing default_flag
+                                                                                                            getnotificationListDetails?.user_flag.value = val == true ? 1 : 0;
+                                                                                                          } //  getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
                                                                                                         });
                                                                                                       })),
                                                                                                     ]))
@@ -2100,64 +2111,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                             : [],
                                                                                       )
                                                                                     : Container())
-                                                                            : Container(
-                                                                                height: Get.height - 30,
-                                                                                margin: Dimens.edgeInsets15,
-                                                                                decoration: BoxDecoration(
-                                                                                  border: Border.all(
-                                                                                    color: ColorValues.lightGreyColorWithOpacity35,
-                                                                                    width: 1,
-                                                                                  ),
-                                                                                  boxShadow: [
-                                                                                    BoxShadow(
-                                                                                      color: ColorValues.appBlueBackgroundColor,
-                                                                                      spreadRadius: 2,
-                                                                                      blurRadius: 5,
-                                                                                      offset: Offset(0, 2),
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                                child: controller.notificationListByUserId.length > 0
-                                                                                    ? ScrollableTableView(
-                                                                                        columns: [
-                                                                                          "Notifications",
-                                                                                          "Default Value",
-                                                                                          "Can Override",
-                                                                                          "User Preference",
-                                                                                        ].map((column) {
-                                                                                          return TableViewColumn(
-                                                                                            label: column,
-                                                                                            minWidth: Get.width * 0.17,
-                                                                                          );
-                                                                                        }).toList(),
-                                                                                        rows: true
-                                                                                            ? controller.notificationListByUserId
-                                                                                                .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
-                                                                                                      TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
-                                                                                                      TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      TableViewCell(child: Obx(() {
-                                                                                                        return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
-                                                                                                          getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
-                                                                                                        });
-                                                                                                      })),
-                                                                                                    ]))
-                                                                                                .toList()
-                                                                                            : [],
-                                                                                      )
-                                                                                    : Container()))
+                                                                            : Container())
                                                                   ],
                                                                 ),
                                                               ]),
@@ -2193,6 +2147,16 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           .value = false;
                                                       await controller
                                                           .addUser();
+                                                      //  .then((value) {
+                                                      // Get.toNamed(
+                                                      // Routes.userList);
+                                                      // if (value == true) {
+                                                      //   // controller.userId.value = 0;
+                                                      //   controller
+                                                      //       .saveAccessLevel();
+                                                      //   //   controller.saveNotification();
+                                                      // }
+                                                      //  });
                                                     } catch (e) {
                                                       Fluttertoast.showToast(
                                                           msg: e.toString(),
@@ -2209,18 +2173,19 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       .appDarkBlueColor,
                                                   text: 'Update',
                                                   onPressed: () {
-                                                    controller
-                                                        .updateUser()
-                                                        .then((value) {
-                                                      // Get.toNamed(
-                                                      // Routes.userList);
-                                                      if (value == true) {
-                                                        // controller.userId.value = 0;
-                                                        controller
-                                                            .saveAccessLevel();
-                                                        //   controller.saveNotification();
-                                                      }
-                                                    });
+                                                    controller.updateUser();
+                                                    // .then((value) {
+                                                    // Get.toNamed(
+                                                    // Routes.userList);
+                                                    // if (value == true) {
+                                                    // controller.userId.value = 0;
+                                                    // controller
+                                                    //     .saveAccessLevel(0);
+                                                    // controller
+                                                    //     .saveNotification(
+                                                    //         0);
+                                                    // }
+                                                    // });
                                                     //  controller.saveAccessLevel();
                                                   },
                                                 ),

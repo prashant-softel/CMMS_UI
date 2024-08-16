@@ -26,26 +26,26 @@ class SaveUserNotificationModel {
 class SaveNotificationList {
   SaveNotificationList({
     required this.notification_id,
-    // required this.can_change,
+    required this.can_change,
     required this.user_flag,
     // required this.default_flag
   });
   int notification_id;
   int user_flag;
-  //int can_change;
+  int can_change;
   // int default_flag;
 
   factory SaveNotificationList.fromJson(Map<String, dynamic> json) =>
       SaveNotificationList(
         // default_flag: json["default_flag"],
         user_flag: json["user_flag"],
-        // can_change: json["can_change"],
+        can_change: json["can_change"],
         notification_id: json["notification_id"],
       );
 
   Map<String, dynamic> toJson() => {
         "notification_id": notification_id,
-        // "can_change": can_change,
+        "can_change": can_change,
         "user_flag": user_flag,
         //"default_flag": default_flag,
       };
