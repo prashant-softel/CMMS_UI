@@ -23,6 +23,7 @@ import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
+import 'package:cmms/domain/models/grievance_summary_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/grievance_List_model.dart';
@@ -16113,6 +16114,39 @@ class Repository {
         return _trainingSummaryModelList;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getTrainingSummary');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<GrievanceReportModel?>?> getGrievanceSummary(
+      int? facility_id, bool? isLoading, String fromDate, String toDate) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      if (facility_id == null) {
+        throw ArgumentError('facility_id cannot be null');
+      }
+
+      final res = await _dataRepository.getGrievanceSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
+      if (!res.hasError) {
+        // String jsonObservationSummaryModels = jsonDecode(res.data);
+        final List<GrievanceReportModel> _grievanceSummaryModelList =
+            grievanceSummaryFromJson(res.data);
+
+        return _grievanceSummaryModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'GrievanceReportSummary');
         return null;
       }
     } catch (error) {
