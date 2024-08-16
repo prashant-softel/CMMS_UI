@@ -732,7 +732,6 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     currentY += sectionHeight;
 
     // Draw Equipment Details Table
-    // Similarly, you can draw a table here as per the structure in the screenshot
     double columnWidth = (pageSize.width - 50) / 3;
     List<String> equipmentHeaders = [
       'S. No',
@@ -747,7 +746,23 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     }
 
     currentY += rowHeight;
-    // Add more rows for equipment data
+
+    // Draw each equipment name from the schedules
+    for (int i = 0; i < (pmtaskViewModel.value?.schedules?.length ?? 0); i++) {
+      var schedule = pmtaskViewModel.value!.schedules![i];
+
+      page.graphics.drawString('${i + 1}', contentFont,
+          bounds:
+              Rect.fromLTWH(30, currentY + 5, columnWidth, rowHeight)); // S. No
+      page.graphics.drawString('Inverter', contentFont,
+          bounds: Rect.fromLTWH(30 + columnWidth, currentY + 5, columnWidth,
+              rowHeight)); // Equipment category
+      page.graphics.drawString('${schedule?.name}', contentFont,
+          bounds: Rect.fromLTWH(30 + 2 * columnWidth, currentY + 5, columnWidth,
+              rowHeight)); // Equipment name
+
+      currentY += rowHeight;
+    }
 
     // Add other sections like Permit carried by, PTW Information, Work description, and Material consumption similarly.
 
