@@ -6,6 +6,7 @@ import 'package:cmms/app/pm_task_view/pm_task_view_presenter.dart';
 import 'package:cmms/app/pm_task_view/view/permit_list_table.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/save_file_web.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
@@ -18,8 +19,10 @@ import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 import '../../domain/models/history_model.dart';
 import '../theme/styles.dart';
@@ -594,5 +597,138 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     Get.toNamed(Routes.viewPermitScreen,
         arguments: {"permitId": permitId, "jobId": jobId, "type": 2});
     print({"Permit", permitId, jobId});
+  }
+
+  Future<void> generateInvoice() async {
+    final PdfDocument document = PdfDocument();
+
+    final PdfPage page = document.pages.add();
+
+    final Size pageSize = page.getClientSize();
+
+    var url = "assets/assets/files/logo.png";
+    var response = await get(Uri.parse(url));
+    var data = response.bodyBytes;
+
+    PdfBitmap image = PdfBitmap(data);
+
+    final PdfLayoutResult result = drawHeader(page, pageSize, document, image);
+
+    final List<int> bytes = await document.save();
+
+    document.dispose();
+
+    await saveAndLaunchFile(bytes, 'PM Task View Report');
+  }
+
+  PdfLayoutResult drawHeader(
+    PdfPage page,
+    Size pageSize,
+    PdfDocument document,
+    PdfBitmap image,
+  ) {
+    final PdfPen borderPen = PdfPen(PdfColor(142, 180, 219), width: 1.0);
+    final PdfBrush backgroundBrush = PdfSolidBrush(PdfColor(217, 226, 243));
+    final PdfFont headerFont = PdfStandardFont(PdfFontFamily.helvetica, 10);
+    final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
+
+    // Draw images
+    page.graphics.drawImage(image, Rect.fromLTWH(15, 10, 100, 80));
+    page.graphics.drawImage(image, Rect.fromLTWH(370, 590, 100, 50));
+
+    // Draw the borders for each section
+    double currentY =
+        100; // Start position for the first section below the image
+    double sectionHeight = 20; // Height for each section header
+
+    // Site name section
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('Site name', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // PM Information
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('PM Information', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Draw PM Information Details
+    double labelWidth = 80;
+    double valueWidth = 120;
+    double labelX = 30;
+    double valueX = labelX + labelWidth + 5;
+
+    List<String> pmInfoLabels = [
+      'PM Plan ID',
+      'PM Plan/task title',
+      'Due date',
+      'Start date'
+    ];
+    List<String> pmInfoValues = [
+      '12345',
+      'Sample Task',
+      '2024-08-16',
+      '2024-08-01'
+    ];
+    double rowHeight = 15;
+
+    for (int i = 0; i < pmInfoLabels.length; i++) {
+      page.graphics.drawString(pmInfoLabels[i], contentFont,
+          bounds: Rect.fromLTWH(labelX, currentY + 5, labelWidth, rowHeight));
+      page.graphics.drawString(pmInfoValues[i], contentFont,
+          bounds: Rect.fromLTWH(valueX, currentY + 5, valueWidth, rowHeight));
+      currentY += rowHeight;
+    }
+
+    // Draw Equipment details
+    currentY += 10; // Adding some space before the next section
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('Equipment details', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Draw Equipment Details Table
+    // Similarly, you can draw a table here as per the structure in the screenshot
+    double columnWidth = (pageSize.width - 50) / 3;
+    List<String> equipmentHeaders = [
+      'S. No',
+      'Equipment category',
+      'Equipment name'
+    ];
+
+    for (int i = 0; i < equipmentHeaders.length; i++) {
+      page.graphics.drawString(equipmentHeaders[i], contentFont,
+          bounds: Rect.fromLTWH(
+              30 + (i * columnWidth), currentY + 5, columnWidth, rowHeight));
+    }
+
+    currentY += rowHeight;
+    // Add more rows for equipment data
+
+    // Add other sections like Permit carried by, PTW Information, Work description, and Material consumption similarly.
+
+    // Return the layout result (for the signature or other elements)
+    final String signatureText = 'Signature of trainer';
+    final Size signatureSize = contentFont.measureString(signatureText);
+
+    return PdfTextElement(text: signatureText, font: contentFont).draw(
+        page: page,
+        bounds: Rect.fromLTWH(
+            400,
+            currentY + 20,
+            pageSize.width - (signatureSize.width + 30),
+            pageSize.height - 120))!;
   }
 }
