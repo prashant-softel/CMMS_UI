@@ -297,7 +297,9 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                                       child: CustomElevatedButton(
                                         backgroundColor: ColorValues.redColor,
                                         text: "Cancel",
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Get.toNamed(Routes.masterDashboard);
+                                        },
                                       ),
                                     ),
                                   ],

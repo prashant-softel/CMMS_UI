@@ -927,7 +927,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                             backgroundColor: ColorValues.cancelColor,
                             text: 'Cancel',
                             onPressed: () {
-                              Get.toNamed(Routes.complianceScreen);
+                              Get.toNamed(Routes.misDashboard);
                             },
                           ),
                         ),
