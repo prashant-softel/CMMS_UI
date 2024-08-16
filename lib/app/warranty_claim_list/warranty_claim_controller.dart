@@ -20,6 +20,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:cmms/domain/models/history_model.dart';
 
 class WarrantyClaimController extends GetxController {
   WarrantyClaimController(this.warrantyClaimPresenter);
@@ -46,8 +47,8 @@ class WarrantyClaimController extends GetxController {
   ///External Emails Part
   var externalEmails = <ExternalEmails>[].obs;
   void updateText(String name, String role, String email, int? mobile) {
-    externalEmails
-        .add(ExternalEmails(email: email, name: name, mobile: mobile,role:role));
+    externalEmails.add(
+        ExternalEmails(email: email, name: name, mobile: mobile, role: role));
   }
 
   ///Radio
@@ -104,6 +105,7 @@ class WarrantyClaimController extends GetxController {
   var currentStartDateCtrlrWeb = TextEditingController();
   var currentStartDateCtrlrWebBuffer;
   Rx<DateTime> selectedcurrentStartDate = DateTime.now().obs;
+
   ///Failure Date Time For Web
   var failureDateTimeCtrlrWeb = TextEditingController();
   var failureDateTimeCtrlrWebBuffer;
@@ -138,7 +140,7 @@ class WarrantyClaimController extends GetxController {
   // var warrantyClaimList = <WarrantyClaimModel>[];
   RxList<WarrantyClaimModel?> filteredData = <WarrantyClaimModel>[].obs;
   RxList<WarrantyClaimModel?> warrantyClaimList = <WarrantyClaimModel>[].obs;
-
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -227,6 +229,7 @@ class WarrantyClaimController extends GetxController {
   final affectedSerialNoTextController = TextEditingController();
   final manufacturerNameTextController = TextEditingController();
   final approxdailylosstxtcontroller = TextEditingController();
+  final commentCtrl = TextEditingController();
 
   final blockTextController = TextEditingController();
   final parentEquipmentTextController = TextEditingController();
@@ -264,6 +267,8 @@ class WarrantyClaimController extends GetxController {
     print({"updated columnVisibility": columnVisibility});
   }
 
+  FocusNode commentFocus = FocusNode();
+  ScrollController commentScroll = ScrollController();
   RxString warrantyClaimIdFilterText = ''.obs;
   RxString dateOfClaimFilterText = ''.obs;
   RxString wcTitleFilterText = ''.obs;
@@ -325,48 +330,14 @@ class WarrantyClaimController extends GetxController {
       "Estimated Cost": estimatedCostFilterText,
       "Status": statusFilterText
     };
-    // wc_id = Get.arguments;
-    // print('WC_Id:$wc_id');
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+    facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getWarrantyClaimList(
+      if (facilityId != 0) {
+        await getWarrantyClaimList(
             facilityId, formattedTodate, formattedFromdate);
-      });
+      }
     });
-
-    Future.delayed(Duration(seconds: 1), () {
-      getFacilityList();
-    });
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getuserAccessData();
-    // });
-    Future.delayed(Duration(seconds: 1), () {
-      getInventoryList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getAffectedPartList();
-    });
-
-    Future.delayed(Duration(seconds: 1), () {
-      getInventoryCategoryList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getBusinessList(facilityId);
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getUnitCurrencyList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getEmployeeList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getEmployeesList();
-    });
-    if (wc_id == 0) {
-      addRowItem();
-    }
-
     immcoracFocus.addListener(() {
       if (!immcoracFocus.hasFocus) {
         immcoracScroll.jumpTo(0.0);
@@ -380,6 +351,11 @@ class WarrantyClaimController extends GetxController {
     wdescFocus.addListener(() {
       if (!wdescFocus.hasFocus) {
         wdescScroll.jumpTo(0.0);
+      }
+    });
+    commentFocus.addListener(() {
+      if (!commentFocus.hasFocus) {
+        commentScroll.jumpTo(0.0);
       }
     });
     super.onInit();
@@ -412,6 +388,22 @@ class WarrantyClaimController extends GetxController {
           inventoryDetailsModel.value?.serialNumber ?? '';
       manufacturerNameTextController.text =
           inventoryDetailsModel.value?.manufacturerName ?? '';
+      String? startDateStr = inventoryDetailsModel.value?.start_date;
+      if (startDateStr != null && startDateStr.isNotEmpty) {
+        DateTime startDate = DateTime.parse(startDateStr);
+        warrantyStartDateTimeCtrlrWeb.text =
+            DateFormat('yyyy-MM-dd').format(startDate);
+        warrantyStartDateTimeCtrlrWebBuffer =
+            warrantyStartDateTimeCtrlrWeb.text;
+      }
+      String? expirydate = inventoryDetailsModel.value?.expiry_date;
+      if (expirydate != null && expirydate.isNotEmpty) {
+        DateTime expiryDate = DateTime.parse(expirydate);
+        warrantyEndDateTimeCtrlrWeb.text =
+            DateFormat('yyyy-MM-dd').format(expiryDate);
+        warrantyEndDateTimeCtrlrWebBuffer = warrantyEndDateTimeCtrlrWeb.text;
+      }
+
       costOfReplacementTextController.text =
           '${int.tryParse('${inventoryDetailsModel.value?.cost ?? ''}')}';
       requestManufactureTextController.text =
@@ -469,6 +461,18 @@ class WarrantyClaimController extends GetxController {
         affectedPartEqipmentNameList.add(affectedPart);
       }
     }
+  }
+
+  Future<void> getHistory({required int wcId, required int facilityId}) async {
+    int moduleType = 3;
+    historyList?.value = await warrantyClaimPresenter.getHistory(
+          moduleType,
+          facilityId,
+          wcId,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   void addRowItem() {
@@ -612,6 +616,13 @@ class WarrantyClaimController extends GetxController {
     //         .contains(keyword.toLowerCase()))
     //     .toList();
     // update(['warranty_claim_list']);
+  }
+
+  void clearSupplierAction() {
+    supplierActionSrNumberTextFieldController.clear();
+    supplierActionTextFieldController.clear();
+    supplierActionDateTimeCtrlrWeb.clear();
+    isCheckedRequire.value = false;
   }
 
   Future<void> getWarrantyClaimList(
@@ -910,7 +921,10 @@ class WarrantyClaimController extends GetxController {
   }
 
   ///Create Warranty Claim
-  void createWarrantyClaim() async {
+  void createWarrantyClaim({
+    List<dynamic>? fileIds,
+    List<dynamic>? affectedFileIds,
+  }) async {
     {
       // checkForm();
       // if (isFormInvalid.value) {
@@ -942,8 +956,8 @@ class WarrantyClaimController extends GetxController {
       late List<ExternalEmails> external_emails_list = [];
 
       externalEmails.forEach((e) {
-        external_emails_list.add(
-            ExternalEmails(name: e.name,role: e.role, email: e.email, mobile: e.mobile));
+        external_emails_list.add(ExternalEmails(
+            name: e.name, role: e.role, email: e.email, mobile: e.mobile));
       });
 
       late List<SupplierActions> supplier_action_list = [];
@@ -956,43 +970,44 @@ class WarrantyClaimController extends GetxController {
           // is_required: e.is_required
         ));
       });
-      List<AffectedParts> affectedPart = [];
+      // List<AffectedParts> affectedPart = [];
 
-      rowItems.forEach((element) {
-        AffectedParts item = AffectedParts(name: element[0]["value"] ?? '0');
-        affectedPart.add(item);
-        print('Affected parts: $item');
-      });
+      // rowItems.forEach((element) {
+      //   AffectedParts item = AffectedParts(name: element[0]["value"] ?? '0');
+      //   affectedPart.add(item);
+      //   print('Affected parts: $item');
+      // });
 
       CreateWarrantyClaimModel createwarrantyClaimModel =
           CreateWarrantyClaimModel(
-              facilityId: facilityId,
-              equipmentId: selectedEquipmentnameId,
-              goodsOrderId: 14205,
-              affectedParts: affectedPart,
-              orderReference: _orderReferenceNo,
-              affectedSrNo: _affectedSerialNo,
-              costOfReplacement: costOfReplacement,
-              currencyId: selectedCurrencyId,
-              approxdailyloss: approxdailyloss,
-              severity: selectedSeverity.value,
-              currentTime: currentStartDateCtrlrWebBuffer,
-              warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
-              warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
-              warrantyClaimTitle: _warrantyClaimTitle,
-              warrantyDescription: _description,
-              correctiveActionByBuyer: _immediateCorrectiveByBuyer,
-              requestToSupplier: _requestToBuyer,
-              approverId: selectedApproverId, //
-              failureTime: failureDateTimeCtrlrWebBuffer,
-              additionalEmailEmployees: selectedEmployeeNameIdList,
-              externalEmails: external_emails_list,
-              supplierActions: supplier_action_list,
-              status: 1
+        facilityId: facilityId,
+        equipmentId: selectedEquipmentnameId,
+        goodsOrderId: 14205,
+        affectedParts: affectedFileIds,
+        orderReference: _orderReferenceNo,
+        affectedSrNo: _affectedSerialNo,
+        costOfReplacement: costOfReplacement,
+        currencyId: selectedCurrencyId,
+        approxdailyloss: approxdailyloss,
+        severity: selectedSeverity.value,
+        currentTime: currentStartDateCtrlrWebBuffer,
+        warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
+        warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
+        warrantyClaimTitle: _warrantyClaimTitle,
+        warrantyDescription: _description,
+        correctiveActionByBuyer: _immediateCorrectiveByBuyer,
+        requestToSupplier: _requestToBuyer,
+        approverId: selectedApproverId, //
+        failureTime: failureDateTimeCtrlrWebBuffer,
+        additionalEmailEmployees: selectedEmployeeNameIdList,
+        externalEmails: external_emails_list,
+        supplierActions: supplier_action_list,
+        status: 1,
+        uploadfile_ids: fileIds,
+        comment: commentCtrl.text,
 
-              ///additional data to create WC as 'Submit for Release'
-
-              );
+        ///additional data to create WC as 'Submit for Release'
+      );
 
       var warrantyClaimJsonString = [createwarrantyClaimModel.toJson()];
       Map<String, dynamic>? responseCreateWarrantyClaim =
@@ -1116,15 +1131,15 @@ class WarrantyClaimController extends GetxController {
         external_emails_list.add(
             ExternalEmails(name: e.name, email: e.email, mobile: e.mobile));
       });
-      late List<AffectedParts> affectedParts = [];
+      // late List<AffectedParts> affectedParts = [];
 
-      rowItems.forEach((element) {
-        AffectedParts item = AffectedParts(name: element[0]["value"] ?? '0');
-        print('Affected parts: $item');
-        affectedParts.add(item);
+      // rowItems.forEach((element) {
+      //   AffectedParts item = AffectedParts(name: element[0]["value"] ?? '0');
+      //   print('Affected parts: $item');
+      //   affectedParts.add(item);
 
-        print('Create req  order  data: $item');
-      });
+      //   print('Create req  order  data: $item');
+      // });
 
       late List<SupplierActions> supplier_action_list = [];
 
@@ -1142,7 +1157,7 @@ class WarrantyClaimController extends GetxController {
               facilityId: facilityId,
               equipmentId: selectedEquipmentnameId,
               goodsOrderId: 14205,
-              affectedParts: affectedParts,
+              // affectedParts: affectedParts,
               orderReference: _orderReferenceNo,
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
@@ -1180,12 +1195,21 @@ class WarrantyClaimController extends GetxController {
   }
 
   Future<void> viewWarrantyClaim({int? wc_id}) async {
-    Get.toNamed(Routes.viewWarrantyClaim, arguments: wc_id);
+    clearStoreData();
+    Get.toNamed(Routes.createWarrantyClaimList,
+        arguments: {"wc_id": wc_id, "type": 1});
     print('Argument$wc_id');
   }
 
+  void clearStoreData() {
+    warrantyClaimPresenter.clearValue();
+    warrantyClaimPresenter.clearTypeValue();
+  }
+
   Future<void> editWarrantyClaim({int? wc_id}) async {
-    Get.toNamed(Routes.editWarrantyClaimContentWeb, arguments: wc_id);
+    clearStoreData();
+    Get.toNamed(Routes.createWarrantyClaimList,
+        arguments: {"wc_id": wc_id, "type": 0});
     print('EditArgument$wc_id');
   }
 

@@ -84,6 +84,9 @@ class AddInventoryUsecase {
     );
   }
 
+  void saveValue({String? inventoryId}) async =>
+      repository.saveValue(LocalKeys.inventoryId, inventoryId);
+
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.inventoryId);
 
@@ -135,10 +138,9 @@ class AddInventoryUsecase {
     required int? businessType,
   }) async {
     return repository.getBusinessList(
-      isLoading: isLoading,
-      businessType: businessType,
-      facilityId: facilityId
-    );
+        isLoading: isLoading,
+        businessType: businessType,
+        facilityId: facilityId);
   }
 
   Future<List<CurrencyListModel>> getUnitCurrencyList(

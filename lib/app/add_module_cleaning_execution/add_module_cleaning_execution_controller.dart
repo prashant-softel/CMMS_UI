@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_presenter.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -14,13 +13,13 @@ import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
-import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/update_mc_execution_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
@@ -75,6 +74,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   int type = 1;
   var schedule;
   TextEditingController commentCtrlr = TextEditingController();
+  Rx<bool> isFormInvalid = false.obs;
 
   ///Permit Type
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
@@ -276,7 +276,7 @@ class AddModuleCleaningExecutionController extends GetxController {
     int? jobId,
   }) async {
     Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "jobId": jobId, "type": 3});
+        arguments: {"permitId": permitId, "jobId": jobId, "type": 4});
     print({"Permit", permitId, jobId});
   }
 
@@ -341,6 +341,7 @@ class AddModuleCleaningExecutionController extends GetxController {
     final _assignedToList =
         await addModuleCleaningExecutionPresenter.getAssignedToList(
       facilityId: facilityId,
+      featureId: UserAccessConstants.kModuleCleaningplanFeatureId,
     );
 
     if (_assignedToList != null) {
@@ -375,10 +376,10 @@ class AddModuleCleaningExecutionController extends GetxController {
       List<int> abandonedEquipmentIds = [];
       equipmenTasktList.forEach((e) {
         e?.smbs.forEach((element) {
-          if (element.isAbandonSmbCheck!) {
+          if (element.isAbandonSmbCheck! && element.isPending != 0) {
             abandonedEquipmentIds.add(element.smbId ?? 0);
           }
-          if (element.isCleanedSmbCheck!) {
+          if (element.isCleanedSmbCheck! && element.isPending != 0) {
             cleanedEquipmentIds.add(element.smbId!);
           }
         });
@@ -387,15 +388,16 @@ class AddModuleCleaningExecutionController extends GetxController {
 
       UpdateMcScheduleExecutionModel updateMCScheduleExecutionModel =
           UpdateMcScheduleExecutionModel(
-              executionId: mcid.value,
-              scheduleId: scheduleId,
-              cleaningDay: cleaningDay,
-              // waterUsed: int.tryParse('${rowItem.value[0][7]["value"]}'),
-              waterUsed: waterUsed == null ? 0 : waterUsed,
-              remark: remark == null ? "" : remark,
-              // remark: rowItem.value[0][8]["value"],
-              cleanedEquipmentIds: cleanedEquipmentIds,
-              abandonedEquipmentIds: abandonedEquipmentIds);
+        executionId: mcid.value,
+        scheduleId: scheduleId,
+        cleaningDay: cleaningDay,
+        // waterUsed: int.tryParse('${rowItem.value[0][7]["value"]}'),
+        waterUsed: waterUsed == null ? 0 : waterUsed,
+        remark: remark == null ? "" : remark,
+        // remark: rowItem.value[0][8]["value"],
+        cleanedEquipmentIds: cleanedEquipmentIds,
+        abandonedEquipmentIds: abandonedEquipmentIds,
+      );
 
       var updateMCScheduleExecutionJsonString =
           updateMCScheduleExecutionModel.toJson();
@@ -427,6 +429,11 @@ class AddModuleCleaningExecutionController extends GetxController {
 
   void abandonAllExecutionButton({int? id}) async {
     {
+      if (commentTextFieldCtrlr.text == '') {
+        // isFormInvalid.value == true;
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = commentTextFieldCtrlr.text.trim();
 
       CommentModel commentAbandonModel =

@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/schedule_course_details_model.dart';
 import 'package:cmms/domain/models/schedule_course_list_model.dart';
 import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
@@ -18,6 +19,17 @@ class CourseUsecase {
     );
   }
 
+  Future<List<EmployeeListModel>> getEmployeePermitList(
+      {required bool isLoading,
+      required int? facility_id,
+      int? featureId}) async {
+    return repository.getEmployeeTrainingList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+      featureId: featureId,
+    );
+  }
+
   Future<Map<String, dynamic>> scheduleCourse({
     scheduleCourseJson,
     isLoading,
@@ -28,18 +40,38 @@ class CourseUsecase {
     );
   }
 
+  Future<ScheduleCourseDetails> getScheduleCourseDetails({
+    int? schedule_id,
+    bool? isLoading,
+  }) async =>
+      await repository.getScheduleCourseDetails(
+        schedule_id: schedule_id,
+        isLoading: isLoading,
+      );
+
   void saveValue({String? courseId}) async => repository.saveValue(
         LocalKeys.courseId,
         courseId,
       );
+  void saveScheduleValue({String? scheduleId}) async => repository.saveValue(
+        LocalKeys.schedule_id,
+        scheduleId,
+      );
   Future<String?> getValue() async => await repository.getStringValue(
         LocalKeys.courseId,
+      );
+  Future<String?> getScheduleValue() async => await repository.getStringValue(
+        LocalKeys.schedule_id,
       );
   void clearValue() async => repository.clearData(
         LocalKeys.courseId,
       );
   void clearScheduleValue() async => repository.clearData(
         LocalKeys.schedule_id,
+      );
+
+  void clearTypeValue() async => repository.clearData(
+        LocalKeys.viewtype,
       );
   Future<Map<String, dynamic>> addCourse({
     courseJson,

@@ -10,8 +10,8 @@ class AttendanceListMonthController extends GetxController {
   AttendanceListMonthController(this.attendanceListMonthPresenter);
   AttendanceListMonthPresenter attendanceListMonthPresenter;
 
-  RxBool openFromDateToStartDatePicker = false.obs;
-  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 70)).obs;
+  bool openFromDateToStartDatePicker = false;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 30)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
@@ -27,174 +27,6 @@ class AttendanceListMonthController extends GetxController {
   RxList<Employee> attendance = <Employee>[].obs;
 
   Rx<AttendanceMonthModel> attendanceMonthModel = AttendanceMonthModel().obs;
-  // Rx<AttendanceMonthModel> attendanceMonthModel = AttendanceMonthModel(
-  //   facility_id: 1,
-  //   facility_name: "Bellary",
-  //   attendance: [
-  //     Employee(
-  //       employeeId: 1,
-  //       employeeName: "HFEAdmin",
-  //       dateOfJoining: "2012-02-20T00:00:00",
-  //       dateOfExit: "0001-01-01T00:00:00",
-  //       workingStatus: "Inactive",
-  //       details: [
-  //         Details(
-  //           date: "2024-06-24T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-26T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-27T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //       ],
-  //     ),
-  //     Employee(
-  //       employeeId: 12,
-  //       employeeName: "PradeepTholety",
-  //       dateOfJoining: "2022-03-22T00:00:00",
-  //       dateOfExit: "0001-01-01T00:00:00",
-  //       workingStatus: "Inactive",
-  //       details: [
-  //         Details(
-  //           date: "2024-06-24T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-26T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-27T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //       ],
-  //     ),
-  //     Employee(
-  //       employeeId: 48,
-  //       employeeName: "ShivaKumar",
-  //       dateOfJoining: "2017-10-20T00:00:00",
-  //       dateOfExit: "0001-01-01T00:00:00",
-  //       workingStatus: "Inactive",
-  //       details: [
-  //         Details(
-  //           date: "2024-06-24T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-26T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-27T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //       ],
-  //     ),
-  //     Employee(
-  //       employeeId: 50,
-  //       employeeName: "GuruKumar",
-  //       dateOfJoining: "2017-10-20T00:00:00",
-  //       dateOfExit: "0001-01-01T00:00:00",
-  //       workingStatus: "Inactive",
-  //       details: [
-  //         Details(
-  //           date: "2024-06-24T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-26T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-27T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //       ],
-  //     ),
-  //     Employee(
-  //       employeeId: 57,
-  //       employeeName: "NareshD",
-  //       dateOfJoining: "2019-08-01T00:00:00",
-  //       dateOfExit: "0001-01-01T00:00:00",
-  //       workingStatus: "Inactive",
-  //       details: [
-  //         Details(
-  //           date: "2024-06-24T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-26T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-27T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //       ],
-  //     ),
-  //     Employee(
-  //       employeeId: 77,
-  //       employeeName: "madhubansahani",
-  //       dateOfJoining: "2024-04-15T00:00:00",
-  //       dateOfExit: "0001-01-01T00:00:00",
-  //       workingStatus: "Inactive",
-  //       details: [
-  //         Details(
-  //           date: "2024-06-24T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-26T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //         Details(
-  //           date: "2024-06-27T00:00:00",
-  //           status: "P",
-  //           inTime: "10:00 AM",
-  //           outTime: "6:00 PM",
-  //         ),
-  //       ],
-  //     ),
-  //   ],
-  // ).obs;
 
   @override
   void onInit() async {
@@ -232,6 +64,7 @@ class AttendanceListMonthController extends GetxController {
         attendance.value = attendanceMonthModel.value.attendance ?? [];
         // print("${jsonEncode(attendanceMonthModel.value.toJson())}");
       }
+      isLoading.value = false;
       List<String> uniqueDates = [];
       attendanceMonthModel.value.attendance?.forEach((employee) {
         print('Processing employee: ${employee.employeeName}');

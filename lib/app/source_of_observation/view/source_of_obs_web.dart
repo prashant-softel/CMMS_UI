@@ -59,11 +59,11 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.offNamed(Routes.misDashboard);
+                        Get.offNamed(Routes.masterDashboard);
                       },
-                      child: Text(" / MIS", style: Styles.greyLight14),
+                      child: Text(" / MASTERS", style: Styles.greyLight14),
                     ),
-                    Text(" / SOURCE OBSERVATION LIST",
+                    Text(" / SOURCE OF OBSERVATION ",
                         style: Styles.greyLight14),
                     // Text(" / CREATE CHECKLIST NUMBER",
                     //     style: Styles.greyMediumLight12)

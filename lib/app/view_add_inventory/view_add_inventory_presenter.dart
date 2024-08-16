@@ -146,8 +146,9 @@ class ViewAddInventoryPresenter {
     );
   }
 
-  // void saveValue({String? inventoryId}) async =>
-  //     viewaddInventoryUsecase.saveValue(LocalKeys.inventoryId, inventoryId);
+  void saveValue({String? inventoryId}) async {
+    return viewaddInventoryUsecase.saveValue(inventoryId: inventoryId);
+  }
 
   ///
   Future<List<ManufacturerModel>> getmanufacturerList({

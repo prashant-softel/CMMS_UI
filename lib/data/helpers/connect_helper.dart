@@ -23,6 +23,7 @@ import 'package:cmms/app/widgets/compliance_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
+import 'package:cmms/app/widgets/create_mrs_success_dailog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_plan_dialog_msg.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
@@ -43,6 +44,8 @@ import 'package:cmms/app/widgets/mc_execution_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/mc_plan_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/mc_plan_message_dialog.dart';
 import 'package:cmms/app/widgets/mc_plan_message_reject_dialog.dart';
+import 'package:cmms/app/widgets/mrs_approval_dialog.dart';
+import 'package:cmms/app/widgets/mrs_issue_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_message_dialog.dart';
@@ -1077,6 +1080,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getDocUploadList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/getDocuementList?facility_id=$facility_id&fromDate=$end_date&toDate=$start_date',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getModuleCleaningListPlan({
     required bool isLoading,
     required String auth,
@@ -1371,8 +1394,12 @@ class ConnectHelper {
     print('WCResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(WCMessageApproveDialog(
-        data: parsedJson['message'], id: parsedJson['id']));
+    Get.dialog<void>(
+      WCMessageApproveDialog(
+        data: parsedJson['message'],
+        id: parsedJson['id'],
+      ),
+    );
 
     return responseModel;
   }
@@ -1468,8 +1495,10 @@ class ConnectHelper {
     print('pmplanApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PmPlanMessageApproveDialog(
-        data: parsedJson['message'], id: parsedJson['id']));
+    Get.dialog<void>(
+        PmPlanMessageApproveDialog(
+            data: parsedJson['message'], id: parsedJson['id']),
+        barrierDismissible: false);
 
     return responseModel;
   }
@@ -2029,8 +2058,10 @@ class ConnectHelper {
                         data: parsedJson['message'],
                         endMCId: parsedJson['id'],
                       ))
-                    : Get.dialog<void>(PermitMessageCloseDialog(
-                        data: parsedJson['message'], jobId: jobId));
+                    : closetype == 5
+                        ? Get.offAllNamed(Routes.vegExecutionScreen)
+                        : Get.dialog<void>(PermitMessageCloseDialog(
+                            data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
@@ -2522,9 +2553,10 @@ class ConnectHelper {
       {required String auth,
       bool? isLoading,
       int? selectedchecklistId,
+      int? type,
       int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId&facility_id=$facilityId&type=2',
+      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId&facility_id=$facilityId&type=$type',
       Request.get,
       null,
       isLoading ?? false,
@@ -2858,6 +2890,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getEmployeeTrainingList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? featureId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getWorkTypeList({
     String? categoryIds,
     bool? isLoading,
@@ -3006,8 +3057,10 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(CreateJobCardDialog(
-        data: parsedJson['message'], jcId: parsedJson['id']));
+    Get.dialog<void>(
+        CreateJobCardDialog(
+            data: parsedJson['message'], jcId: parsedJson['id']),
+        barrierDismissible: false);
     print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
@@ -3031,10 +3084,12 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(JobCardStartedDialog(
-      message: parsedJson['message'],
-      jobId: parsedJson['id'],
-    ));
+    Get.dialog<void>(
+        JobCardStartedDialog(
+          message: parsedJson['message'],
+          jobId: parsedJson['id'],
+        ),
+        barrierDismissible: false);
     return responseModel;
   }
 
@@ -3179,7 +3234,9 @@ class ConnectHelper {
       newPermit,
       bool? isLoading,
       bool? resubmit,
-      int? type}) async {
+      int? type,
+      vegplanId,
+      vegexid}) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3194,8 +3251,14 @@ class ConnectHelper {
     print('UpdateNewPermitResponse5:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(UpdateNewPermitDialog(
-        data: parsedJson['message'], PtwId: parsedJson['id'], type: type));
+    Get.dialog<void>(
+        UpdateNewPermitDialog(
+            data: parsedJson['message'],
+            PtwId: parsedJson['id'],
+            type: type,
+            vegplanId: vegplanId,
+            vegexid: vegexid),
+        barrierDismissible: false);
 
     return responseModel;
   }
@@ -3206,7 +3269,9 @@ class ConnectHelper {
       newPermit,
       bool? isLoading,
       bool? resubmit,
-      int? type}) async {
+      int? type,
+      vegplanId,
+      vegexid}) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3222,7 +3287,11 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(UpdateNewPermitDialog(
-        data: parsedJson['message'], PtwId: parsedJson['id'], type: type));
+        data: parsedJson['message'],
+        PtwId: parsedJson['id'],
+        type: type,
+        vegplanId: vegplanId,
+        vegexid: vegexid));
 
     return responseModel;
   }
@@ -3325,6 +3394,8 @@ class ConnectHelper {
   Future<ResponseModel> createEscalationMatrix({
     required String auth,
     createEscalationMatrix,
+    required int moduleId,
+    required int statusId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -3344,10 +3415,11 @@ class ConnectHelper {
     // if (res.e != null) {
     //   Get.dialog<void>(WarrantyClaimErrorDialog());
     // } else {
-
     Get.dialog<void>(CreateEscalationMatrixDialog(
       data: parsedJson['message'],
       escalationMatrixId: parsedJson['id'],
+      moduleId: moduleId,
+      statusId: statusId,
     ));
     // }
 
@@ -3414,6 +3486,28 @@ class ConnectHelper {
     // if (res.e != null) {
     //   Get.dialog<void>(WarrantyClaimErrorDialog());
     // } else {
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> uploadDocumentNew({
+    required String auth,
+    uploadDocument,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/uploadDocument',
+      Request.post,
+      uploadDocument,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
 
     return responseModel;
   }
@@ -3786,6 +3880,38 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'WC/UpdateWC',
+      Request.patch,
+      updateWarrantyClaim,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Update Warranty Claim Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    Get.dialog<void>(WarrantyClaimUpdatedMessageDialog(
+      data: parsedJson['message'],
+      warrantyClaimId: parsedJson['id'],
+    ));
+    // }
+
+    return responseModel;
+  }
+
+Future<ResponseModel> resubmitWarrantyClaim({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'WC/UpdateWC?resubmit=true',
       Request.patch,
       updateWarrantyClaim,
       isLoading ?? false,
@@ -4207,8 +4333,10 @@ class ConnectHelper {
     print('goodsOrderRejecteResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(viewListOfobsMessageCloseDialog(
-        data: parsedJson['message'], id: parsedJson['id']));
+    Get.dialog<void>(
+        viewListOfobsMessageCloseDialog(
+            data: parsedJson['message'], id: parsedJson['id']),
+        barrierDismissible: false);
 
     return responseModel;
   }
@@ -4480,10 +4608,12 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(JobCardUpdatedDialog(
-      message: parsedJson['message'],
-      jobId: parsedJson['id'],
-    ));
+    Get.dialog<void>(
+        JobCardUpdatedDialog(
+          message: parsedJson['message'],
+          jobId: parsedJson['id'],
+        ),
+        barrierDismissible: false);
     return responseModel;
   }
 
@@ -5579,10 +5709,10 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    var res = responseModel.data;
-    var parsedJson = json.decode(res);
-    String message = parsedJson["message"];
-    Utility.showDialog(message, '');
+    // var res = responseModel.data;
+    // var parsedJson = json.decode(res);
+    // String message = parsedJson["message"];
+    // Utility.showDialog(message, '');
 
     return responseModel;
   }
@@ -5999,7 +6129,7 @@ class ConnectHelper {
     int? type,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMMaster/GetAssetMasterList',
+      'SMMaster/GetAssetMasterList?facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -6681,6 +6811,7 @@ class ConnectHelper {
   Future<ResponseModel> createMrs({
     required String auth,
     createMrsJsonString,
+    type,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -6693,6 +6824,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        CreateMrsSuccessDialog(
+            data: parsedJson['message'], mrsId: parsedJson['id'], type: type),
+        barrierDismissible: false);
     return responseModel;
   }
 
@@ -7041,6 +7178,7 @@ class ConnectHelper {
   Future<ResponseModel> approveMrs({
     required String auth,
     bool? isLoading,
+    int? type,
     required approvetoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -7053,6 +7191,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        MrsApprovalSuccessDialog(
+            data: parsedJson['message'], mrsId: parsedJson['id'], type: type),
+        barrierDismissible: false);
 
     return responseModel;
   }
@@ -7167,6 +7311,7 @@ class ConnectHelper {
   Future<ResponseModel> issueMrs({
     required String auth,
     bool? isLoading,
+    int? type,
     required issuetoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -7179,6 +7324,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        MrsIssueSuccessDialog(
+            data: parsedJson['message'], mrsId: parsedJson['id'], type: type),
+        barrierDismissible: false);
 
     return responseModel;
   }
@@ -7267,12 +7418,51 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(LinkToPermitDialog(
-        data: parsedJson['message'],
-        taskId: scheduleId,
-        activity: activity,
-        type: type //parsedJson['id']
-        ));
+    Get.dialog<void>(
+        LinkToPermitDialog(
+            data: parsedJson['message'],
+            taskId: scheduleId,
+            activity: activity,
+            type: type,
+            permitId: permitId //parsedJson['id']
+            ),
+        barrierDismissible: false);
+    print('jcId2:${parsedJson['id']}');
+    return responseModel;
+  }
+
+  Future<ResponseModel> vegscheduleLinkToPermit(
+      {required String auth,
+      scheduleId,
+      permitId,
+      activity,
+      bool? isLoading,
+      type,
+      vegplanId,
+      vegexid}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      "Vegetation/LinkPermitToVegetation?scheduleId=$scheduleId&permit_id=$permitId",
+      Request.put,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        LinkToPermitDialog(
+            data: parsedJson['message'],
+            taskId: scheduleId,
+            activity: activity,
+            type: type,
+            permitId: permitId,
+            vegplanId: vegplanId,
+            vegexid: vegexid //parsedJson['id']
+            ),
+        barrierDismissible: false);
     print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
@@ -7883,6 +8073,33 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> assignAuditTask({
+    required String auth,
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/AssignAuditTask?task_id=$taskId&assign_to=$assignId',
+      Request.put,
+      null,
+      isLoading,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+      data: parsedJson['message'],
+      id: parsedJson['id'],
+      type: 10,
+    ));
+    return responseModel;
+  }
+
   Future<ResponseModel> assignToMC({
     required String auth,
     int? assignId,
@@ -7892,6 +8109,32 @@ class ConnectHelper {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'MC/ReAssignMcTask?task_id=$taskId&assign_to=$assignId',
+      Request.put,
+      null,
+      isLoading,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PmTaskViewDialog(
+      data: parsedJson['message'],
+      taskId: taskId,
+    ));
+    return responseModel;
+  }
+
+  Future<ResponseModel> assignToVeg({
+    required String auth,
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/ReAssignTaskVegetation?task_id=$taskId&assign_to=$assignId',
       Request.put,
       null,
       isLoading,
@@ -8682,7 +8925,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Vegetation/ApproveVegetationPlan',
-      Request.put,
+      Request.post,
       vegApproveJsonString,
       isLoading ?? false,
       {
@@ -8893,7 +9136,7 @@ class ConnectHelper {
     int? executionId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/EndVegetationExecution?executionId=$executionId',
+      'Vegetation/EndExecutionVegetation?executionId=$executionId',
       Request.put,
       null,
       isLoading ?? true,
@@ -8916,7 +9159,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/AbandonVegetationExecution',
+      'Vegetation/AbandonExecutionVegetation',
       Request.put,
       abandoneJsonString,
       isLoading ?? false,
@@ -8940,9 +9183,8 @@ class ConnectHelper {
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/StartVegScheduleExecution?scheduleId=$scheduleId',
+      'Vegetation/StartScheduleExecutionVegetation?scheduleId=$scheduleId',
       Request.put,
-      // {'comment': "$comment", 'id': id},
       null,
       isLoading ?? true,
       {
@@ -8967,7 +9209,7 @@ class ConnectHelper {
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/EndVegScheduleExecution?scheduleId=$scheduleId',
+      'Vegetation/EndScheduleExecutionVegetation?scheduleId=$scheduleId',
       Request.put,
       null,
       isLoading ?? true,
@@ -9015,7 +9257,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/UpdateVegScheduleExecution',
+      'Vegetation/UpdateScheduleExecutionVegetation',
       Request.put,
       updateVegJson,
       isLoading ?? false,
@@ -9031,6 +9273,143 @@ class ConnectHelper {
       data: parsedJson['message'],
       mcExecutionId: parsedJson['id'],
     ));
+    return responseModel;
+  }
+
+  Future<ResponseModel> vegapproveShecduleExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/ApproveScheduleExecutionVegetation',
+      Request.put,
+      approvetoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+    return responseModel;
+  }
+
+  Future<ResponseModel> vegrejectShecduleExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/RejectScheduleExecution',
+      Request.put,
+      rejecttoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+    return responseModel;
+  }
+
+  Future<ResponseModel> vegendApproveExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/ApproveEndExecutionVegetation',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      approvetoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> vegendRejectExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/RejectEndExecutionVegetation',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      rejecttoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> vegabandonedApproveExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      "Vegetation/ApproveAbandonExecutionVegetation",
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      approvetoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> vegabandoneRejectExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      "Vegetation/RejectAbandonExecutionVegetation",
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      rejecttoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
     return responseModel;
   }
 
@@ -9349,7 +9728,29 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMReports/GetPlantItemTransactionReport?facility_id=1&assetItemId=2&fromDate=2023-07-22&toDate=2024-07-23',
+      'SMReports/GetAssetItemTransactionReport?facility_id=$facilityID&assetItemId=$assetItemID&fromDate=$start_date&toDate=$end_date',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
+  Future<ResponseModel> getDocuementListById({
+    required String auth,
+    required int facilityID,
+    required int docUploadId,
+    String? start_date,
+    required String end_date,
+    String? sub_doc_name,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/getDocuementListById?facility_id=$facilityID&id=$docUploadId&sub_doc_name=$sub_doc_name&fromDate=$start_date&toDate=$end_date',
       Request.get,
       null,
       isLoading ?? false,
@@ -9817,6 +10218,42 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> approveCourseSchedule({
+    required String auth,
+    approveSchedule,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/ApproveScheduleCourse',
+      Request.put,
+      jsonEncode(approveSchedule),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectCourseSchedule({
+    required String auth,
+    rejectSchedule,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/RejectScheduleCourse',
+      Request.put,
+      jsonEncode(rejectSchedule),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getScheduleCourseDetails({
     required String auth,
     int? schedule_id,
@@ -9828,6 +10265,24 @@ class ConnectHelper {
       null,
       isLoading ?? true,
       {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> executeScheduleCourse({
+    required String auth,
+    executeCourseJson,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/ExecuteScheduleCourse',
+      Request.post,
+      executeCourseJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );

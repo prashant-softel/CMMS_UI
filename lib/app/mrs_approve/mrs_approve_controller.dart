@@ -27,27 +27,24 @@ class MrsApproveController extends GetxController {
   String whereUsedType = "";
   Rx<bool> isFormInvalid = false.obs;
   var commentCtrlr = TextEditingController();
+  Rx<int> type = 0.obs;
 
   ///
   @override
   void onInit() async {
-    facilityIdStreamSubscription =
-        homeController.facilityId$.listen((event) async {
-      facilityId = event;
-      if (facilityId > 0) {
-        isFacilitySelected.value = true;
-      }
-      Future.delayed(Duration(seconds: 1), () {
-        getMrsDetails(
-            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
-      });
-    });
     try {
       await setMrsId();
-      if (mrsId.value != 0) {
-        await getMrsDetails(
-            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
-      }
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
+        facilityId = event;
+        if (facilityId > 0) {
+          isFacilitySelected.value = true;
+          if (mrsId.value != 0) {
+            await getMrsDetails(
+                mrsId: mrsId.value, isloading: true, facilityId: facilityId);
+          }
+        }
+      });
       super.onInit();
     } catch (e) {
       print(e);
@@ -57,13 +54,17 @@ class MrsApproveController extends GetxController {
   Future<void> setMrsId() async {
     try {
       final _mrsId = await mrsApprovePresenter.getValue();
+      final _type = await mrsApprovePresenter.getValuee();
       if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         mrsId.value = dataFromPreviousScreen['mrsId'];
+        type.value = dataFromPreviousScreen['type'];
         mrsApprovePresenter.saveValue(mrsId: mrsId.value.toString());
+        mrsApprovePresenter.saveValuee(type: type.value.toString());
       } else {
         mrsId.value = int.tryParse(_mrsId) ?? 0;
+        type.value = int.tryParse(_type!) ?? 0;
       }
     } catch (e) {
       Utility.showDialog(e.toString(), 'mrsId');
@@ -91,6 +92,13 @@ class MrsApproveController extends GetxController {
     }
   }
 
+  void clearStoreData() {
+    mrsApprovePresenter.clearValue();
+  }
+  void clearStoreDataa() {
+    mrsApprovePresenter.clearValuee();
+  }
+
   approveMrs() async {
     {
       checkform();
@@ -105,13 +113,14 @@ class MrsApproveController extends GetxController {
       var approvetoJsonString = commentModel.toJson();
       final response = await mrsApprovePresenter.approveMrs(
         approvetoJsonString: approvetoJsonString,
+        type: type.value,
         isLoading: true,
       );
       if (response == true) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+        // final _flutterSecureStorage = const FlutterSecureStorage();
 
-        _flutterSecureStorage.delete(key: "mrsId");
-        Get.offAllNamed(Routes.mrsListScreen);
+        // _flutterSecureStorage.delete(key: "mrsId");
+        // Get.offAllNamed(Routes.mrsListScreen);
       }
     }
   }

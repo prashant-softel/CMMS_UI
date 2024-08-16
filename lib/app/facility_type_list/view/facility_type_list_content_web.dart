@@ -410,6 +410,262 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             ),
                                           ],
                                         ),
+                                          SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                                child: CustomRichText(
+                                              title: "Latitude",
+                                            )),
+                                            Container(
+                                              width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.20),
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                  BoxShadow(
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    offset:
+                                                        const Offset(0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: TextField(
+                                                controller:
+                                                    controller.latitudeCtrlr,
+                                                focusNode: controller.latiFocus,
+                                                scrollController:
+                                                    controller.latiScroll,
+                                                keyboardType:
+                                                    TextInputType.multiline,
+                                                autofocus: false,
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
+                                                decoration: InputDecoration(
+                                                  fillColor:
+                                                      ColorValues.whiteColor,
+                                                  filled: true,
+                                                  contentPadding:
+                                                      Dimens.edgeInsets05_10,
+                                                  border: InputBorder.none,
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                    borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                    borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent),
+                                                  ),
+                                                  focusedErrorBorder: controller
+                                                          .islatiInvalid
+                                                          .value
+                                                      ? OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: ColorValues
+                                                                .redColorDark,
+                                                          ),
+                                                        )
+                                                      : InputBorder.none,
+                                                  errorBorder: controller
+                                                          .islatiInvalid
+                                                          .value
+                                                      ? OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: ColorValues
+                                                                .redColorDark,
+                                                          ),
+                                                        )
+                                                      : null,
+                                                  errorText: controller
+                                                          .islatiInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+                                                ),
+                                                onChanged: (value) {
+                                                  if (value.trim().length > 1) {
+                                                    controller
+                                                        .islatiInvalid
+                                                        .value = false;
+                                                  } else {
+                                                    controller
+                                                        .islatiInvalid
+                                                        .value = true;
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                                child: CustomRichText(
+                                              title: "Longitude",
+                                            )),
+                                            Container(
+                                              width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.20),
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                  BoxShadow(
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    offset:
+                                                        const Offset(0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: TextField(
+                                                controller:
+                                                    controller.longitudeCtrlr,
+                                                focusNode: controller.longiFocus,
+                                                scrollController:
+                                                    controller.longiScroll,
+                                                keyboardType:
+                                                    TextInputType.multiline,
+                                                autofocus: false,
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
+                                                decoration: InputDecoration(
+                                                  fillColor:
+                                                      ColorValues.whiteColor,
+                                                  filled: true,
+                                                  contentPadding:
+                                                      Dimens.edgeInsets05_10,
+                                                  border: InputBorder.none,
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                    borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                    borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent),
+                                                  ),
+                                                  focusedErrorBorder: controller
+                                                          .islongiInvalid
+                                                          .value
+                                                      ? OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: ColorValues
+                                                                .redColorDark,
+                                                          ),
+                                                        )
+                                                      : InputBorder.none,
+                                                  errorBorder: controller
+                                                          .islongiInvalid
+                                                          .value
+                                                      ? OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: ColorValues
+                                                                .redColorDark,
+                                                          ),
+                                                        )
+                                                      : null,
+                                                  errorText: controller
+                                                          .islongiInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+                                                ),
+                                                onChanged: (value) {
+                                                  if (value.trim().length > 1) {
+                                                    controller
+                                                        .islongiInvalid
+                                                        .value = false;
+                                                  } else {
+                                                    controller
+                                                        .islongiInvalid
+                                                        .value = true;
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -1445,7 +1701,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               DataColumn2(
                                                   // fixedWidth: 150,
                                                   label: Text(
-                                                "Plant Name",
+                                                "Facility Name",
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:

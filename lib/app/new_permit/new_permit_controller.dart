@@ -20,6 +20,7 @@ import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
+import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cmms/domain/models/equipment_model.dart';
@@ -396,6 +397,7 @@ class NewPermitController extends GetxController {
   Rx<bool> isChecked = false.obs;
   JobDetailsModel? jobModel;
   EndMCExecutionDetailsModel? mcExecutionDetailsModel;
+  VegExecutionDetailsModel? vegExecutionDetailsModel;
   PmtaskViewModel? pmtaskViewModel;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoint;
   int? jcId = 0;
@@ -524,6 +526,7 @@ class NewPermitController extends GetxController {
       JobDetailsModel? jobDetail;
       PmtaskViewModel? pmdetail;
       EndMCExecutionDetailsModel? mcdetail;
+      VegExecutionDetailsModel? vegdetail;
 
       final _permitId = await permitPresenter.getValue();
       final _type = await permitPresenter.getValuee();
@@ -547,7 +550,11 @@ class NewPermitController extends GetxController {
         typee.value = dataFromPreviousScreen['type'];
         jobModel = dataFromPreviousScreen['jobModel'];
         scheduleID.value = dataFromPreviousScreen['scheduleID'];
-        mcExecutionDetailsModel = dataFromPreviousScreen['mcModel'];
+        if (typee.value == 4) {
+          mcExecutionDetailsModel = dataFromPreviousScreen['mcModel'];
+        } else if (typee.value == 5) {
+          vegExecutionDetailsModel = dataFromPreviousScreen['vegModel'];
+        }
         pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];
         permitPresenter.saveValue(permitId: permitId.value.toString());
         permitPresenter.saveValuee(type: typee.value.toString());
@@ -577,6 +584,10 @@ class NewPermitController extends GetxController {
         }
         if (mcdetail != null) {
           mcExecutionDetailsModel = mcdetail;
+          //  scheduleID.value = int.tryParse(_type!) ?? 0;
+        }
+        if (vegdetail != null) {
+          vegExecutionDetailsModel = vegdetail;
           //  scheduleID.value = int.tryParse(_type!) ?? 0;
         }
         isChecked.value = _isChecked ?? false;
@@ -1675,6 +1686,8 @@ class NewPermitController extends GetxController {
         activity: activity,
         isLoading: true,
         type: typee.value,
+        vegplanId: vegExecutionDetailsModel?.planId,
+        vegexid: vegExecutionDetailsModel?.executionId,
       );
       if (responseNewPermitCreatedForJob != null) {
         //  CreateNewPermitDialog();
@@ -1830,10 +1843,13 @@ class NewPermitController extends GetxController {
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.updateNewPermit(
-              newPermit: jobJsonString,
-              resubmit: isChecked.value,
-              isLoading: true,
-              type: typee.value);
+        newPermit: jobJsonString,
+        resubmit: isChecked.value,
+        isLoading: true,
+        type: typee.value,
+        vegplanId: vegExecutionDetailsModel?.planId,
+        vegexid: vegExecutionDetailsModel?.executionId,
+      );
       if (responseUpdatePermit != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
@@ -1937,7 +1953,9 @@ class NewPermitController extends GetxController {
         newPermit: jobJsonString,
         resubmit: true,
         isLoading: true,
-        type: typee.value,
+        type: typee.value,  vegplanId: vegExecutionDetailsModel?.planId,
+        vegexid: vegExecutionDetailsModel?.executionId,
+     
       );
       if (responseNewPermitCreated != null) {
         //  CreateNewPermitDialog();
@@ -2015,6 +2033,10 @@ class NewPermitController extends GetxController {
     Get.toNamed(Routes.pmTaskView);
   }
 
+  Future<void> viewAudDetails() async {
+    Get.toNamed(Routes.viewAuditTask);
+  }
+
   Future<void> viewMCTDetails() async {
     Get.toNamed(Routes.addModuleCleaningExecutionContentWeb);
   }
@@ -2023,6 +2045,14 @@ class NewPermitController extends GetxController {
     await permitPresenter.browseFiles(
         fileBytes, fileName.value, type, true, facilityId);
     return true;
+  }
+
+  void clearStoreData() {
+    permitPresenter.clearValue();
+  }
+
+  void clearTypeStoreData() {
+    permitPresenter.clearTypeValue();
   }
 
   void isSuccessDialog() {

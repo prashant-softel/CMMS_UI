@@ -103,7 +103,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                             createContentTile(
                               title: "List Of observation",
                               onTap: () {
-                                controller.goToJobListScreen();
+                                controller.goToObsListScreen();
                               },
                             ),
                             createContentTile(
@@ -120,7 +120,20 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                               },
                             ),
 
-                            createContentTile(
+                          ],
+                        ),
+                         GridView.count(
+                          shrinkWrap: true,
+                          primary: false,
+                          padding: Dimens.edgeInsets15,
+                          crossAxisSpacing: 70,
+                          mainAxisSpacing: 6,
+                          crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                          childAspectRatio: Responsive.isMobile(context)
+                              ? (itemWidth / itemHeight)
+                              : 5,
+                          children: <Widget>[
+                             createContentTile(
                                 title: "MIS Checklist",
                                 onTap: () {
                                   controller.createChecklist();
@@ -133,6 +146,14 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                   //   Routes.preventive_checkPoint,
                                   // );
                                   controller.checkPoint();
+                                }),
+                                   createContentTile(
+                                title: "MIS Summary",
+                                onTap: () {
+                                  // Get.toNamed(
+                                  //   Routes.preventive_checkPoint,
+                                  // );
+                                  controller.goToMisSummary();
                                 }),
                           ],
                         ),
@@ -317,26 +338,28 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 onTap: () {
                                   controller.trainingCourse();
                                 }),
-                            createContentTile(
-                                title: "Training Report",
-                                onTap: () {
-                                  controller.trainingSummary();
-                                }),
+
                             createContentTile(
                                 title: "Schedule Course",
                                 onTap: () {
                                   controller.goToScheduleCourseList();
                                 }),
+
                             createContentTile(
-                                title: "Course Category",
+                                title: "Training Report",
                                 onTap: () {
-                                  controller.goToCourseCategory();
+                                  controller.trainingSummary();
                                 }),
-                            createContentTile(
-                                title: "Targeted Group",
-                                onTap: () {
-                                  controller.goToTargetedGroup();
-                                })
+                            // createContentTile(
+                            //     title: "Course Category",
+                            //     onTap: () {
+                            //       controller.goToCourseCategory();
+                            //     }),
+                            // createContentTile(
+                            //     title: "Targeted Group",
+                            //     onTap: () {
+                            //       controller.goToTargetedGroup();
+                            //     })
                           ],
                         ),
 

@@ -95,6 +95,9 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         onTap: () {
                                           var taskId;
                                           var jobId;
+                                          var vegexe;
+                                          var mcid;
+                                          var vegplan;
                                           controller.type.value == 1
                                               ? Get.offAllNamed(
                                                   Routes.jobDetails,
@@ -105,8 +108,22 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       arguments: {
                                                           'pmTaskId': taskId
                                                         })
-                                                  : Get.offNamed(
-                                                      Routes.newPermitList);
+                                                  : controller.type.value == 5
+                                                      ? Get.offAllNamed(
+                                                          Routes.vegExecutionScreen,
+                                                          arguments: {
+                                                              'vegexe': vegexe,
+                                                              'vegid': vegplan
+                                                            })
+                                                      : controller.type.value ==
+                                                              4
+                                                          ? Get.offAllNamed(
+                                                              Routes.addModuleCleaningExecutionContentWeb,
+                                                              arguments: {
+                                                                  'mcid': mcid
+                                                                })
+                                                          : Get.offNamed(Routes
+                                                              .newPermitList);
                                         },
                                         child: controller.type.value == 1
                                             ? Text(
@@ -118,10 +135,23 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                     "/ PM TASK",
                                                     style: Styles.greyLight14,
                                                   )
-                                                : Text(
-                                                    "/ PERMIT LIST",
-                                                    style: Styles.greyLight14,
-                                                  )),
+                                                : controller.type.value == 5
+                                                    ? Text(
+                                                        "/ VEG TASK",
+                                                        style:
+                                                            Styles.greyLight14,
+                                                      )
+                                                    : controller.type.value == 4
+                                                        ? Text(
+                                                            "/ MC TASK",
+                                                            style: Styles
+                                                                .greyLight14,
+                                                          )
+                                                        : Text(
+                                                            "/ PERMIT LIST",
+                                                            style: Styles
+                                                                .greyLight14,
+                                                          )),
 
                                     Text(" / VIEW PERMIT",
                                         style: Styles.greyLight14)
@@ -158,54 +188,79 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         border: Border.all(
-                                          color: controller
+                                          color: (controller
                                                           .viewPermitDetailsModel
                                                           .value
                                                           ?.ptwStatus ==
                                                       PermitStatusConstants
-                                                          .PTW_APPROVE //125
-                                                  ||
-                                                  controller
+                                                          .PTW_APPROVE) &&
+                                                  (controller
                                                           .viewPermitDetailsModel
                                                           .value
-                                                          ?.ptwStatus ==
+                                                          ?.tbT_Done_Check ==
+                                                      0) // tbt not done but approved
+                                              ? ColorValues.createsColor
+                                              : controller.viewPermitDetailsModel
+                                                          .value?.ptwStatus ==
                                                       PermitStatusConstants
-                                                          .PTW_CREATED //121
-                                                  ||
-                                                  controller
-                                                          .viewPermitDetailsModel
-                                                          .value
-                                                          ?.ptwStatus ==
-                                                      PermitStatusConstants
-                                                          .PTW_EXTEND_REQUEST_APPROVE //135
-                                              ? ColorValues.approveColor
-                                              : ColorValues.appRedColor,
+                                                          .PTW_CREATED
+                                                  ? ColorValues.yellowColor
+                                                  : controller
+                                                              .viewPermitDetailsModel
+                                                              .value
+                                                              ?.ptwStatus ==
+                                                          PermitStatusConstants
+                                                              .PTW_APPROVE
+                                                      ? ColorValues.approveColor
+                                                      : controller
+                                                                  .viewPermitDetailsModel
+                                                                  .value
+                                                                  ?.ptwStatus ==
+                                                              PermitStatusConstants
+                                                                  .PTW_EXTEND_REQUEST_APPROVE
+                                                          ? Color.fromARGB(255,
+                                                              181, 129, 179)
+                                                          : ColorValues
+                                                              .appRedColor,
                                           width: 1,
                                         ),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: controller
+                                            color: (controller
                                                             .viewPermitDetailsModel
                                                             .value
                                                             ?.ptwStatus ==
+                                                        PermitStatusConstants
+                                                            .PTW_APPROVE) &&
+                                                    (controller
+                                                            .viewPermitDetailsModel
+                                                            .value
+                                                            ?.tbT_Done_Check ==
+                                                        0) // tbt not done but approved
+                                                ? ColorValues.createsColor
+                                                : controller.viewPermitDetailsModel
+                                                            .value?.ptwStatus ==
                                                         PermitStatusConstants
                                                             .PTW_APPROVE //125
-                                                    ||
-                                                    controller
-                                                            .viewPermitDetailsModel
-                                                            .value
-                                                            ?.ptwStatus ==
-                                                        PermitStatusConstants
-                                                            .PTW_CREATED //121
-                                                    ||
-                                                    controller
-                                                            .viewPermitDetailsModel
-                                                            .value
-                                                            ?.ptwStatus ==
-                                                        PermitStatusConstants
-                                                            .PTW_EXTEND_REQUEST_APPROVE //135
-                                                ? ColorValues.approveColor
-                                                : ColorValues.appRedColor,
+                                                    ? ColorValues.approveColor
+                                                    : controller
+                                                                .viewPermitDetailsModel
+                                                                .value
+                                                                ?.ptwStatus ==
+                                                            PermitStatusConstants
+                                                                .PTW_CREATED //121
+                                                        ? ColorValues
+                                                            .yellowColor
+                                                        : controller
+                                                                    .viewPermitDetailsModel
+                                                                    .value
+                                                                    ?.ptwStatus ==
+                                                                PermitStatusConstants
+                                                                    .PTW_EXTEND_REQUEST_APPROVE //135
+                                                            ? Color.fromARGB(
+                                                                255, 181, 129, 179)
+                                                            : ColorValues
+                                                                .appRedColor,
                                           ),
                                         ],
                                       ),
@@ -772,18 +827,40 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         onTap: () {
                                                           controller
                                                               .clearStoreDataPMtaskId();
-                                                          Get.toNamed(
-                                                            Routes.pmTaskView,
-                                                            arguments: {
-                                                              'pmTaskId': controller
-                                                                  .listAssociatedPm?[
-                                                                      index]
-                                                                  ?.pmId
-                                                            },
-                                                          );
+                                                          controller.type
+                                                                      .value ==
+                                                                  AppConstants
+                                                                      .kAudit
+                                                              ? Get.toNamed(
+                                                                  Routes
+                                                                      .viewAuditTask,
+                                                                  arguments: {
+                                                                      'auditTaskId': controller
+                                                                          .listAssociatedPm?[
+                                                                              index]
+                                                                          ?.pmId,
+                                                                      'type': controller
+                                                                          .type
+                                                                          .value
+                                                                    })
+                                                              : Get.toNamed(
+                                                                  Routes
+                                                                      .pmTaskView,
+                                                                  arguments: {
+                                                                    'pmTaskId': controller
+                                                                        .listAssociatedPm?[
+                                                                            index]
+                                                                        ?.pmId
+                                                                  },
+                                                                );
                                                         },
                                                         child: Text(
-                                                          "PMT${controller.listAssociatedPm?[index]?.pmId.toString() ?? ''}",
+                                                          controller.type
+                                                                      .value ==
+                                                                  AppConstants
+                                                                      .kAudit
+                                                              ? "AUD${controller.listAssociatedPm?[index]?.pmId.toString() ?? ''} "
+                                                              : "PMT${controller.listAssociatedPm?[index]?.pmId.toString() ?? ''}",
                                                           style: TextStyle(
                                                             decoration:
                                                                 TextDecoration
@@ -811,23 +888,33 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                     ),
                                                     DataCell(
                                                       Text(controller
-                                                              .listAssociatedPm?[
-                                                                  index]
-                                                              ?.equipmentCat
-                                                              .toString() ??
-                                                          ''),
+                                                                  .type.value ==
+                                                              AppConstants
+                                                                  .kAudit
+                                                          ? "NA"
+                                                          : controller
+                                                                  .listAssociatedPm?[
+                                                                      index]
+                                                                  ?.equipmentCat
+                                                                  .toString() ??
+                                                              ''),
                                                     ),
                                                     DataCell(
                                                       SingleChildScrollView(
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         child: Text(
-                                                          controller
-                                                                  .listAssociatedPm?[
-                                                                      index]
-                                                                  ?.equipment
-                                                                  .toString() ??
-                                                              '',
+                                                          controller.type
+                                                                      .value ==
+                                                                  AppConstants
+                                                                      .kAudit
+                                                              ? "NA"
+                                                              : controller
+                                                                      .listAssociatedPm?[
+                                                                          index]
+                                                                      ?.equipment
+                                                                      .toString() ??
+                                                                  '',
                                                         ),
                                                       ),
                                                     ),
@@ -850,6 +937,446 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                     DataCell(
                                                       Text(controller
                                                               .listAssociatedPm?[
+                                                                  index]
+                                                              ?.status_short
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                              //Mc linked to this permit
+                              controller.lstAssociatedMc!.isEmpty
+                                  ? Dimens.box0
+                                  : Container(
+                                      margin: Dimens.edgeInsets20,
+                                      height: ((controller.lstAssociatedMc
+                                                      ?.length ??
+                                                  0) *
+                                              50) +
+                                          125,
+                                      // width: MediaQuery.of(context)
+                                      //         .size
+                                      //         .width /
+                                      //     1.2,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: ColorValues
+                                                .appBlueBackgroundColor,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "MC Task Linked To This Permit",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          // Divider(
+                                          //   color: ColorValues.greyLightColour,
+                                          // ),
+                                          Expanded(
+                                            child: DataTable2(
+                                              border: TableBorder.all(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 229, 234)),
+                                              columns: [
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Task Id",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Task Title",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Equipment\nCategory",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Equipment",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Start Date",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Assigned To",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Status",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller.lstAssociatedMc
+                                                        ?.length ??
+                                                    0,
+                                                (index) => DataRow(
+                                                  cells: [
+                                                    DataCell(
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          controller
+                                                              .clearStoreDataPMtaskId();
+                                                          Get.offAllNamed(
+                                                              Routes
+                                                                  .addModuleCleaningExecutionContentWeb,
+                                                              arguments: {
+                                                                'mcid': controller
+                                                                    .lstAssociatedMc?[
+                                                                        index]
+                                                                    ?.plan_id
+                                                              });
+                                                        },
+                                                        child: Text(
+                                                          "MCT${controller.lstAssociatedMc?[index]?.executionId.toString() ?? ''}",
+                                                          style: TextStyle(
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline,
+                                                            decorationStyle:
+                                                                TextDecorationStyle
+                                                                    .solid,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedMc?[
+                                                                  index]
+                                                              ?.title
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedMc?[
+                                                                  index]
+                                                              ?.equipmentCat
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      SingleChildScrollView(
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        child: Text(
+                                                          controller
+                                                                  .lstAssociatedMc?[
+                                                                      index]
+                                                                  ?.equipment
+                                                                  .toString() ??
+                                                              '',
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedMc?[
+                                                                  index]
+                                                              ?.startDate
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedMc?[
+                                                                  index]
+                                                              ?.assignedTo
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedMc?[
+                                                                  index]
+                                                              ?.status_short
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                              //veg linked to ptw
+                              controller.lstAssociatedVc!.isEmpty
+                                  ? Dimens.box0
+                                  : Container(
+                                      margin: Dimens.edgeInsets20,
+                                      height: ((controller.lstAssociatedVc
+                                                      ?.length ??
+                                                  0) *
+                                              50) +
+                                          125,
+                                      // width: MediaQuery.of(context)
+                                      //         .size
+                                      //         .width /
+                                      //     1.2,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: ColorValues
+                                                .appBlueBackgroundColor,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "VEG Task Linked To This Permit",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          // Divider(
+                                          //   color: ColorValues.greyLightColour,
+                                          // ),
+                                          Expanded(
+                                            child: DataTable2(
+                                              border: TableBorder.all(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 229, 234)),
+                                              columns: [
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Task Id",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Task Title",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Equipment\nCategory",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Equipment",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Start Date",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Assigned To",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "Status",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller.lstAssociatedVc
+                                                        ?.length ??
+                                                    0,
+                                                (index) => DataRow(
+                                                  cells: [
+                                                    DataCell(
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          controller
+                                                              .clearStoreDataPMtaskId();
+                                                          Get.offAllNamed(
+                                                              Routes
+                                                                  .vegExecutionScreen,
+                                                              arguments: {
+                                                                'vegexe': controller
+                                                                    .lstAssociatedVc?[
+                                                                        index]!
+                                                                    .executionId,
+                                                                'vegid': controller
+                                                                    .lstAssociatedVc?[
+                                                                        index]!
+                                                                    .plan_id,
+                                                              });
+                                                        },
+                                                        child: Text(
+                                                          "VE${controller.lstAssociatedVc?[index]?.executionId.toString() ?? ''}",
+                                                          style: TextStyle(
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline,
+                                                            decorationStyle:
+                                                                TextDecorationStyle
+                                                                    .solid,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedVc?[
+                                                                  index]
+                                                              ?.title
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedVc?[
+                                                                  index]
+                                                              ?.equipmentCat
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      SingleChildScrollView(
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        child: Text(
+                                                          controller
+                                                                  .lstAssociatedVc?[
+                                                                      index]
+                                                                  ?.equipment
+                                                                  .toString() ??
+                                                              '',
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedVc?[
+                                                                  index]
+                                                              ?.startDate
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedVc?[
+                                                                  index]
+                                                              ?.assignedTo
+                                                              .toString() ??
+                                                          ''),
+                                                    ),
+                                                    DataCell(
+                                                      Text(controller
+                                                              .lstAssociatedVc?[
                                                                   index]
                                                               ?.status_short
                                                               .toString() ??
@@ -1265,7 +1792,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                           // String baseUrl =
                                                           //     'http://65.0.20.19/CMMS_API/';
                                                           String baseUrl =
-                                                              'http://172.20.43.18:82/';
+                                                              'http://172.20.43.9:83/';
                                                           String endpoint =
                                                               '${controller.sopData}';
 
@@ -1298,7 +1825,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         // String baseUrl =
                                                         //     'http://65.0.20.19/CMMS_API/';
                                                         String baseUrl =
-                                                            'http://172.20.43.18:82/';
+                                                            'http://172.20.43.9:83/';
                                                         String endpoint =
                                                             '${controller.jsaData}';
                                                         String fullUrl =
@@ -1768,352 +2295,352 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
 
                               ////Extend Conditions List
 
-                              controller.viewPermitDetailsModel.value
-                                              ?.ptwStatus ==
-                                          PermitStatusConstants
-                                              .PTW_EXTEND_REQUESTED //133
-                                      ||
-                                      controller.viewPermitDetailsModel.value
-                                              ?.ptwStatus ==
-                                          PermitStatusConstants
-                                              .PTW_EXTEND_REQUEST_APPROVE //135
-                                  ? SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            // CustomAppBar(
-                                            //   title: 'Following safety Measures taken to carry out the work'.tr,
-                                            // ),
-                                            Text(
-                                              'Extend Condition List',
-                                              style: Styles.blue700,
-                                            ),
-                                            Dimens.boxHeight10,
-                                            Column(
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Column(
-                                                      // alignment: WrapAlignment.start,
-                                                      // spacing: 100,
-                                                      children: []
-                                                        ..addAll(controller
-                                                            .listExtendCondition!
-                                                            .map(
-                                                                (element) =>
-                                                                    Column(
-                                                                      // mainAxisSize: MainAxisSize.min,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .start,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        SizedBox(
-                                                                          // width: 200,
-                                                                          child:
-                                                                              Row(
-                                                                            children: [
-                                                                              checkBoxMethods(1),
-                                                                              // Text("${l = l! + 1}. "),
-                                                                              Expanded(child: Text("${element!.name}")),
-                                                                            ],
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ))),
-                                                    ),
-                                                    // : Dimens.box0,
-                                                    SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10,
-                                                              right: 10),
-                                                      child: Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                'Attached Files',
-                                                                style: Styles
-                                                                    .blackBold17,
-                                                              ),
-                                                              Text(
-                                                                'anas zia.jpeg',
-                                                                style: TextStyle(
-                                                                    decoration:
-                                                                        TextDecoration
-                                                                            .underline,
-                                                                    decorationStyle:
-                                                                        TextDecorationStyle
-                                                                            .solid,
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            5,
-                                                                            92,
-                                                                            163),
-                                                                    fontSize: Dimens
-                                                                        .seventeen),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Spacer(),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                'Comment/Remark',
-                                                                style: Styles
-                                                                    .blackBold17,
-                                                              ),
-                                                              Text(
-                                                                'Extended Conditions',
-                                                                style: Styles
-                                                                    .black17,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Spacer(),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                'Approver Name',
-                                                                style: Styles
-                                                                    .blackBold17,
-                                                              ),
-                                                              Text(
-                                                                '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                                style: Styles
-                                                                    .black17,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Spacer(),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                'Date & Time',
-                                                                style: Styles
-                                                                    .blackBold17,
-                                                              ),
-                                                              Text(
-                                                                '${controller.viewPermitDetailsModel.value?.start_datetime}',
-                                                                style: Styles
-                                                                    .black17,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  : Dimens.box0,
+                              // controller.viewPermitDetailsModel.value
+                              //                 ?.ptwStatus ==
+                              //             PermitStatusConstants
+                              //                 .PTW_EXTEND_REQUESTED //133
+                              //         ||
+                              //         controller.viewPermitDetailsModel.value
+                              //                 ?.ptwStatus ==
+                              //             PermitStatusConstants
+                              //                 .PTW_EXTEND_REQUEST_APPROVE //135
+                              //     ? SizedBox(
+                              //         width:
+                              //             MediaQuery.of(context).size.width / 1,
+                              //         child: Padding(
+                              //           padding: const EdgeInsets.all(20),
+                              //           child: Column(
+                              //             crossAxisAlignment:
+                              //                 CrossAxisAlignment.start,
+                              //             children: [
+                              //               // CustomAppBar(
+                              //               //   title: 'Following safety Measures taken to carry out the work'.tr,
+                              //               // ),
+                              //               Text(
+                              //                 'Extend Condition List',
+                              //                 style: Styles.blue700,
+                              //               ),
+                              //               Dimens.boxHeight10,
+                              //               Column(
+                              //                 children: [
+                              //                   Column(
+                              //                     children: [
+                              //                       Column(
+                              //                         // alignment: WrapAlignment.start,
+                              //                         // spacing: 100,
+                              //                         children: []
+                              //                           ..addAll(controller
+                              //                               .listExtendCondition!
+                              //                               .map(
+                              //                                   (element) =>
+                              //                                       Column(
+                              //                                         // mainAxisSize: MainAxisSize.min,
+                              //                                         mainAxisAlignment:
+                              //                                             MainAxisAlignment
+                              //                                                 .start,
+                              //                                         crossAxisAlignment:
+                              //                                             CrossAxisAlignment
+                              //                                                 .start,
+                              //                                         children: [
+                              //                                           SizedBox(
+                              //                                             // width: 200,
+                              //                                             child:
+                              //                                                 Row(
+                              //                                               children: [
+                              //                                                 checkBoxMethods(1),
+                              //                                                 // Text("${l = l! + 1}. "),
+                              //                                                 Expanded(child: Text("${element!.name}")),
+                              //                                               ],
+                              //                                             ),
+                              //                                           ),
+                              //                                         ],
+                              //                                       ))),
+                              //                       ),
+                              //                       // : Dimens.box0,
+                              //                       SizedBox(
+                              //                         height: 20,
+                              //                       ),
+                              //                       Padding(
+                              //                         padding:
+                              //                             const EdgeInsets.only(
+                              //                                 left: 10,
+                              //                                 right: 10),
+                              //                         child: Row(
+                              //                           crossAxisAlignment:
+                              //                               CrossAxisAlignment
+                              //                                   .start,
+                              //                           children: [
+                              //                             Column(
+                              //                               crossAxisAlignment:
+                              //                                   CrossAxisAlignment
+                              //                                       .end,
+                              //                               children: [
+                              //                                 Text(
+                              //                                   'Attached Files',
+                              //                                   style: Styles
+                              //                                       .blackBold17,
+                              //                                 ),
+                              //                                 Text(
+                              //                                   'anas zia.jpeg',
+                              //                                   style: TextStyle(
+                              //                                       decoration:
+                              //                                           TextDecoration
+                              //                                               .underline,
+                              //                                       decorationStyle:
+                              //                                           TextDecorationStyle
+                              //                                               .solid,
+                              //                                       color: Color
+                              //                                           .fromARGB(
+                              //                                               255,
+                              //                                               5,
+                              //                                               92,
+                              //                                               163),
+                              //                                       fontSize: Dimens
+                              //                                           .seventeen),
+                              //                                 ),
+                              //                               ],
+                              //                             ),
+                              //                             Spacer(),
+                              //                             Column(
+                              //                               crossAxisAlignment:
+                              //                                   CrossAxisAlignment
+                              //                                       .end,
+                              //                               children: [
+                              //                                 Text(
+                              //                                   'Comment/Remark',
+                              //                                   style: Styles
+                              //                                       .blackBold17,
+                              //                                 ),
+                              //                                 Text(
+                              //                                   'Extended Conditions',
+                              //                                   style: Styles
+                              //                                       .black17,
+                              //                                 ),
+                              //                               ],
+                              //                             ),
+                              //                             Spacer(),
+                              //                             Column(
+                              //                               crossAxisAlignment:
+                              //                                   CrossAxisAlignment
+                              //                                       .end,
+                              //                               children: [
+                              //                                 Text(
+                              //                                   'Approver Name',
+                              //                                   style: Styles
+                              //                                       .blackBold17,
+                              //                                 ),
+                              //                                 Text(
+                              //                                   '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                              //                                   style: Styles
+                              //                                       .black17,
+                              //                                 ),
+                              //                               ],
+                              //                             ),
+                              //                             Spacer(),
+                              //                             Column(
+                              //                               crossAxisAlignment:
+                              //                                   CrossAxisAlignment
+                              //                                       .end,
+                              //                               children: [
+                              //                                 Text(
+                              //                                   'Date & Time',
+                              //                                   style: Styles
+                              //                                       .blackBold17,
+                              //                                 ),
+                              //                                 Text(
+                              //                                   '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                              //                                   style: Styles
+                              //                                       .black17,
+                              //                                 ),
+                              //                               ],
+                              //                             ),
+                              //                           ],
+                              //                         ),
+                              //                       ),
+                              //                     ],
+                              //                   )
+                              //                 ],
+                              //               ),
+                              //             ],
+                              //           ),
+                              //         ),
+                              //       )
+                              //     : Dimens.box0,
 
                               ///Cancel Condition List
-                              controller.viewPermitDetailsModel.value
-                                              ?.ptwStatus ==
-                                          PermitStatusConstants
-                                              .PTW_CANCELLED_BY_APPROVER //129
-                                      ||
-                                      controller.viewPermitDetailsModel.value
-                                              ?.ptwStatus ==
-                                          PermitStatusConstants
-                                              .PTW_CANCEL_REQUESTED //130
-                                  ? SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            // CustomAppBar(
-                                            //   title: 'Following safety Measures taken to carry out the work'.tr,
-                                            // ),
-                                            Text(
-                                              'Cancel Condition List',
-                                              style: Styles.blue700,
-                                            ),
-                                            Dimens.boxHeight10,
-                                            Column(
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    // controller.permitId != null
-                                                    //     ?
-                                                    Column(
-                                                      // alignment: WrapAlignment.start,
-                                                      // spacing: 100,
-                                                      children: []
-                                                        ..addAll(controller
-                                                            .listCancelCondition!
-                                                            .map(
-                                                                (element) =>
-                                                                    Column(
-                                                                      // mainAxisSize: MainAxisSize.min,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .start,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        SizedBox(
-                                                                          // width: 200,
-                                                                          child:
-                                                                              Row(
-                                                                            children: [
-                                                                              checkBoxMethods(1),
-                                                                              // Text("${l = l! + 1}. "),
-                                                                              Expanded(child: Text("${element!.name}"))
-                                                                            ],
-                                                                          ),
-                                                                        )
-                                                                      ],
-                                                                    ))),
-                                                    ),
-                                                    // : Container(),
-                                                    SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10,
-                                                              right: 10),
-                                                      child: Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                'Attached Files',
-                                                                style: Styles
-                                                                    .blackBold17,
-                                                              ),
-                                                              Text(
-                                                                'anas zia.jpeg',
-                                                                style: TextStyle(
-                                                                    decoration:
-                                                                        TextDecoration
-                                                                            .underline,
-                                                                    decorationStyle:
-                                                                        TextDecorationStyle
-                                                                            .solid,
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            5,
-                                                                            92,
-                                                                            163),
-                                                                    fontSize: Dimens
-                                                                        .seventeen),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Spacer(),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                'Comment/Remark',
-                                                                style: Styles
-                                                                    .blackBold17,
-                                                              ),
-                                                              Text(
-                                                                'cancel Conditions',
-                                                                style: Styles
-                                                                    .black17,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Spacer(),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                'Approver Name',
-                                                                style: Styles
-                                                                    .blackBold17,
-                                                              ),
-                                                              Text(
-                                                                '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                                style: Styles
-                                                                    .black17,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Spacer(),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                'Date & Time',
-                                                                style: Styles
-                                                                    .blackBold17,
-                                                              ),
-                                                              Text(
-                                                                '${controller.viewPermitDetailsModel.value?.start_datetime}',
-                                                                style: Styles
-                                                                    .black17,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  : Dimens.box0,
+                              // controller.viewPermitDetailsModel.value
+                              //                 ?.ptwStatus ==
+                              //             PermitStatusConstants
+                              //                 .PTW_CANCELLED_BY_APPROVER //129
+                              //         ||
+                              //         controller.viewPermitDetailsModel.value
+                              //                 ?.ptwStatus ==
+                              //             PermitStatusConstants
+                              //                 .PTW_CANCEL_REQUESTED //130
+                              //     ? SizedBox(
+                              //         width:
+                              //             MediaQuery.of(context).size.width / 1,
+                              //         child: Padding(
+                              //           padding: const EdgeInsets.all(20),
+                              //           child: Column(
+                              //             crossAxisAlignment:
+                              //                 CrossAxisAlignment.start,
+                              //             children: [
+                              //               // CustomAppBar(
+                              //               //   title: 'Following safety Measures taken to carry out the work'.tr,
+                              //               // ),
+                              //               Text(
+                              //                 'Cancel Condition List',
+                              //                 style: Styles.blue700,
+                              //               ),
+                              //               Dimens.boxHeight10,
+                              //               Column(
+                              //                 children: [
+                              //                   Column(
+                              //                     children: [
+                              //                       // controller.permitId != null
+                              //                       //     ?
+                              //                       Column(
+                              //                         // alignment: WrapAlignment.start,
+                              //                         // spacing: 100,
+                              //                         children: []
+                              //                           ..addAll(controller
+                              //                               .listCancelCondition!
+                              //                               .map(
+                              //                                   (element) =>
+                              //                                       Column(
+                              //                                         // mainAxisSize: MainAxisSize.min,
+                              //                                         mainAxisAlignment:
+                              //                                             MainAxisAlignment
+                              //                                                 .start,
+                              //                                         crossAxisAlignment:
+                              //                                             CrossAxisAlignment
+                              //                                                 .start,
+                              //                                         children: [
+                              //                                           SizedBox(
+                              //                                             // width: 200,
+                              //                                             child:
+                              //                                                 Row(
+                              //                                               children: [
+                              //                                                 checkBoxMethods(1),
+                              //                                                 // Text("${l = l! + 1}. "),
+                              //                                                 Expanded(child: Text("${element!.name}"))
+                              //                                               ],
+                              //                                             ),
+                              //                                           )
+                              //                                         ],
+                              //                                       ))),
+                              //                       ),
+                              //                       // : Container(),
+                              //                       SizedBox(
+                              //                         height: 20,
+                              //                       ),
+                              //                       Padding(
+                              //                         padding:
+                              //                             const EdgeInsets.only(
+                              //                                 left: 10,
+                              //                                 right: 10),
+                              //                         child: Row(
+                              //                           crossAxisAlignment:
+                              //                               CrossAxisAlignment
+                              //                                   .start,
+                              //                           children: [
+                              //                             Column(
+                              //                               crossAxisAlignment:
+                              //                                   CrossAxisAlignment
+                              //                                       .end,
+                              //                               children: [
+                              //                                 Text(
+                              //                                   'Attached Files',
+                              //                                   style: Styles
+                              //                                       .blackBold17,
+                              //                                 ),
+                              //                                 Text(
+                              //                                   'anas zia.jpeg',
+                              //                                   style: TextStyle(
+                              //                                       decoration:
+                              //                                           TextDecoration
+                              //                                               .underline,
+                              //                                       decorationStyle:
+                              //                                           TextDecorationStyle
+                              //                                               .solid,
+                              //                                       color: Color
+                              //                                           .fromARGB(
+                              //                                               255,
+                              //                                               5,
+                              //                                               92,
+                              //                                               163),
+                              //                                       fontSize: Dimens
+                              //                                           .seventeen),
+                              //                                 ),
+                              //                               ],
+                              //                             ),
+                              //                             Spacer(),
+                              //                             Column(
+                              //                               crossAxisAlignment:
+                              //                                   CrossAxisAlignment
+                              //                                       .end,
+                              //                               children: [
+                              //                                 Text(
+                              //                                   'Comment/Remark',
+                              //                                   style: Styles
+                              //                                       .blackBold17,
+                              //                                 ),
+                              //                                 Text(
+                              //                                   'cancel Conditions',
+                              //                                   style: Styles
+                              //                                       .black17,
+                              //                                 ),
+                              //                               ],
+                              //                             ),
+                              //                             Spacer(),
+                              //                             Column(
+                              //                               crossAxisAlignment:
+                              //                                   CrossAxisAlignment
+                              //                                       .end,
+                              //                               children: [
+                              //                                 Text(
+                              //                                   'Approver Name',
+                              //                                   style: Styles
+                              //                                       .blackBold17,
+                              //                                 ),
+                              //                                 Text(
+                              //                                   '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                              //                                   style: Styles
+                              //                                       .black17,
+                              //                                 ),
+                              //                               ],
+                              //                             ),
+                              //                             Spacer(),
+                              //                             Column(
+                              //                               crossAxisAlignment:
+                              //                                   CrossAxisAlignment
+                              //                                       .end,
+                              //                               children: [
+                              //                                 Text(
+                              //                                   'Date & Time',
+                              //                                   style: Styles
+                              //                                       .blackBold17,
+                              //                                 ),
+                              //                                 Text(
+                              //                                   '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                              //                                   style: Styles
+                              //                                       .black17,
+                              //                                 ),
+                              //                               ],
+                              //                             ),
+                              //                           ],
+                              //                         ),
+                              //                       ),
+                              //                     ],
+                              //                   )
+                              //                 ],
+                              //               ),
+                              //             ],
+                              //           ),
+                              //         ),
+                              //       )
+                              //     : Dimens.box0,
 
                               ///Close Condition List
                               ///TODO
@@ -3243,33 +3770,36 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                 //     : Container(),
 
                 /// Permit Cancel By approver & Permit Request
-                varUserAccessModel.value.access_list!
-                                .where((e) =>
-                                    e.feature_id ==
-                                        UserAccessConstants.kPermitFeatureId &&
-                                    e.approve ==
-                                        UserAccessConstants.kHaveApproveAccess)
-                                .length >
-                            0 ||
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPermitFeatureId &&
-                                        e.add ==
-                                            UserAccessConstants.kHaveAddAccess)
-                                    .length >
-                                0 &&
-                            controller
+                (varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kPermitFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0 ||
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kPermitFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0) &&
+                            (controller
                                     .viewPermitDetailsModel.value?.ptwStatus !=
                                 PermitStatusConstants
-                                    .PTW_CANCEL_REQUEST_APPROVED &&
-                            controller
-                                    .viewPermitDetailsModel.value?.ptwStatus !=
-                                PermitStatusConstants
-                                    .PTW_EXTEND_REQUEST_REJECTED
-                    ? Dimens.box0
-                    : Padding(
+                                    .PTW_CANCEL_REQUEST_APPROVED) &&
+                        (controller.viewPermitDetailsModel.value?.ptwStatus !=
+                            PermitStatusConstants
+                                .PTW_EXTEND_REQUEST_REJECTED) &&
+                        (controller.viewPermitDetailsModel.value?.ptwStatus !=
+                            PermitStatusConstants.PTW_CLOSED)
+                    ? Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Container(
                             height: 45,
@@ -3287,7 +3817,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                 );
                               },
                             )),
-                      ),
+                      )
+                    : Dimens.box0,
 
                 // Dimens.boxWidth5,
 

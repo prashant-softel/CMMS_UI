@@ -49,6 +49,7 @@ import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
+import 'package:cmms/app/careate_warranty_calim/create_warranty_claim_binding.dart';
 import 'package:cmms/app/check_list_of_observation/checklist_of_observation_binding.dart';
 import 'package:cmms/app/check_list_of_observation/views/checklist_of_observation_screen.dart';
 import 'package:cmms/app/checklist_Inspection/view/ChecklistInsp_list_screen.dart';
@@ -73,8 +74,10 @@ import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/document_master/document_master_binding.dart';
 import 'package:cmms/app/document_master/view/document_master_screen.dart';
-import 'package:cmms/app/document_upload/document_upload_binding.dart';
-import 'package:cmms/app/document_upload/view/document_upload_screen.dart';
+import 'package:cmms/app/doc_upload/doc_upload_binding.dart';
+import 'package:cmms/app/doc_upload/view/doc_upload_screen.dart';
+import 'package:cmms/app/document_version_dashboard/doc_version_binding.dart';
+import 'package:cmms/app/document_version_dashboard/doc_version_dashboard_screen.dart';
 import 'package:cmms/app/dsm_charges/dsm_charges_binding.dart';
 import 'package:cmms/app/dsm_charges/view/dsm_charges_screen.dart';
 import 'package:cmms/app/dsm_dashboard/dsm_dashboard_binding.dart';
@@ -118,6 +121,8 @@ import 'package:cmms/app/mis/mis_dashboard_binding.dart';
 import 'package:cmms/app/mis/view/mis_dashboard_screen.dart';
 import 'package:cmms/app/mis_list_of_observation/observation_list_binding.dart';
 import 'package:cmms/app/mis_list_of_observation/views/observation_list_screen.dart';
+import 'package:cmms/app/mis_summary/mis_summary_binding.dart';
+import 'package:cmms/app/mis_summary/views/mis_summary_screen.dart';
 import 'package:cmms/app/mis_task/mis_task_binding.dart';
 import 'package:cmms/app/mis_task/view/mis_task_screen.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
@@ -136,8 +141,6 @@ import 'package:cmms/app/mrs_issue/mrs_issue_binding.dart';
 import 'package:cmms/app/mrs_issue/view/mrs_issue_screen.dart';
 import 'package:cmms/app/create_mrs_return/create_mrs_return_binding.dart';
 import 'package:cmms/app/create_mrs_return/view/create_mrs_return_screen.dart';
-import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
-import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/new_permit/view/create_permit_screen.dart';
 import 'package:cmms/app/plant_stock_report_details/plant_stock_report_binding_details.dart';
 import 'package:cmms/app/plant_stock_report_details/view/plant_stock_report_screen_details.dart';
@@ -173,6 +176,8 @@ import 'package:cmms/app/vegetation_plan_list/view/vegetation_plan_list_screen.d
 import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
 import 'package:cmms/app/view_course/view/view_course_screen.dart';
 import 'package:cmms/app/view_course/view_course_binding.dart';
+import 'package:cmms/app/view_doc_upload.dart/view/view_doc_upload_screen.dart';
+import 'package:cmms/app/view_doc_upload.dart/view_doc_upload_binding.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view/view_haz_waste_data_screen.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view_haz_waste_data_binding.dart';
 import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
@@ -246,7 +251,7 @@ import 'package:cmms/app/view_water_data/view_water_data_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
-import 'package:cmms/app/warranty_claim_list/web/create_warranty_claim_web.dart';
+import 'package:cmms/app/careate_warranty_calim/view/create_warranty_claim_web.dart';
 import 'package:cmms/app/waste_data/views/waste_data_screen.dart';
 import 'package:cmms/app/waste_data/waste_data_binding.dart';
 import 'package:cmms/app/waste_type_master/view/waste_type_master_screen.dart';
@@ -292,8 +297,8 @@ import '../calibration_view/view/calibration_view_screen.dart';
 import '../country_list/country_list_binding.dart';
 import '../country_list/view/country_list_screen.dart';
 import '../create_preventive_checklist/create_preventive_checklist_binding.dart';
-import '../document_manager/document_manager_binding.dart';
-import '../document_manager/view/document_manager_screen.dart';
+import '../doc_upload_list/doc_upload_list_binding.dart';
+import '../doc_upload_list/view/doc_upload_list_screen.dart';
 import '../edit_job/edit_job_binding.dart';
 import '../edit_job/views/edit_job_screen.dart';
 import '../edit_mrs/edit_mrs_binding.dart';
@@ -550,7 +555,7 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.warrantyClaimList,
       page: WarrantyClaimListScreen.new,
-      binding: HomeBinding(),
+      binding: WarrantyClaimBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.calibrationList,
@@ -607,7 +612,7 @@ class AppPages {
     GetPage<dynamic>(
         name: _Paths.createWarrantyClaimList,
         page: CreateWarrantyClaimWeb.new,
-        binding: WarrantyClaimBinding()),
+        binding: CreateWarrantyClaimBinding()),
     GetPage<dynamic>(
         name: _Paths.warrantyClaimListWeb,
         page: WarrantyClaimListScreen.new,
@@ -878,11 +883,7 @@ class AppPages {
       page: ViewEscalationMatrixScreen.new,
       binding: ViewEscalationMatrixBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.mrsViewScreen,
-      page: MrsViewScreen.new,
-      binding: MrsViewBinding(),
-    ),
+
     GetPage<dynamic>(
       name: _Paths.mrsApprovalScreen,
       page: MrsApproveScreen.new,
@@ -1395,6 +1396,11 @@ class AppPages {
       name: _Paths.observationSummary,
       page: ObservationSummaryScreen.new,
       binding: ObservationSummaryBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.misSummary,
+      page: MisSummaryScreen.new,
+      binding: MisSummaryBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.trainingSummary,

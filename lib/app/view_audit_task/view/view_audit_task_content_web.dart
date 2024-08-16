@@ -4,6 +4,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_audit_task/tbt_done_audit_dialog.dart';
+import 'package:cmms/app/view_audit_task/view/assigntoauditdailog.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_controller.dart';
 import 'package:cmms/app/widgets/audit_execution_process_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -216,10 +217,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               //   'Created By :',
                                               //   style: Styles.black17,
                                               // ),
-                                              Text(
-                                                'Approved By :',
-                                                style: Styles.black17,
-                                              ),
+                                              // Text(
+                                              //   'Approved By :',
+                                              //   style: Styles.black17,
+                                              // ),
                                               Text(
                                                 'Checklist :',
                                                 style: Styles.black17,
@@ -238,7 +239,9 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               ),
                                             ],
                                           ),
-                                          Dimens.boxWidth10,
+                                          SizedBox(
+                                            width: 5,
+                                          ),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -258,9 +261,9 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               // Text(
                                               //     "hard cod", // '${controller.auditTasknDetailModel.value?.created_by_name ?? ''}',
                                               //     style: Styles.blue17),
-                                              Text(
-                                                  '${controller.auditTasknDetailModel.value.approved_by ?? ""}',
-                                                  style: Styles.blue17),
+                                              // Text(
+                                              //     '${controller.auditTasknDetailModel.value.approved_by ?? ""}',
+                                              //     style: Styles.blue17),
                                               Text(
                                                   '${controller.auditTasknDetailModel.value.schedules?[0]?.checklist_name ?? ""}',
                                                   style: Styles.blue17),
@@ -284,10 +287,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               //   'Created At :',
                                               //   style: Styles.black17,
                                               // ),
-                                              Text(
-                                                'Approved At :',
-                                                style: Styles.black17,
-                                              ),
+                                              // Text(
+                                              //   'Approved At :',
+                                              //   style: Styles.black17,
+                                              // ),
                                               Text(
                                                 'Schedule Date :',
                                                 style: Styles.black17,
@@ -307,7 +310,9 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               ),
                                             ],
                                           ),
-                                          Dimens.boxWidth10,
+                                          SizedBox(
+                                            width: 5,
+                                          ),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -315,9 +320,15 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               // Text(
                                               //     "hard", //  '${controller.auditTasknDetailModel.value?.created_at ?? ""}',
                                               //     style: Styles.blue17),
-                                              Text(
-                                                  '${controller.auditTasknDetailModel.value.approved_at ?? ""}',
-                                                  style: Styles.blue17),
+                                              // Text(
+                                              //     controller
+                                              //                 .auditTasknDetailModel
+                                              //                 .value
+                                              //                 .approved_at ==
+                                              //             "0001-01-01"
+                                              //         ? ""
+                                              //         : '${controller.auditTasknDetailModel.value.approved_at ?? ""}',
+                                              //     style: Styles.blue17),
                                               Text(
                                                   '${controller.auditTasknDetailModel.value.schedule_Date ?? ""}',
                                                   style: Styles.blue17),
@@ -407,7 +418,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 DataColumn2(
                                                     fixedWidth: 150,
                                                     label: Text(
-                                                      "CP ok?",
+                                                      "Accept",
                                                       style: TextStyle(
                                                           fontSize: 15,
                                                           fontWeight:
@@ -488,8 +499,8 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                                       index]
                                                                   .cp_ok ==
                                                               1
-                                                          ? "OK"
-                                                          : "Not OK",
+                                                          ? "YES"
+                                                          : "NO",
                                                       style: controller
                                                                   .auditTasknDetailModel
                                                                   .value
@@ -835,7 +846,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                   child: Row(
                                                     children: [
                                                       Text(
-                                                        "PM History ",
+                                                        "History ",
                                                         style: Styles.blue700,
                                                       ),
                                                     ],
@@ -1178,7 +1189,40 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               )
                                             : Dimens.box0,
                                         Dimens.boxWidth5,
-
+                                        controller.auditTasknDetailModel.value
+                                                        .status ==
+                                                    421 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditExecutionFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveAddAccess)
+                                                        .length >
+                                                    0
+                                            ? Container(
+                                                height: 35,
+                                                child: CustomElevatedButton(
+                                                  // icon: Icons.link,
+                                                  backgroundColor:
+                                                      ColorValues.blueColor,
+                                                  text: "Re-assign",
+                                                  onPressed: () {
+                                                    Get.dialog<void>(
+                                                        AssignToAuditTaskDialog(
+                                                            id: controller
+                                                                    .auditTasknDetailModel
+                                                                    .value
+                                                                    .id ??
+                                                                0));
+                                                    //controller.printScreen();
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         controller.auditTasknDetailModel.value.status == 430 &&
                                                     varUserAccessModel.value.access_list!
                                                             .where((e) =>

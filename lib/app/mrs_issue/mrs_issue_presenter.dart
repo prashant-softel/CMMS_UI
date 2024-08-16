@@ -11,11 +11,12 @@ class MrsIssuePresenter {
   }) async =>
       await mrsIssueUsecase.getMrsDetails(
         mrsId: mrsId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
   Future<bool> issueMrs({
     issuetoJsonString,
+    int? type,
     required bool isLoading,
   }) async {
     return mrsIssueUsecase.issueMrs(
@@ -28,5 +29,17 @@ class MrsIssuePresenter {
     return mrsIssueUsecase.saveValue(mrsId: mrsId);
   }
 
+  void saveValuee({String? type}) async {
+    return mrsIssueUsecase.saveValuee(type: type);
+  }
+
+  void clearValue() async {
+    return mrsIssueUsecase.clearValue();
+  }
+  void clearValuee() async {
+    return mrsIssueUsecase.clearValuee();
+  }
+
   Future<String?> getValue() async => await mrsIssueUsecase.getValue();
+  Future<String?> getValuee() async => await mrsIssueUsecase.getValue();
 }

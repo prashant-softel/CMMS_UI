@@ -33,4 +33,8 @@ class TrainingPresenter {
       );
 
   void clearValue() async => trainingUsecase.clearValue();
+  
+  void clearScheduleValue() async => trainingUsecase.clearScheduleValue();
+  void clearTypeValue() async => trainingUsecase.clearTypeValue();
+
 }

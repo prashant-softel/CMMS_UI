@@ -426,7 +426,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                     )),
                                     DataColumn(
                                         label: Text(
-                                      "Asset Type",
+                                      "Remove From",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
@@ -474,7 +474,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                                 .returnMrsDetailsModel
                                                 .value!
                                                 .cmmrsFaultyItems![index]
-                                                .asset_type
+                                                .fromActorName
                                                 .toString())),
                                             DataCell(Text(controller
                                                 .returnMrsDetailsModel

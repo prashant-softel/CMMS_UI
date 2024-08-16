@@ -1,19 +1,11 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/inventory_category_model.dart';
-import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:rxdart/subjects.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/dashboard_model.dart';
 import '../../domain/models/facility_model.dart';
-import '../../domain/models/user_access_model.dart';
 
 class DashboardController extends GetxController {
   DashboardController(this.homePresenter);
@@ -35,31 +27,8 @@ class DashboardController extends GetxController {
   Map<String, double> categoryMapSmAvailableSiteDouble = <String, double>{};
   Map<String, double> stockOverviewmap = <String, double>{};
 
-  //int facilityId = 45;
-  // String categoryIds = '';
-
-  // Rx<String> selectedFacility = ''.obs;
-  // String username = '';
-
-  // RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
-  // RxList<int> selectedEquipmentList = <int>[].obs;
-  // Rx<bool> isInventorySelected = true.obs;
-  // RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
-  // Rx<String> selectedInventory = ''.obs;
   var selectedSection = 0.obs;
 
-  ////
-  // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  // RxList<InventoryCategoryModel?> equipmentCategoryList =
-  //     <InventoryCategoryModel>[].obs;
-  // var challanDateTc = TextEditingController();
-
-  // RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-  // Rx<bool> isFacilitySelected = true.obs;
-  // PaginationController paginationController = PaginationController(
-  //   rowCount: 0,
-  //   rowsPerPage: 10,
-  // );
   RxList<DashboardModel?> dashboardList = <DashboardModel?>[].obs;
   Rx<DashboardModel?> dashboardBmList = DashboardModel().obs;
   Rx<DashboardModel?> dashboardPmList = DashboardModel().obs;
@@ -543,6 +512,14 @@ class DashboardController extends GetxController {
 
   void clearStoreIrData() {
     homePresenter.iRclearValue();
+  }
+
+  void clearStoreSmData() {
+    homePresenter.smclearValue();
+  }
+
+  void clearStoreDatatype() {
+    homePresenter.clearTypeValue();
   }
 
   void onChartTapped(int index) {

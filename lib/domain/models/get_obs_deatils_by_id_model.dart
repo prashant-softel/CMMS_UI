@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cmms/app/utils/utility.dart';
-import 'package:cmms/domain/models/new_permit_details_model.dart';
+
 
 GetObservationById getObservationByIdModelFromJson(String str) =>
     GetObservationById.fromJson(json.decode(str));
@@ -11,6 +11,7 @@ class GetObservationById {
   int? facility_id;
   String? contractor_name;
   int? risk_type_id;
+  int? status_code;
   String? risk_type_name;
   String? preventive_action;
   String? responsible_person;
@@ -37,6 +38,7 @@ class GetObservationById {
     this.facility_id,
     this.contractor_name,
     this.risk_type_id,
+    this.status_code,
     this.risk_type_name,
     this.preventive_action,
     this.responsible_person,
@@ -52,6 +54,7 @@ class GetObservationById {
     this.target_date,
     this.observation_description,
     this.created_at,
+     this.file_list,
     this.created_by,
     this.updated_at,
     this.updated_by,
@@ -60,6 +63,7 @@ class GetObservationById {
   factory GetObservationById.fromJson(Map<String, dynamic> json) {
     return GetObservationById(
       id: json['id'],
+      status_code: json['status_code'],
       facility_id: json['facility_id'],
       short_status: json['short_status'],
       contact_number: json['contact_number'],
@@ -80,8 +84,47 @@ class GetObservationById {
       source_of_observation: json['source_of_observation'],
       source_of_observation_name: json['source_of_observation_name'],
       target_date: Utility.getFormatedyearMonthDay(json['target_date']),
+      file_list: json["fileDetails"] != null
+          ? List<FileList>.from(
+              json["fileDetails"].map((x) => FileList.fromJson(x)))
+          : [],
       type_of_observation: json['type_of_observation'],
       type_of_observation_name: json['type_of_observation_name'],
     );
   }
+}
+class FileList {
+  FileList({
+    this.id,
+    this.fileName,
+    this.fileCategory,
+    this.fileSize,
+    this.status,
+    this.description,
+  });
+
+  int? id;
+  String? fileName;
+  String? fileCategory;
+  int? fileSize;
+  int? status;
+  String? description;
+
+  factory FileList.fromJson(Map<String, dynamic> json) => FileList(
+        id: json["id"],
+        fileName: json["fileName"],
+        fileCategory: json['fileCategory'],
+        fileSize: json['fileSize'],
+        status: json['status'],
+        description: json['description'] ?? '',
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "fileName": fileName,
+        "fileCategory": fileCategory,
+        "fileSize": fileSize,
+        "status": status,
+        "description": description,
+      };
 }

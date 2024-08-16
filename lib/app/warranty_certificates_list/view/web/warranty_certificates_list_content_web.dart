@@ -285,58 +285,62 @@ class _WarrantyCertificatesListContentWebState
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.inventoryList.isEmpty == true && controller.isLoading == false
+                                  controller.inventoryList.isEmpty == true &&
+                                          controller.isLoading == false
                                       ? Center(child: Text('No data'))
                                       : controller.isLoading.value == true
-                                      ? Center(child: Text("Data Loading......"))
-                                      : Expanded(
-                                          child: ValueListenableBuilder(
-                                              valueListenable:
-                                                  controller.columnVisibility,
-                                              builder: (context, value, child) {
-                                                final dataSource =
-                                                    WarrantyClaimCertificateListDataSource(
-                                                        controller);
+                                          ? Center(
+                                              child: Text("Data Loading......"))
+                                          : Expanded(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    final dataSource =
+                                                        WarrantyClaimCertificateListDataSource(
+                                                            controller);
 
-                                                return PaginatedDataTable2(
-                                                  columnSpacing: 10,
-                                                  dataRowHeight: 70,
-                                                  source:
-                                                      dataSource, // Custom DataSource class
-                                                  // headingRowHeight:
-                                                  //     Get.height * 0.12,
-                                                  minWidth: 2500,
-                                                  showCheckboxColumn: false,
-                                                  rowsPerPage:
-                                                      10, // Number of rows per page
-                                                  availableRowsPerPage: [
-                                                    10,
-                                                    20,
-                                                    30,
-                                                    50
-                                                  ],
-                                                  columns: [
-                                                    for (var entry
-                                                        in value.entries)
-                                                      if (entry.value)
+                                                    return PaginatedDataTable2(
+                                                      columnSpacing: 10,
+                                                      dataRowHeight: 70,
+                                                      source:
+                                                          dataSource, // Custom DataSource class
+                                                      // headingRowHeight:
+                                                      //     Get.height * 0.12,
+                                                      minWidth: 2500,
+                                                      showCheckboxColumn: false,
+                                                      rowsPerPage:
+                                                          10, // Number of rows per page
+                                                      availableRowsPerPage: [
+                                                        10,
+                                                        20,
+                                                        30,
+                                                        50
+                                                      ],
+                                                      columns: [
+                                                        for (var entry
+                                                            in value.entries)
+                                                          if (entry.value)
+                                                            buildDataColumn(
+                                                              entry.key,
+                                                              controller
+                                                                      .filterText[
+                                                                  entry.key]!,
+                                                              controller
+                                                                      .columnwidth[
+                                                                  entry.key],
+                                                            ),
                                                         buildDataColumn(
-                                                          entry.key,
-                                                          controller.filterText[
-                                                              entry.key]!,
+                                                          'Actions',
                                                           controller
-                                                                  .columnwidth[
-                                                              entry.key],
+                                                              .actionFilterText,
+                                                          150,
                                                         ),
-                                                    buildDataColumn(
-                                                      'Actions',
-                                                      controller
-                                                          .actionFilterText,
-                                                      150,
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
-                                        ),
+                                                      ],
+                                                    );
+                                                  }),
+                                            ),
                                 ],
                               ),
                             ),
@@ -375,12 +379,17 @@ class _WarrantyCertificatesListContentWebState
 
                                   // controller.getWarrantyClaimtListByDate();
                                   controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
+                                      false;
                                   controller.update(['stock_Mangement_Date']);
 
                                   // Get.toNamed(
                                   //   Routes.stockManagementGoodsOrdersScreen,
                                   // );
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
                                 },
                               ),
                             ),

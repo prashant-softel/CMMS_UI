@@ -80,9 +80,9 @@ class ComplianceController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           statusOfAplication();
         });
-        Future.delayed(Duration(seconds: 2), () async {
-          await getStatutoryDataList(facilityId);
-        });
+        // Future.delayed(Duration(seconds: 2), () async {
+        //   await getStatutoryDataList(facilityId);
+        // });
       });
       if (srId.value != 0) {
         Future.delayed(Duration(seconds: 1), () {

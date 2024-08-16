@@ -76,8 +76,8 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                   Get.offNamed(Routes.statutory);
                                   controller.clearStoreData();
                                 },
-                                child:
-                                    Text(" / MIS", style: Styles.greyLight14),
+                                child: Text(" / STATUTORY LIST",
+                                    style: Styles.greyLight14),
                               ),
                               controller.srId == 0
                                   ? Text(
@@ -520,6 +520,10 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                             false;
                                         controller.update(['stock_Mangement']);
                                       },
+                                      onCancel: () {
+                                        controller.openIssueDatePicker = false;
+                                        controller.update(['stock_Mangement']);
+                                      },
                                     ),
                                   ),
                                 if (controller.openExpireOnFDatePicker)
@@ -539,6 +543,11 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                         controller.openExpireOnFDatePicker =
                                             !controller.openExpireOnFDatePicker;
                                         controller.isRenewDateInvalid.value =
+                                            false;
+                                        controller.update(['stock_Mangement']);
+                                      },
+                                      onCancel: () {
+                                        controller.openExpireOnFDatePicker =
                                             false;
                                         controller.update(['stock_Mangement']);
                                       },
@@ -562,6 +571,11 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                             !controller.openReNewOnDatePicker;
                                         // controller.isIssueDateInvalid.value =
                                         //     false;
+                                        controller.update(['stock_Mangement']);
+                                      },
+                                      onCancel: () {
+                                        controller.openReNewOnDatePicker =
+                                            false;
                                         controller.update(['stock_Mangement']);
                                       },
                                     ),
@@ -590,7 +604,7 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                 backgroundColor: ColorValues.cancelColor,
                                 text: 'Cancel',
                                 onPressed: () {
-                                  Get.toNamed(Routes.complianceScreen);
+                                  Get.toNamed(Routes.statutory);
                                 },
                               ),
                             ),

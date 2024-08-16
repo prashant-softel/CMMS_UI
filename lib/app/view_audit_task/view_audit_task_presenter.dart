@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
 import 'package:flutter/services.dart';
 
@@ -110,15 +111,12 @@ class ViewAuditTaskPresenter {
   }
 
   Future<List<HistoryModel>?> getHistory(
-    moduleType,
-    id,
-    isLoading,
-  ) async =>
+          moduleType, id, isLoading, facility_id) async =>
       await viewAuditTaskUsecase.getHistory(
-        moduleType: moduleType,
-        id: id,
-        isLoading: isLoading,
-      );
+          moduleType: moduleType,
+          id: id,
+          isLoading: isLoading,
+          facility_id: facility_id);
   Future<Map<String, dynamic>?> startAuditTask({
     int? auditTaskId,
     bool? isLoading,
@@ -146,4 +144,30 @@ class ViewAuditTaskPresenter {
   }
 
   Future<String?> getValue() async => await viewAuditTaskUsecase.getValue();
+  Future<bool> assignToAuditTask({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    return viewAuditTaskUsecase.assignToAuditTask(
+      assignId: assignId,
+      taskId: taskId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<List<EmployeeModel?>?> getAssignedToListWOAttend({
+    String? auth,
+    int? facilityId,
+    int? featureId,
+    int? isattendanceneeded,
+    bool? isLoading,
+  }) async =>
+      await viewAuditTaskUsecase.getAssignedToListWOAttend(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        featureId: featureId ?? 0,
+        isattendanceneeded: isattendanceneeded ?? 0,
+        isLoading: isLoading ?? false,
+      );
 }

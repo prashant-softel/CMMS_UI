@@ -26,6 +26,9 @@ class TrainingCourseListModel {
   int? duration;
   int? max_cap;
   String? description;
+  int? status;
+  String? shortStatus;
+  List<ImageDetails>? imageDetails;
 
   TrainingCourseListModel({
     this.id,
@@ -39,6 +42,9 @@ class TrainingCourseListModel {
     this.duration,
     this.max_cap,
     this.description,
+    this.imageDetails,
+    this.status,
+    this.shortStatus,
   });
 
   factory TrainingCourseListModel.fromJson(Map<String, dynamic> json) =>
@@ -54,6 +60,15 @@ class TrainingCourseListModel {
         duration: json["duration"],
         max_cap: json["max_cap"],
         description: json["description"],
+        status: json["status"],
+        shortStatus: json["short_status"],
+        imageDetails: json["imageDetails"] != null
+            ? List<ImageDetails>.from(
+                json["imageDetails"].map(
+                  (x) => ImageDetails.fromJson(x),
+                ),
+              )
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -67,6 +82,30 @@ class TrainingCourseListModel {
         "number_of_days": number_of_days,
         "duration": duration,
         "max_cap": max_cap,
+        "description": description,
+      };
+}
+
+class ImageDetails {
+  int? id;
+  String? name;
+  String? description;
+
+  ImageDetails({
+    this.id,
+    this.name,
+    this.description,
+  });
+
+  factory ImageDetails.fromJson(Map<String, dynamic> json) => ImageDetails(
+        id: json["id"],
+        name: json["fileName"],
+        description: json["description"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "fileName": name,
         "description": description,
       };
 }

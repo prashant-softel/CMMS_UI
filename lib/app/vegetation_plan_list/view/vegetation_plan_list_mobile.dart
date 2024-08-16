@@ -51,8 +51,7 @@ class _VegetationPlanListMobileState extends State<VegetationPlanListMobile> {
                           itemBuilder: (context, index) {
                             VegetationPlanListModel vegPlan =
                                 controller.vegetationPlanList[index];
-                            var status =
-                                vegPlan.statusShort.toString();
+                            var status = vegPlan.statusShort.toString();
                             print('Current Status: $status');
                             return GestureDetector(
                               onTap: () {
@@ -170,8 +169,7 @@ class _VegetationPlanListMobileState extends State<VegetationPlanListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                vegPlan.createdBy ??
-                                                    '',
+                                                vegPlan.createdBy ?? '',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -193,8 +191,7 @@ class _VegetationPlanListMobileState extends State<VegetationPlanListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                vegPlan.frequency ??
-                                                    '',
+                                                vegPlan.frequency ?? '',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -214,13 +211,11 @@ class _VegetationPlanListMobileState extends State<VegetationPlanListMobile> {
                                                             UserAccessConstants
                                                                 .kHaveEditAccess)
                                                     .isNotEmpty &&
-                                                vegPlan.status ==
-                                                    371
+                                                vegPlan.status == 702
                                             ? CustomElevatedButton(
                                                 onPressed: () {
                                                   controller.clearStoreData();
-                                                  var id = vegPlan.planId ??
-                                                      0;
+                                                  var id = vegPlan.planId ?? 0;
                                                   Get.toNamed(
                                                     Routes
                                                         .addVegetationPlanScreen,
@@ -271,8 +266,11 @@ class _VegetationPlanListMobileState extends State<VegetationPlanListMobile> {
                         var dropDate = DateTime.parse(data.endDate.toString());
                         controller.toDate.value = dropDate;
                         controller.getVegListByDate();
-                        controller.openFromDateToStartDatePicker =
-                            !controller.openFromDateToStartDatePicker;
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['stock_Mangement_Date']);
+                      },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
                         controller.update(['stock_Mangement_Date']);
                       },
                     ),

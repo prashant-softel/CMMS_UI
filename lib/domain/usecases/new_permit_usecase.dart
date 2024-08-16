@@ -208,6 +208,9 @@ class NewPermitUsecase {
     return true;
   }
 
+  void clearValue() async => repository.clearData(LocalKeys.permitId);
+  void clearTypeValue() async => repository.clearData(LocalKeys.types);
+
   Future<Map<String, dynamic>> createNewPermitForJob({
     newPermit,
     jobId,
@@ -220,22 +223,34 @@ class NewPermitUsecase {
       );
 
   Future<Map<String, dynamic>> createNewPermitForPm(
-          {newPermit, pmTaskId, activity, bool? isLoading, type}) async =>
+          {newPermit,
+          pmTaskId,
+          activity,
+          bool? isLoading,
+          type,
+          vegplanId,
+          vegexid}) async =>
       await repository.createNewPermitForPm(
-          newPermit, pmTaskId, activity, isLoading, type);
+          newPermit, pmTaskId, activity, isLoading, type, vegplanId, vegexid);
   Future<Map<String, dynamic>> updateNewPermit(
           {int? type,
           newPermit,
           bool? isLoading,
-          required bool resubmit}) async =>
-      await repository.updateNewPermit(newPermit, isLoading, resubmit, type);
+          required bool resubmit,
+          vegplanId,
+          vegexid}) async =>
+      await repository.updateNewPermit(
+          newPermit, isLoading, resubmit, type, vegplanId, vegexid);
 
   Future<Map<String, dynamic>> resubmitPermit(
           {newPermit,
           bool? isLoading,
           required bool resubmit,
-          int? type}) async =>
-      await repository.resubmitPermit(newPermit, isLoading, resubmit, type);
+          int? type,
+          vegplanId,
+          vegexid}) async =>
+      await repository.resubmitPermit(
+          newPermit, isLoading, resubmit, type, vegplanId, vegexid);
 
   Future<NewPermitDetailModel?> getNewPermitDetail({
     bool? isLoading,

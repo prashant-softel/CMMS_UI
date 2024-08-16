@@ -9,6 +9,7 @@ class MrsDetailsModel {
   dynamic id;
   dynamic requested_by_emp_ID;
   dynamic approver_name;
+  dynamic issued_name;
   String? requestd_date;
   dynamic returnDate;
   String? approval_date;
@@ -32,6 +33,7 @@ class MrsDetailsModel {
       this.issued_date,
       this.approval_status,
       this.approver_name,
+      this.issued_name,
       this.id,
       this.requestd_date,
       this.requested_by_emp_ID,
@@ -67,6 +69,9 @@ class MrsDetailsModel {
         approver_name: parsedJson["approver_name"] == null
             ? ""
             : parsedJson['approver_name'],
+        issued_name: parsedJson["issued_name"] == null
+            ? ""
+            : parsedJson['issued_name'],
         id: parsedJson["id"] == null ? 0 : parsedJson['id'],
         status: parsedJson["status"] == null ? 0 : parsedJson['status'],
         status_short: parsedJson["status_short"] == null

@@ -56,8 +56,13 @@ class AbandonAllDialog extends GetView {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    CustomRichText(title: 'Reason  :'),
-                    Dimens.boxWidth10,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: CustomRichText(title: 'Reason  :'),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
                     Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -79,16 +84,11 @@ class AbandonAllDialog extends GetView {
                         child: LoginCustomTextfield(
                           ishint: 'Enter Reason',
                           textController: _controller.commentTextFieldCtrlr,
-                            )),
-                   
-                     
+                        )),
                   ],
                 ),
-                
                 Spacer(),
                 SizedBox(height: 5),
-                 
-                
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   SizedBox(
                     width: 15,
@@ -106,9 +106,8 @@ class AbandonAllDialog extends GetView {
                   ElevatedButton(
                     style: Styles.greenElevatedButtonStyle,
                     onPressed: () {
-                      // print('Incident Report Id${incidentReportId![0]}');
                       _controller.abandonAllExecutionButton(id: id);
-                      Get.back();
+                      // Get.back();
                     },
                     child: const Text('Submit'),
                   ),

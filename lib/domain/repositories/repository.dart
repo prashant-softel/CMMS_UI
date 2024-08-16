@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:typed_data';
 import 'package:cmms/app/widgets/add_material_popup.dart';
 import 'package:cmms/app/widgets/attendance_popup.dart';
+import 'package:cmms/app/widgets/audit_task_msg_receive_dialog.dart';
 import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
@@ -12,6 +13,7 @@ import 'package:cmms/domain/models/check_list_inspection_model.dart';
 import 'package:cmms/domain/models/complicance_history_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
+import 'package:cmms/domain/models/doc_upload_list_model.dart';
 import 'package:cmms/domain/models/documentmaster_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/escalation_details_model.dart';
@@ -118,6 +120,7 @@ import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
+import 'package:cmms/domain/models/view_doc_upload.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
@@ -445,8 +448,8 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> createNewPermitForPm(
-      newPermit, pmTaskId, activity, bool? isLoading, type) async {
+  Future<Map<String, dynamic>> createNewPermitForPm(newPermit, pmTaskId,
+      activity, bool? isLoading, type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createNewPermitForPm(
@@ -480,6 +483,9 @@ class Repository {
           } else if (pmTaskId != null && type == 4) {
             scheduleLinkToPermit(
                 pmTaskId, activity, permitForJob[0], true, type);
+          } else if (pmTaskId != null && type == 5) {
+            vegscheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
+                type, vegplanId, vegexid);
           } else {
             scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true, 0);
           }
@@ -497,8 +503,8 @@ class Repository {
   }
 
   //Update New Permit
-  Future<Map<String, dynamic>> updateNewPermit(
-      newPermit, bool? isLoading, bool? resubmit, int? type) async {
+  Future<Map<String, dynamic>> updateNewPermit(newPermit, bool? isLoading,
+      bool? resubmit, int? type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateNewPermit(
@@ -506,7 +512,9 @@ class Repository {
           newPermit: newPermit,
           isLoading: isLoading ?? false,
           resubmit: resubmit,
-          type: type);
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -538,8 +546,8 @@ class Repository {
   }
 
   /// sesubmit permit
-  Future<Map<String, dynamic>> resubmitPermit(
-      newPermit, bool? isLoading, bool? resubmit, int? type) async {
+  Future<Map<String, dynamic>> resubmitPermit(newPermit, bool? isLoading,
+      bool? resubmit, int? type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.resubmitPermit(
@@ -547,7 +555,9 @@ class Repository {
           newPermit: newPermit,
           isLoading: isLoading ?? false,
           resubmit: resubmit,
-          type: type);
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -710,6 +720,8 @@ class Repository {
   //Create Escalation Matrix
   Future<Map<String, dynamic>> createEscalationMatrix(
     createEscalationMatrix,
+    int moduleId,
+    int statusId,
     bool? isLoading,
   ) async {
     try {
@@ -717,7 +729,9 @@ class Repository {
       final res = await _dataRepository.createEscalationMatrix(
         auth: auth,
         createEscalationMatrix: createEscalationMatrix,
-        isLoading: isLoading ?? false,
+        moduleId: moduleId,
+        statusId: statusId,
+        isLoading: isLoading?? false,
       );
 
       var resourceData = res.data;
@@ -838,6 +852,34 @@ class Repository {
       } else {
         Utility.showDialog(res.errorCode.toString(), 'createGoodsOrder');
         //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> uploadDocumentNew(
+    uploadDocument,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.uploadDocumentNew(
+        auth: auth,
+        uploadDocument: uploadDocument,
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Document Uploaded Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
+          Routes.documentManager,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Upload Document');
       }
       return Map();
     } catch (error) {
@@ -1343,6 +1385,48 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateWarrantyClaim(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Update Warranty Claim: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateWarrantyClaim');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+  Future<Map<String, dynamic>> resubmitWarrantyClaim(
+    updateWarrantyClaim,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.resubmitWarrantyClaim(
         auth: auth,
         updateWarrantyClaim: updateWarrantyClaim,
         isLoading: isLoading ?? false,
@@ -1999,6 +2083,47 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<GetDocUploadListModel>> getDocUploadList({
+    required int? facility_id,
+    bool? isExport,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getDocUploadList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+
+      if (!res.hasError) {
+        final jsonDocUploadListModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<GetDocUploadListModel> _docUploadModelList =
+            jsonDocUploadListModels
+                .map<GetDocUploadListModel>((m) =>
+                    GetDocUploadListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _docUploadModelList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'Doc Upload List');
         return [];
       }
     } catch (error) {
@@ -3683,6 +3808,11 @@ class Repository {
           var responseMap = json.decode(res.data);
           if (ptw_req == true) {
             permitCloseButton(closePtwJsonString, isLoading, 0, 3);
+          } else {
+            var res = resourceData;
+            var parsedJson = json.decode(res);
+            Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+                type: 4, data: parsedJson['message'], id: parsedJson['id']));
           }
 
           return responseMap;
@@ -3892,6 +4022,33 @@ class Repository {
     catch (error) {
       print(error.toString());
       return null;
+    }
+  }
+
+  Future<bool> assignAuditTask({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.assignAuditTask(
+        auth: auth,
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
     }
   }
 
@@ -4110,6 +4267,34 @@ class Repository {
     int? featureId,
     // int? blockId,
     // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getAssignedToEmployee(
+        facilityId: facility_id,
+        featureId: featureId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Employee List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var employeeList = employeeListModelFromJson(res.data);
+        return employeeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<EmployeeListModel>> getEmployeeTrainingList({
+    required int? facility_id,
+    int? featureId,
     required bool isLoading,
   }) async {
     try {
@@ -5307,12 +5492,13 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> permitApprovedButton(
-    rejectCancelPermitJsonString,
-    String? ptwStatus,
-    int? jobId,
-    int? type,
-    bool? isLoading,
-  ) async {
+      rejectCancelPermitJsonString,
+      String? ptwStatus,
+      int? jobId,
+      int? type,
+      bool? isLoading,
+      int? vegexe,
+      int? vegid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.permitApprovedButton(
@@ -5334,9 +5520,15 @@ class Repository {
               ? Get.offAllNamed(Routes.pmTaskView)
               : type == 1
                   ? Get.offAllNamed(Routes.jobDetails)
-                  // : type == 3
-                  //     ? Get.offAllNamed(Routes.viewAuditTask)
-                  : Get.offAllNamed(Routes.newPermitList);
+                  : type == 3
+                      ? Get.offAllNamed(Routes.viewAuditTask)
+                      : type == 4
+                          ? Get.offAllNamed(
+                              Routes.addModuleCleaningExecutionContentWeb)
+                          : type == 5
+                              ? Get.offAllNamed(Routes.vegExecutionScreen,
+                                  arguments: {"vegexe": vegexe, "vegid": vegid})
+                              : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -6369,7 +6561,7 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: " paln  Add Successfully...", fontSize: 16.0);
-        Get.offNamed(
+        Get.offAllNamed(
           Routes.moduleCleaningListPlan,
         );
 
@@ -6553,6 +6745,33 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.assignToMC(
+        auth: auth,
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> assignToVeg({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.assignToVeg(
         auth: auth,
         assignId: assignId,
         taskId: taskId,
@@ -7247,7 +7466,7 @@ class Repository {
   }
 
   Future<List<CheckPointModel?>?> getCheckPointlist(int? selectedchecklistId,
-      bool? isLoading, int? facilityId, bool? isExport) async {
+      bool? isLoading, int? facilityId, bool? isExport, int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       //print({"checkid", selectedchecklistId});
@@ -7255,7 +7474,8 @@ class Repository {
           auth: auth,
           selectedchecklistId: selectedchecklistId ?? 0,
           isLoading: isLoading ?? false,
-          facilityId: facilityId);
+          facilityId: facilityId,
+          type: type);
       //print({"checkpoint list", res.data});
       if (!res.hasError) {
         final jsonPreventiveCheckPointModels = jsonDecode(res.data);
@@ -7562,7 +7782,7 @@ class Repository {
     }
   }
 
-   Future<List<HistoryModel>?> getViewPlanHistory(
+  Future<List<HistoryModel>?> getViewPlanHistory(
     int? moduleType,
     int? pmPlanId,
     int facilityId,
@@ -7588,7 +7808,6 @@ class Repository {
             )
             .toList();
 
-       
         return _pmPlanDetailsList;
       } else {
         Utility.showDialog(res.errorCode.toString(), "getPMPlanHistory");
@@ -7599,7 +7818,6 @@ class Repository {
       return [];
     }
   }
-
 
   ///Permit History
   Future<List<HistoryModel>?> getPermitHistory(
@@ -8162,7 +8380,7 @@ class Repository {
           approveJsonString: json.encode(approveJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
-        permitCloseButton(closePtwJsonString, isLoading, 0, 0);
+        // permitCloseButton(closePtwJsonString, isLoading, 0, 0);
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
         // Get.offAllNamed(Routes.jobList);
         return true;
@@ -9052,7 +9270,7 @@ class Repository {
     }
   }
 
-  Future<GetNotificationByUserIdModel?> getUserNotificationListById(
+  Future<GetNotificationModel?> getUserNotificationListById(
     int? userId,
     bool? isLoading,
   ) async {
@@ -9064,8 +9282,8 @@ class Repository {
         isLoading: isLoading,
       );
       if (!res.hasError) {
-        final GetNotificationByUserIdModel _getNotificationByUserIdModel =
-            getNotificationByUserIdModelFromJson(res.data);
+        final GetNotificationModel _getNotificationByUserIdModel =
+            getNotificationModelFromJson(res.data);
         return _getNotificationByUserIdModel;
       } //
       else {
@@ -9128,13 +9346,13 @@ class Repository {
                 (m) => UserListModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
         String jsonData = userListModelToJson(_UserListModelList);
+
         if (isExport == true) {
           List<dynamic> jsonDataList = jsonDecode(jsonData);
 
           List<List<dynamic>> data = [
             [
               'Username',
-              'Password',
               'Secondary Email',
               'First Name',
               'Last Name',
@@ -9150,33 +9368,35 @@ class Repository {
               'Role',
               'Is Employee',
               'Joining Date',
-              'Plant Associated',
-              'Report To',
+              'Facilities'
             ],
-            ...jsonDataList
-                .map((userListJson) => [
-                      userListJson['user_name'].toString(),
-                      "-",
-                      userListJson['secondaryName'].toString(),
-                      userListJson['firstName'],
-                      userListJson['lastName'],
-                      userListJson['dateOfBirth'],
-                      userListJson['gender'],
-                      userListJson['bloodGroup'],
-                      userListJson['mobileNumber'],
-                      userListJson['landlineNumber'],
-                      userListJson['country'],
-                      userListJson['state'],
-                      userListJson['city'],
-                      userListJson['zipcodes'],
-                      userListJson['role_name'],
-                      userListJson['employees'] == 1 ? 'Yes' : 'No',
-                      userListJson['joining_dates'],
-                      '-',
-                      '-'
-                    ])
-                .toList(),
+            ...jsonDataList.map((userListJson) {
+              String facilities = (userListJson['facilities'] as List<dynamic>)
+                  .map((facility) => facility['name'].toString())
+                  .join(', ');
+
+              return [
+                userListJson['user_name'].toString(),
+                userListJson['secondaryName'].toString(),
+                userListJson['firstName'].toString(),
+                userListJson['lastName'].toString(),
+                userListJson['dateOfBirth'],
+                userListJson['gender'],
+                userListJson['bloodGroup'],
+                userListJson['mobileNumber'],
+                userListJson['landlineNumber'],
+                userListJson['country'],
+                userListJson['state'],
+                userListJson['city'],
+                userListJson['zipcodes'], // Convert to string
+                userListJson['role_name'],
+                userListJson['employees'] == 1 ? 'Yes' : 'No',
+                userListJson['joining_dates'],
+                facilities
+              ];
+            }).toList(),
           ];
+
           Map<String, List<List<dynamic>>> userData = {
             'Sheet1': data,
           };
@@ -9347,32 +9567,34 @@ class Repository {
     }
   }
 
-  Future<bool> addUser({bool? isLoading, adduserJsonString}) async {
+  Future<Map<String, dynamic>> addUser(
+      {bool? isLoading, adduserJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.addUser(
           auth: auth,
           isLoading: isLoading,
           adduserJsonString: adduserJsonString);
-      print({"resp", res.data});
+      // print({"resp", res.data});
       if (!res.hasError) {
-        // Get.offNamed(Routes.userList);
-        Get.offAndToNamed(Routes.userList);
-
-        //   print("hellooooo");
-        return true;
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), ' addUser');
-        return false;
+        return Map();
       }
+      return Map();
     } catch (error) {
       print(error.toString());
-      return false;
+      return Map();
     }
   }
 
-  Future<bool> updateUser({bool? isLoading, adduserJsonString}) async {
+  Future<Map<String, dynamic>> updateUser(
+      {bool? isLoading, adduserJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateUser(
@@ -9381,16 +9603,19 @@ class Repository {
           adduserJsonString: adduserJsonString);
       print({"resp", res.data});
       if (!res.hasError) {
-        Get.offAllNamed(Routes.userList);
-        return true;
-      } //
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } ////
       else {
         Utility.showDialog(res.errorCode.toString(), ' updateUser');
-        return false;
+        return Map();
       }
+      return Map();
     } catch (error) {
       print(error.toString());
-      return false;
+      return Map();
     }
   }
 
@@ -10116,19 +10341,19 @@ class Repository {
               'asset_name',
               'asset_description',
               'category',
-              'approval_required'
-                  'measurement',
+              'approval_required',
+              'measurement',
               'decimal_status'
             ],
             ...jsonDataList
                 .map((assetmasterjson) => [
                       assetmasterjson['id'],
-                      assetmasterjson['asset_type_id'],
+                      assetmasterjson['asset_type_ID'],
                       assetmasterjson['asset_type'],
                       assetmasterjson['asset_code'],
                       assetmasterjson['asset_name'],
-                      assetmasterjson['asset_description'],
-                      assetmasterjson['category'],
+                      assetmasterjson['description'],
+                      assetmasterjson['cat_name'],
                       assetmasterjson['approval_required'],
                       assetmasterjson['measurement'],
                       assetmasterjson['decimal_status']
@@ -10136,7 +10361,7 @@ class Repository {
                 .toList(),
           ];
           Map<String, List<List<dynamic>>> assetmasterData = {'Sheet1': data};
-          exportToExcel(assetmasterData, "AssetMaster.xlsx");
+          exportToExcel(assetmasterData, "MaterialList.xlsx");
         }
 
         return _ModuleListModelList;
@@ -10803,10 +11028,10 @@ class Repository {
               'requested_by_id',
               'requested_by',
               'requested_date',
+              'approved_date',
               'issued_date',
               'issued_by',
               'activity',
-              'approved_date',
               'approved_status',
               'approved_cmnt',
               'where_used_type',
@@ -10821,10 +11046,10 @@ class Repository {
                       mrslistjson['requested_by_emp_ID'],
                       mrslistjson['requested_by_name'],
                       mrslistjson['requestd_date'],
+                      mrslistjson['approval_date'],
                       mrslistjson['issued_date'],
                       mrslistjson['issued_name'],
                       mrslistjson['activity'],
-                      mrslistjson['approval_date'],
                       mrslistjson['approval_status'],
                       mrslistjson['approval_comment'],
                       mrslistjson['whereUsedTypeName'],
@@ -11008,6 +11233,7 @@ class Repository {
 
   Future<Map<String, dynamic>> createMrs(
     createMrsJsonString,
+    type,
     bool? isLoading,
   ) async {
     try {
@@ -11015,6 +11241,7 @@ class Repository {
       final res = await _dataRepository.createMrs(
         auth: auth,
         createMrsJsonString: createMrsJsonString,
+        type: type,
         isLoading: isLoading ?? false,
       );
 
@@ -11416,13 +11643,15 @@ class Repository {
     }
   }
 
-  Future<bool> approveMrs({bool? isLoading, approvetoJsonString}) async {
+  Future<bool> approveMrs(
+      {bool? isLoading, approvetoJsonString, int? type}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.approveMrs(
           auth: auth,
           isLoading: isLoading,
+          type: type,
           approvetoJsonString: approvetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
@@ -11629,13 +11858,14 @@ class Repository {
     }
   }
 
-  Future<bool> issueMrs({bool? isLoading, issuetoJsonString}) async {
+  Future<bool> issueMrs({bool? isLoading, int? type, issuetoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.issueMrs(
           auth: auth,
           isLoading: isLoading,
+          type: type,
           issuetoJsonString: issuetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
@@ -11725,20 +11955,18 @@ class Repository {
           List<dynamic> jsonDataList = jsonDecode(jsonData);
           List<List<dynamic>> data = [
             [
-              'id',
+              'Id',
               'requested_by_id',
               'requested_date',
               'requested_by',
-              'issued_date',
-              'issued_name',
               'approver_name',
               'approved_date',
               'approver_cmnt',
               'activity',
               'remarks',
-              'whereused_ref_id',
               'where_used_name',
-              'is_splitted',
+              'whereused_ref_id',
+              // 'is_splitted',
               'short_status',
               'long_status',
             ],
@@ -11748,16 +11976,14 @@ class Repository {
                       mrsrlistjson['requested_by_emp_ID'],
                       mrsrlistjson['requestd_date'],
                       mrsrlistjson['requested_by_name'],
-                      mrsrlistjson['issued_date'],
-                      mrsrlistjson['issued_name'],
                       mrsrlistjson['approver_name'],
                       mrsrlistjson['approval_date'],
                       mrsrlistjson['approval_comment'],
                       mrsrlistjson['activity'],
                       mrsrlistjson['remarks'],
-                      mrsrlistjson['whereUsedRefID'],
                       mrsrlistjson['whereUsedTypeName'],
-                      mrsrlistjson['is_splited'],
+                      mrsrlistjson['whereUsedRefID'],
+                      // mrsrlistjson['is_splited'],
                       mrsrlistjson['status_short'],
                       mrsrlistjson['status_long'],
                     ])
@@ -11789,6 +12015,38 @@ class Repository {
           activity: activity,
           isLoading: isLoading ?? false,
           type: type);
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'scheduleLinkToPermit');
+        return Map();
+      }
+      return Map();
+    } //
+    catch (error) {
+      Utility.showDialog(error.toString(), 'scheduleLinkToPermit');
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> vegscheduleLinkToPermit(scheduleId, activity,
+      permitId, bool? isLoading, type, vegplanId, vegexid) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.vegscheduleLinkToPermit(
+          auth: auth,
+          scheduleId: scheduleId,
+          permitId: permitId,
+          activity: activity,
+          isLoading: isLoading ?? false,
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid);
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
@@ -13225,7 +13483,7 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: " Paln Added Successfully...", fontSize: 16.0);
-        Get.offNamed(
+        Get.offAllNamed(
           Routes.vegetationPlanListScreen,
         );
 
@@ -13319,7 +13577,7 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.vegPlanApprovedButton(
         auth: auth,
-        vegApproveJsonString: json.encode(vegApproveJsonString),
+        vegApproveJsonString: vegApproveJsonString,
         isLoading: isLoading ?? false,
       );
 
@@ -13714,9 +13972,7 @@ class Repository {
   }
 
   Future<void> endVegScheduleExecutionButton(
-    int? scheduleId,
-    bool? isLoading,
-  ) async {
+      int? scheduleId, bool? isLoading, closePtwJsonString) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -13728,6 +13984,10 @@ class Repository {
       print('EndScheduleExecutionResponse55: ${res.data}');
 
       if (!res.hasError) {
+        var responseMap = json.decode(res.data);
+        permitCloseButton(closePtwJsonString, isLoading, 0, 5);
+
+        return responseMap;
         //  return _permitIssueModel;
       } else {
         Utility.showDialog(
@@ -13792,6 +14052,154 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<bool> vegapproveShecduleExecution({
+    bool? isLoading,
+    approvetoJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegapproveShecduleExecution(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: json.encode(approvetoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> vegrejectShecduleExecution({
+    bool? isLoading,
+    rejecttoJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegrejectShecduleExecution(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: json.encode(rejecttoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> vegendApproveExecution(
+      {bool? isLoading, approvetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegendApproveExecution(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: json.encode(approvetoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> vegendRejectExecution(
+      {bool? isLoading, rejecttoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegendRejectExecution(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: json.encode(rejecttoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> vegabandonedApproveExecution(
+      {bool? isLoading, approvetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegabandonedApproveExecution(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: json.encode(approvetoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> vegabandoneRejectExecution(
+      {bool? isLoading, rejecttoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.vegabandoneRejectExecution(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: json.encode(rejecttoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
     }
   }
 
@@ -14170,9 +14578,45 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var plantStockMonthDetails =
-              PlantStockMonthDetailModelFromJson(res.data);
-          print({"Plant Stock By Months", plantStockMonthDetails[0].details});
+              plantStockMonthDetailModelFromJson(res.data);
+          // print({"Plant Stock By Months", plantStockMonthDetails[0].details});
           return plantStockMonthDetails;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<List<ViewDocUpload?>?> getDocuementListById({
+    String? start_date,
+    required String end_date,
+    required int facilityID,
+    required int docUploadId,
+    bool? isLoading,
+    String? sub_doc_name,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getDocuementListById(
+        auth: auth,
+        start_date: start_date,
+        end_date: end_date,
+        docUploadId: docUploadId,
+        facilityID: facilityID,
+        sub_doc_name: sub_doc_name,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var viewDocUploadDetails = viewDocUploadModelFromJson(res.data);
+          return viewDocUploadDetails;
         }
       } else {
         Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
@@ -14941,6 +15385,86 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> approveCourseSchedule(
+    approveSchedule,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.approveCourseSchedule(
+        auth: auth,
+        approveSchedule: approveSchedule,
+        isLoading: isLoading ?? false,
+      );
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'approve schedule course');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> rejectCourseSchedule(
+    rejectSchedule,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.rejectCourseSchedule(
+        auth: auth,
+        rejectSchedule: rejectSchedule,
+        isLoading: isLoading ?? false,
+      );
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'approve schedule course');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> executeCourse({
+    executeCourseJson,
+    isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.executeScheduleCourse(
+        auth: auth,
+        executeCourseJson: executeCourseJson,
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Add Course Response: ${resourceData}');
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+          msg: "Course Scheduled Successfully",
+          fontSize: 16.0,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Add Course');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<ScheduleCourseDetails> getScheduleCourseDetails({
     int? schedule_id,
     bool? isLoading,
@@ -15234,6 +15758,10 @@ class Repository {
       );
       print(res.data);
       if (!res.hasError) {
+        Fluttertoast.showToast(msg: "Updated Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
+          Routes.statutory,
+        );
         return true;
       } //
       else {

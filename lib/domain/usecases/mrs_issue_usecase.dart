@@ -17,12 +17,22 @@ class MrsIssueUsecase {
       );
   Future<bool> issueMrs({
     issuetoJsonString,
+    int? type,
     bool? isLoading,
   }) async =>
       await repository.issueMrs(
-          issuetoJsonString: issuetoJsonString, isLoading: isLoading);
+          issuetoJsonString: issuetoJsonString,
+          type: type,
+          isLoading: isLoading);
   void saveValue({String? mrsId}) async =>
       repository.saveValue(LocalKeys.mrsId, mrsId);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.mrsId);
+  void saveValuee({String? type}) async =>
+      repository.saveValue(LocalKeys.type, type);
+  void clearValue() async => repository.clearData(LocalKeys.mrsId);
+  void clearValuee() async => repository.clearData(LocalKeys.type);
+
+  Future<String?> getValuee() async =>
+      await repository.getStringValue(LocalKeys.type);
 }

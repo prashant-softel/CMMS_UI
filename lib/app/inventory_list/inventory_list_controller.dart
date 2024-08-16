@@ -89,7 +89,7 @@ class InventoryListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () async {
-        await getInventoryAssetsList(facilityId,  false);
+        await getInventoryAssetsList(facilityId, false);
       });
     });
     super.onInit();
@@ -161,10 +161,10 @@ class InventoryListController extends GetxController {
         inventoryListTableColumns.add(key);
       }
     }
-    }
+  }
 
   void export() {
-    getInventoryAssetsList(facilityId,  true);
+    getInventoryAssetsList(facilityId, true);
   }
 
   void onValueChanged(dynamic list, dynamic value) {
@@ -195,7 +195,7 @@ class InventoryListController extends GetxController {
   // }
 
   void clearStoreData() {
-    //   inventoryListPresenter.clearValue();
+    inventoryListPresenter.clearValue();
     // }
 
     // void clearTypeStoreData() {

@@ -3,6 +3,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_add_inventory/view_add_inventory_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewCalibrationTabWidget extends StatefulWidget {
   ViewCalibrationTabWidget({super.key});
@@ -200,31 +202,147 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                               ),
                             ),
                             // Dimens.boxHeight5,
-                            SizedBox(height: 5),
-                            Container(
-                              child: IgnorePointer(
-                                child: Row(
-                                  children: [
-                                    Text('Calibration Certificate'),
-                                    // Dimens.boxWidth20,
-                                    SizedBox(width: 20),
-                                    ActionButton(
-                                      label: 'Upload certification file',
-                                      onPressed: () {},
-                                      icon: Icons.file_upload_outlined,
-                                      color: ColorValues.appLightBlueColor,
-                                    ),
-                                    // Dimens.boxWidth70,
-                                    SizedBox(width: 70),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            // SizedBox(height: 5),
+                            // Container(
+                            //   child: IgnorePointer(
+                            //     child: Row(
+                            //       children: [
+                            //         Text('Calibration Certificate'),
+                            //         // Dimens.boxWidth20,
+                            //         SizedBox(width: 20),
+                            //         ActionButton(
+                            //           label: 'Upload certification file',
+                            //           onPressed: () {},
+                            //           icon: Icons.file_upload_outlined,
+                            //           color: ColorValues.appLightBlueColor,
+                            //         ),
+                            //         // Dimens.boxWidth70,
+                            //         SizedBox(width: 70),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ],
                     ),
                   ),
+                  // controller..value > 0 &&
+                  controller.editAddInventoryDetailsModel.value!
+                                  .calibration_file !=
+                              null &&
+                          controller.editAddInventoryDetailsModel.value!
+                              .calibration_file!.isNotEmpty
+                      ? Container(
+                          // width:
+                          //     MediaQuery.of(context).size.width /
+                          //         1.2,
+                          height: ((controller.editAddInventoryDetailsModel
+                                      .value!.calibration_file!.length) *
+                                  41) +
+                              117,
+                          margin: Dimens.edgeInsets20,
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: Colors.grey.withOpacity(.3)),
+                          ),
+
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Calibration Certificates ",
+                                      style: Styles.blue700,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: DataTable2(
+                                  border: TableBorder.all(
+                                    color: Color.fromARGB(255, 206, 229, 234),
+                                  ),
+                                  dataRowHeight: 40,
+                                  columns: [
+                                    DataColumn(
+                                      label: Text(
+                                        "File Description",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    DataColumn(
+                                      label: Text(
+                                        "View Image",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                  rows: List<DataRow>.generate(
+                                    controller.editAddInventoryDetailsModel
+                                            .value!.calibration_file?.length ??
+                                        0,
+                                    (index) => DataRow(
+                                      cells: [
+                                        DataCell(Text(
+                                          controller
+                                                  .editAddInventoryDetailsModel
+                                                  .value!
+                                                  .calibration_file![index]
+                                                  .description
+                                                  .toString() ??
+                                              '',
+                                        )),
+                                        DataCell(
+                                          // Text("View Image"),
+                                          Wrap(
+                                            children: [
+                                              TableActionButton(
+                                                color: ColorValues
+                                                    .appDarkBlueColor,
+                                                icon: Icons.visibility,
+                                                message: 'view',
+                                                onPress: () async {
+                                                  String baseUrl =
+                                                      'http://172.20.43.9:83/';
+                                                  String fileName = controller
+                                                          .editAddInventoryDetailsModel
+                                                          .value!
+                                                          .calibration_file![
+                                                              index]
+                                                          ?.fileName ??
+                                                      "";
+                                                  String fullUrl =
+                                                      baseUrl + fileName;
+                                                  if (await canLaunch(
+                                                      fullUrl)) {
+                                                    await launch(fullUrl);
+                                                  } else {
+                                                    throw 'Could not launch $fullUrl';
+                                                  }
+                                                  // String baseUrl = 'http://172.20.43.9:83/';
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Dimens.box0,
                 ],
               ),
             ),
@@ -243,8 +361,12 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                         '0001-01-01T00:00:00') {
                       controller.lastCalibrationDateTc.text = '';
                     }
-                    controller.openLastCalibrationDatePicker =
-                        !controller.openLastCalibrationDatePicker;
+                    controller.openLastCalibrationDatePicker = false;
+
+                    controller.update(['calibration_tab']);
+                  },
+                  onCancel: () {
+                    controller.openLastCalibrationDatePicker = false;
                     controller.update(['calibration_tab']);
                   },
                 ),

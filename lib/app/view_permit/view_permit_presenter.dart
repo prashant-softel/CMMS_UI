@@ -47,19 +47,22 @@ class ViewPermitPresenter {
         isLoading: isLoading,
       );
 
-  Future<Map<String, dynamic>?> permitApprovedButton({
-    rejectCancelPermitJsonString,
-    String? ptwStatus,
-    int? jobId,
-    required bool isLoading,
-    int? type,
-  }) async {
+  Future<Map<String, dynamic>?> permitApprovedButton(
+      {rejectCancelPermitJsonString,
+      String? ptwStatus,
+      int? jobId,
+      required bool isLoading,
+      int? type,
+      int? vegexe,
+      int? vegid}) async {
     return viewPermitUsecase.permitApprovedButton(
         rejectCancelPermitJsonString: rejectCancelPermitJsonString,
         ptwStatus: ptwStatus,
         jobId: jobId,
         isLoading: isLoading,
-        type: type);
+        type: type,
+        vegid: vegid,
+        vegexe: vegexe);
   }
   // Future<void> permitApprovedButton({
   //   String? comment,

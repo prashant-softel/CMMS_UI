@@ -39,7 +39,7 @@ class _ModuleCleaningPlanMobileState extends State<ModuleCleaningPlanMobile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Add Vegetation Plan",
+                          "Add MC Plan",
                           style: Styles.blackBold18,
                         ),
                       ],
@@ -104,6 +104,24 @@ class _ModuleCleaningPlanMobileState extends State<ModuleCleaningPlanMobile> {
                             ),
                             Dimens.boxHeight15,
                             CustomRichTextMobile(
+                              title: "Frequency: ",
+                            ),
+                            Dimens.boxHeight2,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              child: Obx(
+                                () => DropdownWebWidget(
+                                  dropdownList: controller.frequencyList,
+                                  isValueSelected:
+                                      controller.isSelectedfrequency.value,
+                                  selectedValue:
+                                      controller.selectedfrequency.value,
+                                  onValueChanged: controller.onValueChanged,
+                                ),
+                              ),
+                            ),
+                            Dimens.boxHeight15,
+                            CustomRichTextMobile(
                               title: "Estimated Duration In Days: ",
                             ),
                             Dimens.boxHeight2,
@@ -124,24 +142,6 @@ class _ModuleCleaningPlanMobileState extends State<ModuleCleaningPlanMobile> {
                                   controller.isDurationInvalid.value = true;
                                 }
                               },
-                            ),
-                            Dimens.boxHeight15,
-                            CustomRichTextMobile(
-                              title: "Frequency: ",
-                            ),
-                            Dimens.boxHeight2,
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.1,
-                              child: Obx(
-                                () => DropdownWebWidget(
-                                  dropdownList: controller.frequencyList,
-                                  isValueSelected:
-                                      controller.isSelectedfrequency.value,
-                                  selectedValue:
-                                      controller.selectedfrequency.value,
-                                  onValueChanged: controller.onValueChanged,
-                                ),
-                              ),
                             ),
                             Dimens.boxHeight15,
                             CustomRichTextMobile(
@@ -183,6 +183,63 @@ class _ModuleCleaningPlanMobileState extends State<ModuleCleaningPlanMobile> {
                             Center(
                               child: InkWell(
                                 onTap: () {
+                                  if (controller.id != 0) {
+                                    var selectedEqp = [];
+                                    controller
+                                        .mcPlanDetailsModel.value?.schedules
+                                        .forEach((schedule) {
+                                      schedule.equipments?.forEach((element) {
+                                        var ee = element;
+                                        ee!.cleaningDay = schedule.cleaningDay;
+                                        ;
+                                        selectedEqp.add(element);
+                                        print(element?.toJson());
+                                      });
+                                    });
+                                    selectedEqp.forEach((element) {
+                                      try {
+                                        var selectedParentIndex = controller
+                                            .equipmentList.value
+                                            .indexWhere((eqp) =>
+                                                eqp?.invId == element.parentId);
+                                        print({
+                                          "selectedParentIndex":
+                                              selectedParentIndex
+                                        });
+                                        if (selectedParentIndex > -1) {
+                                          var selectedChildIndex = controller
+                                                  .equipmentList
+                                                  .value[selectedParentIndex]
+                                                  ?.smbs
+                                                  .indexWhere((smb) =>
+                                                      smb.smbId ==
+                                                      element.id) ??
+                                              -1;
+
+                                          if (selectedChildIndex > -1) {
+                                            var ss = controller
+                                                .equipmentList
+                                                .value[selectedParentIndex]
+                                                ?.smbs[selectedChildIndex];
+                                            ss?.selectedDay =
+                                                "${element.cleaningDay}";
+                                            controller
+                                                    .equipmentList
+                                                    .value[selectedParentIndex]
+                                                    ?.smbs[selectedChildIndex] =
+                                                ss!;
+                                          }
+                                          print({
+                                            "selectedChildIndex":
+                                                selectedChildIndex
+                                          });
+                                        }
+                                      } catch (e) {
+                                        print({"eadfds": e});
+                                      }
+                                    });
+                                  }
+
                                   controller.isFormInvalid.value = false;
                                   // controller.checkForm();
                                   if (controller.isFormInvalid.value) {

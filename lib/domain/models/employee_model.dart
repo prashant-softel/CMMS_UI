@@ -53,7 +53,8 @@ class EmployeeModel {
         city: json["city"],
         state: json["state"],
         designation: json["designation"],
-        country: json["country"]!,
+        responsibility: json["responsibility"],
+        country: json["country"],
         pin: json["pin"],
       );
 
@@ -67,6 +68,7 @@ class EmployeeModel {
         "mobileNumber": mobileNumber,
         "city": city,
         "state": state,
+        "responsibility": responsibility,
         "country": country,
         "pin": pin,
       };

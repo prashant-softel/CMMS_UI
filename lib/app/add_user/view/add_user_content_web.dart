@@ -215,7 +215,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                     141),
                                                           ),
                                                           // Dimens.boxHeight10,
-                                                          SizedBox(height:10),
+                                                          SizedBox(height: 10),
                                                           Text("Upload Photo",
                                                               style: Styles
                                                                   .greyMediumLight12)
@@ -265,7 +265,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                         //     margin: Dimens.edgeInsets30_0_0_0,
                                         //     child:
                                         // Dimens.boxWidth30,
-                                         SizedBox(width:30),
+                                        SizedBox(width: 30),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
@@ -275,8 +275,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                 CustomRichText(
                                                     title: 'Login ID: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
-                                               Container(
+                                                SizedBox(width: 10),
+                                                Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -345,13 +345,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'First Name: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -416,14 +416,14 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title:
                                                         'Secondary E-mail: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -493,13 +493,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Gender: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -576,13 +576,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Mobile Number: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -654,13 +654,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Country: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -701,13 +701,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
 
                                             Row(
                                               children: [
                                                 CustomRichText(title: 'City: '),
                                                 // Dimens.boxWidth10,
-                                                SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -747,12 +747,12 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(title: 'Role: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -792,13 +792,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Company Name: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -851,8 +851,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title: 'Password: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -959,13 +959,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Last Name: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -1030,14 +1030,14 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
 
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Date of Birth: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -1120,13 +1120,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Date of Joining: '),
                                                 // Dimens.boxWidth10,
-                                            SizedBox(width:10), 
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -1211,7 +1211,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 Text(
@@ -1223,8 +1223,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                     fontSize: Dimens.sixteen,
                                                   ),
                                                 ),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -1294,13 +1294,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'State: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -1340,12 +1340,12 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(children: [
                                               CustomRichText(
                                                   title: 'Zip Code: '),
-                                              // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                              // Dimens.boxWidth10,
+                                              SizedBox(width: 10),
                                               Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -1412,13 +1412,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   )),
                                             ]),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Blood Group: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -1458,13 +1458,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ],
                                             ),
                                             // Dimens.boxHeight8,
-                                            SizedBox(height:8), 
+                                            SizedBox(height: 8),
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title: 'Designation: '),
-                                                // Dimens.boxWidth10, 
-                                            SizedBox(width:10), 
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -1611,7 +1611,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                         .analytics_outlined),
                                                                     // Dimens
                                                                     //     .boxWidth5,
-                                            SizedBox(width:5), 
+                                                                    SizedBox(
+                                                                        width:
+                                                                            5),
                                                                     Text(
                                                                         'Plant Access'),
                                                                   ],
@@ -1627,7 +1629,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                         .account_tree_outlined),
                                                                     // Dimens
                                                                     //     .boxWidth5,
-                                                                     SizedBox(width:5),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            5),
 
                                                                     Text(
                                                                       'Access Level',
@@ -1645,7 +1649,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                         .notifications),
                                                                     // Dimens
                                                                     //     .boxWidth5,
-                                                                     SizedBox(width:5),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            5),
                                                                     Text(
                                                                       'Notification',
                                                                     ),
@@ -1976,7 +1982,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                                               //       controller.update();
                                                                                                               //     }),
                                                                                                               // Dimens.boxWidth5,
-                                                                                                               SizedBox(width:5),
+                                                                                                              SizedBox(width: 5),
                                                                                                               Expanded(child: Text("${getAccesslevelDetails?.feature_name}"))
                                                                                                             ],
                                                                                                           );
@@ -2063,7 +2069,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                         ].map((column) {
                                                                                           return TableViewColumn(
                                                                                             label: column,
-                                                                                            minWidth: Get.width * 0.17,
+                                                                                            minWidth: Get.width * 0.12,
                                                                                           );
                                                                                         }).toList(),
                                                                                         rows: true
@@ -2071,22 +2077,33 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                                 .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
                                                                                                       TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
                                                                                                       TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
+                                                                                                        child: IgnorePointer(
+                                                                                                          ignoring: true,
+                                                                                                          child: Obx(() {
+                                                                                                            return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
+                                                                                                              if (getnotificationListDetails?.can_change.value == 1) {
+                                                                                                                getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
+                                                                                                              }
+                                                                                                            });
+                                                                                                          }),
+                                                                                                        ),
                                                                                                       ),
                                                                                                       TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
+                                                                                                        child: IgnorePointer(
+                                                                                                          ignoring: true,
+                                                                                                          child: Obx(() {
+                                                                                                            return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
+                                                                                                              getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
+                                                                                                            });
+                                                                                                          }),
+                                                                                                        ),
                                                                                                       ),
                                                                                                       TableViewCell(child: Obx(() {
-                                                                                                        return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
-                                                                                                          getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
+                                                                                                        return controller.rowItem(getnotificationListDetails?.user_flag.value, onCheck: (val) {
+                                                                                                          if (getnotificationListDetails?.can_change.value == 1) {
+                                                                                                            // Ensure can_change is 1 before changing default_flag
+                                                                                                            getnotificationListDetails?.user_flag.value = val == true ? 1 : 0;
+                                                                                                          } //  getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
                                                                                                         });
                                                                                                       })),
                                                                                                     ]))
@@ -2094,64 +2111,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                             : [],
                                                                                       )
                                                                                     : Container())
-                                                                            : Container(
-                                                                                height: Get.height - 30,
-                                                                                margin: Dimens.edgeInsets15,
-                                                                                decoration: BoxDecoration(
-                                                                                  border: Border.all(
-                                                                                    color: ColorValues.lightGreyColorWithOpacity35,
-                                                                                    width: 1,
-                                                                                  ),
-                                                                                  boxShadow: [
-                                                                                    BoxShadow(
-                                                                                      color: ColorValues.appBlueBackgroundColor,
-                                                                                      spreadRadius: 2,
-                                                                                      blurRadius: 5,
-                                                                                      offset: Offset(0, 2),
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                                child: controller.notificationListByUserId.length > 0
-                                                                                    ? ScrollableTableView(
-                                                                                        columns: [
-                                                                                          "Notifications",
-                                                                                          "Default Value",
-                                                                                          "Can Override",
-                                                                                          "User Preference",
-                                                                                        ].map((column) {
-                                                                                          return TableViewColumn(
-                                                                                            label: column,
-                                                                                            minWidth: Get.width * 0.17,
-                                                                                          );
-                                                                                        }).toList(),
-                                                                                        rows: true
-                                                                                            ? controller.notificationListByUserId
-                                                                                                .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
-                                                                                                      TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
-                                                                                                      TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      TableViewCell(child: Obx(() {
-                                                                                                        return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
-                                                                                                          getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
-                                                                                                        });
-                                                                                                      })),
-                                                                                                    ]))
-                                                                                                .toList()
-                                                                                            : [],
-                                                                                      )
-                                                                                    : Container()))
+                                                                            : Container())
                                                                   ],
                                                                 ),
                                                               ]),
@@ -2187,6 +2147,16 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           .value = false;
                                                       await controller
                                                           .addUser();
+                                                      //  .then((value) {
+                                                      // Get.toNamed(
+                                                      // Routes.userList);
+                                                      // if (value == true) {
+                                                      //   // controller.userId.value = 0;
+                                                      //   controller
+                                                      //       .saveAccessLevel();
+                                                      //   //   controller.saveNotification();
+                                                      // }
+                                                      //  });
                                                     } catch (e) {
                                                       Fluttertoast.showToast(
                                                           msg: e.toString(),
@@ -2203,24 +2173,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       .appDarkBlueColor,
                                                   text: 'Update',
                                                   onPressed: () {
-                                                    controller
-                                                        .updateUser()
-                                                        .then((value) {
-                                                      // Get.toNamed(
-                                                          // Routes.userList);
-                                                      if (value == true) {
-                                                        // controller.userId.value = 0;
-                                                        controller
-                                                            .saveAccessLevel();
-                                                        //   controller.saveNotification();
-                                                      }
-                                                    });
+                                                    controller.updateUser();
+                                                    // .then((value) {
+                                                    // Get.toNamed(
+                                                    // Routes.userList);
+                                                    // if (value == true) {
+                                                    // controller.userId.value = 0;
+                                                    // controller
+                                                    //     .saveAccessLevel(0);
+                                                    // controller
+                                                    //     .saveNotification(
+                                                    //         0);
+                                                    // }
+                                                    // });
                                                     //  controller.saveAccessLevel();
                                                   },
                                                 ),
                                               ),
                                         // Dimens.boxWidth20,
-                                         SizedBox(width:20),
+                                        SizedBox(width: 20),
                                         Container(
                                           height: 35,
                                           child: CustomElevatedButton(
@@ -2267,6 +2238,10 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                           controller.isdobInvalid.value = false;
                           controller.update(['stock_Mangement']);
                         },
+                        onCancel: () {
+                          controller.openDobDatePicker = false;
+                          controller.update(['stock_Mangement']);
+                        },
                       ),
                     ),
                   if (controller.openDoJDatePicker)
@@ -2285,6 +2260,10 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                           controller.openDoJDatePicker =
                               !controller.openDoJDatePicker;
                           controller.isDateofJoiningInvalid.value = false;
+                          controller.update(['stock_Mangement']);
+                        },
+                        onCancel: () {
+                          controller.openDoJDatePicker = false;
                           controller.update(['stock_Mangement']);
                         },
                       ),

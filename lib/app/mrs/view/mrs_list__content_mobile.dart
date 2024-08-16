@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/mrs/mrs_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/get_mrs_list_model.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,7 @@ import '../../widgets/date_picker.dart';
 
 class MrsListContentMobile extends GetView<MrsListController> {
   MrsListContentMobile({Key? key}) : super(key: key);
-  final homecontroller = Get.find<HomeController>();
+  // final homecontroller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +26,8 @@ class MrsListContentMobile extends GetView<MrsListController> {
               Scaffold(
             body: //
                 Obx(
-              () => Stack(
-                children:[
-                   Container(
+              () => Stack(children: [
+                Container(
                   child: //
                       Column(
                     children: [
@@ -54,12 +55,19 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                 onTap: () {
                                   controller.clearStoreData();
                                   // controller.clearStoreDatatype();
-                                  var _mrsId = controller.mrsList[index]!.id ?? 0;
+                                  var _mrsId =
+                                      controller.mrsList[index]!.id ?? 0;
                                   controller.mrsList[index]?.status == 323
                                       ? Get.toNamed(Routes.mrsIssueScreen,
-                                          arguments: {'mrsId': _mrsId})
+                                          arguments: {
+                                              'mrsId': _mrsId,
+                                              'type': 0
+                                            })
                                       : Get.toNamed(Routes.mrsApprovalScreen,
-                                          arguments: {'mrsId': _mrsId});
+                                          arguments: {
+                                              'mrsId': _mrsId,
+                                              'type': 0
+                                            });
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(left: 10, right: 10),
@@ -81,8 +89,8 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                                 Text(
                                                   'MRS Id: ',
                                                   style: const TextStyle(
-                                                      color:
-                                                          ColorValues.blackColor,
+                                                      color: ColorValues
+                                                          .blackColor,
                                                       fontWeight:
                                                           FontWeight.w400),
                                                 ),
@@ -90,8 +98,8 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                                   'MRS${mrsListModel?.id ?? 0}',
                                                   style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color:
-                                                        ColorValues.navyBlueColor,
+                                                    color: ColorValues
+                                                        .navyBlueColor,
                                                   ),
                                                 ),
                                                 Spacer(),
@@ -99,10 +107,78 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                                   padding:
                                                       Dimens.edgeInsets8_2_8_2,
                                                   decoration: BoxDecoration(
-                                                    color:
-                                                        ColorValues.addNewColor,
+                                                    color: controller.mrsList
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      e?.id ==
+                                                                      mrsListModel!
+                                                                          .id,
+                                                                  orElse: () =>
+                                                                      MrsListModel(
+                                                                          id: 00),
+                                                                )
+                                                                ?.status ==
+                                                            322
+                                                        ? ColorValues
+                                                            .rejectedStatusColor
+                                                        : controller.mrsList
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          e?.id ==
+                                                                          mrsListModel!
+                                                                              .id,
+                                                                      orElse: () =>
+                                                                          MrsListModel(
+                                                                              id: 00),
+                                                                    )
+                                                                    ?.status ==
+                                                                321
+                                                            ? ColorValues
+                                                                .submitColor
+                                                            : controller.mrsList
+                                                                        .firstWhere(
+                                                                          (e) =>
+                                                                              e?.id ==
+                                                                              mrsListModel!.id,
+                                                                          orElse: () =>
+                                                                              MrsListModel(id: 00),
+                                                                        )
+                                                                        ?.status ==
+                                                                    323
+                                                                ? ColorValues
+                                                                    .appLightBlueColor
+                                                                : controller
+                                                                            .mrsList
+                                                                            .firstWhere(
+                                                                              (e) => e?.id == mrsListModel!.id,
+                                                                              orElse: () => MrsListModel(id: 00),
+                                                                            )
+                                                                            ?.status ==
+                                                                        324
+                                                                    ? ColorValues
+                                                                        .issueStatusColor
+                                                                    : controller
+                                                                                .mrsList
+                                                                                .firstWhere(
+                                                                                  (e) => e?.id == mrsListModel!.id,
+                                                                                  orElse: () => MrsListModel(id: 00),
+                                                                                )
+                                                                                ?.status ==
+                                                                            326
+                                                                        ? ColorValues
+                                                                            .appYellowColor
+                                                                        : controller.mrsList
+                                                                                    .firstWhere(
+                                                                                      (e) => e?.id == mrsListModel!.id,
+                                                                                      orElse: () => MrsListModel(id: 00),
+                                                                                    )
+                                                                                    ?.status ==
+                                                                                325
+                                                                            ? ColorValues.rejectedStatusColor
+                                                                            : ColorValues.addNewColor,
                                                     borderRadius:
-                                                        BorderRadius.circular(4),
+                                                        BorderRadius.circular(
+                                                            4),
                                                   ),
                                                   child: Text(
                                                     '${mrsListModel?.status_short}',
@@ -118,8 +194,10 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                               Text(
                                                 'Activity: ',
                                                 style: const TextStyle(
-                                                    color: ColorValues.blackColor,
-                                                    fontWeight: FontWeight.w400),
+                                                    color:
+                                                        ColorValues.blackColor,
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
                                               SizedBox(
                                                 width: 5,
@@ -129,8 +207,8 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                                   '${mrsListModel?.activity}'
                                                   '',
                                                   style: const TextStyle(
-                                                    color:
-                                                        ColorValues.navyBlueColor,
+                                                    color: ColorValues
+                                                        .navyBlueColor,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -141,8 +219,10 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                               Text(
                                                 'Where Used: ',
                                                 style: const TextStyle(
-                                                    color: ColorValues.blackColor,
-                                                    fontWeight: FontWeight.w400),
+                                                    color:
+                                                        ColorValues.blackColor,
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
                                               SizedBox(
                                                 width: 5,
@@ -151,8 +231,8 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                                 child: Text(
                                                   '${mrsListModel?.whereUsedType.toString().toUpperCase() ?? ''}${mrsListModel?.whereUsedTypeId ?? ''}',
                                                   style: const TextStyle(
-                                                    color:
-                                                        ColorValues.navyBlueColor,
+                                                    color: ColorValues
+                                                        .navyBlueColor,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -162,8 +242,10 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                               Text(
                                                 'Mrs Detail: ',
                                                 style: const TextStyle(
-                                                    color: ColorValues.blackColor,
-                                                    fontWeight: FontWeight.w400),
+                                                    color:
+                                                        ColorValues.blackColor,
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
                                               SizedBox(
                                                 width: 5,
@@ -172,8 +254,8 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                                 child: Text(
                                                   "Requested by:${mrsListModel?.requested_by_name ?? ""}\nIssued by:${mrsListModel?.approver_name ?? ""}",
                                                   style: const TextStyle(
-                                                    color:
-                                                        ColorValues.navyBlueColor,
+                                                    color: ColorValues
+                                                        .navyBlueColor,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -197,33 +279,63 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                                     style: const TextStyle(
                                                       color: ColorValues
                                                           .navyBlueColor,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   )
                                                 ],
                                               ),
                                             ]),
                                             Dimens.boxHeight5,
-                                            Center(
-                                              child: CustomElevatedButton(
-                                                onPressed: () {
-                                                  controller.clearStoreData();
-                
-                                                  String mrsId = mrsListModel?.id
-                                                          .toString() ??
-                                                      "";
-                                                  print({"mrsId": mrsId});
-                                                  Get.toNamed(Routes.editMrs,
-                                                      arguments: {
-                                                        'mrsId':
-                                                            int.tryParse("$mrsId")
-                                                      });
-                                                },
-                                                text: 'Edit MRS',
-                                                icon: Icons.edit,
-                                                backgroundColor: Colors.blue,
-                                              ),
-                                            )
+                                            varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kMrsFeatureId &&
+                                                                e.edit ==
+                                                                    UserAccessConstants
+                                                                        .kHaveEditAccess)
+                                                            .length >
+                                                        0 &&
+                                                    controller.mrsList
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.id ==
+                                                                  mrsListModel!
+                                                                      .id,
+                                                              orElse: () =>
+                                                                  MrsListModel(
+                                                                      id: 00),
+                                                            )
+                                                            ?.status ==
+                                                        321
+                                                ? Center(
+                                                    child: CustomElevatedButton(
+                                                      onPressed: () {
+                                                        controller
+                                                            .clearStoreData();
+
+                                                        String mrsId =
+                                                            mrsListModel?.id
+                                                                    .toString() ??
+                                                                "";
+                                                        print({"mrsId": mrsId});
+                                                        Get.toNamed(
+                                                            Routes.editMrs,
+                                                            arguments: {
+                                                              'mrsId':
+                                                                  int.tryParse(
+                                                                      "$mrsId")
+                                                            });
+                                                      },
+                                                      text: 'Edit MRS',
+                                                      icon: Icons.edit,
+                                                      backgroundColor:
+                                                          Colors.blue,
+                                                    ),
+                                                  )
+                                                : Dimens.box0
                                           ]),
                                     ),
                                   ),
@@ -234,7 +346,7 @@ class MrsListContentMobile extends GetView<MrsListController> {
                     ],
                   ),
                 ),
-                 if (controller.openFromDateToStartDatePicker)
+                if (controller.openFromDateToStartDatePicker)
                   Positioned(
                     top: 50,
                     left: 10,
@@ -263,11 +375,14 @@ class MrsListContentMobile extends GetView<MrsListController> {
                           controller.update(['mrslist']);
                         }
                       },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['mrslist']);
+                      },
                     ),
                   ),
                 Dimens.boxHeight10,
-                ]
-              ),
+              ]),
             ),
             //
           );

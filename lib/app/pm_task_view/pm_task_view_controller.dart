@@ -6,6 +6,7 @@ import 'package:cmms/app/pm_task_view/pm_task_view_presenter.dart';
 import 'package:cmms/app/pm_task_view/view/permit_list_table.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/save_file_web.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
@@ -18,8 +19,10 @@ import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 import '../../domain/models/history_model.dart';
 import '../theme/styles.dart';
@@ -280,119 +283,122 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   }
 
   void _updatedailog() {
-    Get.dialog(AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-      ),
-      insetPadding: Dimens.edgeInsets10_0_10_0,
-      contentPadding: EdgeInsets.zero,
-      title: Column(
-        children: [
-          Text(
-            'PM Task Started',
-            textAlign: TextAlign.center,
-            style: Styles.green700,
+    Get.dialog(
+        AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
           ),
-          Divider(
-            color: ColorValues.greyColor,
-          )
-        ],
-      ),
-      content: Builder(builder: (context) {
-        var height = Get.height;
+          insetPadding: Dimens.edgeInsets10_0_10_0,
+          contentPadding: EdgeInsets.zero,
+          title: Column(
+            children: [
+              Text(
+                'PM Task Started',
+                textAlign: TextAlign.center,
+                style: Styles.green700,
+              ),
+              Divider(
+                color: ColorValues.greyColor,
+              )
+            ],
+          ),
+          content: Builder(builder: (context) {
+            var height = Get.height;
 
-        return Container(
-          height: height / 6,
-          width: double.infinity,
-          child: Container(
-            margin: Dimens.edgeInsets20,
-            child: Column(
-              children: [
-                Text(startresponseMessage.value),
-                Dimens.boxHeight10,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+            return Container(
+              height: height / 6,
+              width: double.infinity,
+              child: Container(
+                margin: Dimens.edgeInsets20,
+                child: Column(
                   children: [
-                    // RichText(
-                    //   text: TextSpan(
-                    //       text: 'PM Execution Submitted with',
-                    //       style: Styles.blue700,
-                    //       children: <TextSpan>[
-                    //         TextSpan(text: ' \n     Code', style: Styles.blue700),
-                    //         TextSpan(
-                    //           text: '  2444',
-                    //           style: Styles.redBold15,
-                    //         ),
-                    //       ]),
-                    // ),
-                    // Dimens.boxHeight12,
-                    //  Text("PM Execution Submitted with code PMSC87456"),
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        text: "View Task",
-                        onPressed: () async {
-                          Get.back();
-                          try {
-                            await setScheduleId();
+                    Text(startresponseMessage.value),
+                    Dimens.boxHeight10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // RichText(
+                        //   text: TextSpan(
+                        //       text: 'PM Execution Submitted with',
+                        //       style: Styles.blue700,
+                        //       children: <TextSpan>[
+                        //         TextSpan(text: ' \n     Code', style: Styles.blue700),
+                        //         TextSpan(
+                        //           text: '  2444',
+                        //           style: Styles.redBold15,
+                        //         ),
+                        //       ]),
+                        // ),
+                        // Dimens.boxHeight12,
+                        //  Text("PM Execution Submitted with code PMSC87456"),
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            text: "View Task",
+                            onPressed: () async {
+                              Get.back();
+                              try {
+                                await setScheduleId();
 
-                            if (scheduleId != 0) {
-                              await getPmtaskViewList(
-                                  scheduleId: scheduleId.value,
-                                  isloading: true,
-                                  facilityId: facilityId);
-                              getHistory(facilityId);
-                              getMrsListByModuleTask(taskId: scheduleId.value);
-                              getReAssignedToList(facilityId);
-                            }
-                            // textControllers =
-                            //     List.generate(permitValuesCount, (_) => TextEditingController());
-                            // permitValues = RxList<String>.filled(permitValuesCount, '');
-                          } catch (e) {
-                            print(e);
-                          }
-                        },
-                        backgroundColor: ColorValues.appGreenColor,
-                        textColor: ColorValues.whiteColor,
-                      ),
-                    ),
-                    Dimens.boxWidth10,
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        text: "PM Task List",
-                        onPressed: () {
-                          Get.back();
+                                if (scheduleId != 0) {
+                                  await getPmtaskViewList(
+                                      scheduleId: scheduleId.value,
+                                      isloading: true,
+                                      facilityId: facilityId);
+                                  getHistory(facilityId);
+                                  getMrsListByModuleTask(
+                                      taskId: scheduleId.value);
+                                  getReAssignedToList(facilityId);
+                                }
+                                // textControllers =
+                                //     List.generate(permitValuesCount, (_) => TextEditingController());
+                                // permitValues = RxList<String>.filled(permitValuesCount, '');
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                            backgroundColor: ColorValues.appGreenColor,
+                            textColor: ColorValues.whiteColor,
+                          ),
+                        ),
+                        Dimens.boxWidth10,
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            text: "PM Task List",
+                            onPressed: () {
+                              Get.back();
 
-                          Get.offAndToNamed(Routes.pmTask);
-                        },
-                        backgroundColor: ColorValues.appDarkBlueColor,
-                        textColor: ColorValues.whiteColor,
-                      ),
-                    ),
-                    Dimens.boxWidth10,
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        text: "Execute",
-                        onPressed: () {
-                          Get.back();
+                              Get.offAndToNamed(Routes.pmTask);
+                            },
+                            backgroundColor: ColorValues.appDarkBlueColor,
+                            textColor: ColorValues.whiteColor,
+                          ),
+                        ),
+                        Dimens.boxWidth10,
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            text: "Execute",
+                            onPressed: () {
+                              Get.back();
 
-                          gotoexecution();
-                        },
-                        backgroundColor: ColorValues.appYellowColor,
-                        textColor: ColorValues.whiteColor,
-                      ),
+                              gotoexecution();
+                            },
+                            backgroundColor: ColorValues.appYellowColor,
+                            textColor: ColorValues.whiteColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
-        );
-      }),
-      actions: [],
-    ));
+              ),
+            );
+          }),
+          actions: [],
+        ),
+        barrierDismissible: false);
   }
 
   void onDropdownValueChanged(dynamic list, dynamic value) {
@@ -591,5 +597,338 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     Get.toNamed(Routes.viewPermitScreen,
         arguments: {"permitId": permitId, "jobId": jobId, "type": 2});
     print({"Permit", permitId, jobId});
+  }
+
+  Future<void> generateInvoice() async {
+    final PdfDocument document = PdfDocument();
+
+    final PdfPage page = document.pages.add();
+
+    final Size pageSize = page.getClientSize();
+
+    var url = "assets/assets/files/logo.png";
+    var response = await get(Uri.parse(url));
+    var data = response.bodyBytes;
+
+    PdfBitmap image = PdfBitmap(data);
+
+    final PdfLayoutResult result = drawHeader(page, pageSize, document, image);
+
+    final List<int> bytes = await document.save();
+
+    document.dispose();
+
+    await saveAndLaunchFile(bytes, 'PM Task View Report');
+  }
+
+  PdfLayoutResult drawHeader(
+    PdfPage page,
+    Size pageSize,
+    PdfDocument document,
+    PdfBitmap image,
+  ) {
+    final PdfPen borderPen = PdfPen(PdfColor(142, 180, 219), width: 1.0);
+    final PdfBrush backgroundBrush = PdfSolidBrush(PdfColor(217, 226, 243));
+    final PdfFont headerFont =
+        PdfStandardFont(PdfFontFamily.helvetica, 10, style: PdfFontStyle.bold);
+    final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
+
+    // Draw images
+    page.graphics.drawImage(image, Rect.fromLTWH(15, 10, 100, 80));
+    page.graphics.drawImage(image, Rect.fromLTWH(370, 590, 100, 50));
+
+    // Site name section
+    double currentY =
+        100; // Start position for the first section below the image
+    double sectionHeight = 20; // Height for each section header
+
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('Site name', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // PM Information
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('PM Information', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Draw PM Information Details (Left Side)
+    double labelWidth = 80;
+    double valueWidth = 120;
+    double labelX = 30;
+    double valueX = labelX + labelWidth + 5;
+
+    List<String> pmInfoLabelsLeft = [
+      'PM Plan ID',
+      'PM Plan/task title',
+      'Due date',
+      'Start date'
+    ];
+    List<String> pmInfoValuesLeft = [
+      '${pmtaskViewModel.value?.id}',
+      '${pmtaskViewModel.value?.plan_title}',
+      '${pmtaskViewModel.value?.due_date}',
+      '${pmtaskViewModel.value?.started_at}',
+    ];
+    double rowHeight = 15;
+
+    for (int i = 0; i < pmInfoLabelsLeft.length; i++) {
+      page.graphics.drawString(pmInfoLabelsLeft[i], contentFont,
+          bounds: Rect.fromLTWH(labelX, currentY + 5, labelWidth, rowHeight));
+      page.graphics.drawString(pmInfoValuesLeft[i], contentFont,
+          bounds: Rect.fromLTWH(valueX, currentY + 5, valueWidth, rowHeight));
+      currentY += rowHeight;
+    }
+
+    // Draw PM Information Details (Right Side)
+    double labelWidthRight = 80;
+    double valueWidthRight = 120;
+    double labelXRight = pageSize.width / 2 + 10; // Position on the right side
+    double valueXRight = labelXRight + labelWidthRight + 5;
+
+    List<String> pmInfoLabelsRight = [
+      'PM Task ID',
+      'Frequency',
+      'Assigned to',
+      'Done date'
+    ];
+    List<String> pmInfoValuesRight = [
+      '${pmtaskViewModel.value?.id}',
+      '${pmtaskViewModel.value?.frequency_name}',
+      '${pmtaskViewModel.value?.assigned_to_name}',
+      '${pmtaskViewModel.value?.done_date}',
+    ];
+
+    currentY -= pmInfoLabelsLeft.length *
+        rowHeight; // Reset currentY to align with left side
+
+    for (int i = 0; i < pmInfoLabelsRight.length; i++) {
+      page.graphics.drawString(pmInfoLabelsRight[i], contentFont,
+          bounds: Rect.fromLTWH(
+              labelXRight, currentY + 5, labelWidthRight, rowHeight));
+      page.graphics.drawString(pmInfoValuesRight[i], contentFont,
+          bounds: Rect.fromLTWH(
+              valueXRight, currentY + 5, valueWidthRight, rowHeight));
+      currentY += rowHeight;
+    }
+
+    // Draw Equipment details
+    currentY += 10; // Adding some space before the next section
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('Equipment details', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Draw Equipment Details Table
+    double columnWidth = (pageSize.width - 50) / 3;
+    List<String> equipmentHeaders = [
+      'S. No',
+      'Equipment category',
+      'Equipment name'
+    ];
+
+    for (int i = 0; i < equipmentHeaders.length; i++) {
+      page.graphics.drawString(equipmentHeaders[i], contentFont,
+          bounds: Rect.fromLTWH(
+              30 + (i * columnWidth), currentY + 5, columnWidth, rowHeight));
+    }
+
+    currentY += rowHeight;
+
+    // Draw each equipment name from the schedules
+    for (int i = 0; i < (pmtaskViewModel.value?.schedules?.length ?? 0); i++) {
+      var schedule = pmtaskViewModel.value!.schedules![i];
+
+      page.graphics.drawString('${i + 1}', contentFont,
+          bounds:
+              Rect.fromLTWH(30, currentY + 5, columnWidth, rowHeight)); // S. No
+      page.graphics.drawString(
+          '${pmtaskViewModel.value?.category_name}', contentFont,
+          bounds: Rect.fromLTWH(30 + columnWidth, currentY + 5, columnWidth,
+              rowHeight)); // Equipment category
+      page.graphics.drawString('${schedule?.name}', contentFont,
+          bounds: Rect.fromLTWH(30 + 2 * columnWidth, currentY + 5, columnWidth,
+              rowHeight)); // Equipment name
+
+      currentY += rowHeight;
+    }
+
+    // Permit carried by section
+    currentY += 10; // Adding some space before the next section
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('Permit carried by', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Column Headers
+    columnWidth = (pageSize.width - 50) / 4; // Adjust column width as needed
+    List<String> permitHeaders = [
+      'S. No',
+      'Employee ID',
+      'Employee name',
+      'Company'
+    ];
+
+    for (int i = 0; i < permitHeaders.length; i++) {
+      page.graphics.drawString(permitHeaders[i], contentFont,
+          bounds: Rect.fromLTWH(
+              30 + (i * columnWidth), currentY + 5, columnWidth, rowHeight));
+    }
+
+    currentY += sectionHeight;
+
+    // Static Data Rows for "Permit carried by"
+    List<Map<String, String>> permitData = [
+      {
+        'S. No': '1',
+        'Employee ID': '12345',
+        'Employee name': 'John Doe',
+        'Company': 'ABC Corp'
+      },
+      {
+        'S. No': '2',
+        'Employee ID': '67890',
+        'Employee name': 'Jane Smith',
+        'Company': 'XYZ Inc'
+      },
+      // Add more static rows as needed
+    ];
+
+    for (var row in permitData) {
+      page.graphics.drawString(row['S. No']!, contentFont,
+          bounds: Rect.fromLTWH(30, currentY + 5, columnWidth, rowHeight));
+      page.graphics.drawString(row['Employee ID']!, contentFont,
+          bounds: Rect.fromLTWH(
+              30 + columnWidth, currentY + 5, columnWidth, rowHeight));
+      page.graphics.drawString(row['Employee name']!, contentFont,
+          bounds: Rect.fromLTWH(
+              30 + 2 * columnWidth, currentY + 5, columnWidth, rowHeight));
+      page.graphics.drawString(row['Company']!, contentFont,
+          bounds: Rect.fromLTWH(
+              30 + 3 * columnWidth, currentY + 5, columnWidth, rowHeight));
+
+      currentY += rowHeight;
+    }
+
+    // PTW Information section
+    currentY += 10;
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('PTW Information', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    double ptwColumnWidth = (pageSize.width - 50) / 5;
+    List<String> ptwHeaders = [
+      'PTW ID',
+      'Permit type',
+      'Isolation taken',
+      'Isolated equipment\'s'
+    ];
+
+    for (int i = 0; i < ptwHeaders.length; i++) {
+      page.graphics.drawString(ptwHeaders[i], contentFont,
+          bounds: Rect.fromLTWH(30 + (i * ptwColumnWidth), currentY + 5,
+              ptwColumnWidth, rowHeight));
+    }
+
+    currentY += rowHeight;
+
+    // TBT section
+    currentY += 10;
+    double tbtColumnWidth = (pageSize.width - 50) / 4;
+    List<String> tbtHeaders = [
+      'TBT conducted by',
+      'TBT done time',
+      'Start time',
+      'Status'
+    ];
+
+    for (int i = 0; i < tbtHeaders.length; i++) {
+      page.graphics.drawString(tbtHeaders[i], contentFont,
+          bounds: Rect.fromLTWH(30 + (i * tbtColumnWidth), currentY + 5,
+              tbtColumnWidth, rowHeight));
+    }
+
+    currentY += sectionHeight;
+
+    // Work description section
+    currentY += 10;
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('Work description', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Add static description after Work description
+    String staticDescription =
+        "This is a static description text that explains the work done or provides additional details.";
+    page.graphics.drawString(staticDescription, contentFont,
+        bounds:
+            Rect.fromLTWH(30, currentY + 5, pageSize.width - 60, rowHeight * 2),
+        format: PdfStringFormat(alignment: PdfTextAlignment.left));
+    currentY += rowHeight * 2;
+
+    // Material consumption section
+    currentY += 10;
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('Material consumption', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    double materialColumnWidth = (pageSize.width - 50) / 6;
+    List<String> materialHeaders = [
+      'Equipment ID',
+      'Material ID',
+      'Material name',
+      'Material type',
+      'Issued quantity',
+      'Used quantity'
+    ];
+
+    for (int i = 0; i < materialHeaders.length; i++) {
+      page.graphics.drawString(materialHeaders[i], contentFont,
+          bounds: Rect.fromLTWH(30 + (i * materialColumnWidth), currentY + 5,
+              materialColumnWidth, rowHeight));
+    }
+
+    currentY += rowHeight;
+
+    // Return the layout result (for the signature or other elements)
+    final String signatureText = 'Signature of trainer';
+    final Size signatureSize = contentFont.measureString(signatureText);
+
+    return PdfTextElement(text: signatureText, font: contentFont).draw(
+        page: page,
+        bounds: Rect.fromLTWH(
+            400,
+            currentY + 20,
+            pageSize.width - (signatureSize.width + 30),
+            pageSize.height - 120))!;
   }
 }

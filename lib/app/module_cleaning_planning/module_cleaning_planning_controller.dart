@@ -40,6 +40,7 @@ class ModuleCleaningPlanningController extends GetxController {
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<String> selectedAssignedTo = ''.obs;
   RxInt selectedAssignedToId = 0.obs;
+
   bool openStartDatePicker = false;
   var startDateTc = TextEditingController();
   Rx<bool> isFormInvalid = false.obs;
@@ -100,13 +101,15 @@ class ModuleCleaningPlanningController extends GetxController {
       await setMcId();
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
-        Future.delayed(Duration(seconds: 1), () {
-          getEquipmentModelList(facilityId, true);
-        });
+        if (facilityId > 0) {
+          Future.delayed(Duration(seconds: 1), () {
+            getEquipmentModelList(facilityId, true);
+
+            getAssignedToList();
+          });
+        }
       });
-      Future.delayed(Duration(seconds: 1), () {
-        getAssignedToList();
-      });
+
       if (id != 0) {
         Future.delayed(Duration(seconds: 1), () {
           getMcPlanDetail(planId: id.value, facilityId: facilityId);
@@ -214,21 +217,27 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   void updateMcPlan() async {
-    int i = -1;
-
-    List<Schedule>? sch =
-        mcPlanDetailsModel.value?.schedules.map<Schedule>((e) {
-      i++;
-      var row = rowItem.value[i];
+    Map<int, List<Equipments>> equipmentMap = {};
+    equipmentList.forEach((equipment) {
+      equipment?.smbs?.forEach((smb) {
+        if (smb.selectedDay != null) {
+          int day = int.tryParse(smb.selectedDay!) ?? 0;
+          if (day > 0) {
+            if (!equipmentMap.containsKey(day)) {
+              equipmentMap[day] = [];
+            }
+            equipmentMap[day]!.add(Equipments(id: smb.smbId));
+          }
+        }
+      });
+    });
+    List<Schedule> sch = equipmentMap.entries.map((entry) {
       return Schedule(
-          cleaningDay: e.cleaningDay,
-          cleaningType: int.tryParse(
-                  "${row[4]['value'] == 'Dry' ? 1 : (row[4]['value'] == 'Wel' ? 2 : null)}") ??
-              null,
-          equipments: e.equipments?.map((e) {
-            return Equipments(id: e?.id);
-          }).toList());
+        cleaningDay: entry.key,
+        equipments: entry.value,
+      );
     }).toList();
+
     print({"sch": sch});
 
     String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
@@ -243,7 +252,8 @@ class ModuleCleaningPlanningController extends GetxController {
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         title: _mcTitelCtrlr,
         assignedToId: selectedAssignedToId.value,
-        schedules: sch ?? []);
+        schedules: sch ?? [],
+        cleaningType: selectedCleaningId);
 
     var updateMcModelJsonString = [createMcModel.toJson()];
     Map<String, dynamic>? responseCreateMcModel =
@@ -266,7 +276,12 @@ class ModuleCleaningPlanningController extends GetxController {
       mcPlanDetailsModel.value = _mcPlanDetails;
       mcTitelCtrlr.text = mcPlanDetailsModel.value?.title ?? "";
       selectedfrequency.value = mcPlanDetailsModel.value?.frequency ?? '';
+      selectedCleaningType.value =
+          mcPlanDetailsModel.value?.cleaningTypeName ?? '';
+
       selectedAssignedToId.value = mcPlanDetailsModel.value?.assignedToId ?? 0;
+      selectedCleaningId = mcPlanDetailsModel.value?.cleaningType ?? 0;
+
       selectedAssignedTo.value = mcPlanDetailsModel.value?.assignedTo ?? '';
 
       startDateTc.text = mcPlanDetailsModel.value?.startDate ?? '';
@@ -347,7 +362,8 @@ class ModuleCleaningPlanningController extends GetxController {
             selectedCleaningId =
                 int.tryParse(cleaningType[cleaningTypeIndex].id ?? '0') ?? 0;
             selectedCleaningType.value = value;
-            isSelectedfrequency.value = true;
+            isSelectedCleaningType.value = true;
+
           } else {
             selectedCleaningId = 0;
           }
@@ -439,26 +455,37 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   void checkFromModule() {
-    if (mcTitelCtrlr.text.trim().length == 0) {
+    if (mcTitelCtrlr.text.trim()=='') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
     }
-    if (selectedfrequency == '') {
+    if (selectedfrequencyId == 0) {
       isSelectedfrequency.value = false;
       isFormInvalid.value = true;
     }
-    if (durationInDayCtrlr.text.trim().length == 0) {
+    
+     if (selectedCleaningId == 0) {
+      isSelectedCleaningType.value = false;
+      isFormInvalid.value = true;
+    }
+      if (selectedAssignedToId == 0) {
+      isAssignedToSelected.value = false;
+      isFormInvalid.value = true;
+    }
+
+
+    if (durationInDayCtrlr.text.trim()=='') {
       isEstimatedInvalid.value = true;
       isFormInvalid.value = true;
     }
 
-    if (startDateTimeCtrlrBuffer.text.trim().length == 0) {
-      isstartdateInvalid.value = true;
-      isFormInvalid = false.obs;
-    }
+    // if (startDateTimeCtrlrBuffer.text.trim().length == 0) {
+    //   isstartdateInvalid.value = true;
+    //   isFormInvalid = false.obs;
+    // }
     if (validTillTimeCtrlr.text.trim().length == 0) {
       isstartdateInvalid.value = true;
-      isFormInvalid = false.obs;
+      isFormInvalid = true.obs;
     }
   }
 

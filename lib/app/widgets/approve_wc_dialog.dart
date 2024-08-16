@@ -1,3 +1,4 @@
+import 'package:cmms/app/careate_warranty_calim/create_warranty_claim_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -8,10 +9,10 @@ import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
 class ApproveWCDialog extends GetView {
-  int? id;
+  final int? id;
 
   ApproveWCDialog({super.key, this.id});
-  final ViewWarrantyClaimController _controller = Get.find();
+  final CreateWarrantyClaimController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

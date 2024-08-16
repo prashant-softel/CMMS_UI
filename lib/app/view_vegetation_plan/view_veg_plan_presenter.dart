@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/veg_plan_detail_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/usecases/view_veg_plan_usercase.dart';
@@ -18,7 +19,20 @@ class ViewVegPlanPresenter {
       isLoading: isLoading ?? false,
     );
   }
+ Future<List<HistoryModel>?> getHistory(
+    moduleType,
+    id,
+    facilityId,
 
+    isLoading,
+  ) async =>
+      await viewVegPlanUsecase.getHistory(
+        moduleType: moduleType,
+        id: id,
+        facilityId: facilityId,
+
+        isLoading: isLoading,
+      );
   Future<List<VegetationEquipmentModel>> getVegEquipmentModelList({
     required bool isLoading,
     required int? facilityId,

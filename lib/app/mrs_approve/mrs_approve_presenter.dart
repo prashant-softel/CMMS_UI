@@ -11,15 +11,17 @@ class MrsApprovePresenter {
   }) async =>
       await mrsApproveUsecase.getMrsDetails(
         mrsId: mrsId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
   Future<bool> approveMrs({
     approvetoJsonString,
+    int? type,
     required bool isLoading,
   }) async {
     return mrsApproveUsecase.approveMrs(
       approvetoJsonString: approvetoJsonString,
+      type:type,
       isLoading: isLoading,
     );
   }
@@ -37,6 +39,17 @@ class MrsApprovePresenter {
   void saveValue({String? mrsId}) async {
     return mrsApproveUsecase.saveValue(mrsId: mrsId);
   }
+  void clearValue() async {
+    return mrsApproveUsecase.clearValue();
+  }
+  void clearValuee() async {
+    return mrsApproveUsecase.clearValuee();
+  }
 
   Future<String?> getValue() async => await mrsApproveUsecase.getValue();
+  void saveValuee({String? type}) async {
+    return mrsApproveUsecase.saveValuee(type: type);
+  }
+
+  Future<String?> getValuee() async => await mrsApproveUsecase.getValuee();
 }

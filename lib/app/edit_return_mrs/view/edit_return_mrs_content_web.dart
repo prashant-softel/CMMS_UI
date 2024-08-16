@@ -590,10 +590,10 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                               //       }))),
                               // Text(jsonEncode(controller.dropdownMapperData)),
                               Container(
-                                height: 200,
+                                height: 400,
                                 margin: EdgeInsets.only(left: 10, right: 10),
                                 child: DataTable2(
-                                  minWidth: 1600,
+                                  // minWidth: 1600,
                                   columnSpacing: 10,
                                   border: TableBorder.all(
                                       color:
@@ -608,21 +608,21 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                           fontWeight: FontWeight.bold),
                                     )),
                                     DataColumn2(
-                                        fixedWidth: 170,
+                                        // fixedWidth: 170,
                                         label: Text(
-                                          "Assets",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
-                                    DataColumn2(
-                                        fixedWidth: 170,
-                                        label: Text(
-                                          "Material Type",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                      "Assets",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    // DataColumn2(
+                                    //     fixedWidth: 170,
+                                    //     label: Text(
+                                    //       "Material Type",
+                                    //       style: TextStyle(
+                                    //           fontSize: 15,
+                                    //           fontWeight: FontWeight.bold),
+                                    //     )),
                                     // DataColumn2(
                                     //     fixedWidth: 250,
                                     //     label: Text(
@@ -631,22 +631,22 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                     //           fontSize: 15,
                                     //           fontWeight: FontWeight.bold),
                                     //     )),
-                                    DataColumn2(
-                                        fixedWidth: 150,
-                                        label: Text(
-                                          "Material Code ",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
-                                    DataColumn2(
-                                        fixedWidth: 200,
-                                        label: Text(
-                                          "Material Category",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                    // DataColumn2(
+                                    //     fixedWidth: 150,
+                                    //     label: Text(
+                                    //       "Material Code ",
+                                    //       style: TextStyle(
+                                    //           fontSize: 15,
+                                    //           fontWeight: FontWeight.bold),
+                                    //     )),
+                                    // DataColumn2(
+                                    //     fixedWidth: 200,
+                                    //     label: Text(
+                                    //       "Material Category",
+                                    //       style: TextStyle(
+                                    //           fontSize: 15,
+                                    //           fontWeight: FontWeight.bold),
+                                    //     )),
                                     DataColumn2(
                                         fixedWidth: 200,
                                         label: Text(
@@ -664,13 +664,13 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                               fontWeight: FontWeight.bold),
                                         )),
                                     DataColumn2(
-                                        // fixedWidth: 200,
+                                        fixedWidth: 200,
                                         label: Text(
-                                      "Remark",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                                          "Remark",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
                                     DataColumn2(
                                         fixedWidth: 100,
                                         label: Text(
@@ -743,16 +743,22 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                                   .all(6.0),
                                                           child:
                                                               DropdownWebWidget(
-                                                            width: (MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width *
-                                                                    .2) -
-                                                                100,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                4,
                                                             controller:
                                                                 controller,
                                                             dropdownList: controller
-                                                                .scheduleCheckPointsdrop,
+                                                                        .returnMrsDetailsModel
+                                                                        .value
+                                                                        ?.whereUsedType ==
+                                                                    "JOBCARD"
+                                                                ? controller
+                                                                    .workingAreaList
+                                                                : controller
+                                                                    .scheduleCheckPointsdrop,
                                                             selectedValue:
                                                                 mapData[
                                                                     "value"],
@@ -953,34 +959,41 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                                       "code")
                                                                   ? Text(
                                                                       "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.asset_code ?? ""}")
+                                                                  // : (mapData['key'] ==
+                                                                  //         "Material_Type")
+                                                                  //     ? Text(
+                                                                  //         "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.asset_type ?? ""}")
+                                                                  //     : (mapData['key'] ==
+                                                                  //             "Material_Category")
+                                                                  //         ? Text(
+                                                                  //             "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.cat_name ?? ""}")
                                                                   : (mapData['key'] ==
-                                                                          "Material_Type")
-                                                                      ? Text(
-                                                                          "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.asset_type ?? ""}")
-                                                                      : (mapData['key'] ==
-                                                                              "Material_Category")
-                                                                          ? Text(
-                                                                              "${controller.dropdownFaultyMapperData.value[record[0]['value']]?.cat_name ?? ""}")
-                                                                          : (mapData['key'] == "Action ")
-                                                                              ? Padding(
-                                                                                  padding: EdgeInsets.only(top: 10),
-                                                                                  child: Column(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                    children: [
-                                                                                      TableActionButton(
-                                                                                        color: ColorValues.appRedColor,
-                                                                                        icon: Icons.delete,
-                                                                                        label: '',
-                                                                                        message: '',
-                                                                                        onPress: () {
-                                                                                          controller.rowFaultyItem.remove(record);
-                                                                                        },
-                                                                                      )
-                                                                                    ],
-                                                                                  ),
-                                                                                )
-                                                                              : Text(mapData['key'] ?? ''),
+                                                                          "Action ")
+                                                                      ? Padding(
+                                                                          padding:
+                                                                              EdgeInsets.only(top: 10),
+                                                                          child:
+                                                                              Column(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              TableActionButton(
+                                                                                color: ColorValues.appRedColor,
+                                                                                icon: Icons.delete,
+                                                                                label: '',
+                                                                                message: '',
+                                                                                onPress: () {
+                                                                                  controller.rowFaultyItem.remove(record);
+                                                                                },
+                                                                              )
+                                                                            ],
+                                                                          ),
+                                                                        )
+                                                                      : Text(mapData[
+                                                                              'key'] ??
+                                                                          ''),
                                         );
                                       }).toList(),
                                     );

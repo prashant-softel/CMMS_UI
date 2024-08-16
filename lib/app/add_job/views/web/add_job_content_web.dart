@@ -1215,7 +1215,14 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                 controller.openbreaketimeDatePicker =
                                     !controller.openbreaketimeDatePicker;
                                 controller.update(['stock_Mangement']);
+
+
                               },
+                                 onCancel: () {
+                                  controller.openbreaketimeDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement']);
+                                },
                             ),
                           ),
                       ],

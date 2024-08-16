@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:flutter/material.dart';
 
 List<MRSListByJobIdModel> linkedJobsToPermitModelFromJson(String str) =>
@@ -36,7 +37,7 @@ class MRSListByJobIdModel {
   int? status;
   String? status_short;
   List<CmmrsItems>? cmmrsItems;
-  List<MaterialUsedAssets>? material_used_by_assets;
+  List<WorkingAreaList>? material_used_by_assets;
 
   factory MRSListByJobIdModel.fromJson(Map<String, dynamic> json) {
     var list = json['cmmrsItems'] == null ? [] : json['cmmrsItems'] as List;
@@ -45,8 +46,8 @@ class MRSListByJobIdModel {
     var usedmaterial = json['material_used_by_assets'] == null
         ? []
         : json['material_used_by_assets'] as List;
-    List<MaterialUsedAssets> usematerialAssets =
-        usedmaterial.map((i) => MaterialUsedAssets.fromJson(i)).toList();
+    List<WorkingAreaList> usematerialAssets =
+        usedmaterial.map((i) => WorkingAreaList.fromJson(i)).toList();
     return MRSListByJobIdModel(
         mrsId: json['mrsId'] == null ? 0 : json['mrsId'],
         jobId: json["jobId"] == null ? 0 : json["jobId"],
@@ -83,6 +84,8 @@ class CmmrsItems {
   double? returned_qty;
   double? available_qty;
   double? used_qty;
+  double? draftUsedqty;
+
   double? issued_qty;
   String? approved_date;
   String? issued_date;
@@ -126,7 +129,8 @@ class CmmrsItems {
       this.materialID,
       this.serial_number,
       this.name,
-      this.transaction_id});
+      this.transaction_id,
+      this.draftUsedqty});
 
   factory CmmrsItems.fromJson(Map<String, dynamic> parsedJson) {
     return CmmrsItems(
@@ -158,6 +162,8 @@ class CmmrsItems {
             ? 0.0
             : parsedJson['available_qty'],
         used_qty: parsedJson["used_qty"] == null ? 0.0 : parsedJson['used_qty'],
+        draftUsedqty:
+            parsedJson["used_qty"] == null ? 0.0 : parsedJson['used_qty'],
         issued_qty:
             parsedJson["issued_qty"] == null ? 0.0 : parsedJson['issued_qty'],
         approved_date: parsedJson["approved_date"] == null
@@ -194,34 +200,39 @@ class CmmrsItems {
   map(DataCell Function(dynamic mapData) param0) {}
 }
 
-class MaterialUsedAssets {
-  int? asset_id;
+// class MaterialUsedAssets {
+//   int? asset_id;
+//   String? asset_name;
+//   List<UsedItems>? items;
+//   MaterialUsedAssets({this.asset_id, this.items, this.asset_name});
 
-  List<UsedItems>? items;
-  MaterialUsedAssets({this.asset_id, this.items});
+//   factory MaterialUsedAssets.fromJson(Map<String, dynamic> parsedJson) {
+//     var list = parsedJson['items'] == null ? [] : parsedJson['items'] as List;
+//     List<UsedItems> usedItems = list.map((i) => UsedItems.fromJson(i)).toList();
 
-  factory MaterialUsedAssets.fromJson(Map<String, dynamic> parsedJson) {
-    var list = parsedJson['items'] == null ? [] : parsedJson['items'] as List;
-    List<UsedItems> usedItems = list.map((i) => UsedItems.fromJson(i)).toList();
+//     return MaterialUsedAssets(
+//         asset_id: parsedJson["asset_id"] == null ? 0 : parsedJson['asset_id'],
+//         asset_name: parsedJson["asset_name"],
+//         items: usedItems);
+//   }
 
-    return MaterialUsedAssets(
-        asset_id: parsedJson["asset_id"] == null ? 0 : parsedJson['asset_id'],
-        items: usedItems);
-  }
-
-  // map(DataCell Function(dynamic mapData) param0) {}
-}
+//   // map(DataCell Function(dynamic mapData) param0) {}
+// }
 
 class UsedItems {
   int? sm_asset_id;
+  int? mrs_Item_Id;
   dynamic used_qty;
-  UsedItems({this.sm_asset_id, this.used_qty});
+  String? asset_name;
+  UsedItems(
+      {this.sm_asset_id, this.used_qty, this.mrs_Item_Id, this.asset_name});
 
   factory UsedItems.fromJson(Map<String, dynamic> parsedJson) {
     return UsedItems(
-      sm_asset_id:
-          parsedJson["sm_asset_id"] == null ? 0 : parsedJson['sm_asset_id'],
-      used_qty: parsedJson["used_qty"],
-    );
+        sm_asset_id:
+            parsedJson["sm_asset_id"] == null ? 0 : parsedJson['sm_asset_id'],
+        used_qty: parsedJson["used_qty"],
+        asset_name: parsedJson["sm_asset_name"],
+        mrs_Item_Id: parsedJson["mrs_Item_Id"]);
   }
 }

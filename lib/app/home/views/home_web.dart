@@ -415,26 +415,33 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                               isScrollable: true,
                               tabs: [
                                 CustomTabBar(
+                                  width: 240,
                                   label: 'All'.tr,
                                   // icon: Icons.menu,
                                 ),
                                 CustomTabBar(
+                                  width: 240,
+
                                   label: 'Breakdown Maintenance'.tr,
                                   // icon: Icons.menu,
                                 ),
                                 CustomTabBar(
+                                  width: 240,
                                   label: 'Preventive Maintenance'.tr,
                                   // icon: Icons.account_tree_sharp,
                                 ),
                                 CustomTabBar(
+                                  width: 240,
                                   label: 'Module Cleaning'.tr,
                                   // icon: Icons.location_on,
                                 ),
                                 CustomTabBar(
+                                  width: 240,
                                   label: 'Incident Report'.tr,
                                   // icon: Icons.location_on,
                                 ),
                                 CustomTabBar(
+                                  width: 240,
                                   label: 'Stock Management'.tr,
                                   // icon: Icons.location_on,
                                 ),
@@ -5785,18 +5792,10 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                         .facility_name
                                                         .toString() ??
                                                     '')),
-                                                DataCell(Text(""
-                                                    // '${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].grNo.toString() ?? ''}')
-
-                                                    )),
-                                                DataCell(Text(controller
-                                                        .dashboardSmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .goNo
-                                                        .toString() ??
-                                                    '')),
+                                                DataCell(Text(
+                                                    '${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].grNo.toString() ?? ''}')), // )),
+                                                DataCell(Text(
+                                                    'GO${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].go_id.toString() ?? ''}')),
                                                 DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
@@ -5883,28 +5882,29 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                             .remove_red_eye_outlined,
                                                         message: 'View',
                                                         onPress: () {
-                                                          // controller
-                                                          //     .clearStoreData();
-                                                          // controller
-                                                          //     .clearStoreDatatype();
+                                                          controller
+                                                              .clearStoreSmData();
+                                                          controller
+                                                              .clearStoreDatatype();
 
-                                                          // int pmTaskId = controller
-                                                          //         .dashboardSmList
-                                                          //         .value
-                                                          //         ?.cmDashboadDetails
-                                                          //         ?.item_list?[
-                                                          //             index]
-                                                          //         .wo_number ??
-                                                          //     0;
-                                                          // if (pmTaskId != 0) {
-                                                          //   Get.toNamed(
-                                                          //       Routes
-                                                          //           .pmTaskView,
-                                                          //       arguments: {
-                                                          //         'pmTaskId':
-                                                          //             pmTaskId
-                                                          //       });
-                                                          // }
+                                                          int goId = controller
+                                                                  .dashboardSmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .go_id ??
+                                                              0;
+                                                          if (goId != 0) {
+                                                            Get.toNamed(
+                                                              Routes
+                                                                  .receiveGoodsOrders,
+                                                              arguments: {
+                                                                'goId': goId,
+                                                                "goType": 1
+                                                              },
+                                                            );
+                                                          }
                                                         },
                                                       ),
                                                     ],
@@ -5958,13 +5958,16 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                           ? controller.toDate.value = dropDate
                           : controller.toDate.value = pickUpDate;
                       controller.getDashBordListByDate();
-                      controller.openFromDateToStartDatePicker =
-                          !controller.openFromDateToStartDatePicker;
+                      controller.openFromDateToStartDatePicker = false;
                       controller.update(['dashboard']);
 
                       // Get.toNamed(
                       //   Routes.stockManagementGoodsOrdersScreen,
                       // );
+                    },
+                    onCancel: () {
+                      controller.openFromDateToStartDatePicker = false;
+                      controller.update(['dashboard']);
                     },
                   ),
                 ),

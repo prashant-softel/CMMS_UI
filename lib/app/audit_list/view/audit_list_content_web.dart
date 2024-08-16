@@ -131,7 +131,7 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                           children: [
                                             CustomRichText(title: 'Date Range'),
                                             // Dimens.boxWidth10,
-                                            SizedBox(width:10),
+                                            SizedBox(width: 10),
 
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
@@ -153,7 +153,7 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                           ],
                                         ),
                                         // Dimens.boxWidth10,
-                                        SizedBox(width:10),
+                                        SizedBox(width: 10),
                                         ActionButton(
                                           icon: Icons.add,
                                           label: "Add New",
@@ -423,12 +423,17 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
 
                                   controller.getAuditListByDate();
                                   controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
+                                      false;
                                   controller.update(['stock_Mangement_Date']);
 
                                   // Get.toNamed(
                                   //   Routes.stockManagementGoodsOrdersScreen,
                                   // );
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
                                 },
                               ),
                             ),
@@ -758,68 +763,89 @@ class AuditListListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                            controller.auditPlanList
-                            .firstWhere(
-                              (e) => e.id == AuditPlanPlanningListDetails!.id,
-                              orElse: () => AuditPlanListModel(id: 00),
-                            )
-                            .status !=
-                        425
-                    ? Wrap(
-                        children: [
-                          varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kPmExecutionFeatureId &&
-                                          e.view ==
-                                              UserAccessConstants
-                                                  .kHaveEditAccess)
-                                      .length >
-                                  0
-                              ? TableActionButton(
-                                  color: ColorValues.editColor,
-                                  icon: Icons.edit,
-                                  message: 'Edit',
-                                  onPress: () {
-                                    controller.clearStoreIdData();
-                                    int id =
-                                        AuditPlanPlanningListDetails?.id ?? 0;
-                                    if (id != 0) {
-                                      Get.toNamed(Routes.createAudit, arguments: {
-                                        "auditId": id,
-                                        'type': controller.type.value
-                                      });
-                                    }
-                                  },
-                                )
-                              : Dimens.box0,
-                          varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kAuditPlanFeatureId &&
-                                          e.delete ==
-                                              UserAccessConstants
-                                                  .kHaveDeleteAccess)
-                                      .length >
-                                  0
-                              ? TableActionButton(
-                                  color: ColorValues.deleteColor,
-                                  icon: Icons.delete,
-                                  message: 'Delete',
-                                  onPress: () {
-                                    controller.isDeleteDialog(
-                                        planName: AuditPlanPlanningListDetails
-                                            ?.plan_number,
-                                        planId: AuditPlanPlanningListDetails?.id
-                                            .toString());
-                                  },
-                                )
-                              : Dimens.box0,
-                        ],
-                      )
-                    : Dimens.box0,
+                        controller.auditPlanList
+                                    .firstWhere(
+                                      (e) =>
+                                          e.id ==
+                                          AuditPlanPlanningListDetails!.id,
+                                      orElse: () => AuditPlanListModel(id: 00),
+                                    )
+                                    .status !=
+                                425
+                            ? Wrap(
+                                children: [
+                                  varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kPmExecutionFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveEditAccess)
+                                                  .length >
+                                              0 &&
+                                          (AuditPlanPlanningListDetails
+                                                      ?.short_status ==
+                                                  'Rejected' ||
+                                              AuditPlanPlanningListDetails
+                                                      ?.short_status ==
+                                                  'Schedule')
+                                      ? TableActionButton(
+                                          color: ColorValues.editColor,
+                                          icon: Icons.edit,
+                                          message: 'Edit',
+                                          onPress: () {
+                                            controller.clearStoreIdData();
+                                            int id =
+                                                AuditPlanPlanningListDetails
+                                                        ?.id ??
+                                                    0;
+                                            if (id != 0) {
+                                              Get.toNamed(Routes.createAudit,
+                                                  arguments: {
+                                                    "auditId": id,
+                                                    'type':
+                                                        controller.type.value
+                                                  });
+                                            }
+                                          },
+                                        )
+                                      : Dimens.box0,
+                                  varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kAuditPlanFeatureId &&
+                                                      e.delete ==
+                                                          UserAccessConstants
+                                                              .kHaveDeleteAccess)
+                                                  .length >
+                                              0 &&
+                                          (AuditPlanPlanningListDetails
+                                                      ?.short_status ==
+                                                  'Rejected' ||
+                                              AuditPlanPlanningListDetails
+                                                      ?.short_status ==
+                                                  'Schedule')
+                                      ? TableActionButton(
+                                          color: ColorValues.deleteColor,
+                                          icon: Icons.delete,
+                                          message: 'Delete',
+                                          onPress: () {
+                                            controller.isDeleteDialog(
+                                                planName:
+                                                    AuditPlanPlanningListDetails
+                                                        ?.plan_number,
+                                                planId:
+                                                    AuditPlanPlanningListDetails
+                                                        ?.id
+                                                        .toString());
+                                          },
+                                        )
+                                      : Dimens.box0,
+                                ],
+                              )
+                            : Dimens.box0,
                         // varUserAccessModel.value.access_list!
                         //             .where((e) =>
                         //                 e.feature_id ==

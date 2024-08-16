@@ -620,6 +620,10 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                       !controller.openPurchaseDatePicker;
                                   controller.update(['stock_Mangement']);
                                 },
+                                onCancel: () {
+                                  controller.openPurchaseDatePicker = false;
+                                  controller.update(['stock_Mangement']);
+                                },
                               ),
                             ),
                         ],

@@ -13,4 +13,12 @@ class ModuleCleaningDashboardController extends GetxController {
   void onInit() async {
     super.onInit();
   }
+
+  void clearStoreDataMcid() {
+    moduleCleaningDashboardPresenter.clearValueMcId();
+  }
+
+  void clearStoreDataPlanid() {
+    moduleCleaningDashboardPresenter.clearValuePlanId();
+  }
 }

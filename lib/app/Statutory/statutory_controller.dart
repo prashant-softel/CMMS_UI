@@ -52,24 +52,24 @@ class StatutoryController extends GetxController {
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "ID": true,
     "Compliance": true,
-    "Status OF Application": true,
+    "Status Of Application": true,
     "Date of received": true,
     "Validity (Month)": true,
     "Days Left": true,
     "Expires on": true,
-    "Status Code": true,
+    // "Status Code": true,
 
     // "search": true,
   });
   final Map<String, double> columnwidth = {
     "ID": 150,
     "Compliance": 150,
-    "Status OF Application": 250,
+    "Status Of Application": 250,
     "Date of received": 200,
     "Validity (Month)": 183,
     "Days Left": 120,
     "Expires on": 140,
-    "Status Code": 150
+    // "Status Code": 150
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -85,12 +85,12 @@ class StatutoryController extends GetxController {
     this.filterText = {
       "ID": idFilterText,
       "Compliance": complianceFilterText,
-      "Status OF Application": statusOFApplicationFilterText,
+      "Status Of Application": statusOFApplicationFilterText,
       "Date of received": dateofReceivedFilterText,
       "Validity (Month)": validityFilterText,
       "Days Left": daysLeftFilterText,
       "Expires on": expiresOnFilterText,
-      "Status Code": statusCodeFilterText,
+      // "Status Code": statusCodeFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -102,6 +102,10 @@ class StatutoryController extends GetxController {
       }
     });
     super.onInit();
+  }
+  void getstatutorylistbydate() {
+    getStatutoryDataList(
+              facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
   void search(String keyword) {

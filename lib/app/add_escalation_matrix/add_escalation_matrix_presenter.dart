@@ -10,10 +10,14 @@ class AddEscalationMatrixPresenter {
 
   Future<Map<String, dynamic>?> createEscalationMatrix({
     createEscalationMatrix,
+    required int moduleId,
+    required int statusId,
     required bool isLoading,
   }) async {
     return addEscalationMatrixUsecase.createEscalationMatrix(
       createEscalationMatrix: createEscalationMatrix,
+      moduleId: moduleId,
+      statusId: statusId,
       isLoading: isLoading,
     );
   }

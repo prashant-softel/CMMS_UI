@@ -127,6 +127,10 @@ class MrsViewApproveContentMobile extends GetView<MrsApproveController> {
                                     ]),
                               ),
                             ]),
+                        Text(
+                          "Materials  ",
+                          style: Styles.blue700,
+                        ),
                         ListView.builder(
                             //physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -185,7 +189,20 @@ class MrsViewApproveContentMobile extends GetView<MrsApproveController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel.asset_type ??
+                                                  mrsViewModel.asset_type ?? '',
+                                                  style: Styles.appDarkBlue12),
+                                            )
+                                          ]),
+                                          Row(children: [
+                                            Text('Available Qty.: ',
+                                                style: Styles.appDarkGrey12),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  mrsViewModel.available_qty
+                                                          .toString() ??
                                                       '',
                                                   style: Styles.appDarkBlue12),
                                             )
@@ -205,7 +222,7 @@ class MrsViewApproveContentMobile extends GetView<MrsApproveController> {
                                             )
                                           ]),
                                           Row(children: [
-                                            Text('issued Qyt.: ',
+                                            Text('issued Qty.: ',
                                                 style: Styles.appDarkGrey12),
                                             SizedBox(
                                               width: 5,

@@ -1,5 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/dashboard_controller.dart';
+import 'package:cmms/app/home/views/devices.dart';
+import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,9 +19,9 @@ class HomeScreen extends GetView<DashboardController> {
       child: Scaffold(
         appBar: Responsive.isMobile(context)
             ? AppBar(
-                title: Text('Home'),
-                centerTitle: true,
-                elevation: 0,
+                title: HeadingProfileAppBar(
+                  title: "Home",
+                ),
               )
             : null,
         drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
@@ -41,9 +43,15 @@ class HomeScreen extends GetView<DashboardController> {
                   Expanded(
                     child: Column(
                       children: [
-                        (Responsive.isDesktop(context))
-                            ? Expanded(child: DashBoardHomeWeb())
-                            : Dimens.box0
+                        if (Responsive.isDesktop(context))
+                          Expanded(child: DashBoardHomeWeb()),
+                        if (Responsive.isMobile(context))
+                          Expanded(
+                            child: DashBoardHomeMobile(),
+                          )
+                        // (Responsive.isDesktop(context))
+                        //     ? Expanded(child: DashBoardHomeWeb())
+                        //     : Dimens.box0
                       ],
                     ),
                   )

@@ -79,7 +79,7 @@ class _StatutoryWebState extends State<StatutoryWeb> {
                               child: Text(" / HSE REPORT",
                                   style: Styles.greyLight14),
                             ),
-                            Text(" / STATUTORY", style: Styles.greyLight14)
+                            Text(" / STATUTORY LIST", style: Styles.greyLight14)
                           ],
                         ),
                       ),
@@ -112,8 +112,10 @@ class _StatutoryWebState extends State<StatutoryWeb> {
                                         Spacer(),
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Date Range'),
-                                            Dimens.boxWidth10,
+                                            CustomRichText(
+                                                title: 'Date Range',
+                                                includeAsterisk: false),
+                                            Dimens.boxWidth2,
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
                                                       .size
@@ -133,7 +135,7 @@ class _StatutoryWebState extends State<StatutoryWeb> {
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        Dimens.boxWidth3,
                                         ActionButton(
                                           icon: Icons.add,
                                           label: "Add New",
@@ -244,7 +246,7 @@ class _StatutoryWebState extends State<StatutoryWeb> {
                                       Container(
                                         width: 300,
                                         height: 40,
-                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        margin: EdgeInsets.only(right: 10),
                                         child: TextField(
                                           style: GoogleFonts.lato(
                                             textStyle: TextStyle(
@@ -373,14 +375,19 @@ class _StatutoryWebState extends State<StatutoryWeb> {
                                       ? controller.toDate.value = dropDate
                                       : controller.toDate.value = pickUpDate;
 
-                                  // controller.getPmTaskListByDate();
+                                  controller.getstatutorylistbydate();
                                   controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
+                                      false;
                                   controller.update(['stock_Mangement_Date']);
 
                                   // Get.toNamed(
                                   //   Routes.stockManagementGoodsOrdersScreen,
                                   // );
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
                                 },
                               ),
                             ),
@@ -502,7 +509,7 @@ class StatutoryListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' SR ${StatutoryListDetails?.id}',
+                        ' SR${StatutoryListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(

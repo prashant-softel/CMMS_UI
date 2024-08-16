@@ -1,4 +1,5 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/veg_plan_detail_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 
@@ -15,6 +16,18 @@ class ViewVegPlanUsecase {
         planId: planId,
         facilityId: facilityId,
         isLoading: isLoading ?? false,
+      );
+  Future<List<HistoryModel>?> getHistory({
+    moduleType,
+    id,
+    facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getHistory(
+        moduleType,
+        id,
+        facilityId,
+        isLoading,
       );
   Future<Map<String, dynamic>> vegPlanApprovedButton({
     vegApproveJsonString,

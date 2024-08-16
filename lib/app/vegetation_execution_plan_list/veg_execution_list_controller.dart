@@ -61,7 +61,7 @@ class VegExecutionListController extends GetxController {
     "No Of Days": true,
     "Start Date": true,
     "Done Date": true,
-    "Status": true,
+    // "Status": true,
     // "search": true,
   });
   final Map<String, double> columnwidth = {
@@ -73,7 +73,7 @@ class VegExecutionListController extends GetxController {
     "No Of Days": 153,
     "Start Date": 130,
     "Done Date": 120,
-    "Status": 100
+    // "Status": 100
   };
 
   Map<String, RxString> filterText = {};
@@ -100,7 +100,7 @@ class VegExecutionListController extends GetxController {
       "No Of Days": noOfDaysFilterText,
       "Start Date": startDateFilterText,
       "Done Date": doneDateFilterText,
-      "Status": statusFilterText,
+      // "Status": statusFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -205,7 +205,7 @@ class VegExecutionListController extends GetxController {
       isLoading.value = false;
     }
 
-    // update(['veg_task_list']);
+    update(['veg_task_list']);
   }
 
   void onValueChanged(dynamic list, dynamic value) {

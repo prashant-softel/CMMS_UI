@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:cmms/app/create_mrs_return/create_mrs_return_presenter.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,6 +26,8 @@ class CreateMrsReturnController extends GetxController {
   RxList<PlantStockListModel?> assetItemList = <PlantStockListModel?>[].obs;
   RxList<StockDetails?> StockDetailsList = <StockDetails?>[].obs;
   Rx<String> selectedasset = ''.obs;
+  RxInt jobid = 0.obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
 
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
   RxMap<dynamic, dynamic> checkdropdownMapperData = {}.obs;
@@ -33,10 +37,11 @@ class CreateMrsReturnController extends GetxController {
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
   var setTemlateCtrlr = TextEditingController();
-  var allDropdownsSelected = true.obs;
+  var allDropdownsSelected = false.obs;
   RxList<ScheduleCheckPoint> scheduleCheckPoints = <ScheduleCheckPoint>[].obs;
   RxList<ScheduleCheckPoint> scheduleCheckPointsdrop =
       <ScheduleCheckPoint>[].obs;
+  RxList<WorkingAreaList>? workingAreaList = <WorkingAreaList>[].obs;
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<int> type = 0.obs;
   Rx<String> activity = ''.obs;
@@ -74,7 +79,11 @@ class CreateMrsReturnController extends GetxController {
               facilityId,
             );
             getAssetList(facilityId);
-            getPmtaskViewList(facilityId: facilityId);
+            if (type.value == 1) {
+              getJobDetails(jobid.value, facilityId);
+            } else {
+              getPmtaskViewList(facilityId: facilityId);
+            }
           });
         }
       }
@@ -99,7 +108,9 @@ class CreateMrsReturnController extends GetxController {
       fromActorTypeId.value = dataFromPreviousScreen['fromActorTypeId'];
       to_actor_type_id.value = dataFromPreviousScreen['to_actor_type_id'];
       mrsId.value = dataFromPreviousScreen['mrsId'];
-
+      if (type.value == 1) {
+        jobid.value = dataFromPreviousScreen['jobId'];
+      }
       createmrsReturnPresenter.saveValue(
           whereUsedTypeId: whereUsedTypeId.value.toString());
       createmrsReturnPresenter.saveValuee(type: type.value.toString());
@@ -137,6 +148,22 @@ class CreateMrsReturnController extends GetxController {
     addRowItem();
   }
 
+  void getJobDetails(int? jobId, int facilityId) async {
+    try {
+      final _jobDetailsList = await createmrsReturnPresenter.getJobDetails(
+          facilityId: facilityId, jobId: jobId, isLoading: false);
+
+      if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
+        jobDetailsModel.value =
+            _jobDetailsList.firstWhereOrNull((element) => element?.id != null);
+        workingAreaList?.value = jobDetailsModel.value!.workingAreaList!;
+        update(["jobDetailsModel"]);
+      }
+    } catch (e) {
+      Utility.showDialog(e.toString(), 'getJobDetails');
+    }
+  }
+
   Future<void> getAssetList(int _facilityId) async {
     assetList.value = <GetAssetDataModel>[];
     final _assetList =
@@ -155,9 +182,9 @@ class CreateMrsReturnController extends GetxController {
     rowFaultyItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "assets", "value": ''},
-      {'key': "Material_Type", "value": ''},
+      // {'key': "Material_Type", "value": ''},
       {'key': "code", "value": ''},
-      {'key': "Material_Category", "value": ''},
+      // {'key': "Material_Category", "value": ''},
       {'key': "Sr_no", "value": ''},
       {'key': "Return_Qty", "value": '1'},
       {'key': "Remark", "value": ''},
@@ -257,10 +284,12 @@ class CreateMrsReturnController extends GetxController {
         assetMasterItemID:
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
         mrsItemID: 0,
-        assetsID: checkdropdownMapperData[element[1]["value"]].assetsID,
-        sr_no: element[6]["value"] ?? '0',
-        returned_qty: int.tryParse(element[6]["value"] ?? '0'),
-        return_remarks: element[7]["value"] ?? '0',
+        assetsID: type == 1
+            ? checkdropdownMapperData[element[1]["value"]].asset_id
+            : checkdropdownMapperData[element[1]["value"]].assetsID,
+        sr_no: element[3]["value"] ?? '0',
+        returned_qty: int.tryParse(element[4]["value"] ?? '0'),
+        return_remarks: element[5]["value"] ?? '0',
       );
       faultyItems.add(item);
     });

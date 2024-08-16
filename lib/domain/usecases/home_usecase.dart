@@ -24,6 +24,9 @@ class HomeUsecase {
   void pmclearValue() async => _repository.clearData(LocalKeys.pmTaskId);
   void iRclearValue() async => _repository.clearData(LocalKeys.irId);
 
+  void smclearValue() async => _repository.clearData(LocalKeys.goId);
+  void clearTypeValue() async => _repository.clearData(LocalKeys.goType);
+
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int? facilityId,

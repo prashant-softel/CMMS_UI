@@ -20,12 +20,24 @@ class PlantStockReportDetailsPresenter {
       isLoading: isLoading ?? false,
     );
   }
-//  void saveValue({String? assetID}) async {
-//     return PlantStockReportDetailsUsecase.saveValue(assetID: assetID);
-//   }
-
-//   Future<String?> getValue() async =>
-//       await PlantStockReportDetailsUsecase.getValue();
+void saveValue({String? assetId}) async {
+  return plantStockReportDetailsUsecase.saveValue(assetId: assetId);
+}
+void savestartValue({String? startdate}) async {
+  return plantStockReportDetailsUsecase.savestartValue(startdate: startdate);
+}
+void saveendValue({String? enddate}) async {
+  return plantStockReportDetailsUsecase.saveendValue(enddate: enddate);
 }
 
+Future<String?> getValue() async {
+  return await plantStockReportDetailsUsecase.getValue();
+}
+Future<String?> getStartdateValue() async {
+  return await plantStockReportDetailsUsecase.getStartdateValue();
+}
+Future<String?> getEnddateValue() async {
+  return await plantStockReportDetailsUsecase.getEnddateValue();
+}
+}
 

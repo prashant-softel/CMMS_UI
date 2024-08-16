@@ -8,9 +8,10 @@ import '../theme/dimens.dart';
 import '../utils/responsive.dart';
 
 class FileUploadWidgetWithDropzone extends StatefulWidget {
-  FileUploadWidgetWithDropzone({
-    Key? key,
-  }) : super(key: key);
+  bool? uploadSingleFile = true;
+
+  FileUploadWidgetWithDropzone({Key? key, this.uploadSingleFile})
+      : super(key: key);
 
   @override
   State<FileUploadWidgetWithDropzone> createState() =>
@@ -74,7 +75,8 @@ class _FileUploadWidgetWithDropzoneState
                                     height: 23,
                                     child: ElevatedButton.icon(
                                       onPressed: () {
-                                        controller.addFiles();
+                                        controller.addFiles(
+                                            single: widget.uploadSingleFile);
                                         controller.showUploadButton.value =
                                             true;
                                       },

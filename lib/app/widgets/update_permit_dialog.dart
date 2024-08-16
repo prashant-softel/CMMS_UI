@@ -11,9 +11,17 @@ class UpdateNewPermitDialog extends GetView {
   String? data;
   List<dynamic>? PtwId;
   int? type;
+  int? vegexid;
+  int? vegplanId;
 
   UpdateNewPermitDialog(
-      {super.key, this.createPermitData, this.data, this.PtwId, this.type});
+      {super.key,
+      this.createPermitData,
+      this.data,
+      this.PtwId,
+      this.type,
+      this.vegplanId,
+      this.vegexid});
   final NewPermitController controller = Get.find();
 
   @override
@@ -156,7 +164,33 @@ class UpdateNewPermitDialog extends GetView {
                         onPressed: () => Get.offAllNamed(Routes.pmTaskView),
                         child: const Text('View Task'),
                       )
-                    : Dimens.box0,
+                    : type == 3
+                        ? ElevatedButton(
+                            style: Styles.darkBlueElevatedButtonStyle,
+                            onPressed: () =>
+                                Get.offAllNamed(Routes.viewAuditTask),
+                            child: const Text('View Audit'),
+                          )
+                        : type == 4
+                            ? ElevatedButton(
+                                style: Styles.darkBlueElevatedButtonStyle,
+                                onPressed: () => Get.offAllNamed(Routes
+                                    .addModuleCleaningExecutionContentWeb),
+                                child: const Text('View MC'),
+                              )
+                            : type == 5
+                                ? ElevatedButton(
+                                    style: Styles.darkBlueElevatedButtonStyle,
+                                    onPressed: () => Get.offAllNamed(
+                                      Routes.vegExecutionScreen,
+                                      arguments: {
+                                        "vegexe": vegexid,
+                                        "vegid": vegplanId,
+                                      },
+                                    ),
+                                    child: const Text('View VEG'),
+                                  )
+                                : Dimens.box0,
             Dimens.boxWidth10,
           ]),
         ],

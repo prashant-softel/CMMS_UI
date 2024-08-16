@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:cmms/app/edit_return_mrs/edit_return_mrs_presenter.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/create_return_mrs_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
+import 'package:cmms/domain/models/job_card_details_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,6 +28,8 @@ class EditMrsReturnController extends GetxController {
   var allDropdownsSelected = true.obs;
   RxMap<dynamic, dynamic> checkdropdownMapperData = {}.obs;
   Rx<String> selectedasset = ''.obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
+  RxList<WorkingAreaList>? workingAreaList = <WorkingAreaList>[].obs;
 
   // RxList<CmmrsItemsModel?> assetItemList = <CmmrsItemsModel?>[].obs;
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
@@ -40,11 +45,12 @@ class EditMrsReturnController extends GetxController {
   RxList<List<Map<String, String>>> rowFaultyItem =
       <List<Map<String, String>>>[].obs;
   RxMap<dynamic, dynamic> dropdownFaultyMapperData = {}.obs;
-  int mrsId = 0;
+  Rx<int> mrsId = 0.obs;
   var isSetTemplate = false.obs;
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   Rx<ReturnMrsDetailsModel?> returnMrsDetailsModel =
       ReturnMrsDetailsModel().obs;
+  RxList<JobCardDetailsModel?> jobCardList = <JobCardDetailsModel?>[].obs;
 
   void setTemplatetoggle() {
     isSetTemplate.value = !isSetTemplate.value;
@@ -53,17 +59,49 @@ class EditMrsReturnController extends GetxController {
   ///
   @override
   void onInit() async {
-    mrsId = Get.arguments;
+    try {
+      await setMrsId();
 
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getReturnMrsDetails(
-            mrsId: mrsId, isloading: true, facilityId: facilityId);
-        // getAssetList(facilityId);
+      facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+        facilityId = event;
+        if (facilityId > 0) {
+          if (mrsId != 0) {
+            Future.delayed(Duration(seconds: 1), () {
+              getReturnMrsDetails(
+                  mrsId: mrsId.value, isloading: true, facilityId: facilityId);
+              // getAssetList(facilityId);
+            });
+          }
+        }
       });
-    });
-    super.onInit();
+      // if (mrsId != 0) {
+      //   await getMrsDetails(mrsId: mrsId.value, isloading: true);
+      // }
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> setMrsId() async {
+    try {
+      final _mrsId = await editmrsReturnPresenter.getValue();
+      // final _type = await editmrsReturnPresenter.getValue();
+      if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        mrsId.value = dataFromPreviousScreen['mrsId'];
+        // type.value = dataFromPreviousScreen['type'];
+        editmrsReturnPresenter.saveValue(mrsId: mrsId.value.toString());
+        // editMrsPresenter.saveValuee(type: type.value.toString());
+      } else {
+        mrsId.value = int.tryParse(_mrsId) ?? 0;
+        // type.value = int.tryParse(_type!) ?? 0;
+      }
+      //  await _flutterSecureStorage.delete(key: "mrsId");
+    } catch (e) {
+      Utility.showDialog(e.toString(), 'mrsId');
+    }
   }
 
   Future<void> getReturnMrsDetails(
@@ -75,13 +113,44 @@ class EditMrsReturnController extends GetxController {
     if (_returnMrsrsDetailsModel != null) {
       returnMrsDetailsModel.value = _returnMrsrsDetailsModel;
 
-      getCmmsItemList(
-        _returnMrsrsDetailsModel.mrs_id ?? 0,
-      );
-      getAssetList(facilityId);
-      getPmtaskViewList(facilityId: facilityId);
+      if (returnMrsDetailsModel.value?.whereUsedType == "JOBCARD") {
+        jobCardList.value = await editmrsReturnPresenter.getJobCardDetails(
+              jobCardId: returnMrsDetailsModel.value?.whereUsedTypeId,
+              isLoading: true,
+            ) ??
+            [];
+        if (jobCardList.value != null) {
+          getJobDetails(jobCardList.value[0]!.jobId, facilityId);
+          await getCmmsItemList(
+            _returnMrsrsDetailsModel.mrs_id ?? 0,
+          );
+        }
+      } else {
+        getPmtaskViewList(facilityId: facilityId);
+        await getCmmsItemList(
+          _returnMrsrsDetailsModel.mrs_id ?? 0,
+        );
+      }
+
+      await getAssetList(facilityId);
     }
     // print({"mrsdetailss", returnMrsDetailsModel.value});
+  }
+
+  void getJobDetails(int? jobId, int facilityId) async {
+    try {
+      final _jobDetailsList = await editmrsReturnPresenter.getJobDetails(
+          facilityId: facilityId, jobId: jobId, isLoading: false);
+
+      if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
+        jobDetailsModel.value =
+            _jobDetailsList.firstWhereOrNull((element) => element?.id != null);
+        workingAreaList?.value = jobDetailsModel.value!.workingAreaList!;
+        update(["jobDetailsModel"]);
+      }
+    } catch (e) {
+      Utility.showDialog(e.toString(), 'getJobDetails');
+    }
   }
 
   Future<void> getCmmsItemList(int orginmrsId) async {
@@ -150,9 +219,15 @@ class EditMrsReturnController extends GetxController {
             "value": '${element.name}',
             "id": '${element.mrs_item_id}'
           },
-          {'key': "code", "value": ''},
-          {'key': "Material_Type", "value": ''},
-          {'key': "Material_Category", "value": ''},
+          {
+            'key': "assets",
+            "value": '${element.fromActorName}',
+            "id": '${element.fromActorID}'
+          },
+
+          // {'key': "code", "value": ''},
+          // {'key': "Material_Type", "value": ''},
+          // {'key': "Material_Category", "value": ''},
           {'key': "Sr_no", "value": '${element.serial_number}'},
           {'key': "Return_Qty", "value": '${element.returned_qty}'},
           {'key': "Remark", "value": '${element.return_remarks}'},
@@ -160,8 +235,19 @@ class EditMrsReturnController extends GetxController {
           // {'key': "Action ", "value": ''},
         ]);
         dropdownFaultyMapperData[element.name] = assetList.firstWhere(
-            (e) => e!.asset_type == element.asset_type,
+            (e) => e!.asset_code == element.asset_code,
             orElse: null);
+        if (returnMrsDetailsModel.value?.whereUsedType == "JOBCARD") {
+          checkdropdownMapperData[element.fromActorName ?? ""] =
+              workingAreaList!.firstWhere(
+                  (e) => e.name == element.fromActorName,
+                  orElse: null);
+        } else {
+          checkdropdownMapperData[element.fromActorName ?? ""] =
+              scheduleCheckPointsdrop.firstWhere(
+                  (e) => e.name == element.fromActorName,
+                  orElse: null);
+        }
       });
       update(["AssetList"]);
     }
@@ -173,7 +259,7 @@ class EditMrsReturnController extends GetxController {
       {"key": "Drop_down", "value": 'Please Select', 'item_id': ''},
       {'key': "Sr_No", "value": ''},
       {'key': "code", "value": ''},
-      {'key': "Material_Type", "value": ''},
+      // {'key': "Material_Type", "value": ''},
       {'key': "Issue_Qty", "value": ''},
       {'key': "Used_Qty", "value": ''},
       {'key': "Return_Qty", "value": ''},
@@ -235,10 +321,10 @@ class EditMrsReturnController extends GetxController {
   void addRowFaultyItem() {
     rowFaultyItem.add([
       {"key": "Drop_down", "value": 'Please Select', "id": ''},
-      {'key': "assets", "value": ''},
-      {'key': "code", "value": ''},
-      {'key': "Material_Type", "value": ''},
-      {'key': "Material_Category", "value": ''},
+      {'key': "assets", "value": '', "id": ''},
+      // {'key': "code", "value": ''},
+      // {'key': "Material_Type", "value": ''},
+      // {'key': "Material_Category", "value": ''},
       {'key': "Sr_no", "value": ''},
       {'key': "Return_Qty", "value": '1'},
       {'key': "Remark", "value": ''},
@@ -267,28 +353,39 @@ class EditMrsReturnController extends GetxController {
         assetMasterItemID:
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
         mrsItemID: int.tryParse(element[0]["id"] ?? '0'),
-        assetsID: checkdropdownMapperData[element[1]["value"]].assetsID,
-        sr_no: element[4]["value"] ?? '0',
-        returned_qty: int.tryParse(element[5]["value"] ?? '0'),
-        return_remarks: element[6]["value"] ?? '0',
+        assetsID: returnMrsDetailsModel.value?.whereUsedType == "JOBCARD"
+            ? checkdropdownMapperData[element[1]["value"]].asset_id
+            : checkdropdownMapperData[element[1]["value"]].assetsID,
+        sr_no: element[2]["value"] ?? '0',
+        returned_qty: int.tryParse(element[3]["value"] ?? '0'),
+        return_remarks: element[4]["value"] ?? '0',
       );
       faultyItems.add(item);
     });
     CreateReturnMrsModel createMrs = CreateReturnMrsModel(
-        ID: mrsId,
+        ID: mrsId.value,
         facility_ID: facilityId,
         setAsTemplate: "", //isSetTemplate == true ? 1 : 0,
         activity: _activity,
         //1 is job,2 is pm
-        whereUsedType: 27,
+
+        whereUsedType: returnMrsDetailsModel.value?.whereUsedType == "PMTASK"
+            ? 27
+            : 4, //27,
         whereUsedTypeId: returnMrsDetailsModel.value?.whereUsedTypeId,
         to_actor_id: facilityId, //
-        to_actor_type_id: 2, // to_actor_type_id.value,
-        from_actor_type_id: 3, // fromActorTypeId.value,
+        to_actor_type_id: returnMrsDetailsModel.value?.whereUsedType == "PMTASK"
+            ? 2
+            : 2, // to_actor_type_id.value,
+        from_actor_type_id:
+            returnMrsDetailsModel.value?.whereUsedType == "PMTASK"
+                ? 3
+                : 4, // fromActorTypeId.value,
         from_actor_id: returnMrsDetailsModel.value?.whereUsedTypeId,
         remarks: _remark,
         cmmrsItems: items,
         faultyItems: faultyItems);
+
     var createReturnMrsJsonString = createMrs.toJson();
 
     print({"createReturnMrsJsonString", createReturnMrsJsonString});

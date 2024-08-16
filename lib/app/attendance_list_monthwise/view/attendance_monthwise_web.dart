@@ -116,11 +116,9 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
                                             numberTextField: true,
                                             onTap: () {
                                               controller
-                                                      .openFromDateToStartDatePicker
-                                                      .value =
+                                                      .openFromDateToStartDatePicker =
                                                   !controller
-                                                      .openFromDateToStartDatePicker
-                                                      .value;
+                                                      .openFromDateToStartDatePicker;
                                               controller.update(
                                                   ['attendance-list-month']);
                                             },
@@ -171,10 +169,11 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
                                             200,
                                         constraints: BoxConstraints(
                                           minWidth: Get.width,
-                                          maxWidth: Get.width * 5,
+                                          maxWidth: Get.width * 6,
                                         ),
                                         child: DataTable2(
-                                          minWidth: Get.width * 1.2,
+                                          fixedLeftColumns: 1,
+                                          minWidth: Get.width * 5,
                                           border: TableBorder.all(
                                               color: Colors.black),
                                           dataRowHeight: 40,
@@ -194,7 +193,7 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
                     ),
                   ],
                 ),
-                if (controller.openFromDateToStartDatePicker.value)
+                if (controller.openFromDateToStartDatePicker)
                   Positioned(
                     right: 230,
                     top: 90,
@@ -223,13 +222,12 @@ class _AttendanceMonthWiseWebState extends State<AttendanceMonthWiseWeb> {
                             ? controller.toDate.value = dropDate
                             : controller.toDate.value = pickUpDate;
                         controller.getAttendanceListByDate();
-                        controller.openFromDateToStartDatePicker.value =
-                            !controller.openFromDateToStartDatePicker.value;
+                        controller.openFromDateToStartDatePicker = false;
                         controller.update(['stock_Mangement_Date']);
-
-                        // Get.toNamed(
-                        //   Routes.stockManagementGoodsOrdersScreen,
-                        // );
+                      },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['stock_Mangement_Date']);
                       },
                     ),
                   ),

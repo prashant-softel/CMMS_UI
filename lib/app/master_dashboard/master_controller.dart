@@ -200,12 +200,6 @@ class MastersController extends GetxController {
     );
   }
 
-  Future<void> goToDocumentManager() async {
-    Get.toNamed(
-      Routes.documentManager,
-    );
-  }
-
   Future<void> goToTypeOfObservation() async {
     Get.toNamed(
       Routes.typeofobservation,
@@ -291,6 +285,7 @@ class MastersController extends GetxController {
   }
 
   Future<void> createWarrantyClaimList() async {
+    clearWarrantyValue();
     Get.toNamed(
       Routes.createWarrantyClaimList,
     );
@@ -352,6 +347,15 @@ class MastersController extends GetxController {
 
   void clearStoreUserIdData() {
     mastersPresenter.clearStoreUserIdData();
+  }
+
+  void clearAssetsIdStoreData() {
+    mastersPresenter.clearAssetsIdStoreData();
+  }
+
+  void clearWarrantyValue() {
+    mastersPresenter.clearWarrantyValue();
+    mastersPresenter.clearWarrantyTypeValue();
   }
 
   Future<void> documentUpload() async {

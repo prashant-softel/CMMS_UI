@@ -550,8 +550,9 @@ class ReturnMrsListDataSource extends DataTableSource {
                                 onPress: () {
                                   controller.clearStoreData();
                                   int mrsId = MrsDetails?.id ?? 0;
-                                  Get.toNamed(Routes.editReturnMrs,
-                                      arguments: mrsId);
+                                  Get.toNamed(Routes.editReturnMrs, arguments: {
+                                    'mrsId': mrsId,
+                                  });
                                 },
                               )
                             : Dimens.box0,

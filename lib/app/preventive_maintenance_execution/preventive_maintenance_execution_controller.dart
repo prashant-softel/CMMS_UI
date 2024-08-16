@@ -5,12 +5,15 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/transferItems_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../domain/models/file_upload_model.dart';
@@ -19,7 +22,6 @@ import '../../domain/models/update_pm_task_execution_model.dart';
 import 'preventive_maintenance_execution_presenter.dart';
 
 class PreventiveMaintenanceExecutionController extends GetxController {
-  ///
   PreventiveMaintenanceExecutionController(
     this.preventiveMaintenanceExecutionPresenter,
   );
@@ -48,7 +50,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<MRSListByJobIdModel?>? listMrsByTaskId = <MRSListByJobIdModel?>[].obs;
   RxList<CmmrsItems?>? cmmrsItems = <CmmrsItems?>[].obs;
-  RxList<MaterialUsedAssets?>? materialUsedAssets = <MaterialUsedAssets?>[].obs;
+  RxList<WorkingAreaList?>? materialUsedAssets = <WorkingAreaList?>[].obs;
 
   var commentCtrlr = TextEditingController();
   var updatecommentCtrlr = TextEditingController();
@@ -87,6 +89,9 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Rx<bool> allTrue = false.obs;
   Rx<bool> isforminvalid = false.obs;
 
+  var latitude = 0.0.obs;
+  var longitude = 0.0.obs;
+
   ///fileIDs
   int fileIds = 0;
   @override
@@ -107,6 +112,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                 facilityId: facilityId);
 
             getHistory();
+            getLocation();
           }
         }
       });
@@ -133,7 +139,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Future<void> getMrsListByModuleTask({required int taskId}) async {
     rowItem.value = [];
     cmmrsItems!.value = <CmmrsItems>[];
-    materialUsedAssets!.value = <MaterialUsedAssets>[];
+    materialUsedAssets!.value = <WorkingAreaList>[];
 
     listMrsByTaskId?.value =
         await preventiveMaintenanceExecutionPresenter.getMrsListByModuleTask(
@@ -163,8 +169,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
         if (matchedUsedAssets.isNotEmpty) {
           var usedItems = matchedUsedAssets.first!.items
-              ?.where(
-                  (usedItem) => usedItem.sm_asset_id == element?.asset_item_ID)
+              ?.where((usedItem) => usedItem.mrs_Item_Id == element?.id)
               .toList();
 
           if (usedItems != null && usedItems.isNotEmpty) {
@@ -185,8 +190,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
         dropdownMapperData[element?.name ?? ""] = listMrsByTaskId!
             .value.last!.cmmrsItems!
-            .firstWhere((e) => e!.serial_number == element?.serial_number,
-                orElse: null);
+            .firstWhere((e) => e!.id == element?.id, orElse: null);
       });
 
       _processJsonData();
@@ -214,18 +218,12 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       final _scheduleId =
           await preventiveMaintenanceExecutionPresenter.getValue();
 
-      //  String? _scheduleId = await _flutterSecureStorage.read(key: "pmTaskId");
       if (_scheduleId == null || _scheduleId == '' || _scheduleId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         scheduleId.value = dataFromPreviousScreen['pmTaskId'];
         preventiveMaintenanceExecutionPresenter.saveValue(
             pmTaskId: scheduleId.value.toString());
-
-        // await _flutterSecureStorage.write(
-        //   key: "pmTaskId",
-        //   value: scheduleId.value == null ? '' : scheduleId.value.toString(),
-        // );
       } else {
         scheduleId.value = int.tryParse(_scheduleId) ?? 0;
       }
@@ -235,13 +233,10 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   }
 
   Future<void> getHistory() async {
-    /// TODO: CHANGE THESE VALUES
     int moduleType = 27;
-    //
 
     historyList?.value =
         await preventiveMaintenanceExecutionPresenter.getHistory(
-              // tempModuleType,
               facilityId,
               moduleType,
               scheduleId.value,
@@ -274,7 +269,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
       _permitDetails.schedules?.forEach((element) {
-        //  if (element.completedBy_id == 0) {
         rowItemclone.value.add([
           {
             "key": "Asset",
@@ -293,7 +287,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           },
           {'key': "dropdown", "value": ''},
         ]);
-        // Add to scheduleCheckPoints if completedBy_id != 0
         if (element.completedBy_id != 0) {
           scheduleCheckPointsdrop.value.add(element);
         }
@@ -305,33 +298,30 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       }
       await getMrsListByModuleTask(taskId: scheduleId ?? 0);
     }
-    // selectedasset.value = scheduleCheckPoints[0].name ?? "";
     update(["getPmtaskViewList"]);
-
-    // print({"checklistObservations", checklistObservations});
   }
 
   Future<void> transferItem() async {
     List<TranferItems> items = [];
     rowItem.value.forEach((element) {
       TranferItems item = TranferItems(
-        assetItemID:
-            dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-        facilityID: pmtaskViewModel.value?.facility_id ?? 0,
-        fromActorID: scheduleId.value,
-        fromActorType: AppConstants.kTask,
-        mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-        mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
-        qty: int.tryParse(element[6]["value"] ?? '0') ?? 0,
-        refID: scheduleId.value,
-        refType: AppConstants.kTask,
-        remarks: "remarks",
-        toActorID: selectedItem?.assetsID ?? 0,
-        // dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
-        toActorType: AppConstants.kInventory,
-        transaction_id:
-            dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
-      );
+          assetItemID:
+              dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+          facilityID: pmtaskViewModel.value?.facility_id ?? 0,
+          fromActorID: scheduleId.value,
+          fromActorType: AppConstants.kTask,
+          mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
+          mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
+          qty: int.tryParse(element[6]["value"] ?? '0') ?? 0,
+          refID: scheduleId.value,
+          refType: AppConstants.kTask,
+          remarks: "remarks",
+          toActorID: selectedItem?.assetsID ?? 0,
+          toActorType: AppConstants.kInventory,
+          transaction_id:
+              dropdownMapperData[element[0]["value"]]?.transaction_id ?? 0,
+          latitude: latitude.value,
+          longitude: longitude.value);
 
       items.add(item);
     });
@@ -343,6 +333,36 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       transferItemJsonString: transferItemJsonString,
       isLoading: true,
     );
+  }
+
+  void getLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      print('Location services are disabled.');
+      return;
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print('Location permissions are denied.');
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      print('Location permissions are permanently denied.');
+      return;
+    }
+
+    Position position = await Geolocator.getCurrentPosition();
+    latitude.value = position.latitude;
+    longitude.value = position.longitude;
+    print('Current Position: ${position.toString()}');
   }
 
   Future<bool> browseFiles({
@@ -370,13 +390,11 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           pm_files: pmfile);
       addObservations.add(item);
     });
-    // });
+
     List<SchedulesTask> schedule = <SchedulesTask>[];
-    // checklistObservations?.forEach((e) {
     schedule.add(SchedulesTask(
         schedule_id: selectedItem?.schedule_id ?? 0,
         add_observations: addObservations));
-    // });
 
     UpdatePmExecutionMdel updatePmExecutionMdel = UpdatePmExecutionMdel(
         task_id: scheduleId.value,
@@ -390,7 +408,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       isLoading: true,
     );
     _updatedailog();
-    // Get.back();
   }
 
   void cloneDialog(String assets) {
@@ -417,11 +434,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
         return Obx(
           () => Container(
-            // margin: Dimens.edgeInsets15,
-            // padding: Dimens.edgeInsets25,
             height: height / 7,
             width: double.infinity,
-
             child: Column(
               children: [
                 RichText(
@@ -456,7 +470,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                         textColor: ColorValues.whiteColor,
                       ),
                     ),
-                    // Spacer(),
                     Dimens.boxWidth20,
                     Container(
                       height: 35,
@@ -511,12 +524,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
               closePtwJsonString: closePtwJsonString,
               isLoading: true,
               closetype: 1);
-      // if (response == true) {
-      //   final _flutterSecureStorage = const FlutterSecureStorage();
-
-      //   _flutterSecureStorage.delete(key: "pmTaskId");
-      //   Get.offAllNamed(Routes.pmTask);
-      // }
     }
   }
 
@@ -542,15 +549,9 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       content: Builder(builder: (context) {
         var height = Get.height;
 
-        return
-            //  Obx(
-            //   () =>
-            Container(
-          // margin: Dimens.edgeInsets15,
-          // padding: Dimens.edgeInsets25,
+        return Container(
           height: height / 7,
           width: double.infinity,
-
           child: Column(
             children: [
               RichText(
@@ -559,15 +560,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                   text:
                       'The schedule to be cloned contains job(s), do you want to create new job(s) during clone?',
                   style: Styles.blue700,
-                  // children: <TextSpan>[
-                  //   TextSpan(
-                  //     text: '\n ${selectedasset.value}',
-                  //     style: Styles.redBold15,
-                  //   ),
-                  //   TextSpan(
-                  //       text: '? It contain the job',
-                  //       style: Styles.blue700),
-                  // ]
                 ),
               ),
               Dimens.boxHeight12,
@@ -585,7 +577,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                       textColor: ColorValues.whiteColor,
                     ),
                   ),
-                  // Spacer(),
                   Dimens.boxWidth20,
                   Container(
                     height: 35,
@@ -628,7 +619,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
               ),
             ],
           ),
-          // ),
         );
       }),
       actions: [],
@@ -641,7 +631,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     var updatePMTaskExecutionJsonString = {
       "task_id": scheduleId.value,
       "comment": _comment,
-    }; //commentModel.toJson();
+    };
     final response =
         await preventiveMaintenanceExecutionPresenter.UpdatePMTaskExecution(
       updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
@@ -725,20 +715,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // RichText(
-                    //   text: TextSpan(
-                    //       text: 'PM Execution Submitted with',
-                    //       style: Styles.blue700,
-                    //       children: <TextSpan>[
-                    //         TextSpan(text: ' \n     Code', style: Styles.blue700),
-                    //         TextSpan(
-                    //           text: '  2444',
-                    //           style: Styles.redBold15,
-                    //         ),
-                    //       ]),
-                    // ),
-                    // Dimens.boxHeight12,
-                    //  Text("PM Execution Submitted with code PMSC87456"),
                     Container(
                       height: 35,
                       child: CustomElevatedButton(
@@ -770,9 +746,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
                               getHistory();
                             }
-                            // textControllers =
-                            //     List.generate(permitValuesCount, (_) => TextEditingController());
-                            // permitValues = RxList<String>.filled(permitValuesCount, '');
                           } catch (e) {
                             print(e);
                           }

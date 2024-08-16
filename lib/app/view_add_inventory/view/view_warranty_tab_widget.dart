@@ -61,8 +61,8 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                                       width:
                                           MediaQuery.of(context).size.width / 5,
                                       dropdownList: controller.warrantyNameList,
-                                      isValueSelected:
-                                          controller.isWarrentyNameSelected.value,
+                                      isValueSelected: controller
+                                          .isWarrentyNameSelected.value,
                                       selectedValue:
                                           controller.selectedWarrantyName.value,
                                       onValueChanged: controller.onValueChanged,
@@ -91,7 +91,8 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                                       dropdownList:
                                           controller.warrantyUsageTermNameList,
                                       isValueSelected: controller
-                                          .iswarrantyUsageTermNameSelected.value,
+                                          .iswarrantyUsageTermNameSelected
+                                          .value,
                                       selectedValue: controller
                                           .selectedwarrantyUsageTermListName
                                           .value,
@@ -107,29 +108,30 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                             child: Row(
                               children: [
                                 CustomRichText(
-                                    includeAsterisk: false, title: "Description"),
+                                    includeAsterisk: false,
+                                    title: "Description"),
                                 SizedBox(width: 10),
                                 LoginCustomTextfield(
-                                    width:
-                                        (MediaQuery.of(context).size.width * .2),
-                                    textController:
-                                        controller.warrentyDescriptionCtrlr,
-                                    // errorController:
-                                    //     controller.isDescriptionInvalid.value
-                                    //         ? "Required field"
-                                    //         : null,
-                                    // onChanged: (value) {
-                                    //   if (value.trim().length > 1) {
-                                    //     controller.isDescriptionInvalid.value =
-                                    //         false;
-                                    //   } else {
-                                    //     controller.isDescriptionInvalid.value =
-                                    //         true;
-                                    //   }
-                                    // }
-                                    // focusnode: controller.wdescFocus,
-                                    // scroll: controller.wdescScroll,
-                                    ),
+                                  width:
+                                      (MediaQuery.of(context).size.width * .2),
+                                  textController:
+                                      controller.warrentyDescriptionCtrlr,
+                                  // errorController:
+                                  //     controller.isDescriptionInvalid.value
+                                  //         ? "Required field"
+                                  //         : null,
+                                  // onChanged: (value) {
+                                  //   if (value.trim().length > 1) {
+                                  //     controller.isDescriptionInvalid.value =
+                                  //         false;
+                                  //   } else {
+                                  //     controller.isDescriptionInvalid.value =
+                                  //         true;
+                                  //   }
+                                  // }
+                                  // focusnode: controller.wdescFocus,
+                                  // scroll: controller.wdescScroll,
+                                ),
                               ],
                             ),
                           ),
@@ -138,31 +140,32 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                             child: Row(
                               children: [
                                 CustomRichText(
-                                    includeAsterisk: false, title: 'Start Date:'),
+                                    includeAsterisk: false,
+                                    title: 'Start Date:'),
                                 SizedBox(width: 10),
                                 CustomTextFieldForStock(
-                                    width: MediaQuery.of(context).size.width / 5,
-                                    numberTextField: true,
-                                    onTap: () {
-                                      controller.openStartDatePicker =
-                                          !controller.openStartDatePicker;
-                                      controller.update(['warranty_tab']);
-                                    },
-                                    textController: controller.startDateTc,
-                                    // errorController:
-                                    //     controller.isStartDateInvalid.value
-                                    //         ? "Required field"
-                                    //         : null,
-                                    // onChanged: (value) {
-                                    //   if (value.trim().length > 1) {
-                                    //     controller.isStartDateInvalid.value =
-                                    //         false;
-                                    //   } else {
-                                    //     controller.isStartDateInvalid.value =
-                                    //         true;
-                                    //   }
-                                    // }
-                                    ),
+                                  width: MediaQuery.of(context).size.width / 5,
+                                  numberTextField: true,
+                                  onTap: () {
+                                    controller.openStartDatePicker =
+                                        !controller.openStartDatePicker;
+                                    controller.update(['warranty_tab']);
+                                  },
+                                  textController: controller.startDateTc,
+                                  // errorController:
+                                  //     controller.isStartDateInvalid.value
+                                  //         ? "Required field"
+                                  //         : null,
+                                  // onChanged: (value) {
+                                  //   if (value.trim().length > 1) {
+                                  //     controller.isStartDateInvalid.value =
+                                  //         false;
+                                  //   } else {
+                                  //     controller.isStartDateInvalid.value =
+                                  //         true;
+                                  //   }
+                                  // }
+                                ),
                               ],
                             ),
                           ),
@@ -214,42 +217,41 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                                     color: Color(0xFE50000),
                                     width: 0.5,
                                   )),
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.040,
+                                  height: MediaQuery.of(context).size.height *
+                                      0.040,
                                   constraints: BoxConstraints(
                                     maxWidth:
                                         MediaQuery.of(context).size.width / 5,
                                     minWidth: 100,
                                   ),
                                   child: LoginCustomTextfield(
-                                      keyboardType: TextInputType.number,
-                                      inputFormatters: <TextInputFormatter>[
-                                        FilteringTextInputFormatter.digitsOnly
-                                      ],
-                                      textController:
-                                          controller.certificateNoCtrlr,
-                                      // errorController: controller
-                                      //         .isCertificateNumberInvalid.value
-                                      //     ? "Required field"
-                                      //     : null,
-                                      // onChanged: (value) {
-                                      //   if (value.trim().length > 1) {
-                                      //     controller.isCertificateNumberInvalid
-                                      //         .value = false;
-                                      //   } else {
-                                      //     controller.isCertificateNumberInvalid
-                                      //         .value = true;
-                                      //   }
-                                      // }
-                                      ),
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    textController:
+                                        controller.certificateNoCtrlr,
+                                    // errorController: controller
+                                    //         .isCertificateNumberInvalid.value
+                                    //     ? "Required field"
+                                    //     : null,
+                                    // onChanged: (value) {
+                                    //   if (value.trim().length > 1) {
+                                    //     controller.isCertificateNumberInvalid
+                                    //         .value = false;
+                                    //   } else {
+                                    //     controller.isCertificateNumberInvalid
+                                    //         .value = true;
+                                    //   }
+                                    // }
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                           Dimens.boxHeight10,
                           Container(
-                            child: 
-                            IgnorePointer(
+                            child: IgnorePointer(
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -277,28 +279,28 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                                     title: ' Expire Date:'),
                                 SizedBox(width: 10),
                                 CustomTextFieldForStock(
-                                    width: MediaQuery.of(context).size.width / 5,
-                                    numberTextField: true,
-                                    onTap: () {
-                                      controller.openExpiryDatePicker =
-                                          !controller.openExpiryDatePicker;
-                                      controller.update(['warranty_tab']);
-                                    },
-                                    textController: controller.expireDateTc,
-                                    // errorController:
-                                    //     controller.isExpireDateInvalid.value
-                                    //         ? "Required field"
-                                    //         : null,
-                                    // onChanged: (value) {
-                                    //   if (value.trim().length > 1) {
-                                    //     controller.isExpireDateInvalid.value =
-                                    //         false;
-                                    //   } else {
-                                    //     controller.isExpireDateInvalid.value =
-                                    //         true;
-                                    //   }
-                                    // }
-                                    ),
+                                  width: MediaQuery.of(context).size.width / 5,
+                                  numberTextField: true,
+                                  onTap: () {
+                                    controller.openExpiryDatePicker =
+                                        !controller.openExpiryDatePicker;
+                                    controller.update(['warranty_tab']);
+                                  },
+                                  textController: controller.expireDateTc,
+                                  // errorController:
+                                  //     controller.isExpireDateInvalid.value
+                                  //         ? "Required field"
+                                  //         : null,
+                                  // onChanged: (value) {
+                                  //   if (value.trim().length > 1) {
+                                  //     controller.isExpireDateInvalid.value =
+                                  //         false;
+                                  //   } else {
+                                  //     controller.isExpireDateInvalid.value =
+                                  //         true;
+                                  //   }
+                                  // }
+                                ),
                               ],
                             ),
                           ),
@@ -327,8 +329,12 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                                     controller.startDateTc.text =
                                         DateFormat('yyyy-MM-dd')
                                             .format(p0.value);
-                                    controller.openStartDatePicker =
-                                        !controller.openStartDatePicker;
+
+                                    controller.openStartDatePicker = false;
+                                    controller.update(['warranty_tab']);
+                                  },
+                                  onCancel: () {
+                                    controller.openStartDatePicker = false;
                                     controller.update(['warranty_tab']);
                                   },
                                 ),
@@ -375,6 +381,10 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                                             !controller.openExpiryDatePicker;
                                         controller.update(['warranty_tab']);
                                       }
+                                    },
+                                    onCancel: () {
+                                      controller.openExpiryDatePicker = false;
+                                      controller.update(['warranty_tab']);
                                     },
                                   ),
                                 ),

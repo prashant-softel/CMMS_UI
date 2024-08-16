@@ -117,7 +117,7 @@ class AddJobController extends GetxController {
         // Future.delayed(Duration(seconds: 1), () async {
         await getBlocksList(facilityId);
         getAssignedToList(facilityId);
-        await getInventoryCategoryList(facilityId.toString());
+        // await getInventoryCategoryList(facilityId.toString());
         // await getWorkTypeList();
 
         // });
@@ -422,7 +422,7 @@ class AddJobController extends GetxController {
             // selectedWorkTypeList.value = [];
             getInventoryCategoryList(selectedBlockId.toString());
             getWorkTypeList();
-            getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
+            // getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
           } else {
             selectedBlockId = 0;
           }
@@ -550,7 +550,8 @@ class AddJobController extends GetxController {
     String? title,
     Function()? onPress,
   }) async {
-    await Get.dialog<void>(JobCreatedDialog(jobId: jobId, message: message));
+    await Get.dialog<void>(JobCreatedDialog(jobId: jobId, message: message),
+        barrierDismissible: false);
   }
 
   ///

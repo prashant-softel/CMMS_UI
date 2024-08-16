@@ -9,7 +9,7 @@ Future<void> exportToExcel(
   data.forEach((sheetName, sheetData) {
     Sheet sheetObject = excel[sheetName];
     populateExcelWithData(sheetObject, sheetData);
-  });
+});
 
   List<int> bytes = excel.save()!;
 

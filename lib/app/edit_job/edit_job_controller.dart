@@ -131,15 +131,10 @@ class EditJobController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           getBlocksList(selectedFacilityId);
         });
-        Future.delayed(Duration(seconds: 1), () {
-          getInventoryCategoryList(selectedFacilityId.toString());
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getInventoryList(
-            facilityId: selectedFacilityId,
-            blockId: selectedBlockId,
-          );
-        });
+        // Future.delayed(Duration(seconds: 1), () {
+        //   getInventoryCategoryList(selectedFacilityId.toString());
+        // });
+
         Future.delayed(Duration(seconds: 1), () {
           getWorkTypeList();
         });
@@ -186,6 +181,17 @@ class EditJobController extends GetxController {
       jobTitleCtrlr.text = jobDetailsModel.value?.jobTitle ?? '';
       jobDescriptionCtrlr.text = jobDetailsModel.value?.jobDescription ?? '';
       selectedBlock.value = jobDetailsModel.value?.blockName ?? "";
+      jobDetailsModel.value?.equipmentCatList?.forEach((category) {
+        selectedEquipmentCategoryIdList.add(category.equipmentCatId);
+      });
+      if (selectedBlock.value != null) {
+        getInventoryCategoryList(selectedFacilityId.toString());
+
+        await getInventoryList(
+          facilityId: selectedFacilityId,
+          blockId: jobDetailsModel.value?.blockId,
+        );
+      }
       breakdownTimeCtrlr.text =
           formatDateTimeForUI(jobDetailsModel.value?.breakdownTime);
       toolsRequiredList?.value = jobDetailsModel.value?.toolsRequiredList ?? [];
@@ -379,24 +385,35 @@ class EditJobController extends GetxController {
     selectedWorkAreaIdList.clear();
     categoryIds = selectedEquipmentCategoryIdList;
     String lststrCategoryIds = categoryIds.join(', ').toString();
-    final _workAreaList = await homePresenter.getInventoryList(
+    workAreaList.value = await homePresenter.getInventoryList(
       facilityId: facilityId,
       blockId: blockId,
       categoryIds: lststrCategoryIds,
       isLoading: true,
     );
-    if (_workAreaList.isNotEmpty) {
-      workAreaList.value = _workAreaList;
-      if (jobDetailsModel.value?.workingAreaList != null)
-        for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
-          int _selectedWorkAreaId = _workArea.workingAreaId ?? 0;
-          if (_selectedWorkAreaId > 0 &&
-              !selectedWorkAreaIdList.contains(_selectedWorkAreaId)) {
-            selectedWorkAreaIdList.add(_selectedWorkAreaId);
-          }
-          update();
-        }
-    }
+    // if (_workAreaList.isNotEmpty) {
+    //   // workAreaList.value = _workAreaList;
+    //   if (jobDetailsModel.value?.workingAreaList != null)
+    //     for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
+    //       int _selectedWorkAreaId = _workArea. ?? 0;
+    //       if (_selectedWorkAreaId > 0 &&
+    //           !selectedWorkAreaIdList.contains(_selectedWorkAreaId)) {
+    //         selectedWorkAreaIdList.add(_workArea);
+    //         selectedWorkTypeList.add(_workArea); //}
+    //         update();
+    //       }
+    //     }
+    // }
+    if (jobDetailsModel.value?.workingAreaList != null)
+      for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
+        WorkTypeModel equipmentCategory = WorkTypeModel(
+          id: _workArea.asset_id,
+          name: _workArea.name,
+        );
+        selectedWorkAreaIdList.add(equipmentCategory.id);
+        selectedWorkTypeList.add(equipmentCategory);
+        update();
+      }
   }
 
   Future<void> getWorkTypeList({
@@ -679,7 +696,8 @@ class EditJobController extends GetxController {
     String? title,
     Function()? onPress,
   }) async {
-    await Get.dialog<void>(JobUpdatedDialog(jobId: jobId, message: message));
+    await Get.dialog<void>(JobUpdatedDialog(jobId: jobId, message: message),
+        barrierDismissible: false);
   }
 
   ///

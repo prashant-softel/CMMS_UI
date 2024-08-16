@@ -169,7 +169,7 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                   // ),
                                 ],
                               ),
-                              Dimens.boxWidth15,
+                              Dimens.boxWidth3,
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -236,7 +236,7 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                   ),
                                 ],
                               ),
-                              Dimens.boxWidth15,
+                              Dimens.boxWidth3,
 
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -718,7 +718,7 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                                                       }),
                                                                                     ),
                                                                                     TableViewCell(child: Obx(() {
-                                                                                      return _rowItem(getNotificationDetails?.default_flag.value);
+                                                                                      return _rowItem(getNotificationDetails?.user_flag.value);
                                                                                     })),
                                                                                   ]))
                                                                               .toList()

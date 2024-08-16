@@ -90,13 +90,13 @@ class DsmDashboard extends GetView<DsmDashboardController> {
                                       ? (itemWidth / itemHeight)
                                       : 5,
                                   children: <Widget>[
+                                    // OnHover(builder: (((isHovered) {
+                                    //   return createContentTile(
+                                    //       title: "DSM Charges", onTap: () {});
+                                    // }))),
                                     OnHover(builder: (((isHovered) {
                                       return createContentTile(
-                                          title: "DSM Charges", onTap: () {});
-                                    }))),
-                                    OnHover(builder: (((isHovered) {
-                                      return createContentTile(
-                                          title: "Import DSM List",
+                                          title: "DSM List",
                                           onTap: () {
                                             controller
                                                 .goToImportDsmListChargesScreen();

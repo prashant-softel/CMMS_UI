@@ -80,7 +80,52 @@ class PmPlanContentMobile extends GetView<PmPlanListController> {
                                             Container(
                                               padding: Dimens.edgeInsets8_2_8_2,
                                               decoration: BoxDecoration(
-                                                color: ColorValues.addNewColor,
+                                                color: controller.pmPlanList
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.plan_id ==
+                                                                  pmTaskModel
+                                                                      ?.plan_id,
+                                                              orElse: () =>
+                                                                  PmPlanListModel(
+                                                                      plan_id:
+                                                                          00),
+                                                            )
+                                                            ?.status_id ==
+                                                        406
+                                                    ? ColorValues
+                                                        .rejectedStatusColor
+                                                    : controller.pmPlanList
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      e?.plan_id ==
+                                                                      pmTaskModel
+                                                                          ?.plan_id,
+                                                                  orElse: () =>
+                                                                      PmPlanListModel(
+                                                                          plan_id:
+                                                                              00),
+                                                                )
+                                                                ?.status_id ==
+                                                            401
+                                                        ? ColorValues
+                                                            .appLightBlueColor
+                                                        : controller.pmPlanList
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          e?.plan_id ==
+                                                                          pmTaskModel
+                                                                              ?.plan_id,
+                                                                      orElse: () =>
+                                                                          PmPlanListModel(
+                                                                              plan_id: 00),
+                                                                    )
+                                                                    ?.status_id ==
+                                                                405
+                                                            ? ColorValues
+                                                                .approveStatusColor
+                                                            : ColorValues
+                                                                .addNewColor,
                                                 borderRadius:
                                                     BorderRadius.circular(4),
                                               ),
@@ -166,6 +211,10 @@ class PmPlanContentMobile extends GetView<PmPlanListController> {
                           controller.openFromDateToStartDatePicker = false;
                           controller.update(['PreventiveMaintenanceTask']);
                         }
+                      },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['PreventiveMaintenanceTask']);
                       },
                     ),
                   ),

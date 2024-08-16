@@ -59,20 +59,14 @@ class JobCardListController extends GetxController {
 
     List<JobCardModel?> filteredList = filteredData
         .where((item) =>
-            (item?.id
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.jobCardId
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.jobId
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.jobId?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.jobId
                     ?.toString()
@@ -97,6 +91,11 @@ class JobCardListController extends GetxController {
                     .contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.end_time
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.statusShort
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??

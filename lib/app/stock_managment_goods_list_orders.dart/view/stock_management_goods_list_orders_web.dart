@@ -120,7 +120,7 @@ class _StockManagementGoodsOrdersWebState
                                           children: [
                                             CustomRichText(title: 'Date Range'),
                                             // Dimens.boxWidth10,
-                                            SizedBox(width:10),
+                                            SizedBox(width: 10),
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
                                                       .size
@@ -293,7 +293,7 @@ class _StockManagementGoodsOrdersWebState
                                         width: 300,
                                         height: 40,
                                         // margin: Dimens.edgeInsets0_0_16_0,
-                                        margin:EdgeInsets.only(right:5),
+                                        margin: EdgeInsets.only(right: 5),
                                         child: TextField(
                                           style: GoogleFonts.lato(
                                             textStyle: TextStyle(
@@ -424,12 +424,17 @@ class _StockManagementGoodsOrdersWebState
 
                                   controller.getGOListByDate();
                                   controller.openFromDateToStartDatePicker =
-                                      !controller.openFromDateToStartDatePicker;
+                                      false;
                                   controller.update(['stock_Mangement_Date']);
 
                                   // Get.toNamed(
                                   //   Routes.stockManagementGoodsOrdersScreen,
                                   // );
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
                                 },
                               ),
                             ),
@@ -562,7 +567,7 @@ class GoodsOrderListDataSource extends DataTableSource {
       '${GoodsOrderListDetails?.po_date ?? ''}',
       '${GoodsOrderListDetails?.cost ?? ''}',
       '${GoodsOrderListDetails?.currency ?? ''}',
-      '${GoodsOrderListDetails?.status ?? ''}',
+      // '${GoodsOrderListDetails?.status ?? ''}',
 
       'Actions',
     ];
@@ -720,16 +725,17 @@ class GoodsOrderListDataSource extends DataTableSource {
                 : (value == 'Actions')
                     ? Wrap(children: [
                         varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kGoodsFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
-                                    0 &&
-                                GoodsOrderListDetails?.status == 308 || GoodsOrderListDetails?.status == 310
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.add ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
+                                        0 &&
+                                    GoodsOrderListDetails?.status == 308 ||
+                                GoodsOrderListDetails?.status == 310
                             ? TableActionButton(
                                 color: ColorValues.viewColor,
                                 icon: Icons.remove_red_eye_outlined,

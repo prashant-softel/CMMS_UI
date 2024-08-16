@@ -109,11 +109,12 @@ class AuditScreen extends GetView<AuditController> {
                                     ? (itemWidth / itemHeight)
                                     : 5,
                                 children: <Widget>[
+                               
                                   varUserAccessModel.value.access_list!
                                               .where((e) =>
                                                   e.feature_id ==
                                                       UserAccessConstants
-                                                          .kAuditPlanFeatureId &&
+                                                          .kAuditExecutionFeatureId &&
                                                   e.view ==
                                                       UserAccessConstants
                                                           .kHaveViewAccess)

@@ -70,7 +70,7 @@ class ComplianceStatusContentWeb extends GetView<ComplianceStatusController> {
                       ),
                     ),
                     Text(
-                      " / Compliance Status ",
+                      " / COMPLIANCE STATUS ",
                       style: Styles.greyLight14,
                     ),
                   ],

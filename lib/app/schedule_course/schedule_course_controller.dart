@@ -1,13 +1,13 @@
 import 'dart:async';
-
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/schedule_course/schedule_course_presenter.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/schedule_course_details_model.dart';
 import 'package:cmms/domain/models/schedule_course_model.dart';
 import 'package:cmms/domain/models/training_course_list_model.dart';
-import 'package:cmms/domain/models/training_course_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,6 +65,7 @@ class ScheduleController extends GetxController {
   Rx<String> selectedEmployeeNamesList = ''.obs;
   RxInt selectedId = 0.obs;
   RxInt courseId = 0.obs;
+  RxInt scheduleId = 0.obs;
   RxBool isLoading = true.obs;
 
   RxBool isFormInvalid = false.obs;
@@ -82,7 +83,9 @@ class ScheduleController extends GetxController {
   Map<dynamic, dynamic> employee_map = {};
   RxList<ScheduleTrainingCourse> scheduleTrainingCourse =
       <ScheduleTrainingCourse>[].obs;
+  Rx<DateTime> selectedStartTime = DateTime.now().obs;
   Rx<TrainingCourseListModel> trainingCourse = TrainingCourseListModel().obs;
+  Rx<ScheduleCourseDetails> scheduleCourseDetails = ScheduleCourseDetails().obs;
   RxList<int> selectedEmployeeIdList = <int>[].obs;
   RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
   RxList<EmployeeListModel?> filteredEmployeeNameList =
@@ -92,17 +95,9 @@ class ScheduleController extends GetxController {
   RxList<StatusModel> mode = <StatusModel>[
     StatusModel(id: 1, name: 'Online'),
     StatusModel(id: 2, name: 'Offline'),
+    StatusModel(id: 2, name: 'Online + Offline'),
   ].obs;
-  RxList<EmployeeModel> employees = <EmployeeModel>[
-    EmployeeModel(
-      id: 1,
-      name: 'Majid',
-    ),
-    EmployeeModel(
-      id: 2,
-      name: 'Tanmay',
-    ),
-  ].obs;
+  RxList<EmployeeListModel?> employees = <EmployeeListModel>[].obs;
   RxList<BusinessListModel> trainingAgency = <BusinessListModel>[
     BusinessListModel(
       id: 1,
@@ -114,19 +109,6 @@ class ScheduleController extends GetxController {
     ),
   ].obs;
 
-  RxList<TrainingCourse> trainingCourseList = <TrainingCourse>[
-    TrainingCourse(
-      id: 1,
-      name: 'Training Course 1',
-      description: 'Description 1',
-    ),
-    TrainingCourse(
-      id: 2,
-      name: 'Training Course 2',
-      description: 'Description 2',
-    ),
-  ].obs;
-
   @override
   void onInit() async {
     await setId();
@@ -135,6 +117,9 @@ class ScheduleController extends GetxController {
       facilityId.value = event;
       await getEmployeeList();
       await getCourseDetails(courseId.value);
+      if (scheduleId.value != 0) {
+        await getScheduleCourseDetails(schedule_id: scheduleId.value);
+      }
     });
     commentFocus.addListener(() {
       if (!commentFocus.hasFocus) {
@@ -157,12 +142,17 @@ class ScheduleController extends GetxController {
   Future<void> setId() async {
     try {
       final _courseId = await schedulePresenter.getValue();
+      final _scheduleId = await schedulePresenter.getScheduleValue();
       if (_courseId == null || _courseId == "" || _courseId == 0) {
         var dataFromPrevioursScreen = Get.arguments;
         courseId.value = dataFromPrevioursScreen['courseId'];
+        courseId.value = dataFromPrevioursScreen['scheduleId'];
         schedulePresenter.saveValue(courseId: courseId.value.toString());
+        schedulePresenter.saveScheduleValue(
+            scheduleId: scheduleId.value.toString());
       } else {
         courseId.value = int.tryParse(_courseId) ?? 0;
+        scheduleId.value = int.tryParse(_scheduleId ?? "") ?? 0;
       }
     } catch (e) {
       print(e);
@@ -171,6 +161,7 @@ class ScheduleController extends GetxController {
 
   void clearStoreData() {
     schedulePresenter.clearValue();
+    schedulePresenter.clearScheduleValue();
   }
 
   Future<void> getCourseDetails(int courseId) async {
@@ -181,6 +172,15 @@ class ScheduleController extends GetxController {
     );
     trainingCourse.value = _courseDetails;
     isLoading.value = false;
+  }
+
+  Future<void> getScheduleCourseDetails({required int schedule_id}) async {
+    scheduleCourseDetails.value = ScheduleCourseDetails();
+    final _courseDetails = await schedulePresenter.getScheduleCourseDetails(
+      schedule_id: schedule_id,
+      isLoading: true,
+    );
+    scheduleCourseDetails.value = _courseDetails;
   }
 
   void addExternalEmployee() {
@@ -223,6 +223,18 @@ class ScheduleController extends GetxController {
       employeeNameList.add(employee_list);
     }
     update();
+  }
+
+  Future<void> getEmployeePermitList() async {
+    employeeNameList.value = <EmployeeListModel>[];
+    final _employeeNameList = await schedulePresenter.getEmployeePermitList(
+      isLoading: true,
+      facility_id: facilityId.value,
+      featureId: UserAccessConstants.kPermitFeatureId,
+    );
+    for (var employee_list in _employeeNameList) {
+      employees.add(employee_list);
+    }
   }
 
   void employeeNameSelected(_selectedEmployeeNameIds) {
@@ -365,9 +377,9 @@ class ScheduleController extends GetxController {
     switch (list.runtimeType) {
       case const (RxList<EmployeeModel>):
         {
-          int employeeIndex = employees.indexWhere((x) => x.name == value);
-          selectedEmployeeName.value = employees[employeeIndex].name ?? '';
-          selectedEmployeeId.value = employees[employeeIndex].id ?? 0;
+          int employeeIndex = employees.indexWhere((x) => x?.name == value);
+          selectedEmployeeName.value = employees[employeeIndex]?.name ?? '';
+          selectedEmployeeId.value = employees[employeeIndex]?.id ?? 0;
           isEmployeeSelected.value = true;
           print("facility selected $selectedEmployeeId, $selectedEmployeeName");
         }

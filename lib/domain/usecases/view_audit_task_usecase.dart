@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
@@ -97,13 +98,13 @@ class ViewAuditTaskUsecase {
       );
   Future<List<HistoryModel>?> getHistory({
     moduleType,
-    id,
+    id,facility_id,
     bool? isLoading,
   }) async =>
       await repository.getHistory(
         moduleType,
         id,
-        0,
+        facility_id,
         isLoading,
       );
   Future<Map<String, dynamic>?> startAuditTask({
@@ -131,4 +132,28 @@ class ViewAuditTaskUsecase {
       repository.saveValue(LocalKeys.auditTaskId, auditTaskId);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.auditTaskId);
+  Future<bool> assignToAuditTask({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async =>
+      await repository.assignAuditTask(
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
+  Future<List<EmployeeModel?>?> getAssignedToListWOAttend({
+    String? auth,
+    int? facilityId,
+    int? featureId,
+    int? isattendanceneeded,
+    bool? isLoading,
+  }) async =>
+      await repository.getAssignedToListWOAttend(
+        auth,
+        facilityId,
+        featureId,
+        isattendanceneeded,
+        isLoading,
+      );
 }

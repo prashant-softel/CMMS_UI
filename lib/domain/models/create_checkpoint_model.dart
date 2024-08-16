@@ -4,9 +4,12 @@ class CreateCheckpoint {
   String requirement;
   int is_document_required;
   int status;
+  int? type;
   int id;
   CheckpointType? checkpoint_type;
   int failure_weightage;
+  int?type_of_observation;
+  int? risk_type;
   CreateCheckpoint(
       {required this.check_point,
       required this.checklist_id,
@@ -15,7 +18,11 @@ class CreateCheckpoint {
       required this.id,
       required this.failure_weightage,
       required this.is_document_required,
-      this.checkpoint_type});
+      this.checkpoint_type,
+      this.type,
+      this.type_of_observation,
+      this.risk_type
+      });
 
   factory CreateCheckpoint.fromJson(Map<String, dynamic> json) =>
       CreateCheckpoint(
@@ -26,7 +33,10 @@ class CreateCheckpoint {
         checkpoint_type: CheckpointType.fromJson(json['checkpoint_type']),
         failure_weightage: json['failure_weightage'],
         id: json['id'],
+        type: json['type'],
         is_document_required: json['is_document_required'],
+        type_of_observation: json['type_of_observation'],
+        risk_type: json['risk_type'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,6 +48,10 @@ class CreateCheckpoint {
         'is_document_required': is_document_required,
         "checkpoint_type": checkpoint_type!.toJson(),
         'id': id,
+        'type': type,
+        'type_of_observation': type_of_observation,
+        'risk_type': risk_type,
+
       };
 }
 

@@ -54,7 +54,7 @@ class CreateMrsReturnScreen extends GetView<CreateMrsReturnController> {
                     child: Column(
                       children: [
                         if (Responsive.isMobile(context))
-                          Expanded(child: ReturnMrsContentMobile()),
+                          Expanded(child: CreateReturnMrsContentMobile()),
                         if (Responsive.isDesktop(context))
                           Expanded(
                             child: CreateMrsReturnContentWeb(),

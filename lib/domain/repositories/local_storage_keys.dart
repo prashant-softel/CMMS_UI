@@ -13,6 +13,8 @@ abstract class LocalKeys {
   static const irId = 'irId';
   static const srId = 'srId';
   static const obsId = 'obsId';
+  static const wc_id = 'wc_id';
+  static const wc_type = 'wc_type';
 
   static const reNew = 'reNew';
   static const compliance_id = 'compliance_id';
@@ -21,15 +23,19 @@ abstract class LocalKeys {
   static const roType = 'roType';
   static const types = 'types';
   static const type = 'type';
+  static const viewtype = 'viewtype';
   static const auditId = 'auditId';
 
   static const roId = 'roId';
+  static const docUploadId = 'docUploadId';
+
   static const permitId = 'permitId';
   static const mcTaskId = 'mcModel';
 
   static const isChecked = 'isChecked';
   static const jobModel = 'jobModel';
   static const pmTaskModel = 'pmTaskModel';
+  static const selectedItem = 'selectedItem';
 
   static const selectFacalityDropdowndata = 'selectFacalityDropdowndata';
   static const pmTaskId = 'pmTaskId';
@@ -106,4 +112,7 @@ abstract class LocalKeys {
   static const statusId = 'status_id';
   static const moduleId = 'module_id';
   static const date = 'date';
+  static const assetId = 'assetId';
+  static const startdate = 'startdate';
+  static const enddate = 'enddate';
 }

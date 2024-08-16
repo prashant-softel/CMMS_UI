@@ -23,25 +23,11 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
 
-  // bool valuefirst = false;
-  // bool _switchValue = false;
-
-  // final controller = Get.find<HomeController>();
-
   @override
   Widget build(BuildContext context) => SelectionArea(
         child: Scaffold(
-          // appBar: AppBar(
-          //   title: HeaderWidget(),
-          //   elevation: 0,
-          //   toolbarHeight: 60,
-          //   automaticallyImplyLeading: false,
-          // ),
           body: Row(
             children: [
-              Responsive.isMobile(context) || Responsive.isTablet(context)
-                  ? Dimens.box0
-                  : Container(),
               Expanded(
                 child: Container(
                   // margin: Dimens.edgeInsets16,
@@ -157,7 +143,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         ),
                                                       ],
                                                     )
-                                                  : Dimens.box0), 
+                                                  : Dimens.box0),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 10, top: 10, right: 10),
@@ -1040,7 +1026,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                             ],
                                                                           ),
                                                                           Dimens
-                                                                              .boxWidth50,
+                                                                              .boxWidth20,
                                                                           Row(
                                                                             children: [
                                                                               CustomRichText(title: 'Designation: '),
@@ -1094,7 +1080,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                                   Dimens.boxWidth180,
                                                                                   Text('Name'),
                                                                                   SizedBox(
-                                                                                    width: 310,
+                                                                                    width: 50,
                                                                                   ),
                                                                                   Text('Designation'),
                                                                                   Dimens.boxWidth200,
@@ -1195,35 +1181,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
 
                                                           ///Root Cause
                                                           Dimens.boxHeight10,
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'RCA Upload Required: '),
-                                                          //     Dimens.boxWidth10,
-                                                          //     // SizedBox(
-                                                          //     //   width:
-                                                          //     //       MediaQuery.of(context)
-                                                          //     //               .size
-                                                          //     //               .width /
-                                                          //     //           5,
-                                                          //     //   child: Obx(
-                                                          //     //     () => Switch(
-                                                          //     //       activeColor:
-                                                          //     //           Colors.green,
-                                                          //     //       value: controller
-                                                          //     //           .rCAUploadRequiredValue
-                                                          //     //           .value,
-                                                          //     //       onChanged: (value) {
-                                                          //     //         controller
-                                                          //     //             .rCAUploadRequiredValue
-                                                          //     //             .value = value;
-                                                          //     //       },
-                                                          //     //     ),
-                                                          //     //   ),
-                                                          //     // )
-                                                          //   ],
-                                                          // ),
+
                                                           Text(
                                                             "RCA  Required",
                                                             style: Styles
@@ -1231,19 +1189,12 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           ),
                                                           Dimens.boxHeight10,
 
-                                                          // controller.rCAUploadRequiredValue ==
-                                                          //         true
-                                                          // ?
                                                           RootCauseAnalysis(),
-                                                          // : Dimens.box0,
 
-                                                          ///Immediate Correction
                                                           ImmediateCorrection(),
 
-                                                          ///Proposed action plan
                                                           AddPrposedAction(),
 
-                                                          /// FILE UPLOAD WIDGET
                                                           Dimens.boxHeight10,
                                                         ],
                                                       ),
@@ -1591,9 +1542,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     );
   }
 
-  ///Below All For WEB
-  ///
-  /// Action Taken date and Time
   Widget _buildActionTakenDateTimeField_web(
     BuildContext context,
   ) {
@@ -1633,7 +1581,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                   TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
             ),
             onTap: () {
-              pickActionTakenDateTime_web(context, 0);
+              controller.pickActionTakenDateTime_web(context, 0);
 
               // : null;
             },
@@ -1653,83 +1601,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
         ),
       ),
     ]);
-  }
-
-//Action Taken Date and Time
-  Future pickActionTakenDateTime_web(BuildContext context, int position) async {
-    var dateTime = controller.selectedActionTakenTime.value;
-
-    final date = await pickActionTakenDate_web(context, position);
-    if (date == null) {
-      return;
-    }
-
-    final time = await pickActionTakenTime_web(context, position);
-    if (time == null) {
-      return;
-    }
-
-    dateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-    controller.selectedActionTakenTime.value;
-
-    controller.actionTakenDateTimeCtrlr
-      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
-      ..selection = TextSelection.fromPosition(
-        TextPosition(
-          offset: controller.actionTakenDateTimeCtrlr.text.length,
-          affinity: TextAffinity.upstream,
-        ),
-      );
-
-    controller.actionTakenDateTimeCtrlrBuffer =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
-    print(
-        'Action TakenDate & Time ${controller.actionTakenDateTimeCtrlrBuffer}');
-  }
-
-  Future<DateTime?> pickActionTakenDate_web(
-      BuildContext context, int position) async {
-    DateTime? dateTime = controller.selectedActionTakenTime.value;
-
-    //final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
-      context: context,
-      initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
-    );
-
-    if (newDate == null) return null;
-
-    return newDate;
-  }
-
-  Future<TimeOfDay?> pickActionTakenTime_web(
-      BuildContext context, int position) async {
-    DateTime dateTime = controller.selectedActionTakenTime.value;
-
-    //final initialTime = TimeOfDay(hour: 12, minute: 0);
-    final newTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        });
-
-    if (newTime == null) {
-      return null;
-    }
-
-    return newTime;
   }
 
   ///
@@ -1911,7 +1782,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                   TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
             ),
             onTap: () {
-              pickDateTime_web(context);
+              controller.pickDateTime_web(context);
 
               // : null;
             },
@@ -1935,86 +1806,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   }
 
 //Start Date and valid Till
-  Future pickDateTime_web(
-    BuildContext context,
-  ) async {
-    var dateTime = controller.selectedBreakdownTime.value;
-
-    final date = await pickDate_web(context);
-    if (date == null) {
-      return;
-    }
-
-    final time = await pickTime_web(context);
-    if (time == null) {
-      return;
-    }
-
-    dateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-    controller.selectedBreakdownTime.value;
-
-    controller.startDateTimeCtrlr
-      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
-      ..selection = TextSelection.fromPosition(
-        TextPosition(
-          offset: controller.startDateTimeCtrlr.text.length,
-          affinity: TextAffinity.upstream,
-        ),
-      );
-    controller.startDateTimeCtrlr.text =
-        DateFormat("yyyy-MM-dd HH:mm").format(dateTime);
-
-    controller.startDateTimeCtrlrBuffer =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
-    print('Incident reportDate & Time ${controller.startDateTimeCtrlrBuffer}');
-  }
-
-  Future<DateTime?> pickDate_web(
-    BuildContext context,
-  ) async {
-    DateTime? dateTime = controller.selectedBreakdownTime.value;
-
-    //final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
-      context: context,
-      initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
-    );
-
-    if (newDate == null) return null;
-
-    return newDate;
-  }
-
-  Future<TimeOfDay?> pickTime_web(
-    BuildContext context,
-  ) async {
-    DateTime dateTime = controller.selectedBreakdownTime.value;
-
-    //final initialTime = TimeOfDay(hour: 12, minute: 0);
-    final newTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        });
-
-    if (newTime == null) {
-      return null;
-    }
-
-    return newTime;
-  }
 
   Widget _buildIncidentReportDescriptionField_web(BuildContext context) {
     return Column(//
@@ -3482,11 +3273,7 @@ class AddPrposedAction extends StatelessWidget {
                                           ),
                                           child: LoginCustomTextfield(
                                             keyboardType: TextInputType.text,
-                                            // inputFormatters: <
-                                            //     TextInputFormatter>[
-                                            //   FilteringTextInputFormatter
-                                            //       .digitsOnly
-                                            // ],
+                                            
                                             maxLine: 1,
                                             textController:
                                                 new TextEditingController(
@@ -3581,7 +3368,8 @@ class AddPrposedAction extends StatelessWidget {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                 ),
-                                                child: DropdownWebStock(
+                                                child:
+                                                 DropdownWebStock(
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
@@ -3607,6 +3395,7 @@ class AddPrposedAction extends StatelessWidget {
                                                             orElse: null);
                                                   },
                                                 ),
+                                            
                                               ),
                                             ],
                                           ),
@@ -3834,6 +3623,7 @@ class AddPrposedAction extends StatelessWidget {
 
     return newTime;
   }
+
 }
 
 ///why why Analysis
@@ -6206,7 +5996,10 @@ class DetailsOfOtherPerson extends StatelessWidget {
                                                                           LoginCustomTextfield(
                                                                         keyboardType:
                                                                             TextInputType.number,
-                                                                            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                                                        inputFormatters: [
+                                                                          FilteringTextInputFormatter
+                                                                              .digitsOnly
+                                                                        ],
                                                                         maxLine:
                                                                             1,
                                                                         textController:

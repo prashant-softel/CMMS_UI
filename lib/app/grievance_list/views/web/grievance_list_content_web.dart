@@ -375,13 +375,16 @@ class GrievanceListContentWeb extends StatelessWidget {
                             : controller.toDate.value = pickUpDate;
 
                         controller.getGrievanceListByDate();
-                        controller.openFromDateToStartDatePicker =
-                            !controller.openFromDateToStartDatePicker;
+                        controller.openFromDateToStartDatePicker = false;
                         controller.update(['grievance_list']);
 
                         // Get.toNamed(
                         //   Routes.stockManagementGoodsOrdersScreen,
                         // );
+                      },
+                      onCancel: () {
+                        controller.openFromDateToStartDatePicker = false;
+                        controller.update(['grievance_list']);
                       },
                     ),
                   ),
