@@ -128,7 +128,7 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                         children: [
                                           Row(
                                             children: [
-                                              CustomRichText(title: 'Topic: '),
+                                              CustomRichText(title: 'Course Name: '),
                                               Dimens.boxWidth10,
                                               Container(
                                                 decoration: BoxDecoration(

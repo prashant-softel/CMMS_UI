@@ -133,9 +133,7 @@ class ViewWarrantyClaimModel {
         warranty_description: json["warranty_description"],
         affected_sr_no: json['affected_sr_no'],
         manufacture_name: json['manufacture_name'],
-        failure_time: json['failure_time'] == null
-            ? null
-            : Utility.getFormattedYearMonthDayTime(json['failure_time']),
+        failure_time: json['failure_time'],
         estimated_cost: json["estimated_cost"],
         quantity: json["quantity"],
         cost_of_replacement: json['cost_of_replacement'],
@@ -243,7 +241,7 @@ class ExternalsEmailsList {
   String? name;
   String? email;
   String? role;
-  int? mobile;
+  String? mobile;
 
   factory ExternalsEmailsList.fromJson(Map<String, dynamic> json) =>
       ExternalsEmailsList(

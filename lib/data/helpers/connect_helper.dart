@@ -1394,8 +1394,12 @@ class ConnectHelper {
     print('WCResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(WCMessageApproveDialog(
-        data: parsedJson['message'], id: parsedJson['id']));
+    Get.dialog<void>(
+      WCMessageApproveDialog(
+        data: parsedJson['message'],
+        id: parsedJson['id'],
+      ),
+    );
 
     return responseModel;
   }
@@ -3390,6 +3394,8 @@ class ConnectHelper {
   Future<ResponseModel> createEscalationMatrix({
     required String auth,
     createEscalationMatrix,
+    required int moduleId,
+    required int statusId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -3409,10 +3415,11 @@ class ConnectHelper {
     // if (res.e != null) {
     //   Get.dialog<void>(WarrantyClaimErrorDialog());
     // } else {
-
     Get.dialog<void>(CreateEscalationMatrixDialog(
       data: parsedJson['message'],
       escalationMatrixId: parsedJson['id'],
+      moduleId: moduleId,
+      statusId: statusId,
     ));
     // }
 
@@ -3873,6 +3880,38 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'WC/UpdateWC',
+      Request.patch,
+      updateWarrantyClaim,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Update Warranty Claim Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    Get.dialog<void>(WarrantyClaimUpdatedMessageDialog(
+      data: parsedJson['message'],
+      warrantyClaimId: parsedJson['id'],
+    ));
+    // }
+
+    return responseModel;
+  }
+
+Future<ResponseModel> resubmitWarrantyClaim({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'WC/UpdateWC?resubmit=true',
       Request.patch,
       updateWarrantyClaim,
       isLoading ?? false,

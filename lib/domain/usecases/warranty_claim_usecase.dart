@@ -65,6 +65,14 @@ class WarrantyClaimUsecase {
         updateWarrantyClaim,
         isLoading,
       );
+  Future<Map<String, dynamic>> resubmitWarrantyClaim({
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await _repository.resubmitWarrantyClaim(
+        updateWarrantyClaim,
+        isLoading,
+      );
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,

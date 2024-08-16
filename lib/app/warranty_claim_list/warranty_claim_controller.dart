@@ -333,8 +333,10 @@ class WarrantyClaimController extends GetxController {
     facilityIdStreamSubscription =
         homeController.facilityId$.listen((event) async {
       facilityId = event;
-      await getWarrantyClaimList(
-          facilityId, formattedTodate, formattedFromdate);
+      if (facilityId != 0) {
+        await getWarrantyClaimList(
+            facilityId, formattedTodate, formattedFromdate);
+      }
     });
     immcoracFocus.addListener(() {
       if (!immcoracFocus.hasFocus) {

@@ -42,7 +42,7 @@ class WarrantyClaimModel {
   String? good_order_id;
   String? order_reference_number;
   String? warranty_description;
-  int? estimated_cost;
+  String? estimated_cost;
   int? quantity;
   String? status;
   int? status_code;
