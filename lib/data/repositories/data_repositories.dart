@@ -1970,11 +1970,15 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> createEscalationMatrix({
     required String auth,
     createEscalationMatrix,
+    required int moduleId,
+    required int statusId,
     bool? isLoading,
   }) async =>
       await connectHelper.createEscalationMatrix(
         auth: auth,
         createEscalationMatrix: createEscalationMatrix,
+        moduleId: moduleId,
+        statusId: statusId,
         isLoading: isLoading ?? false,
       );
 
@@ -2182,6 +2186,16 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.updateWarrantyClaim(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> resubmitWarrantyClaim({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.resubmitWarrantyClaim(
         auth: auth,
         updateWarrantyClaim: updateWarrantyClaim,
         isLoading: isLoading ?? false,

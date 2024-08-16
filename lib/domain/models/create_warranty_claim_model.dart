@@ -30,6 +30,7 @@ class CreateWarrantyClaimModel {
   String? failureTime;
   List<dynamic>? uploadfile_ids;
   List<dynamic>? affectedParts;
+  bool? resubmit;
 
   List<int?>? additionalEmailEmployees;
   List<ExternalEmails?>? externalEmails;
@@ -61,6 +62,7 @@ class CreateWarrantyClaimModel {
       this.externalEmails,
       this.supplierActions,
       this.affectedParts,
+      this.resubmit,
       this.status,
       this.uploadfile_ids,
       this.comment,
@@ -107,6 +109,7 @@ class CreateWarrantyClaimModel {
             ? List<int>.from(json["uploadfile_ids"].map((x) => x))
             : [],
         status: json['status'],
+        resubmit: json['resubmit'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -138,6 +141,7 @@ class CreateWarrantyClaimModel {
         "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
         "affectedParts": List<dynamic>.from(affectedParts!.map((x) => x)),
         "status": status,
+        "resubmit": resubmit,
       };
 }
 

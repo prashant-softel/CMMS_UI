@@ -148,16 +148,102 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              top: 10,
-                                              right: 10,
-                                              left: 10,
-                                            ),
-                                            child: Text(
-                                              "New Warranty Claim",
-                                              style: Styles.blackBold14,
-                                            ),
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  top: 10,
+                                                  right: 10,
+                                                  left: 10,
+                                                ),
+                                                child: Text(
+                                                  controller.type.value == 1
+                                                      ? "View Warranty Claim"
+                                                      : controller.wc_id
+                                                                  .value !=
+                                                              0
+                                                          ? "Update Warranty Claim"
+                                                          : "New Warranty Claim",
+                                                  style: Styles.blackBold14,
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  top: 10,
+                                                  right: 10,
+                                                  left: 10,
+                                                ),
+                                                child: Container(
+                                                  padding: EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: controller
+                                                                  .viewWarrantyClaimDetailsModel
+                                                                  .value
+                                                                  ?.status ==
+                                                              192
+                                                          ? ColorValues
+                                                              .yellowColor
+                                                          : controller
+                                                                      .viewWarrantyClaimDetailsModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  194
+                                                              ? ColorValues
+                                                                  .appGreenColor
+                                                              : controller
+                                                                          .viewWarrantyClaimDetailsModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      191
+                                                                  ? ColorValues
+                                                                      .draftColor
+                                                                  : ColorValues
+                                                                      .appRedColor,
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: controller
+                                                                    .viewWarrantyClaimDetailsModel
+                                                                    .value
+                                                                    ?.status ==
+                                                                192
+                                                            ? ColorValues
+                                                                .yellowColor
+                                                            : controller
+                                                                        .viewWarrantyClaimDetailsModel
+                                                                        .value
+                                                                        ?.status ==
+                                                                    194
+                                                                ? ColorValues
+                                                                    .appGreenColor
+                                                                : controller
+                                                                            .viewWarrantyClaimDetailsModel
+                                                                            .value
+                                                                            ?.status ==
+                                                                        191
+                                                                    ? ColorValues
+                                                                        .draftColor
+                                                                    : ColorValues
+                                                                        .appRedColor,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  child: Center(
+                                                      child: Text(
+                                                    '${controller.viewWarrantyClaimDetailsModel.value?.status_short}',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )),
+                                                ),
+                                              ),
+                                              // controller.viewWarrantyClaimDetailsModel.value?.status == 192
+                                            ],
                                           ),
                                           Divider(
                                             color: ColorValues.greyLightColour,
@@ -174,173 +260,238 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                       controller.type.value ==
                                                           1,
                                                   child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
-                                                      CustomRichText(
-                                                        title:
-                                                            'Warranty Claim Title: ',
-                                                      ),
-                                                      Dimens.boxWidth10,
-                                                      Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                title:
+                                                                    'Warranty Claim Title: ',
                                                               ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
-                                                            ),
-                                                          ],
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        child:
-                                                            LoginCustomTextfield(
-                                                          width:
-                                                              (Get.width * 0.3),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text,
-                                                          maxLine: 1,
-                                                          textController: controller
-                                                              .warrantyClaimTitleTextController,
-                                                          focusNode: controller
-                                                              .wtitleFocus,
-                                                          scrollController:
-                                                              controller
-                                                                  .wtitleScroll,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Dimens.boxHeight15,
-                                                IgnorePointer(
-                                                  ignoring:
-                                                      controller.type.value ==
-                                                          1,
-                                                  child: Row(
-                                                    children: [
-                                                      CustomRichText(
-                                                        title:
-                                                            'Warranty Brief Description: ',
-                                                      ),
-                                                      Dimens.boxWidth2,
-                                                      Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
+                                                              Dimens.boxWidth2,
+                                                              Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .black26,
+                                                                      offset:
+                                                                          const Offset(
+                                                                        5.0,
+                                                                        5.0,
+                                                                      ),
+                                                                      blurRadius:
+                                                                          5.0,
+                                                                      spreadRadius:
+                                                                          1.0,
+                                                                    ),
+                                                                  ],
+                                                                  color: ColorValues
+                                                                      .whiteColor,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                ),
+                                                                child:
+                                                                    LoginCustomTextfield(
+                                                                  width:
+                                                                      (Get.width *
+                                                                          0.3),
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .text,
+                                                                  maxLine: 1,
+                                                                  textController:
+                                                                      controller
+                                                                          .warrantyClaimTitleTextController,
+                                                                  focusNode:
+                                                                      controller
+                                                                          .wtitleFocus,
+                                                                  scrollController:
+                                                                      controller
+                                                                          .wtitleScroll,
+                                                                  errorController: controller
+                                                                          .isTitleInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        1) {
+                                                                      controller
+                                                                          .isTitleInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isTitleInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  },
+                                                                ),
                                                               ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
-                                                            ),
-                                                          ],
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        child:
-                                                            LoginCustomTextfield(
-                                                          width:
-                                                              (Get.width * 0.3),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text,
-                                                          maxLine: 3,
-                                                          textController: controller
-                                                              .warrantyClaimBriefDescTextController,
-                                                          focusNode: controller
-                                                              .wdescFocus,
-                                                          scrollController:
-                                                              controller
-                                                                  .wdescScroll,
-                                                        ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight15,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                title:
+                                                                    'Warranty Brief Description: ',
+                                                              ),
+                                                              Dimens.boxWidth2,
+                                                              Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .black26,
+                                                                      offset:
+                                                                          const Offset(
+                                                                        5.0,
+                                                                        5.0,
+                                                                      ),
+                                                                      blurRadius:
+                                                                          5.0,
+                                                                      spreadRadius:
+                                                                          1.0,
+                                                                    ),
+                                                                  ],
+                                                                  color: ColorValues
+                                                                      .whiteColor,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                ),
+                                                                child:
+                                                                    LoginCustomTextfield(
+                                                                  width:
+                                                                      (Get.width *
+                                                                          0.3),
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .text,
+                                                                  maxLine: 3,
+                                                                  textController:
+                                                                      controller
+                                                                          .warrantyClaimBriefDescTextController,
+                                                                  focusNode:
+                                                                      controller
+                                                                          .wdescFocus,
+                                                                  scrollController:
+                                                                      controller
+                                                                          .wdescScroll,
+                                                                  errorController: controller
+                                                                          .isDescInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        1) {
+                                                                      controller
+                                                                          .isDescInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isDescInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Dimens.boxHeight15,
-                                                IgnorePointer(
-                                                  ignoring:
-                                                      controller.type.value ==
-                                                          1,
-                                                  child: Row(
-                                                    children: [
-                                                      CustomRichText(
-                                                          title:
-                                                              'Equipment Categories: '),
-                                                      SizedBox(
-                                                        width: 27,
-                                                      ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            4.2,
-                                                        child:
-                                                            DropdownWebWidget(
-                                                          dropdownList: controller
-                                                              .equipmentCategoryList,
-                                                          isValueSelected:
-                                                              controller
-                                                                  .isEquipmentCategorySelected
-                                                                  .value,
-                                                          selectedValue: controller
-                                                              .selectedEquipmentCategory
-                                                              .value,
-                                                          onValueChanged:
-                                                              controller
-                                                                  .onValueChanged,
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 55,
-                                                      ),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Equipment Name: '),
-                                                      SizedBox(
-                                                        width: 15,
-                                                      ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            4.2,
-                                                        child:
-                                                            DropdownWebWidget(
-                                                          dropdownList: controller
-                                                              .eqipmentNameList,
-                                                          isValueSelected:
-                                                              controller
-                                                                  .isEquipmentNameSelected
-                                                                  .value,
-                                                          selectedValue: controller
-                                                              .selectedEquipmentName
-                                                              .value,
-                                                          onValueChanged:
-                                                              controller
-                                                                  .onValueChanged,
-                                                        ),
+                                                      Dimens.boxWidth15,
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Equipment Categories: '),
+                                                              Dimens.boxWidth2,
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4.2,
+                                                                child:
+                                                                    DropdownWebWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .equipmentCategoryList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isEquipmentCategorySelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedEquipmentCategory
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight10,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Equipment Name: '),
+                                                              Dimens.boxWidth2,
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4.2,
+                                                                child:
+                                                                    DropdownWebWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .eqipmentNameList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isEquipmentNameSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedEquipmentName
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
                                                       ),
                                                     ],
                                                   ),
@@ -564,192 +715,6 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                 MainAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  CustomRichText(
-                                                                    title:
-                                                                        'Failure Date & Time: ',
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      boxShadow: [
-                                                                        BoxShadow(
-                                                                          color:
-                                                                              Colors.black26,
-                                                                          offset:
-                                                                              const Offset(
-                                                                            5.0,
-                                                                            5.0,
-                                                                          ),
-                                                                          blurRadius:
-                                                                              5.0,
-                                                                          spreadRadius:
-                                                                              1.0,
-                                                                        ),
-                                                                      ],
-                                                                      color: ColorValues
-                                                                          .whiteColor,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              5),
-                                                                    ),
-                                                                    child:
-                                                                        LoginCustomTextfield(
-                                                                      width: (Get
-                                                                              .width *
-                                                                          0.15),
-                                                                      keyboardType:
-                                                                          TextInputType
-                                                                              .text,
-                                                                      maxLine:
-                                                                          1,
-                                                                      textController:
-                                                                          controller
-                                                                              .failureDateTimeCtrlrWeb,
-                                                                      widget:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .calendar_month,
-                                                                      ),
-                                                                      ontap:
-                                                                          () {
-                                                                        pickFailureDateTime_web(
-                                                                            context);
-                                                                      },
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  CustomRichText(
-                                                                    title:
-                                                                        'Approximate Daily Loss: ',
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      boxShadow: [
-                                                                        BoxShadow(
-                                                                          color:
-                                                                              Colors.black26,
-                                                                          offset:
-                                                                              const Offset(
-                                                                            5.0,
-                                                                            5.0,
-                                                                          ),
-                                                                          blurRadius:
-                                                                              5.0,
-                                                                          spreadRadius:
-                                                                              1.0,
-                                                                        ),
-                                                                      ],
-                                                                      color: ColorValues
-                                                                          .whiteColor,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              5),
-                                                                    ),
-                                                                    child:
-                                                                        LoginCustomTextfield(
-                                                                      width: (Get
-                                                                              .width *
-                                                                          0.15),
-                                                                      keyboardType:
-                                                                          TextInputType
-                                                                              .number,
-                                                                      maxLine:
-                                                                          1,
-                                                                      inputFormatters: [
-                                                                        FilteringTextInputFormatter
-                                                                            .digitsOnly
-                                                                      ],
-                                                                      textController:
-                                                                          controller
-                                                                              .approxdailylosstxtcontroller,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  CustomRichText(
-                                                                    title:
-                                                                        'Applied At: ',
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      boxShadow: [
-                                                                        BoxShadow(
-                                                                          color:
-                                                                              Colors.black26,
-                                                                          offset:
-                                                                              const Offset(
-                                                                            5.0,
-                                                                            5.0,
-                                                                          ),
-                                                                          blurRadius:
-                                                                              5.0,
-                                                                          spreadRadius:
-                                                                              1.0,
-                                                                        ),
-                                                                      ],
-                                                                      color: ColorValues
-                                                                          .whiteColor,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              5),
-                                                                    ),
-                                                                    child:
-                                                                        LoginCustomTextfield(
-                                                                      widget:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .calendar_month,
-                                                                      ),
-                                                                      width: (Get
-                                                                              .width *
-                                                                          0.15),
-                                                                      keyboardType:
-                                                                          TextInputType
-                                                                              .text,
-                                                                      maxLine:
-                                                                          1,
-                                                                      ontap:
-                                                                          () {
-                                                                        pickcurrentStartDate_web(
-                                                                            context);
-                                                                      },
-                                                                      textController:
-                                                                          controller
-                                                                              .currentStartDateCtrlrWeb,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Dimens
-                                                                  .boxHeight10,
                                                               IgnorePointer(
                                                                 child: Row(
                                                                   mainAxisAlignment:
@@ -794,9 +759,23 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         maxLine:
                                                                             1,
                                                                         ishint:
-                                                                            "${controller.inventoryDetailsModel.value?.serialNumber}",
+                                                                            "${controller.inventoryDetailsModel.value?.serialNumber ?? ""}",
                                                                         textController:
                                                                             controller.affectedSerialNoTextController,
+                                                                        errorController: controller.isAffectedsrnoInvalid.value
+                                                                            ? "Required field"
+                                                                            : null,
+                                                                        onChanged:
+                                                                            (value) {
+                                                                          if (value.trim().length >
+                                                                              1) {
+                                                                            controller.isAffectedsrnoInvalid.value =
+                                                                                false;
+                                                                          } else {
+                                                                            controller.isAffectedsrnoInvalid.value =
+                                                                                true;
+                                                                          }
+                                                                        },
                                                                       ),
                                                                     ),
                                                                   ],
@@ -848,9 +827,23 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         maxLine:
                                                                             1,
                                                                         ishint:
-                                                                            '${controller.inventoryDetailsModel.value?.manufacturerName}',
+                                                                            '${controller.inventoryDetailsModel.value?.manufacturerName ?? ""}',
                                                                         textController:
                                                                             controller.manufacturerNameTextController,
+                                                                        errorController: controller.isManufactureInvalid.value
+                                                                            ? "Required field"
+                                                                            : null,
+                                                                        onChanged:
+                                                                            (value) {
+                                                                          if (value.trim().length >
+                                                                              1) {
+                                                                            controller.isManufactureInvalid.value =
+                                                                                false;
+                                                                          } else {
+                                                                            controller.isManufactureInvalid.value =
+                                                                                true;
+                                                                          }
+                                                                        },
                                                                       ),
                                                                     ),
                                                                   ],
@@ -858,57 +851,71 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                               ),
                                                               Dimens
                                                                   .boxHeight10,
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  CustomRichText(
-                                                                    title:
-                                                                        'Contract Reference No.: ',
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      boxShadow: [
-                                                                        BoxShadow(
-                                                                          color:
-                                                                              Colors.black26,
-                                                                          offset:
-                                                                              const Offset(
-                                                                            5.0,
-                                                                            5.0,
-                                                                          ),
-                                                                          blurRadius:
+                                                              IgnorePointer(
+                                                                child: Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    CustomRichText(
+                                                                      title:
+                                                                          'Request to Warrenty Provider: ',
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxWidth10,
+                                                                    Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        boxShadow: [
+                                                                          BoxShadow(
+                                                                            color:
+                                                                                Colors.black26,
+                                                                            offset:
+                                                                                const Offset(
                                                                               5.0,
-                                                                          spreadRadius:
-                                                                              1.0,
-                                                                        ),
-                                                                      ],
-                                                                      color: ColorValues
-                                                                          .whiteColor,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              5),
+                                                                              5.0,
+                                                                            ),
+                                                                            blurRadius:
+                                                                                5.0,
+                                                                            spreadRadius:
+                                                                                1.0,
+                                                                          ),
+                                                                        ],
+                                                                        color: ColorValues
+                                                                            .whiteColor,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
+                                                                      ),
+                                                                      child:
+                                                                          LoginCustomTextfield(
+                                                                        width: (Get.width *
+                                                                            0.15),
+                                                                        keyboardType:
+                                                                            TextInputType.text,
+                                                                        maxLine:
+                                                                            1,
+                                                                        ishint:
+                                                                            '${controller.inventoryDetailsModel.value?.warrantyProviderName ?? ""}',
+                                                                        textController:
+                                                                            controller.requestManufactureTextController,
+                                                                        errorController: controller.isRequestWarrantyInvalid.value
+                                                                            ? "Required field"
+                                                                            : null,
+                                                                        onChanged:
+                                                                            (value) {
+                                                                          if (value.trim().length >
+                                                                              1) {
+                                                                            controller.isRequestWarrantyInvalid.value =
+                                                                                false;
+                                                                          } else {
+                                                                            controller.isRequestWarrantyInvalid.value =
+                                                                                true;
+                                                                          }
+                                                                        },
+                                                                      ),
                                                                     ),
-                                                                    child:
-                                                                        LoginCustomTextfield(
-                                                                      width: (Get
-                                                                              .width *
-                                                                          0.15),
-                                                                      keyboardType:
-                                                                          TextInputType
-                                                                              .text,
-                                                                      maxLine:
-                                                                          1,
-                                                                      textController:
-                                                                          controller
-                                                                              .orderReferenceNoTextController,
-                                                                    ),
-                                                                  ),
-                                                                ],
+                                                                  ],
+                                                                ),
                                                               ),
                                                               Dimens
                                                                   .boxHeight10,
@@ -956,7 +963,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         maxLine:
                                                                             1,
                                                                         ishint:
-                                                                            '${controller.inventoryDetailsModel.value?.start_date}',
+                                                                            '${controller.inventoryDetailsModel.value?.start_date ?? ""}',
                                                                         widget:
                                                                             Icon(
                                                                           Icons
@@ -969,6 +976,20 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         },
                                                                         textController:
                                                                             controller.warrantyStartDateTimeCtrlrWeb,
+                                                                        errorController: controller.isWStartDateInvalid.value
+                                                                            ? "Required field"
+                                                                            : null,
+                                                                        onChanged:
+                                                                            (value) {
+                                                                          if (value.trim().length >
+                                                                              1) {
+                                                                            controller.isWStartDateInvalid.value =
+                                                                                false;
+                                                                          } else {
+                                                                            controller.isWStartDateInvalid.value =
+                                                                                true;
+                                                                          }
+                                                                        },
                                                                       ),
                                                                     ),
                                                                   ],
@@ -1028,10 +1049,337 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         },
                                                                         textController:
                                                                             controller.warrantyEndDateTimeCtrlrWeb,
+                                                                        errorController: controller.isWEndDateInvalid.value
+                                                                            ? "Required field"
+                                                                            : null,
+                                                                        onChanged:
+                                                                            (value) {
+                                                                          if (value.trim().length >
+                                                                              1) {
+                                                                            controller.isWEndDateInvalid.value =
+                                                                                false;
+                                                                          } else {
+                                                                            controller.isWEndDateInvalid.value =
+                                                                                true;
+                                                                          }
+                                                                        },
                                                                       ),
                                                                     ),
                                                                   ],
                                                                 ),
+                                                              ),
+                                                              Dimens
+                                                                  .boxHeight10,
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  CustomRichText(
+                                                                    title:
+                                                                        'Failure Date & Time: ',
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxWidth10,
+                                                                  Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Colors.black26,
+                                                                          offset:
+                                                                              const Offset(
+                                                                            5.0,
+                                                                            5.0,
+                                                                          ),
+                                                                          blurRadius:
+                                                                              5.0,
+                                                                          spreadRadius:
+                                                                              1.0,
+                                                                        ),
+                                                                      ],
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child:
+                                                                        LoginCustomTextfield(
+                                                                      width: (Get
+                                                                              .width *
+                                                                          0.15),
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .text,
+                                                                      maxLine:
+                                                                          1,
+                                                                      textController:
+                                                                          controller
+                                                                              .failureDateTimeCtrlrWeb,
+                                                                      widget:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .calendar_month,
+                                                                      ),
+                                                                      ontap:
+                                                                          () {
+                                                                        pickFailureDateTime_web(
+                                                                            context);
+                                                                      },
+                                                                      errorController: controller
+                                                                              .isFailureDateTimeInvalid
+                                                                              .value
+                                                                          ? "Required field"
+                                                                          : null,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        if (value.trim().length >
+                                                                            1) {
+                                                                          controller
+                                                                              .isFailureDateTimeInvalid
+                                                                              .value = false;
+                                                                        } else {
+                                                                          controller
+                                                                              .isFailureDateTimeInvalid
+                                                                              .value = true;
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Dimens
+                                                                  .boxHeight10,
+
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  CustomRichText(
+                                                                    title:
+                                                                        'Applied At: ',
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxWidth10,
+                                                                  Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Colors.black26,
+                                                                          offset:
+                                                                              const Offset(
+                                                                            5.0,
+                                                                            5.0,
+                                                                          ),
+                                                                          blurRadius:
+                                                                              5.0,
+                                                                          spreadRadius:
+                                                                              1.0,
+                                                                        ),
+                                                                      ],
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child:
+                                                                        LoginCustomTextfield(
+                                                                      widget:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .calendar_month,
+                                                                      ),
+                                                                      width: (Get
+                                                                              .width *
+                                                                          0.15),
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .text,
+                                                                      maxLine:
+                                                                          1,
+                                                                      ontap:
+                                                                          () {
+                                                                        pickcurrentStartDate_web(
+                                                                            context);
+                                                                      },
+                                                                      textController:
+                                                                          controller
+                                                                              .currentStartDateCtrlrWeb,
+                                                                      errorController: controller
+                                                                              .isAppliedAtInvalid
+                                                                              .value
+                                                                          ? "Required field"
+                                                                          : null,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        if (value.trim().length >
+                                                                            1) {
+                                                                          controller
+                                                                              .isAppliedAtInvalid
+                                                                              .value = false;
+                                                                        } else {
+                                                                          controller
+                                                                              .isAppliedAtInvalid
+                                                                              .value = true;
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Dimens
+                                                                  .boxHeight10,
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  CustomRichText(
+                                                                    title:
+                                                                        'Contract Reference No.: ',
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxWidth10,
+                                                                  Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Colors.black26,
+                                                                          offset:
+                                                                              const Offset(
+                                                                            5.0,
+                                                                            5.0,
+                                                                          ),
+                                                                          blurRadius:
+                                                                              5.0,
+                                                                          spreadRadius:
+                                                                              1.0,
+                                                                        ),
+                                                                      ],
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child:
+                                                                        LoginCustomTextfield(
+                                                                      width: (Get
+                                                                              .width *
+                                                                          0.15),
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .text,
+                                                                      maxLine:
+                                                                          1,
+                                                                      textController:
+                                                                          controller
+                                                                              .orderReferenceNoTextController,
+                                                                      errorController: controller
+                                                                              .isContractRefInvalid
+                                                                              .value
+                                                                          ? "Required field"
+                                                                          : null,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        if (value.trim().length >
+                                                                            1) {
+                                                                          controller
+                                                                              .isContractRefInvalid
+                                                                              .value = false;
+                                                                        } else {
+                                                                          controller
+                                                                              .isContractRefInvalid
+                                                                              .value = true;
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Dimens
+                                                                  .boxHeight10,
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  CustomRichText(
+                                                                    title:
+                                                                        'Approximate Daily Loss: ',
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxWidth10,
+                                                                  Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Colors.black26,
+                                                                          offset:
+                                                                              const Offset(
+                                                                            5.0,
+                                                                            5.0,
+                                                                          ),
+                                                                          blurRadius:
+                                                                              5.0,
+                                                                          spreadRadius:
+                                                                              1.0,
+                                                                        ),
+                                                                      ],
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child:
+                                                                        LoginCustomTextfield(
+                                                                      width: (Get
+                                                                              .width *
+                                                                          0.15),
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .number,
+                                                                      maxLine:
+                                                                          1,
+                                                                      inputFormatters: [
+                                                                        FilteringTextInputFormatter
+                                                                            .digitsOnly
+                                                                      ],
+                                                                      textController:
+                                                                          controller
+                                                                              .approxdailylosstxtcontroller,
+                                                                      errorController: controller
+                                                                              .isApproxLossInvalid
+                                                                              .value
+                                                                          ? "Required field"
+                                                                          : null,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        if (value.trim().length >
+                                                                            1) {
+                                                                          controller
+                                                                              .isApproxLossInvalid
+                                                                              .value = false;
+                                                                        } else {
+                                                                          controller
+                                                                              .isApproxLossInvalid
+                                                                              .value = true;
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
                                                               Dimens
                                                                   .boxHeight10,
@@ -1081,7 +1429,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                       maxLine:
                                                                           1,
                                                                       ishint:
-                                                                          '${controller.inventoryDetailsModel.value?.cost}',
+                                                                          '${controller.inventoryDetailsModel.value?.cost ?? ""}',
                                                                       textController:
                                                                           controller
                                                                               .costOfReplacementTextController,
@@ -1089,6 +1437,24 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         FilteringTextInputFormatter
                                                                             .digitsOnly
                                                                       ],
+                                                                      errorController: controller
+                                                                              .isCostOfReplacementInvalid
+                                                                              .value
+                                                                          ? "Required field"
+                                                                          : null,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        if (value.trim().length >
+                                                                            1) {
+                                                                          controller
+                                                                              .isCostOfReplacementInvalid
+                                                                              .value = false;
+                                                                        } else {
+                                                                          controller
+                                                                              .isCostOfReplacementInvalid
+                                                                              .value = true;
+                                                                        }
+                                                                      },
                                                                     ),
                                                                   ),
                                                                 ],
@@ -1143,64 +1509,31 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                       textController:
                                                                           controller
                                                                               .immediateCorrectiveActionTextController,
+                                                                      errorController: controller
+                                                                              .isCorrectiveActionInvalid
+                                                                              .value
+                                                                          ? "Required field"
+                                                                          : null,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        if (value.trim().length >
+                                                                            1) {
+                                                                          controller
+                                                                              .isCorrectiveActionInvalid
+                                                                              .value = false;
+                                                                        } else {
+                                                                          controller
+                                                                              .isCorrectiveActionInvalid
+                                                                              .value = true;
+                                                                        }
+                                                                      },
                                                                     ),
                                                                   ),
                                                                 ],
                                                               ),
                                                               Dimens
                                                                   .boxHeight10,
-                                                              IgnorePointer(
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    CustomRichText(
-                                                                      title:
-                                                                          'Request to Warrenty Provider: ',
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxWidth10,
-                                                                    Container(
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        boxShadow: [
-                                                                          BoxShadow(
-                                                                            color:
-                                                                                Colors.black26,
-                                                                            offset:
-                                                                                const Offset(
-                                                                              5.0,
-                                                                              5.0,
-                                                                            ),
-                                                                            blurRadius:
-                                                                                5.0,
-                                                                            spreadRadius:
-                                                                                1.0,
-                                                                          ),
-                                                                        ],
-                                                                        color: ColorValues
-                                                                            .whiteColor,
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(5),
-                                                                      ),
-                                                                      child:
-                                                                          LoginCustomTextfield(
-                                                                        width: (Get.width *
-                                                                            0.15),
-                                                                        keyboardType:
-                                                                            TextInputType.text,
-                                                                        maxLine:
-                                                                            1,
-                                                                        ishint:
-                                                                            '${controller.inventoryDetailsModel.value?.supplierName}',
-                                                                        textController:
-                                                                            controller.requestManufactureTextController,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
+
                                                               // Dimens.boxHeight90,
                                                             ],
                                                           ),
@@ -1389,9 +1722,31 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                                                     SizedBox(
                                                                                                       height: 15,
                                                                                                     ),
-                                                                                                    emailDropdown(
-                                                                                                      context,
-                                                                                                      'Select Employees',
+                                                                                                    Row(
+                                                                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                                                      children: [
+                                                                                                        SizedBox(
+                                                                                                          width: MediaQuery.of(context).size.width / 4.2,
+                                                                                                          child: CustomMultiSelectDialogField(
+                                                                                                            buttonText: 'Select Employee',
+                                                                                                            title: 'Employees',
+                                                                                                            // initialValue: [],
+                                                                                                            initialValue: (controller.selectedEmployeeNameIdList.isNotEmpty) ? controller.selectedEmployeeNameIdList : [],
+                                                                                                            items: controller.employeesList
+                                                                                                                .map(
+                                                                                                                  (equipmentCategory) => MultiSelectItem(
+                                                                                                                    equipmentCategory.id,
+                                                                                                                    equipmentCategory.name ?? '',
+                                                                                                                  ),
+                                                                                                                )
+                                                                                                                .toList(),
+                                                                                                            onConfirm: (selectedOptionsList) => {
+                                                                                                              controller.employeesNameSelected(selectedOptionsList),
+                                                                                                              print('Employees Name list Ids ${controller.selectedEmployeeNameIdList}')
+                                                                                                            },
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                      ],
                                                                                                     ),
                                                                                                     SizedBox(
                                                                                                       height: 10,
@@ -2289,15 +2644,87 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                 ? Row(
                     children: <Widget>[
                       Spacer(),
-                      controller.wc_id.value != 0
+                      controller.wc_id.value != 0 &&
+                              controller.viewWarrantyClaimDetailsModel.value
+                                      ?.status ==
+                                  192
                           ? Container(
                               height: 30,
                               child: CustomElevatedButton(
                                 backgroundColor: ColorValues.appGreenColor,
                                 onPressed: () {
-                                  controller.updateWarrantyClaim();
+                                  controller.isFormInvalid.value = false;
+                                  controller.updateWarrantyClaim(
+                                    isDraft: false,
+                                    fileIds: dropzoneController.fileIds,
+                                    affectedFileIds:
+                                        affectedPartController.fileIds,
+                                  );
                                 },
                                 text: 'Update',
+                              ),
+                            )
+                          : Dimens.box0,
+                      controller.wc_id.value != 0 &&
+                              controller.viewWarrantyClaimDetailsModel.value
+                                      ?.status ==
+                                  191
+                          ? Container(
+                              height: 30,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                onPressed: () {
+                                  controller.isFormInvalid.value = false;
+                                  controller.updateWarrantyClaim(
+                                    isDraft: true,
+                                    fileIds: dropzoneController.fileIds,
+                                    affectedFileIds:
+                                        affectedPartController.fileIds,
+                                  );
+                                },
+                                text: 'Update Draft',
+                              ),
+                            )
+                          : Dimens.box0,
+                      Dimens.boxWidth10,
+                      controller.wc_id.value != 0 &&
+                              controller.viewWarrantyClaimDetailsModel.value
+                                      ?.status ==
+                                  191
+                          ? Container(
+                              height: 30,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                onPressed: () {
+                                  controller.isFormInvalid.value = false;
+                                  controller.updateWarrantyClaim(
+                                    isDraft: false,
+                                    fileIds: dropzoneController.fileIds,
+                                    affectedFileIds:
+                                        affectedPartController.fileIds,
+                                  );
+                                },
+                                text: 'Submit For Release',
+                              ),
+                            )
+                          : Dimens.box0,
+                      controller.wc_id.value != 0 &&
+                              controller.viewWarrantyClaimDetailsModel.value
+                                      ?.status ==
+                                  193
+                          ? Container(
+                              height: 30,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                onPressed: () {
+                                  controller.isFormInvalid.value = false;
+                                  controller.resubmitWarrantyClaim(
+                                    fileIds: dropzoneController.fileIds,
+                                    affectedFileIds:
+                                        affectedPartController.fileIds,
+                                  );
+                                },
+                                text: 'Resubmit',
                               ),
                             )
                           : Dimens.box0,
@@ -2307,7 +2734,11 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                               child: CustomElevatedButton(
                                 backgroundColor: ColorValues.appGreenColor,
                                 onPressed: () {
-                                  controller.saveAsDraft();
+                                  controller.saveAsDraft(
+                                    fileIds: dropzoneController.fileIds,
+                                    affectedFileIds:
+                                        affectedPartController.fileIds,
+                                  );
                                 },
                                 text: 'Save As Draft',
                               ),
@@ -2322,6 +2753,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                               child: CustomElevatedButton(
                                 backgroundColor: ColorValues.appGreenColor,
                                 onPressed: () {
+                                  controller.isFormInvalid.value = false;
                                   controller.createWarrantyClaim(
                                     fileIds: dropzoneController.fileIds,
                                     affectedFileIds:
@@ -2339,28 +2771,34 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Spacer(),
-                      Container(
-                        height: 35,
-                        child: CustomElevatedButton(
-                          icon: Icons.print_outlined,
-                          backgroundColor: ColorValues.appDarkBlueColor,
-                          text: "Print",
-                          onPressed: () {
-                            // controller.printScreen();
-                          },
-                        ),
-                      ),
+                      controller.viewWarrantyClaimDetailsModel.value?.status ==
+                              194
+                          ? Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                icon: Icons.print_outlined,
+                                backgroundColor: ColorValues.appDarkBlueColor,
+                                text: "Print",
+                                onPressed: () {
+                                  // controller.printScreen();
+                                },
+                              ),
+                            )
+                          : Dimens.box0,
                       Dimens.boxWidth10,
                       varUserAccessModel.value.access_list!
-                                  .where((e) =>
-                                      e.feature_id ==
-                                          UserAccessConstants
-                                              .kWarrantyClaimFeatureId &&
-                                      e.approve ==
-                                          UserAccessConstants
-                                              .kHaveApproveAccess)
-                                  .length >
-                              0
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants
+                                                  .kWarrantyClaimFeatureId &&
+                                          e.approve ==
+                                              UserAccessConstants
+                                                  .kHaveApproveAccess)
+                                      .length >
+                                  0 &&
+                              controller.viewWarrantyClaimDetailsModel.value
+                                      ?.status ==
+                                  192
                           ? Container(
                               height: 28,
                               child: CustomElevatedButton(
@@ -2377,15 +2815,18 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                           : Dimens.box0,
                       Dimens.boxWidth10,
                       varUserAccessModel.value.access_list!
-                                  .where((e) =>
-                                      e.feature_id ==
-                                          UserAccessConstants
-                                              .kWarrantyClaimFeatureId &&
-                                      e.approve ==
-                                          UserAccessConstants
-                                              .kHaveApproveAccess)
-                                  .length >
-                              0
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants
+                                                  .kWarrantyClaimFeatureId &&
+                                          e.approve ==
+                                              UserAccessConstants
+                                                  .kHaveApproveAccess)
+                                      .length >
+                                  0 &&
+                              controller.viewWarrantyClaimDetailsModel.value
+                                      ?.status ==
+                                  192
                           ? Container(
                               height: 28,
                               child: CustomElevatedButton(
@@ -2690,42 +3131,14 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
     return newTime;
   }
 
-  emailDropdown(
-    BuildContext context,
-    String? title,
-  ) {
-    return Obx(
-      () => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width / 4.2,
-            child: CustomMultiSelectDialogField(
-              buttonText: '$title',
-              title: 'Employees',
-              // initialValue: [],
-              initialValue: (controller.selectedEmployeeNameIdList.isNotEmpty)
-                  ? controller.selectedEmployeeNameIdList
-                  : [],
-              items: controller.employeesList
-                  .map(
-                    (equipmentCategory) => MultiSelectItem(
-                      equipmentCategory.id,
-                      equipmentCategory.name ?? '',
-                    ),
-                  )
-                  .toList(),
-              onConfirm: (selectedOptionsList) => {
-                controller.employeesNameSelected(selectedOptionsList),
-                print(
-                    'Employees Name list Ids ${controller.selectedEmployeeNameIdList}')
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // emailDropdown(
+  //   BuildContext context,
+  //   String? title,
+  // ) {
+  //   return Obx(
+  //     () =>
+  //   );
+  // }
 
   supplierActionData(
     String? title,
@@ -2811,33 +3224,32 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
               border: InputBorder.none,
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,
-              // focusedErrorBorder: controller.isWorPermitNumberTextInvalid.value
-              //     ? OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(5),
-              //         borderSide: BorderSide(
-              //           color: ColorValues.redColorDark,
-              //         ),
-              //       )
-              //     : InputBorder.none,
-              // errorBorder: controller.isWorPermitNumberTextInvalid.value
-              //     ? OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(5),
-              //         borderSide: BorderSide(
-              //           color: ColorValues.redColorDark,
-              //         ),
-              //       )
-              //     : null,
-              // errorText: controller.isWorPermitNumberTextInvalid.value
-              //     ? "Required field"
-              //     : null,
+              focusedErrorBorder: controller.isCommentInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isCommentInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText:
+                  controller.isCommentInvalid.value ? "Required field" : null,
             ),
-            // onChanged: (value) {
-            //   if (value.trim().length > 3) {
-            //     controller.isWorPermitNumberTextInvalid.value = false;
-            //   } else {
-            //     controller.isWorPermitNumberTextInvalid.value = true;
-            //   }
-            // },
+            onChanged: (value) {
+              if (value.trim().length > 3) {
+                controller.isCommentInvalid.value = false;
+              } else {
+                controller.isCommentInvalid.value = true;
+              }
+            },
           ),
         ),
       ),

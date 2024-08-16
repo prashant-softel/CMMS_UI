@@ -46,7 +46,7 @@ class ViewEscalationMatrixContentWeb
                       Get.offNamed(Routes.home);
                     },
                     child: Text(
-                      "Dashboard",
+                      "Dashboard".toUpperCase(),
                       style: Styles.greyLight14,
                     ),
                   ),
@@ -56,12 +56,12 @@ class ViewEscalationMatrixContentWeb
                       Get.offNamed(Routes.escalationMatrixListWeb);
                     },
                     child: Text(
-                      " / Escalation Matrix List",
+                      " / Escalation Matrix List".toUpperCase(),
                       style: Styles.greyLight14,
                     ),
                   ),
                   Text(
-                    " / View Escalation Matrix",
+                    " / View Escalation Matrix".toUpperCase(),
                     style: Styles.greyLight14,
                   )
                 ],
@@ -195,7 +195,16 @@ class ViewEscalationMatrixContentWeb
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.appGreenColor,
                               text: "Edit",
-                              onPressed: () {},
+                              onPressed: () {
+                                controller.editEscalationMatrix(
+                                  moudle_id: controller.escalation_details.value
+                                          ?.module_id ??
+                                      0,
+                                  status_id: controller
+                                          .status_escalation.value.status_id ??
+                                      0,
+                                );
+                              },
                             ),
                           ),
                         ],

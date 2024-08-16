@@ -86,11 +86,11 @@ class NewWarrantyClaimDialog extends GetView {
                   SizedBox(
                     height: 30,
                   ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Center(
-                          child: ElevatedButton(
+                  Center(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton(
                             style: Styles.greenElevatedButtonStyle,
                             onPressed: () {
                               Get.offAllNamed(Routes.warrantyClaimListWeb);
@@ -98,24 +98,8 @@ class NewWarrantyClaimDialog extends GetView {
                             },
                             child: const Text('Warranty Claim List'),
                           ),
-                        ),
-                        // Dimens.boxWidth10,
-                        // ElevatedButton(
-                        //   style: Styles.yellowElevatedButtonStyle,
-                        //   onPressed: () {
-                        //     // Get.offAllNamed(Routes.viewWarrantyClaim);
-                        //     _controller.(
-                        //         wc_id: warrantyClaimId![0]);
-                        //   },
-                        //   child: const Text('View This Warranty Claim'),
-                        // ),
-                        // // Dimens.boxWidth10,
-                        // ElevatedButton(
-                        //   style: Styles.darkBlueElevatedButtonStyle,
-                        //   onPressed: () => Get.back(),
-                        //   child: const Text('Ok'),
-                        // ),
-                      ]),
+                        ]),
+                  ),
                 ]),
           );
         }),
