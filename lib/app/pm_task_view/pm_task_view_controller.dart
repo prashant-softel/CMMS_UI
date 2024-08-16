@@ -660,31 +660,63 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    // Draw PM Information Details
+    // Draw PM Information Details (Left Side)
     double labelWidth = 80;
     double valueWidth = 120;
     double labelX = 30;
     double valueX = labelX + labelWidth + 5;
 
-    List<String> pmInfoLabels = [
+    List<String> pmInfoLabelsLeft = [
       'PM Plan ID',
       'PM Plan/task title',
       'Due date',
       'Start date'
     ];
-    List<String> pmInfoValues = [
-      '12345',
-      'Sample Task',
-      '2024-08-16',
-      '2024-08-01'
+    List<String> pmInfoValuesLeft = [
+      '${pmtaskViewModel.value?.id}',
+      '${pmtaskViewModel.value?.plan_title}',
+      '${pmtaskViewModel.value?.due_date}',
+      '${pmtaskViewModel.value?.started_at}',
     ];
     double rowHeight = 15;
 
-    for (int i = 0; i < pmInfoLabels.length; i++) {
-      page.graphics.drawString(pmInfoLabels[i], contentFont,
+    for (int i = 0; i < pmInfoLabelsLeft.length; i++) {
+      page.graphics.drawString(pmInfoLabelsLeft[i], contentFont,
           bounds: Rect.fromLTWH(labelX, currentY + 5, labelWidth, rowHeight));
-      page.graphics.drawString(pmInfoValues[i], contentFont,
+      page.graphics.drawString(pmInfoValuesLeft[i], contentFont,
           bounds: Rect.fromLTWH(valueX, currentY + 5, valueWidth, rowHeight));
+      currentY += rowHeight;
+    }
+
+    // Draw PM Information Details (Right Side)
+    double labelWidthRight = 80;
+    double valueWidthRight = 120;
+    double labelXRight = pageSize.width / 2 + 10; // Position on the right side
+    double valueXRight = labelXRight + labelWidthRight + 5;
+
+    List<String> pmInfoLabelsRight = [
+      'PM Task ID',
+      'Frequency',
+      'Assigned to',
+      'Done date'
+    ];
+    List<String> pmInfoValuesRight = [
+      '${pmtaskViewModel.value?.id}',
+      '${pmtaskViewModel.value?.frequency_name}',
+      '${pmtaskViewModel.value?.assigned_to_name}',
+      '${pmtaskViewModel.value?.done_date}',
+    ];
+
+    currentY -= pmInfoLabelsLeft.length *
+        rowHeight; // Reset currentY to align with left side
+
+    for (int i = 0; i < pmInfoLabelsRight.length; i++) {
+      page.graphics.drawString(pmInfoLabelsRight[i], contentFont,
+          bounds: Rect.fromLTWH(
+              labelXRight, currentY + 5, labelWidthRight, rowHeight));
+      page.graphics.drawString(pmInfoValuesRight[i], contentFont,
+          bounds: Rect.fromLTWH(
+              valueXRight, currentY + 5, valueWidthRight, rowHeight));
       currentY += rowHeight;
     }
 
