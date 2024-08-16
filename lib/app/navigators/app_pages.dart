@@ -1241,6 +1241,11 @@ class AppPages {
       binding: GrievanceListBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.grievanceSummary,
+      page: GrievanceSummaryScreen.new,
+      binding: GrievanceSummaryBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.viewHazWasteData,
       page: ViewHazWasteDataScreen.new,
       binding: ViewHazWasteDataBinding(),
@@ -1395,11 +1400,6 @@ class AppPages {
       name: _Paths.trainingSummary,
       page: TrainingSummaryScreen.new,
       binding: TrainingSummaryBinding(),
-    ),
-    GetPage<dynamic>(
-      name: _Paths.grievanceSummary,
-      page: GrievanceSummaryScreen.new,
-      binding: GrievanceSummaryBinding(),
     ),
   ];
 }
