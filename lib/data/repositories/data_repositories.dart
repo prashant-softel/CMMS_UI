@@ -5937,5 +5937,20 @@ class DataRepository extends DomainRepository {
         toDate: toDate,
       );
 
+    Future<ResponseModel> getGrievanceSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    String? fromDate,
+    String? toDate,
+  }) async =>
+      await connectHelper.getGrievanceSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
 //end
 }

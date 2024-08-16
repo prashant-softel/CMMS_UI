@@ -267,6 +267,11 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 title: "Create Grievance",
                                 onTap: () {
                                   controller.addGrievance();
+                                }),
+                                createContentTile(
+                                title: "Grievance Summary \nReport",
+                                onTap: () {
+                                  controller.GrievanceSummaryReport();
                                 })
                           ],
                         ),

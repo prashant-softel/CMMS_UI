@@ -92,6 +92,8 @@ import 'package:cmms/app/faulty_material_report/faulty_material_report_binding.d
 import 'package:cmms/app/faulty_material_report/view/faulty_material_report_screen.dart';
 import 'package:cmms/app/grievance_list/grievance_list_binding.dart';
 import 'package:cmms/app/grievance_list/views/grievance_list_screen.dart';
+import 'package:cmms/app/grievance_summary/grievance_summary_binding.dart';
+import 'package:cmms/app/grievance_summary/views/grievance_summary_screen.dart';
 import 'package:cmms/app/grievance_type/grievance_type_binding.dart';
 import 'package:cmms/app/grievance_type/view/grievance_type_screen.dart';
 import 'package:cmms/app/hoto/hoto_list_binding.dart';
@@ -1393,6 +1395,11 @@ class AppPages {
       name: _Paths.trainingSummary,
       page: TrainingSummaryScreen.new,
       binding: TrainingSummaryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.grievanceSummary,
+      page: GrievanceSummaryScreen.new,
+      binding: GrievanceSummaryBinding(),
     ),
   ];
 }

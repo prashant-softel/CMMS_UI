@@ -10320,5 +10320,31 @@ class ConnectHelper {
 
     return response;
   }
+
+  Future<ResponseModel> getGrievanceSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    required String? fromDate,
+    required String? toDate,
+  }) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('Grievance List: ${response}');
+    try {
+      response = await apiWrapper.makeRequest(
+        'Grievance/GrievanceSummaryReport?facility_id=$facility_id&fromDate=$fromDate&toDate=$toDate',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
   //end
 }
