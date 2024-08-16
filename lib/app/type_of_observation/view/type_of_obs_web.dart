@@ -60,9 +60,9 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.offNamed(Routes.misDashboard);
+                        Get.offNamed(Routes.masterDashboard);
                       },
-                      child: Text(" / MIS", style: Styles.greyLight14),
+                      child: Text(" / MASTERS", style: Styles.greyLight14),
                     ),
                     Text(" / TYPE OF OBSERVATION", style: Styles.greyLight14),
                     // Text(" / CREATE CHECKLIST NUMBER",
@@ -70,22 +70,22 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close  Type Of Observation'
-                          : 'Open  Type Of Observation',
-                    );
-                  }),
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.only(left: 10, top: 10),
+              //   child: ElevatedButton(
+              //     style: Styles.navyBlueElevatedButtonStyle,
+              //     onPressed: () {
+              //       controller.toggleContainer();
+              //     },
+              //     child: Obx(() {
+              //       return Text(
+              //         controller.isContainerVisible.value
+              //             ? 'Close  Type Of Observation'
+              //             : 'Open  Type Of Observation',
+              //       );
+              //     }),
+              //   ),
+              // ),
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,7 +153,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                           Expanded(
                                             child: CustomRichText(
                                                 title:
-                                                    'Type Of Observation Name: '),
+                                                    'Observation Name: '),
                                           ),
                                           Container(
                                             width: (MediaQuery.of(context)
@@ -437,6 +437,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                               ColorValues.appRedColor,
                                           onPressed: () {
                                             controller.cleardata();
+                                            controller.toggleContainer();
                                           },
                                           text: 'Cancel')),
                                   SizedBox(
