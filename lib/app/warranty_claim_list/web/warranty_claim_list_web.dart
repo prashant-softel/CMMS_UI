@@ -546,7 +546,20 @@ class WarrantyClaimListDataSource extends DataTableSource {
                                               ?.status_code ==
                                           194
                                       ? ColorValues.appGreenColor
-                                      : ColorValues.appRedColor),
+                                      : controller.warrantyClaimList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        e?.wc_id ==
+                                                        WarrantyClaimListDetails!
+                                                            .wc_id,
+                                                    orElse: () =>
+                                                        WarrantyClaimModel(
+                                                            wc_id: 00),
+                                                  )
+                                                  ?.status_code ==
+                                              191
+                                          ? ColorValues.draftColor
+                                          : ColorValues.appRedColor),
                           child: Text(
                             '${WarrantyClaimListDetails?.status}',
                             style: Styles.white10.copyWith(
@@ -586,15 +599,28 @@ class WarrantyClaimListDataSource extends DataTableSource {
                                 : Dimens.box0,
                             //),
                             varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kWarrantyClaimFeatureId &&
-                                            e.edit ==
-                                                UserAccessConstants
-                                                    .kHaveEditAccess)
-                                        .length >
-                                    0
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kWarrantyClaimFeatureId &&
+                                                    e.edit ==
+                                                        UserAccessConstants
+                                                            .kHaveEditAccess)
+                                                .length >
+                                            0 &&
+                                        controller.warrantyClaimList
+                                                .firstWhereOrNull((element) =>
+                                                    element?.wc_id ==
+                                                    WarrantyClaimListDetails
+                                                        ?.wc_id)
+                                                ?.status_code ==
+                                            192 ||
+                                    controller.warrantyClaimList
+                                            .firstWhereOrNull((element) =>
+                                                element?.wc_id ==
+                                                WarrantyClaimListDetails?.wc_id)
+                                            ?.status_code ==
+                                        191
                                 ? TableActionButton(
                                     color: ColorValues.appYellowColor,
                                     icon: Icons.edit,
@@ -607,17 +633,51 @@ class WarrantyClaimListDataSource extends DataTableSource {
                                     },
                                   )
                                 : Dimens.box0,
+                            varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kWarrantyClaimFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveEditAccess)
+                                            .length >
+                                        0 &&
+                                    controller.warrantyClaimList
+                                            .firstWhereOrNull((element) =>
+                                                element?.wc_id ==
+                                                WarrantyClaimListDetails?.wc_id)
+                                            ?.status_code ==
+                                        193
+                                ? TableActionButton(
+                                    color: Color.fromARGB(255, 116, 78, 130),
+                                    icon: Icons.ads_click,
+                                    message: 'Resubmit',
+                                    onPress: () {
+                                      controller.editWarrantyClaim(
+                                          wc_id:
+                                              WarrantyClaimListDetails?.wc_id);
+                                      // print('edit record:${int.tryParse('${record[0]}')}');
+                                    },
+                                  )
+                                : Dimens.box0,
 
                             varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kWarrantyClaimFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kWarrantyClaimFeatureId &&
+                                                e.approve ==
+                                                    UserAccessConstants
+                                                        .kHaveApproveAccess)
+                                            .length >
+                                        0 &&
+                                    controller.warrantyClaimList
+                                            .firstWhereOrNull((element) =>
+                                                element?.wc_id ==
+                                                WarrantyClaimListDetails?.wc_id)
+                                            ?.status_code ==
+                                        192
                                 ? TableActionButton(
                                     color: ColorValues.appGreenColor,
                                     icon: Icons.check,

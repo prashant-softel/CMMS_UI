@@ -1,3 +1,4 @@
+import 'package:cmms/app/careate_warranty_calim/create_warranty_claim_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_controller.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class WCMessageApproveDialog extends GetView {
   List<dynamic>? id;
 
   WCMessageApproveDialog({super.key, this.data, this.id});
-  final ViewWarrantyClaimController controller = Get.find();
+  final CreateWarrantyClaimController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -47,48 +48,23 @@ class WCMessageApproveDialog extends GetView {
                   Text('${id}',
                       style: TextStyle(color: Colors.green),
                       textAlign: TextAlign.center),
-                  //     SizedBox(height: 20,),
-                  // Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       SizedBox(
-                  //         width: 15,
-                  //       ),
-                  //       ElevatedButton(
-                  //         style: Styles.greenElevatedButtonStyle,
-                  //         onPressed: () => Get.offAllNamed(Routes.newPermit),
-                  //         child: const Text('Permit List'),
-                  //       ),
-                  //       Dimens.boxWidth10,
-                  //       ElevatedButton(
-                  //         style: Styles.blueElevatedButtonStyle,
-                  //         onPressed: () => Get.offAndToNamed(Routes.newPermitList),
-                  //         child: const Text('View This Permit'),
-                  //       ),
-                  //       Dimens.boxWidth10,
-                  //       // ElevatedButton(
-                  //       //   style: Styles.redElevatedButtonStyle,
-                  //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-                  //       //   child: const Text('Add New Job'),
-                  //       // ),
-                  //     ]),
                 ]),
           );
         }),
         actions: [
           // Dimens.boxWidth10,
-           SizedBox(width: 10),
+          SizedBox(width: 10),
           Center(
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                Get.toNamed(Routes.warrantyClaimList);
+                Get.offAllNamed(Routes.warrantyClaimListWeb);
               },
               child: const Text('WC List'),
             ),
           ),
           // Dimens.boxWidth10
-           SizedBox(width: 10),
+          SizedBox(width: 10),
         ],
       );
     }));

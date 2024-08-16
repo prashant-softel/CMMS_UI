@@ -285,9 +285,10 @@ class ImportDsmListChargesListController extends GetxController {
 
     if (dsmList != null) {
       isLoading.value = false;
-      for (var _dsmList in dsmList) {
-        dsmDataList.add(_dsmList!);
-      }
+      // for (var _dsmList in dsmList) {
+      //   dsmDataList.add(_dsmList!);
+      // }
+      dsmDataList.value = dsmList;
       filteredDSMList?.value = dsmDataList.value;
       dsmPaginationController = PaginationController(
         rowCount: dsmDataList.length,
@@ -305,7 +306,7 @@ class ImportDsmListChargesListController extends GetxController {
     print("${dsmDataList.length}");
   }
 
-    Future<void> goToImportDsmChargesScreen() async {
+  Future<void> goToImportDsmChargesScreen() async {
     clearStoreData();
     Get.toNamed(
       Routes.importInventory,

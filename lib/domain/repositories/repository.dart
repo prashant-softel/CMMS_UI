@@ -719,6 +719,8 @@ class Repository {
   //Create Escalation Matrix
   Future<Map<String, dynamic>> createEscalationMatrix(
     createEscalationMatrix,
+    int moduleId,
+    int statusId,
     bool? isLoading,
   ) async {
     try {
@@ -726,7 +728,9 @@ class Repository {
       final res = await _dataRepository.createEscalationMatrix(
         auth: auth,
         createEscalationMatrix: createEscalationMatrix,
-        isLoading: isLoading ?? false,
+        moduleId: moduleId,
+        statusId: statusId,
+        isLoading: isLoading?? false,
       );
 
       var resourceData = res.data;
@@ -1380,6 +1384,48 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateWarrantyClaim(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Update Warranty Claim: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateWarrantyClaim');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+  Future<Map<String, dynamic>> resubmitWarrantyClaim(
+    updateWarrantyClaim,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.resubmitWarrantyClaim(
         auth: auth,
         updateWarrantyClaim: updateWarrantyClaim,
         isLoading: isLoading ?? false,

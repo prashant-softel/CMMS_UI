@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
@@ -6,17 +7,22 @@ import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
 class CreateEscalationMatrixDialog extends GetView {
-  String? createEscalationMatrixData;
-  String? data;
-  List<dynamic>? escalationMatrixId;
+  final String? createEscalationMatrixData;
+  final String? data;
+  final List<dynamic>? escalationMatrixId;
+  final int? moduleId;
+  final int? statusId;
 
-  CreateEscalationMatrixDialog(
-      {super.key,
-      this.createEscalationMatrixData,
-      this.data,
-      this.escalationMatrixId});
+  CreateEscalationMatrixDialog({
+    super.key,
+    this.createEscalationMatrixData,
+    this.data,
+    this.escalationMatrixId,
+    this.moduleId,
+    this.statusId,
+  });
 
-  // final IncidentReportListController _controller = Get.find();
+  final AddEscalationMatrixController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +121,10 @@ class CreateEscalationMatrixDialog extends GetView {
               ElevatedButton(
                 style: Styles.yellowElevatedButtonStyle,
                 onPressed: () {
-                  // _controller.viewIncidentReport(id: incidentReportId![0]);
-                  // print('Incident Report Id${incidentReportId![0]}');
+                  _controller.viewEscalationMatrix(
+                    moudle_id: moduleId ?? 0,
+                    status_id: statusId ?? 0,
+                  );
                 },
                 child: const Text('View This Escalation Matrix'),
               ),

@@ -59,6 +59,15 @@ class CreateWarrantyClaimPresenter {
       isLoading: isLoading,
     );
   }
+  Future<Map<String, dynamic>?> resubmitWarrantyClaim({
+    updateWarrantyClaim,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.resubmitWarrantyClaim(
+      updateWarrantyClaim: updateWarrantyClaim,
+      isLoading: isLoading,
+    );
+  }
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
@@ -74,12 +83,12 @@ class CreateWarrantyClaimPresenter {
     );
   }
 
-  Future<List<HistoryModel>?> getHistory(
+  Future<List<HistoryModel>?> getHistory({
     moduleType,
-    wcId,
     facilityId,
+    wcId,
     isLoading,
-  ) async =>
+  }) async =>
       await warrantyClaimUsecase.getHistory(
         moduleType: moduleType,
         wcId: wcId,

@@ -31,6 +31,7 @@ class InventoryDetailsModel {
     this.calibrationDueDate,
     this.manufacturerName,
     this.expiry_date,
+    this.warrantyProviderName,
     this.start_date,
     this.status,
     this.cost,
@@ -51,6 +52,7 @@ class InventoryDetailsModel {
   String? manufacturerName;
   String? start_date;
   String? expiry_date;
+  String? warrantyProviderName;
   String? ownerName;
   String? operatorName;
   String? serialNumber;
@@ -81,6 +83,7 @@ class InventoryDetailsModel {
         serialNumber: json["serialNumber"],
         specialTool: json["specialTool"],
         warrantyId: json["warrantyId"],
+        warrantyProviderName: json["warrantyProviderName"],
         calibrationDueDate: json['calibrationDueDate'] == null
             ? null
             : DateTime.parse(json['calibrationDueDate'] as String),
