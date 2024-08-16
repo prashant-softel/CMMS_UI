@@ -219,7 +219,7 @@ class ApproveReturnMrsViewContentMobile
                                               )
                                             ]),
                                             Row(children: [
-                                              Text('issued Date: ',
+                                              Text('Issued Date: ',
                                                   style: Styles.appDarkGrey12),
                                               SizedBox(
                                                 width: 5,
@@ -242,6 +242,21 @@ class ApproveReturnMrsViewContentMobile
                                               Expanded(
                                                 child: Text(
                                                     mrsViewModel.returned_qty
+                                                            .toString() ??
+                                                        '',
+                                                    style:
+                                                        Styles.appDarkBlue12),
+                                              )
+                                            ]),
+                                            Row(children: [
+                                              Text('Remarks: ',
+                                                  style: Styles.appDarkGrey12),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                    mrsViewModel.return_remarks
                                                             .toString() ??
                                                         '',
                                                     style:
