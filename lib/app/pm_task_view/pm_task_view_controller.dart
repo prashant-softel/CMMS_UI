@@ -941,6 +941,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     }
 
     // Material consumption section
+
+
     currentY += 10;
     page.graphics.drawRectangle(
         pen: borderPen,
@@ -950,26 +952,46 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    double materialColumnWidth =
-        pageWidth / 6; // Adjusted to 6 columns, including margins
-    List<String> materialHeaders = [
-      'Eqp ID',
-      'ID',
-      'name',
-      'type',
-      'Issued Qty',
-      'Used Qty'
-    ];
+// Define static widths
+    double eqpIdWidth = 50;
+    double idWidth = 40;
+    double typeWidth = 80;
+    double issuedQtyWidth = 60;
+    double usedQtyWidth = 60;
+
+// Calculate remaining width for the name column
+    double nameColumnWidth = pageWidth -
+        (eqpIdWidth + idWidth + typeWidth + issuedQtyWidth + usedQtyWidth);
 
 // Draw the headers
-    for (int i = 0; i < materialHeaders.length; i++) {
-      page.graphics.drawString(materialHeaders[i], contentFont,
-          bounds: Rect.fromLTWH(
-              margin + (i * materialColumnWidth),
-              currentY + 5,
-              materialColumnWidth - 5,
-              rowHeight)); // Subtract 5 for slight padding
-    }
+    page.graphics.drawString('Eqp ID', contentFont,
+        bounds: Rect.fromLTWH(margin, currentY + 5, eqpIdWidth, rowHeight));
+    page.graphics.drawString('ID', contentFont,
+        bounds: Rect.fromLTWH(
+            margin + eqpIdWidth, currentY + 5, idWidth, rowHeight));
+    page.graphics.drawString('name', contentFont,
+        bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth, currentY + 5,
+            nameColumnWidth, rowHeight));
+    page.graphics.drawString('type', contentFont,
+        bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth + nameColumnWidth,
+            currentY + 5, typeWidth, rowHeight));
+    page.graphics.drawString('Issued Qty', contentFont,
+        bounds: Rect.fromLTWH(
+            margin + eqpIdWidth + idWidth + nameColumnWidth + typeWidth,
+            currentY + 5,
+            issuedQtyWidth,
+            rowHeight));
+    page.graphics.drawString('Used Qty', contentFont,
+        bounds: Rect.fromLTWH(
+            margin +
+                eqpIdWidth +
+                idWidth +
+                nameColumnWidth +
+                typeWidth +
+                issuedQtyWidth,
+            currentY + 5,
+            usedQtyWidth,
+            rowHeight));
 
     currentY += rowHeight;
 
@@ -981,31 +1003,42 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
       page.graphics.drawString(
           '${materialConsumption.equipment_ID}', contentFont,
-          bounds: Rect.fromLTWH(margin, currentY + 5, materialColumnWidth - 5,
-              rowHeight)); // Equipment ID
+          bounds: Rect.fromLTWH(
+              margin, currentY + 5, eqpIdWidth, rowHeight)); // Equipment ID
 
       page.graphics.drawString(
           '${materialConsumption.material_ID}', contentFont,
-          bounds: Rect.fromLTWH(margin + materialColumnWidth, currentY + 5,
-              materialColumnWidth - 5, rowHeight)); // Material ID
+          bounds: Rect.fromLTWH(margin + eqpIdWidth, currentY + 5, idWidth,
+              rowHeight)); // Material ID
 
       page.graphics.drawString(
           '${materialConsumption.material_name}', contentFont,
-          bounds: Rect.fromLTWH(margin + 2 * materialColumnWidth, currentY + 5,
-              materialColumnWidth - 5, rowHeight)); // Material name
+          bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth, currentY + 5,
+              nameColumnWidth, rowHeight)); // Material name
 
       page.graphics.drawString(
           '${materialConsumption.material_type}', contentFont,
-          bounds: Rect.fromLTWH(margin + 3 * materialColumnWidth, currentY + 5,
-              materialColumnWidth - 5, rowHeight)); // Material type
+          bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth + nameColumnWidth,
+              currentY + 5, typeWidth, rowHeight)); // Material type
 
       page.graphics.drawString('${materialConsumption.issued_qty}', contentFont,
-          bounds: Rect.fromLTWH(margin + 4 * materialColumnWidth, currentY + 5,
-              materialColumnWidth - 5, rowHeight)); // Issued quantity
+          bounds: Rect.fromLTWH(
+              margin + eqpIdWidth + idWidth + nameColumnWidth + typeWidth,
+              currentY + 5,
+              issuedQtyWidth,
+              rowHeight)); // Issued quantity
 
       page.graphics.drawString('${materialConsumption.used_qty}', contentFont,
-          bounds: Rect.fromLTWH(margin + 5 * materialColumnWidth, currentY + 5,
-              materialColumnWidth - 5, rowHeight)); // Used quantity
+          bounds: Rect.fromLTWH(
+              margin +
+                  eqpIdWidth +
+                  idWidth +
+                  nameColumnWidth +
+                  typeWidth +
+                  issuedQtyWidth,
+              currentY + 5,
+              usedQtyWidth,
+              rowHeight)); // Used quantity
 
       currentY += rowHeight;
     }
