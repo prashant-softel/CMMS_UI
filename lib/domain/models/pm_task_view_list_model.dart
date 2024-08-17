@@ -58,6 +58,15 @@ class PmtaskViewModel {
   List<ScheduleCheckPoint>? schedules;
   String? is_PTW;
   List<MaterialConsumption>? material_consumption;
+  int? employee_ID;
+  String? employee_name;
+  String? company;
+  int? isolation_taken;
+  String? isolated_equipment;
+  String? tbT_conducted_by_name;
+  String? tbT_done_time;
+  String? start_time;
+  String? workdescription;
 
   PmtaskViewModel({
     this.assigned_to_name,
@@ -106,6 +115,15 @@ class PmtaskViewModel {
     this.updated_by_name,
     this.schedule_Date,
     this.material_consumption,
+    this.employee_ID,
+    this.employee_name,
+    this.company,
+    this.isolation_taken,
+    this.isolated_equipment,
+    this.tbT_conducted_by_name,
+    this.tbT_done_time,
+    this.start_time,
+    this.workdescription,
   });
 
   factory PmtaskViewModel.fromJson(Map<String, dynamic> json) =>
@@ -146,7 +164,16 @@ class PmtaskViewModel {
         frequency_id: json["frequency_id"] ?? 0,
         frequency_name: json["frequency_name"] ?? "",
         id: json["id"] ?? 0,
+        tbT_done_time: json["tbT_done_time"] ?? "",
+        tbT_conducted_by_name: json["tbT_conducted_by_name"] ?? "",
+        start_time: json["start_time"] ?? "",
+        workdescription: json["workdescription"] ?? "",
+        employee_name: json["employee_name"] ?? "",
+        employee_ID: json["employee_ID"] ?? 0,
         permit_code: json["permit_code"] ?? "",
+        company: json["company"] ?? "",
+        isolation_taken: json["isolation_taken"] ?? 0,
+        isolated_equipment: json["isolated_equipment"] ?? "",
         permit_id: json["permit_id"] ?? 0,
         status: json["status"] ?? 0,
         facility_id: json["facility_id"] ?? 0,
@@ -177,6 +204,15 @@ class PmtaskViewModel {
         "is_PTW": is_PTW,
         "schedule_Date": schedule_Date,
         "plan_id": plan_id,
+        "tbT_conducted_by_name": tbT_conducted_by_name,
+        "start_time": start_time,
+        "workdescription": workdescription,
+        "tbT_done_time": tbT_done_time,
+        "employee_ID": employee_ID,
+        "employee_name": employee_name,
+        "company": company,
+        "isolation_taken": isolation_taken,
+        "isolated_equipment": isolated_equipment,
         "updated_by_name": updated_by_name,
         "updated_by_id": updated_by_id,
         "updated_at": updated_at,
