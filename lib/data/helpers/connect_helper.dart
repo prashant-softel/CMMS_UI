@@ -3525,6 +3525,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> escalateModule({
+    required String auth,
+    required int moduleId,
+    required int statusId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'EM/Escalate?moduleId=$moduleId&statusId=$statusId',
+      Request.post,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('Create Escalation Matrix Response:${responseModel.data}');
+    return responseModel;
+  }
+
   Future<ResponseModel> getEscalationDetail({
     required String auth,
     required int? moduleId,

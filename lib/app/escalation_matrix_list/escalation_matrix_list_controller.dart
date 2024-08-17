@@ -159,4 +159,14 @@ class EscalationMatrixListController extends GetxController {
       },
     );
   }
+
+  void escalateModule({required int moduleId, required int statusId}) async {
+    Map<String, dynamic>? responseCreateEscalationMatrixModel =
+        await escalationMatrixPresenter.escalateModule(
+      moduleId: moduleId,
+      statusId: statusId,
+      isLoading: true,
+    );
+    if (responseCreateEscalationMatrixModel == null) {}
+  }
 }
