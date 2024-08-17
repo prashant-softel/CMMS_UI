@@ -1373,6 +1373,16 @@ class AppPages {
       binding: ViewComplianceBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.docVersionDashboard,
+      page: DocVersionDashboardScreen.new,
+      binding: DocVersionDashbordBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewDocUploadScreen,
+      page: ViewDocUploadScreen.new,
+      binding: ViewDocUploadBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.ComplianceStatus,
       page: ComplianceStatusScreen.new,
       binding: ComplianceStatusBinding(),
@@ -1397,7 +1407,7 @@ class AppPages {
       page: ObservationSummaryScreen.new,
       binding: ObservationSummaryBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.misSummary,
       page: MisSummaryScreen.new,
       binding: MisSummaryBinding(),

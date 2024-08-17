@@ -890,6 +890,62 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         format: PdfStringFormat(alignment: PdfTextAlignment.left));
     currentY += rowHeight * 2;
 
+    // PM History section
+    currentY += 20; // Adding some space before the next section
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('PM History', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Adding history details
+    // double columnWidth = (pageSize.width - 50) / 4; // Adjust column width as needed
+    List<String> historyHeaders = [
+      'Time Stamp',
+      'Posted By',
+      'Comments',
+      'Status'
+    ];
+
+    for (int i = 0; i < historyHeaders.length; i++) {
+      page.graphics.drawString(historyHeaders[i], contentFont,
+          bounds: Rect.fromLTWH(
+              30 + (i * columnWidth), currentY + 5, columnWidth, rowHeight));
+    }
+
+    currentY += rowHeight;
+
+    for (var history in historyList!.value) {
+      if (history != null) {
+        String timeStamp = history.createdAt?.result != null
+            ? history.createdAt!.result
+                .toString()
+                .substring(0, 16)
+                .replaceFirst('T', ' ')
+            : 'N/A';
+        String postedBy = history.createdByName ?? 'Unknown';
+        String comments = history.comment ?? 'No comments';
+        String status = history.status_name ?? 'Unknown status';
+
+        page.graphics.drawString(timeStamp, contentFont,
+            bounds: Rect.fromLTWH(30, currentY + 5, columnWidth, rowHeight));
+        page.graphics.drawString(postedBy, contentFont,
+            bounds: Rect.fromLTWH(
+                30 + columnWidth, currentY + 5, columnWidth, rowHeight));
+        page.graphics.drawString(comments, contentFont,
+            bounds: Rect.fromLTWH(
+                30 + 2 * columnWidth, currentY + 5, columnWidth, rowHeight));
+        page.graphics.drawString(status, contentFont,
+            bounds: Rect.fromLTWH(
+                30 + 3 * columnWidth, currentY + 5, columnWidth, rowHeight));
+
+        currentY += rowHeight;
+      }
+    }
+
     // Material consumption section
     currentY += 10;
     page.graphics.drawRectangle(
