@@ -633,37 +633,36 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         PdfStandardFont(PdfFontFamily.helvetica, 10, style: PdfFontStyle.bold);
     final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
 
-    // Draw images
-    page.graphics.drawImage(image, Rect.fromLTWH(15, 10, 100, 80));
-    page.graphics.drawImage(image, Rect.fromLTWH(370, 590, 100, 50));
-
-    // Site name section
+    double margin = 10; // Margin from all sides
     double currentY =
         100; // Start position for the first section below the image
     double sectionHeight = 20; // Height for each section header
+    double pageWidth = pageSize.width - 2 * margin;
 
+    // Draw images
+    page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
+
+    // Site name section
     page.graphics.drawRectangle(
         pen: borderPen,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
     page.graphics.drawString('Site name', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
     // PM Information
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
     page.graphics.drawString('PM Information', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
     // Draw PM Information Details (Left Side)
     double labelWidth = 80;
     double valueWidth = 120;
-    double labelX = 30;
+    double labelX = margin + 5;
     double valueX = labelX + labelWidth + 5;
 
     List<String> pmInfoLabelsLeft = [
@@ -691,7 +690,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     // Draw PM Information Details (Right Side)
     double labelWidthRight = 80;
     double valueWidthRight = 120;
-    double labelXRight = pageSize.width / 2 + 10; // Position on the right side
+    double labelXRight = pageWidth / 2 + margin; // Position on the right side
     double valueXRight = labelXRight + labelWidthRight + 5;
 
     List<String> pmInfoLabelsRight = [
@@ -725,14 +724,13 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
     page.graphics.drawString('Equipment details', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
     // Draw Equipment Details Table
-    double columnWidth = (pageSize.width - 50) / 3;
+    double columnWidth = pageWidth / 3;
     List<String> equipmentHeaders = [
       'S. No',
       'Equipment category',
@@ -741,8 +739,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
     for (int i = 0; i < equipmentHeaders.length; i++) {
       page.graphics.drawString(equipmentHeaders[i], contentFont,
-          bounds: Rect.fromLTWH(
-              30 + (i * columnWidth), currentY + 5, columnWidth, rowHeight));
+          bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
+              columnWidth, rowHeight));
     }
 
     currentY += rowHeight;
@@ -752,15 +750,15 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       var schedule = pmtaskViewModel.value!.schedules![i];
 
       page.graphics.drawString('${i + 1}', contentFont,
-          bounds:
-              Rect.fromLTWH(30, currentY + 5, columnWidth, rowHeight)); // S. No
+          bounds: Rect.fromLTWH(
+              margin, currentY + 5, columnWidth, rowHeight)); // S. No
       page.graphics.drawString(
           '${pmtaskViewModel.value?.category_name}', contentFont,
-          bounds: Rect.fromLTWH(30 + columnWidth, currentY + 5, columnWidth,
+          bounds: Rect.fromLTWH(margin + columnWidth, currentY + 5, columnWidth,
               rowHeight)); // Equipment category
       page.graphics.drawString('${schedule?.name}', contentFont,
-          bounds: Rect.fromLTWH(30 + 2 * columnWidth, currentY + 5, columnWidth,
-              rowHeight)); // Equipment name
+          bounds: Rect.fromLTWH(margin + 2 * columnWidth, currentY + 5,
+              columnWidth, rowHeight)); // Equipment name
 
       currentY += rowHeight;
     }
@@ -770,14 +768,13 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
     page.graphics.drawString('Permit carried by', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
     // Column Headers
-    columnWidth = (pageSize.width - 50) / 4; // Adjust column width as needed
+    columnWidth = pageWidth / 4; // Adjust column width as needed
     List<String> permitHeaders = [
       'S. No',
       'Employee ID',
@@ -787,8 +784,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
     for (int i = 0; i < permitHeaders.length; i++) {
       page.graphics.drawString(permitHeaders[i], contentFont,
-          bounds: Rect.fromLTWH(
-              30 + (i * columnWidth), currentY + 5, columnWidth, rowHeight));
+          bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
+              columnWidth, rowHeight));
     }
 
     currentY += sectionHeight;
@@ -812,16 +809,16 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
     for (var row in permitData) {
       page.graphics.drawString(row['S. No']!, contentFont,
-          bounds: Rect.fromLTWH(30, currentY + 5, columnWidth, rowHeight));
+          bounds: Rect.fromLTWH(margin, currentY + 5, columnWidth, rowHeight));
       page.graphics.drawString(row['Employee ID']!, contentFont,
           bounds: Rect.fromLTWH(
-              30 + columnWidth, currentY + 5, columnWidth, rowHeight));
+              margin + columnWidth, currentY + 5, columnWidth, rowHeight));
       page.graphics.drawString(row['Employee name']!, contentFont,
           bounds: Rect.fromLTWH(
-              30 + 2 * columnWidth, currentY + 5, columnWidth, rowHeight));
+              margin + 2 * columnWidth, currentY + 5, columnWidth, rowHeight));
       page.graphics.drawString(row['Company']!, contentFont,
           bounds: Rect.fromLTWH(
-              30 + 3 * columnWidth, currentY + 5, columnWidth, rowHeight));
+              margin + 3 * columnWidth, currentY + 5, columnWidth, rowHeight));
 
       currentY += rowHeight;
     }
@@ -831,13 +828,12 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
     page.graphics.drawString('PTW Information', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    double ptwColumnWidth = (pageSize.width - 50) / 5;
+    double ptwColumnWidth = pageWidth / 5;
     List<String> ptwHeaders = [
       'PTW ID',
       'Permit type',
@@ -847,7 +843,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
     for (int i = 0; i < ptwHeaders.length; i++) {
       page.graphics.drawString(ptwHeaders[i], contentFont,
-          bounds: Rect.fromLTWH(30 + (i * ptwColumnWidth), currentY + 5,
+          bounds: Rect.fromLTWH(margin + (i * ptwColumnWidth), currentY + 5,
               ptwColumnWidth, rowHeight));
     }
 
@@ -855,7 +851,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
     // TBT section
     currentY += 10;
-    double tbtColumnWidth = (pageSize.width - 50) / 4;
+    double tbtColumnWidth = pageWidth / 4;
     List<String> tbtHeaders = [
       'TBT conducted by',
       'TBT done time',
@@ -865,7 +861,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
     for (int i = 0; i < tbtHeaders.length; i++) {
       page.graphics.drawString(tbtHeaders[i], contentFont,
-          bounds: Rect.fromLTWH(30 + (i * tbtColumnWidth), currentY + 5,
+          bounds: Rect.fromLTWH(margin + (i * tbtColumnWidth), currentY + 5,
               tbtColumnWidth, rowHeight));
     }
 
@@ -875,18 +871,18 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     currentY += 10;
     page.graphics.drawRectangle(
         pen: borderPen,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+        brush: backgroundBrush,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
     page.graphics.drawString('Work description', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
     // Add static description after Work description
     String staticDescription =
         "This is a static description text that explains the work done or provides additional details.";
     page.graphics.drawString(staticDescription, contentFont,
-        bounds:
-            Rect.fromLTWH(30, currentY + 5, pageSize.width - 60, rowHeight * 2),
+        bounds: Rect.fromLTWH(
+            margin + 5, currentY + 5, pageWidth - 10, rowHeight * 2),
         format: PdfStringFormat(alignment: PdfTextAlignment.left));
     currentY += rowHeight * 2;
 
@@ -895,14 +891,11 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
     page.graphics.drawString('PM History', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    // Adding history details
-    // double columnWidth = (pageSize.width - 50) / 4; // Adjust column width as needed
     List<String> historyHeaders = [
       'Time Stamp',
       'Posted By',
@@ -912,8 +905,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
     for (int i = 0; i < historyHeaders.length; i++) {
       page.graphics.drawString(historyHeaders[i], contentFont,
-          bounds: Rect.fromLTWH(
-              30 + (i * columnWidth), currentY + 5, columnWidth, rowHeight));
+          bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
+              columnWidth, rowHeight));
     }
 
     currentY += rowHeight;
@@ -931,49 +924,124 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         String status = history.status_name ?? 'Unknown status';
 
         page.graphics.drawString(timeStamp, contentFont,
-            bounds: Rect.fromLTWH(30, currentY + 5, columnWidth, rowHeight));
+            bounds:
+                Rect.fromLTWH(margin, currentY + 5, columnWidth, rowHeight));
         page.graphics.drawString(postedBy, contentFont,
             bounds: Rect.fromLTWH(
-                30 + columnWidth, currentY + 5, columnWidth, rowHeight));
+                margin + columnWidth, currentY + 5, columnWidth, rowHeight));
         page.graphics.drawString(comments, contentFont,
-            bounds: Rect.fromLTWH(
-                30 + 2 * columnWidth, currentY + 5, columnWidth, rowHeight));
+            bounds: Rect.fromLTWH(margin + 2 * columnWidth, currentY + 5,
+                columnWidth, rowHeight));
         page.graphics.drawString(status, contentFont,
-            bounds: Rect.fromLTWH(
-                30 + 3 * columnWidth, currentY + 5, columnWidth, rowHeight));
+            bounds: Rect.fromLTWH(margin + 3 * columnWidth, currentY + 5,
+                columnWidth, rowHeight));
 
         currentY += rowHeight;
       }
     }
 
     // Material consumption section
+
+
     currentY += 10;
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
     page.graphics.drawString('Material consumption', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    double materialColumnWidth = (pageSize.width - 50) / 6;
-    List<String> materialHeaders = [
-      'Equipment ID',
-      'Material ID',
-      'Material name',
-      'Material type',
-      'Issued quantity',
-      'Used quantity'
-    ];
+// Define static widths
+    double eqpIdWidth = 50;
+    double idWidth = 40;
+    double typeWidth = 80;
+    double issuedQtyWidth = 60;
+    double usedQtyWidth = 60;
 
-    for (int i = 0; i < materialHeaders.length; i++) {
-      page.graphics.drawString(materialHeaders[i], contentFont,
-          bounds: Rect.fromLTWH(30 + (i * materialColumnWidth), currentY + 5,
-              materialColumnWidth, rowHeight));
-    }
+// Calculate remaining width for the name column
+    double nameColumnWidth = pageWidth -
+        (eqpIdWidth + idWidth + typeWidth + issuedQtyWidth + usedQtyWidth);
+
+// Draw the headers
+    page.graphics.drawString('Eqp ID', contentFont,
+        bounds: Rect.fromLTWH(margin, currentY + 5, eqpIdWidth, rowHeight));
+    page.graphics.drawString('ID', contentFont,
+        bounds: Rect.fromLTWH(
+            margin + eqpIdWidth, currentY + 5, idWidth, rowHeight));
+    page.graphics.drawString('name', contentFont,
+        bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth, currentY + 5,
+            nameColumnWidth, rowHeight));
+    page.graphics.drawString('type', contentFont,
+        bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth + nameColumnWidth,
+            currentY + 5, typeWidth, rowHeight));
+    page.graphics.drawString('Issued Qty', contentFont,
+        bounds: Rect.fromLTWH(
+            margin + eqpIdWidth + idWidth + nameColumnWidth + typeWidth,
+            currentY + 5,
+            issuedQtyWidth,
+            rowHeight));
+    page.graphics.drawString('Used Qty', contentFont,
+        bounds: Rect.fromLTWH(
+            margin +
+                eqpIdWidth +
+                idWidth +
+                nameColumnWidth +
+                typeWidth +
+                issuedQtyWidth,
+            currentY + 5,
+            usedQtyWidth,
+            rowHeight));
 
     currentY += rowHeight;
+
+// Draw the material consumption data
+    for (int i = 0;
+        i < (pmtaskViewModel.value?.material_consumption?.length ?? 0);
+        i++) {
+      var materialConsumption = pmtaskViewModel.value!.material_consumption![i];
+
+      page.graphics.drawString(
+          '${materialConsumption.equipment_ID}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin, currentY + 5, eqpIdWidth, rowHeight)); // Equipment ID
+
+      page.graphics.drawString(
+          '${materialConsumption.material_ID}', contentFont,
+          bounds: Rect.fromLTWH(margin + eqpIdWidth, currentY + 5, idWidth,
+              rowHeight)); // Material ID
+
+      page.graphics.drawString(
+          '${materialConsumption.material_name}', contentFont,
+          bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth, currentY + 5,
+              nameColumnWidth, rowHeight)); // Material name
+
+      page.graphics.drawString(
+          '${materialConsumption.material_type}', contentFont,
+          bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth + nameColumnWidth,
+              currentY + 5, typeWidth, rowHeight)); // Material type
+
+      page.graphics.drawString('${materialConsumption.issued_qty}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + eqpIdWidth + idWidth + nameColumnWidth + typeWidth,
+              currentY + 5,
+              issuedQtyWidth,
+              rowHeight)); // Issued quantity
+
+      page.graphics.drawString('${materialConsumption.used_qty}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin +
+                  eqpIdWidth +
+                  idWidth +
+                  nameColumnWidth +
+                  typeWidth +
+                  issuedQtyWidth,
+              currentY + 5,
+              usedQtyWidth,
+              rowHeight)); // Used quantity
+
+      currentY += rowHeight;
+    }
 
     // Return the layout result (for the signature or other elements)
     final String signatureText = 'Signature of trainer';
@@ -981,10 +1049,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
     return PdfTextElement(text: signatureText, font: contentFont).draw(
         page: page,
-        bounds: Rect.fromLTWH(
-            400,
-            currentY + 20,
-            pageSize.width - (signatureSize.width + 30),
-            pageSize.height - 120))!;
+        bounds: Rect.fromLTWH(pageWidth - (signatureSize.width + margin),
+            currentY + 20, signatureSize.width, signatureSize.height))!;
   }
 }
