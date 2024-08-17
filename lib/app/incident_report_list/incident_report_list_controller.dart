@@ -102,7 +102,7 @@ class IncidentReportListController extends GetxController {
     "Approved At": true,
     "Reported By": true,
     "Reported At": true,
-    "Status": true,
+    // "Status": true,
 
     // "search": true,
   });
@@ -115,7 +115,7 @@ class IncidentReportListController extends GetxController {
     "Approved At": 150,
     "Reported By": 150,
     "Reported At": 150,
-    "Status": 150,
+    // "Status": 150,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -164,7 +164,7 @@ class IncidentReportListController extends GetxController {
       "Approved At": approved_atFilterText,
       "Reported By": reported_by_nameFilterText,
       "Reported At": reported_atFilterText,
-      "Status": statusFilterText
+      // "Status": statusFilterText
     };
     // wc_id = Get.arguments;
     // print('WC_Id:$wc_id');

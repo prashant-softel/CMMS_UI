@@ -443,6 +443,10 @@ class ViewIncidentReportController extends GetxController {
 
   void rejectIncidentReportButton({int? id}) async {
     {
+      if(rejectCommentTextFieldCtrlr.text =='') {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentIncidentRejectModel =
