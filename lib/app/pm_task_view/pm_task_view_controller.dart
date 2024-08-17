@@ -898,6 +898,72 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
             remainingWidth / 2,
             rowHeight)); // Isolated equipment's
 
+    // TBT section header
+    currentY += 25; // Adding some space before the next section
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString('TBT conducted by', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Define static widths for the TBT table columns
+    double tbtConductedByWidth = pageWidth / 4; // Width for 'TBT conducted by'
+    double tbtDoneTimeWidth = pageWidth / 4; // Width for 'TBT done time'
+    double startTimeWidth = pageWidth / 4; // Width for 'Start time'
+    double statusWidth = pageWidth / 4; // Width for 'Status'
+
+    // Headers for TBT section
+    List<String> tbtHeaders = [
+      'TBT conducted by',
+      'TBT done time',
+      'Start time',
+      'Status'
+    ];
+
+    // Draw the headers with static widths
+    page.graphics.drawString(tbtHeaders[0], contentFont,
+        bounds: Rect.fromLTWH(
+            margin, currentY + 5, tbtConductedByWidth, rowHeight));
+    page.graphics.drawString(tbtHeaders[1], contentFont,
+        bounds: Rect.fromLTWH(margin + tbtConductedByWidth, currentY + 5,
+            tbtDoneTimeWidth, rowHeight));
+    page.graphics.drawString(tbtHeaders[2], contentFont,
+        bounds: Rect.fromLTWH(margin + tbtConductedByWidth + tbtDoneTimeWidth,
+            currentY + 5, startTimeWidth, rowHeight));
+    page.graphics.drawString(tbtHeaders[3], contentFont,
+        bounds: Rect.fromLTWH(
+            margin + tbtConductedByWidth + tbtDoneTimeWidth + startTimeWidth,
+            currentY + 5,
+            statusWidth,
+            rowHeight));
+
+    currentY += rowHeight;
+
+    // Example row for TBT section with the same static widths
+    page.graphics.drawString(
+        '${pmtaskViewModel.value?.tbT_conducted_by_name ?? ''}', contentFont,
+        bounds: Rect.fromLTWH(margin, currentY + 5, tbtConductedByWidth,
+            rowHeight)); // TBT conducted by
+    page.graphics.drawString(
+        '${pmtaskViewModel.value?.tbT_done_time ?? ''}', contentFont,
+        bounds: Rect.fromLTWH(margin + tbtConductedByWidth, currentY + 5,
+            tbtDoneTimeWidth, rowHeight)); // TBT done time
+    page.graphics.drawString(
+        '${pmtaskViewModel.value?.started_at ?? ''}', contentFont,
+        bounds: Rect.fromLTWH(margin + tbtConductedByWidth + tbtDoneTimeWidth,
+            currentY + 5, startTimeWidth, rowHeight)); // Start time
+    page.graphics.drawString(
+        '${pmtaskViewModel.value?.status_short_ptw ?? ''}', contentFont,
+        bounds: Rect.fromLTWH(
+            margin + tbtConductedByWidth + tbtDoneTimeWidth + startTimeWidth,
+            currentY + 5,
+            statusWidth,
+            rowHeight)); // Status
+
+    currentY += rowHeight;
+
     // Work description section
     currentY += 25;
     page.graphics.drawRectangle(
@@ -909,9 +975,9 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     currentY += sectionHeight;
 
     // Add static description after Work description
-    String staticDescription =
-        "This is a static description text that explains the work done or provides additional details.";
-    page.graphics.drawString(staticDescription, contentFont,
+
+    page.graphics.drawString(
+        '${pmtaskViewModel.value?.workdescription}', contentFont,
         bounds: Rect.fromLTWH(
             margin + 5, currentY + 5, pageWidth - 10, rowHeight * 2),
         format: PdfStringFormat(alignment: PdfTextAlignment.left));
