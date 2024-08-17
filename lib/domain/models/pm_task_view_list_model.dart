@@ -446,6 +446,8 @@ class ScheduleLinkJob {
   String? job_description;
   String? job_date;
   String? job_status;
+  int? no_of_tools;
+  String? tool_name;
 
   ScheduleLinkJob({
     this.job_date,
@@ -453,6 +455,8 @@ class ScheduleLinkJob {
     this.job_id,
     this.job_status,
     this.job_title,
+    this.no_of_tools,
+    this.tool_name,
   });
 
   factory ScheduleLinkJob.fromJson(Map<String, dynamic> json) =>
@@ -462,6 +466,8 @@ class ScheduleLinkJob {
         job_id: json["job_id"],
         job_status: json["job_status"],
         job_title: json["job_title"],
+        no_of_tools: json["no_of_tools"],
+        tool_name: json["tool_name"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -470,6 +476,8 @@ class ScheduleLinkJob {
         "job_id": job_id,
         "job_description": job_description,
         "job_date": job_date,
+        "no_of_tools": no_of_tools,
+        "tool_name": tool_name,
       };
 }
 
