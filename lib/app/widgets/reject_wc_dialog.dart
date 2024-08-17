@@ -10,11 +10,11 @@ import 'package:google_fonts/google_fonts.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class RejectWCDialog extends GetView {
+class RejectWCDialog extends GetView<CreateWarrantyClaimController> {
   final int? id;
 
   RejectWCDialog({super.key, this.id});
-  final CreateWarrantyClaimController _controller = Get.find();
+  final CreateWarrantyClaimController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class RejectWCDialog extends GetView {
                           textStyle: TextStyle(
                               fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
-                        controller: _controller.rejectCommentTextFieldCtrlr,
+                        controller: controller.rejectCommentTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
@@ -92,8 +92,11 @@ class RejectWCDialog extends GetView {
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                _controller.wcRejectdButton(id: id);
+                controller.viewWarrantyClaimDetailsModel.value?.status == 199
+                    ? controller.closeWCRejectdButton(id: id)
+                    : controller.wcRejectdButton(id: id);
                 print('Wc Reject:$id');
+
                 Get.back();
               },
               child: Text('Reject WC'),

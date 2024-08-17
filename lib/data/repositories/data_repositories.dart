@@ -975,6 +975,47 @@ class DataRepository extends DomainRepository {
         WCRejectJsonString: WCRejectJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> closeWCApprovedButton({
+    required String auth,
+    WCApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.closeWCApprovedButton(
+        auth: auth,
+        WCApproveJsonString: WCApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> closeWCRejectdButton({
+    required String auth,
+    WCRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.closeWCRejectdButton(
+        auth: auth,
+        WCRejectJsonString: WCRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> updateWarranty({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateWarranty(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> closeWarranty({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.closeWarranty(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> rejectMcExecutionApprovedButton({
     required String auth,
@@ -6153,6 +6194,21 @@ class DataRepository extends DomainRepository {
     String? toDate,
   }) async =>
       await connectHelper.getTrainingSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
+    Future<ResponseModel> getGrievanceSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    String? fromDate,
+    String? toDate,
+  }) async =>
+      await connectHelper.getGrievanceSummary(
         auth: auth,
         isLoading: isLoading,
         facility_id: facility_id,
