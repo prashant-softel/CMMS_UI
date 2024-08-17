@@ -642,6 +642,22 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     // Draw images
     page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
 
+    final String centerText = 'PM Task View Report';
+    final PdfFont centerTextFont =
+        PdfStandardFont(PdfFontFamily.helvetica, 12, style: PdfFontStyle.bold);
+    final Size centerTextSize = centerTextFont.measureString(centerText);
+
+// Calculate the X position to center the text
+    double centerX = (pageSize.width - centerTextSize.width) / 2;
+
+// Draw the center text after the image
+    page.graphics.drawString(
+      centerText,
+      centerTextFont,
+      bounds: Rect.fromLTWH(
+          centerX, 60, centerTextSize.width, centerTextSize.height),
+    ); // Red color for the text
+
     // Site name section
     page.graphics.drawRectangle(
         pen: borderPen,
@@ -670,13 +686,15 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       'PM Plan ID',
       'PM Plan/task title',
       'Due date',
-      'Start date'
+      'Start date',
+      'PMT Status'
     ];
     List<String> pmInfoValuesLeft = [
-      '${pmtaskViewModel.value?.id}',
+      'PMT${pmtaskViewModel.value?.id}',
       '${pmtaskViewModel.value?.plan_title}',
       '${pmtaskViewModel.value?.due_date}',
       '${pmtaskViewModel.value?.started_at}',
+      '${pmtaskViewModel.value?.status_short}',
     ];
     double rowHeight = 15;
 
@@ -721,7 +739,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     }
 
     // Draw Equipment details
-    currentY += 10; // Adding some space before the next section
+    currentY += 20; // Adding some space before the next section
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
