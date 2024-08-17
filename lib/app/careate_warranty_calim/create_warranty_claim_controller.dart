@@ -1608,10 +1608,12 @@ class CreateWarrantyClaimController extends GetxController {
 
   void closeWarranty({
     List<dynamic>? fileIds,
+    required int type,
   }) async {
     UpdateWarrantyClaim update = UpdateWarrantyClaim(
       id: wc_id.value,
       facilityId: facilityId,
+      type: type,
       uploadfile_ids: fileIds,
       comment: commentCtrl.text,
     );

@@ -11,7 +11,8 @@ class WarrantyClaimUpdatedMessageDialog extends GetView {
   List<dynamic>? warrantyClaimId;
   String? data;
 
-  WarrantyClaimUpdatedMessageDialog({super.key, this.warrantyClaimId, this.data});
+  WarrantyClaimUpdatedMessageDialog(
+      {super.key, this.warrantyClaimId, this.data});
   // final WarrantyClaimController controller = Get.find();
 
   @override
@@ -33,7 +34,7 @@ class WarrantyClaimUpdatedMessageDialog extends GetView {
 
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
-            height: 50,
+            height: 80,
             width: double.infinity,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -44,7 +45,8 @@ class WarrantyClaimUpdatedMessageDialog extends GetView {
                   ),
                   RichText(
                     text: TextSpan(
-                      text: 'Warranty Claim Details Updated Successfully with Id ',
+                      text:
+                          'Warranty Claim Details Updated Successfully with Id ',
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(
@@ -56,7 +58,8 @@ class WarrantyClaimUpdatedMessageDialog extends GetView {
                           ),
                         ),
                         TextSpan(
-                            text: '. Please Click on OK button to go to Warranty Claim List.'),
+                            text:
+                                '. \nPlease Click on OK button to go to Warranty Claim List.'),
                       ],
                     ),
                   ),
