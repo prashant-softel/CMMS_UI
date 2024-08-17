@@ -67,6 +67,8 @@ class PmtaskViewModel {
   String? tbT_done_time;
   String? start_time;
   String? workdescription;
+  String? new_remark;
+  String? site_name;
 
   PmtaskViewModel({
     this.assigned_to_name,
@@ -124,6 +126,8 @@ class PmtaskViewModel {
     this.tbT_done_time,
     this.start_time,
     this.workdescription,
+    this.new_remark,
+    this.site_name,
   });
 
   factory PmtaskViewModel.fromJson(Map<String, dynamic> json) =>
@@ -164,9 +168,11 @@ class PmtaskViewModel {
         frequency_id: json["frequency_id"] ?? 0,
         frequency_name: json["frequency_name"] ?? "",
         id: json["id"] ?? 0,
+        site_name: json["site_name"] ?? "",
         tbT_done_time: json["tbT_done_time"] ?? "",
         tbT_conducted_by_name: json["tbT_conducted_by_name"] ?? "",
         start_time: json["start_time"] ?? "",
+        new_remark: json["new_remark"] ?? "",
         workdescription: json["workdescription"] ?? "",
         employee_name: json["employee_name"] ?? "",
         employee_ID: json["employee_ID"] ?? 0,
@@ -206,6 +212,8 @@ class PmtaskViewModel {
         "plan_id": plan_id,
         "tbT_conducted_by_name": tbT_conducted_by_name,
         "start_time": start_time,
+        "new_remark": new_remark,
+        "site_name": site_name,
         "workdescription": workdescription,
         "tbT_done_time": tbT_done_time,
         "employee_ID": employee_ID,
