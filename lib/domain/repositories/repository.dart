@@ -731,7 +731,7 @@ class Repository {
         createEscalationMatrix: createEscalationMatrix,
         moduleId: moduleId,
         statusId: statusId,
-        isLoading: isLoading?? false,
+        isLoading: isLoading ?? false,
       );
 
       var resourceData = res.data;
@@ -755,6 +755,36 @@ class Repository {
       } else {
         Utility.showDialog(res.errorCode.toString(), 'createEscalationMatrix');
         //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> escalateModule(
+    int moduleId,
+    int statusId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.escalateModule(
+        auth: auth,
+        moduleId: moduleId,
+        statusId: statusId,
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Response Escalation Matrix Report: ${resourceData}');
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {}
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'createEscalationMatrix');
       }
       return Map();
     } catch (error) {
@@ -1420,6 +1450,7 @@ class Repository {
       return Map();
     }
   }
+
   Future<Map<String, dynamic>> resubmitWarrantyClaim(
     updateWarrantyClaim,
     bool? isLoading,
@@ -3476,6 +3507,7 @@ class Repository {
       return Map();
     }
   }
+
   Future<Map<String, dynamic>> closeWCApprovedButton(
     WCApproveJsonString,
     bool? isLoading,
