@@ -646,7 +646,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     page.graphics.drawRectangle(
         pen: borderPen,
         bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
-    page.graphics.drawString('Site name', headerFont,
+    page.graphics.drawString(
+        'Site name : ${pmtaskViewModel.value?.site_name}', headerFont,
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
@@ -983,60 +984,6 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         format: PdfStringFormat(alignment: PdfTextAlignment.left));
     currentY += rowHeight * 2;
 
-    // PM History section
-    currentY += 20; // Adding some space before the next section
-    page.graphics.drawRectangle(
-        pen: borderPen,
-        brush: backgroundBrush,
-        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
-    page.graphics.drawString('PM History', headerFont,
-        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
-    currentY += sectionHeight;
-
-    List<String> historyHeaders = [
-      'Time Stamp',
-      'Posted By',
-      'Comments',
-      'Status'
-    ];
-
-    for (int i = 0; i < historyHeaders.length; i++) {
-      page.graphics.drawString(historyHeaders[i], contentFont,
-          bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
-              columnWidth, rowHeight));
-    }
-
-    currentY += rowHeight;
-
-    for (var history in historyList!.value) {
-      if (history != null) {
-        String timeStamp = history.createdAt?.result != null
-            ? history.createdAt!.result
-                .toString()
-                .substring(0, 16)
-                .replaceFirst('T', ' ')
-            : 'N/A';
-        String postedBy = history.createdByName ?? 'Unknown';
-        String comments = history.comment ?? 'No comments';
-        String status = history.status_name ?? 'Unknown status';
-
-        page.graphics.drawString(timeStamp, contentFont,
-            bounds:
-                Rect.fromLTWH(margin, currentY + 5, columnWidth, rowHeight));
-        page.graphics.drawString(postedBy, contentFont,
-            bounds: Rect.fromLTWH(
-                margin + columnWidth, currentY + 5, columnWidth, rowHeight));
-        page.graphics.drawString(comments, contentFont,
-            bounds: Rect.fromLTWH(margin + 2 * columnWidth, currentY + 5,
-                columnWidth, rowHeight));
-        page.graphics.drawString(status, contentFont,
-            bounds: Rect.fromLTWH(margin + 3 * columnWidth, currentY + 5,
-                columnWidth, rowHeight));
-
-        currentY += rowHeight;
-      }
-    }
-
     // Material consumption section
 
     currentY += 10;
@@ -1137,6 +1084,78 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
               rowHeight)); // Used quantity
 
       currentY += rowHeight;
+    }
+
+    currentY += 25;
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString('Remarks', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Add static description after Work description
+
+    page.graphics.drawString(
+        '${pmtaskViewModel.value?.new_remark}', contentFont,
+        bounds: Rect.fromLTWH(
+            margin + 5, currentY + 5, pageWidth - 10, rowHeight * 2),
+        format: PdfStringFormat(alignment: PdfTextAlignment.left));
+    currentY += rowHeight * 2;
+
+    // PM History section
+    currentY += 20; // Adding some space before the next section
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString('PM History', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    List<String> historyHeaders = [
+      'Time Stamp',
+      'Posted By',
+      'Comments',
+      'Status'
+    ];
+
+    for (int i = 0; i < historyHeaders.length; i++) {
+      page.graphics.drawString(historyHeaders[i], contentFont,
+          bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
+              columnWidth, rowHeight));
+    }
+
+    currentY += rowHeight;
+
+    for (var history in historyList!.value) {
+      if (history != null) {
+        String timeStamp = history.createdAt?.result != null
+            ? history.createdAt!.result
+                .toString()
+                .substring(0, 16)
+                .replaceFirst('T', ' ')
+            : 'N/A';
+        String postedBy = history.createdByName ?? 'Unknown';
+        String comments = history.comment ?? 'No comments';
+        String status = history.status_name ?? 'Unknown status';
+
+        page.graphics.drawString(timeStamp, contentFont,
+            bounds:
+                Rect.fromLTWH(margin, currentY + 5, columnWidth, rowHeight));
+        page.graphics.drawString(postedBy, contentFont,
+            bounds: Rect.fromLTWH(
+                margin + columnWidth, currentY + 5, columnWidth, rowHeight));
+        page.graphics.drawString(comments, contentFont,
+            bounds: Rect.fromLTWH(margin + 2 * columnWidth, currentY + 5,
+                columnWidth, rowHeight));
+        page.graphics.drawString(status, contentFont,
+            bounds: Rect.fromLTWH(margin + 3 * columnWidth, currentY + 5,
+                columnWidth, rowHeight));
+
+        currentY += rowHeight;
+      }
     }
 
     // Return the layout result (for the signature or other elements)
