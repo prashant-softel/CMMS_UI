@@ -326,7 +326,13 @@ class ViewAddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
               "";
       lastCalibrationDateTc.text =
-          editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
+          editAddInventoryDetailsModel.value?.calibrationDueDate.toString() ??
+              "";
+      startDateTc.text =
+          editAddInventoryDetailsModel.value?.start_date.toString() ??
+              "";
+      expireDateTc.text =
+          editAddInventoryDetailsModel.value?.expiry_date.toString() ??
               "";
       selectedStatusNameId = editAddInventoryDetailsModel.value?.statusId ?? 0;
       selectedStatusName.value =
@@ -346,7 +352,7 @@ class ViewAddInventoryController extends GetxController {
       selectedUnitCurrency.value =
           editAddInventoryDetailsModel.value?.currency ?? "";
       parentEquipmentNoCtrlr.text =
-          editAddInventoryDetailsModel.value?.parentName ?? "";
+          editAddInventoryDetailsModel.value?.parentSerial ?? "";
       costCtrlr.text =
           editAddInventoryDetailsModel.value?.cost.toString() ?? "";
       calibrationRemaingCtrlr.text = editAddInventoryDetailsModel
@@ -361,15 +367,15 @@ class ViewAddInventoryController extends GetxController {
       calibrationRemaingCtrlr.text =
           "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationReminderDays ?? 0}")}";
       selectedWarrantyName.value =
-          editAddInventoryDetailsModel.value?.warrantyTypeName ?? "";
+          editAddInventoryDetailsModel.value?.warrantyType ?? "";
       selectedmanufacturerName.value =
           editAddInventoryDetailsModel.value?.warrantyProviderName ?? "";
       selectedwarrantyUsageTermListName.value =
-          editAddInventoryDetailsModel.value?.warrantyTermTypeName ?? "";
+          editAddInventoryDetailsModel.value?.warranty_term_type ?? "";
       warrentyDescriptionCtrlr.text =
           editAddInventoryDetailsModel.value?.warrantyDescription ?? "";
-      selectedmanufacturerName.value =
-          editAddInventoryDetailsModel.value?.manufacturerName ?? "";
+      // selectedmanufacturerName.value =
+      //     editAddInventoryDetailsModel.value?.manufacturerName ?? "";
       selectedsupplierrName.value =
           editAddInventoryDetailsModel.value?.supplierName ?? "";
       modelNoCtrlr.text = editAddInventoryDetailsModel.value?.model ?? "";

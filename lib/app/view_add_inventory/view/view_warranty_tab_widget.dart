@@ -5,6 +5,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewWarrantyTabWidget extends StatefulWidget {
   ViewWarrantyTabWidget({
@@ -250,26 +252,26 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                             ),
                           ),
                           Dimens.boxHeight10,
-                          Container(
-                            child: IgnorePointer(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Warranty Certificate',
-                                    style: Styles.blackBold16,
-                                  ),
-                                  SizedBox(width: 10),
-                                  ActionButton(
-                                    label: 'Upload certification file',
-                                    onPressed: () {},
-                                    icon: Icons.file_upload_outlined,
-                                    color: ColorValues.appLightBlueColor,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
+                          // Container(
+                          //   child: IgnorePointer(
+                          //     child: Row(
+                          //       mainAxisSize: MainAxisSize.min,
+                          //       children: [
+                          //         Text(
+                          //           'Warranty Certificate',
+                          //           style: Styles.blackBold16,
+                          //         ),
+                          //         SizedBox(width: 10),
+                          //         ActionButton(
+                          //           label: 'Upload certification file',
+                          //           onPressed: () {},
+                          //           icon: Icons.file_upload_outlined,
+                          //           color: ColorValues.appLightBlueColor,
+                          //         )
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                           Dimens.boxHeight10,
                           IgnorePointer(
                             child: Row(
@@ -396,7 +398,121 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                         ],
                       ),
                     ]),
-                  )
+                  ),
+                  controller.editAddInventoryDetailsModel.value!
+                                  .warranty_file !=
+                              null &&
+                          controller.editAddInventoryDetailsModel.value!
+                              .warranty_file!.isNotEmpty
+                      ? Container(
+                          // width:
+                          //     MediaQuery.of(context).size.width /
+                          //         1.2,
+                          height: ((controller.editAddInventoryDetailsModel
+                                      .value!.warranty_file!.length) *
+                                  41) +
+                              117,
+                          margin: Dimens.edgeInsets20,
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: Colors.grey.withOpacity(.3)),
+                          ),
+
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Warranty Certificates ",
+                                      style: Styles.blue700,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: DataTable2(
+                                  border: TableBorder.all(
+                                    color: Color.fromARGB(255, 206, 229, 234),
+                                  ),
+                                  dataRowHeight: 40,
+                                  columns: [
+                                    DataColumn(
+                                      label: Text(
+                                        "File Description",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    DataColumn(
+                                      label: Text(
+                                        "View File",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                  rows: List<DataRow>.generate(
+                                    controller.editAddInventoryDetailsModel
+                                            .value!.warranty_file?.length ??
+                                        0,
+                                    (index) => DataRow(
+                                      cells: [
+                                        DataCell(Text(
+                                          controller
+                                                  .editAddInventoryDetailsModel
+                                                  .value!
+                                                  .warranty_file![index]
+                                                  .description
+                                                  .toString() ??
+                                              '',
+                                        )),
+                                        DataCell(
+                                          // Text("View Image"),
+                                          Wrap(
+                                            children: [
+                                              TableActionButton(
+                                                color: ColorValues
+                                                    .appDarkBlueColor,
+                                                icon: Icons.visibility,
+                                                message: 'view',
+                                                onPress: () async {
+                                                  String baseUrl =
+                                                      'http://172.20.43.9:83/';
+                                                  String fileName = controller
+                                                          .editAddInventoryDetailsModel
+                                                          .value!
+                                                          .warranty_file![index]
+                                                          ?.fileName ??
+                                                      "";
+                                                  String fullUrl =
+                                                      baseUrl + fileName;
+                                                  if (await canLaunch(
+                                                      fullUrl)) {
+                                                    await launch(fullUrl);
+                                                  } else {
+                                                    throw 'Could not launch $fullUrl';
+                                                  }
+                                                  // String baseUrl = 'http://172.20.43.9:83/';
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Dimens.box0,
                 ],
               ),
             ),
