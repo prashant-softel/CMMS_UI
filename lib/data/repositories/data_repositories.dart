@@ -2022,6 +2022,18 @@ class DataRepository extends DomainRepository {
         statusId: statusId,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> escalateModule({
+    required String auth,
+    required int moduleId,
+    required int statusId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.escalateModule(
+        auth: auth,
+        moduleId: moduleId,
+        statusId: statusId,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getEscalationDetail({
     required String auth,

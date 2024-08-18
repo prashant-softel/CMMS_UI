@@ -86,13 +86,13 @@ class CreateWarrantyClaimController extends GetxController {
     String name,
     int is_required,
     String required_by_data,
-    String srNumber,
+    // String srNumber,
   ) {
     supplierActions.add(SupplierActions(
       name: name,
       required_by_date: required_by_data,
       is_required: is_required,
-      srNumber: srNumber,
+      // srNumber: srNumber,
     ));
   }
 
@@ -407,6 +407,8 @@ class CreateWarrantyClaimController extends GetxController {
         commentScroll.jumpTo(0.0);
       }
     });
+    update(["create-warranty-claim"]);
+    update(["employee"]);
     super.onInit();
   }
 
@@ -524,6 +526,8 @@ class CreateWarrantyClaimController extends GetxController {
       images.value = viewWarrantyClaimDetailsModel.value?.images ?? [];
       affectedPartImages.value =
           viewWarrantyClaimDetailsModel.value?.affectedPartsImages ?? [];
+      update(["employee"]);
+      update(["create-warranty-claim"]);
     }
   }
 
@@ -594,6 +598,7 @@ class CreateWarrantyClaimController extends GetxController {
       selectedEmployeeNameIdList.add(_selectedEmployeesId);
     }
     update(["create-warranty-claim"]);
+    update(["employee"]);
   }
 
   void affectedPartSelected(_selectedaffectedPartIds) {

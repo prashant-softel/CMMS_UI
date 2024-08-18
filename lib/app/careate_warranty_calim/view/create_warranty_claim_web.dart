@@ -182,10 +182,15 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                             10),
                                                     border: Border.all(
                                                       color: controller
-                                                                  .viewWarrantyClaimDetailsModel
-                                                                  .value
-                                                                  ?.status ==
-                                                              192
+                                                                      .viewWarrantyClaimDetailsModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  192 ||
+                                                              controller
+                                                                      .viewWarrantyClaimDetailsModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  199
                                                           ? ColorValues
                                                               .yellowColor
                                                           : controller
@@ -214,21 +219,25 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                     boxShadow: [
                                                       BoxShadow(
                                                         color: controller
-                                                                    .viewWarrantyClaimDetailsModel
-                                                                    .value
-                                                                    ?.status ==
-                                                                192
+                                                                        .viewWarrantyClaimDetailsModel
+                                                                        .value
+                                                                        ?.status ==
+                                                                    192 ||
+                                                                controller
+                                                                        .viewWarrantyClaimDetailsModel
+                                                                        .value
+                                                                        ?.status ==
+                                                                    199
                                                             ? ColorValues
                                                                 .yellowColor
-                                                            : controller
-                                                                        .viewWarrantyClaimDetailsModel
-                                                                        .value
-                                                                        ?.status ==
-                                                                    194 || controller
-                                                                        .viewWarrantyClaimDetailsModel
-                                                                        .value
-                                                                        ?.status ==
-                                                                    200
+                                                            : controller.viewWarrantyClaimDetailsModel.value
+                                                                            ?.status ==
+                                                                        194 ||
+                                                                    controller
+                                                                            .viewWarrantyClaimDetailsModel
+                                                                            .value
+                                                                            ?.status ==
+                                                                        200
                                                                 ? ColorValues
                                                                     .appGreenColor
                                                                 : controller
@@ -1641,321 +1650,327 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                               ],
                                                             ),
                                                           ),
-                                                          SizedBox(
-                                                            height: 500,
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                2.2,
-                                                            child: Center(
-                                                              child: Container(
-                                                                margin: Dimens
-                                                                    .edgeInsets16,
-                                                                height:
-                                                                    Get.height,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  border: Border.all(
-                                                                      color: Colors
-                                                                          .grey
-                                                                          .withOpacity(
-                                                                              .3)),
-                                                                ),
-                                                                constraints:
-                                                                    BoxConstraints(
-                                                                  maxWidth:
-                                                                      1100,
-                                                                ),
-                                                                child:
-                                                                    SingleChildScrollView(
-                                                                  child: Obx(
-                                                                    () =>
-                                                                        Column(
-                                                                      children: [
-                                                                        CustomAppBar(
-                                                                          title:
-                                                                              'Additional Emails'.tr,
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight10,
-                                                                        Wrap(
-                                                                          children: [
+                                                          GetBuilder<
+                                                              CreateWarrantyClaimController>(
+                                                            id: "employee",
+                                                            builder:
+                                                                (controller) {
+                                                              return SizedBox(
+                                                                height: 500,
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    2.2,
+                                                                child: Center(
+                                                                  child:
+                                                                      Container(
+                                                                    margin: Dimens
+                                                                        .edgeInsets16,
+                                                                    height: Get
+                                                                        .height,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      border: Border.all(
+                                                                          color: Colors
+                                                                              .grey
+                                                                              .withOpacity(.3)),
+                                                                    ),
+                                                                    constraints:
+                                                                        BoxConstraints(
+                                                                      maxWidth:
+                                                                          1100,
+                                                                    ),
+                                                                    child:
+                                                                        SingleChildScrollView(
+                                                                      child:
+                                                                          Obx(
+                                                                        () =>
                                                                             Column(
+                                                                          children: [
+                                                                            CustomAppBar(
+                                                                              title: 'Additional Emails'.tr,
+                                                                            ),
+                                                                            Dimens.boxHeight10,
+                                                                            Wrap(
                                                                               children: [
-                                                                                SizedBox(
-                                                                                  width: MediaQuery.of(context).size.width / 1.5,
-                                                                                  child: DefaultTabController(
-                                                                                    length: 2,
-                                                                                    child: Column(
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: const EdgeInsets.all(1.0),
-                                                                                          child: Container(
-                                                                                            height: 45,
-                                                                                            decoration: BoxDecoration(
-                                                                                              border: Border.all(color: Colors.grey),
-                                                                                              color: Colors.white,
-                                                                                              borderRadius: BorderRadius.circular(1),
-                                                                                            ),
-                                                                                            child: TabBar(
-                                                                                              labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                                                                                              labelColor: Colors.black,
-                                                                                              indicator: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(1)),
-                                                                                              unselectedLabelColor: Colors.black,
-                                                                                              tabs: [
-                                                                                                Tab(
-                                                                                                  child: Text('Employee'),
+                                                                                Column(
+                                                                                  children: [
+                                                                                    SizedBox(
+                                                                                      width: MediaQuery.of(context).size.width / 1.5,
+                                                                                      child: DefaultTabController(
+                                                                                        length: 2,
+                                                                                        child: Column(
+                                                                                          children: [
+                                                                                            Padding(
+                                                                                              padding: const EdgeInsets.all(1.0),
+                                                                                              child: Container(
+                                                                                                height: 45,
+                                                                                                decoration: BoxDecoration(
+                                                                                                  border: Border.all(color: Colors.grey),
+                                                                                                  color: Colors.white,
+                                                                                                  borderRadius: BorderRadius.circular(1),
                                                                                                 ),
-                                                                                                Tab(
-                                                                                                  child: Text(
-                                                                                                    'External Emails',
-                                                                                                  ),
-                                                                                                ),
-                                                                                              ],
-                                                                                            ),
-                                                                                          ),
-                                                                                        ),
-                                                                                        IgnorePointer(
-                                                                                          ignoring: controller.type.value == 1,
-                                                                                          child: SizedBox(
-                                                                                            height: 250,
-                                                                                            width: MediaQuery.of(context).size.width / 2,
-                                                                                            child: TabBarView(
-                                                                                              children: [
-                                                                                                Container(
-                                                                                                    child: Column(
-                                                                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  children: [
-                                                                                                    SizedBox(
-                                                                                                      height: 15,
+                                                                                                child: TabBar(
+                                                                                                  labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                                                                                                  labelColor: Colors.black,
+                                                                                                  indicator: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(1)),
+                                                                                                  unselectedLabelColor: Colors.black,
+                                                                                                  tabs: [
+                                                                                                    Tab(
+                                                                                                      child: Text('Employee'),
                                                                                                     ),
-                                                                                                    Row(
-                                                                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                                                                      children: [
-                                                                                                        SizedBox(
-                                                                                                          width: MediaQuery.of(context).size.width / 4.2,
-                                                                                                          child: CustomMultiSelectDialogField(
-                                                                                                            buttonText: 'Select Employee',
-                                                                                                            title: 'Employees',
-                                                                                                            // initialValue: [],
-                                                                                                            initialValue: (controller.selectedEmployeeNameIdList.isNotEmpty) ? controller.selectedEmployeeNameIdList : [],
-                                                                                                            items: controller.employeesList
-                                                                                                                .map(
-                                                                                                                  (equipmentCategory) => MultiSelectItem(
-                                                                                                                    equipmentCategory.id,
-                                                                                                                    equipmentCategory.name ?? '',
-                                                                                                                  ),
-                                                                                                                )
-                                                                                                                .toList(),
-                                                                                                            onConfirm: (selectedOptionsList) => {
-                                                                                                              controller.employeesNameSelected(selectedOptionsList),
-                                                                                                              print('Employees Name list Ids ${controller.selectedEmployeeNameIdList}')
-                                                                                                            },
-                                                                                                          ),
-                                                                                                        ),
-                                                                                                      ],
-                                                                                                    ),
-                                                                                                    SizedBox(
-                                                                                                      height: 10,
+                                                                                                    Tab(
+                                                                                                      child: Text(
+                                                                                                        'External Emails',
+                                                                                                      ),
                                                                                                     ),
                                                                                                   ],
-                                                                                                )),
-                                                                                                SingleChildScrollView(
-                                                                                                  child: Column(
-                                                                                                    children: [
-                                                                                                      SizedBox(
-                                                                                                        height: 10,
-                                                                                                      ),
-                                                                                                      Row(
-                                                                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            IgnorePointer(
+                                                                                              ignoring: controller.type.value == 1,
+                                                                                              child: SizedBox(
+                                                                                                height: 250,
+                                                                                                width: MediaQuery.of(context).size.width / 2,
+                                                                                                child: TabBarView(
+                                                                                                  children: [
+                                                                                                    Container(
+                                                                                                        child: Column(
+                                                                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                      children: [
+                                                                                                        SizedBox(
+                                                                                                          height: 15,
+                                                                                                        ),
+                                                                                                        Row(
+                                                                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                                                          children: [
+                                                                                                            SizedBox(
+                                                                                                              width: MediaQuery.of(context).size.width / 4.2,
+                                                                                                              child: CustomMultiSelectDialogField(
+                                                                                                                buttonText: 'Select Employee',
+                                                                                                                title: 'Employees',
+                                                                                                                // initialValue: [],
+                                                                                                                initialValue: (controller.selectedEmployeeNameIdList.isNotEmpty) ? controller.selectedEmployeeNameIdList : [],
+                                                                                                                items: controller.employeesList
+                                                                                                                    .map(
+                                                                                                                      (equipmentCategory) => MultiSelectItem(
+                                                                                                                        equipmentCategory.id,
+                                                                                                                        equipmentCategory.name ?? '',
+                                                                                                                      ),
+                                                                                                                    )
+                                                                                                                    .toList(),
+                                                                                                                onConfirm: (selectedOptionsList) => {
+                                                                                                                  controller.employeesNameSelected(selectedOptionsList),
+                                                                                                                  print('Employees Name list Ids ${controller.selectedEmployeeNameIdList}')
+                                                                                                                },
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ],
+                                                                                                        ),
+                                                                                                        SizedBox(
+                                                                                                          height: 10,
+                                                                                                        ),
+                                                                                                      ],
+                                                                                                    )),
+                                                                                                    SingleChildScrollView(
+                                                                                                      child: Column(
                                                                                                         children: [
                                                                                                           SizedBox(
-                                                                                                            width: 75,
+                                                                                                            height: 10,
                                                                                                           ),
-                                                                                                          Text(
-                                                                                                            'Name',
-                                                                                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                                          Row(
+                                                                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                            children: [
+                                                                                                              SizedBox(
+                                                                                                                width: 75,
+                                                                                                              ),
+                                                                                                              Text(
+                                                                                                                'Name',
+                                                                                                                style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                                              ),
+                                                                                                              Dimens.boxWidth15,
+                                                                                                              Text(
+                                                                                                                'Email',
+                                                                                                                style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                                              ),
+                                                                                                              Dimens.boxWidth40,
+                                                                                                              Text(
+                                                                                                                'Role',
+                                                                                                                style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                                              ),
+                                                                                                              Dimens.boxWidth15,
+                                                                                                              Text(
+                                                                                                                'Mobile',
+                                                                                                                style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                                              ),
+                                                                                                            ],
                                                                                                           ),
-                                                                                                          Dimens.boxWidth15,
-                                                                                                          Text(
-                                                                                                            'Email',
-                                                                                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                                          SizedBox(
+                                                                                                            height: 10,
                                                                                                           ),
-                                                                                                          Dimens.boxWidth15,
-                                                                                                          Text(
-                                                                                                            'Role',
-                                                                                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                                          Column(
+                                                                                                              children: []..addAll(controller.externalEmails.map((data) => Row(
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                                    children: [
+                                                                                                                      SizedBox(
+                                                                                                                        width: 75,
+                                                                                                                      ),
+                                                                                                                      SizedBox(width: 100, child: Text('${data.name}')),
+                                                                                                                      SizedBox(width: 200, child: Text('${data.email}')),
+                                                                                                                      SizedBox(width: 100, child: Text('${data.role}')),
+                                                                                                                      SizedBox(width: 100, child: Text('${data.mobile}')),
+                                                                                                                    ],
+                                                                                                                  )))),
+                                                                                                          Dimens.boxHeight10,
+                                                                                                          SizedBox(
+                                                                                                              width: MediaQuery.of(context).size.width / 3,
+                                                                                                              child: Row(
+                                                                                                                children: [
+                                                                                                                  Text(
+                                                                                                                    ' Name: ',
+                                                                                                                    style: Styles.black14,
+                                                                                                                  ),
+                                                                                                                  Container(
+                                                                                                                    decoration: BoxDecoration(
+                                                                                                                        border: Border.all(
+                                                                                                                      color: Color(0xFE50000),
+                                                                                                                      width: 0.5,
+                                                                                                                    )),
+                                                                                                                    height: MediaQuery.of(context).size.height * 0.040,
+                                                                                                                    // margin: Dimens.edgeInsets5,
+                                                                                                                    constraints: BoxConstraints(
+                                                                                                                      maxWidth: MediaQuery.of(context).size.width / 4,
+                                                                                                                      minWidth: 100,
+                                                                                                                    ),
+                                                                                                                    child: LoginCustomTextfield(
+                                                                                                                      textController: controller.nameTextFieldController,
+                                                                                                                    ),
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              )),
+                                                                                                          SizedBox(
+                                                                                                            width: MediaQuery.of(context).size.width / 3,
+                                                                                                            child: Row(
+                                                                                                              children: [
+                                                                                                                Text(
+                                                                                                                  '  Email: ',
+                                                                                                                  style: Styles.black14,
+                                                                                                                ),
+                                                                                                                Container(
+                                                                                                                  decoration: BoxDecoration(
+                                                                                                                      border: Border.all(
+                                                                                                                    color: Color(0xFE50000),
+                                                                                                                    width: 0.5,
+                                                                                                                  )),
+                                                                                                                  height: MediaQuery.of(context).size.height * 0.040,
+                                                                                                                  // margin: Dimens.edgeInsets5,
+                                                                                                                  constraints: BoxConstraints(
+                                                                                                                    maxWidth: MediaQuery.of(context).size.width / 4,
+                                                                                                                    minWidth: 100,
+                                                                                                                  ),
+                                                                                                                  child: LoginCustomTextfield(
+                                                                                                                    textController: controller.emailTextFieldController,
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            ),
                                                                                                           ),
-                                                                                                          Dimens.boxWidth15,
-                                                                                                          Text(
-                                                                                                            'Mobile',
-                                                                                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                                          SizedBox(
+                                                                                                            width: MediaQuery.of(context).size.width / 3,
+                                                                                                            child: Row(
+                                                                                                              children: [
+                                                                                                                Text(
+                                                                                                                  '     Role: ',
+                                                                                                                  style: Styles.black14,
+                                                                                                                ),
+                                                                                                                Container(
+                                                                                                                  decoration: BoxDecoration(
+                                                                                                                      border: Border.all(
+                                                                                                                    color: Color(0xFE50000),
+                                                                                                                    width: 0.5,
+                                                                                                                  )),
+                                                                                                                  height: MediaQuery.of(context).size.height * 0.040,
+                                                                                                                  // margin: Dimens.edgeInsets5,
+                                                                                                                  constraints: BoxConstraints(
+                                                                                                                    maxWidth: MediaQuery.of(context).size.width / 4,
+                                                                                                                    minWidth: 100,
+                                                                                                                  ),
+                                                                                                                  child: LoginCustomTextfield(
+                                                                                                                    textController: controller.roleTextFieldController,
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                          SizedBox(
+                                                                                                            width: MediaQuery.of(context).size.width / 3,
+                                                                                                            child: Row(
+                                                                                                              children: [
+                                                                                                                Text(
+                                                                                                                  'Mobile: ',
+                                                                                                                  style: Styles.black14,
+                                                                                                                ),
+                                                                                                                Container(
+                                                                                                                  decoration: BoxDecoration(
+                                                                                                                      border: Border.all(
+                                                                                                                    color: Color(0xFE50000),
+                                                                                                                    width: 0.5,
+                                                                                                                  )),
+                                                                                                                  height: MediaQuery.of(context).size.height * 0.040,
+                                                                                                                  // margin: Dimens.edgeInsets5,
+                                                                                                                  constraints: BoxConstraints(
+                                                                                                                    maxWidth: MediaQuery.of(context).size.width / 4,
+                                                                                                                    minWidth: 100,
+                                                                                                                  ),
+                                                                                                                  child: LoginCustomTextfield(
+                                                                                                                    inputFormatters: [
+                                                                                                                      FilteringTextInputFormatter.digitsOnly
+                                                                                                                    ],
+                                                                                                                    textController: controller.mobileTextFieldController,
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                          ElevatedButton(
+                                                                                                            onPressed: () {
+                                                                                                              controller.updateText(controller.nameTextFieldController.text, controller.roleTextFieldController.text, controller.emailTextFieldController.text, int.tryParse('${controller.mobileTextFieldController.text}'));
+                                                                                                              controller.nameTextFieldController.clear();
+                                                                                                              controller.emailTextFieldController.clear();
+                                                                                                              controller.roleTextFieldController.clear();
+                                                                                                              controller.mobileTextFieldController.clear();
+                                                                                                            },
+                                                                                                            child: Text(
+                                                                                                              'Add',
+                                                                                                              style: TextStyle(color: ColorValues.whiteColor),
+                                                                                                            ),
                                                                                                           ),
                                                                                                         ],
                                                                                                       ),
-                                                                                                      SizedBox(
-                                                                                                        height: 10,
-                                                                                                      ),
-                                                                                                      Column(
-                                                                                                          children: []..addAll(controller.externalEmails.map((data) => Row(
-                                                                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                                children: [
-                                                                                                                  SizedBox(
-                                                                                                                    width: 75,
-                                                                                                                  ),
-                                                                                                                  SizedBox(width: 100, child: Text('${data.name}')),
-                                                                                                                  SizedBox(width: 200, child: Text('${data.email}')),
-                                                                                                                  SizedBox(width: 100, child: Text('${data.role}')),
-                                                                                                                  SizedBox(width: 100, child: Text('${data.mobile}')),
-                                                                                                                ],
-                                                                                                              )))),
-                                                                                                      Dimens.boxHeight10,
-                                                                                                      SizedBox(
-                                                                                                          width: MediaQuery.of(context).size.width / 3,
-                                                                                                          child: Row(
-                                                                                                            children: [
-                                                                                                              Text(
-                                                                                                                ' Name: ',
-                                                                                                                style: Styles.black14,
-                                                                                                              ),
-                                                                                                              Container(
-                                                                                                                decoration: BoxDecoration(
-                                                                                                                    border: Border.all(
-                                                                                                                  color: Color(0xFE50000),
-                                                                                                                  width: 0.5,
-                                                                                                                )),
-                                                                                                                height: MediaQuery.of(context).size.height * 0.040,
-                                                                                                                // margin: Dimens.edgeInsets5,
-                                                                                                                constraints: BoxConstraints(
-                                                                                                                  maxWidth: MediaQuery.of(context).size.width / 4,
-                                                                                                                  minWidth: 100,
-                                                                                                                ),
-                                                                                                                child: LoginCustomTextfield(
-                                                                                                                  textController: controller.nameTextFieldController,
-                                                                                                                ),
-                                                                                                              ),
-                                                                                                            ],
-                                                                                                          )),
-                                                                                                      SizedBox(
-                                                                                                        width: MediaQuery.of(context).size.width / 3,
-                                                                                                        child: Row(
-                                                                                                          children: [
-                                                                                                            Text(
-                                                                                                              '  Email: ',
-                                                                                                              style: Styles.black14,
-                                                                                                            ),
-                                                                                                            Container(
-                                                                                                              decoration: BoxDecoration(
-                                                                                                                  border: Border.all(
-                                                                                                                color: Color(0xFE50000),
-                                                                                                                width: 0.5,
-                                                                                                              )),
-                                                                                                              height: MediaQuery.of(context).size.height * 0.040,
-                                                                                                              // margin: Dimens.edgeInsets5,
-                                                                                                              constraints: BoxConstraints(
-                                                                                                                maxWidth: MediaQuery.of(context).size.width / 4,
-                                                                                                                minWidth: 100,
-                                                                                                              ),
-                                                                                                              child: LoginCustomTextfield(
-                                                                                                                textController: controller.emailTextFieldController,
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                          ],
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                      SizedBox(
-                                                                                                        width: MediaQuery.of(context).size.width / 3,
-                                                                                                        child: Row(
-                                                                                                          children: [
-                                                                                                            Text(
-                                                                                                              '     Role: ',
-                                                                                                              style: Styles.black14,
-                                                                                                            ),
-                                                                                                            Container(
-                                                                                                              decoration: BoxDecoration(
-                                                                                                                  border: Border.all(
-                                                                                                                color: Color(0xFE50000),
-                                                                                                                width: 0.5,
-                                                                                                              )),
-                                                                                                              height: MediaQuery.of(context).size.height * 0.040,
-                                                                                                              // margin: Dimens.edgeInsets5,
-                                                                                                              constraints: BoxConstraints(
-                                                                                                                maxWidth: MediaQuery.of(context).size.width / 4,
-                                                                                                                minWidth: 100,
-                                                                                                              ),
-                                                                                                              child: LoginCustomTextfield(
-                                                                                                                textController: controller.roleTextFieldController,
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                          ],
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                      SizedBox(
-                                                                                                        width: MediaQuery.of(context).size.width / 3,
-                                                                                                        child: Row(
-                                                                                                          children: [
-                                                                                                            Text(
-                                                                                                              'Mobile: ',
-                                                                                                              style: Styles.black14,
-                                                                                                            ),
-                                                                                                            Container(
-                                                                                                              decoration: BoxDecoration(
-                                                                                                                  border: Border.all(
-                                                                                                                color: Color(0xFE50000),
-                                                                                                                width: 0.5,
-                                                                                                              )),
-                                                                                                              height: MediaQuery.of(context).size.height * 0.040,
-                                                                                                              // margin: Dimens.edgeInsets5,
-                                                                                                              constraints: BoxConstraints(
-                                                                                                                maxWidth: MediaQuery.of(context).size.width / 4,
-                                                                                                                minWidth: 100,
-                                                                                                              ),
-                                                                                                              child: LoginCustomTextfield(
-                                                                                                                inputFormatters: [
-                                                                                                                  FilteringTextInputFormatter.digitsOnly
-                                                                                                                ],
-                                                                                                                textController: controller.mobileTextFieldController,
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                          ],
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                      ElevatedButton(
-                                                                                                        onPressed: () {
-                                                                                                          controller.updateText(controller.nameTextFieldController.text, controller.roleTextFieldController.text, controller.emailTextFieldController.text, int.tryParse('${controller.mobileTextFieldController.text}'));
-                                                                                                          controller.nameTextFieldController.clear();
-                                                                                                          controller.emailTextFieldController.clear();
-                                                                                                          controller.roleTextFieldController.clear();
-                                                                                                          controller.mobileTextFieldController.clear();
-                                                                                                        },
-                                                                                                        child: Text(
-                                                                                                          'Add',
-                                                                                                          style: TextStyle(color: ColorValues.whiteColor),
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ],
-                                                                                                  ),
-                                                                                                )
-                                                                                              ],
+                                                                                                    )
+                                                                                                  ],
+                                                                                                ),
+                                                                                              ),
                                                                                             ),
-                                                                                          ),
+                                                                                          ],
                                                                                         ),
-                                                                                      ],
+                                                                                      ),
                                                                                     ),
-                                                                                  ),
+                                                                                  ],
                                                                                 ),
                                                                               ],
                                                                             ),
                                                                           ],
                                                                         ),
-                                                                      ],
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ),
+                                                              );
+                                                            },
                                                           ),
                                                         ],
                                                       ),
@@ -2001,47 +2016,47 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         10.0),
                                                                 child: Column(
                                                                   children: <Widget>[
-                                                                    Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Text(
-                                                                          "Serial No: ",
-                                                                        ),
-                                                                        Container(
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            boxShadow: [
-                                                                              BoxShadow(
-                                                                                color: Colors.black26,
-                                                                                offset: const Offset(
-                                                                                  5.0,
-                                                                                  5.0,
-                                                                                ),
-                                                                                blurRadius: 5.0,
-                                                                                spreadRadius: 1.0,
-                                                                              ),
-                                                                            ],
-                                                                            color:
-                                                                                ColorValues.whiteColor,
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(5),
-                                                                          ),
-                                                                          child:
-                                                                              LoginCustomTextfield(
-                                                                            width:
-                                                                                (Get.width * 0.15),
-                                                                            keyboardType:
-                                                                                TextInputType.text,
-                                                                            maxLine:
-                                                                                1,
-                                                                            textController:
-                                                                                controller.supplierActionSrNumberTextFieldController,
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
+                                                                    // Row(
+                                                                    //   mainAxisAlignment:
+                                                                    //       MainAxisAlignment
+                                                                    //           .spaceBetween,
+                                                                    //   children: [
+                                                                    //     Text(
+                                                                    //       "Serial No: ",
+                                                                    //     ),
+                                                                    //     Container(
+                                                                    //       decoration:
+                                                                    //           BoxDecoration(
+                                                                    //         boxShadow: [
+                                                                    //           BoxShadow(
+                                                                    //             color: Colors.black26,
+                                                                    //             offset: const Offset(
+                                                                    //               5.0,
+                                                                    //               5.0,
+                                                                    //             ),
+                                                                    //             blurRadius: 5.0,
+                                                                    //             spreadRadius: 1.0,
+                                                                    //           ),
+                                                                    //         ],
+                                                                    //         color:
+                                                                    //             ColorValues.whiteColor,
+                                                                    //         borderRadius:
+                                                                    //             BorderRadius.circular(5),
+                                                                    //       ),
+                                                                    //       child:
+                                                                    //           LoginCustomTextfield(
+                                                                    //         width:
+                                                                    //             (Get.width * 0.15),
+                                                                    //         keyboardType:
+                                                                    //             TextInputType.text,
+                                                                    //         maxLine:
+                                                                    //             1,
+                                                                    //         textController:
+                                                                    //             controller.supplierActionSrNumberTextFieldController,
+                                                                    //       ),
+                                                                    //     ),
+                                                                    //   ],
+                                                                    // ),
                                                                     Dimens
                                                                         .boxHeight8,
                                                                     Row(
@@ -2116,7 +2131,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                               .spaceBetween,
                                                                       children: [
                                                                         Text(
-                                                                          "Required Date: ",
+                                                                          "Required By Date: ",
                                                                         ),
                                                                         Container(
                                                                           decoration:
@@ -2176,7 +2191,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                               controller.supplierActionTextFieldController.text,
                                                                               controller.isCheckedRequire.value == true ? 1 : 0,
                                                                               controller.supplierActionDateTimeCtrlrWeb.text,
-                                                                              controller.supplierActionSrNumberTextFieldController.text,
+                                                                              // controller.supplierActionSrNumberTextFieldController.text,
                                                                             );
                                                                             controller.clearSupplierAction();
                                                                           },
@@ -2218,7 +2233,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                           size:
                                                                               ColumnSize.S,
                                                                           label:
-                                                                              Text('#'),
+                                                                              Text('Serial No'),
                                                                         ),
                                                                         DataColumn2(
                                                                           size:
@@ -2256,7 +2271,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                           return DataRow(
                                                                             cells: [
                                                                               DataCell(
-                                                                                Text('${supplier.srNumber ?? ''}'),
+                                                                                Text('${index + 1}'),
                                                                               ),
                                                                               DataCell(
                                                                                 Text('${supplier.name ?? ''}'),
@@ -2431,7 +2446,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                               message: 'view attachment',
                                                                               onPress: () async {
                                                                                 String baseUrl = 'http://172.20.43.9:83/';
-                                                                                String fileName = controller.affectedPartImages[index]?.fileName ?? "";
+                                                                                String fileName = controller.images[index]?.fileName ?? "";
                                                                                 String fullUrl = baseUrl + fileName;
                                                                                 if (await canLaunch(fullUrl)) {
                                                                                   await launch(fullUrl);
@@ -2452,26 +2467,41 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                         ),
                                                       )
                                                     : Dimens.box0,
-                                                Center(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 60,
-                                                            right: 60),
-                                                    child: Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Comments: '),
-                                                        Expanded(
-                                                          child:
-                                                              _buildWorkPermitCommentTextField_web(
-                                                                  context),
+                                                controller
+                                                                .viewWarrantyClaimDetailsModel.value?.status ==
+                                                            192 ||
+                                                        controller
+                                                                .viewWarrantyClaimDetailsModel
+                                                                .value
+                                                                ?.status ==
+                                                            199 ||
+                                                        controller
+                                                                .viewWarrantyClaimDetailsModel
+                                                                .value
+                                                                ?.status ==
+                                                            200
+                                                    ? Dimens.box0
+                                                    : Center(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  left: 60,
+                                                                  right: 60),
+                                                          child: Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Comments: '),
+                                                              Expanded(
+                                                                child:
+                                                                    _buildWorkPermitCommentTextField_web(
+                                                                        context),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
+                                                      ),
                                                 Dimens.boxHeight10,
                                                 controller
                                                         .historyList!.isNotEmpty

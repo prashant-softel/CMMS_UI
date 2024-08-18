@@ -13,6 +13,18 @@ class EscalationMatrixListPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> escalateModule({
+    required int moduleId,
+    required int statusId,
+    required bool isLoading,
+  }) async {
+    return escalationMatrixListUsecase.escalateModule(
+      moduleId: moduleId,
+      statusId: statusId,
+      isLoading: isLoading,
+    );
+  }
+
   void clearStatusValue() async =>
       escalationMatrixListUsecase.clearStatusValue();
 

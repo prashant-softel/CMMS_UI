@@ -317,9 +317,11 @@ class AddModuleCleaningExecutionContentWeb
                                                         "0001-01-01"
                                                     ? Text("")
                                                     : Text(
-                                                        controller.mcExecutionDetailsModel
-                                            .value?.startDate ??
-                                        '',
+                                                        controller
+                                                                .mcExecutionDetailsModel
+                                                                .value
+                                                                ?.startDate ??
+                                                            '',
                                                         style: Styles.blue17,
                                                       ),
                                               ],
@@ -1121,7 +1123,18 @@ class AddModuleCleaningExecutionContentWeb
                                             //   width: 10,
                                             // ),
                                             Dimens.boxWidth10,
-
+                                            Container(
+                                              height: 35,
+                                              child: CustomElevatedButton(
+                                                icon: Icons.print,
+                                                backgroundColor: ColorValues
+                                                    .linktopermitColor,
+                                                text: "print",
+                                                onPressed: () {
+                                                  controller.generateInvoice();
+                                                },
+                                              ),
+                                            ),
                                             controller.mcExecutionDetailsModel.value?.status == 361 &&
                                                         varUserAccessModel.value
                                                                 .access_list!

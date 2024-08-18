@@ -177,7 +177,7 @@ class SupplierActions {
     this.name,
     this.is_required,
     this.required_by_date,
-    this.srNumber,
+    this.srNumber = "",
   });
 
   String? name;
