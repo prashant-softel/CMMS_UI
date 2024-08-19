@@ -507,7 +507,7 @@ class MCExcutionListDataSource extends DataTableSource {
       // '${McExcutionListDetails?.id ?? ''}',
       "id",
       '${McExcutionListDetails?.title ?? ''}',
-      '${McExcutionListDetails?.planId ?? ''}',
+      'MCP${McExcutionListDetails?.planId ?? ''}',
 
       // '${McExcutionListDetails?.responsibility ?? ''}',
 
