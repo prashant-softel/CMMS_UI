@@ -199,8 +199,13 @@ class LstCmjcJobDetailList {
     this.jobRaisedOn,
     this.typeOfJob,
     this.turnaroundTimeMinutes,
+    this.company,
+    this.employee_name,
+    this.employee_ID,
   });
-
+  String? company;
+  String? employee_name;
+  int? employee_ID;
   int? jobId;
   String? jobTitle;
   String? jobAssignedEmployeeName;
@@ -234,6 +239,9 @@ class LstCmjcJobDetailList {
         jobRaisedOn: json["job_raised_on"],
         typeOfJob: json["type_of_Job"],
         turnaroundTimeMinutes: json["turnaround_time_minutes"],
+        company: json["company"],
+        employee_name: json["employee_name"],
+        employee_ID: json["employee_ID"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -252,6 +260,9 @@ class LstCmjcJobDetailList {
         "job_raised_on": jobRaisedOn,
         "type_of_Job": typeOfJob,
         "turnaround_time_minutes": turnaroundTimeMinutes,
+        "company": company,
+        "employee_name": employee_name,
+        "employee_ID": employee_ID,
       };
 }
 
