@@ -1,9 +1,8 @@
-///Dart imports
 import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
-// ignore: avoid_web_libraries_in_flutter
-// import 'dart:html';
+
+import 'dart:html';
 
 ///To save the pdf file in the device
 Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {

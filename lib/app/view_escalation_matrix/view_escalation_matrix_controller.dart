@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_escalation_matrix/view_escalation_matrix_presenter.dart';
 import 'package:cmms/domain/models/escalation_details_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
@@ -106,5 +107,19 @@ class ViewEscalationMatrixController extends GetxController {
   void clearStoreData() {
     viewExcalationPresenter.clearModuleValue();
     viewExcalationPresenter.clearStatusValue();
+  }
+
+  Future<void> editEscalationMatrix({
+    required int moudle_id,
+    required int status_id,
+  }) async {
+    clearStoreData();
+    Get.toNamed(
+      Routes.addEscalatiomMatrixContentWeb,
+      arguments: {
+        "module_id": moudle_id,
+        "status_id": status_id,
+      },
+    );
   }
 }

@@ -63,15 +63,15 @@ class CourseCategoryContentWeb extends GetView<CourseCategoryController> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.offNamed(Routes.misDashboard);
+                        Get.offNamed(Routes.masterDashboard);
                       },
                       child: Text(
-                        " / MIS",
+                        " / MASTERS",
                         style: Styles.greyLight14,
                       ),
                     ),
                     Text(
-                      " / COURSE CATEGORY LIST ",
+                      " / COURSE CATEGORY ",
                       style: Styles.greyLight14,
                     ),
                   ],

@@ -66,7 +66,7 @@ class AddEscalationMatrixContentWeb
                                 Get.offNamed(Routes.home);
                               },
                               child: Text(
-                                "Dashboard",
+                                "Dashboard".toUpperCase(),
                                 style: Styles.greyLight14,
                               ),
                             ),
@@ -76,12 +76,12 @@ class AddEscalationMatrixContentWeb
                                 Get.offNamed(Routes.escalationMatrixListWeb);
                               },
                               child: Text(
-                                " / Escalation Matrix List",
+                                " / Escalation Matrix List".toUpperCase(),
                                 style: Styles.greyLight14,
                               ),
                             ),
                             Text(
-                              " / Create Escalation Matrix",
+                              " / Create Escalation Matrix".toUpperCase(),
                               style: Styles.greyLight14,
                             )
                           ],

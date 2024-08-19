@@ -23,6 +23,7 @@ import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
+import 'package:cmms/domain/models/grievance_summary_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/grievance_List_model.dart';
@@ -719,6 +720,8 @@ class Repository {
   //Create Escalation Matrix
   Future<Map<String, dynamic>> createEscalationMatrix(
     createEscalationMatrix,
+    int moduleId,
+    int statusId,
     bool? isLoading,
   ) async {
     try {
@@ -726,6 +729,8 @@ class Repository {
       final res = await _dataRepository.createEscalationMatrix(
         auth: auth,
         createEscalationMatrix: createEscalationMatrix,
+        moduleId: moduleId,
+        statusId: statusId,
         isLoading: isLoading ?? false,
       );
 
@@ -750,6 +755,36 @@ class Repository {
       } else {
         Utility.showDialog(res.errorCode.toString(), 'createEscalationMatrix');
         //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> escalateModule(
+    int moduleId,
+    int statusId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.escalateModule(
+        auth: auth,
+        moduleId: moduleId,
+        statusId: statusId,
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Response Escalation Matrix Report: ${resourceData}');
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {}
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'createEscalationMatrix');
       }
       return Map();
     } catch (error) {
@@ -1380,6 +1415,49 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateWarrantyClaim(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Update Warranty Claim: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateWarrantyClaim');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> resubmitWarrantyClaim(
+    updateWarrantyClaim,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.resubmitWarrantyClaim(
         auth: auth,
         updateWarrantyClaim: updateWarrantyClaim,
         isLoading: isLoading ?? false,
@@ -3405,6 +3483,143 @@ class Repository {
       final res = await _dataRepository.wcRejectdButton(
         auth: auth,
         WCRejectJsonString: json.encode(WCRejectJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response WC Reject: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'WcRejectButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> closeWCApprovedButton(
+    WCApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.closeWCApprovedButton(
+        auth: auth,
+        WCApproveJsonString: WCApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response WC Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'WcApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  //Reject warranty Claim
+  Future<Map<String, dynamic>> closeWCRejectdButton(
+    WCRejectJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.closeWCRejectdButton(
+        auth: auth,
+        WCRejectJsonString: WCRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response WC Reject: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'WcRejectButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> updateWarranty(
+    updateWarrantyClaim,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateWarranty(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response WC Reject: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'WcRejectButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> closeWarranty(
+    updateWarrantyClaim,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.closeWarranty(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
         isLoading: isLoading ?? false,
       );
 
@@ -9223,7 +9438,7 @@ class Repository {
     }
   }
 
-  Future<GetNotificationByUserIdModel?> getUserNotificationListById(
+  Future<GetNotificationModel?> getUserNotificationListById(
     int? userId,
     bool? isLoading,
   ) async {
@@ -9235,8 +9450,8 @@ class Repository {
         isLoading: isLoading,
       );
       if (!res.hasError) {
-        final GetNotificationByUserIdModel _getNotificationByUserIdModel =
-            getNotificationByUserIdModelFromJson(res.data);
+        final GetNotificationModel _getNotificationByUserIdModel =
+            getNotificationModelFromJson(res.data);
         return _getNotificationByUserIdModel;
       } //
       else {
@@ -9520,32 +9735,34 @@ class Repository {
     }
   }
 
-  Future<bool> addUser({bool? isLoading, adduserJsonString}) async {
+  Future<Map<String, dynamic>> addUser(
+      {bool? isLoading, adduserJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.addUser(
           auth: auth,
           isLoading: isLoading,
           adduserJsonString: adduserJsonString);
-      print({"resp", res.data});
+      // print({"resp", res.data});
       if (!res.hasError) {
-        // Get.offNamed(Routes.userList);
-        Get.offAndToNamed(Routes.userList);
-
-        //   print("hellooooo");
-        return true;
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), ' addUser');
-        return false;
+        return Map();
       }
+      return Map();
     } catch (error) {
       print(error.toString());
-      return false;
+      return Map();
     }
   }
 
-  Future<bool> updateUser({bool? isLoading, adduserJsonString}) async {
+  Future<Map<String, dynamic>> updateUser(
+      {bool? isLoading, adduserJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateUser(
@@ -9554,16 +9771,19 @@ class Repository {
           adduserJsonString: adduserJsonString);
       print({"resp", res.data});
       if (!res.hasError) {
-        Get.offAllNamed(Routes.userList);
-        return true;
-      } //
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } ////
       else {
         Utility.showDialog(res.errorCode.toString(), ' updateUser');
-        return false;
+        return Map();
       }
+      return Map();
     } catch (error) {
       print(error.toString());
-      return false;
+      return Map();
     }
   }
 
@@ -16062,6 +16282,39 @@ class Repository {
         return _trainingSummaryModelList;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getTrainingSummary');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<GrievanceReportModel?>?> getGrievanceSummary(
+      int? facility_id, bool? isLoading, String fromDate, String toDate) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      if (facility_id == null) {
+        throw ArgumentError('facility_id cannot be null');
+      }
+
+      final res = await _dataRepository.getGrievanceSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
+      if (!res.hasError) {
+        // String jsonObservationSummaryModels = jsonDecode(res.data);
+        final List<GrievanceReportModel> _grievanceSummaryModelList =
+            grievanceSummaryFromJson(res.data);
+
+        return _grievanceSummaryModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'GrievanceReportSummary');
         return null;
       }
     } catch (error) {

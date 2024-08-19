@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_presenter.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/save_file_web.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
@@ -21,9 +22,11 @@ import 'package:cmms/domain/models/update_mc_execution_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 import '../../domain/models/facility_model.dart';
 
 class AddModuleCleaningExecutionController extends GetxController {
@@ -795,5 +798,215 @@ class AddModuleCleaningExecutionController extends GetxController {
         isLoading: true,
       );
     }
+  }
+
+  Future<void> generateInvoice() async {
+    final PdfDocument document = PdfDocument();
+
+    final PdfPage page = document.pages.add();
+
+    final Size pageSize = page.getClientSize();
+
+    var url = "assets/assets/files/logo.png";
+    var response = await get(Uri.parse(url));
+    var data = response.bodyBytes;
+
+    PdfBitmap image = PdfBitmap(data);
+
+    final PdfLayoutResult result = drawHeader(page, pageSize, document, image);
+
+    final List<int> bytes = await document.save();
+
+    document.dispose();
+
+    await saveAndLaunchFile(bytes, 'MC Task View Report');
+  }
+
+  PdfLayoutResult drawHeader(
+    PdfPage page,
+    Size pageSize,
+    PdfDocument document,
+    PdfBitmap image,
+  ) {
+    final PdfPen borderPen = PdfPen(PdfColor(142, 180, 219), width: 1.0);
+    final PdfBrush backgroundBrush = PdfSolidBrush(PdfColor(217, 226, 243));
+    final PdfFont headerFont =
+        PdfStandardFont(PdfFontFamily.helvetica, 10, style: PdfFontStyle.bold);
+    final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
+
+    // Draw images
+    page.graphics.drawImage(image, Rect.fromLTWH(15, 10, 100, 80));
+
+    // Site name section
+    double currentY = 100;
+    double sectionHeight = 20;
+
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('Site name', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Module Cleaning Information
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('Module Cleaning information', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Draw Left Side PM Information Details
+    double labelWidth = 150;
+    double valueWidth = 80;
+    double labelX = 30;
+    double valueX = labelX + labelWidth + 5;
+
+    List<String> pmInfoLabelsLeft = [
+      'Job ID',
+      'Permit ID',
+      'Target (No.of Modules)',
+      'Actual (No.of Modules)',
+      'Deviation',
+      'No. of manpower',
+      'Performed by',
+      'Cleaning type'
+    ];
+    List<String> pmInfoValuesLeft = [
+      'Job ID${mcExecutionDetailsModel.value?.id}',
+      'Permit ID${mcExecutionDetailsModel.value?.permit_id}',
+      'Target (No.of Modules)${mcExecutionDetailsModel.value?.noOfDays}',
+      'Actual (No.of Modules)${mcExecutionDetailsModel.value?.noOfDays}',
+      'Deviation${mcExecutionDetailsModel.value?.noOfDays}',
+      'No. of manpower${mcExecutionDetailsModel.value?.noOfDays}',
+      'Performed by${mcExecutionDetailsModel.value?.plannedBy}',
+      'Cleaning type${mcExecutionDetailsModel.value?.noOfDays}',
+    ];
+    double rowHeight = 15;
+
+    for (int i = 0; i < pmInfoLabelsLeft.length; i++) {
+      page.graphics.drawString(pmInfoLabelsLeft[i], contentFont,
+          bounds: Rect.fromLTWH(labelX, currentY + 5, labelWidth, rowHeight));
+      page.graphics.drawString(pmInfoValuesLeft[i], contentFont,
+          bounds: Rect.fromLTWH(valueX, currentY + 5, valueWidth, rowHeight));
+      currentY += rowHeight;
+    }
+
+    // Draw Right Side PM Information Details
+    currentY -= pmInfoLabelsLeft.length *
+        rowHeight; // Reset currentY for right side alignment
+    double labelXRight = pageSize.width / 2 + 10;
+    double valueXRight = labelXRight + labelWidth + 5;
+    double rightRowSpacing = 10; // Less space between rows on the right side
+
+    List<String> pmInfoLabelsRight = [
+      'Cleaning cycle no',
+      'Date',
+      'Cleaning start time',
+      'Cleaning end time',
+      'Rain status',
+      'Water used',
+      'Approved by',
+    ];
+    List<String> pmInfoValuesRight = [
+      'Cleaning cycle no',
+      'Date',
+      'Cleaning start time',
+      'Cleaning end time',
+      'Rain status',
+      'Water used',
+      'Approved by',
+    ];
+
+    for (int i = 0; i < pmInfoLabelsRight.length; i++) {
+      page.graphics.drawString(pmInfoLabelsRight[i], contentFont,
+          bounds:
+              Rect.fromLTWH(labelXRight, currentY + 5, labelWidth, rowHeight));
+      page.graphics.drawString(pmInfoValuesRight[i], contentFont,
+          bounds:
+              Rect.fromLTWH(valueXRight, currentY + 5, valueWidth, rowHeight));
+      currentY += rightRowSpacing;
+    }
+
+    // Add space before Equipment ID section
+    currentY += 60; // Added more space above Equipment ID
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('Equipment ID', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Equipment Table Headers
+    double columnWidth = (pageSize.width - 50) / 4;
+    List<String> equipmentHeaders = [
+      'S. No',
+      'Block ID',
+      'Inverter ID',
+      'SMB ID'
+    ];
+
+    for (int i = 0; i < equipmentHeaders.length; i++) {
+      page.graphics.drawString(equipmentHeaders[i], contentFont,
+          bounds: Rect.fromLTWH(
+              30 + (i * columnWidth), currentY + 5, columnWidth, rowHeight));
+    }
+    currentY += rowHeight;
+
+    // Equipment Table Rows
+    for (int i = 0;
+        i < (mcExecutionDetailsModel.value?.schedules?.length ?? 0);
+        i++) {
+      var schedule = mcExecutionDetailsModel.value!.schedules![i];
+
+      page.graphics.drawString('${i + 1}', contentFont,
+          bounds: Rect.fromLTWH(30, currentY + 5, columnWidth, rowHeight));
+      page.graphics.drawString(
+          'blockID', contentFont, //'${schedule?.blockId}', contentFont,
+          bounds: Rect.fromLTWH(
+              30 + columnWidth, currentY + 5, columnWidth, rowHeight));
+      page.graphics.drawString(
+          'inverterId', contentFont, //'${schedule?.inverterId}', contentFont,
+          bounds: Rect.fromLTWH(
+              30 + 2 * columnWidth, currentY + 5, columnWidth, rowHeight));
+      page.graphics.drawString(
+          'smbId', contentFont, //'${schedule?.smbId}', contentFont,
+          bounds: Rect.fromLTWH(
+              30 + 3 * columnWidth, currentY + 5, columnWidth, rowHeight));
+      currentY += rowHeight;
+    }
+
+    // Work Description Section
+    currentY += 10;
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds:
+            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
+    page.graphics.drawString('Work description', headerFont,
+        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    String staticDescription =
+        "This is a static description text that explains the work done or provides additional details.";
+    page.graphics.drawString(staticDescription, contentFont,
+        bounds:
+            Rect.fromLTWH(30, currentY + 5, pageSize.width - 60, rowHeight * 2),
+        format: PdfStringFormat(alignment: PdfTextAlignment.left));
+    currentY += rowHeight * 2;
+
+    // Signature of trainer section
+    final String signatureText = 'Signature of trainer';
+    final Size signatureSize = contentFont.measureString(signatureText);
+
+    return PdfTextElement(text: signatureText, font: contentFont).draw(
+        page: page,
+        bounds: Rect.fromLTWH(pageSize.width - signatureSize.width - 30,
+            currentY + 20, signatureSize.width, pageSize.height - 120))!;
   }
 }

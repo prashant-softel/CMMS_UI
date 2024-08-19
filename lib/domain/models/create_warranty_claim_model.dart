@@ -30,6 +30,7 @@ class CreateWarrantyClaimModel {
   String? failureTime;
   List<dynamic>? uploadfile_ids;
   List<dynamic>? affectedParts;
+  bool? resubmit;
 
   List<int?>? additionalEmailEmployees;
   List<ExternalEmails?>? externalEmails;
@@ -61,6 +62,7 @@ class CreateWarrantyClaimModel {
       this.externalEmails,
       this.supplierActions,
       this.affectedParts,
+      this.resubmit,
       this.status,
       this.uploadfile_ids,
       this.comment,
@@ -107,6 +109,7 @@ class CreateWarrantyClaimModel {
             ? List<int>.from(json["uploadfile_ids"].map((x) => x))
             : [],
         status: json['status'],
+        resubmit: json['resubmit'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -138,6 +141,7 @@ class CreateWarrantyClaimModel {
         "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
         "affectedParts": List<dynamic>.from(affectedParts!.map((x) => x)),
         "status": status,
+        "resubmit": resubmit,
       };
 }
 
@@ -171,27 +175,27 @@ class ExternalEmails {
 class SupplierActions {
   SupplierActions({
     this.name,
-    // this.is_required,
+    this.is_required,
     this.required_by_date,
-    this.srNumber,
+    this.srNumber = "",
   });
 
   String? name;
-  // bool? is_required;
+  int? is_required;
   String? required_by_date;
   String? srNumber;
 
   factory SupplierActions.fromJson(Map<String, dynamic> json) =>
       SupplierActions(
         name: json["name"],
-        // is_required: json["is_required"],
+        is_required: json["is_required"],
         required_by_date: json["required_by_date"],
         srNumber: json['srNumber'],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
-        // "is_required": is_required,
+        "is_required": is_required,
         "required_by_date": required_by_date,
         "srNumber": srNumber
       };

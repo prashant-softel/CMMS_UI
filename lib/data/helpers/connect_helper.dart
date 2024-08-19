@@ -75,6 +75,7 @@ import 'package:cmms/app/widgets/veg_plan_message_dialog.dart';
 import 'package:cmms/app/widgets/veg_plan_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/view_list_of_obs_message_close_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_updated_message_dialog.dart';
+import 'package:cmms/app/widgets/wc_popup.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
@@ -1394,8 +1395,40 @@ class ConnectHelper {
     print('WCResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(WCMessageApproveDialog(
-        data: parsedJson['message'], id: parsedJson['id']));
+    Get.dialog<void>(
+      WCMessageApproveDialog(
+        data: parsedJson['message'],
+        id: parsedJson['id'],
+      ),
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> closeWCApprovedButton({
+    required String auth,
+    WCApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'WC/ApprovedClosedWC',
+      Request.post,
+      WCApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('WCResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+      WCMessageApproveDialog(
+        data: parsedJson['message'],
+        id: parsedJson['id'],
+      ),
+    );
 
     return responseModel;
   }
@@ -1422,6 +1455,76 @@ class ConnectHelper {
     Get.dialog<void>(WCMessageRejectDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> closeWCRejectdButton({
+    required String auth,
+    WCRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'WC/RejectClosedWC',
+      Request.post,
+      WCRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('WCResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(WCMessageRejectDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateWarranty({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'WC/updateWCimages',
+      Request.post,
+      updateWarrantyClaim,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('WCResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        WCPopUp(data: parsedJson['message'], id: parsedJson['id']));
+    return responseModel;
+  }
+
+  Future<ResponseModel> closeWarranty({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'WC/ClosedWC',
+      Request.post,
+      updateWarrantyClaim,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('WCResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        WCPopUp(data: parsedJson['message'], id: parsedJson['id']));
     return responseModel;
   }
 
@@ -3390,6 +3493,8 @@ class ConnectHelper {
   Future<ResponseModel> createEscalationMatrix({
     required String auth,
     createEscalationMatrix,
+    required int moduleId,
+    required int statusId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -3409,13 +3514,34 @@ class ConnectHelper {
     // if (res.e != null) {
     //   Get.dialog<void>(WarrantyClaimErrorDialog());
     // } else {
-
     Get.dialog<void>(CreateEscalationMatrixDialog(
       data: parsedJson['message'],
       escalationMatrixId: parsedJson['id'],
+      moduleId: moduleId,
+      statusId: statusId,
     ));
     // }
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> escalateModule({
+    required String auth,
+    required int moduleId,
+    required int statusId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'EM/Escalate?moduleId=$moduleId&statusId=$statusId',
+      Request.post,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('Create Escalation Matrix Response:${responseModel.data}');
     return responseModel;
   }
 
@@ -3873,6 +3999,38 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'WC/UpdateWC',
+      Request.patch,
+      updateWarrantyClaim,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Update Warranty Claim Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    Get.dialog<void>(WarrantyClaimUpdatedMessageDialog(
+      data: parsedJson['message'],
+      warrantyClaimId: parsedJson['id'],
+    ));
+    // }
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> resubmitWarrantyClaim({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'WC/UpdateWC?resubmit=true',
       Request.patch,
       updateWarrantyClaim,
       isLoading ?? false,
@@ -5670,10 +5828,10 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    var res = responseModel.data;
-    var parsedJson = json.decode(res);
-    String message = parsedJson["message"];
-    Utility.showDialog(message, '');
+    // var res = responseModel.data;
+    // var parsedJson = json.decode(res);
+    // String message = parsedJson["message"];
+    // Utility.showDialog(message, '');
 
     return responseModel;
   }
@@ -10196,6 +10354,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> rejectCourseSchedule({
     required String auth,
     rejectSchedule,
@@ -10722,6 +10881,32 @@ class ConnectHelper {
     try {
       response = await apiWrapper.makeRequest(
         'Training/GetTrainingReportByCategory?facility_id=$facility_id&from_date=$fromDate&to_date=$toDate',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
+
+  Future<ResponseModel> getGrievanceSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    required String? fromDate,
+    required String? toDate,
+  }) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('Grievance List: ${response}');
+    try {
+      response = await apiWrapper.makeRequest(
+        'Grievance/GrievanceSummaryReport?facility_id=$facility_id&fromDate=$fromDate&toDate=$toDate',
         Request.get,
         null,
         isLoading ?? false,

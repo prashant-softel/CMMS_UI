@@ -134,6 +134,7 @@ abstract class Routes {
   static const DocumentMaster = _Paths.DocumentMaster;
   static const viewObservationScreen = _Paths.viewObservationScreen;
   static const observationSummary = _Paths.observationSummary;
+  
   static const misSummary = _Paths.misSummary;
 
   
@@ -250,6 +251,7 @@ abstract class Routes {
   static const attendanceListScreen = _Paths.attendanceListScreen;
   static const attendanceListMonthwise = _Paths.attendanceListMonthwise;
   static const materialCategory = _Paths.materialCategory;
+  static const grievanceSummary = _Paths.grievanceSummary;
 }
 
 abstract class _Paths {
@@ -383,6 +385,7 @@ abstract class _Paths {
   static const DocumentMaster = '/Document-Master';
   static const viewObservationScreen = '/viewObservationScreen';
   static const observationSummary = '/observation-summary';
+ 
   static const misSummary='/mis-summary';
 
   static const documentUploadScreen = '/documentUploadScreen';
@@ -434,7 +437,7 @@ abstract class _Paths {
   static const typeofobservation = '/type-of-observation';
   static const sourceofobservation = '/source-of-observation';
   static const risktypemaster = '/risk-type-master';
-  static const viewMcPlaning = '/view-mc-planing';
+  static const viewMcPlaning = '/view-mc-planning';
   static const print = '/print';
   static const hotoListScreenContentWeb = '/hoto-list-screen';
   static const auditListScreen = '/audit-list-screen';
@@ -495,4 +498,5 @@ abstract class _Paths {
   static const materialCategory = '/material-category';
 
   static const trainingSummary = '/training-summary';
+  static const grievanceSummary = '/grievance-summary';
 }

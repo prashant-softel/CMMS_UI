@@ -5,6 +5,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -384,6 +385,10 @@ class MrsIssueContentMobile extends GetView<MrsIssueController> {
                                                         ),
                                                         child:
                                                             LoginCustomTextfield(
+                                                                inputFormatters: [
+                                                              FilteringTextInputFormatter
+                                                                  .digitsOnly, // Restrict input to digits only
+                                                            ],
                                                                 textController: controller
                                                                         .mrsDetailsModel
                                                                         .value!
@@ -430,6 +435,13 @@ class MrsIssueContentMobile extends GetView<MrsIssueController> {
                                                                         fontSize:
                                                                             16.0,
                                                                       );
+                                                                      controller
+                                                                          .mrsDetailsModel
+                                                                          .value!
+                                                                          .cmmrsItems![
+                                                                              index]
+                                                                          .issued_qty_controller!
+                                                                          .text = ''; 
                                                                     }
                                                                   } catch (e) {
                                                                     // Handle the case where parsing fails

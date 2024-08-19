@@ -15,7 +15,7 @@ abstract class LocalKeys {
   static const obsId = 'obsId';
   static const wc_id = 'wc_id';
   static const wc_type = 'wc_type';
-
+  static const typeEdit = 'typeEdit';
   static const reNew = 'reNew';
   static const compliance_id = 'compliance_id';
 

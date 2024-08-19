@@ -4,7 +4,11 @@
 
 import 'dart:convert';
 
+import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
+import 'package:cmms/domain/models/tools_model.dart';
+import 'package:cmms/domain/models/work_type_model.dart';
 
 JobDetailsModel jobDetailsModelFromJson(String str) =>
     JobDetailsModel.fromJson(json.decode(str));
@@ -74,11 +78,11 @@ class JobDetailsModel {
   int? currentPtwId;
   String? currentPtwTitle;
   int? latestJCStatus;
-  List<EquipmentCatList>? equipmentCatList;
-  List<WorkingAreaList>? workingAreaList;
-  List<WorkTypeList>? workTypeList;
+  List<InventoryCategoryModel>? equipmentCatList;
+  List<InventoryModel>? workingAreaList;
+  List<WorkTypeModel>? workTypeList;
   List<AssociatedPermit>? associatedPermitList;
-  List<ToolsRequiredList>? toolsRequiredList;
+  List<ToolsModel>? toolsRequiredList;
 
   factory JobDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobDetailsModel(
@@ -120,21 +124,21 @@ class JobDetailsModel {
         currentPtwTitle:
             json["current_ptw_title"] == null ? '' : json['current_ptw_title'],
         equipmentCatList: (json["equipment_cat_list"] != null)
-            ? List<EquipmentCatList>.from(json["equipment_cat_list"]
-                .map((x) => EquipmentCatList.fromJson(x)))
+            ? List<InventoryCategoryModel>.from(json["equipment_cat_list"]
+                .map((x) => InventoryCategoryModel.fromJson(x)))
             : [],
         workTypeList: json["work_type_list"] != null
-            ? List<WorkTypeList>.from(
-                json["work_type_list"].map((x) => WorkTypeList.fromJson(x)))
+            ? List<WorkTypeModel>.from(
+                json["work_type_list"].map((x) => WorkTypeModel.fromJson(x)))
             : [],
 
         workingAreaList: (json["working_area_name_list"] != null)
-            ? List<WorkingAreaList>.from(json["working_area_name_list"]
-                .map((x) => WorkingAreaList.fromJson(x)))
+            ? List<InventoryModel>.from(json["working_area_name_list"]
+                .map((x) => InventoryModel.fromJson(x)))
             : [],
         toolsRequiredList: (json["tools_required_list"] != null)
-            ? List<ToolsRequiredList>.from(json["tools_required_list"]
-                .map((x) => ToolsRequiredList.fromJson(x)))
+            ? List<ToolsModel>.from(
+                json["tools_required_list"].map((x) => ToolsModel.fromJson(x)))
             : [],
         associatedPermitList: (json["associated_permit_list"] != null)
             ? List<AssociatedPermit>.from(json["associated_permit_list"]
@@ -168,12 +172,14 @@ class JobDetailsModel {
         "latestJCStatusShort": latestJCStatusShort,
         "equipment_cat_list":
             List<dynamic>.from(equipmentCatList?.map((x) => x.toJson()) ?? []),
-        // "working_area_name_list":
-        //     List<dynamic>.from(workingAreaList?.map((x) => x.toJson()) ?? []),
+        "working_area_name_list":
+            List<dynamic>.from(workingAreaList?.map((x) => x.toJson()) ?? []),
         "work_type_list":
             List<dynamic>.from(workTypeList?.map((x) => x.toJson()) ?? []),
         "associated_permit_list": List<dynamic>.from(
             associatedPermitList?.map((x) => x.toJson()) ?? []),
+        "tools_required_list":
+            List<dynamic>.from(toolsRequiredList?.map((x) => x.toJson()) ?? []),
       };
 }
 
@@ -238,22 +244,22 @@ class AssociatedPermit {
 
 class EquipmentCatList {
   EquipmentCatList({
-    required this.equipmentCatId,
-    required this.equipmentCatName,
+    required this.id,
+    required this.name,
   });
 
-  int equipmentCatId;
-  String equipmentCatName;
+  int id;
+  String name;
 
   factory EquipmentCatList.fromJson(Map<String, dynamic> json) =>
       EquipmentCatList(
-        equipmentCatId: json["equipmentCat_id"],
-        equipmentCatName: json["equipmentCat_name"],
+        id: json["equipmentCat_id"],
+        name: json["equipmentCat_name"],
       );
 
   Map<String, dynamic> toJson() => {
-        "equipmentCat_id": equipmentCatId,
-        "equipmentCat_name": equipmentCatName,
+        "equipmentCat_id": id,
+        "equipmentCat_name": name,
       };
 }
 

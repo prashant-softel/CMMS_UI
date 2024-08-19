@@ -63,15 +63,15 @@ class TargetedGroupContentWeb extends GetView<TargetedGroupController> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.offNamed(Routes.misDashboard);
+                        Get.offNamed(Routes.masterDashboard);
                       },
                       child: Text(
-                        " / MIS",
+                        " / MASTERS",
                         style: Styles.greyLight14,
                       ),
                     ),
                     Text(
-                      " / Targeted Group LIST ",
+                      " / TARGETED GROUP",
                       style: Styles.greyLight14,
                     ),
                   ],

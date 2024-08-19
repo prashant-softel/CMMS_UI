@@ -101,6 +101,8 @@ import 'package:cmms/app/faulty_material_report/faulty_material_report_binding.d
 import 'package:cmms/app/faulty_material_report/view/faulty_material_report_screen.dart';
 import 'package:cmms/app/grievance_list/grievance_list_binding.dart';
 import 'package:cmms/app/grievance_list/views/grievance_list_screen.dart';
+import 'package:cmms/app/grievance_summary/grievance_summary_binding.dart';
+import 'package:cmms/app/grievance_summary/views/grievance_summary_screen.dart';
 import 'package:cmms/app/grievance_type/grievance_type_binding.dart';
 import 'package:cmms/app/grievance_type/view/grievance_type_screen.dart';
 import 'package:cmms/app/hoto/hoto_list_binding.dart';
@@ -1199,7 +1201,7 @@ class AppPages {
       page: WaterDataListScreen.new,
       binding: WaterDataListBinding(),
     ),
-   
+
     GetPage<dynamic>(
       name: _Paths.waterDataScreen,
       page: WaterDataScreen.new,
@@ -1251,6 +1253,11 @@ class AppPages {
       name: _Paths.grievanceList,
       page: GrievanceListScreen.new,
       binding: GrievanceListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.grievanceSummary,
+      page: GrievanceSummaryScreen.new,
+      binding: GrievanceSummaryBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.viewHazWasteData,
@@ -1379,6 +1386,16 @@ class AppPages {
       binding: ViewComplianceBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.docVersionDashboard,
+      page: DocVersionDashboardScreen.new,
+      binding: DocVersionDashbordBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewDocUploadScreen,
+      page: ViewDocUploadScreen.new,
+      binding: ViewDocUploadBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.ComplianceStatus,
       page: ComplianceStatusScreen.new,
       binding: ComplianceStatusBinding(),
@@ -1403,7 +1420,7 @@ class AppPages {
       page: ObservationSummaryScreen.new,
       binding: ObservationSummaryBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.misSummary,
       page: MisSummaryScreen.new,
       binding: MisSummaryBinding(),
@@ -1454,7 +1471,7 @@ class AppPages {
       page: PermitsTBTDataListScreen.new,
       binding: PermitsTBTDataListBinding(),
     ),
-    
-    
+
+
   ];
 }

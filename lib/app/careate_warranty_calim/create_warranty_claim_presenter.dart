@@ -60,6 +60,16 @@ class CreateWarrantyClaimPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> resubmitWarrantyClaim({
+    updateWarrantyClaim,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.resubmitWarrantyClaim(
+      updateWarrantyClaim: updateWarrantyClaim,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int? facilityId,
@@ -74,12 +84,12 @@ class CreateWarrantyClaimPresenter {
     );
   }
 
-  Future<List<HistoryModel>?> getHistory(
+  Future<List<HistoryModel>?> getHistory({
     moduleType,
-    wcId,
     facilityId,
+    wcId,
     isLoading,
-  ) async =>
+  }) async =>
       await warrantyClaimUsecase.getHistory(
         moduleType: moduleType,
         wcId: wcId,
@@ -207,6 +217,46 @@ class CreateWarrantyClaimPresenter {
   }) async {
     return warrantyClaimUsecase.wcRejectdButton(
       WCRejectJsonString: WCRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> closeWCApprovedButton({
+    WCApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.closeWCApprovedButton(
+      WCApproveJsonString: WCApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> closeWCRejectdButton({
+    WCRejectJsonString,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.closeWCRejectdButton(
+      WCRejectJsonString: WCRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> updateWarranty({
+    updateWarrantyClaim,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.updateWarranty(
+      updateWarrantyClaim: updateWarrantyClaim,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> closeWarranty({
+    updateWarrantyClaim,
+    required bool isLoading,
+  }) async {
+    return warrantyClaimUsecase.closeWarranty(
+      updateWarrantyClaim: updateWarrantyClaim,
       isLoading: isLoading,
     );
   }

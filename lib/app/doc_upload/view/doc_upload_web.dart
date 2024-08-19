@@ -72,9 +72,9 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                         ),
                         InkWell(
                           onTap: () {
-                            Get.offNamed(Routes.docVersionDashboard);
+                            Get.offNamed(Routes.documentManager);
                           },
-                          child: Text(" / DOCUMENT VERSION",
+                          child: Text(" / DOCUMENT MANAGER",
                               style: Styles.greyLight14),
                         ),
                         controller.selectedItem == null
@@ -187,39 +187,34 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                                 ],
                                               ),
                                               Dimens.boxHeight10,
-                                              controller.selectedItem != null
-                                                  ? Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                            includeAsterisk:
-                                                                false,
-                                                            title:
-                                                                'Please Mention The ReNew Date: '),
-                                                        Dimens.boxWidth2,
-                                                        CustomTextFieldForStock(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                          numberTextField: true,
-                                                          onTap: () {
-                                                            controller
-                                                                    .openrenewDateTcDatePicker =
-                                                                !controller
-                                                                    .openrenewDateTcDatePicker;
-                                                            controller.update([
-                                                              'stock_Mangement'
-                                                            ]);
-                                                          },
-                                                          textController:
-                                                              controller
-                                                                  .renewDateTc,
-                                                          onChanged: (value) {},
-                                                        ),
-                                                      ],
-                                                    )
-                                                  : Dimens.box0
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      includeAsterisk: false,
+                                                      title:
+                                                          'Please Mention The ReNew Date: '),
+                                                  Dimens.boxWidth2,
+                                                  CustomTextFieldForStock(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                    numberTextField: true,
+                                                    onTap: () {
+                                                      controller
+                                                              .openrenewDateTcDatePicker =
+                                                          !controller
+                                                              .openrenewDateTcDatePicker;
+                                                      controller.update(
+                                                          ['stock_Mangement']);
+                                                    },
+                                                    textController:
+                                                        controller.renewDateTc,
+                                                    onChanged: (value) {},
+                                                  ),
+                                                ],
+                                              )
                                             ],
                                           ),
                                           Spacer(),
@@ -317,30 +312,31 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    controller.selectedItem == null
-                                        ? Container(
-                                            margin: EdgeInsets.only(
-                                                top: 10, right: 20, left: 20),
-                                            height: Get.height * 0.2,
-                                            width: Get.width,
-                                            child: Row(
-                                                //
-                                                children: [
-                                                  Expanded(
-                                                    flex: 2,
-                                                    child:
-                                                        FileUploadWidgetWithDropzone(
-                                                      uploadSingleFile: false,
-                                                    ),
-                                                  ),
-                                                  Dimens.boxWidth10,
-                                                  Expanded(
-                                                      flex: 8,
-                                                      child:
-                                                          FileUploadDetailsWidgetWeb()),
-                                                ]),
-                                          )
-                                        : Dimens.box0,
+                                    // controller.selectedItem == null
+                                    //     ?
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          top: 10, right: 20, left: 20),
+                                      height: Get.height * 0.2,
+                                      width: Get.width,
+                                      child: Row(
+                                          //
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child:
+                                                  FileUploadWidgetWithDropzone(
+                                                uploadSingleFile: false,
+                                              ),
+                                            ),
+                                            Dimens.boxWidth10,
+                                            Expanded(
+                                                flex: 8,
+                                                child:
+                                                    FileUploadDetailsWidgetWeb()),
+                                          ]),
+                                    ),
+                                    // : Dimens.box0,
                                     Dimens.boxHeight10,
                                     Padding(
                                       padding: const EdgeInsets.symmetric(

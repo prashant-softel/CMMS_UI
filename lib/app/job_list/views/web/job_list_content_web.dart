@@ -252,8 +252,7 @@ class JobListContentWeb extends StatelessWidget {
                                       width: 0.0,
                                     ),
                                   ),
-                                  contentPadding:
-                                            EdgeInsets.only(left: 3),
+                                  contentPadding: EdgeInsets.only(left: 3),
                                   hintText: 'search'.tr,
                                   hintStyle: Styles.grey16,
                                 ),
@@ -560,37 +559,51 @@ class JobDataSource extends DataTableSource {
                           );
                         },
                       ),
-                      if (jobDetails?.status == 102 &&
-                          varUserAccessModel.value.access_list!
-                                  .where((e) =>
-                                      e.feature_id ==
-                                          UserAccessConstants.kJobFeatureId &&
-                                      e.approve ==
-                                          UserAccessConstants
-                                              .kHaveApproveAccess)
-                                  .length >
-                              0)
-                        TableActionButton(
-                          color: ColorValues.appYellowColor,
-                          icon: Icons.assignment_ind,
-                          message: 'Re-Assign',
-                          onPress: () {
-                            controller.clearStoreData();
+                      // jobDetails?.status == 101
+                      //     ?
+                      TableActionButton(
+                        color: ColorValues.editColor,
+                        icon: Icons.edit,
+                        message: 'Edit Job',
+                        onPress: () {
+                          controller.clearStoreData();
 
-                            controller.goToEditJobScreen(
-                                int.tryParse('${jobDetails?.id}'));
-                          },
-                        ),
-                      if (jobDetails?.status == 101)
-                        TableActionButton(
-                          color: ColorValues.appYellowColor,
-                          icon: Icons.assignment,
-                          message: 'Assign',
-                          onPress: () {
-                            controller.goToEditJobScreen(
-                                int.tryParse('${jobDetails?.id}'));
-                          },
-                        ),
+                          controller.goToEditJobScreen(
+                              int.tryParse('${jobDetails?.id}'));
+                        },
+                      )
+                      // : Dimens.box0,
+                      // if (jobDetails?.status == 102 &&
+                      //     varUserAccessModel.value.access_list!
+                      //             .where((e) =>
+                      //                 e.feature_id ==
+                      //                     UserAccessConstants.kJobFeatureId &&
+                      //                 e.approve ==
+                      //                     UserAccessConstants
+                      //                         .kHaveApproveAccess)
+                      //             .length >
+                      //         0)
+                      //   TableActionButton(
+                      //     color: ColorValues.appYellowColor,
+                      //     icon: Icons.assignment_ind,
+                      //     message: 'Re-Assign',
+                      //     onPress: () {
+                      //       controller.clearStoreData();
+
+                      //       controller.goToEditJobScreen(
+                      //           int.tryParse('${jobDetails?.id}'));
+                      //     },
+                      //   ),
+                      // if (jobDetails?.status == 101)
+                      //   TableActionButton(
+                      //     color: ColorValues.appYellowColor,
+                      //     icon: Icons.assignment,
+                      //     message: 'Assign',
+                      //     onPress: () {
+                      //       controller.goToEditJobScreen(
+                      //           int.tryParse('${jobDetails?.id}'));
+                      //     },
+                      //   ),
 
                       /// if job is linked, only then show Job Card button
                       //   if (jobDetails?.status == JobStatus.JOB_LINKED)

@@ -73,6 +73,8 @@ class JobDetailsPresenter {
         permitId: permitId,
         isLoading: isLoading,
       );
+  void clearStoreDataType() async => jobDetailsUsecase.clearStoreDataType();
+
   Future<Map<String, dynamic>?> createJobCard({
     String? auth,
     int? jobId,

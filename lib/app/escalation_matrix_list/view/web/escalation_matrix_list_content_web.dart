@@ -426,10 +426,15 @@ class EscalationListDataSource extends DataTableSource {
                                 },
                               ),
                               TableActionButton(
-                                color: Colors.red,
-                                icon: Icons.delete,
-                                message: 'Delete',
-                                onPress: () {},
+                                color: ColorValues.draftColor,
+                                icon: Icons.escalator,
+                                message: 'Escalate',
+                                onPress: () {
+                                  controller.escalateModule(
+                                    moduleId: Escalation?.moduleId ?? 0,
+                                    statusId: Escalation?.statusId ?? 0,
+                                  );
+                                },
                               )
                             ],
                           ),

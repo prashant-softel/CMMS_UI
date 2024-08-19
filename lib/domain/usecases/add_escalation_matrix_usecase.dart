@@ -10,10 +10,14 @@ class AddEscalationMatrixUsecase {
   AddEscalationMatrixUsecase(this._repository);
   Future<Map<String, dynamic>> createEscalationMatrix({
     createEscalationMatrix,
+    required int moduleId,
+    required int statusId,
     bool? isLoading,
   }) async =>
       await _repository.createEscalationMatrix(
         createEscalationMatrix,
+        moduleId,
+        statusId,
         isLoading,
       );
 

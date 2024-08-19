@@ -14,6 +14,17 @@ class EscalationMatrixListUsecase {
     );
   }
 
+  Future<Map<String, dynamic>> escalateModule({
+    required int moduleId,
+    required int statusId,
+    bool? isLoading,
+  }) async =>
+      await _repository.escalateModule(
+        moduleId,
+        statusId,
+        isLoading,
+      );
+
   void clearModuleValue() async => _repository.clearData(
         LocalKeys.moduleId,
       );

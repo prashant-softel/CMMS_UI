@@ -990,18 +990,18 @@ class PreventiveMaintenanceTaskViewContentWeb
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Container(
-                    //   height: 35,
-                    //   child: CustomElevatedButton(
-                    //     icon: Icons.print,
-                    //     backgroundColor: ColorValues.linktopermitColor,
-                    //     text: "print",
-                    //     onPressed: () {
-                    //       // controller.generateInvoice();
-                    //     },
-                    //   ),
-                    // ),
-                    // Dimens.boxWidth10,
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        icon: Icons.print,
+                        backgroundColor: ColorValues.linktopermitColor,
+                        text: "print",
+                        onPressed: () {
+                          controller.generateInvoice();
+                        },
+                      ),
+                    ),
+                    Dimens.boxWidth10,
                     controller.pmtaskViewModel.value?.status == 161
                         ? Container(
                             height: 35,

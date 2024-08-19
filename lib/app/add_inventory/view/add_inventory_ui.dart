@@ -12,6 +12,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -108,9 +109,9 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                           InkWell(
                                             onTap: () {
                                               Get.offNamed(
-                                                  Routes.masterDashboard);
+                                                  Routes.inventoryList);
                                             },
-                                            child: Text(" / MASTER",
+                                            child: Text(" / ASSET LIST",
                                                 style: Styles.greyLight14),
                                           ),
                                           Text(
@@ -791,7 +792,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                                                   child: FileUploadWidgetWithDropzone(),
                                                                                 ),
                                                                                 Dimens.boxWidth10,
-                                                                                Expanded(flex: 8, child: FileUploadDetailsWidgetWeb()),
+                                                                                Expanded(flex: 8, child: FileUploadDetailsWidgetWeb2()),
                                                                               ]),
                                                                         ),
                                                                       ),

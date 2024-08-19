@@ -65,6 +65,14 @@ class WarrantyClaimUsecase {
         updateWarrantyClaim,
         isLoading,
       );
+  Future<Map<String, dynamic>> resubmitWarrantyClaim({
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await _repository.resubmitWarrantyClaim(
+        updateWarrantyClaim,
+        isLoading,
+      );
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
@@ -208,6 +216,39 @@ class WarrantyClaimUsecase {
   }) async =>
       await _repository.wcRejectdButton(
         WCRejectJsonString,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> closeWCApprovedButton({
+    WCApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.closeWCApprovedButton(
+        WCApproveJsonString,
+        isLoading,
+      );
+
+  Future<Map<String, dynamic>> closeWCRejectdButton({
+    WCRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.closeWCRejectdButton(
+        WCRejectJsonString,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> updateWarranty({
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await _repository.updateWarranty(
+        updateWarrantyClaim,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> closeWarranty({
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await _repository.closeWarranty(
+        updateWarrantyClaim,
         isLoading,
       );
 

@@ -975,6 +975,47 @@ class DataRepository extends DomainRepository {
         WCRejectJsonString: WCRejectJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> closeWCApprovedButton({
+    required String auth,
+    WCApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.closeWCApprovedButton(
+        auth: auth,
+        WCApproveJsonString: WCApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> closeWCRejectdButton({
+    required String auth,
+    WCRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.closeWCRejectdButton(
+        auth: auth,
+        WCRejectJsonString: WCRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> updateWarranty({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateWarranty(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> closeWarranty({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.closeWarranty(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> rejectMcExecutionApprovedButton({
     required String auth,
@@ -1970,11 +2011,27 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> createEscalationMatrix({
     required String auth,
     createEscalationMatrix,
+    required int moduleId,
+    required int statusId,
     bool? isLoading,
   }) async =>
       await connectHelper.createEscalationMatrix(
         auth: auth,
         createEscalationMatrix: createEscalationMatrix,
+        moduleId: moduleId,
+        statusId: statusId,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> escalateModule({
+    required String auth,
+    required int moduleId,
+    required int statusId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.escalateModule(
+        auth: auth,
+        moduleId: moduleId,
+        statusId: statusId,
         isLoading: isLoading ?? false,
       );
 
@@ -2182,6 +2239,16 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.updateWarrantyClaim(
+        auth: auth,
+        updateWarrantyClaim: updateWarrantyClaim,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> resubmitWarrantyClaim({
+    required String auth,
+    updateWarrantyClaim,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.resubmitWarrantyClaim(
         auth: auth,
         updateWarrantyClaim: updateWarrantyClaim,
         isLoading: isLoading ?? false,
@@ -6139,6 +6206,21 @@ class DataRepository extends DomainRepository {
     String? toDate,
   }) async =>
       await connectHelper.getTrainingSummary(
+        auth: auth,
+        isLoading: isLoading,
+        facility_id: facility_id,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+
+    Future<ResponseModel> getGrievanceSummary({
+    String? auth,
+    bool? isLoading,
+    required int facility_id,
+    String? fromDate,
+    String? toDate,
+  }) async =>
+      await connectHelper.getGrievanceSummary(
         auth: auth,
         isLoading: isLoading,
         facility_id: facility_id,

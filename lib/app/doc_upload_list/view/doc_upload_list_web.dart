@@ -79,11 +79,10 @@ class _DocumentManagerListWebState extends State<DocumentManagerWeb> {
                               onTap: () {
                                 Get.offAllNamed(Routes.docVersionDashboard);
                               },
-                              child: Text(" / DOCUMENT VERSION",
+                              child: Text(" / DOCUMENT MANAGER",
                                   style: Styles.greyLight14),
                             ),
-                            Text(" / DOCUMENT MANAGER",
-                                style: Styles.greyLight14)
+                            Text(" / DOCUMENT LIST", style: Styles.greyLight14)
                           ],
                         ),
                       ),
@@ -629,38 +628,37 @@ class DocUploadListDataSource extends DataTableSource {
                             }
                           },
                         ),
-                        controller.docUploadList
-                                    .firstWhere(
-                                      (e) => e.id == docUploadListDetails!.id,
-                                      orElse: () =>
-                                          GetDocUploadListModel(id: 0),
-                                    )
-                                    .activation_status ==
-                                0
-                            ? TableActionButton(
-                                color: ColorValues.editColor,
-                                icon: Icons.edit,
-                                message: 'Edit',
-                                onPress: () {
-                                  controller.selectedItem =
-                                      controller.docUploadList.firstWhere(
-                                    (element) =>
-                                        "${element.id}" ==
-                                        docUploadListDetails?.id.toString(),
-                                  );
-                                  int docUploadId =
-                                      docUploadListDetails?.id ?? 0;
+                        // controller.docUploadList
+                        //             .firstWhere(
+                        //               (e) => e.id == docUploadListDetails!.id,
+                        //               orElse: () =>
+                        //                   GetDocUploadListModel(id: 0),
+                        //             )
+                        //             .activation_status ==
+                        //         0
+                        //     ?
+                        TableActionButton(
+                          color: ColorValues.editColor,
+                          icon: Icons.edit,
+                          message: 'Edit',
+                          onPress: () {
+                            controller.selectedItem =
+                                controller.docUploadList.firstWhere(
+                              (element) =>
+                                  "${element.id}" ==
+                                  docUploadListDetails?.id.toString(),
+                            );
+                            int docUploadId = docUploadListDetails?.id ?? 0;
 
-                                  if (docUploadId != 0) {
-                                    Get.toNamed(Routes.documentUploadScreen,
-                                        arguments: {
-                                          "selectedItem":
-                                              controller.selectedItem
-                                        });
-                                  }
-                                },
-                              )
-                            : Dimens.box0
+                            if (docUploadId != 0) {
+                              Get.toNamed(Routes.documentUploadScreen,
+                                  arguments: {
+                                    "selectedItem": controller.selectedItem
+                                  });
+                            }
+                          },
+                        )
+                        // : Dimens.box0
                       ])
                     : Text(value.toString()),
           ),

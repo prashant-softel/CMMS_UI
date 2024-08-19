@@ -59,7 +59,7 @@ class AddUserPresenter {
       await addUserUsecase.getResponsibilityList(
         isLoading: isLoading ?? false,
       );
-      Future<List<DesignationModel?>?> getDesignationList({
+  Future<List<DesignationModel?>?> getDesignationList({
     bool? isLoading,
   }) async =>
       await addUserUsecase.getDesignationList(
@@ -81,7 +81,7 @@ class AddUserPresenter {
         userId: userId,
         isLoading: isLoading,
       );
-  Future<GetNotificationByUserIdModel?> getUserNotificationListById({
+  Future<GetNotificationModel?> getUserNotificationListById({
     int? userId,
     bool? isLoading,
   }) async =>
@@ -104,19 +104,20 @@ class AddUserPresenter {
     required int facilityId,
     required bool isLoading,
   }) async {
-    return addUserUsecase.getBusinessList(type: ListType, isLoading: isLoading, facilityId: facilityId);
+    return addUserUsecase.getBusinessList(
+        type: ListType, isLoading: isLoading, facilityId: facilityId);
   }
 
-  Future<bool> addUser({
+  Future<Map<String, dynamic>?> addUser({
     adduserJsonString,
     required bool isLoading,
   }) async {
     print("presenter");
-    addUserUsecase.addUser(
+    return addUserUsecase.addUser(
       adduserJsonString: adduserJsonString,
       isLoading: isLoading,
     );
-    return true;
+    // return true;
   }
 
   Future<UserDetailsModel?> getUserDetails({
@@ -127,16 +128,16 @@ class AddUserPresenter {
         userId: userId,
         isLoading: isLoading,
       );
-  Future<bool> updateUser({
+  Future<Map<String, dynamic>?> updateUser({
     adduserJsonString,
     required bool isLoading,
   }) async {
     print("presenter");
-    addUserUsecase.updateUser(
+    return addUserUsecase.updateUser(
       adduserJsonString: adduserJsonString,
       isLoading: isLoading,
     );
-    return true;
+    // return true;
   }
 
   Future<AddUserModel?> uploadImge(
