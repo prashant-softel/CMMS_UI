@@ -196,4 +196,24 @@ class MisDashboardController extends GetxController {
       Routes.documentManager,
     );
   }
+   void goToCreateOccupationalScreen() {
+    Get.toNamed(Routes.createOccupationalScreen);
+  }
+   void goToOccupationalDataListScreen() {
+    Get.toNamed(Routes.occupationalDataListScreen);
+  }
+   void goToRegulataryDataListScreen() {
+    Get.toNamed(Routes.regulataryDataListScreen);
+  }
+   void goToCreateRegulataryVisitsScreen() {
+    Get.toNamed(Routes.createRegulataryVisitsScreen);
+  }
+   void goToCreatePermitsTBTScreen() {
+    Get.toNamed(Routes.createPermitsTBTScreen);
+  }
+   void goToPermitsTBTDataListScreen() {
+    Get.toNamed(Routes.permitsTBTDataListScreen);
+  }
+
+  
 }

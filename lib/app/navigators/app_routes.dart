@@ -209,6 +209,14 @@ abstract class Routes {
   static const viewMisPlan = _Paths.viewMisPlan;
   static const misTask = _Paths.misTask;
   static const waterDataListScreen = _Paths.waterDataListScreen;
+  static const createOccupationalScreen = _Paths.createOccupationalScreen;
+  static const createRegulataryVisitsScreen = _Paths.createRegulataryVisitsScreen;
+  static const createPermitsTBTScreen = _Paths.createPermitsTBTScreen;
+  static const permitsTBTDataListScreen = _Paths.permitsTBTDataListScreen;
+  static const occupationalDataListScreen = _Paths.occupationalDataListScreen;
+  static const regulataryDataListScreen = _Paths.regulataryDataListScreen;
+
+  
   static const waterDataScreen = _Paths.waterDataScreen;
   static const complianceHistoryScreen = _Paths.complianceHistoryScreen;
   static const addWasteDataScreen = _Paths.addWasteDataScreen;
@@ -447,6 +455,12 @@ abstract class _Paths {
   static const viewMisPlan = '/viewMisPlan';
   static const misTask = '/misTask';
   static const waterDataListScreen = '/waterDataListScreen';
+  static const createOccupationalScreen = '/CreateOccupationalScreen';
+  static const createRegulataryVisitsScreen = '/CreateRegulataryVisitsScreen';
+  static const createPermitsTBTScreen = '/CreatePermitsTBTScreen';
+  static const permitsTBTDataListScreen = '/PermitsTBTDataListScreen';
+  static const occupationalDataListScreen = '/OccupationalDataListScreen';
+  static const regulataryDataListScreen = '/RegulataryDataListScreen';
   static const complianceScreen = '/complianceScreen';
   static const waterDataScreen = '/waterDataScreen';
   static const complianceHistoryScreen = '/complianceHistoryScreen';

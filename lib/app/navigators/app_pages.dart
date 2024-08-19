@@ -59,6 +59,7 @@ import 'package:cmms/app/compliance/compliance_binding.dart';
 import 'package:cmms/app/compliance/views/compliance_screen.dart';
 import 'package:cmms/app/compliance_history/compliance_history_binding.dart';
 import 'package:cmms/app/compliance_history/views/compliance_history_screen.dart';
+import 'package:cmms/app/create_OccupationalHealth/views/create_occupationalhealth_screen.dart';
 import 'package:cmms/app/create_audit/craete_audit_binding.dart';
 
 import 'package:cmms/app/create_audit/view/create_audit_screen.dart';
@@ -69,9 +70,14 @@ import 'package:cmms/app/create_mis_plan/view/create_mis_plan_screen.dart';
 import 'package:cmms/app/create_mrs/create_mrs_binding.dart';
 import 'package:cmms/app/create_mrs/view/create_mrs_screen.dart';
 import 'package:cmms/app/create_observation/views/create_observation_screen.dart';
+import 'package:cmms/app/create_occupationalhealth/create_occupationalhealth_binding.dart';
+import 'package:cmms/app/create_pemitstoworkTBT/create_pemitstoworkTBT_binding.dart';
+import 'package:cmms/app/create_pemitstoworkTBT/views/create_pemitstoworkTBT_screen.dart';
 import 'package:cmms/app/create_pm_plan/create_pm_plan_binding.dart';
 import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/app/create_regulataryvisits/create_regulataryvisits_binding.dart';
+import 'package:cmms/app/create_regulataryvisits/views/create_regulataryvisits_screen.dart';
 import 'package:cmms/app/document_master/document_master_binding.dart';
 import 'package:cmms/app/document_master/view/document_master_screen.dart';
 import 'package:cmms/app/doc_upload/doc_upload_binding.dart';
@@ -111,6 +117,12 @@ import 'package:cmms/app/incident_risk_type/incident_risk_type_binding.dart';
 import 'package:cmms/app/incident_risk_type/view/incident_risk_type_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/issue_mrs_approve_reject/issue_mrs_approve_binding.dart';
+import 'package:cmms/app/list_of_PermitsTBTDataList/permitsTBT_list_binding.dart';
+import 'package:cmms/app/list_of_PermitsTBTDataList/views/permitsTBT_list_screen.dart';
+import 'package:cmms/app/list_of_Regulatary_Visits%20/regulataryvisits_list_binding.dart';
+import 'package:cmms/app/list_of_Regulatary_Visits%20/views/regulataryvisits_list_screen.dart';
+import 'package:cmms/app/list_of_occupationalhealth/occupational_list_binding.dart';
+import 'package:cmms/app/list_of_occupationalhealth/views/occupational_list_screen.dart';
 import 'package:cmms/app/master_responsibility/responsivility_binding.dart';
 import 'package:cmms/app/master_responsibility/view/responsivility_screen.dart';
 import 'package:cmms/app/material_category/material_category_binding.dart';
@@ -1187,6 +1199,7 @@ class AppPages {
       page: WaterDataListScreen.new,
       binding: WaterDataListBinding(),
     ),
+   
     GetPage<dynamic>(
       name: _Paths.waterDataScreen,
       page: WaterDataScreen.new,
@@ -1410,5 +1423,38 @@ class AppPages {
       page: ViewDocUploadScreen.new,
       binding: ViewDocUploadBinding(),
     ),
+      GetPage<dynamic>(
+      name: _Paths.createOccupationalScreen,
+      page: CreateOccupationalScreen.new,
+      binding: CreateOccupationalBinding(),
+    ),
+
+     GetPage<dynamic>(
+      name: _Paths.occupationalDataListScreen,
+      page: OccupationalDataListScreen.new,
+      binding: OccupationalDataListBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.regulataryDataListScreen,
+      page: RegulataryDataListScreen.new,
+      binding: RegulataryDataListBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.createRegulataryVisitsScreen,
+      page: RegulataryVisitsScreen.new,
+      binding: RegulataryVisitsBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.createPermitsTBTScreen,
+      page: PermitsTBTScreen.new,
+      binding: PermitsTBTBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.permitsTBTDataListScreen,
+      page: PermitsTBTDataListScreen.new,
+      binding: PermitsTBTDataListBinding(),
+    ),
+    
+    
   ];
 }
