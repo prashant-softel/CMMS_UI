@@ -48,7 +48,7 @@ class AddInventoryDetailsModel {
   int? specialTool;
   dynamic specialToolEmp;
   int? warrantyId;
-  dynamic warrantyDescription;
+  String? warrantyDescription;
   dynamic certificateNumber;
   int? warrantyTypeId;
   dynamic warrantyTypeName;
@@ -75,11 +75,13 @@ class AddInventoryDetailsModel {
   String? warranty_term_type;
   String? warrantyStatus;
   List<FileList>? calibration_file;
+  List<FileList>? warranty_file;
 
   AddInventoryDetailsModel(
       {this.id,
       this.name,
       this.calibration_file,
+      this.warranty_file,
       this.facilityId,
       this.facilityName,
       this.blockId,
@@ -187,6 +189,10 @@ class AddInventoryDetailsModel {
       calibration_file: json['calibration_file'] != null
           ? List<FileList>.from(
               json['calibration_file'].map((x) => FileList.fromJson(x)))
+          : [],
+      warranty_file: json['warranty_file'] != null
+          ? List<FileList>.from(
+              json['warranty_file'].map((x) => FileList.fromJson(x)))
           : [],
       // calibrationLastDate:
       //     Utility.getFormatedyearMonthDay(json['calibrationLastDate']),

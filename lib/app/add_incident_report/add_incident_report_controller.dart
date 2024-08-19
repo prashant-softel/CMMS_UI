@@ -4,12 +4,14 @@ import 'dart:convert';
 import 'package:cmms/app/add_incident_report/add_incident_report_presenter.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/body_injured_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/create_incident_report_model.dart';
 import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
@@ -134,7 +136,7 @@ class AddIncidentReportController extends GetxController {
 
   // Example of adding one more data
   void addOneMoreData() {
-    victimNameList.add(EmployeeListModel(name: "Other"));
+    victimNameList.add(EmployeeModel(name: "Other"));
     victimNameList.reversed.toList();
   }
 
@@ -144,10 +146,10 @@ class AddIncidentReportController extends GetxController {
   }
 
   /// Victim Name List
-  RxList<EmployeeListModel> victimNameList = <EmployeeListModel>[].obs;
+  RxList<EmployeeModel> victimNameList = <EmployeeModel>[].obs;
   RxMap<dynamic, dynamic> dropdownVictimNameMapperData = {}.obs;
 
-  RxList<EmployeeListModel?> filteredVictimNameList = <EmployeeListModel>[].obs;
+  RxList<EmployeeModel?> filteredVictimNameList = <EmployeeModel>[].obs;
   Map<dynamic, dynamic> employee_map = {};
 
   Rx<bool> isVictimNameListSelected = true.obs;
@@ -166,8 +168,8 @@ class AddIncidentReportController extends GetxController {
   int selectedRiskTypeId = 0;
 
   /// Asset Restoration Action taken By List
-  RxList<EmployeeListModel> assetRestorationActionTakenByList =
-      <EmployeeListModel>[].obs;
+  RxList<EmployeeModel> assetRestorationActionTakenByList =
+      <EmployeeModel>[].obs;
   Rx<bool> isAssetRestorationActionTakenByListSelected = true.obs;
   Rx<String> selectedAssetRestorationActionTakenByList = ''.obs;
   RxList<String?> selectedAssetRestorationActionTakenByDataList =
@@ -1043,11 +1045,11 @@ class AddIncidentReportController extends GetxController {
 
   void victimNameSelected(_selectedVictimNameIds) {
     selectedVictimNameIdList.value = <int>[];
-    filteredVictimNameList.value = <EmployeeListModel>[];
+    filteredVictimNameList.value = <EmployeeModel>[];
     late int emp_id = 0;
     for (var _selectedVictimId in _selectedVictimNameIds) {
       selectedVictimNameIdList.add(_selectedVictimId);
-      EmployeeListModel? e = victimNameList.firstWhere((element) {
+      EmployeeModel? e = victimNameList.firstWhere((element) {
         return element.id == _selectedVictimId;
       });
       filteredVictimNameList.add(e);
@@ -1146,15 +1148,16 @@ class AddIncidentReportController extends GetxController {
   }
 
   void getVictimNameList() async {
-    victimNameList.value = <EmployeeListModel>[];
+    victimNameList.value = <EmployeeModel>[];
     final _victimNameList = await incidentReportPresenter.getVictimNameList(
       isLoading: true,
       // categoryIds: categoryIds,
       facility_id: facilityId,
+      featureId: UserAccessConstants.kIncidentReportFeatureId,
     );
     print('victim Name List:$incidentInvestigationVerificationDoneByList');
-    for (var victim_name_list in _victimNameList) {
-      victimNameList.add(victim_name_list);
+    for (var victim_name_list in _victimNameList!) {
+      victimNameList.add(victim_name_list!);
     }
 
     update(['victim_name_list']);
@@ -1187,17 +1190,18 @@ class AddIncidentReportController extends GetxController {
   }
 
   void getAssetRestorationActionTakenByList() async {
-    assetRestorationActionTakenByList.value = <EmployeeListModel>[];
+    assetRestorationActionTakenByList.value = <EmployeeModel>[];
     final _assetRestorationActionTakenByList =
-        await incidentReportPresenter.getAssetRestorationActionTakenByList(
+        await incidentReportPresenter.getAssignedToList(
       isLoading: true,
       // categoryIds: categoryIds,
-      facility_id: facilityId,
+      facilityId: facilityId,
+      featureId: UserAccessConstants.kIncidentReportFeatureId,
     );
     print(
         'Asset Restoration Action Taken By List:$incidentInvestigationVerificationDoneByList');
-    for (var victim_name_list in _assetRestorationActionTakenByList) {
-      assetRestorationActionTakenByList.add(victim_name_list);
+    for (var victim_name_list in _assetRestorationActionTakenByList!) {
+      assetRestorationActionTakenByList.add(victim_name_list!);
     }
 
     update(['asset_restoration_action_taken_by_list']);
@@ -1460,7 +1464,7 @@ class AddIncidentReportController extends GetxController {
       //     // }
       //   }
       //   break;
-      case const (RxList<EmployeeListModel>):
+      case const (RxList<EmployeeModel>):
         {
           int incidentInvestigationDoneByListIndex =
               incidentInvestigationDoneByList
@@ -1854,10 +1858,10 @@ class AddIncidentReportController extends GetxController {
         isLoading: true,
       );
 
-      if (responseCreateIncidentReport == null) {
+      // if (responseCreateIncidentReport == null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
-      }
+      // }
       print('Create Incident Report data: $incidentReportJsonString');
     }
   }

@@ -919,9 +919,7 @@ class ViewIncidentReportContentWeb
                                                       ),
                                                     ),
 
-                        
-
-                                                     ///Details Of OtherInjured Person
+                                              ///Details Of OtherInjured Person
                                               controller
                                                       .detailsOfOtherInjuredPersonList!
                                                       .isEmpty
@@ -1139,7 +1137,6 @@ class ViewIncidentReportContentWeb
                                                       ),
                                                     ),
 
-
                                               controller.incidentReportDetailsModel
                                                           .value?.fileList ==
                                                       null
@@ -1276,7 +1273,6 @@ class ViewIncidentReportContentWeb
                                                               ),
                                                             ),
                                                           ),
-                                                       
                                                         ],
                                                       ),
                                                     ),
@@ -2293,7 +2289,7 @@ class ViewIncidentReportContentWeb
                                                                 )),
                                                                 DataColumn(
                                                                     label: Text(
-                                                                  "Module Ref ID",
+                                                                  "Posted By",
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           15,
@@ -2311,16 +2307,16 @@ class ViewIncidentReportContentWeb
                                                                           FontWeight
                                                                               .bold),
                                                                 )),
-                                                                DataColumn(
-                                                                    label: Text(
-                                                                  "Module Type",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          15,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                )),
+                                                                // DataColumn(
+                                                                //     label: Text(
+                                                                //   "Module Type",
+                                                                //   style: TextStyle(
+                                                                //       fontSize:
+                                                                //           15,
+                                                                //       fontWeight:
+                                                                //           FontWeight
+                                                                //               .bold),
+                                                                // )),
                                                                 DataColumn(
                                                                     label: Text(
                                                                   "Status",
@@ -2349,7 +2345,7 @@ class ViewIncidentReportContentWeb
                                                                           '')),
                                                                       DataCell(Text(controller
                                                                               .historyList?[index]
-                                                                              ?.moduleRefId
+                                                                              ?.createdByName
                                                                               .toString() ??
                                                                           '')),
                                                                       DataCell(Text(controller
@@ -2357,11 +2353,11 @@ class ViewIncidentReportContentWeb
                                                                               ?.comment
                                                                               .toString() ??
                                                                           '')),
-                                                                      DataCell(Text(controller
-                                                                              .historyList?[index]
-                                                                              ?.moduleType
-                                                                              .toString() ??
-                                                                          '')),
+                                                                      // DataCell(Text(controller
+                                                                      //         .historyList?[index]
+                                                                      //         ?.moduleType
+                                                                      //         .toString() ??
+                                                                      //     '')),
                                                                       DataCell(Text(controller
                                                                               .historyList?[index]
                                                                               ?.status_name

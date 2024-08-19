@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -1217,7 +1218,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         Expanded(
                                                             flex: 8,
                                                             child:
-                                                                FileUploadDetailsWidgetWeb()),
+                                                                FileUploadDetailsWidgetWeb2()),
                                                       ]),
                                                 ),
                                               ],
@@ -1297,7 +1298,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             )),
                                                             DataColumn(
                                                                 label: Text(
-                                                              "Module Ref ID",
+                                                              "Posted By",
                                                               style: TextStyle(
                                                                   fontSize: 15,
                                                                   fontWeight:
@@ -1313,15 +1314,15 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       FontWeight
                                                                           .bold),
                                                             )),
-                                                            DataColumn(
-                                                                label: Text(
-                                                              "Module Type",
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )),
+                                                            // DataColumn(
+                                                            //     label: Text(
+                                                            //   "Module Type",
+                                                            //   style: TextStyle(
+                                                            //       fontSize: 15,
+                                                            //       fontWeight:
+                                                            //           FontWeight
+                                                            //               .bold),
+                                                            // )),
                                                             DataColumn(
                                                                 label: Text(
                                                               "Status",
@@ -1350,7 +1351,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               DataCell(Text(controller
                                                                       .historyList?[
                                                                           index]
-                                                                      ?.moduleRefId
+                                                                      ?.createdByName
                                                                       .toString() ??
                                                                   '')),
                                                               DataCell(Text(controller
@@ -1359,12 +1360,12 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       ?.comment
                                                                       .toString() ??
                                                                   '')),
-                                                              DataCell(Text(controller
-                                                                      .historyList?[
-                                                                          index]
-                                                                      ?.moduleType
-                                                                      .toString() ??
-                                                                  '')),
+                                                              // DataCell(Text(controller
+                                                              //         .historyList?[
+                                                              //             index]
+                                                              //         ?.moduleType
+                                                              //         .toString() ??
+                                                              //     '')),
                                                               DataCell(Text(controller
                                                                       .historyList?[
                                                                           index]
@@ -3273,7 +3274,6 @@ class AddPrposedAction extends StatelessWidget {
                                           ),
                                           child: LoginCustomTextfield(
                                             keyboardType: TextInputType.text,
-                                            
                                             maxLine: 1,
                                             textController:
                                                 new TextEditingController(
@@ -3368,8 +3368,7 @@ class AddPrposedAction extends StatelessWidget {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                 ),
-                                                child:
-                                                 DropdownWebStock(
+                                                child: DropdownWebStock(
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
@@ -3395,7 +3394,6 @@ class AddPrposedAction extends StatelessWidget {
                                                             orElse: null);
                                                   },
                                                 ),
-                                            
                                               ),
                                             ],
                                           ),
@@ -3623,7 +3621,6 @@ class AddPrposedAction extends StatelessWidget {
 
     return newTime;
   }
-
 }
 
 ///why why Analysis

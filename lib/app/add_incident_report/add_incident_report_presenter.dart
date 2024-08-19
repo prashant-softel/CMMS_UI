@@ -3,6 +3,7 @@ import 'package:cmms/domain/models/body_injured_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
@@ -80,13 +81,15 @@ class AddIncidentReportPresenter {
     );
   }
 
-  Future<List<EmployeeListModel>> getVictimNameList({
+  Future<List<EmployeeModel?>?> getVictimNameList({
     required bool isLoading,
     required int? facility_id,
+    required int? featureId,
   }) async {
-    return incidentReportUsecase.getVictimNameList(
+    return incidentReportUsecase.getAssignedToList(
       isLoading: isLoading,
-      facility_id: facility_id,
+      facilityId: facility_id,
+      featureId: featureId
     );
   }
 
@@ -190,6 +193,19 @@ class AddIncidentReportPresenter {
       end_date: end_date,
     );
   }
+
+  Future<List<EmployeeModel?>?> getAssignedToList({
+    String? auth,
+    int? facilityId,
+    int? featureId,
+    bool? isLoading,
+  }) async =>
+      await incidentReportUsecase.getAssignedToList(
+        auth: auth ?? "",
+        facilityId: facilityId,
+        featureId: featureId,
+        isLoading: isLoading,
+      );
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await incidentReportUsecase.getFacilityList();
