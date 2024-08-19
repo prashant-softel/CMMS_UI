@@ -692,7 +692,7 @@ class JobCardDetailsContentMobile extends GetView<JobCardDetailsController> {
                               controller.permitList
                                           ?.firstWhere((element) =>
                                               element.permitId != null)
-                                          .tbT_Done_Check ==
+                                          .tbTDoneCheck ==
                                       1
                                   ? controller.startJobCard(
                                       jcCard: controller.jobCardId.value,

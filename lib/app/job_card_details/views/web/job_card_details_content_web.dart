@@ -181,7 +181,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: Text(
-                                      " ${controller.jobCardDetailsModel.value?.status_short ?? ""}",
+                                      " ${controller.jobCardDetailsModel.value?.statusShort ?? ""}",
                                     )),
                               ],
                             ),
@@ -219,7 +219,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   style: Styles.black14),
                                               SizedBox(width: 2),
                                               Text(
-                                                  " ${controller.jobCardDetailsModel.value?.assetcatlist != null ? controller.jobCardDetailsModel.value?.assetcatlist?.map<String>((item) => item.name.toString()).toList() : []}",
+                                                  " ${controller.jobCardDetailsModel.value?.assetCategoryName != null ? controller.jobCardDetailsModel.value?.assetCategoryName?.map<String>((item) => item.equipmentName.toString()).toList() : []}",
                                                   maxLines: 3,
                                                   style: Styles.blue14)
                                             ],
@@ -256,7 +256,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   style: Styles.black14),
                                               SizedBox(width: 2),
                                               Text(
-                                                  " ${controller.jobCardDetailsModel.value?.created_by ?? ""}",
+                                                  " ${controller.jobCardDetailsModel.value?.createdBy ?? ""}",
                                                   style: Styles.blue14),
                                             ],
                                           ),
@@ -277,7 +277,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   style: Styles.black14),
                                               SizedBox(width: 2),
                                               Text(
-                                                  " ${controller.jobCardDetailsModel.value?.created_by ?? ""}",
+                                                  " ${controller.jobCardDetailsModel.value?.createdBy ?? ""}",
                                                   style: Styles.blue14),
                                             ],
                                           ),
@@ -314,7 +314,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   style: Styles.black14),
                                               SizedBox(width: 2),
                                               Text(
-                                                  " ${controller.jobCardDetailsModel.value?.jC_Start_By_Name ?? ""}",
+                                                  " ${controller.jobCardDetailsModel.value?.jcStartByName ?? ""}",
                                                   style: Styles.blue14)
                                             ],
                                           ),
@@ -1353,7 +1353,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                     ?.firstWhere((element) =>
                                                         element.permitId !=
                                                         null)
-                                                    .tbT_Done_Check ==
+                                                    .tbTDoneCheck ==
                                                 1;
 
                                             if ((permitCondition &&
@@ -1383,7 +1383,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                                 element
                                                                     .permitId !=
                                                                 null)
-                                                        .tbT_Done_Check ==
+                                                        .tbTDoneCheck ==
                                                     1) &&
                                                 // employeesNotDeployed == true &&
                                                 anyEmployeeNotSelected ==
@@ -1399,7 +1399,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                     ?.firstWhere((element) =>
                                                         element.permitId !=
                                                         null)
-                                                    .tbT_Done_Check ==
+                                                    .tbTDoneCheck ==
                                                 0) {
                                               Get.dialog<void>(TbtDoneBMDialog(
                                                 ptw_id: controller
@@ -1991,6 +1991,17 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                         ))
                                                   ])
                                             : Container(),
+                            Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                icon: Icons.print,
+                                backgroundColor: ColorValues.linktopermitColor,
+                                text: "print",
+                                onPressed: () {
+                                  controller.generateInvoice();
+                                },
+                              ),
+                            ),
 
                             // Dimens.boxHeight20,
                             SizedBox(height: 20),
