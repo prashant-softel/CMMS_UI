@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../theme/dimens.dart';
-// import '../view_incident_report/view_incident_report_controller.dart';
 
 class AddModuleCleaningExecutionDialog extends GetView {
   int? scheduleId;
   int? cleaningDay;
   int? waterUsed;
-  // int? executedDay;
   int? is_view;
+
+  bool expandAll = false; // Track the expand/collapse state
 
   AddModuleCleaningExecutionDialog(
       {required this.scheduleId,
@@ -32,14 +32,12 @@ class AddModuleCleaningExecutionDialog extends GetView {
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
         insetPadding: EdgeInsets.all(10),
-        // Dimens.edgeInsets0_0_10_0,
         title: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Update For Day", style: Styles.blue20),
-                // Dimens.boxWidth10,
                 SizedBox(width: 10),
                 Text(
                   "${cleaningDay}",
@@ -49,7 +47,6 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 ),
               ],
             ),
-            // Dimens.boxHeight15,
             SizedBox(height: 15),
             Row(
               children: [
@@ -65,12 +62,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     LoginCustomTextfield(
                       width: (MediaQuery.of(context).size.width * .2),
                       keyboardType: TextInputType.number,
-                      // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                       textController: controller.remarkCtrlrWeb,
                     ),
                   ],
                 ),
-                // Dimens.boxWidth10,
                 SizedBox(width: 10),
                 Row(
                   children: [
@@ -154,10 +149,6 @@ class AddModuleCleaningExecutionDialog extends GetView {
                             flex: 1,
                             child: Text("Executed Day",
                                 style: TextStyle(color: Color(0xff31576D)))),
-
-                        // Expanded(
-                        //     child: Text("Day",
-                        //         style: TextStyle(color: Color(0xff31576D)))),
                       ],
                     ),
                   )
@@ -215,16 +206,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   child: Container(
                                     alignment: Alignment.centerLeft,
                                     child: IgnorePointer(
-                                      ignoring: is_view == 1
-                                          // ||
-                                          // !controller.check
-                                          //     .containsKey(e.invName)
-                                          ? true
-                                          : false,
+                                      ignoring: is_view == 1 ? true : false,
                                       child: Checkbox(
                                         value: e.isCleanedChecked,
                                         onChanged: (bool? value) {
-                                          // controller.toggleItemSelection(index);
                                           setState(
                                             () {
                                               e.isCleanedChecked =
@@ -258,16 +243,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   child: Container(
                                     alignment: Alignment.centerLeft,
                                     child: IgnorePointer(
-                                      ignoring: is_view == 1
-                                          // ||
-                                          //         !controller.check
-                                          //             .containsKey(e.invName)
-                                          ? true
-                                          : false,
+                                      ignoring: is_view == 1 ? true : false,
                                       child: Checkbox(
                                         value: e.isAbandonedChecked,
                                         onChanged: (bool? value) {
-                                          // controller.toggleItemSelection(index);
                                           setState(
                                             () {
                                               e.isAbandonedChecked =
@@ -305,7 +284,6 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                         e.smbs.map(
                                           (smbItems) {
                                             return Row(
-                                              // mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
                                                 Expanded(
                                                     flex: 2,
@@ -339,7 +317,6 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                             .isCleanedSmbCheck,
                                                         onChanged:
                                                             (bool? value) {
-                                                          // controller.toggleItemSelection(index);
                                                           setState(
                                                             () {
                                                               smbItems.isCleanedSmbCheck =
@@ -378,7 +355,6 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                             .isAbandonSmbCheck,
                                                         onChanged:
                                                             (bool? value) {
-                                                          // controller.toggleItemSelection(index);
                                                           setState(
                                                             () {
                                                               smbItems.isAbandonSmbCheck =
@@ -418,73 +394,71 @@ class AddModuleCleaningExecutionDialog extends GetView {
         actions: [
           is_view == 1
               ? Center(
-                  child: Container(
-                    height: 35,
-                    child: CustomElevatedButton(
-                      backgroundColor: ColorValues.redColor,
-                      text: "Cancel",
-                      onPressed: () {
-                        final _flutterSecureStorage =
-                            // const FlutterSecureStorage();
-
-                            // _flutterSecureStorage.delete(
-                            // key: "userId");
-
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          backgroundColor: ColorValues.redColor,
+                          text: "Cancel",
+                          onPressed: () {
                             Get.back();
-                      },
-                    ),
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          backgroundColor:
+                              const Color.fromARGB(255, 86, 116, 205),
+                          text: expandAll ? 'Collapse' : 'Expand',
+                          onPressed: () {
+                            setState(() {
+                              expandAll = !expandAll;
+                              for (var item
+                                  in controller.equipmenTasktList.value) {
+                                item!.isExpanded = expandAll;
+                              }
+                            });
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Container(
-                    //   height: 35,
-                    //   child: CustomElevatedButton(
-                    //     backgroundColor: ColorValues.greenColor,
-                    //     text: 'Expand',
-                    //     onPressed: () {
-                    //       // controller.createMcPlan();
-                    //     },
-                    //   ),
-                    // ),
-                    //Dimens.boxWidth20,
-                    // SizedBox(width: 20),
-                    // Container(
-                    //   height: 35,
-                    //   child: CustomElevatedButton(
-                    //     backgroundColor: ColorValues.redColor,
-                    //     text: "Collapse",
-                    //     onPressed: () {
-                    //       final _flutterSecureStorage =
-                    //           // const FlutterSecureStorage();
-
-                    //           // _flutterSecureStorage.delete(
-                    //           // key: "userId");
-
-                    //           Get.back();
-                    //     },
-                    //   ),
-                    // ),
-                    //Dimens.boxWidth20,
-                    // SizedBox(width: 20),
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        backgroundColor:
+                            const Color.fromARGB(255, 86, 116, 205),
+                        text: expandAll ? 'Collapse' : 'Expand',
+                        onPressed: () {
+                          setState(() {
+                            expandAll = !expandAll;
+                            for (var item
+                                in controller.equipmenTasktList.value) {
+                              item!.isExpanded = expandAll;
+                            }
+                          });
+                        },
+                      ),
+                    ),
+                    SizedBox(width: 20),
                     Container(
                       height: 35,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.redColor,
                         text: "Cancel",
                         onPressed: () {
-                          final _flutterSecureStorage =
-                              // const FlutterSecureStorage();
-
-                              // _flutterSecureStorage.delete(
-                              // key: "userId");
-
-                              Get.back();
+                          Get.back();
                         },
                       ),
                     ),
-                    //Dimens.boxWidth20,
                     SizedBox(width: 20),
                     Container(
                       height: 35,
@@ -492,7 +466,6 @@ class AddModuleCleaningExecutionDialog extends GetView {
                         backgroundColor: ColorValues.greenColor,
                         text: 'Submit',
                         onPressed: () {
-                          // controller.createMcPlan();
                           controller.updateMCScheduleExecution(
                               scheduleId: scheduleId,
                               cleaningDay: cleaningDay,
