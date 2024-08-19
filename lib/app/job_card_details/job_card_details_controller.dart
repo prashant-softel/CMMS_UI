@@ -1593,73 +1593,66 @@ class JobCardDetailsController extends GetxController {
     }
 
     // Tools carried section
-    // currentY += 25; // Adding some space before the next section
-    // page.graphics.drawRectangle(
-    //     pen: borderPen,
-    //     brush: backgroundBrush,
-    //     bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
-    // page.graphics.drawString('Tools carried', headerFont,
-    //     bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
-    // currentY += sectionHeight;
+    // Set the starting position for the Tools carried section
+    currentY += 25; // Adding some space before the next section
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString('Tools carried', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+    currentY += sectionHeight;
 
-    // // Define column widths for Tools carried section
-    // double serialNoWidthTools = 40;
-    // double toolNameWidth = pageWidth / 2;
-    // double toolCountWidth = pageWidth - serialNoWidthTools - toolNameWidth;
+// Define column widths for Tools carried section
+    double serialNoWidthTools = 40;
+    double toolNameWidth = pageWidth / 2;
+    double toolCountWidth = pageWidth - serialNoWidthTools - toolNameWidth;
 
-    // // Draw the column headers for Tools carried section
-    // List<String> toolsHeaders = ['S. No', 'Tool name', 'No. of tools'];
+// Draw the column headers for Tools carried section
+    List<String> toolsHeaders = ['S. No', 'Tool name', 'No. of tools'];
 
-    // page.graphics.drawString(toolsHeaders[0], contentFont,
-    //     bounds:
-    //         Rect.fromLTWH(margin, currentY + 5, serialNoWidthTools, rowHeight));
-    // page.graphics.drawString(toolsHeaders[1], contentFont,
-    //     bounds: Rect.fromLTWH(margin + serialNoWidthTools, currentY + 5,
-    //         toolNameWidth, rowHeight));
-    // page.graphics.drawString(toolsHeaders[2], contentFont,
-    //     bounds: Rect.fromLTWH(margin + serialNoWidthTools + toolNameWidth,
-    //         currentY + 5, toolCountWidth, rowHeight));
+    page.graphics.drawString(toolsHeaders[0], contentFont,
+        bounds:
+            Rect.fromLTWH(margin, currentY + 5, serialNoWidthTools, rowHeight));
+    page.graphics.drawString(toolsHeaders[1], contentFont,
+        bounds: Rect.fromLTWH(margin + serialNoWidthTools, currentY + 5,
+            toolNameWidth, rowHeight));
+    page.graphics.drawString(toolsHeaders[2], contentFont,
+        bounds: Rect.fromLTWH(margin + serialNoWidthTools + toolNameWidth,
+            currentY + 5, toolCountWidth, rowHeight));
 
-    // currentY += rowHeight;
+    currentY += rowHeight;
 
-    // // Loop through each schedule and its linked jobs to draw the rows for Tools carried section
-    // int toolIndex = 1; // Initialize tool serial number
+// Loop through each tool in the toolList to draw the rows for Tools carried section
+    int toolIndex = 1; // Initialize tool serial number
 
-    // for (var schedule in jobCardDetailsModel.value?.toolList ?? []) {
-    //   if (schedule.schedule_link_job != null &&
-    //       schedule.schedule_link_job!.isNotEmpty) {
-    //     for (var job in schedule.schedule_link_job!) {
-    //       if (job.tool_name != null &&
-    //           job.no_of_tools != null &&
-    //           job.no_of_tools! > 0) {
-    //         page.graphics.drawString('$toolIndex', contentFont,
-    //             bounds: Rect.fromLTWH(margin, currentY + 5, serialNoWidthTools,
-    //                 rowHeight)); // S. No
+    for (var tool in jobCardDetailsModel.value!.toolList ?? []) {
+      if (tool.toolName != null &&
+          tool.noOfTools != null &&
+          tool.noOfTools! > 0) {
+        page.graphics.drawString('$toolIndex', contentFont,
+            bounds: Rect.fromLTWH(
+                margin, currentY + 5, serialNoWidthTools, rowHeight)); // S. No
 
-    //         page.graphics.drawString(job.tool_name ?? '', contentFont,
-    //             bounds: Rect.fromLTWH(margin + serialNoWidthTools, currentY + 5,
-    //                 toolNameWidth, rowHeight)); // Tool name
+        page.graphics.drawString(tool.toolName ?? '', contentFont,
+            bounds: Rect.fromLTWH(margin + serialNoWidthTools, currentY + 5,
+                toolNameWidth, rowHeight)); // Tool name
 
-    //         page.graphics.drawString('${job.no_of_tools}', contentFont,
-    //             bounds: Rect.fromLTWH(
-    //                 margin + serialNoWidthTools + toolNameWidth,
-    //                 currentY + 5,
-    //                 toolCountWidth,
-    //                 rowHeight)); // No. of tools
+        page.graphics.drawString('${tool.noOfTools}', contentFont,
+            bounds: Rect.fromLTWH(margin + serialNoWidthTools + toolNameWidth,
+                currentY + 5, toolCountWidth, rowHeight)); // No. of tools
 
-    //         currentY += rowHeight;
-    //         toolIndex++;
-    //       }
-    //     }
-    //   }
-    // }
+        currentY += rowHeight;
+        toolIndex++;
+      }
+    }
 
-    // If no tools are found, you can add a message indicating that
-    // if (toolIndex == 1) {
-    //   page.graphics.drawString('No tools carried', contentFont,
-    //       bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
-    //   currentY += rowHeight;
-    // }
+// If no tools are found, add a message indicating that
+    if (toolIndex == 1) {
+      page.graphics.drawString('No tools carried', contentFont,
+          bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
+      currentY += rowHeight;
+    }
 
     // Remarks field
     currentY += 25;
