@@ -326,6 +326,7 @@ class AddInventoryController extends GetxController {
       selectedInventoryType.value =
           editAddInventoryDetailsModel.value?.type ?? '';
       selectedTypeName.value = editAddInventoryDetailsModel.value?.type ?? "";
+      selectedTypeNameId= editAddInventoryDetailsModel.value?.typeId ?? 0;
       assetsNameCtrlr.text = editAddInventoryDetailsModel.value?.name ?? '';
       moduleQuantityCtrlr.text =
           editAddInventoryDetailsModel.value?.moduleQuantity.toString() ?? '';
@@ -434,6 +435,10 @@ class AddInventoryController extends GetxController {
       isTypeNameSelected.value = false;
       isFormValid.value = false;
     }
+    //  if (selectedTypeName.value == "") {
+    //   isTypeNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
     if (selectedStatusNameId == 0) {
       isStatusNameSelected.value = false;
       isFormValid.value = false;
