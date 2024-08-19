@@ -312,7 +312,7 @@ class AddModuleCleaningExecutionContentWeb
                                                   ' ${controller.mcExecutionDetailsModel.value?.plannedBy}',
                                                   style: Styles.blue17,
                                                 ),
-                                               controller.mcExecutionDetailsModel.value?.status==361?  
+                                               controller.mcExecutionDetailsModel.value?.status!=360?  
                                                 Text(
                                                         controller
                                                                 .mcExecutionDetailsModel
