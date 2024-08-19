@@ -560,6 +560,8 @@ class AddInventoryController extends GetxController {
     String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
     String _moduleQuantityCtrlr = moduleQuantityCtrlr.text.trim();
 
+    List<dynamic> _warrantyFileIds = dropzoneController3.fileIds;
+    List<dynamic> _calibrationFileIds = dropzoneController2.fileIds;
     String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
     String _certificateNoCtrlr = certificateNoCtrlr.text.trim();
     String _discriptionCtrlr = discriptionCtrlr.text.trim();
@@ -615,6 +617,8 @@ class AddInventoryController extends GetxController {
             warranty_term_type: selectedwarrantyUsageTermNameId,
             parent_equipment_no: _parentEquipmentNoCtrlr,
             uplaodfile_ids: fileIds,
+            uplaodfile_of_warranty: _warrantyFileIds,
+            uplaodfile_of_calibration: _calibrationFileIds,
             calibrationFrequencyType: selectedfrequency.value,
             acCapacity: 2000,
             dcCapacity: 5000,
