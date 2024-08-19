@@ -242,12 +242,12 @@ class EditJobController extends GetxController {
         // jobDetailsModel.value?.equipmentCatList?.forEach((category) {
         //   selectedCategoryIds.add(category.id);
         // });
-        //   selectedCategoryIds = jobDetailsModel.value?.equipmentCatList
-        //           ?.map((element) => element.id)
-        //           .toList() ??
-        //       [];
-        //   print({"selectedCategoryIds242", selectedCategoryIds[0]});
-        //   equipmentCategoriesSelected(selectedCategoryIds);
+        selectedCategoryIds = jobDetailsModel.value?.equipmentCatList
+                ?.map((element) => element.id)
+                .toList() ??
+            [];
+        print({"selectedCategoryIds", selectedCategoryIds[0]});
+        equipmentCategoriesSelected(selectedCategoryIds);
       }
       List<int?> selectedworkAreaIds = jobDetailsModel.value?.workingAreaList
               ?.map((element) => element.id)
@@ -795,15 +795,15 @@ class EditJobController extends GetxController {
   void equipmentCategoriesSelected(_selectedEquipmentCategories) {
     selectedEquipmentCategoryIdList.value = <int>[];
     for (var _selectedCategory in _selectedEquipmentCategories) {
-      selectedEquipmentCategoryIdList.add(_selectedCategory.name);
+      selectedEquipmentCategoryIdList.add(_selectedCategory.id);
       // selectedEquipmentCategoryIdList.add(_selectedCategory.name);
     }
 
     getInventoryList(
-        facilityId: facilityId,
-        blockId: selectedBlockId,
-        receivedCategoryIds: [4] //selectedEquipmentCategoryIdList,
-        );
+      facilityId: facilityId,
+      blockId: selectedBlockId,
+      receivedCategoryIds: selectedEquipmentCategoryIdList,
+    );
     getWorkTypeList(receivedCategoryIds: selectedEquipmentCategoryIdList);
   }
 
