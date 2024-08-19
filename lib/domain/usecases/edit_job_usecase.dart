@@ -90,6 +90,10 @@ class EditJobUsecase {
       repository.saveValue(LocalKeys.jobId, jobId);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.jobId);
+  void saveTypeValue({String? typeEdit}) async =>
+      repository.saveValue(LocalKeys.typeEdit, typeEdit);
+  Future<String?> getTypeValue() async =>
+      await repository.getStringValue(LocalKeys.typeEdit);
 
   ///
 }

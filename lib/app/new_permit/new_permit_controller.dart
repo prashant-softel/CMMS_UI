@@ -1953,9 +1953,9 @@ class NewPermitController extends GetxController {
         newPermit: jobJsonString,
         resubmit: true,
         isLoading: true,
-        type: typee.value,  vegplanId: vegExecutionDetailsModel?.planId,
+        type: typee.value,
+        vegplanId: vegExecutionDetailsModel?.planId,
         vegexid: vegExecutionDetailsModel?.executionId,
-     
       );
       if (responseNewPermitCreated != null) {
         //  CreateNewPermitDialog();
@@ -1984,10 +1984,9 @@ class NewPermitController extends GetxController {
 
     //// uncomment once work done
     listJobModelCategory.value = jobModel.equipmentCatList ?? [];
-    List<int> idList =
-        listJobModelCategory.map((obj) => obj!.equipmentCatId).toList();
+    List<int> idList = listJobModelCategory.map((obj) => obj!.id).toList();
     List<String> nameList =
-        listJobModelCategory.map((obj) => obj!.equipmentCatName).toList();
+        listJobModelCategory.map((obj) => obj!.name).toList();
 
     list_working_area_name.value = jobModel.workingAreaList ?? [];
 

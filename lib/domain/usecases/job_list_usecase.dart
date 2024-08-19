@@ -22,4 +22,5 @@ class JobListUsecase {
       await repository.getJobList(
           auth, facilityId, self_view, isLoading, isExport);
   void clearValue() async => repository.clearData(LocalKeys.jobId);
+  void clearTypeValue() async => repository.clearData(LocalKeys.typeEdit);
 }

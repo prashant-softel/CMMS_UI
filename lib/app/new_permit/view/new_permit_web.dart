@@ -402,7 +402,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                         children: [
                                                           SizedBox(
                                                             child: Text(
-                                                              "${element?.equipmentCatName}",
+                                                              "${element?.name}",
                                                               maxLines: 3,
                                                             ),
                                                           ),

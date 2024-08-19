@@ -102,6 +102,11 @@ class EditJobPresenter {
   }
 
   Future<String?> getValue() async => await editJobUsecase.getValue();
+  void saveTypeValue({String? typeEdit}) async {
+    return editJobUsecase.saveTypeValue(typeEdit: typeEdit);
+  }
+
+  Future<String?> getTypeValue() async => await editJobUsecase.getTypeValue();
 
   ///
 }

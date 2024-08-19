@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/create_return_mrs_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/job_card_details_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
@@ -29,7 +30,7 @@ class EditMrsReturnController extends GetxController {
   RxMap<dynamic, dynamic> checkdropdownMapperData = {}.obs;
   Rx<String> selectedasset = ''.obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
-  RxList<WorkingAreaList>? workingAreaList = <WorkingAreaList>[].obs;
+  RxList<InventoryModel>? workingAreaList = <InventoryModel>[].obs;
 
   // RxList<CmmrsItemsModel?> assetItemList = <CmmrsItemsModel?>[].obs;
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;

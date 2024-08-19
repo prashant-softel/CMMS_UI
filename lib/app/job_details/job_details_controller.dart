@@ -250,7 +250,13 @@ class JobDetailsController extends GetxController {
   }
 
   void goToEditJobScreen(int? _jobId) {
-    Get.toNamed(Routes.editJob, arguments: {'jobId': _jobId});
+    clearStoreDataType();
+
+    Get.toNamed(Routes.editJob, arguments: {'jobId': _jobId, 'typeEdit': 2});
+  }
+
+  void clearStoreDataType() {
+    jobDetailsPresenter.clearStoreDataType();
   }
 
   void showPermitsDialog() {
