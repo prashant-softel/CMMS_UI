@@ -88,7 +88,7 @@ class NewWarrantyClaimDialog extends GetView {
                   ),
                   Center(
                     child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
                             style: Styles.greenElevatedButtonStyle,
