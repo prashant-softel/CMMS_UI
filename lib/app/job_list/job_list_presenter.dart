@@ -26,4 +26,5 @@ class JobListPresenter {
         isExport: isExport,
       );
   void clearValue() async => jobUsecase.clearValue();
+  void clearTypeValue() async => jobUsecase.clearTypeValue();
 }

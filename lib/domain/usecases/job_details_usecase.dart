@@ -62,6 +62,7 @@ class JobDetailsUsecase {
         facilityId,
         isLoading,
       );
+  void clearStoreDataType() async => repository.clearData(LocalKeys.typeEdit);
 
   ///
   Future<Map<String, dynamic>?> linkToPermit({

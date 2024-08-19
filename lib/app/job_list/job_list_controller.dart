@@ -26,7 +26,7 @@ class JobListController extends GetxController {
   ///
   RxList<JobModel?> jobList = <JobModel?>[].obs;
   RxList<JobModel?> filteredData = <JobModel?>[].obs;
-   bool openFromDateToStartDatePicker = false;
+  bool openFromDateToStartDatePicker = false;
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
@@ -64,10 +64,10 @@ class JobListController extends GetxController {
     rowsPerPage: 10,
   );
 
-    Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
 
-    String get formattedFromdate =>
+  String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
   String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
   String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
@@ -85,7 +85,8 @@ class JobListController extends GetxController {
       // Future.delayed(Duration(seconds: 1), () {
       // userId = varUserAccessModel.value.user_id ?? 0;
       // if (userId != null) {
-      getJobList(userId, false,formattedTodate1, formattedFromdate1, false, false);
+      getJobList(
+          userId, false, formattedTodate1, formattedFromdate1, false, false);
       // }
       // });
     });
@@ -101,7 +102,8 @@ class JobListController extends GetxController {
   void switchFacility(String? facilityName) {
     facilityId =
         facilityList.indexWhere((facility) => facility?.name == facilityName);
-    getJobList(userId, false,formattedTodate1, formattedFromdate1, false, false);
+    getJobList(
+        userId, false, formattedTodate1, formattedFromdate1, false, false);
   }
 
   Future<void> getFacilityList({bool? isLoading}) async {
@@ -161,8 +163,8 @@ class JobListController extends GetxController {
     jobList.value = filteredList;
   }
 
-  Future<void> getJobList(
-      int userId, bool self_view, formattedTodate1, formattedFromdate1,bool isLoading, bool isExport) async {
+  Future<void> getJobList(int userId, bool self_view, formattedTodate1,
+      formattedFromdate1, bool isLoading, bool isExport) async {
     jobList.value = <JobModel>[];
     filteredData.value = <JobModel>[];
 
@@ -198,12 +200,13 @@ class JobListController extends GetxController {
           jobListTableColumns.add(key);
         }
       }
-      
     }
-      update(['PreventiveMaintenanceTask']);
+    update(['PreventiveMaintenanceTask']);
   }
-    void getjobListByDate() {
-    getJobList(facilityId,false, formattedTodate1, formattedFromdate1, false,false);
+
+  void getjobListByDate() {
+    getJobList(
+        facilityId, false, formattedTodate1, formattedFromdate1, false, false);
   }
 
   void goToAddJobScreen() {
@@ -212,18 +215,21 @@ class JobListController extends GetxController {
 
   void goToJobCardScreen(int? jobId) {
     clearStoreData();
+    clearStoreDataType();
 
     Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId});
   }
 
   void goToEditJobScreen(int? _jobId) {
     clearStoreData();
+    clearStoreDataType();
 
-    Get.toNamed(Routes.editJob, arguments: {'jobId': _jobId});
+    Get.toNamed(Routes.editJob, arguments: {'jobId': _jobId, 'typeEdit': 1});
   }
 
   void goToJobDetailsScreen(int? _jobId) {
     clearStoreData();
+    clearStoreDataType();
 
     Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
   }
@@ -366,15 +372,20 @@ class JobListController extends GetxController {
       isBlockSelected.value = true;
     }
     selectedBlock.value = selectedValue;
-    getJobList(userId, false, formattedTodate1, formattedFromdate1,false, false);
+    getJobList(
+        userId, false, formattedTodate1, formattedFromdate1, false, false);
   }
 
   void clearStoreData() {
     jobListPresenter.clearValue();
   }
 
+  void clearStoreDataType() {
+    jobListPresenter.clearTypeValue();
+  }
+
   void export() {
-    getJobList(userId, true, formattedTodate1, formattedFromdate1,true, true);
+    getJobList(userId, true, formattedTodate1, formattedFromdate1, true, true);
   }
 
   ///

@@ -147,22 +147,22 @@ class AddJobController extends GetxController {
     super.onClose();
   }
 
-  Future<void> getFacilityList() async {
-    facilityList.value = <FacilityModel>[];
-    blockList.value = <BlockModel>[];
-    final _facilityList = await jobListPresenter.getFacilityList();
-    selectedFacilityId = Get.arguments;
-    if (_facilityList != null) {
-      facilityList.value = _facilityList;
+  // Future<void> getFacilityList() async {
+  //   facilityList.value = <FacilityModel>[];
+  //   blockList.value = <BlockModel>[];
+  //   final _facilityList = await jobListPresenter.getFacilityList();
+  //   selectedFacilityId = Get.arguments;
+  //   if (_facilityList != null) {
+  //     facilityList.value = _facilityList;
 
-      int facilityIndex =
-          facilityList.indexWhere((x) => x?.id == selectedFacilityId);
-      if (facilityIndex > -1) {
-        selectedFacility.value = facilityList[facilityIndex]?.name ?? '';
-        getBlocksList(selectedFacilityId);
-      }
-    }
-  }
+  //     int facilityIndex =
+  //         facilityList.indexWhere((x) => x?.id == selectedFacilityId);
+  //     if (facilityIndex > -1) {
+  //       selectedFacility.value = facilityList[facilityIndex]?.name ?? '';
+  //       getBlocksList(selectedFacilityId);
+  //     }
+  //   }
+  // }
 
   Future<void> getBlocksList(int _facilityId) async {
     blockList.value = <BlockModel>[];
@@ -421,7 +421,7 @@ class AddJobController extends GetxController {
             // selectedAssignedTo.value ='';
             // selectedWorkTypeList.value = [];
             getInventoryCategoryList(selectedBlockId.toString());
-            getWorkTypeList();
+            // getWorkTypeList();
             // getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
           } else {
             selectedBlockId = 0;

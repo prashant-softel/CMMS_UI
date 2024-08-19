@@ -4,6 +4,7 @@ import 'package:cmms/app/create_mrs_return/create_mrs_return_presenter.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class CreateMrsReturnController extends GetxController {
   RxList<ScheduleCheckPoint> scheduleCheckPoints = <ScheduleCheckPoint>[].obs;
   RxList<ScheduleCheckPoint> scheduleCheckPointsdrop =
       <ScheduleCheckPoint>[].obs;
-  RxList<WorkingAreaList>? workingAreaList = <WorkingAreaList>[].obs;
+  RxList<InventoryModel>? workingAreaList = <InventoryModel>[].obs;
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<int> type = 0.obs;
   Rx<String> activity = ''.obs;

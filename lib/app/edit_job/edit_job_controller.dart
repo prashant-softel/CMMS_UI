@@ -36,7 +36,7 @@ class EditJobController extends GetxController {
   RxList<JobModel?>? jobList = <JobModel?>[].obs;
   RxList<JobDetailsModel?>? jobDetailsList = <JobDetailsModel?>[].obs;
   RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
-  RxList<ToolsRequiredList>? toolsRequiredList = <ToolsRequiredList>[].obs;
+  RxList<ToolsModel>? toolsRequiredList = <ToolsModel>[].obs;
 
   //
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -50,7 +50,11 @@ class EditJobController extends GetxController {
   Rx<String> selectedBlock = ''.obs;
   Rx<bool> isBlockSelected = true.obs;
   int selectedBlockId = 0;
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
 
+  FocusNode jobNameFocus = FocusNode();
+  ScrollController jobNameScroll = ScrollController();
   //
   Rx<String> selectedWorkTypeCategory = ''.obs;
   Rx<bool> isWorkTypeSelected = true.obs;
@@ -67,6 +71,7 @@ class EditJobController extends GetxController {
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
   List<int> selectedAssetsIdList = [];
+  RxList<EquipmentModel?> equipmentList = <EquipmentModel>[].obs;
 
   //
   Rx<String> selectedEquipmentCategory = ''.obs;
@@ -86,11 +91,12 @@ class EditJobController extends GetxController {
   //
   Rx<String> selectedToolRequiredToWorkType = ''.obs;
   Rx<bool> isToolRequiredToWorkTypeSelected = false.obs;
-  RxList<ToolsModel?>? toolsRequiredToWorkTypeList = <ToolsModel>[].obs;
+  RxList<ToolsModel?> toolsRequiredToWorkTypeList = <ToolsModel>[].obs;
   RxList<ToolsModel?> selectedtoolsRequiredToWorkTypeList = <ToolsModel>[].obs;
   RxList<int?> selectedtoolsRequiredToWorkTypeIdList = <int>[].obs;
 
-  RxList<WorkTypeList?>? workTypeListObj = <WorkTypeList>[].obs;
+  RxList<WorkTypeModel?>? workTypeListObj = <WorkTypeModel>[].obs;
+  List<int> selectedwrktype = [];
 
   ///
   int selectedPermitId = 0;
@@ -107,6 +113,9 @@ class EditJobController extends GetxController {
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   Rx<int> jobID = 0.obs;
+  Rx<int> typeEdit = 0.obs;
+  Rx<bool> isBreakdownInvalid = false.obs;
+
   HtmlEscape htmlEscape = HtmlEscape();
 
   StreamSubscription<int>? facilityIdStreamSubscription;
@@ -155,18 +164,55 @@ class EditJobController extends GetxController {
   Future<void> setJobId() async {
     try {
       final _jobId = await editJobPresenter.getValue();
+      final _typeEdit = await editJobPresenter.getTypeValue();
 
       // If jobId is unavailable, take it from the arguments received
       if (_jobId == null || _jobId == '' || _jobId == "null") {
         var data = Get.arguments;
         jobID.value = data["jobId"];
+        typeEdit.value = data['typeEdit'];
         editJobPresenter.saveValue(jobId: jobID.value.toString());
+        editJobPresenter.saveTypeValue(typeEdit: typeEdit.value.toString());
       } else {
         jobID.value = int.tryParse(_jobId) ?? 0;
+        typeEdit.value = int.tryParse(_typeEdit ?? "") ?? 0;
       }
     } catch (e) {
       Utility.showDialog(e.toString(), 'jobId');
     }
+  }
+
+  Future<void> getInventoryList({
+    required int? facilityId,
+    required int blockId,
+    receivedCategoryIds,
+  }) async {
+    workAreaList.value = <InventoryModel>[];
+    if (receivedCategoryIds == null || receivedCategoryIds.isEmpty) {
+      receivedCategoryIds = selectedEquipmentCategoryIdList;
+    }
+    String lststrCategoryIds = receivedCategoryIds.join(', ').toString();
+    final _workAreaList = await homePresenter.getInventoryList(
+      facilityId: facilityId,
+      blockId: blockId,
+      categoryIds: lststrCategoryIds,
+      isLoading: false,
+    );
+    workAreaList.value = _workAreaList;
+
+    update(["workAreaList"]);
+  }
+
+  Future<void> getWorkTypeList({
+    List<int>? receivedCategoryIds,
+  }) async {
+    workTypeList.value = <WorkTypeModel>[];
+    String lststrCategoryIds = receivedCategoryIds?.join(', ').toString() ?? '';
+    final _workTypeList = await editJobPresenter.getWorkTypeList(
+      categoryIds: lststrCategoryIds,
+      isLoading: false,
+    );
+    workTypeList.value = _workTypeList ?? <WorkTypeModel>[];
   }
 
   Future<void> getJobDetails(int _jobId, int facilityId) async {
@@ -174,41 +220,56 @@ class EditJobController extends GetxController {
     final _jobDetailsList = await jobDetailsPresenter.getJobDetails(
         jobId: _jobId, facilityId: facilityId);
 
+    // After fetching job details
     if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
       jobDetailsModel.value = _jobDetailsList[0];
       update(["jobDetailsModel"]);
-      // Fill Job Title and Job Description and Breakdown Time
+
+      // Set Job Title, Description, and Breakdown Time
       jobTitleCtrlr.text = jobDetailsModel.value?.jobTitle ?? '';
       jobDescriptionCtrlr.text = jobDetailsModel.value?.jobDescription ?? '';
-      selectedBlock.value = jobDetailsModel.value?.blockName ?? "";
-      jobDetailsModel.value?.equipmentCatList?.forEach((category) {
-        selectedEquipmentCategoryIdList.add(category.equipmentCatId);
-      });
-      if (selectedBlock.value != null) {
-        getInventoryCategoryList(selectedFacilityId.toString());
-
-        await getInventoryList(
-          facilityId: selectedFacilityId,
-          blockId: jobDetailsModel.value?.blockId,
-        );
-      }
       breakdownTimeCtrlr.text =
           formatDateTimeForUI(jobDetailsModel.value?.breakdownTime);
-      toolsRequiredList?.value = jobDetailsModel.value?.toolsRequiredList ?? [];
-      List<int?> toolReqIds =
-          toolsRequiredList!.map((element) => element.toolId).toList();
-      // selectedtoolsRequiredToWorkTypeIdList =
-      //     toolReqIds.whereType<int>().toList();
+
+      // Set Block
+      selectedBlock.value = jobDetailsModel.value?.blockName ?? "";
+      selectedBlockId = jobDetailsModel.value?.blockId ?? 0;
+      if (selectedBlockId != 0) {
+        getInventoryCategoryList(selectedBlockId.toString());
+
+        // Set Equipment Categories
+        List<int> selectedCategoryIds = [];
+        // jobDetailsModel.value?.equipmentCatList?.forEach((category) {
+        //   selectedCategoryIds.add(category.id);
+        // });
+        //   selectedCategoryIds = jobDetailsModel.value?.equipmentCatList
+        //           ?.map((element) => element.id)
+        //           .toList() ??
+        //       [];
+        //   print({"selectedCategoryIds242", selectedCategoryIds[0]});
+        //   equipmentCategoriesSelected(selectedCategoryIds);
+      }
+      List<int?> selectedworkAreaIds = jobDetailsModel.value?.workingAreaList
+              ?.map((element) => element.id)
+              .toList() ??
+          [];
+      print({"selectedworkAreaIds", selectedworkAreaIds[0]});
+
+      workAreasSelected(selectedworkAreaIds);
+      List<int?> selectedworkAreaTypeIds = jobDetailsModel.value?.workTypeList
+              ?.map((element) => element.id)
+              .toList() ??
+          [];
+      print({"selectedworkAreaTypeIds", selectedworkAreaTypeIds[0]});
+
+      workTypesSelected(selectedworkAreaTypeIds);
+      // Tools Required
+      List<int?> toolReqIds = jobDetailsModel.value?.toolsRequiredList
+              ?.map((element) => element.id)
+              .toList() ??
+          [];
       toolsRequiredSelected(toolReqIds);
-
-      // workTypeListObj?.value = jobDetailsModel.value!.workTypeList ?? [];
-      // List<int?> workTypeIdList =
-      //     workTypeListObj!.map((element) => element!.workTypeId).toList();
-      // selectedWorkTypeIdList.value = workTypeIdList.whereType<int>().toList();
     }
-
-    associatedPermitList?.value =
-        jobDetailsModel.value?.associatedPermitList ?? <AssociatedPermit>[];
   }
 
   String formatDateTimeForUI(timestamp) {
@@ -288,43 +349,43 @@ class EditJobController extends GetxController {
   //     print(e);
   //   }
   // }
-  Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
-    try {
-      toolsRequiredToWorkTypeList?.clear();
-      selectedtoolsRequiredToWorkTypeList.clear();
-      selectedtoolsRequiredToWorkTypeIdList.clear();
+  // Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
+  //   try {
+  //     toolsRequiredToWorkTypeList?.clear();
+  //     selectedtoolsRequiredToWorkTypeList.clear();
+  //     selectedtoolsRequiredToWorkTypeIdList.clear();
 
-      // Fetch the list of tools from the API
-      final toolsList = await editJobPresenter.getToolsRequiredToWorkTypeList(
-        isLoading: true,
-        workTypeIds: workTypeIds,
-      );
+  //     // Fetch the list of tools from the API
+  //     final toolsList = await editJobPresenter.getToolsRequiredToWorkTypeList(
+  //       isLoading: true,
+  //       workTypeIds: workTypeIds,
+  //     );
 
-      // Create a set to store unique tools
-      final uniqueTools = <ToolsModel>{};
+  //     // Create a set to store unique tools
+  //     final uniqueTools = <ToolsModel>{};
 
-      // Add tools from the API response to the set
-      for (var tool in toolsList ?? []) {
-        uniqueTools.add(tool);
-      }
+  //     // Add tools from the API response to the set
+  //     for (var tool in toolsList ?? []) {
+  //       uniqueTools.add(tool);
+  //     }
 
-      // Add tools from jobDetailsModel (if available) to the set
-      for (var toolType in jobDetailsModel.value?.toolsRequiredList ?? []) {
-        uniqueTools.add(ToolsModel(
-          id: toolType.toolId,
-          linkedToolName: toolType.toolName,
-        ));
-      }
+  //     // Add tools from jobDetailsModel (if available) to the set
+  //     for (var toolType in jobDetailsModel.value?.toolsRequiredList ?? []) {
+  //       uniqueTools.add(ToolsModel(
+  //         id: toolType.toolId,
+  //         linkedToolName: toolType.toolName,
+  //       ));
+  //     }
 
-      // Update the list with unique tools
-      toolsRequiredToWorkTypeList?.value = uniqueTools.toList();
+  //     // Update the list with unique tools
+  //     toolsRequiredToWorkTypeList?.value = uniqueTools.toList();
 
-      // Update the UI
-      update(['toolsRequiredToWorkTypeList']);
-    } catch (e) {
-      print(e);
-    }
-  }
+  //     // Update the UI
+  //     update(['toolsRequiredToWorkTypeList']);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   Future<void> getInventoryCategoryList(String? facilityId) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
@@ -340,16 +401,17 @@ class EditJobController extends GetxController {
         equipmentCategoryList.add(equimentCategory);
       }
 
-      if (jobDetailsModel.value?.equipmentCatList != null)
-        for (var equipCat in jobDetailsModel.value?.equipmentCatList ?? []) {
-          InventoryCategoryModel equipmentCategory = InventoryCategoryModel(
-            id: equipCat.equipmentCatId,
-            name: equipCat.equipmentCatName,
-          );
-          selectedEquipmentCategoryList.add(equipmentCategory);
-          selectedEquipmentCategoryIdList.add(equipmentCategory.id);
-          update();
-        }
+      // if (jobDetailsModel.value?.equipmentCatList != null)
+      //   for (var equipCat in jobDetailsModel.value?.equipmentCatList ?? []) {
+      //     InventoryCategoryModel equipmentCategory = InventoryCategoryModel(
+      //       id: equipCat.equipmentCatId,
+      //       name: equipCat.equipmentCatName,
+      //     );
+      //     selectedEquipmentCategoryList.add(equipmentCategory);
+      //     selectedEquipmentCategoryIdList.add(equipmentCategory.id);
+
+      //     update();
+      //   }
     }
   }
 
@@ -378,79 +440,79 @@ class EditJobController extends GetxController {
   //       }
   //   }
   // }
-  Future<void> getInventoryList({
-    int? facilityId,
-    int? blockId,
-  }) async {
-    selectedWorkAreaIdList.clear();
-    categoryIds = selectedEquipmentCategoryIdList;
-    String lststrCategoryIds = categoryIds.join(', ').toString();
-    workAreaList.value = await homePresenter.getInventoryList(
-      facilityId: facilityId,
-      blockId: blockId,
-      categoryIds: lststrCategoryIds,
-      isLoading: true,
-    );
-    // if (_workAreaList.isNotEmpty) {
-    //   // workAreaList.value = _workAreaList;
-    //   if (jobDetailsModel.value?.workingAreaList != null)
-    //     for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
-    //       int _selectedWorkAreaId = _workArea. ?? 0;
-    //       if (_selectedWorkAreaId > 0 &&
-    //           !selectedWorkAreaIdList.contains(_selectedWorkAreaId)) {
-    //         selectedWorkAreaIdList.add(_workArea);
-    //         selectedWorkTypeList.add(_workArea); //}
-    //         update();
-    //       }
-    //     }
-    // }
-    if (jobDetailsModel.value?.workingAreaList != null)
-      for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
-        WorkTypeModel equipmentCategory = WorkTypeModel(
-          id: _workArea.asset_id,
-          name: _workArea.name,
-        );
-        selectedWorkAreaIdList.add(equipmentCategory.id);
-        selectedWorkTypeList.add(equipmentCategory);
-        update();
-      }
-  }
+  // Future<void> getInventoryList({
+  //   int? facilityId,
+  //   int? blockId,
+  // }) async {
+  //   selectedWorkAreaIdList.clear();
+  //   categoryIds = selectedEquipmentCategoryIdList;
+  //   String lststrCategoryIds = categoryIds.join(', ').toString();
+  //   workAreaList.value = await homePresenter.getInventoryList(
+  //     facilityId: facilityId,
+  //     blockId: blockId,
+  //     categoryIds: lststrCategoryIds,
+  //     isLoading: true,
+  //   );
+  //   // if (_workAreaList.isNotEmpty) {
+  //   //   // workAreaList.value = _workAreaList;
+  //   //   if (jobDetailsModel.value?.workingAreaList != null)
+  //   //     for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
+  //   //       int _selectedWorkAreaId = _workArea. ?? 0;
+  //   //       if (_selectedWorkAreaId > 0 &&
+  //   //           !selectedWorkAreaIdList.contains(_selectedWorkAreaId)) {
+  //   //         selectedWorkAreaIdList.add(_workArea);
+  //   //         selectedWorkTypeList.add(_workArea); //}
+  //   //         update();
+  //   //       }
+  //   //     }
+  //   // }
+  //   if (jobDetailsModel.value?.workingAreaList != null)
+  //     for (var _workArea in jobDetailsModel.value?.workingAreaList ?? []) {
+  //       WorkTypeModel equipmentCategory = WorkTypeModel(
+  //         id: _workArea.asset_id,
+  //         name: _workArea.name,
+  //       );
+  //       selectedWorkAreaIdList.add(equipmentCategory.id);
+  //       selectedWorkTypeList.add(equipmentCategory);
+  //       update();
+  //     }
+  // }
 
-  Future<void> getWorkTypeList({
-    List<int>? categoryIds,
-  }) async {
-    try {
-      workTypeList.clear();
-      selectedWorkTypeList.clear();
-      selectedWorkTypeIdList.clear();
+  // Future<void> getWorkTypeList({
+  //   List<int>? categoryIds,
+  // }) async {
+  //   try {
+  //     workTypeList.clear();
+  //     selectedWorkTypeList.clear();
+  //     selectedWorkTypeIdList.clear();
 
-      ///
-      categoryIds = selectedEquipmentCategoryIdList;
-      String lststrCategoryIds = categoryIds.join(', ').toString();
-      final _workTypeList = await editJobPresenter.getWorkTypeList(
-        categoryIds: lststrCategoryIds,
-        isLoading: true,
-      );
-      //bind worktype list
-      if (_workTypeList != null) {
-        workTypeList.value = _workTypeList ?? <WorkTypeModel>[];
-      }
-      // pre-fill worktype values
-      if (jobDetailsModel.value?.workTypeList != null)
-        for (var _workType in jobDetailsModel.value?.workTypeList ?? []) {
-          WorkTypeModel workType = WorkTypeModel(
-            id: _workType.workTypeId,
-            name: _workType.workTypeName,
-          );
-          selectedWorkTypeList.add(workType);
-          selectedWorkTypeIdList.add(workType.id ?? 0);
-        }
-      update();
-    } //
-    catch (e) {
-      print(e);
-    }
-  }
+  //     ///
+  //     categoryIds = selectedEquipmentCategoryIdList;
+  //     String lststrCategoryIds = categoryIds.join(', ').toString();
+  //     final _workTypeList = await editJobPresenter.getWorkTypeList(
+  //       categoryIds: lststrCategoryIds,
+  //       isLoading: true,
+  //     );
+  //     //bind worktype list
+  //     if (_workTypeList != null) {
+  //       workTypeList.value = _workTypeList ?? <WorkTypeModel>[];
+  //     }
+  //     // pre-fill worktype values
+  //     if (jobDetailsModel.value?.workTypeList != null)
+  //       for (var _workType in jobDetailsModel.value?.workTypeList ?? []) {
+  //         WorkTypeModel workType = WorkTypeModel(
+  //           id: _workType.workTypeId,
+  //           name: _workType.workTypeName,
+  //         );
+  //         selectedWorkTypeList.add(workType);
+  //         selectedWorkTypeIdList.add(workType.id ?? 0);
+  //       }
+  //     update();
+  //   } //
+  //   catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   void checkForm() {
     if (selectedAssignedTo.value == '') {
@@ -500,6 +562,19 @@ class EditJobController extends GetxController {
     return formattedDateTime;
   }
 
+  Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
+    print("Fault in controller, $workTypeIds");
+    final list = await editJobPresenter.getToolsRequiredToWorkTypeList(
+      isLoading: false,
+      workTypeIds: workTypeIds,
+    );
+    toolsRequiredToWorkTypeList.value = list ?? <ToolsModel>[];
+
+    // str = toolsRequiredToWorkTypeList.join(" , ");
+    // print({"str", str});
+    update(['toolsRequiredToWorkTypeList']);
+  }
+
   String? getAssignedToName(int _selectedAssignedToId) {
     final item =
         assignedToList.firstWhere((item) => item?.id == _selectedAssignedToId);
@@ -540,38 +615,52 @@ class EditJobController extends GetxController {
     }
   }
 
-  void updateJob() async {
+  void updateJob({List<dynamic>? fileIds}) async {
     try {
-      checkForm();
-      if (isFormInvalid.value) {
-        return;
-      }
+      // checkForm();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
       //
-      if (selectedAssignedToId <= 0) {
-        selectedAssignedToId = getAssignedToId(selectedAssignedTo.value) ?? 0;
-      }
+      // if (selectedAssignedToId <= 0) {
+      //   selectedAssignedToId = getAssignedToId(selectedAssignedTo.value) ?? 0;
+      // }
       int _permitId = selectedPermitId;
       String _title = htmlEscape.convert(jobTitleCtrlr.text.trim());
       String _description = htmlEscape.convert(jobDescriptionCtrlr.text.trim());
-      String _breakdownTime = convertDateTimeToAPIFormat();
-      selectedAssetsIdList.clear();
+      // String _breakdownTime = convertDateTimeToAPIFormat();
+      String originalDateTimeString = breakdownTimeCtrlr.text;
+
+      // Parse the original date and time string
+      DateTime originalDateTime =
+          DateFormat("dd-MM-yyyy HH:mm").parse(originalDateTimeString);
+
+      // Format the DateTime object to the desired format
+      String _breakdownTime =
+          DateFormat("yyyy-MM-ddTHH:mm:ss'Z'").format(originalDateTime.toUtc());
+
+      // selectedAssetsIdList.clear();
 
       for (var _selectedWorkArea in selectedWorkAreaList) {
         selectedAssetsIdList.add(_selectedWorkArea?.id ?? 0);
       }
-
+      for (var _selectedworktype in selectedWorkTypeList) {
+        selectedwrktype.add(_selectedworktype?.id ?? 0);
+      }
+      print("selected  Fault : $selectedwrktype");
       AddJobModel addJobModel = AddJobModel(
         id: jobID.value,
         facilityId: selectedFacilityId,
+        // blockId: selectedBlockIdList,
         blockId: selectedBlockId,
-        // blockId: [72,73],
         permitId: _permitId,
         assignedId: selectedAssignedToId,
         title: _title,
         description: _description,
         breakdownTime: _breakdownTime,
         assetsIds: selectedAssetsIdList,
-        workTypeIds: selectedWorkAreaIdList,
+        workTypeIds: selectedwrktype,
+        uploadfile_ids: fileIds,
       );
 
       Map<String, dynamic>? responseMapJobUpdated =
@@ -598,41 +687,100 @@ class EditJobController extends GetxController {
   }
 
   bool openbreaketimeDatePicker = false;
-  void onDropdownValueChanged(list, value) {
+
+  ///Value changed in any of the dropdowns - single select
+  void onDropdownValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case const (RxList<FacilityModel>):
-        {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
-          selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
-          if (selectedFacilityId > 0) {
-            isFacilitySelected.value = true;
-          }
-          selectedFacilityName.value = value;
-          getBlocksList(selectedFacilityId);
-        }
-        break;
+      // case const (RxList<FacilityModel>):
+      //   {
+      //     if (value != "Please Select") {
+      //       int facilityIndex =
+      //           facilityList.indexWhere((x) => x?.name == value);
+      //       selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
+      //       if (selectedFacilityId != 0) {
+      //         isFacilitySelected.value = true;
+      //       }
+      //       selectedFacility.value = value;
+      //       getBlocksList(selectedFacilityId);
+      //     } else {
+      //       selectedFacilityId = 0;
+      //     }
+      //   }
+      //   break;
 
       case const (RxList<BlockModel>):
         {
-          int blockIndex = blockList.indexWhere((x) => x?.name == value);
-          selectedBlockId = blockList[blockIndex]?.id ?? 0;
-          if (selectedBlockId > 0) {
-            isBlockSelected.value = true;
+          if (value != "Please Select") {
+            int blockIndex = blockList.indexWhere((x) => x?.name == value);
+            selectedBlockId = blockList[blockIndex]?.id ?? 0;
+            if (selectedBlockId > 0) {
+              isBlockSelected.value = true;
+            }
+            selectedBlock.value = value;
+            print('SelectedBlock:$selectedBlock');
+            // selectedEquipmentCategory.value ='';
+            // selectedToolRequiredToWorkType.value ='';
+            // selectedWorkAreaList.value = [];
+            // selectedAssignedTo.value ='';
+            // selectedWorkTypeList.value = [];
+            getInventoryCategoryList(selectedBlockId.toString());
+            getWorkTypeList();
+            // getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
+          } else {
+            selectedBlockId = 0;
           }
-          selectedBlock.value = value;
-          getInventoryCategoryList(selectedBlockId.toString());
+
+          // getToolsRequiredToWorkTypeList();
+        }
+        break;
+      case const (RxList<EquipmentModel>):
+        {
+          if (value != "Please Select") {
+            int equipmentIndex =
+                equipmentList.indexWhere((x) => x?.name == value);
+            int selectedEquipmentId = equipmentList[equipmentIndex]?.id ?? 0;
+            print(selectedEquipmentId);
+          } else {
+            // selectedEquipmentId=0;
+          }
+        }
+        break;
+      case const (RxList<InventoryModel>):
+        {
+          if (value != "Please Select") {
+            for (var workAreaName in selectedWorkAreaNameList) {
+              int workAreaIndex =
+                  workAreaList.indexWhere((x) => x?.name == workAreaName);
+              selectedWorkAreaIdList.add(workAreaIndex);
+            }
+          } else {}
+        }
+        break;
+      case const (RxList<InventoryCategoryModel>):
+        {
+          if (value != "Please Select") {
+            for (var equipCat in selectedEquipmentCategoryList) {
+              int equipCatIndex = selectedEquipmentCategoryList
+                  .indexWhere((x) => x?.name == equipCat);
+              selectedEquipmentCategoryIdList.add(equipCatIndex);
+            }
+          } else {}
         }
         break;
 
       case const (RxList<EmployeeModel>):
         {
-          int assignedToIndex =
-              assignedToList.indexWhere((x) => x?.name == value);
-          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
-          if (selectedAssignedToId > 0) {
-            isAssignedToSelected.value = true;
+          if (value != "Please Select") {
+            int assignedToIndex =
+                assignedToList.indexWhere((x) => x?.name == value);
+            selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+            if (selectedAssignedToId != 0) {
+              isAssignedToSelected.value = true;
+            }
+            selectedAssignedTo.value = value;
+          } else {
+            selectedAssignedToId = 0;
           }
-          selectedAssignedTo.value = value;
         }
         break;
       default:
@@ -643,51 +791,50 @@ class EditJobController extends GetxController {
     }
   }
 
-  void equipmentCategoriesSelected(_selectedEquipmentCategoryIds) {
+  /// Equipment categories selected - multi select
+  void equipmentCategoriesSelected(_selectedEquipmentCategories) {
     selectedEquipmentCategoryIdList.value = <int>[];
-    for (var _selectedCategoryId in _selectedEquipmentCategoryIds) {
-      selectedEquipmentCategoryIdList.add(_selectedCategoryId);
+    for (var _selectedCategory in _selectedEquipmentCategories) {
+      selectedEquipmentCategoryIdList.add(_selectedCategory.name);
+      // selectedEquipmentCategoryIdList.add(_selectedCategory.name);
     }
-    getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
-    getWorkTypeList(categoryIds: selectedEquipmentCategoryIdList);
+
+    getInventoryList(
+        facilityId: facilityId,
+        blockId: selectedBlockId,
+        receivedCategoryIds: [4] //selectedEquipmentCategoryIdList,
+        );
+    getWorkTypeList(receivedCategoryIds: selectedEquipmentCategoryIdList);
   }
 
-  void toolsRequiredSelected(_selectedtoolsRequiredToWorkTypeId) async {
+  void toolsRequiredSelected(_selectedToolsRequired) {
     selectedtoolsRequiredToWorkTypeIdList.value = <int>[];
-    for (var _selectedtoolsRequiredToWorkType
-        in _selectedtoolsRequiredToWorkTypeId) {
-      selectedtoolsRequiredToWorkTypeIdList
-          .add(_selectedtoolsRequiredToWorkType);
+    for (var _selectedCategory in _selectedToolsRequired) {
+      selectedtoolsRequiredToWorkTypeList.add(_selectedCategory.name);
     }
-    // getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
-    // getWorkTypeList(categoryIds: selectedEquipmentCategoryIdList);
+    getToolsRequiredToWorkTypeList(selectedEquipmentCategoryIdList);
   }
 
-  void workAreasSelected(_selectedWorkAreaIdsList) {
-    selectedWorkAreaList.clear();
-    for (var selectedWorkAreaId in _selectedWorkAreaIdsList) {
-      int workAreaIndex =
-          workAreaList.indexWhere((x) => x?.id == selectedWorkAreaId);
-      var workArea = workAreaList[workAreaIndex];
-      selectedWorkAreaList.add(workArea);
-    }
+  /// Work-areas / Equipments selected - multi select
+  void workAreasSelected(_selectedWorkAreaList) {
+    selectedWorkAreaList.value = _selectedWorkAreaList.cast<InventoryModel>();
   }
 
-  void workTypesSelected(_selectedWorkTypeIdList) {
-    selectedWorkTypeList.clear();
-    selectedWorkTypeIdList.clear();
-
-    for (var _selectedWorkTypeId in _selectedWorkTypeIdList) {
-      int workTypeIndex =
-          workTypeList.indexWhere((x) => x?.id == _selectedWorkTypeId);
-      var workType = workTypeList[workTypeIndex];
-      selectedWorkTypeList.add(workType);
-      selectedWorkTypeIdList.add(_selectedWorkTypeId);
+  /// Work-types selected - multi select
+  void workTypesSelected(_selectedWorkTypesList) {
+    selectedWorkTypeList.value = _selectedWorkTypesList.cast<WorkTypeModel>();
+    selectedWorkTypeIdList.value = <int>[];
+    for (var _selectedWorkType in _selectedWorkTypesList) {
+      selectedWorkTypeIdList.add(_selectedWorkType.id);
     }
-
-    String lststrWorkTypeIds = selectedWorkTypeIdList.join(', ').toString();
-    getToolsRequiredToWorkTypeList(lststrWorkTypeIds);
+    print({selectedWorkTypeIdList});
+    // var worktypeid = selectedWorkTypeIdList.join(', ').toString();
+    var worktypeid =
+        selectedWorkTypeIdList.map((id) => id.toString()).join(',');
+    getToolsRequiredToWorkTypeList(worktypeid);
   }
+
+  ///Block
 
   /// Show alert dialog
   static void showAlertDialog({
@@ -696,8 +843,10 @@ class EditJobController extends GetxController {
     String? title,
     Function()? onPress,
   }) async {
-    await Get.dialog<void>(JobUpdatedDialog(jobId: jobId, message: message),
-        barrierDismissible: false);
+    await Get.dialog<void>(
+      JobUpdatedDialog(jobId: jobId, message: message),
+      // barrierDismissible: false
+    );
   }
 
   ///
@@ -718,6 +867,72 @@ class EditJobController extends GetxController {
     final _flutterSecureStorage = const FlutterSecureStorage();
     _flutterSecureStorage.delete(key: "jobId");
     Get.offAllNamed(Routes.jobList);
+  }
+
+  Future<DateTime?> pickDate(BuildContext context) async {
+    DateTime? dateTime = selectedBreakdownTime.value;
+
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime.now(),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime(BuildContext context) async {
+    DateTime dateTime = selectedBreakdownTime.value;
+
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
+  }
+
+  Future pickDateTime(BuildContext context) async {
+    var dateTime = selectedBreakdownTime.value;
+    final date = await pickDate(context);
+    if (date == null) {
+      return;
+    }
+
+    final time = await pickTime(context);
+    if (time == null) {
+      return;
+    }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    selectedBreakdownTime.value = dateTime;
+    isBreakdownInvalid.value = false;
+    breakdownTimeCtrlr
+      ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: breakdownTimeCtrlr.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
   }
 
   ///

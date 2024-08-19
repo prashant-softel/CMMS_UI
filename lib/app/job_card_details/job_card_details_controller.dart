@@ -5,6 +5,7 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
@@ -40,7 +41,7 @@ class JobCardDetailsController extends GetxController {
   RxList<FilesModel?> file_list = <FilesModel?>[].obs;
   RxList<FilesModel?> file_list_new = <FilesModel?>[].obs;
   RxList<FilesModel?> allFiles = <FilesModel?>[].obs;
-  RxList<WorkingAreaList>? workingAreaList = <WorkingAreaList>[].obs;
+  RxList<InventoryModel>? workingAreaList = <InventoryModel>[].obs;
 
   Rx<String> selectedEmployeeName = ''.obs;
   Rx<bool> isEmployeeSelected = true.obs;
@@ -269,8 +270,7 @@ class JobCardDetailsController extends GetxController {
         for (var workingArea in workingAreaList!) {
           if (workingArea != null) {
             var matchedUsedAssets = materialUsedAssets!
-                .where(
-                    (usedAsset) => usedAsset!.asset_id == workingArea.asset_id)
+                .where((usedAsset) => usedAsset!.asset_id == workingArea.id)
                 .toList();
 
             for (var matchedUsedAsset in matchedUsedAssets) {
