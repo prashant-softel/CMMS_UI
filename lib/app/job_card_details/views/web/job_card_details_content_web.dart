@@ -1991,15 +1991,18 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                         ))
                                                   ])
                                             : Container(),
-                            Container(
-                              height: 35,
-                              child: CustomElevatedButton(
-                                icon: Icons.print,
-                                backgroundColor: ColorValues.linktopermitColor,
-                                text: "print",
-                                onPressed: () {
-                                  controller.generateInvoice();
-                                },
+                            Center(
+                              child: Container(
+                                height: 35,
+                                child: CustomElevatedButton(
+                                  icon: Icons.print,
+                                  backgroundColor:
+                                      ColorValues.linktopermitColor,
+                                  text: "print",
+                                  onPressed: () {
+                                    controller.generateInvoice();
+                                  },
+                                ),
                               ),
                             ),
 
