@@ -1686,7 +1686,7 @@ class JobCardDetailsController extends GetxController {
             pen: borderPen,
             brush: backgroundBrush,
             bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
-        page.graphics.drawString('PM History', headerFont,
+        page.graphics.drawString('JOB Card History', headerFont,
             bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
         currentY += sectionHeight;
 
