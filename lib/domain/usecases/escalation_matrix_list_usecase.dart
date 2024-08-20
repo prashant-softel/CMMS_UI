@@ -17,11 +17,13 @@ class EscalationMatrixListUsecase {
   Future<Map<String, dynamic>> escalateModule({
     required int moduleId,
     required int statusId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await _repository.escalateModule(
         moduleId,
         statusId,
+        facilityId,
         isLoading,
       );
 

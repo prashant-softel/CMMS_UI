@@ -16,11 +16,13 @@ class EscalationMatrixListPresenter {
   Future<Map<String, dynamic>?> escalateModule({
     required int moduleId,
     required int statusId,
+    required int facilityId,
     required bool isLoading,
   }) async {
     return escalationMatrixListUsecase.escalateModule(
       moduleId: moduleId,
       statusId: statusId,
+      facilityId: facilityId,
       isLoading: isLoading,
     );
   }
