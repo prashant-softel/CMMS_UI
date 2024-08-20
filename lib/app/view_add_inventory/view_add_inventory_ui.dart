@@ -113,11 +113,16 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                     alignment: Alignment.topRight,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        color: controller
-                                                    .editAddInventoryDetailsModel
-                                                    .value!
-                                                    .warrantyStatus ==
-                                                "Inactive"
+                                        color: (controller
+                                                        .editAddInventoryDetailsModel
+                                                        .value!
+                                                        .warrantyStatus ==
+                                                    "Inactive") ||
+                                                (controller
+                                                        .editAddInventoryDetailsModel
+                                                        .value!
+                                                        .warrantyStatus ==
+                                                    "Expire")
                                             ? Colors.red
                                             : Colors.green,
                                         borderRadius: BorderRadius.circular(
