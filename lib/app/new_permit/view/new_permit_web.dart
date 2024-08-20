@@ -856,7 +856,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                             );
                                                                           }
 
-                                                                          final initialValue = controller.typee == 4
+                                                                          final initialValue = controller.typee == 4 || controller.typee == 5
                                                                               ? controller.equipmentCategoryList?.where((category) => category?.name == 'Inverter')?.map((category) => category?.id)?.toList() ?? []
                                                                               : (controller.selectedEquipmentCategoryIdList.isNotEmpty ? controller.selectedEquipmentCategoryIdList : []);
 
