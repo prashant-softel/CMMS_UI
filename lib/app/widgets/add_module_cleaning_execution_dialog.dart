@@ -2,6 +2,7 @@ import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execu
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,7 +41,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 Text("Update For Day", style: Styles.blue20),
                 SizedBox(width: 10),
                 Text(
-                  "${cleaningDay}",
+                  "$cleaningDay",
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -69,10 +70,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 SizedBox(width: 10),
                 Row(
                   children: [
-                    Text(
-                      'Water Used: ',
-                      style: TextStyle(fontSize: 17),
-                    ),
+                    CustomRichText(title: 'Water Used: '),
                     SizedBox(
                       width: 5,
                     ),
@@ -466,13 +464,27 @@ class AddModuleCleaningExecutionDialog extends GetView {
                         backgroundColor: ColorValues.greenColor,
                         text: 'Submit',
                         onPressed: () {
-                          controller.updateMCScheduleExecution(
-                              scheduleId: scheduleId,
-                              cleaningDay: cleaningDay,
-                              waterUsed: int.tryParse(
-                                  '${controller.waterUsedCtrlrWeb.text}'),
-                              remark: '${controller.remarkCtrlrWeb.text}');
-                          Get.back();
+                          if (controller.waterUsedCtrlrWeb.text.isEmpty) {
+                            Get.defaultDialog(
+                              title: 'Validation Error',
+                              content: Text('Please enter water used.'),
+                              confirm: CustomElevatedButton(
+                                backgroundColor: ColorValues.greenColor,
+                                text: 'OK',
+                                onPressed: () {
+                                  Get.back();
+                                },
+                              ),
+                            );
+                          } else {
+                            controller.updateMCScheduleExecution(
+                                scheduleId: scheduleId,
+                                cleaningDay: cleaningDay,
+                                waterUsed: int.tryParse(
+                                    controller.waterUsedCtrlrWeb.text),
+                                remark: controller.remarkCtrlrWeb.text);
+                            Get.back();
+                          }
                         },
                       ),
                     ),
