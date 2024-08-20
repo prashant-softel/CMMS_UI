@@ -111,13 +111,13 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                               Get.offNamed(
                                                   Routes.inventoryList);
                                             },
-                                            child: Text(" / ASSET LIST",
+                                            child: Text("/ ASSET LIST",
                                                 style: Styles.greyLight14),
                                           ),
                                           Text(
                                             controller.inventoryId.value == 0
-                                                ? " / ADD ASSETS"
-                                                : " / UPDATE ASSETS",
+                                                ? "/ ADD ASSETS"
+                                                : "/ UPDATE ASSETS",
                                             style: Styles.greyLight14,
                                           ),
                                         ],
@@ -851,7 +851,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                               backgroundColor: ColorValues.appDarkBlueColor,
                               text: 'Update',
                               onPressed: () {
-                                controller.isFormValid.value = true;
+                                // controller.isFormValid.value = true;
                                 controller.updateInventory(
                                     fileIds: dropzoneController.fileIds);
                               },

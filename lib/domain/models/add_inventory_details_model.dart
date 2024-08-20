@@ -76,12 +76,14 @@ class AddInventoryDetailsModel {
   String? warrantyStatus;
   List<FileList>? calibration_file;
   List<FileList>? warranty_file;
+  List<FileList>? inventory_image;
 
   AddInventoryDetailsModel(
       {this.id,
       this.name,
       this.calibration_file,
       this.warranty_file,
+      this.inventory_image,
       this.facilityId,
       this.facilityName,
       this.blockId,
@@ -193,6 +195,10 @@ class AddInventoryDetailsModel {
       warranty_file: json['warranty_file'] != null
           ? List<FileList>.from(
               json['warranty_file'].map((x) => FileList.fromJson(x)))
+          : [],
+      inventory_image: json['inventory_image'] != null
+          ? List<FileList>.from(
+              json['inventory_image'].map((x) => FileList.fromJson(x)))
           : [],
       // calibrationLastDate:
       //     Utility.getFormatedyearMonthDay(json['calibrationLastDate']),
