@@ -68,14 +68,17 @@ class Schedule {
     this.cleaningDay,
     this.cleaningType,
     this.equipments,
+    this.scheduleId,
   });
 
   int? cleaningDay;
   int? cleaningType;
   List<Equipments?>? equipments;
+  int? scheduleId;
 
   factory Schedule.fromJson(Map<String, dynamic> json) => Schedule(
         cleaningDay: json['cleaningDay'],
+        scheduleId: json['scheduleId'],
         cleaningType: json['cleaningType'],
         equipments: json["equipments"] != null
             ? List<Equipments>.from(
@@ -86,6 +89,7 @@ class Schedule {
   Map<String, dynamic> toJson() {
     var initialData = {
       "cleaningDay": cleaningDay,
+      "scheduleId": scheduleId,
       "equipments": List<dynamic>.from(equipments!.map((x) => x)),
     };
     if (cleaningType != null) {
