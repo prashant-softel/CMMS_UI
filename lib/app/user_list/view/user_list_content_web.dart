@@ -473,6 +473,7 @@ class UserDataSource extends DataTableSource {
       "Profile_Img", // '${UserDetails?.id ?? ''}',
       '${UserDetails?.name ?? ''}',
       '${UserDetails?.role_name ?? ''}',
+      '${UserDetails?.designation ?? ''}',
       '${UserDetails?.contact_no ?? ''}',
       "${UserDetails?.created_at ?? ''}",
       "${UserDetails?.updated_at ?? ''}",

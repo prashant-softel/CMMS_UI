@@ -32,6 +32,7 @@ class UserListController extends GetxController {
   RxString idFilterText = ''.obs;
   RxString userLoginIdFilterText = ''.obs;
   RxString userRoleFilterText = ''.obs;
+  RxString userDesgnFilterText = ''.obs;
   RxString contractFilterText = ''.obs;
   RxString createdOnFilterText = ''.obs;
   RxString updatedOnFilterText = ''.obs;
@@ -42,7 +43,8 @@ class UserListController extends GetxController {
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Profile": true,
     "User Login ID": true,
-    "User Role": true,
+    "Role": true,
+    "Designation": true,
     "Contact Number": true,
     "Created On": true,
     "Updated On": true,
@@ -51,8 +53,9 @@ class UserListController extends GetxController {
   });
   final Map<String, double> columnwidth = {
     "Profile": 123,
-    "User Login ID": 400,
-    "User Role": 200,
+    "User Login ID": 300,
+    "Role": 200,
+    "Designation": 200,
     "Contact Number": 200,
     "Created On": 123,
     "Updated On": 123,
@@ -106,7 +109,8 @@ class UserListController extends GetxController {
     this.filterText = {
       "Profile": idFilterText,
       "User Login ID": userLoginIdFilterText,
-      "User Role": userRoleFilterText,
+      "Role": userRoleFilterText,
+      "Designation": userDesgnFilterText,
       "Contact Number": contractFilterText,
       "Created On": createdOnFilterText,
       "Updated On": updatedOnFilterText,

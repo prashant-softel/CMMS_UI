@@ -29,6 +29,7 @@ class AddInventoryDetailsModel {
   int? manufacturerId;
   String? manufacturerName;
   int? supplierId;
+  int? currencyId;
   String? supplierName;
   int? acCapacity;
   int? dcCapacity;
@@ -76,12 +77,14 @@ class AddInventoryDetailsModel {
   String? warrantyStatus;
   List<FileList>? calibration_file;
   List<FileList>? warranty_file;
+  List<FileList>? inventory_image;
 
   AddInventoryDetailsModel(
       {this.id,
       this.name,
       this.calibration_file,
       this.warranty_file,
+      this.inventory_image,
       this.facilityId,
       this.facilityName,
       this.blockId,
@@ -103,6 +106,7 @@ class AddInventoryDetailsModel {
       this.manufacturerId,
       this.manufacturerName,
       this.supplierId,
+      this.currencyId,
       this.supplierName,
       this.acCapacity,
       this.dcCapacity,
@@ -175,6 +179,7 @@ class AddInventoryDetailsModel {
       manufacturerId: json['manufacturerId'],
       manufacturerName: json['manufacturerName'],
       supplierId: json['supplierId'],
+      currencyId: json['currencyId'],
       supplierName: json['supplierName'],
       acCapacity: json['acCapacity'],
       dcCapacity: json['dcCapacity'],
@@ -193,6 +198,10 @@ class AddInventoryDetailsModel {
       warranty_file: json['warranty_file'] != null
           ? List<FileList>.from(
               json['warranty_file'].map((x) => FileList.fromJson(x)))
+          : [],
+      inventory_image: json['inventory_image'] != null
+          ? List<FileList>.from(
+              json['inventory_image'].map((x) => FileList.fromJson(x)))
           : [],
       // calibrationLastDate:
       //     Utility.getFormatedyearMonthDay(json['calibrationLastDate']),
