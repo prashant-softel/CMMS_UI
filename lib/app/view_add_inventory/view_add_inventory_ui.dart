@@ -12,9 +12,11 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'view/view_warranty_tab_widget.dart';
 
@@ -94,7 +96,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                           onTap: () {
                                             Get.offNamed(Routes.inventoryList);
                                           },
-                                          child: Text(" / ASSETS",
+                                          child: Text(" / ASSET LIST",
                                               style: Styles.greyMediumLight12),
                                         ),
                                         Text(
@@ -111,11 +113,16 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                     alignment: Alignment.topRight,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        color: controller
-                                                    .editAddInventoryDetailsModel
-                                                    .value!
-                                                    .warrantyStatus ==
-                                                "Inactive"
+                                        color: (controller
+                                                        .editAddInventoryDetailsModel
+                                                        .value!
+                                                        .warrantyStatus ==
+                                                    "Inactive") ||
+                                                (controller
+                                                        .editAddInventoryDetailsModel
+                                                        .value!
+                                                        .warrantyStatus ==
+                                                    "Expire")
                                             ? Colors.red
                                             : Colors.green,
                                         borderRadius: BorderRadius.circular(
@@ -125,7 +132,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                           vertical: 2, horizontal: 5),
                                       margin: EdgeInsets.only(top: 5),
                                       child: Text(
-                                        " Warranty Status:${controller.editAddInventoryDetailsModel.value!.warrantyStatus}",
+                                        " Warranty Status: ${controller.editAddInventoryDetailsModel.value!.warrantyStatus}",
                                         style: TextStyle(
                                           color: Colors
                                               .white, // Text color set to white for visibility on red/green background
@@ -523,30 +530,146 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                                 ViewCalibrationTabWidget(),
                                                 ViewWarrantyTabWidget(),
                                                 ViewManufacturarTabWidget(),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      20.0),
-                                                  child: IgnorePointer(
-                                                    ignoring: true,
-                                                    child: Container(
-                                                      height: Get.height * 0.2,
-                                                      width: Get.width,
-                                                      child: Row(//
-                                                          children: [
-                                                        Expanded(
-                                                          flex: 2,
-                                                          child:
-                                                              FileUploadWidgetWithDropzone(),
+                                                controller
+                                                                .editAddInventoryDetailsModel
+                                                                .value!
+                                                                .inventory_image !=
+                                                            null &&
+                                                        controller
+                                                            .editAddInventoryDetailsModel
+                                                            .value!
+                                                            .inventory_image!
+                                                            .isNotEmpty
+                                                    ? Container(
+                                                        // width:
+                                                        //     MediaQuery.of(context).size.width /
+                                                        //         1.2,
+                                                        height: ((controller
+                                                                    .editAddInventoryDetailsModel
+                                                                    .value!
+                                                                    .inventory_image!
+                                                                    .length) *
+                                                                41) +
+                                                            117,
+                                                        margin:
+                                                            Dimens.edgeInsets20,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              color: Colors.grey
+                                                                  .withOpacity(
+                                                                      .3)),
                                                         ),
-                                                        Dimens.boxWidth10,
-                                                        Expanded(
-                                                            flex: 8,
-                                                            child:
-                                                                FileUploadDetailsWidgetWeb()),
-                                                      ]),
-                                                    ),
-                                                  ),
-                                                ),
+
+                                                        child: Column(
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "Uploaded Files ",
+                                                                    style: Styles
+                                                                        .blue700,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: DataTable2(
+                                                                border:
+                                                                    TableBorder
+                                                                        .all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234),
+                                                                ),
+                                                                dataRowHeight:
+                                                                    40,
+                                                                columns: [
+                                                                  DataColumn(
+                                                                    label: Text(
+                                                                      "File Description",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  DataColumn(
+                                                                    label: Text(
+                                                                      "View File",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                                rows: List<
+                                                                    DataRow>.generate(
+                                                                  controller
+                                                                          .editAddInventoryDetailsModel
+                                                                          .value!
+                                                                          .inventory_image
+                                                                          ?.length ??
+                                                                      0,
+                                                                  (index) =>
+                                                                      DataRow(
+                                                                    cells: [
+                                                                      DataCell(
+                                                                          Text(
+                                                                        controller.editAddInventoryDetailsModel.value!.inventory_image![index].description.toString() ??
+                                                                            '',
+                                                                      )),
+                                                                      DataCell(
+                                                                        // Text("View Image"),
+                                                                        Wrap(
+                                                                          children: [
+                                                                            TableActionButton(
+                                                                              color: ColorValues.appDarkBlueColor,
+                                                                              icon: Icons.visibility,
+                                                                              message: 'view',
+                                                                              onPress: () async {
+                                                                                String baseUrl = 'http://172.20.43.9:83/';
+                                                                                String fileName = controller.editAddInventoryDetailsModel.value!.inventory_image![index]?.fileName ?? "";
+                                                                                String fullUrl = baseUrl + fileName;
+                                                                                if (await canLaunch(fullUrl)) {
+                                                                                  await launch(fullUrl);
+                                                                                } else {
+                                                                                  throw 'Could not launch $fullUrl';
+                                                                                }
+                                                                                // String baseUrl = 'http://172.20.43.9:83/';
+                                                                              },
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      )
+                                                    : Center(
+                                                        child: CustomRichText(
+                                                            title:
+                                                                'No Files Available',
+                                                            includeAsterisk:
+                                                                false)),
                                               ],
                                             ),
                                           ),

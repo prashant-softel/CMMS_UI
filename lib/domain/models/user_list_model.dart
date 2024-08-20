@@ -26,6 +26,7 @@ class UserListModel {
   String? joiningdate;
   String? name;
   String? role_name;
+  String? designation;
   String? contact_no;
   String? created_at;
   String? updated_at;
@@ -54,6 +55,7 @@ class UserListModel {
     this.contact_no,
     this.full_name,
     this.role_name,
+    this.designation,
     this.created_at,
     this.updated_at,
     this.name,
@@ -83,6 +85,7 @@ class UserListModel {
         joiningdate: json['joining_dates'],
         contact_no: json['contact_no'],
         role_name: json['role_name'],
+        designation: json['designation'],
         created_at: json['createdAt'],
         updated_at: json['updatedAt'],
         name: json['user_name'],
@@ -116,6 +119,7 @@ class UserListModel {
         "joining_dates": joiningdate,
         "contact_no": contact_no,
         "role_name": role_name,
+        "designation": designation,
         "CreatedAt": created_at,
         "updatedAt": updated_at,
         "photoId": photoId,

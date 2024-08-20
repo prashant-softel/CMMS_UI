@@ -148,6 +148,10 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                     style: Styles.black17,
                                   ),
                                   Text(
+                                    'Date of Joining: ',
+                                    style: Styles.black17,
+                                  ),
+                                  Text(
                                     'Gender: ',
                                     style: Styles.black17,
                                   ),
@@ -181,6 +185,11 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                   Text(
                                       controller.userDetailModel.value
                                               ?.first_name ??
+                                          "",
+                                      style: Styles.blue17),
+                                  Text(
+                                      controller.userDetailModel.value
+                                              ?.joiningDate ??
                                           "",
                                       style: Styles.blue17),
                                   Text(
@@ -234,6 +243,10 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                     'Role: ',
                                     style: Styles.black17,
                                   ),
+                                  Text(
+                                    'Designation: ',
+                                    style: Styles.black17,
+                                  ),
                                 ],
                               ),
                               Dimens.boxWidth3,
@@ -272,6 +285,11 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                   Text(
                                       controller.userDetailModel.value
                                               ?.role_name ??
+                                          "",
+                                      style: Styles.blue17),
+                                  Text(
+                                      controller.userDetailModel.value
+                                              ?.designation_name ??
                                           "",
                                       style: Styles.blue17),
                                 ],

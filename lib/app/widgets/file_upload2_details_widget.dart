@@ -149,7 +149,14 @@ class FileUpload2DetailsWidgetWeb extends StatelessWidget {
                                 },
                               ),
                             ),
-                            DataCell(Text('-')),
+                            DataCell(
+                              Text(
+                                '${(_fileUploadController.progresses.value.length > pickedFileIndex ? "Done" : 'Pending')}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
                             DataCell(
                               IconButton(
                                 icon: Icon(Icons.delete),

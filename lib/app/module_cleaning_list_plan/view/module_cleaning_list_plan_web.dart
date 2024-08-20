@@ -606,7 +606,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
-                          'MC ${ModuleCleaningPlanningListDetails?.status_short}',
+                          '${ModuleCleaningPlanningListDetails?.status_short}',
                           style: Styles.white11.copyWith(
                             color: Colors.white,
                           ),
