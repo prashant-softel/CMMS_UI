@@ -612,7 +612,7 @@ class CalibrationDataSource extends DataTableSource {
                                 : calibrationDetails?.statusID == 220
                                     ? ColorValues.rejectedStatusColor
                                     : calibrationDetails?.statusID == 211
-                                        ? ColorValues.blueColor
+                                        ? ColorValues.addNewColor
                                         : calibrationDetails?.statusID == 214
                                             ? ColorValues.appGreenColor
                                             : calibrationDetails?.statusID ==
