@@ -54,11 +54,13 @@ class CreateVegPlanModel {
 class Schedule {
   int? cleaningDay;
   List<Equipments>? equipments;
+  int? scheduleId;
 
-  Schedule({this.cleaningDay, this.equipments});
+  Schedule({this.cleaningDay, this.equipments, this.scheduleId});
 
   factory Schedule.fromJson(Map<String, dynamic> json) => Schedule(
         cleaningDay: json['cleaningDay'],
+        scheduleId: json['scheduleId'],
         equipments: json['equipments'] != null
             ? List<Equipments>.from(
                 json['elements'].map((x) => Equipments.fromJson(x)))
@@ -67,6 +69,7 @@ class Schedule {
 
   Map<String, dynamic> toJson() {
     return {
+      "scheduleId": scheduleId,
       "cleaningDay": cleaningDay,
       "equipments": List<dynamic>.from(equipments!.map((x) => x)),
     };
