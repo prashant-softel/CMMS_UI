@@ -329,11 +329,9 @@ class ViewAddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.calibrationDueDate.toString() ??
               "";
       startDateTc.text =
-          editAddInventoryDetailsModel.value?.start_date.toString() ??
-              "";
+          editAddInventoryDetailsModel.value?.start_date.toString() ?? "";
       expireDateTc.text =
-          editAddInventoryDetailsModel.value?.expiry_date.toString() ??
-              "";
+          editAddInventoryDetailsModel.value?.expiry_date.toString() ?? "";
       selectedStatusNameId = editAddInventoryDetailsModel.value?.statusId ?? 0;
       selectedStatusName.value =
           editAddInventoryDetailsModel.value?.status ?? '';
@@ -424,7 +422,7 @@ class ViewAddInventoryController extends GetxController {
             manufacturerId: selectedmanufacturerNameId,
             blockId: selectedBlockListId,
             categoryId: selectedEquipmentCategoryNameId,
-            currency: selectedUnitCurrency.value,
+            currency: 0, //selectedUnitCurrency.value,
             cost: int.tryParse(_costCtrlr),
             model: _modelNoCtrlr,
             serialNumber: _serialNoCtrlr,
