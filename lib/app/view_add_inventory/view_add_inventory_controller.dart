@@ -329,11 +329,9 @@ class ViewAddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.calibrationDueDate.toString() ??
               "";
       startDateTc.text =
-          editAddInventoryDetailsModel.value?.start_date.toString() ??
-              "";
+          editAddInventoryDetailsModel.value?.start_date.toString() ?? "";
       expireDateTc.text =
-          editAddInventoryDetailsModel.value?.expiry_date.toString() ??
-              "";
+          editAddInventoryDetailsModel.value?.expiry_date.toString() ?? "";
       selectedStatusNameId = editAddInventoryDetailsModel.value?.statusId ?? 0;
       selectedStatusName.value =
           editAddInventoryDetailsModel.value?.status ?? '';
@@ -384,79 +382,79 @@ class ViewAddInventoryController extends GetxController {
     }
   }
 
-  Future<bool> updateInventory() async {
-    String _serialNoCtrlr = serialNoCtrlr.text.trim();
-    String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
-    String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
-    String _certificateNoCtrlr = certificateNoCtrlr.text.trim();
-    String _discriptionCtrlr = discriptionCtrlr.text.trim();
-    String _modelNoCtrlr = modelNoCtrlr.text.trim();
-    String _parentEquipmentNoCtrlr = parentEquipmentNoCtrlr.text.trim();
-    String _costCtrlr = costCtrlr.text.trim();
-    String _calibrationRemainderInTc = calibrationRemainderInTc.text.trim();
-    String _lastCalibrationDateTc = lastCalibrationDateTc.text.trim();
-    String _expireDateTc = expireDateTc.text.trim();
-    String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
+  // Future<bool> updateInventory() async {
+  //   String _serialNoCtrlr = serialNoCtrlr.text.trim();
+  //   String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
+  //   String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
+  //   String _certificateNoCtrlr = certificateNoCtrlr.text.trim();
+  //   String _discriptionCtrlr = discriptionCtrlr.text.trim();
+  //   String _modelNoCtrlr = modelNoCtrlr.text.trim();
+  //   String _parentEquipmentNoCtrlr = parentEquipmentNoCtrlr.text.trim();
+  //   String _costCtrlr = costCtrlr.text.trim();
+  //   String _calibrationRemainderInTc = calibrationRemainderInTc.text.trim();
+  //   String _lastCalibrationDateTc = lastCalibrationDateTc.text.trim();
+  //   String _expireDateTc = expireDateTc.text.trim();
+  //   String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
 
-    LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
-        // warranty_description: _warrentyDescriptionCtrlr,
-        warrantyProviderId: selectedmanufacturerNameId,
-        warrantyStatus: 1,
-        warrantyType: selectedWarrentyNameId,
-        warrranty_term_type: selectedwarrantyUsageTermNameId,
-        // meterLimit: 1,
-        // meterUnit: 1,
-        certificate_number: int.tryParse(_certificateNoCtrlr),
-        expiryDate: _expireDateTc, //"2030-12-31",
-        // startDate///  is missing
-        warrantyDiscription: _warrentyDescriptionCtrlr);
+  //   LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
+  //       // warranty_description: _warrentyDescriptionCtrlr,
+  //       warrantyProviderId: selectedmanufacturerNameId,
+  //       warrantyStatus: 1,
+  //       warrantyType: selectedWarrentyNameId,
+  //       warrranty_term_type: selectedwarrantyUsageTermNameId,
+  //       // meterLimit: 1,
+  //       // meterUnit: 1,
+  //       certificate_number: int.tryParse(_certificateNoCtrlr),
+  //       expiryDate: _expireDateTc, //"2030-12-31",
+  //       // startDate///  is missing
+  //       warrantyDiscription: _warrentyDescriptionCtrlr);
 
-    AddInventoryRequestModel addInventoryRequestModel =
-        AddInventoryRequestModel(
-            id: inventoryId.value,
-            name: _assetsNameCtrlr,
-            description: _discriptionCtrlr,
-            assetdescription: _assesDiscriptionCtrlr,
-            typeId: selectedTypeNameId,
-            statusId: selectedStatusNameId,
-            facilityId: facilityId,
-            supplierId: selectedsupplierrNameId,
-            manufacturerId: selectedmanufacturerNameId,
-            blockId: selectedBlockListId,
-            categoryId: selectedEquipmentCategoryNameId,
-            currency: selectedUnitCurrency.value,
-            cost: int.tryParse(_costCtrlr),
-            model: _modelNoCtrlr,
-            serialNumber: _serialNoCtrlr,
-            warranty_provider_id: selectedmanufacturerNameId,
-            warranty_type: selectedWarrentyNameId,
-            warranty_term_type: selectedwarrantyUsageTermNameId,
-            parent_equipment_no: _parentEquipmentNoCtrlr,
-            parentId: selectedEquipmentnameId,
-            calibrationFrequency: selectedfrequencyId,
-            calibrationReminderDays: int.tryParse(_calibrationRemainderInTc),
-            calibrationLastDate: _lastCalibrationDateTc, // "2023-01-10",
-            // calibrationFirstDueDate: "2023-01-10",
-            calibrationFrequencyType: selectedfrequency.value,
-            acCapacity: 2000,
-            dcCapacity: 5000,
-            multiplier: 3,
-            customerId: 1,
-            operatorId: 3,
-            ownerId: 2,
-            stockCount: 50,
-            moduleQuantity: 15,
-            attachments: null);
-    var addInventoryJsonString = addInventoryRequestModel
-        .toJson(); //createCheckListToJson([createChecklist]);
+  //   AddInventoryRequestModel addInventoryRequestModel =
+  //       AddInventoryRequestModel(
+  //           id: inventoryId.value,
+  //           name: _assetsNameCtrlr,
+  //           description: _discriptionCtrlr,
+  //           assetdescription: _assesDiscriptionCtrlr,
+  //           typeId: selectedTypeNameId,
+  //           statusId: selectedStatusNameId,
+  //           facilityId: facilityId,
+  //           supplierId: selectedsupplierrNameId,
+  //           manufacturerId: selectedmanufacturerNameId,
+  //           blockId: selectedBlockListId,
+  //           categoryId: selectedEquipmentCategoryNameId,
+  //           currency: selectedUnitCurrency.value,
+  //           cost: int.tryParse(_costCtrlr),
+  //           model: _modelNoCtrlr,
+  //           serialNumber: _serialNoCtrlr,
+  //           warranty_provider_id: selectedmanufacturerNameId,
+  //           warranty_type: selectedWarrentyNameId,
+  //           warranty_term_type: selectedwarrantyUsageTermNameId,
+  //           parent_equipment_no: _parentEquipmentNoCtrlr,
+  //           parentId: selectedEquipmentnameId,
+  //           calibrationFrequency: selectedfrequencyId,
+  //           calibrationReminderDays: int.tryParse(_calibrationRemainderInTc),
+  //           calibrationLastDate: _lastCalibrationDateTc, // "2023-01-10",
+  //           // calibrationFirstDueDate: "2023-01-10",
+  //           calibrationFrequencyType: selectedfrequency.value,
+  //           acCapacity: 2000,
+  //           dcCapacity: 5000,
+  //           multiplier: 3,
+  //           customerId: 1,
+  //           operatorId: 3,
+  //           ownerId: 2,
+  //           stockCount: 50,
+  //           moduleQuantity: 15,
+  //           attachments: null);
+  //   var addInventoryJsonString = addInventoryRequestModel
+  //       .toJson(); //createCheckListToJson([createChecklist]);
 
-    print({"updateJsonString", addInventoryJsonString});
-    await viewaddInventoryPresenter.updateInventory(
-      addInventoryJsonString: addInventoryJsonString,
-      isLoading: true,
-    );
-    return true;
-  }
+  //   print({"updateJsonString", addInventoryJsonString});
+  //   await viewaddInventoryPresenter.updateInventory(
+  //     addInventoryJsonString: addInventoryJsonString,
+  //     isLoading: true,
+  //   );
+  //   return true;
+  // }
 
   void getInventoryList() async {
     eqipmentNameList.value = <InventoryModel>[];

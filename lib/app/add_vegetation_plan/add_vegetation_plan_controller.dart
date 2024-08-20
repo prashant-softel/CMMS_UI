@@ -161,8 +161,8 @@ class AddVegetationPlanController extends GetxController {
       List<Equipments> eqp = value.map<Equipments>((e) {
         return Equipments(id: e);
       }).toList();
-      schedule
-          .add(Schedule(cleaningDay: int.tryParse('${key}'), equipments: eqp));
+      schedule.add(Schedule(
+          cleaningDay: int.tryParse('${key}'), equipments: eqp, scheduleId: 0));
     });
 
     print({"mappedData": mappedData});
@@ -193,9 +193,9 @@ class AddVegetationPlanController extends GetxController {
   }
 
   void updateVegPlan() async {
+    int firstScheduleId = await fetchLastScheduleId();
+    int scheduleIdCounter = firstScheduleId + 1;
     Map<int, List<Equipments>> equipmentMap = {};
-
-   
     equipmentList.forEach((equipment) {
       equipment?.smbs?.forEach((smb) {
         if (smb.selectedDay != null) {
@@ -210,12 +210,19 @@ class AddVegetationPlanController extends GetxController {
       });
     });
 
-    // Convert the equipmentMap to a list of schedules
+    bool isFirstSchedule = true;
     List<Schedule> sch = equipmentMap.entries.map((entry) {
+      int scheduleId;
+      if (isFirstSchedule) {
+        scheduleId = firstScheduleId;
+        isFirstSchedule = false;
+      } else {
+        scheduleId = scheduleIdCounter++;
+      }
       return Schedule(
-        cleaningDay: entry.key,
-        equipments: entry.value,
-      );
+          cleaningDay: entry.key,
+          equipments: entry.value,
+          scheduleId: scheduleId);
     }).toList();
 
     print({"sch": sch});
@@ -243,6 +250,17 @@ class AddVegetationPlanController extends GetxController {
     );
     if (responseCreateVegModel == null) {}
     print('update MC   data: $updateVegModelJsonString');
+  }
+
+  Future<int> fetchLastScheduleId() async {
+    await getVegPlanDetail(planId: vegid.value, facilityId: facilityId);
+
+    if (vegPlanDetailsModel.value?.schedules != null &&
+        vegPlanDetailsModel.value!.schedules!.isNotEmpty) {
+      return vegPlanDetailsModel.value!.schedules!.first.scheduleId ?? 0;
+    } else {
+      return 0;
+    }
   }
 
   Future<void> getVegPlanDetail({

@@ -305,6 +305,7 @@ class NewPermitController extends GetxController {
   int selectedSOPId = 0;
   String? jsaData;
   String? sopData;
+  var isInventoryCategoryListLoaded = false.obs;
 
   ///Safety Measure List
   RxList<SafetyMeasureListModel> safetyMeasureList =
@@ -419,69 +420,44 @@ class NewPermitController extends GetxController {
 
   String allChecklistNames = '';
 
-  ///
   @override
   void onInit() async {
-    // jcId = Get.arguments["jcId"];
-    // print('JobCardId:$jcId');
+    super.onInit();
+
     try {
       await setId();
-      // final arguments = Get.arguments;
-      // if (arguments != null) {
-      //   if (arguments.containsKey('permitId')) {
-      //     permitId.value = arguments['permitId'];
-      //     print('PermitId:${permitId.value}');
-      //   }
-      //   if (arguments.containsKey('isChecked')) {
-      //     isChecked.value = arguments['isChecked'];
-      //   }
-      //   print('Edit Data:${isChecked}');
 
-      //   if (arguments.containsKey('jobModel')) {
-      //     jobModel = arguments['jobModel'];
-      //   }
-      //   if (arguments.containsKey('pmTaskModel')) {
-      //     pmtaskViewModel = arguments['pmTaskModel'];
-      //     if (pmtaskViewModel != null) {
-      //       loadPermitDetailsWithTask(pmtaskViewModel);
-      //     }
-      //   }
-      //   if (jobModel != null) {
-      //     loadPermitDetails(jobModel);
-      //   }
-      // }
-
-      //homePresenter.generateToken();
-      //  Future.delayed(Duration(seconds: 1), () {
-      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
         facilityId = event;
         print('FacilityIdsss$facilityId');
-        Future.delayed(Duration(seconds: 1), () {
+
+        await Future.delayed(Duration(seconds: 1), () {
           getBlocksList(facilityId);
         });
+
         if (permitId.value > 0) {
-          getNewPermitDetail(
+          await getNewPermitDetail(
               intPermitId: permitId.value, facilityId: facilityId);
           isCheckedJSA.value = true;
           isCheckedSOP.value = true;
-          getPermitHistory(permitId: permitId.value, facilityId: facilityId);
+          await getPermitHistory(
+              permitId: permitId.value, facilityId: facilityId);
         }
 
-        // Future.delayed(Duration(seconds: 1), () {
-        //   getNewPermitDetail(
-        //       intPermitId: permitId.value, facilityId: facilityId);
-        // });
-        Future.delayed(Duration(seconds: 1), () {
+        await Future.delayed(Duration(seconds: 1), () {
           getTypePermitList(facilityId);
         });
-        getInventoryCategoryList();
-        getInventoryIsolationList();
-        getAssignedToList();
-        getFacilityLists();
-        // getInventoryDetailList();
-        getEmployeePermitList();
+
+        await getInventoryCategoryList();
+
+        await getInventoryIsolationList();
+        await getAssignedToList();
+        await getFacilityLists();
+        await getEmployeePermitList();
         addRowItem();
-        getJobTypePermitList();
+        await getJobTypePermitList();
+
         if (pmtaskViewModel?.id != null) {
           loadPermitDetailsWithTask(pmtaskViewModel);
         } else if (jobModel != null || jobModel != "") {
@@ -490,12 +466,6 @@ class NewPermitController extends GetxController {
           print("Nothing to load");
         }
       });
-
-      // if (permitId.value > 0 && selectedEquipmentIsolationIdList != null) {
-      //   equipmentIsolationSelected(selectedEquipmentIsolationIdList);
-      // }
-      // await getPermitIssuerList();
-      // await getPermitApproverList();
     } catch (e) {
       print('jobModelError: $e');
     }
@@ -511,8 +481,6 @@ class NewPermitController extends GetxController {
         commentScroll.jumpTo(0.0);
       }
     });
-
-    super.onInit();
   }
 
   void removeItem(int index) {
@@ -1165,14 +1133,25 @@ class NewPermitController extends GetxController {
 
   Future<void> getInventoryCategoryList({String? facilityId}) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
-    final _equipmentCategoryList =
-        await permitPresenter.getInventoryCategoryList(
-      isLoading: true,
-    );
-    if (_equipmentCategoryList != null) {
-      for (var equimentCategory in _equipmentCategoryList) {
-        equipmentCategoryList.add(equimentCategory);
+
+    isInventoryCategoryListLoaded.value = false;
+
+    try {
+      final _equipmentCategoryList =
+          await permitPresenter.getInventoryCategoryList(
+        isLoading: true,
+      );
+
+      if (_equipmentCategoryList != null) {
+        for (var equimentCategory in _equipmentCategoryList) {
+          equipmentCategoryList.add(equimentCategory);
+        }
       }
+
+      isInventoryCategoryListLoaded.value = true;
+    } catch (e) {
+      print('Error fetching inventory category list: $e');
+      isInventoryCategoryListLoaded.value = true;
     }
   }
 
