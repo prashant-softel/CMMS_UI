@@ -279,7 +279,7 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   Future<int> fetchLastScheduleId() async {
-    await getMcPlanDetail(planId: planId.value, facilityId: facilityId);
+    // await getMcPlanDetail(planId: planId.value, facilityId: facilityId);
 
     if (mcPlanDetailsModel.value?.schedules != null &&
         mcPlanDetailsModel.value!.schedules.isNotEmpty) {

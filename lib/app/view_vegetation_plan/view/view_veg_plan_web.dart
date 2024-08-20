@@ -292,7 +292,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                               DataColumn2(
                                                 // fixedWidth: 150,
                                                 label: Text(
-                                                  'No. of Blocks',
+                                                  'No. of SMB',
                                                   style: TextStyle(
                                                       fontSize: 15,
                                                       fontWeight:

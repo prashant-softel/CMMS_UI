@@ -87,10 +87,13 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                 child: Text(" / VEGETATION PLANNING LIST",
                                     style: Styles.greyLight14),
                               ),
-                              Text(
-                                " / ADD VEGETATION PLAN",
-                                style: Styles.greyLight14,
-                              )
+                              controller.vegid == 0
+                                  ? Text(
+                                      " / ADD VEGETATION PLAN",
+                                      style: Styles.greyLight14,
+                                    )
+                                  : Text(" / UPDATE VEGETATION PLAN",
+                                      style: Styles.greyLight14)
                             ],
                           ),
                         ),
@@ -129,10 +132,17 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                             top: 10,
                                                             right: 10,
                                                             left: 10),
-                                                    child: Text(
-                                                      "Add Vegetation Plan",
-                                                      style: Styles.blackBold14,
-                                                    ),
+                                                    child: controller.vegid == 0
+                                                        ? Text(
+                                                            "Add Vegetation Plan",
+                                                            style: Styles
+                                                                .blackBold14,
+                                                          )
+                                                        : Text(
+                                                            "Update Vegetation Plan",
+                                                            style: Styles
+                                                                .blackBold14,
+                                                          ),
                                                   ),
                                                 ],
                                               ),
@@ -801,7 +811,7 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                               DataColumn2(
                                                                 // fixedWidth: 150,
                                                                 label: Text(
-                                                                  'No. of Blocks',
+                                                                  'No. of SMB',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           15,
