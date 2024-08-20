@@ -29,6 +29,7 @@ class AddInventoryDetailsModel {
   int? manufacturerId;
   String? manufacturerName;
   int? supplierId;
+  int? currencyId;
   String? supplierName;
   int? acCapacity;
   int? dcCapacity;
@@ -105,6 +106,7 @@ class AddInventoryDetailsModel {
       this.manufacturerId,
       this.manufacturerName,
       this.supplierId,
+      this.currencyId,
       this.supplierName,
       this.acCapacity,
       this.dcCapacity,
@@ -177,6 +179,7 @@ class AddInventoryDetailsModel {
       manufacturerId: json['manufacturerId'],
       manufacturerName: json['manufacturerName'],
       supplierId: json['supplierId'],
+      currencyId: json['currencyId'],
       supplierName: json['supplierName'],
       acCapacity: json['acCapacity'],
       dcCapacity: json['dcCapacity'],
