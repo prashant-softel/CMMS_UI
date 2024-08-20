@@ -742,7 +742,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                     includeAsterisk:
                                                                         false,
                                                                     title:
-                                                                        'Affected Sr.No.: ',
+                                                                        'Sr.No.: ',
                                                                   ),
                                                                   Dimens
                                                                       .boxWidth10,

@@ -1,9 +1,12 @@
+import 'package:cmms/domain/models/create_warranty_claim_model.dart';
+
 class UpdateWarrantyClaim {
   int? id;
   int? facilityId;
   int? type;
   String? comment;
   List<dynamic>? uploadfile_ids;
+  List<SupplierActions?>? supplierActions;
 
   UpdateWarrantyClaim({
     this.id,
@@ -11,6 +14,7 @@ class UpdateWarrantyClaim {
     this.type,
     this.comment,
     this.uploadfile_ids,
+    this.supplierActions,
   });
 
   factory UpdateWarrantyClaim.fromJson(Map<String, dynamic> json) =>
@@ -19,6 +23,10 @@ class UpdateWarrantyClaim {
         facilityId: json['facilityId'],
         type: json['claim_status'],
         comment: json['comment'],
+        supplierActions: json["supplierActions"] != null
+            ? List<SupplierActions>.from(json["supplierActions"]
+                ?.map((x) => SupplierActions.fromJson(x)))
+            : [],
         uploadfile_ids: json["uploadfile_ids"] != null
             ? List<int>.from(json["uploadfile_ids"].map((x) => x))
             : [],
@@ -29,6 +37,7 @@ class UpdateWarrantyClaim {
         'facilityId': facilityId,
         'claim_status': type,
         'comment': comment,
+        "supplierActions": List<dynamic>.from(supplierActions!.map((x) => x)),
         "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
       };
 }
