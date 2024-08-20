@@ -441,7 +441,7 @@ class AddInventoryController extends GetxController {
       isBlocksSelected.value = false;
       isFormValid.value = false;
     }
-    if (selectedTypeName.value == '') {
+    if (selectedTypeNameId == 0) {
       isTypeNameSelected.value = false;
       isFormValid.value = false;
     }
