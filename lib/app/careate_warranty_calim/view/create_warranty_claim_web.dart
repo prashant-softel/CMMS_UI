@@ -194,26 +194,28 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                           ? ColorValues
                                                               .yellowColor
                                                           : controller
-                                                                          .viewWarrantyClaimDetailsModel
-                                                                          .value
-                                                                          ?.status ==
-                                                                      194 ||
-                                                                  controller
-                                                                          .viewWarrantyClaimDetailsModel
-                                                                          .value
-                                                                          ?.status ==
-                                                                      200
+                                                                      .viewWarrantyClaimDetailsModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  194
                                                               ? ColorValues
-                                                                  .appGreenColor
+                                                                  .primaryColor
                                                               : controller
                                                                           .viewWarrantyClaimDetailsModel
                                                                           .value
                                                                           ?.status ==
-                                                                      191
+                                                                      200
                                                                   ? ColorValues
-                                                                      .draftColor
-                                                                  : ColorValues
-                                                                      .appRedColor,
+                                                                      .appGreenColor
+                                                                  : controller
+                                                                              .viewWarrantyClaimDetailsModel
+                                                                              .value
+                                                                              ?.status ==
+                                                                          191
+                                                                      ? ColorValues
+                                                                          .draftColor
+                                                                      : ColorValues
+                                                                          .appRedColor,
                                                       width: 1,
                                                     ),
                                                     boxShadow: [

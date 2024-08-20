@@ -27,6 +27,7 @@ class WarrantyClaimModel {
       this.warranty_description,
       this.estimated_cost,
       this.quantity,
+      this.long_claim_status,
       this.status,
       this.status_code});
 
@@ -43,6 +44,7 @@ class WarrantyClaimModel {
   String? order_reference_number;
   String? warranty_description;
   String? estimated_cost;
+  String? long_claim_status;
   int? quantity;
   String? status;
   int? status_code;
@@ -68,6 +70,7 @@ class WarrantyClaimModel {
         quantity: json["quantity"],
         status: json["status"],
         status_code: json["status_code"],
+        long_claim_status: json["long_claim_status"],
       );
 
   Map<String, dynamic> toJson() => {
