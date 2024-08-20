@@ -181,8 +181,8 @@ class ModuleCleaningPlanningController extends GetxController {
       List<Equipments> eqp = value.map<Equipments>((e) {
         return Equipments(id: e);
       }).toList();
-      schedules
-          .add(Schedule(cleaningDay: int.tryParse('${key}'), equipments: eqp));
+      schedules.add(Schedule(
+          cleaningDay: int.tryParse('${key}'), equipments: eqp, scheduleId: 0));
     });
 
     print({"mappedData": mappedData});
@@ -217,7 +217,11 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   void updateMcPlan() async {
+    int firstScheduleId = await fetchLastScheduleId();
+    int scheduleIdCounter = firstScheduleId + 1;
+
     Map<int, List<Equipments>> equipmentMap = {};
+
     equipmentList.forEach((equipment) {
       equipment?.smbs?.forEach((smb) {
         if (smb.selectedDay != null) {
@@ -231,11 +235,20 @@ class ModuleCleaningPlanningController extends GetxController {
         }
       });
     });
+
+    bool isFirstSchedule = true;
     List<Schedule> sch = equipmentMap.entries.map((entry) {
+      int scheduleId;
+      if (isFirstSchedule) {
+        scheduleId = firstScheduleId;
+        isFirstSchedule = false;
+      } else {
+        scheduleId = scheduleIdCounter++;
+      }
       return Schedule(
-        cleaningDay: entry.key,
-        equipments: entry.value,
-      );
+          cleaningDay: entry.key,
+          equipments: entry.value,
+          scheduleId: scheduleId);
     }).toList();
 
     print({"sch": sch});
@@ -252,7 +265,7 @@ class ModuleCleaningPlanningController extends GetxController {
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         title: _mcTitelCtrlr,
         assignedToId: selectedAssignedToId.value,
-        schedules: sch ?? [],
+        schedules: sch,
         cleaningType: selectedCleaningId);
 
     var updateMcModelJsonString = [createMcModel.toJson()];
@@ -263,6 +276,17 @@ class ModuleCleaningPlanningController extends GetxController {
     );
     if (responseCreateMcModel == null) {}
     print('update MC   data: $updateMcModelJsonString');
+  }
+
+  Future<int> fetchLastScheduleId() async {
+    await getMcPlanDetail(planId: planId.value, facilityId: facilityId);
+
+    if (mcPlanDetailsModel.value?.schedules != null &&
+        mcPlanDetailsModel.value!.schedules.isNotEmpty) {
+      return mcPlanDetailsModel.value!.schedules.first.scheduleId ?? 0;
+    } else {
+      return 0;
+    }
   }
 
   Future<void> getMcPlanDetail(
@@ -363,7 +387,6 @@ class ModuleCleaningPlanningController extends GetxController {
                 int.tryParse(cleaningType[cleaningTypeIndex].id ?? '0') ?? 0;
             selectedCleaningType.value = value;
             isSelectedCleaningType.value = true;
-
           } else {
             selectedCleaningId = 0;
           }
@@ -455,7 +478,7 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   void checkFromModule() {
-    if (mcTitelCtrlr.text.trim()=='') {
+    if (mcTitelCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
     }
@@ -463,18 +486,17 @@ class ModuleCleaningPlanningController extends GetxController {
       isSelectedfrequency.value = false;
       isFormInvalid.value = true;
     }
-    
-     if (selectedCleaningId == 0) {
+
+    if (selectedCleaningId == 0) {
       isSelectedCleaningType.value = false;
       isFormInvalid.value = true;
     }
-      if (selectedAssignedToId == 0) {
+    if (selectedAssignedToId == 0) {
       isAssignedToSelected.value = false;
       isFormInvalid.value = true;
     }
 
-
-    if (durationInDayCtrlr.text.trim()=='') {
+    if (durationInDayCtrlr.text.trim() == '') {
       isEstimatedInvalid.value = true;
       isFormInvalid.value = true;
     }
