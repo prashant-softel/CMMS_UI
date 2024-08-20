@@ -153,7 +153,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                 0
                                             ? ActionButton(
                                                 icon: Icons.add,
-                                                label: "Add Warranty Claim",
+                                                label: "Add New",
                                                 onPressed: () {
                                                   controller.clearStoreData();
                                                   Get.toNamed(Routes
@@ -443,6 +443,9 @@ class WarrantyClaimListDataSource extends DataTableSource {
           (WarrantyClaimList?.warranty_claim_title ?? '')
               .toString()
               .contains(controller.wcTitleFilterText.value.toLowerCase()) &&
+          (WarrantyClaimList?.long_claim_status ?? '')
+              .toString()
+              .contains(controller.statusFilterText.value.toLowerCase()) &&
           (WarrantyClaimList?.equipment_sr_no ?? '').toString().contains(
               controller.equipmentSrNoFilterText.value.toLowerCase()) &&
           (WarrantyClaimList?.equipment_category ?? '').toString().contains(
@@ -451,11 +454,9 @@ class WarrantyClaimListDataSource extends DataTableSource {
               controller.equipmentNameFilterText.value.toLowerCase()) &&
           (WarrantyClaimList?.estimated_cost ?? '').toString().contains(
               controller.estimatedCostFilterText.value.toLowerCase()) &&
-          (WarrantyClaimList?.equipment_name ?? '').toString().contains(
-              controller.equipmentNameFilterText.value.toLowerCase()) &&
-          (WarrantyClaimList?.status ?? '')
+          (WarrantyClaimList?.equipment_name ?? '')
               .toString()
-              .contains(controller.statusFilterText.value.toLowerCase());
+              .contains(controller.equipmentNameFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
@@ -478,12 +479,12 @@ class WarrantyClaimListDataSource extends DataTableSource {
       "wc_id",
       '${WarrantyClaimListDetails?.warranty_claim_title ?? ''}',
       formattedDateOfClaim,
+      '${WarrantyClaimListDetails?.long_claim_status ?? '-'}',
       // '${WarrantyClaimListDetails?.date_of_claim ?? ''}',
       '${WarrantyClaimListDetails?.equipment_sr_no ?? ''}',
       '${WarrantyClaimListDetails?.equipment_category ?? ''}',
       '${WarrantyClaimListDetails?.equipment_name ?? ''}',
       '${WarrantyClaimListDetails?.estimated_cost ?? ''}',
-      '${WarrantyClaimListDetails?.status_code ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -550,30 +551,18 @@ class WarrantyClaimListDataSource extends DataTableSource {
                                           199
                                   ? ColorValues.yellowColor
                                   : controller.warrantyClaimList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        e?.wc_id ==
-                                                        WarrantyClaimListDetails!
-                                                            .wc_id,
-                                                    orElse: () =>
-                                                        WarrantyClaimModel(
-                                                            wc_id: 00),
-                                                  )
-                                                  ?.status_code ==
-                                              194 ||
-                                          controller.warrantyClaimList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        e?.wc_id ==
-                                                        WarrantyClaimListDetails!
-                                                            .wc_id,
-                                                    orElse: () =>
-                                                        WarrantyClaimModel(
-                                                            wc_id: 00),
-                                                  )
-                                                  ?.status_code ==
-                                              200
-                                      ? ColorValues.appGreenColor
+                                              .firstWhere(
+                                                (e) =>
+                                                    e?.wc_id ==
+                                                    WarrantyClaimListDetails!
+                                                        .wc_id,
+                                                orElse: () =>
+                                                    WarrantyClaimModel(
+                                                        wc_id: 00),
+                                              )
+                                              ?.status_code ==
+                                          194
+                                      ? ColorValues.primaryColor
                                       : controller.warrantyClaimList
                                                   .firstWhere(
                                                     (e) =>
@@ -585,9 +574,22 @@ class WarrantyClaimListDataSource extends DataTableSource {
                                                             wc_id: 00),
                                                   )
                                                   ?.status_code ==
-                                              191
-                                          ? ColorValues.draftColor
-                                          : ColorValues.appRedColor),
+                                              200
+                                          ? ColorValues.appGreenColor
+                                          : controller.warrantyClaimList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            e?.wc_id ==
+                                                            WarrantyClaimListDetails!
+                                                                .wc_id,
+                                                        orElse: () =>
+                                                            WarrantyClaimModel(
+                                                                wc_id: 00),
+                                                      )
+                                                      ?.status_code ==
+                                                  191
+                                              ? ColorValues.draftColor
+                                              : ColorValues.appRedColor),
                           child: Text(
                             '${WarrantyClaimListDetails?.status}',
                             style: Styles.white10.copyWith(
