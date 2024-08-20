@@ -126,36 +126,22 @@ class EditJobController extends GetxController {
   void onInit() async {
     try {
       await setJobId();
-      //
-      // if (jobID.value != 0) {
-      //   getJobDetails(jobID.value, facilityId);
-      // }
       facilityIdStreamSubscription =
           homeController.facilityId$.listen((event) async {
         selectedFacilityId = event;
-        //Future.delayed(Duration(seconds: 1), () {
-        // });
 
-        // await getFacilityList();
-        // Future.delayed(Duration(seconds: 1), () {
-        getBlocksList(selectedFacilityId);
-        // });
-        // Future.delayed(Duration(seconds: 1), () {
+        await getBlocksList(selectedFacilityId);
         await getInventoryCategoryList();
-        // });
 
-        // Future.delayed(Duration(seconds: 1), () {
-        //   getWorkTypeList();
-        // });
+        if (isInventoryCategoryListLoaded.value &&
+            blockList != null &&
+            equipmentCategoryList.isNotEmpty) {
+          getJobDetails(jobID.value, selectedFacilityId);
+        }
+
         Future.delayed(Duration(seconds: 1), () {
           getAssignedToList();
         });
-        if (blockList != null && equipmentCategoryList != null) {
-          getJobDetails(jobID.value, selectedFacilityId);
-        }
-        // Future.delayed(Duration(seconds: 1), () {
-        //   getToolsRequiredToWorkTypeList(workTypeIds.toString());
-        // });
       });
     } catch (e) {
       print({"editjoberror", e});
