@@ -289,7 +289,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
 
                                                     return PaginatedDataTable2(
                                                       columnSpacing: 10,
-                                                      dataRowHeight: 70,
+                                                      dataRowHeight: 75,
                                                       source:
                                                           dataSource, // Custom DataSource class
                                                       // headingRowHeight:
@@ -516,11 +516,13 @@ class WarrantyClaimListDataSource extends DataTableSource {
                       Text(
                         'WC${WarrantyClaimListDetails?.wc_id}',
                       ),
-                      Dimens.boxHeight10,
+                      Dimens.boxHeight8,
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
+                          padding:
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                          margin: EdgeInsets.only(top: 5),
                           decoration: BoxDecoration(
                               color: controller.warrantyClaimList
                                               .firstWhere(

@@ -5,6 +5,7 @@ import 'package:cmms/app/widgets/body_custom_app_bar.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -503,76 +504,111 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 .size
                                                                 .width *
                                                             .2),
-                                                        child: Obx(
-                                                          () => SizedBox(
-                                                            // height:
-                                                            //     MediaQuery.of(context).size.height *
-                                                            //         0.040,
-                                                            child:
-                                                                MultiSelectDialogField(
-                                                              dialogWidth: 300,
-                                                              dialogHeight: 400,
-                                                              searchable: true,
-                                                              validator:
-                                                                  (selectedItems) {
-                                                                if (controller
-                                                                        .isWorkAreaSelected
-                                                                        .value ==
-                                                                    false) {
-                                                                  return "Required field";
-                                                                } else {
-                                                                  return null;
-                                                                }
-                                                              },
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .always,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                border:
-                                                                    Border.all(
-                                                                  color: controller
-                                                                              .isWorkAreaSelected
-                                                                              .value ==
-                                                                          false
-                                                                      ? Colors
-                                                                          .red
-                                                                      : Colors
-                                                                          .transparent,
-                                                                  width: 1.0,
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                              ),
-                                                              buttonIcon: Icon(Icons
-                                                                  .arrow_drop_down),
-                                                              items: controller
-                                                                  .workAreaList
-                                                                  .map((e) =>
-                                                                      MultiSelectItem(
-                                                                          e,
-                                                                          e?.name ??
-                                                                              ''))
-                                                                  .toList(),
-                                                              onConfirm:
-                                                                  (selectedOptionsList) =>
-                                                                      {
-                                                                controller
-                                                                    .workAreasSelected(
-                                                                        selectedOptionsList),
-                                                                controller
-                                                                        .isWorkAreaSelected
-                                                                        .value =
-                                                                    selectedOptionsList
-                                                                        .isNotEmpty,
-                                                              },
-                                                              chipDisplay:
-                                                                  MultiSelectChipDisplay(),
-                                                            ),
-                                                          ),
-                                                        ),
+                                                        child:
+                                                        //  Obx(() {
+                                                        //   print(
+                                                        //       'Work Area List: ${controller.workAreaList}');
+                                                        //   print(
+                                                        //       'Selected Work Area List: ${controller.selectedWorkAreaList}');
+                                                        //   return SizedBox(
+                                                        //     child: MultiSelectDialogField<
+                                                        //         InventoryModel?>(
+                                                        //       dialogWidth: 300,
+                                                        //       dialogHeight: 400,
+                                                        //       searchable: true,
+                                                        //       validator:
+                                                        //           (selectedItems) {
+                                                        //         if (controller
+                                                        //                 .isWorkAreaSelected
+                                                        //                 .value ==
+                                                        //             false) {
+                                                        //           return "Required field";
+                                                        //         } else {
+                                                        //           return null;
+                                                        //         }
+                                                        //       },
+                                                        //       autovalidateMode:
+                                                        //           AutovalidateMode
+                                                        //               .always,
+                                                        //       decoration:
+                                                        //           BoxDecoration(
+                                                        //         border:
+                                                        //             Border.all(
+                                                        //           color: controller
+                                                        //                       .isWorkAreaSelected
+                                                        //                       .value ==
+                                                        //                   false
+                                                        //               ? Colors
+                                                        //                   .red
+                                                        //               : Colors
+                                                        //                   .transparent,
+                                                        //           width: 1.0,
+                                                        //         ),
+                                                        //         borderRadius:
+                                                        //             BorderRadius
+                                                        //                 .circular(
+                                                        //                     5),
+                                                        //       ),
+                                                        //       buttonIcon: Icon(Icons
+                                                        //           .arrow_drop_down),
+                                                        //       items: controller
+                                                        //           .workAreaList
+                                                        //           .map((e) =>
+                                                        //               MultiSelectItem<
+                                                        //                   InventoryModel?>(
+                                                        //                 e,
+                                                        //                 e?.name ??
+                                                        //                     '',
+                                                        //               ))
+                                                        //           .toList(),
+                                                        //       initialValue:
+                                                        //           controller
+                                                        //               .selectedWorkAreaList
+                                                        //               .toList(),
+                                                        //       onConfirm:
+                                                        //           (selectedOptionsList) {
+                                                        //         print(
+                                                        //             'Selected Work Area: $selectedOptionsList');
+                                                        //         controller
+                                                        //             .workAreasSelected(
+                                                        //                 selectedOptionsList);
+                                                        //         controller
+                                                        //                 .isWorkAreaSelected
+                                                        //                 .value =
+                                                        //             selectedOptionsList
+                                                        //                 .isNotEmpty;
+                                                        //       },
+                                                        //       chipDisplay:
+                                                        //           MultiSelectChipDisplay(),
+                                                        //     ),
+                                                        //   );
+                                                        // }),
+
+                                                            Obx(() {
+                                                          return MultiSelectDialogField<
+                                                              InventoryModel?>(
+                                                            items: controller
+                                                                .selectedWorkAreaList
+                                                                .map((e) =>
+                                                                    MultiSelectItem<
+                                                                            InventoryModel?>(
+                                                                        e,
+                                                                        e?.name ??
+                                                                            ''))
+                                                                .toList(),
+                                                            initialValue: controller
+                                                                .selectedWorkAreaList
+                                                                .toList(),
+                                                            onConfirm:
+                                                                (selectedOptionsList) {
+                                                              controller
+                                                                  .workAreasSelected(
+                                                                      selectedOptionsList);
+                                                            },
+                                                            chipDisplay:
+                                                                MultiSelectChipDisplay(),
+                                                          );
+                                                        }),
                                                       ),
                                                     ],
                                                   ),
