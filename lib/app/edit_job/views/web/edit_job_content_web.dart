@@ -385,65 +385,63 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 .size
                                                                 .width *
                                                             .2),
-                                                        child: Obx(
-                                                          () {
-                                                            if (controller
-                                                                .equipmentCategoryList
-                                                                .isEmpty) {
-                                                              return CustomMultiSelectDialogField(
-                                                                onConfirm:
-                                                                    (selectedOptionsList) {},
-                                                                buttonText: "",
-                                                                initialValue: [],
-                                                                items: [],
-                                                                title: "",
-                                                              );
-                                                            }
+                                                        child: Obx(() {
+                                                          if (!controller
+                                                              .isInventoryCategoryListLoaded
+                                                              .value) {
+                                                            return CircularProgressIndicator(); // Loading indicator while waiting
+                                                          }
 
-                                                            final initialValue =
-                                                                (controller
-                                                                        .selectedEquipmentCategoryIdList
-                                                                        .isNotEmpty
-                                                                    ? controller
-                                                                        .selectedEquipmentCategoryIdList
-                                                                    : []);
-
-                                                            print(
-                                                                'Initial Value: $initialValue');
-
+                                                          if (!controller
+                                                              .isInventoryCategoryListLoaded
+                                                              .value) {
                                                             return CustomMultiSelectDialogField(
-                                                              title:
-                                                                  'Please Select',
-                                                              buttonText:
-                                                                  'Equipment Category',
-                                                              initialValue:
-                                                                  initialValue,
-                                                              items: controller
-                                                                      .equipmentCategoryList
-                                                                      .map(
-                                                                        (equipmentCategory) =>
-                                                                            MultiSelectItem(
-                                                                          equipmentCategory!
-                                                                              .id,
-                                                                          equipmentCategory
-                                                                              .name,
-                                                                        ),
-                                                                      )
-                                                                      ?.toList() ??
-                                                                  [],
                                                               onConfirm:
-                                                                  (selectedOptionsList) {
-                                                                controller
-                                                                    .equipmentCategoriesSelected(
-                                                                        selectedOptionsList);
-                                                                print(
-                                                                    'Selected Equipment Categories: $selectedOptionsList');
-                                                                print(
-                                                                    'Updated Selected Categories in Controller: ${controller.selectedEquipmentCategoryIdList}');
-                                                              },
+                                                                  (selectedOptionsList) {},
+                                                              buttonText: "",
+                                                              initialValue: [],
+                                                              items: [],
+                                                              title: "",
                                                             );
-                                                          },
-                                                        ),
+                                                          }
+
+                                                          final initialValue = controller
+                                                                  .selectedEquipmentCategoryIdList
+                                                                  .isNotEmpty
+                                                              ? controller
+                                                                  .selectedEquipmentCategoryIdList
+                                                              : [];
+
+                                                          return CustomMultiSelectDialogField(
+                                                            title:
+                                                                'Please Select',
+                                                            buttonText:
+                                                                'Equipment Category',
+                                                            initialValue:
+                                                                initialValue,
+                                                            items: controller
+                                                                .equipmentCategoryList
+                                                                .map(
+                                                                    (equipmentCategory) {
+                                                              return MultiSelectItem(
+                                                                equipmentCategory!
+                                                                    .id,
+                                                                equipmentCategory
+                                                                    .name,
+                                                              );
+                                                            }).toList(),
+                                                            onConfirm:
+                                                                (selectedOptionsList) {
+                                                              controller
+                                                                  .equipmentCategoriesSelected(
+                                                                      selectedOptionsList);
+                                                              print(
+                                                                  'Selected Equipment Categories: $selectedOptionsList');
+                                                              print(
+                                                                  'Updated Selected Categories in Controller: ${controller.selectedEquipmentCategoryIdList}');
+                                                            },
+                                                          );
+                                                        }),
                                                       )
                                                     ],
                                                   ),
