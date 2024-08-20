@@ -253,7 +253,7 @@ class AddVegetationPlanController extends GetxController {
   }
 
   Future<int> fetchLastScheduleId() async {
-    await getVegPlanDetail(planId: vegid.value, facilityId: facilityId);
+    // await getVegPlanDetail(planId: vegid.value, facilityId: facilityId);
 
     if (vegPlanDetailsModel.value?.schedules != null &&
         vegPlanDetailsModel.value!.schedules!.isNotEmpty) {
@@ -291,7 +291,7 @@ class AddVegetationPlanController extends GetxController {
           rowItem.value.add(
             [
               {"key": "day", "value": '${element.cleaningDay}'},
-              {'key': "noOfBlocks", "value": '${element.blocks}'},
+              {'key': "noOfBlocks", "value": '${element.smbs}'},
               {"key": "noOfInverters", "value": '${element.invs}'},
               {'key': "area", "value": '${element.scheduledArea}'},
             ],

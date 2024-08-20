@@ -1991,6 +1991,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                         ))
                                                   ])
                                             : Container(),
+                            Dimens.boxHeight10,
                             Center(
                               child: Container(
                                 height: 35,
