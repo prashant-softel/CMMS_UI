@@ -9423,7 +9423,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/RejectScheduleExecution',
+      'Vegetation/RejectScheduleExecutionVegetation',
       Request.put,
       rejecttoJsonString,
       isLoading ?? true,

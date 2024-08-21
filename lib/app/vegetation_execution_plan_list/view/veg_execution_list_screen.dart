@@ -13,7 +13,8 @@ import 'package:get/get.dart';
 class VegExecutionListScreen extends GetView<VegExecutionListController> {
   VegExecutionListScreen();
   final VegExecutionListController controller = Get.find();
-  final HomeController homecontroller = Get.find();
+
+   final homecontroller = Get.find<HomeController>();
 
   Widget build(BuildContext context) {
     return Scaffold(

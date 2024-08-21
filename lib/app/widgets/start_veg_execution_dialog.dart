@@ -92,9 +92,9 @@ class StartVegExecutionMessageDialog extends GetView {
                       facilityId: controller.facilityId.value,
                     );
                     controller.getVegTaskEquipmentList(
-                      executionId: controller.vegexe.value,
-                      facilityId: controller.facilityId.value,
-                    );
+                        executionId: controller.vegexe.value,
+                        facilityId: controller.facilityId.value,
+                        isLoading: true);
                     controller.getAssignedToList(); //  });
 
                     Get.back();

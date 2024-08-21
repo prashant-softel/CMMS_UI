@@ -196,12 +196,12 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             Text(
                                                 '${controller.mcPlanDetailsModel.value?.title ?? ''}',
                                                 style: Styles.blue17),
+                                            Dimens.boxHeight10,
                                             Obx(
                                               () => Text(
                                                   '${controller.mcPlanDetailsModel.value?.createdBy ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                   style: Styles.blue17),
                                             ),
-                                            Dimens.boxHeight10,
                                           ],
                                         ),
                                         Spacer(),
@@ -225,6 +225,8 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             Text(
                                                 '${controller.mcPlanDetailsModel.value?.createdAt ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                 style: Styles.blue17),
+                                            Dimens.boxHeight10,
+
                                             Text(
                                                 '${controller.mcPlanDetailsModel.value?.assignedTo ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                 style: Styles.blue17),
