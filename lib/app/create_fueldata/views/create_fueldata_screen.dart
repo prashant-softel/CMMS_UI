@@ -1,18 +1,19 @@
+import 'package:cmms/app/create_observation/views/mobile/create_observation_mobile.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
-import 'package:cmms/app/list_of_occupationalhealth/views/web/occupational_list_web.dart';
-import 'package:cmms/app/mis_list_of_observation/views/mobile/observation_list_mobile.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import '../occupational_list_controller.dart';
+import '../create_fueldata_controller.dart';
+import 'web/create_fueldata_web.dart';
 
-class OccupationalDataListScreen extends GetView<OccupationalDataListController> {
-  OccupationalDataListScreen({super.key});
-  final controller = Get.find<OccupationalDataListController>();
+class FuelDataScreen extends GetView<CreateFuelDataController> {
+  FuelDataScreen({super.key});
+  // final controller = Get.find<CreateFuelDataController>();
   final homecontroller = Get.find<HomeController>();
 
   @override
@@ -21,7 +22,7 @@ class OccupationalDataListScreen extends GetView<OccupationalDataListController>
       appBar: Responsive.isMobile(context)
           ? AppBar(
               title: HeadingProfileAppBar(
-                title: "List Of Occupational Health",
+                title: "Create Regulatary Visits",
               ),
             )
           : null,
@@ -48,10 +49,12 @@ class OccupationalDataListScreen extends GetView<OccupationalDataListController>
                     child: Column(
                       children: [
                         if (Responsive.isMobile(context))
-                          Expanded(child: ObservationListMobile()),
+                          Expanded(
+                            child: CreateObservationMobile(),
+                          ),
                         if (Responsive.isDesktop(context))
                           Expanded(
-                            child: OccupationalListWeb(),
+                            child: FuelDataWeb(),
                           )
                       ],
                     ),
