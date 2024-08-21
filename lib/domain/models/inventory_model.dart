@@ -14,6 +14,7 @@ String inventoryModelToJson(List<InventoryModel> data) =>
 class InventoryModel {
   InventoryModel({
     this.id,
+    this.area,
     this.name,
     this.facilityName,
     this.blockName,
@@ -62,6 +63,7 @@ class InventoryModel {
   });
 
   int? id;
+  int? area;
 
   int? module_qty;
   int? checklist_id;
@@ -164,6 +166,7 @@ class InventoryModel {
             ? null
             : DateTime.parse(json['calibrationLastDate'] as String),
         status: json["status"],
+        area: json["area"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -213,5 +216,6 @@ class InventoryModel {
         "start_date": startdate?.toIso8601String(),
         "calibrationLastDate": calilastdate?.toIso8601String(),
         "status": status,
+        "area": area,
       };
 }

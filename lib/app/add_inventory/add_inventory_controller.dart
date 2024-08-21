@@ -616,7 +616,7 @@ class AddInventoryController extends GetxController {
             manufacturerId: selectedmanufacturerNameId,
             blockId: selectedBlockListId,
             categoryId: selectedEquipmentCategoryNameId.value,
-            currency: selectedUnitCurrencyId,
+            currencyId: selectedUnitCurrencyId,
             cost: _cost,
             model: _modelNoCtrlr,
             serialNumber: _serialNoCtrlr,
@@ -641,8 +641,7 @@ class AddInventoryController extends GetxController {
             customerId: 1,
             operatorId: 3,
             ownerId: 2,
-            stockCount: 50,
-            attachments: null);
+            stockCount: 50);
     var addInventoryJsonString = addInventoryRequestModel
         .toJson(); //createCheckListToJson([createChecklist]);
 
@@ -759,7 +758,7 @@ class AddInventoryController extends GetxController {
             manufacturerId: selectedmanufacturerNameId,
             blockId: selectedBlockListId,
             categoryId: selectedEquipmentCategoryNameId.value,
-            currency: selectedUnitCurrencyId,
+            currencyId: selectedUnitCurrencyId,
             cost: _cost,
             model: _modelNoCtrlr,
             serialNumber: _serialNoCtrlr,
@@ -783,7 +782,7 @@ class AddInventoryController extends GetxController {
             operatorId: 3,
             ownerId: 2,
             stockCount: 50,
-            attachments: null,
+            // attachments: null,
             uplaodfile_of_calibration: _calibrationFileIds,
             uplaodfile_of_warranty: _warrantyFileIds);
 
@@ -1027,22 +1026,8 @@ class AddInventoryController extends GetxController {
             int warrantyUsageTermIndex =
                 warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
             selectedwarrantyUsageTermNameId =
-                warrantyNameList[warrantyUsageTermIndex]?.id ?? 0;
+                warrantyUsageTermNameList[warrantyUsageTermIndex]?.id ?? 0;
             selectedwarrantyUsageTermListName.value = value;
-            // iswarrantyUsageTermNameSelected.value = true;
-          } else {
-            selectedwarrantyUsageTermNameId = 0;
-          }
-        }
-        break;
-      case const (RxList<WarrantyUsageTermListModel>):
-        {
-          if (value != "Please Select") {
-            int warrantyUsageIndex =
-                warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
-
-            selectedwarrantyUsageTermNameId =
-                warrantyUsageTermNameList[warrantyUsageIndex]?.id ?? 0;
           } else {
             selectedwarrantyUsageTermNameId = 0;
           }
