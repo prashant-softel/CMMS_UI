@@ -642,7 +642,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     // Draw images
     page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
 
-    final String centerText = 'PM Task View Report';
+    final String centerText = 'PM Task Report';
     final PdfFont centerTextFont =
         PdfStandardFont(PdfFontFamily.helvetica, 12, style: PdfFontStyle.bold);
     final Size centerTextSize = centerTextFont.measureString(centerText);
@@ -689,13 +689,15 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       'Start date',
       'PMT Status'
     ];
+
     List<String> pmInfoValuesLeft = [
       'PMT${pmtaskViewModel.value?.id ?? ''}',
       '${pmtaskViewModel.value?.plan_title ?? ''}',
       '${pmtaskViewModel.value?.due_date ?? ''}',
-      '${pmtaskViewModel.value?.started_at ?? ''}',
+      '${pmtaskViewModel.value?.start_time == "0001-01-01T00:00:00" ? '' : pmtaskViewModel.value?.start_time ?? ''}',
       '${pmtaskViewModel.value?.status_short ?? ''}',
     ];
+
     double rowHeight = 15;
 
     for (int i = 0; i < pmInfoLabelsLeft.length; i++) {
@@ -964,11 +966,13 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         bounds: Rect.fromLTWH(margin, currentY + 5, tbtConductedByWidth,
             rowHeight)); // TBT conducted by
     page.graphics.drawString(
-        '${pmtaskViewModel.value?.tbT_done_time ?? ''}', contentFont,
+        '${pmtaskViewModel.value?.tbT_done_time == "0001-01-01T00:00:00" ? '' : pmtaskViewModel.value?.tbT_done_time ?? ''}',
+        contentFont,
         bounds: Rect.fromLTWH(margin + tbtConductedByWidth, currentY + 5,
             tbtDoneTimeWidth, rowHeight)); // TBT done time
     page.graphics.drawString(
-        '${pmtaskViewModel.value?.started_at ?? ''}', contentFont,
+        '${pmtaskViewModel.value?.started_at == "0001-01-01T00:00:00" ? '' : pmtaskViewModel.value?.started_at ?? ''}',
+        contentFont,
         bounds: Rect.fromLTWH(margin + tbtConductedByWidth + tbtDoneTimeWidth,
             currentY + 5, startTimeWidth, rowHeight)); // Start time
     page.graphics.drawString(
@@ -1260,5 +1264,4 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         bounds: Rect.fromLTWH(pageWidth - (signatureSize.width + margin),
             currentY + 20, signatureSize.width, signatureSize.height))!;
   }
-
 }
