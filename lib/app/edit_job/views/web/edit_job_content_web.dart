@@ -2,6 +2,7 @@ import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/body_custom_app_bar.dart';
+import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
@@ -384,70 +385,64 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 .size
                                                                 .width *
                                                             .2),
-                                                        child: Obx(
-                                                          () =>
-                                                              MultiSelectDialogField(
-                                                            dialogWidth: 300,
-                                                            dialogHeight: 400,
-                                                            searchable: true,
-                                                            validator:
-                                                                (selectedItems) {
-                                                              if (controller
-                                                                      .isEquipmentCategorySelected
-                                                                      .value ==
-                                                                  false) {
-                                                                return "Required field";
-                                                              } else {
-                                                                return null;
-                                                              }
-                                                            },
-                                                            autovalidateMode:
-                                                                AutovalidateMode
-                                                                    .always,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border:
-                                                                  Border.all(
-                                                                color: controller
-                                                                            .isEquipmentCategorySelected
-                                                                            .value ==
-                                                                        false
-                                                                    ? Colors.red
-                                                                    : Colors
-                                                                        .transparent,
-                                                                width: 1.0,
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
-                                                            buttonIcon: Icon(Icons
-                                                                .arrow_drop_down),
+                                                        child: Obx(() {
+                                                          if (!controller
+                                                              .isInventoryCategoryListLoaded
+                                                              .value) {
+                                                            return CircularProgressIndicator(); // Loading indicator while waiting
+                                                          }
+
+                                                          if (!controller
+                                                              .isInventoryCategoryListLoaded
+                                                              .value) {
+                                                            return CustomMultiSelectDialogField(
+                                                              onConfirm:
+                                                                  (selectedOptionsList) {},
+                                                              buttonText: "",
+                                                              initialValue: [],
+                                                              items: [],
+                                                              title: "",
+                                                            );
+                                                          }
+
+                                                          final initialValue = controller
+                                                                  .selectedEquipmentCategoryIdList
+                                                                  .isNotEmpty
+                                                              ? controller
+                                                                  .selectedEquipmentCategoryIdList
+                                                              : [];
+
+                                                          return CustomMultiSelectDialogField(
+                                                            title:
+                                                                'Please Select',
+                                                            buttonText:
+                                                                'Equipment Category',
+                                                            initialValue:
+                                                                initialValue,
                                                             items: controller
                                                                 .equipmentCategoryList
                                                                 .map(
-                                                                  (equipCat) =>
-                                                                      MultiSelectItem<
-                                                                          InventoryCategoryModel?>(
-                                                                    equipCat,
-                                                                    equipCat?.name ??
-                                                                        '',
-                                                                  ),
-                                                                )
-                                                                .toList(),
+                                                                    (equipmentCategory) {
+                                                              return MultiSelectItem(
+                                                                equipmentCategory!
+                                                                    .id,
+                                                                equipmentCategory
+                                                                    .name,
+                                                              );
+                                                            }).toList(),
                                                             onConfirm:
-                                                                (selectedOptionsList) =>
-                                                                    {
+                                                                (selectedOptionsList) {
                                                               controller
                                                                   .equipmentCategoriesSelected(
-                                                                      selectedOptionsList),
+                                                                      selectedOptionsList);
+                                                              print(
+                                                                  'Selected Equipment Categories: $selectedOptionsList');
+                                                              print(
+                                                                  'Updated Selected Categories in Controller: ${controller.selectedEquipmentCategoryIdList}');
                                                             },
-                                                            chipDisplay:
-                                                                MultiSelectChipDisplay(),
-                                                          ),
-                                                        ),
-                                                      ),
+                                                          );
+                                                        }),
+                                                      )
                                                     ],
                                                   ),
                                                 ),

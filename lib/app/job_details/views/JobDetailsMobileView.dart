@@ -107,9 +107,8 @@ Widget _content(context, controller) {
                                                 null)
                                             ? controller.jobDetailsModel.value
                                                 ?.equipmentCatList
-                                                ?.map<String>((item) => item
-                                                    .equipmentCatName
-                                                    .toString())
+                                                ?.map<String>((item) =>
+                                                    item.name.toString())
                                                 .toList()
                                             : [],
                                       ),

@@ -240,24 +240,23 @@ class WarrantyClaimController extends GetxController {
     "Id": true,
     "Warranty Claim Title": true,
     "Date Of Claim": true,
-
+    "Claim Status": true,
     "Equipment Serial No.": true,
     "Equipment Category": true,
     "Equipment Name": true,
     "Estimated Cost": true,
-    "Status": true,
 
     // "search": true,
   });
   final Map<String, double> columnwidth = {
     "Id": 153,
     "Warranty Claim Title": 220,
-    "Date Of Claim": 320,
+    "Date Of Claim": 200,
+    "Claim Status": 250,
     "Equipment Serial No.": 200,
     "Equipment Category": 250,
     "Equipment Name": 250,
     "Estimated Cost": 250,
-    "Status": 250,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -324,11 +323,11 @@ class WarrantyClaimController extends GetxController {
       "Id": warrantyClaimIdFilterText,
       "Warranty Claim Title": wcTitleFilterText,
       "Date Of Claim": dateOfClaimFilterText,
+      "Claim Status": statusFilterText,
       "Equipment Serial No.": equipmentSrNoFilterText,
       "Equipment Category": equipmentCategoryFilterText,
       "Equipment Name": equipmentNameFilterText,
       "Estimated Cost": estimatedCostFilterText,
-      "Status": statusFilterText
     };
     facilityIdStreamSubscription =
         homeController.facilityId$.listen((event) async {

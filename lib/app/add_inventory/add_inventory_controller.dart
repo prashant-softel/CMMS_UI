@@ -326,7 +326,7 @@ class AddInventoryController extends GetxController {
       selectedInventoryType.value =
           editAddInventoryDetailsModel.value?.type ?? '';
       selectedTypeName.value = editAddInventoryDetailsModel.value?.type ?? "";
-      selectedTypeNameId= editAddInventoryDetailsModel.value?.typeId ?? 0;
+      selectedTypeNameId = editAddInventoryDetailsModel.value?.typeId ?? 0;
       assetsNameCtrlr.text = editAddInventoryDetailsModel.value?.name ?? '';
       moduleQuantityCtrlr.text =
           editAddInventoryDetailsModel.value?.moduleQuantity.toString() ?? '';
@@ -404,6 +404,16 @@ class AddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.calibrationFreqType ?? "";
       selectedfrequencyId =
           editAddInventoryDetailsModel.value?.calibrationFrequency ?? 0;
+      selectedWarrentyNameId =
+          editAddInventoryDetailsModel.value?.warrantyTypeId ?? 0;
+      selectedwarrantyUsageTermNameId =
+          editAddInventoryDetailsModel.value?.warrantyTermTypeId ?? 0;
+      selectedmanufacturerNameId =
+          editAddInventoryDetailsModel.value?.warrantyProviderId ?? 0;
+      selectedsupplierrNameId =
+          editAddInventoryDetailsModel.value?.supplierId ?? 0;
+      selectedUnitCurrencyId =
+          editAddInventoryDetailsModel.value?.currencyId ?? 0;
 
       calibrationRemaingCtrlr.text =
           "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationReminderDays ?? 0}")}";
@@ -565,6 +575,8 @@ class AddInventoryController extends GetxController {
     String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
     String _moduleQuantityCtrlr = moduleQuantityCtrlr.text.trim();
 
+    List<dynamic> _warrantyFileIds = dropzoneController3.fileIds;
+    List<dynamic> _calibrationFileIds = dropzoneController2.fileIds;
     String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
     String _certificateNoCtrlr = certificateNoCtrlr.text.trim();
     String _discriptionCtrlr = discriptionCtrlr.text.trim();
@@ -604,7 +616,7 @@ class AddInventoryController extends GetxController {
             manufacturerId: selectedmanufacturerNameId,
             blockId: selectedBlockListId,
             categoryId: selectedEquipmentCategoryNameId.value,
-            currency: selectedUnitCurrencyId.toString(),
+            currency: selectedUnitCurrencyId,
             cost: _cost,
             model: _modelNoCtrlr,
             serialNumber: _serialNoCtrlr,
@@ -620,6 +632,8 @@ class AddInventoryController extends GetxController {
             warranty_term_type: selectedwarrantyUsageTermNameId,
             parent_equipment_no: _parentEquipmentNoCtrlr,
             uplaodfile_ids: fileIds,
+            uplaodfile_of_warranty: _warrantyFileIds,
+            uplaodfile_of_calibration: _calibrationFileIds,
             calibrationFrequencyType: selectedfrequency.value,
             acCapacity: 2000,
             dcCapacity: 5000,
@@ -745,7 +759,7 @@ class AddInventoryController extends GetxController {
             manufacturerId: selectedmanufacturerNameId,
             blockId: selectedBlockListId,
             categoryId: selectedEquipmentCategoryNameId.value,
-            currency: selectedUnitCurrencyId.toString(),
+            currency: selectedUnitCurrencyId,
             cost: _cost,
             model: _modelNoCtrlr,
             serialNumber: _serialNoCtrlr,

@@ -766,6 +766,7 @@ class Repository {
   Future<Map<String, dynamic>> escalateModule(
     int moduleId,
     int statusId,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -774,6 +775,7 @@ class Repository {
         auth: auth,
         moduleId: moduleId,
         statusId: statusId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
       var resourceData = res.data;
@@ -13954,7 +13956,7 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: " paln  Add Successfully...", fontSize: 16.0);
-        Get.offNamed(
+        Get.offAllNamed(
           Routes.vegetationPlanListScreen,
         );
 

@@ -3529,10 +3529,11 @@ class ConnectHelper {
     required String auth,
     required int moduleId,
     required int statusId,
+    required int facilityId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'EM/Escalate?moduleId=$moduleId&statusId=$statusId',
+      'EM/Escalate?moduleId=$moduleId&statusId=$statusId&facilityId=$facilityId',
       Request.post,
       null,
       isLoading ?? false,

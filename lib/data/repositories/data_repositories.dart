@@ -2026,12 +2026,14 @@ class DataRepository extends DomainRepository {
     required String auth,
     required int moduleId,
     required int statusId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await connectHelper.escalateModule(
         auth: auth,
         moduleId: moduleId,
         statusId: statusId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 

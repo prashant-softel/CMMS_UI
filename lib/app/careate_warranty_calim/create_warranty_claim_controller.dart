@@ -1591,11 +1591,22 @@ class CreateWarrantyClaimController extends GetxController {
   void updateWarranty({
     List<dynamic>? fileIds,
   }) async {
+    late List<SupplierActions> supplier_action_list = [];
+
+    supplierActions.forEach((e) {
+      supplier_action_list.add(SupplierActions(
+        srNumber: e.srNumber,
+        is_required: e.is_required,
+        name: e.name,
+        required_by_date: e.required_by_date,
+      ));
+    });
     UpdateWarrantyClaim update = UpdateWarrantyClaim(
       id: wc_id.value,
       facilityId: facilityId,
       uploadfile_ids: fileIds,
       comment: commentCtrl.text,
+      supplierActions: supplier_action_list,
     );
     var updateJson = update.toJson();
     Map<String, dynamic>? responseUpdateWarrantyClaim =
@@ -1608,10 +1619,13 @@ class CreateWarrantyClaimController extends GetxController {
 
   void closeWarranty({
     List<dynamic>? fileIds,
+    required int type,
   }) async {
     UpdateWarrantyClaim update = UpdateWarrantyClaim(
       id: wc_id.value,
       facilityId: facilityId,
+      type: type,
+      supplierActions: [],
       uploadfile_ids: fileIds,
       comment: commentCtrl.text,
     );

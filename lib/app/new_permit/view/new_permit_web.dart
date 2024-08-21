@@ -842,30 +842,51 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                           Get.width *
                                                                               .2,
                                                                       child:
-                                                                          CustomMultiSelectDialogField(
-                                                                        title:
-                                                                            'Please Select',
-                                                                        buttonText:
-                                                                            'Equipment Category',
-                                                                        initialValue: (controller.selectedEquipmentCategoryIdList.isNotEmpty)
-                                                                            ? controller.selectedEquipmentCategoryIdList
-                                                                            : [],
-                                                                        items: controller
-                                                                            .equipmentCategoryList
-                                                                            .map(
-                                                                              (equipmentCategory) => MultiSelectItem(
-                                                                                equipmentCategory?.id,
-                                                                                equipmentCategory?.name ?? '',
-                                                                              ),
-                                                                            )
-                                                                            .toList(),
-                                                                        onConfirm:
-                                                                            (selectedOptionsList) =>
-                                                                                {
-                                                                          controller
-                                                                              .equipmentCategoriesSelected(selectedOptionsList),
+                                                                          Obx(
+                                                                        () {
+                                                                          if (controller
+                                                                              .equipmentCategoryList
+                                                                              .isEmpty) {
+                                                                            return CustomMultiSelectDialogField(
+                                                                              onConfirm: (selectedOptionsList) {},
+                                                                              buttonText: "",
+                                                                              initialValue: [],
+                                                                              items: [],
+                                                                              title: "",
+                                                                            );
+                                                                          }
+
+                                                                          final initialValue = controller.typee == 4 || controller.typee == 5
+                                                                              ? controller.equipmentCategoryList?.where((category) => category?.name == 'Inverter')?.map((category) => category?.id)?.toList() ?? []
+                                                                              : (controller.selectedEquipmentCategoryIdList.isNotEmpty ? controller.selectedEquipmentCategoryIdList : []);
+
                                                                           print(
-                                                                              'Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
+                                                                              'Initial Value: $initialValue');
+
+                                                                          return IgnorePointer(
+                                                                            ignoring:
+                                                                                controller.typee == 4,
+                                                                            child:
+                                                                                CustomMultiSelectDialogField(
+                                                                              title: 'Please Select',
+                                                                              buttonText: 'Equipment Category',
+                                                                              initialValue: initialValue,
+                                                                              items: controller.equipmentCategoryList
+                                                                                      ?.map(
+                                                                                        (equipmentCategory) => MultiSelectItem(
+                                                                                          equipmentCategory!.id,
+                                                                                          equipmentCategory.name,
+                                                                                        ),
+                                                                                      )
+                                                                                      ?.toList() ??
+                                                                                  [],
+                                                                              onConfirm: (selectedOptionsList) {
+                                                                                controller.equipmentCategoriesSelected(selectedOptionsList);
+                                                                                print('Selected Equipment Categories: $selectedOptionsList');
+                                                                                print('Updated Selected Categories in Controller: ${controller.selectedEquipmentCategoryIdList}');
+                                                                              },
+                                                                            ),
+                                                                          );
                                                                         },
                                                                       ),
                                                                     ),

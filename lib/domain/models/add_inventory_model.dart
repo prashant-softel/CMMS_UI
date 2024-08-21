@@ -30,7 +30,7 @@ class AddInventoryRequestModel {
   int? stockCount;
   int? moduleQuantity;
   int? cost;
-  String? currency;
+  int? currency;
   String? assetdescription;
   String? warranty_description;
   String? parent_equipment_no;
