@@ -1625,7 +1625,7 @@ class NewPermitController extends GetxController {
         permit_id: permitId.value,
         facility_id: facilityId,
         blockId: selectedBlockId,
-        lotoId: selectedEquipmentCategoryIdList.first,
+        lotoId: 0, //selectedEquipmentCategoryIdList[0],
         permitTypeId: selectedPermitTypeId,
         resubmit: false,
 
