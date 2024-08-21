@@ -2122,6 +2122,31 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
         position: position,
       );
+  Future<ResponseModel> createoccupational(
+          {required String auth,
+          createoccupational,
+          bool? isLoading,
+          }) async =>
+      await connectHelper.createoccupational(
+        auth: auth,
+        createoccupational: createoccupational,
+        isLoading: isLoading ?? false,
+        
+      );
+
+      // update Occupational Health
+       Future<ResponseModel> updateHealthData({
+    required String auth,
+    updateHealthData,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateHealthData(
+        auth: auth,
+        updateHealthData: updateHealthData,
+        isLoading: isLoading ?? false,
+      );
+
+      
   Future<ResponseModel> createWaterData({
     required String auth,
     createWaterData,

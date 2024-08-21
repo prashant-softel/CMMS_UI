@@ -63,6 +63,8 @@ import 'package:cmms/app/create_OccupationalHealth/views/create_occupationalheal
 import 'package:cmms/app/create_audit/craete_audit_binding.dart';
 
 import 'package:cmms/app/create_audit/view/create_audit_screen.dart';
+import 'package:cmms/app/create_fueldata/create_fueldata_binding.dart';
+import 'package:cmms/app/create_fueldata/views/create_fueldata_screen.dart';
 import 'package:cmms/app/create_grievance/create_grievance_binding.dart';
 import 'package:cmms/app/create_grievance/view/create_grievance_screen.dart';
 import 'package:cmms/app/create_mis_plan/create_mis_plan_binding.dart';
@@ -73,6 +75,8 @@ import 'package:cmms/app/create_observation/views/create_observation_screen.dart
 import 'package:cmms/app/create_occupationalhealth/create_occupationalhealth_binding.dart';
 import 'package:cmms/app/create_pemitstoworkTBT/create_pemitstoworkTBT_binding.dart';
 import 'package:cmms/app/create_pemitstoworkTBT/views/create_pemitstoworkTBT_screen.dart';
+import 'package:cmms/app/create_plantationdata/create_plantationdata_binding.dart';
+import 'package:cmms/app/create_plantationdata/views/create_plantationdata_screen.dart';
 import 'package:cmms/app/create_pm_plan/create_pm_plan_binding.dart';
 import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
@@ -1470,6 +1474,16 @@ class AppPages {
       name: _Paths.permitsTBTDataListScreen,
       page: PermitsTBTDataListScreen.new,
       binding: PermitsTBTDataListBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.createFuelDataScreen,
+      page: FuelDataScreen.new,
+      binding: FuelDataBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.createplantationdataScreen,
+      page: PlantationDataScreen.new,
+      binding: PlantationDataBinding(),
     ),
 
 

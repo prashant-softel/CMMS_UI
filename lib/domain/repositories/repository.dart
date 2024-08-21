@@ -1043,6 +1043,77 @@ class Repository {
       return Map();
     }
   }
+  Future<Map<String, dynamic>> createoccupational(
+      createoccupational, bool? isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createoccupational(
+        auth: auth,
+        createoccupational: createoccupational,
+        isLoading: isLoading ?? false,
+
+      );
+
+      var resourceData = res.data;
+
+      print('Response create Occupational order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Occupational Add Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
+          Routes.observationListScreen,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Occupational');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+  //update Occupational Health
+  Future<Map<String, dynamic>> updateHealthData(
+    updateHealthData,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateHealthData(
+        auth: auth,
+        updateHealthData: updateHealthData,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Health Data : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Health Data  Successfully...", fontSize: 16.0);
+        // Get.offAllNamed(
+        //   Routes.viewWaterData,
+        // );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'update Water Data');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
 
   Future<Map<String, dynamic>> createWaterData(
     createWaterData,
