@@ -39,6 +39,7 @@ class NewPermitDetailModel {
   String? end_datetime;
   String? permitArea;
   int? workingTime;
+  int? blockId;
   String? issuedByName;
   DateTime? issue_at;
   DateTime? request_datetime;
@@ -85,6 +86,7 @@ class NewPermitDetailModel {
     this.insertedId,
     this.ptwStatus,
     this.permitNo,
+    this.blockId,
     this.sitePermitNo,
     this.permitTypeid,
     this.job_type_id,
@@ -145,6 +147,7 @@ class NewPermitDetailModel {
   factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) =>
       NewPermitDetailModel(
         isExpired: json['isExpired'],
+        blockId: json['blockId'],
         insertedId: json["insertedId"],
         is_physical_iso_required: json["is_physical_iso_required"],
         ptwStatus: json["ptwStatus"],
@@ -256,7 +259,7 @@ class NewPermitDetailModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "isExpired": isExpired,
+        "isExpired": isExpired, "blockId": blockId,
         "is_physical_iso_required": is_physical_iso_required,
         "insertedId": insertedId,
         "ptwStatus": ptwStatus,
@@ -669,6 +672,7 @@ class ListAssociatedMC {
         "status_short": status_short,
       };
 }
+
 class ListAssociatedVC {
   ListAssociatedVC(
       {this.permitId,
