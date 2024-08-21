@@ -1821,6 +1821,7 @@ class Repository {
               'Asset_Last_calibration_date',
               'Calibration_Next_Due_date',
               'Calibration_reminder_days',
+              'Area'
             ],
             ...jsonDataList
                 .map((inventoryJson) => [
@@ -1860,6 +1861,7 @@ class Repository {
                       inventoryJson['calibrationLastDate'],
                       inventoryJson['calibrationDueDate'],
                       inventoryJson['calibrationReminderDays'],
+                      inventoryJson['area'],
                     ])
                 .toList(),
           ];
