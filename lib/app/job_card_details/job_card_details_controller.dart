@@ -1093,7 +1093,7 @@ class JobCardDetailsController extends GetxController {
 
     document.dispose();
 
-    await saveAndLaunchFile(bytes, 'Job Card View Report');
+    await saveAndLaunchFile(bytes, 'Job Card  Report');
   }
 
   PdfLayoutResult drawHeader(
@@ -1117,7 +1117,7 @@ class JobCardDetailsController extends GetxController {
     // Draw images
     page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
 
-    final String centerText = 'Job Card View Report';
+    final String centerText = 'Job Card  Report';
     final PdfFont centerTextFont =
         PdfStandardFont(PdfFontFamily.helvetica, 12, style: PdfFontStyle.bold);
     final Size centerTextSize = centerTextFont.measureString(centerText);
@@ -1138,7 +1138,7 @@ class JobCardDetailsController extends GetxController {
         pen: borderPen,
         bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
     page.graphics.drawString(
-        'Site name : ${jobCardDetailsModel.value?.blockName ?? ''}', headerFont,
+        'Site name : ${jobCardDetailsModel.value?.plantName ?? ''}', headerFont,
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
@@ -1195,8 +1195,12 @@ class JobCardDetailsController extends GetxController {
     ];
     List<String> pmInfoValuesRight = [
       '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.jobTitle ?? ''}',
-      '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.breakdownEndTime ?? ''}',
-      '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.jobClosedOn ?? ''}',
+      jobCardDetailsModel.value!.status == 158
+          ? '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.breakdownEndTime ?? ''}'
+          : "",
+      jobCardDetailsModel.value!.status == 158
+          ? '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.jobClosedOn ?? ''}'
+          : "",
       '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.turnaroundTimeMinutes ?? ''} Minutes',
     ];
 
