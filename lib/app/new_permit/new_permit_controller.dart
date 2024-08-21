@@ -422,42 +422,34 @@ class NewPermitController extends GetxController {
 
   @override
   void onInit() async {
-    super.onInit();
-
     try {
       await setId();
 
-      facilityIdStreamSubscription =
-          homeController.facilityId$.listen((event) async {
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
         print('FacilityIdsss$facilityId');
-
-        await Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(Duration(seconds: 1), () {
           getBlocksList(facilityId);
         });
-
         if (permitId.value > 0) {
-          await getNewPermitDetail(
+          getNewPermitDetail(
               intPermitId: permitId.value, facilityId: facilityId);
           isCheckedJSA.value = true;
           isCheckedSOP.value = true;
-          await getPermitHistory(
-              permitId: permitId.value, facilityId: facilityId);
+          getPermitHistory(permitId: permitId.value, facilityId: facilityId);
         }
 
-        await Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(Duration(seconds: 1), () {
           getTypePermitList(facilityId);
         });
+        getInventoryCategoryList();
+        getInventoryIsolationList();
+        getAssignedToList();
+        getFacilityLists();
 
-        await getInventoryCategoryList();
-
-        await getInventoryIsolationList();
-        await getAssignedToList();
-        await getFacilityLists();
-        await getEmployeePermitList();
+        getEmployeePermitList();
         addRowItem();
-        await getJobTypePermitList();
-
+        getJobTypePermitList();
         if (pmtaskViewModel?.id != null) {
           loadPermitDetailsWithTask(pmtaskViewModel);
         } else if (jobModel != null || jobModel != "") {
@@ -481,6 +473,8 @@ class NewPermitController extends GetxController {
         commentScroll.jumpTo(0.0);
       }
     });
+
+    super.onInit();
   }
 
   void removeItem(int index) {
