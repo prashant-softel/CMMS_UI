@@ -14084,17 +14084,17 @@ class Repository {
   }
 
   Future<List<VegTaskEquipmentList?>> getVegTaskEquipmentList({
-    bool? isLoading,
     required int facilityId,
     int? executionId,
+    required bool isLoading,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getVegTaskEquipmentList(
-        auth: auth,
-        facilityId: facilityId,
         executionId: executionId,
-        isLoading: isLoading ?? false,
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
       );
       print({"VegExecutiondetail", res.data});
       if (!res.hasError) {
