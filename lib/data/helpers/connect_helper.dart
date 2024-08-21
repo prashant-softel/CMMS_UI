@@ -3682,6 +3682,52 @@ class ConnectHelper {
 
     return responseModel;
   }
+  //Occupational Health create
+  Future<ResponseModel> createoccupational({
+    required String auth,
+    createoccupational,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateHealthData',
+      Request.post,
+      createoccupational,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Water Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+  //Update Occupational Health 
+   Future<ResponseModel> updateHealthData({
+    required String auth,
+    updateHealthData,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateHealthData',
+      Request.post,
+      jsonEncode(updateHealthData),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Occupational  Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    print(parsedJson);
+    return responseModel;
+  }
 
   Future<ResponseModel> createWaterData({
     required String auth,
@@ -9423,7 +9469,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/RejectScheduleExecution',
+      'Vegetation/RejectScheduleExecutionVegetation',
       Request.put,
       rejecttoJsonString,
       isLoading ?? true,

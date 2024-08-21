@@ -12,8 +12,9 @@ import 'package:get/get.dart';
 class VegetationListPlanScreen extends GetView<VegetationPlanListController> {
   VegetationListPlanScreen({super.key});
   final controller = Get.find<VegetationPlanListController>();
+  final homecontroller = Get.find<HomeController>();
 
-  final HomeController homecontroller = Get.find();
+ 
 
   @override
   Widget build(BuildContext context) {

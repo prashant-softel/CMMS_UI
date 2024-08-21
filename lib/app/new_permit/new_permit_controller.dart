@@ -422,42 +422,34 @@ class NewPermitController extends GetxController {
 
   @override
   void onInit() async {
-    super.onInit();
-
     try {
       await setId();
 
-      facilityIdStreamSubscription =
-          homeController.facilityId$.listen((event) async {
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
         print('FacilityIdsss$facilityId');
-
-        await Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(Duration(seconds: 1), () {
           getBlocksList(facilityId);
         });
-
         if (permitId.value > 0) {
-          await getNewPermitDetail(
+          getNewPermitDetail(
               intPermitId: permitId.value, facilityId: facilityId);
           isCheckedJSA.value = true;
           isCheckedSOP.value = true;
-          await getPermitHistory(
-              permitId: permitId.value, facilityId: facilityId);
+          getPermitHistory(permitId: permitId.value, facilityId: facilityId);
         }
 
-        await Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(Duration(seconds: 1), () {
           getTypePermitList(facilityId);
         });
+        getInventoryCategoryList();
+        getInventoryIsolationList();
+        getAssignedToList();
+        getFacilityLists();
 
-        await getInventoryCategoryList();
-
-        await getInventoryIsolationList();
-        await getAssignedToList();
-        await getFacilityLists();
-        await getEmployeePermitList();
+        getEmployeePermitList();
         addRowItem();
-        await getJobTypePermitList();
-
+        getJobTypePermitList();
         if (pmtaskViewModel?.id != null) {
           loadPermitDetailsWithTask(pmtaskViewModel);
         } else if (jobModel != null || jobModel != "") {
@@ -481,6 +473,8 @@ class NewPermitController extends GetxController {
         commentScroll.jumpTo(0.0);
       }
     });
+
+    super.onInit();
   }
 
   void removeItem(int index) {
@@ -623,6 +617,7 @@ class NewPermitController extends GetxController {
 
       ///
       selectedBlock.value = newPermitDetailsModel.value?.blockName ?? "";
+      selectedBlockId = newPermitDetailsModel.value?.blockId ?? 0;
 
       selectedTypePermit.value =
           newPermitDetailsModel.value?.permitTypeName ?? '';
@@ -1392,7 +1387,9 @@ class NewPermitController extends GetxController {
       CreatePermitModel createPermitModel = CreatePermitModel(
         facility_id: facilityId,
         blockId: selectedBlockId,
-        lotoId: selectedEquipmentCategoryIdList.first,
+        lotoId: typee.value == 5 || typee.value == 4
+            ? 8
+            : selectedEquipmentCategoryIdList.first,
         permitTypeId: selectedPermitTypeId,
 
         ///Permit Type Id
@@ -1511,7 +1508,9 @@ class NewPermitController extends GetxController {
       CreatePermitModel createPermitModel = CreatePermitModel(
         facility_id: facilityId,
         blockId: selectedBlockId,
-        lotoId: selectedEquipmentCategoryIdList.first,
+        lotoId: typee.value == 5 || typee.value == 4
+            ? 8
+            : selectedEquipmentCategoryIdList.first,
         permitTypeId: selectedPermitTypeId,
 
         ///Permit Type Id
@@ -1625,7 +1624,9 @@ class NewPermitController extends GetxController {
         permit_id: permitId.value,
         facility_id: facilityId,
         blockId: selectedBlockId,
-        lotoId: selectedEquipmentCategoryIdList.first,
+        lotoId: typee.value == 5 || typee.value == 4
+            ? 8
+            : selectedEquipmentCategoryIdList.first,
         permitTypeId: selectedPermitTypeId,
         resubmit: false,
 
@@ -1712,10 +1713,10 @@ class NewPermitController extends GetxController {
   ///Update New Permit
   void updateNewPermit({List<dynamic>? fileIds}) async {
     {
-      checkForm();
-      if (isFormInvalid.value) {
-        return;
-      }
+      // checkForm();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
       String _description =
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
@@ -1740,7 +1741,7 @@ class NewPermitController extends GetxController {
       rowTBTTrainingOtherPersonItem.forEach((element) {
         LotoOtherDetails item = LotoOtherDetails(
           employee_name: element[0]["value"] ?? '0',
-          contact_number: int.tryParse('${element[1]["value"] ?? '0'}'),
+          contact_number: int.tryParse('${element[1]["value"] ?? '0'}') ?? 0,
           responsibility: element[2]["value"] ?? '0',
         );
 
@@ -1788,7 +1789,9 @@ class NewPermitController extends GetxController {
       CreatePermitModel updatePermitModel = CreatePermitModel(
         facility_id: facilityId,
         blockId: selectedBlockId,
-        lotoId: selectedEquipmentCategoryIdList.first,
+        lotoId: typee.value == 5 || typee.value == 4
+            ? 8
+            : selectedEquipmentCategoryIdList.first,
         permit_id: permitId.value,
         permitTypeId: selectedPermitTypeId,
 
@@ -1899,7 +1902,9 @@ class NewPermitController extends GetxController {
         facility_id: facilityId,
         permit_id: permitId.value,
         blockId: selectedBlockId,
-        lotoId: selectedEquipmentCategoryIdList.first,
+        lotoId: typee.value == 5 || typee.value == 4
+            ? 8
+            : selectedEquipmentCategoryIdList.first,
         permitTypeId: selectedPermitTypeId,
         start_datetime: startDateTimeCtrlrBuffer,
         end_datetime: validTillTimeCtrlrBuffer,

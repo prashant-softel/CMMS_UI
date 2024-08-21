@@ -21,21 +21,6 @@ class EditJobContentMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Dimens.boxHeight10,
-        HeaderWidgetMobile(),
-
-        Container(
-          margin: EdgeInsets.only(left: 30, top: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Edit Job",
-                style: Styles.blackBold18,
-              ),
-            ],
-          ),
-        ),
         Card(
           color: Colors.lightBlue.shade50,
           elevation: 10,

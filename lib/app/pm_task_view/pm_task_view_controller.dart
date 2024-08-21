@@ -642,7 +642,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     // Draw images
     page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
 
-    final String centerText = 'PM Task View Report';
+    final String centerText = 'PM Task Report';
     final PdfFont centerTextFont =
         PdfStandardFont(PdfFontFamily.helvetica, 12, style: PdfFontStyle.bold);
     final Size centerTextSize = centerTextFont.measureString(centerText);
@@ -689,13 +689,15 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       'Start date',
       'PMT Status'
     ];
+
     List<String> pmInfoValuesLeft = [
       'PMT${pmtaskViewModel.value?.id ?? ''}',
       '${pmtaskViewModel.value?.plan_title ?? ''}',
       '${pmtaskViewModel.value?.due_date ?? ''}',
-      '${pmtaskViewModel.value?.started_at ?? ''}',
+      '${pmtaskViewModel.value?.start_time == "0001-01-01T00:00:00" ? '' : pmtaskViewModel.value?.start_time ?? ''}',
       '${pmtaskViewModel.value?.status_short ?? ''}',
     ];
+
     double rowHeight = 15;
 
     for (int i = 0; i < pmInfoLabelsLeft.length; i++) {
@@ -784,33 +786,34 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
     // Permit carried by section
     currentY += 10; // Adding some space before the next section
-    page.graphics.drawRectangle(
-        pen: borderPen,
-        brush: backgroundBrush,
-        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
-    page.graphics.drawString('Permit carried by', headerFont,
-        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
-    currentY += sectionHeight;
 
-    // Column Headers
-    columnWidth = pageWidth / 4; // Adjust column width as needed
-    List<String> permitHeaders = [
-      'S. No',
-      'Employee ID',
-      'Employee name',
-      'Company'
-    ];
+    if (pmtaskViewModel.value!.permit_id != 0) {
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Permit carried by', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
 
-    for (int i = 0; i < permitHeaders.length; i++) {
-      page.graphics.drawString(permitHeaders[i], contentFont,
-          bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
-              columnWidth, rowHeight));
-    }
+      // Column Headers
+      columnWidth = pageWidth / 4; // Adjust column width as needed
+      List<String> permitHeaders = [
+        'S. No',
+        'Employee ID',
+        'Employee name',
+        'Company'
+      ];
 
-    currentY += sectionHeight;
+      for (int i = 0; i < permitHeaders.length; i++) {
+        page.graphics.drawString(permitHeaders[i], contentFont,
+            bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
+                columnWidth, rowHeight));
+      }
 
-    // Draw Permit Data
-    if (pmtaskViewModel.value != null) {
+      currentY += sectionHeight;
+
+      // Draw Permit Data
       page.graphics.drawString('1', contentFont,
           bounds: Rect.fromLTWH(margin, currentY + 5, columnWidth, rowHeight));
       page.graphics.drawString(
@@ -830,157 +833,167 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
     // PTW Information section
     currentY += 10; // Adding some space before the next section
-    page.graphics.drawRectangle(
-        pen: borderPen,
-        brush: backgroundBrush,
-        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
-    page.graphics.drawString('PTW Information', headerFont,
-        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
-    currentY += sectionHeight;
 
-    // Define static widths for the S. No, PTW ID, and Isolation taken columns
-    double serialNoWidth = 40; // Width for S. No
-    double ptwIdWidth = 50; // Width for PTW ID
-    double isolationTakenWidth = 80; // Width for Isolation taken
-    double remainingWidth = pageWidth -
-        (ptwIdWidth +
-            serialNoWidth +
-            isolationTakenWidth); // Calculate remaining width
+// Check if the permit_id is 0 before drawing the PTW Information section
+    if (pmtaskViewModel.value!.permit_id != 0) {
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('PTW Information', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
 
-    // Headers for PTW Information section
-    List<String> ptwHeaders = [
-      'S. No',
-      'PTW ID',
-      'Isolation taken',
-      'Permit type',
-      'Isolated equipment\'s'
-    ];
+      // Define static widths for the S. No, PTW ID, and Isolation taken columns
+      double serialNoWidth = 40; // Width for S. No
+      double ptwIdWidth = 50; // Width for PTW ID
+      double isolationTakenWidth = 80; // Width for Isolation taken
+      double remainingWidth = pageWidth -
+          (ptwIdWidth +
+              serialNoWidth +
+              isolationTakenWidth); // Calculate remaining width
 
-    // Draw the headers with static widths
-    page.graphics.drawString(ptwHeaders[0], contentFont,
-        bounds: Rect.fromLTWH(margin, currentY + 5, serialNoWidth, rowHeight));
-    page.graphics.drawString(ptwHeaders[1], contentFont,
-        bounds: Rect.fromLTWH(
-            margin + serialNoWidth, currentY + 5, ptwIdWidth, rowHeight));
-    page.graphics.drawString(ptwHeaders[2], contentFont,
-        bounds: Rect.fromLTWH(margin + serialNoWidth + ptwIdWidth, currentY + 5,
-            isolationTakenWidth, rowHeight));
-    page.graphics.drawString(ptwHeaders[3], contentFont,
-        bounds: Rect.fromLTWH(
-            margin + serialNoWidth + ptwIdWidth + isolationTakenWidth,
-            currentY + 5,
-            remainingWidth / 2,
-            rowHeight));
-    page.graphics.drawString(ptwHeaders[4], contentFont,
-        bounds: Rect.fromLTWH(
-            margin +
-                serialNoWidth +
-                ptwIdWidth +
-                isolationTakenWidth +
-                remainingWidth / 2,
-            currentY + 5,
-            remainingWidth / 2,
-            rowHeight));
+      // Headers for PTW Information section
+      List<String> ptwHeaders = [
+        'S. No',
+        'PTW ID',
+        'Isolation taken',
+        'Permit type',
+        'Isolated equipment\'s'
+      ];
 
-    currentY += rowHeight;
+      // Draw the headers with static widths
+      page.graphics.drawString(ptwHeaders[0], contentFont,
+          bounds:
+              Rect.fromLTWH(margin, currentY + 5, serialNoWidth, rowHeight));
+      page.graphics.drawString(ptwHeaders[1], contentFont,
+          bounds: Rect.fromLTWH(
+              margin + serialNoWidth, currentY + 5, ptwIdWidth, rowHeight));
+      page.graphics.drawString(ptwHeaders[2], contentFont,
+          bounds: Rect.fromLTWH(margin + serialNoWidth + ptwIdWidth,
+              currentY + 5, isolationTakenWidth, rowHeight));
+      page.graphics.drawString(ptwHeaders[3], contentFont,
+          bounds: Rect.fromLTWH(
+              margin + serialNoWidth + ptwIdWidth + isolationTakenWidth,
+              currentY + 5,
+              remainingWidth / 2,
+              rowHeight));
+      page.graphics.drawString(ptwHeaders[4], contentFont,
+          bounds: Rect.fromLTWH(
+              margin +
+                  serialNoWidth +
+                  ptwIdWidth +
+                  isolationTakenWidth +
+                  remainingWidth / 2,
+              currentY + 5,
+              remainingWidth / 2,
+              rowHeight));
 
-    // Example row for PTW Information section with the same static widths
-    page.graphics.drawString('1', contentFont,
-        bounds: Rect.fromLTWH(
-            margin, currentY + 5, serialNoWidth, rowHeight)); // S. No
-    page.graphics.drawString(
-        '${pmtaskViewModel.value?.permit_id ?? ''}', contentFont,
-        bounds: Rect.fromLTWH(margin + serialNoWidth, currentY + 5, ptwIdWidth,
-            rowHeight)); // PTW ID
-    page.graphics.drawString(
-        '${pmtaskViewModel.value?.isolation_taken ?? ''}', contentFont,
-        bounds: Rect.fromLTWH(margin + serialNoWidth + ptwIdWidth, currentY + 5,
-            isolationTakenWidth, rowHeight)); // Isolation taken
-    page.graphics.drawString(
-        '${pmtaskViewModel.value?.permit_type ?? ''}', contentFont,
-        bounds: Rect.fromLTWH(
-            margin + serialNoWidth + ptwIdWidth + isolationTakenWidth,
-            currentY + 5,
-            remainingWidth / 2,
-            rowHeight)); // Permit type
-    page.graphics.drawString(
-        '${pmtaskViewModel.value?.isolated_equipment ?? ''}', contentFont,
-        bounds: Rect.fromLTWH(
-            margin +
-                serialNoWidth +
-                ptwIdWidth +
-                isolationTakenWidth +
-                remainingWidth / 2,
-            currentY + 5,
-            remainingWidth / 2,
-            rowHeight)); // Isolated equipment's
+      currentY += rowHeight;
 
-    // TBT section header
-    currentY += 25; // Adding some space before the next section
-    page.graphics.drawRectangle(
-        pen: borderPen,
-        brush: backgroundBrush,
-        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
-    page.graphics.drawString('TBT conducted by', headerFont,
-        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
-    currentY += sectionHeight;
+      // Example row for PTW Information section with the same static widths
+      page.graphics.drawString('1', contentFont,
+          bounds: Rect.fromLTWH(
+              margin, currentY + 5, serialNoWidth, rowHeight)); // S. No
+      page.graphics.drawString(
+          '${pmtaskViewModel.value?.permit_id ?? ''}', contentFont,
+          bounds: Rect.fromLTWH(margin + serialNoWidth, currentY + 5,
+              ptwIdWidth, rowHeight)); // PTW ID
+      page.graphics.drawString(
+          '${pmtaskViewModel.value?.isolation_taken ?? ''}', contentFont,
+          bounds: Rect.fromLTWH(margin + serialNoWidth + ptwIdWidth,
+              currentY + 5, isolationTakenWidth, rowHeight)); // Isolation taken
+      page.graphics.drawString(
+          '${pmtaskViewModel.value?.permit_type ?? ''}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + serialNoWidth + ptwIdWidth + isolationTakenWidth,
+              currentY + 5,
+              remainingWidth / 2,
+              rowHeight)); // Permit type
+      page.graphics.drawString(
+          '${pmtaskViewModel.value?.isolated_equipment ?? ''}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin +
+                  serialNoWidth +
+                  ptwIdWidth +
+                  isolationTakenWidth +
+                  remainingWidth / 2,
+              currentY + 5,
+              remainingWidth / 2,
+              rowHeight)); // Isolated equipment's
 
-    // Define static widths for the TBT table columns
-    double tbtConductedByWidth = pageWidth / 4; // Width for 'TBT conducted by'
-    double tbtDoneTimeWidth = pageWidth / 4; // Width for 'TBT done time'
-    double startTimeWidth = pageWidth / 4; // Width for 'Start time'
-    double statusWidth = pageWidth / 4; // Width for 'Status'
+      currentY += rowHeight;
+    }
+    if (pmtaskViewModel.value!.ptw_tbt_done == 1) {
+      // TBT section header
+      currentY += 25; // Adding some space before the next section
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('TBT conducted by', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
 
-    // Headers for TBT section
-    List<String> tbtHeaders = [
-      'TBT conducted by',
-      'TBT done time',
-      'Start time',
-      'Status'
-    ];
+      // Define static widths for the TBT table columns
+      double tbtConductedByWidth =
+          pageWidth / 4; // Width for 'TBT conducted by'
+      double tbtDoneTimeWidth = pageWidth / 4; // Width for 'TBT done time'
+      double startTimeWidth = pageWidth / 4; // Width for 'Start time'
+      double statusWidth = pageWidth / 4; // Width for 'Status'
 
-    // Draw the headers with static widths
-    page.graphics.drawString(tbtHeaders[0], contentFont,
-        bounds: Rect.fromLTWH(
-            margin, currentY + 5, tbtConductedByWidth, rowHeight));
-    page.graphics.drawString(tbtHeaders[1], contentFont,
-        bounds: Rect.fromLTWH(margin + tbtConductedByWidth, currentY + 5,
-            tbtDoneTimeWidth, rowHeight));
-    page.graphics.drawString(tbtHeaders[2], contentFont,
-        bounds: Rect.fromLTWH(margin + tbtConductedByWidth + tbtDoneTimeWidth,
-            currentY + 5, startTimeWidth, rowHeight));
-    page.graphics.drawString(tbtHeaders[3], contentFont,
-        bounds: Rect.fromLTWH(
-            margin + tbtConductedByWidth + tbtDoneTimeWidth + startTimeWidth,
-            currentY + 5,
-            statusWidth,
-            rowHeight));
+      // Headers for TBT section
+      List<String> tbtHeaders = [
+        'TBT conducted by',
+        'TBT done time',
+        'Start time',
+        'Status'
+      ];
 
-    currentY += rowHeight;
+      // Draw the headers with static widths
+      page.graphics.drawString(tbtHeaders[0], contentFont,
+          bounds: Rect.fromLTWH(
+              margin, currentY + 5, tbtConductedByWidth, rowHeight));
+      page.graphics.drawString(tbtHeaders[1], contentFont,
+          bounds: Rect.fromLTWH(margin + tbtConductedByWidth, currentY + 5,
+              tbtDoneTimeWidth, rowHeight));
+      page.graphics.drawString(tbtHeaders[2], contentFont,
+          bounds: Rect.fromLTWH(margin + tbtConductedByWidth + tbtDoneTimeWidth,
+              currentY + 5, startTimeWidth, rowHeight));
+      page.graphics.drawString(tbtHeaders[3], contentFont,
+          bounds: Rect.fromLTWH(
+              margin + tbtConductedByWidth + tbtDoneTimeWidth + startTimeWidth,
+              currentY + 5,
+              statusWidth,
+              rowHeight));
 
-    // Example row for TBT section with the same static widths
-    page.graphics.drawString(
-        '${pmtaskViewModel.value?.tbT_conducted_by_name ?? ''}', contentFont,
-        bounds: Rect.fromLTWH(margin, currentY + 5, tbtConductedByWidth,
-            rowHeight)); // TBT conducted by
-    page.graphics.drawString(
-        '${pmtaskViewModel.value?.tbT_done_time ?? ''}', contentFont,
-        bounds: Rect.fromLTWH(margin + tbtConductedByWidth, currentY + 5,
-            tbtDoneTimeWidth, rowHeight)); // TBT done time
-    page.graphics.drawString(
-        '${pmtaskViewModel.value?.started_at ?? ''}', contentFont,
-        bounds: Rect.fromLTWH(margin + tbtConductedByWidth + tbtDoneTimeWidth,
-            currentY + 5, startTimeWidth, rowHeight)); // Start time
-    page.graphics.drawString(
-        '${pmtaskViewModel.value?.status_short_ptw ?? ''}', contentFont,
-        bounds: Rect.fromLTWH(
-            margin + tbtConductedByWidth + tbtDoneTimeWidth + startTimeWidth,
-            currentY + 5,
-            statusWidth,
-            rowHeight)); // Status
+      currentY += rowHeight;
 
-    currentY += rowHeight;
+      // Example row for TBT section with the same static widths
+      page.graphics.drawString(
+          '${pmtaskViewModel.value?.tbT_conducted_by_name ?? ''}', contentFont,
+          bounds: Rect.fromLTWH(margin, currentY + 5, tbtConductedByWidth,
+              rowHeight)); // TBT conducted by
+      page.graphics.drawString(
+          '${pmtaskViewModel.value?.tbT_done_time == "0001-01-01T00:00:00" ? '' : pmtaskViewModel.value?.tbT_done_time ?? ''}',
+          contentFont,
+          bounds: Rect.fromLTWH(margin + tbtConductedByWidth, currentY + 5,
+              tbtDoneTimeWidth, rowHeight)); // TBT done time
+      page.graphics.drawString(
+          '${pmtaskViewModel.value?.start_time == "0001-01-01T00:00:00" ? '' : pmtaskViewModel.value?.start_time ?? ''}',
+          contentFont,
+          bounds: Rect.fromLTWH(margin + tbtConductedByWidth + tbtDoneTimeWidth,
+              currentY + 5, startTimeWidth, rowHeight)); // Start time
+      page.graphics.drawString(
+          '${pmtaskViewModel.value?.status_short_ptw ?? ''}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + tbtConductedByWidth + tbtDoneTimeWidth + startTimeWidth,
+              currentY + 5,
+              statusWidth,
+              rowHeight)); // Status
 
+      currentY += rowHeight;
+    }
     // Work description section
     currentY += 25;
     page.graphics.drawRectangle(
@@ -1260,5 +1273,4 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         bounds: Rect.fromLTWH(pageWidth - (signatureSize.width + margin),
             currentY + 20, signatureSize.width, signatureSize.height))!;
   }
-
 }
