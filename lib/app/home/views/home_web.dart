@@ -475,7 +475,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                              margin: EdgeInsets.only(left: 20),
+                                              margin: EdgeInsets.only(left: 0),
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 10),
                                               decoration: BoxDecoration(
@@ -1075,8 +1075,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         height: Get.height,
                                         child: Padding(
                                           padding: EdgeInsets.only(
-                                            left: 16,
-                                            right: 16,
+                                            left: 0,
+                                            right: 0,
                                           ),
                                           child: DataTable2(
                                             showCheckboxColumn: false,
@@ -1142,7 +1142,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 180,
+                                                fixedWidth: 120,
                                                 label: Text(
                                                   'Start Date',
                                                   style: Styles.blackBold14,
@@ -1150,7 +1150,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 180,
+                                                fixedWidth: 120,
                                                 label: Text(
                                                   'End Date',
                                                   style: Styles.blackBold14,
@@ -1375,7 +1375,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                              margin: EdgeInsets.only(left: 20),
+                                              margin: EdgeInsets.only(left: 0),
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 10),
                                               decoration: BoxDecoration(
@@ -1922,7 +1922,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 180,
+                                                fixedWidth: 120,
                                                 label: Text(
                                                   'Start Date',
                                                   style: Styles.blackBold14,
@@ -1930,7 +1930,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 180,
+                                                fixedWidth: 120,
                                                 label: Text(
                                                   'End Date',
                                                   style: Styles.blackBold14,
@@ -2168,7 +2168,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                              margin: EdgeInsets.only(left: 20),
+                                              margin: EdgeInsets.only(left: 0),
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 10),
                                               decoration: BoxDecoration(
@@ -2713,7 +2713,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 180,
+                                                fixedWidth: 120,
                                                 label: Text(
                                                   'Start Date',
                                                   style: Styles.blackBold14,
@@ -2721,7 +2721,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 180,
+                                                fixedWidth: 120,
                                                 label: Text(
                                                   'End Date',
                                                   style: Styles.blackBold14,
@@ -2984,7 +2984,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                              margin: EdgeInsets.only(left: 20),
+                                              margin: EdgeInsets.only(left: 0),
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 10),
                                               decoration: BoxDecoration(
@@ -3589,7 +3589,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 180,
+                                                fixedWidth: 120,
                                                 label: Text(
                                                   'Start Date',
                                                   style: Styles.blackBold14,
@@ -3597,7 +3597,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 180,
+                                                fixedWidth: 120,
                                                 label: Text(
                                                   'End Date',
                                                   style: Styles.blackBold14,
@@ -3798,7 +3798,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                              margin: EdgeInsets.only(left: 20),
+                                              margin: EdgeInsets.only(left: 0),
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 10),
                                               decoration: BoxDecoration(
@@ -4719,7 +4719,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                              margin: EdgeInsets.only(left: 20),
+                                              margin: EdgeInsets.only(left: 0),
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 10),
                                               decoration: BoxDecoration(
