@@ -24,6 +24,7 @@ class VegExecutionWeb extends StatefulWidget {
 
 class _VegExecutionWebState extends State<VegExecutionWeb> {
   final VegExecutionController controller = Get.find();
+  final homecontroller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<VegExecutionController>(

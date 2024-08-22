@@ -1,4 +1,5 @@
 import 'package:cmms/app/add_vegetation_plan/add_vegetation_plan_controller.dart';
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -30,6 +31,7 @@ class AddVegetationPlanWeb extends StatefulWidget {
 
 class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
   @override
+  final homecontroller = Get.find<HomeController>();
   Widget build(BuildContext context) {
     return GetBuilder<AddVegetationPlanController>(
       id: 'stock_Mangement',
