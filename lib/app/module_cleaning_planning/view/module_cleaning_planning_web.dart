@@ -91,7 +91,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                           Stack(
                             children: [
                               Container(
-                                height: Get.height,
+                                height: Get.height * 0.85,
                                 child: Card(
                                   margin: EdgeInsets.all(20),
                                   color: Color.fromARGB(255, 245, 248, 250),
@@ -99,603 +99,622 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 10, right: 10, left: 10),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 10, right: 10, left: 10),
-                                              child: controller.planId == 0
-                                                  ? Text(
-                                                      "Add Module Cleaning Plan",
-                                                      style: Styles.blackBold14,
-                                                    )
-                                                  : Text(
-                                                      "Update Module Cleaning Plan",
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                            ),
-                                          ],
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10, right: 10, left: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10,
+                                                    right: 10,
+                                                    left: 10),
+                                                child: controller.planId == 0
+                                                    ? Text(
+                                                        "Add Module Cleaning Plan",
+                                                        style:
+                                                            Styles.blackBold14,
+                                                      )
+                                                    : Text(
+                                                        "Update Module Cleaning Plan",
+                                                        style:
+                                                            Styles.blackBold14,
+                                                      ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      Divider(
-                                        color: ColorValues.greyLightColour,
-                                      ),
-                                      Dimens.boxHeight15,
-                                      Container(
-                                        margin: Dimens.edgeInsets20,
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Spacer(),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title: 'Title:'),
-                                                    Dimens.boxWidth10,
-                                                    LoginCustomTextfield(
-                                                      width: (MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width *
-                                                          .2),
-                                                      textController: controller
-                                                          .mcTitelCtrlr,
-                                                      //validate
-                                                      errorController: controller
-                                                              .isTitleInvalid
-                                                              .value
-                                                          ? "Required field"
-                                                          : null,
-                                                      onChanged: (value) {
-                                                        if (value
-                                                                .trim()
-                                                                .length >
-                                                            0) {
-                                                          controller
-                                                              .isTitleInvalid
-                                                              .value = false;
-                                                        } else {
-                                                          controller
-                                                              .isTitleInvalid
-                                                              .value = true;
-                                                        }
-                                                      },
-                                                      inputFormatters: [
-                                                        FilteringTextInputFormatter
-                                                            .deny(
-                                                          RegExp('[\'^]'),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight10,
-                                                Row(
-                                                  children: [
-                                                    Dimens.boxWidth10,
-                                                    CustomRichText(
-                                                        title: 'Frequency : '),
-                                                    Dimens.boxWidth10,
-                                                    SizedBox(
-                                                      child: DropdownWebWidget(
-                                                        width: MediaQuery.of(
+                                        Divider(
+                                          color: ColorValues.greyLightColour,
+                                        ),
+                                        Dimens.boxHeight15,
+                                        Container(
+                                          margin: Dimens.edgeInsets20,
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Spacer(),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title: 'Title:'),
+                                                      Dimens.boxWidth10,
+                                                      LoginCustomTextfield(
+                                                        width: (MediaQuery.of(
                                                                     context)
                                                                 .size
-                                                                .width /
-                                                            5,
-                                                        controller: controller,
-                                                        dropdownList: controller
-                                                            .frequencyList,
-                                                        isValueSelected: controller
-                                                            .isSelectedfrequency
-                                                            .value,
-                                                        selectedValue: controller
-                                                            .selectedfrequency
-                                                            .value,
-                                                        onValueChanged:
+                                                                .width *
+                                                            .2),
+                                                        textController:
                                                             controller
-                                                                .onValueChanged,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight10,
-                                                controller.planId == 0 ||
-                                                        controller
-                                                                .mcPlanDetailsModel
+                                                                .mcTitelCtrlr,
+                                                        //validate
+                                                        errorController: controller
+                                                                .isTitleInvalid
                                                                 .value
-                                                                ?.status ==
-                                                            351
-                                                    ? Row(
-                                                        children: [
-                                                          Dimens.boxWidth10,
-                                                          CustomRichText(
-                                                              title:
-                                                                  'Cleaning Type: '),
-                                                          Dimens.boxWidth10,
-                                                          SizedBox(
-                                                            child:
-                                                                DropdownWebWidget(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              controller:
-                                                                  controller,
-                                                              dropdownList:
-                                                                  controller
-                                                                      .cleaningType,
-                                                              isValueSelected:
-                                                                  controller
-                                                                      .isSelectedCleaningType
-                                                                      .value,
-                                                              selectedValue:
-                                                                  controller
-                                                                      .selectedCleaningType
-                                                                      .value,
-                                                              onValueChanged:
-                                                                  controller
-                                                                      .onValueChanged,
-                                                            ),
-                                                          ),
+                                                            ? "Required field"
+                                                            : null,
+                                                        onChanged: (value) {
+                                                          if (value
+                                                                  .trim()
+                                                                  .length >
+                                                              0) {
+                                                            controller
+                                                                .isTitleInvalid
+                                                                .value = false;
+                                                          } else {
+                                                            controller
+                                                                .isTitleInvalid
+                                                                .value = true;
+                                                          }
+                                                        },
+                                                        inputFormatters: [
+                                                          FilteringTextInputFormatter
+                                                              .deny(
+                                                            RegExp('[\'^]'),
+                                                          )
                                                         ],
-                                                      )
-                                                    : Dimens.box0
-                                              ],
-                                            ),
-                                            Spacer(),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Dimens.boxWidth10,
-                                                    CustomRichText(
-                                                        title:
-                                                            'Estimated Duration In Day'),
-                                                    Dimens.boxWidth10,
-                                                    Obx(
-                                                      () => SizedBox(
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Dimens.boxHeight10,
+                                                  Row(
+                                                    children: [
+                                                      Dimens.boxWidth10,
+                                                      CustomRichText(
+                                                          title:
+                                                              'Frequency : '),
+                                                      Dimens.boxWidth10,
+                                                      SizedBox(
                                                         child:
-                                                            LoginCustomTextfield(
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          inputFormatters: <TextInputFormatter>[
-                                                            FilteringTextInputFormatter
-                                                                .digitsOnly
-                                                          ],
-                                                          textController: controller
-                                                              .durationInDayCtrlr,
-                                                          //validate
-                                                          errorController: controller
-                                                                  .isEstimatedInvalid
-                                                                  .value
-                                                              ? "Required field"
-                                                              : null,
-                                                          onChanged: (value) {
-                                                            if (value
-                                                                    .trim()
-                                                                    .length >
-                                                                0) {
-                                                              controller
-                                                                  .isEstimatedInvalid
-                                                                  .value = false;
-                                                            } else {
-                                                              controller
-                                                                  .isEstimatedInvalid
-                                                                  .value = true;
-                                                            }
-                                                          },
+                                                            DropdownWebWidget(
                                                           width: MediaQuery.of(
                                                                       context)
                                                                   .size
                                                                   .width /
                                                               5,
-                                                          enabled: controller
-                                                              .isDurationEditable
+                                                          controller:
+                                                              controller,
+                                                          dropdownList:
+                                                              controller
+                                                                  .frequencyList,
+                                                          isValueSelected:
+                                                              controller
+                                                                  .isSelectedfrequency
+                                                                  .value,
+                                                          selectedValue: controller
+                                                              .selectedfrequency
                                                               .value,
+                                                          onValueChanged:
+                                                              controller
+                                                                  .onValueChanged,
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight10,
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title: 'Assigned To :'),
-                                                    Dimens.boxWidth10,
-                                                    SizedBox(
-                                                      child: DropdownWebWidget(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        controller: controller,
-                                                        dropdownList: controller
-                                                            .assignedToList,
-                                                        isValueSelected: controller
-                                                            .isAssignedToSelected
-                                                            .value,
-                                                        selectedValue: controller
-                                                            .selectedAssignedTo
-                                                            .value,
-                                                        onValueChanged:
-                                                            controller
-                                                                .onValueChanged,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight10,
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title: 'Start date:'),
-                                                    Dimens.boxWidth10,
-                                                    _buildStartValidTillDateField_web(
-                                                      context,
-                                                      0,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            Spacer(),
-                                          ],
-                                        ),
-                                      ),
-                                      Dimens.boxHeight12,
-                                      controller.id == 0
-                                          ? Center(
-                                              child: InkWell(
-                                                onTap: () {
-                                                  // controller.schedules.
-                                                  controller.dayCount(
-                                                      dayCount: int.tryParse(
-                                                              '${controller.durationInDayCtrlr.text}') ??
-                                                          0);
-
-                                                  Get.dialog(SetEquipmentDialog(
-                                                    estimateDurationDays:
-                                                        int.tryParse(
-                                                            '${controller.durationInDayCtrlr.text}'),
-                                                  ));
-                                                },
-                                                child: Container(
-                                                  height: 30,
-                                                  width: 150,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        ColorValues.addNewColor,
-                                                    border: Border.all(
-                                                      color: ColorValues
-                                                          .lightGreyColorWithOpacity35,
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(5)),
+                                                    ],
                                                   ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Set Equipments",
-                                                      style: TextStyle(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w100,
-                                                          color: Colors.white),
-                                                    ),
-                                                  ),
-                                                ),
+                                                  Dimens.boxHeight10,
+                                                  controller.planId == 0 ||
+                                                          controller
+                                                                  .mcPlanDetailsModel
+                                                                  .value
+                                                                  ?.status ==
+                                                              351
+                                                      ? Row(
+                                                          children: [
+                                                            Dimens.boxWidth10,
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Cleaning Type: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              child:
+                                                                  DropdownWebWidget(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                controller:
+                                                                    controller,
+                                                                dropdownList:
+                                                                    controller
+                                                                        .cleaningType,
+                                                                isValueSelected:
+                                                                    controller
+                                                                        .isSelectedCleaningType
+                                                                        .value,
+                                                                selectedValue:
+                                                                    controller
+                                                                        .selectedCleaningType
+                                                                        .value,
+                                                                onValueChanged:
+                                                                    controller
+                                                                        .onValueChanged,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      : Dimens.box0
+                                                ],
                                               ),
-                                            )
-                                          : Dimens.box0,
-                                      controller.id == 0
-                                          ? Dimens.box0
-                                          : Container(
-                                              margin: Dimens.edgeInsets20,
-                                              height: ((controller
-                                                          .schedules.length) *
-                                                      40) +
-                                                  200,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: ColorValues
-                                                      .lightGreyColorWithOpacity35,
-                                                  width: 1,
-                                                ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: ColorValues
-                                                        .appBlueBackgroundColor,
-                                                    spreadRadius: 2,
-                                                    blurRadius: 5,
-                                                    offset: Offset(0, 2),
+                                              Spacer(),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Dimens.boxWidth10,
+                                                      CustomRichText(
+                                                          title:
+                                                              'Estimated Duration In Day'),
+                                                      Dimens.boxWidth10,
+                                                      Obx(
+                                                        () => SizedBox(
+                                                          child:
+                                                              LoginCustomTextfield(
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
+                                                            inputFormatters: <TextInputFormatter>[
+                                                              FilteringTextInputFormatter
+                                                                  .digitsOnly
+                                                            ],
+                                                            textController:
+                                                                controller
+                                                                    .durationInDayCtrlr,
+                                                            //validate
+                                                            errorController: controller
+                                                                    .isEstimatedInvalid
+                                                                    .value
+                                                                ? "Required field"
+                                                                : null,
+                                                            onChanged: (value) {
+                                                              if (value
+                                                                      .trim()
+                                                                      .length >
+                                                                  0) {
+                                                                controller
+                                                                    .isEstimatedInvalid
+                                                                    .value = false;
+                                                              } else {
+                                                                controller
+                                                                    .isEstimatedInvalid
+                                                                    .value = true;
+                                                              }
+                                                            },
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                5,
+                                                            enabled: controller
+                                                                .isDurationEditable
+                                                                .value,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Dimens.boxHeight10,
+                                                  Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title:
+                                                              'Assigned To :'),
+                                                      Dimens.boxWidth10,
+                                                      SizedBox(
+                                                        child:
+                                                            DropdownWebWidget(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          controller:
+                                                              controller,
+                                                          dropdownList: controller
+                                                              .assignedToList,
+                                                          isValueSelected:
+                                                              controller
+                                                                  .isAssignedToSelected
+                                                                  .value,
+                                                          selectedValue: controller
+                                                              .selectedAssignedTo
+                                                              .value,
+                                                          onValueChanged:
+                                                              controller
+                                                                  .onValueChanged,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Dimens.boxHeight10,
+                                                  Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title: 'Start date:'),
+                                                      Dimens.boxWidth10,
+                                                      _buildStartValidTillDateField_web(
+                                                        context,
+                                                        0,
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                              child: Column(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10.0),
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          "Schedule",
-                                                          style: Styles.blue700,
-                                                        ),
-                                                        Spacer(),
-                                                        InkWell(
-                                                          onTap: () {
-                                                            var selectedEqp =
-                                                                [];
-                                                            controller
-                                                                .mcPlanDetailsModel
-                                                                .value
-                                                                ?.schedules
-                                                                .forEach(
-                                                                    (schedule) {
-                                                              schedule
-                                                                  .equipments
-                                                                  ?.forEach(
-                                                                      (element) {
-                                                                var ee =
-                                                                    element;
-                                                                ee!.cleaningDay =
-                                                                    schedule
-                                                                        .cleaningDay;
-                                                                ;
-                                                                selectedEqp.add(
-                                                                    element);
-                                                                print(element
-                                                                    ?.toJson());
-                                                              });
-                                                            });
-                                                            selectedEqp.forEach(
-                                                                (element) {
-                                                              try {
-                                                                var selectedParentIndex = controller
-                                                                    .equipmentList
-                                                                    .value
-                                                                    .indexWhere((eqp) =>
-                                                                        eqp?.invId ==
-                                                                        element
-                                                                            .parentId);
-                                                                print({
-                                                                  "selectedParentIndex":
-                                                                      selectedParentIndex
+                                              Spacer(),
+                                            ],
+                                          ),
+                                        ),
+                                        Dimens.boxHeight12,
+                                        controller.id == 0
+                                            ? Center(
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    // controller.schedules.
+                                                    controller.dayCount(
+                                                        dayCount: int.tryParse(
+                                                                '${controller.durationInDayCtrlr.text}') ??
+                                                            0);
+
+                                                    Get.dialog(
+                                                        SetEquipmentDialog(
+                                                      estimateDurationDays:
+                                                          int.tryParse(
+                                                              '${controller.durationInDayCtrlr.text}'),
+                                                    ));
+                                                  },
+                                                  child: Container(
+                                                    height: 30,
+                                                    width: 150,
+                                                    decoration: BoxDecoration(
+                                                      color: ColorValues
+                                                          .addNewColor,
+                                                      border: Border.all(
+                                                        color: ColorValues
+                                                            .lightGreyColorWithOpacity35,
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5)),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Set Equipments",
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight.w100,
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            : Dimens.box0,
+                                        controller.id == 0
+                                            ? Dimens.box0
+                                            : Container(
+                                                margin: Dimens.edgeInsets20,
+                                                height: ((controller
+                                                            .schedules.length) *
+                                                        40) +
+                                                    200,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: ColorValues
+                                                        .lightGreyColorWithOpacity35,
+                                                    width: 1,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .appBlueBackgroundColor,
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset: Offset(0, 2),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            "Schedule",
+                                                            style:
+                                                                Styles.blue700,
+                                                          ),
+                                                          Spacer(),
+                                                          InkWell(
+                                                            onTap: () {
+                                                              var selectedEqp =
+                                                                  [];
+                                                              controller
+                                                                  .mcPlanDetailsModel
+                                                                  .value
+                                                                  ?.schedules
+                                                                  .forEach(
+                                                                      (schedule) {
+                                                                schedule
+                                                                    .equipments
+                                                                    ?.forEach(
+                                                                        (element) {
+                                                                  var ee =
+                                                                      element;
+                                                                  ee!.cleaningDay =
+                                                                      schedule
+                                                                          .cleaningDay;
+                                                                  ;
+                                                                  selectedEqp.add(
+                                                                      element);
+                                                                  print(element
+                                                                      ?.toJson());
                                                                 });
-                                                                if (selectedParentIndex >
-                                                                    -1) {
-                                                                  var selectedChildIndex = controller
+                                                              });
+                                                              selectedEqp
+                                                                  .forEach(
+                                                                      (element) {
+                                                                try {
+                                                                  var selectedParentIndex = controller
+                                                                      .equipmentList
+                                                                      .value
+                                                                      .indexWhere((eqp) =>
+                                                                          eqp?.invId ==
+                                                                          element
+                                                                              .parentId);
+                                                                  print({
+                                                                    "selectedParentIndex":
+                                                                        selectedParentIndex
+                                                                  });
+                                                                  if (selectedParentIndex >
+                                                                      -1) {
+                                                                    var selectedChildIndex = controller
+                                                                            .equipmentList
+                                                                            .value[
+                                                                                selectedParentIndex]
+                                                                            ?.smbs
+                                                                            .indexWhere((smb) =>
+                                                                                smb.smbId ==
+                                                                                element.id) ??
+                                                                        -1;
+
+                                                                    if (selectedChildIndex >
+                                                                        -1) {
+                                                                      var ss = controller
                                                                           .equipmentList
                                                                           .value[
                                                                               selectedParentIndex]
-                                                                          ?.smbs
-                                                                          .indexWhere((smb) =>
-                                                                              smb.smbId ==
-                                                                              element.id) ??
-                                                                      -1;
-
-                                                                  if (selectedChildIndex >
-                                                                      -1) {
-                                                                    var ss = controller
-                                                                        .equipmentList
-                                                                        .value[
-                                                                            selectedParentIndex]
-                                                                        ?.smbs[selectedChildIndex];
-                                                                    ss?.selectedDay =
-                                                                        "${element.cleaningDay}";
-                                                                    controller
-                                                                        .equipmentList
-                                                                        .value[
-                                                                            selectedParentIndex]
-                                                                        ?.smbs[selectedChildIndex] = ss!;
+                                                                          ?.smbs[selectedChildIndex];
+                                                                      ss?.selectedDay =
+                                                                          "${element.cleaningDay}";
+                                                                      controller
+                                                                          .equipmentList
+                                                                          .value[
+                                                                              selectedParentIndex]
+                                                                          ?.smbs[selectedChildIndex] = ss!;
+                                                                    }
+                                                                    print({
+                                                                      "selectedChildIndex":
+                                                                          selectedChildIndex
+                                                                    });
                                                                   }
+                                                                } catch (e) {
                                                                   print({
-                                                                    "selectedChildIndex":
-                                                                        selectedChildIndex
+                                                                    "eadfds": e
                                                                   });
                                                                 }
-                                                              } catch (e) {
-                                                                print({
-                                                                  "eadfds": e
-                                                                });
-                                                              }
-                                                            });
+                                                              });
 
-                                                            controller.dayCount(
-                                                                dayCount:
+                                                              controller.dayCount(
+                                                                  dayCount:
+                                                                      int.tryParse(
+                                                                              '${controller.durationInDayCtrlr.text}') ??
+                                                                          0);
+
+                                                              Get.dialog(
+                                                                  SetEquipmentDialog(
+                                                                estimateDurationDays:
                                                                     int.tryParse(
-                                                                            '${controller.durationInDayCtrlr.text}') ??
-                                                                        0);
-
-                                                            Get.dialog(
-                                                                SetEquipmentDialog(
-                                                              estimateDurationDays:
-                                                                  int.tryParse(
-                                                                      '${controller.durationInDayCtrlr.text}'),
-                                                            ));
-                                                          },
-                                                          child: Container(
-                                                            height: 30,
-                                                            width: 150,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: ColorValues
-                                                                  .addNewColor,
-                                                              border:
-                                                                  Border.all(
+                                                                        '${controller.durationInDayCtrlr.text}'),
+                                                              ));
+                                                            },
+                                                            child: Container(
+                                                              height: 30,
+                                                              width: 150,
+                                                              decoration:
+                                                                  BoxDecoration(
                                                                 color: ColorValues
-                                                                    .lightGreyColorWithOpacity35,
-                                                                width: 1,
+                                                                    .addNewColor,
+                                                                border:
+                                                                    Border.all(
+                                                                  color: ColorValues
+                                                                      .lightGreyColorWithOpacity35,
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            5)),
                                                               ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .all(Radius
-                                                                          .circular(
-                                                                              5)),
-                                                            ),
-                                                            child: Center(
-                                                              child: Text(
-                                                                "Set Equipments",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        18,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w100,
-                                                                    color: Colors
-                                                                        .white),
+                                                              child: Center(
+                                                                child: Text(
+                                                                  "Set Equipments",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          18,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w100,
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
                                                               ),
                                                             ),
-                                                          ),
-                                                        )
-                                                      ],
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Expanded(
-                                                    child: DataTable2(
-                                                      border: TableBorder.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              206,
-                                                              229,
-                                                              234)),
-                                                      columns: [
-                                                        DataColumn2(
-                                                          fixedWidth: 100,
-                                                          label: Text(
-                                                            "Day",
-                                                            style: TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                    Expanded(
+                                                      child: DataTable2(
+                                                        border: TableBorder.all(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    206,
+                                                                    229,
+                                                                    234)),
+                                                        columns: [
+                                                          DataColumn2(
+                                                            fixedWidth: 100,
+                                                            label: Text(
+                                                              "Day",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
                                                           ),
-                                                        ),
-                                                        DataColumn2(
-                                                          label: Text(
-                                                            'No. of Inverters',
-                                                            style: TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                          DataColumn2(
+                                                            label: Text(
+                                                              'No. of Inverters',
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
                                                           ),
-                                                        ),
-                                                        DataColumn2(
-                                                          fixedWidth: 150,
-                                                          label: Text(
-                                                            'No. of SMBs',
-                                                            style: TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                          DataColumn2(
+                                                            fixedWidth: 150,
+                                                            label: Text(
+                                                              'No. of SMBs',
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
                                                           ),
-                                                        ),
-                                                        DataColumn2(
-                                                          label: Text(
-                                                            'No of modules',
-                                                            style: TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                          DataColumn2(
+                                                            label: Text(
+                                                              'No of modules',
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
                                                           ),
-                                                        ),
-                                                        DataColumn2(
-                                                          label: Text(
-                                                            'Type',
-                                                            style: TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                          DataColumn2(
+                                                            label: Text(
+                                                              'Type',
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ],
-                                                      rows: controller
-                                                          .rowItem.value
-                                                          .map((record) {
-                                                        return DataRow(
-                                                          cells: record
-                                                              .map((mapData) {
-                                                            return DataCell(
-                                                              (mapData['key'] ==
-                                                                      "cleaningType")
-                                                                  ? Padding(
-                                                                      padding:
-                                                                          const EdgeInsets
-                                                                              .only(
-                                                                        left:
-                                                                            10,
-                                                                        right:
-                                                                            10,
-                                                                        top: 10,
-                                                                      ),
-                                                                      child:
-                                                                          Column(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.start,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          IgnorePointer(
-                                                                            child:
-                                                                                DropdownWebStock(
-                                                                              width: MediaQuery.of(context).size.width,
-                                                                              dropdownList: controller.cleaningType,
-                                                                              selectedValue: mapData["value"],
-                                                                              onValueChanged: (list, selectedValue) {
-                                                                                mapData["value"] = selectedValue;
-                                                                                controller.cleaningTyperopdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
-                                                                              },
-                                                                            ),
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    )
-                                                                  : (mapData['key'] ==
-                                                                          "")
-                                                                      ? Text(
-                                                                          mapData['value'] ??
-                                                                              "")
-                                                                      : Text(mapData[
-                                                                              'value'] ??
-                                                                          ''),
-                                                            );
-                                                          }).toList(),
-                                                        );
-                                                      }).toList(),
+                                                        ],
+                                                        rows: controller
+                                                            .rowItem.value
+                                                            .map((record) {
+                                                          return DataRow(
+                                                            cells: record
+                                                                .map((mapData) {
+                                                              return DataCell(
+                                                                (mapData['key'] ==
+                                                                        "cleaningType")
+                                                                    ? Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.only(
+                                                                          left:
+                                                                              10,
+                                                                          right:
+                                                                              10,
+                                                                          top:
+                                                                              10,
+                                                                        ),
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.start,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            IgnorePointer(
+                                                                              child: DropdownWebStock(
+                                                                                width: MediaQuery.of(context).size.width,
+                                                                                dropdownList: controller.cleaningType,
+                                                                                selectedValue: mapData["value"],
+                                                                                onValueChanged: (list, selectedValue) {
+                                                                                  mapData["value"] = selectedValue;
+                                                                                  controller.cleaningTyperopdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
+                                                                                },
+                                                                              ),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    : (mapData['key'] ==
+                                                                            "")
+                                                                        ? Text(mapData['value'] ??
+                                                                            "")
+                                                                        : Text(mapData['value'] ??
+                                                                            ''),
+                                                              );
+                                                            }).toList(),
+                                                          );
+                                                        }).toList(),
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
