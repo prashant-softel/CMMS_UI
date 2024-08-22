@@ -1511,5 +1511,10 @@ class AppPages {
       page: CmmsReportDashboardScreen.new,
       binding: CmmsReportDashboardBinding(),
     ),
+    GetPage<dynamic>(
+      name: _Paths.calendarViewDashbord,
+      page: CalendarViewDashbordScreen.new,
+      binding: CalendarViewDashbordBinding(),
+    ),
   ];
 }
