@@ -580,7 +580,7 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                               Dimens.boxHeight12,
                                               controller.vegid == 0
                                                   ? Center(
-                                                      child: GestureDetector(
+                                                      child: InkWell(
                                                         onTap: () {
                                                           controller
                                                               .isFormInvalid
