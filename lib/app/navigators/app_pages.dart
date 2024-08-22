@@ -46,8 +46,6 @@ import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen
 import 'package:cmms/app/business_List/view/business_list_screen.dart';
 import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_binding.dart';
 import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_screen.dart';
-import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_binding.dart';
-import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
@@ -58,6 +56,8 @@ import 'package:cmms/app/check_list_of_observation/checklist_of_observation_bind
 import 'package:cmms/app/check_list_of_observation/views/checklist_of_observation_screen.dart';
 import 'package:cmms/app/checklist_Inspection/view/ChecklistInsp_list_screen.dart';
 import 'package:cmms/app/checklist_Inspection/ChecklistInsp_list_binding.dart';
+import 'package:cmms/app/cmms_report/cmms_report_binding.dart';
+import 'package:cmms/app/cmms_report/cmms_report_screen.dart';
 import 'package:cmms/app/cmms_report/cmms_report_binding.dart';
 import 'package:cmms/app/cmms_report/cmms_report_screen.dart';
 
@@ -284,6 +284,8 @@ import 'package:cmms/app/water_data_list/view/water_data_list_screen.dart';
 import 'package:cmms/app/water_data_list/water_data_list_binding.dart';
 import 'package:cmms/app/work_type/view/work_type_screen.dart';
 import 'package:cmms/app/work_type/work_type_binding.dart';
+import 'package:cmms/app/view_compliance/view_compliance_binding.dart';
+import 'package:cmms/app/view_compliance/views/view_compliance_screen.dart';
 import 'package:cmms/app/view_compliance/view_compliance_binding.dart';
 import 'package:cmms/app/view_compliance/views/view_compliance_screen.dart';
 import '../approve_return_mrs/approve_return_mrs_binding.dart';
@@ -1490,17 +1492,6 @@ class AppPages {
       name: _Paths.createplantationdataScreen,
       page: PlantationDataScreen.new,
       binding: PlantationDataBinding(),
-    ),
-    GetPage<dynamic>(
-      name: _Paths.calendarViewDashbord,
-      page: CalendarViewDashbordScreen.new,
-      binding: CalendarViewDashbordBinding(),
-    ),
-
-    GetPage<dynamic>(
-      name: _Paths.cmmsReport,
-      page: CmmsReportDashboardScreen.new,
-      binding: CmmsReportDashboardBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.calendarViewDashbord,
