@@ -190,7 +190,6 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                               Row(
                                                 children: [
                                                   CustomRichText(
-                                                      includeAsterisk: false,
                                                       title:
                                                           'Please Mention The ReNew Date: '),
                                                   Dimens.boxWidth2,
@@ -414,6 +413,8 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                                   ColorValues.submitColor,
                                               text: "Upload",
                                               onPressed: () {
+                                                controller.isFormInvalid.value =
+                                                    false;
                                                 controller.uploadDocumentNew(
                                                     fileIds: dropzoneController
                                                         .fileIds);

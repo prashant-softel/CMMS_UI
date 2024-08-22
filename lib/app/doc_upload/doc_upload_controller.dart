@@ -97,25 +97,102 @@ class DocumentUploadController extends GetxController {
       String _remarkDateTc = remark.text.trim();
       String _subDocNameDateTc = subDocName.text.trim();
 
+      if (fileIds == null || fileIds.isEmpty) {
+        showAlertDialog(
+          title: "Upload Failed",
+          message:
+              "No file has been selected for upload. Please select a file and try again.",
+        );
+        return;
+      }
+
       UploadDocumentModel uploadDocumentModel = UploadDocumentModel(
-          is_renew: 0,
-          docuemnt_id: 0,
-          docMasterId: selectedDocumentId,
-          fileId: fileIds[0],
-          facility_id: facilityId,
-          remarks: _remarkDateTc,
-          renewDate: _renewDateTc,
-          subDocName: _subDocNameDateTc);
+        is_renew: 0,
+        docuemnt_id: 0,
+        docMasterId: selectedDocumentId,
+        fileId: fileIds[0],
+        facility_id: facilityId,
+        remarks: _remarkDateTc,
+        renewDate: _renewDateTc,
+        subDocName: _subDocNameDateTc,
+      );
+
       var uploadDocumenModelJsonString = uploadDocumentModel.toJson();
       Map<String, dynamic>? responseUploadDocument =
           await documentUploadPresenter.uploadDocumentNew(
         uploadDocument: uploadDocumenModelJsonString,
         isLoading: true,
       );
-      if (responseUploadDocument == null) {}
+
+      if (responseUploadDocument == null) {
+        // Show alert dialog if the upload fails
+        showAlertDialog(
+          title: "Upload Failed",
+          message: "The document upload failed. Please try again.",
+        );
+      } else {
+        // Handle success case if needed
+        print("Upload successful");
+      }
     } catch (e) {
       print(e);
+      showAlertDialog(
+        title: "Error",
+        message: "An unexpected error occurred: ${e.toString()}",
+      );
     }
+  }
+
+  void showAlertDialog({required String title, required String message}) {
+    Get.dialog(
+      AlertDialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+            color: Color(0xFF002147),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Arial',
+          ),
+        ),
+        content: Text(
+          message,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 16,
+            fontFamily: 'Arial',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back(); // Close the dialog
+            },
+            child: Text(
+              "OK",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: Color(0xFF002147),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+        ],
+        elevation: 24.0,
+        contentPadding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+        actionsPadding: EdgeInsets.only(right: 16.0, bottom: 8.0),
+      ),
+    );
   }
 
   void reNewUploadDocumentNew({dynamic fileIds}) async {
