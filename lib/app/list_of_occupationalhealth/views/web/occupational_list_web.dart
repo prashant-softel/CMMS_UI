@@ -1,16 +1,22 @@
+import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/list_of_occupationalhealth/occupational_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/theme/styles.dart';
-import 'package:cmms/app/widgets/action_button.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/domain/models/get_occupational_list_model.dart';
-import 'package:cmms/domain/models/get_occupational_list_model.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:cmms/app/list_of_occupationalhealth/occupational_list_controller.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/action_button.dart';
+import 'package:cmms/domain/models/get_occupational_list_model.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 
 class OccupationalListWeb extends StatefulWidget {
@@ -19,10 +25,12 @@ class OccupationalListWeb extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<OccupationalListWeb> createState() => _OccupationalWebState();
+  State<OccupationalListWeb> createState() =>
+      _OccupationalListWebState();
 }
 
-class _OccupationalWebState extends State<OccupationalListWeb> {
+class _OccupationalListWebState
+    extends State<OccupationalListWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OccupationalDataListController>(
@@ -70,12 +78,14 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.offNamed(Routes.misDashboard);
+                                Get.offAllNamed(
+                                    Routes.misDashboard);
                               },
-                              child: Text(" / MIS", style: Styles.greyLight14),
+                              child: Text(" / MIS",
+                                  style: Styles.greyLight14),
                             ),
                             Text(" / LIST OF OCCUPATIONAL HEALTH",
-                                style: Styles.greyLight14),
+                                style: Styles.greyLight14)
                           ],
                         ),
                       ),
@@ -102,47 +112,58 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "List Of Occupational Health",
+                                           "List Of Occupational Health",
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
-                                        // Row(
-                                        //   children: [
-                                        //     CustomRichText(
-                                        //         title: 'Date Range',
-                                        //         includeAsterisk: false),
-                                        //     Dimens.boxWidth2,
-                                        //     // CustomTextFieldForStock(
-                                        //     //   width: MediaQuery.of(context)
-                                        //     //           .size
-                                        //     //           .width /
-                                        //     //       5,
-                                        //     //   numberTextField: true,
-                                        //     //   onTap: () {
-                                        //     //     controller
-                                        //     //             .openFromDateToStartDatePicker =
-                                        //     //         !controller
-                                        //     //             .openFromDateToStartDatePicker;
-                                        //     //     controller.update(
-                                        //     //         ['stock_Mangement_Date']);
-                                        //     //   },
-                                        //     //   hintText:
-                                        //     //       '${controller.formattedFromdate} - ${controller.formattedTodate}',
-                                        //     // ),
-                                        //   ],
-                                        // ),
-                                        Dimens.boxWidth3,
-                                        ActionButton(
-                                          icon: Icons.add,
-                                          label: "Add New",
-                                          onPressed: () {
-                                            controller.clearStoreData();
-
-                                            Get.offNamed(
-                                                Routes.createOccupationalScreen);
-                                          },
-                                          color: ColorValues.addNewColor,
-                                        )
+                                        Row(
+                                          children: [
+                                            CustomRichText(title: 'Date Range'),
+                                            // Dimens.boxWidth10,
+                                            SizedBox(width: 10),
+                                            CustomTextFieldForStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              numberTextField: true,
+                                              onTap: () {
+                                                controller
+                                                        .openFromDateToStartDatePicker =
+                                                    !controller
+                                                        .openFromDateToStartDatePicker;
+                                                controller.update(
+                                                    ['stock_Mangement_Date']);
+                                              },
+                                              hintText:
+                                                  '${controller.formattedFromdate} - ${controller.formattedTodate}',
+                                            ),
+                                          ],
+                                        ),
+                                        // Dimens.boxWidth10,
+                                        SizedBox(width: 10),
+                                        varUserAccessModel.value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kGoodsFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
+                                            ? ActionButton(
+                                                icon: Icons.add,
+                                                label: "Add New",
+                                                onPressed: () {
+                                                  controller.clearStoreData();
+                                             
+                                                  Get.offNamed(Routes
+                                                      .createOccupationalScreen);
+                                                },
+                                                color: ColorValues.addNewColor,
+                                              )
+                                            : Dimens.box0,
                                       ],
                                     ),
                                   ),
@@ -219,6 +240,34 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                                           // Handle column selection
                                         },
                                       ),
+
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'Copy'),
+                                      // ),
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'Excel'),
+                                      // ),
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'PDF'),
+                                      // ),
                                       Container(
                                         decoration: BoxDecoration(boxShadow: [
                                           BoxShadow(
@@ -242,45 +291,45 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                                       Container(
                                         width: 300,
                                         height: 40,
-                                        margin: EdgeInsets.only(right: 10),
-                                        // child: TextField(
-                                        //   style: GoogleFonts.lato(
-                                        //     textStyle: TextStyle(
-                                        //         fontSize: 16.0,
-                                        //         height: 1.0,
-                                        //         color: Colors.black),
-                                        //   ),
-                                        //   onChanged: (value) =>
-                                        //       // controller.search(value),
-                                        //   // decoration: InputDecoration(
-                                        //   //   enabledBorder:
-                                        //   //       const OutlineInputBorder(
-                                        //   //     borderSide: const BorderSide(
-                                        //   //       color: Colors.grey,
-                                        //   //       width: 0.0,
-                                        //   //     ),
-                                        //   //   ),
-                                        //   //   focusedBorder:
-                                        //   //       const OutlineInputBorder(
-                                        //   //     borderSide: const BorderSide(
-                                        //   //       color: Colors.grey,
-                                        //   //       width: 0.0,
-                                        //   //     ),
-                                        //   //   ),
-                                        //   //   contentPadding:
-                                        //   //       Dimens.edgeInsets05_10,
-                                        //   //   hintText: 'search'.tr,
-                                        //   //   hintStyle: Styles.grey16,
-                                        //   // ),
-                                        // ),
+                                        // margin: Dimens.edgeInsets0_0_16_0,
+                                        margin: EdgeInsets.only(right: 5),
+                                        child: TextField(
+                                          style: GoogleFonts.lato(
+                                            textStyle: TextStyle(
+                                                fontSize: 16.0,
+                                                height: 1.0,
+                                                color: Colors.black),
+                                          ),
+                                          onChanged: (value) =>
+                                              controller.search(value),
+                                          decoration: InputDecoration(
+                                            enabledBorder:
+                                                const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Colors.grey,
+                                                width: 0.0,
+                                              ),
+                                            ),
+                                            focusedBorder:
+                                                const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Colors.grey,
+                                                width: 0.0,
+                                              ),
+                                            ),
+                                            contentPadding:
+                                                Dimens.edgeInsets05_10,
+                                            hintText: 'search'.tr,
+                                            hintStyle: Styles.grey16,
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  controller.occupationalhealthList.isEmpty ==
-                                              true &&
+                                  controller.occupationalhealthList.isEmpty == true &&
                                           controller.isLoading == false
                                       ? Center(child: Text('No data'))
                                       : controller.isLoading.value == true
@@ -303,10 +352,10 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                                                           dataSource, // Custom DataSource class
                                                       // headingRowHeight:
                                                       //     Get.height * 0.12,
-                                                      minWidth: 2500,
-
+                                                      minWidth: Get.width * 1.2,
                                                       showCheckboxColumn: false,
-                                                      rowsPerPage: 10,
+                                                      rowsPerPage:
+                                                          10, // Number of rows per page
                                                       availableRowsPerPage: [
                                                         10,
                                                         20,
@@ -329,8 +378,8 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                                                         buildDataColumn(
                                                           'Actions',
                                                           controller
-                                                              .actionFilterText,
-                                                          230,
+                                                              .userDateFilterText,
+                                                          150,
                                                         ),
                                                       ],
                                                     );
@@ -340,55 +389,54 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                               ),
                             ),
                           ),
-                          // if (controller.openFromDateToStartDatePicker)
-                          //   Positioned(
-                          //     right: 150,
-                          //     top: 85,
-                          //     child: DatePickerWidget(
-                          //       selectionMode:
-                          //           DateRangePickerSelectionMode.range,
-                          //       monthCellStyle: DateRangePickerMonthCellStyle(
-                          //         todayCellDecoration: BoxDecoration(
-                          //             shape: BoxShape.circle,
-                          //             color: ColorValues.appDarkBlueColor),
-                          //       ), // last date of this year
-                          //       // controller: DateRangePickerController(),
-                          //       initialSelectedRange: PickerDateRange(
-                          //         controller.fromDate.value,
-                          //         controller.toDate.value,
-                          //       ),
+                          if (controller.openFromDateToStartDatePicker)
+                            Positioned(
+                              right: 150,
+                              top: 85,
+                              child: DatePickerWidget(
+                                selectionMode:
+                                    DateRangePickerSelectionMode.range,
+                                monthCellStyle: DateRangePickerMonthCellStyle(
+                                  todayCellDecoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: ColorValues.appDarkBlueColor),
+                                ), // last date of this year
+                                // controller: DateRangePickerController(),
+                                initialSelectedRange: PickerDateRange(
+                                  controller.fromDate.value,
+                                  controller.toDate.value,
+                                ),
 
-                          //       onSubmit: (value) {
-                          //         print('po valu ${value.toString()}');
-                          //         PickerDateRange? data =
-                          //             value as PickerDateRange;
+                                onSubmit: (value) {
+                                  print('po valu ${value.toString()}');
+                                  PickerDateRange? data =
+                                      value as PickerDateRange;
 
-                          //         var pickUpDate =
-                          //             DateTime.parse(data.startDate.toString());
-                          //         controller.fromDate.value = pickUpDate;
-                          //         var dropDate =
-                          //             DateTime.parse(data.endDate.toString());
-                          //         dropDate != null
-                          //             ? controller.toDate.value = dropDate
-                          //             : controller.toDate.value = pickUpDate;
-                          //         controller.getobslistbydate();
+                                  var pickUpDate =
+                                      DateTime.parse(data.startDate.toString());
+                                  controller.fromDate.value = pickUpDate;
+                                  var dropDate =
+                                      DateTime.parse(data.endDate.toString());
+                                  dropDate != null
+                                      ? controller.toDate.value = dropDate
+                                      : controller.toDate.value = pickUpDate;
 
-                          //         // controller.getPmTaskListByDate();
-                          //         controller.openFromDateToStartDatePicker =
-                          //             false;
-                          //         controller.update(['stock_Mangement_Date']);
+                                  // controller.getGOListByDate();
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
 
-                          //         // Get.toNamed(
-                          //         //   Routes.stockManagementGoodsOrdersScreen,
-                          //         // );
-                          //       },
-                          //       onCancel: () {
-                          //         controller.openFromDateToStartDatePicker =
-                          //             false;
-                          //         controller.update(['stock_Mangement_Date']);
-                          //       },
-                          //     ),
-                          //   ),
+                                  // Get.toNamed(
+                                  //   Routes.stockManagementGoodsOrdersScreen,
+                                  // );
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
+                                },
+                              ),
+                            ),
                         ],
                       ),
                     ],
@@ -402,16 +450,54 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
 }
 
 DataColumn2 buildDataColumn(
+  // String columnName,
   String header,
+
+  /// ColumnSize columnSize,
   RxString filterText,
   double? fixedWidth,
+  //  {required Function(String) onSearchCallBack}
 ) {
   return //
       DataColumn2(
+    // size: columnSize,
     fixedWidth: fixedWidth,
-    label: Column(
-        mainAxisAlignment: MainAxisAlignment.center, //
-        children: [
+
+    label: //
+        Column(
+            mainAxisAlignment: MainAxisAlignment.center, //
+            children: [
+          // SizedBox(
+          //   height: Get.height * 0.05,
+          //   child: TextField(
+          //     style: GoogleFonts.lato(
+          //       textStyle:
+          //           TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+          //     ),
+          //     onChanged: (value) {
+          //       filterText.value = value;
+          //       //   onSearchCallBack(value);
+          //     },
+          //     textAlign: TextAlign.left,
+          //     decoration: InputDecoration(
+          //       hintText: 'Filter',
+          //       contentPadding:
+          //           EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //       focusedBorder: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //       enabledBorder: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -420,6 +506,7 @@ DataColumn2 buildDataColumn(
             ),
           ),
         ]),
+    // ),
   );
 }
 
@@ -429,27 +516,39 @@ class OccupationalDataListSource extends DataTableSource {
   late List<GetOccupationalList?> filteredGetOccupationalList;
 
   OccupationalDataListSource(this.controller) {
-    // filtersGetStatutory();
+    filtersOccupationalhealth();
   }
 
   ///
-  
+  void filtersOccupationalhealth() {
+    filteredGetOccupationalList = <GetOccupationalList?>[];
+    filteredGetOccupationalList = controller.occupationalhealthList.where((Occupationallist) {
+      return (Occupationallist.id ?? '')
+              .toString()
+              .contains(controller.monthFilterText.value.toLowerCase())
+            ;
+
+      // Add other filter conditions as needed
+    }).toList();
+    // print({"filteredGetOccupationalList": filteredGetOccupationalList});
+  }
 
   @override
   DataRow? getRow(int index) {
     // print({"getRow call"});
-    final OccupationalListDetails = filteredGetOccupationalList[index];
+    final OccupationallistDetails = filteredGetOccupationalList[index];
 
-    controller.id.value = OccupationalListDetails?.id ?? 0;
+    controller.occupationId.value = OccupationallistDetails?.id ?? 0;
     var cellsBuffer = [
-      // '${OccupationalListDetails?.id ?? ''}',
+      // '${OccupationallistDetails?.id ?? ''}',
       "id",
-      '${OccupationalListDetails?.id ?? ''}',
-      '${OccupationalListDetails?.noOfHealthExamsOfNewJoiner?? ''}',
-      '${OccupationalListDetails?.occupationalIllnesses ?? ''}',
-      '${OccupationalListDetails?.periodicTests?? ''}',
-      '${OccupationalListDetails?.month_name?? ''}',
-      '${OccupationalListDetails?.createdAt?? ''}',
+      '${OccupationallistDetails?.id ?? ''}',
+      '${OccupationallistDetails?.noOfHealthExamsOfNewJoiner?? ''}',
+      '${OccupationallistDetails?.occupationalIllnesses ?? ''}',
+      '${OccupationallistDetails?.periodicTests?? ''}',
+      '${OccupationallistDetails?.month_name?? ''}',
+      '${OccupationallistDetails?.createdAt?? ''}',
+      // '${OccupationallistDetails?.status ?? ''}',
 
       'Actions',
     ];
@@ -481,91 +580,639 @@ class OccupationalDataListSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' OBS${OccupationalListDetails?.id}',
+                        ' GO ${OccupationallistDetails?.id}',
                       ),
                       Dimens.boxHeight10,
-                      // Align(
-                      //   alignment: Alignment.centerRight,
-                      //   child: Container(
-                      //     padding:
-                      //         EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                      //     decoration: BoxDecoration(
-                      //       color: OccupationalListDetails!.observation_status ==
-                      //               "Open"
-                      //           ? ColorValues.yellowColor
-                      //           : OccupationalListDetails.observation_status ==
-                      //                   "In Time"
-                      //               ? ColorValues.appGreenColor
-                      //               : ColorValues.appRedColor,
-                      //       borderRadius: BorderRadius.circular(4),
-                      //     ),
-                      //     child: Text(
-                      //       '${OccupationalListDetails.observation_status}',
-                      //       style: Styles.white10.copyWith(
-                      //         color: Colors.white,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding: Dimens.edgeInsets8_2_8_2,
+                          decoration: BoxDecoration(
+                            color: controller.occupationalhealthList
+                                        .firstWhere(
+                                          (e) =>
+                                              e.id == OccupationallistDetails!.id,
+                                          orElse: () =>
+                                              GetOccupationalList(id: 00),
+                                        )
+                                        .status ==
+                                    302
+                                ? ColorValues.yellowColor
+                                : controller.occupationalhealthList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e.id ==
+                                                  OccupationallistDetails!.id,
+                                              orElse: () =>
+                                                  GetOccupationalList(id: 00),
+                                            )
+                                            .status ==
+                                        304
+                                    ? ColorValues.closeColor
+                                    : controller.occupationalhealthList
+                                                .firstWhere(
+                                                  (e) =>
+                                                      e.id ==
+                                                      OccupationallistDetails!.id,
+                                                  orElse: () =>
+                                                      GetOccupationalList(
+                                                          id: 00),
+                                                )
+                                                .status ==
+                                            305
+                                        ? ColorValues.rejectColor
+                                        : controller.occupationalhealthList
+                                                    .firstWhere(
+                                                      (e) =>
+                                                          e.id ==
+                                                          OccupationallistDetails!
+                                                              .id,
+                                                      orElse: () =>
+                                                          GetOccupationalList(
+                                                              id: 00),
+                                                    )
+                                                    .status ==
+                                                309
+                                            ? ColorValues.rejectColor
+                                            : controller.occupationalhealthList
+                                                        .firstWhere(
+                                                          (e) =>
+                                                              e.id ==
+                                                              OccupationallistDetails!
+                                                                  .id,
+                                                          orElse: () =>
+                                                              GetOccupationalList(
+                                                                  id: 00),
+                                                        )
+                                                        .status ==
+                                                    306
+                                                ? ColorValues.approveStatusColor
+                                                : controller.occupationalhealthList
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e.id ==
+                                                                  OccupationallistDetails!
+                                                                      .id,
+                                                              orElse: () =>
+                                                                  GetOccupationalList(
+                                                                      id: 00),
+                                                            )
+                                                            .status ==
+                                                        301
+                                                    ? Color.fromARGB(
+                                                        255, 44, 230, 230)
+                                                    : controller.occupationalhealthList
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      e.id ==
+                                                                      OccupationallistDetails!
+                                                                          .id,
+                                                                  orElse: () =>
+                                                                      GetOccupationalList(
+                                                                          id: 00),
+                                                                )
+                                                                .status ==
+                                                            304
+                                                        ? ColorValues.closeColor
+                                                        : controller
+                                                                    .occupationalhealthList
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          e.id ==
+                                                                          OccupationallistDetails!
+                                                                              .id,
+                                                                      orElse: () =>
+                                                                          GetOccupationalList(
+                                                                              id: 00),
+                                                                    )
+                                                                    .status ==
+                                                                301
+                                                            ? ColorValues
+                                                                .approveColor
+                                                            : ColorValues
+                                                                .addNewColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          // child: Text(
+                          //   // '${OccupationallistDetails?.status_short}',
+                          //   // style: Styles.white10.copyWith(
+                          //   //   color: Colors.white,
+                          //   // ),
+                          // ),
+                        ),
+                      ),
                     ],
                   )
                 : (value == 'Actions')
-                    ? Row(
-                        children: [
-                          TableActionButton(
-                            color: ColorValues.viewColor,
-                            icon: Icons.remove_red_eye_outlined,
-                            message: 'View',
-                            onPress: () {
-                              // controller.clearStoreData();
-                              int obsId = OccupationalListDetails?.id ?? 0;
-                              if (obsId != 0) {
-                                controller.clearStoreData();
-                                // Get.toNamed(
-                                //   // Routes.viewObservationScreen,
-                                //   // arguments: {
-                                //   //   'obsId': OccupationalListDetails?.id,
-                                //   // },
-                                // );
-                              }
-                            },
-                          ),
-                          // OccupationalListDetails!.status_code != 552
-                          //     ? TableActionButton(
-                          //         color: ColorValues.editColor,
-                          //         icon: Icons.edit,
-                          //         message: 'Edit',
-                          //         onPress: () {
-                          //           // controller.clearStoreData();
-                          //           int obsId = OccupationalListDetails?.id ?? 0;
-                          //           if (obsId != 0) {
-                          //             Get.toNamed(
-                          //               Routes.createObservation,
-                          //               arguments: {
-                          //                 'obsId': OccupationalListDetails?.id,
-                          //               },
-                          //             );
-                          //           }
-                          //         },
-                          //       )
-                              // : Dimens.box0,
-                        ],
-                      )
+                    ? Wrap(children: [
+                        varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.add ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
+                                        0 &&
+                                    OccupationallistDetails?.status == 308 ||
+                                OccupationallistDetails?.status == 310
+                            ? TableActionButton(
+                                color: ColorValues.viewColor,
+                                icon: Icons.remove_red_eye_outlined,
+                                message: 'View RO',
+                                onPress: () {
+                                  controller.clearStoreData();
+                                  int goId = OccupationallistDetails?.id ?? 0;
+                                  if (goId != 0) {
+                                    Get.toNamed(Routes.receiveGoodsOrders,
+                                        arguments: {
+                                          'goId': OccupationallistDetails?.id,
+                                          "goType": 1
+                                        });
+                                  }
+                                },
+                              )
+                            : varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.add ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
+                                        0 &&
+                                    OccupationallistDetails?.status == 304
+                                ? TableActionButton(
+                                    color: ColorValues.viewColor,
+                                    icon: Icons.remove_red_eye_outlined,
+                                    message: 'View RO',
+                                    onPress: () {
+                                      controller.clearStoreData();
+                                      int goId = OccupationallistDetails?.id ?? 0;
+                                      if (goId != 0) {
+                                        Get.toNamed(Routes.receiveGoodsOrders,
+                                            arguments: {
+                                              'goId': OccupationallistDetails?.id,
+                                              "goType": 1
+                                            });
+                                      }
+                                    },
+                                  )
+                                : varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.view ==
+                                                    UserAccessConstants
+                                                        .kHaveApproveAccess)
+                                            .length >
+                                        0
+                                    ? TableActionButton(
+                                        color: ColorValues.viewColor,
+                                        icon: Icons.remove_red_eye_outlined,
+                                        message: 'View',
+                                        onPress: () {
+                                          controller.clearStoreData();
+                                          int goId =
+                                              OccupationallistDetails?.id ?? 0;
+                                          if (goId != 0) {
+                                            Get.toNamed(Routes.viewGoodsOrders,
+                                                arguments: {
+                                                  'goId': goId,
+                                                  "goType": 1
+                                                });
+                                          }
+                                        },
+                                      )
+                                    : Dimens.box0,
+                        controller.occupationalhealthList
+                                        .firstWhere(
+                                          (e) =>
+                                              e.id == OccupationallistDetails!.id,
+                                          orElse: () =>
+                                              GetOccupationalList(id: 00),
+                                        )
+                                        .status ==
+                                    310 ||
+                                controller.occupationalhealthList
+                                        .firstWhere(
+                                          (e) =>
+                                              e.id == OccupationallistDetails!.id,
+                                          orElse: () =>
+                                              GetOccupationalList(id: 00),
+                                        )
+                                        .status ==
+                                    304
+                            ? Dimens.box0
+                            : controller.occupationalhealthList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e.id ==
+                                                  OccupationallistDetails!.id,
+                                              orElse: () =>
+                                                  GetOccupationalList(id: 00),
+                                            )
+                                            .status ==
+                                        302 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveApproveAccess)
+                                            .length >
+                                        0
+                                ? TableActionButton(
+                                    color: ColorValues.editColor,
+                                    icon: Icons.edit,
+                                    message: 'Edit',
+                                    onPress: () {
+                                      controller.clearStoreData();
+                                      int goId = OccupationallistDetails?.id ?? 0;
+                                      if (goId != 0) {
+                                        Get.toNamed(
+                                            Routes
+                                                .updateGoodsOrdersDetailsScreen,
+                                            arguments: {"goId": goId});
+                                      }
+                                    },
+                                  )
+                                : Dimens.box0,
+                        controller.occupationalhealthList
+                                        .firstWhere(
+                                          (e) =>
+                                              e.id == OccupationallistDetails!.id,
+                                          orElse: () =>
+                                              GetOccupationalList(id: 00),
+                                        )
+                                        .status ==
+                                    310 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kGoodsFeatureId &&
+                                            e.edit ==
+                                                UserAccessConstants
+                                                    .kHaveEditAccess)
+                                        .length >
+                                    0
+                            ? TableActionButton(
+                                color: ColorValues.closeColor,
+                                icon: Icons.close,
+                                message: 'Close',
+                                onPress: () {
+                                  controller.clearStoreData();
+                                  int goId = OccupationallistDetails?.id ?? 0;
+                                  if (goId != 0) {
+                                    Get.toNamed(
+                                      Routes.receiveGoodsOrders,
+                                      arguments: {
+                                        'goId': OccupationallistDetails?.id,
+                                        "goType": 1
+                                      },
+                                    );
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        controller.occupationalhealthList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e.id ==
+                                                  OccupationallistDetails!.id,
+                                              orElse: () =>
+                                                  GetOccupationalList(id: 00),
+                                            )
+                                            .status ==
+                                        306 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.add ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
+                                        0 ||
+                                controller.occupationalhealthList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e.id ==
+                                                  OccupationallistDetails!.id,
+                                              orElse: () =>
+                                                  GetOccupationalList(id: 00),
+                                            )
+                                            .status ==
+                                        307 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.add ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
+                                        0 ||
+                                controller.occupationalhealthList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e.id ==
+                                                  OccupationallistDetails!.id,
+                                              orElse: () =>
+                                                  GetOccupationalList(id: 00),
+                                            )
+                                            .status ==
+                                        308 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.approve ==
+                                                    UserAccessConstants
+                                                        .kHaveApproveAccess)
+                                            .length >
+                                        0 ||
+                                controller.occupationalhealthList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e.id ==
+                                                  OccupationallistDetails!.id,
+                                              orElse: () =>
+                                                  GetOccupationalList(id: 00),
+                                            )
+                                            .status ==
+                                        309 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.approve ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
+                                        0
+                            ? TableActionButton(
+                                color: ColorValues.approveColor,
+                                icon: Icons.shopping_cart,
+                                message: 'Receive GO',
+                                onPress: () {
+                                  controller.clearStoreData();
+                                  int goId = OccupationallistDetails?.id ?? 0;
+                                  if (goId != 0) {
+                                    Get.toNamed(Routes.receiveGoodsOrders,
+                                        arguments: {'goId': goId, "goType": 1});
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+
+                        controller.occupationalhealthList
+                                        .firstWhere(
+                                          (e) =>
+                                              e.id == OccupationallistDetails!.id,
+                                          orElse: () =>
+                                              GetOccupationalList(id: 00),
+                                        )
+                                        .status ==
+                                    309 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kGoodsFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
+                            ? TableActionButton(
+                                color: Color.fromARGB(255, 116, 78, 130),
+                                icon: Icons.ads_click,
+                                message: 'Re-Submit Receive GO',
+                                onPress: () {
+                                  controller.clearStoreData();
+
+                                  int goId = OccupationallistDetails?.id ?? 0;
+                                  if (goId != 0) {
+                                    Get.toNamed(Routes.receiveGoodsOrders,
+                                        arguments: {'goId': goId, "goType": 1});
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        // TableActionButton(
+                        //   color: ColorValues.approveColor,
+                        //   icon: Icons.approval_outlined,
+                        //   message: 'Approve/Reject GO Receive',
+                        //   onPress: () {
+                        //     int id = OccupationallistDetails?.id ?? 0;
+                        //     if (id != 0) {
+                        //       Get.toNamed(Routes.receiveGoodsOrders,
+                        //           arguments: {'id': id, "type": 1});
+                        //     }
+                        //   },
+                        // ),
+                        //   : Dimens.box0,
+                        // :
+                        controller.occupationalhealthList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e.id ==
+                                                  OccupationallistDetails!.id,
+                                              orElse: () =>
+                                                  GetOccupationalList(id: 00),
+                                            )
+                                            .status ==
+                                        302 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.approve ==
+                                                    UserAccessConstants
+                                                        .kHaveApproveAccess)
+                                            .length >
+                                        0 ||
+                                controller.occupationalhealthList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e.id ==
+                                                  OccupationallistDetails!.id,
+                                              orElse: () =>
+                                                  GetOccupationalList(id: 00),
+                                            )
+                                            .status ==
+                                        301 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.approve ==
+                                                    UserAccessConstants
+                                                        .kHaveApproveAccess)
+                                            .length >
+                                        0
+                            ? TableActionButton(
+                                color: ColorValues.approveColor,
+                                icon: Icons.check,
+                                message: 'Approve/Reject GO',
+                                onPress: () {
+                                  controller.clearStoreData();
+                                  int goId = OccupationallistDetails?.id ?? 0;
+                                  if (goId != 0) {
+                                    Get.toNamed(Routes.viewGoodsOrders,
+                                        arguments: {'goId': goId, "goType": 1});
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+
+                        controller.occupationalhealthList
+                                        .firstWhere(
+                                          (e) =>
+                                              e.id == OccupationallistDetails!.id,
+                                          orElse: () =>
+                                              GetOccupationalList(id: 00),
+                                        )
+                                        .status ==
+                                    305 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kGoodsFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
+                            ? TableActionButton(
+                                color: ColorValues.purpleColor,
+                                icon: Icons.ads_click,
+                                message: 'Re-Submit GO',
+                                onPress: () {
+                                  controller.clearStoreData();
+
+                                  int goId = OccupationallistDetails?.id ?? 0;
+                                  if (goId != 0) {
+                                    Get.toNamed(
+                                      Routes.updateGoodsOrdersDetailsScreen,
+                                      arguments: {"goId": goId, 'goType': 1},
+                                    );
+                                  }
+                                },
+                              )
+                            : Dimens.box0
+
+                        // TableActionButton(
+                        //   color: ColorValues.deleteColor,
+                        //   icon: Icons.delete,
+                        //   message: 'Delete',
+                        //   onPress: () {},
+                        // )
+                      ])
                     : Text(value.toString()),
           ),
         );
       }).toList(),
+      //   ],
       onSelectChanged: (_) {
-        int obsId = OccupationalListDetails?.id ?? 0;
-        if (obsId != 0) {
-          controller.clearStoreData();
-          // Get.toNamed(
-          //   Routes.viewObservationScreen,
-          //   arguments: {
-          //     'obsId': OccupationalListDetails?.id,
-          //   },
-          // );
-        }
+        controller.clearStoreData();
+        OccupationallistDetails?.status == 302
+            ? Get.toNamed(Routes.viewGoodsOrders,
+                arguments: {'goId': OccupationallistDetails?.id, "goType": 1})
+            : OccupationallistDetails?.status == 309
+                ? Get.toNamed(Routes.receiveGoodsOrders,
+                    arguments: {'goId': OccupationallistDetails?.id, "goType": 1})
+                : OccupationallistDetails?.status == 302
+                    ? Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
+                        arguments: {'goId': OccupationallistDetails?.id})
+                    : OccupationallistDetails?.status == 306 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id == UserAccessConstants.kGoodsFeatureId &&
+                                        e.approve ==
+                                            UserAccessConstants
+                                                .kHaveApproveAccess)
+                                    .length >
+                                0
+                        ? Get.toNamed(
+                            Routes.receiveGoodsOrders,
+                            arguments: {
+                              'goId': OccupationallistDetails?.id,
+                              "goType": 1
+                            },
+                          )
+                        : OccupationallistDetails?.status == 306 &&
+                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length >
+                                    0
+                            ? Get.toNamed(Routes.receiveGoodsOrders, arguments: {
+                                'goId': OccupationallistDetails?.id,
+                                "goType": 1
+                              })
+                            : OccupationallistDetails?.status == 310 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
+                                            .length >
+                                        0
+                                ? Get.toNamed(
+                                    Routes.receiveGoodsOrders,
+                                    arguments: {
+                                      'goId': OccupationallistDetails?.id,
+                                      "goType": 1
+                                    },
+                                  )
+                                : OccupationallistDetails?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0
+                                    ? Get.toNamed(Routes.receiveGoodsOrders, arguments: {'goId': OccupationallistDetails?.id, "goType": 1})
+                                    : OccupationallistDetails?.status == 305
+                                        ? Get.toNamed(
+                                            Routes
+                                                .updateGoodsOrdersDetailsScreen,
+                                            arguments: {
+                                              'goId': OccupationallistDetails?.id,
+                                              "goType": 0
+                                            },
+                                          )
+                                        : OccupationallistDetails?.status == 308
+                                            ? Get.toNamed(
+                                                Routes.receiveGoodsOrders,
+                                                arguments: {
+                                                  'goId':
+                                                      OccupationallistDetails?.id,
+                                                  "goType": 1
+                                                },
+                                              )
+                                            : OccupationallistDetails?.status == 304
+                                                ? Get.toNamed(
+                                                    Routes.receiveGoodsOrders,
+                                                    arguments: {
+                                                      'goId':
+                                                          OccupationallistDetails
+                                                              ?.id,
+                                                      "goType": 1
+                                                    },
+                                                  )
+                                                : Get.toNamed(
+                                                    Routes.viewGoodsOrders,
+                                                    arguments: {
+                                                      "goId":
+                                                          OccupationallistDetails
+                                                              ?.id,
+                                                      "goType": 0
+                                                    },
+                                                  );
       },
     );
   }
@@ -579,3 +1226,5 @@ class OccupationalDataListSource extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 }
+
+
