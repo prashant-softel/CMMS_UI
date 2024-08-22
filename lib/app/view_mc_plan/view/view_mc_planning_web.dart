@@ -130,18 +130,18 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                     color: ColorValues.greyLightColour,
                                   ),
 
-                                  Dimens.boxHeight15,
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Current Status:",
-                                      ),
-                                      Text(
-                                        " ${controller.mcPlanDetailsModel.value?.status_long ?? ""}",
-                                      )
-                                    ],
-                                  ),
+                                  // Dimens.boxHeight15,
+                                  // Row(
+                                  //   mainAxisAlignment: MainAxisAlignment.center,
+                                  //   children: [
+                                  //     Text(
+                                  //       "Current Status:",
+                                  //     ),
+                                  //     Text(
+                                  //       " ${controller.mcPlanDetailsModel.value?.status_long ?? ""}",
+                                  //     )
+                                  //   ],
+                                  // ),
                                   Dimens.boxHeight10,
                                   Container(
                                     margin: Dimens.edgeInsets20,
