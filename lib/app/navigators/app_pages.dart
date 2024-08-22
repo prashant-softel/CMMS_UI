@@ -58,8 +58,6 @@ import 'package:cmms/app/checklist_Inspection/view/ChecklistInsp_list_screen.dar
 import 'package:cmms/app/checklist_Inspection/ChecklistInsp_list_binding.dart';
 import 'package:cmms/app/cmms_report/cmms_report_binding.dart';
 import 'package:cmms/app/cmms_report/cmms_report_screen.dart';
-import 'package:cmms/app/cmms_report/cmms_report_binding.dart';
-import 'package:cmms/app/cmms_report/cmms_report_screen.dart';
 
 import 'package:cmms/app/compliance/compliance_binding.dart';
 import 'package:cmms/app/compliance/views/compliance_screen.dart';
@@ -284,8 +282,6 @@ import 'package:cmms/app/water_data_list/view/water_data_list_screen.dart';
 import 'package:cmms/app/water_data_list/water_data_list_binding.dart';
 import 'package:cmms/app/work_type/view/work_type_screen.dart';
 import 'package:cmms/app/work_type/work_type_binding.dart';
-import 'package:cmms/app/view_compliance/view_compliance_binding.dart';
-import 'package:cmms/app/view_compliance/views/view_compliance_screen.dart';
 import 'package:cmms/app/view_compliance/view_compliance_binding.dart';
 import 'package:cmms/app/view_compliance/views/view_compliance_screen.dart';
 import '../approve_return_mrs/approve_return_mrs_binding.dart';
@@ -1453,46 +1449,55 @@ class AppPages {
       binding: ViewDocUploadBinding(),
     ),
     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.createOccupationalScreen,
       page: CreateOccupationalScreen.new,
       binding: CreateOccupationalBinding(),
     ),
 
     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.occupationalDataListScreen,
       page: OccupationalDataListScreen.new,
       binding: OccupationalDataListBinding(),
     ),
+    GetPage<dynamic>(
     GetPage<dynamic>(
       name: _Paths.regulataryDataListScreen,
       page: RegulataryDataListScreen.new,
       binding: RegulataryDataListBinding(),
     ),
     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.createRegulataryVisitsScreen,
       page: RegulataryVisitsScreen.new,
       binding: RegulataryVisitsBinding(),
     ),
+    GetPage<dynamic>(
     GetPage<dynamic>(
       name: _Paths.createPermitsTBTScreen,
       page: PermitsTBTScreen.new,
       binding: PermitsTBTBinding(),
     ),
     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.permitsTBTDataListScreen,
       page: PermitsTBTDataListScreen.new,
       binding: PermitsTBTDataListBinding(),
     ),
+    GetPage<dynamic>(
     GetPage<dynamic>(
       name: _Paths.createFuelDataScreen,
       page: FuelDataScreen.new,
       binding: FuelDataBinding(),
     ),
     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.createplantationdataScreen,
       page: PlantationDataScreen.new,
       binding: PlantationDataBinding(),
     ),
+    GetPage<dynamic>(
     GetPage<dynamic>(
       name: _Paths.calendarViewDashbord,
       page: CalendarViewDashbordScreen.new,
