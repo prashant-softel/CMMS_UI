@@ -20,7 +20,13 @@ class EditJobScreen extends GetView<EditJobController> {
     return Scaffold(
       appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeadingProfileAppBar(title: "Edit Job"),
+              title: Obx(
+                () => HeadingProfileAppBar(
+                  title: controller.typeEdit.value == 1
+                      ? "Edit Job"
+                      : "Reassign Job",
+                ),
+              ),
             )
           : null,
       drawer: //

@@ -250,11 +250,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                                   child: CustomElevatedButton(
                                                     onPressed: () {
                                                       controller
-                                                          .clearStoreData();
-
-                                                      controller
-                                                          .clearStoreData();
-
+                                                          .clearStoreDataType();
                                                       controller.goToEditJobScreen(
                                                           int.tryParse(
                                                               '${jobModel?.id}'));
