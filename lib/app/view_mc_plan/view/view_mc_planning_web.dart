@@ -119,10 +119,6 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             " ${controller.mcPlanDetailsModel.value?.status_short ?? ""}",
                                           ),
                                         ),
-                                        Dimens.boxWidth10,
-                                        Text(
-                                          "Id:${controller.mcPlanDetailsModel.value?.planId} ",
-                                        ),
                                       ],
                                     ),
                                   ),
@@ -147,6 +143,33 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                     margin: Dimens.edgeInsets20,
                                     child: Row(
                                       children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            CustomRichText(title: 'Plan ID  :'),
+                                            Dimens.boxHeight10,
+                                            CustomRichText(
+                                              title: 'Assign To :',
+                                            ),
+                                          ],
+                                        ),
+                                        Dimens.boxWidth2,
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                'MCP${controller.mcPlanDetailsModel.value?.planId ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight10,
+                                            Obx(
+                                              () => Text(
+                                                  '${controller.mcPlanDetailsModel.value?.assignedTo ?? ""}', //  "Block 2 all Inverter maintenance plan",
+                                                  style: Styles.blue17),
+                                            ),
+                                          ],
+                                        ),
                                         Spacer(),
                                         Column(
                                           crossAxisAlignment:
@@ -160,7 +183,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        Dimens.boxWidth2,
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -188,7 +211,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                 title: 'Planning by :'),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        Dimens.boxWidth2,
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -212,12 +235,9 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             CustomRichText(
                                                 title:
                                                     'Planning Date & Time :'),
-                                            Dimens.boxHeight10,
-                                            CustomRichText(
-                                                title: 'Assign To :'),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        Dimens.boxWidth2,
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -225,11 +245,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             Text(
                                                 '${controller.mcPlanDetailsModel.value?.createdAt ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                 style: Styles.blue17),
-                                            Dimens.boxHeight10,
 
-                                            Text(
-                                                '${controller.mcPlanDetailsModel.value?.assignedTo ?? ''}', //  "Block 2 all Inverter maintenance plan",
-                                                style: Styles.blue17),
                                             // Dimens.boxHeight10,
                                           ],
                                         ),
@@ -237,6 +253,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                       ],
                                     ),
                                   ),
+                                 
                                   Dimens.boxHeight12,
                                   // controller.filteredInventoryNameList.length > 0
                                   //     ?
@@ -681,7 +698,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                 },
                                               ),
                                             ),
-                                            Dimens.boxWidth10,
+                                            Dimens.boxWidth2,
 
                                             Container(
                                               height: 45,
