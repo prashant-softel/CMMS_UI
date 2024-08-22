@@ -575,6 +575,18 @@ class DataRepository extends DomainRepository {
       end_date: end_date,
     );
   }
+  //getHealthDatalist
+   @override
+  Future<ResponseModel> getHealthDatalist({
+  
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getHealthDatalist(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
 
   @override
   Future<ResponseModel> getInventoryAssetsList({
@@ -2137,6 +2149,18 @@ class DataRepository extends DomainRepository {
         auth: auth,
         createoccupational: createoccupational,
         isLoading: isLoading ?? false,
+      );
+      //createvisitsandnotices
+       Future<ResponseModel> createvisitsandnotices(
+          {required String auth,
+          createvisitsandnotices,
+          bool? isLoading,
+          }) async =>
+      await connectHelper.createvisitsandnotices(
+        auth: auth,
+        createvisitsandnotices: createvisitsandnotices,
+        isLoading: isLoading ?? false,
+        
       );
 
   // update Occupational Health

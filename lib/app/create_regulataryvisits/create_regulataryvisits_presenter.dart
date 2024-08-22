@@ -7,5 +7,11 @@ class CreateRegulataryVisitsPresenter {
 
   ///
 
-  
+  Future<Map<String, dynamic>?> createvisitsandnotices(
+      {createvisitsandnotices, required bool isLoading}) async {
+    return createregulataryvisitsUsecase.createvisitsandnotices(
+      createvisitsandnotices: createvisitsandnotices,
+      isLoading: isLoading,
+    );
+  }
 }

@@ -21,6 +21,7 @@ import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
+import 'package:cmms/domain/models/get_occupational_list_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/grievance_summary_model.dart';
@@ -1064,7 +1065,7 @@ class Repository {
         Fluttertoast.showToast(
             msg: "Occupational Add Successfully...", fontSize: 16.0);
         Get.offAllNamed(
-          Routes.observationListScreen,
+          Routes.occupationalDataListScreen,
         );
 
         // if (res.errorCode == 200) {
@@ -1075,6 +1076,45 @@ class Repository {
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Occupational');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+  //createvisitsandnotices
+  Future<Map<String, dynamic>> createvisitsandnotices(
+      createvisitsandnotices, bool? isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createvisitsandnotices(
+        auth: auth,
+        createvisitsandnotices: createvisitsandnotices,
+        isLoading: isLoading ?? false,
+
+      );
+
+      var resourceData = res.data;
+
+      print('Response create Occupational order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "visits and notices Add Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
+          Routes.occupationalDataListScreen,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'visits and notices');
         //return '';
       }
       return Map();
@@ -5026,6 +5066,85 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+  //getHealthDatalist
+
+  Future<List<GetOccupationalList>> getHealthDatalist({
+    bool? isExport,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getHealthDatalist(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('IncidentReportList: ${res.data}');
+
+      if (!res.hasError) {
+        // var incidentReportList = GetOccupationalListFromJson(res.data);
+        // return incidentReportList.reversed.toList();
+        final jsonIrListModelModels = jsonDecode(res.data);
+
+        final List<GetOccupationalList> _occupationallList =
+            jsonIrListModelModels
+                .map<GetOccupationalList>((m) =>
+                    GetOccupationalList.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+        String jsonData = GetOccupationalListModelToJson(_occupationallList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'id',
+   'noOfHealthExamsOfNewJoiner',
+   'status',
+  'updatedAt',
+  'createdAt',
+   'createdBy',
+  'date',
+   'periodicTests',
+   'occupationalIllnesses',
+  'updatedBy',
+  'month_id',
+  'month_name',
+            ],
+            ...jsonDataList
+                .map((healthlistjson) => [
+                      healthlistjson['id'],
+                      healthlistjson['noOfHealthExamsOfNewJoiner'],
+                      healthlistjson['status'],
+                      healthlistjson['updatedAt'],
+                      healthlistjson['createdAt'],
+                      healthlistjson['createdBy'],
+                      healthlistjson['date'],
+                      healthlistjson['periodicTests'],
+                      healthlistjson['occupationalIllnesses'],
+                      healthlistjson['updatedBy'],
+                      healthlistjson['month_id'],
+                      healthlistjson['month_name'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> healthlistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(healthlistData, 'healthlist.xlsx');
+        }
+        return _occupationallList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getHealthDatalist');
         return [];
       }
     } catch (error) {

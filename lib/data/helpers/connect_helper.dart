@@ -791,6 +791,22 @@ class ConnectHelper {
     );
     return responseModel;
   }
+  // Get Health data
+   Future<ResponseModel> getHealthDatalist({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetHealthData',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 
   Future<ResponseModel> getInventoryAssetsList({
     required bool isLoading,
@@ -3698,6 +3714,30 @@ class ConnectHelper {
       'MISMaster/CreateHealthData',
       Request.post,
       createoccupational,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Water Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
+  // CreateRegulataryVisits
+    Future<ResponseModel> createvisitsandnotices({
+    required String auth,
+    createvisitsandnotices,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateVisitsAndNotices',
+      Request.post,
+      createvisitsandnotices,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
