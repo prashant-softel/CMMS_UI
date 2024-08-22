@@ -13,13 +13,18 @@ class PermitMessageRejectDialog extends GetView {
   String? data;
   String? ptwStatus;
   int? jobId;
-
+  int? vegexe;
+  int? type;
+  int? vegid;
   PermitMessageRejectDialog(
       {super.key,
       this.createPermitData,
       this.data,
       this.ptwStatus,
-      this.jobId});
+      this.jobId,
+      this.type,
+      this.vegid,
+      this.vegexe});
   final ViewPermitController _controller = Get.find();
 
   @override
@@ -87,10 +92,27 @@ class PermitMessageRejectDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                jobId != 0
-                    ? Get.offAllNamed(Routes.jobDetails,
-                        arguments: {"jobId": jobId})
-                    : Get.offAllNamed(Routes.newPermitList);
+                type == 2
+                    ? Get.offAllNamed(Routes.pmTaskView)
+                    : type == 1
+                        ? Get.offAllNamed(Routes.jobDetails)
+                        : type == 3
+                            ? Get.offAllNamed(Routes.viewAuditTask)
+                            : type == 4
+                                ? Get.offAllNamed(
+                                    Routes.addModuleCleaningExecutionContentWeb)
+                                : type == 5
+                                    ? Get.offAllNamed(Routes.vegExecutionScreen,
+                                        arguments: {
+                                            "vegexe": vegexe,
+                                            "vegid": vegid
+                                          })
+                                    : Get.offAllNamed(Routes.newPermitList);
+
+                // jobId != 0
+                //     ? Get.offAllNamed(Routes.jobDetails,
+                //         arguments: {"jobId": jobId})
+                //     : Get.offAllNamed(Routes.newPermitList);
               },
               child: const Text('Ok'),
             ),
