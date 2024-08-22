@@ -44,6 +44,8 @@ import 'package:cmms/app/audit_task/audit_task_binding.dart';
 import 'package:cmms/app/audit_task/view/audit_task_screen.dart';
 import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen.dart';
 import 'package:cmms/app/business_List/view/business_list_screen.dart';
+import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_binding.dart';
+import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
@@ -54,6 +56,8 @@ import 'package:cmms/app/check_list_of_observation/checklist_of_observation_bind
 import 'package:cmms/app/check_list_of_observation/views/checklist_of_observation_screen.dart';
 import 'package:cmms/app/checklist_Inspection/view/ChecklistInsp_list_screen.dart';
 import 'package:cmms/app/checklist_Inspection/ChecklistInsp_list_binding.dart';
+import 'package:cmms/app/cmms_report/cmms_report_binding.dart';
+import 'package:cmms/app/cmms_report/cmms_report_screen.dart';
 
 import 'package:cmms/app/compliance/compliance_binding.dart';
 import 'package:cmms/app/compliance/views/compliance_screen.dart';
@@ -63,6 +67,8 @@ import 'package:cmms/app/create_OccupationalHealth/views/create_occupationalheal
 import 'package:cmms/app/create_audit/craete_audit_binding.dart';
 
 import 'package:cmms/app/create_audit/view/create_audit_screen.dart';
+import 'package:cmms/app/create_fueldata/create_fueldata_binding.dart';
+import 'package:cmms/app/create_fueldata/views/create_fueldata_screen.dart';
 import 'package:cmms/app/create_grievance/create_grievance_binding.dart';
 import 'package:cmms/app/create_grievance/view/create_grievance_screen.dart';
 import 'package:cmms/app/create_mis_plan/create_mis_plan_binding.dart';
@@ -73,6 +79,8 @@ import 'package:cmms/app/create_observation/views/create_observation_screen.dart
 import 'package:cmms/app/create_occupationalhealth/create_occupationalhealth_binding.dart';
 import 'package:cmms/app/create_pemitstoworkTBT/create_pemitstoworkTBT_binding.dart';
 import 'package:cmms/app/create_pemitstoworkTBT/views/create_pemitstoworkTBT_screen.dart';
+import 'package:cmms/app/create_plantationdata/create_plantationdata_binding.dart';
+import 'package:cmms/app/create_plantationdata/views/create_plantationdata_screen.dart';
 import 'package:cmms/app/create_pm_plan/create_pm_plan_binding.dart';
 import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
@@ -274,8 +282,8 @@ import 'package:cmms/app/water_data_list/view/water_data_list_screen.dart';
 import 'package:cmms/app/water_data_list/water_data_list_binding.dart';
 import 'package:cmms/app/work_type/view/work_type_screen.dart';
 import 'package:cmms/app/work_type/work_type_binding.dart';
-import 'package:cmms/view_compliance/view_compliance_binding.dart';
-import 'package:cmms/view_compliance/views/view_compliance_screen.dart';
+import 'package:cmms/app/view_compliance/view_compliance_binding.dart';
+import 'package:cmms/app/view_compliance/views/view_compliance_screen.dart';
 import '../approve_return_mrs/approve_return_mrs_binding.dart';
 import '../approve_return_mrs/view/approve_return_mrs_screen.dart';
 import '../body_injured/body_injured_binding.dart';
@@ -1440,38 +1448,56 @@ class AppPages {
       page: ViewDocUploadScreen.new,
       binding: ViewDocUploadBinding(),
     ),
-      GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.createOccupationalScreen,
       page: CreateOccupationalScreen.new,
       binding: CreateOccupationalBinding(),
     ),
 
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.occupationalDataListScreen,
       page: OccupationalDataListScreen.new,
       binding: OccupationalDataListBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.regulataryDataListScreen,
       page: RegulataryDataListScreen.new,
       binding: RegulataryDataListBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.createRegulataryVisitsScreen,
       page: RegulataryVisitsScreen.new,
       binding: RegulataryVisitsBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.createPermitsTBTScreen,
       page: PermitsTBTScreen.new,
       binding: PermitsTBTBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.permitsTBTDataListScreen,
       page: PermitsTBTDataListScreen.new,
       binding: PermitsTBTDataListBinding(),
     ),
-
-
+    GetPage<dynamic>(
+      name: _Paths.createFuelDataScreen,
+      page: FuelDataScreen.new,
+      binding: FuelDataBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.createplantationdataScreen,
+      page: PlantationDataScreen.new,
+      binding: PlantationDataBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.calendarViewDashbord,
+      page: CalendarViewDashbordScreen.new,
+      binding: CalendarViewDashbordBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.cmmsReport,
+      page: CmmsReportDashboardScreen.new,
+      binding: CmmsReportDashboardBinding(),
+    ),
   ];
 }

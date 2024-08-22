@@ -20,47 +20,58 @@ class EditJobScreen extends GetView<EditJobController> {
     return Scaffold(
       appBar: Responsive.isMobile(context)
           ? AppBar(
-              centerTitle: true,
-              elevation: 0,
+              title: Obx(
+                () => HeadingProfileAppBar(
+                  title: controller.typeEdit.value == 1
+                      ? "Edit Job"
+                      : "Reassign Job",
+                ),
+              ),
             )
           : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer()
+              ? HomeDrawerMobile()
               : null,
-      body: Obx(
-        () => Stack(
-          children: [
-            AnimatedContainer(
-                duration: Duration(milliseconds: 450),
-                margin: EdgeInsets.only(
-                    left: homecontroller.menuButton.value ? 250.0 : 70.0),
-                width: Get.width,
-                height: Get.height,
-                child: Row(
-                  children: [
-                    (Responsive.isMobile(context) ||
-                            Responsive.isTablet(context))
-                        ? Dimens.box0
-                        : Container(),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          if (Responsive.isMobile(context))
-                            Expanded(child: EditJobContentMobile()),
-                          if (Responsive.isDesktop(context))
-                            Expanded(
-                              child: EditJobContentWeb(),
-                            )
-                        ],
-                      ),
+      body: Stack(
+        children: [
+          AnimatedContainer(
+              duration: Duration(milliseconds: 450),
+              margin: EdgeInsets.only(
+                left: Responsive.isDesktop(context)
+                    ? homecontroller.menuButton.value
+                        ? 250.0
+                        : 70.0
+                    : 0,
+              ),
+              width: Get.width,
+              height: Get.height,
+              child: Row(
+                children: [
+                  (Responsive.isMobile(context) || Responsive.isTablet(context))
+                      ? Dimens.box0
+                      : Container(),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        if (Responsive.isMobile(context))
+                          Expanded(child: EditJobContentMobile()),
+                        if (Responsive.isDesktop(context))
+                          Expanded(
+                            child: EditJobContentWeb(),
+                          )
+                      ],
                     ),
-                  ],
-                )),
-            AnimatedPositioned(
-                child: HomeDrawer(), duration: Duration(milliseconds: 450))
-          ],
-        ),
+                  ),
+                ],
+              )),
+          Responsive.isDesktop(context)
+              ? AnimatedPositioned(
+                  duration: Duration(milliseconds: 450),
+                  child: HomeDrawer(),
+                )
+              : Dimens.box0
+        ],
       ),
     );
   }

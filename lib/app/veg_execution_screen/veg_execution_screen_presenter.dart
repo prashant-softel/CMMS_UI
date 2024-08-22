@@ -55,14 +55,15 @@ class VegExecutionPresenter {
   }
 
   Future<List<VegTaskEquipmentList?>> getVegTaskEquipmentList({
-    bool? isLoading,
+  required bool isLoading,
     required int facilityId,
     required int executionId,
   }) async {
     return vegExecutionUsecase.getVegTaskEquipmentList(
+       isLoading: isLoading,
       executionId: executionId,
       facilityId: facilityId,
-      isLoading: isLoading ?? false,
+     
     );
   }
 

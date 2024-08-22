@@ -218,6 +218,12 @@ class MisDashboardController extends GetxController {
    void goToPermitsTBTDataListScreen() {
     Get.toNamed(Routes.permitsTBTDataListScreen);
   }
+    void goToCreateFuelDataScreen() {
+    Get.toNamed(Routes.createFuelDataScreen);
+  }
+    void goToCreatePlantationDataScreen() {
+    Get.toNamed(Routes.createplantationdataScreen);
+  }
 
   
 }

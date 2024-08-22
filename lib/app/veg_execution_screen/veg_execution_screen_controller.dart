@@ -72,9 +72,9 @@ class VegExecutionController extends GetxController {
           facilityId: facilityId.value,
         );
         await getVegTaskEquipmentList(
-          executionId: vegexe.value,
-          facilityId: facilityId.value,
-        );
+            executionId: vegexe.value,
+            facilityId: facilityId.value,
+            isLoading: true);
         await getAssignedToList();
       });
     } catch (e) {
@@ -158,12 +158,13 @@ class VegExecutionController extends GetxController {
     }
   }
 
-  Future<void> getVegTaskEquipmentList({
-    required int executionId,
-    required int facilityId,
-  }) async {
+  Future<void> getVegTaskEquipmentList(
+      {required int executionId,
+      required int facilityId,
+      required bool isLoading}) async {
     final _vegTaskEquipmentList =
         await vegExecutionPresenter.getVegTaskEquipmentList(
+      isLoading: isLoading,
       executionId: executionId,
       facilityId: facilityId,
     );

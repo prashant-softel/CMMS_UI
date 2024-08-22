@@ -44,14 +44,15 @@ class VegExecutionUsecase {
       );
 
   Future<List<VegTaskEquipmentList?>> getVegTaskEquipmentList({
-    bool? isLoading,
+    required bool isLoading,
     required int facilityId,
     required int executionId,
   }) async =>
       await repository.getVegTaskEquipmentList(
+        isLoading: isLoading,
         executionId: executionId,
         facilityId: facilityId,
-        isLoading: isLoading ?? false,
+       
       );
 
   Future<void> startVegExecutionButton({

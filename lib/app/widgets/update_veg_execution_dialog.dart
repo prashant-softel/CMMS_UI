@@ -85,9 +85,9 @@ class UpdateVegExecutionDialog extends GetView<VegExecutionController> {
                       Get.back();
                       Future.delayed(Duration(seconds: 1), () {
                         controller.getVegTaskEquipmentList(
-                          facilityId: controller.facilityId.value,
-                          executionId: controller.vegexe.value,
-                        );
+                            facilityId: controller.facilityId.value,
+                            executionId: controller.vegexe.value,
+                            isLoading: true);
                       });
                       if (mcExecutionId![0] != null) {
                         Future.delayed(Duration(seconds: 1), () {

@@ -6,7 +6,7 @@ import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
-import 'package:cmms/view_compliance/view_compliance_presenter.dart';
+import 'package:cmms/app/view_compliance/view_compliance_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';

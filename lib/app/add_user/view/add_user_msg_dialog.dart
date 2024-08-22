@@ -3,7 +3,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
-import 'package:cmms/view_compliance/view_compliance_controller.dart';
+import 'package:cmms/app/view_compliance/view_compliance_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

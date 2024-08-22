@@ -20,7 +20,7 @@ class AddJobModel {
     required this.description,
     // this.status,
     required this.breakdownTime,
-    required this.assetsIds,
+   required  this.assetsIds,
     required this.workTypeIds,
     this.uploadfile_ids,
   });
@@ -36,7 +36,7 @@ class AddJobModel {
   // int? status;
 
   String? breakdownTime;
-  List<int> assetsIds;
+  List<int?> assetsIds;
   List<int?> workTypeIds;
   List<dynamic>? uploadfile_ids;
 

@@ -110,9 +110,37 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                                                 style: Styles.blackBold16,
                                               ),
                                               Spacer(),
+                                               Padding(
+                                            padding: EdgeInsets.only(
+                                              top: 20,
+                                              right: 20,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Text('Month:'),
+                                                Dimens.boxWidth10,
+                                                CustomTextFieldForStock(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      8,
+                                                  numberTextField: true,
+                                                  onTap: () {
+                                                    _showMonthPicker(
+                                                        context, controller);
+                                                  },
+                                                  // textController:
+                                                  //     controller.waterDateTc,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                             ],
                                           ),
                                         ),
+                                       
+                                         
+                                        
                                         Divider(
                                           color: ColorValues.greyLightColour,
                                         ),
@@ -154,30 +182,30 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                                                                   keyboardType:
                                                                       TextInputType
                                                                           .number,
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .contractorNameCtrlr,
-                                                                 // validate
-                                                                  // errorController: controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  textController:
+                                                                      controller
+                                                                          .noofhealthexamsofnewjoinerCtrl,
+                                                                // validate
+                                                                  errorController: controller
+                                                                          .isHeathExamInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isHeathExamInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isHeathExamInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -195,30 +223,30 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .correctivePreventiveCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value = true;
-                                                                    // }
-                                                                  // }
+                                                                  textController:
+                                                                      controller
+                                                                          .periodictestsCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isPeriodictestInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isPeriodictestInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isPeriodictestInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -235,30 +263,30 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .responsiblePersonCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  textController:
+                                                                      controller
+                                                                          .occupationalillnessesCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isOccupationalIllnessesInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isOccupationalIllnessesInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isOccupationalIllnessesInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -303,7 +331,7 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                               backgroundColor: ColorValues.cancelColor,
                               text: 'Cancel',
                               onPressed: () {
-                                Get.toNamed(Routes.complianceScreen);
+                                Get.toNamed(Routes.misDashboard);
                               },
                             ),
                           ),
@@ -317,9 +345,7 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                                     text: 'Submit',
                                     onPressed: () {
                                       // controller.isFormInvalid.value = false;
-                                      // controller.createObs(
-                                      //     position: 1,
-                                      //     fileIds: dropzoneController.fileIds);
+                                      controller.createoccupational();
                                     },
                                   ),
                                 )
@@ -350,3 +376,49 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
     );
   }
 }
+_showMonthPicker(BuildContext context, CreateOccupationalhealthController controller) {
+  // controller.selectedMonth = DateTime.now().year;
+  // showDialog(
+  //   context: context,
+  //   builder: (BuildContext context) {
+  //     return AlertDialog(
+  //       title: Text("Select Year"),
+  //       content: Container(
+  //         height: 200,
+  //         child: CupertinoPicker(
+  //           itemExtent: 40,
+  //           onSelectedItemChanged: (int index) {
+  //             controller.selectedMonth = DateTime.now().year - index;
+  //           },
+  //           children: List.generate(10, (index) {
+  //             return Center(
+  //               child: Text((DateTime.now().year - index).toString()),
+  //             );
+  //           }),
+  //         ),
+  //       ),
+  //       actions: <Widget>[
+  //         ActionButton(
+  //           label: "Cancel", color: ColorValues.appRedColor,
+  //           onPressed: () {
+  //             Navigator.of(context).pop();
+  //           },
+  //           // child: Text("Cancel"),
+  //         ),
+  //         Dimens.boxHeight10,
+  //         ActionButton(
+  //           color: ColorValues.addNewColor,
+  //           onPressed: () {
+  //             controller.waterDateTc.text = controller.selectedYear.toString();
+  //             controller.goWaterDataList();
+  //             controller.update(['stock_Mangement_Date']);
+  //             Navigator.of(context).pop();
+  //           },
+  //           label: "Select",
+  //         ),
+  //       ],
+  //     );
+  //   },
+  // );
+}
+

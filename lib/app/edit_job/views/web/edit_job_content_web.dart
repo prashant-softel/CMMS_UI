@@ -498,76 +498,62 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 .size
                                                                 .width *
                                                             .2),
-                                                        child: Obx(
-                                                          () => SizedBox(
-                                                            // height:
-                                                            //     MediaQuery.of(context).size.height *
-                                                            //         0.040,
-                                                            child:
-                                                                MultiSelectDialogField(
-                                                              dialogWidth: 300,
-                                                              dialogHeight: 400,
-                                                              searchable: true,
-                                                              validator:
-                                                                  (selectedItems) {
-                                                                if (controller
-                                                                        .isWorkAreaSelected
-                                                                        .value ==
-                                                                    false) {
-                                                                  return "Required field";
-                                                                } else {
-                                                                  return null;
-                                                                }
-                                                              },
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .always,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                border:
-                                                                    Border.all(
-                                                                  color: controller
-                                                                              .isWorkAreaSelected
-                                                                              .value ==
-                                                                          false
-                                                                      ? Colors
-                                                                          .red
-                                                                      : Colors
-                                                                          .transparent,
-                                                                  width: 1.0,
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                              ),
-                                                              buttonIcon: Icon(Icons
-                                                                  .arrow_drop_down),
-                                                              items: controller
-                                                                  .workAreaList
-                                                                  .map((e) =>
-                                                                      MultiSelectItem(
-                                                                          e,
-                                                                          e?.name ??
-                                                                              ''))
-                                                                  .toList(),
+                                                        child: Obx(() {
+                                                          if (!controller
+                                                              .isInventoryCategoryListLoaded
+                                                              .value) {
+                                                            return CircularProgressIndicator(); // Loading indicator while waiting
+                                                          }
+
+                                                          if (!controller
+                                                              .isInventoryCategoryListLoaded
+                                                              .value) {
+                                                            return CustomMultiSelectDialogField(
                                                               onConfirm:
-                                                                  (selectedOptionsList) =>
-                                                                      {
-                                                                controller
-                                                                    .workAreasSelected(
-                                                                        selectedOptionsList),
-                                                                controller
-                                                                        .isWorkAreaSelected
-                                                                        .value =
-                                                                    selectedOptionsList
-                                                                        .isNotEmpty,
-                                                              },
-                                                              chipDisplay:
-                                                                  MultiSelectChipDisplay(),
-                                                            ),
-                                                          ),
-                                                        ),
+                                                                  (selectedOptionsList) {},
+                                                              buttonText: "",
+                                                              initialValue: [],
+                                                              items: [],
+                                                              title: "",
+                                                            );
+                                                          }
+
+                                                          final initialValue = controller
+                                                                  .selectedWorkAreaIdList
+                                                                  .isNotEmpty
+                                                              ? controller
+                                                                  .selectedWorkAreaIdList
+                                                              : [];
+
+                                                          return CustomMultiSelectDialogField(
+                                                            title:
+                                                                'Please Select',
+                                                            buttonText:
+                                                                'Equipment Category',
+                                                            initialValue:
+                                                                initialValue,
+                                                            items: controller
+                                                                .workAreaList
+                                                                .map(
+                                                                    (workarea) {
+                                                              return MultiSelectItem(
+                                                                workarea!.id,
+                                                                workarea.name ??
+                                                                    "",
+                                                              );
+                                                            }).toList(),
+                                                            onConfirm:
+                                                                (selectedOptionsList) {
+                                                              controller
+                                                                  .workAreasSelected(
+                                                                      selectedOptionsList);
+                                                              print(
+                                                                  'Selected workarea Categories: $selectedOptionsList');
+                                                              print(
+                                                                  'Updated Selected workarea in Controller: ${controller.selectedEquipmentCategoryIdList}');
+                                                            },
+                                                          );
+                                                        }),
                                                       ),
                                                     ],
                                                   ),
@@ -740,18 +726,19 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                               ],
                                             ),
                                             Spacer(),
-                                            IgnorePointer(
-                                              ignoring: controller.typeEdit == 1
-                                                  ? false
-                                                  : true,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: [
-                                                  ///
-                                                  //   Dimens.boxHeight10,
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                ///
+                                                //   Dimens.boxHeight10,
 
-                                                  Row(
+                                                IgnorePointer(
+                                                  ignoring:
+                                                      controller.typeEdit == 1
+                                                          ? false
+                                                          : true,
+                                                  child: Row(
                                                     children: [
                                                       CustomRichText(
                                                           title:
@@ -845,8 +832,14 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Dimens.boxHeight10,
-                                                  Row(
+                                                ),
+                                                Dimens.boxHeight10,
+                                                IgnorePointer(
+                                                  ignoring:
+                                                      controller.typeEdit == 1
+                                                          ? false
+                                                          : true,
+                                                  child: Row(
                                                     children: [
                                                       CustomRichText(
                                                           title: 'Fault :'),
@@ -890,75 +883,73 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 .size
                                                                 .width *
                                                             .2),
-                                                        child: Obx(
-                                                          () =>
-                                                              MultiSelectDialogField(
-                                                            dialogWidth: 300,
-                                                            dialogHeight: 400,
-                                                            searchable: true,
-                                                            validator:
-                                                                (selectedItems) {
-                                                              if (controller
-                                                                      .isWorkTypeSelected
-                                                                      .value ==
-                                                                  false) {
-                                                                return "Required field";
-                                                              } else {
-                                                                return null;
-                                                              }
-                                                            },
-                                                            autovalidateMode:
-                                                                AutovalidateMode
-                                                                    .always,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border:
-                                                                  Border.all(
-                                                                color: controller
-                                                                            .isWorkTypeSelected
-                                                                            .value ==
-                                                                        false
-                                                                    ? Colors.red
-                                                                    : Colors
-                                                                        .transparent,
-                                                                width: 1.0,
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
-                                                            buttonIcon: Icon(Icons
-                                                                .arrow_drop_down),
+                                                        child: Obx(() {
+                                                          if (!controller
+                                                              .isInventoryCategoryListLoaded
+                                                              .value) {
+                                                            return CircularProgressIndicator(); // Loading indicator while waiting
+                                                          }
+
+                                                          if (!controller
+                                                              .isInventoryCategoryListLoaded
+                                                              .value) {
+                                                            return CustomMultiSelectDialogField(
+                                                              onConfirm:
+                                                                  (selectedOptionsList) {},
+                                                              buttonText: "",
+                                                              initialValue: [],
+                                                              items: [],
+                                                              title: "",
+                                                            );
+                                                          }
+
+                                                          final initialValue = controller
+                                                                  .selectedWorkTypeIdList
+                                                                  .isNotEmpty
+                                                              ? controller
+                                                                  .selectedWorkTypeIdList
+                                                              : [];
+
+                                                          return CustomMultiSelectDialogField(
+                                                            title:
+                                                                'Please Select',
+                                                            buttonText:
+                                                                'Equipment Category',
+                                                            initialValue:
+                                                                initialValue,
                                                             items: controller
                                                                 .workTypeList
-                                                                .map((e) =>
-                                                                    MultiSelectItem(
-                                                                        e,
-                                                                        e?.name ??
-                                                                            ''))
-                                                                .toList(),
+                                                                .map(
+                                                                    (workType) {
+                                                              return MultiSelectItem(
+                                                                workType!.id,
+                                                                workType.name ??
+                                                                    "",
+                                                              );
+                                                            }).toList(),
                                                             onConfirm:
-                                                                (selectedOptionsList) =>
-                                                                    {
+                                                                (selectedOptionsList) {
                                                               controller
                                                                   .workTypesSelected(
-                                                                      selectedOptionsList),
-                                                              controller
-                                                                      .isWorkTypeSelected
-                                                                      .value =
-                                                                  selectedOptionsList
-                                                                      .isNotEmpty,
+                                                                      selectedOptionsList);
+                                                              print(
+                                                                  'Selected workarea Categories: $selectedOptionsList');
+                                                              print(
+                                                                  'Updated Selected workarea in Controller: ${controller.selectedEquipmentCategoryIdList}');
                                                             },
-                                                            chipDisplay:
-                                                                MultiSelectChipDisplay(),
-                                                          ),
-                                                        ),
+                                                          );
+                                                        }),
                                                       ),
                                                     ],
                                                   ),
-                                                  Dimens.boxHeight10,
-                                                  Row(
+                                                ),
+                                                Dimens.boxHeight10,
+                                                IgnorePointer(
+                                                  ignoring:
+                                                      controller.typeEdit == 1
+                                                          ? false
+                                                          : true,
+                                                  child: Row(
                                                     children: [
                                                       CustomRichText(
                                                         title:
@@ -1006,120 +997,142 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 .size
                                                                 .width *
                                                             .2),
-                                                        child:
-                                                            MultiSelectDialogField(
-                                                          dialogWidth: 300,
-                                                          dialogHeight: 400,
-                                                          searchable: true,
-                                                          // validator: (selectedItems) {
-                                                          //   if (controller.isToolRequiredToWorkTypeSelected.value == false) {
-                                                          //     return "Required field";
-                                                          //   } else {
-                                                          //     return null;
-                                                          //   }
-                                                          // },
-                                                          autovalidateMode:
-                                                              AutovalidateMode
-                                                                  .always,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                              color:
-                                                                  //     controller.isToolRequiredToWorkTypeSelected.value == false
-                                                                  //         ? Colors.red
-                                                                  //         :
-                                                                  Colors
-                                                                      .transparent,
-                                                              width: 1.0,
-                                                            ),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                          ),
-                                                          buttonIcon: Icon(Icons
-                                                              .arrow_drop_down),
-                                                          initialValue: controller
-                                                              .toolsRequiredToWorkTypeList!
-                                                              .toList(), // Select all items initially
+                                                        child: Obx(() {
+                                                          if (!controller
+                                                              .isInventoryCategoryListLoaded
+                                                              .value) {
+                                                            return CircularProgressIndicator(); // Loading indicator while waiting
+                                                          }
 
-                                                          items: controller
-                                                              .toolsRequiredToWorkTypeList!
-                                                              .map((e) =>
-                                                                  MultiSelectItem(
-                                                                      e,
-                                                                      e?.linkedToolName ??
-                                                                          ''))
-                                                              .toList(),
+                                                          if (!controller
+                                                              .isInventoryCategoryListLoaded
+                                                              .value) {
+                                                            return CustomMultiSelectDialogField(
+                                                              onConfirm:
+                                                                  (selectedOptionsList) {},
+                                                              buttonText: "",
+                                                              initialValue: [],
+                                                              items: [],
+                                                              title: "",
+                                                            );
+                                                          }
 
-                                                          onConfirm:
-                                                              (selectedOptionsList) =>
-                                                                  {
-                                                            controller
-                                                                .toolsRequiredSelected(
-                                                                    selectedOptionsList),
-                                                            controller
-                                                                    .isToolRequiredToWorkTypeSelected
-                                                                    .value =
-                                                                selectedOptionsList
-                                                                    .isNotEmpty,
-                                                          },
-                                                          chipDisplay:
-                                                              MultiSelectChipDisplay(),
-                                                        ),
+                                                          final initialValue = controller
+                                                                  .selectedtoolsRequiredToWorkTypeIdList
+                                                                  .isNotEmpty
+                                                              ? controller
+                                                                  .selectedtoolsRequiredToWorkTypeIdList
+                                                              : [];
+
+                                                          return CustomMultiSelectDialogField(
+                                                            title:
+                                                                'Please Select',
+                                                            buttonText:
+                                                                'Equipment Category',
+                                                            initialValue:
+                                                                initialValue,
+                                                            items: controller
+                                                                .toolsRequiredToWorkTypeList
+                                                                .map(
+                                                                    (workarea) {
+                                                              return MultiSelectItem(
+                                                                workarea!.id,
+                                                                workarea.linkedToolName ??
+                                                                    "",
+                                                              );
+                                                            }).toList(),
+                                                            onConfirm:
+                                                                (selectedOptionsList) {
+                                                              controller
+                                                                  .toolsRequiredSelected(
+                                                                      selectedOptionsList);
+                                                              print(
+                                                                  'Selected workarea Categories: $selectedOptionsList');
+                                                              print(
+                                                                  'Updated Selected workarea in Controller: ${controller.selectedEquipmentCategoryIdList}');
+                                                            },
+                                                          );
+                                                        }),
                                                       ),
                                                     ],
                                                   ),
+                                                ),
 
-                                                  // Dimens.boxHeight10,
-                                                  // Row(
-                                                  //   children: [
-                                                  //     CustomRichText(
-                                                  //         title: 'Assigned To :'),
-                                                  //     Dimens.boxWidth10,
-                                                  //     Container(
-                                                  //       decoration: BoxDecoration(
-                                                  //         borderRadius:
-                                                  //             BorderRadius.circular(10),
-                                                  //         border: Border.all(
-                                                  //           color: Color.fromARGB(
-                                                  //               255, 227, 224, 224),
-                                                  //           width: 1,
-                                                  //         ),
-                                                  //         boxShadow: [
-                                                  //           BoxShadow(
-                                                  //             color: Color.fromARGB(
-                                                  //                     255, 236, 234, 234)
-                                                  //                 .withOpacity(0.5),
-                                                  //             spreadRadius: 2,
-                                                  //             blurRadius: 5,
-                                                  //             offset: Offset(0, 2),
-                                                  //           ),
-                                                  //         ],
-                                                  //       ),
-                                                  //       width: (MediaQuery.of(context)
-                                                  //               .size
-                                                  //               .width *
-                                                  //           .2),
-                                                  //       child: DropdownWebWidget(
-                                                  //         controller: controller,
-                                                  //         dropdownList:
-                                                  //             controller.assignedToList,
-                                                  //         isValueSelected: controller
-                                                  //             .isAssignedToSelected.value,
-                                                  //         selectedValue: controller
-                                                  //             .selectedAssignedTo.value,
-                                                  //         onValueChanged: controller
-                                                  //             .onDropdownValueChanged,
-                                                  //       ),
-                                                  //     ),
-                                                  //   ],
-                                                  // ),
-                                                  // Dimens.boxHeight10,
+                                                Dimens.boxHeight10,
+                                                controller.typeEdit == 1
+                                                    ? Dimens.box0
+                                                    : Row(
+                                                        children: [
+                                                          CustomRichText(
+                                                              title:
+                                                                  'Assigned To :'),
+                                                          Dimens.boxWidth10,
+                                                          Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              border:
+                                                                  Border.all(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        227,
+                                                                        224,
+                                                                        224),
+                                                                width: 1,
+                                                              ),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Color.fromARGB(
+                                                                          255,
+                                                                          236,
+                                                                          234,
+                                                                          234)
+                                                                      .withOpacity(
+                                                                          0.5),
+                                                                  spreadRadius:
+                                                                      2,
+                                                                  blurRadius: 5,
+                                                                  offset:
+                                                                      Offset(
+                                                                          0, 2),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            width: (MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                .2),
+                                                            child:
+                                                                DropdownWebWidget(
+                                                              controller:
+                                                                  controller,
+                                                              dropdownList:
+                                                                  controller
+                                                                      .assignedToList,
+                                                              isValueSelected:
+                                                                  controller
+                                                                      .isAssignedToSelected
+                                                                      .value,
+                                                              selectedValue:
+                                                                  controller
+                                                                      .selectedAssignedTo
+                                                                      .value,
+                                                              onValueChanged:
+                                                                  controller
+                                                                      .onDropdownValueChanged,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                // Dimens.boxHeight10,
 
-                                                  Dimens.boxHeight10,
-                                                ],
-                                              ),
+                                                Dimens.boxHeight10,
+                                              ],
                                             ),
                                             Spacer(),
                                           ],
@@ -1376,7 +1389,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                             ? controller.updateJob(
                                                 fileIds:
                                                     dropzoneController.fileIds)
-                                            : controller.assignReAssignJob,
+                                            : controller.assignReAssignJob(),
                                     backgroundColor:
                                         ColorValues.appDarkBlueColor,
                                   ),

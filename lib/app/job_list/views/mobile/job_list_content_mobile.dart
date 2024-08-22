@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:flutter/material.dart';
@@ -293,6 +294,23 @@ class JobListContentMobile extends GetView<JobListController> {
                                               ),
                                             ],
                                           ),
+                                          jobModel?.status == 101
+                                              ? Center(
+                                                  child: CustomElevatedButton(
+                                                    onPressed: () {
+                                                      controller
+                                                          .clearStoreDataType();
+                                                      controller.goToEditJobScreen(
+                                                          int.tryParse(
+                                                              '${jobModel?.id}'));
+                                                    },
+                                                    text: 'Edit Job',
+                                                    icon: Icons.edit,
+                                                    backgroundColor:
+                                                        ColorValues.editColor,
+                                                  ),
+                                                )
+                                              : Dimens.box0
                                         ],
                                       ),
                                     ),

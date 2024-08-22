@@ -575,6 +575,18 @@ class DataRepository extends DomainRepository {
       end_date: end_date,
     );
   }
+  //getHealthDatalist
+   @override
+  Future<ResponseModel> getHealthDatalist({
+  
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getHealthDatalist(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
 
   @override
   Future<ResponseModel> getInventoryAssetsList({
@@ -1387,22 +1399,26 @@ class DataRepository extends DomainRepository {
   //       isLoading: isLoading ?? false,
   //     );
 
-  Future<ResponseModel> permitRejectButton({
-    required String auth,
-    int? id,
-    String? ptwStatus,
-    int? jobId,
-    rejectExtendPermitJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> permitRejectButton(
+          {required String auth,
+          int? id,
+          String? ptwStatus,
+          int? jobId,
+          rejectExtendPermitJsonString,
+          bool? isLoading,
+          int? type,
+          int? vegexe,
+          int? vegid}) async =>
       await connectHelper.permitRejectButton(
-        auth: auth,
-        rejectExtendPermitJsonString: rejectExtendPermitJsonString,
-        id: id,
-        jobId: jobId,
-        ptwStatus: ptwStatus,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          rejectExtendPermitJsonString: rejectExtendPermitJsonString,
+          id: id,
+          jobId: jobId,
+          ptwStatus: ptwStatus,
+          isLoading: isLoading ?? false,
+          type: type,
+          vegexe: vegexe,
+          vegid: vegid);
 
   Future<ResponseModel> incidentReportRejectButton({
     required String auth,
@@ -2124,6 +2140,41 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
         position: position,
       );
+  Future<ResponseModel> createoccupational({
+    required String auth,
+    createoccupational,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createoccupational(
+        auth: auth,
+        createoccupational: createoccupational,
+        isLoading: isLoading ?? false,
+      );
+      //createvisitsandnotices
+       Future<ResponseModel> createvisitsandnotices(
+          {required String auth,
+          createvisitsandnotices,
+          bool? isLoading,
+          }) async =>
+      await connectHelper.createvisitsandnotices(
+        auth: auth,
+        createvisitsandnotices: createvisitsandnotices,
+        isLoading: isLoading ?? false,
+        
+      );
+
+  // update Occupational Health
+  Future<ResponseModel> updateHealthData({
+    required String auth,
+    updateHealthData,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateHealthData(
+        auth: auth,
+        updateHealthData: updateHealthData,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> createWaterData({
     required String auth,
     createWaterData,
@@ -6215,7 +6266,7 @@ class DataRepository extends DomainRepository {
         toDate: toDate,
       );
 
-    Future<ResponseModel> getGrievanceSummary({
+  Future<ResponseModel> getGrievanceSummary({
     String? auth,
     bool? isLoading,
     required int facility_id,

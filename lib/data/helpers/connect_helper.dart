@@ -791,6 +791,22 @@ class ConnectHelper {
     );
     return responseModel;
   }
+  // Get Health data
+   Future<ResponseModel> getHealthDatalist({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetHealthData',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 
   Future<ResponseModel> getInventoryAssetsList({
     required bool isLoading,
@@ -2352,7 +2368,10 @@ class ConnectHelper {
       int? id,
       String? ptwStatus,
       rejectExtendPermitJsonString,
-      int? jobId}) async {
+      int? jobId,
+      int? type,
+      int? vegexe,
+      int? vegid}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       ptwStatus == '133' ? 'Permit/PermitExtendReject' : 'Permit/PermitReject',
@@ -2369,10 +2388,12 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageRejectDialog(
-      data: parsedJson['message'],
-      jobId: jobId,
-      ptwStatus: ptwStatus,
-    ));
+        data: parsedJson['message'],
+        jobId: jobId,
+        ptwStatus: ptwStatus,
+        vegid: vegid,
+        type: type,
+        vegexe: vegexe));
 
     return responseModel;
   }
@@ -3680,6 +3701,78 @@ class ConnectHelper {
     //   Get.dialog<void>(WarrantyClaimErrorDialog());
     // } else {
 
+    return responseModel;
+  }
+
+  //Occupational Health create
+  Future<ResponseModel> createoccupational({
+    required String auth,
+    createoccupational,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateHealthData',
+      Request.post,
+      createoccupational,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Water Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
+  // CreateRegulataryVisits
+    Future<ResponseModel> createvisitsandnotices({
+    required String auth,
+    createvisitsandnotices,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateVisitsAndNotices',
+      Request.post,
+      createvisitsandnotices,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Water Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
+  //Update Occupational Health
+  Future<ResponseModel> updateHealthData({
+    required String auth,
+    updateHealthData,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateHealthData',
+      Request.post,
+      jsonEncode(updateHealthData),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Occupational  Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    print(parsedJson);
     return responseModel;
   }
 
@@ -9423,7 +9516,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/RejectScheduleExecution',
+      'Vegetation/RejectScheduleExecutionVegetation',
       Request.put,
       rejecttoJsonString,
       isLoading ?? true,

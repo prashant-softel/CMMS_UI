@@ -16,16 +16,20 @@ class DocumentUploadController extends GetxController {
 
   int facilityId = 0;
   RxList<DocumentMasterModel?> documentNameType = <DocumentMasterModel>[].obs;
+  Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isSubDocInvalid = false.obs;
+  Rx<bool> isRenewDateTcInvalid = false.obs;
+  Rx<bool> isReamrkInvalid = false.obs;
 
   Rx<bool> isSelectedDocumentNameType = true.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   bool openrenewDateTcDatePicker = false;
   bool isLoading = true;
   var renewDateTc = TextEditingController();
+
   var remark = TextEditingController();
   var subDocName = TextEditingController();
 
-  Rx<bool> isSelecteddocumentNameType = true.obs;
   Rx<String> selecteddocumentNameType = ''.obs;
   int selectedDocumentId = 0;
 
@@ -93,33 +97,148 @@ class DocumentUploadController extends GetxController {
 
   void uploadDocumentNew({dynamic fileIds}) async {
     try {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _renewDateTc = renewDateTc.text.trim();
       String _remarkDateTc = remark.text.trim();
       String _subDocNameDateTc = subDocName.text.trim();
 
+      if (fileIds == null || fileIds.isEmpty) {
+        showAlertDialog(
+          title: "Upload Failed",
+          message:
+              "No file has been selected for upload. Please select a file and try again.",
+        );
+        return;
+      }
+
       UploadDocumentModel uploadDocumentModel = UploadDocumentModel(
-          is_renew: 0,
-          docuemnt_id: 0,
-          docMasterId: selectedDocumentId,
-          fileId: fileIds[0],
-          facility_id: facilityId,
-          remarks: _remarkDateTc,
-          renewDate: _renewDateTc,
-          subDocName: _subDocNameDateTc);
+        is_renew: 0,
+        docuemnt_id: 0,
+        docMasterId: selectedDocumentId,
+        fileId: fileIds[0],
+        facility_id: facilityId,
+        remarks: _remarkDateTc,
+        renewDate: _renewDateTc,
+        subDocName: _subDocNameDateTc,
+      );
+
       var uploadDocumenModelJsonString = uploadDocumentModel.toJson();
       Map<String, dynamic>? responseUploadDocument =
           await documentUploadPresenter.uploadDocumentNew(
         uploadDocument: uploadDocumenModelJsonString,
         isLoading: true,
       );
-      if (responseUploadDocument == null) {}
+
+      if (responseUploadDocument == null) {
+        // Show alert dialog if the upload fails
+        showAlertDialog(
+          title: "Upload Failed",
+          message: "The document upload failed. Please try again.",
+        );
+      } else {
+        // Handle success case if needed
+        print("Upload successful");
+      }
     } catch (e) {
       print(e);
+      showAlertDialog(
+        title: "Error",
+        message: "An unexpected error occurred: ${e.toString()}",
+      );
     }
+  }
+
+  void checkForm() {
+    if (selectedDocumentId == 0) {
+      isSelectedDocumentNameType.value = false;
+      isFormInvalid.value = true;
+    }
+    if (subDocName.text.trim().length == 0) {
+      isSubDocInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (renewDateTc.text.trim().length == 0) {
+      isRenewDateTcInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (remark.text.trim().length == 0) {
+      isReamrkInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+  }
+
+  void checkRenewForm() {
+    if (renewDateTc.text.trim().length == 0) {
+      isRenewDateTcInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (remark.text.trim().length == 0) {
+      isReamrkInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+  }
+
+  void showAlertDialog({required String title, required String message}) {
+    Get.dialog(
+      AlertDialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+            color: Color(0xFF002147),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Arial',
+          ),
+        ),
+        content: Text(
+          message,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 16,
+            fontFamily: 'Arial',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back(); // Close the dialog
+            },
+            child: Text(
+              "OK",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: Color(0xFF002147),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+        ],
+        elevation: 24.0,
+        contentPadding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+        actionsPadding: EdgeInsets.only(right: 16.0, bottom: 8.0),
+      ),
+    );
   }
 
   void reNewUploadDocumentNew({dynamic fileIds}) async {
     try {
+      checkRenewForm();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _renewDateTc = renewDateTc.text.trim();
       String _remarkDateTc = remark.text.trim();
       String _subDocNameDateTc = subDocName.text.trim();
@@ -127,6 +246,14 @@ class DocumentUploadController extends GetxController {
       int docMasterIdToUse = selectedItem?.doc_master_id ?? selectedDocumentId;
       int docIdToUse = selectedItem?.id ?? selectedDocumentId;
 
+      if (fileIds == null || fileIds.isEmpty) {
+        showAlertDialog(
+          title: "Upload Failed",
+          message:
+              "No file has been selected for upload. Please select a file and try again.",
+        );
+        return;
+      }
       UploadDocumentModel uploadDocumentModel = UploadDocumentModel(
           is_renew: 1,
           docMasterId: docMasterIdToUse,
@@ -144,10 +271,17 @@ class DocumentUploadController extends GetxController {
         isLoading: true,
       );
       if (responseUploadDocument == null) {
-        // Handle the case where the response is null
+        showAlertDialog(
+          title: "Upload Failed",
+          message: "The document upload failed. Please try again.",
+        );
       }
     } catch (e) {
       print(e);
+      showAlertDialog(
+        title: "Error",
+        message: "An unexpected error occurred: ${e.toString()}",
+      );
     }
   }
 
@@ -162,7 +296,7 @@ class DocumentUploadController extends GetxController {
             selectedDocumentId = documentNameType[documentIndex]?.id ?? 0;
 
             selecteddocumentNameType.value = value;
-            isSelecteddocumentNameType.value = true;
+            isSelectedDocumentNameType.value = true;
           } else {
             selectedDocumentId = 0;
           }

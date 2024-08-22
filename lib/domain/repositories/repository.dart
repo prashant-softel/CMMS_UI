@@ -21,6 +21,7 @@ import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
+import 'package:cmms/domain/models/get_occupational_list_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/grievance_summary_model.dart';
@@ -1046,6 +1047,117 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> createoccupational(
+      createoccupational, bool? isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createoccupational(
+        auth: auth,
+        createoccupational: createoccupational,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response create Occupational order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Occupational Add Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
+          Routes.occupationalDataListScreen,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Occupational');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+  //createvisitsandnotices
+  Future<Map<String, dynamic>> createvisitsandnotices(
+      createvisitsandnotices, bool? isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createvisitsandnotices(
+        auth: auth,
+        createvisitsandnotices: createvisitsandnotices,
+        isLoading: isLoading ?? false,
+
+      );
+
+      var resourceData = res.data;
+
+      print('Response create Occupational order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "visits and notices Add Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
+          Routes.occupationalDataListScreen,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'visits and notices');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  //update Occupational Health
+  Future<Map<String, dynamic>> updateHealthData(
+    updateHealthData,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateHealthData(
+        auth: auth,
+        updateHealthData: updateHealthData,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Health Data : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Health Data  Successfully...", fontSize: 16.0);
+        // Get.offAllNamed(
+        //   Routes.viewWaterData,
+        // );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'update Water Data');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<Map<String, dynamic>> createWaterData(
     createWaterData,
     bool? isLoading,
@@ -1750,6 +1862,7 @@ class Repository {
               'Asset_Last_calibration_date',
               'Calibration_Next_Due_date',
               'Calibration_reminder_days',
+              'Area'
             ],
             ...jsonDataList
                 .map((inventoryJson) => [
@@ -1789,6 +1902,7 @@ class Repository {
                       inventoryJson['calibrationLastDate'],
                       inventoryJson['calibrationDueDate'],
                       inventoryJson['calibrationReminderDays'],
+                      inventoryJson['area'],
                     ])
                 .toList(),
           ];
@@ -4959,6 +5073,85 @@ class Repository {
       return [];
     }
   }
+  //getHealthDatalist
+
+  Future<List<GetOccupationalList>> getHealthDatalist({
+    bool? isExport,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getHealthDatalist(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('IncidentReportList: ${res.data}');
+
+      if (!res.hasError) {
+        // var incidentReportList = GetOccupationalListFromJson(res.data);
+        // return incidentReportList.reversed.toList();
+        final jsonIrListModelModels = jsonDecode(res.data);
+
+        final List<GetOccupationalList> _occupationallList =
+            jsonIrListModelModels
+                .map<GetOccupationalList>((m) =>
+                    GetOccupationalList.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+        String jsonData = GetOccupationalListModelToJson(_occupationallList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'id',
+   'noOfHealthExamsOfNewJoiner',
+   'status',
+  'updatedAt',
+  'createdAt',
+   'createdBy',
+  'date',
+   'periodicTests',
+   'occupationalIllnesses',
+  'updatedBy',
+  'month_id',
+  'month_name',
+            ],
+            ...jsonDataList
+                .map((healthlistjson) => [
+                      healthlistjson['id'],
+                      healthlistjson['noOfHealthExamsOfNewJoiner'],
+                      healthlistjson['status'],
+                      healthlistjson['updatedAt'],
+                      healthlistjson['createdAt'],
+                      healthlistjson['createdBy'],
+                      healthlistjson['date'],
+                      healthlistjson['periodicTests'],
+                      healthlistjson['occupationalIllnesses'],
+                      healthlistjson['updatedBy'],
+                      healthlistjson['month_id'],
+                      healthlistjson['month_name'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> healthlistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(healthlistData, 'healthlist.xlsx');
+        }
+        return _occupationallList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getHealthDatalist');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
 
   ///Equipment Model List 26
   Future<List<EquipmentListModel>> getEquipmentModelList({
@@ -6227,22 +6420,27 @@ class Repository {
   // }
 
   Future<Map<String, dynamic>> permitRejectButton(
-    rejectExtendPermitJsonString,
-    int? id,
-    String? ptwStatus,
-    int? jobId,
-    bool? isLoading,
-  ) async {
+      rejectExtendPermitJsonString,
+      int? id,
+      String? ptwStatus,
+      int? jobId,
+      int? type,
+      bool? isLoading,
+      int? vegexe,
+      int? vegid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.permitRejectButton(
-        auth: auth,
-        rejectExtendPermitJsonString: json.encode(rejectExtendPermitJsonString),
-        id: id,
-        ptwStatus: ptwStatus,
-        jobId: jobId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          rejectExtendPermitJsonString:
+              json.encode(rejectExtendPermitJsonString),
+          id: id,
+          ptwStatus: ptwStatus,
+          jobId: jobId,
+          isLoading: isLoading ?? false,
+          type: type,
+          vegexe: vegexe,
+          vegid: vegid);
 
       var resourceData = res.data;
 
@@ -14013,17 +14211,17 @@ class Repository {
   }
 
   Future<List<VegTaskEquipmentList?>> getVegTaskEquipmentList({
-    bool? isLoading,
     required int facilityId,
     int? executionId,
+    required bool isLoading,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getVegTaskEquipmentList(
-        auth: auth,
-        facilityId: facilityId,
         executionId: executionId,
-        isLoading: isLoading ?? false,
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
       );
       print({"VegExecutiondetail", res.data});
       if (!res.hasError) {
