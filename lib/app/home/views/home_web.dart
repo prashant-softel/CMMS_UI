@@ -621,7 +621,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                            margin: EdgeInsets.only(left: 10),
+                                            margin: EdgeInsets.only(
+                                                left: 10, right: 10),
                                             padding: EdgeInsets.only(
                                                 left: 10, top: 12),
                                             decoration: BoxDecoration(
@@ -890,8 +891,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                            margin: EdgeInsets.only(
-                                                left: 10, right: 10),
+                                            margin: EdgeInsets.only(right: 10),
                                             // padding: EdgeInsets.only(
                                             //     left: 10, top: 10),
                                             decoration: BoxDecoration(
@@ -1855,8 +1855,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         height: Get.height,
                                         child: Padding(
                                           padding: EdgeInsets.only(
-                                            left: 16,
-                                            right: 16,
+                                            left: 0,
+                                            right: 0,
                                           ),
                                           child: DataTable2(
                                             showCheckboxColumn: false,
@@ -2648,7 +2648,10 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         width: Get.width,
                                         height: Get.height,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(16),
+                                          padding: EdgeInsets.only(
+                                            left: 0,
+                                            right: 0,
+                                          ),
                                           child: DataTable2(
                                             showCheckboxColumn: false,
                                             headingRowHeight: 45,
@@ -3525,7 +3528,10 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         width: Get.width,
                                         height: Get.height,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(16),
+                                          padding: EdgeInsets.only(
+                                            left: 0,
+                                            right: 0,
+                                          ),
                                           child: DataTable2(
                                             headingRowHeight: 45,
                                             dataRowHeight: 40,
@@ -3951,7 +3957,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                           flex: 2,
                                           child: Container(
                                             margin: EdgeInsets.only(
-                                                left: 10, right: 10),
+                                              left: 10,
+                                            ),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -4489,7 +4496,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                       ],
                                     ),
                                     // Dimens.boxHeight10,
-                                    SizedBox(height: 10),
+                                    Dimens.boxHeight10,
                                     Expanded(
                                       child: Container(
                                         color:
@@ -4497,7 +4504,10 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         width: Get.width,
                                         height: Get.height,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(16),
+                                          padding: EdgeInsets.only(
+                                            left: 0,
+                                            right: 0,
+                                          ),
                                           child: DataTable2(
                                             headingRowHeight: 45,
                                             dataRowHeight: 40,
@@ -5019,7 +5029,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                   child: SingleChildScrollView(
                                                     child: Container(
                                                       margin: EdgeInsets.only(
-                                                          left: 10, right: 10),
+                                                          left: 5, right: 10),
                                                       decoration: BoxDecoration(
                                                         color: ColorValues
                                                             .lightBlueColor,
@@ -5323,8 +5333,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                               ? Expanded(
                                                   flex: 2,
                                                   child: Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 10, right: 10),
+                                                    margin: EdgeInsets.only(),
                                                     // padding: EdgeInsets.only(
                                                     //     left: 10, top: 10),
                                                     decoration: BoxDecoration(
@@ -5482,7 +5491,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                   flex: 2,
                                                   child: Container(
                                                     margin: EdgeInsets.only(
-                                                        left: 10, right: 10),
+                                                      left: 10,
+                                                    ),
                                                     // padding: EdgeInsets.only(
                                                     //     left: 10, top: 10),
                                                     decoration: BoxDecoration(
@@ -5640,7 +5650,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                       ],
                                     ),
                                     // Dimens.boxHeight10,
-                                    SizedBox(height: 10),
+                                    Dimens.boxHeight10,
                                     Expanded(
                                       child: Container(
                                         color:
@@ -5648,7 +5658,10 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                         width: Get.width,
                                         height: Get.height,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(16),
+                                          padding: EdgeInsets.only(
+                                            left: 0,
+                                            right: 0,
+                                          ),
                                           child: DataTable2(
                                             headingRowHeight: 45,
                                             dataRowHeight: 40,
