@@ -366,7 +366,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                       Dimens.boxHeight12,
                                       controller.id == 0
                                           ? Center(
-                                              child: GestureDetector(
+                                              child: InkWell(
                                                 onTap: () {
                                                   // controller.schedules.
                                                   controller.dayCount(
@@ -411,8 +411,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                           : Dimens.box0,
                                       controller.id == 0
                                           ? Dimens.box0
-                                          : 
-                                          Container(
+                                          : Container(
                                               margin: Dimens.edgeInsets20,
                                               height: ((controller
                                                           .schedules.length) *
@@ -447,7 +446,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                           style: Styles.blue700,
                                                         ),
                                                         Spacer(),
-                                                        GestureDetector(
+                                                        InkWell(
                                                           onTap: () {
                                                             var selectedEqp =
                                                                 [];
@@ -573,7 +572,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                             ),
                                                           ),
                                                         )
-                                                     
                                                       ],
                                                     ),
                                                   ),
@@ -697,7 +695,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                 ],
                                               ),
                                             ),
-                                   
                                     ],
                                   ),
                                 ),
