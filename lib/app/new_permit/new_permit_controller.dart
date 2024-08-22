@@ -452,7 +452,7 @@ class NewPermitController extends GetxController {
         getJobTypePermitList();
         if (pmtaskViewModel?.id != null) {
           loadPermitDetailsWithTask(pmtaskViewModel);
-        } else if (jobModel != null || jobModel != "") {
+        } else if (jobModel != null || jobModel != "" || jobModel?.id != 0) {
           loadPermitDetails(jobModel);
         } else {
           print("Nothing to load");
@@ -496,14 +496,14 @@ class NewPermitController extends GetxController {
       final _pmTaskModel = await permitPresenter.getPmtaskModelValue();
       final _jobModel = await permitPresenter.getJobModelValue();
 
-      if (_jobModel.isNotEmpty) {
-        final jobdetaildata = jsonDecode(_jobModel);
-        jobDetail = JobDetailsModel.fromJson(jobdetaildata);
-      }
-      if (_pmTaskModel.isNotEmpty) {
-        final pmtaskdata = jsonDecode(_pmTaskModel);
-        pmdetail = PmtaskViewModel.fromJson(pmtaskdata);
-      }
+      // if (_jobModel.isNotEmpty) {
+      //   final jobdetaildata = jsonDecode(_jobModel);
+      //   jobDetail = JobDetailsModel.fromJson(jobdetaildata);
+      // }
+      // if (_pmTaskModel.isNotEmpty) {
+      //   final pmtaskdata = jsonDecode(_pmTaskModel);
+      //   pmdetail = PmtaskViewModel.fromJson(pmtaskdata);
+      // }
       if (_permitId == null || _permitId == "" || _permitId == "null") {
         var dataFromPreviousScreen = Get.arguments;
         permitId.value = dataFromPreviousScreen['permitId'];
@@ -526,7 +526,7 @@ class NewPermitController extends GetxController {
         permitPresenter.saveJobModelValue(jobModel: jobModel.toString());
         print("SChedule check point: ${pmtaskViewModel}");
 
-        if (pmtaskViewModel?.id != null || pmtaskViewModel?.id != 0) {
+        if (pmtaskViewModel?.id != null && pmtaskViewModel!.id! > 0) {
           for (int i = 0; i < pmtaskViewModel!.schedules!.length; i++) {
             allChecklistNames +=
                 pmtaskViewModel!.schedules![i].checklist_name ?? '';
@@ -1965,6 +1965,7 @@ class NewPermitController extends GetxController {
     titleTextCtrlr.text = jobModel.jobTitle ?? '';
     selectedBlock.value = jobModel.blockName ?? '';
     selectedBlockId = jobModel.blockId ?? 0;
+    assignToTextCtrlr.text = jobModel.assignedName ?? "";
 
     //// uncomment once work done
     listJobModelCategory.value = jobModel.equipmentCatList ?? [];
@@ -1993,10 +1994,15 @@ class NewPermitController extends GetxController {
     ///end uncomment
 
     // idCtrlr.text = '${int.tryParse(jobModel.id ?? 0)}';
-    assignToTextCtrlr.text = jobModel.assignedName;
-    breakdownTimeTextCtrlr.text =
-        '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${jobModel.breakdownTime}')).toString()}';
-    blockNameTextCtrlr.text = jobModel.blockwName ?? '';
+    if (jobModel.breakdownTime != null && jobModel.breakdownTime.isNotEmpty) {
+      breakdownTimeTextCtrlr.text = DateFormat('yyyy-MM-dd HH:mm')
+          .format(DateTime.parse(jobModel.breakdownTime))
+          .toString();
+      blockNameTextCtrlr.text = jobModel.blockwName ?? '';
+    } else {
+      breakdownTimeTextCtrlr.text = '';
+      blockNameTextCtrlr.text = '';
+    }
 
     // RxList<JobDetailsModel> jobDataList =
     // filteredEmployeeNameList = jobModel.assignedId;

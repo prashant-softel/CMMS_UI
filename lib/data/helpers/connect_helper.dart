@@ -2352,7 +2352,10 @@ class ConnectHelper {
       int? id,
       String? ptwStatus,
       rejectExtendPermitJsonString,
-      int? jobId}) async {
+      int? jobId,
+      int? type,
+      int? vegexe,
+      int? vegid}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       ptwStatus == '133' ? 'Permit/PermitExtendReject' : 'Permit/PermitReject',
@@ -2369,10 +2372,12 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageRejectDialog(
-      data: parsedJson['message'],
-      jobId: jobId,
-      ptwStatus: ptwStatus,
-    ));
+        data: parsedJson['message'],
+        jobId: jobId,
+        ptwStatus: ptwStatus,
+        vegid: vegid,
+        type: type,
+        vegexe: vegexe));
 
     return responseModel;
   }
@@ -3682,6 +3687,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   //Occupational Health create
   Future<ResponseModel> createoccupational({
     required String auth,
@@ -3705,8 +3711,9 @@ class ConnectHelper {
 
     return responseModel;
   }
-  //Update Occupational Health 
-   Future<ResponseModel> updateHealthData({
+
+  //Update Occupational Health
+  Future<ResponseModel> updateHealthData({
     required String auth,
     updateHealthData,
     bool? isLoading,

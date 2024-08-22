@@ -1045,6 +1045,7 @@ class Repository {
       return Map();
     }
   }
+
   Future<Map<String, dynamic>> createoccupational(
       createoccupational, bool? isLoading) async {
     try {
@@ -1053,7 +1054,6 @@ class Repository {
         auth: auth,
         createoccupational: createoccupational,
         isLoading: isLoading ?? false,
-
       );
 
       var resourceData = res.data;
@@ -1083,6 +1083,7 @@ class Repository {
       return Map();
     }
   }
+
   //update Occupational Health
   Future<Map<String, dynamic>> updateHealthData(
     updateHealthData,
@@ -6300,22 +6301,27 @@ class Repository {
   // }
 
   Future<Map<String, dynamic>> permitRejectButton(
-    rejectExtendPermitJsonString,
-    int? id,
-    String? ptwStatus,
-    int? jobId,
-    bool? isLoading,
-  ) async {
+      rejectExtendPermitJsonString,
+      int? id,
+      String? ptwStatus,
+      int? jobId,
+      int? type,
+      bool? isLoading,
+      int? vegexe,
+      int? vegid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.permitRejectButton(
-        auth: auth,
-        rejectExtendPermitJsonString: json.encode(rejectExtendPermitJsonString),
-        id: id,
-        ptwStatus: ptwStatus,
-        jobId: jobId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          rejectExtendPermitJsonString:
+              json.encode(rejectExtendPermitJsonString),
+          id: id,
+          ptwStatus: ptwStatus,
+          jobId: jobId,
+          isLoading: isLoading ?? false,
+          type: type,
+          vegexe: vegexe,
+          vegid: vegid);
 
       var resourceData = res.data;
 

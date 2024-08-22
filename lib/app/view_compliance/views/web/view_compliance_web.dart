@@ -6,7 +6,7 @@ import 'package:cmms/app/view_course/view/view_course_web.dart';
 import 'package:cmms/app/widgets/compliance_approve_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
-import 'package:cmms/view_compliance/view_compliance_controller.dart';
+import 'package:cmms/app/view_compliance/view_compliance_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';

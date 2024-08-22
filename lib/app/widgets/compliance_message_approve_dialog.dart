@@ -1,5 +1,5 @@
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/view_compliance/view_compliance_controller.dart';
+import 'package:cmms/app/view_compliance/view_compliance_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../navigators/app_pages.dart';
@@ -82,7 +82,7 @@ class ComplianceMessageApproveDialog extends GetView {
             Row(
               children: [
                 // Dimens.boxWidth10,
-                 SizedBox(width:10),
+                SizedBox(width: 10),
                 Center(
                   child: ElevatedButton(
                     style: Styles.darkBlueElevatedButtonStyle,
@@ -93,7 +93,7 @@ class ComplianceMessageApproveDialog extends GetView {
                   ),
                 ),
                 // Dimens.boxWidth10,
-                 SizedBox(width:10),
+                SizedBox(width: 10),
                 Center(
                   child: ElevatedButton(
                     style: Styles.yellowElevatedButtonStyle,
@@ -109,7 +109,7 @@ class ComplianceMessageApproveDialog extends GetView {
                   ),
                 ),
                 // Dimens.boxWidth10,
-                 SizedBox(width:10),
+                SizedBox(width: 10),
               ],
             )
           ],
