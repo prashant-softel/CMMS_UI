@@ -10,5 +10,6 @@ class CreateRegulataryVisitsController extends GetxController {
   );
   CreateRegulataryVisitsPresenter createregulataryvisitsPresenter;
   final HomeController homeController = Get.find();
+
  
 }

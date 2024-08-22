@@ -1,20 +1,16 @@
-import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/mis_list_of_observation/observation_list_controller.dart';
+import 'package:cmms/app/list_of_occupationalhealth/occupational_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/domain/models/get_observation_list_model.dart';
+import 'package:cmms/domain/models/get_occupational_list_model.dart';
+import 'package:cmms/domain/models/get_occupational_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 
 class OccupationalListWeb extends StatefulWidget {
@@ -29,12 +25,12 @@ class OccupationalListWeb extends StatefulWidget {
 class _OccupationalWebState extends State<OccupationalListWeb> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ObservationListController>(
+    return GetBuilder<OccupationalDataListController>(
         id: 'stock_Mangement_Date',
         builder: (controller) {
           return Obx(
             () {
-              final dataSource = ObservationListDataSource(controller);
+              final dataSource = OccupationalDataListSource(controller);
               return SelectionArea(
                 child: SingleChildScrollView(
                   child: Column(
@@ -110,40 +106,40 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
-                                        Row(
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Date Range',
-                                                includeAsterisk: false),
-                                            Dimens.boxWidth2,
-                                            CustomTextFieldForStock(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  5,
-                                              numberTextField: true,
-                                              onTap: () {
-                                                controller
-                                                        .openFromDateToStartDatePicker =
-                                                    !controller
-                                                        .openFromDateToStartDatePicker;
-                                                controller.update(
-                                                    ['stock_Mangement_Date']);
-                                              },
-                                              hintText:
-                                                  '${controller.formattedFromdate} - ${controller.formattedTodate}',
-                                            ),
-                                          ],
-                                        ),
+                                        // Row(
+                                        //   children: [
+                                        //     CustomRichText(
+                                        //         title: 'Date Range',
+                                        //         includeAsterisk: false),
+                                        //     Dimens.boxWidth2,
+                                        //     // CustomTextFieldForStock(
+                                        //     //   width: MediaQuery.of(context)
+                                        //     //           .size
+                                        //     //           .width /
+                                        //     //       5,
+                                        //     //   numberTextField: true,
+                                        //     //   onTap: () {
+                                        //     //     controller
+                                        //     //             .openFromDateToStartDatePicker =
+                                        //     //         !controller
+                                        //     //             .openFromDateToStartDatePicker;
+                                        //     //     controller.update(
+                                        //     //         ['stock_Mangement_Date']);
+                                        //     //   },
+                                        //     //   hintText:
+                                        //     //       '${controller.formattedFromdate} - ${controller.formattedTodate}',
+                                        //     // ),
+                                        //   ],
+                                        // ),
                                         Dimens.boxWidth3,
                                         ActionButton(
                                           icon: Icons.add,
                                           label: "Add New",
                                           onPressed: () {
-                                            // controller.clearStoreData();
+                                            controller.clearStoreData();
 
                                             Get.offNamed(
-                                                Routes.createObservation);
+                                                Routes.createOccupationalScreen);
                                           },
                                           color: ColorValues.addNewColor,
                                         )
@@ -238,7 +234,7 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                                             backgroundColor:
                                                 ColorValues.appLightBlueColor,
                                             onPressed: () {
-                                              controller.export();
+                                              // controller.export();
                                             },
                                             text: 'Excel'),
                                       ),
@@ -247,43 +243,43 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                                         width: 300,
                                         height: 40,
                                         margin: EdgeInsets.only(right: 10),
-                                        child: TextField(
-                                          style: GoogleFonts.lato(
-                                            textStyle: TextStyle(
-                                                fontSize: 16.0,
-                                                height: 1.0,
-                                                color: Colors.black),
-                                          ),
-                                          onChanged: (value) =>
-                                              controller.search(value),
-                                          decoration: InputDecoration(
-                                            enabledBorder:
-                                                const OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                color: Colors.grey,
-                                                width: 0.0,
-                                              ),
-                                            ),
-                                            focusedBorder:
-                                                const OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                color: Colors.grey,
-                                                width: 0.0,
-                                              ),
-                                            ),
-                                            contentPadding:
-                                                Dimens.edgeInsets05_10,
-                                            hintText: 'search'.tr,
-                                            hintStyle: Styles.grey16,
-                                          ),
-                                        ),
+                                        // child: TextField(
+                                        //   style: GoogleFonts.lato(
+                                        //     textStyle: TextStyle(
+                                        //         fontSize: 16.0,
+                                        //         height: 1.0,
+                                        //         color: Colors.black),
+                                        //   ),
+                                        //   onChanged: (value) =>
+                                        //       // controller.search(value),
+                                        //   // decoration: InputDecoration(
+                                        //   //   enabledBorder:
+                                        //   //       const OutlineInputBorder(
+                                        //   //     borderSide: const BorderSide(
+                                        //   //       color: Colors.grey,
+                                        //   //       width: 0.0,
+                                        //   //     ),
+                                        //   //   ),
+                                        //   //   focusedBorder:
+                                        //   //       const OutlineInputBorder(
+                                        //   //     borderSide: const BorderSide(
+                                        //   //       color: Colors.grey,
+                                        //   //       width: 0.0,
+                                        //   //     ),
+                                        //   //   ),
+                                        //   //   contentPadding:
+                                        //   //       Dimens.edgeInsets05_10,
+                                        //   //   hintText: 'search'.tr,
+                                        //   //   hintStyle: Styles.grey16,
+                                        //   // ),
+                                        // ),
                                       ),
                                     ],
                                   ),
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  controller.getObservationList.isEmpty ==
+                                  controller.occupationalhealthList.isEmpty ==
                                               true &&
                                           controller.isLoading == false
                                       ? Center(child: Text('No data'))
@@ -297,7 +293,7 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                                                   builder:
                                                       (context, value, child) {
                                                     final dataSource =
-                                                        ObservationListDataSource(
+                                                        OccupationalDataListSource(
                                                             controller);
 
                                                     return PaginatedDataTable2(
@@ -333,7 +329,7 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                                                         buildDataColumn(
                                                           'Actions',
                                                           controller
-                                                              .userDateFilterText,
+                                                              .actionFilterText,
                                                           230,
                                                         ),
                                                       ],
@@ -344,55 +340,55 @@ class _OccupationalWebState extends State<OccupationalListWeb> {
                               ),
                             ),
                           ),
-                          if (controller.openFromDateToStartDatePicker)
-                            Positioned(
-                              right: 150,
-                              top: 85,
-                              child: DatePickerWidget(
-                                selectionMode:
-                                    DateRangePickerSelectionMode.range,
-                                monthCellStyle: DateRangePickerMonthCellStyle(
-                                  todayCellDecoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: ColorValues.appDarkBlueColor),
-                                ), // last date of this year
-                                // controller: DateRangePickerController(),
-                                initialSelectedRange: PickerDateRange(
-                                  controller.fromDate.value,
-                                  controller.toDate.value,
-                                ),
+                          // if (controller.openFromDateToStartDatePicker)
+                          //   Positioned(
+                          //     right: 150,
+                          //     top: 85,
+                          //     child: DatePickerWidget(
+                          //       selectionMode:
+                          //           DateRangePickerSelectionMode.range,
+                          //       monthCellStyle: DateRangePickerMonthCellStyle(
+                          //         todayCellDecoration: BoxDecoration(
+                          //             shape: BoxShape.circle,
+                          //             color: ColorValues.appDarkBlueColor),
+                          //       ), // last date of this year
+                          //       // controller: DateRangePickerController(),
+                          //       initialSelectedRange: PickerDateRange(
+                          //         controller.fromDate.value,
+                          //         controller.toDate.value,
+                          //       ),
 
-                                onSubmit: (value) {
-                                  print('po valu ${value.toString()}');
-                                  PickerDateRange? data =
-                                      value as PickerDateRange;
+                          //       onSubmit: (value) {
+                          //         print('po valu ${value.toString()}');
+                          //         PickerDateRange? data =
+                          //             value as PickerDateRange;
 
-                                  var pickUpDate =
-                                      DateTime.parse(data.startDate.toString());
-                                  controller.fromDate.value = pickUpDate;
-                                  var dropDate =
-                                      DateTime.parse(data.endDate.toString());
-                                  dropDate != null
-                                      ? controller.toDate.value = dropDate
-                                      : controller.toDate.value = pickUpDate;
-                                  controller.getobslistbydate();
+                          //         var pickUpDate =
+                          //             DateTime.parse(data.startDate.toString());
+                          //         controller.fromDate.value = pickUpDate;
+                          //         var dropDate =
+                          //             DateTime.parse(data.endDate.toString());
+                          //         dropDate != null
+                          //             ? controller.toDate.value = dropDate
+                          //             : controller.toDate.value = pickUpDate;
+                          //         controller.getobslistbydate();
 
-                                  // controller.getPmTaskListByDate();
-                                  controller.openFromDateToStartDatePicker =
-                                      false;
-                                  controller.update(['stock_Mangement_Date']);
+                          //         // controller.getPmTaskListByDate();
+                          //         controller.openFromDateToStartDatePicker =
+                          //             false;
+                          //         controller.update(['stock_Mangement_Date']);
 
-                                  // Get.toNamed(
-                                  //   Routes.stockManagementGoodsOrdersScreen,
-                                  // );
-                                },
-                                onCancel: () {
-                                  controller.openFromDateToStartDatePicker =
-                                      false;
-                                  controller.update(['stock_Mangement_Date']);
-                                },
-                              ),
-                            ),
+                          //         // Get.toNamed(
+                          //         //   Routes.stockManagementGoodsOrdersScreen,
+                          //         // );
+                          //       },
+                          //       onCancel: () {
+                          //         controller.openFromDateToStartDatePicker =
+                          //             false;
+                          //         controller.update(['stock_Mangement_Date']);
+                          //       },
+                          //     ),
+                          //   ),
                         ],
                       ),
                     ],
@@ -427,65 +423,33 @@ DataColumn2 buildDataColumn(
   );
 }
 
-class ObservationListDataSource extends DataTableSource {
-  final ObservationListController controller;
+class OccupationalDataListSource extends DataTableSource {
+  final OccupationalDataListController controller;
 
-  late List<GetObservationList?> filteredGetObservationList;
+  late List<GetOccupationalList?> filteredGetOccupationalList;
 
-  ObservationListDataSource(this.controller) {
-    filtersGetStatutory();
+  OccupationalDataListSource(this.controller) {
+    // filtersGetStatutory();
   }
 
   ///
-  void filtersGetStatutory() {
-    filteredGetObservationList = <GetObservationList?>[];
-    filteredGetObservationList =
-        controller.getObservationList.where((ObservationList) {
-      return (ObservationList.contact_number ?? '')
-              .toString()
-              .contains(controller.closerDateFilterText.value.toLowerCase()) &&
-          (ObservationList.corrective_action ?? '')
-              .toString()
-              .contains(controller.actionTakenFilterText.value.toLowerCase()) &&
-          (ObservationList.corrective_action ?? '').toString().contains(
-              controller.dateofObservationFilterText.value.toLowerCase()) &&
-          (ObservationList.cost_type ?? '').contains(
-              controller.dateofObservationFilterText.value.toLowerCase()) &&
-          (ObservationList.corrective_action ?? '')
-              .toString()
-              .contains(controller.statusFilterText.value.toLowerCase());
-
-      // Add other filter conditions as needed
-    }).toList();
-    // print({"filteredGetObservationList": filteredGetObservationList});
-  }
+  
 
   @override
   DataRow? getRow(int index) {
     // print({"getRow call"});
-    final ObservationListDetails = filteredGetObservationList[index];
+    final OccupationalListDetails = filteredGetOccupationalList[index];
 
-    controller.ObservationId.value = ObservationListDetails?.id ?? 0;
-    String closedDate = ObservationListDetails?.closed_date == "0001-01-01"
-        ? ''
-        : '${ObservationListDetails?.closed_date ?? ''}';
+    controller.id.value = OccupationalListDetails?.id ?? 0;
     var cellsBuffer = [
-      // '${ObservationListDetails?.id ?? ''}',
+      // '${OccupationalListDetails?.id ?? ''}',
       "id",
-      '${ObservationListDetails?.month_of_observation ?? ''}',
-      '${ObservationListDetails?.date_of_observation ?? ''}',
-      '${ObservationListDetails?.contractor_name ?? ''}',
-      '${ObservationListDetails?.location_of_observation ?? ''}',
-      '${ObservationListDetails?.type_of_observation_name ?? ''}',
-      '${ObservationListDetails?.source_of_observation_name ?? ''}',
-      '${ObservationListDetails?.risk_type ?? ''}',
-      '${ObservationListDetails?.observation_description ?? ''}',
-      '${ObservationListDetails?.responsible_person ?? ''}',
-      '${ObservationListDetails?.target_date ?? ''}',
-      '${ObservationListDetails?.action_taken ?? ''}',
-      closedDate,
-      '${ObservationListDetails?.cost_type ?? ''}',
-      // '${ObservationListDetails?.status_code ?? ''}',
+      '${OccupationalListDetails?.id ?? ''}',
+      '${OccupationalListDetails?.noOfHealthExamsOfNewJoiner?? ''}',
+      '${OccupationalListDetails?.occupationalIllnesses ?? ''}',
+      '${OccupationalListDetails?.periodicTests?? ''}',
+      '${OccupationalListDetails?.month_name?? ''}',
+      '${OccupationalListDetails?.createdAt?? ''}',
 
       'Actions',
     ];
@@ -517,32 +481,32 @@ class ObservationListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' OBS${ObservationListDetails?.id}',
+                        ' OBS${OccupationalListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                          decoration: BoxDecoration(
-                            color: ObservationListDetails!.observation_status ==
-                                    "Open"
-                                ? ColorValues.yellowColor
-                                : ObservationListDetails.observation_status ==
-                                        "In Time"
-                                    ? ColorValues.appGreenColor
-                                    : ColorValues.appRedColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            '${ObservationListDetails.observation_status}',
-                            style: Styles.white10.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Align(
+                      //   alignment: Alignment.centerRight,
+                      //   child: Container(
+                      //     padding:
+                      //         EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                      //     decoration: BoxDecoration(
+                      //       color: OccupationalListDetails!.observation_status ==
+                      //               "Open"
+                      //           ? ColorValues.yellowColor
+                      //           : OccupationalListDetails.observation_status ==
+                      //                   "In Time"
+                      //               ? ColorValues.appGreenColor
+                      //               : ColorValues.appRedColor,
+                      //       borderRadius: BorderRadius.circular(4),
+                      //     ),
+                      //     child: Text(
+                      //       '${OccupationalListDetails.observation_status}',
+                      //       style: Styles.white10.copyWith(
+                      //         color: Colors.white,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   )
                 : (value == 'Actions')
@@ -554,37 +518,37 @@ class ObservationListDataSource extends DataTableSource {
                             message: 'View',
                             onPress: () {
                               // controller.clearStoreData();
-                              int obsId = ObservationListDetails?.id ?? 0;
+                              int obsId = OccupationalListDetails?.id ?? 0;
                               if (obsId != 0) {
-                                controller.clearValue();
-                                Get.toNamed(
-                                  Routes.viewObservationScreen,
-                                  arguments: {
-                                    'obsId': ObservationListDetails?.id,
-                                  },
-                                );
+                                controller.clearStoreData();
+                                // Get.toNamed(
+                                //   // Routes.viewObservationScreen,
+                                //   // arguments: {
+                                //   //   'obsId': OccupationalListDetails?.id,
+                                //   // },
+                                // );
                               }
                             },
                           ),
-                          ObservationListDetails!.status_code != 552
-                              ? TableActionButton(
-                                  color: ColorValues.editColor,
-                                  icon: Icons.edit,
-                                  message: 'Edit',
-                                  onPress: () {
-                                    // controller.clearStoreData();
-                                    int obsId = ObservationListDetails?.id ?? 0;
-                                    if (obsId != 0) {
-                                      Get.toNamed(
-                                        Routes.createObservation,
-                                        arguments: {
-                                          'obsId': ObservationListDetails?.id,
-                                        },
-                                      );
-                                    }
-                                  },
-                                )
-                              : Dimens.box0,
+                          // OccupationalListDetails!.status_code != 552
+                          //     ? TableActionButton(
+                          //         color: ColorValues.editColor,
+                          //         icon: Icons.edit,
+                          //         message: 'Edit',
+                          //         onPress: () {
+                          //           // controller.clearStoreData();
+                          //           int obsId = OccupationalListDetails?.id ?? 0;
+                          //           if (obsId != 0) {
+                          //             Get.toNamed(
+                          //               Routes.createObservation,
+                          //               arguments: {
+                          //                 'obsId': OccupationalListDetails?.id,
+                          //               },
+                          //             );
+                          //           }
+                          //         },
+                          //       )
+                              // : Dimens.box0,
                         ],
                       )
                     : Text(value.toString()),
@@ -592,22 +556,22 @@ class ObservationListDataSource extends DataTableSource {
         );
       }).toList(),
       onSelectChanged: (_) {
-        int obsId = ObservationListDetails?.id ?? 0;
+        int obsId = OccupationalListDetails?.id ?? 0;
         if (obsId != 0) {
-          controller.clearValue();
-          Get.toNamed(
-            Routes.viewObservationScreen,
-            arguments: {
-              'obsId': ObservationListDetails?.id,
-            },
-          );
+          controller.clearStoreData();
+          // Get.toNamed(
+          //   Routes.viewObservationScreen,
+          //   arguments: {
+          //     'obsId': OccupationalListDetails?.id,
+          //   },
+          // );
         }
       },
     );
   }
 
   @override
-  int get rowCount => filteredGetObservationList.length;
+  int get rowCount => filteredGetOccupationalList.length;
 
   @override
   bool get isRowCountApproximate => false;
