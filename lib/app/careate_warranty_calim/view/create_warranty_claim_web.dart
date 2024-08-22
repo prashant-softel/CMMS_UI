@@ -19,6 +19,7 @@ import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/reject_wc_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -2321,7 +2322,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                   .only(
                                                                   top: 15),
                                                           child:
-                                                              FileUploadDetailsWidgetWeb(),
+                                                              FileUploadDetailsWidgetWeb2(),
                                                         ),
                                                       ),
                                                     ],
