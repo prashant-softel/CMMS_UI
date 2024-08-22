@@ -46,6 +46,8 @@ import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen
 import 'package:cmms/app/business_List/view/business_list_screen.dart';
 import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_binding.dart';
 import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_screen.dart';
+import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_binding.dart';
+import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
@@ -1502,6 +1504,12 @@ class AppPages {
       name: _Paths.calendarViewDashbord,
       page: CalendarViewDashbordScreen.new,
       binding: CalendarViewDashbordBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.cmmsReport,
+      page: CmmsReportDashboardScreen.new,
+      binding: CmmsReportDashboardBinding(),
     ),
   ];
 }
