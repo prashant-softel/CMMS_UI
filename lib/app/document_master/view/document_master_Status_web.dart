@@ -467,7 +467,9 @@ class DocumentMasterContentWeb extends GetView<DocumentMasterController> {
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
-                                                controller.createDocumentMaster().then(
+                                                controller
+                                                    .createDocumentMaster()
+                                                    .then(
                                                   (value) {
                                                     print("CREATE");
                                                     print("value,$value");
@@ -488,8 +490,9 @@ class DocumentMasterContentWeb extends GetView<DocumentMasterController> {
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
                                               controller
-                                                  .updateDocumentMaster(controller
-                                                      .selectedItem?.id)
+                                                  .updateDocumentMaster(
+                                                      controller
+                                                          .selectedItem?.id)
                                                   .then(
                                                 (value) {
                                                   print("UPDATE");
@@ -539,7 +542,7 @@ class DocumentMasterContentWeb extends GetView<DocumentMasterController> {
                                       width: 300,
                                       height: 40,
                                       // margin: Dimens.edgeInsets0_0_16_0,
-                                      margin: EdgeInsets.only(right:5) ,
+                                      margin: EdgeInsets.only(right: 5),
                                       child: TextField(
                                         style: GoogleFonts.lato(
                                           textStyle: TextStyle(
@@ -612,7 +615,7 @@ class DocumentMasterContentWeb extends GetView<DocumentMasterController> {
                                                 DataColumn2(
                                                     // fixedWidth: 150,
                                                     label: Text(
-                                                  "Document ",
+                                                  "Name",
                                                   style: TextStyle(
                                                       fontSize: 15,
                                                       fontWeight:
@@ -638,12 +641,15 @@ class DocumentMasterContentWeb extends GetView<DocumentMasterController> {
                                                     )),
                                               ],
                                               rows: List<DataRow>.generate(
-                                                controller.DocumentMaster.length ?? 0,
+                                                controller.DocumentMaster
+                                                        .length ??
+                                                    0,
                                                 (index) => DataRow(cells: [
                                                   DataCell(Text(
                                                       (index + 1).toString())),
                                                   DataCell(Text(controller
-                                                          .DocumentMaster[index].name
+                                                          .DocumentMaster[index]
+                                                          .name
                                                           .toString() ??
                                                       '')),
                                                   DataCell(Text(controller

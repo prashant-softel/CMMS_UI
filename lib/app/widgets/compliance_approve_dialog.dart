@@ -1,6 +1,6 @@
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/view_compliance/view_compliance_controller.dart';
+import 'package:cmms/app/view_compliance/view_compliance_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -79,7 +79,7 @@ class ComplianceApprovedDialog extends GetView {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             // Dimens.boxWidth10,
-             SizedBox(width:10),
+            SizedBox(width: 10),
             ElevatedButton(
               style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
@@ -88,7 +88,7 @@ class ComplianceApprovedDialog extends GetView {
               child: const Text('Cancel'),
             ),
             // Dimens.boxWidth20,
-             SizedBox(width:20),
+            SizedBox(width: 20),
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {

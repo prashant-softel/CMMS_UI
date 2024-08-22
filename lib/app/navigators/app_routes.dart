@@ -134,10 +134,8 @@ abstract class Routes {
   static const DocumentMaster = _Paths.DocumentMaster;
   static const viewObservationScreen = _Paths.viewObservationScreen;
   static const observationSummary = _Paths.observationSummary;
-  
-  static const misSummary = _Paths.misSummary;
 
-  
+  static const misSummary = _Paths.misSummary;
 
   static const documentUploadScreen = _Paths.documentUploadScreen;
   static const viewComplianceScreen = _Paths.viewComplianceScreen;
@@ -211,15 +209,17 @@ abstract class Routes {
   static const misTask = _Paths.misTask;
   static const waterDataListScreen = _Paths.waterDataListScreen;
   static const createOccupationalScreen = _Paths.createOccupationalScreen;
-  static const createRegulataryVisitsScreen = _Paths.createRegulataryVisitsScreen;
+  static const createRegulataryVisitsScreen =
+      _Paths.createRegulataryVisitsScreen;
   static const createPermitsTBTScreen = _Paths.createPermitsTBTScreen;
   static const createFuelDataScreen = _Paths.createFuelDataScreen;
   static const createplantationdataScreen = _Paths.createplantationdataScreen;
+  static const calendarViewDashbord = _Paths.calendarViewDashbord;
+
   static const permitsTBTDataListScreen = _Paths.permitsTBTDataListScreen;
   static const occupationalDataListScreen = _Paths.occupationalDataListScreen;
   static const regulataryDataListScreen = _Paths.regulataryDataListScreen;
 
-  
   static const waterDataScreen = _Paths.waterDataScreen;
   static const complianceHistoryScreen = _Paths.complianceHistoryScreen;
   static const addWasteDataScreen = _Paths.addWasteDataScreen;
@@ -254,6 +254,7 @@ abstract class Routes {
   static const attendanceListMonthwise = _Paths.attendanceListMonthwise;
   static const materialCategory = _Paths.materialCategory;
   static const grievanceSummary = _Paths.grievanceSummary;
+  static const cmmsReport = _Paths.cmmsReport;
 }
 
 abstract class _Paths {
@@ -387,8 +388,8 @@ abstract class _Paths {
   static const DocumentMaster = '/Document-Master';
   static const viewObservationScreen = '/viewObservationScreen';
   static const observationSummary = '/observation-summary';
- 
-  static const misSummary='/mis-summary';
+
+  static const misSummary = '/mis-summary';
 
   static const documentUploadScreen = '/documentUploadScreen';
   static const viewComplianceScreen = '/viewComplianceScreen';
@@ -465,6 +466,8 @@ abstract class _Paths {
   static const createPermitsTBTScreen = '/CreatePermitsTBTScreen';
   static const createFuelDataScreen = '/CreateFuelDataScreen';
   static const createplantationdataScreen = '/CreatePlantationDataScreen';
+  static const calendarViewDashbord = '/calendarViewDashbord';
+
   static const permitsTBTDataListScreen = '/PermitsTBTDataListScreen';
   static const occupationalDataListScreen = '/OccupationalDataListScreen';
   static const regulataryDataListScreen = '/RegulataryDataListScreen';
@@ -503,4 +506,5 @@ abstract class _Paths {
 
   static const trainingSummary = '/training-summary';
   static const grievanceSummary = '/grievance-summary';
+  static const cmmsReport = '/cmms-report';
 }

@@ -1046,6 +1046,7 @@ class Repository {
       return Map();
     }
   }
+
   Future<Map<String, dynamic>> createoccupational(
       createoccupational, bool? isLoading) async {
     try {
@@ -1054,7 +1055,6 @@ class Repository {
         auth: auth,
         createoccupational: createoccupational,
         isLoading: isLoading ?? false,
-
       );
 
       var resourceData = res.data;
@@ -1123,6 +1123,7 @@ class Repository {
       return Map();
     }
   }
+
   //update Occupational Health
   Future<Map<String, dynamic>> updateHealthData(
     updateHealthData,
@@ -1861,6 +1862,7 @@ class Repository {
               'Asset_Last_calibration_date',
               'Calibration_Next_Due_date',
               'Calibration_reminder_days',
+              'Area'
             ],
             ...jsonDataList
                 .map((inventoryJson) => [
@@ -1900,6 +1902,7 @@ class Repository {
                       inventoryJson['calibrationLastDate'],
                       inventoryJson['calibrationDueDate'],
                       inventoryJson['calibrationReminderDays'],
+                      inventoryJson['area'],
                     ])
                 .toList(),
           ];
@@ -5071,7 +5074,7 @@ class Repository {
     }
   }
   //getHealthDatalist
-  
+
   Future<List<GetOccupationalList>> getHealthDatalist({
     bool? isExport,
     required bool isLoading,
@@ -6417,22 +6420,27 @@ class Repository {
   // }
 
   Future<Map<String, dynamic>> permitRejectButton(
-    rejectExtendPermitJsonString,
-    int? id,
-    String? ptwStatus,
-    int? jobId,
-    bool? isLoading,
-  ) async {
+      rejectExtendPermitJsonString,
+      int? id,
+      String? ptwStatus,
+      int? jobId,
+      int? type,
+      bool? isLoading,
+      int? vegexe,
+      int? vegid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.permitRejectButton(
-        auth: auth,
-        rejectExtendPermitJsonString: json.encode(rejectExtendPermitJsonString),
-        id: id,
-        ptwStatus: ptwStatus,
-        jobId: jobId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          rejectExtendPermitJsonString:
+              json.encode(rejectExtendPermitJsonString),
+          id: id,
+          ptwStatus: ptwStatus,
+          jobId: jobId,
+          isLoading: isLoading ?? false,
+          type: type,
+          vegexe: vegexe,
+          vegid: vegid);
 
       var resourceData = res.data;
 
@@ -14203,17 +14211,17 @@ class Repository {
   }
 
   Future<List<VegTaskEquipmentList?>> getVegTaskEquipmentList({
-    bool? isLoading,
     required int facilityId,
     int? executionId,
+    required bool isLoading,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getVegTaskEquipmentList(
-        auth: auth,
-        facilityId: facilityId,
         executionId: executionId,
-        isLoading: isLoading ?? false,
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
       );
       print({"VegExecutiondetail", res.data});
       if (!res.hasError) {

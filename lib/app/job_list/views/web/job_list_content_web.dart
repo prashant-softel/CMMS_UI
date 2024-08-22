@@ -553,26 +553,26 @@ class JobDataSource extends DataTableSource {
                         message: 'View',
                         onPress: () {
                           controller.clearStoreData();
+                          controller.clearStoreDataType();
 
                           controller.goToJobDetailsScreen(
                             int.tryParse('${jobDetails?.id}'),
                           );
                         },
                       ),
-                      // jobDetails?.status == 101
-                      //     ?
-                      TableActionButton(
-                        color: ColorValues.editColor,
-                        icon: Icons.edit,
-                        message: 'Edit Job',
-                        onPress: () {
-                          controller.clearStoreData();
-
-                          controller.goToEditJobScreen(
-                              int.tryParse('${jobDetails?.id}'));
-                        },
-                      )
-                      // : Dimens.box0,
+                      jobDetails?.status == 101
+                          ? TableActionButton(
+                              color: ColorValues.editColor,
+                              icon: Icons.edit,
+                              message: 'Edit Job',
+                              onPress: () {
+                                controller.clearStoreData();
+                                controller.clearStoreDataType();
+                                controller.goToEditJobScreen(
+                                    int.tryParse('${jobDetails?.id}'));
+                              },
+                            )
+                          : Dimens.box0,
                       // if (jobDetails?.status == 102 &&
                       //     varUserAccessModel.value.access_list!
                       //             .where((e) =>
@@ -627,6 +627,7 @@ class JobDataSource extends DataTableSource {
       ],
       onSelectChanged: (_) {
         controller.clearStoreData();
+        controller.clearStoreDataType();
 
         controller.goToJobDetailsScreen(int.tryParse('${jobDetails?.id}'));
       },

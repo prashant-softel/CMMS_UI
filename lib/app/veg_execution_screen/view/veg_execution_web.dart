@@ -24,6 +24,7 @@ class VegExecutionWeb extends StatefulWidget {
 
 class _VegExecutionWebState extends State<VegExecutionWeb> {
   final VegExecutionController controller = Get.find();
+  final homecontroller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<VegExecutionController>(
@@ -203,12 +204,11 @@ class _VegExecutionWebState extends State<VegExecutionWeb> {
                                                   ? TitleAndInfo(
                                                       "Start Date Time: ",
                                                       "${controller.vegExecutionDetailsModel.value?.startedAt == null ? "" : controller.vegExecutionDetailsModel.value?.startedAt}",
-                                                    ):
-                                                  TitleAndInfo(
+                                                    )
+                                                  : TitleAndInfo(
                                                       "Start Date Time: ",
                                                       "",
                                                     )
-                                                  
                                             ],
                                           ),
                                         ),
@@ -544,7 +544,7 @@ class _VegExecutionWebState extends State<VegExecutionWeb> {
                                                                                                                   )
                                                                                                                 : Dimens.box0,
 
-                                                                                                            controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 722 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 384
+                                                                                                            controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 722 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 384 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 732
                                                                                                                 ? TableActionButton(
                                                                                                                     onPress: () {
                                                                                                                       var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
@@ -560,7 +560,7 @@ class _VegExecutionWebState extends State<VegExecutionWeb> {
                                                                                                                     message: 'Equipments',
                                                                                                                   )
                                                                                                                 : Dimens.box0,
-                                                                                                            controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 722 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 384
+                                                                                                            controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 722 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 384 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => VegSchedules(status: -1))?.status == 732
                                                                                                                 ? TableActionButton(
                                                                                                                     // label: 'Start',
                                                                                                                     onPress: () {

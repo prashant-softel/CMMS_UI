@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -25,6 +26,7 @@ class VegetationPlanListWeb extends StatefulWidget {
 }
 
 class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
+  final homecontroller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<VegetationPlanListController>(

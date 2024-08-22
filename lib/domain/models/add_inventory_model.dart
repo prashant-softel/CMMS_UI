@@ -30,6 +30,7 @@ class AddInventoryRequestModel {
   int? stockCount;
   int? moduleQuantity;
   int? cost;
+  int? currencyId;
   int? currency;
   String? assetdescription;
   String? warranty_description;
@@ -76,6 +77,7 @@ class AddInventoryRequestModel {
       this.stockCount,
       this.moduleQuantity,
       this.cost,
+      this.currencyId,
       this.currency,
       this.attachments,
       this.assetdescription,
@@ -126,6 +128,7 @@ class AddInventoryRequestModel {
     stockCount = json['stockCount'];
     moduleQuantity = json['moduleQuantity'];
     cost = json['cost'];
+    currencyId = json['currencyId'];
     currency = json['currency'];
     parent_equipment_no = json['parent_equipment_no'];
     warranty_term_type = json['warranty_term_type'];
@@ -186,6 +189,7 @@ class AddInventoryRequestModel {
     data['warranty_term_type'] = this.warranty_term_type;
     data['certificate_number'] = this.certificate_number;
 
+    data['currencyId'] = this.currencyId;
     data['currency'] = this.currency;
     data['attachments'] = this.attachments;
     if (this.lstWarrantyDetail != null) {

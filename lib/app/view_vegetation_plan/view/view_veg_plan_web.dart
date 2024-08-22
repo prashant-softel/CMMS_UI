@@ -121,10 +121,6 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                             " ${controller.vegPlanDetailsModel.value!.statusShort ?? ""}",
                                           ),
                                         ),
-                                        Dimens.boxWidth2,
-                                        Text(
-                                          "Id:${controller.vegPlanDetailsModel.value?.planId} ",
-                                        ),
                                       ],
                                     ),
                                   ),
@@ -132,23 +128,38 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                     color: ColorValues.greyLightColour,
                                   ),
 
-                                  Dimens.boxHeight15,
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Current Status:",
-                                      ),
-                                      Text(
-                                        " ${controller.vegPlanDetailsModel.value?.statusLong ?? ""}",
-                                      )
-                                    ],
-                                  ),
                                   Dimens.boxHeight10,
                                   Container(
                                     margin: Dimens.edgeInsets20,
                                     child: Row(
                                       children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            CustomRichText(title: 'Plan ID  :'),
+                                            Dimens.boxHeight10,
+                                            CustomRichText(
+                                              title: 'Assign To :',
+                                            ),
+                                          ],
+                                        ),
+                                        Dimens.boxWidth2,
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                'VC${controller.vegPlanDetailsModel.value?.planId ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight10,
+                                            Obx(
+                                              () => Text(
+                                                  '${controller.vegPlanDetailsModel.value?.assignedTo ?? ""}', //  "Block 2 all Inverter maintenance plan",
+                                                  style: Styles.blue17),
+                                            ),
+                                          ],
+                                        ),
                                         Spacer(),
                                         Column(
                                           crossAxisAlignment:
@@ -198,12 +209,12 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                             Text(
                                                 '${controller.vegPlanDetailsModel.value?.title ?? ''}',
                                                 style: Styles.blue17),
+                                            Dimens.boxHeight10,
                                             Obx(
                                               () => Text(
                                                   '${controller.vegPlanDetailsModel.value?.createdBy ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                   style: Styles.blue17),
                                             ),
-                                            Dimens.boxHeight10,
                                           ],
                                         ),
                                         Spacer(),
@@ -214,9 +225,6 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                             CustomRichText(
                                                 title:
                                                     'Planning Date & Time :'),
-                                            Dimens.boxHeight10,
-                                            CustomRichText(
-                                                title: 'Assigned to :'),
                                           ],
                                         ),
                                         Dimens.boxWidth2,
@@ -227,9 +235,6 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                             Text(
                                                 '${controller.vegPlanDetailsModel.value?.createdAt ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                 style: Styles.blue17),
-                                            Text(
-                                                '${controller.vegPlanDetailsModel.value?.assignedTo ?? ''}', //  "Block 2 all Inverter maintenance plan",
-                                                style: Styles.blue17),
 
                                             // Dimens.boxHeight10,
                                           ],
@@ -238,6 +243,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                       ],
                                     ),
                                   ),
+
                                   Dimens.boxHeight12,
                                   // controller.filteredInventoryNameList.length > 0
                                   //     ?
