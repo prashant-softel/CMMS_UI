@@ -16,16 +16,20 @@ class DocumentUploadController extends GetxController {
 
   int facilityId = 0;
   RxList<DocumentMasterModel?> documentNameType = <DocumentMasterModel>[].obs;
+  Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isSubDocInvalid = false.obs;
+  Rx<bool> isRenewDateTcInvalid = false.obs;
+  Rx<bool> isReamrkInvalid = false.obs;
 
   Rx<bool> isSelectedDocumentNameType = true.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   bool openrenewDateTcDatePicker = false;
   bool isLoading = true;
   var renewDateTc = TextEditingController();
+
   var remark = TextEditingController();
   var subDocName = TextEditingController();
 
-  Rx<bool> isSelecteddocumentNameType = true.obs;
   Rx<String> selecteddocumentNameType = ''.obs;
   int selectedDocumentId = 0;
 
@@ -93,6 +97,10 @@ class DocumentUploadController extends GetxController {
 
   void uploadDocumentNew({dynamic fileIds}) async {
     try {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _renewDateTc = renewDateTc.text.trim();
       String _remarkDateTc = remark.text.trim();
       String _subDocNameDateTc = subDocName.text.trim();
@@ -140,6 +148,36 @@ class DocumentUploadController extends GetxController {
         title: "Error",
         message: "An unexpected error occurred: ${e.toString()}",
       );
+    }
+  }
+
+  void checkForm() {
+    if (selectedDocumentId == 0) {
+      isSelectedDocumentNameType.value = false;
+      isFormInvalid.value = true;
+    }
+    if (subDocName.text.trim().length == 0) {
+      isSubDocInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (renewDateTc.text.trim().length == 0) {
+      isRenewDateTcInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (remark.text.trim().length == 0) {
+      isReamrkInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+  }
+
+  void checkRenewForm() {
+    if (renewDateTc.text.trim().length == 0) {
+      isRenewDateTcInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (remark.text.trim().length == 0) {
+      isReamrkInvalid.value = true;
+      isFormInvalid.value = true;
     }
   }
 
@@ -197,6 +235,10 @@ class DocumentUploadController extends GetxController {
 
   void reNewUploadDocumentNew({dynamic fileIds}) async {
     try {
+      checkRenewForm();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _renewDateTc = renewDateTc.text.trim();
       String _remarkDateTc = remark.text.trim();
       String _subDocNameDateTc = subDocName.text.trim();
@@ -204,6 +246,14 @@ class DocumentUploadController extends GetxController {
       int docMasterIdToUse = selectedItem?.doc_master_id ?? selectedDocumentId;
       int docIdToUse = selectedItem?.id ?? selectedDocumentId;
 
+      if (fileIds == null || fileIds.isEmpty) {
+        showAlertDialog(
+          title: "Upload Failed",
+          message:
+              "No file has been selected for upload. Please select a file and try again.",
+        );
+        return;
+      }
       UploadDocumentModel uploadDocumentModel = UploadDocumentModel(
           is_renew: 1,
           docMasterId: docMasterIdToUse,
@@ -221,10 +271,17 @@ class DocumentUploadController extends GetxController {
         isLoading: true,
       );
       if (responseUploadDocument == null) {
-        // Handle the case where the response is null
+        showAlertDialog(
+          title: "Upload Failed",
+          message: "The document upload failed. Please try again.",
+        );
       }
     } catch (e) {
       print(e);
+      showAlertDialog(
+        title: "Error",
+        message: "An unexpected error occurred: ${e.toString()}",
+      );
     }
   }
 
@@ -239,7 +296,7 @@ class DocumentUploadController extends GetxController {
             selectedDocumentId = documentNameType[documentIndex]?.id ?? 0;
 
             selecteddocumentNameType.value = value;
-            isSelecteddocumentNameType.value = true;
+            isSelectedDocumentNameType.value = true;
           } else {
             selectedDocumentId = 0;
           }
