@@ -175,14 +175,33 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                                             .selectedItem !=
                                                         null,
                                                     child: LoginCustomTextfield(
-                                                      textController:
-                                                          controller.subDocName,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                    ),
+                                                        textController:
+                                                            controller
+                                                                .subDocName,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        errorController: controller
+                                                                .isSubDocInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                        onChanged: (value) {
+                                                          if (value
+                                                                  .trim()
+                                                                  .length >
+                                                              0) {
+                                                            controller
+                                                                .isSubDocInvalid
+                                                                .value = false;
+                                                          } else {
+                                                            controller
+                                                                .isSubDocInvalid
+                                                                .value = true;
+                                                          }
+                                                        }),
                                                   ),
                                                 ],
                                               ),
@@ -190,7 +209,6 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                               Row(
                                                 children: [
                                                   CustomRichText(
-                                                      includeAsterisk: false,
                                                       title:
                                                           'Please Mention The ReNew Date: '),
                                                   Dimens.boxWidth2,
@@ -211,7 +229,26 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                                     },
                                                     textController:
                                                         controller.renewDateTc,
-                                                    onChanged: (value) {},
+                                                    errorController: controller
+                                                            .isRenewDateTcInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (controller
+                                                              .renewDateTc.text
+                                                              .trim()
+                                                              .length >
+                                                          0) {
+                                                        controller
+                                                            .isRenewDateTcInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isRenewDateTcInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
                                                   ),
                                                 ],
                                               )
@@ -347,44 +384,55 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                           width: 10,
                                         ),
                                         Expanded(
-                                          child: TextField(
-                                            style: GoogleFonts.lato(
-                                              textStyle: TextStyle(
-                                                  fontSize: 16.0,
-                                                  height: 1.0,
-                                                  color: Colors.black),
+                                            child: TextField(
+                                          style: GoogleFonts.lato(
+                                            textStyle: TextStyle(
+                                              fontSize: 16.0,
+                                              height: 1.0,
+                                              color: Colors.black,
                                             ),
-                                            controller: controller.remark,
-                                            decoration: InputDecoration(
-                                              disabledBorder:
-                                                  OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: ColorValues
-                                                      .appLightGreyColor,
-                                                  width: 1.0,
-                                                ),
-                                              ),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: ColorValues
-                                                      .appLightBlueColor,
-                                                  width: 1.0,
-                                                ),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: ColorValues
-                                                      .appLightBlueColor,
-                                                  width: 1.0,
-                                                ),
-                                              ),
-                                            ),
-                                            keyboardType:
-                                                TextInputType.multiline,
-                                            minLines: 5,
-                                            maxLines: null,
                                           ),
-                                        ),
+                                          controller: controller.remark,
+                                          decoration: InputDecoration(
+                                            disabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: ColorValues
+                                                    .appLightGreyColor,
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: ColorValues
+                                                    .appLightBlueColor,
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: ColorValues
+                                                    .appLightBlueColor,
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            errorText:
+                                                controller.isSubDocInvalid.value
+                                                    ? "Required field"
+                                                    : null,
+                                          ),
+                                          keyboardType: TextInputType.multiline,
+                                          minLines: 5,
+                                          maxLines: null,
+                                          onChanged: (value) {
+                                            if (value.trim().isNotEmpty) {
+                                              controller.isSubDocInvalid.value =
+                                                  false;
+                                            } else {
+                                              controller.isSubDocInvalid.value =
+                                                  true;
+                                            }
+                                          },
+                                        )),
                                       ]),
                                     ),
                                   ],
@@ -414,6 +462,8 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                                   ColorValues.submitColor,
                                               text: "Upload",
                                               onPressed: () {
+                                                controller.isFormInvalid.value =
+                                                    false;
                                                 controller.uploadDocumentNew(
                                                     fileIds: dropzoneController
                                                         .fileIds);
@@ -427,6 +477,8 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                                   ColorValues.submitColor,
                                               text: "ReNew Upload",
                                               onPressed: () {
+                                                  controller.isFormInvalid.value =
+                                                    false;
                                                 controller
                                                     .reNewUploadDocumentNew(
                                                         fileIds:
@@ -454,13 +506,15 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                   print('po valu ${p0.value.toString()}');
                                   controller.renewDateTc.text =
                                       DateFormat('yyyy-MM-dd').format(p0.value);
-                                  controller.openrenewDateTcDatePicker =
-                                      !controller.openrenewDateTcDatePicker;
+                                  controller.openrenewDateTcDatePicker = false;
+                                  // controller.openrenewDateTcDatePicker =
+                                  //     !controller.openrenewDateTcDatePicker;
+                                  controller.isRenewDateTcInvalid.value = false;
                                   controller.update(['stock_Mangement']);
                                 },
                                 onCancel: () {
                                   controller.openrenewDateTcDatePicker = false;
-                                  controller.update(['stock_Mangement_Date']);
+                                  controller.update(['stock_Mangement']);
                                 },
                               ),
                             ),
