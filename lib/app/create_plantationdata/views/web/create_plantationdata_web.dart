@@ -1,4 +1,6 @@
-import 'package:cmms/app/create_PlantationData/create_PlantationData_controller.dart';
+import 'package:cmms/app/create_fueldata/create_fueldata_controller.dart';
+import 'package:cmms/app/create_plantationdata/create_plantationdata_controller.dart';
+import 'package:cmms/app/create_regulataryvisits/create_regulataryvisits_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -9,18 +11,23 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
 
-class PlantationDataWeb extends  GetView<CreatePlantationDataController>{
+class PlantationDataWeb extends StatefulWidget {
   PlantationDataWeb({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<PlantationDataWeb> createState() => _ViewPlantationDataWebState();
+}
+
+class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
   final HomeController homecontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    // return GetBuilder<CreatePlantationDataController>(
-    //   id: 'stock_Mangement',
-    //   builder: (controller) {
+    return GetBuilder<CreatePlantationDataController>(
+      id: 'stock_Mangement',
+      builder: (controller) {
         return SelectionArea(
           child: Scaffold(
             body: Container(
@@ -68,7 +75,7 @@ class PlantationDataWeb extends  GetView<CreatePlantationDataController>{
                             },
                             child: Text(" / MIS", style: Styles.greyLight14),
                           ),
-                          Text(" /PLANTATION DATA ",
+                          Text(" / PLANTATION DATA",
                               style: Styles.greyLight14),
                         ],
                       ),
@@ -101,10 +108,35 @@ class PlantationDataWeb extends  GetView<CreatePlantationDataController>{
                                           child: Row(
                                             children: [
                                               Text(
-                                                "Plantation Data ",
+                                                "Plantation Data",
                                                 style: Styles.blackBold16,
                                               ),
                                               Spacer(),
+                                                    Padding(
+                                            padding: EdgeInsets.only(
+                                              top: 20,
+                                              right: 20,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Text('Month:'),
+                                                Dimens.boxWidth10,
+                                                CustomTextFieldForStock(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      8,
+                                                  numberTextField: true,
+                                                  onTap: () {
+                                                    _showMonthPicker(
+                                                        context, controller);
+                                                  },
+                                                  // textController:
+                                                  //     controller.waterDateTc,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                             ],
                                           ),
                                         ),
@@ -146,33 +178,33 @@ class PlantationDataWeb extends  GetView<CreatePlantationDataController>{
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // keyboardType:
-                                                                  //     TextInputType
-                                                                  //         .number,
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .contractorNameCtrlr,
-                                                                  //validate
-                                                                  // errorController: controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  textController:
+                                                                      controller
+                                                                          .SaplingsPlantedCtrl,
+                                                                //  validate
+                                                                  errorController: controller
+                                                                          .isSaplingsPlantedCtrlInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isSaplingsPlantedCtrlInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isSaplingsPlantedCtrlInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -189,30 +221,30 @@ class PlantationDataWeb extends  GetView<CreatePlantationDataController>{
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .correctivePreventiveCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  textController:
+                                                                      controller
+                                                                          .SaplingsSurvivedCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isSaplingsSurvivedCtrlInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isSaplingsSurvivedCtrlInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isSaplingsSurvivedCtrlInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -229,30 +261,30 @@ class PlantationDataWeb extends  GetView<CreatePlantationDataController>{
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .responsiblePersonCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  textController:
+                                                                      controller
+                                                                          .SaplingsDiedCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isSaplingsDiedCtrlInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isSaplingsDiedCtrlInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isSaplingsDiedCtrlInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -307,9 +339,8 @@ class PlantationDataWeb extends  GetView<CreatePlantationDataController>{
                                   text: 'Submit',
                                   onPressed: () {
                                     // controller.isFormInvalid.value = false;
-                                    // controller.createObs(
-                                    //     position: 1,
-                                    //     fileIds: dropzoneController.fileIds);
+                                    controller.createplantationdata();
+
                                   },
                                 ),
                               )
@@ -335,7 +366,52 @@ class PlantationDataWeb extends  GetView<CreatePlantationDataController>{
           ),
         );
         // );
-    //   },
-    // );
+      },
+    );
   }
+}
+_showMonthPicker(BuildContext context, CreatePlantationDataController controller) {
+  // controller.selectedMonth = DateTime.now().year;
+  // showDialog(
+  //   context: context,
+  //   builder: (BuildContext context) {
+  //     return AlertDialog(
+  //       title: Text("Select Year"),
+  //       content: Container(
+  //         height: 200,
+  //         child: CupertinoPicker(
+  //           itemExtent: 40,
+  //           onSelectedItemChanged: (int index) {
+  //             controller.selectedMonth = DateTime.now().year - index;
+  //           },
+  //           children: List.generate(10, (index) {
+  //             return Center(
+  //               child: Text((DateTime.now().year - index).toString()),
+  //             );
+  //           }),
+  //         ),
+  //       ),
+  //       actions: <Widget>[
+  //         ActionButton(
+  //           label: "Cancel", color: ColorValues.appRedColor,
+  //           onPressed: () {
+  //             Navigator.of(context).pop();
+  //           },
+  //           // child: Text("Cancel"),
+  //         ),
+  //         Dimens.boxHeight10,
+  //         ActionButton(
+  //           color: ColorValues.addNewColor,
+  //           onPressed: () {
+  //             controller.waterDateTc.text = controller.selectedYear.toString();
+  //             controller.goWaterDataList();
+  //             controller.update(['stock_Mangement_Date']);
+  //             Navigator.of(context).pop();
+  //           },
+  //           label: "Select",
+  //         ),
+  //       ],
+  //     );
+  //   },
+  // );
 }

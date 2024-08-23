@@ -1,19 +1,20 @@
-import 'package:cmms/domain/models/get_occupational_list_model.dart';
+import 'package:cmms/domain/models/get_fueldata_list_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
-class OccupationalListUsecase {
-  OccupationalListUsecase(this.repository);
+class FuelDataListUsecase {
+  FuelDataListUsecase(this.repository);
   Repository repository;
-         
-  ///
 
- Future<List<GetOccupationalList>> getHealthDatalist({
+
+  ///getFuelConsumption
+
+ Future<List<GetFuelDataList>> getFuelConsumption({
     required bool isLoading,
     bool? isExport,
 
   }) async {
-    return repository.getHealthDatalist(
+    return repository.getFuelConsumption(
       isLoading: isLoading,
       isExport: isExport,
     

@@ -86,8 +86,6 @@ import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/create_regulataryvisits/create_regulataryvisits_binding.dart';
 import 'package:cmms/app/create_regulataryvisits/views/create_regulataryvisits_screen.dart';
-import 'package:cmms/app/cumulative_report/cumulative_report_binding.dart';
-import 'package:cmms/app/cumulative_report/view/cumulative_report_screen.dart';
 import 'package:cmms/app/document_master/document_master_binding.dart';
 import 'package:cmms/app/document_master/view/document_master_screen.dart';
 import 'package:cmms/app/doc_upload/doc_upload_binding.dart';
@@ -133,6 +131,8 @@ import 'package:cmms/app/list_of_PermitsTBTDataList/permitsTBT_list_binding.dart
 import 'package:cmms/app/list_of_PermitsTBTDataList/views/permitsTBT_list_screen.dart';
 import 'package:cmms/app/list_of_Regulatary_Visits/regulataryvisits_list_binding.dart';
 import 'package:cmms/app/list_of_Regulatary_Visits/views/regulataryvisits_list_screen.dart';
+import 'package:cmms/app/list_of_fueldata/fueldata_list_binding.dart';
+import 'package:cmms/app/list_of_fueldata/views/fueldata_list_list_screen.dart';
 import 'package:cmms/app/list_of_occupationalhealth/occupational_list_binding.dart';
 import 'package:cmms/app/list_of_occupationalhealth/views/occupational_list_screen.dart';
 import 'package:cmms/app/master_responsibility/responsivility_binding.dart';
@@ -1502,9 +1502,10 @@ class AppPages {
       binding: CmmsReportDashboardBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.cumulativeReport,
-      page: CumulativeReportScreen.new,
-      binding: CumulativeReportBinding(),
+      name: _Paths.fueldataListScreen,
+      page: FuelDataListScreen.new,
+      binding:  FuelDataListBinding(),
     ),
+    
   ];
 }

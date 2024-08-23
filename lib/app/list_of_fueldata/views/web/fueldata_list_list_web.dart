@@ -1,42 +1,43 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/list_of_fueldata/fueldata_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/domain/models/get_fueldata_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:cmms/app/list_of_occupationalhealth/occupational_list_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/domain/models/get_occupational_list_model.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 
-class OccupationalListWeb extends StatefulWidget {
-  OccupationalListWeb({
+class FueldataListWeb extends StatefulWidget {
+  FueldataListWeb({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<OccupationalListWeb> createState() => _OccupationalListWebState();
+  State<FueldataListWeb> createState() => _FueldataListWebState();
 }
 
-class _OccupationalListWebState extends State<OccupationalListWeb> {
+class _FueldataListWebState extends State<FueldataListWeb> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<OccupationalDataListController>(
+    return GetBuilder<FuelDataListController>(
         id: 'stock_Mangement_Date',
         builder: (controller) {
           return Obx(
             () {
-              final dataSource = OccupationalDataListSource(controller);
+              final dataSource = FuelDataListSource(controller);
               return SelectionArea(
                 child: SingleChildScrollView(
                   child: Column(
@@ -80,7 +81,7 @@ class _OccupationalListWebState extends State<OccupationalListWeb> {
                               },
                               child: Text(" / MIS", style: Styles.greyLight14),
                             ),
-                            Text(" / LIST OF OCCUPATIONAL HEALTH",
+                            Text(" / LIST OF FUEL DATA",
                                 style: Styles.greyLight14)
                           ],
                         ),
@@ -108,7 +109,7 @@ class _OccupationalListWebState extends State<OccupationalListWeb> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "List Of Occupational Health",
+                                          "List Of Fuel Data",
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
@@ -155,7 +156,7 @@ class _OccupationalListWebState extends State<OccupationalListWeb> {
                                                   controller.clearStoreData();
 
                                                   Get.offNamed(Routes
-                                                      .createOccupationalScreen);
+                                                      .createFuelDataScreen);
                                                 },
                                                 color: ColorValues.addNewColor,
                                               )
@@ -325,7 +326,7 @@ class _OccupationalListWebState extends State<OccupationalListWeb> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  controller.occupationalhealthList.isEmpty ==
+                                  controller.fueldataList.isEmpty ==
                                               true &&
                                           controller.isLoading == false
                                       ? Center(child: Text('No data'))
@@ -339,7 +340,7 @@ class _OccupationalListWebState extends State<OccupationalListWeb> {
                                                   builder:
                                                       (context, value, child) {
                                                     final dataSource =
-                                                        OccupationalDataListSource(
+                                                        FuelDataListSource(
                                                             controller);
 
                                                     return PaginatedDataTable2(
@@ -476,41 +477,43 @@ DataColumn2 buildDataColumn(
   );
 }
 
-class OccupationalDataListSource extends DataTableSource {
-  final OccupationalDataListController controller;
+class FuelDataListSource extends DataTableSource {
+  final FuelDataListController controller;
 
-  late List<GetOccupationalList?> filteredGetOccupationalList;
+  late List<GetFuelDataList?> filteredGetFuelDataList;
 
-  OccupationalDataListSource(this.controller) {
+  FuelDataListSource(this.controller) {
     filtersOccupationalhealth();
   }
 
   ///
   void filtersOccupationalhealth() {
-    filteredGetOccupationalList = <GetOccupationalList?>[];
-    filteredGetOccupationalList =
-        controller.occupationalhealthList.where((Occupationallist) {
-      return (Occupationallist.id ?? '')
+    filteredGetFuelDataList = <GetFuelDataList?>[];
+    filteredGetFuelDataList =
+        controller.fueldataList.where((Fueldatalist) {
+      return (Fueldatalist.id ?? '')
           .toString()
           .contains(controller.monthFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
-    // print({"filteredGetOccupationalList": filteredGetOccupationalList});
+    // print({"filteredGetFuelDataList": filteredGetFuelDataList});
   }
 
   @override
   DataRow? getRow(int index) {
     // print({"getRow call"});
-    final OccupationallistDetails = filteredGetOccupationalList[index];
+    final FuelDataDetails = filteredGetFuelDataList[index];
 
-    controller.occupationId.value = OccupationallistDetails?.id ?? 0;
+    controller.fuelId.value = FuelDataDetails?.id ?? 0;
     var cellsBuffer = [
-      '${OccupationallistDetails?.noOfHealthExamsOfNewJoiner ?? ''}',
-      '${OccupationallistDetails?.occupationalIllnesses ?? ''}',
-      '${OccupationallistDetails?.periodicTests ?? ''}',
-      '${OccupationallistDetails?.month_name ?? ''}',
-      '${OccupationallistDetails?.createdAt ?? ''}',
+      '${FuelDataDetails?.dieselConsumedForVehicles ?? ''}',
+      '${FuelDataDetails?.petrolConsumedForVehicles ?? ''}',
+      '${FuelDataDetails?.petrolConsumedForGrassCuttingAndMovers ?? ''}',
+      '${FuelDataDetails?.dieselConsumedAtSite ?? ''}',
+      '${FuelDataDetails?.petrolConsumedAtSite ?? ''}',
+      '${FuelDataDetails?.month_name ?? ''}',
+      '${FuelDataDetails?.createdAt ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -597,7 +600,7 @@ class OccupationalDataListSource extends DataTableSource {
   }
 
   @override
-  int get rowCount => filteredGetOccupationalList.length;
+  int get rowCount => filteredGetFuelDataList.length;
 
   @override
   bool get isRowCountApproximate => false;
