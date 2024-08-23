@@ -13278,13 +13278,14 @@ class Repository {
   }
 
   Future<bool> endApproveExecution(
-      {bool? isLoading, approvetoJsonString}) async {
+      {bool? isLoading, approvetoJsonString,int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.endApproveExecution(
           auth: auth,
           isLoading: isLoading,
+          facility_id: facility_id,
           approvetoJsonString: json.encode(approvetoJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {

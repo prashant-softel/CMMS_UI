@@ -587,10 +587,10 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+
   //getFuelConsumption
-   @override
+  @override
   Future<ResponseModel> getFuelConsumption({
-  
     required bool isLoading,
     required String auth,
   }) async {
@@ -599,10 +599,10 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+
 // getVisitsAndNoticesDatalist
-   @override
+  @override
   Future<ResponseModel> getVisitsAndNoticesDatalist({
-  
     required bool isLoading,
     required String auth,
   }) async {
@@ -611,6 +611,7 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+
   @override
   Future<ResponseModel> getInventoryAssetsList({
     int? facility_id,
@@ -2186,28 +2187,26 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 // createfuledata
-   Future<ResponseModel> createfuledata(
-          {required String auth,
-          createfuledata,
-          bool? isLoading,
-          }) async =>
+  Future<ResponseModel> createfuledata({
+    required String auth,
+    createfuledata,
+    bool? isLoading,
+  }) async =>
       await connectHelper.createfuledata(
         auth: auth,
         createfuledata: createfuledata,
         isLoading: isLoading ?? false,
-        
       );
 //createplantationdata
- Future<ResponseModel> createplantationdata(
-          {required String auth,
-          createplantationdata,
-          bool? isLoading,
-          }) async =>
+  Future<ResponseModel> createplantationdata({
+    required String auth,
+    createplantationdata,
+    bool? isLoading,
+  }) async =>
       await connectHelper.createplantationdata(
         auth: auth,
         createplantationdata: createplantationdata,
         isLoading: isLoading ?? false,
-        
       );
   // update Occupational Health
   Future<ResponseModel> updateHealthData({
@@ -4851,13 +4850,14 @@ class DataRepository extends DomainRepository {
           rejecttoJsonString: rejecttoJsonString,
           isLoading: isLoading ?? false,
           facility_id: facility_id);
-  Future<ResponseModel> endApproveExecution({
-    required String auth,
-    approvetoJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> endApproveExecution(
+          {required String auth,
+          approvetoJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.endApproveExecution(
         auth: auth,
+        facility_id: facility_id,
         approvetoJsonString: approvetoJsonString,
         isLoading: isLoading ?? false,
       );

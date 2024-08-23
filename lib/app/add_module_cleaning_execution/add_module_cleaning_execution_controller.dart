@@ -725,9 +725,9 @@ class AddModuleCleaningExecutionController extends GetxController {
       var approvetoJsonString = commentModel.toJson();
       final response =
           await addModuleCleaningExecutionPresenter.endApproveExecution(
-        approvetoJsonString: approvetoJsonString,
-        isLoading: true,
-      );
+              approvetoJsonString: approvetoJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       if (response == true) {
         Get.offAllNamed(Routes.moduleCleaningListExecution);
       }

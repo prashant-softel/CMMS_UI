@@ -184,10 +184,12 @@ class AddModuleCleaningExecutionPresenter {
   Future<bool> endApproveExecution({
     approvetoJsonString,
     required bool isLoading,
+    int? facility_id
   }) async {
     return addModuleCleaningExecutionUsecase.endApproveExecution(
       approvetoJsonString: approvetoJsonString,
       isLoading: isLoading,
+      facility_id: facility_id
     );
   }
 
