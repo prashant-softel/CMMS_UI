@@ -193,6 +193,7 @@ class ModuleCleaningPlanningController extends GetxController {
     print("Start Date: ${_startDateTc}");
 
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
+      resubmit: 0,
       planId: 0,
       facilityId: facilityId,
       startDate: _startDateTc,
@@ -259,6 +260,7 @@ class ModuleCleaningPlanningController extends GetxController {
     String _startDateTc = startDateTc.text.trim();
 
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
+        resubmit: 1,
         planId: id.value,
         facilityId: facilityId,
         startDate: _startDateTc,

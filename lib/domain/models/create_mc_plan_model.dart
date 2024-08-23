@@ -7,6 +7,7 @@ CreateMcPalningsModel createMcPlaningModelFromJson(String str) =>
 //     json.encode(data.toJson());
 
 class CreateMcPalningsModel {
+  int? resubmit;
   int? facilityId;
   int? planId;
   String? title;
@@ -21,6 +22,7 @@ class CreateMcPalningsModel {
 
   CreateMcPalningsModel({
     this.title,
+    this.resubmit,
     this.facilityId,
     this.startDate,
     // this.assignedToId,
@@ -35,6 +37,7 @@ class CreateMcPalningsModel {
   factory CreateMcPalningsModel.fromJson(Map<String, dynamic> json) =>
       CreateMcPalningsModel(
         facilityId: json['facilityId'],
+        resubmit: json['resubmit'],
         title: json['title'] ?? '',
         startDate: json['startDate'],
         assignedToId: json['assignedToId'],
@@ -51,6 +54,7 @@ class CreateMcPalningsModel {
       );
 
   Map<String, dynamic> toJson() => {
+        "resubmit": resubmit,
         "title": title,
         "facilityId": facilityId,
         "startDate": startDate,
