@@ -106,7 +106,7 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                                   ? _vegetationList(
                                       tittle: "Planning",
                                       ontap: () {
-                                        Get.offNamed(
+                                        Get.toNamed(
                                           Routes.vegetationPlanListScreen,
                                         );
                                       },
@@ -126,7 +126,7 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                                   ? _vegetationList(
                                       tittle: "Execution",
                                       ontap: () {
-                                        Get.offNamed(
+                                        Get.toNamed(
                                           Routes.vegExecutionListScreen,
                                         );
                                       },

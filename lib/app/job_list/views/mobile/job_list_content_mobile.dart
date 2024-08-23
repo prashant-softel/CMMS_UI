@@ -66,7 +66,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                             children: [
                                               Expanded(
                                                 child: Text(
-                                                  'Job Id : ${jobModel?.id ?? 0}',
+                                                  'JOB${jobModel?.id ?? 0}',
                                                   style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: ColorValues
@@ -77,6 +77,33 @@ class JobListContentMobile extends GetView<JobListController> {
                                               Expanded(
                                                 child: Container(
                                                   decoration: BoxDecoration(
+                                                    color: jobModel?.status ==
+                                                            101
+                                                        ? ColorValues
+                                                            .createdColor
+                                                        : jobModel?.status ==
+                                                                102
+                                                            ? ColorValues
+                                                                .assignStatusColor
+                                                            : jobModel?.latestJCStatus ==
+                                                                    151
+                                                                ? ColorValues
+                                                                    .createsColor
+                                                                : jobModel?.latestJCStatus ==
+                                                                        152
+                                                                    ? ColorValues
+                                                                        .startColor
+                                                                    : jobModel?.latestJCStatus ==
+                                                                            153
+                                                                        ? Color.fromARGB(
+                                                                            255,
+                                                                            181,
+                                                                            129,
+                                                                            179)
+                                                                        : jobModel?.latestJCStatus ==
+                                                                                155
+                                                                            ? ColorValues.waitingForApproveStatusColor
+                                                                            : ColorValues.lightBlueColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
@@ -88,12 +115,34 @@ class JobListContentMobile extends GetView<JobListController> {
                                                     vertical: 5,
                                                   ),
                                                   child: Center(
-                                                    child: Text(
-                                                      '${jobModel?.latestJCStatus ?? 'Unassigned'}',
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
+                                                    child: jobModel?.status ==
+                                                            101
+                                                        ? Text(
+                                                            "Job Created",
+                                                            style:
+                                                                const TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          )
+                                                        : jobModel?.status ==
+                                                                102
+                                                            ? Text(
+                                                                "Job Assigned",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                              )
+                                                            : Text(
+                                                                ' ${jobModel?.latestJCStatusShort ?? ''}',
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                              ),
                                                   ),
                                                 ),
                                               ),
