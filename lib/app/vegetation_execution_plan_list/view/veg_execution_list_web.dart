@@ -21,13 +21,12 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 class VegExecutionListWeb extends StatefulWidget {
   const VegExecutionListWeb({super.key});
 
-
   @override
   State<VegExecutionListWeb> createState() => _VegExecutionListWebState();
 }
 
 class _VegExecutionListWebState extends State<VegExecutionListWeb> {
-    final homecontroller = Get.find<HomeController>();
+  final homecontroller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<VegExecutionListController>(
@@ -506,9 +505,12 @@ class VegExcutionListDataSource extends DataTableSource {
       VegExcutionListDetails?.startDate == "0001-01-01"
           ? "-"
           : '${VegExcutionListDetails?.startDate ?? ''}',
-      VegExcutionListDetails?.doneDate == "0001-01-01"
-          ? "-"
-          : '${VegExcutionListDetails?.doneDate ?? ''}',
+
+      VegExcutionListDetails?.status == 727
+          ? '${VegExcutionListDetails?.abondond_done_date ?? ''}'
+          : (VegExcutionListDetails?.doneDate == "0001-01-01"
+              ? "-"
+              : '${VegExcutionListDetails?.doneDate ?? ''}'),
 
       // '${VegExcutionListDetails?.status ?? ''}',
 
