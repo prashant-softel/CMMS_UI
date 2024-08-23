@@ -2918,7 +2918,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                 text: "Partially Paid",
                                 onPressed: () {
                                   controller.closeWarranty(
-                                    type: 2,
+                                    type: 3,
                                     fileIds: dropzoneController.fileIds,
                                   );
                                 },
@@ -2935,7 +2935,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                 text: "Rejected",
                                 onPressed: () {
                                   controller.closeWarranty(
-                                    type: 3,
+                                    type: 2,
                                     fileIds: dropzoneController.fileIds,
                                   );
                                 },

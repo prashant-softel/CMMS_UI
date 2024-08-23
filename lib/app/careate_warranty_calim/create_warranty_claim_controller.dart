@@ -359,7 +359,7 @@ class CreateWarrantyClaimController extends GetxController {
     });
     Future.delayed(Duration(seconds: 1), () {
       if (wc_id.value != 0) {
-        getViewWarrantyClaimDetail(wc_id: wc_id.value);
+        getViewWarrantyClaimDetail(wc_id: wc_id.value, facilityId: facilityId);
         getHistory(facilityId: facilityId, wcId: wc_id.value);
       }
       // getFacilityList();
@@ -438,10 +438,12 @@ class CreateWarrantyClaimController extends GetxController {
     warrantyClaimPresenter.clearTypeValue();
   }
 
-  Future<void> getViewWarrantyClaimDetail({required int wc_id}) async {
+  Future<void> getViewWarrantyClaimDetail(
+      {required int wc_id, required int facilityId}) async {
     final _viewWarrantyClaimDetails =
         await warrantyClaimPresenter.getViewWarrantyClaimDetail(
       wc_id: wc_id,
+      facilityId: facilityId,
     );
 
     if (_viewWarrantyClaimDetails != null) {
@@ -1512,10 +1514,14 @@ class CreateWarrantyClaimController extends GetxController {
 
   void wcApprovedButton({int? id}) async {
     {
+      if (approveCommentTextFieldCtrlr.text == '') {
+        Fluttertoast.showToast(msg: 'Please enter comment');
+        return;
+      }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentWCAproveModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var WCApproveJsonString = commentWCAproveModel.toJson();
 
@@ -1533,10 +1539,14 @@ class CreateWarrantyClaimController extends GetxController {
 
   void wcRejectdButton({int? id}) async {
     {
+      if (rejectCommentTextFieldCtrlr.text == '') {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentWCRejectModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var WCRejectJsonString = commentWCRejectModel.toJson();
 
@@ -1554,10 +1564,14 @@ class CreateWarrantyClaimController extends GetxController {
 
   void closeWCApprovedButton({int? id}) async {
     {
+      if (approveCommentTextFieldCtrlr.text == '') {
+        Fluttertoast.showToast(msg: 'Please enter comment');
+        return;
+      }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentWCAproveModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var WCApproveJsonString = commentWCAproveModel.toJson();
 
@@ -1575,9 +1589,13 @@ class CreateWarrantyClaimController extends GetxController {
 
   void closeWCRejectdButton({int? id}) async {
     {
+      if (rejectCommentTextFieldCtrlr.text == '') {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
       CommentModel commentWCRejectModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
       var WCRejectJsonString = commentWCRejectModel.toJson();
       Map<String, dynamic>? response =
           await warrantyClaimPresenter.closeWCRejectdButton(

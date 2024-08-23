@@ -2630,12 +2630,14 @@ class Repository {
   Future<ViewWarrantyClaimModel?> getViewWarrantyClaimDetail({
     bool? isLoading,
     int? wc_id,
+    int? facilityId,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getViewWarrantyClaimDetail(
         auth: auth,
         wc_id: wc_id,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 

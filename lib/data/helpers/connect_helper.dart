@@ -4307,9 +4307,10 @@ class ConnectHelper {
     required String auth,
     bool? isLoading,
     int? wc_id,
+    int? facilityId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'wc/GetWCDetails?wc_id=$wc_id',
+      'wc/GetWCDetails?wc_id=$wc_id&facilityId=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
