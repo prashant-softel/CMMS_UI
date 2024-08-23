@@ -158,12 +158,12 @@ class AddModuleCleaningExecutionUsecase {
           rejecttoJsonString: rejecttoJsonString,
           isLoading: isLoading,
           facility_id: facility_id);
-  Future<bool> endApproveExecution({
-    approvetoJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<bool> endApproveExecution(
+          {approvetoJsonString, bool? isLoading, int? facility_id}) async =>
       await _repository.endApproveExecution(
-          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+          approvetoJsonString: approvetoJsonString,
+          isLoading: isLoading,
+          facility_id: facility_id);
   Future<bool> endRejectExecution(
           {rejecttoJsonString, bool? isLoading, int? facility_id}) async =>
       await _repository.endRejectExecution(
