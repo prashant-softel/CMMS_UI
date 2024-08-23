@@ -88,12 +88,14 @@ class ModuleCleaningPlanningUsecase {
     String? auth,
     int? facilityId,
     int? featureId,
+    int? isattendanceneeded,
     bool? isLoading,
   }) async =>
-      await repository.getAssignedToEmployee(
+      await repository.getAssignedToListWOAttend(
         auth,
         facilityId,
         featureId,
+        isattendanceneeded,
         isLoading,
       );
   Future<PMPlanDetail?> getPmPlanDetails({
