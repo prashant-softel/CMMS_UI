@@ -213,9 +213,9 @@ class viewModuleCleaningExecutionController extends GetxController {
 
       Map<String, dynamic>? response =
           await viewModuleCleaningExecutionPresenter.mcExecutionApprovedButton(
-        mcExecutionApproveJsonString: mcExecutionApproveJsonString,
-        isLoading: true,
-      );
+              mcExecutionApproveJsonString: mcExecutionApproveJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
@@ -235,9 +235,10 @@ class viewModuleCleaningExecutionController extends GetxController {
       Map<String, dynamic>? response =
           await viewModuleCleaningExecutionPresenter
               .rejectMcExecutionApprovedButton(
-        rejectMcExecutionApproveJsonString: rejectMcExecutionApproveJsonString,
-        isLoading: true,
-      );
+                  rejectMcExecutionApproveJsonString:
+                      rejectMcExecutionApproveJsonString,
+                  isLoading: true,
+                  facility_id: facilityId);
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
@@ -269,24 +270,25 @@ class viewModuleCleaningExecutionController extends GetxController {
       case const (RxList<FacilityModel>):
         {
           if (value != "Please Select") {
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
 
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
           } else {
-            facilityId=0;
-            
+            facilityId = 0;
           }
         }
         break;
       case const (RxList<ModuleListModel>):
         {
-         if (value != "Please Select") {
-            int moduleListIndex = moduleList.indexWhere((x) => x?.name == value);
-          selectedModuleListId = moduleList[moduleListIndex]?.id ?? 0;
-          print('Module List Id: $selectedModuleListId');
-         } else {
-           selectedModuleListId=0;
-         }
+          if (value != "Please Select") {
+            int moduleListIndex =
+                moduleList.indexWhere((x) => x?.name == value);
+            selectedModuleListId = moduleList[moduleListIndex]?.id ?? 0;
+            print('Module List Id: $selectedModuleListId');
+          } else {
+            selectedModuleListId = 0;
+          }
         }
         break;
 

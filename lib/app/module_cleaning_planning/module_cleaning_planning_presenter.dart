@@ -20,24 +20,21 @@ class ModuleCleaningPlanningPresenter {
       await moduleCleaningPlanningUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  Future<Map<String, dynamic>?> createMcPlan({
-    createMcPlans,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> createMcPlan(
+      {createMcPlans, required bool isLoading, int? facilityId}) async {
     return moduleCleaningPlanningUsecase.createMcPlan(
       createMcPlans: createMcPlans,
       isLoading: isLoading,
+      facilityId: facilityId,
     );
   }
 
-  Future<Map<String, dynamic>?> updateMcPlan({
-    updateMcPlans,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> updateMcPlan(
+      {updateMcPlans, required bool isLoading, int? facility_id}) async {
     return moduleCleaningPlanningUsecase.updateMcPlan(
-      updateMcPlans: updateMcPlans,
-      isLoading: isLoading,
-    );
+        updateMcPlans: updateMcPlans,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   Future<List<EquipmentListModel>> getEquipmentModelList({
@@ -69,7 +66,7 @@ class ModuleCleaningPlanningPresenter {
   }) async {
     return moduleCleaningPlanningUsecase.getMcPlanDetail(
       planId: planId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading ?? false,
     );
   }

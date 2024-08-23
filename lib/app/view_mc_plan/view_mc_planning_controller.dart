@@ -190,9 +190,9 @@ class ViewMcPlaningController extends GetxController {
 
       Map<String, dynamic>? response =
           await viewMcPlaningPresenter.mcPlanApprovedButton(
-        mcApproveJsonString: mcApproveJsonString,
-        isLoading: true,
-      );
+              mcApproveJsonString: mcApproveJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
@@ -210,9 +210,9 @@ class ViewMcPlaningController extends GetxController {
 
       Map<String, dynamic>? response =
           await viewMcPlaningPresenter.mcPlanRejectButton(
-        mcRejectJsonString: mcRejectJsonString,
-        isLoading: true,
-      );
+              mcRejectJsonString: mcRejectJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
