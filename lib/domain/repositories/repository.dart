@@ -450,7 +450,7 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createNewPermitForPm(newPermit, pmTaskId,
-      activity, bool? isLoading, type, vegplanId, vegexid) async {
+      activity, bool? isLoading, type, vegplanId, vegexid, facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createNewPermitForPm(
@@ -480,15 +480,16 @@ class Repository {
           print('CreateForJobPermitResponse:${permitForJob[0]}');
           if (pmTaskId != null && type == 3) {
             scheduleLinkToPermit(
-                pmTaskId, activity, permitForJob[0], true, type);
+                pmTaskId, activity, permitForJob[0], true, type, 0);
           } else if (pmTaskId != null && type == 4) {
             scheduleLinkToPermit(
-                pmTaskId, activity, permitForJob[0], true, type);
+                pmTaskId, activity, permitForJob[0], true, type, facilityId);
           } else if (pmTaskId != null && type == 5) {
             vegscheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
                 type, vegplanId, vegexid);
           } else {
-            scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true, 0);
+            scheduleLinkToPermit(
+                pmTaskId, activity, permitForJob[0], true, 0, 0);
           }
           return responseMap;
         }
@@ -1084,6 +1085,7 @@ class Repository {
       return Map();
     }
   }
+
   //createvisitsandnotices
   Future<Map<String, dynamic>> createvisitsandnotices(
       createvisitsandnotices, bool? isLoading) async {
@@ -1093,7 +1095,6 @@ class Repository {
         auth: auth,
         createvisitsandnotices: createvisitsandnotices,
         isLoading: isLoading ?? false,
-
       );
 
       var resourceData = res.data;
@@ -5097,8 +5098,7 @@ class Repository {
         final List<GetOccupationalList> _occupationallList =
             jsonIrListModelModels
                 .map<GetOccupationalList>((m) =>
-                    GetOccupationalList.fromJson(
-                        Map<String, dynamic>.from(m)))
+                    GetOccupationalList.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
         String jsonData = GetOccupationalListModelToJson(_occupationallList);
         if (isExport == true) {
@@ -5107,17 +5107,17 @@ class Repository {
           List<List<dynamic>> data = [
             [
               'id',
-   'noOfHealthExamsOfNewJoiner',
-   'status',
-  'updatedAt',
-  'createdAt',
-   'createdBy',
-  'date',
-   'periodicTests',
-   'occupationalIllnesses',
-  'updatedBy',
-  'month_id',
-  'month_name',
+              'noOfHealthExamsOfNewJoiner',
+              'status',
+              'updatedAt',
+              'createdAt',
+              'createdBy',
+              'date',
+              'periodicTests',
+              'occupationalIllnesses',
+              'updatedBy',
+              'month_id',
+              'month_name',
             ],
             ...jsonDataList
                 .map((healthlistjson) => [
@@ -12372,8 +12372,8 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> scheduleLinkToPermit(
-      scheduleId, activity, permitId, bool? isLoading, type) async {
+  Future<Map<String, dynamic>> scheduleLinkToPermit(scheduleId, activity,
+      permitId, bool? isLoading, type, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.scheduleLinkToPermit(
@@ -12382,7 +12382,8 @@ class Repository {
           permitId: permitId,
           activity: activity,
           isLoading: isLoading ?? false,
-          type: type);
+          type: type,
+          facilityId: facilityId);
 
       if (!res.hasError) {
         if (res.errorCode == 200) {

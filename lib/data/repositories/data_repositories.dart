@@ -575,10 +575,10 @@ class DataRepository extends DomainRepository {
       end_date: end_date,
     );
   }
+
   //getHealthDatalist
-   @override
+  @override
   Future<ResponseModel> getHealthDatalist({
-  
     required bool isLoading,
     required String auth,
   }) async {
@@ -2150,17 +2150,16 @@ class DataRepository extends DomainRepository {
         createoccupational: createoccupational,
         isLoading: isLoading ?? false,
       );
-      //createvisitsandnotices
-       Future<ResponseModel> createvisitsandnotices(
-          {required String auth,
-          createvisitsandnotices,
-          bool? isLoading,
-          }) async =>
+  //createvisitsandnotices
+  Future<ResponseModel> createvisitsandnotices({
+    required String auth,
+    createvisitsandnotices,
+    bool? isLoading,
+  }) async =>
       await connectHelper.createvisitsandnotices(
         auth: auth,
         createvisitsandnotices: createvisitsandnotices,
         isLoading: isLoading ?? false,
-        
       );
 
   // update Occupational Health
@@ -4382,14 +4381,16 @@ class DataRepository extends DomainRepository {
           permitId,
           activity,
           bool? isLoading,
-          type}) async =>
+          type,
+          facilityId}) async =>
       await connectHelper.scheduleLinkToPermit(
           auth: auth,
           scheduleId: scheduleId,
           permitId: permitId,
           activity: activity,
           isLoading: isLoading ?? false,
-          type: type);
+          type: type,
+          facilityId: facilityId);
   Future<ResponseModel> vegscheduleLinkToPermit(
           {required String auth,
           scheduleId,

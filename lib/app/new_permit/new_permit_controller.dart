@@ -1661,14 +1661,14 @@ class NewPermitController extends GetxController {
       print(jobJsonString);
       Map<String, dynamic>? responseNewPermitCreatedForJob =
           await permitPresenter.createNewPermitForPm(
-        newPermit: jobJsonString,
-        pmTaskId: pmTaskId!,
-        activity: activity,
-        isLoading: true,
-        type: typee.value,
-        vegplanId: vegExecutionDetailsModel?.planId,
-        vegexid: vegExecutionDetailsModel?.executionId,
-      );
+              newPermit: jobJsonString,
+              pmTaskId: pmTaskId!,
+              activity: activity,
+              isLoading: true,
+              type: typee.value,
+              vegplanId: vegExecutionDetailsModel?.planId,
+              vegexid: vegExecutionDetailsModel?.executionId,
+              facilityId: facilityId);
       if (responseNewPermitCreatedForJob != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
