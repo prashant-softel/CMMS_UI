@@ -452,7 +452,7 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createNewPermitForPm(newPermit, pmTaskId,
-      activity, bool? isLoading, type, vegplanId, vegexid) async {
+      activity, bool? isLoading, type, vegplanId, vegexid, facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createNewPermitForPm(
@@ -482,15 +482,16 @@ class Repository {
           print('CreateForJobPermitResponse:${permitForJob[0]}');
           if (pmTaskId != null && type == 3) {
             scheduleLinkToPermit(
-                pmTaskId, activity, permitForJob[0], true, type);
+                pmTaskId, activity, permitForJob[0], true, type, 0);
           } else if (pmTaskId != null && type == 4) {
             scheduleLinkToPermit(
-                pmTaskId, activity, permitForJob[0], true, type);
+                pmTaskId, activity, permitForJob[0], true, type, facilityId);
           } else if (pmTaskId != null && type == 5) {
             vegscheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
                 type, vegplanId, vegexid);
           } else {
-            scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true, 0);
+            scheduleLinkToPermit(
+                pmTaskId, activity, permitForJob[0], true, 0, 0);
           }
           return responseMap;
         }
@@ -1775,17 +1776,17 @@ class Repository {
 
   //Update MC Schedule Execution
   Future<Map<String, dynamic>> updateMCScheduleExecution(
-    updateMCScheduleExecutionJsonString,
-    bool? isLoading,
-  ) async {
+      updateMCScheduleExecutionJsonString,
+      bool? isLoading,
+      int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateMCScheduleExecution(
-        auth: auth,
-        updateMCScheduleExecutionJsonString:
-            json.encode(updateMCScheduleExecutionJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          updateMCScheduleExecutionJsonString:
+              json.encode(updateMCScheduleExecutionJsonString),
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -2708,12 +2709,14 @@ class Repository {
   Future<ViewWarrantyClaimModel?> getViewWarrantyClaimDetail({
     bool? isLoading,
     int? wc_id,
+    int? facilityId,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getViewWarrantyClaimDetail(
         auth: auth,
         wc_id: wc_id,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -3530,16 +3533,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> mcPlanRejectButton(
-    mcRejectJsonString,
-    bool? isLoading,
-  ) async {
+      mcRejectJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.mcPlanRejectButton(
-        auth: auth,
-        mcRejectJsonString: json.encode(mcRejectJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          mcRejectJsonString: json.encode(mcRejectJsonString),
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       var resourceData = res.data;
 
@@ -3564,16 +3565,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> mcPlanApprovedButton(
-    mcApproveJsonString,
-    bool? isLoading,
-  ) async {
+      mcApproveJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.mcPlanApprovedButton(
-        auth: auth,
-        mcApproveJsonString: json.encode(mcApproveJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          mcApproveJsonString: json.encode(mcApproveJsonString),
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       var resourceData = res.data;
 
@@ -3598,16 +3597,15 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> mcExecutionApprovedButton(
-    mcExecutionApproveJsonString,
-    bool? isLoading,
-  ) async {
+      mcExecutionApproveJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.mcExecutionApprovedButton(
-        auth: auth,
-        mcExecutionApproveJsonString: json.encode(mcExecutionApproveJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          mcExecutionApproveJsonString:
+              json.encode(mcExecutionApproveJsonString),
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       var resourceData = res.data;
 
@@ -3840,17 +3838,17 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> rejectMcExecutionApprovedButton(
-    rejectMcExecutionApproveJsonString,
-    bool? isLoading,
-  ) async {
+      rejectMcExecutionApproveJsonString,
+      bool? isLoading,
+      int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.rejectMcExecutionApprovedButton(
-        auth: auth,
-        rejectMcExecutionApproveJsonString:
-            json.encode(rejectMcExecutionApproveJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          rejectMcExecutionApproveJsonString:
+              json.encode(rejectMcExecutionApproveJsonString),
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       var resourceData = res.data;
 
@@ -6401,16 +6399,14 @@ class Repository {
 
   ///Abandon MC Execution
   Future<Map<String, dynamic>> abandonExecutionButton(
-    abandoneJsonString,
-    bool? isLoading,
-  ) async {
+      abandoneJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.abandonExecutionButton(
-        auth: auth,
-        abandoneJsonString: json.encode(abandoneJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          abandoneJsonString: json.encode(abandoneJsonString),
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -6445,16 +6441,14 @@ class Repository {
 
   ///Abandon Schedule Execution
   Future<Map<String, dynamic>> abandonScheduleExecutionButton(
-    abandoneScheduleJsonString,
-    bool? isLoading,
-  ) async {
+      abandoneScheduleJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.abandonScheduleExecutionButton(
-        auth: auth,
-        abandoneScheduleJsonString: json.encode(abandoneScheduleJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          abandoneScheduleJsonString: json.encode(abandoneScheduleJsonString),
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -6490,16 +6484,14 @@ class Repository {
 
   ///End MC Execution
   Future<Map<String, dynamic>> endMCExecutionButton(
-    endJsonString,
-    bool? isLoading,
-  ) async {
+      endJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.endMCExecutionButton(
-        auth: auth,
-        endJsonString: json.encode(endJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          endJsonString: json.encode(endJsonString),
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -6533,17 +6525,15 @@ class Repository {
   }
 
   Future<void> startMCExecutionButton(
-    int? executionId,
-    bool? isLoading,
-  ) async {
+      int? executionId, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.startMCExecutionButton(
-        auth: auth,
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          executionId: executionId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
       print('StartExecutionResponse55: ${res.data}');
 
       if (!res.hasError) {
@@ -6557,17 +6547,15 @@ class Repository {
   }
 
   Future<void> endMcExecutionButton(
-    int? executionId,
-    bool? isLoading,
-  ) async {
+      int? executionId, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.endMcExecutionButton(
-        auth: auth,
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          executionId: executionId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
       print('endExecutionResponse55: ${res.data}');
 
       if (!res.hasError) {
@@ -6581,17 +6569,15 @@ class Repository {
   }
 
   Future<void> startMCExecutionScheduleButton(
-    int? scheduleId,
-    bool? isLoading,
-  ) async {
+      int? scheduleId, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.startMCExecutionScheduleButton(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
       print('StartScheduleExecutionResponse55: ${res.data}');
 
       if (!res.hasError) {
@@ -6605,19 +6591,16 @@ class Repository {
     }
   }
 
-  Future<void> endMCScheduleExecutionButton(
-    int? scheduleId,
-    bool? isLoading,
-    closePtwJsonString,
-  ) async {
+  Future<void> endMCScheduleExecutionButton(int? scheduleId, bool? isLoading,
+      closePtwJsonString, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.endMCScheduleExecutionButton(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
       print('EndScheduleExecutionResponse55: ${res.data}');
 
       if (res.errorCode == 200) {
@@ -7156,16 +7139,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createMcPlan(
-    createMcPlans,
-    bool? isLoading,
-  ) async {
+      createMcPlans, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createMcPlan(
-        auth: auth,
-        createMcPlans: createMcPlans,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          createMcPlans: createMcPlans,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
 
       var resourceData = res.data;
 
@@ -7196,16 +7177,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> updateMcPlan(
-    updateMcPlans,
-    bool? isLoading,
-  ) async {
+      updateMcPlans, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateMcPlan(
-        auth: auth,
-        updateMcPlans: updateMcPlans,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          updateMcPlans: updateMcPlans,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       var resourceData = res.data;
 
@@ -7349,20 +7328,20 @@ class Repository {
     }
   }
 
-  Future<bool> assignToMC({
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async {
+  Future<bool> assignToMC(
+      {int? assignId,
+      int? taskId,
+      required bool isLoading,
+      int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.assignToMC(
-        auth: auth,
-        assignId: assignId,
-        taskId: taskId,
-        isLoading: isLoading,
-      );
+          auth: auth,
+          assignId: assignId,
+          taskId: taskId,
+          isLoading: isLoading,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         return true;
@@ -12617,8 +12596,8 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> scheduleLinkToPermit(
-      scheduleId, activity, permitId, bool? isLoading, type) async {
+  Future<Map<String, dynamic>> scheduleLinkToPermit(scheduleId, activity,
+      permitId, bool? isLoading, type, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.scheduleLinkToPermit(
@@ -12627,7 +12606,8 @@ class Repository {
           permitId: permitId,
           activity: activity,
           isLoading: isLoading ?? false,
-          type: type);
+          type: type,
+          facilityId: facilityId);
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
@@ -13240,14 +13220,15 @@ class Repository {
   }
 
   Future<bool> approveShecduleExecution(
-      {bool? isLoading, approvetoJsonString}) async {
+      {bool? isLoading, approvetoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.approveShecduleExecution(
           auth: auth,
           isLoading: isLoading,
-          approvetoJsonString: json.encode(approvetoJsonString));
+          approvetoJsonString: json.encode(approvetoJsonString),
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -13264,14 +13245,15 @@ class Repository {
   }
 
   Future<bool> rejectShecduleExecution(
-      {bool? isLoading, rejecttoJsonString}) async {
+      {bool? isLoading, rejecttoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.rejectShecduleExecution(
           auth: auth,
           isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString));
+          rejecttoJsonString: json.encode(rejecttoJsonString),
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -13311,14 +13293,16 @@ class Repository {
     }
   }
 
-  Future<bool> endRejectExecution({bool? isLoading, rejecttoJsonString}) async {
+  Future<bool> endRejectExecution(
+      {bool? isLoading, rejecttoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.endRejectExecution(
           auth: auth,
           isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString));
+          rejecttoJsonString: json.encode(rejecttoJsonString),
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -13335,14 +13319,15 @@ class Repository {
   }
 
   Future<bool> abandonedApproveExecution(
-      {bool? isLoading, approvetoJsonString}) async {
+      {bool? isLoading, approvetoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.abandonedApproveExecution(
           auth: auth,
           isLoading: isLoading,
-          approvetoJsonString: json.encode(approvetoJsonString));
+          approvetoJsonString: json.encode(approvetoJsonString),
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -13359,14 +13344,15 @@ class Repository {
   }
 
   Future<bool> abandoneRejectExecution(
-      {bool? isLoading, rejecttoJsonString}) async {
+      {bool? isLoading, rejecttoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.abandoneRejectExecution(
           auth: auth,
           isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString));
+          rejecttoJsonString: json.encode(rejecttoJsonString),
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);

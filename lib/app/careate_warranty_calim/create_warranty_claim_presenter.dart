@@ -3,6 +3,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
@@ -33,9 +34,11 @@ class CreateWarrantyClaimPresenter {
   Future<ViewWarrantyClaimModel?> getViewWarrantyClaimDetail({
     bool? isLoading,
     required int wc_id,
+    required int facilityId,
   }) async {
     return warrantyClaimUsecase.getViewWarrantyClaimDetail(
       wc_id: wc_id,
+      facilityId: facilityId,
       isLoading: isLoading ?? false,
     );
   }
@@ -137,6 +140,14 @@ class CreateWarrantyClaimPresenter {
       isLoading: isLoading,
       facility_id: facility_id,
     );
+  }
+  Future<List<EmployeeModel?>?> getEmployeList({
+    required bool isLoading,
+    required int? facility_id,
+    required int? featureId,
+  }) async {
+    return warrantyClaimUsecase.getAssignedToList(
+        isLoading: isLoading, facilityId: facility_id, featureId: featureId);
   }
 
   Future<InventoryDetailsModel?> getInventoryDetail({

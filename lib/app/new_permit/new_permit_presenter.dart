@@ -230,7 +230,7 @@ class NewPermitPresenter {
       required bool isLoading,
       int? type,
       int? vegplanId,
-      int? vegexid}) async {
+      int? vegexid,int?facilityId}) async {
     return newPermitUsecase.createNewPermitForPm(
         newPermit: newPermit,
         pmTaskId: pmTaskId,
@@ -238,7 +238,7 @@ class NewPermitPresenter {
         isLoading: isLoading,
         type: type,
         vegexid: vegexid,
-        vegplanId: vegplanId);
+        vegplanId: vegplanId,facilityId:facilityId);
   }
 
   Future<Map<String, dynamic>?> updateNewPermit(

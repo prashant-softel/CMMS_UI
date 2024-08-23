@@ -294,7 +294,7 @@ class EditWarrantyClaimController extends GetxController {
     editWarrantyClaimDetailsList?.value = <ViewWarrantyClaimModel>[];
 
     final _editWarrantyClaimDetails = await editWarrantyClaimPresenter
-        .getEditWarrantyClaimDetail(wc_id: wc_id);
+        .getEditWarrantyClaimDetail(wc_id: wc_id, facilityId: facilityId);
     print('Edit Warranty Claim Detail:$_editWarrantyClaimDetails');
 
     if (_editWarrantyClaimDetails != null) {

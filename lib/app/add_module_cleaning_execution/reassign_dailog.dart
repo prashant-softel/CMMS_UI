@@ -1,4 +1,5 @@
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -124,8 +125,10 @@ class AssignToMcDialog extends GetView {
                       ElevatedButton(
                         style: Styles.greenElevatedButtonStyle,
                         onPressed: () {
-                          Get.back();
                           controller.assignToMC(id: id ?? 0);
+                          Get.offAllNamed(
+                            Routes.addModuleCleaningExecutionContentWeb,
+                          );
                         },
                         child: const Text('Submit'),
                       ),

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/careate_warranty_calim/create_warranty_claim_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
@@ -10,6 +11,7 @@ import 'package:cmms/domain/models/create_warranty_claim_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
@@ -235,7 +237,7 @@ class CreateWarrantyClaimController extends GetxController {
   int selectedApproverId = 0;
 
   /// Employees List / Additional Email
-  RxList<EmployeeListModel2> employeesList = <EmployeeListModel2>[].obs;
+  RxList<EmployeeModel> employeesList = <EmployeeModel>[].obs;
   Rx<bool> isemployeesListSelected = true.obs;
   Rx<String> selectedEmployeesList = ''.obs;
   RxList<int> selectedEmployeeNameIdList = <int>[].obs;
@@ -357,7 +359,7 @@ class CreateWarrantyClaimController extends GetxController {
     });
     Future.delayed(Duration(seconds: 1), () {
       if (wc_id.value != 0) {
-        getViewWarrantyClaimDetail(wc_id: wc_id.value);
+        getViewWarrantyClaimDetail(wc_id: wc_id.value, facilityId: facilityId);
         getHistory(facilityId: facilityId, wcId: wc_id.value);
       }
       // getFacilityList();
@@ -436,10 +438,12 @@ class CreateWarrantyClaimController extends GetxController {
     warrantyClaimPresenter.clearTypeValue();
   }
 
-  Future<void> getViewWarrantyClaimDetail({required int wc_id}) async {
+  Future<void> getViewWarrantyClaimDetail(
+      {required int wc_id, required int facilityId}) async {
     final _viewWarrantyClaimDetails =
         await warrantyClaimPresenter.getViewWarrantyClaimDetail(
       wc_id: wc_id,
+      facilityId: facilityId,
     );
 
     if (_viewWarrantyClaimDetails != null) {
@@ -729,15 +733,16 @@ class CreateWarrantyClaimController extends GetxController {
   }
 
   void getEmployeesList() async {
-    employeesList.value = <EmployeeListModel2>[];
-    final _employeesList = await warrantyClaimPresenter.getEmployeesList(
+    employeesList.value = <EmployeeModel>[];
+    final _employeesList = await warrantyClaimPresenter.getEmployeList(
       isLoading: true,
       // categoryIds: categoryIds,
       facility_id: facilityId,
+      featureId: UserAccessConstants.kWarrantyClaimFeatureId,
     );
     print('Employees List:$employeesList');
-    for (var employees_list in _employeesList) {
-      employeesList.add(employees_list);
+    for (var employees_list in _employeesList!) {
+      employeesList.add(employees_list!);
     }
 
     update(['employee_list']);
@@ -1509,10 +1514,14 @@ class CreateWarrantyClaimController extends GetxController {
 
   void wcApprovedButton({int? id}) async {
     {
+      if (approveCommentTextFieldCtrlr.text == '') {
+        Fluttertoast.showToast(msg: 'Please enter comment');
+        return;
+      }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentWCAproveModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var WCApproveJsonString = commentWCAproveModel.toJson();
 
@@ -1530,10 +1539,14 @@ class CreateWarrantyClaimController extends GetxController {
 
   void wcRejectdButton({int? id}) async {
     {
+      if (rejectCommentTextFieldCtrlr.text == '') {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentWCRejectModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var WCRejectJsonString = commentWCRejectModel.toJson();
 
@@ -1551,10 +1564,14 @@ class CreateWarrantyClaimController extends GetxController {
 
   void closeWCApprovedButton({int? id}) async {
     {
+      if (approveCommentTextFieldCtrlr.text == '') {
+        Fluttertoast.showToast(msg: 'Please enter comment');
+        return;
+      }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentWCAproveModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var WCApproveJsonString = commentWCAproveModel.toJson();
 
@@ -1572,9 +1589,13 @@ class CreateWarrantyClaimController extends GetxController {
 
   void closeWCRejectdButton({int? id}) async {
     {
+      if (rejectCommentTextFieldCtrlr.text == '') {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
       CommentModel commentWCRejectModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
       var WCRejectJsonString = commentWCRejectModel.toJson();
       Map<String, dynamic>? response =
           await warrantyClaimPresenter.closeWCRejectdButton(

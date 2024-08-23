@@ -27,14 +27,12 @@ class ViewModuleCleaningExecutionUsecase {
         isLoading,
       );
 
-  Future<Map<String, dynamic>> mcExecutionApprovedButton({
-    mcExecutionApproveJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>> mcExecutionApprovedButton(
+          {mcExecutionApproveJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await _repository.mcExecutionApprovedButton(
-        mcExecutionApproveJsonString,
-        isLoading,
-      );
+          mcExecutionApproveJsonString, isLoading, facility_id);
 
   Future<List<GetMCTaskEquipmentList>> getMCTaskEquipmentList({
     required bool isLoading,
@@ -42,20 +40,15 @@ class ViewModuleCleaningExecutionUsecase {
     required int facilityId,
   }) async {
     return _repository.getMCTaskEquipmentList(
-      isLoading: isLoading,
-      taskId: taskId,
-      facilityId: facilityId
-    );
+        isLoading: isLoading, taskId: taskId, facilityId: facilityId);
   }
 
-  Future<Map<String, dynamic>> rejectMcExecutionApprovedButton({
-    rejectMcExecutionApproveJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>> rejectMcExecutionApprovedButton(
+          {rejectMcExecutionApproveJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await _repository.rejectMcExecutionApprovedButton(
-        rejectMcExecutionApproveJsonString,
-        isLoading,
-      );
+          rejectMcExecutionApproveJsonString, isLoading, facility_id);
 
   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
     bool? isLoading,
@@ -64,7 +57,7 @@ class ViewModuleCleaningExecutionUsecase {
   }) async =>
       await _repository.getMCExecutionDetail(
         executionId: executionId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 

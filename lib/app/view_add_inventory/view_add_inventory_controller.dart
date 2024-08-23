@@ -77,6 +77,8 @@ class ViewAddInventoryController extends GetxController {
   var warrentyDescriptionCtrlr = TextEditingController();
 
   int selectedEquipmentId = 0;
+  var areaCtrlr = TextEditingController();
+    var moduleQuantityCtrlr = TextEditingController();
 //CategoryModel
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -325,6 +327,8 @@ class ViewAddInventoryController extends GetxController {
       calibrationRemainderInTc.text =
           editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
               "";
+      areaCtrlr.text =
+          editAddInventoryDetailsModel.value?.area.toString() ?? '';
       lastCalibrationDateTc.text =
           editAddInventoryDetailsModel.value?.calibrationDueDate.toString() ??
               "";

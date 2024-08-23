@@ -229,9 +229,9 @@ class NewPermitUsecase {
           bool? isLoading,
           type,
           vegplanId,
-          vegexid}) async =>
+          vegexid,facilityId}) async =>
       await repository.createNewPermitForPm(
-          newPermit, pmTaskId, activity, isLoading, type, vegplanId, vegexid);
+          newPermit, pmTaskId, activity, isLoading, type, vegplanId, vegexid,facilityId);
   Future<Map<String, dynamic>> updateNewPermit(
           {int? type,
           newPermit,

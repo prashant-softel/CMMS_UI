@@ -20,9 +20,11 @@ class EditWarrantyClaimPresenter {
   
     bool? isLoading,  
     required int wc_id,
+    required int facilityId,
   }) async {
       return editWarrantyClaimUsecase.getEditWarrantyClaimDetail(
         wc_id: wc_id,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
   }

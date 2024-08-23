@@ -22,14 +22,12 @@ class ModuleCleaningListExecutionPresenter {
     );
   }
 
-  Future<Map<String, dynamic>?> abandonExecutionButton({
-    abandoneJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> abandonExecutionButton(
+      {abandoneJsonString, required bool isLoading, int? facility_id}) async {
     return moduleCleaningExecutionPlanUsecase.abandonExecutionButton(
-      abandoneJsonString: abandoneJsonString,
-      isLoading: isLoading,
-    );
+        abandoneJsonString: abandoneJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
