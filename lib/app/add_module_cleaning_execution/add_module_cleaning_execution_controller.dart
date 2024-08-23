@@ -330,9 +330,9 @@ class AddModuleCleaningExecutionController extends GetxController {
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       Map<String, dynamic>? response = await addModuleCleaningExecutionPresenter
           .abandonScheduleExecutionButton(
-        abandoneScheduleJsonString: abandoneScheduleJsonString,
-        isLoading: true,
-      );
+              abandoneScheduleJsonString: abandoneScheduleJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
@@ -446,9 +446,9 @@ class AddModuleCleaningExecutionController extends GetxController {
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       Map<String, dynamic>? response =
           await addModuleCleaningExecutionPresenter.abandonAllExecutionButton(
-        abandoneJsonString: abandoneJsonString,
-        isLoading: true,
-      );
+              abandoneJsonString: abandoneJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }

@@ -169,9 +169,9 @@ class ModuleCleaningListExecutionController extends GetxController {
 
     final _abandonExecutionBtn =
         await moduleCleaningListExecutionPresenter.abandonExecutionButton(
-      abandoneJsonString: abandoneJsonString,
-      isLoading: true,
-    );
+            abandoneJsonString: abandoneJsonString,
+            isLoading: true,
+            facility_id: facilityId);
     // showAlertPermitApproveDialog();
     // print('abandon Button Data:${_Comment}');
     // print('abandon id Button Data:${id}');

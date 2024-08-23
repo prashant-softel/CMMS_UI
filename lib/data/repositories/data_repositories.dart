@@ -2733,27 +2733,27 @@ class DataRepository extends DomainRepository {
   }
 
 //
-  Future<ResponseModel> abandonExecutionButton({
-    required String auth,
-    abandoneJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> abandonExecutionButton(
+          {required String auth,
+          abandoneJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.abandonExecutionButton(
-        auth: auth,
-        abandoneJsonString: abandoneJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          abandoneJsonString: abandoneJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
-  Future<ResponseModel> abandonScheduleExecutionButton({
-    required String auth,
-    abandoneScheduleJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> abandonScheduleExecutionButton(
+          {required String auth,
+          abandoneScheduleJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.abandonScheduleExecutionButton(
-        auth: auth,
-        abandoneScheduleJsonString: abandoneScheduleJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          abandoneScheduleJsonString: abandoneScheduleJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
   Future<ResponseModel> endMCExecutionButton(
           {required String auth,
