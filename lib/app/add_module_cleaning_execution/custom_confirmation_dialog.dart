@@ -63,7 +63,7 @@ class CustomCalibrationDialog extends GetView {
                   Get.back();
                   starttype == 1
                       ? controller.startMCExecutionScheduleButton(
-                          scheduleID: id)
+                          scheduleID: id, facility_id: controller.facilityId)
                       : starttype == 2
                           ? controller.endMCScheduleExecutionButton(
                               scheduleID: id, ptw_id: ptw_id)

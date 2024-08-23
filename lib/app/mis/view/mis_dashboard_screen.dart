@@ -661,7 +661,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                   createContentTile(
                                 title: 'List Of Fuel Data',
                                 onTap: () {
-                                  controller.goToPermitsTBTDataListScreen();
+                                  controller.goToFuelDataListScreen();
                                 }),
                           ],
                         ),

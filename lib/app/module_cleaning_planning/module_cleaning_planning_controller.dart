@@ -63,6 +63,7 @@ class ModuleCleaningPlanningController extends GetxController {
   int facilityId = 0;
   Rx<int> id = 0.obs;
   Rx<int> planId = 0.obs;
+  Rx<int> mcType = 0.obs;
 
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
   RxList<SMBS> smblist = <SMBS>[].obs;
@@ -138,6 +139,7 @@ class ModuleCleaningPlanningController extends GetxController {
 
         id.value = dataFromPreviousScreen['mcid'];
         planId.value = dataFromPreviousScreen['planId'];
+        mcType.value = dataFromPreviousScreen['mcType'];
 
         moduleCleaningPlanningPresenter.saveValueMcId(
             mcid: id.value.toString());
@@ -193,6 +195,7 @@ class ModuleCleaningPlanningController extends GetxController {
     print("Start Date: ${_startDateTc}");
 
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
+      resubmit: 0,
       planId: 0,
       facilityId: facilityId,
       startDate: _startDateTc,
@@ -209,6 +212,7 @@ class ModuleCleaningPlanningController extends GetxController {
         await moduleCleaningPlanningPresenter.createMcPlan(
       createMcPlans: createMcModelJsonString,
       isLoading: true,
+      facilityId: facilityId,
     );
     if (responseCreateMcModel == null) {
       print("Failed to create MC Plan");
@@ -258,6 +262,7 @@ class ModuleCleaningPlanningController extends GetxController {
     String _startDateTc = startDateTc.text.trim();
 
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
+        resubmit: 0,
         planId: id.value,
         facilityId: facilityId,
         startDate: _startDateTc,
@@ -271,11 +276,74 @@ class ModuleCleaningPlanningController extends GetxController {
     var updateMcModelJsonString = [createMcModel.toJson()];
     Map<String, dynamic>? responseCreateMcModel =
         await moduleCleaningPlanningPresenter.updateMcPlan(
-      updateMcPlans: updateMcModelJsonString,
-      isLoading: true,
-    );
+            updateMcPlans: updateMcModelJsonString,
+            isLoading: true,
+            facility_id: facilityId);
     if (responseCreateMcModel == null) {}
     print('update MC   data: $updateMcModelJsonString');
+  }
+
+  void renewMcPlan() async {
+    int firstScheduleId = await fetchLastScheduleId();
+    int scheduleIdCounter = firstScheduleId + 1;
+
+    Map<int, List<Equipments>> equipmentMap = {};
+
+    equipmentList.forEach((equipment) {
+      equipment?.smbs?.forEach((smb) {
+        if (smb.selectedDay != null) {
+          int day = int.tryParse(smb.selectedDay!) ?? 0;
+          if (day > 0) {
+            if (!equipmentMap.containsKey(day)) {
+              equipmentMap[day] = [];
+            }
+            equipmentMap[day]!.add(Equipments(id: smb.smbId));
+          }
+        }
+      });
+    });
+
+    bool isFirstSchedule = true;
+    List<Schedule> sch = equipmentMap.entries.map((entry) {
+      int scheduleId;
+      if (isFirstSchedule) {
+        scheduleId = firstScheduleId;
+        isFirstSchedule = false;
+      } else {
+        scheduleId = scheduleIdCounter++;
+      }
+      return Schedule(
+          cleaningDay: entry.key,
+          equipments: entry.value,
+          scheduleId: scheduleId);
+    }).toList();
+
+    print({"sch": sch});
+
+    String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
+    String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
+    String _startDateTc = startDateTc.text.trim();
+
+    CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
+        resubmit: 1,
+        planId: id.value,
+        facilityId: facilityId,
+        startDate: _startDateTc,
+        frequencyId: selectedfrequencyId,
+        noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
+        title: _mcTitelCtrlr,
+        assignedToId: selectedAssignedToId.value,
+        schedules: sch,
+        cleaningType: selectedCleaningId);
+
+    var updateMcModelJsonString = [createMcModel.toJson()];
+    Map<String, dynamic>? responseCreateMcModel =
+        await moduleCleaningPlanningPresenter.updateMcPlan(
+            updateMcPlans: updateMcModelJsonString,
+            isLoading: true,
+            facility_id: facilityId);
+    if (responseCreateMcModel == null) {}
+    print('renew mc  data: $updateMcModelJsonString');
   }
 
   Future<int> fetchLastScheduleId() async {

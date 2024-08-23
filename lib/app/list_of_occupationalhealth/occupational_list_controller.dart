@@ -49,25 +49,23 @@ class OccupationalDataListController extends GetxController {
   RxString userDateFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-       "no Of Health Exams Of New Joiner": true,
-    "periodic Tests": true,
-    "occupational Illnesses": true,
-    "month name": true,
-    "created By": true,
-    "created At": true,
-    "Action": true,
+    "No Of Health Exams Of New Joiner": true,
+    "Periodic Tests": true,
+    "Occupational Illnesses": true,
+    "Month name": true,
+    // "Created By": true,
+    "Created At": true,
     // "Status": true,
 
     // "search": true,
   });
   final Map<String, double> columnwidth = {
-   "no Of Health Exams Of New Joiner": 380,
-    "periodic Tests": 220,
-    "occupational Illnesses": 250,
-    "month name": 200,
-    "created By": 150,
-    "created At": 150,
-    "Action": 100,
+   "No Of Health Exams Of New Joiner": 380,
+    "Periodic Tests": 220,
+    "Occupational Illnesses": 250,
+    "Month name": 200,
+    // "Created By": 150,
+    "Created At": 150,
     // "Status": 100
   };
   Map<String, RxString> filterText = {};
@@ -82,12 +80,12 @@ class OccupationalDataListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
-      "no Of Health Exams Of New Joiner": healthexamsFilterText,
-      "periodic Tests": periodictestsFilterText,
-      "occupational Illnesses": illnessesFilterText,
-      "month name": monthFilterText,
-      "created By": createdbyFilterText,
-      "created At": createdatFilterText,
+      "No Of Health Exams Of New Joiner": healthexamsFilterText,
+      "Periodic Tests": periodictestsFilterText,
+      "Occupational Illnesses": illnessesFilterText,
+      "Month name": monthFilterText,
+      // "Created By": createdbyFilterText,
+      "Created At": createdatFilterText,
       "Action": actionFilterText,
       // "Status": statusFilterText,
     };

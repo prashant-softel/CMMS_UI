@@ -213,6 +213,7 @@ abstract class Routes {
       _Paths.createRegulataryVisitsScreen;
   static const createPermitsTBTScreen = _Paths.createPermitsTBTScreen;
   static const createFuelDataScreen = _Paths.createFuelDataScreen;
+  static const fueldataListScreen = _Paths.fueldataListScreen;
   static const createplantationdataScreen = _Paths.createplantationdataScreen;
   static const calendarViewDashbord = _Paths.calendarViewDashbord;
 
@@ -255,6 +256,7 @@ abstract class Routes {
   static const materialCategory = _Paths.materialCategory;
   static const grievanceSummary = _Paths.grievanceSummary;
   static const cmmsReport = _Paths.cmmsReport;
+  static const cumulativeReport = _Paths.cumulativeReport;
 }
 
 abstract class _Paths {
@@ -319,7 +321,7 @@ abstract class _Paths {
   static const calibrationHistory = '/calibration-history-screen';
   static const viewWarrantyClaim = '/view-warranty-claim';
   static const newWarrantyClaimList = '/new-warranty-claim';
-  static const createWarrantyClaimList = '/create-warranty-claim';
+  static const createWarrantyClaimList = '/warranty-claim-screen';
   static const calibrationDetail = '/calibration-detail';
   static const pmSchedule = '/pm-schedule-screen';
   static const pmTask = '/pm-task-screen';
@@ -465,6 +467,7 @@ abstract class _Paths {
   static const createRegulataryVisitsScreen = '/CreateRegulataryVisitsScreen';
   static const createPermitsTBTScreen = '/CreatePermitsTBTScreen';
   static const createFuelDataScreen = '/CreateFuelDataScreen';
+  static const fueldataListScreen = '/FuelDataListScreen';
   static const createplantationdataScreen = '/CreatePlantationDataScreen';
   static const calendarViewDashbord = '/calendarViewDashbord';
 
@@ -507,4 +510,5 @@ abstract class _Paths {
   static const trainingSummary = '/training-summary';
   static const grievanceSummary = '/grievance-summary';
   static const cmmsReport = '/cmms-report';
+  static const cumulativeReport = '/cumulative-report';
 }

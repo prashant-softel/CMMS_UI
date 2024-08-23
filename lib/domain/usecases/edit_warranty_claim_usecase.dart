@@ -38,9 +38,11 @@ class EditWarrantyClaimUsecase {
    Future<ViewWarrantyClaimModel?> getEditWarrantyClaimDetail({
     bool? isLoading,  
     required int wc_id,
+    required int facilityId,
   }) async =>
       await _repository.getViewWarrantyClaimDetail(
         wc_id: wc_id,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 

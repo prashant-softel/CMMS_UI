@@ -2,18 +2,22 @@ class CommentModel {
   CommentModel({
     this.comment,
     this.id,
+    this.facilityId,
   });
   int? id;
+  int? facilityId;
   String? comment;
 
   factory CommentModel.fromJson(Map<String, dynamic> json) => CommentModel(
         id: json["id"],
         comment: json["comment"],
+        facilityId: json["facilityId"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "comment": comment,
+        "facilityId": facilityId,
       };
 }
 

@@ -25,12 +25,10 @@ class OccupationalListWeb extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<OccupationalListWeb> createState() =>
-      _OccupationalListWebState();
+  State<OccupationalListWeb> createState() => _OccupationalListWebState();
 }
 
-class _OccupationalListWebState
-    extends State<OccupationalListWeb> {
+class _OccupationalListWebState extends State<OccupationalListWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OccupationalDataListController>(
@@ -78,11 +76,9 @@ class _OccupationalListWebState
                             ),
                             InkWell(
                               onTap: () {
-                                Get.offAllNamed(
-                                    Routes.misDashboard);
+                                Get.offAllNamed(Routes.misDashboard);
                               },
-                              child: Text(" / MIS",
-                                  style: Styles.greyLight14),
+                              child: Text(" / MIS", style: Styles.greyLight14),
                             ),
                             Text(" / LIST OF OCCUPATIONAL HEALTH",
                                 style: Styles.greyLight14)
@@ -112,7 +108,7 @@ class _OccupationalListWebState
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                           "List Of Occupational Health",
+                                          "List Of Occupational Health",
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
@@ -157,7 +153,7 @@ class _OccupationalListWebState
                                                 label: "Add New",
                                                 onPressed: () {
                                                   controller.clearStoreData();
-                                             
+
                                                   Get.offNamed(Routes
                                                       .createOccupationalScreen);
                                                 },
@@ -329,7 +325,8 @@ class _OccupationalListWebState
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  controller.occupationalhealthList.isEmpty == true &&
+                                  controller.occupationalhealthList.isEmpty ==
+                                              true &&
                                           controller.isLoading == false
                                       ? Center(child: Text('No data'))
                                       : controller.isLoading.value == true
@@ -467,37 +464,6 @@ DataColumn2 buildDataColumn(
         Column(
             mainAxisAlignment: MainAxisAlignment.center, //
             children: [
-          // SizedBox(
-          //   height: Get.height * 0.05,
-          //   child: TextField(
-          //     style: GoogleFonts.lato(
-          //       textStyle:
-          //           TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-          //     ),
-          //     onChanged: (value) {
-          //       filterText.value = value;
-          //       //   onSearchCallBack(value);
-          //     },
-          //     textAlign: TextAlign.left,
-          //     decoration: InputDecoration(
-          //       hintText: 'Filter',
-          //       contentPadding:
-          //           EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
-          //       border: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //       focusedBorder: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //       enabledBorder: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -522,11 +488,11 @@ class OccupationalDataListSource extends DataTableSource {
   ///
   void filtersOccupationalhealth() {
     filteredGetOccupationalList = <GetOccupationalList?>[];
-    filteredGetOccupationalList = controller.occupationalhealthList.where((Occupationallist) {
+    filteredGetOccupationalList =
+        controller.occupationalhealthList.where((Occupationallist) {
       return (Occupationallist.id ?? '')
-              .toString()
-              .contains(controller.monthFilterText.value.toLowerCase())
-            ;
+          .toString()
+          .contains(controller.monthFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
@@ -540,16 +506,11 @@ class OccupationalDataListSource extends DataTableSource {
 
     controller.occupationId.value = OccupationallistDetails?.id ?? 0;
     var cellsBuffer = [
-      // '${OccupationallistDetails?.id ?? ''}',
-      "id",
-      '${OccupationallistDetails?.id ?? ''}',
-      '${OccupationallistDetails?.noOfHealthExamsOfNewJoiner?? ''}',
+      '${OccupationallistDetails?.noOfHealthExamsOfNewJoiner ?? ''}',
       '${OccupationallistDetails?.occupationalIllnesses ?? ''}',
-      '${OccupationallistDetails?.periodicTests?? ''}',
-      '${OccupationallistDetails?.month_name?? ''}',
-      '${OccupationallistDetails?.createdAt?? ''}',
-      // '${OccupationallistDetails?.status ?? ''}',
-
+      '${OccupationallistDetails?.periodicTests ?? ''}',
+      '${OccupationallistDetails?.month_name ?? ''}',
+      '${OccupationallistDetails?.createdAt ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -575,645 +536,63 @@ class OccupationalDataListSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'id')
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        ' GO ${OccupationallistDetails?.id}',
-                      ),
-                      Dimens.boxHeight10,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
-                          decoration: BoxDecoration(
-                            color: controller.occupationalhealthList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.id == OccupationallistDetails!.id,
-                                          orElse: () =>
-                                              GetOccupationalList(id: 00),
-                                        )
-                                        .status ==
-                                    302
-                                ? ColorValues.yellowColor
-                                : controller.occupationalhealthList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  OccupationallistDetails!.id,
-                                              orElse: () =>
-                                                  GetOccupationalList(id: 00),
-                                            )
-                                            .status ==
-                                        304
-                                    ? ColorValues.closeColor
-                                    : controller.occupationalhealthList
-                                                .firstWhere(
-                                                  (e) =>
-                                                      e.id ==
-                                                      OccupationallistDetails!.id,
-                                                  orElse: () =>
-                                                      GetOccupationalList(
-                                                          id: 00),
-                                                )
-                                                .status ==
-                                            305
-                                        ? ColorValues.rejectColor
-                                        : controller.occupationalhealthList
-                                                    .firstWhere(
-                                                      (e) =>
-                                                          e.id ==
-                                                          OccupationallistDetails!
-                                                              .id,
-                                                      orElse: () =>
-                                                          GetOccupationalList(
-                                                              id: 00),
-                                                    )
-                                                    .status ==
-                                                309
-                                            ? ColorValues.rejectColor
-                                            : controller.occupationalhealthList
-                                                        .firstWhere(
-                                                          (e) =>
-                                                              e.id ==
-                                                              OccupationallistDetails!
-                                                                  .id,
-                                                          orElse: () =>
-                                                              GetOccupationalList(
-                                                                  id: 00),
-                                                        )
-                                                        .status ==
-                                                    306
-                                                ? ColorValues.approveStatusColor
-                                                : controller.occupationalhealthList
-                                                            .firstWhere(
-                                                              (e) =>
-                                                                  e.id ==
-                                                                  OccupationallistDetails!
-                                                                      .id,
-                                                              orElse: () =>
-                                                                  GetOccupationalList(
-                                                                      id: 00),
-                                                            )
-                                                            .status ==
-                                                        301
-                                                    ? Color.fromARGB(
-                                                        255, 44, 230, 230)
-                                                    : controller.occupationalhealthList
-                                                                .firstWhere(
-                                                                  (e) =>
-                                                                      e.id ==
-                                                                      OccupationallistDetails!
-                                                                          .id,
-                                                                  orElse: () =>
-                                                                      GetOccupationalList(
-                                                                          id: 00),
-                                                                )
-                                                                .status ==
-                                                            304
-                                                        ? ColorValues.closeColor
-                                                        : controller
-                                                                    .occupationalhealthList
-                                                                    .firstWhere(
-                                                                      (e) =>
-                                                                          e.id ==
-                                                                          OccupationallistDetails!
-                                                                              .id,
-                                                                      orElse: () =>
-                                                                          GetOccupationalList(
-                                                                              id: 00),
-                                                                    )
-                                                                    .status ==
-                                                                301
-                                                            ? ColorValues
-                                                                .approveColor
-                                                            : ColorValues
-                                                                .addNewColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          // child: Text(
-                          //   // '${OccupationallistDetails?.status_short}',
-                          //   // style: Styles.white10.copyWith(
-                          //   //   color: Colors.white,
-                          //   // ),
-                          // ),
-                        ),
-                      ),
-                    ],
-                  )
-                : (value == 'Actions')
-                    ? Wrap(children: [
-                        varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.add ==
-                                                    UserAccessConstants
-                                                        .kHaveAddAccess)
-                                            .length >
-                                        0 &&
-                                    OccupationallistDetails?.status == 308 ||
-                                OccupationallistDetails?.status == 310
-                            ? TableActionButton(
-                                color: ColorValues.viewColor,
-                                icon: Icons.remove_red_eye_outlined,
-                                message: 'View RO',
-                                onPress: () {
-                                  controller.clearStoreData();
-                                  int goId = OccupationallistDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(Routes.receiveGoodsOrders,
-                                        arguments: {
-                                          'goId': OccupationallistDetails?.id,
-                                          "goType": 1
-                                        });
-                                  }
-                                },
-                              )
-                            : varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.add ==
-                                                    UserAccessConstants
-                                                        .kHaveAddAccess)
-                                            .length >
-                                        0 &&
-                                    OccupationallistDetails?.status == 304
-                                ? TableActionButton(
-                                    color: ColorValues.viewColor,
-                                    icon: Icons.remove_red_eye_outlined,
-                                    message: 'View RO',
-                                    onPress: () {
-                                      controller.clearStoreData();
-                                      int goId = OccupationallistDetails?.id ?? 0;
-                                      if (goId != 0) {
-                                        Get.toNamed(Routes.receiveGoodsOrders,
-                                            arguments: {
-                                              'goId': OccupationallistDetails?.id,
-                                              "goType": 1
-                                            });
-                                      }
-                                    },
-                                  )
-                                : varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.view ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0
-                                    ? TableActionButton(
-                                        color: ColorValues.viewColor,
-                                        icon: Icons.remove_red_eye_outlined,
-                                        message: 'View',
-                                        onPress: () {
-                                          controller.clearStoreData();
-                                          int goId =
-                                              OccupationallistDetails?.id ?? 0;
-                                          if (goId != 0) {
-                                            Get.toNamed(Routes.viewGoodsOrders,
-                                                arguments: {
-                                                  'goId': goId,
-                                                  "goType": 1
-                                                });
-                                          }
-                                        },
-                                      )
-                                    : Dimens.box0,
-                        controller.occupationalhealthList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.id == OccupationallistDetails!.id,
-                                          orElse: () =>
-                                              GetOccupationalList(id: 00),
-                                        )
-                                        .status ==
-                                    310 ||
-                                controller.occupationalhealthList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.id == OccupationallistDetails!.id,
-                                          orElse: () =>
-                                              GetOccupationalList(id: 00),
-                                        )
-                                        .status ==
-                                    304
-                            ? Dimens.box0
-                            : controller.occupationalhealthList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  OccupationallistDetails!.id,
-                                              orElse: () =>
-                                                  GetOccupationalList(id: 00),
-                                            )
-                                            .status ==
-                                        302 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.edit ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0
-                                ? TableActionButton(
-                                    color: ColorValues.editColor,
-                                    icon: Icons.edit,
-                                    message: 'Edit',
-                                    onPress: () {
-                                      controller.clearStoreData();
-                                      int goId = OccupationallistDetails?.id ?? 0;
-                                      if (goId != 0) {
-                                        Get.toNamed(
-                                            Routes
-                                                .updateGoodsOrdersDetailsScreen,
-                                            arguments: {"goId": goId});
-                                      }
-                                    },
-                                  )
-                                : Dimens.box0,
-                        controller.occupationalhealthList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.id == OccupationallistDetails!.id,
-                                          orElse: () =>
-                                              GetOccupationalList(id: 00),
-                                        )
-                                        .status ==
-                                    310 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kGoodsFeatureId &&
-                                            e.edit ==
-                                                UserAccessConstants
-                                                    .kHaveEditAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.closeColor,
-                                icon: Icons.close,
-                                message: 'Close',
-                                onPress: () {
-                                  controller.clearStoreData();
-                                  int goId = OccupationallistDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(
-                                      Routes.receiveGoodsOrders,
-                                      arguments: {
-                                        'goId': OccupationallistDetails?.id,
-                                        "goType": 1
-                                      },
-                                    );
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-                        controller.occupationalhealthList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  OccupationallistDetails!.id,
-                                              orElse: () =>
-                                                  GetOccupationalList(id: 00),
-                                            )
-                                            .status ==
-                                        306 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.add ==
-                                                    UserAccessConstants
-                                                        .kHaveAddAccess)
-                                            .length >
-                                        0 ||
-                                controller.occupationalhealthList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  OccupationallistDetails!.id,
-                                              orElse: () =>
-                                                  GetOccupationalList(id: 00),
-                                            )
-                                            .status ==
-                                        307 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.add ==
-                                                    UserAccessConstants
-                                                        .kHaveAddAccess)
-                                            .length >
-                                        0 ||
-                                controller.occupationalhealthList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  OccupationallistDetails!.id,
-                                              orElse: () =>
-                                                  GetOccupationalList(id: 00),
-                                            )
-                                            .status ==
-                                        308 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0 ||
-                                controller.occupationalhealthList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  OccupationallistDetails!.id,
-                                              orElse: () =>
-                                                  GetOccupationalList(id: 00),
-                                            )
-                                            .status ==
-                                        309 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveAddAccess)
-                                            .length >
-                                        0
-                            ? TableActionButton(
-                                color: ColorValues.approveColor,
-                                icon: Icons.shopping_cart,
-                                message: 'Receive GO',
-                                onPress: () {
-                                  controller.clearStoreData();
-                                  int goId = OccupationallistDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(Routes.receiveGoodsOrders,
-                                        arguments: {'goId': goId, "goType": 1});
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-
-                        controller.occupationalhealthList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.id == OccupationallistDetails!.id,
-                                          orElse: () =>
-                                              GetOccupationalList(id: 00),
-                                        )
-                                        .status ==
-                                    309 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kGoodsFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: Color.fromARGB(255, 116, 78, 130),
-                                icon: Icons.ads_click,
-                                message: 'Re-Submit Receive GO',
-                                onPress: () {
-                                  controller.clearStoreData();
-
-                                  int goId = OccupationallistDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(Routes.receiveGoodsOrders,
-                                        arguments: {'goId': goId, "goType": 1});
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-                        // TableActionButton(
-                        //   color: ColorValues.approveColor,
-                        //   icon: Icons.approval_outlined,
-                        //   message: 'Approve/Reject GO Receive',
-                        //   onPress: () {
-                        //     int id = OccupationallistDetails?.id ?? 0;
-                        //     if (id != 0) {
-                        //       Get.toNamed(Routes.receiveGoodsOrders,
-                        //           arguments: {'id': id, "type": 1});
-                        //     }
-                        //   },
-                        // ),
-                        //   : Dimens.box0,
-                        // :
-                        controller.occupationalhealthList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  OccupationallistDetails!.id,
-                                              orElse: () =>
-                                                  GetOccupationalList(id: 00),
-                                            )
-                                            .status ==
-                                        302 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0 ||
-                                controller.occupationalhealthList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  OccupationallistDetails!.id,
-                                              orElse: () =>
-                                                  GetOccupationalList(id: 00),
-                                            )
-                                            .status ==
-                                        301 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0
-                            ? TableActionButton(
-                                color: ColorValues.approveColor,
-                                icon: Icons.check,
-                                message: 'Approve/Reject GO',
-                                onPress: () {
-                                  controller.clearStoreData();
-                                  int goId = OccupationallistDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(Routes.viewGoodsOrders,
-                                        arguments: {'goId': goId, "goType": 1});
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-
-                        controller.occupationalhealthList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.id == OccupationallistDetails!.id,
-                                          orElse: () =>
-                                              GetOccupationalList(id: 00),
-                                        )
-                                        .status ==
-                                    305 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kGoodsFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.purpleColor,
-                                icon: Icons.ads_click,
-                                message: 'Re-Submit GO',
-                                onPress: () {
-                                  controller.clearStoreData();
-
-                                  int goId = OccupationallistDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(
-                                      Routes.updateGoodsOrdersDetailsScreen,
-                                      arguments: {"goId": goId, 'goType': 1},
-                                    );
-                                  }
-                                },
-                              )
-                            : Dimens.box0
-
-                        // TableActionButton(
-                        //   color: ColorValues.deleteColor,
-                        //   icon: Icons.delete,
-                        //   message: 'Delete',
-                        //   onPress: () {},
-                        // )
-                      ])
-                    : Text(value.toString()),
+            child: (value == 'Actions')
+                ? Wrap(children: [
+                    varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants.kGoodsFeatureId &&
+                                    e.view ==
+                                        UserAccessConstants.kHaveApproveAccess)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.viewColor,
+                            icon: Icons.remove_red_eye_outlined,
+                            message: 'View',
+                            onPress: () {
+                              controller.clearStoreData();
+                              // int goId =
+                              //     OccupationallistDetails?.id ?? 0;
+                              // if (goId != 0) {
+                              //   Get.toNamed(Routes.viewGoodsOrders,
+                              //       arguments: {
+                              //         'goId': goId,
+                              //         "goType": 1
+                              //       });
+                              // }
+                            },
+                          )
+                        : Dimens.box0,
+                    varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants.kGoodsFeatureId &&
+                                    e.edit ==
+                                        UserAccessConstants.kHaveApproveAccess)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.editColor,
+                            icon: Icons.edit,
+                            message: 'Edit',
+                            onPress: () {
+                              controller.clearStoreData();
+                              // int goId = OccupationallistDetails?.id ?? 0;
+                              // if (goId != 0) {
+                              //   Get.toNamed(
+                              //       Routes
+                              //           .updateGoodsOrdersDetailsScreen,
+                              //       arguments: {"goId": goId});
+                              // }
+                            },
+                          )
+                        : Dimens.box0,
+                  ])
+                : Text(value.toString()),
           ),
         );
       }).toList(),
-      //   ],
-      onSelectChanged: (_) {
-        controller.clearStoreData();
-        OccupationallistDetails?.status == 302
-            ? Get.toNamed(Routes.viewGoodsOrders,
-                arguments: {'goId': OccupationallistDetails?.id, "goType": 1})
-            : OccupationallistDetails?.status == 309
-                ? Get.toNamed(Routes.receiveGoodsOrders,
-                    arguments: {'goId': OccupationallistDetails?.id, "goType": 1})
-                : OccupationallistDetails?.status == 302
-                    ? Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
-                        arguments: {'goId': OccupationallistDetails?.id})
-                    : OccupationallistDetails?.status == 306 &&
-                            varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id == UserAccessConstants.kGoodsFeatureId &&
-                                        e.approve ==
-                                            UserAccessConstants
-                                                .kHaveApproveAccess)
-                                    .length >
-                                0
-                        ? Get.toNamed(
-                            Routes.receiveGoodsOrders,
-                            arguments: {
-                              'goId': OccupationallistDetails?.id,
-                              "goType": 1
-                            },
-                          )
-                        : OccupationallistDetails?.status == 306 &&
-                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length >
-                                    0
-                            ? Get.toNamed(Routes.receiveGoodsOrders, arguments: {
-                                'goId': OccupationallistDetails?.id,
-                                "goType": 1
-                              })
-                            : OccupationallistDetails?.status == 310 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
-                                            .length >
-                                        0
-                                ? Get.toNamed(
-                                    Routes.receiveGoodsOrders,
-                                    arguments: {
-                                      'goId': OccupationallistDetails?.id,
-                                      "goType": 1
-                                    },
-                                  )
-                                : OccupationallistDetails?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0
-                                    ? Get.toNamed(Routes.receiveGoodsOrders, arguments: {'goId': OccupationallistDetails?.id, "goType": 1})
-                                    : OccupationallistDetails?.status == 305
-                                        ? Get.toNamed(
-                                            Routes
-                                                .updateGoodsOrdersDetailsScreen,
-                                            arguments: {
-                                              'goId': OccupationallistDetails?.id,
-                                              "goType": 0
-                                            },
-                                          )
-                                        : OccupationallistDetails?.status == 308
-                                            ? Get.toNamed(
-                                                Routes.receiveGoodsOrders,
-                                                arguments: {
-                                                  'goId':
-                                                      OccupationallistDetails?.id,
-                                                  "goType": 1
-                                                },
-                                              )
-                                            : OccupationallistDetails?.status == 304
-                                                ? Get.toNamed(
-                                                    Routes.receiveGoodsOrders,
-                                                    arguments: {
-                                                      'goId':
-                                                          OccupationallistDetails
-                                                              ?.id,
-                                                      "goType": 1
-                                                    },
-                                                  )
-                                                : Get.toNamed(
-                                                    Routes.viewGoodsOrders,
-                                                    arguments: {
-                                                      "goId":
-                                                          OccupationallistDetails
-                                                              ?.id,
-                                                      "goType": 0
-                                                    },
-                                                  );
-      },
     );
   }
 
@@ -1226,5 +605,3 @@ class OccupationalDataListSource extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 }
-
-

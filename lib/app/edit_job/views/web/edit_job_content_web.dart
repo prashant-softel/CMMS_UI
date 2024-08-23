@@ -386,24 +386,27 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 .width *
                                                             .2),
                                                         child: Obx(() {
-                                                          if (!controller
-                                                              .isInventoryCategoryListLoaded
-                                                              .value) {
-                                                            return CircularProgressIndicator(); // Loading indicator while waiting
-                                                          }
+                                                          final isLoaded =
+                                                              controller
+                                                                  .isInventoryCategoryListLoaded
+                                                                  .value;
 
-                                                          if (!controller
-                                                              .isInventoryCategoryListLoaded
-                                                              .value) {
-                                                            return CustomMultiSelectDialogField(
-                                                              onConfirm:
-                                                                  (selectedOptionsList) {},
-                                                              buttonText: "",
-                                                              initialValue: [],
-                                                              items: [],
-                                                              title: "",
-                                                            );
-                                                          }
+                                                          final List<
+                                                                  MultiSelectItem<
+                                                                      dynamic>>
+                                                              items = isLoaded
+                                                                  ? controller
+                                                                      .equipmentCategoryList
+                                                                      .map(
+                                                                          (equipmentCategory) {
+                                                                      return MultiSelectItem(
+                                                                        equipmentCategory!
+                                                                            .id,
+                                                                        equipmentCategory.name ??
+                                                                            "",
+                                                                      );
+                                                                    }).toList()
+                                                                  : [];
 
                                                           final initialValue = controller
                                                                   .selectedEquipmentCategoryIdList
@@ -412,6 +415,34 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                   .selectedEquipmentCategoryIdList
                                                               : [];
 
+                                                          if (!isLoaded) {
+                                                            return Container(
+                                                              height: 40,
+                                                              child: Row(
+                                                                children: [
+                                                                  Text(''),
+                                                                  Spacer(),
+                                                                  Container(
+                                                                    margin:
+                                                                        EdgeInsets
+                                                                            .only(
+                                                                      right: 25,
+                                                                      top: 12,
+                                                                      bottom:
+                                                                          10,
+                                                                    ),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .arrow_drop_down,
+                                                                      color: Color(
+                                                                          0xFF8C8C8C),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            );
+                                                          }
+
                                                           return CustomMultiSelectDialogField(
                                                             title:
                                                                 'Please Select',
@@ -419,17 +450,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 'Equipment Category',
                                                             initialValue:
                                                                 initialValue,
-                                                            items: controller
-                                                                .equipmentCategoryList
-                                                                .map(
-                                                                    (equipmentCategory) {
-                                                              return MultiSelectItem(
-                                                                equipmentCategory!
-                                                                    .id,
-                                                                equipmentCategory
-                                                                    .name,
-                                                              );
-                                                            }).toList(),
+                                                            items: items,
                                                             onConfirm:
                                                                 (selectedOptionsList) {
                                                               controller
@@ -499,24 +520,27 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 .width *
                                                             .2),
                                                         child: Obx(() {
-                                                          if (!controller
-                                                              .isInventoryCategoryListLoaded
-                                                              .value) {
-                                                            return CircularProgressIndicator(); // Loading indicator while waiting
-                                                          }
+                                                          final isLoaded =
+                                                              controller
+                                                                  .isInventoryCategoryListLoaded
+                                                                  .value;
 
-                                                          if (!controller
-                                                              .isInventoryCategoryListLoaded
-                                                              .value) {
-                                                            return CustomMultiSelectDialogField(
-                                                              onConfirm:
-                                                                  (selectedOptionsList) {},
-                                                              buttonText: "",
-                                                              initialValue: [],
-                                                              items: [],
-                                                              title: "",
-                                                            );
-                                                          }
+                                                          final List<
+                                                                  MultiSelectItem<
+                                                                      dynamic>>
+                                                              items = isLoaded
+                                                                  ? controller
+                                                                      .workAreaList
+                                                                      .map(
+                                                                          (workarea) {
+                                                                      return MultiSelectItem(
+                                                                        workarea!
+                                                                            .id,
+                                                                        workarea.name ??
+                                                                            "",
+                                                                      );
+                                                                    }).toList()
+                                                                  : [];
 
                                                           final initialValue = controller
                                                                   .selectedWorkAreaIdList
@@ -525,6 +549,34 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                   .selectedWorkAreaIdList
                                                               : [];
 
+                                                          if (!isLoaded) {
+                                                            return Container(
+                                                              height: 40,
+                                                              child: Row(
+                                                                children: [
+                                                                  Text(''),
+                                                                  Spacer(),
+                                                                  Container(
+                                                                    margin:
+                                                                        EdgeInsets
+                                                                            .only(
+                                                                      right: 25,
+                                                                      top: 12,
+                                                                      bottom:
+                                                                          10,
+                                                                    ),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .arrow_drop_down,
+                                                                      color: Color(
+                                                                          0xFF8C8C8C),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            );
+                                                          }
+
                                                           return CustomMultiSelectDialogField(
                                                             title:
                                                                 'Please Select',
@@ -532,16 +584,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 'Equipment Category',
                                                             initialValue:
                                                                 initialValue,
-                                                            items: controller
-                                                                .workAreaList
-                                                                .map(
-                                                                    (workarea) {
-                                                              return MultiSelectItem(
-                                                                workarea!.id,
-                                                                workarea.name ??
-                                                                    "",
-                                                              );
-                                                            }).toList(),
+                                                            items: items,
                                                             onConfirm:
                                                                 (selectedOptionsList) {
                                                               controller
@@ -884,24 +927,27 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 .width *
                                                             .2),
                                                         child: Obx(() {
-                                                          if (!controller
-                                                              .isInventoryCategoryListLoaded
-                                                              .value) {
-                                                            return CircularProgressIndicator(); // Loading indicator while waiting
-                                                          }
+                                                          final isLoaded =
+                                                              controller
+                                                                  .isInventoryCategoryListLoaded
+                                                                  .value;
 
-                                                          if (!controller
-                                                              .isInventoryCategoryListLoaded
-                                                              .value) {
-                                                            return CustomMultiSelectDialogField(
-                                                              onConfirm:
-                                                                  (selectedOptionsList) {},
-                                                              buttonText: "",
-                                                              initialValue: [],
-                                                              items: [],
-                                                              title: "",
-                                                            );
-                                                          }
+                                                          final List<
+                                                                  MultiSelectItem<
+                                                                      dynamic>>
+                                                              items = isLoaded
+                                                                  ? controller
+                                                                      .workTypeList
+                                                                      .map(
+                                                                          (workType) {
+                                                                      return MultiSelectItem(
+                                                                        workType!
+                                                                            .id,
+                                                                        workType.name ??
+                                                                            "",
+                                                                      );
+                                                                    }).toList()
+                                                                  : [];
 
                                                           final initialValue = controller
                                                                   .selectedWorkTypeIdList
@@ -910,6 +956,34 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                   .selectedWorkTypeIdList
                                                               : [];
 
+                                                          if (!isLoaded) {
+                                                            return Container(
+                                                              height: 40,
+                                                              child: Row(
+                                                                children: [
+                                                                  Text(''),
+                                                                  Spacer(),
+                                                                  Container(
+                                                                    margin:
+                                                                        EdgeInsets
+                                                                            .only(
+                                                                      right: 25,
+                                                                      top: 12,
+                                                                      bottom:
+                                                                          10,
+                                                                    ),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .arrow_drop_down,
+                                                                      color: Color(
+                                                                          0xFF8C8C8C),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            );
+                                                          }
+
                                                           return CustomMultiSelectDialogField(
                                                             title:
                                                                 'Please Select',
@@ -917,16 +991,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 'Equipment Category',
                                                             initialValue:
                                                                 initialValue,
-                                                            items: controller
-                                                                .workTypeList
-                                                                .map(
-                                                                    (workType) {
-                                                              return MultiSelectItem(
-                                                                workType!.id,
-                                                                workType.name ??
-                                                                    "",
-                                                              );
-                                                            }).toList(),
+                                                            items: items,
                                                             onConfirm:
                                                                 (selectedOptionsList) {
                                                               controller
@@ -998,24 +1063,27 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 .width *
                                                             .2),
                                                         child: Obx(() {
-                                                          if (!controller
-                                                              .isInventoryCategoryListLoaded
-                                                              .value) {
-                                                            return CircularProgressIndicator(); // Loading indicator while waiting
-                                                          }
+                                                          final isLoaded =
+                                                              controller
+                                                                  .isInventoryCategoryListLoaded
+                                                                  .value;
 
-                                                          if (!controller
-                                                              .isInventoryCategoryListLoaded
-                                                              .value) {
-                                                            return CustomMultiSelectDialogField(
-                                                              onConfirm:
-                                                                  (selectedOptionsList) {},
-                                                              buttonText: "",
-                                                              initialValue: [],
-                                                              items: [],
-                                                              title: "",
-                                                            );
-                                                          }
+                                                          final List<
+                                                                  MultiSelectItem<
+                                                                      dynamic>>
+                                                              items = isLoaded
+                                                                  ? controller
+                                                                      .toolsRequiredToWorkTypeList
+                                                                      .map(
+                                                                          (workarea) {
+                                                                      return MultiSelectItem(
+                                                                        workarea!
+                                                                            .id,
+                                                                        workarea.linkedToolName ??
+                                                                            "",
+                                                                      );
+                                                                    }).toList()
+                                                                  : [];
 
                                                           final initialValue = controller
                                                                   .selectedtoolsRequiredToWorkTypeIdList
@@ -1024,6 +1092,34 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                   .selectedtoolsRequiredToWorkTypeIdList
                                                               : [];
 
+                                                          if (!isLoaded) {
+                                                            return Container(
+                                                              height: 40,
+                                                              child: Row(
+                                                                children: [
+                                                                  Text(''),
+                                                                  Spacer(),
+                                                                  Container(
+                                                                    margin:
+                                                                        EdgeInsets
+                                                                            .only(
+                                                                      right: 25,
+                                                                      top: 12,
+                                                                      bottom:
+                                                                          10,
+                                                                    ),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .arrow_drop_down,
+                                                                      color: Color(
+                                                                          0xFF8C8C8C),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            );
+                                                          }
+
                                                           return CustomMultiSelectDialogField(
                                                             title:
                                                                 'Please Select',
@@ -1031,16 +1127,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 'Equipment Category',
                                                             initialValue:
                                                                 initialValue,
-                                                            items: controller
-                                                                .toolsRequiredToWorkTypeList
-                                                                .map(
-                                                                    (workarea) {
-                                                              return MultiSelectItem(
-                                                                workarea!.id,
-                                                                workarea.linkedToolName ??
-                                                                    "",
-                                                              );
-                                                            }).toList(),
+                                                            items: items,
                                                             onConfirm:
                                                                 (selectedOptionsList) {
                                                               controller

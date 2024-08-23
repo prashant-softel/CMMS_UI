@@ -559,9 +559,9 @@ class VegetationPlanListDataSource extends DataTableSource {
                                             e.feature_id ==
                                                 UserAccessConstants
                                                     .kVegetationControlFeatureId &&
-                                            e.edit ==
+                                            e.add ==
                                                 UserAccessConstants
-                                                    .kHaveEditAccess)
+                                                    .kHaveAddAccess)
                                         .length >
                                     0 &&
                                 controller.vegetationPlanList
@@ -585,6 +585,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                                     Get.toNamed(Routes.addVegetationPlanScreen,
                                         arguments: {
                                           "vegid": id,
+                                          "vegType": 1,
                                         });
                                   }
                                 },

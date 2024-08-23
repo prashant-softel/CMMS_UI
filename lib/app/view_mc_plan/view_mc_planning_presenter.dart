@@ -42,24 +42,20 @@ class ViewMcPlaningPresenter {
     );
   }
 
-  Future<Map<String, dynamic>?> mcPlanApprovedButton({
-    mcApproveJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> mcPlanApprovedButton(
+      {mcApproveJsonString, required bool isLoading, int? facility_id}) async {
     return viewMcPlaningUsecase.mcPlanApprovedButton(
-      mcApproveJsonString: mcApproveJsonString,
-      isLoading: isLoading,
-    );
+        mcApproveJsonString: mcApproveJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
-  Future<Map<String, dynamic>?> mcPlanRejectButton({
-    mcRejectJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> mcPlanRejectButton(
+      {mcRejectJsonString, required bool isLoading, int? facility_id}) async {
     return viewMcPlaningUsecase.mcPlanRejectButton(
-      mcRejectJsonString: mcRejectJsonString,
-      isLoading: isLoading,
-    );
+        mcRejectJsonString: mcRejectJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   void saveValue({String? mcid}) async {

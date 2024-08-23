@@ -6,7 +6,13 @@ class CreateFuelDataPresenter {
   CreateFuelDataUsecase createfueldataUsecase;
 
 
-  ///
-
+  /// createfuledata
+  Future<Map<String, dynamic>?> createfuledata(
+      {createfuledata, required bool isLoading}) async {
+    return createfueldataUsecase.createfuledata(
+      createfuledata: createfuledata,
+      isLoading: isLoading,
+    );
+  }
   
 }

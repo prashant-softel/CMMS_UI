@@ -253,7 +253,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                       ],
                                     ),
                                   ),
-                                 
+
                                   Dimens.boxHeight12,
                                   // controller.filteredInventoryNameList.length > 0
                                   //     ?

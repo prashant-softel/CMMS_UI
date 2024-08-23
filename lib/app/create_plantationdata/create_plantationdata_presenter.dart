@@ -5,7 +5,13 @@ class CreatePlantationDataPresenter {
   CreatePlantationDataPresenter(this.createplantationdataUsecase);
   CreatePlantationDataUsecase createplantationdataUsecase;
 
-  ///
-
+  ///createplantationdata
+  Future<Map<String, dynamic>?> createplantationdata(
+      {createplantationdata, required bool isLoading}) async {
+    return createplantationdataUsecase.createplantationdata(
+      createplantationdata: createplantationdata,
+      isLoading: isLoading,
+    );
+  }
   
 }
