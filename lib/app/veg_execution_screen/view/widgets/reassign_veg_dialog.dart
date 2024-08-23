@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
@@ -121,7 +122,9 @@ class AssignToVegDialog extends GetView {
                       ElevatedButton(
                         style: Styles.greenElevatedButtonStyle,
                         onPressed: () {
-                          Get.back();
+                          Get.offAllNamed(
+                            Routes.vegExecutionScreen,
+                          );
                           controller.assignToVeg(id: id ?? 0);
                         },
                         child: const Text('Submit'),
