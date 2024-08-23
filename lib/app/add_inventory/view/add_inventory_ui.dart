@@ -413,28 +413,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                 ? Row(
                                                     children: [
                                                       CustomRichText(
+                                                          includeAsterisk:
+                                                              false,
                                                           title:
                                                               "Module Quantity"),
                                                       Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
-                                                              ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
-                                                            ),
-                                                          ],
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
                                                         height: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -468,6 +451,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                     ],
                                                   )
                                                 : Dimens.box0
+                                        
                                           ],
                                         ),
                                         Spacer(),
@@ -671,7 +655,52 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                   ),
                                                 ),
                                               ],
-                                            )
+                                            ),
+                                            controller.selectedEquipmentCategoryNameId
+                                                        .value ==
+                                                    9
+                                                ? Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          includeAsterisk:
+                                                              false,
+                                                          title: "Area"),
+                                                      Container(
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
+                                                        margin:
+                                                            Dimens.edgeInsets5,
+                                                        constraints:
+                                                            BoxConstraints(
+                                                          maxWidth: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          minWidth: 100,
+                                                        ),
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          textController:
+                                                              controller
+                                                                  .areaCtrlr,
+                                                          scroll: controller
+                                                              .nameScroll,
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .deny(
+                                                              RegExp('[\'^]'),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                : Dimens.box0
+                                         
                                           ],
                                         ),
                                         SizedBox(

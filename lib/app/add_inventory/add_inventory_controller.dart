@@ -97,6 +97,8 @@ class AddInventoryController extends GetxController {
   var serialNoCtrlr = TextEditingController();
   var assetsNameCtrlr = TextEditingController();
   var moduleQuantityCtrlr = TextEditingController();
+  var areaCtrlr = TextEditingController();
+
   var assesDiscriptionCtrlr = TextEditingController();
   var certificateNoCtrlr = TextEditingController();
   var discriptionCtrlr = TextEditingController();
@@ -330,6 +332,8 @@ class AddInventoryController extends GetxController {
       assetsNameCtrlr.text = editAddInventoryDetailsModel.value?.name ?? '';
       moduleQuantityCtrlr.text =
           editAddInventoryDetailsModel.value?.moduleQuantity.toString() ?? '';
+      areaCtrlr.text =
+          editAddInventoryDetailsModel.value?.area.toString() ?? '';
 
       assesDiscriptionCtrlr.text =
           editAddInventoryDetailsModel.value?.description ?? "";
@@ -574,6 +578,7 @@ class AddInventoryController extends GetxController {
     String _serialNoCtrlr = serialNoCtrlr.text.trim();
     String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
     String _moduleQuantityCtrlr = moduleQuantityCtrlr.text.trim();
+    String _areaCtrlr = areaCtrlr.text.trim();
 
     List<dynamic> _warrantyFileIds = dropzoneController3.fileIds;
     List<dynamic> _calibrationFileIds = dropzoneController2.fileIds;
@@ -606,6 +611,7 @@ class AddInventoryController extends GetxController {
             id: inventoryId.value,
             name: _assetsNameCtrlr,
             moduleQuantity: int.tryParse(_moduleQuantityCtrlr) ?? 0,
+            area: double.tryParse(_areaCtrlr) ?? 0,
             description: _discriptionCtrlr,
             warranty_description: _warrentyDescriptionCtrlr,
             assetdescription: _assesDiscriptionCtrlr,
@@ -719,6 +725,8 @@ class AddInventoryController extends GetxController {
     String _serialNoCtrlr = serialNoCtrlr.text.trim();
     String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
     String _moduleQuantityCtrlr = moduleQuantityCtrlr.text.trim();
+    String _areaCtrlr = areaCtrlr.text.trim();
+
     String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
     String _certificateNoCtrlr = certificateNoCtrlr.text.trim();
     String _discriptionCtrlr = discriptionCtrlr.text.trim();
@@ -748,6 +756,7 @@ class AddInventoryController extends GetxController {
             id: 0,
             name: _assetsNameCtrlr,
             moduleQuantity: int.tryParse(_moduleQuantityCtrlr) ?? 0,
+            area: double.tryParse(_areaCtrlr) ?? 0,
             description: _discriptionCtrlr,
             warranty_description: _warrentyDescriptionCtrlr,
             assetdescription: _assesDiscriptionCtrlr,
