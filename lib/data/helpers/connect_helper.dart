@@ -1345,13 +1345,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> mcPlanApprovedButton({
-    required String auth,
-    mcApproveJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> mcPlanApprovedButton(
+      {required String auth,
+      mcApproveJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/ApproveMCPlan',
+      'MC/ApproveMCPlan?facility_id=$facility_id',
       Request.put,
       mcApproveJsonString,
       isLoading ?? false,
@@ -1369,13 +1369,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> mcExecutionApprovedButton({
-    required String auth,
-    mcExecutionApproveJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> mcExecutionApprovedButton(
+      {required String auth,
+      mcExecutionApproveJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/ApproveMCExecution',
+      'MC/ApproveMCExecution?facility_id=$facility_id',
       Request.put,
       mcExecutionApproveJsonString,
       isLoading ?? false,
@@ -1545,13 +1545,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> rejectMcExecutionApprovedButton({
-    required String auth,
-    rejectMcExecutionApproveJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> rejectMcExecutionApprovedButton(
+      {required String auth,
+      rejectMcExecutionApproveJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/RejectMCPExecution',
+      'MC/RejectMCPExecution?facility_id=$facility_id',
       Request.put,
       rejectMcExecutionApproveJsonString,
       isLoading ?? false,
@@ -1569,13 +1569,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> mcPlanRejectButton({
-    required String auth,
-    mcRejectJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> mcPlanRejectButton(
+      {required String auth,
+      mcRejectJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/RejectMCPlan',
+      'MC/RejectMCPlan?facility_id=$facility_id',
       Request.put,
       mcRejectJsonString,
       isLoading ?? false,
@@ -2231,13 +2231,13 @@ class ConnectHelper {
   }
 
   ///End MC Execution
-  Future<ResponseModel> endMCExecutionButton({
-    required String auth,
-    endJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> endMCExecutionButton(
+      {required String auth,
+      endJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/EndMCScheduleExecution',
+      'MC/EndMCScheduleExecution?facility_id=$facility_id',
       Request.put,
       endJsonString,
       isLoading ?? false,
@@ -2254,14 +2254,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> startMCExecutionButton({
-    required String auth,
-    bool? isLoading,
-    int? executionId,
-  }) async {
+  Future<ResponseModel> startMCExecutionButton(
+      {required String auth,
+      bool? isLoading,
+      int? executionId,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/StartMCExecution?executionId=$executionId',
+      'MC/StartMCExecution?executionId=$executionId&facility_id=$facility_id',
       Request.put,
       // {'comment': "$comment", 'id': id},
       null,
@@ -2281,14 +2281,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> endMcExecutionButton({
-    required String auth,
-    bool? isLoading,
-    int? executionId,
-  }) async {
+  Future<ResponseModel> endMcExecutionButton(
+      {required String auth,
+      bool? isLoading,
+      int? executionId,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/EndMCExecution?executionId=$executionId',
+      'MC/EndMCExecution?executionId=$executionId&facility_id=$facility_id',
       Request.put,
       // {'comment': "$comment", 'id': id},
       null,
@@ -2308,14 +2308,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> startMCExecutionScheduleButton({
-    required String auth,
-    bool? isLoading,
-    int? scheduleId,
-  }) async {
+  Future<ResponseModel> startMCExecutionScheduleButton(
+      {required String auth,
+      bool? isLoading,
+      int? scheduleId,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/StartMCScheduleExecution?scheduleId=$scheduleId',
+      'MC/StartMCScheduleExecution?scheduleId=$scheduleId&facility_id=$facility_id',
       Request.put,
       // {'comment': "$comment", 'id': id},
       null,
@@ -2335,14 +2335,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> endMCScheduleExecutionButton({
-    required String auth,
-    bool? isLoading,
-    int? scheduleId,
-  }) async {
+  Future<ResponseModel> endMCScheduleExecutionButton(
+      {required String auth,
+      bool? isLoading,
+      int? scheduleId,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/EndMCScheduleExecution?scheduleId=$scheduleId',
+      'MC/EndMCScheduleExecution?scheduleId=$scheduleId&facility_id=$facility_id',
       Request.put,
       // {'comment': "$comment", 'id': id},
       null,
@@ -3908,13 +3908,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> createMcPlan({
-    required String auth,
-    createMcPlans,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> createMcPlan(
+      {required String auth,
+      createMcPlans,
+      bool? isLoading,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/CreateMCPlan',
+      'MC/CreateMCPlan?facility_id=$facilityId',
       Request.post,
       createMcPlans,
       isLoading ?? false,
@@ -3934,13 +3934,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> updateMcPlan({
-    required String auth,
-    updateMcPlans,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> updateMcPlan(
+      {required String auth,
+      updateMcPlans,
+      bool? isLoading,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/UpdateMCPlan',
+      'MC/UpdateMCPlan?facility_id=$facility_id',
       Request.post,
       updateMcPlans,
       isLoading ?? false,
@@ -4217,13 +4217,13 @@ class ConnectHelper {
   }
 
   //Update MC Schedule Execution
-  Future<ResponseModel> updateMCScheduleExecution({
-    required String auth,
-    updateMCScheduleExecutionJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> updateMCScheduleExecution(
+      {required String auth,
+      updateMCScheduleExecutionJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/UpdateMCScheduleExecution',
+      'MC/UpdateMCScheduleExecution?facility_id=$facility_id',
       Request.put,
       updateMCScheduleExecutionJsonString,
       isLoading ?? false,
@@ -8315,15 +8315,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> assignToMC({
-    required String auth,
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async {
+  Future<ResponseModel> assignToMC(
+      {required String auth,
+      int? assignId,
+      int? taskId,
+      required bool isLoading,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/ReAssignMcTask?task_id=$taskId&assign_to=$assignId',
+      'MC/ReAssignMcTask?task_id=$taskId&assign_to=$assignId&facility_id=facility_id',
       Request.put,
       null,
       isLoading,
@@ -8367,14 +8367,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> approveShecduleExecution({
-    required String auth,
-    approvetoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> approveShecduleExecution(
+      {required String auth,
+      approvetoJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/ApproveScheduleExecution',
+      'MC/ApproveScheduleExecution?facility_id=$facility_id',
       Request.put,
       // {'comment': "$comment", 'id': id},
       approvetoJsonString,
@@ -8391,14 +8391,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> rejectShecduleExecution({
-    required String auth,
-    rejecttoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> rejectShecduleExecution(
+      {required String auth,
+      rejecttoJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/RejectScheduleExecution',
+      'MC/RejectScheduleExecution?facility_id=$facility_id',
       Request.put,
       // {'comment': "$comment", 'id': id},
       rejecttoJsonString,
@@ -8422,7 +8422,7 @@ class ConnectHelper {
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/ApproveEndExecution',
+      'MC/',
       Request.put,
       // {'comment': "$comment", 'id': id},
       approvetoJsonString,
@@ -8439,14 +8439,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> endRejectExecution({
-    required String auth,
-    rejecttoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> endRejectExecution(
+      {required String auth,
+      rejecttoJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/RejectEndExecution',
+      'MC/RejectEndExecution?facility_id=$facility_id',
       Request.put,
       // {'comment': "$comment", 'id': id},
       rejecttoJsonString,
@@ -8463,14 +8463,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> abandonedApproveExecution({
-    required String auth,
-    approvetoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> abandonedApproveExecution(
+      {required String auth,
+      approvetoJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/ApproveAbandonExecution',
+      'MC/ApproveAbandonExecution?facility_id=$facility_id',
       Request.put,
       // {'comment': "$comment", 'id': id},
       approvetoJsonString,
@@ -8487,14 +8487,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> abandoneRejectExecution({
-    required String auth,
-    rejecttoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> abandoneRejectExecution(
+      {required String auth,
+      rejecttoJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/RejectAbandonExecution',
+      'MC/RejectAbandonExecution?facility_id=$facility_id',
       Request.put,
       // {'comment': "$comment", 'id': id},
       rejecttoJsonString,

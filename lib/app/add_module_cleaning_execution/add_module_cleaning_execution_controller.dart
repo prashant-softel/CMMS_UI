@@ -406,10 +406,10 @@ class AddModuleCleaningExecutionController extends GetxController {
           updateMCScheduleExecutionModel.toJson();
       Map<String, dynamic>? responseUpdateMCExecution =
           await addModuleCleaningExecutionPresenter.updateMCScheduleExecution(
-        updateMCScheduleExecutionJsonString:
-            updateMCScheduleExecutionJsonString,
-        isLoading: true,
-      );
+              updateMCScheduleExecutionJsonString:
+                  updateMCScheduleExecutionJsonString,
+              isLoading: true,
+              facility_id: facilityId);
 
       if (responseUpdateMCExecution == null) {
         // showAlertDialog();
@@ -495,27 +495,24 @@ class AddModuleCleaningExecutionController extends GetxController {
   Future<void> startMCExecutionButton() async {
     final _startMCExecutionBtn =
         await addModuleCleaningExecutionPresenter.startMCExecutionButton(
-      executionId: mcid.value,
-    );
+            executionId: mcid.value, facility_id: facilityId);
 
     // print('Plan Data:${data['planId']}');
   }
 
   Future<void> endMcExecutionButton() async {
-    final _endMCExecutionBtn =
-        await addModuleCleaningExecutionPresenter.endMcExecutionButton(
-      executionId: mcid.value,
-    );
+    final _endMCExecutionBtn = await addModuleCleaningExecutionPresenter
+        .endMcExecutionButton(executionId: mcid.value, facility_id: facilityId);
 
     // print('Plan Data:${data['planId']}');
   }
 
-  Future<void> startMCExecutionScheduleButton({int? scheduleID}) async {
+  Future<void> startMCExecutionScheduleButton(
+      {int? scheduleID, int? facility_id}) async {
     final _startMCScheduleExecutionBtn =
         await addModuleCleaningExecutionPresenter
             .startMCExecutionScheduleButton(
-      scheduleId: scheduleID,
-    );
+                scheduleId: scheduleID, facility_id: facility_id);
 
     // print('Plan Data:${data['planId']}');
   }
@@ -531,7 +528,8 @@ class AddModuleCleaningExecutionController extends GetxController {
         await addModuleCleaningExecutionPresenter.endMCScheduleExecutionButton(
             scheduleId: scheduleID,
             closePtwJsonString: closePtwJsonString,
-            isLoading: true);
+            isLoading: true,
+            facility_id: facilityId);
   }
 
   void endMCExecutionButton({int? id}) async {
@@ -563,9 +561,9 @@ class AddModuleCleaningExecutionController extends GetxController {
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       Map<String, dynamic>? response =
           await addModuleCleaningExecutionPresenter.endMCExecutionButton(
-        endJsonString: endJsonString,
-        isLoading: true,
-      );
+              endJsonString: endJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       print('EndJsonData:$endJsonString');
       if (response == true) {
         //getCalibrationList(facilityId, true);
@@ -691,9 +689,9 @@ class AddModuleCleaningExecutionController extends GetxController {
       var approvetoJsonString = commentModel.toJson();
       final response =
           await addModuleCleaningExecutionPresenter.approveShecduleExecution(
-        approvetoJsonString: approvetoJsonString,
-        isLoading: true,
-      );
+              approvetoJsonString: approvetoJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       if (response == true) {
         Get.offAllNamed(Routes.moduleCleaningListExecution);
       }
@@ -709,9 +707,9 @@ class AddModuleCleaningExecutionController extends GetxController {
       var rejecttoJsonString = commentModel.toJson();
       final response =
           await addModuleCleaningExecutionPresenter.rejectShecduleExecution(
-        rejecttoJsonString: rejecttoJsonString,
-        isLoading: true,
-      );
+              rejecttoJsonString: rejecttoJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       if (response == true) {
         Get.offAllNamed(Routes.moduleCleaningListExecution);
       }
@@ -745,9 +743,9 @@ class AddModuleCleaningExecutionController extends GetxController {
       var rejecttoJsonString = commentModel.toJson();
       final response =
           await addModuleCleaningExecutionPresenter.endRejectExecution(
-        rejecttoJsonString: rejecttoJsonString,
-        isLoading: true,
-      );
+              rejecttoJsonString: rejecttoJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       if (response == true) {
         Get.offAllNamed(Routes.moduleCleaningListExecution);
       }
@@ -763,9 +761,9 @@ class AddModuleCleaningExecutionController extends GetxController {
       var approvetoJsonString = commentModel.toJson();
       final response =
           await addModuleCleaningExecutionPresenter.abandonedApproveExecution(
-        approvetoJsonString: approvetoJsonString,
-        isLoading: true,
-      );
+              approvetoJsonString: approvetoJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       if (response == true) {
         Get.offAllNamed(Routes.moduleCleaningListExecution);
       }
@@ -781,9 +779,9 @@ class AddModuleCleaningExecutionController extends GetxController {
       var rejecttoJsonString = commentModel.toJson();
       final response =
           await addModuleCleaningExecutionPresenter.abandoneRejectExecution(
-        rejecttoJsonString: rejecttoJsonString,
-        isLoading: true,
-      );
+              rejecttoJsonString: rejecttoJsonString,
+              isLoading: true,
+              facility_id: facilityId);
       if (response == true) {
         Get.offAllNamed(Routes.moduleCleaningListExecution);
       }
@@ -793,10 +791,10 @@ class AddModuleCleaningExecutionController extends GetxController {
   assignToMC({required int id}) async {
     {
       final response = await addModuleCleaningExecutionPresenter.assignToMC(
-        assignId: selectedAssignedToId,
-        taskId: id,
-        isLoading: true,
-      );
+          assignId: selectedAssignedToId,
+          taskId: id,
+          isLoading: true,
+          facility_id: facilityId);
     }
   }
 

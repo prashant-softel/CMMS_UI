@@ -21,14 +21,14 @@ class ViewModuleCleaningExecutionPresenter {
         isLoading: isLoading,
       );
 
-  Future<Map<String, dynamic>?> mcExecutionApprovedButton({
-    mcExecutionApproveJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> mcExecutionApprovedButton(
+      {mcExecutionApproveJsonString,
+      required bool isLoading,
+      int? facility_id}) async {
     return viewModuleCleaningExecutionUsecase.mcExecutionApprovedButton(
-      mcExecutionApproveJsonString: mcExecutionApproveJsonString,
-      isLoading: isLoading,
-    );
+        mcExecutionApproveJsonString: mcExecutionApproveJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   Future<List<GetMCTaskEquipmentList>> getMCTaskEquipmentList({
@@ -37,20 +37,17 @@ class ViewModuleCleaningExecutionPresenter {
     required int? taskId,
   }) async {
     return viewModuleCleaningExecutionUsecase.getMCTaskEquipmentList(
-      isLoading: isLoading,
-      taskId: taskId,
-      facilityId: facilityId
-    );
+        isLoading: isLoading, taskId: taskId, facilityId: facilityId);
   }
 
-  Future<Map<String, dynamic>?> rejectMcExecutionApprovedButton({
-    rejectMcExecutionApproveJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> rejectMcExecutionApprovedButton(
+      {rejectMcExecutionApproveJsonString,
+      required bool isLoading,
+      int? facility_id}) async {
     return viewModuleCleaningExecutionUsecase.rejectMcExecutionApprovedButton(
-      rejectMcExecutionApproveJsonString: rejectMcExecutionApproveJsonString,
-      isLoading: isLoading,
-    );
+        rejectMcExecutionApproveJsonString: rejectMcExecutionApproveJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
@@ -60,7 +57,7 @@ class ViewModuleCleaningExecutionPresenter {
   }) async {
     return viewModuleCleaningExecutionUsecase.getMCExecutionDetail(
       executionId: executionId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading ?? false,
     );
   }

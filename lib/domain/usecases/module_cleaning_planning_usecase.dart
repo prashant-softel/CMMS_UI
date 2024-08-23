@@ -26,22 +26,21 @@ class ModuleCleaningPlanningUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
-  Future<Map<String, dynamic>> createMcPlan({
-    createMcPlans,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>> createMcPlan(
+          {createMcPlans, bool? isLoading, int? facilityId}) async =>
       await repository.createMcPlan(
         createMcPlans,
         isLoading,
+        facilityId,
       );
 
   Future<Map<String, dynamic>> updateMcPlan({
     updateMcPlans,
-    bool? isLoading,
+    bool? isLoading,int?facility_id
   }) async =>
       await repository.updateMcPlan(
         updateMcPlans,
-        isLoading,
+        isLoading,facility_id
       );
 
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
@@ -100,7 +99,7 @@ class ModuleCleaningPlanningUsecase {
       );
   Future<PMPlanDetail?> getPmPlanDetails({
     int? pmPlanId,
-    int?  facilityId,
+    int? facilityId,
     bool? isLoading,
   }) async =>
       await repository.getPmPlanDetails(
@@ -115,7 +114,7 @@ class ModuleCleaningPlanningUsecase {
   }) async =>
       await repository.getMcPlanDetail(
         planId: planId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
   void saveValueMcId({String? mcid}) async =>

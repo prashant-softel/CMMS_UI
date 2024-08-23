@@ -209,6 +209,7 @@ class ModuleCleaningPlanningController extends GetxController {
         await moduleCleaningPlanningPresenter.createMcPlan(
       createMcPlans: createMcModelJsonString,
       isLoading: true,
+      facilityId: facilityId,
     );
     if (responseCreateMcModel == null) {
       print("Failed to create MC Plan");
@@ -271,9 +272,9 @@ class ModuleCleaningPlanningController extends GetxController {
     var updateMcModelJsonString = [createMcModel.toJson()];
     Map<String, dynamic>? responseCreateMcModel =
         await moduleCleaningPlanningPresenter.updateMcPlan(
-      updateMcPlans: updateMcModelJsonString,
-      isLoading: true,
-    );
+            updateMcPlans: updateMcModelJsonString,
+            isLoading: true,
+            facility_id: facilityId);
     if (responseCreateMcModel == null) {}
     print('update MC   data: $updateMcModelJsonString');
   }

@@ -944,27 +944,27 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> mcPlanApprovedButton({
-    required String auth,
-    mcApproveJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> mcPlanApprovedButton(
+          {required String auth,
+          mcApproveJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.mcPlanApprovedButton(
-        auth: auth,
-        mcApproveJsonString: mcApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          mcApproveJsonString: mcApproveJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
-  Future<ResponseModel> mcExecutionApprovedButton({
-    required String auth,
-    mcExecutionApproveJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> mcExecutionApprovedButton(
+          {required String auth,
+          mcExecutionApproveJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.mcExecutionApprovedButton(
-        auth: auth,
-        mcExecutionApproveJsonString: mcExecutionApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          mcExecutionApproveJsonString: mcExecutionApproveJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
   Future<ResponseModel> wcApprovedButton({
     required String auth,
@@ -1029,27 +1029,28 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> rejectMcExecutionApprovedButton({
-    required String auth,
-    rejectMcExecutionApproveJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> rejectMcExecutionApprovedButton(
+          {required String auth,
+          rejectMcExecutionApproveJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.rejectMcExecutionApprovedButton(
-        auth: auth,
-        rejectMcExecutionApproveJsonString: rejectMcExecutionApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          rejectMcExecutionApproveJsonString:
+              rejectMcExecutionApproveJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
-  Future<ResponseModel> mcPlanRejectButton({
-    required String auth,
-    mcRejectJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> mcPlanRejectButton(
+          {required String auth,
+          mcRejectJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.mcPlanRejectButton(
-        auth: auth,
-        mcRejectJsonString: mcRejectJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          mcRejectJsonString: mcRejectJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
   Future<ResponseModel> pmPlanApprovedButton({
     required String auth,
@@ -1338,49 +1339,49 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  Future<ResponseModel> startMCExecutionButton({
-    required String auth,
-    int? executionId,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> startMCExecutionButton(
+          {required String auth,
+          int? executionId,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.startMCExecutionButton(
-        auth: auth,
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          executionId: executionId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
-  Future<ResponseModel> endMcExecutionButton({
-    required String auth,
-    int? executionId,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> endMcExecutionButton(
+          {required String auth,
+          int? executionId,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.endMcExecutionButton(
-        auth: auth,
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          executionId: executionId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
-  Future<ResponseModel> startMCExecutionScheduleButton({
-    required String auth,
-    int? scheduleId,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> startMCExecutionScheduleButton(
+          {required String auth,
+          int? scheduleId,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.startMCExecutionScheduleButton(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
-  Future<ResponseModel> endMCScheduleExecutionButton({
-    required String auth,
-    int? scheduleId,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> endMCScheduleExecutionButton(
+          {required String auth,
+          int? scheduleId,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.endMCScheduleExecutionButton(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
   // Future<ResponseModel> permitRejectButton({
   //   required String auth,
@@ -2076,27 +2077,27 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> createMcPlan({
-    required String auth,
-    createMcPlans,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> createMcPlan(
+          {required String auth,
+          createMcPlans,
+          bool? isLoading,
+          int? facilityId}) async =>
       await connectHelper.createMcPlan(
-        auth: auth,
-        createMcPlans: createMcPlans,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          createMcPlans: createMcPlans,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
 
-  Future<ResponseModel> updateMcPlan({
-    required String auth,
-    updateMcPlans,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> updateMcPlan(
+          {required String auth,
+          updateMcPlans,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.updateMcPlan(
-        auth: auth,
-        updateMcPlans: updateMcPlans,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          updateMcPlans: updateMcPlans,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
   Future<ResponseModel> createGoodsOrder({
     required String auth,
@@ -2328,17 +2329,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> updateMCScheduleExecution({
-    required String auth,
-    updateMCScheduleExecutionJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> updateMCScheduleExecution(
+          {required String auth,
+          updateMCScheduleExecutionJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.updateMCScheduleExecution(
-        auth: auth,
-        updateMCScheduleExecutionJsonString:
-            updateMCScheduleExecutionJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          updateMCScheduleExecutionJsonString:
+              updateMCScheduleExecutionJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
   Future<ResponseModel> getNewPermitDetail({
     required int facilityId,
@@ -2754,16 +2755,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> endMCExecutionButton({
-    required String auth,
-    endJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> endMCExecutionButton(
+          {required String auth,
+          endJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.endMCExecutionButton(
-        auth: auth,
-        endJsonString: endJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          endJsonString: endJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
   // Future<ResponseModel> getPreventiveCheckList({
   //   required String auth,
@@ -4721,18 +4722,18 @@ class DataRepository extends DomainRepository {
         taskId: taskId,
         isLoading: isLoading,
       );
-  Future<ResponseModel> assignToMC({
-    required String auth,
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async =>
+  Future<ResponseModel> assignToMC(
+          {required String auth,
+          int? assignId,
+          int? taskId,
+          required bool isLoading,
+          int? facility_id}) async =>
       await connectHelper.assignToMC(
-        auth: auth,
-        assignId: assignId,
-        taskId: taskId,
-        isLoading: isLoading,
-      );
+          auth: auth,
+          assignId: assignId,
+          taskId: taskId,
+          isLoading: isLoading,
+          facility_id: facility_id);
   Future<ResponseModel> assignToVeg({
     required String auth,
     int? assignId,
@@ -4770,36 +4771,36 @@ class DataRepository extends DomainRepository {
         cloneJobs: cloneJobs,
         isloading: isloading ?? false,
       );
-  Future<ResponseModel> rejectShecduleExecution({
-    required String auth,
-    rejecttoJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> rejectShecduleExecution(
+          {required String auth,
+          rejecttoJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.rejectShecduleExecution(
-        auth: auth,
-        rejecttoJsonString: rejecttoJsonString,
-        isLoading: isLoading ?? false,
-      );
-  Future<ResponseModel> approveShecduleExecution({
-    required String auth,
-    approvetoJsonString,
-    bool? isLoading,
-  }) async =>
+          auth: auth,
+          rejecttoJsonString: rejecttoJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
+  Future<ResponseModel> approveShecduleExecution(
+          {required String auth,
+          approvetoJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.approveShecduleExecution(
-        auth: auth,
-        approvetoJsonString: approvetoJsonString,
-        isLoading: isLoading ?? false,
-      );
-  Future<ResponseModel> endRejectExecution({
-    required String auth,
-    rejecttoJsonString,
-    bool? isLoading,
-  }) async =>
+          auth: auth,
+          approvetoJsonString: approvetoJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
+  Future<ResponseModel> endRejectExecution(
+          {required String auth,
+          rejecttoJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.endRejectExecution(
-        auth: auth,
-        rejecttoJsonString: rejecttoJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          rejecttoJsonString: rejecttoJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
   Future<ResponseModel> endApproveExecution({
     required String auth,
     approvetoJsonString,
@@ -4811,26 +4812,26 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> abandoneRejectExecution({
-    required String auth,
-    rejecttoJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> abandoneRejectExecution(
+          {required String auth,
+          rejecttoJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.abandoneRejectExecution(
-        auth: auth,
-        rejecttoJsonString: rejecttoJsonString,
-        isLoading: isLoading ?? false,
-      );
-  Future<ResponseModel> abandonedApproveExecution({
-    required String auth,
-    approvetoJsonString,
-    bool? isLoading,
-  }) async =>
+          auth: auth,
+          rejecttoJsonString: rejecttoJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
+  Future<ResponseModel> abandonedApproveExecution(
+          {required String auth,
+          approvetoJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.abandonedApproveExecution(
-        auth: auth,
-        approvetoJsonString: approvetoJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          approvetoJsonString: approvetoJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
   Future<ResponseModel> getAssetCategoryList({
     required bool isLoading,
