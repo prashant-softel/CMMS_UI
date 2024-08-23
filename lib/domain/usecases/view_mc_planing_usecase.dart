@@ -15,17 +15,13 @@ class ViewMcPlaningUsecase {
   }) async =>
       await repository.getMcPlanDetail(
         planId: planId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
-  Future<Map<String, dynamic>> mcPlanApprovedButton({
-    mcApproveJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>> mcPlanApprovedButton(
+          {mcApproveJsonString, bool? isLoading, int? facility_id}) async =>
       await repository.mcPlanApprovedButton(
-        mcApproveJsonString,
-        isLoading,
-      );
+          mcApproveJsonString, isLoading, facility_id);
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,
@@ -48,14 +44,10 @@ class ViewMcPlaningUsecase {
     );
   }
 
-  Future<Map<String, dynamic>> mcPlanRejectButton({
-    mcRejectJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>> mcPlanRejectButton(
+          {mcRejectJsonString, bool? isLoading, int? facility_id}) async =>
       await repository.mcPlanRejectButton(
-        mcRejectJsonString,
-        isLoading,
-      );
+          mcRejectJsonString, isLoading, facility_id);
   void saveValue({String? mcid}) async =>
       repository.saveValue(LocalKeys.mcid, mcid);
   Future<String?> getValue() async =>

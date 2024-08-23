@@ -29,6 +29,7 @@ class AddInventoryRequestModel {
   String? model;
   int? stockCount;
   int? moduleQuantity;
+  double? area;
   int? cost;
   int? currencyId;
   int? currency;
@@ -76,6 +77,7 @@ class AddInventoryRequestModel {
       this.model,
       this.stockCount,
       this.moduleQuantity,
+      this.area,
       this.cost,
       this.currencyId,
       this.currency,
@@ -127,6 +129,8 @@ class AddInventoryRequestModel {
     model = json['model'];
     stockCount = json['stockCount'];
     moduleQuantity = json['moduleQuantity'];
+    area = json['area'];
+
     cost = json['cost'];
     currencyId = json['currencyId'];
     currency = json['currency'];
@@ -184,6 +188,8 @@ class AddInventoryRequestModel {
     data['model'] = this.model;
     data['stockCount'] = this.stockCount;
     data['moduleQuantity'] = this.moduleQuantity;
+    data['area'] = this.area;
+
     data['cost'] = this.cost;
     data['parent_equipment_no'] = this.parent_equipment_no;
     data['warranty_term_type'] = this.warranty_term_type;

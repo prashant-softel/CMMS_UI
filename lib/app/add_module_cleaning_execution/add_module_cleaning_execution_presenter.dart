@@ -11,53 +11,45 @@ class AddModuleCleaningExecutionPresenter {
   AddModuleCleaningExecutionPresenter(this.addModuleCleaningExecutionUsecase);
   AddModuleCleaningExecutionUsecase addModuleCleaningExecutionUsecase;
 
-  Future<void> startMCExecutionButton({
-    int? executionId,
-    bool? isLoading,
-  }) async =>
+  Future<void> startMCExecutionButton(
+          {int? executionId, bool? isLoading, int? facility_id}) async =>
       await addModuleCleaningExecutionUsecase.startMCExecutionButton(
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+          executionId: executionId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
-  Future<void> endMcExecutionButton({
-    int? executionId,
-    bool? isLoading,
-  }) async =>
+  Future<void> endMcExecutionButton(
+          {int? executionId, bool? isLoading, int? facility_id}) async =>
       await addModuleCleaningExecutionUsecase.endMcExecutionButton(
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+          executionId: executionId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
-  Future<Map<String, dynamic>?> abandonAllExecutionButton({
-    abandoneJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> abandonAllExecutionButton(
+      {abandoneJsonString, required bool isLoading, int? facility_id}) async {
     return addModuleCleaningExecutionUsecase.abandonAllExecutionButton(
-      abandoneJsonString: abandoneJsonString,
-      isLoading: isLoading,
-    );
+        abandoneJsonString: abandoneJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
-  Future<void> startMCExecutionScheduleButton({
-    int? scheduleId,
-    bool? isLoading,
-  }) async =>
+  Future<void> startMCExecutionScheduleButton(
+          {int? scheduleId, bool? isLoading, int? facility_id}) async =>
       await addModuleCleaningExecutionUsecase.startMCExecutionScheduleButton(
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
-  Future<void> endMCScheduleExecutionButton({
-    int? scheduleId,
-    bool? isLoading,
-    closePtwJsonString,
-  }) async =>
+  Future<void> endMCScheduleExecutionButton(
+          {int? scheduleId,
+          bool? isLoading,
+          closePtwJsonString,
+          int? facility_id}) async =>
       await addModuleCleaningExecutionUsecase.endMCScheduleExecutionButton(
           scheduleId: scheduleId,
           isLoading: isLoading ?? false,
-    closePtwJsonString:
-          closePtwJsonString);
+          closePtwJsonString: closePtwJsonString,
+          facility_id: facility_id);
 
   Future<List<TypePermitModel?>?> getTypePermitList(
           {required int facility_id}) async =>
@@ -83,14 +75,12 @@ class AddModuleCleaningExecutionPresenter {
     );
   }
 
-  Future<Map<String, dynamic>?> endMCExecutionButton({
-    endJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> endMCExecutionButton(
+      {endJsonString, required bool isLoading, int? facility_id}) async {
     return addModuleCleaningExecutionUsecase.endMCExecutionButton(
-      endJsonString: endJsonString,
-      isLoading: isLoading,
-    );
+        endJsonString: endJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   Future<List<GetMCTaskEquipmentList>> getMCTaskEquipmentList({
@@ -102,24 +92,25 @@ class AddModuleCleaningExecutionPresenter {
         isLoading: isLoading, taskId: taskId, facilityId: facilityId);
   }
 
-  Future<Map<String, dynamic>?> abandonScheduleExecutionButton({
-    abandoneScheduleJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> abandonScheduleExecutionButton(
+      {abandoneScheduleJsonString,
+      required bool isLoading,
+      int? facility_id}) async {
     return addModuleCleaningExecutionUsecase.abandonScheduleExecutionButton(
-      abandoneScheduleJsonString: abandoneScheduleJsonString,
-      isLoading: isLoading,
-    );
+        abandoneScheduleJsonString: abandoneScheduleJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
-  Future<Map<String, dynamic>?> updateMCScheduleExecution({
-    updateMCScheduleExecutionJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> updateMCScheduleExecution(
+      {updateMCScheduleExecutionJsonString,
+      required bool isLoading,
+      int? facility_id}) async {
     return addModuleCleaningExecutionUsecase.updateMCScheduleExecution(
-      updateMCScheduleExecutionJsonString: updateMCScheduleExecutionJsonString,
-      isLoading: isLoading,
-    );
+        updateMCScheduleExecutionJsonString:
+            updateMCScheduleExecutionJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   Future<List<EmployeeModel?>?> getAssignedToList({
@@ -134,16 +125,16 @@ class AddModuleCleaningExecutionPresenter {
         featureId: featureId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<bool> assignToMC({
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async {
+  Future<bool> assignToMC(
+      {int? assignId,
+      int? taskId,
+      required bool isLoading,
+      int? facility_id}) async {
     return addModuleCleaningExecutionUsecase.assignToMC(
-      assignId: assignId,
-      taskId: taskId,
-      isLoading: isLoading,
-    );
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
@@ -174,24 +165,20 @@ class AddModuleCleaningExecutionPresenter {
       addModuleCleaningExecutionUsecase.clearisCheckedValue();
   void clearpmTaskValue() async =>
       addModuleCleaningExecutionUsecase.clearpmTaskValue();
-  Future<bool> approveShecduleExecution({
-    approvetoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> approveShecduleExecution(
+      {approvetoJsonString, required bool isLoading, int? facility_id}) async {
     return addModuleCleaningExecutionUsecase.approveShecduleExecution(
-      approvetoJsonString: approvetoJsonString,
-      isLoading: isLoading,
-    );
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
-  Future<bool> rejectShecduleExecution({
-    rejecttoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> rejectShecduleExecution(
+      {rejecttoJsonString, required bool isLoading, int? facility_id}) async {
     return addModuleCleaningExecutionUsecase.rejectShecduleExecution(
-      rejecttoJsonString: rejecttoJsonString,
-      isLoading: isLoading,
-    );
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   Future<bool> endApproveExecution({
@@ -204,33 +191,27 @@ class AddModuleCleaningExecutionPresenter {
     );
   }
 
-  Future<bool> endRejectExecution({
-    rejecttoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> endRejectExecution(
+      {rejecttoJsonString, required bool isLoading, int? facility_id}) async {
     return addModuleCleaningExecutionUsecase.endRejectExecution(
-      rejecttoJsonString: rejecttoJsonString,
-      isLoading: isLoading,
-    );
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
-  Future<bool> abandonedApproveExecution({
-    approvetoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> abandonedApproveExecution(
+      {approvetoJsonString, required bool isLoading, int? facility_id}) async {
     return addModuleCleaningExecutionUsecase.abandonedApproveExecution(
-      approvetoJsonString: approvetoJsonString,
-      isLoading: isLoading,
-    );
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
-  Future<bool> abandoneRejectExecution({
-    rejecttoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> abandoneRejectExecution(
+      {rejecttoJsonString, required bool isLoading, int? facility_id}) async {
     return addModuleCleaningExecutionUsecase.abandoneRejectExecution(
-      rejecttoJsonString: rejecttoJsonString,
-      isLoading: isLoading,
-    );
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 }

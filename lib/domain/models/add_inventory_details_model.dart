@@ -61,6 +61,7 @@ class AddInventoryDetailsModel {
   int? multiplier;
   int? statusId;
   dynamic status;
+  double? area;
   dynamic statusShort;
   dynamic statusLong;
   dynamic importedAt;
@@ -87,6 +88,7 @@ class AddInventoryDetailsModel {
       this.inventory_image,
       this.facilityId,
       this.facilityName,
+      this.area,
       this.blockId,
       this.blockName,
       this.description,
@@ -164,6 +166,9 @@ class AddInventoryDetailsModel {
       blockName: json['blockName'],
       description: json['description'],
       typeId: json['typeId'],
+      area: json['area'],
+
+
       type: json['type'],
       categoryId: json['categoryId'],
       categoryName: json['categoryName'],

@@ -119,7 +119,7 @@ class CmmsReportDashboardScreen extends GetView<CmmsReportDashboardController> {
                                     tittle: "Cumulative Report",
                                     ontap: () {
                                       Get.toNamed(
-                                        Routes.incidentReportListWeb,
+                                        Routes.cumulativeReport,
                                       );
                                     })
                                 : Dimens.box0,
