@@ -250,16 +250,27 @@ class VegSetEquipment extends GetView<AddVegetationPlanController> {
                           ),
                         ),
                         Dimens.boxWidth20,
-                        Container(
-                          height: 35,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.greenColor,
-                            text: 'Update',
-                            onPressed: () {
-                              controller.updateVegPlan();
-                            },
-                          ),
-                        ),
+                        controller.vegType.value == 1
+                            ? Container(
+                                height: 35,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.greenColor,
+                                  text: 'Re-Submit',
+                                  onPressed: () {
+                                    controller.resubmitVegPlan();
+                                  },
+                                ),
+                              )
+                            : Container(
+                                height: 35,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.greenColor,
+                                  text: 'Update',
+                                  onPressed: () {
+                                    controller.updateVegPlan();
+                                  },
+                                ),
+                              ),
                       ],
                     )
                   : Dimens.box0

@@ -707,10 +707,12 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                   int id = ModuleCleaningPlanningListDetails
                                           ?.planId ??
                                       0;
+
                                   if (id != 0) {
                                     Get.toNamed(Routes.moduleCleaningPlanning,
                                         arguments: {
                                           "mcid": id,
+                                          "mcType": 1,
                                           "planId":
                                               ModuleCleaningPlanningListDetails
                                                   ?.planId

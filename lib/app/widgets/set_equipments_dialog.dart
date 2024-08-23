@@ -293,16 +293,27 @@ class SetEquipmentDialog extends GetView {
                           ),
                         ),
                         Dimens.boxWidth20,
-                        Container(
-                          height: 35,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.greenColor,
-                            text: 'Update',
-                            onPressed: () {
-                              controller.updateMcPlan();
-                            },
-                          ),
-                        ),
+                        controller.mcType.value == 1
+                            ? Container(
+                                height: 35,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.greenColor,
+                                  text: 'Re-Submit',
+                                  onPressed: () {
+                                    controller.renewMcPlan();
+                                  },
+                                ),
+                              )
+                            : Container(
+                                height: 35,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.greenColor,
+                                  text: 'Update',
+                                  onPressed: () {
+                                    controller.updateMcPlan();
+                                  },
+                                ),
+                              ),
                       ],
                     )
                   : Dimens.box0

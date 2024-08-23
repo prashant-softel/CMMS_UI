@@ -585,6 +585,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                                     Get.toNamed(Routes.addVegetationPlanScreen,
                                         arguments: {
                                           "vegid": id,
+                                          "vegType": 1,
                                         });
                                   }
                                 },
