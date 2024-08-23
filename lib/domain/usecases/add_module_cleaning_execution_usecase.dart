@@ -27,14 +27,10 @@ class AddModuleCleaningExecutionUsecase {
     await _repository.endMcExecutionButton(executionId, isLoading, facility_id);
   }
 
-  Future<Map<String, dynamic>> abandonAllExecutionButton({
-    abandoneJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>> abandonAllExecutionButton(
+          {abandoneJsonString, bool? isLoading, int? facility_id}) async =>
       await _repository.abandonExecutionButton(
-        abandoneJsonString,
-        isLoading,
-      );
+          abandoneJsonString, isLoading, facility_id);
 
   Future<void> startMCExecutionScheduleButton(
       {int? scheduleId, bool? isLoading, int? facility_id}) async {
@@ -64,14 +60,12 @@ class AddModuleCleaningExecutionUsecase {
         isLoading: isLoading, taskId: taskId, facilityId: facilityId);
   }
 
-  Future<Map<String, dynamic>> abandonScheduleExecutionButton({
-    abandoneScheduleJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>> abandonScheduleExecutionButton(
+          {abandoneScheduleJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await _repository.abandonScheduleExecutionButton(
-        abandoneScheduleJsonString,
-        isLoading,
-      );
+          abandoneScheduleJsonString, isLoading, facility_id);
   Future<List<TypePermitModel?>?> getTypePermitList(
           bool? isLoading, int? facility_id) async =>
       await _repository.getTypePermitList(isLoading, facility_id);

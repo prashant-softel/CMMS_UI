@@ -6151,16 +6151,14 @@ class Repository {
 
   ///Abandon MC Execution
   Future<Map<String, dynamic>> abandonExecutionButton(
-    abandoneJsonString,
-    bool? isLoading,
-  ) async {
+      abandoneJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.abandonExecutionButton(
-        auth: auth,
-        abandoneJsonString: json.encode(abandoneJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          abandoneJsonString: json.encode(abandoneJsonString),
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -6195,16 +6193,14 @@ class Repository {
 
   ///Abandon Schedule Execution
   Future<Map<String, dynamic>> abandonScheduleExecutionButton(
-    abandoneScheduleJsonString,
-    bool? isLoading,
-  ) async {
+      abandoneScheduleJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.abandonScheduleExecutionButton(
-        auth: auth,
-        abandoneScheduleJsonString: json.encode(abandoneScheduleJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          abandoneScheduleJsonString: json.encode(abandoneScheduleJsonString),
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);

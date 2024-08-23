@@ -2182,13 +2182,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> abandonExecutionButton({
-    required String auth,
-    abandoneJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> abandonExecutionButton(
+      {required String auth,
+      abandoneJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/AbandonMCExecution',
+      'MC/AbandonMCExecution?facility_id=$facility_id',
       Request.put,
       abandoneJsonString,
       isLoading ?? false,
@@ -2206,13 +2206,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> abandonScheduleExecutionButton({
-    required String auth,
-    abandoneScheduleJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> abandonScheduleExecutionButton(
+      {required String auth,
+      abandoneScheduleJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/AbandonMCSchedule',
+      'MC/AbandonMCSchedule?facility_id=$facility_id',
       Request.put,
       abandoneScheduleJsonString,
       isLoading ?? false,
