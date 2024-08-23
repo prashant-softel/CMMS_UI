@@ -14,6 +14,7 @@ import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -309,6 +310,48 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                               ),
                                             ],
                                           ),
+                                          controller.selectedEquipmentCategoryNameId ==
+                                                  9
+                                              ? Row(
+                                                  children: [
+                                                    CustomRichText(
+                                                        includeAsterisk: false,
+                                                        title:
+                                                            "Module Quantity"),
+                                                    Container(
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.040,
+                                                      margin:
+                                                          Dimens.edgeInsets5,
+                                                      constraints:
+                                                          BoxConstraints(
+                                                        maxWidth: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        minWidth: 100,
+                                                      ),
+                                                      child: IgnorePointer(
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          textController: controller
+                                                              .moduleQuantityCtrlr,
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .deny(
+                                                              RegExp('[\'^]'),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Dimens.box0
                                         ],
                                       ),
                                       Spacer(),
@@ -470,7 +513,49 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                                 ),
                                               ),
                                             ],
-                                          )
+                                          ),
+                                          controller.selectedEquipmentCategoryNameId ==
+                                                  9
+                                              ? Row(
+                                                  children: [
+                                                    CustomRichText(
+                                                        includeAsterisk: false,
+                                                        title: "Area"),
+                                                    Container(
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.040,
+                                                      margin:
+                                                          Dimens.edgeInsets5,
+                                                      constraints:
+                                                          BoxConstraints(
+                                                        maxWidth: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        minWidth: 100,
+                                                      ),
+                                                      child: IgnorePointer(
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          textController:
+                                                              controller
+                                                                  .areaCtrlr,
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .deny(
+                                                              RegExp('[\'^]'),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Dimens.box0
                                         ],
                                       ),
                                       SizedBox(
