@@ -124,7 +124,7 @@ class Schedules {
   int? invs;
   int? smbs;
   int? scheduledModules;
-  int? scheduledArea;
+  double? scheduledArea;
   String? plannedDate;
   int? status;
   String? statusShort;
