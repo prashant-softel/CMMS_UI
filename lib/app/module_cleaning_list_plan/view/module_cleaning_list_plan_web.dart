@@ -600,9 +600,22 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                                 planId: 00),
                                       )
                                       .status ==
-                                  342
+                                  353
                               ? ColorValues.approveColor
-                              : ColorValues.addNewColor,
+                              : controller.moduleCleaningListPlan
+                                          .firstWhere(
+                                            (e) =>
+                                                e.planId ==
+                                                ModuleCleaningPlanningListDetails!
+                                                    .planId,
+                                            orElse: () =>
+                                                ModuleCleaningListPlanModel(
+                                                    planId: 00),
+                                          )
+                                          .status ==
+                                      351
+                                  ? ColorValues.yellowColor
+                                  : ColorValues.redColor,
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
