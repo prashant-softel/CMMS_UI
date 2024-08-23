@@ -110,6 +110,31 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                                 style: Styles.blackBold16,
                                               ),
                                               Spacer(),
+                                                    Padding(
+                                            padding: EdgeInsets.only(
+                                              top: 20,
+                                              right: 20,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Text('Month:'),
+                                                Dimens.boxWidth10,
+                                                CustomTextFieldForStock(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      8,
+                                                  numberTextField: true,
+                                                  onTap: () {
+                                                    _showMonthPicker(
+                                                        context, controller);
+                                                  },
+                                                  // textController:
+                                                  //     controller.waterDateTc,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                             ],
                                           ),
                                         ),
@@ -151,33 +176,33 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // keyboardType:
-                                                                  //     TextInputType
-                                                                  //         .number,
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .contractorNameCtrlr,
-                                                                  //validate
-                                                                  // errorController: controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  textController:
+                                                                      controller
+                                                                          .govtauthvisitsCtrl,
+                                                                //  validate
+                                                                  errorController: controller
+                                                                          .isGovtAuthVisitsInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isGovtAuthVisitsInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isGovtAuthVisitsInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -194,30 +219,30 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .correctivePreventiveCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  textController:
+                                                                      controller
+                                                                          .noOffinebythirdpartyCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isNoOfFineByThirdPartyInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isNoOfFineByThirdPartyInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isNoOfFineByThirdPartyInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -234,30 +259,30 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .responsiblePersonCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  textController:
+                                                                      controller
+                                                                          .noofshowcausenoticesbythirdpartyCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isNoOfShowCauseNoticesInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isNoOfShowCauseNoticesInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isNoOfShowCauseNoticesInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -278,33 +303,33 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                                                     FilteringTextInputFormatter
                                                                         .digitsOnly
                                                                   ],
-                                                                  // keyboardType:
-                                                                  //     TextInputType
-                                                                  //         .number,
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .contactNumberCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  textController:
+                                                                      controller
+                                                                          .noticestocontractorCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isNoticesToContractorInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isNoticesToContractorInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isNoticesToContractorInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -325,33 +350,33 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                                                     FilteringTextInputFormatter
                                                                         .digitsOnly
                                                                   ],
-                                                                  // keyboardType:
-                                                                  //     TextInputType
-                                                                  //         .number,
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .contactNumberCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  textController:
+                                                                      controller
+                                                                          .amountofpenaltiestocontractorsCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isAmountOfPenaltiesToContractorsInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isAmountOfPenaltiesToContractorsInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isAmountOfPenaltiesToContractorsInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -368,37 +393,37 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // inputFormatters: [
-                                                                  //   FilteringTextInputFormatter
-                                                                  //       .digitsOnly
-                                                                  // ],
-                                                                  // keyboardType:
-                                                                  //     TextInputType
-                                                                  //         .number,
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .contactNumberCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  inputFormatters: [
+                                                                    FilteringTextInputFormatter
+                                                                        .digitsOnly
+                                                                  ],
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  textController:
+                                                                      controller
+                                                                          .anyotherCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isAnyOtherInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isAnyOtherInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isAnyOtherInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -453,9 +478,8 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                   text: 'Submit',
                                   onPressed: () {
                                     // controller.isFormInvalid.value = false;
-                                    // controller.createObs(
-                                    //     position: 1,
-                                    //     fileIds: dropzoneController.fileIds);
+                                    controller.createvisitsandnotices();
+
                                   },
                                 ),
                               )
@@ -484,4 +508,49 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
       },
     );
   }
+}
+_showMonthPicker(BuildContext context, CreateRegulataryVisitsController controller) {
+  // controller.selectedMonth = DateTime.now().year;
+  // showDialog(
+  //   context: context,
+  //   builder: (BuildContext context) {
+  //     return AlertDialog(
+  //       title: Text("Select Year"),
+  //       content: Container(
+  //         height: 200,
+  //         child: CupertinoPicker(
+  //           itemExtent: 40,
+  //           onSelectedItemChanged: (int index) {
+  //             controller.selectedMonth = DateTime.now().year - index;
+  //           },
+  //           children: List.generate(10, (index) {
+  //             return Center(
+  //               child: Text((DateTime.now().year - index).toString()),
+  //             );
+  //           }),
+  //         ),
+  //       ),
+  //       actions: <Widget>[
+  //         ActionButton(
+  //           label: "Cancel", color: ColorValues.appRedColor,
+  //           onPressed: () {
+  //             Navigator.of(context).pop();
+  //           },
+  //           // child: Text("Cancel"),
+  //         ),
+  //         Dimens.boxHeight10,
+  //         ActionButton(
+  //           color: ColorValues.addNewColor,
+  //           onPressed: () {
+  //             controller.waterDateTc.text = controller.selectedYear.toString();
+  //             controller.goWaterDataList();
+  //             controller.update(['stock_Mangement_Date']);
+  //             Navigator.of(context).pop();
+  //           },
+  //           label: "Select",
+  //         ),
+  //       ],
+  //     );
+  //   },
+  // );
 }

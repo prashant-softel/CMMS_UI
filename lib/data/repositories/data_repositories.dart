@@ -587,7 +587,30 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
-
+  //getFuelConsumption
+   @override
+  Future<ResponseModel> getFuelConsumption({
+  
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getFuelConsumption(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+// getVisitsAndNoticesDatalist
+   @override
+  Future<ResponseModel> getVisitsAndNoticesDatalist({
+  
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getVisitsAndNoticesDatalist(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
   @override
   Future<ResponseModel> getInventoryAssetsList({
     int? facility_id,
@@ -2162,7 +2185,30 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
         
       );
-
+// createfuledata
+   Future<ResponseModel> createfuledata(
+          {required String auth,
+          createfuledata,
+          bool? isLoading,
+          }) async =>
+      await connectHelper.createfuledata(
+        auth: auth,
+        createfuledata: createfuledata,
+        isLoading: isLoading ?? false,
+        
+      );
+//createplantationdata
+ Future<ResponseModel> createplantationdata(
+          {required String auth,
+          createplantationdata,
+          bool? isLoading,
+          }) async =>
+      await connectHelper.createplantationdata(
+        auth: auth,
+        createplantationdata: createplantationdata,
+        isLoading: isLoading ?? false,
+        
+      );
   // update Occupational Health
   Future<ResponseModel> updateHealthData({
     required String auth,

@@ -1,7 +1,7 @@
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
-import 'package:cmms/app/list_of_Regulatary_Visits/views/web/regulataryvisits_list_web.dart';
+import 'package:cmms/app/list_of_fueldata/views/web/fueldata_list_list_web.dart';
 import 'package:cmms/app/list_of_occupationalhealth/views/web/occupational_list_web.dart';
 import 'package:cmms/app/mis_list_of_observation/views/mobile/observation_list_mobile.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +9,11 @@ import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import '../regulataryvisits_list_controller.dart';
+import '../fueldata_list_controller.dart';
 
-class RegulataryDataListScreen extends GetView<RegulataryDataListController> {
-  RegulataryDataListScreen({super.key});
-  final controller = Get.find<RegulataryDataListController>();
+class FuelDataListScreen extends GetView<FuelDataListController> {
+  FuelDataListScreen({super.key});
+  final controller = Get.find<FuelDataListController>();
   final homecontroller = Get.find<HomeController>();
 
   @override
@@ -22,7 +22,7 @@ class RegulataryDataListScreen extends GetView<RegulataryDataListController> {
       appBar: Responsive.isMobile(context)
           ? AppBar(
               title: HeadingProfileAppBar(
-                title: "List Of Regulatary ",
+                title: "List Of Fuel Data",
               ),
             )
           : null,
@@ -52,7 +52,7 @@ class RegulataryDataListScreen extends GetView<RegulataryDataListController> {
                           Expanded(child: ObservationListMobile()),
                         if (Responsive.isDesktop(context))
                           Expanded(
-                            child: VisitandNoticeListWeb(),
+                            child: FueldataListWeb(),
                           )
                       ],
                     ),

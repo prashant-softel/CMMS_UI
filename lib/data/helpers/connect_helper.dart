@@ -807,6 +807,38 @@ class ConnectHelper {
     );
     return responseModel;
   }
+  // get fuel list
+     Future<ResponseModel> getFuelConsumption({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetFuelConsumption',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+   // Get regulatraty data
+   Future<ResponseModel> getVisitsAndNoticesDatalist({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetVisitsAndNotices',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 
   Future<ResponseModel> getInventoryAssetsList({
     required bool isLoading,
@@ -3722,6 +3754,52 @@ class ConnectHelper {
     );
 
     print('Submit Water Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+  // craete fule data
+    Future<ResponseModel> createfuledata({
+    required String auth,
+    createfuledata,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateFuelConsumption',
+      Request.post,
+      createfuledata,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Water Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+  //CreatePlantationData
+    Future<ResponseModel> createplantationdata({
+    required String auth,
+    createplantationdata,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreatePlantationData',
+      Request.post,
+      createplantationdata,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Create Plantion Response:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
 

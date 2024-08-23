@@ -5,4 +5,14 @@ class CreateFuelDataUsecase {
   Repository repository;
 
   
+
+Future<Map<String, dynamic>> createfuledata({
+    createfuledata,
+    bool? isLoading,
+  }) async =>
+      await repository.createfuledata(
+        createfuledata,
+        isLoading,
+      );
+
 }

@@ -1,4 +1,5 @@
-import 'package:cmms/app/create_FuelData/create_FuelData_controller.dart';
+import 'package:cmms/app/create_fueldata/create_fueldata_controller.dart';
+import 'package:cmms/app/create_regulataryvisits/create_regulataryvisits_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -9,18 +10,23 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
 
-class FuelDataWeb extends GetView<CreateFuelDataController> {
+class FuelDataWeb extends StatefulWidget {
   FuelDataWeb({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<FuelDataWeb> createState() => _ViewFuelDataWebState();
+}
+
+class _ViewFuelDataWebState extends State<FuelDataWeb> {
   final HomeController homecontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    // return GetBuilder<CreateFuelDataController>(
-    //   id: 'stock_Mangement',
-    //   builder: (controller) {
+    return GetBuilder<CreateFuelDataController>(
+      id: 'stock_Mangement',
+      builder: (controller) {
         return SelectionArea(
           child: Scaffold(
             body: Container(
@@ -105,6 +111,31 @@ class FuelDataWeb extends GetView<CreateFuelDataController> {
                                                 style: Styles.blackBold16,
                                               ),
                                               Spacer(),
+                                                    Padding(
+                                            padding: EdgeInsets.only(
+                                              top: 20,
+                                              right: 20,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Text('Month:'),
+                                                Dimens.boxWidth10,
+                                                CustomTextFieldForStock(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      8,
+                                                  numberTextField: true,
+                                                  onTap: () {
+                                                    _showMonthPicker(
+                                                        context, controller);
+                                                  },
+                                                  // textController:
+                                                  //     controller.waterDateTc,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                             ],
                                           ),
                                         ),
@@ -138,7 +169,7 @@ class FuelDataWeb extends GetView<CreateFuelDataController> {
                                                             children: [
                                                               CustomRichText(
                                                                   title:
-                                                                      'Total diesel consumed for vehicles in Litres'),
+                                                                      'Total diesel consumed for vehicles in Litres '),
                                                               Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
@@ -146,33 +177,33 @@ class FuelDataWeb extends GetView<CreateFuelDataController> {
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // keyboardType:
-                                                                  //     TextInputType
-                                                                  //         .number,
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .contractorNameCtrlr,
-                                                                  //validate
-                                                                  // errorController: controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isContractorInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  textController:
+                                                                      controller
+                                                                          .dieselConsumedforvehiclesCtrl,
+                                                                //  validate
+                                                                  errorController: controller
+                                                                          .isDieselConsumedForVehiclesInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isDieselConsumedForVehiclesInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isDieselConsumedForVehiclesInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -189,30 +220,30 @@ class FuelDataWeb extends GetView<CreateFuelDataController> {
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .correctivePreventiveCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isCorrectiveInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  textController:
+                                                                      controller
+                                                                          .petrolconsumedforvehiclesCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isPetrolConsumedForVehiclesInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isPetrolConsumedForVehiclesInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isPetrolConsumedForVehiclesInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -229,30 +260,30 @@ class FuelDataWeb extends GetView<CreateFuelDataController> {
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .responsiblePersonCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isResponsibleInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  textController:
+                                                                      controller
+                                                                          .petrolconsumedforgrasscuttingandmoversCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isPetrolConsumedForGrassCuttingAndMoversInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isPetrolConsumedForGrassCuttingAndMoversInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isPetrolConsumedForGrassCuttingAndMoversInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -273,33 +304,33 @@ class FuelDataWeb extends GetView<CreateFuelDataController> {
                                                                     FilteringTextInputFormatter
                                                                         .digitsOnly
                                                                   ],
-                                                                  // keyboardType:
-                                                                  //     TextInputType
-                                                                  //         .number,
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .contactNumberCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  textController:
+                                                                      controller
+                                                                          .dieselconsumedatsiteCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isDieselConsumedAtSiteInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isDieselConsumedAtSiteInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isDieselConsumedAtSiteInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
@@ -320,37 +351,38 @@ class FuelDataWeb extends GetView<CreateFuelDataController> {
                                                                     FilteringTextInputFormatter
                                                                         .digitsOnly
                                                                   ],
-                                                                  // keyboardType:
-                                                                  //     TextInputType
-                                                                  //         .number,
-                                                                  // textController:
-                                                                  //     controller
-                                                                  //         .contactNumberCtrlr,
-                                                                  // //validate
-                                                                  // errorController: controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value
-                                                                  //     ? "Required field"
-                                                                  //     : null,
-                                                                  // onChanged:
-                                                                  //     (value) {
-                                                                  //   if (value
-                                                                  //           .trim()
-                                                                  //           .length >
-                                                                  //       0) {
-                                                                  //     controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value = false;
-                                                                  //   } else {
-                                                                  //     controller
-                                                                  //         .isContactNumberInvalid
-                                                                  //         .value = true;
-                                                                  //   }
-                                                                  // }
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  textController:
+                                                                      controller
+                                                                          .petrolconsumedatsiteCtrl,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isPetrolConsumedAtSiteInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isPetrolConsumedAtSiteInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isPetrolConsumedAtSiteInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }
                                                                   ),
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
+                                                          
                                                         ],
                                                       ),
                                                       Spacer(),
@@ -400,9 +432,8 @@ class FuelDataWeb extends GetView<CreateFuelDataController> {
                                   text: 'Submit',
                                   onPressed: () {
                                     // controller.isFormInvalid.value = false;
-                                    // controller.createObs(
-                                    //     position: 1,
-                                    //     fileIds: dropzoneController.fileIds);
+                                    controller.createfuledata();
+
                                   },
                                 ),
                               )
@@ -428,7 +459,52 @@ class FuelDataWeb extends GetView<CreateFuelDataController> {
           ),
         );
         // );
-    //   },
-    // );
+      },
+    );
   }
+}
+_showMonthPicker(BuildContext context, CreateFuelDataController controller) {
+  // controller.selectedMonth = DateTime.now().year;
+  // showDialog(
+  //   context: context,
+  //   builder: (BuildContext context) {
+  //     return AlertDialog(
+  //       title: Text("Select Year"),
+  //       content: Container(
+  //         height: 200,
+  //         child: CupertinoPicker(
+  //           itemExtent: 40,
+  //           onSelectedItemChanged: (int index) {
+  //             controller.selectedMonth = DateTime.now().year - index;
+  //           },
+  //           children: List.generate(10, (index) {
+  //             return Center(
+  //               child: Text((DateTime.now().year - index).toString()),
+  //             );
+  //           }),
+  //         ),
+  //       ),
+  //       actions: <Widget>[
+  //         ActionButton(
+  //           label: "Cancel", color: ColorValues.appRedColor,
+  //           onPressed: () {
+  //             Navigator.of(context).pop();
+  //           },
+  //           // child: Text("Cancel"),
+  //         ),
+  //         Dimens.boxHeight10,
+  //         ActionButton(
+  //           color: ColorValues.addNewColor,
+  //           onPressed: () {
+  //             controller.waterDateTc.text = controller.selectedYear.toString();
+  //             controller.goWaterDataList();
+  //             controller.update(['stock_Mangement_Date']);
+  //             Navigator.of(context).pop();
+  //           },
+  //           label: "Select",
+  //         ),
+  //       ],
+  //     );
+  //   },
+  // );
 }

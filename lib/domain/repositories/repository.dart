@@ -18,12 +18,14 @@ import 'package:cmms/domain/models/documentmaster_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/escalation_details_model.dart';
 import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
+import 'package:cmms/domain/models/get_fueldata_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
 import 'package:cmms/domain/models/get_occupational_list_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
+import 'package:cmms/domain/models/get_visitandnotice_list_model.dart';
 import 'package:cmms/domain/models/grievance_summary_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
@@ -1084,6 +1086,7 @@ class Repository {
       return Map();
     }
   }
+
   //createvisitsandnotices
   Future<Map<String, dynamic>> createvisitsandnotices(
       createvisitsandnotices, bool? isLoading) async {
@@ -1093,7 +1096,6 @@ class Repository {
         auth: auth,
         createvisitsandnotices: createvisitsandnotices,
         isLoading: isLoading ?? false,
-
       );
 
       var resourceData = res.data;
@@ -1104,7 +1106,7 @@ class Repository {
         Fluttertoast.showToast(
             msg: "visits and notices Add Successfully...", fontSize: 16.0);
         Get.offAllNamed(
-          Routes.occupationalDataListScreen,
+          Routes.regulataryDataListScreen,
         );
 
         // if (res.errorCode == 200) {
@@ -1124,6 +1126,82 @@ class Repository {
     }
   }
 
+// createfuledata
+  Future<Map<String, dynamic>> createfuledata(
+      createfuledata, bool? isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createfuledata(
+        auth: auth,
+        createfuledata: createfuledata,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response create fule data order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "fule data Add Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
+          Routes.fueldataListScreen,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'visits and notices');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+//createplantationdata
+ Future<Map<String, dynamic>> createplantationdata(
+      createplantationdata, bool? isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createplantationdata(
+        auth: auth,
+        createplantationdata: createplantationdata,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response create fule data order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "fule data Add Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
+          Routes.fueldataListScreen,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'plantaion data');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
   //update Occupational Health
   Future<Map<String, dynamic>> updateHealthData(
     updateHealthData,
@@ -5097,8 +5175,7 @@ class Repository {
         final List<GetOccupationalList> _occupationallList =
             jsonIrListModelModels
                 .map<GetOccupationalList>((m) =>
-                    GetOccupationalList.fromJson(
-                        Map<String, dynamic>.from(m)))
+                    GetOccupationalList.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
         String jsonData = GetOccupationalListModelToJson(_occupationallList);
         if (isExport == true) {
@@ -5107,17 +5184,17 @@ class Repository {
           List<List<dynamic>> data = [
             [
               'id',
-   'noOfHealthExamsOfNewJoiner',
-   'status',
-  'updatedAt',
-  'createdAt',
-   'createdBy',
-  'date',
-   'periodicTests',
-   'occupationalIllnesses',
-  'updatedBy',
-  'month_id',
-  'month_name',
+              'noOfHealthExamsOfNewJoiner',
+              'status',
+              'updatedAt',
+              'createdAt',
+              'createdBy',
+              'date',
+              'periodicTests',
+              'occupationalIllnesses',
+              'updatedBy',
+              'month_id',
+              'month_name',
             ],
             ...jsonDataList
                 .map((healthlistjson) => [
@@ -5145,6 +5222,174 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getHealthDatalist');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  //getFuelConsumption
+  Future<List<GetFuelDataList>> getFuelConsumption({
+    bool? isExport,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getFuelConsumption(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('FuelConsumption: ${res.data}');
+
+      if (!res.hasError) {
+        // var incidentReportList = GetOccupationalListFromJson(res.data);
+        // return incidentReportList.reversed.toList();
+        final jsonFueListModelModels = jsonDecode(res.data);
+
+        final List<GetFuelDataList> _fueldataList = jsonFueListModelModels
+            .map<GetFuelDataList>(
+                (m) => GetFuelDataList.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        String jsonData = GetFuelDataListModelToJson(_fueldataList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'id',
+              'dieselConsumedForVehicles',
+              'status',
+              'updatedAt',
+              'createdAt',
+              'createdBy',
+              'date',
+              'petrolConsumedForVehicles',
+              'petrolConsumedForGrassCuttingAndMovers',
+              'dieselConsumedAtSite',
+              'petrolConsumedAtSite',
+              'month_id',
+              'month_name',
+              'updatedBy',
+            ],
+            ...jsonDataList
+                .map((fuellistjson) => [
+                      fuellistjson['id'],
+                      fuellistjson['dieselConsumedForVehicles'],
+                      fuellistjson['status'],
+                      fuellistjson['updatedAt'],
+                      fuellistjson['createdAt'],
+                      fuellistjson['createdBy'],
+                      fuellistjson['date'],
+                      fuellistjson['petrolConsumedForVehicles'],
+                      fuellistjson['petrolConsumedForGrassCuttingAndMovers'],
+                      fuellistjson['dieselConsumedAtSite'],
+                      fuellistjson['petrolConsumedAtSite'],
+                      fuellistjson['updatedBy'],
+                      fuellistjson['month_id'],
+                      fuellistjson['month_name'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> FuellistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(FuellistData, 'FuellistData.xlsx');
+        }
+        return _fueldataList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getFuelConsumption');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+//getVisitsAndNoticesDatalist
+  Future<List<GetVisitAndNoticeList>> getVisitsAndNoticesDatalist({
+    bool? isExport,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getVisitsAndNoticesDatalist(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Visit and Notice List: ${res.data}');
+
+      if (!res.hasError) {
+        // var incidentReportList = GetOccupationalListFromJson(res.data);
+        // return incidentReportList.reversed.toList();
+        final jsonvisitandnoticeListModel = jsonDecode(res.data);
+
+        final List<GetVisitAndNoticeList> _visitandnoticeList =
+            jsonvisitandnoticeListModel
+                .map<GetVisitAndNoticeList>((m) =>
+                    GetVisitAndNoticeList.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+        String jsonData = GetVisitAndNoticeListModelToJson(_visitandnoticeList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'id'
+                  'date'
+                  'month_name'
+                  'month_id'
+                  'govtAuthVisits'
+                  'noOfFineByThirdParty'
+                  'noOfShowCauseNoticesByThirdParty'
+                  'noticesToContractor'
+                  'amountOfPenaltiesToContractors'
+                  'anyOther'
+                  'status'
+                  'createdBy'
+                  'createdAt'
+                  'updatedBy'
+                  'updatedAt'
+            ],
+            ...jsonDataList
+                .map((visitandnoticelistjson) => [
+                      visitandnoticelistjson['id'],
+                      visitandnoticelistjson['date'],
+                      visitandnoticelistjson['month_name'],
+                      visitandnoticelistjson['month_id'],
+                      visitandnoticelistjson['govtAuthVisits'],
+                      visitandnoticelistjson['noOfFineByThirdParty'],
+                      visitandnoticelistjson[
+                          'noOfShowCauseNoticesByThirdParty'],
+                      visitandnoticelistjson['noticesToContractor'],
+                      visitandnoticelistjson['amountOfPenaltiesToContractors'],
+                      visitandnoticelistjson['anyOther'],
+                      visitandnoticelistjson['status'],
+                      visitandnoticelistjson['createdBy'],
+                      visitandnoticelistjson['createdAt'],
+                      visitandnoticelistjson['updatedBy'],
+                      visitandnoticelistjson['updatedAt'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> regularlistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(regularlistData, 'regularlist.xlsx');
+        }
+        return _visitandnoticeList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'getVisitsAndNoticesDatalist');
         return [];
       }
     } catch (error) {
