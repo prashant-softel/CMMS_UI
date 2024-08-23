@@ -221,6 +221,9 @@ class MisDashboardController extends GetxController {
     void goToCreateFuelDataScreen() {
     Get.toNamed(Routes.createFuelDataScreen);
   }
+    void goToFuelDataListScreen() {
+    Get.toNamed(Routes.fueldataListScreen);
+  }
     void goToCreatePlantationDataScreen() {
     Get.toNamed(Routes.createplantationdataScreen);
   }

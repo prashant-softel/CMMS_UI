@@ -1,21 +1,22 @@
 
 import 'dart:async';
+
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/list_of_fueldata/fueldata_list_presenter.dart';
+import 'package:cmms/domain/models/get_fueldata_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import 'package:cmms/app/list_of_occupationalhealth/occupational_list_presenter.dart';
-import 'package:cmms/domain/models/get_occupational_list_model.dart';
 
-class OccupationalDataListController extends GetxController {
-  OccupationalDataListController(
-    this.occupationalListPresenter,
+class FuelDataListController extends GetxController {
+  FuelDataListController(
+    this.fueldataListPresenter,
   );
-  OccupationalListPresenter occupationalListPresenter;
+  FuelDataListPresenter fueldataListPresenter;
   final HomeController homecontroller = Get.find();
-  RxList<GetOccupationalList> occupationalhealthList = <GetOccupationalList>[].obs;
-  RxList<GetOccupationalList> filteredData = <GetOccupationalList>[].obs;
+  RxList<GetFuelDataList> fueldataList = <GetFuelDataList>[].obs;
+  RxList<GetFuelDataList> filteredData = <GetFuelDataList>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
 
@@ -26,7 +27,7 @@ class OccupationalDataListController extends GetxController {
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
 
-  GetOccupationalList? getoccupationaList;
+  GetFuelDataList? getoccupationaList;
   RxList<String> occupationalListListTableColumns = <String>[].obs;
   bool openFromDateToStartDatePicker = false;
 
@@ -36,10 +37,12 @@ class OccupationalDataListController extends GetxController {
   );
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  Rx<int> occupationId = 0.obs;
-   RxString healthexamsFilterText = ''.obs;
-  RxString periodictestsFilterText = ''.obs;
-  RxString illnessesFilterText = ''.obs;
+  Rx<int> fuelId = 0.obs;
+   RxString dieselConsumedFilterText = ''.obs;
+  RxString petrolConsumedFilterText = ''.obs;
+  RxString petrolConsumedForGrassCuttingFilterText = ''.obs;
+  RxString dieselConsumedAtSiteFilterText = ''.obs;
+  RxString petrolConsumedAtSiteFilterText = ''.obs;
   RxString monthFilterText = ''.obs;
   RxString createdbyFilterText = ''.obs;
   RxString createdatFilterText = ''.obs;
@@ -49,24 +52,22 @@ class OccupationalDataListController extends GetxController {
   RxString userDateFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    "No Of Health Exams Of New Joiner": true,
-    "Periodic Tests": true,
-    "Occupational Illnesses": true,
+    "Diesel Consumed For Vehicles": true,
+    "Petrol Consumed For Vehicles": true,
+    "Petrol Consumed For Grass Cutting And Movers": true,
+    "Diesel Consumed At Site": true,
+    "Petrol Consumed At Site": true,
     "Month name": true,
-    // "Created By": true,
     "Created At": true,
-    // "Status": true,
-
-    // "search": true,
   });
   final Map<String, double> columnwidth = {
-   "No Of Health Exams Of New Joiner": 380,
-    "Periodic Tests": 220,
-    "Occupational Illnesses": 250,
-    "Month name": 200,
-    // "Created By": 150,
+   "Diesel Consumed For Vehicles": 250,
+    "Petrol Consumed For Vehicles": 250,
+    "Petrol Consumed For Grass Cutting And Movers": 300,
+    "Diesel Consumed At Site": 200,
+    "Petrol Consumed At Site": 200,
+    "Month name": 150,
     "Created At": 150,
-    // "Status": 100
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -80,19 +81,21 @@ class OccupationalDataListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
-      "No Of Health Exams Of New Joiner": healthexamsFilterText,
-      "Periodic Tests": periodictestsFilterText,
-      "Occupational Illnesses": illnessesFilterText,
-      "Month name": monthFilterText,
-      // "Created By": createdbyFilterText,
-      "Created At": createdatFilterText,
+       "Diesel Consumed For Vehicles": dieselConsumedFilterText,
+    "Petrol Consumed For Vehicles": petrolConsumedFilterText,
+    "Petrol Consumed For Grass Cutting And Movers": petrolConsumedForGrassCuttingFilterText,
+    "Diesel Consumed At Site": dieselConsumedAtSiteFilterText,
+    "Petrol Consumed At Site": petrolConsumedAtSiteFilterText,
+    "Month name": monthFilterText,
+    "Created At": createdatFilterText,
+
       "Action": actionFilterText,
       // "Status": statusFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getHealthDatalist(false);
+        getFuelConsumption(false);
       });
     });
     super.onInit();
@@ -101,12 +104,12 @@ class OccupationalDataListController extends GetxController {
   void search(String keyword) {
     print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      occupationalhealthList.value = filteredData.value;
+      fueldataList.value = filteredData.value;
       return;
     }
-    List<GetOccupationalList> filteredList = filteredData
+    List<GetFuelDataList> filteredList = filteredData
         .where((item) =>
-            (item.noOfHealthExamsOfNewJoiner
+            (item.dieselConsumedForVehicles
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
@@ -114,30 +117,30 @@ class OccupationalDataListController extends GetxController {
        
             )
         .toList();
-    occupationalhealthList.value = filteredList;
+    fueldataList.value = filteredList;
   }
 
-  Future<void> getHealthDatalist(
+  Future<void> getFuelConsumption(
      bool isExport) async {
-    occupationalhealthList.value = <GetOccupationalList>[];
-    filteredData.value = <GetOccupationalList>[];
+    fueldataList.value = <GetFuelDataList>[];
+    filteredData.value = <GetFuelDataList>[];
 
     final _goodsordersList =
-        await occupationalListPresenter.getHealthDatalist(
+        await fueldataListPresenter.getFuelConsumption(
             isLoading: isLoading.value,
             // start_date: startDate,
             // end_date: endDate,
             // facility_id: facilityId,
             isExport: isExport);
-    occupationalhealthList.value = _goodsordersList;
+    fueldataList.value = _goodsordersList;
     isLoading.value = false;
     paginationController = PaginationController(
-      rowCount: occupationalhealthList.length,
+      rowCount: fueldataList.length,
       rowsPerPage: 10,
     );
-    if (occupationalhealthList.isNotEmpty) {
-      filteredData.value = occupationalhealthList.value;
-      getoccupationaList = occupationalhealthList[0];
+    if (fueldataList.isNotEmpty) {
+      filteredData.value = fueldataList.value;
+      getoccupationaList = fueldataList[0];
       var newOccupationalListJson = getoccupationaList?.toJson();
       occupationalListListTableColumns.value = <String>[];
       for (var key in newOccupationalListJson?.keys.toList() ?? []) {
@@ -153,7 +156,7 @@ class OccupationalDataListController extends GetxController {
 
 
   void clearStoreData() {
-    occupationalListPresenter.clearValue();
+    fueldataListPresenter.clearValue();
   }
 
   

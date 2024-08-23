@@ -209,9 +209,9 @@ class ViewVegPlanController extends GetxController {
       var vegApproveJsonString = commentVegAproveModel.toJson();
       Map<String, dynamic>? response =
           await viewVegPlanPresenter.vegPlanApprovedButton(
-        vegApproveJsonString: vegApproveJsonString,
-        isLoading: true,
-      );
+              vegApproveJsonString: vegApproveJsonString,
+              isLoading: true,
+              facilityId: facilityId);
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
@@ -226,9 +226,9 @@ class ViewVegPlanController extends GetxController {
       var vegRejectJsonString = commentVegAproveModel.toJson();
       Map<String, dynamic>? response =
           await viewVegPlanPresenter.vegPlanRejectButton(
-        vegRejectJsonString: vegRejectJsonString,
-        isLoading: true,
-      );
+              vegRejectJsonString: vegRejectJsonString,
+              isLoading: true,
+              facilityId: facilityId);
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }

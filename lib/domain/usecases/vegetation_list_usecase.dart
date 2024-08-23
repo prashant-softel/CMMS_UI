@@ -43,14 +43,10 @@ class VegetationlistUsecase {
         isLoading,
       );
 
-  Future<Map<String, dynamic>> createVegetationPlan({
-    createVegetationPlans,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>> createVegetationPlan(
+          {createVegetationPlans, bool? isLoading, int? facility_Id}) async =>
       await repository.createVegetationPlan(
-        createVegetationPlans,
-        isLoading,
-      );
+          createVegetationPlans, isLoading, facility_Id);
 
   Future<List<VegetationEquipmentModel>> getVegEquipmentModelList({
     required bool isLoading,
@@ -88,23 +84,14 @@ class VegetationlistUsecase {
         isLoading: isLoading ?? false,
       );
 
-  Future<Map<String, dynamic>> updateVegPlan({
-    updateVegPlans,
-    bool? isLoading,
-  }) async =>
-      await repository.updateVegPlan(
-        updateVegPlans,
-        isLoading,
-      );
+  Future<Map<String, dynamic>> updateVegPlan(
+          {updateVegPlans, bool? isLoading, int? facilityId}) async =>
+      await repository.updateVegPlan(updateVegPlans, isLoading, facilityId);
 
-  deleteVegPlan({
-    required int planId,
-    bool? isLoading,
-  }) async =>
+  deleteVegPlan(
+          {required int planId, bool? isLoading, int? facilityId}) async =>
       await repository.deleteVegPlan(
-        planId: planId,
-        isLoading: isLoading,
-      );
+          planId: planId, isLoading: isLoading, facilityId: facilityId);
 
   void saveValue({String? vegid}) async =>
       repository.saveValue(LocalKeys.vegid, vegid);
