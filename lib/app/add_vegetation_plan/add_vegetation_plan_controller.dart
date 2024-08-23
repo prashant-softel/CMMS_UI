@@ -185,9 +185,9 @@ class AddVegetationPlanController extends GetxController {
     var createVegModelJsonString = [createVegModel.toJson()];
     Map<String, dynamic>? responseCreateVegModel =
         await addVegetationPresenter.createVegetationPlan(
-      createVegetationPlans: createVegModelJsonString,
-      isLoading: true,
-    );
+            createVegetationPlans: createVegModelJsonString,
+            isLoading: true,
+            facility_Id: facilityId);
     if (responseCreateVegModel == null) {}
     print('Create  Create GO  data: $createVegModelJsonString');
   }
@@ -245,9 +245,9 @@ class AddVegetationPlanController extends GetxController {
     var updateVegModelJsonString = [createVegModel.toJson()];
     Map<String, dynamic>? responseCreateVegModel =
         await addVegetationPresenter.updateVegPlan(
-      updateVegPlans: updateVegModelJsonString,
-      isLoading: true,
-    );
+            updateVegPlans: updateVegModelJsonString,
+            isLoading: true,
+            facilityId: facilityId);
     if (responseCreateVegModel == null) {}
     print('update MC   data: $updateVegModelJsonString');
   }

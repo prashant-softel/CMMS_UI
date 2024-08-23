@@ -17,14 +17,10 @@ class VegetationPlanListPresenter {
         isLoading: isLoading, facility_id: facility_id, isExport: isExport);
   }
 
-  deleteVegPlan({
-    required int planId,
-    bool? isLoading,
-  }) async =>
+  deleteVegPlan(
+          {required int planId, bool? isLoading, int? facilityId}) async =>
       await vegetationlistUsecase.deleteVegPlan(
-        planId: planId,
-        isLoading: isLoading,
-      );
+          planId: planId, isLoading: isLoading, facilityId: facilityId);
 
   void clearValue() async => vegetationlistUsecase.clearValue();
 }

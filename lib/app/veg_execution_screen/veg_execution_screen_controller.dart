@@ -195,15 +195,13 @@ class VegExecutionController extends GetxController {
   Future<void> startVegExecutionButton() async {
     final _startVegExecutionBtn =
         await vegExecutionPresenter.startVegExecutionButton(
-      executionId: vegexe.value,
-    );
+            executionId: vegexe.value, facilityId: facilityId.value);
   }
 
   Future<void> endVegExecutionButton() async {
     final _endVegExecutionBtn =
         await vegExecutionPresenter.endVegExecutionButton(
-      executionId: vegexe.value,
-    );
+            executionId: vegexe.value, facilityId: facilityId.value);
   }
 
   void abandonVegExecutionButton({int? id}) async {
@@ -220,17 +218,16 @@ class VegExecutionController extends GetxController {
       var abandoneJsonString = commentAbandonModel.toJson();
       Map<String, dynamic>? response =
           await vegExecutionPresenter.abandonVegExecutionButton(
-        abandoneJsonString: abandoneJsonString,
-        isLoading: true,
-      );
+              abandoneJsonString: abandoneJsonString,
+              isLoading: true,
+              facilityId: facilityId.value);
     }
   }
 
   Future<void> startVegExecutionScheduleButton({int? scheduleID}) async {
     final _startVegScheduleExecutionBtn =
         await vegExecutionPresenter.startVegExecutionScheduleButton(
-      scheduleId: scheduleID,
-    );
+            scheduleId: scheduleID, facilityId: facilityId.value);
   }
 
   Future<void> endVegScheduleExecutionButton(
@@ -242,9 +239,9 @@ class VegExecutionController extends GetxController {
 
     final _endVegScheduleExecutionBtn =
         await vegExecutionPresenter.endVegScheduleExecutionButton(
-      scheduleId: scheduleID,
-      closePtwJsonString: closePtwJsonString,
-    );
+            scheduleId: scheduleID,
+            closePtwJsonString: closePtwJsonString,
+            facilityId: facilityId.value);
   }
 
   void abandonVegScheduleButton({int? id}) async {
@@ -301,9 +298,9 @@ class VegExecutionController extends GetxController {
       var updateVegJson = updateVegScheduleExecutionModel.toJson();
       Map<String, dynamic>? responseVegScheduleExecution =
           await vegExecutionPresenter.updateVegScheduleExecution(
-        updateVegJson: updateVegJson,
-        isLoading: true,
-      );
+              updateVegJson: updateVegJson,
+              isLoading: true,
+              facilityId: facilityId.value);
       print('Update MC Schedule Execution data: $updateVegJson');
     }
   }
@@ -316,9 +313,9 @@ class VegExecutionController extends GetxController {
 
       var approvetoJsonString = commentModel.toJson();
       final response = await vegExecutionPresenter.vegapproveShecduleExecution(
-        approvetoJsonString: approvetoJsonString,
-        isLoading: true,
-      );
+          approvetoJsonString: approvetoJsonString,
+          isLoading: true,
+          facilityId: facilityId.value);
       if (response == true) {
         Get.offAllNamed(Routes.vegExecutionListScreen);
       }
@@ -333,9 +330,9 @@ class VegExecutionController extends GetxController {
 
       var rejecttoJsonString = commentModel.toJson();
       final response = await vegExecutionPresenter.vegrejectShecduleExecution(
-        rejecttoJsonString: rejecttoJsonString,
-        isLoading: true,
-      );
+          rejecttoJsonString: rejecttoJsonString,
+          isLoading: true,
+          facilityId: facilityId.value);
       if (response == true) {
         Get.offAllNamed(Routes.vegExecutionListScreen);
       }
@@ -350,9 +347,9 @@ class VegExecutionController extends GetxController {
 
       var approvetoJsonString = commentModel.toJson();
       final response = await vegExecutionPresenter.endApproveExecution(
-        approvetoJsonString: approvetoJsonString,
-        isLoading: true,
-      );
+          approvetoJsonString: approvetoJsonString,
+          isLoading: true,
+          facilityId: facilityId.value);
       if (response == true) {
         Get.offAllNamed(Routes.vegExecutionListScreen);
       }
@@ -367,9 +364,9 @@ class VegExecutionController extends GetxController {
 
       var rejecttoJsonString = commentModel.toJson();
       final response = await vegExecutionPresenter.endRejectExecution(
-        rejecttoJsonString: rejecttoJsonString,
-        isLoading: true,
-      );
+          rejecttoJsonString: rejecttoJsonString,
+          isLoading: true,
+          facilityId: facilityId.value);
       if (response == true) {
         Get.offAllNamed(Routes.vegExecutionListScreen);
       }
@@ -384,9 +381,9 @@ class VegExecutionController extends GetxController {
 
       var approvetoJsonString = commentModel.toJson();
       final response = await vegExecutionPresenter.abandonedApproveExecution(
-        approvetoJsonString: approvetoJsonString,
-        isLoading: true,
-      );
+          approvetoJsonString: approvetoJsonString,
+          isLoading: true,
+          facilityId: facilityId.value);
       if (response == true) {
         Get.offAllNamed(Routes.vegExecutionListScreen);
       }
@@ -401,9 +398,9 @@ class VegExecutionController extends GetxController {
 
       var rejecttoJsonString = commentModel.toJson();
       final response = await vegExecutionPresenter.abandoneRejectExecution(
-        rejecttoJsonString: rejecttoJsonString,
-        isLoading: true,
-      );
+          rejecttoJsonString: rejecttoJsonString,
+          isLoading: true,
+          facilityId: facilityId.value);
       if (response == true) {
         Get.offAllNamed(Routes.vegExecutionListScreen);
       }
@@ -413,10 +410,10 @@ class VegExecutionController extends GetxController {
   assignToVeg({required int id}) async {
     {
       final response = await vegExecutionPresenter.assignToVeg(
-        assignId: selectedAssignedToId,
-        taskId: id,
-        isLoading: true,
-      );
+          assignId: selectedAssignedToId,
+          taskId: id,
+          isLoading: true,
+          facilityId: facilityId.value);
     }
   }
 

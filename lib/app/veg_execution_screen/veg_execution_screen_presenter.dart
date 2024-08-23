@@ -19,16 +19,16 @@ class VegExecutionPresenter {
         featureId: featureId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<bool> assignToVeg({
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async {
+  Future<bool> assignToVeg(
+      {int? assignId,
+      int? taskId,
+      required bool isLoading,
+      int? facilityId}) async {
     return vegExecutionUsecase.assignToVeg(
-      assignId: assignId,
-      taskId: taskId,
-      isLoading: isLoading,
-    );
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
   void clearPermitStoreData() async =>
@@ -55,61 +55,56 @@ class VegExecutionPresenter {
   }
 
   Future<List<VegTaskEquipmentList?>> getVegTaskEquipmentList({
-  required bool isLoading,
+    required bool isLoading,
     required int facilityId,
     required int executionId,
   }) async {
     return vegExecutionUsecase.getVegTaskEquipmentList(
-       isLoading: isLoading,
+      isLoading: isLoading,
       executionId: executionId,
       facilityId: facilityId,
-     
     );
   }
 
-  Future<void> startVegExecutionButton({
-    int? executionId,
-    bool? isLoading,
-  }) async =>
+  Future<void> startVegExecutionButton(
+          {int? executionId, bool? isLoading, int? facilityId}) async =>
       await vegExecutionUsecase.startVegExecutionButton(
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+          executionId: executionId,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
 
-  Future<void> endVegExecutionButton({
-    int? executionId,
-    bool? isLoading,
-  }) async =>
+  Future<void> endVegExecutionButton(
+          {int? executionId, bool? isLoading, int? facilityId}) async =>
       await vegExecutionUsecase.endVegExecutionButton(
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+          executionId: executionId,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
 
-  Future<Map<String, dynamic>?> abandonVegExecutionButton({
-    abandoneJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> abandonVegExecutionButton(
+      {abandoneJsonString, required bool isLoading, int? facilityId}) async {
     return vegExecutionUsecase.abandonVegExecutionButton(
-      abandoneJsonString: abandoneJsonString,
-      isLoading: isLoading,
-    );
+        abandoneJsonString: abandoneJsonString,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
-  Future<void> startVegExecutionScheduleButton({
-    int? scheduleId,
-    bool? isLoading,
-  }) async =>
+  Future<void> startVegExecutionScheduleButton(
+          {int? scheduleId, bool? isLoading, int? facilityId}) async =>
       await vegExecutionUsecase.startVegExecutionScheduleButton(
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
 
   Future<void> endVegScheduleExecutionButton(
-          {int? scheduleId, bool? isLoading, closePtwJsonString}) async =>
+          {int? scheduleId,
+          bool? isLoading,
+          closePtwJsonString,
+          int? facilityId}) async =>
       await vegExecutionUsecase.endVegScheduleExecutionButton(
           scheduleId: scheduleId,
           isLoading: isLoading ?? false,
-          closePtwJsonString: closePtwJsonString);
+          closePtwJsonString: closePtwJsonString,
+          facilityId: facilityId);
 
   Future<Map<String, dynamic>?> abandonVegScheduleButton({
     abandoneScheduleJsonString,
@@ -121,74 +116,60 @@ class VegExecutionPresenter {
     );
   }
 
-  Future<Map<String, dynamic>?> updateVegScheduleExecution({
-    updateVegJson,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> updateVegScheduleExecution(
+      {updateVegJson, required bool isLoading, int? facilityId}) async {
     return vegExecutionUsecase.updateVegScheduleExecution(
-      updateVegJson: updateVegJson,
-      isLoading: isLoading,
-    );
+        updateVegJson: updateVegJson,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
-  Future<bool> vegapproveShecduleExecution({
-    approvetoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> vegapproveShecduleExecution(
+      {approvetoJsonString, required bool isLoading, int? facilityId}) async {
     return vegExecutionUsecase.vegapproveShecduleExecution(
-      approvetoJsonString: approvetoJsonString,
-      isLoading: isLoading,
-    );
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
-  Future<bool> vegrejectShecduleExecution({
-    rejecttoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> vegrejectShecduleExecution(
+      {rejecttoJsonString, required bool isLoading, int? facilityId}) async {
     return vegExecutionUsecase.vegrejectShecduleExecution(
-      rejecttoJsonString: rejecttoJsonString,
-      isLoading: isLoading,
-    );
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
-  Future<bool> endApproveExecution({
-    approvetoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> endApproveExecution(
+      {approvetoJsonString, required bool isLoading, int? facilityId}) async {
     return vegExecutionUsecase.endApproveExecution(
-      approvetoJsonString: approvetoJsonString,
-      isLoading: isLoading,
-    );
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
-  Future<bool> endRejectExecution({
-    rejecttoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> endRejectExecution(
+      {rejecttoJsonString, required bool isLoading, int? facilityId}) async {
     return vegExecutionUsecase.endRejectExecution(
-      rejecttoJsonString: rejecttoJsonString,
-      isLoading: isLoading,
-    );
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
-  Future<bool> abandonedApproveExecution({
-    approvetoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> abandonedApproveExecution(
+      {approvetoJsonString, required bool isLoading, int? facilityId}) async {
     return vegExecutionUsecase.abandonedApproveExecution(
-      approvetoJsonString: approvetoJsonString,
-      isLoading: isLoading,
-    );
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
-  Future<bool> abandoneRejectExecution({
-    rejecttoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> abandoneRejectExecution(
+      {rejecttoJsonString, required bool isLoading, int? facilityId}) async {
     return vegExecutionUsecase.abandoneRejectExecution(
-      rejecttoJsonString: rejecttoJsonString,
-      isLoading: isLoading,
-    );
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
   void savePlanId({String? vegid}) async =>

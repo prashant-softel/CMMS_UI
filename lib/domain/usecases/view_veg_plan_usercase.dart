@@ -29,14 +29,10 @@ class ViewVegPlanUsecase {
         facilityId,
         isLoading,
       );
-  Future<Map<String, dynamic>> vegPlanApprovedButton({
-    vegApproveJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>> vegPlanApprovedButton(
+          {vegApproveJsonString, bool? isLoading, int? facilityId}) async =>
       await repository.vegPlanApprovedButton(
-        vegApproveJsonString,
-        isLoading,
-      );
+          vegApproveJsonString, isLoading, facilityId);
   // Future<List<HistoryModel>?> getHistory({
   //   moduleType,
   //   id,
@@ -57,14 +53,10 @@ class ViewVegPlanUsecase {
     );
   }
 
-  Future<Map<String, dynamic>> vegPlanRejectButton({
-    vegRejectJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>> vegPlanRejectButton(
+          {vegRejectJsonString, bool? isLoading, int? facilityId}) async =>
       await repository.vegPlanRejectButton(
-        vegRejectJsonString,
-        isLoading,
-      );
+          vegRejectJsonString, isLoading, facilityId);
   void saveValue({String? vegid}) async =>
       repository.saveValue(LocalKeys.vegid, vegid);
   Future<String?> getValue() async =>

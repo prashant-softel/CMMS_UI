@@ -7654,9 +7654,10 @@ class ConnectHelper {
       bool? isLoading,
       type,
       vegplanId,
-      vegexid}) async {
+      vegexid,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      "Vegetation/LinkPermitToVegetation?scheduleId=$scheduleId&permit_id=$permitId",
+      "Vegetation/LinkPermitToVegetation?scheduleId=$scheduleId&permit_id=$permitId&facilityId=$facilityId",
       Request.put,
       null,
       isLoading ?? false,
@@ -8341,15 +8342,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> assignToVeg({
-    required String auth,
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async {
+  Future<ResponseModel> assignToVeg(
+      {required String auth,
+      int? assignId,
+      int? taskId,
+      required bool isLoading,
+      int? facilityId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/ReAssignTaskVegetation?task_id=$taskId&assign_to=$assignId',
+      'Vegetation/ReAssignTaskVegetation?task_id=$taskId&assign_to=$assignId&facilityId=$facilityId',
       Request.put,
       null,
       isLoading,
@@ -9068,13 +9069,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> createVegetationPlan({
-    required String auth,
-    createVegetationPlans,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> createVegetationPlan(
+      {required String auth,
+      createVegetationPlans,
+      bool? isLoading,
+      int? facility_Id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/CreateVegetationPlan',
+      'Vegetation/CreateVegetationPlan?facilityId=$facility_Id',
       Request.post,
       createVegetationPlans,
       isLoading ?? false,
@@ -9133,13 +9134,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> vegPlanApprovedButton({
-    required String auth,
-    vegApproveJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> vegPlanApprovedButton(
+      {required String auth,
+      vegApproveJsonString,
+      bool? isLoading,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/ApproveVegetationPlan',
+      'Vegetation/ApproveVegetationPlan?facilityId=$facilityId',
       Request.post,
       vegApproveJsonString,
       isLoading ?? false,
@@ -9156,13 +9157,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> vegPlanRejectButton({
-    required String auth,
-    vegRejectJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> vegPlanRejectButton(
+      {required String auth,
+      vegRejectJsonString,
+      bool? isLoading,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/RejectVegetationPlan',
+      'Vegetation/RejectVegetationPlan?facilityId=$facilityId',
       Request.put,
       vegRejectJsonString,
       isLoading ?? false,
@@ -9179,13 +9180,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> deleteVegPlan({
-    required String auth,
-    bool? isLoading,
-    required planId,
-  }) async {
+  Future<ResponseModel> deleteVegPlan(
+      {required String auth,
+      bool? isLoading,
+      required planId,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/DeleteVegetationplan?planId=$planId',
+      'Vegetation/DeleteVegetationplan?planId=$planId&facilityId=$facilityId',
       Request.put,
       null,
       isLoading ?? false,
@@ -9236,13 +9237,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> updateVegPlan({
-    required String auth,
-    updateVegPlans,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> updateVegPlan(
+      {required String auth,
+      updateVegPlans,
+      bool? isLoading,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/UpdateVegetationPlan',
+      'Vegetation/UpdateVegetationPlan?facilityId=$facilityId',
       Request.post,
       updateVegPlans,
       isLoading ?? false,
@@ -9322,13 +9323,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> startVegExecutionButton({
-    required String auth,
-    bool? isLoading,
-    int? executionId,
-  }) async {
+  Future<ResponseModel> startVegExecutionButton(
+      {required String auth,
+      bool? isLoading,
+      int? executionId,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/StartVegetationExecution?executionId=$executionId',
+      'Vegetation/StartVegetationExecution?executionId=$executionId&facilityId=$facilityId',
       Request.put,
       null,
       isLoading ?? true,
@@ -9345,13 +9346,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> endVegExecutionButton({
-    required String auth,
-    bool? isLoading,
-    int? executionId,
-  }) async {
+  Future<ResponseModel> endVegExecutionButton(
+      {required String auth,
+      bool? isLoading,
+      int? executionId,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/EndExecutionVegetation?executionId=$executionId',
+      'Vegetation/EndExecutionVegetation?executionId=$executionId&facilityId=$facilityId',
       Request.put,
       null,
       isLoading ?? true,
@@ -9368,13 +9369,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> abandonVegExecutionButton({
-    required String auth,
-    abandoneJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> abandonVegExecutionButton(
+      {required String auth,
+      abandoneJsonString,
+      bool? isLoading,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/AbandonExecutionVegetation',
+      'Vegetation/AbandonExecutionVegetation?facilityId=$facilityId',
       Request.put,
       abandoneJsonString,
       isLoading ?? false,
@@ -9391,14 +9392,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> startVegExecutionScheduleButton({
-    required String auth,
-    bool? isLoading,
-    int? scheduleId,
-  }) async {
+  Future<ResponseModel> startVegExecutionScheduleButton(
+      {required String auth,
+      bool? isLoading,
+      int? scheduleId,
+      int? facilityId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/StartScheduleExecutionVegetation?scheduleId=$scheduleId',
+      'Vegetation/StartScheduleExecutionVegetation?scheduleId=$scheduleId&facilityId=facilityId',
       Request.put,
       null,
       isLoading ?? true,
@@ -9417,14 +9418,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> endVegScheduleExecutionButton({
-    required String auth,
-    bool? isLoading,
-    int? scheduleId,
-  }) async {
+  Future<ResponseModel> endVegScheduleExecutionButton(
+      {required String auth,
+      bool? isLoading,
+      int? scheduleId,
+      int? facilityId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/EndScheduleExecutionVegetation?scheduleId=$scheduleId',
+      'Vegetation/EndScheduleExecutionVegetation?scheduleId=$scheduleId&facilityId=$facilityId',
       Request.put,
       null,
       isLoading ?? true,
@@ -9466,13 +9467,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> updateVegScheduleExecution({
-    required String auth,
-    updateVegJson,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> updateVegScheduleExecution(
+      {required String auth,
+      updateVegJson,
+      bool? isLoading,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/UpdateScheduleExecutionVegetation',
+      'Vegetation/UpdateScheduleExecutionVegetation?facilityId=$facilityId',
       Request.put,
       updateVegJson,
       isLoading ?? false,
@@ -9491,13 +9492,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> vegapproveShecduleExecution({
-    required String auth,
-    approvetoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> vegapproveShecduleExecution(
+      {required String auth,
+      approvetoJsonString,
+      bool? isLoading,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/ApproveScheduleExecutionVegetation',
+      'Vegetation/ApproveScheduleExecutionVegetation?facilityId=$facilityId',
       Request.put,
       approvetoJsonString,
       isLoading ?? true,
@@ -9512,13 +9513,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> vegrejectShecduleExecution({
-    required String auth,
-    rejecttoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> vegrejectShecduleExecution(
+      {required String auth,
+      rejecttoJsonString,
+      bool? isLoading,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/RejectScheduleExecutionVegetation',
+      'Vegetation/RejectScheduleExecutionVegetation?facilityId=$facilityId',
       Request.put,
       rejecttoJsonString,
       isLoading ?? true,
@@ -9533,14 +9534,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> vegendApproveExecution({
-    required String auth,
-    approvetoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> vegendApproveExecution(
+      {required String auth,
+      approvetoJsonString,
+      bool? isLoading,
+      int? facilityId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/ApproveEndExecutionVegetation',
+      'Vegetation/ApproveEndExecutionVegetation?facilityId=$facilityId',
       Request.put,
       // {'comment': "$comment", 'id': id},
       approvetoJsonString,
@@ -9557,14 +9558,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> vegendRejectExecution({
-    required String auth,
-    rejecttoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> vegendRejectExecution(
+      {required String auth,
+      rejecttoJsonString,
+      bool? isLoading,
+      int? facilityId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/RejectEndExecutionVegetation',
+      'Vegetation/RejectEndExecutionVegetation?facilityId=$facilityId',
       Request.put,
       // {'comment': "$comment", 'id': id},
       rejecttoJsonString,
@@ -9581,14 +9582,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> vegabandonedApproveExecution({
-    required String auth,
-    approvetoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> vegabandonedApproveExecution(
+      {required String auth,
+      approvetoJsonString,
+      bool? isLoading,
+      int? facilityId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      "Vegetation/ApproveAbandonExecutionVegetation",
+      "Vegetation/ApproveAbandonExecutionVegetation?facilityId=$facilityId",
       Request.put,
       // {'comment': "$comment", 'id': id},
       approvetoJsonString,
@@ -9605,14 +9606,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> vegabandoneRejectExecution({
-    required String auth,
-    rejecttoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> vegabandoneRejectExecution(
+      {required String auth,
+      rejecttoJsonString,
+      bool? isLoading,
+      int? facilityId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      "Vegetation/RejectAbandonExecutionVegetation",
+      "Vegetation/RejectAbandonExecutionVegetation?facilityId=$facilityId",
       Request.put,
       // {'comment': "$comment", 'id': id},
       rejecttoJsonString,

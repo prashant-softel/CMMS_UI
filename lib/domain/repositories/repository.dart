@@ -480,16 +480,16 @@ class Repository {
           print('CreateForJobPermitResponse:${permitForJob[0]}');
           if (pmTaskId != null && type == 3) {
             scheduleLinkToPermit(
-                pmTaskId, activity, permitForJob[0], true, type, 0);
+                pmTaskId, activity, permitForJob[0], true, type, facilityId);
           } else if (pmTaskId != null && type == 4) {
             scheduleLinkToPermit(
                 pmTaskId, activity, permitForJob[0], true, type, facilityId);
           } else if (pmTaskId != null && type == 5) {
             vegscheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
-                type, vegplanId, vegexid);
+                type, vegplanId, vegexid, facilityId);
           } else {
             scheduleLinkToPermit(
-                pmTaskId, activity, permitForJob[0], true, 0, 0);
+                pmTaskId, activity, permitForJob[0], true, 0, facilityId);
           }
           return responseMap;
         }
@@ -7107,20 +7107,20 @@ class Repository {
     }
   }
 
-  Future<bool> assignToVeg({
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async {
+  Future<bool> assignToVeg(
+      {int? assignId,
+      int? taskId,
+      required bool isLoading,
+      int? facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.assignToVeg(
-        auth: auth,
-        assignId: assignId,
-        taskId: taskId,
-        isLoading: isLoading,
-      );
+          auth: auth,
+          assignId: assignId,
+          taskId: taskId,
+          isLoading: isLoading,
+          facilityId: facilityId);
       print({"res.data", res.data});
       if (!res.hasError) {
         return true;
@@ -12379,8 +12379,15 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> vegscheduleLinkToPermit(scheduleId, activity,
-      permitId, bool? isLoading, type, vegplanId, vegexid) async {
+  Future<Map<String, dynamic>> vegscheduleLinkToPermit(
+      scheduleId,
+      activity,
+      permitId,
+      bool? isLoading,
+      type,
+      vegplanId,
+      vegexid,
+      int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.vegscheduleLinkToPermit(
@@ -12391,7 +12398,8 @@ class Repository {
           isLoading: isLoading ?? false,
           type: type,
           vegplanId: vegplanId,
-          vegexid: vegexid);
+          vegexid: vegexid,
+          facilityId: facilityId);
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
@@ -13816,16 +13824,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createVegetationPlan(
-    createVegetationPlans,
-    bool? isLoading,
-  ) async {
+      createVegetationPlans, bool? isLoading, int? facility_Id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createVegetationPlan(
-        auth: auth,
-        createVegetationPlans: createVegetationPlans,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          createVegetationPlans: createVegetationPlans,
+          isLoading: isLoading ?? false,
+          facility_Id: facility_Id);
 
       var resourceData = res.data;
 
@@ -13921,16 +13927,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> vegPlanApprovedButton(
-    vegApproveJsonString,
-    bool? isLoading,
-  ) async {
+      vegApproveJsonString, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.vegPlanApprovedButton(
-        auth: auth,
-        vegApproveJsonString: vegApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          vegApproveJsonString: vegApproveJsonString,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
 
       var resourceData = res.data;
 
@@ -13955,16 +13959,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> vegPlanRejectButton(
-    vegRejectJsonString,
-    bool? isLoading,
-  ) async {
+      vegRejectJsonString, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.vegPlanRejectButton(
-        auth: auth,
-        vegRejectJsonString: json.encode(vegRejectJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          vegRejectJsonString: json.encode(vegRejectJsonString),
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
 
       var resourceData = res.data;
 
@@ -13988,17 +13990,15 @@ class Repository {
     }
   }
 
-  Future<void> deleteVegPlan({
-    bool? isLoading,
-    required int planId,
-  }) async {
+  Future<void> deleteVegPlan(
+      {bool? isLoading, required int planId, int? facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteVegPlan(
-        auth: auth,
-        planId: planId,
-        isLoading: isLoading,
-      );
+          auth: auth,
+          planId: planId,
+          isLoading: isLoading,
+          facilityId: facilityId);
 
       if (!res.hasError) {
       } else {
@@ -14048,16 +14048,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> updateVegPlan(
-    updateVegPlans,
-    bool? isLoading,
-  ) async {
+      updateVegPlans, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateVegPlan(
-        auth: auth,
-        updateVegPlans: updateVegPlans,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          updateVegPlans: updateVegPlans,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
 
       var resourceData = res.data;
 
@@ -14226,16 +14224,14 @@ class Repository {
   }
 
   Future<void> startVegExecutionButton(
-    int? executionId,
-    bool? isLoading,
-  ) async {
+      int? executionId, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.startVegExecutionButton(
-        auth: auth,
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          executionId: executionId,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
       print('StartExecutionResponse55: ${res.data}');
       if (!res.hasError) {
       } else {
@@ -14247,16 +14243,14 @@ class Repository {
   }
 
   Future<void> endVegExecutionButton(
-    int? executionId,
-    bool? isLoading,
-  ) async {
+      int? executionId, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.endVegExecutionButton(
-        auth: auth,
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          executionId: executionId,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
       print('endExecutionResponse55: ${res.data}');
       if (!res.hasError) {
         //  return _permitIssueModel;
@@ -14269,16 +14263,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> abandonVegExecutionButton(
-    abandoneJsonString,
-    bool? isLoading,
-  ) async {
+      abandoneJsonString, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.abandonVegExecutionButton(
-        auth: auth,
-        abandoneJsonString: json.encode(abandoneJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          abandoneJsonString: json.encode(abandoneJsonString),
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
       var resourceData = res.data;
       print('Response Abandon Execution: ${resourceData}');
       if (!res.hasError) {
@@ -14298,17 +14290,15 @@ class Repository {
   }
 
   Future<void> startVegExecutionScheduleButton(
-    int? scheduleId,
-    bool? isLoading,
-  ) async {
+      int? scheduleId, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.startVegExecutionScheduleButton(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
       print('StartScheduleExecutionResponse55: ${res.data}');
 
       if (!res.hasError) {
@@ -14322,16 +14312,16 @@ class Repository {
     }
   }
 
-  Future<void> endVegScheduleExecutionButton(
-      int? scheduleId, bool? isLoading, closePtwJsonString) async {
+  Future<void> endVegScheduleExecutionButton(int? scheduleId, bool? isLoading,
+      closePtwJsonString, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.endVegScheduleExecutionButton(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
       print('EndScheduleExecutionResponse55: ${res.data}');
 
       if (!res.hasError) {
@@ -14378,17 +14368,15 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> updateVegScheduleExecution({
-    updateVegJson,
-    bool? isLoading,
-  }) async {
+  Future<Map<String, dynamic>> updateVegScheduleExecution(
+      {updateVegJson, bool? isLoading, int? facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateVegScheduleExecution(
-        auth: auth,
-        updateVegJson: json.encode(updateVegJson),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          updateVegJson: json.encode(updateVegJson),
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
       var resourceData = res.data;
       print('Response MC Schedule Execution Report: ${resourceData}');
       if (!res.hasError) {
@@ -14406,17 +14394,16 @@ class Repository {
     }
   }
 
-  Future<bool> vegapproveShecduleExecution({
-    bool? isLoading,
-    approvetoJsonString,
-  }) async {
+  Future<bool> vegapproveShecduleExecution(
+      {bool? isLoading, approvetoJsonString, int? facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.vegapproveShecduleExecution(
           auth: auth,
           isLoading: isLoading,
-          approvetoJsonString: json.encode(approvetoJsonString));
+          approvetoJsonString: json.encode(approvetoJsonString),
+          facilityId: facilityId);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -14432,17 +14419,16 @@ class Repository {
     }
   }
 
-  Future<bool> vegrejectShecduleExecution({
-    bool? isLoading,
-    rejecttoJsonString,
-  }) async {
+  Future<bool> vegrejectShecduleExecution(
+      {bool? isLoading, rejecttoJsonString, int? facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.vegrejectShecduleExecution(
           auth: auth,
           isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString));
+          rejecttoJsonString: json.encode(rejecttoJsonString),
+          facilityId: facilityId);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -14459,14 +14445,15 @@ class Repository {
   }
 
   Future<bool> vegendApproveExecution(
-      {bool? isLoading, approvetoJsonString}) async {
+      {bool? isLoading, approvetoJsonString, int? facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.vegendApproveExecution(
           auth: auth,
           isLoading: isLoading,
-          approvetoJsonString: json.encode(approvetoJsonString));
+          approvetoJsonString: json.encode(approvetoJsonString),
+          facilityId: facilityId);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -14483,14 +14470,15 @@ class Repository {
   }
 
   Future<bool> vegendRejectExecution(
-      {bool? isLoading, rejecttoJsonString}) async {
+      {bool? isLoading, rejecttoJsonString, int? facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.vegendRejectExecution(
           auth: auth,
           isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString));
+          rejecttoJsonString: json.encode(rejecttoJsonString),
+          facilityId: facilityId);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -14507,14 +14495,15 @@ class Repository {
   }
 
   Future<bool> vegabandonedApproveExecution(
-      {bool? isLoading, approvetoJsonString}) async {
+      {bool? isLoading, approvetoJsonString, int? facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.vegabandonedApproveExecution(
           auth: auth,
           isLoading: isLoading,
-          approvetoJsonString: json.encode(approvetoJsonString));
+          approvetoJsonString: json.encode(approvetoJsonString),
+          facilityId: facilityId);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -14531,14 +14520,15 @@ class Repository {
   }
 
   Future<bool> vegabandoneRejectExecution(
-      {bool? isLoading, rejecttoJsonString}) async {
+      {bool? isLoading, rejecttoJsonString, int? facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.vegabandoneRejectExecution(
           auth: auth,
           isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString));
+          rejecttoJsonString: json.encode(rejecttoJsonString),
+          facilityId: facilityId);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);

@@ -19,18 +19,17 @@ class ViewVegPlanPresenter {
       isLoading: isLoading ?? false,
     );
   }
- Future<List<HistoryModel>?> getHistory(
+
+  Future<List<HistoryModel>?> getHistory(
     moduleType,
     id,
     facilityId,
-
     isLoading,
   ) async =>
       await viewVegPlanUsecase.getHistory(
         moduleType: moduleType,
         id: id,
         facilityId: facilityId,
-
         isLoading: isLoading,
       );
   Future<List<VegetationEquipmentModel>> getVegEquipmentModelList({
@@ -43,24 +42,20 @@ class ViewVegPlanPresenter {
     );
   }
 
-  Future<Map<String, dynamic>?> vegPlanApprovedButton({
-    vegApproveJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> vegPlanApprovedButton(
+      {vegApproveJsonString, required bool isLoading, int? facilityId}) async {
     return viewVegPlanUsecase.vegPlanApprovedButton(
-      vegApproveJsonString: vegApproveJsonString,
-      isLoading: isLoading,
-    );
+        vegApproveJsonString: vegApproveJsonString,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
-  Future<Map<String, dynamic>?> vegPlanRejectButton({
-    vegRejectJsonString,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> vegPlanRejectButton(
+      {vegRejectJsonString, required bool isLoading, int? facilityId}) async {
     return viewVegPlanUsecase.vegPlanRejectButton(
-      vegRejectJsonString: vegRejectJsonString,
-      isLoading: isLoading,
-    );
+        vegRejectJsonString: vegRejectJsonString,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
   void saveValue({String? vegid}) async {
@@ -69,6 +64,4 @@ class ViewVegPlanPresenter {
 
   Future<String?> getValue() async => await viewVegPlanUsecase.getValue();
   void clearValue() async => viewVegPlanUsecase.clearValue();
-
-  
 }
