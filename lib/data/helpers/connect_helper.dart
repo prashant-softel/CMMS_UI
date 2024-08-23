@@ -791,8 +791,9 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   // Get Health data
-   Future<ResponseModel> getHealthDatalist({
+  Future<ResponseModel> getHealthDatalist({
     required bool isLoading,
     required String auth,
   }) async {
@@ -3729,7 +3730,7 @@ class ConnectHelper {
   }
 
   // CreateRegulataryVisits
-    Future<ResponseModel> createvisitsandnotices({
+  Future<ResponseModel> createvisitsandnotices({
     required String auth,
     createvisitsandnotices,
     bool? isLoading,
@@ -7611,14 +7612,15 @@ class ConnectHelper {
       permitId,
       activity,
       bool? isLoading,
-      type}) async {
+      type,
+      facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
       // 'PMScheduleView/LinkPermitToPMTask?schedule_id=$scheduleId&permit_id=$permitId',
 
       type == 3
           ? 'AuditPlan/AuditLinkToPermit?audit_id=$scheduleId&ptw_id=$permitId'
           : type == 4
-              ? 'MC/LinkPermitToModuleCleaning?scheduleId=$scheduleId&permit_id=$permitId'
+              ? 'MC/LinkPermitToModuleCleaning?scheduleId=$scheduleId&permit_id=$permitId&facility_id=$facilityId'
               : 'PMScheduleView/LinkPermitToPMTask?task_id=$scheduleId&permit_id=$permitId',
 
       Request.put,

@@ -162,15 +162,18 @@ class FileList {
   int? fileSize;
   int? status;
   String? description;
+  String? created_at;
+  String? created_by;
 
-  FileList({
-    this.id,
-    this.fileName,
-    this.fileCategory,
-    this.fileSize,
-    this.status,
-    this.description,
-  });
+  FileList(
+      {this.id,
+      this.fileName,
+      this.fileCategory,
+      this.fileSize,
+      this.status,
+      this.description,
+      this.created_by,
+      this.created_at});
 
   factory FileList.fromJson(Map<String, dynamic> json) => FileList(
         id: json['id'],
@@ -179,10 +182,16 @@ class FileList {
         fileSize: json['fileSize'],
         status: json['status'],
         description: json['description'] ?? '',
+        created_by: json['created_by'] ?? '',
+        created_at: json['created_at'] == null
+            ? null
+            : Utility.getFormatedyearMonthDay(json['created_at']),
       );
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'created_at': created_at,
+        'created_by': created_by,
         'fileName': fileName,
         'fileCategory': fileCategory,
         'fileSize': fileSize,

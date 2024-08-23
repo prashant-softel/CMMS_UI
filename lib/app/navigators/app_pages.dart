@@ -86,6 +86,8 @@ import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/create_regulataryvisits/create_regulataryvisits_binding.dart';
 import 'package:cmms/app/create_regulataryvisits/views/create_regulataryvisits_screen.dart';
+import 'package:cmms/app/cumulative_report/cumulative_report_binding.dart';
+import 'package:cmms/app/cumulative_report/view/cumulative_report_screen.dart';
 import 'package:cmms/app/document_master/document_master_binding.dart';
 import 'package:cmms/app/document_master/view/document_master_screen.dart';
 import 'package:cmms/app/doc_upload/doc_upload_binding.dart';
@@ -1498,6 +1500,11 @@ class AppPages {
       name: _Paths.cmmsReport,
       page: CmmsReportDashboardScreen.new,
       binding: CmmsReportDashboardBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.cumulativeReport,
+      page: CumulativeReportScreen.new,
+      binding: CumulativeReportBinding(),
     ),
   ];
 }
