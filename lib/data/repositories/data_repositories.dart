@@ -2371,10 +2371,12 @@ class DataRepository extends DomainRepository {
     required String auth,
     bool? isLoading,
     int? wc_id,
+    int? facilityId,
   }) async =>
       await connectHelper.getViewWarrantyClaimDetail(
         auth: auth,
         wc_id: wc_id,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 

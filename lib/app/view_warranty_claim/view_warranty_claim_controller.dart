@@ -167,7 +167,8 @@ class ViewWarrantyClaimController extends GetxController {
 
     if (wc_id != null) {
       Future.delayed(Duration(seconds: 1), () {
-        getViewWarrantyClaimDetail(wc_id: wc_id!);
+        getViewWarrantyClaimDetail(wc_id: wc_id!, facilityId: facilityId);
+
       });
     }
 
@@ -221,12 +222,12 @@ class ViewWarrantyClaimController extends GetxController {
     }
   }
 
-  Future<void> getViewWarrantyClaimDetail({required int wc_id}) async {
+  Future<void> getViewWarrantyClaimDetail({required int wc_id, required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     viewWarrantyClaimDetailsList?.value = <ViewWarrantyClaimModel>[];
 
     final _viewWarrantyClaimDetails = await viewWarrantyClaimPresenter
-        .getViewWarrantyClaimDetail(wc_id: wc_id);
+        .getViewWarrantyClaimDetail(wc_id: wc_id, facilityId: facilityId);
     print('New Warranty Claim Detail:$_viewWarrantyClaimDetails');
 
     if (_viewWarrantyClaimDetails != null) {

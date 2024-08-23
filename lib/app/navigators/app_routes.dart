@@ -320,7 +320,7 @@ abstract class _Paths {
   static const calibrationHistory = '/calibration-history-screen';
   static const viewWarrantyClaim = '/view-warranty-claim';
   static const newWarrantyClaimList = '/new-warranty-claim';
-  static const createWarrantyClaimList = '/create-warranty-claim';
+  static const createWarrantyClaimList = '/warranty-claim-screen';
   static const calibrationDetail = '/calibration-detail';
   static const pmSchedule = '/pm-schedule-screen';
   static const pmTask = '/pm-task-screen';
