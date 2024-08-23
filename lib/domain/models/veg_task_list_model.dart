@@ -19,23 +19,26 @@ class VegTaskListModel {
   String? doneDate;
   String? lastDoneDate;
   int? status;
+  String? abondond_done_date;
   String? status_short;
   int? water_used;
   String? title;
 
-  VegTaskListModel(
-      {this.id,
-      this.planId,
-      this.responsibility,
-      this.frequency,
-      this.noOfDays,
-      this.startDate,
-      this.doneDate,
-      this.lastDoneDate,
-      this.status,
-      this.status_short,
-      this.water_used,
-      this.title});
+  VegTaskListModel({
+    this.id,
+    this.planId,
+    this.responsibility,
+    this.frequency,
+    this.noOfDays,
+    this.startDate,
+    this.doneDate,
+    this.lastDoneDate,
+    this.status,
+    this.status_short,
+    this.water_used,
+    this.title,
+    this.abondond_done_date,
+  });
 
   factory VegTaskListModel.fromJson(Map<String, dynamic> json) =>
       VegTaskListModel(
@@ -51,6 +54,8 @@ class VegTaskListModel {
         status: json['status'],
         status_short: json['status_short'],
         title: json['title'],
+        abondond_done_date:
+            Utility.getFormatedyearMonthDay(json['abondond_done_date']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -65,6 +70,7 @@ class VegTaskListModel {
         "lastDoneDate": lastDoneDate,
         "status": status,
         "status_short": status_short,
-        "title": title
+        "title": title,
+        "abondond_done_date": abondond_done_date
       };
 }

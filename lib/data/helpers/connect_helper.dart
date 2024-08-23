@@ -9482,7 +9482,7 @@ class ConnectHelper {
       int? facilityId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/StartScheduleExecutionVegetation?scheduleId=$scheduleId&facilityId=facilityId',
+      'Vegetation/StartScheduleExecutionVegetation?scheduleId=$scheduleId&facilityId=$facilityId',
       Request.put,
       null,
       isLoading ?? true,
