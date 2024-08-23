@@ -675,6 +675,50 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
+                        varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kModuleCleaningplanFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0 &&
+                                controller.moduleCleaningListPlan
+                                        .firstWhere(
+                                          (e) =>
+                                              e.planId ==
+                                              ModuleCleaningPlanningListDetails!
+                                                  .planId,
+                                          orElse: () =>
+                                              ModuleCleaningListPlanModel(
+                                                  planId: 00),
+                                        )
+                                        .status ==
+                                    352
+                            ? TableActionButton(
+                                color: Color.fromARGB(255, 116, 78, 130),
+                                icon: Icons.ads_click,
+                                message: 'Resubmit',
+                                onPress: () {
+                                  controller.clearStoreDataMcid();
+                                  controller.clearStoreDataPlanid();
+                                  int id = ModuleCleaningPlanningListDetails
+                                          ?.planId ??
+                                      0;
+                                  if (id != 0) {
+                                    Get.toNamed(Routes.moduleCleaningPlanning,
+                                        arguments: {
+                                          "mcid": id,
+                                          "planId":
+                                              ModuleCleaningPlanningListDetails
+                                                  ?.planId
+                                        });
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
                         // controller.moduleCleaningListPlan
                         //                 .firstWhere(
                         //                   (e) =>

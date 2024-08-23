@@ -173,6 +173,7 @@ class AddVegetationPlanController extends GetxController {
 
     CreateVegPlanModel createVegModel = CreateVegPlanModel(
       facilityId: facilityId,
+      resubmit: 0,
       frequencyId: selectedfrequencyId,
       planId: 0,
       startDate: _startDate,
@@ -233,6 +234,7 @@ class AddVegetationPlanController extends GetxController {
 
     CreateVegPlanModel createVegModel = CreateVegPlanModel(
       planId: vegid.value,
+      resubmit: 1,
       facilityId: facilityId,
       startDate: _startDate,
       frequencyId: selectedfrequencyId,

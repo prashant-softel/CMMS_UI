@@ -358,6 +358,12 @@ class CreateWarrantyClaimController extends GetxController {
       facilityId = event;
     });
     Future.delayed(Duration(seconds: 1), () {
+      getEmployeeList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getEmployeesList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
       if (wc_id.value != 0) {
         getViewWarrantyClaimDetail(wc_id: wc_id.value);
         getHistory(facilityId: facilityId, wcId: wc_id.value);
@@ -379,12 +385,7 @@ class CreateWarrantyClaimController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getUnitCurrencyList();
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getEmployeeList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getEmployeesList();
-    });
+
     if (wc_id == 0) {
       addRowItem();
     }
@@ -452,6 +453,7 @@ class CreateWarrantyClaimController extends GetxController {
           viewWarrantyClaimDetailsModel.value?.warranty_description ?? "";
       selectedEquipmentCategory.value =
           viewWarrantyClaimDetailsModel.value?.equipment_category ?? "";
+
       selectedInventoryCategoryId =
           viewWarrantyClaimDetailsModel.value?.equipment_category_id ?? 0;
       selectedEquipmentName.value =

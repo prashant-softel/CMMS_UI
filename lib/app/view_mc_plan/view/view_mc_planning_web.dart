@@ -253,7 +253,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                       ],
                                     ),
                                   ),
-                                 
+
                                   Dimens.boxHeight12,
                                   // controller.filteredInventoryNameList.length > 0
                                   //     ?
@@ -289,125 +289,124 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                 style: Styles.blue700,
                                               ),
                                               Spacer(),
-                                              // GestureDetector(
-                                              //   onTap: () {
-                                              //     var selectedEqp = [];
-                                              //     controller.mcPlanDetailsModel
-                                              //         .value?.schedules
-                                              //         .forEach((schedule) {
-                                              //       schedule.equipments
-                                              //           ?.forEach((element) {
-                                              //         var ee = element;
-                                              //         ee!.cleaningDay =
-                                              //             schedule.cleaningDay;
-                                              //         ;
-                                              //         selectedEqp.add(element);
-                                              //         print(element?.toJson());
-                                              //       });
-                                              //     });
-                                              //     selectedEqp
-                                              //         .forEach((element) {
-                                              //       try {
-                                              //         var selectedParentIndex =
-                                              //             controller
-                                              //                 .equipmentList
-                                              //                 .value
-                                              //                 .indexWhere((eqp) =>
-                                              //                     eqp?.invId ==
-                                              //                     element
-                                              //                         .parentId);
-                                              //         print({
-                                              //           "selectedParentIndex":
-                                              //               selectedParentIndex
-                                              //         });
-                                              //         if (selectedParentIndex >
-                                              //             -1) {
-                                              //           var selectedChildIndex = controller
-                                              //                   .equipmentList
-                                              //                   .value[
-                                              //                       selectedParentIndex]
-                                              //                   ?.smbs
-                                              //                   .indexWhere((smb) =>
-                                              //                       smb.smbId ==
-                                              //                       element
-                                              //                           .id) ??
-                                              //               -1;
+                                              GestureDetector(
+                                                onTap: () {
+                                                  var selectedEqp = [];
+                                                  controller.mcPlanDetailsModel
+                                                      .value?.schedules
+                                                      .forEach((schedule) {
+                                                    schedule.equipments
+                                                        ?.forEach((element) {
+                                                      var ee = element;
+                                                      ee!.cleaningDay =
+                                                          schedule.cleaningDay;
+                                                      ;
+                                                      selectedEqp.add(element);
+                                                      print(element?.toJson());
+                                                    });
+                                                  });
+                                                  selectedEqp
+                                                      .forEach((element) {
+                                                    try {
+                                                      var selectedParentIndex =
+                                                          controller
+                                                              .equipmentList
+                                                              .value
+                                                              .indexWhere((eqp) =>
+                                                                  eqp?.invId ==
+                                                                  element
+                                                                      .parentId);
+                                                      print({
+                                                        "selectedParentIndex":
+                                                            selectedParentIndex
+                                                      });
+                                                      if (selectedParentIndex >
+                                                          -1) {
+                                                        var selectedChildIndex = controller
+                                                                .equipmentList
+                                                                .value[
+                                                                    selectedParentIndex]
+                                                                ?.smbs
+                                                                .indexWhere((smb) =>
+                                                                    smb.smbId ==
+                                                                    element
+                                                                        .id) ??
+                                                            -1;
 
-                                              //           if (selectedChildIndex >
-                                              //               -1) {
-                                              //             var ss = controller
-                                              //                     .equipmentList
-                                              //                     .value[
-                                              //                         selectedParentIndex]
-                                              //                     ?.smbs[
-                                              //                 selectedChildIndex];
-                                              //             ss?.selectedDay =
-                                              //                 "${element.cleaningDay}";
-                                              //             controller
-                                              //                     .equipmentList
-                                              //                     .value[
-                                              //                         selectedParentIndex]
-                                              //                     ?.smbs[
-                                              //                 selectedChildIndex] = ss!;
-                                              //           }
-                                              //           print({
-                                              //             "selectedChildIndex":
-                                              //                 selectedChildIndex
-                                              //           });
-                                              //         }
-                                              //       } catch (e) {
-                                              //         print({"eadfds": e});
-                                              //       }
-                                              //     });
-                                              //     // controller
-                                              //     //     .equipmentList
-                                              //     //     .value
-                                              //     //     .forEach(
-                                              //     //         (element) {
+                                                        if (selectedChildIndex >
+                                                            -1) {
+                                                          var ss = controller
+                                                                  .equipmentList
+                                                                  .value[
+                                                                      selectedParentIndex]
+                                                                  ?.smbs[
+                                                              selectedChildIndex];
+                                                          ss?.selectedDay =
+                                                              "${element.cleaningDay}";
+                                                          controller
+                                                                  .equipmentList
+                                                                  .value[
+                                                                      selectedParentIndex]
+                                                                  ?.smbs[
+                                                              selectedChildIndex] = ss!;
+                                                        }
+                                                        print({
+                                                          "selectedChildIndex":
+                                                              selectedChildIndex
+                                                        });
+                                                      }
+                                                    } catch (e) {
+                                                      print({"eadfds": e});
+                                                    }
+                                                  });
+                                                  // controller
+                                                  //     .equipmentList
+                                                  //     .value
+                                                  //     .forEach(
+                                                  //         (element) {
 
-                                              //     //         });
+                                                  //         });
 
-                                              //     // print(
-                                              //     //     'MC plan Detail:${controller.schedules.toJson()}');
-                                              //     Get.dialog(
-                                              //         ViewSetEquipmentDialog(
-                                              //       estimateDurationDays:
-                                              //           int.tryParse(
-                                              //               '${controller.durationInDayCtrlr.text}'),
-
-                                              //     ));
-                                              //   },
-                                              //   // color: ColorValues.appDarkBlueColor,
-                                              //   // onTap: () {
-                                              //   //   controller.addRowItem();
-                                              //   // },
-                                              //   child: Container(
-                                              //     height: 30,
-                                              //     width: 150,
-                                              //     decoration: BoxDecoration(
-                                              //       color:
-                                              //           ColorValues.addNewColor,
-                                              //       border: Border.all(
-                                              //         color: ColorValues
-                                              //             .lightGreyColorWithOpacity35,
-                                              //         width: 1,
-                                              //       ),
-                                              //       borderRadius:
-                                              //           BorderRadius.all(
-                                              //               Radius.circular(5)),
-                                              //     ),
-                                              //     child: Center(
-                                              //       child: Text(
-                                              //         "Set Equipments",
-                                              //         style: TextStyle(
-                                              //             fontSize: 18,
-                                              //             fontWeight:
-                                              //                 FontWeight.w100,
-                                              //             color: Colors.white),
-                                              //       ),
-                                              //     ),
-                                              //   ),
-                                              // )
+                                                  // print(
+                                                  //     'MC plan Detail:${controller.schedules.toJson()}');
+                                                  Get.dialog(
+                                                      ViewSetEquipmentDialog(
+                                                    estimateDurationDays:
+                                                        int.tryParse(
+                                                            '${controller.durationInDayCtrlr.text}'),
+                                                  ));
+                                                },
+                                                // color: ColorValues.appDarkBlueColor,
+                                                // onTap: () {
+                                                //   controller.addRowItem();
+                                                // },
+                                                child: Container(
+                                                  height: 30,
+                                                  width: 150,
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        ColorValues.addNewColor,
+                                                    border: Border.all(
+                                                      color: ColorValues
+                                                          .lightGreyColorWithOpacity35,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(5)),
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Set Equipments",
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w100,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
                                             ],
                                           ),
                                         ),
