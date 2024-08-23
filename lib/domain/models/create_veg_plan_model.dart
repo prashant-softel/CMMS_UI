@@ -5,6 +5,7 @@ CreateVegPlanModel createMcPlaningModelFromJson(String str) =>
 
 class CreateVegPlanModel {
   int? facilityId;
+  int? resubmit;
   int? planId;
   String? title;
   int? noOfCleaningDays;
@@ -15,6 +16,7 @@ class CreateVegPlanModel {
 
   CreateVegPlanModel({
     this.facilityId,
+    this.resubmit,
     this.planId,
     this.title,
     this.noOfCleaningDays,
@@ -27,6 +29,7 @@ class CreateVegPlanModel {
   factory CreateVegPlanModel.fromJson(Map<String, dynamic> json) =>
       CreateVegPlanModel(
         facilityId: json['facilityId'],
+        resubmit: json['resubmit'],
         title: json['title'],
         planId: json['planId'],
         noOfCleaningDays: json['noOfCleaningDays'],
@@ -41,6 +44,7 @@ class CreateVegPlanModel {
 
   Map<String, dynamic> toJson() => {
         "title": title,
+        "resubmit": resubmit,
         "planId": planId,
         "facilityId": facilityId,
         "startDate": startDate,

@@ -1765,11 +1765,11 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                                                                 title: 'Employees',
                                                                                                                 // initialValue: [],
                                                                                                                 initialValue: (controller.selectedEmployeeNameIdList.isNotEmpty) ? controller.selectedEmployeeNameIdList : [],
-                                                                                                                items: controller.employeesList
+                                                                                                                items: controller.employeeList
                                                                                                                     .map(
-                                                                                                                      (equipmentCategory) => MultiSelectItem(
-                                                                                                                        equipmentCategory.id,
-                                                                                                                        equipmentCategory.name ?? '',
+                                                                                                                      (emp) => MultiSelectItem(
+                                                                                                                        emp.id,
+                                                                                                                        emp.name ?? '',
                                                                                                                       ),
                                                                                                                     )
                                                                                                                     .toList(),
