@@ -172,9 +172,7 @@ class VegetationPlanListController extends GetxController {
 
   Future<void> deleteVegPlan(int? planId) async {
     await vegetationPlanListPresenter.deleteVegPlan(
-      planId: planId ?? 0,
-      isLoading: true,
-    );
+        planId: planId ?? 0, isLoading: true, facilityId: facilityId);
   }
 
   void getVegListByDate() {

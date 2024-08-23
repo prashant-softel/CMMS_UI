@@ -15,14 +15,14 @@ class AddVegetationPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<Map<String, dynamic>?> createVegetationPlan({
-    createVegetationPlans,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> createVegetationPlan(
+      {createVegetationPlans,
+      required bool isLoading,
+      int? facility_Id}) async {
     return vegetationlistUsecase.createVegetationPlan(
-      createVegetationPlans: createVegetationPlans,
-      isLoading: isLoading,
-    );
+        createVegetationPlans: createVegetationPlans,
+        isLoading: isLoading,
+        facility_Id: facility_Id);
   }
 
   Future<List<EmployeeModel?>?> getAssignedToEmployee({
@@ -71,14 +71,12 @@ class AddVegetationPresenter {
     );
   }
 
-  Future<Map<String, dynamic>?> updateVegPlan({
-    updateVegPlans,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> updateVegPlan(
+      {updateVegPlans, required bool isLoading, int? facilityId}) async {
     return vegetationlistUsecase.updateVegPlan(
-      updateVegPlans: updateVegPlans,
-      isLoading: isLoading,
-    );
+        updateVegPlans: updateVegPlans,
+        isLoading: isLoading,
+        facilityId: facilityId);
   }
 
   void saveValue({String? vegid}) async {
