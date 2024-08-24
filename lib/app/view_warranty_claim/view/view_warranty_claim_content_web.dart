@@ -150,18 +150,19 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                                         width: 20,
                                                       ),
                                                       SizedBox(
-                                                        width:
-                                                            MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                2.70,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            2.70,
                                                         child: CustomTextField(
                                                           textController: controller
                                                               .equipmentNameTextController,
                                                           readOnly: true,
                                                           hintText:
                                                               '${controller.viewWarrantyClaimDetailsModel.value?.equipment_name}',
-                                                          label: 'Equipment Name',
+                                                          label:
+                                                              'Equipment Name',
                                                           suffixIcon: Icon(Icons
                                                               .arrow_drop_down),
                                                         ),
@@ -336,7 +337,7 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                                                             mainAxisAlignment:
                                                                                 MainAxisAlignment.spaceBetween,
                                                                             children: [
-                                                                              emails('${data!.name}', '${data.email}', context)
+                                                                              emails('${data!.name}', '${data.login_id}', context)
                                                                             ],
                                                                           ))))
                                                           ],

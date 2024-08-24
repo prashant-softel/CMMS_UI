@@ -1758,27 +1758,96 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                                                         Row(
                                                                                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                                                                           children: [
-                                                                                                            SizedBox(
-                                                                                                              width: MediaQuery.of(context).size.width / 4.2,
-                                                                                                              child: CustomMultiSelectDialogField(
-                                                                                                                buttonText: 'Select Employee',
-                                                                                                                title: 'Employees',
-                                                                                                                // initialValue: [],
-                                                                                                                initialValue: (controller.selectedEmployeeNameIdList.isNotEmpty) ? controller.selectedEmployeeNameIdList : [],
-                                                                                                                items: controller.employeeList
-                                                                                                                    .map(
-                                                                                                                      (emp) => MultiSelectItem(
-                                                                                                                        emp.id,
-                                                                                                                        emp.name ?? '',
-                                                                                                                      ),
-                                                                                                                    )
-                                                                                                                    .toList(),
-                                                                                                                onConfirm: (selectedOptionsList) => {
-                                                                                                                  controller.employeesNameSelected(selectedOptionsList),
-                                                                                                                  print('Employees Name list Ids ${controller.selectedEmployeeNameIdList}')
-                                                                                                                },
+                                                                                                            Container(
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: ColorValues.whiteColor,
+                                                                                                                borderRadius: BorderRadius.circular(10),
+                                                                                                                border: Border.all(
+                                                                                                                  color: Color.fromARGB(255, 227, 224, 224),
+                                                                                                                  width: 1,
+                                                                                                                ),
+                                                                                                                boxShadow: [
+                                                                                                                  BoxShadow(
+                                                                                                                    color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                                                                                                                    spreadRadius: 2,
+                                                                                                                    blurRadius: 5,
+                                                                                                                    offset: Offset(0, 2),
+                                                                                                                  ),
+                                                                                                                ],
                                                                                                               ),
-                                                                                                            ),
+                                                                                                              width: (MediaQuery.of(context).size.width * .2),
+                                                                                                              child: Obx(() {
+                                                                                                                final isLoaded = controller.isInventoryCategoryListLoaded.value;
+
+                                                                                                                final List<MultiSelectItem<dynamic>> items = isLoaded
+                                                                                                                    ? controller.employeeList.map((equipmentCategory) {
+                                                                                                                        return MultiSelectItem(
+                                                                                                                          equipmentCategory.id,
+                                                                                                                          equipmentCategory.name ?? "",
+                                                                                                                        );
+                                                                                                                      }).toList()
+                                                                                                                    : [];
+
+                                                                                                                final initialValue = controller.selectedEmployeeNameIdList.isNotEmpty ? controller.selectedEmployeeNameIdList : [];
+
+                                                                                                                if (!isLoaded && controller.wc_id.value > 0) {
+                                                                                                                  return Container(
+                                                                                                                    height: 40,
+                                                                                                                    child: Row(
+                                                                                                                      children: [
+                                                                                                                        Text(''),
+                                                                                                                        Spacer(),
+                                                                                                                        Container(
+                                                                                                                          margin: EdgeInsets.only(
+                                                                                                                            right: 25,
+                                                                                                                            top: 12,
+                                                                                                                            bottom: 10,
+                                                                                                                          ),
+                                                                                                                          child: Icon(
+                                                                                                                            Icons.arrow_drop_down,
+                                                                                                                            color: Color(0xFF8C8C8C),
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      ],
+                                                                                                                    ),
+                                                                                                                  );
+                                                                                                                }
+
+                                                                                                                return CustomMultiSelectDialogField(
+                                                                                                                  title: 'Please Select',
+                                                                                                                  buttonText: 'Equipment Category',
+                                                                                                                  initialValue: initialValue,
+                                                                                                                  items: items,
+                                                                                                                  onConfirm: (selectedOptionsList) {
+                                                                                                                    controller.employeesNameSelected(selectedOptionsList);
+                                                                                                                    print('Selected Equipment Categories: $selectedOptionsList');
+                                                                                                                    print('Updated Selected Categories in Controller: ${controller.selectedEmployeeNameIdList}');
+                                                                                                                  },
+                                                                                                                );
+                                                                                                              }),
+                                                                                                            )
+
+                                                                                                            // SizedBox(
+                                                                                                            //   width: MediaQuery.of(context).size.width / 4.2,
+                                                                                                            //   child: CustomMultiSelectDialogField(
+                                                                                                            //     buttonText: 'Select Employee',
+                                                                                                            //     title: 'Employees',
+                                                                                                            //     // initialValue: [],
+                                                                                                            //     initialValue: (controller.selectedEmployeeNameIdList.isNotEmpty) ? controller.selectedEmployeeNameIdList : [],
+                                                                                                            //     items: controller.employeeList
+                                                                                                            //         .map(
+                                                                                                            //           (emp) => MultiSelectItem(
+                                                                                                            //             emp.id,
+                                                                                                            //             emp.name ?? '',
+                                                                                                            //           ),
+                                                                                                            //         )
+                                                                                                            //         .toList(),
+                                                                                                            //     onConfirm: (selectedOptionsList) => {
+                                                                                                            //       controller.employeesNameSelected(selectedOptionsList),
+                                                                                                            //       print('Employees Name list Ids ${controller.selectedEmployeeNameIdList}')
+                                                                                                            //     },
+                                                                                                            //   ),
+                                                                                                            // ),
                                                                                                           ],
                                                                                                         ),
                                                                                                         SizedBox(
