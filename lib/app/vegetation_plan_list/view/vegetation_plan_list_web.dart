@@ -455,7 +455,33 @@ class VegetationPlanListDataSource extends DataTableSource {
                           padding:
                               EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                           decoration: BoxDecoration(
-                            color: ColorValues.addNewColor,
+                            color:controller.vegetationPlanList
+                                      .firstWhere(
+                                        (e) =>
+                                            e.planId ==
+                                            VegetationListDetails!
+                                                .planId,
+                                        orElse: () =>
+                                            VegetationPlanListModel(
+                                                planId: 00),
+                                      )
+                                      .status ==
+                                  704
+                              ? ColorValues.approveColor
+                              :  controller.vegetationPlanList
+                                          .firstWhere(
+                                            (e) =>
+                                                e.planId ==
+                                                VegetationListDetails!
+                                                    .planId,
+                                            orElse: () =>
+                                                VegetationPlanListModel(
+                                                    planId: 00),
+                                          )
+                                          .status ==
+                                      702
+                                  ? ColorValues.yellowColor
+                                  : ColorValues.redColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(

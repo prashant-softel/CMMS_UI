@@ -37,7 +37,7 @@ class ModuleCleaningListPlanController extends GetxController {
     'Plan Title': true,
     'No of Days': true,
     'Created By': true,
-    'frequency': true,
+    'Frequency': true,
 
     // "search": true,
   });
@@ -46,7 +46,7 @@ class ModuleCleaningListPlanController extends GetxController {
     'Plan Title': 320,
     'No of Days': 220,
     'Created By': 200,
-    'frequency': 250,
+    'Frequency': 250,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -82,7 +82,7 @@ class ModuleCleaningListPlanController extends GetxController {
       'Plan Title': planTitleFilterText,
       'No of Days': noOfDaysFilterText,
       'Created By': createdByFilterText,
-      'frequency': frequencyFilterText,
+      'Frequency': frequencyFilterText,
       "Status": statusFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
