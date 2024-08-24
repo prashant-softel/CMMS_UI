@@ -580,8 +580,8 @@ class CreateWarrantyClaimController extends GetxController {
         warrantyEndDateTimeCtrlrWebBuffer = warrantyEndDateTimeCtrlrWeb.text;
       }
 
-      // costOfReplacementTextController.text =
-      //     '${int.tryParse('${inventoryDetailsModel.value?.cost ?? ''}')}';
+      costOfReplacementTextController.text =
+          '${int.tryParse('${inventoryDetailsModel.value?.cost ?? ''}')}';
       requestManufactureTextController.text =
           inventoryDetailsModel.value?.warrantyProviderName ?? '';
     }
