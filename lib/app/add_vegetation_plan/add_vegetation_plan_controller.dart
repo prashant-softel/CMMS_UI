@@ -223,11 +223,10 @@ class AddVegetationPlanController extends GetxController {
         scheduleId = firstScheduleId;
         isFirstSchedule = false;
       } else {
-        // Check if the current scheduleId already exists
         if (existingVegScheduleIds.contains(scheduleIdCounter)) {
-          scheduleId = scheduleIdCounter; // Use the existing scheduleId
+          scheduleId = scheduleIdCounter;
         } else {
-          scheduleId = 0; // New scheduleId
+          scheduleId = 0;
         }
         scheduleIdCounter++;
       }
@@ -292,11 +291,10 @@ class AddVegetationPlanController extends GetxController {
         scheduleId = firstScheduleId;
         isFirstSchedule = false;
       } else {
-        // Check if the current scheduleId already exists
         if (existingVegScheduleIds.contains(scheduleIdCounter)) {
-          scheduleId = scheduleIdCounter; // Use the existing scheduleId
+          scheduleId = scheduleIdCounter;
         } else {
-          scheduleId = 0; // New scheduleId
+          scheduleId = 0;
         }
         scheduleIdCounter++;
       }
@@ -336,8 +334,6 @@ class AddVegetationPlanController extends GetxController {
   }
 
   Future<int> fetchLastScheduleId() async {
-    // await getVegPlanDetail(planId: vegid.value, facilityId: facilityId);
-
     if (vegPlanDetailsModel.value?.schedules != null &&
         vegPlanDetailsModel.value!.schedules!.isNotEmpty) {
       return vegPlanDetailsModel.value!.schedules!.first.scheduleId ?? 0;
@@ -372,10 +368,9 @@ class AddVegetationPlanController extends GetxController {
       rowItem.value = [];
       schedules.value = _vegPlanDetails.schedules!;
 
-      // Collect existing scheduleIds, filtering out any null values
       existingVegScheduleIds = _vegPlanDetails.schedules!
           .map((schedule) => schedule.scheduleId)
-          .whereType<int>() // Ensure only non-null integers are included
+          .whereType<int>()
           .toList();
 
       _vegPlanDetails.schedules?.forEach(
