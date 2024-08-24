@@ -186,69 +186,83 @@ class EditJobContentMobile extends GetView<EditJobController> {
                   CustomRichText(title: 'Equipment Categories :'),
                   Dimens.boxHeight5,
                   IgnorePointer(
-                    ignoring: controller.typeEdit.value == 1 ? false : true,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: ColorValues.whiteColor,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Color.fromARGB(255, 227, 224, 224),
-                          width: 1,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 236, 234, 234)
-                                .withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 2),
+                      ignoring: controller.typeEdit.value == 1 ? false : true,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: ColorValues.whiteColor,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Color.fromARGB(255, 227, 224, 224),
+                            width: 1,
                           ),
-                        ],
-                      ),
-                      // width: (MediaQuery.of(context).size.width * .2),
-                      child: Obx(() {
-                        if (!controller.isInventoryCategoryListLoaded.value) {
-                          return CircularProgressIndicator(); // Loading indicator while waiting
-                        }
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Obx(() {
+                          final isLoaded =
+                              controller.isInventoryCategoryListLoaded.value;
 
-                        if (!controller.isInventoryCategoryListLoaded.value) {
-                          return CustomMultiSelectDialogField(
-                            onConfirm: (selectedOptionsList) {},
-                            buttonText: "",
-                            initialValue: [],
-                            items: [],
-                            title: "",
-                          );
-                        }
+                          final List<MultiSelectItem<dynamic>> items = isLoaded
+                              ? controller.equipmentCategoryList
+                                  .map((equipmentCategory) {
+                                  return MultiSelectItem(
+                                    equipmentCategory!.id,
+                                    equipmentCategory.name ?? "",
+                                  );
+                                }).toList()
+                              : [];
 
-                        final initialValue = controller
-                                .selectedEquipmentCategoryIdList.isNotEmpty
-                            ? controller.selectedEquipmentCategoryIdList
-                            : [];
+                          final initialValue = controller
+                                  .selectedEquipmentCategoryIdList.isNotEmpty
+                              ? controller.selectedEquipmentCategoryIdList
+                              : [];
 
-                        return CustomMultiSelectDialogField(
-                          title: 'Please Select',
-                          buttonText: 'Equipment Category',
-                          initialValue: initialValue,
-                          items: controller.equipmentCategoryList
-                              .map((equipmentCategory) {
-                            return MultiSelectItem(
-                              equipmentCategory!.id,
-                              equipmentCategory.name,
+                          if (!isLoaded) {
+                            return Container(
+                              height: 40,
+                              child: Row(
+                                children: [
+                                  Text(''),
+                                  Spacer(),
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                      right: 25,
+                                      top: 12,
+                                      bottom: 10,
+                                    ),
+                                    child: Icon(
+                                      Icons.arrow_drop_down,
+                                      color: Color(0xFF8C8C8C),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             );
-                          }).toList(),
-                          onConfirm: (selectedOptionsList) {
-                            controller.equipmentCategoriesSelected(
-                                selectedOptionsList);
-                            print(
-                                'Selected Equipment Categories: $selectedOptionsList');
-                            print(
-                                'Updated Selected Categories in Controller: ${controller.selectedEquipmentCategoryIdList}');
-                          },
-                        );
-                      }),
-                    ),
-                  ),
+                          }
+
+                          return CustomMultiSelectDialogField(
+                            title: 'Please Select',
+                            buttonText: 'Equipment Category',
+                            initialValue: initialValue,
+                            items: items,
+                            onConfirm: (selectedOptionsList) {
+                              controller.equipmentCategoriesSelected(
+                                  selectedOptionsList);
+                              print(
+                                  'Selected Equipment Categories: $selectedOptionsList');
+                              print(
+                                  'Updated Selected Categories in Controller: ${controller.selectedEquipmentCategoryIdList}');
+                            },
+                          );
+                        }),
+                      )),
                   Dimens.boxHeight20,
 
                   CustomRichText(title: 'Work Area / Equipments :'),
@@ -273,37 +287,52 @@ class EditJobContentMobile extends GetView<EditJobController> {
                           ),
                         ],
                       ),
-                      // width: (MediaQuery.of(context).size.width * .2),
                       child: Obx(() {
-                        if (!controller.isInventoryCategoryListLoaded.value) {
-                          return CircularProgressIndicator(); // Loading indicator while waiting
-                        }
+                        final isLoaded =
+                            controller.isInventoryCategoryListLoaded.value;
 
-                        if (!controller.isInventoryCategoryListLoaded.value) {
-                          return CustomMultiSelectDialogField(
-                            onConfirm: (selectedOptionsList) {},
-                            buttonText: "",
-                            initialValue: [],
-                            items: [],
-                            title: "",
-                          );
-                        }
+                        final List<MultiSelectItem<dynamic>> items = isLoaded
+                            ? controller.workAreaList.map((workarea) {
+                                return MultiSelectItem(
+                                  workarea!.id,
+                                  workarea.name ?? "",
+                                );
+                              }).toList()
+                            : [];
 
                         final initialValue =
                             controller.selectedWorkAreaIdList.isNotEmpty
                                 ? controller.selectedWorkAreaIdList
                                 : [];
 
+                        if (!isLoaded) {
+                          return Container(
+                            height: 40,
+                            child: Row(
+                              children: [
+                                Text(''),
+                                Spacer(),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    right: 25,
+                                    top: 12,
+                                    bottom: 10,
+                                  ),
+                                  child: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Color(0xFF8C8C8C),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+
                         return CustomMultiSelectDialogField(
                           title: 'Please Select',
                           buttonText: 'Equipment Category',
                           initialValue: initialValue,
-                          items: controller.workAreaList.map((workarea) {
-                            return MultiSelectItem(
-                              workarea!.id,
-                              workarea.name ?? "",
-                            );
-                          }).toList(),
+                          items: items,
                           onConfirm: (selectedOptionsList) {
                             controller.workAreasSelected(selectedOptionsList);
                             print(
@@ -416,37 +445,52 @@ class EditJobContentMobile extends GetView<EditJobController> {
                           ),
                         ],
                       ),
-                      // width: (MediaQuery.of(context).size.width * .2),
                       child: Obx(() {
-                        if (!controller.isInventoryCategoryListLoaded.value) {
-                          return CircularProgressIndicator(); // Loading indicator while waiting
-                        }
+                        final isLoaded =
+                            controller.isInventoryCategoryListLoaded.value;
 
-                        if (!controller.isInventoryCategoryListLoaded.value) {
-                          return CustomMultiSelectDialogField(
-                            onConfirm: (selectedOptionsList) {},
-                            buttonText: "",
-                            initialValue: [],
-                            items: [],
-                            title: "",
-                          );
-                        }
+                        final List<MultiSelectItem<dynamic>> items = isLoaded
+                            ? controller.workTypeList.map((workType) {
+                                return MultiSelectItem(
+                                  workType!.id,
+                                  workType.name ?? "",
+                                );
+                              }).toList()
+                            : [];
 
                         final initialValue =
                             controller.selectedWorkTypeIdList.isNotEmpty
                                 ? controller.selectedWorkTypeIdList
                                 : [];
 
+                        if (!isLoaded) {
+                          return Container(
+                            height: 40,
+                            child: Row(
+                              children: [
+                                Text(''),
+                                Spacer(),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    right: 25,
+                                    top: 12,
+                                    bottom: 10,
+                                  ),
+                                  child: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Color(0xFF8C8C8C),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+
                         return CustomMultiSelectDialogField(
                           title: 'Please Select',
                           buttonText: 'Equipment Category',
                           initialValue: initialValue,
-                          items: controller.workTypeList.map((workType) {
-                            return MultiSelectItem(
-                              workType!.id,
-                              workType.name ?? "",
-                            );
-                          }).toList(),
+                          items: items,
                           onConfirm: (selectedOptionsList) {
                             controller.workTypesSelected(selectedOptionsList);
                             print(
@@ -485,21 +529,19 @@ class EditJobContentMobile extends GetView<EditJobController> {
                           ),
                         ],
                       ),
-                      // width: (MediaQuery.of(context).size.width * .2),
                       child: Obx(() {
-                        if (!controller.isInventoryCategoryListLoaded.value) {
-                          return CircularProgressIndicator(); // Loading indicator while waiting
-                        }
+                        final isLoaded =
+                            controller.isInventoryCategoryListLoaded.value;
 
-                        if (!controller.isInventoryCategoryListLoaded.value) {
-                          return CustomMultiSelectDialogField(
-                            onConfirm: (selectedOptionsList) {},
-                            buttonText: "",
-                            initialValue: [],
-                            items: [],
-                            title: "",
-                          );
-                        }
+                        final List<MultiSelectItem<dynamic>> items = isLoaded
+                            ? controller.toolsRequiredToWorkTypeList
+                                .map((workarea) {
+                                return MultiSelectItem(
+                                  workarea!.id,
+                                  workarea.linkedToolName ?? "",
+                                );
+                              }).toList()
+                            : [];
 
                         final initialValue = controller
                                 .selectedtoolsRequiredToWorkTypeIdList
@@ -507,17 +549,34 @@ class EditJobContentMobile extends GetView<EditJobController> {
                             ? controller.selectedtoolsRequiredToWorkTypeIdList
                             : [];
 
+                        if (!isLoaded) {
+                          return Container(
+                            height: 40,
+                            child: Row(
+                              children: [
+                                Text(''),
+                                Spacer(),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    right: 25,
+                                    top: 12,
+                                    bottom: 10,
+                                  ),
+                                  child: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Color(0xFF8C8C8C),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+
                         return CustomMultiSelectDialogField(
                           title: 'Please Select',
                           buttonText: 'Equipment Category',
                           initialValue: initialValue,
-                          items: controller.toolsRequiredToWorkTypeList
-                              .map((workarea) {
-                            return MultiSelectItem(
-                              workarea!.id,
-                              workarea.linkedToolName ?? "",
-                            );
-                          }).toList(),
+                          items: items,
                           onConfirm: (selectedOptionsList) {
                             controller
                                 .toolsRequiredSelected(selectedOptionsList);
