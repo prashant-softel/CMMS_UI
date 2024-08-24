@@ -215,6 +215,7 @@ abstract class Routes {
   static const createFuelDataScreen = _Paths.createFuelDataScreen;
   static const fueldataListScreen = _Paths.fueldataListScreen;
   static const createplantationdataScreen = _Paths.createplantationdataScreen;
+  static const plantationlistScreen = _Paths.plantationlistScreen;
   static const calendarViewDashbord = _Paths.calendarViewDashbord;
 
   static const permitsTBTDataListScreen = _Paths.permitsTBTDataListScreen;
@@ -469,6 +470,7 @@ abstract class _Paths {
   static const createFuelDataScreen = '/CreateFuelDataScreen';
   static const fueldataListScreen = '/FuelDataListScreen';
   static const createplantationdataScreen = '/CreatePlantationDataScreen';
+  static const plantationlistScreen = '/PlantationListScreen';
   static const calendarViewDashbord = '/calendarViewDashbord';
 
   static const permitsTBTDataListScreen = '/PermitsTBTDataListScreen';

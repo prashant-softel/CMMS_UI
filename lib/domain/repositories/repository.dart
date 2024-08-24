@@ -23,6 +23,7 @@ import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
 import 'package:cmms/domain/models/get_occupational_list_model.dart';
+import 'package:cmms/domain/models/get_plantation_list_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/get_visitandnotice_list_model.dart';
@@ -1165,8 +1166,9 @@ class Repository {
       return Map();
     }
   }
+
 //createplantationdata
- Future<Map<String, dynamic>> createplantationdata(
+  Future<Map<String, dynamic>> createplantationdata(
       createplantationdata, bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -1184,7 +1186,7 @@ class Repository {
         Fluttertoast.showToast(
             msg: "fule data Add Successfully...", fontSize: 16.0);
         Get.offAllNamed(
-          Routes.fueldataListScreen,
+          Routes.plantationlistScreen,
         );
 
         // if (res.errorCode == 200) {
@@ -1203,6 +1205,7 @@ class Repository {
       return Map();
     }
   }
+
   //update Occupational Health
   Future<Map<String, dynamic>> updateHealthData(
     updateHealthData,
@@ -5301,6 +5304,83 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getFuelConsumption');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+//getplantationdata
+  Future<List<GetPlantationList>> getplantationdata({
+    bool? isExport,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getplantationdata(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Plantation Data: ${res.data}');
+
+      if (!res.hasError) {
+        // var incidentReportList = GetOccupationalListFromJson(res.data);
+        // return incidentReportList.reversed.toList();
+        final jsonFueListModelModels = jsonDecode(res.data);
+
+        final List<GetPlantationList> _plantationList = jsonFueListModelModels
+            .map<GetPlantationList>(
+                (m) => GetPlantationList.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        String jsonData = GetPlantationListModelToJson(_plantationList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'id',
+              'date',
+              'month_name',
+              'month_id',
+              'saplingsPlanted',
+              'saplingsSurvived',
+              'saplingsDied',
+              'status',
+              'createdBy',
+              'createdAt',
+              'updatedBy',
+              'updatedAt',
+            ],
+            ...jsonDataList
+                .map((fuellistjson) => [
+                      fuellistjson['id'],
+                      fuellistjson['date'],
+                      fuellistjson['month_name'],
+                      fuellistjson['month_id'],
+                      fuellistjson['saplingsPlanted'],
+                      fuellistjson['saplingsSurvived'],
+                      fuellistjson['saplingsDied'],
+                      fuellistjson['status'],
+                      fuellistjson['createdBy'],
+                      fuellistjson['createdAt'],
+                      fuellistjson['updatedBy'],
+                      fuellistjson['updatedAt'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> Plantationdata = {
+            'Sheet1': data,
+          };
+          exportToExcel(Plantationdata, 'FuellistData.xlsx');
+        }
+        return _plantationList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getplantationdata');
         return [];
       }
     } catch (error) {
@@ -13278,7 +13358,7 @@ class Repository {
   }
 
   Future<bool> endApproveExecution(
-      {bool? isLoading, approvetoJsonString,int? facility_id}) async {
+      {bool? isLoading, approvetoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
