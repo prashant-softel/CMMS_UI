@@ -135,6 +135,8 @@ import 'package:cmms/app/list_of_fueldata/fueldata_list_binding.dart';
 import 'package:cmms/app/list_of_fueldata/views/fueldata_list_list_screen.dart';
 import 'package:cmms/app/list_of_occupationalhealth/occupational_list_binding.dart';
 import 'package:cmms/app/list_of_occupationalhealth/views/occupational_list_screen.dart';
+import 'package:cmms/app/list_of_plantation/plantation_list_binding.dart';
+import 'package:cmms/app/list_of_plantation/views/plantation_list_list_screen.dart';
 import 'package:cmms/app/master_responsibility/responsivility_binding.dart';
 import 'package:cmms/app/master_responsibility/view/responsivility_screen.dart';
 import 'package:cmms/app/material_category/material_category_binding.dart';
@@ -1505,6 +1507,11 @@ class AppPages {
       name: _Paths.fueldataListScreen,
       page: FuelDataListScreen.new,
       binding:  FuelDataListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.plantationlistScreen,
+      page: PlantationListScreen.new,
+      binding:  PlantationListBinding(),
     ),
     
   ];

@@ -825,7 +825,22 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
+//get plantation list
+  Future<ResponseModel> getplantationdata({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetPlantationData',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
   // Get regulatraty data
   Future<ResponseModel> getVisitsAndNoticesDatalist({
     required bool isLoading,

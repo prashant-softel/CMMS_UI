@@ -710,7 +710,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                   createContentTile(
                                 title: 'List Of Plantation Data',
                                 onTap: () {
-                                  controller.goToPermitsTBTDataListScreen();
+                                  controller.goToPlantationListScreen();
                                 }),
                           ],
                         ),

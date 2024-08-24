@@ -599,7 +599,17 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
-
+//getplantationdata
+  @override
+  Future<ResponseModel> getplantationdata({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getplantationdata(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
 // getVisitsAndNoticesDatalist
   @override
   Future<ResponseModel> getVisitsAndNoticesDatalist({
