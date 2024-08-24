@@ -168,7 +168,6 @@ class AddInventoryDetailsModel {
       typeId: json['typeId'],
       area: json['area'],
 
-
       type: json['type'],
       categoryId: json['categoryId'],
       categoryName: json['categoryName'],
@@ -217,18 +216,18 @@ class AddInventoryDetailsModel {
       // start_date: Utility.getFormatedyearMonthDay(json['start_date']),
       calibrationLastDate: json['calibrationLastDate'] != null
           ? Utility.getFormatedyearMonthDay(json['calibrationLastDate'])
-          : 'default_value',
+          : '',
       calibrationDueDate: json['calibrationDueDate'] != null
           ? Utility.getFormatedyearMonthDay(json['calibrationDueDate'])
-          : 'default_value',
+          : '',
 
       expiry_date: json['expiry_date'] != null
           ? Utility.getFormatedyearMonthDay(json['expiry_date'])
-          : 'default_value',
+          : '',
 
       start_date: json['start_date'] != null
           ? Utility.getFormatedyearMonthDay(json['start_date'])
-          : 'default_value',
+          : '',
 
       // calibrationDueDate: DateTime.parse(json['calibrationDueDate']),
       specialTool: json['specialTool'],
