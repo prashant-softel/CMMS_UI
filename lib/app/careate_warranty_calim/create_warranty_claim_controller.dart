@@ -130,6 +130,7 @@ class CreateWarrantyClaimController extends GetxController {
 
   RxList<AffectedPartImages?> affectedPartImages = <AffectedPartImages>[].obs;
   RxList<AffectedPartImages?> images = <AffectedPartImages>[].obs;
+  var isInventoryCategoryListLoaded = false.obs;
 
   /// default date controller
   Rx<DateTime> dateController = DateTime.now().obs;
@@ -357,16 +358,19 @@ class CreateWarrantyClaimController extends GetxController {
         homeController.facilityId$.listen((event) async {
       facilityId = event;
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getEmployeeList();
+
+    Future.delayed(Duration(seconds: 1), () async {
+      await getEmployeeList();
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getEmployeesList();
+    Future.delayed(Duration(seconds: 1), () async {
+      await getEmployeesList();
     });
-    Future.delayed(Duration(seconds: 1), () {
+
+    Future.delayed(Duration(seconds: 1), () async {
       if (wc_id.value != 0) {
-        getViewWarrantyClaimDetail(wc_id: wc_id.value, facilityId: facilityId);
-        getHistory(facilityId: facilityId, wcId: wc_id.value);
+        await getViewWarrantyClaimDetail(
+            wc_id: wc_id.value, facilityId: facilityId);
+        await getHistory(facilityId: facilityId, wcId: wc_id.value);
       }
       // getFacilityList();
     });
@@ -502,7 +506,7 @@ class CreateWarrantyClaimController extends GetxController {
       if (viewWarrantyClaimDetailsModel.value?.additionalEmailEmployees !=
           null) {
         idList = viewWarrantyClaimDetailsModel.value!.additionalEmailEmployees!
-            .map((employee) => employee?.user_id ?? 0)
+            .map((employee) => employee?.id ?? 0)
             .toList();
       }
       employeesNameSelected(idList);
@@ -719,8 +723,23 @@ class CreateWarrantyClaimController extends GetxController {
     update(['unit_currency_list']);
   }
 
-  void getEmployeeList() async {
+  // Future<void> getEmployeeList() async {
+  //   employeeList.value = <EmployeeListModel>[];
+  //   final _employeeList = await warrantyClaimPresenter.getEmployeeList(
+  //     isLoading: true,
+  //     // categoryIds: categoryIds,
+  //     facility_id: facilityId,
+  //   );
+  //   print('Employee List:$employeeList');
+  //   for (var employee_list in _employeeList) {
+  //     employeeList.add(employee_list);
+  //   }
+
+  //   update(['employee_list']);
+  // }
+  Future<void> getEmployeeList() async {
     employeeList.value = <EmployeeListModel>[];
+    isInventoryCategoryListLoaded.value = false;
     final _employeeList = await warrantyClaimPresenter.getEmployeeList(
       isLoading: true,
       // categoryIds: categoryIds,
@@ -732,9 +751,10 @@ class CreateWarrantyClaimController extends GetxController {
     }
 
     update(['employee_list']);
+    isInventoryCategoryListLoaded.value = true;
   }
 
-  void getEmployeesList() async {
+  Future<void> getEmployeesList() async {
     employeesList.value = <EmployeeModel>[];
     final _employeesList = await warrantyClaimPresenter.getEmployeList(
       isLoading: true,

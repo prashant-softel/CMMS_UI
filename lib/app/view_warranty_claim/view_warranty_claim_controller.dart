@@ -116,8 +116,8 @@ class ViewWarrantyClaimController extends GetxController {
   ///External Emails list from api
   RxList<ExternalsEmailsList?>? externalEmailsList =
       <ExternalsEmailsList?>[].obs;
-  RxList<AdditionalEmailsEmployeesList?>? additionalEmailEmployees =
-      <AdditionalEmailsEmployeesList?>[].obs;
+  RxList<EmployeeListModel?>? additionalEmailEmployees =
+      <EmployeeListModel?>[].obs;
   RxList<AffectedParts?>? affectedParts = <AffectedParts?>[].obs;
 
   ///Supplier ACtion
@@ -168,7 +168,6 @@ class ViewWarrantyClaimController extends GetxController {
     if (wc_id != null) {
       Future.delayed(Duration(seconds: 1), () {
         getViewWarrantyClaimDetail(wc_id: wc_id!, facilityId: facilityId);
-
       });
     }
 
@@ -222,7 +221,8 @@ class ViewWarrantyClaimController extends GetxController {
     }
   }
 
-  Future<void> getViewWarrantyClaimDetail({required int wc_id, required int facilityId}) async {
+  Future<void> getViewWarrantyClaimDetail(
+      {required int wc_id, required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     viewWarrantyClaimDetailsList?.value = <ViewWarrantyClaimModel>[];
 

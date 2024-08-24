@@ -5,6 +5,7 @@
 import 'dart:convert';
 
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/domain/models/employee_list_model.dart';
 
 ViewWarrantyClaimModel viewWarrantyClaimDetailModelFromJson(String str) =>
     ViewWarrantyClaimModel.fromJson(json.decode(str));
@@ -101,7 +102,7 @@ class ViewWarrantyClaimModel {
   String? status_long;
   String? wstart_date;
   String? wend_date;
-  List<AdditionalEmailsEmployeesList?>? additionalEmailEmployees;
+  List<EmployeeListModel?>? additionalEmailEmployees;
   List<ExternalsEmailsList?>? externalEmails;
   List<SuppliersActionsList?>? supplierActions;
   List<AffectedPartImages?>? affectedPartsImages;
@@ -158,9 +159,8 @@ class ViewWarrantyClaimModel {
             ? null
             : Utility.getFormatedyearMonthDay(json['warrantyEndDate']),
         additionalEmailEmployees: json["additionalEmailEmployees"] != null
-            ? List<AdditionalEmailsEmployeesList>.from(
-                json["additionalEmailEmployees"]
-                    .map((x) => AdditionalEmailsEmployeesList.fromJson(x)))
+            ? List<EmployeeListModel>.from(json["additionalEmailEmployees"]
+                .map((x) => EmployeeListModel.fromJson(x)))
             : [],
         externalEmails: json["externalEmails"] != null
             ? List<ExternalsEmailsList>.from(json["externalEmails"]
@@ -259,30 +259,6 @@ class ExternalsEmailsList {
       };
 }
 
-class AdditionalEmailsEmployeesList {
-  AdditionalEmailsEmployeesList({
-    this.name,
-    this.email,
-    this.user_id,
-  });
-  int? user_id;
-  String? name;
-  String? email;
-
-  factory AdditionalEmailsEmployeesList.fromJson(Map<String, dynamic> json) =>
-      AdditionalEmailsEmployeesList(
-        user_id: json['user_id'],
-        name: json["name"],
-        email: json["email"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "user_id": user_id,
-        "name": name,
-        "email": email,
-      };
-}
-
 class AffectedParts {
   AffectedParts({
     this.name,
@@ -344,7 +320,7 @@ class AffectedPartImages {
 
 String addExternalsEmailsListToJson(ExternalsEmailsList data) =>
     json.encode(data.toJson());
-String additionalEmailEmployeesListToJson(AdditionalEmailsEmployeesList data) =>
+String additionalEmailEmployeesListToJson(EmployeeListModel data) =>
     json.encode(data.toJson());
 String addSuppliersActionsListToJson(SuppliersActionsList data) =>
     json.encode(data.toJson());
