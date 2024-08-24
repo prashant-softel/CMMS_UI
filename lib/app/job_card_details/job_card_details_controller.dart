@@ -1081,7 +1081,9 @@ class JobCardDetailsController extends GetxController {
 
     final Size pageSize = page.getClientSize();
 
-    var url = "assets/assets/files/logo.png";
+    var url = "assets/files/HFE Logo.png";
+    // var url = "assets/files/hfeLogo.jpg";
+
     var response = await get(Uri.parse(url));
     var data = response.bodyBytes;
 
