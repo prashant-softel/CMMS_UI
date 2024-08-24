@@ -6,6 +6,7 @@ import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/request_calibration_model.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,10 @@ class CalibrationListController extends GetxController {
     rowsPerPage: 10,
   );
   var commentCtrlr = TextEditingController();
+  RxList<BusinessTypeModel?> businessCategoryList = <BusinessTypeModel>[].obs;
+  Rx<bool> isSelectedBusinessType = true.obs;
+  Rx<String?> selectedBusinessType = ''.obs;
+  int selectedBusinessTypeId = 0;
 
   var isToggleOn = false.obs;
   final isSuccess = false.obs;
@@ -123,7 +128,7 @@ class CalibrationListController extends GetxController {
       facilityId = event;
       if (facilityId > 0) {
         Future.delayed(Duration(seconds: 1), () {
-          getVenderNameList(facilityId);
+          getBusinessTypeList();
         });
         Future.delayed(Duration(seconds: 1), () {
           getCalibrationList(facilityId, false);
@@ -193,12 +198,34 @@ class CalibrationListController extends GetxController {
     }
   }
 
-  void getVenderNameList(int facilityId) async {
+  Future<void> getBusinessTypeList() async {
+    // if(isSelectedBusinessType == true ){
+    //   businessCategoryList.value = <BusinessTypeModel>[];
+    // }else{
+    print("$selectedBusinessTypeId");
+    final list = await calibrationListPresenter.getBusinessTypeList();
+
+    for (var _equipmentCategoryList in list) {
+      businessCategoryList.add(_equipmentCategoryList);
+    }
+    // if(selectedBusinessType.value != '')
+
+    //   print("$selectedBusinessTypeId");
+    //
+    //   getBusinessList(selectedBusinessTypeId, true);
+    // }
+    // print("$selectedBusinessTypeId");
+    // }
+    // selectedBusinessType.value = businessCategoryList[0]?.name!;
+    // selectedBusinessTypeId = businessCategoryList[0]?.id??0;
+  }
+
+  void getVenderNameList(int selectedBusinessTypeId, int facilityId) async {
     venderNameList.value = <BusinessListModel>[];
     final _venderNameList = await calibrationListPresenter.getVenderNameList(
       facilityId: facilityId,
       isLoading: true,
-      businessType: 4,
+      businessType: selectedBusinessTypeId,
     );
     for (var supplier_list in _venderNameList) {
       venderNameList.add(supplier_list);
@@ -224,7 +251,22 @@ class CalibrationListController extends GetxController {
           }
         }
         break;
+      case const (RxList<BusinessTypeModel>):
+        {
+          if (value != "Please Select") {
+            int equipmentIndex =
+                businessCategoryList.indexWhere((x) => x?.name == value);
+            selectedBusinessTypeId =
+                businessCategoryList[equipmentIndex]?.id ?? 0;
+            selectedBusinessType.value = value;
+            
+            getVenderNameList(selectedBusinessTypeId, facilityId);
+          } else {
+            selectedBusinessTypeId = 0;
+          }
+        }
 
+        break;
       default:
         {
           //statements;
@@ -866,6 +908,57 @@ class CalibrationListController extends GetxController {
                               color: ColorValues.greyLightColor,
                             ),
                           ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Bussiness Type :"),
+                      Spacer(),
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: const Offset(
+                                2.0,
+                                3.0,
+                              ),
+                              blurRadius: 3.0,
+                              spreadRadius: 1.0,
+                            ),
+                          ],
+                          color: ColorValues.whiteColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        width: Get.width / 5,
+                        child: DropdownWebWidget(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: const Offset(
+                                5.0,
+                                5.0,
+                              ),
+                              blurRadius: 5.0,
+                              spreadRadius: 1.0,
+                            ),
+                            BoxShadow(
+                              color: ColorValues.whiteColor,
+                              offset: const Offset(0.0, 0.0),
+                              blurRadius: 0.0,
+                              spreadRadius: 0.0,
+                            ),
+                          ],
+                          dropdownList: businessCategoryList,
+                          isValueSelected: isSelectedBusinessType.value,
+                          selectedValue: selectedBusinessType.value,
+                          onValueChanged: onValueChanged,
+                        ),
+                      )
                     ],
                   ),
                   SizedBox(

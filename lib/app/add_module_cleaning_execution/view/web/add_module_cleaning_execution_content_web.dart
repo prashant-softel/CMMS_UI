@@ -312,15 +312,18 @@ class AddModuleCleaningExecutionContentWeb
                                                   ' ${controller.mcExecutionDetailsModel.value?.plannedBy}',
                                                   style: Styles.blue17,
                                                 ),
-                                               controller.mcExecutionDetailsModel.value?.status!=360?  
-                                                Text(
+                                                controller.mcExecutionDetailsModel
+                                                            .value?.status !=
+                                                        360
+                                                    ? Text(
                                                         controller
                                                                 .mcExecutionDetailsModel
                                                                 .value
                                                                 ?.startDate ??
                                                             '',
                                                         style: Styles.blue17,
-                                                      ):Text("")
+                                                      )
+                                                    : Text("")
                                               ],
                                             ),
                                             Spacer(),
@@ -760,6 +763,24 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                             controller.clearPermitStoreData();
                                                                                                                             controller.viewNewPermitList(permitId: filterdData?.permit_id, jobId: controller.jobDetailsModel.value!.id ?? 0);
                                                                                                                           })
+                                                                                                                      : Dimens.box0,
+                                                                                                                  controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.ptw_status == 124 || controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.ptw_status == 132
+
+                                                                                                                      // controller.pmtaskViewModel.value?.ptw_status == 124 || controller.pmtaskViewModel.value?.ptw_status == 132
+                                                                                                                      ? TableActionButton(
+                                                                                                                          color: Color.fromARGB(255, 116, 78, 130),
+                                                                                                                          icon: Icons.ads_click,
+                                                                                                                          message: 'Re-Submit Permit',
+                                                                                                                          onPress: () {
+                                                                                                                            var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                                                                                                               controller.editNewPermit(permitId: filterdData?.permit_id, isChecked: false
+                                                                                                                            // controller
+                                                                                                                            //     .isChecked
+                                                                                                                            //     .value
+                                                                                                                               );
+                                                                                                                          },
+                                                                                                                        )
                                                                                                                       : Dimens.box0,
                                                                                                                   //  record[9]['value'] == "Scheduled"
                                                                                                                   // controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 360

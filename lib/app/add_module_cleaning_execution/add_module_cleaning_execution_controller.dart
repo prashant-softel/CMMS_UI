@@ -19,6 +19,7 @@ import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/update_mc_execution_model.dart';
+import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -104,7 +105,7 @@ class AddModuleCleaningExecutionController extends GetxController {
       <InventoryCategoryModel>[].obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
 
-  var equipments = <Equipments>[].obs;
+  var equipments = <EquipmentsMc>[].obs;
   RxList<InventoryCategoryModel?> filteredequipmentsList =
       <InventoryCategoryModel>[].obs;
   Rx<int> permitIdclose = 0.obs;
@@ -144,7 +145,8 @@ class AddModuleCleaningExecutionController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-
+  Rx<VegExecutionDetailsModel?> vegExecutionDetailsModel =
+      VegExecutionDetailsModel().obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
@@ -356,6 +358,29 @@ class AddModuleCleaningExecutionController extends GetxController {
     }
   }
 
+  Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
+    // clearStoreData();
+    clearJobDetailStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearpmTaskValue();
+    clearPermitStoreData();
+    clearmcDetailsStoreData();
+    Get.toNamed(Routes.createPermit, arguments: {
+      "jobModel": jobDetailsModel.value,
+      "permitId": permitId,
+      "isChecked": isChecked,
+      "type": 4,
+      "isFromJobDetails": true,
+      "pmTaskModel": pmtaskViewModel.value,
+      "mcModel": mcExecutionDetailsModel.value,
+      "vegModel": vegExecutionDetailsModel.value,
+      "scheduleID": 0
+    });
+    print('PermitIDForTBt:$permitId');
+    print('PermitIdArgument:$isChecked');
+  }
+
   ///Update MC Schedule Execution
   void updateMCScheduleExecution(
       {int? scheduleId,
@@ -536,10 +561,10 @@ class AddModuleCleaningExecutionController extends GetxController {
     {
       String _remark = remarkTextFieldCtrlr.text.trim();
 
-      late List<Equipments> equipments_list = [];
+      late List<EquipmentsMc> equipments_list = [];
 
       filteredequipmentsList.forEach((e) {
-        equipments_list.add(Equipments(id: e?.id));
+        equipments_list.add(EquipmentsMc(id: e?.id));
       });
 
       EndMCExecutionModel endMCModel = EndMCExecutionModel(
