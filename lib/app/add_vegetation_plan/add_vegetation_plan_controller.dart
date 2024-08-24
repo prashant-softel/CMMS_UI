@@ -201,6 +201,7 @@ class AddVegetationPlanController extends GetxController {
     int firstScheduleId = await fetchLastScheduleId();
     int scheduleIdCounter = firstScheduleId + 1;
     Map<int, List<Equipments>> equipmentMap = {};
+
     equipmentList.forEach((equipment) {
       equipment?.smbs?.forEach((smb) {
         if (smb.selectedDay != null) {
@@ -222,12 +223,19 @@ class AddVegetationPlanController extends GetxController {
         scheduleId = firstScheduleId;
         isFirstSchedule = false;
       } else {
-        scheduleId = scheduleIdCounter++;
+        // Check if the current scheduleId already exists
+        if (existingVegScheduleIds.contains(scheduleIdCounter)) {
+          scheduleId = scheduleIdCounter; // Use the existing scheduleId
+        } else {
+          scheduleId = 0; // New scheduleId
+        }
+        scheduleIdCounter++;
       }
       return Schedule(
-          cleaningDay: entry.key,
-          equipments: entry.value,
-          scheduleId: scheduleId);
+        cleaningDay: entry.key,
+        equipments: entry.value,
+        scheduleId: scheduleId,
+      );
     }).toList();
 
     print({"sch": sch});
@@ -255,14 +263,14 @@ class AddVegetationPlanController extends GetxController {
             isLoading: true,
             facilityId: facilityId);
     if (responseCreateVegModel == null) {}
-    print('update MC   data: $updateVegModelJsonString');
+    print('update Veg Plan data: $updateVegModelJsonString');
   }
-
 
   void resubmitVegPlan() async {
     int firstScheduleId = await fetchLastScheduleId();
     int scheduleIdCounter = firstScheduleId + 1;
     Map<int, List<Equipments>> equipmentMap = {};
+
     equipmentList.forEach((equipment) {
       equipment?.smbs?.forEach((smb) {
         if (smb.selectedDay != null) {
@@ -284,12 +292,19 @@ class AddVegetationPlanController extends GetxController {
         scheduleId = firstScheduleId;
         isFirstSchedule = false;
       } else {
-        scheduleId = scheduleIdCounter++;
+        // Check if the current scheduleId already exists
+        if (existingVegScheduleIds.contains(scheduleIdCounter)) {
+          scheduleId = scheduleIdCounter; // Use the existing scheduleId
+        } else {
+          scheduleId = 0; // New scheduleId
+        }
+        scheduleIdCounter++;
       }
       return Schedule(
-          cleaningDay: entry.key,
-          equipments: entry.value,
-          scheduleId: scheduleId);
+        cleaningDay: entry.key,
+        equipments: entry.value,
+        scheduleId: scheduleId,
+      );
     }).toList();
 
     print({"sch": sch});
@@ -317,7 +332,7 @@ class AddVegetationPlanController extends GetxController {
             isLoading: true,
             facilityId: facilityId);
     if (responseCreateVegModel == null) {}
-    print('update MC   data: $updateVegModelJsonString');
+    print('update Veg Plan data: $updateVegModelJsonString');
   }
 
   Future<int> fetchLastScheduleId() async {
@@ -330,6 +345,8 @@ class AddVegetationPlanController extends GetxController {
       return 0;
     }
   }
+
+  List<int> existingVegScheduleIds = [];
 
   Future<void> getVegPlanDetail({
     required int planId,
@@ -354,6 +371,13 @@ class AddVegetationPlanController extends GetxController {
           vegPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
       rowItem.value = [];
       schedules.value = _vegPlanDetails.schedules!;
+
+      // Collect existing scheduleIds, filtering out any null values
+      existingVegScheduleIds = _vegPlanDetails.schedules!
+          .map((schedule) => schedule.scheduleId)
+          .whereType<int>() // Ensure only non-null integers are included
+          .toList();
+
       _vegPlanDetails.schedules?.forEach(
         (element) {
           rowItem.value.add(
