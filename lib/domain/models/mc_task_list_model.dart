@@ -26,6 +26,7 @@ class MCTaskListModel {
     this.status,
     this.status_short,
     this.title,
+    this.abondond_done_date,
   });
 
   int? executionId;
@@ -39,6 +40,7 @@ class MCTaskListModel {
   int? status;
   String? status_short;
   String? title;
+  String? abondond_done_date;
 
   factory MCTaskListModel.fromJson(Map<String, dynamic> json) =>
       MCTaskListModel(
@@ -53,6 +55,8 @@ class MCTaskListModel {
         status: json['status'],
         status_short: json["status_short"],
         title: json["title"],
+        abondond_done_date:
+            Utility.getFormatedyearMonthDay(json['abondond_done_date']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,6 +70,7 @@ class MCTaskListModel {
         "doneDate": doneDate,
         "status": status,
         "status_short": status_short,
-        "title": title
+        "title": title,
+        "abondond_done_date": abondond_done_date
       };
 }

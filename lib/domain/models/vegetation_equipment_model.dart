@@ -13,7 +13,7 @@ class VegetationEquipmentModel {
   String? invName;
   int? moduleQuantity;
   bool isExpanded;
-  int? area;
+  double? area;
   List<SMBS>? smbs;
   String? selectedDay;
 
@@ -58,7 +58,7 @@ class SMBS {
   int? smbId;
   String? smbName;
   int? moduleQuantity;
-  int? area;
+  double? area;
   String? selectedDay;
   SMBS({
     this.parentId,

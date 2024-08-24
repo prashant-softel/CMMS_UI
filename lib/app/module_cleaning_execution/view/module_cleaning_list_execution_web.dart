@@ -516,9 +516,13 @@ class MCExcutionListDataSource extends DataTableSource {
       McExcutionListDetails?.startDate == "0001-01-01"
           ? "-"
           : '${McExcutionListDetails?.startDate ?? ''}',
-      McExcutionListDetails?.doneDate == "0001-01-01"
-          ? "-"
-          : '${McExcutionListDetails?.doneDate ?? ''}',
+
+      McExcutionListDetails?.status == 369
+          ? '${McExcutionListDetails?.abondond_done_date ?? ''}'
+          : (McExcutionListDetails?.doneDate == "0001-01-01"
+              ? "-"
+              : '${McExcutionListDetails?.doneDate ?? ''}'),
+
       // '${McExcutionListDetails?.status_short ?? ''}',
 
       'Actions',

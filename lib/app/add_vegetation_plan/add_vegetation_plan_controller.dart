@@ -51,6 +51,8 @@ class AddVegetationPlanController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> vegid = 0.obs;
+  Rx<int> vegType = 0.obs;
+
   RxList<VegetationEquipmentModel?> equipmentList =
       <VegetationEquipmentModel?>[].obs;
   RxList<SMBS> smbsList = <SMBS>[].obs;
@@ -123,6 +125,8 @@ class AddVegetationPlanController extends GetxController {
       if (_vegid == null || _vegid == '' || _vegid == "null") {
         var dataFromPreviousScreen = Get.arguments;
         vegid.value = dataFromPreviousScreen['vegid'];
+        vegType.value = dataFromPreviousScreen['vegType'];
+
         addVegetationPresenter.saveValue(vegid: vegid.value.toString());
       } else {
         vegid.value = int.tryParse(_vegid) ?? 0;
@@ -194,6 +198,68 @@ class AddVegetationPlanController extends GetxController {
   }
 
   void updateVegPlan() async {
+    int firstScheduleId = await fetchLastScheduleId();
+    int scheduleIdCounter = firstScheduleId + 1;
+    Map<int, List<Equipments>> equipmentMap = {};
+    equipmentList.forEach((equipment) {
+      equipment?.smbs?.forEach((smb) {
+        if (smb.selectedDay != null) {
+          int day = int.tryParse(smb.selectedDay!) ?? 0;
+          if (day > 0) {
+            if (!equipmentMap.containsKey(day)) {
+              equipmentMap[day] = [];
+            }
+            equipmentMap[day]!.add(Equipments(id: smb.smbId));
+          }
+        }
+      });
+    });
+
+    bool isFirstSchedule = true;
+    List<Schedule> sch = equipmentMap.entries.map((entry) {
+      int scheduleId;
+      if (isFirstSchedule) {
+        scheduleId = firstScheduleId;
+        isFirstSchedule = false;
+      } else {
+        scheduleId = scheduleIdCounter++;
+      }
+      return Schedule(
+          cleaningDay: entry.key,
+          equipments: entry.value,
+          scheduleId: scheduleId);
+    }).toList();
+
+    print({"sch": sch});
+
+    String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
+    String _vegTitleController = vegTitleController.text.trim();
+    String _startDate = startDateTc.text.trim();
+
+    CreateVegPlanModel createVegModel = CreateVegPlanModel(
+      planId: vegid.value,
+      resubmit: 0,
+      facilityId: facilityId,
+      startDate: _startDate,
+      frequencyId: selectedfrequencyId,
+      noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
+      title: _vegTitleController,
+      assignedTo: selectedAssignedToId.value,
+      schedules: sch,
+    );
+
+    var updateVegModelJsonString = [createVegModel.toJson()];
+    Map<String, dynamic>? responseCreateVegModel =
+        await addVegetationPresenter.updateVegPlan(
+            updateVegPlans: updateVegModelJsonString,
+            isLoading: true,
+            facilityId: facilityId);
+    if (responseCreateVegModel == null) {}
+    print('update MC   data: $updateVegModelJsonString');
+  }
+
+
+  void resubmitVegPlan() async {
     int firstScheduleId = await fetchLastScheduleId();
     int scheduleIdCounter = firstScheduleId + 1;
     Map<int, List<Equipments>> equipmentMap = {};

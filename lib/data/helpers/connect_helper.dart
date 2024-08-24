@@ -808,8 +808,9 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   // get fuel list
-     Future<ResponseModel> getFuelConsumption({
+  Future<ResponseModel> getFuelConsumption({
     required bool isLoading,
     required String auth,
   }) async {
@@ -824,8 +825,9 @@ class ConnectHelper {
     );
     return responseModel;
   }
-   // Get regulatraty data
-   Future<ResponseModel> getVisitsAndNoticesDatalist({
+
+  // Get regulatraty data
+  Future<ResponseModel> getVisitsAndNoticesDatalist({
     required bool isLoading,
     required String auth,
   }) async {
@@ -3760,8 +3762,9 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   // craete fule data
-    Future<ResponseModel> createfuledata({
+  Future<ResponseModel> createfuledata({
     required String auth,
     createfuledata,
     bool? isLoading,
@@ -3783,8 +3786,9 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   //CreatePlantationData
-    Future<ResponseModel> createplantationdata({
+  Future<ResponseModel> createplantationdata({
     required String auth,
     createplantationdata,
     bool? isLoading,
@@ -8495,14 +8499,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> endApproveExecution({
-    required String auth,
-    approvetoJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> endApproveExecution(
+      {required String auth,
+      approvetoJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/',
+      'MC/ApproveEndExecution?facility_id=$facility_id',
       Request.put,
       // {'comment': "$comment", 'id': id},
       approvetoJsonString,
@@ -9478,7 +9482,7 @@ class ConnectHelper {
       int? facilityId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/StartScheduleExecutionVegetation?scheduleId=$scheduleId&facilityId=facilityId',
+      'Vegetation/StartScheduleExecutionVegetation?scheduleId=$scheduleId&facilityId=$facilityId',
       Request.put,
       null,
       isLoading ?? true,
