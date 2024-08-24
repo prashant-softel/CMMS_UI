@@ -215,6 +215,8 @@ abstract class Routes {
   static const createFuelDataScreen = _Paths.createFuelDataScreen;
   static const fueldataListScreen = _Paths.fueldataListScreen;
   static const createplantationdataScreen = _Paths.createplantationdataScreen;
+  static const createkaizensScreen = _Paths.createkaizensScreen;
+  static const kaizensListScreen = _Paths.kaizensListScreen;
   static const plantationlistScreen = _Paths.plantationlistScreen;
   static const calendarViewDashbord = _Paths.calendarViewDashbord;
 
@@ -470,6 +472,8 @@ abstract class _Paths {
   static const createFuelDataScreen = '/CreateFuelDataScreen';
   static const fueldataListScreen = '/FuelDataListScreen';
   static const createplantationdataScreen = '/CreatePlantationDataScreen';
+  static const createkaizensScreen = '/CreateKaizensScreen';
+  static const kaizensListScreen = '/KaizensListScreen';
   static const plantationlistScreen = '/PlantationListScreen';
   static const calendarViewDashbord = '/calendarViewDashbord';
 

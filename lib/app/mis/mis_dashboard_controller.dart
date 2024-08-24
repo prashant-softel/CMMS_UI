@@ -230,6 +230,12 @@ class MisDashboardController extends GetxController {
     void goToPlantationListScreen() {
     Get.toNamed(Routes.plantationlistScreen);
   }
+     void goToCreateKaizensScreen() {
+    Get.toNamed(Routes.createkaizensScreen);
+  }
+     void goToKaizensListScreen() {
+    Get.toNamed(Routes.kaizensListScreen);
+  }
 
   
 }

@@ -71,6 +71,8 @@ import 'package:cmms/app/create_fueldata/create_fueldata_binding.dart';
 import 'package:cmms/app/create_fueldata/views/create_fueldata_screen.dart';
 import 'package:cmms/app/create_grievance/create_grievance_binding.dart';
 import 'package:cmms/app/create_grievance/view/create_grievance_screen.dart';
+import 'package:cmms/app/create_kaizens/create_kaizens_binding.dart';
+import 'package:cmms/app/create_kaizens/views/create_kaizens_screen.dart';
 import 'package:cmms/app/create_mis_plan/create_mis_plan_binding.dart';
 import 'package:cmms/app/create_mis_plan/view/create_mis_plan_screen.dart';
 import 'package:cmms/app/create_mrs/create_mrs_binding.dart';
@@ -133,6 +135,8 @@ import 'package:cmms/app/list_of_Regulatary_Visits/regulataryvisits_list_binding
 import 'package:cmms/app/list_of_Regulatary_Visits/views/regulataryvisits_list_screen.dart';
 import 'package:cmms/app/list_of_fueldata/fueldata_list_binding.dart';
 import 'package:cmms/app/list_of_fueldata/views/fueldata_list_list_screen.dart';
+import 'package:cmms/app/list_of_kaizensdata/kaizensdata_list_binding.dart';
+import 'package:cmms/app/list_of_kaizensdata/views/kaizensdata_list_list_screen.dart';
 import 'package:cmms/app/list_of_occupationalhealth/occupational_list_binding.dart';
 import 'package:cmms/app/list_of_occupationalhealth/views/occupational_list_screen.dart';
 import 'package:cmms/app/list_of_plantation/plantation_list_binding.dart';
@@ -1512,6 +1516,18 @@ class AppPages {
       name: _Paths.plantationlistScreen,
       page: PlantationListScreen.new,
       binding:  PlantationListBinding(),
+    ),
+    
+    GetPage<dynamic>(
+      name: _Paths.createkaizensScreen,
+      page: KaizensScreen.new,
+      binding:  KaizensBinding(),
+    ),
+    
+    GetPage<dynamic>(
+      name: _Paths.kaizensListScreen,
+      page: KaizensListScreen.new,
+      binding:  KaizensListBinding(),
     ),
     
   ];
