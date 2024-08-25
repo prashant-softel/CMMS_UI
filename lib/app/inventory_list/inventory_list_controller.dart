@@ -88,9 +88,11 @@ class InventoryListController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () async {
-        await getInventoryAssetsList(facilityId, false);
-      });
+      if (facilityId > 0) {
+        Future.delayed(Duration(seconds: 1), () async {
+          await getInventoryAssetsList(facilityId, false);
+        });
+      }
     });
     super.onInit();
   }
