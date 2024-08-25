@@ -57,9 +57,9 @@ class WarrantyClaimUpdatedMessageDialog extends GetView {
                                 .bold, // Set any additional styles as needed
                           ),
                         ),
-                        TextSpan(
-                            text:
-                                '. \nPlease Click on OK button to go to Warranty Claim List.'),
+                        // TextSpan(
+                        //     text:
+                        //         '. \nPlease Click on OK button to go to Warranty Claim List.'),
                       ],
                     ),
                   ),
