@@ -491,7 +491,8 @@ class CreateWarrantyClaimController extends GetxController {
       warrantyEndDateTimeCtrlrWebBuffer =
           viewWarrantyClaimDetailsModel.value?.wend_date ?? "";
       costOfReplacementTextController.text =
-          viewWarrantyClaimDetailsModel.value?.cost_of_replacement ?? "";
+          viewWarrantyClaimDetailsModel.value?.cost_of_replacement.toString() ??
+              "";
       immediateCorrectiveActionTextController.text =
           viewWarrantyClaimDetailsModel.value?.corrective_action_by_buyer ?? "";
       requestManufactureTextController.text =

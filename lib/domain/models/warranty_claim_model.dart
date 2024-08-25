@@ -43,7 +43,7 @@ class WarrantyClaimModel {
   String? good_order_id;
   String? order_reference_number;
   String? warranty_description;
-  String? estimated_cost;
+  int? estimated_cost;
   String? long_claim_status;
   int? quantity;
   String? status;
