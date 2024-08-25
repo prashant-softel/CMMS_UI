@@ -366,7 +366,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                 ),
                                                 DataColumn(
                                                   label: Text(
-                                                    "View Image",
+                                                    "View",
                                                     style: TextStyle(
                                                       fontSize: 15,
                                                       fontWeight:
