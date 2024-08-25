@@ -484,7 +484,7 @@ class WarrantyClaimListDataSource extends DataTableSource {
       '${WarrantyClaimListDetails?.equipment_sr_no ?? ''}',
       '${WarrantyClaimListDetails?.equipment_category ?? ''}',
       '${WarrantyClaimListDetails?.equipment_name ?? ''}',
-      '${WarrantyClaimListDetails?.estimated_cost ?? ''}',
+      '${WarrantyClaimListDetails?.estimated_cost.toString() ?? ""}',
       'Actions',
     ];
     var cells = [];

@@ -249,7 +249,8 @@ class ViewWarrantyClaimController extends GetxController {
       failureDateTimeTextController.text =
           '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewWarrantyClaimDetailsModel.value?.failure_time}'))}';
       costOfReplacementTextController.text =
-          viewWarrantyClaimDetailsModel.value?.cost_of_replacement ?? '';
+          viewWarrantyClaimDetailsModel.value?.cost_of_replacement.toString() ??
+              '';
       // warrantyStartDateTextController.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewWarrantyClaimDetailsModel.value?.date_of_claim ?? ''}'))}';
       warrantyClaimTitleTextController.text =
           viewWarrantyClaimDetailsModel.value?.warranty_claim_title ?? '';

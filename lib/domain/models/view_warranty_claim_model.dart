@@ -85,7 +85,7 @@ class ViewWarrantyClaimModel {
   String? failure_time;
   int? estimated_cost;
   int? quantity;
-  String? cost_of_replacement;
+  int? cost_of_replacement;
   int? approxdailyloss;
   int? currencyId;
   String? currency;

@@ -327,7 +327,7 @@ class EditWarrantyClaimController extends GetxController {
       warrantyEndDateTimeCtrlrWeb.text =
           '${DateFormat('yyyy-MM-dd').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time ?? ''}'))}';
       costOfReplacementTextController.text =
-          editWarrantyClaimDetailsModel.value?.cost_of_replacement ?? '';
+          editWarrantyClaimDetailsModel.value?.cost_of_replacement.toString() ?? '';
       immediateCorrectiveActionTextController.text =
           editWarrantyClaimDetailsModel.value?.corrective_action_by_buyer ?? '';
       requestManufactureTextController.text =
