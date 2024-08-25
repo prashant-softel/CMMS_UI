@@ -455,33 +455,30 @@ class VegetationPlanListDataSource extends DataTableSource {
                           padding:
                               EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                           decoration: BoxDecoration(
-                            color:controller.vegetationPlanList
-                                      .firstWhere(
-                                        (e) =>
-                                            e.planId ==
-                                            VegetationListDetails!
-                                                .planId,
-                                        orElse: () =>
-                                            VegetationPlanListModel(
-                                                planId: 00),
-                                      )
-                                      .status ==
-                                  704
-                              ? ColorValues.approveColor
-                              :  controller.vegetationPlanList
-                                          .firstWhere(
-                                            (e) =>
-                                                e.planId ==
-                                                VegetationListDetails!
-                                                    .planId,
-                                            orElse: () =>
-                                                VegetationPlanListModel(
-                                                    planId: 00),
-                                          )
-                                          .status ==
-                                      702
-                                  ? ColorValues.yellowColor
-                                  : ColorValues.redColor,
+                            color: controller.vegetationPlanList
+                                        .firstWhere(
+                                          (e) =>
+                                              e.planId ==
+                                              VegetationListDetails!.planId,
+                                          orElse: () => VegetationPlanListModel(
+                                              planId: 00),
+                                        )
+                                        .status ==
+                                    704
+                                ? ColorValues.approveColor
+                                : controller.vegetationPlanList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e.planId ==
+                                                  VegetationListDetails!.planId,
+                                              orElse: () =>
+                                                  VegetationPlanListModel(
+                                                      planId: 00),
+                                            )
+                                            .status ==
+                                        702
+                                    ? ColorValues.yellowColor
+                                    : ColorValues.redColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
@@ -547,39 +544,39 @@ class VegetationPlanListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kVegetationControlFeatureId &&
-                                            e.delete ==
-                                                UserAccessConstants
-                                                    .kHaveEditAccess)
-                                        .length >
-                                    0 &&
-                                controller.vegetationPlanList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.planId ==
-                                              VegetationListDetails!.planId,
-                                          orElse: () => VegetationPlanListModel(
-                                              planId: 00),
-                                        )
-                                        .status ==
-                                    702
-                            ? TableActionButton(
-                                color: ColorValues.deleteColor,
-                                icon: Icons.delete,
-                                message: 'Delete',
-                                onPress: () {
-                                  controller.clearStoreData();
-                                  controller.isDeleteDialog(
-                                    planName: VegetationListDetails?.title,
-                                    planId: VegetationListDetails?.planId,
-                                  );
-                                },
-                              )
-                            : Dimens.box0,
+                        // varUserAccessModel.value.access_list!
+                        //                 .where((e) =>
+                        //                     e.feature_id ==
+                        //                         UserAccessConstants
+                        //                             .kVegetationControlFeatureId &&
+                        //                     e.delete ==
+                        //                         UserAccessConstants
+                        //                             .kHaveEditAccess)
+                        //                 .length >
+                        //             0 &&
+                        //         controller.vegetationPlanList
+                        //                 .firstWhere(
+                        //                   (e) =>
+                        //                       e.planId ==
+                        //                       VegetationListDetails!.planId,
+                        //                   orElse: () => VegetationPlanListModel(
+                        //                       planId: 00),
+                        //                 )
+                        //                 .status ==
+                        //             702
+                        //     ? TableActionButton(
+                        //         color: ColorValues.deleteColor,
+                        //         icon: Icons.delete,
+                        //         message: 'Delete',
+                        //         onPress: () {
+                        //           controller.clearStoreData();
+                        //           controller.isDeleteDialog(
+                        //             planName: VegetationListDetails?.title,
+                        //             planId: VegetationListDetails?.planId,
+                        //           );
+                        //         },
+                        //       )
+                        //     : Dimens.box0,
                         varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==

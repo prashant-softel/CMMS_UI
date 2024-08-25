@@ -12,7 +12,9 @@ import 'package:get/get.dart';
 
 class VegExecutionListScreen extends GetView<VegExecutionListController> {
   VegExecutionListScreen();
-  final VegExecutionListController controller = Get.find();
+
+
+  final controller = Get.find<VegExecutionListController>();
 
    final homecontroller = Get.find<HomeController>();
 
