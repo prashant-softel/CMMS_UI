@@ -185,11 +185,11 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'MCP${"VC${controller.vegid.value == 0 ? "" : controller.vegid.value}"}',
+                                                  '${"VC${controller.vegid.value == 0 ? "" : controller.vegid.value}"}',
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                  'MCT${controller.vegExecutionDetailsModel.value?.executionId == null ? "" : controller.vegExecutionDetailsModel.value?.executionId}',
+                                                  'VE${controller.vegExecutionDetailsModel.value?.executionId == null ? "" : controller.vegExecutionDetailsModel.value?.executionId}',
                                                   style: Styles.blue17,
                                                 ),
                                               ],
