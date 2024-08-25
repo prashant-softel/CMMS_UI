@@ -532,7 +532,7 @@ class CreateWarrantyClaimController extends GetxController {
           );
         }).toList();
       }
-      getInventoryDetail();
+      // getInventoryDetail();
       images.value = viewWarrantyClaimDetailsModel.value?.images ?? [];
       affectedPartImages.value =
           viewWarrantyClaimDetailsModel.value?.affectedPartsImages ?? [];
