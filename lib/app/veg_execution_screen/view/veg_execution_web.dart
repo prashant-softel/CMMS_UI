@@ -189,7 +189,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                  'MCT${controller.vegExecutionDetailsModel.value?.executionId == null ? "" : controller.vegExecutionDetailsModel.value?.executionId}}',
+                                                  'MCT${controller.vegExecutionDetailsModel.value?.executionId == null ? "" : controller.vegExecutionDetailsModel.value?.executionId}',
                                                   style: Styles.blue17,
                                                 ),
                                               ],
@@ -215,11 +215,11 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  ' ${controller.mcExecutionDetailsModel.value?.title}',
+                                                  ' ${controller.vegExecutionDetailsModel.value?.title}',
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                  ' ${controller.mcExecutionDetailsModel.value?.frequency}',
+                                                  ' ${controller.vegExecutionDetailsModel.value?.frequency}',
                                                   style: Styles.blue17,
                                                 ),
                                               ],
@@ -245,15 +245,15 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  ' ${controller.mcExecutionDetailsModel.value?.plannedBy}',
+                                                  ' ${controller.vegExecutionDetailsModel.value?.plannedBy}',
                                                   style: Styles.blue17,
                                                 ),
-                                                controller.mcExecutionDetailsModel
+                                                controller.vegExecutionDetailsModel
                                                             .value?.status !=
                                                         360
                                                     ? Text(
                                                         controller
-                                                                .mcExecutionDetailsModel
+                                                                .vegExecutionDetailsModel
                                                                 .value
                                                                 ?.startDate ??
                                                             '',
@@ -288,7 +288,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                  ' ${controller.mcExecutionDetailsModel.value?.startedBy}',
+                                                  ' ${controller.vegExecutionDetailsModel.value?.startedBy}',
                                                   style: Styles.blue17,
                                                 ),
                                               ],
