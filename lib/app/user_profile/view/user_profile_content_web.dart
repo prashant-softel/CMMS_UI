@@ -124,7 +124,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                   //     margin: Dimens.edgeInsets30_0_0_0,
                                   //     child:
                                   // Dimens.boxWidth30,
-                                  SizedBox(width:30),
+                                  SizedBox(width: 30),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
@@ -159,7 +159,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                     ],
                                   ),
                                   // Dimens.boxWidth15,
-                                  SizedBox(width:15),
+                                  SizedBox(width: 15),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -228,7 +228,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                     ],
                                   ),
                                   // Dimens.boxWidth15,
-                                  SizedBox(width:15),
+                                  SizedBox(width: 15),
 
                                   Column(
                                     crossAxisAlignment:
@@ -355,7 +355,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                               Icon(Icons
                                                                   .analytics_outlined),
                                                               // Dimens.boxWidth5,
-                                                              SizedBox(width:5),
+                                                              SizedBox(
+                                                                  width: 5),
                                                               Text(
                                                                   'Plant Access'),
                                                             ],
@@ -370,7 +371,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                               Icon(Icons
                                                                   .account_tree_outlined),
                                                               // Dimens.boxWidth5,
-                                                              SizedBox(width:5),
+                                                              SizedBox(
+                                                                  width: 5),
                                                               Text(
                                                                 'Access Level',
                                                               ),
@@ -386,7 +388,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                               Icon(Icons
                                                                   .notifications),
                                                               // Dimens.boxWidth5,
-                                                              SizedBox(width:5),
+                                                              SizedBox(
+                                                                  width: 5),
                                                               Text(
                                                                 'Notification',
                                                               ),
@@ -746,12 +749,12 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                               ].map((column) {
                                                                                 return TableViewColumn(
                                                                                   label: column,
-                                                                                  minWidth: Get.width * 0.17,
+                                                                                  minWidth: Get.width * 0.12,
                                                                                 );
                                                                               }).toList(),
                                                                               rows: true
                                                                                   ? controller.notificationListByUserId
-                                                                                      .map((getNotificationDetails) => TableViewRow(height: 70, cells: [
+                                                                                      .map((getNotificationDetails) => TableViewRow(height: 50, cells: [
                                                                                             TableViewCell(child: Text("${getNotificationDetails?.feature_name}" " " "${getNotificationDetails?.notification_name.value}")),
                                                                                             TableViewCell(
                                                                                               child: Obx(() {
@@ -789,7 +792,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                               ),
                             ),
                             // Dimens.boxHeight15
-                            SizedBox(height:15),
+                            SizedBox(height: 15),
                           ],
                         ),
                       ),

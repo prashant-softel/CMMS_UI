@@ -259,7 +259,9 @@ class CalibrationListController extends GetxController {
             selectedBusinessTypeId =
                 businessCategoryList[equipmentIndex]?.id ?? 0;
             selectedBusinessType.value = value;
-            
+            selectedVender.value = "";
+            selectedvenderId = 0;
+
             getVenderNameList(selectedBusinessTypeId, facilityId);
           } else {
             selectedBusinessTypeId = 0;
@@ -830,185 +832,178 @@ class CalibrationListController extends GetxController {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text("Last Calibration"),
-                          Text("                         Date:"),
+                          Text(
+                            "Last Calibration Date:",
+                            style: Styles.black17,
+                          ),
+                          Dimens.boxHeight10,
+                          Text(
+                            "Due Date For Calibration:",
+                            style: Styles.black17,
+                          ),
+                          Dimens.boxHeight10,
+                          Text(
+                            "Bussiness Type :",
+                            style: Styles.black17,
+                          ),
+                          Dimens.boxHeight10,
+                          Text(
+                            "Vender Name :",
+                            style: Styles.black17,
+                          ),
                         ],
                       ),
-                      Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: const Offset(
-                                  2.0,
-                                  3.0,
-                                ),
-                                blurRadius: 3.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                            color: ColorValues.whiteColor,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          width: Get.width / 5,
-                          child: LoginCustomTextfield(
-                            enabled: false,
-                            textController: previousDateController,
-                            ontap: () {
-                              _selectDate(context, 1);
-                            },
-                            widget: Icon(
-                              Icons.calendar_month,
-                              color: ColorValues.greyLightColor,
-                            ),
-                          ))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                      Dimens.boxWidth10,
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Due Date For "),
-                          Text("             Calibration:"),
+                          Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: const Offset(
+                                      2.0,
+                                      3.0,
+                                    ),
+                                    blurRadius: 3.0,
+                                    spreadRadius: 1.0,
+                                  ),
+                                ],
+                                color: ColorValues.whiteColor,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              width: Get.width / 5,
+                              child: LoginCustomTextfield(
+                                enabled: false,
+                                textController: previousDateController,
+                                ontap: () {
+                                  _selectDate(context, 1);
+                                },
+                                widget: Icon(
+                                  Icons.calendar_month,
+                                  color: ColorValues.greyLightColor,
+                                ),
+                              )),
+                          Dimens.boxHeight10,
+                          Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: const Offset(
+                                      2.0,
+                                      3.0,
+                                    ),
+                                    blurRadius: 3.0,
+                                    spreadRadius: 1.0,
+                                  ),
+                                ],
+                                color: ColorValues.whiteColor,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              width: Get.width / 5,
+                              child: LoginCustomTextfield(
+                                enabled: false,
+                                textController: nextDueDateController,
+                                ontap: () {
+                                  _selectDate(context, 2);
+                                },
+                                widget: Icon(
+                                  Icons.calendar_month,
+                                  color: ColorValues.greyLightColor,
+                                ),
+                              )),
+                          Dimens.boxHeight10,
+                          Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  offset: const Offset(
+                                    2.0,
+                                    3.0,
+                                  ),
+                                  blurRadius: 3.0,
+                                  spreadRadius: 1.0,
+                                ),
+                              ],
+                              color: ColorValues.whiteColor,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            width: Get.width / 5,
+                            child: DropdownWebWidget(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  offset: const Offset(
+                                    5.0,
+                                    5.0,
+                                  ),
+                                  blurRadius: 5.0,
+                                  spreadRadius: 1.0,
+                                ),
+                                BoxShadow(
+                                  color: ColorValues.whiteColor,
+                                  offset: const Offset(0.0, 0.0),
+                                  blurRadius: 0.0,
+                                  spreadRadius: 0.0,
+                                ),
+                              ],
+                              dropdownList: businessCategoryList,
+                              isValueSelected: isSelectedBusinessType.value,
+                              selectedValue: selectedBusinessType.value,
+                              onValueChanged: onValueChanged,
+                            ),
+                          ),
+                          Dimens.boxHeight10,
+                          Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  offset: const Offset(
+                                    2.0,
+                                    3.0,
+                                  ),
+                                  blurRadius: 3.0,
+                                  spreadRadius: 1.0,
+                                ),
+                              ],
+                              color: ColorValues.whiteColor,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            width: Get.width / 5,
+                            child: DropdownWebWidget(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  offset: const Offset(
+                                    5.0,
+                                    5.0,
+                                  ),
+                                  blurRadius: 5.0,
+                                  spreadRadius: 1.0,
+                                ),
+                                BoxShadow(
+                                  color: ColorValues.whiteColor,
+                                  offset: const Offset(0.0, 0.0),
+                                  blurRadius: 0.0,
+                                  spreadRadius: 0.0,
+                                ),
+                              ],
+                              dropdownList: venderNameList,
+                              isValueSelected: isVenderNameSelected.value,
+                              selectedValue: selectedVender.value,
+                              onValueChanged: onValueChanged,
+                            ),
+                          )
                         ],
                       ),
-                      Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: const Offset(
-                                  2.0,
-                                  3.0,
-                                ),
-                                blurRadius: 3.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                            color: ColorValues.whiteColor,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          width: Get.width / 5,
-                          child: LoginCustomTextfield(
-                            enabled: false,
-                            textController: nextDueDateController,
-                            ontap: () {
-                              _selectDate(context, 2);
-                            },
-                            widget: Icon(
-                              Icons.calendar_month,
-                              color: ColorValues.greyLightColor,
-                            ),
-                          ))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Bussiness Type :"),
-                      Spacer(),
-                      Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              offset: const Offset(
-                                2.0,
-                                3.0,
-                              ),
-                              blurRadius: 3.0,
-                              spreadRadius: 1.0,
-                            ),
-                          ],
-                          color: ColorValues.whiteColor,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        width: Get.width / 5,
-                        child: DropdownWebWidget(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              offset: const Offset(
-                                5.0,
-                                5.0,
-                              ),
-                              blurRadius: 5.0,
-                              spreadRadius: 1.0,
-                            ),
-                            BoxShadow(
-                              color: ColorValues.whiteColor,
-                              offset: const Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ),
-                          ],
-                          dropdownList: businessCategoryList,
-                          isValueSelected: isSelectedBusinessType.value,
-                          selectedValue: selectedBusinessType.value,
-                          onValueChanged: onValueChanged,
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Vender Name :"),
-                      Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              offset: const Offset(
-                                2.0,
-                                3.0,
-                              ),
-                              blurRadius: 3.0,
-                              spreadRadius: 1.0,
-                            ),
-                          ],
-                          color: ColorValues.whiteColor,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        width: Get.width / 5,
-                        child: DropdownWebWidget(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              offset: const Offset(
-                                5.0,
-                                5.0,
-                              ),
-                              blurRadius: 5.0,
-                              spreadRadius: 1.0,
-                            ),
-                            BoxShadow(
-                              color: ColorValues.whiteColor,
-                              offset: const Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ),
-                          ],
-                          dropdownList: venderNameList,
-                          isValueSelected: isVenderNameSelected.value,
-                          selectedValue: selectedVender.value,
-                          onValueChanged: onValueChanged,
-                        ),
-                      )
                     ],
                   ),
                   SizedBox(
