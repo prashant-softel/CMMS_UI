@@ -1205,6 +1205,7 @@ Future<Map<String, dynamic>> createkaizensdata(
       return Map();
     }
   }
+
 //createplantationdata
   Future<Map<String, dynamic>> createplantationdata(
       createplantationdata, bool? isLoading) async {
@@ -1946,8 +1947,9 @@ Future<Map<String, dynamic>> createkaizensdata(
 
           List<List<dynamic>> data = [
             [
-              'Site_Name',
+              'Plant_Name',
               'Asset_Facility_Name',
+              'Asset_category_name',
               'Asset_Name',
               'Asset_Description',
               'Asset_Parent_Name',
@@ -1957,13 +1959,13 @@ Future<Map<String, dynamic>> createkaizensdata(
               'AC_Capacity',
               'AC_Rating',
               'Quantity/Module_Quantity',
-              'Asset_category_name',
               'Asset_Type_Name',
               'Asset_Status_Name',
               'Description_Maintenance',
               'Warranty Type',
               'Asset_warranty_Provider',
               'Asset_Warranty_Start_Date',
+              'Asset_Warranty_Expiry_Date',
               'Warranty Tenure (How many years/month/days)',
               'Asset_Warranty_Certificate_No',
               'Asset_Manufacturer_Name',
@@ -1988,6 +1990,7 @@ Future<Map<String, dynamic>> createkaizensdata(
                 .map((inventoryJson) => [
                       inventoryJson['facilityName'],
                       inventoryJson['blockName'],
+                      inventoryJson['categoryName'],
                       inventoryJson['name'],
                       inventoryJson['description'],
                       inventoryJson['parentName'],
@@ -1997,13 +2000,13 @@ Future<Map<String, dynamic>> createkaizensdata(
                       inventoryJson['acCapacity'],
                       inventoryJson['acrating'],
                       inventoryJson['moduleQuantity'],
-                      inventoryJson['categoryName'],
                       inventoryJson['type'],
                       inventoryJson['status'],
                       inventoryJson['descMaintenace'],
                       inventoryJson['warrantyType'],
                       inventoryJson['warrantyProviderName'],
                       inventoryJson['start_date'],
+                      inventoryJson['expiry_date'],
                       inventoryJson['warrantyTenture'],
                       inventoryJson['certificate_number'],
                       inventoryJson['manufacturername'],
