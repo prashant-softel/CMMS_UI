@@ -251,7 +251,7 @@ class AddInventoryController extends GetxController {
         getInventoryCategoryList();
         getInventoryTypeList(isLoading: true, facilityId: facilityId);
         getInventoryStatusList(isLoading: true);
-        if (inventoryId != 0) {
+        if (inventoryId > 0) {
           getAddInventoryDetail(id: inventoryId.value);
         }
       });
@@ -344,15 +344,19 @@ class AddInventoryController extends GetxController {
       //     editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
       //         "";
       // Ensure the text field is properly updated with the calibration date
-      lastCalibrationDateTc.text =
-          editAddInventoryDetailsModel.value?.calibrationLastDate?.toString() ??
-              "";
+      // lastCalibrationDateTc.text =
+      //     editAddInventoryDetailsModel.value?.calibrationLastDate?.toString() ??
+      //         "";
 
 // Check if the calibration date is '0001-01-01T00:00:00' and set it to an empty string
-      if (lastCalibrationDateTc.text == '0001-01-01T00:00:00') {
+      if (editAddInventoryDetailsModel.value?.calibrationDueDate ==
+          '0001-01-01') {
         lastCalibrationDateTc.text = '';
       } else {
-        lastCalibrationDateTc.text;
+        lastCalibrationDateTc.text = editAddInventoryDetailsModel
+                .value?.calibrationDueDate
+                ?.toString() ??
+            "";
       }
 
       startDateTc.text =

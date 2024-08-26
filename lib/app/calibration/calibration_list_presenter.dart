@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
 
 import '../../domain/models/business_list_model.dart';
@@ -19,6 +20,14 @@ class CalibrationListPresenter {
     );
   }
 
+  Future<List<BusinessTypeModel>> getBusinessTypeList({
+    int? businessType,
+    bool? isLoading,
+  }) async =>
+      await calibrationListUsecase.getBusinessTypeList(
+        isLoading: isLoading ?? false,
+        businessType: businessType,
+      );
   Future<List<CalibrationListModel?>?> getCalibrationList({
     int? facilityId,
     bool? isLoading,

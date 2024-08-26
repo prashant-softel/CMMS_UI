@@ -599,7 +599,28 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
-
+  //getkaizensdata
+  @override
+  Future<ResponseModel> getkaizensdata({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getkaizensdata(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+//getplantationdata
+  @override
+  Future<ResponseModel> getplantationdata({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getplantationdata(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
 // getVisitsAndNoticesDatalist
   @override
   Future<ResponseModel> getVisitsAndNoticesDatalist({
@@ -2195,6 +2216,17 @@ class DataRepository extends DomainRepository {
       await connectHelper.createfuledata(
         auth: auth,
         createfuledata: createfuledata,
+        isLoading: isLoading ?? false,
+      );
+      // createkaizensdata
+        Future<ResponseModel> createkaizensdata({
+    required String auth,
+    createkaizensdata,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createkaizensdata(
+        auth: auth,
+        createkaizensdata: createkaizensdata,
         isLoading: isLoading ?? false,
       );
 //createplantationdata

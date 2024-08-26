@@ -64,7 +64,7 @@ class InventoryModel {
   });
 
   int? id;
-  int? area;
+  dynamic area;
 
   int? module_qty;
   int? checklist_id;

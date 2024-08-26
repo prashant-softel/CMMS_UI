@@ -2074,7 +2074,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                         }).toList(),
                                                                                         rows: true
                                                                                             ? controller.notificationList
-                                                                                                .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
+                                                                                                .map((getnotificationListDetails) => TableViewRow(height: 50, cells: [
                                                                                                       TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
                                                                                                       TableViewCell(
                                                                                                         child: IgnorePointer(
@@ -2226,7 +2226,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                       top: 260,
                       child: DatePickerWidget(
                         minDate: DateTime(DateTime.now().year - 100),
-                         maxDate: DateTime(DateTime.now().year, 13,
+                        maxDate: DateTime(DateTime.now().year, 13,
                             0), // last date of this year
                         controller: DateRangePickerController(),
                         selectionChanges: (p0) {
@@ -2250,7 +2250,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                       top: 300,
                       child: DatePickerWidget(
                         minDate: DateTime(DateTime.now().year),
-                         maxDate: DateTime(DateTime.now().year, 13,
+                        maxDate: DateTime(DateTime.now().year, 13,
                             0), // last date of this year
                         controller: DateRangePickerController(),
                         selectionChanges: (p0) {

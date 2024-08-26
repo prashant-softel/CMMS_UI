@@ -247,7 +247,12 @@ class ModuleCleaningPlanningController extends GetxController {
         scheduleId = firstScheduleId;
         isFirstSchedule = false;
       } else {
-        scheduleId = scheduleIdCounter++;
+        if (existingScheduleIds.contains(scheduleIdCounter)) {
+          scheduleId = scheduleIdCounter;
+        } else {
+          scheduleId = 0;
+        }
+        scheduleIdCounter++;
       }
       return Schedule(
           cleaningDay: entry.key,
@@ -310,7 +315,12 @@ class ModuleCleaningPlanningController extends GetxController {
         scheduleId = firstScheduleId;
         isFirstSchedule = false;
       } else {
-        scheduleId = scheduleIdCounter++;
+        if (existingScheduleIds.contains(scheduleIdCounter)) {
+          scheduleId = scheduleIdCounter;
+        } else {
+          scheduleId = 0;
+        }
+        scheduleIdCounter++;
       }
       return Schedule(
           cleaningDay: entry.key,
@@ -343,12 +353,10 @@ class ModuleCleaningPlanningController extends GetxController {
             isLoading: true,
             facility_id: facilityId);
     if (responseCreateMcModel == null) {}
-    print('renew mc  data: $updateMcModelJsonString');
+    print('update MC   data: $updateMcModelJsonString');
   }
 
   Future<int> fetchLastScheduleId() async {
-    // await getMcPlanDetail(planId: planId.value, facilityId: facilityId);
-
     if (mcPlanDetailsModel.value?.schedules != null &&
         mcPlanDetailsModel.value!.schedules.isNotEmpty) {
       return mcPlanDetailsModel.value!.schedules.first.scheduleId ?? 0;
@@ -356,6 +364,8 @@ class ModuleCleaningPlanningController extends GetxController {
       return 0;
     }
   }
+
+  List<int> existingScheduleIds = [];
 
   Future<void> getMcPlanDetail(
       {required int planId, required int facilityId}) async {
@@ -382,6 +392,13 @@ class ModuleCleaningPlanningController extends GetxController {
 
       rowItem.value = [];
       schedules.value = _mcPlanDetails.schedules;
+
+      // Collect existing scheduleIds, filtering out any null values
+      existingScheduleIds = _mcPlanDetails.schedules
+          .map((schedule) => schedule.scheduleId)
+          .whereType<int>() // Ensure only non-null integers are included
+          .toList();
+
       _mcPlanDetails.schedules.forEach(
         (element) {
           rowItem.value.add(
