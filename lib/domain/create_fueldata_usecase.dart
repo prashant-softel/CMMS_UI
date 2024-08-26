@@ -5,7 +5,7 @@ class CreateFuelDataUsecase {
   Repository repository;
 
   
-// CreateKaizensModel
+
 Future<Map<String, dynamic>> createfuledata({
     createfuledata,
     bool? isLoading,

@@ -825,6 +825,22 @@ class ConnectHelper {
     );
     return responseModel;
   }
+  //get kaizens data
+    Future<ResponseModel> getkaizensdata({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetKaizensData',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 //get plantation list
   Future<ResponseModel> getplantationdata({
     required bool isLoading,
@@ -3801,7 +3817,29 @@ class ConnectHelper {
 
     return responseModel;
   }
+// create kaizens
+Future<ResponseModel> createkaizensdata({
+    required String auth,
+    createkaizensdata,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateKaizensData',
+      Request.post,
+      createkaizensdata,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
+    print('Submit kaizens Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
   //CreatePlantationData
   Future<ResponseModel> createplantationdata({
     required String auth,
