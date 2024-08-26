@@ -55,6 +55,7 @@ class InventoryModel {
     this.calireminderdays,
     this.calibrationtestdate,
     this.startdate,
+    this.expiry_date,
     this.calilastdate,
     this.moduleQuantity,
     this.checklist_id,
@@ -105,6 +106,7 @@ class InventoryModel {
   DateTime? calibrationDueDate;
   DateTime? calibrationtestdate;
   DateTime? startdate;
+  DateTime? expiry_date;
   DateTime? calilastdate;
   String? status;
   int? linkedToBlockId;
@@ -162,6 +164,9 @@ class InventoryModel {
         startdate: json['start_date'] == null
             ? null
             : DateTime.parse(json['start_date'] as String),
+        expiry_date: json['expiry_date'] == null
+            ? null
+            : DateTime.parse(json['expiry_date'] as String),
         calilastdate: json['calibrationLastDate'] == null
             ? null
             : DateTime.parse(json['calibrationLastDate'] as String),
@@ -214,6 +219,7 @@ class InventoryModel {
         "calibrationDueDate": calibrationDueDate?.toIso8601String(),
         "calibration_testing_date": calibrationtestdate?.toIso8601String(),
         "start_date": startdate?.toIso8601String(),
+        "expiry_date": startdate?.toIso8601String(),
         "calibrationLastDate": calilastdate?.toIso8601String(),
         "status": status,
         "area": area,
