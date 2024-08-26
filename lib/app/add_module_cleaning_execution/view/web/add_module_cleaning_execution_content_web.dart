@@ -967,6 +967,7 @@ class AddModuleCleaningExecutionContentWeb
                                             ),
                                           ]),
                                         ),
+
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -1140,7 +1141,7 @@ class AddModuleCleaningExecutionContentWeb
                                             // SizedBox(
                                             //   width: 10,
                                             // ),
-                                            Dimens.boxWidth5,
+                                            // Dimens.boxWidth5,
                                             // Container(
                                             //   height: 28,
                                             //   child: CustomElevatedButton(
@@ -1153,7 +1154,7 @@ class AddModuleCleaningExecutionContentWeb
                                             //     },
                                             //   ),
                                             // ),
-                                            // Dimens.boxWidth5,
+                                            Dimens.boxWidth5,
                                             controller.mcExecutionDetailsModel.value?.status == 361 &&
                                                         varUserAccessModel.value
                                                                 .access_list!
