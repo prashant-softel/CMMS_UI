@@ -355,7 +355,7 @@ class EditMrsReturnController extends GetxController {
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
         mrsItemID: int.tryParse(element[0]["id"] ?? '0'),
         assetsID: returnMrsDetailsModel.value?.whereUsedType == "JOBCARD"
-            ? checkdropdownMapperData[element[1]["value"]].asset_id
+            ? checkdropdownMapperData[element[1]["value"]].id
             : checkdropdownMapperData[element[1]["value"]].assetsID,
         sr_no: element[2]["value"] ?? '0',
         returned_qty: int.tryParse(element[3]["value"] ?? '0'),

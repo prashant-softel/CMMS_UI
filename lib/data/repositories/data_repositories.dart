@@ -599,6 +599,7 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+
   //getkaizensdata
   @override
   Future<ResponseModel> getkaizensdata({
@@ -610,6 +611,7 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+
 //getplantationdata
   @override
   Future<ResponseModel> getplantationdata({
@@ -621,6 +623,7 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+
 // getVisitsAndNoticesDatalist
   @override
   Future<ResponseModel> getVisitsAndNoticesDatalist({
@@ -2218,8 +2221,8 @@ class DataRepository extends DomainRepository {
         createfuledata: createfuledata,
         isLoading: isLoading ?? false,
       );
-      // createkaizensdata
-        Future<ResponseModel> createkaizensdata({
+  // createkaizensdata
+  Future<ResponseModel> createkaizensdata({
     required String auth,
     createkaizensdata,
     bool? isLoading,
@@ -5291,18 +5294,22 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> getVegTaskList({
     int? facility_id,
+    dynamic startDate,
+    dynamic endDate,
     required bool isLoading,
     required String auth,
     // String? start_date,
     // required String end_date,
   }) async {
     return await connectHelper.getVegTaskList(
-      isLoading: isLoading,
-      auth: auth,
-      facility_id: facility_id,
-      // start_date: start_date,
-      // end_date: end_date,
-    );
+        isLoading: isLoading,
+        auth: auth,
+        facility_id: facility_id,
+        startDate: startDate,
+        endDate: endDate
+        // start_date: start_date,
+        // end_date: end_date,
+        );
   }
 
   Future<ResponseModel> getVegExecutionDetail({

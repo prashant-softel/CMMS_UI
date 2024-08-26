@@ -17,6 +17,8 @@ class VegExecutionListPresenter {
   Future<List<VegTaskListModel>> getVegTaskList({
     required bool isLoading,
     required int? facility_id,
+      dynamic endDate,
+      dynamic startDate,
     bool? isExport
     // String? start_date,
     // required String end_date,
@@ -24,6 +26,8 @@ class VegExecutionListPresenter {
     return vegExecutionListUsecase.getVegTaskList(
       isLoading: isLoading,
       facility_id: facility_id,
+        endDate: endDate,
+        startDate: startDate,
       isExport: isExport
       // start_date: start_date,
       // end_date: end_date,
