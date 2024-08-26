@@ -14531,7 +14531,9 @@ Future<Map<String, dynamic>> createkaizensdata(
   }
 
   Future<List<VegTaskListModel>> getVegTaskList(
-      {required int? facility_id, required bool isLoading, bool? isExport
+      {required int? facility_id,
+      dynamic startDate,
+      dynamic endDate, required bool isLoading, bool? isExport
       // String? start_date,
       // required String end_date,
       }) async {
@@ -14541,6 +14543,8 @@ Future<Map<String, dynamic>> createkaizensdata(
       log(auth);
       final res = await _dataRepository.getVegTaskList(
         facility_id: facility_id,
+          startDate: startDate,
+          endDate: endDate,
         isLoading: isLoading,
         // start_date: start_date,
         // end_date: end_date,

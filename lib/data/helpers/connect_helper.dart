@@ -825,8 +825,9 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   //get kaizens data
-    Future<ResponseModel> getkaizensdata({
+  Future<ResponseModel> getkaizensdata({
     required bool isLoading,
     required String auth,
   }) async {
@@ -841,6 +842,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
 //get plantation list
   Future<ResponseModel> getplantationdata({
     required bool isLoading,
@@ -857,6 +859,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   // Get regulatraty data
   Future<ResponseModel> getVisitsAndNoticesDatalist({
     required bool isLoading,
@@ -3817,8 +3820,9 @@ class ConnectHelper {
 
     return responseModel;
   }
+
 // create kaizens
-Future<ResponseModel> createkaizensdata({
+  Future<ResponseModel> createkaizensdata({
     required String auth,
     createkaizensdata,
     bool? isLoading,
@@ -3840,6 +3844,7 @@ Future<ResponseModel> createkaizensdata({
 
     return responseModel;
   }
+
   //CreatePlantationData
   Future<ResponseModel> createplantationdata({
     required String auth,
@@ -9407,10 +9412,12 @@ Future<ResponseModel> createkaizensdata({
   Future<ResponseModel> getVegTaskList({
     required bool isLoading,
     required String auth,
+    dynamic startDate,
+    dynamic endDate,
     int? facility_id,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Vegetation/GetVegetationTaskList?facility_Id=$facility_id',
+      'Vegetation/GetVegetationTaskList?facility_Id=$facility_id&start_date=${startDate}&end_date=${endDate}',
       Request.get,
       null,
       isLoading,

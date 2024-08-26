@@ -449,7 +449,7 @@ class JobCardDetailsController extends GetxController {
               //         dropdownMapperDataworkingArea[element[1]["value"]]
               //                 .workingAreaId !=
               //             0
-              ? dropdownMapperDataworkingArea[element[1]["value"]].asset_id
+              ? dropdownMapperDataworkingArea[element[1]["value"]].id
               : 0,
           toActorType:
               dropdownMapperDataworkingArea[element[1]["value"]] != null
