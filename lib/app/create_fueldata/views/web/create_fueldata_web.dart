@@ -169,7 +169,7 @@ class _ViewFuelDataWebState extends State<FuelDataWeb> {
                                                             children: [
                                                               CustomRichText(
                                                                   title:
-                                                                      'Total diesel consumed for vehicles in Litres '),
+                                                                      'Total diesel consumed for vehicles in Litres'),
                                                               Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
