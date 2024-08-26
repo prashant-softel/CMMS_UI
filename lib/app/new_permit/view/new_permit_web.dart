@@ -315,7 +315,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                 )
                               : Dimens.box0,
                           controller.jobModel?.id != null
-                              ? Container(
+                              ?
+                               Container(
                                   // alignment: Alignment.centerLeft,
                                   width: Get.width * .9,
                                   height: Get.height * .2,
@@ -392,7 +393,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           SizedBox(
                                             child: Column(
                                               children: controller
-                                                  .listJobModelCategory
+                                                  .jobModel!.equipmentCatList!
                                                   .map((element) => Column(
                                                         // mainAxisAlignment:
                                                         //     MainAxisAlignment
@@ -426,7 +427,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           SizedBox(
                                             child: Column(
                                               children: controller
-                                                  .list_working_area_name
+                                                  .jobModel!.workingAreaList!
                                                   .map(
                                                     (element) => Column(
                                                       mainAxisAlignment:
@@ -451,18 +452,19 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         ),
                                         DataCell(
                                           Text(
-                                              '${controller.breakdownTimeTextCtrlr.text}',
+                                              '${controller.jobModel?.breakdownTime}',
                                               overflow: TextOverflow.ellipsis),
                                         ),
                                         DataCell(
                                           Text(
-                                              '${controller.assignToTextCtrlr.text}',
+                                              '${controller.jobModel?.assignedName}',
                                               overflow: TextOverflow.ellipsis),
                                         ),
                                       ]),
                                     ],
                                   ),
                                 )
+                             
                               : Dimens.box0,
 
                           // hgvbjn,

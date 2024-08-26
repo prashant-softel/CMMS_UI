@@ -830,7 +830,7 @@ class AddModuleCleaningExecutionController extends GetxController {
 
     final Size pageSize = page.getClientSize();
 
-    var url = "assets/assets/files/logo.png";
+    var url = "assets/files/HFE Logo.png";
     var response = await get(Uri.parse(url));
     var data = response.bodyBytes;
 
@@ -842,7 +842,7 @@ class AddModuleCleaningExecutionController extends GetxController {
 
     document.dispose();
 
-    await saveAndLaunchFile(bytes, 'MC Task View Report');
+    await saveAndLaunchFile(bytes, 'MC Task Report');
   }
 
   PdfLayoutResult drawHeader(
@@ -857,57 +857,70 @@ class AddModuleCleaningExecutionController extends GetxController {
         PdfStandardFont(PdfFontFamily.helvetica, 10, style: PdfFontStyle.bold);
     final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
 
+    double margin = 10; // Margin from all sides
+    double currentY =
+        100; // Start position for the first section below the image
+    double sectionHeight = 20; // Height for each section header
+    double pageWidth = pageSize.width - 2 * margin;
+
     // Draw images
-    page.graphics.drawImage(image, Rect.fromLTWH(15, 10, 100, 80));
+    page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
+
+    final String centerText = 'MC Task Report';
+    final PdfFont centerTextFont =
+        PdfStandardFont(PdfFontFamily.helvetica, 12, style: PdfFontStyle.bold);
+    final Size centerTextSize = centerTextFont.measureString(centerText);
+
+    // Calculate the X position to center the text
+    double centerX = (pageSize.width - centerTextSize.width) / 2;
+
+    // Draw the center text after the image
+    page.graphics.drawString(
+      centerText,
+      centerTextFont,
+      bounds: Rect.fromLTWH(
+          centerX, 60, centerTextSize.width, centerTextSize.height),
+    );
 
     // Site name section
-    double currentY = 100;
-    double sectionHeight = 20;
-
     page.graphics.drawRectangle(
         pen: borderPen,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
-    page.graphics.drawString('Site name', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString(
+        'Site name : ${mcExecutionDetailsModel.value?.site_name ?? ''}',
+        headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    // Module Cleaning Information
+    // PM Information
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
-    page.graphics.drawString('Module Cleaning information', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString('MC Information', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    // Draw Left Side PM Information Details
-    double labelWidth = 150;
-    double valueWidth = 80;
-    double labelX = 30;
+    // Draw PM Information Details (Left Side)
+    double labelWidth = 80;
+    double valueWidth = 120;
+    double labelX = margin + 5;
     double valueX = labelX + labelWidth + 5;
 
     List<String> pmInfoLabelsLeft = [
-      'Job ID',
-      'Permit ID',
-      'Target (No.of Modules)',
-      'Actual (No.of Modules)',
-      'Deviation',
-      'No. of manpower',
-      'Performed by',
-      'Cleaning type'
+      'MC Plan ID',
+      'Task ID',
+      'Plan Title',
+      'Frequency',
     ];
+
     List<String> pmInfoValuesLeft = [
-      'Job ID${mcExecutionDetailsModel.value?.id}',
-      'Permit ID${mcExecutionDetailsModel.value?.permit_id}',
-      'Target (No.of Modules)${mcExecutionDetailsModel.value?.noOfDays}',
-      'Actual (No.of Modules)${mcExecutionDetailsModel.value?.noOfDays}',
-      'Deviation${mcExecutionDetailsModel.value?.noOfDays}',
-      'No. of manpower${mcExecutionDetailsModel.value?.noOfDays}',
-      'Performed by${mcExecutionDetailsModel.value?.plannedBy}',
-      'Cleaning type${mcExecutionDetailsModel.value?.noOfDays}',
+      'MCP${planId}',
+      'MCT${mcid}',
+      '${mcExecutionDetailsModel.value?.title ?? ''}',
+      '${mcExecutionDetailsModel.value?.frequency ?? ''}',
     ];
+
     double rowHeight = 15;
 
     for (int i = 0; i < pmInfoLabelsLeft.length; i++) {
@@ -918,118 +931,43 @@ class AddModuleCleaningExecutionController extends GetxController {
       currentY += rowHeight;
     }
 
-    // Draw Right Side PM Information Details
-    currentY -= pmInfoLabelsLeft.length *
-        rowHeight; // Reset currentY for right side alignment
-    double labelXRight = pageSize.width / 2 + 10;
-    double valueXRight = labelXRight + labelWidth + 5;
-    double rightRowSpacing = 10; // Less space between rows on the right side
+    // Draw PM Information Details (Right Side)
+    double labelWidthRight = 80;
+    double valueWidthRight = 120;
+    double labelXRight = pageWidth / 2 + margin; // Position on the right side
+    double valueXRight = labelXRight + labelWidthRight + 5;
 
     List<String> pmInfoLabelsRight = [
-      'Cleaning cycle no',
-      'Date',
-      'Cleaning start time',
-      'Cleaning end time',
-      'Rain status',
-      'Water used',
-      'Approved by',
+      'Planned By',
+      'Start Date Time',
+      'Planning Date Time',
+      'Execution started by'
     ];
     List<String> pmInfoValuesRight = [
-      'Cleaning cycle no',
-      'Date',
-      'Cleaning start time',
-      'Cleaning end time',
-      'Rain status',
-      'Water used',
-      'Approved by',
+      '${mcExecutionDetailsModel.value?.plannedBy}',
+      '${mcExecutionDetailsModel.value?.status != 360 ? mcExecutionDetailsModel.value?.startDate : ''}',
+      '${plannedAtDateTimeCtrlrWeb.text}',
+      '${mcExecutionDetailsModel.value?.startedBy ?? ''}',
     ];
+
+    currentY -= pmInfoLabelsLeft.length *
+        rowHeight; // Reset currentY to align with left side
 
     for (int i = 0; i < pmInfoLabelsRight.length; i++) {
       page.graphics.drawString(pmInfoLabelsRight[i], contentFont,
-          bounds:
-              Rect.fromLTWH(labelXRight, currentY + 5, labelWidth, rowHeight));
+          bounds: Rect.fromLTWH(
+              labelXRight, currentY + 5, labelWidthRight, rowHeight));
       page.graphics.drawString(pmInfoValuesRight[i], contentFont,
-          bounds:
-              Rect.fromLTWH(valueXRight, currentY + 5, valueWidth, rowHeight));
-      currentY += rightRowSpacing;
-    }
-
-    // Add space before Equipment ID section
-    currentY += 60; // Added more space above Equipment ID
-    page.graphics.drawRectangle(
-        pen: borderPen,
-        brush: backgroundBrush,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
-    page.graphics.drawString('Equipment ID', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
-    currentY += sectionHeight;
-
-    // Equipment Table Headers
-    double columnWidth = (pageSize.width - 50) / 4;
-    List<String> equipmentHeaders = [
-      'S. No',
-      'Block ID',
-      'Inverter ID',
-      'SMB ID'
-    ];
-
-    for (int i = 0; i < equipmentHeaders.length; i++) {
-      page.graphics.drawString(equipmentHeaders[i], contentFont,
           bounds: Rect.fromLTWH(
-              30 + (i * columnWidth), currentY + 5, columnWidth, rowHeight));
-    }
-    currentY += rowHeight;
-
-    // Equipment Table Rows
-    for (int i = 0;
-        i < (mcExecutionDetailsModel.value?.schedules?.length ?? 0);
-        i++) {
-      var schedule = mcExecutionDetailsModel.value!.schedules![i];
-
-      page.graphics.drawString('${i + 1}', contentFont,
-          bounds: Rect.fromLTWH(30, currentY + 5, columnWidth, rowHeight));
-      page.graphics.drawString(
-          'blockID', contentFont, //'${schedule?.blockId}', contentFont,
-          bounds: Rect.fromLTWH(
-              30 + columnWidth, currentY + 5, columnWidth, rowHeight));
-      page.graphics.drawString(
-          'inverterId', contentFont, //'${schedule?.inverterId}', contentFont,
-          bounds: Rect.fromLTWH(
-              30 + 2 * columnWidth, currentY + 5, columnWidth, rowHeight));
-      page.graphics.drawString(
-          'smbId', contentFont, //'${schedule?.smbId}', contentFont,
-          bounds: Rect.fromLTWH(
-              30 + 3 * columnWidth, currentY + 5, columnWidth, rowHeight));
+              valueXRight, currentY + 5, valueWidthRight, rowHeight));
       currentY += rowHeight;
     }
 
-    // Work Description Section
-    currentY += 10;
-    page.graphics.drawRectangle(
-        pen: borderPen,
-        brush: backgroundBrush,
-        bounds:
-            Rect.fromLTWH(25, currentY, pageSize.width - 50, sectionHeight));
-    page.graphics.drawString('Work description', headerFont,
-        bounds: Rect.fromLTWH(30, currentY + 5, 0, 0));
-    currentY += sectionHeight;
-
-    String staticDescription =
-        "This is a static description text that explains the work done or provides additional details.";
-    page.graphics.drawString(staticDescription, contentFont,
-        bounds:
-            Rect.fromLTWH(30, currentY + 5, pageSize.width - 60, rowHeight * 2),
-        format: PdfStringFormat(alignment: PdfTextAlignment.left));
-    currentY += rowHeight * 2;
-
-    // Signature of trainer section
-    final String signatureText = 'Signature of trainer';
+    final String signatureText = 'Signature';
     final Size signatureSize = contentFont.measureString(signatureText);
-
     return PdfTextElement(text: signatureText, font: contentFont).draw(
         page: page,
-        bounds: Rect.fromLTWH(pageSize.width - signatureSize.width - 30,
-            currentY + 20, signatureSize.width, pageSize.height - 120))!;
+        bounds: Rect.fromLTWH(pageWidth - (signatureSize.width + margin),
+            currentY + 20, signatureSize.width, signatureSize.height))!;
   }
 }

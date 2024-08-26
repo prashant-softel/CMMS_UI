@@ -1965,15 +1965,38 @@ class NewPermitController extends GetxController {
     titleTextCtrlr.text = jobModel.jobTitle ?? '';
     selectedBlock.value = jobModel.blockName ?? '';
     selectedBlockId = jobModel.blockId ?? 0;
-    assignToTextCtrlr.text = jobModel.assignedName ?? "";
+    // assignToTextCtrlr.text = jobModel.assignedName ?? "";
 
     //// uncomment once work done
-    listJobModelCategory.value = jobModel.equipmentCatList ?? [];
-    List<int> idList = listJobModelCategory.map((obj) => obj!.id).toList();
-    List<String> nameList =
-        listJobModelCategory.map((obj) => obj!.name).toList();
+    try {
+      if (jobModel.equipmentCatList != null &&
+          jobModel.equipmentCatList!.isNotEmpty) {
+        listJobModelCategory.value =
+            jobModel.equipmentCatList!.map<EquipmentCatList?>((action) {
+          if (action != null) {
+            return EquipmentCatList(
+                name: action.name ?? '', id: action.id ?? 0);
+          } else {
+            return EquipmentCatList(
+                name: '', id: 0); // Handle null case appropriately
+          }
+        }).toList();
+      } else {
+        listJobModelCategory.value =
+            <EquipmentCatList?>[]; // Explicitly define the list type
+      }
+    } catch (e, stacktrace) {
+      print('Error while processing equipmentCatList: $e');
+      print('Stacktrace: $stacktrace');
+    }
 
-    list_working_area_name.value = jobModel.workingAreaList ?? [];
+    List<int> idList = listJobModelCategory.map((obj) => obj!.id).toList();
+    selectedEquipmentCategoryIdList.value = idList;
+
+    // List<String> nameList =
+    //     listJobModelCategory.map((obj) => obj!.name).toList();
+
+    // list_working_area_name.value = jobModel.workingAreaList ?? [];
 
     //  selectedItem = nameList[0];
     ///end uncomment
@@ -1985,7 +2008,6 @@ class NewPermitController extends GetxController {
 
     print("Selected Block Id:${selectedBlockId}");
     //uncomment once work done
-    selectedEquipmentCategoryIdList.value = idList;
     // selectedJobModelEquipemntIsolationIdList.value = idList;
     print("Selected Equipment: ${selectedEquipmentCategoryIdList}");
     print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");

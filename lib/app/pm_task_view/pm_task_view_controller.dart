@@ -1299,4 +1299,5 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         bounds: Rect.fromLTWH(pageWidth - (signatureSize.width + margin),
             currentY + 20, signatureSize.width, signatureSize.height))!;
   }
+
 }
