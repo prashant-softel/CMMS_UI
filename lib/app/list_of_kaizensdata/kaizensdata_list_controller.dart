@@ -38,6 +38,8 @@ class KaizensDataListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> kaizensId = 0.obs;
+
+   RxString idFilterText = ''.obs;
    RxString kaizensImplementedFilterText = ''.obs;
   RxString costForImplementationFilterText = ''.obs;
   RxString costSavedFromImplementationFilterText = ''.obs;
@@ -50,6 +52,7 @@ class KaizensDataListController extends GetxController {
   RxString userDateFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Id":true,
     "Kaizens Implemented": true,
     "Cost For Implementation": true,
     "Cost Saved From Implementation": true,
@@ -57,6 +60,7 @@ class KaizensDataListController extends GetxController {
     "Created At": true,
   });
   final Map<String, double> columnwidth = {
+    "Id":100,
    "Kaizens Implemented": 250,
     "Cost For Implementation": 250,
     "Cost Saved From Implementation": 300,
@@ -75,6 +79,7 @@ class KaizensDataListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
+      "Id":idFilterText,
      "Kaizens Implemented": kaizensImplementedFilterText,
     "Cost For Implementation": costForImplementationFilterText,
     "Cost Saved From Implementation": costSavedFromImplementationFilterText,
