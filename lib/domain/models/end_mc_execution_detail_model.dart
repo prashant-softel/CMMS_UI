@@ -7,6 +7,7 @@ EndMCExecutionDetailsModel endMCExecutionDetailsModelFromJson(String str) =>
 
 class EndMCExecutionDetailsModel {
   int? id;
+  String? site_name;
   int? executionId;
   String? title;
   String? description;
@@ -33,6 +34,7 @@ class EndMCExecutionDetailsModel {
   EndMCExecutionDetailsModel({
     this.id,
     this.executionId,
+    this.site_name,
     this.title,
     this.description,
     this.frequency,
@@ -64,6 +66,7 @@ class EndMCExecutionDetailsModel {
             : json['status_short_ptw'] ?? '',
         executionId: json["executionId"],
         title: json['title'] ?? '',
+        site_name: json['site_name'] ?? '',
         description: json['description'] ?? '',
         frequency: json['frequency'] ?? '',
         assignedTo: json['assignedTo'] ?? '',
@@ -94,6 +97,7 @@ class EndMCExecutionDetailsModel {
             status_short_ptw == 'Invalid' ? '' : status_short_ptw,
         "executionId": executionId,
         "title": title ?? '',
+        "site_name": site_name ?? '',
         "description": description ?? '',
         "frequency": frequency ?? '',
         "assignedTo": assignedTo ?? '',

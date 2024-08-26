@@ -774,11 +774,11 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                           onPress: () {
                                                                                                                             var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
 
-                                                                                                                               controller.editNewPermit(permitId: filterdData?.permit_id, isChecked: false
-                                                                                                                            // controller
-                                                                                                                            //     .isChecked
-                                                                                                                            //     .value
-                                                                                                                               );
+                                                                                                                            controller.editNewPermit(permitId: filterdData?.permit_id, isChecked: false
+                                                                                                                                // controller
+                                                                                                                                //     .isChecked
+                                                                                                                                //     .value
+                                                                                                                                );
                                                                                                                           },
                                                                                                                         )
                                                                                                                       : Dimens.box0,
@@ -1140,9 +1140,9 @@ class AddModuleCleaningExecutionContentWeb
                                             // SizedBox(
                                             //   width: 10,
                                             // ),
-                                            Dimens.boxWidth10,
+                                            Dimens.boxWidth5,
                                             // Container(
-                                            //   height: 35,
+                                            //   height: 28,
                                             //   child: CustomElevatedButton(
                                             //     icon: Icons.print,
                                             //     backgroundColor: ColorValues
@@ -1153,6 +1153,7 @@ class AddModuleCleaningExecutionContentWeb
                                             //     },
                                             //   ),
                                             // ),
+                                            // Dimens.boxWidth5,
                                             controller.mcExecutionDetailsModel.value?.status == 361 &&
                                                         varUserAccessModel.value
                                                                 .access_list!
