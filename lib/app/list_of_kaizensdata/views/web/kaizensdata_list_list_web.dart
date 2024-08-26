@@ -1,7 +1,6 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/list_of_fueldata/fueldata_list_controller.dart';
 import 'package:cmms/app/list_of_kaizensdata/kaizensdata_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
@@ -9,7 +8,6 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/domain/models/get_fueldata_list_model.dart';
 import 'package:cmms/domain/models/get_kaizensdata_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +17,6 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/action_button.dart';
-import 'package:cmms/domain/models/get_occupational_list_model.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 
 class KaizensdataListWeb extends StatefulWidget {
@@ -509,6 +506,7 @@ class KaizensDataListSource extends DataTableSource {
 
     controller.kaizensId.value = KaizensDataDetails?.id ?? 0;
     var cellsBuffer = [
+            'KD${KaizensDataDetails?.id?? ''}',
       '${KaizensDataDetails?.kaizensImplemented?? ''}',
       '${KaizensDataDetails?.costForImplementation ?? ''}',
       '${KaizensDataDetails?.costSavedFromImplementation?? ''}',
