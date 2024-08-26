@@ -863,7 +863,7 @@ class AddModuleCleaningExecutionController extends GetxController {
     double sectionHeight = 20; // Height for each section header
     double pageWidth = pageSize.width - 2 * margin;
 
-    // Draw images
+    // Draw image
     page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
 
     final String centerText = 'MC Task Report';
@@ -892,7 +892,7 @@ class AddModuleCleaningExecutionController extends GetxController {
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    // PM Information
+    // MC Information section
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
@@ -901,20 +901,20 @@ class AddModuleCleaningExecutionController extends GetxController {
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    // Draw PM Information Details (Left Side)
+    // Draw MC Information Details (Left Side)
     double labelWidth = 80;
     double valueWidth = 120;
     double labelX = margin + 5;
     double valueX = labelX + labelWidth + 5;
 
-    List<String> pmInfoLabelsLeft = [
+    List<String> mcInfoLabelsLeft = [
       'MC Plan ID',
       'Task ID',
       'Plan Title',
       'Frequency',
     ];
 
-    List<String> pmInfoValuesLeft = [
+    List<String> mcInfoValuesLeft = [
       'MCP${planId}',
       'MCT${mcid}',
       '${mcExecutionDetailsModel.value?.title ?? ''}',
@@ -923,45 +923,59 @@ class AddModuleCleaningExecutionController extends GetxController {
 
     double rowHeight = 15;
 
-    for (int i = 0; i < pmInfoLabelsLeft.length; i++) {
-      page.graphics.drawString(pmInfoLabelsLeft[i], contentFont,
+    for (int i = 0; i < mcInfoLabelsLeft.length; i++) {
+      page.graphics.drawString(mcInfoLabelsLeft[i], contentFont,
           bounds: Rect.fromLTWH(labelX, currentY + 5, labelWidth, rowHeight));
-      page.graphics.drawString(pmInfoValuesLeft[i], contentFont,
+      page.graphics.drawString(mcInfoValuesLeft[i], contentFont,
           bounds: Rect.fromLTWH(valueX, currentY + 5, valueWidth, rowHeight));
       currentY += rowHeight;
     }
 
-    // Draw PM Information Details (Right Side)
+    // Draw MC Information Details (Right Side)
     double labelWidthRight = 80;
     double valueWidthRight = 120;
     double labelXRight = pageWidth / 2 + margin; // Position on the right side
     double valueXRight = labelXRight + labelWidthRight + 5;
 
-    List<String> pmInfoLabelsRight = [
+    List<String> mcInfoLabelsRight = [
       'Planned By',
       'Start Date Time',
       'Planning Date Time',
       'Execution started by'
     ];
-    List<String> pmInfoValuesRight = [
+    List<String> mcInfoValuesRight = [
       '${mcExecutionDetailsModel.value?.plannedBy}',
       '${mcExecutionDetailsModel.value?.status != 360 ? mcExecutionDetailsModel.value?.startDate : ''}',
       '${plannedAtDateTimeCtrlrWeb.text}',
       '${mcExecutionDetailsModel.value?.startedBy ?? ''}',
     ];
 
-    currentY -= pmInfoLabelsLeft.length *
+    currentY -= mcInfoLabelsLeft.length *
         rowHeight; // Reset currentY to align with left side
 
-    for (int i = 0; i < pmInfoLabelsRight.length; i++) {
-      page.graphics.drawString(pmInfoLabelsRight[i], contentFont,
+    for (int i = 0; i < mcInfoLabelsRight.length; i++) {
+      page.graphics.drawString(mcInfoLabelsRight[i], contentFont,
           bounds: Rect.fromLTWH(
               labelXRight, currentY + 5, labelWidthRight, rowHeight));
-      page.graphics.drawString(pmInfoValuesRight[i], contentFont,
+      page.graphics.drawString(mcInfoValuesRight[i], contentFont,
           bounds: Rect.fromLTWH(
               valueXRight, currentY + 5, valueWidthRight, rowHeight));
       currentY += rowHeight;
     }
+
+    // Add "Schedule Execution" header before the table
+    currentY += 15;
+    double tableWidth =
+        pageWidth; // Ensure the header width matches the table width
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        bounds: Rect.fromLTWH(margin, currentY, tableWidth, sectionHeight));
+    page.graphics.drawString('Schedule Execution', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+
+    currentY += sectionHeight;
+
+    // Define column widths
     double colWidthSchId = 30;
     double colWidthDays = 30;
     double colWidthScheduled = 60;
@@ -969,26 +983,17 @@ class AddModuleCleaningExecutionController extends GetxController {
     double colWidthAbandoned = 60;
     double colWidthPending = 60;
     double colWidthWaterUsed = 55;
-    double colWidthPermitStatus = 100;
-    double colWidthStatus = 60;
+    double colWidthPermitStatus = 90;
+    double colWidthStatus = 55;
 
-    double tableWidth = colWidthSchId +
-        colWidthDays +
-        colWidthScheduled +
-        colWidthCleaned +
-        colWidthAbandoned +
-        colWidthPending +
-        colWidthWaterUsed +
-        colWidthPermitStatus +
-        colWidthStatus;
+    // Adjust table width to ensure it matches the page width
+    tableWidth = pageWidth;
 
-// Draw table header
-    currentY += 10;
+    // Draw table header
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
-        bounds: Rect.fromLTWH(margin, currentY, tableWidth,
-            25)); // Increased height for better readability
+        bounds: Rect.fromLTWH(margin, currentY, tableWidth, 25));
     page.graphics.drawString('Id', headerFont,
         bounds: Rect.fromLTWH(margin, currentY, colWidthSchId, 25),
         format: PdfStringFormat(
@@ -1093,7 +1098,7 @@ class AddModuleCleaningExecutionController extends GetxController {
 
     currentY += 25;
 
-// Draw table rows
+    // Draw table rows
     for (var schedule in mcExecutionDetailsModel.value?.schedules ?? []) {
       page.graphics.drawRectangle(
           pen: borderPen,
