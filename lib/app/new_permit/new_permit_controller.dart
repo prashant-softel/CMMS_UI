@@ -272,6 +272,7 @@ class NewPermitController extends GetxController {
 
   //
   RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
+  RxList<EmployeeListModel?> employeeNameListt = <EmployeeListModel>[].obs;
   Rx<bool> isemployeeNameListSelected = true.obs;
   Rx<String> selectedEmployeeNamesList = ''.obs;
   int selectedTbtConductedId = 0;
@@ -448,6 +449,7 @@ class NewPermitController extends GetxController {
         getFacilityLists();
 
         getEmployeePermitList();
+        getEmployeePermitListoftbt();
         addRowItem();
         getJobTypePermitList();
         if (pmtaskViewModel?.id != null) {
@@ -768,6 +770,20 @@ class NewPermitController extends GetxController {
 
     employee_map[emp_id] = selectedEmployeeNameIdList;
   }
+  void employeeNameSelectedoftbt(_selectedEmployeeNameIds) {
+    selectedEmployeeNameIdList.value = <int>[];
+    filteredEmployeeNameList.value = <EmployeeListModel>[];
+    late int emp_id = 0;
+    for (var _selectedEmployeeNameId in _selectedEmployeeNameIds) {
+      selectedEmployeeNameIdList.add(_selectedEmployeeNameId);
+      EmployeeListModel? e = employeeNameListt.firstWhere((element) {
+        return element?.id == _selectedEmployeeNameId;
+      });
+      filteredEmployeeNameList.add(e);
+    }
+
+    employee_map[emp_id] = selectedEmployeeNameIdList;
+  }
 
   //  void removeRow({selectedEmployeeNameIds}) {
   //   selectedEmployeeNameIdList.value = <int>[];
@@ -853,6 +869,23 @@ class NewPermitController extends GetxController {
     // supplierNameList = _supplierNameList;
     employeeNamepaginationController = PaginationController(
       rowCount: employeeNameList.length,
+      rowsPerPage: 10,
+    );
+    update(['permit_employee_list']);
+  }
+  Future<void> getEmployeePermitListoftbt() async {
+    employeeNameListt.value = <EmployeeListModel>[];
+    final _employeeNameList = await permitPresenter.getEmployeePermitListoftbt(
+        isLoading: true,
+        // categoryIds: categoryIds,
+        facility_id: facilityId,
+        featureId: 0);
+    for (var employee_list in _employeeNameList) {
+      employeeNameListt.add(employee_list);
+    }
+    // supplierNameList = _supplierNameList;
+    employeeNamepaginationController = PaginationController(
+      rowCount: employeeNameListt.length,
       rowsPerPage: 10,
     );
     update(['permit_employee_list']);
