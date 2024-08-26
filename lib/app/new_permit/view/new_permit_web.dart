@@ -3609,7 +3609,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                           title: 'Select Employee',
                           initialValue:
                               controller.selectedEmployeeNameIdList.value,
-                          items: controller.employeeNameList
+                          items: controller.employeeNameListt
                               .map(
                                 (employeeName) => MultiSelectItem(
                                   employeeName?.id,
@@ -3619,7 +3619,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                               .toList(),
                           onConfirm: (selectedOptionsList) => {
                             controller
-                                .employeeNameSelected(selectedOptionsList),
+                                .employeeNameSelectedoftbt(selectedOptionsList),
                             controller.selectedEmployeeNameIdList.value =
                                 selectedOptionsList.cast<int>().toList(),
                             print(
