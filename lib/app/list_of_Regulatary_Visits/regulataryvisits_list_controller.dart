@@ -38,6 +38,8 @@ class RegulataryDataListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> VisitAndNoticeId = 0.obs;
+
+  RxString idFilterText = ''.obs;
   RxString monthnameFilterText = ''.obs;
   RxString govtAuthVisitsFilterText = ''.obs;
   RxString noOfFineByThirdPartyFilterText = ''.obs;
@@ -52,21 +54,23 @@ class RegulataryDataListController extends GetxController {
   RxString userDateFilterText = ''.obs;
 
  final columnVisibility = ValueNotifier<Map<String, bool>>({
+  "Id":true,
     "Govt. authorities visited": true,
-    "Penalties/fines received by third parties ": true,
-    "Show cause notices received by third parties ": true,
-    "warning or Non conformity notices issued by HFE to contractor": true,
-    "Penalties imposed to the contractor by HFE in Amount ": true,
+    "Penalties third parties": true,
+    "Cause notices third parties": true,
+    "Notices issued by HFE to contractor": true,
+    "Penalties contractor by HFE in Amount": true,
     "Any other": true,
     "Month name": true,
     "Created At": true,
   });
     final Map<String, double> columnwidth = {
+      "Id":100,
     "Govt. authorities visited":100,
-    "Penalties/fines received by third parties ": 200,
-    "Show cause notices received by third parties ": 200,
-    "warning or Non conformity notices issued by HFE to contractor": 200,
-    "Penalties imposed to the contractor by HFE in Amount ": 200,
+    "Penalties third parties": 200,
+    "Cause notices third parties": 200,
+    "Notices issued by HFE to contractor": 200,
+    "Penalties contractor by HFE in Amount": 200,
     "Any other": 100,
     "Month name": 100,
     "Created At": 100,
@@ -82,11 +86,12 @@ class RegulataryDataListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
+      "Id":idFilterText,
      "Govt. authorities visited":govtAuthVisitsFilterText,
-    "Penalties/fines received by third parties ": noOfFineByThirdPartyFilterText,
-    "Show cause notices received by third parties ": noOfShowCauseNoticesFilterText,
-    "warning or Non conformity notices issued by HFE to contractor": noticesToContractorFilterText,
-    "Penalties imposed to the contractor by HFE in Amount ": amountOfPenaltiesFilterText,
+    "Penalties third parties": noOfFineByThirdPartyFilterText,
+    "Cause notices third parties": noOfShowCauseNoticesFilterText,
+    "Notices issued by HFE to contractor": noticesToContractorFilterText,
+    "Penalties contractor by HFE in Amount": amountOfPenaltiesFilterText,
     "Any other": anyOtherFilterText,
     "Month name": monthnameFilterText,
     "Created At": createdAtFilterText,

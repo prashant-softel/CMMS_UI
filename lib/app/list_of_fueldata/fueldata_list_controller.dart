@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
@@ -38,7 +37,8 @@ class FuelDataListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> fuelId = 0.obs;
-   RxString dieselConsumedFilterText = ''.obs;
+  RxString idConsumedFilterText = ''.obs;
+  RxString dieselConsumedFilterText = ''.obs;
   RxString petrolConsumedFilterText = ''.obs;
   RxString petrolConsumedForGrassCuttingFilterText = ''.obs;
   RxString dieselConsumedAtSiteFilterText = ''.obs;
@@ -48,26 +48,27 @@ class FuelDataListController extends GetxController {
   RxString createdatFilterText = ''.obs;
   RxString actionFilterText = ''.obs;
 
-
   RxString userDateFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    "Diesel Consumed For Vehicles": true,
-    "Petrol Consumed For Vehicles": true,
-    "Petrol Consumed For Grass Cutting And Movers": true,
-    "Diesel Consumed At Site": true,
-    "Petrol Consumed At Site": true,
-    "Month name": true,
+    "Id": true,
+    "Diesel For Vehicles": true,
+    "Petrol For Vehicles": true,
+    "Petrol For Cutting And Movers": true,
+    "Diesel At Site": true,
+    "Petrol At Site": true,
+    "Month": true,
     "Created At": true,
   });
   final Map<String, double> columnwidth = {
-   "Diesel Consumed For Vehicles": 250,
-    "Petrol Consumed For Vehicles": 250,
-    "Petrol Consumed For Grass Cutting And Movers": 300,
-    "Diesel Consumed At Site": 200,
-    "Petrol Consumed At Site": 200,
-    "Month name": 150,
-    "Created At": 150,
+    "Id": 100,
+    "Diesel For Vehicles": 200,
+    "Petrol For Vehicles": 200,
+    "Petrol For Cutting And Movers": 250,
+    "Diesel At Site": 150,
+    "Petrol At Site": 150,
+    "Month": 100,
+    "Created At": 100,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -81,13 +82,14 @@ class FuelDataListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
-       "Diesel Consumed For Vehicles": dieselConsumedFilterText,
-    "Petrol Consumed For Vehicles": petrolConsumedFilterText,
-    "Petrol Consumed For Grass Cutting And Movers": petrolConsumedForGrassCuttingFilterText,
-    "Diesel Consumed At Site": dieselConsumedAtSiteFilterText,
-    "Petrol Consumed At Site": petrolConsumedAtSiteFilterText,
-    "Month name": monthFilterText,
-    "Created At": createdatFilterText,
+      "Id": idConsumedFilterText,
+      "Diesel For Vehicles": dieselConsumedFilterText,
+      "Petrol For Vehicles": petrolConsumedFilterText,
+      "Petrol For Cutting And Movers": petrolConsumedForGrassCuttingFilterText,
+      "Diesel At Site": dieselConsumedAtSiteFilterText,
+      "Petrol At Site": petrolConsumedAtSiteFilterText,
+      "Month": monthFilterText,
+      "Created At": createdatFilterText,
 
       "Action": actionFilterText,
       // "Status": statusFilterText,
@@ -108,30 +110,25 @@ class FuelDataListController extends GetxController {
       return;
     }
     List<GetFuelDataList> filteredList = filteredData
-        .where((item) =>
-            (item.dieselConsumedForVehicles
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false) 
-       
-            )
+        .where((item) => (item.dieselConsumedForVehicles
+                ?.toString()
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ??
+            false))
         .toList();
     fueldataList.value = filteredList;
   }
 
-  Future<void> getFuelConsumption(
-     bool isExport) async {
+  Future<void> getFuelConsumption(bool isExport) async {
     fueldataList.value = <GetFuelDataList>[];
     filteredData.value = <GetFuelDataList>[];
 
-    final _goodsordersList =
-        await fueldataListPresenter.getFuelConsumption(
-            isLoading: isLoading.value,
-            // start_date: startDate,
-            // end_date: endDate,
-            // facility_id: facilityId,
-            isExport: isExport);
+    final _goodsordersList = await fueldataListPresenter.getFuelConsumption(
+        isLoading: isLoading.value,
+        // start_date: startDate,
+        // end_date: endDate,
+        // facility_id: facilityId,
+        isExport: isExport);
     fueldataList.value = _goodsordersList;
     isLoading.value = false;
     paginationController = PaginationController(
@@ -153,11 +150,7 @@ class FuelDataListController extends GetxController {
     switch (list.runtimeType) {}
   }
 
-
-
   void clearStoreData() {
     fueldataListPresenter.clearValue();
   }
-
-  
 }

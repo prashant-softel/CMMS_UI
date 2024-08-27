@@ -1,6 +1,7 @@
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
+import 'package:cmms/app/list_of_occupationalhealth/views/mobile/occupational_list_mobile.dart';
 import 'package:cmms/app/list_of_occupationalhealth/views/web/occupational_list_web.dart';
 import 'package:cmms/app/mis_list_of_observation/views/mobile/observation_list_mobile.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class OccupationalDataListScreen extends GetView<OccupationalDataListController>
                     child: Column(
                       children: [
                         if (Responsive.isMobile(context))
-                          Expanded(child: ObservationListMobile()),
+                          Expanded(child: HealthListMobile()),
                         if (Responsive.isDesktop(context))
                           Expanded(
                             child: OccupationalListWeb(),

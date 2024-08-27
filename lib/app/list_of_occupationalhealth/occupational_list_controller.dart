@@ -37,6 +37,7 @@ class OccupationalDataListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> occupationId = 0.obs;
+   RxString idFilterText = ''.obs;
    RxString healthexamsFilterText = ''.obs;
   RxString periodictestsFilterText = ''.obs;
   RxString illnessesFilterText = ''.obs;
@@ -49,6 +50,7 @@ class OccupationalDataListController extends GetxController {
   RxString userDateFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Id":true,
     "No Of Health Exams Of New Joiner": true,
     "Periodic Tests": true,
     "Occupational Illnesses": true,
@@ -60,6 +62,7 @@ class OccupationalDataListController extends GetxController {
     // "search": true,
   });
   final Map<String, double> columnwidth = {
+    "Id": 100,
    "No Of Health Exams Of New Joiner": 380,
     "Periodic Tests": 220,
     "Occupational Illnesses": 250,
@@ -80,6 +83,7 @@ class OccupationalDataListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
+      "Id":idFilterText,
       "No Of Health Exams Of New Joiner": healthexamsFilterText,
       "Periodic Tests": periodictestsFilterText,
       "Occupational Illnesses": illnessesFilterText,
