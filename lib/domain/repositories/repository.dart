@@ -9402,41 +9402,37 @@ class Repository {
 
           List<List<dynamic>> data = [
             [
-              'Task_code',
-              'Plan_title',
-              'Last_donedate',
-              'due_date',
-              'done_date',
-              'frequency_id',
-              'frequency_name',
-              'category_id',
-              'Category_name',
-              'assigned_to_id',
-              'assigned_to_name',
-              'permit_id',
-              'permit_code',
-              'status',
-              'ptw_status',
-              'short_status',
+              'Site Name',
+              "Equipment Category",
+              'Task Title',
+              'Start Date',
+              'Frequency',
+              'Task ID',
+              'Assigned To',
+              'PTW ID',
+              'Status',
+              'Due Date',
+              'Done Date',
+              'Last Done Date',
+              'Isolation Taken?',
+              'Permit Type',
             ],
             ...jsonDataList
                 .map((pmtaskjson) => [
-                      pmtaskjson['task_code'],
+                      pmtaskjson['site_name'],
+                      pmtaskjson['category_name'],
                       pmtaskjson['plan_title'],
-                      pmtaskjson['last_done_date'],
+                      pmtaskjson['start_date'],
+                      pmtaskjson['frequency_name'],
+                      pmtaskjson['task_code'],
+                      pmtaskjson['assigned_to_name'],
+                      pmtaskjson['permit_code'],
+                      pmtaskjson['status_short'],
                       pmtaskjson['due_date'],
                       pmtaskjson['done_date'],
-                      pmtaskjson['frequency_id'],
-                      pmtaskjson['frequency_name'],
-                      pmtaskjson['category_id'],
-                      pmtaskjson['category_name'],
-                      pmtaskjson['assigned_to_id'],
-                      pmtaskjson['assigned_to_name'],
-                      pmtaskjson['permit_id'],
-                      pmtaskjson['permit_code'],
-                      pmtaskjson['status'],
-                      pmtaskjson['ptw_status'],
-                      pmtaskjson['status_short'],
+                      pmtaskjson['last_done_date'],
+                      pmtaskjson['isolation_taken'],
+                      pmtaskjson['permit_type'],
                     ])
                 .toList(),
           ];
@@ -10240,7 +10236,7 @@ class Repository {
               'Assigned To',
               'Permit No',
               'Permit Type',
-              'Isolation Taken',
+              'Isolation Taken?',
               'Job Card Date',
               'Job Card Start Time',
               'Job Card End Time',
@@ -10267,11 +10263,9 @@ class Repository {
               }
               String faults = '';
               if (jobCardJson['_WorkTypes'] != null) {
-                faults =
-                    (jobCardJson['_WorkTypes'] as List<dynamic>)
-                        .map((workType) =>
-                            workType['workType'].toString())
-                        .join(', ');
+                faults = (jobCardJson['_WorkTypes'] as List<dynamic>)
+                    .map((workType) => workType['workType'].toString())
+                    .join(', ');
               }
 
               return [
