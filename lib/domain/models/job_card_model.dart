@@ -32,6 +32,7 @@ class JobCardModel {
     this.start_time,
     this.end_time,
     this.lstequipmentCatList,
+    this.errordescription,
   });
 
   int? id;
@@ -53,6 +54,7 @@ class JobCardModel {
   dynamic start_time;
   dynamic end_time;
   List<EquipCategory>? lstequipmentCatList;
+  List<Faults>? errordescription;
 
   factory JobCardModel.fromJson(Map<String, dynamic> json) => JobCardModel(
         jobCardId: json["jobCardId"],
@@ -88,6 +90,10 @@ class JobCardModel {
             ? List<EquipCategory>.from(json['lstequipmentCatList']
                 .map((x) => EquipCategory.fromJson(x)))
             : [],
+        errordescription: json['_WorkTypes'] != null
+            ? List<Faults>.from(json['_WorkTypes']
+                .map((x) => Faults.fromJson(x)))
+            : [],
         // lstequipmentCatList: (json["lstequipmentCatList"] != null)
         //     ? List<LstequipmentCatList>.from(json["lstequipmentCatList"]
         //         .map((x) => LstequipmentCatList.fromJson(x)))
@@ -121,25 +127,51 @@ class JobCardModel {
         "lstequipmentCatList": lstequipmentCatList != null
             ? List<dynamic>.from(lstequipmentCatList!.map((x) => x.toJson()))
             : [],
+        "_WorkTypes": errordescription != null
+            ? List<dynamic>.from(errordescription!.map((x) => x.toJson()))
+            : [],
       };
 }
 
 class EquipCategory {
   EquipCategory({
-    required this.equipmentCatId,
-    required this.equipmentCatName,
+     this.equipmentCatId,
+     this.equipmentCatName,
+     this.equipment_name,
   });
 
-  int equipmentCatId;
-  String equipmentCatName;
+  int? equipmentCatId;
+  String? equipmentCatName;
+  String? equipment_name;
 
   factory EquipCategory.fromJson(Map<String, dynamic> json) => EquipCategory(
         equipmentCatId: json["equipmentCat_id"],
         equipmentCatName: json["equipmentCat_name"],
+        equipment_name: json["equipment_name"],
       );
 
   Map<String, dynamic> toJson() => {
         "equipmentCat_id": equipmentCatId,
         "equipmentCat_name": equipmentCatName,
+        "equipment_name": equipment_name,
+      };
+}
+class Faults {
+  Faults({
+     this.Id,
+     this.workType,
+  });
+
+  int? Id;
+  String? workType;
+
+  factory Faults.fromJson(Map<String, dynamic> json) => Faults(
+        Id: json["id"],
+        workType: json["workType"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": Id,
+        "workType": workType,
       };
 }

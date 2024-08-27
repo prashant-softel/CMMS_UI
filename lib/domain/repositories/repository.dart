@@ -10234,6 +10234,8 @@ class Repository {
               'Job ID',
               'Job Title',
               'Equipment Category',
+              'Equipment Name',
+              'Error Description',
               'Breakdown Time',
               'Assigned To',
               'Permit No',
@@ -10255,6 +10257,22 @@ class Repository {
                             equipmentCat['equipmentCat_name'].toString())
                         .join(', ');
               }
+              String equipment_name = '';
+              if (jobCardJson['lstequipmentCatList'] != null) {
+                equipment_name =
+                    (jobCardJson['lstequipmentCatList'] as List<dynamic>)
+                        .map((equipment_name) =>
+                            equipment_name['equipment_name'].toString())
+                        .join(', ');
+              }
+              String faults = '';
+              if (jobCardJson['_WorkTypes'] != null) {
+                faults =
+                    (jobCardJson['_WorkTypes'] as List<dynamic>)
+                        .map((workType) =>
+                            workType['workType'].toString())
+                        .join(', ');
+              }
 
               return [
                 'JC${jobCardJson['jobCardId']}',
@@ -10262,6 +10280,8 @@ class Repository {
                 'JOB${jobCardJson['jobid']}',
                 jobCardJson['description'],
                 equipmentCategory,
+                equipment_name,
+                faults,
                 jobCardJson['breakdownTime'],
                 jobCardJson['job_assinged_to'],
                 jobCardJson['permit_no'],
