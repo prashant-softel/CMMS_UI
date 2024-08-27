@@ -1167,8 +1167,9 @@ class Repository {
       return Map();
     }
   }
+
 //createkaizensdata
-Future<Map<String, dynamic>> createkaizensdata(
+  Future<Map<String, dynamic>> createkaizensdata(
       createkaizensdata, bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -5352,8 +5353,9 @@ Future<Map<String, dynamic>> createkaizensdata(
       return [];
     }
   }
+
 //getkaizensdata
- Future<List<GetKaizensDataList>> getkaizensdata({
+  Future<List<GetKaizensDataList>> getkaizensdata({
     bool? isExport,
     required bool isLoading,
   }) async {
@@ -5372,28 +5374,29 @@ Future<Map<String, dynamic>> createkaizensdata(
         // return incidentReportList.reversed.toList();
         final jsonKaizensListModelModels = jsonDecode(res.data);
 
-        final List<GetKaizensDataList> _kaizensdataList = jsonKaizensListModelModels
-            .map<GetKaizensDataList>(
-                (m) => GetKaizensDataList.fromJson(Map<String, dynamic>.from(m)))
-            .toList();
+        final List<GetKaizensDataList> _kaizensdataList =
+            jsonKaizensListModelModels
+                .map<GetKaizensDataList>((m) =>
+                    GetKaizensDataList.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
         String jsonData = GetKaizensDataListModelToJson(_kaizensdataList);
         if (isExport == true) {
           List<dynamic> jsonDataList = jsonDecode(jsonData);
 
           List<List<dynamic>> data = [
             [
-             'id',
-        'date',
-        'month_name',
-        'month_id',
-        'kaizensImplemented',
-        'costForImplementation',
-        'costSavedFromImplementation',
-        'status',
-        'createdBy',
-        'createdAt',
-        'updatedBy',
-        'updatedAt',
+              'id',
+              'date',
+              'month_name',
+              'month_id',
+              'kaizensImplemented',
+              'costForImplementation',
+              'costSavedFromImplementation',
+              'status',
+              'createdBy',
+              'createdAt',
+              'updatedBy',
+              'updatedAt',
             ],
             ...jsonDataList
                 .map((kaizenslistjson) => [
@@ -5428,6 +5431,7 @@ Future<Map<String, dynamic>> createkaizensdata(
       return [];
     }
   }
+
 //getplantationdata
   Future<List<GetPlantationList>> getplantationdata({
     bool? isExport,
@@ -10222,36 +10226,60 @@ Future<Map<String, dynamic>> createkaizensdata(
         String jsonData = jobCardDetailslModelToJson(_JobCardListModelList);
         if (isExport == true) {
           List<dynamic> jsonDataList = jsonDecode(jsonData);
+
           List<List<dynamic>> data = [
             [
-              'job_card_id',
-              'job_id',
-              'permit_id',
-              'permit_no',
-              'description',
-              'assigned_to',
-              'start_time',
-              'end_time',
-              'short_status',
+              'Job Card ID',
+              'Site Name',
+              'Job ID',
+              'Job Title',
+              'Equipment Category',
+              'Breakdown Time',
+              'Assigned To',
+              'Permit No',
+              'Permit Type',
+              'Isolation Taken',
+              'Job Card Date',
+              'Job Card Start Time',
+              'Job Card End Time',
+              'Status',
+              'Jobs Closed',
             ],
-            ...jsonDataList
-                .map((jobcardjson) => [
-                      jobcardjson['jobCardId'],
-                      jobcardjson['jobid'],
-                      jobcardjson['permit_id'],
-                      jobcardjson['permit_no'],
-                      jobcardjson['description'],
-                      jobcardjson['job_assinged_to'],
-                      jobcardjson['start_time'],
-                      jobcardjson['end_time'],
-                      jobcardjson['status_short'],
-                    ])
-                .toList(),
+            ...jsonDataList.map((jobCardJson) {
+              // Check if 'lstequipmentCatList' is null
+              String equipmentCategory = '';
+              if (jobCardJson['lstequipmentCatList'] != null) {
+                equipmentCategory =
+                    (jobCardJson['lstequipmentCatList'] as List<dynamic>)
+                        .map((equipmentCat) =>
+                            equipmentCat['equipmentCat_name'].toString())
+                        .join(', ');
+              }
+
+              return [
+                'JC${jobCardJson['jobCardId']}',
+                jobCardJson['site_name'],
+                'JOB${jobCardJson['jobid']}',
+                jobCardJson['description'],
+                equipmentCategory,
+                jobCardJson['breakdownTime'],
+                jobCardJson['job_assinged_to'],
+                jobCardJson['permit_no'],
+                jobCardJson['permit_type'],
+                jobCardJson['isolation_taken'],
+                jobCardJson['job_card_date'],
+                jobCardJson['start_time'],
+                jobCardJson['end_time'],
+                jobCardJson['status_short'],
+                jobCardJson['jobs_closed'],
+              ];
+            }).toList(),
           ];
-          Map<String, List<List<dynamic>>> jobcardlistdata = {
+
+          Map<String, List<List<dynamic>>> jobCardData = {
             'Sheet1': data,
           };
-          exportToExcel(jobcardlistdata, "jobcardlist.xlsx");
+          exportToExcel(jobCardData, "jobcardlist.xlsx");
         }
 
         return _JobCardListModelList.reversed.toList();
@@ -14533,7 +14561,9 @@ Future<Map<String, dynamic>> createkaizensdata(
   Future<List<VegTaskListModel>> getVegTaskList(
       {required int? facility_id,
       dynamic startDate,
-      dynamic endDate, required bool isLoading, bool? isExport
+      dynamic endDate,
+      required bool isLoading,
+      bool? isExport
       // String? start_date,
       // required String end_date,
       }) async {
@@ -14543,8 +14573,8 @@ Future<Map<String, dynamic>> createkaizensdata(
       log(auth);
       final res = await _dataRepository.getVegTaskList(
         facility_id: facility_id,
-          startDate: startDate,
-          endDate: endDate,
+        startDate: startDate,
+        endDate: endDate,
         isLoading: isLoading,
         // start_date: start_date,
         // end_date: end_date,
