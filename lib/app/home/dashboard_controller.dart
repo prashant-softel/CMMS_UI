@@ -18,6 +18,8 @@ class DashboardController extends GetxController {
   final categoryMapMC = <String, double>{};
   Map<String, double> categoryMapBMDouble = <String, double>{};
   Map<String, double> categoryMapPMDouble = <String, double>{};
+  Map<String, double> mcTypeMapMcDouble = <String, double>{};
+
   Map<String, double> categoryMapSMDouble = <String, double>{};
   Map<String, double> categoryMapIRDouble = <String, double>{};
 
@@ -26,6 +28,7 @@ class DashboardController extends GetxController {
   Map<String, double> categoryMapSmAvailableDouble = <String, double>{};
   Map<String, double> categoryMapSmAvailableSiteDouble = <String, double>{};
   Map<String, double> stockOverviewmap = <String, double>{};
+  Map<String, double> waterUsedDouble = <String, double>{};
 
   var selectedSection = 0.obs;
 
@@ -138,7 +141,7 @@ class DashboardController extends GetxController {
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      getdashboardList();
+      if (facilityId > 0) getdashboardList();
     });
 
     super.onInit();
@@ -301,6 +304,70 @@ class DashboardController extends GetxController {
 
         categoryMapPMDouble = categoryMapPm
             .map((key, value) => MapEntry(key, (value.toDouble())));
+      }
+      if (dashboardMcList.value != null) {
+        final typeMapMc = <String, int>{};
+        final totalWater = <String, double>{};
+
+        for (var item
+            in dashboardMcList.value!.cmDashboadDetails!.item_list ?? []) {
+          final types = item.mC_Type?.split(', ') ?? [];
+          for (var type in types) {
+            if (typeMapMc.containsKey(type)) {
+              typeMapMc[type] = typeMapMc[type]! + 1;
+            } else {
+              typeMapMc[type] = 1;
+            }
+          }
+        }
+
+        final sortedTypes = typeMapMc.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        final top5Types = sortedTypes.take(5).toList();
+        final otherTypesCount = sortedTypes.skip(5).fold<int>(
+              0,
+              (sum, entry) => sum + entry.value,
+            );
+
+        typeMapMc.clear();
+        for (var entry in top5Types) {
+          typeMapMc[entry.key] = entry.value;
+        }
+        if (otherTypesCount > 0) {
+          typeMapMc['Other'] = otherTypesCount;
+        }
+
+        mcTypeMapMcDouble =
+            typeMapMc.map((key, value) => MapEntry(key, (value.toDouble())));
+
+        ///water used site wise
+        for (var item
+            in dashboardMcList.value?.cmDashboadDetails?.waterUsedTotal ?? []) {
+          if (totalWater.containsKey(item.site_name)) {
+            totalWater[item.site_name!] =
+                totalWater[item.site_name!]! + item.totalWaterUsed!;
+          } else {
+            totalWater[item.site_name!] = item.totalWaterUsed!.toDouble();
+          }
+        }
+        final sortedUsedWaters = totalWater.entries.toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+        final top5sortedUsedWaters = sortedUsedWaters.take(5).toList();
+        final otherCategoriesCountConsumptionSites =
+            sortedUsedWaters.skip(5).fold<double>(
+                  0.0,
+                  (sum, entry) => sum + entry.value,
+                );
+
+        final top5mapededUsedWaters = <String, double>{};
+        for (var entry in top5sortedUsedWaters) {
+          top5mapededUsedWaters[entry.key] = entry.value;
+        }
+        if (otherCategoriesCountConsumptionSites > 0) {
+          top5mapededUsedWaters['Other'] = otherCategoriesCountConsumptionSites;
+        }
+
+        waterUsedDouble = top5mapededUsedWaters;
       }
       if (dashboardIrList.value != null) {
         final categoryMapIr = <String, int>{};

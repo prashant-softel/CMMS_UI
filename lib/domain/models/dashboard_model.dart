@@ -80,7 +80,8 @@ class CmDashboadDetails {
       this.stockConsumptionByGoods,
       this.stockAvailbleBySites,
       this.stockAvailbleByGoods,
-      this.stockOverview});
+      this.stockOverview,
+      this.waterUsedTotal});
 
   int? created;
   int? submitted;
@@ -105,6 +106,7 @@ class CmDashboadDetails {
   List<AllChartview>? stockConsumptionBySites;
   List<AllChartview>? stockAvailbleByGoods;
   List<AllChartview>? stockAvailbleBySites;
+  List<WaterUsedTotal>? waterUsedTotal;
 
   factory CmDashboadDetails.fromJson(Map<String, dynamic> parsedJson) =>
       CmDashboadDetails(
@@ -129,6 +131,10 @@ class CmDashboadDetails {
         item_list: parsedJson['item_list'] != null
             ? List<Itemlist>.from(
                 parsedJson['item_list'].map((x) => Itemlist.fromJson(x)))
+            : null,
+        waterUsedTotal: parsedJson['waterUsedTotal'] != null
+            ? List<WaterUsedTotal>.from(parsedJson['waterUsedTotal']
+                .map((x) => WaterUsedTotal.fromJson(x)))
             : null,
         stockOverview: parsedJson['stockOverview'] != null
             ? List<AllChartview>.from(parsedJson['stockOverview']
@@ -172,6 +178,9 @@ class CmDashboadDetails {
         "completed": completed,
         'item_list': item_list != null
             ? List<dynamic>.from(item_list!.map((x) => x.toJson()))
+            : null,
+        'waterUsedTotal': waterUsedTotal != null
+            ? List<dynamic>.from(waterUsedTotal!.map((x) => x.toJson()))
             : null,
         'stockOverview': stockOverview != null
             ? List<dynamic>.from(stockOverview!.map((x) => x.toJson()))
@@ -231,7 +240,12 @@ class Itemlist {
       this.restoration_datetime,
       this.severity,
       this.title,
-      this.type_of_incident});
+      this.type_of_incident,
+      this.totalWaterUsed,
+      this.end_Date_done,
+      this.mC_Type,
+      this.no_of_cleaned,
+      this.scheduled});
 
   int? facility_id;
   String? facility_name;
@@ -243,6 +257,10 @@ class Itemlist {
   String? start_date;
   String? end_date;
   int? ptw_id;
+  dynamic mC_Type;
+  dynamic no_of_cleaned;
+  String? end_Date_done;
+  dynamic totalWaterUsed;
   String? wo_decription;
   int? latestJCStatus;
   int? latestJCid;
@@ -260,6 +278,7 @@ class Itemlist {
   dynamic total_amount;
   dynamic grn_date;
   dynamic grn_qty;
+  dynamic scheduled;
   String? title;
   String? type_of_incident;
   String? location_of_incident;
@@ -299,6 +318,8 @@ class Itemlist {
         goNo: parsedJson["goNo"],
         product_name: parsedJson["product_name"],
         requested_qty: parsedJson["requested_qty"],
+        scheduled:
+            parsedJson['scheduled'] == null ? 0 : parsedJson['scheduled'],
         gr_date: parsedJson['gr_date'] == null
             ? parsedJson['gr_date']
             : Utility.getFormatedyearMonthDay(parsedJson['gr_date']),
@@ -312,10 +333,25 @@ class Itemlist {
             ? parsedJson['grn_date']
             : Utility.getFormatedyearMonthDay(parsedJson['grn_date']),
         grn_qty: parsedJson["grn_qty"],
+        totalWaterUsed: parsedJson['totalWaterUsed'] == null
+            ? ""
+            : parsedJson['totalWaterUsed'],
+        end_Date_done: parsedJson['end_Date_done'] == null
+            ? parsedJson['end_Date_done']
+            : Utility.getFormatedyearMonthDay(parsedJson['end_Date_done']),
+        mC_Type: parsedJson['mC_Type'] == null ? "" : parsedJson['mC_Type'],
+        no_of_cleaned: parsedJson['no_of_cleaned'] == null
+            ? 0
+            : parsedJson['no_of_cleaned'],
       );
 
   Map<String, dynamic> toJson() => {
         "facility_id": facility_id,
+        "scheduled": scheduled,
+        "no_of_cleaned": no_of_cleaned,
+        "mC_Type": mC_Type,
+        "end_Date_done": end_Date_done,
+        "totalWaterUsed": totalWaterUsed,
         "title": title,
         "location_of_incident": location_of_incident,
         "type_of_incident": type_of_incident,
@@ -373,5 +409,32 @@ class AllChartview {
   Map<String, dynamic> toJson() => {
         "key": key,
         "value": value,
+      };
+}
+
+class WaterUsedTotal {
+  WaterUsedTotal(
+      {this.site_name,
+      this.totalWaterUsed,
+      this.plan_days,
+      this.no_of_cleaned});
+  String? site_name;
+  int? totalWaterUsed;
+  int? plan_days;
+  int? no_of_cleaned;
+
+  factory WaterUsedTotal.fromJson(Map<String, dynamic> parsedJson) =>
+      WaterUsedTotal(
+        site_name: parsedJson['site_name'],
+        totalWaterUsed: parsedJson['totalWaterUsed'],
+        plan_days: parsedJson['plan_days'],
+        no_of_cleaned: parsedJson['no_of_cleaned'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "site_name": site_name,
+        "totalWaterUsed": totalWaterUsed,
+        "plan_days": plan_days,
+        "no_of_cleaned": no_of_cleaned,
       };
 }
