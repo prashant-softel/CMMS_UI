@@ -1,4 +1,5 @@
 import 'package:cmms/app/create_observation/views/mobile/create_observation_mobile.dart';
+import 'package:cmms/app/create_occupationalhealth/views/mobile/create_occupationalhealth_mobile.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
@@ -50,7 +51,7 @@ class CreateOccupationalScreen extends GetView<CreateOccupationalhealthControlle
                       children: [
                         if (Responsive.isMobile(context))
                           Expanded(
-                            child: CreateObservationMobile(),
+                            child: CreateOccupationalhealthMobile(),
                           ),
                         if (Responsive.isDesktop(context))
                           Expanded(

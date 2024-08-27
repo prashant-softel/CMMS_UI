@@ -1,5 +1,5 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/create_OccupationalHealth/create_occupationalhealth_controller.dart';
+import 'package:cmms/app/create_regulataryvisits/create_regulataryvisits_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -9,21 +9,21 @@ import 'package:cmms/app/widgets/custom_textFieldMobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CreateOccupationalhealthMobile extends StatefulWidget {
-  CreateOccupationalhealthMobile({
+class CreateVisitAndNodticeMobile extends StatefulWidget {
+  CreateVisitAndNodticeMobile({
     Key? key,
   }) : super(key: key);
   // final FileUploadController dropzoneController =
   //     Get.put(FileUploadController());
 @override
-  State<CreateOccupationalhealthMobile> createState() =>
-      _CreateOccupationalhealthMobileState();
+  State<CreateVisitAndNodticeMobile> createState() =>
+      _CreateVisitAndNodticeMobileState();
 }
 
-class _CreateOccupationalhealthMobileState extends State<CreateOccupationalhealthMobile> {
+class _CreateVisitAndNodticeMobileState extends State<CreateVisitAndNodticeMobile> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CreateOccupationalhealthController>(
+    return GetBuilder<CreateRegulataryVisitsController>(
       id: 'stock_Mangement',
       builder: (controller) {
         return SelectionArea(
@@ -40,7 +40,7 @@ class _CreateOccupationalhealthMobileState extends State<CreateOccupationalhealt
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Create Occupational Health",
+                          "Create Visit And Notice",
                           style: Styles.blackBold18,
                         ),
                       ],
@@ -61,63 +61,124 @@ class _CreateOccupationalhealthMobileState extends State<CreateOccupationalhealt
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomRichTextMobile(
-                              title: "No. of Health Examinations carried out for newly joined person: ",
+                              title: "No. of Govt. authorities visited the site: ",
                             ),
                             Dimens.boxHeight2,
                             CustomTextfieldMobile(
                               width: MediaQuery.of(context).size.width / 1.1,
                               keyboardType: TextInputType.number,
-                              textController: controller.noofhealthexamsofnewjoinerCtrl,
-                              // errorController: controller.isHeathExamInvalid.value
+                              textController: controller.govtauthvisitsCtrl,
+                              // errorController: controller.isDieselConsumedForVehiclesInvalid.value
                               //     ? "Required field"
                               //     : null,
                               onChanged: (value) {
                                 if (value.trim().length > 0) {
-                                  controller.isHeathExamInvalid.value = false;
+                                  controller.isGovtAuthVisitsInvalid.value = false;
                                 } else {
-                                  controller.isHeathExamInvalid.value = true;
+                                  controller.isGovtAuthVisitsInvalid.value = true;
                                 }
                               },
                             ),
                             Dimens.boxHeight15,
 
                             CustomRichTextMobile(
-                              title: "No. of Occupational Health related illness:",
+                              title: "No. of Penalties/fines received by third parties:",
                             ),
                             Dimens.boxHeight2,
                             CustomTextfieldMobile(
                               width: MediaQuery.of(context).size.width / 1.1,
                               keyboardType: TextInputType.number,
                               textController:
-                                  controller.periodictestsCtrl,
-                              // errorController: controller.isPeriodictestInvalid.value
+                                  controller.noOffinebythirdpartyCtrl,
+                              // errorController: controller.isPetrolConsumedForVehiclesInvalid.value
                               //     ? "Required field"
                               //     : null,
                               onChanged: (value) {
                                 if (value.trim().length > 0) {
-                                  controller.isPeriodictestInvalid.value = false;
+                                  controller.isNoOfFineByThirdPartyInvalid.value = false;
                                 } else {
-                                  controller.isPeriodictestInvalid.value = true;
+                                  controller.isNoOfFineByThirdPartyInvalid.value = true;
                                 }
                               },
                             ),
                             Dimens.boxHeight15,
                             CustomRichTextMobile(
-                              title: "No. of persons to which Periodic Health Examination conducted (Annual Physical Fitness):",
+                              title: "No. of Show cause notices received by third parties:",
                             ),
                             Dimens.boxHeight2,
                             CustomTextfieldMobile(
                               width: MediaQuery.of(context).size.width / 1.1,
                               keyboardType: TextInputType.number,
-                              textController: controller.occupationalillnessesCtrl,
-                              // errorController: controller.isOccupationalIllnessesInvalid.value
+                              textController: controller.noofshowcausenoticesbythirdpartyCtrl,
+                              // errorController: controller.isPetrolConsumedForGrassCuttingAndMoversInvalid.value
                               //     ? "Required field"
                               //     : null,
                               onChanged: (value) {
                                 if (value.trim().length > 0) {
-                                  controller.isOccupationalIllnessesInvalid.value = false;
+                                  controller.isNoOfShowCauseNoticesInvalid.value = false;
                                 } else {
-                                  controller.isOccupationalIllnessesInvalid.value = true;
+                                  controller.isNoOfShowCauseNoticesInvalid.value = true;
+                                }
+                              },
+                            ),
+                            Dimens.boxHeight15,
+                            CustomRichTextMobile(
+                              title: "No of warning or Non conformity notices issued by HFE to contractor:",
+                            ),
+                            Dimens.boxHeight2,
+                            CustomTextfieldMobile(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              keyboardType: TextInputType.number,
+                              textController:
+                                  controller.noticestocontractorCtrl,
+                              // errorController: controller.isNoticesToContractorInvalid.value
+                              //     ? "Required field"
+                              //     : null,
+                              onChanged: (value) {
+                                if (value.trim().length > 0) {
+                                  controller.isNoticesToContractorInvalid.value = false;
+                                } else {
+                                  controller.isNoticesToContractorInvalid.value = true;
+                                }
+                              },
+                            ),
+                            Dimens.boxHeight15,
+                            CustomRichTextMobile(
+                              title: "Penalties imposed to the contractor by HFE in Amount:",
+                            ),
+                            Dimens.boxHeight2,
+                            CustomTextfieldMobile(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              keyboardType: TextInputType.number,
+                              textController: controller.amountofpenaltiestocontractorsCtrl,
+                              // errorController: controller.isPetrolConsumedAtSiteInvalid.value
+                              //     ? "Required field"
+                              //     : null,
+                              onChanged: (value) {
+                                if (value.trim().length > 0) {
+                                  controller.isAmountOfPenaltiesToContractorsInvalid.value = false;
+                                } else {
+                                  controller.isAmountOfPenaltiesToContractorsInvalid.value = true;
+                                }
+                              },
+                            ),
+                            Dimens.boxHeight15,
+                             CustomRichTextMobile(
+                              title: "Any other:",
+                            ),
+                            Dimens.boxHeight2,
+                            CustomTextfieldMobile(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              keyboardType: TextInputType.number,
+                              textController: controller.anyotherCtrl,
+                              // errorController: controller.isPetrolConsumedAtSiteInvalid.value
+                              //     ? "Required field"
+                              //     : null,
+                              onChanged: (value) {
+                                if (value.trim().length > 0) {
+                                  controller.isAnyOtherInvalid.value = false;
+                                } else {
+                                  controller.isAnyOtherInvalid.value = true;
                                 }
                               },
                             ),
@@ -155,7 +216,7 @@ class _CreateOccupationalhealthMobileState extends State<CreateOccupationalhealt
                                   text: 'Submit',
                                   onPressed: () {
                                     // controller.isFormInvalid.value = false;
-                                    controller.createoccupational();
+                                    controller.createvisitsandnotices();
                                   },
                                 ),
                               )

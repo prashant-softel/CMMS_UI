@@ -1,4 +1,5 @@
 import 'package:cmms/app/create_observation/views/mobile/create_observation_mobile.dart';
+import 'package:cmms/app/create_regulataryvisits/views/mobile/create_regulataryvisitandnotice_mobile.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
@@ -50,7 +51,7 @@ class RegulataryVisitsScreen extends GetView<CreateRegulataryVisitsController> {
                       children: [
                         if (Responsive.isMobile(context))
                           Expanded(
-                            child: CreateObservationMobile(),
+                            child: CreateVisitAndNodticeMobile(),
                           ),
                         if (Responsive.isDesktop(context))
                           Expanded(

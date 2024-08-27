@@ -1,9 +1,8 @@
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
+import 'package:cmms/app/list_of_Regulatary_Visits/views/mobile/regulataryvisit_list_mobile.dart';
 import 'package:cmms/app/list_of_Regulatary_Visits/views/web/regulataryvisits_list_web.dart';
-import 'package:cmms/app/list_of_occupationalhealth/views/web/occupational_list_web.dart';
-import 'package:cmms/app/mis_list_of_observation/views/mobile/observation_list_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
@@ -22,7 +21,7 @@ class RegulataryDataListScreen extends GetView<RegulataryDataListController> {
       appBar: Responsive.isMobile(context)
           ? AppBar(
               title: HeadingProfileAppBar(
-                title: "List Of Regulatary ",
+                title: "List Of Visit And Notices ",
               ),
             )
           : null,
@@ -49,7 +48,7 @@ class RegulataryDataListScreen extends GetView<RegulataryDataListController> {
                     child: Column(
                       children: [
                         if (Responsive.isMobile(context))
-                          Expanded(child: ObservationListMobile()),
+                          Expanded(child: VisitAndNoticeListMobile()),
                         if (Responsive.isDesktop(context))
                           Expanded(
                             child: VisitandNoticeListWeb(),

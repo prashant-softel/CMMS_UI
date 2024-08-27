@@ -1,28 +1,28 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
-import 'package:cmms/app/list_of_occupationalhealth/occupational_list_controller.dart';
+import 'package:cmms/app/list_of_Regulatary_Visits/regulataryvisits_list_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/domain/models/get_occupational_list_model.dart';
+import 'package:cmms/domain/models/get_visitandnotice_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class HealthListMobile extends StatefulWidget {
-  const HealthListMobile({Key? key}) : super(key: key);
+class VisitAndNoticeListMobile extends StatefulWidget {
+  const VisitAndNoticeListMobile({Key? key}) : super(key: key);
 
   @override
-  _HealthListMobileState createState() =>
-      _HealthListMobileState();
+  _VisitAndNoticeListMobileState createState() =>
+      _VisitAndNoticeListMobileState();
 }
 
-class _HealthListMobileState extends State<HealthListMobile> {
+class _VisitAndNoticeListMobileState extends State<VisitAndNoticeListMobile> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<OccupationalDataListController>(
+    return GetBuilder<RegulataryDataListController>(
       id: "stock_Mangement_Date",
       builder: (controller) {
         return Scaffold(
@@ -43,10 +43,10 @@ class _HealthListMobileState extends State<HealthListMobile> {
                       Expanded(
                         child: ListView.builder(
                           shrinkWrap: true,
-                          itemCount: controller.occupationalhealthList.length,
+                          itemCount: controller.visitandnoticeList.length,
                           itemBuilder: (context, index) {
-                            GetOccupationalList Health=
-                                controller.occupationalhealthList[index];
+                            GetVisitAndNoticeList visitAndNotice=
+                                controller.visitandnoticeList[index];
                             // var status = Kaizens.status_short.toString();
                             // print('Current Status: $status');
                             return GestureDetector(
@@ -79,7 +79,7 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                'Health Id: ',
+                                                'Visit And Notices Id: ',
                                                 // ${Kaizens. ?? 0}
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                             ),
                                              Expanded(
                                               child: Text(
-                                                'OH${Health.id?? ''}',
+                                                'FD${visitAndNotice.id?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -106,7 +106,7 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                'No Of Health Exams Of New Joiner:',
+                                                'Govt. authorities visited:',
                                                 style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                 ),
@@ -114,7 +114,7 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                '${Health.noOfHealthExamsOfNewJoiner ?? 'Unassigned'}',
+                                                '${visitAndNotice.govtAuthVisits ?? 'Unassigned'}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -128,7 +128,7 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                'Periodic Tests: ',
+                                                'Penalties third parties: ',
                                                 style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                 ),
@@ -136,7 +136,7 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                '${Health.periodicTests?? ''}',
+                                                '${visitAndNotice.noOfFineByThirdParty?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -150,7 +150,7 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                'Occupational Illnesses: ',
+                                                'Cause notices third parties: ',
                                                 style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                 ),
@@ -158,7 +158,7 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                '${Health.occupationalIllnesses?? ''}',
+                                                '${visitAndNotice.noOfShowCauseNoticesByThirdParty?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -172,7 +172,7 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                'Month name: ',
+                                                'Notices issued by HFE to contractore: ',
                                                 style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                 ),
@@ -180,7 +180,51 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                               '${Health.month_name?? ''}',
+                                               '${visitAndNotice.noticesToContractor?? ''}',
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color:
+                                                      ColorValues.navyBlueColor,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                         Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                'Penalties contractor by HFE in Amount: ',
+                                                style: const TextStyle(
+                                                  color: ColorValues.blackColor,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                 '${visitAndNotice.amountOfPenaltiesToContractors?? ''}',
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color:
+                                                      ColorValues.navyBlueColor,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                           Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                'Month: ',
+                                                style: const TextStyle(
+                                                  color: ColorValues.blackColor,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                 '${visitAndNotice.month_name?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -202,7 +246,7 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                 '${Health.createdAt?? ''}',
+                                                 '${visitAndNotice.createdAt?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -212,7 +256,6 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                             ),
                                           ],
                                         ),
-                                          
                                         Dimens.boxHeight4,
                                         varUserAccessModel.value.access_list!
                                                     .where((e) =>
@@ -223,7 +266,7 @@ class _HealthListMobileState extends State<HealthListMobile> {
                                                             UserAccessConstants
                                                                 .kHaveEditAccess)
                                                     .isNotEmpty &&
-                                                Health.status == 351
+                                                visitAndNotice.status == 351
                                             ? CustomElevatedButton(
                                                 onPressed: () {
                                                   controller
