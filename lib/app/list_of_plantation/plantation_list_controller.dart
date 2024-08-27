@@ -39,6 +39,7 @@ class PlantationListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> planatationId = 0.obs;
+   RxString idFilterText = ''.obs;
    RxString saplingsPlantedFilterText = ''.obs;
   RxString saplingsSurvivedFilterText = ''.obs;
   RxString saplingsDiedFilterText = ''.obs;
@@ -51,6 +52,7 @@ class PlantationListController extends GetxController {
   RxString userDateFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Id":true,
     "Saplings Planted": true,
     "Saplings Survived": true,
     "Saplings Died": true,
@@ -58,6 +60,7 @@ class PlantationListController extends GetxController {
     "Created At": true,
   });
   final Map<String, double> columnwidth = {
+    "Id":100,
       "Saplings Planted": 250,
     "Saplings Survived": 250,
     "Saplings Died": 250,
@@ -76,6 +79,7 @@ class PlantationListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
+      "Id":idFilterText,
          "Saplings Planted": saplingsPlantedFilterText,
     "Saplings Survived": saplingsSurvivedFilterText,
     "Saplings Died": saplingsDiedFilterText,

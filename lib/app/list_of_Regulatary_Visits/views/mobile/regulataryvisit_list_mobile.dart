@@ -1,28 +1,28 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
-import 'package:cmms/app/list_of_fueldata/fueldata_list_controller.dart';
+import 'package:cmms/app/list_of_Regulatary_Visits/regulataryvisits_list_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/domain/models/get_fueldata_list_model.dart';
+import 'package:cmms/domain/models/get_visitandnotice_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class FuelListMobile extends StatefulWidget {
-  const FuelListMobile({Key? key}) : super(key: key);
+class VisitAndNoticeListMobile extends StatefulWidget {
+  const VisitAndNoticeListMobile({Key? key}) : super(key: key);
 
   @override
-  _FuelListMobileState createState() =>
-      _FuelListMobileState();
+  _VisitAndNoticeListMobileState createState() =>
+      _VisitAndNoticeListMobileState();
 }
 
-class _FuelListMobileState extends State<FuelListMobile> {
+class _VisitAndNoticeListMobileState extends State<VisitAndNoticeListMobile> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<FuelDataListController>(
+    return GetBuilder<RegulataryDataListController>(
       id: "stock_Mangement_Date",
       builder: (controller) {
         return Scaffold(
@@ -43,10 +43,10 @@ class _FuelListMobileState extends State<FuelListMobile> {
                       Expanded(
                         child: ListView.builder(
                           shrinkWrap: true,
-                          itemCount: controller.fueldataList.length,
+                          itemCount: controller.visitandnoticeList.length,
                           itemBuilder: (context, index) {
-                            GetFuelDataList Fuel=
-                                controller.fueldataList[index];
+                            GetVisitAndNoticeList visitAndNotice=
+                                controller.visitandnoticeList[index];
                             // var status = Kaizens.status_short.toString();
                             // print('Current Status: $status');
                             return GestureDetector(
@@ -79,7 +79,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                'Fuel Id: ',
+                                                'Visit And Notices Id: ',
                                                 // ${Kaizens. ?? 0}
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                             ),
                                              Expanded(
                                               child: Text(
-                                                'FD${Fuel.id?? ''}',
+                                                'FD${visitAndNotice.id?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -106,7 +106,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                'Diesel For Vehicles:',
+                                                'Govt. authorities visited:',
                                                 style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                 ),
@@ -114,7 +114,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                '${Fuel.dieselConsumedForVehicles ?? 'Unassigned'}',
+                                                '${visitAndNotice.govtAuthVisits ?? 'Unassigned'}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -128,7 +128,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                'Petrol For Vehicles: ',
+                                                'Penalties third parties: ',
                                                 style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                 ),
@@ -136,7 +136,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                '${Fuel.petrolConsumedForVehicles?? ''}',
+                                                '${visitAndNotice.noOfFineByThirdParty?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -150,7 +150,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                'Petrol For Cutting And Movers: ',
+                                                'Cause notices third parties: ',
                                                 style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                 ),
@@ -158,7 +158,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                '${Fuel.petrolConsumedForGrassCuttingAndMovers?? ''}',
+                                                '${visitAndNotice.noOfShowCauseNoticesByThirdParty?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -172,7 +172,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                'Diesel At Site: ',
+                                                'Notices issued by HFE to contractore: ',
                                                 style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                 ),
@@ -180,7 +180,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                               '${Fuel.dieselConsumedAtSite?? ''}',
+                                               '${visitAndNotice.noticesToContractor?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -194,7 +194,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                'Petrol At Site: ',
+                                                'Penalties contractor by HFE in Amount: ',
                                                 style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                 ),
@@ -202,7 +202,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                 '${Fuel.petrolConsumedAtSite?? ''}',
+                                                 '${visitAndNotice.amountOfPenaltiesToContractors?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -224,7 +224,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                 '${Fuel.month_name?? ''}',
+                                                 '${visitAndNotice.month_name?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -246,7 +246,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                 '${Fuel.createdAt?? ''}',
+                                                 '${visitAndNotice.createdAt?? ''}',
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
@@ -266,7 +266,7 @@ class _FuelListMobileState extends State<FuelListMobile> {
                                                             UserAccessConstants
                                                                 .kHaveEditAccess)
                                                     .isNotEmpty &&
-                                                Fuel.status == 351
+                                                visitAndNotice.status == 351
                                             ? CustomElevatedButton(
                                                 onPressed: () {
                                                   controller

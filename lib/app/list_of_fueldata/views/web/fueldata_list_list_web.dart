@@ -17,7 +17,6 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/action_button.dart';
-import 'package:cmms/domain/models/get_occupational_list_model.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 
 class FueldataListWeb extends StatefulWidget {
@@ -507,6 +506,7 @@ class FuelDataListSource extends DataTableSource {
 
     controller.fuelId.value = FuelDataDetails?.id ?? 0;
     var cellsBuffer = [
+      'FD${FuelDataDetails?.id ?? ''}',
       '${FuelDataDetails?.dieselConsumedForVehicles ?? ''}',
       '${FuelDataDetails?.petrolConsumedForVehicles ?? ''}',
       '${FuelDataDetails?.petrolConsumedForGrassCuttingAndMovers ?? ''}',

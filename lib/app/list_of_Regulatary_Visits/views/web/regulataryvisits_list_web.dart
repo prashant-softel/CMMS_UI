@@ -478,6 +478,8 @@ class VisitandNoticeDataListSource extends DataTableSource {
 
     controller.VisitAndNoticeId.value = VisitAndNoticeDetails?.id ?? 0;
     var cellsBuffer = [
+
+      'VN${VisitAndNoticeDetails?.id ?? ''}',
       '${VisitAndNoticeDetails?.govtAuthVisits ?? ''}',
       '${VisitAndNoticeDetails?.noOfFineByThirdParty?? ''}',
       '${VisitAndNoticeDetails?.noOfShowCauseNoticesByThirdParty ?? ''}',
