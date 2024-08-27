@@ -32,7 +32,7 @@ class AddInventoryRequestModel {
   double? area;
   int? cost;
   int? currencyId;
-  int? currency;
+  // int? currency;
   String? assetdescription;
   String? warranty_description;
   String? parent_equipment_no;
@@ -42,7 +42,7 @@ class AddInventoryRequestModel {
   List<dynamic>? uplaodfile_of_calibration;
   List<dynamic>? uplaodfile_of_warranty;
 
-  dynamic attachments;
+  // dynamic attachments;
   List<LstWarrantyDetail>? lstWarrantyDetail;
 
   AddInventoryRequestModel(
@@ -80,8 +80,8 @@ class AddInventoryRequestModel {
       this.area,
       this.cost,
       this.currencyId,
-      this.currency,
-      this.attachments,
+      // this.currency,
+      // this.attachments,
       this.assetdescription,
       this.lstWarrantyDetail,
       this.parent_equipment_no,
@@ -133,12 +133,12 @@ class AddInventoryRequestModel {
 
     cost = json['cost'];
     currencyId = json['currencyId'];
-    currency = json['currency'];
+    // currency = json['currency'];
     parent_equipment_no = json['parent_equipment_no'];
     warranty_term_type = json['warranty_term_type'];
     certificate_number = json['certificate_number'];
 
-    attachments = json['attachments'];
+    // attachments = json['attachments'];
     if (json['lstWarrantyDetail'] != null) {
       lstWarrantyDetail = <LstWarrantyDetail>[];
       json['lstWarrantyDetail'].forEach((v) {
@@ -196,8 +196,8 @@ class AddInventoryRequestModel {
     data['certificate_number'] = this.certificate_number;
 
     data['currencyId'] = this.currencyId;
-    data['currency'] = this.currency;
-    data['attachments'] = this.attachments;
+    // data['currency'] = this.currency;
+    // data['attachments'] = this.attachments;
     if (this.lstWarrantyDetail != null) {
       data['lstWarrantyDetail'] =
           this.lstWarrantyDetail!.map((v) => v.toJson()).toList();
