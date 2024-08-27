@@ -464,7 +464,7 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                             backgroundColor: ColorValues.cancelColor,
                             text: 'Cancel',
                             onPressed: () {
-                              Get.toNamed(Routes.complianceScreen);
+                              Get.toNamed(Routes.misDashboard);
                             },
                           ),
                         ),
