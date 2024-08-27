@@ -117,8 +117,10 @@ class _ModuleCleaningListExecutionState
                                         Spacer(),
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Date Range'),
-                                            Dimens.boxWidth10,
+                                            CustomRichText(
+                                                title: 'Date Range',
+                                                includeAsterisk: false),
+                                            Dimens.boxWidth2,
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
                                                       .size

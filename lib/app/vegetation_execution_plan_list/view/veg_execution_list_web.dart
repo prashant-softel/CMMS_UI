@@ -112,7 +112,9 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                                         Spacer(),
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Date Range'),
+                                            CustomRichText(
+                                                title: 'Date Range',
+                                                includeAsterisk: false),
                                             Dimens.boxWidth2,
                                             CustomTextFieldForStock(
                                               width: MediaQuery.of(context)
