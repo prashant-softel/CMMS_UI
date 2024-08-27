@@ -402,9 +402,10 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                 Positioned(
                   left: 200,
                   child: DatePickerWidget(
-                    minDate: DateTime(DateTime.now().year),
-                    maxDate: DateTime(
-                        DateTime.now().year, 13, 0), // last date of this year
+                    minDate: DateTime(
+                        2000), // Allows selection of any past date starting from the year 1900
+                    maxDate: DateTime(DateTime.now().year + 13, 0, 0),
+                    // Restricts selection to the current date
                     controller: DateRangePickerController(),
                     selectionChanges: (p0) {
                       controller.startDateTc.text =
@@ -424,8 +425,8 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                   top: 10,
                   left: 1000,
                   child: DatePickerWidget(
-                    minDate: DateTime(DateTime.now().year),
-                    maxDate: DateTime(DateTime.now().year, 13, 0),
+                    // minDate: DateTime(DateTime.now().year),
+                    // maxDate: DateTime(DateTime.now().year, 13, 0),
                     controller: DateRangePickerController(),
                     selectionChanges: (p0) {
                       final startDate = controller.startDateTc.text;
