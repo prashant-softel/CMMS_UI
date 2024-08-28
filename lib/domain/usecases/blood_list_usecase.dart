@@ -19,17 +19,6 @@ class BloodlistUsecase {
         isLoading,
       );
 
-  Future<List<ModuleListModel?>?> getModuleList({
-    int? type,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await repository.getModuleList(
-        type,
-        facilityId,
-        isLoading,
-      );
-
   Future<List<BloodModel?>?> getBloodList({
     // int? type,
     // int? facility/Id,
@@ -67,5 +56,4 @@ class BloodlistUsecase {
         isLoading: isLoading,
         modulelistJsonString: modulelistJsonString,
       );
-
 }

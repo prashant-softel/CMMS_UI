@@ -97,7 +97,9 @@ class ModuleListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getModuleList(facilityId, type);
+        getModuleList(
+          facilityId,
+        );
       });
     });
     modnameFocus.addListener(() {
@@ -114,12 +116,14 @@ class ModuleListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getModuleList(int facilityId, int type) async {
+  Future<void> getModuleList(
+    int facilityId,
+  ) async {
     moduleList.value = <ModuleListModel>[];
     BufferModuleList.value = <ModuleListModel>[];
 
-    final _moduleList = await moduleListPresenter.getModuleList(
-        facilityId: facilityId, type: type, isLoading: isLoading.value);
+    final _moduleList =
+        await moduleListPresenter.getModuleList(isLoading: isLoading.value);
 
     if (_moduleList != null) {
       moduleList.value = _moduleList.cast<ModuleListModel>();
@@ -226,7 +230,9 @@ class ModuleListController extends GetxController {
       );
       return true;
     }
-    getModuleList(facilityId, type);
+    getModuleList(
+      facilityId,
+    );
     return true;
   }
 
@@ -253,7 +259,9 @@ class ModuleListController extends GetxController {
     isToggle5On.value = false;
     isToggle6On.value = false;
     Future.delayed(Duration(seconds: 1), () {
-      getModuleList(facilityId, type);
+      getModuleList(
+        facilityId,
+      );
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -297,7 +305,9 @@ class ModuleListController extends GetxController {
                 onPressed: () {
                   deleteModulelist(module_id).then((value) {
                     Get.back();
-                    getModuleList(facilityId, type);
+                    getModuleList(
+                      facilityId,
+                    );
                   });
                 },
                 child: Text('YES'),

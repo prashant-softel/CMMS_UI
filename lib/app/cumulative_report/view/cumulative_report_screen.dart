@@ -2,8 +2,6 @@ import 'package:cmms/app/cumulative_report/cumulative_report_controller.dart';
 import 'package:cmms/app/cumulative_report/view/cumulative_report_screen_content_web.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
-import 'package:cmms/app/plant_stock_report/view/plant_stock_report_content_mobile.dart';
-import 'package:cmms/app/plant_stock_report/view/plant_stock_report_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';

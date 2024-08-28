@@ -19,13 +19,9 @@ class ModulelistUsecase {
       );
 
   Future<List<ModuleListModel?>?> getModuleList({
-    int? type,
-    int? facilityId,
     bool? isLoading,
   }) async =>
       await repository.getModuleList(
-        type,
-        facilityId,
         isLoading,
       );
   Future<List<FrequencyModel?>?> getFrequencyList({
@@ -54,5 +50,4 @@ class ModulelistUsecase {
         isLoading: isLoading,
         modulelistJsonString: modulelistJsonString,
       );
-
 }

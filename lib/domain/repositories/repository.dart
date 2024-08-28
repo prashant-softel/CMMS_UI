@@ -1167,8 +1167,9 @@ class Repository {
       return Map();
     }
   }
+
 //createkaizensdata
-Future<Map<String, dynamic>> createkaizensdata(
+  Future<Map<String, dynamic>> createkaizensdata(
       createkaizensdata, bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -5352,8 +5353,9 @@ Future<Map<String, dynamic>> createkaizensdata(
       return [];
     }
   }
+
 //getkaizensdata
- Future<List<GetKaizensDataList>> getkaizensdata({
+  Future<List<GetKaizensDataList>> getkaizensdata({
     bool? isExport,
     required bool isLoading,
   }) async {
@@ -5372,28 +5374,29 @@ Future<Map<String, dynamic>> createkaizensdata(
         // return incidentReportList.reversed.toList();
         final jsonKaizensListModelModels = jsonDecode(res.data);
 
-        final List<GetKaizensDataList> _kaizensdataList = jsonKaizensListModelModels
-            .map<GetKaizensDataList>(
-                (m) => GetKaizensDataList.fromJson(Map<String, dynamic>.from(m)))
-            .toList();
+        final List<GetKaizensDataList> _kaizensdataList =
+            jsonKaizensListModelModels
+                .map<GetKaizensDataList>((m) =>
+                    GetKaizensDataList.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
         String jsonData = GetKaizensDataListModelToJson(_kaizensdataList);
         if (isExport == true) {
           List<dynamic> jsonDataList = jsonDecode(jsonData);
 
           List<List<dynamic>> data = [
             [
-             'id',
-        'date',
-        'month_name',
-        'month_id',
-        'kaizensImplemented',
-        'costForImplementation',
-        'costSavedFromImplementation',
-        'status',
-        'createdBy',
-        'createdAt',
-        'updatedBy',
-        'updatedAt',
+              'id',
+              'date',
+              'month_name',
+              'month_id',
+              'kaizensImplemented',
+              'costForImplementation',
+              'costSavedFromImplementation',
+              'status',
+              'createdBy',
+              'createdAt',
+              'updatedBy',
+              'updatedAt',
             ],
             ...jsonDataList
                 .map((kaizenslistjson) => [
@@ -5428,6 +5431,7 @@ Future<Map<String, dynamic>> createkaizensdata(
       return [];
     }
   }
+
 //getplantationdata
   Future<List<GetPlantationList>> getplantationdata({
     bool? isExport,
@@ -8095,16 +8099,12 @@ Future<Map<String, dynamic>> createkaizensdata(
   }
 
   Future<List<ModuleListModel?>?> getModuleList(
-    int? type,
-    int? facilityId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getModuleList(
         auth: auth,
-        facilityId: facilityId ?? 0,
-        type: type,
         isLoading: isLoading ?? false,
       );
 
@@ -8129,16 +8129,12 @@ Future<Map<String, dynamic>> createkaizensdata(
   }
 
   Future<List<ModuleModel?>?> getModule(
-    int? type,
-    int? facilityId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getModuleList(
         auth: auth,
-        facilityId: facilityId ?? 0,
-        type: type,
         isLoading: isLoading ?? false,
       );
 
@@ -14533,7 +14529,9 @@ Future<Map<String, dynamic>> createkaizensdata(
   Future<List<VegTaskListModel>> getVegTaskList(
       {required int? facility_id,
       dynamic startDate,
-      dynamic endDate, required bool isLoading, bool? isExport
+      dynamic endDate,
+      required bool isLoading,
+      bool? isExport
       // String? start_date,
       // required String end_date,
       }) async {
@@ -14543,8 +14541,8 @@ Future<Map<String, dynamic>> createkaizensdata(
       log(auth);
       final res = await _dataRepository.getVegTaskList(
         facility_id: facility_id,
-          startDate: startDate,
-          endDate: endDate,
+        startDate: startDate,
+        endDate: endDate,
         isLoading: isLoading,
         // start_date: start_date,
         // end_date: end_date,

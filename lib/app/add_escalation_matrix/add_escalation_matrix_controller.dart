@@ -82,7 +82,7 @@ class AddEscalationMatrixController extends GetxController {
     facilityIdStreamSubscription =
         homeController.facilityId$.listen((event) async {
       facilityId.value = event;
-      await getModuleList(facilityId.value, type, true);
+      await getModuleList(facilityId.value, true);
       await getRoleList();
       if (module_id.value != 0) {
         await getStatusList(moduleId: module_id.value);
@@ -201,10 +201,10 @@ class AddEscalationMatrixController extends GetxController {
     }
   }
 
-  Future<void> getModuleList(int facilityId, int type, bool isLoading) async {
+  Future<void> getModuleList(int facilityId, bool isLoading) async {
     moduleList.value = <ModuleModel>[];
-    final _moduleList = await addEscalationPresenter.getModuleList(
-        facilityId: facilityId, type: type, isLoading: isLoading);
+    final _moduleList =
+        await addEscalationPresenter.getModuleList(isLoading: isLoading);
 
     if (_moduleList != null) {
       moduleList.value = _moduleList;
