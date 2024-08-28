@@ -469,8 +469,8 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                           ),
                         ),
                         Dimens.boxWidth15,
-                        // controller.obsId == 0
-                            // ? 
+                        controller.selectedItem == null
+                            ? 
                             Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -483,20 +483,21 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                   },
                                 ),
                               )
-                            // : Container(
-                            //     height: 40,
-                            //     child: CustomElevatedButton(
-                            //       backgroundColor: ColorValues.submitColor,
-                            //       text: 'Update',
-                            //       onPressed: () {
-                            //         controller.isFormInvalid.value = false;
-                            //         controller.createObs(
-                            //             position: 0,
-                            //             fileIds: dropzoneController.fileIds);
-                            //       },
-                            //     ),
-                            //   ),
-                            ,
+                            : Container(
+                                height: 40,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.submitColor,
+                                  text: 'Update',
+                                  onPressed: () {
+                                    // controller.isFormInvalid.value = false;
+                                    controller.updateVisitAndNoticeDetails(
+                                        // position: 0,
+                                        // fileIds: dropzoneController.fileIds
+                                        );
+                                  },
+                                ),
+                              ),
+                            
                         Spacer(),
                       ],
                     )
