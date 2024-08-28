@@ -579,9 +579,25 @@ class OccupationalDataListSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
-                              controller.clearStoreData();
-                              int? id = OccupationallistDetails?.id;
-                          controller.editHealth(healthId: id);
+                              // controller.clearStoreData();
+                                       controller.selectedItem =
+                                controller.occupationalhealthList.firstWhere(
+                              (element) =>
+                                  "${element.id}" ==
+                                  OccupationallistDetails?.id.toString(),
+                            );
+                            int healthId = OccupationallistDetails?.id ?? 0;
+
+                            if (healthId != 0) {
+                              Get.toNamed(Routes.createOccupationalScreen,
+                                  arguments: {
+                                    "selectedItem": controller.selectedItem
+                                  });
+                            }
+
+
+                          //     int? id = OccupationallistDetails?.id;
+                          // controller.editHealth(healthId: id);
                          
                               // }
                             },

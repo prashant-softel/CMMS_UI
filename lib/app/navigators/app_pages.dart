@@ -88,6 +88,8 @@ import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/create_regulataryvisits/create_regulataryvisits_binding.dart';
 import 'package:cmms/app/create_regulataryvisits/views/create_regulataryvisits_screen.dart';
+import 'package:cmms/app/cumulative_report/cumulative_report_binding.dart';
+import 'package:cmms/app/cumulative_report/view/cumulative_report_screen.dart';
 import 'package:cmms/app/document_master/document_master_binding.dart';
 import 'package:cmms/app/document_master/view/document_master_screen.dart';
 import 'package:cmms/app/doc_upload/doc_upload_binding.dart';
@@ -1510,25 +1512,29 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.fueldataListScreen,
       page: FuelDataListScreen.new,
-      binding:  FuelDataListBinding(),
+      binding: FuelDataListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.plantationlistScreen,
       page: PlantationListScreen.new,
-      binding:  PlantationListBinding(),
+      binding: PlantationListBinding(),
     ),
-    
+
     GetPage<dynamic>(
       name: _Paths.createkaizensScreen,
       page: KaizensScreen.new,
-      binding:  KaizensBinding(),
+      binding: KaizensBinding(),
     ),
-    
+
     GetPage<dynamic>(
       name: _Paths.kaizensListScreen,
       page: KaizensListScreen.new,
-      binding:  KaizensListBinding(),
+      binding: KaizensListBinding(),
     ),
-    
+    GetPage<dynamic>(
+      name: _Paths.cumulativeReport,
+      page: CumulativeReportScreen.new,
+      binding: CumulativeReportBinding(),
+    ),
   ];
 }

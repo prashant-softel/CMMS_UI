@@ -34,13 +34,9 @@ class AddEscalationMatrixPresenter {
       );
 
   Future<List<ModuleModel?>?> getModuleList({
-    int? facilityId,
-    int? type,
     bool? isLoading,
   }) async =>
       await addEscalationMatrixUsecase.getModuleList(
-        facilityId: facilityId ?? 0,
-        type: type,
         isLoading: isLoading ?? false,
       );
 

@@ -8099,16 +8099,12 @@ class Repository {
   }
 
   Future<List<ModuleListModel?>?> getModuleList(
-    int? type,
-    int? facilityId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getModuleList(
         auth: auth,
-        facilityId: facilityId ?? 0,
-        type: type,
         isLoading: isLoading ?? false,
       );
 
@@ -8133,16 +8129,12 @@ class Repository {
   }
 
   Future<List<ModuleModel?>?> getModule(
-    int? type,
-    int? facilityId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getModuleList(
         auth: auth,
-        facilityId: facilityId ?? 0,
-        type: type,
         isLoading: isLoading ?? false,
       );
 

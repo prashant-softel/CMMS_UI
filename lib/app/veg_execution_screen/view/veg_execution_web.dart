@@ -922,6 +922,20 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                     ),
                                                   )
                                                 : Dimens.box0,
+                                            Dimens.boxWidth5,
+                                            Container(
+                                              height: 28,
+                                              child: CustomElevatedButton(
+                                                icon: Icons.print,
+                                                backgroundColor: ColorValues
+                                                    .linktopermitColor,
+                                                text: "Print",
+                                                onPressed: () {
+                                                  controller.generateInvoice();
+                                                },
+                                              ),
+                                            ),
+                                            Dimens.boxWidth5,
                                             controller.vegExecutionDetailsModel
                                                             .value?.status ==
                                                         724 &&
