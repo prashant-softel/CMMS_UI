@@ -336,8 +336,8 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                             ),
                           ),
                           Dimens.boxWidth10,
-                          // controller.obsId == 0
-                              // ? 
+                          controller.healthId == 0
+                              ? 
                               Container(
                                   height: 40,
                                   child: CustomElevatedButton(
@@ -349,20 +349,22 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                                     },
                                   ),
                                 )
-                              // : Container(
-                              //     height: 40,
-                              //     child: CustomElevatedButton(
-                              //       backgroundColor: ColorValues.submitColor,
-                              //       text: 'Update',
-                              //       onPressed: () {
-                              //         controller.isFormInvalid.value = false;
-                              //         controller.createObs(
-                              //             position: 0,
-                              //             fileIds: dropzoneController.fileIds);
-                              //       },
-                              //     ),
-                          //       ),
-                          ,
+                              : 
+                              Container(
+                                  height: 40,
+                                  child: CustomElevatedButton(
+                                    backgroundColor: ColorValues.submitColor,
+                                    text: 'Update',
+                                    onPressed: () {
+                                      // controller.isFormInvalid.value = false;
+                                      controller.updateOccupationalDetails(
+                                          // position: 0,
+                                          // fileIds: dropzoneController.fileIds
+                                          );
+                                    },
+                                  ),
+                                ),
+                          
                           Spacer(),
                         ],
                       ),

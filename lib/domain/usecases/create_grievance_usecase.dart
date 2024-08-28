@@ -46,8 +46,6 @@ class CreateGrievanceUsecase {
         isLoading,
       );
 
-  
-
   Future<Map<String, dynamic>> saveGrievance({
     grievance,
     bool? isLoading,
@@ -60,10 +58,11 @@ class CreateGrievanceUsecase {
   Future<List<GrievanceTypeModel?>?> getGrievanceType(bool? isLoading) async =>
       await repository.getGrievanceType(isLoading: isLoading);
 
-       Future<GrievanceListModel?> getGrievanceDetails({bool? isLoading, int? id}) async =>
-      await repository.getGrievanceDetails(isLoading: isLoading, id:id);
+  Future<GrievanceListModel?> getGrievanceDetails(
+          {bool? isLoading, int? id}) async =>
+      await repository.getGrievanceDetails(isLoading: isLoading, id: id);
 
-       Future<Map<String, dynamic>>  updateGrievanceDetails({
+  Future<Map<String, dynamic>> updateGrievanceDetails({
     grievanceJson,
     bool? isLoading,
   }) async =>
@@ -71,5 +70,4 @@ class CreateGrievanceUsecase {
         isLoading: isLoading,
         grievanceJson: grievanceJson,
       );
-
 }
