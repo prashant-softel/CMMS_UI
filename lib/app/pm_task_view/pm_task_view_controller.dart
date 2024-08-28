@@ -605,7 +605,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     final PdfPage page = document.pages.add();
 
     final Size pageSize = page.getClientSize();
-    var url = "assets/files/HFE Logo.png";
+    var url = "assets/assets/files/HFE Logo.png";
     var response = await get(Uri.parse(url));
     var data = response.bodyBytes;
 
@@ -617,7 +617,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
     document.dispose();
 
-    await saveAndLaunchFile(bytes, 'PM Task View Report');
+    await saveAndLaunchFile(bytes, 'PM Task Report.pdf');
   }
 
   PdfLayoutResult drawHeader(
