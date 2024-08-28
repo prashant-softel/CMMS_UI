@@ -962,6 +962,245 @@ class AddModuleCleaningExecutionController extends GetxController {
               valueXRight, currentY + 5, valueWidthRight, rowHeight));
       currentY += rowHeight;
     }
+    double colWidthSchId = 30;
+    double colWidthDays = 30;
+    double colWidthScheduled = 60;
+    double colWidthCleaned = 50;
+    double colWidthAbandoned = 60;
+    double colWidthPending = 60;
+    double colWidthWaterUsed = 55;
+    double colWidthPermitStatus = 100;
+    double colWidthStatus = 60;
+
+    double tableWidth = colWidthSchId +
+        colWidthDays +
+        colWidthScheduled +
+        colWidthCleaned +
+        colWidthAbandoned +
+        colWidthPending +
+        colWidthWaterUsed +
+        colWidthPermitStatus +
+        colWidthStatus;
+
+// Draw table header
+    currentY += 10;
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds: Rect.fromLTWH(margin, currentY, tableWidth,
+            25)); // Increased height for better readability
+    page.graphics.drawString('Id', headerFont,
+        bounds: Rect.fromLTWH(margin, currentY, colWidthSchId, 25),
+        format: PdfStringFormat(
+            alignment: PdfTextAlignment.center,
+            lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('Days', headerFont,
+        bounds:
+            Rect.fromLTWH(margin + colWidthSchId, currentY, colWidthDays, 25),
+        format: PdfStringFormat(
+            alignment: PdfTextAlignment.center,
+            lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('Scheduled', headerFont,
+        bounds: Rect.fromLTWH(margin + colWidthSchId + colWidthDays, currentY,
+            colWidthScheduled, 25),
+        format: PdfStringFormat(
+            alignment: PdfTextAlignment.center,
+            lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('Cleaned', headerFont,
+        bounds: Rect.fromLTWH(
+            margin + colWidthSchId + colWidthDays + colWidthScheduled,
+            currentY,
+            colWidthCleaned,
+            25),
+        format: PdfStringFormat(
+            alignment: PdfTextAlignment.center,
+            lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('Abandoned', headerFont,
+        bounds: Rect.fromLTWH(
+            margin +
+                colWidthSchId +
+                colWidthDays +
+                colWidthScheduled +
+                colWidthCleaned,
+            currentY,
+            colWidthAbandoned,
+            25),
+        format: PdfStringFormat(
+            alignment: PdfTextAlignment.center,
+            lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('Pending', headerFont,
+        bounds: Rect.fromLTWH(
+            margin +
+                colWidthSchId +
+                colWidthDays +
+                colWidthScheduled +
+                colWidthCleaned +
+                colWidthAbandoned,
+            currentY,
+            colWidthPending,
+            25),
+        format: PdfStringFormat(
+            alignment: PdfTextAlignment.center,
+            lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('Water Used', headerFont,
+        bounds: Rect.fromLTWH(
+            margin +
+                colWidthSchId +
+                colWidthDays +
+                colWidthScheduled +
+                colWidthCleaned +
+                colWidthAbandoned +
+                colWidthPending,
+            currentY,
+            colWidthWaterUsed,
+            25),
+        format: PdfStringFormat(
+            alignment: PdfTextAlignment.center,
+            lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('Permit Status', headerFont,
+        bounds: Rect.fromLTWH(
+            margin +
+                colWidthSchId +
+                colWidthDays +
+                colWidthScheduled +
+                colWidthCleaned +
+                colWidthAbandoned +
+                colWidthPending +
+                colWidthWaterUsed,
+            currentY,
+            colWidthPermitStatus,
+            25),
+        format: PdfStringFormat(
+            alignment: PdfTextAlignment.center,
+            lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('Status', headerFont,
+        bounds: Rect.fromLTWH(
+            margin +
+                colWidthSchId +
+                colWidthDays +
+                colWidthScheduled +
+                colWidthCleaned +
+                colWidthAbandoned +
+                colWidthPending +
+                colWidthWaterUsed +
+                colWidthPermitStatus,
+            currentY,
+            colWidthStatus,
+            25),
+        format: PdfStringFormat(
+            alignment: PdfTextAlignment.center,
+            lineAlignment: PdfVerticalAlignment.middle));
+
+    currentY += 25;
+
+// Draw table rows
+    for (var schedule in mcExecutionDetailsModel.value?.schedules ?? []) {
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          bounds: Rect.fromLTWH(margin, currentY, tableWidth, 25));
+      page.graphics.drawString('${schedule.scheduleId}', contentFont,
+          bounds: Rect.fromLTWH(margin, currentY, colWidthSchId, 25),
+          format: PdfStringFormat(
+              alignment: PdfTextAlignment.center,
+              lineAlignment: PdfVerticalAlignment.middle));
+      page.graphics.drawString('${schedule.cleaningDay}', contentFont,
+          bounds:
+              Rect.fromLTWH(margin + colWidthSchId, currentY, colWidthDays, 25),
+          format: PdfStringFormat(
+              alignment: PdfTextAlignment.center,
+              lineAlignment: PdfVerticalAlignment.middle));
+      page.graphics.drawString('${schedule.scheduled}', contentFont,
+          bounds: Rect.fromLTWH(margin + colWidthSchId + colWidthDays, currentY,
+              colWidthScheduled, 25),
+          format: PdfStringFormat(
+              alignment: PdfTextAlignment.center,
+              lineAlignment: PdfVerticalAlignment.middle));
+      page.graphics.drawString('${schedule.cleaned}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + colWidthSchId + colWidthDays + colWidthScheduled,
+              currentY,
+              colWidthCleaned,
+              25),
+          format: PdfStringFormat(
+              alignment: PdfTextAlignment.center,
+              lineAlignment: PdfVerticalAlignment.middle));
+      page.graphics.drawString('${schedule.abandoned}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin +
+                  colWidthSchId +
+                  colWidthDays +
+                  colWidthScheduled +
+                  colWidthCleaned,
+              currentY,
+              colWidthAbandoned,
+              25),
+          format: PdfStringFormat(
+              alignment: PdfTextAlignment.center,
+              lineAlignment: PdfVerticalAlignment.middle));
+      page.graphics.drawString('${schedule.pending}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin +
+                  colWidthSchId +
+                  colWidthDays +
+                  colWidthScheduled +
+                  colWidthCleaned +
+                  colWidthAbandoned,
+              currentY,
+              colWidthPending,
+              25),
+          format: PdfStringFormat(
+              alignment: PdfTextAlignment.center,
+              lineAlignment: PdfVerticalAlignment.middle));
+      page.graphics.drawString('${schedule.waterUsed}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin +
+                  colWidthSchId +
+                  colWidthDays +
+                  colWidthScheduled +
+                  colWidthCleaned +
+                  colWidthAbandoned +
+                  colWidthPending,
+              currentY,
+              colWidthWaterUsed,
+              25),
+          format: PdfStringFormat(
+              alignment: PdfTextAlignment.center,
+              lineAlignment: PdfVerticalAlignment.middle));
+      page.graphics.drawString('${schedule.status_short_ptw}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin +
+                  colWidthSchId +
+                  colWidthDays +
+                  colWidthScheduled +
+                  colWidthCleaned +
+                  colWidthAbandoned +
+                  colWidthPending +
+                  colWidthWaterUsed,
+              currentY,
+              colWidthPermitStatus,
+              25),
+          format: PdfStringFormat(
+              alignment: PdfTextAlignment.center,
+              lineAlignment: PdfVerticalAlignment.middle));
+      page.graphics.drawString('${schedule.status_short}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin +
+                  colWidthSchId +
+                  colWidthDays +
+                  colWidthScheduled +
+                  colWidthCleaned +
+                  colWidthAbandoned +
+                  colWidthPending +
+                  colWidthWaterUsed +
+                  colWidthPermitStatus,
+              currentY,
+              colWidthStatus,
+              25),
+          format: PdfStringFormat(
+              alignment: PdfTextAlignment.center,
+              lineAlignment: PdfVerticalAlignment.middle));
+      currentY += 25;
+    }
 
     // Add "Schedule Execution" header before the table
     currentY += 15;
