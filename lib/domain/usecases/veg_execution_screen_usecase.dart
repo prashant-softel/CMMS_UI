@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
@@ -52,6 +53,18 @@ class VegExecutionUsecase {
         isLoading: isLoading,
         executionId: executionId,
         facilityId: facilityId,
+      );
+  Future<List<HistoryModel>?> getHistory({
+    moduleType,
+    id,
+    facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getHistory(
+        moduleType,
+        id,
+        facilityId,
+        isLoading,
       );
 
   Future<void> startVegExecutionButton(

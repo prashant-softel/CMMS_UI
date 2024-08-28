@@ -1145,7 +1145,7 @@ class AddModuleCleaningExecutionContentWeb
                                                 icon: Icons.print,
                                                 backgroundColor: ColorValues
                                                     .linktopermitColor,
-                                                text: "print",
+                                                text: "Print",
                                                 onPressed: () {
                                                   controller.generateInvoice();
                                                 },

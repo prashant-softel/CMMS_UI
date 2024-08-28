@@ -934,7 +934,7 @@ class AddModuleCleaningExecutionController extends GetxController {
     double valueX = labelX + labelWidth + 5;
 
     List<String> mcInfoLabelsLeft = [
-      'MC Plan ID',
+      'Plan ID',
       'Task ID',
       'Plan Title',
       'Frequency',
@@ -1005,9 +1005,9 @@ class AddModuleCleaningExecutionController extends GetxController {
     double totalColWidth = pageWidth - 2 * margin;
     double colWidthSchId = totalColWidth * 0.06;
     double colWidthDays = totalColWidth * 0.06;
-    double colWidthScheduled = totalColWidth * 0.10;
+    double colWidthScheduled = totalColWidth * 0.12;
     double colWidthCleaned = totalColWidth * 0.10;
-    double colWidthAbandoned = totalColWidth * 0.10;
+    double colWidthAbandoned = totalColWidth * 0.12;
     double colWidthPending = totalColWidth * 0.10;
     double colWidthWaterUsed = totalColWidth * 0.08;
     double colWidthPermitID = totalColWidth * 0.10;
@@ -1087,7 +1087,7 @@ class AddModuleCleaningExecutionController extends GetxController {
         format: PdfStringFormat(
             alignment: PdfTextAlignment.center,
             lineAlignment: PdfVerticalAlignment.middle));
-    page.graphics.drawString('Permit ID', headerFont,
+    page.graphics.drawString('PTW ID', headerFont,
         bounds: Rect.fromLTWH(
             margin +
                 colWidthSchId +
@@ -1103,7 +1103,7 @@ class AddModuleCleaningExecutionController extends GetxController {
         format: PdfStringFormat(
             alignment: PdfTextAlignment.center,
             lineAlignment: PdfVerticalAlignment.middle));
-    page.graphics.drawString('Permit Status', headerFont,
+    page.graphics.drawString('PTW Status', headerFont,
         bounds: Rect.fromLTWH(
             margin +
                 colWidthSchId +
@@ -1215,7 +1215,7 @@ class AddModuleCleaningExecutionController extends GetxController {
               alignment: PdfTextAlignment.center,
               lineAlignment: PdfVerticalAlignment.middle));
       page.graphics.drawString(
-          '${schedule.permit_id}', contentFont, // New Permit ID column
+          'PTW${schedule.permit_id}', contentFont, // New Permit ID column
           bounds: Rect.fromLTWH(
               margin +
                   colWidthSchId +
