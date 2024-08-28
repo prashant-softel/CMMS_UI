@@ -85,7 +85,7 @@ class VegExecutionListController extends GetxController {
   }
 
   void getVegExcustionListByDate() {
-    getVegTaskList(facilityId,formattedTodate1, formattedFromdate1, false);
+    getVegTaskList(facilityId, formattedFromdate1, formattedTodate1, false);
   }
 
   Rx<bool> isLoading = true.obs;
@@ -106,10 +106,11 @@ class VegExecutionListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
         await getVegTaskList(
-            facilityId,
-            formattedTodate1,
-            formattedFromdate1,
-            false,);
+          facilityId,
+          formattedFromdate1,
+          formattedTodate1,
+          false,
+        );
       });
     });
     super.onInit();
@@ -173,14 +174,13 @@ class VegExecutionListController extends GetxController {
   // }
 
   Future<void> getVegTaskList(
-      int facilityId, dynamic startDate, dynamic endDate,
-      bool isExport) async {
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
     vegTaskList.value = <VegTaskListModel>[];
 
     final list = await vegExecutionListPresenter.getVegTaskList(
         isLoading: isLoading.value,
-        // start_date: startDate, //// "2020-01-01",
-        // end_date: endDate,
+        startDate: startDate, //// "2020-01-01",
+        endDate: endDate,
         facility_id: facilityId,
         isExport: isExport);
 
@@ -218,7 +218,7 @@ class VegExecutionListController extends GetxController {
   }
 
   void export() {
-    getVegTaskList(facilityId,formattedTodate1, formattedFromdate1, true);
+    getVegTaskList(facilityId, formattedFromdate1, formattedTodate1, true);
   }
 
   void viewVegetation(int executionId, int planId) {
