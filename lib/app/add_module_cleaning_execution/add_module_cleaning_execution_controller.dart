@@ -962,6 +962,20 @@ class AddModuleCleaningExecutionController extends GetxController {
               valueXRight, currentY + 5, valueWidthRight, rowHeight));
       currentY += rowHeight;
     }
+
+    // Add "Schedule Execution" header before the table
+    currentY += 15;
+    double tableWidth =
+        pageWidth; // Ensure the header width matches the table width
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        bounds: Rect.fromLTWH(margin, currentY, tableWidth, sectionHeight));
+    page.graphics.drawString('Schedule Execution', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+
+    currentY += sectionHeight;
+
+    // Define column widths
     double colWidthSchId = 30;
     double colWidthDays = 30;
     double colWidthScheduled = 60;
@@ -972,23 +986,14 @@ class AddModuleCleaningExecutionController extends GetxController {
     double colWidthPermitStatus = 100;
     double colWidthStatus = 60;
 
-    double tableWidth = colWidthSchId +
-        colWidthDays +
-        colWidthScheduled +
-        colWidthCleaned +
-        colWidthAbandoned +
-        colWidthPending +
-        colWidthWaterUsed +
-        colWidthPermitStatus +
-        colWidthStatus;
+    // Adjust table width to ensure it matches the page width
+    tableWidth = pageWidth;
 
-// Draw table header
-    currentY += 10;
+    // Draw table header
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
-        bounds: Rect.fromLTWH(margin, currentY, tableWidth,
-            25)); // Increased height for better readability
+        bounds: Rect.fromLTWH(margin, currentY, tableWidth, 25));
     page.graphics.drawString('Id', headerFont,
         bounds: Rect.fromLTWH(margin, currentY, colWidthSchId, 25),
         format: PdfStringFormat(
@@ -1093,7 +1098,7 @@ class AddModuleCleaningExecutionController extends GetxController {
 
     currentY += 25;
 
-// Draw table rows
+    // Draw table rows
     for (var schedule in mcExecutionDetailsModel.value?.schedules ?? []) {
       page.graphics.drawRectangle(
           pen: borderPen,
