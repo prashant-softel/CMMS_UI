@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/usecases/add_module_cleaning_execution_usecase.dart';
@@ -113,6 +114,18 @@ class AddModuleCleaningExecutionPresenter {
         facility_id: facility_id);
   }
 
+  Future<List<HistoryModel>?> getHistory(
+    moduleType,
+    id,
+    facilityId,
+    isLoading,
+  ) async =>
+      await addModuleCleaningExecutionUsecase.getHistory(
+        moduleType: moduleType,
+        id: id,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
@@ -181,16 +194,12 @@ class AddModuleCleaningExecutionPresenter {
         facility_id: facility_id);
   }
 
-  Future<bool> endApproveExecution({
-    approvetoJsonString,
-    required bool isLoading,
-    int? facility_id
-  }) async {
+  Future<bool> endApproveExecution(
+      {approvetoJsonString, required bool isLoading, int? facility_id}) async {
     return addModuleCleaningExecutionUsecase.endApproveExecution(
-      approvetoJsonString: approvetoJsonString,
-      isLoading: isLoading,
-      facility_id: facility_id
-    );
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   Future<bool> endRejectExecution(
