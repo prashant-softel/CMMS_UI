@@ -1,3 +1,5 @@
+import 'package:cmms/domain/models/get_occupational_list_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class CreateOccupationalhealthUsecase {
@@ -21,4 +23,16 @@ class CreateOccupationalhealthUsecase {
         updateHealthData,
         isLoading,
       );
+
+
+        Future<List<GetOccupationalList?>?> getHealthDatalist(isLoading) async =>
+      await repository.getHealthDatalist(isLoading: isLoading);
+
+        void saveValue({String? healthId}) async =>
+      repository.saveValue(LocalKeys.healthId, healthId);
+
+        Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.healthId);
+
+        void clearValue() async => repository.clearData(LocalKeys.healthId);
 }

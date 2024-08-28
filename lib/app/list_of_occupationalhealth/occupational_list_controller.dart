@@ -1,6 +1,7 @@
 
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -160,5 +161,11 @@ class OccupationalDataListController extends GetxController {
     occupationalListPresenter.clearValue();
   }
 
+  Future<void> editHealth({int? healthId}) async {
+    clearStoreData();
+    Get.toNamed(Routes.createOccupationalScreen, arguments: {
+      "healthId": healthId,
+    });
+  }
   
 }
