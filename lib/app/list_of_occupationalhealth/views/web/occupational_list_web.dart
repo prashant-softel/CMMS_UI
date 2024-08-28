@@ -580,12 +580,9 @@ class OccupationalDataListSource extends DataTableSource {
                             message: 'Edit',
                             onPress: () {
                               controller.clearStoreData();
-                              // int goId = OccupationallistDetails?.id ?? 0;
-                              // if (goId != 0) {
-                              //   Get.toNamed(
-                              //       Routes
-                              //           .updateGoodsOrdersDetailsScreen,
-                              //       arguments: {"goId": goId});
+                              int? id = OccupationallistDetails?.id;
+                          controller.editHealth(healthId: id);
+                         
                               // }
                             },
                           )

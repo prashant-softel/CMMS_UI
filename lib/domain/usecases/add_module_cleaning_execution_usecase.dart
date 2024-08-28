@@ -2,6 +2,7 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 
@@ -80,7 +81,18 @@ class AddModuleCleaningExecutionUsecase {
         facilityId,
         isLoading,
       );
-
+  Future<List<HistoryModel>?> getHistory({
+    moduleType,
+    id,
+    facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getHistory(
+        moduleType,
+        id,
+        facilityId,
+        isLoading,
+      );
   Future<Map<String, dynamic>> updateMCScheduleExecution(
           {updateMCScheduleExecutionJsonString,
           bool? isLoading,
