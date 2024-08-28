@@ -166,11 +166,12 @@ void updateVisitAndNoticeDetails() async {
       var createvisitandnoticeModelJsonString = createregulataryvisitsModel.toJson();
       print(createvisitandnoticeModelJsonString);
       // Call the createoccupational function from stockManagementAddGoodsOrdersPresenter
-      Map<String, dynamic>? responseoccupationalupdate =
-          await createregulataryvisitsPresenter.createvisitsandnotices(
-        createvisitsandnotices: createvisitandnoticeModelJsonString,
+      // Map<String, dynamic>? responseoccupationalupdate =
+          await createregulataryvisitsPresenter.updateVisitAndNoticeDetails(
+        updateVisitAndNoticeDetails: createvisitandnoticeModelJsonString,
         isLoading: true,
       );
+  
 
    
      

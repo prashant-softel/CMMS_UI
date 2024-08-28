@@ -469,7 +469,7 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                           ),
                         ),
                         Dimens.boxWidth15,
-                        controller.selectedItem == null
+                          controller.selectedItem?.id== 0
                             ? 
                             Container(
                                 height: 40,
