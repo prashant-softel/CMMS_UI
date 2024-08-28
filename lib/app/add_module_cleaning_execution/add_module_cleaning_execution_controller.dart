@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_presenter.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -12,6 +13,7 @@ import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
@@ -154,6 +156,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   int taskId = 0;
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
   List<int?> scheduleId = [];
 
@@ -173,6 +176,7 @@ class AddModuleCleaningExecutionController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () async {
         await getFacilityList();
+        getHistory(facilityId);
         await getInventoryCategoryList();
         if (mcid > 0) {
           //   Future.delayed(Duration(seconds: 1), () {
@@ -379,6 +383,19 @@ class AddModuleCleaningExecutionController extends GetxController {
     });
     print('PermitIDForTBt:$permitId');
     print('PermitIdArgument:$isChecked');
+  }
+
+  Future<void> getHistory(int facilityId) async {
+    int moduleType = 82;
+
+    historyList?.value = await addModuleCleaningExecutionPresenter.getHistory(
+          moduleType,
+          mcid.value,
+          facilityId,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   ///Update MC Schedule Execution
@@ -1250,6 +1267,90 @@ class AddModuleCleaningExecutionController extends GetxController {
               alignment: PdfTextAlignment.center,
               lineAlignment: PdfVerticalAlignment.middle));
       currentY += 25;
+    }
+
+    // MC History Section
+    currentY += rowHeight * 2;
+
+    double pageHeight = pageSize.height;
+    double columnWidth = pageWidth / 4;
+
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString('MC History', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    List<String> historyHeaders = [
+      'Time Stamp',
+      'Posted By',
+      'Comments',
+      'Status'
+    ];
+
+    for (int i = 0; i < historyHeaders.length; i++) {
+      page.graphics.drawString(historyHeaders[i], contentFont,
+          bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
+              columnWidth, rowHeight));
+    }
+
+    currentY += rowHeight;
+
+    for (var history in historyList!.value) {
+      // Check if we need to add a new page
+      if (currentY + rowHeight > pageHeight - margin) {
+        // Add a new page and reset the currentY
+        page = document.pages.add();
+        currentY = margin; // Reset Y position for the new page
+
+        // Re-draw the "PM History" header on the new page
+        page.graphics.drawRectangle(
+            pen: borderPen,
+            brush: backgroundBrush,
+            bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+        page.graphics.drawString('MC History', headerFont,
+            bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+        currentY += sectionHeight;
+
+        // Draw column headers for "PM History"
+        for (int i = 0; i < historyHeaders.length; i++) {
+          page.graphics.drawString(historyHeaders[i], contentFont,
+              bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
+                  columnWidth, rowHeight));
+        }
+
+        currentY += rowHeight; // Move down after drawing headers
+      }
+
+      // Render the history items
+      if (history != null) {
+        String timeStamp = history.createdAt?.result != null
+            ? history.createdAt!.result
+                .toString()
+                .substring(0, 16)
+                .replaceFirst('T', ' ')
+            : 'N/A';
+        String postedBy = history.createdByName ?? 'Unknown';
+        String comments = history.comment ?? 'No comments';
+        String status = history.status_name ?? 'Unknown status';
+
+        page.graphics.drawString(timeStamp, contentFont,
+            bounds:
+                Rect.fromLTWH(margin, currentY + 5, columnWidth, rowHeight));
+        page.graphics.drawString(postedBy, contentFont,
+            bounds: Rect.fromLTWH(
+                margin + columnWidth, currentY + 5, columnWidth, rowHeight));
+        page.graphics.drawString(comments, contentFont,
+            bounds: Rect.fromLTWH(margin + 2 * columnWidth, currentY + 5,
+                columnWidth, rowHeight));
+        page.graphics.drawString(status, contentFont,
+            bounds: Rect.fromLTWH(margin + 3 * columnWidth, currentY + 5,
+                columnWidth, rowHeight));
+
+        currentY += rowHeight;
+      }
     }
 
     final String signatureText = 'Signature';
