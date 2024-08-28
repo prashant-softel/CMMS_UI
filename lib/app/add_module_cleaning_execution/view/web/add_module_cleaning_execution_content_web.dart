@@ -1138,8 +1138,6 @@ class AddModuleCleaningExecutionContentWeb
                                                   )
                                                 : Dimens.box0,
 
-
-                                            
                                             Dimens.boxWidth5,
                                             Container(
                                               height: 28,
@@ -1153,8 +1151,6 @@ class AddModuleCleaningExecutionContentWeb
                                                 },
                                               ),
                                             ),
-
-                                        
 
                                             Dimens.boxWidth5,
                                             controller.mcExecutionDetailsModel.value?.status == 361 &&
