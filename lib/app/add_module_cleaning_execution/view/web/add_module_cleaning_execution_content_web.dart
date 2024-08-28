@@ -967,6 +967,7 @@ class AddModuleCleaningExecutionContentWeb
                                             ),
                                           ]),
                                         ),
+
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -1137,23 +1138,21 @@ class AddModuleCleaningExecutionContentWeb
                                                   )
                                                 : Dimens.box0,
 
-                                            // SizedBox(
-                                            //   width: 10,
-                                            // ),
                                             Dimens.boxWidth5,
-                                            // Container(
-                                            //   height: 28,
-                                            //   child: CustomElevatedButton(
-                                            //     icon: Icons.print,
-                                            //     backgroundColor: ColorValues
-                                            //         .linktopermitColor,
-                                            //     text: "print",
-                                            //     onPressed: () {
-                                            //       controller.generateInvoice();
-                                            //     },
-                                            //   ),
-                                            // ),
-                                            // Dimens.boxWidth5,
+                                            Container(
+                                              height: 28,
+                                              child: CustomElevatedButton(
+                                                icon: Icons.print,
+                                                backgroundColor: ColorValues
+                                                    .linktopermitColor,
+                                                text: "print",
+                                                onPressed: () {
+                                                  controller.generateInvoice();
+                                                },
+                                              ),
+                                            ),
+
+                                            Dimens.boxWidth5,
                                             controller.mcExecutionDetailsModel.value?.status == 361 &&
                                                         varUserAccessModel.value
                                                                 .access_list!
