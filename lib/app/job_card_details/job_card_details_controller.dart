@@ -1081,7 +1081,7 @@ class JobCardDetailsController extends GetxController {
 
     final Size pageSize = page.getClientSize();
 
-    var url = "assets/files/HFE Logo.png";
+    var url = "assets/assets/files/HFE Logo.png";
     // var url = "assets/files/hfeLogo.jpg";
 
     var response = await get(Uri.parse(url));
@@ -1095,7 +1095,7 @@ class JobCardDetailsController extends GetxController {
 
     document.dispose();
 
-    await saveAndLaunchFile(bytes, 'Job Card  Report');
+    await saveAndLaunchFile(bytes, 'Job Card Report.pdf');
   }
 
   PdfLayoutResult drawHeader(
@@ -1119,7 +1119,7 @@ class JobCardDetailsController extends GetxController {
     // Draw images
     page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
 
-    final String centerText = 'Job Card  Report';
+    final String centerText = 'Job Card Report';
     final PdfFont centerTextFont =
         PdfStandardFont(PdfFontFamily.helvetica, 12, style: PdfFontStyle.bold);
     final Size centerTextSize = centerTextFont.measureString(centerText);
@@ -1267,7 +1267,7 @@ class JobCardDetailsController extends GetxController {
     // Permit carried by section
     currentY += 10; // Adding some space before the next section
 
-    // Draw the permit section with header
+// Draw the permit section with header
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
@@ -1276,8 +1276,16 @@ class JobCardDetailsController extends GetxController {
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    // Column Headers
+// Define static widths for the columns
+    double serialNoWidth = 40; // Width for S. No
+    double employeeIdWidth = 80; // Width for Employee ID
+    double employeeNameWidth = 180; // Width for Employee Name
+    double companyWidth = pageWidth -
+        (serialNoWidth +
+            employeeIdWidth +
+            employeeNameWidth); // Remaining width for Company
 
+// Headers for Permit carried by section
     List<String> permitHeaders = [
       'S. No',
       'Employee ID',
@@ -1285,38 +1293,46 @@ class JobCardDetailsController extends GetxController {
       'Company'
     ];
 
-    for (int i = 0; i < permitHeaders.length; i++) {
-      page.graphics.drawString(permitHeaders[i], contentFont,
-          bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
-              columnWidth, rowHeight));
-    }
+// Draw the headers with static widths
+    page.graphics.drawString(permitHeaders[0], contentFont,
+        bounds: Rect.fromLTWH(margin, currentY + 5, serialNoWidth, rowHeight));
+    page.graphics.drawString(permitHeaders[1], contentFont,
+        bounds: Rect.fromLTWH(
+            margin + serialNoWidth, currentY + 5, employeeIdWidth, rowHeight));
+    page.graphics.drawString(permitHeaders[2], contentFont,
+        bounds: Rect.fromLTWH(margin + serialNoWidth + employeeIdWidth,
+            currentY + 5, employeeNameWidth, rowHeight));
+    page.graphics.drawString(permitHeaders[3], contentFont,
+        bounds: Rect.fromLTWH(
+            margin + serialNoWidth + employeeIdWidth + employeeNameWidth,
+            currentY + 5,
+            companyWidth,
+            rowHeight));
 
-    currentY += sectionHeight;
+    currentY += rowHeight;
 
-    if (jobCardDetailsModel.value!.lstPermitDetailList != null &&
-        jobCardDetailsModel.value!.lstPermitDetailList!.isNotEmpty) {
+    if (jobCardDetailsModel.value!.lstCmjcJobDetailList != null &&
+        jobCardDetailsModel.value!.lstCmjcJobDetailList!.isNotEmpty) {
       int serialNo = 1;
-      for (var permit in jobCardDetailsModel.value!.lstPermitDetailList!) {
+      for (var permit in jobCardDetailsModel.value!.lstCmjcJobDetailList!) {
         // Draw Permit Data
         page.graphics.drawString('$serialNo', contentFont,
             bounds: Rect.fromLTWH(
-                margin, currentY + 5, columnWidth, rowHeight)); // S. No
-        page.graphics.drawString('${permit.permitId ?? ''}', contentFont,
-            bounds: Rect.fromLTWH(margin + columnWidth, currentY + 5,
-                columnWidth, rowHeight)); // Permit ID
-        page.graphics.drawString(
-            '${permit.permitIssuedByName ?? ''}', contentFont,
+                margin, currentY + 5, serialNoWidth, rowHeight)); // S. No
+        page.graphics.drawString('${permit.employee_ID ?? ''}', contentFont,
+            bounds: Rect.fromLTWH(margin + serialNoWidth, currentY + 5,
+                employeeIdWidth, rowHeight)); // Employee ID
+        page.graphics.drawString('${permit.employee_name ?? ''}', contentFont,
             bounds: Rect.fromLTWH(
-                margin + 2 * columnWidth,
+                margin + serialNoWidth + employeeIdWidth,
                 currentY + 5,
-                columnWidth,
+                employeeNameWidth,
                 rowHeight)); // Employee name (assuming it's permitIssuedByName)
-        page.graphics.drawString(
-            '${permit.permitApprovedByName ?? ''}', contentFont,
+        page.graphics.drawString('${permit.company ?? ''}', contentFont,
             bounds: Rect.fromLTWH(
-                margin + 3 * columnWidth,
+                margin + serialNoWidth + employeeIdWidth + employeeNameWidth,
                 currentY + 5,
-                columnWidth,
+                companyWidth,
                 rowHeight)); // Company (assuming it's permitApprovedByName)
 
         currentY += rowHeight;
@@ -1343,7 +1359,7 @@ class JobCardDetailsController extends GetxController {
     currentY += sectionHeight;
 
     // Define static widths for the S. No, PTW ID, and Isolation taken columns
-    double serialNoWidth = 40; // Width for S. No
+    // double serialNoWidth = 40; // Width for S. No
     double ptwIdWidth = 50; // Width for PTW ID
     double isolationTakenWidth = 80; // Width for Isolation taken
     double remainingWidth = pageWidth -
@@ -1721,8 +1737,17 @@ class JobCardDetailsController extends GetxController {
         format: PdfStringFormat(alignment: PdfTextAlignment.left));
     currentY += rowHeight * 2;
 
-    // PM History section
+// PM History section
     double pageHeight = pageSize.height;
+
+// Define static widths for the columns in the history section
+    double timeStampWidth = 100; // Width for Time Stamp
+    double postedByWidth = 80; // Width for Posted By
+    double commentsWidth = 200; // Width for Comments
+    // double statusWidth = pageWidth -
+    //     (timeStampWidth +
+    //         postedByWidth +
+    //         commentsWidth); // Remaining width for Status
 
     for (var history in historyList!.value) {
       // Check if we need to add a new page
@@ -1740,7 +1765,7 @@ class JobCardDetailsController extends GetxController {
             bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
         currentY += sectionHeight;
 
-        // Draw column headers for "PM History"
+        // Draw column headers for "PM History" with static widths
         List<String> historyHeaders = [
           'Time Stamp',
           'Posted By',
@@ -1748,16 +1773,26 @@ class JobCardDetailsController extends GetxController {
           'Status'
         ];
 
-        for (int i = 0; i < historyHeaders.length; i++) {
-          page.graphics.drawString(historyHeaders[i], contentFont,
-              bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
-                  columnWidth, rowHeight));
-        }
+        page.graphics.drawString(historyHeaders[0], contentFont,
+            bounds:
+                Rect.fromLTWH(margin, currentY + 5, timeStampWidth, rowHeight));
+        page.graphics.drawString(historyHeaders[1], contentFont,
+            bounds: Rect.fromLTWH(margin + timeStampWidth, currentY + 5,
+                postedByWidth, rowHeight));
+        page.graphics.drawString(historyHeaders[2], contentFont,
+            bounds: Rect.fromLTWH(margin + timeStampWidth + postedByWidth,
+                currentY + 5, commentsWidth, rowHeight));
+        page.graphics.drawString(historyHeaders[3], contentFont,
+            bounds: Rect.fromLTWH(
+                margin + timeStampWidth + postedByWidth + commentsWidth,
+                currentY + 5,
+                statusWidth,
+                rowHeight));
 
         currentY += rowHeight; // Move down after drawing headers
       }
 
-      // Render your history items as before
+      // Render history items with static widths
       if (history != null) {
         String timeStamp = history.createdAt?.result != null
             ? history.createdAt!.result
@@ -1771,16 +1806,19 @@ class JobCardDetailsController extends GetxController {
 
         page.graphics.drawString(timeStamp, contentFont,
             bounds:
-                Rect.fromLTWH(margin, currentY + 5, columnWidth, rowHeight));
+                Rect.fromLTWH(margin, currentY + 5, timeStampWidth, rowHeight));
         page.graphics.drawString(postedBy, contentFont,
-            bounds: Rect.fromLTWH(
-                margin + columnWidth, currentY + 5, columnWidth, rowHeight));
+            bounds: Rect.fromLTWH(margin + timeStampWidth, currentY + 5,
+                postedByWidth, rowHeight));
         page.graphics.drawString(comments, contentFont,
-            bounds: Rect.fromLTWH(margin + 2 * columnWidth, currentY + 5,
-                columnWidth, rowHeight));
+            bounds: Rect.fromLTWH(margin + timeStampWidth + postedByWidth,
+                currentY + 5, commentsWidth, rowHeight));
         page.graphics.drawString(status, contentFont,
-            bounds: Rect.fromLTWH(margin + 3 * columnWidth, currentY + 5,
-                columnWidth, rowHeight));
+            bounds: Rect.fromLTWH(
+                margin + timeStampWidth + postedByWidth + commentsWidth,
+                currentY + 5,
+                statusWidth,
+                rowHeight));
 
         currentY += rowHeight;
       }
