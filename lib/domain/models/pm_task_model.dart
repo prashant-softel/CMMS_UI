@@ -12,6 +12,7 @@ String mTaskListModelToJson(List<PmTaskListModel> data) =>
 class PmTaskListModel {
   int? id;
   int? facility_id;
+  int? plan_id;
   String? task_code;
   String? name;
   String? last_done_date;
@@ -38,6 +39,7 @@ class PmTaskListModel {
       {this.assigned_to_id,
       this.assigned_to_name,
       this.category_id,
+      this.plan_id,
       this.category_name,
       this.done_date,
       this.due_date,
@@ -65,6 +67,7 @@ class PmTaskListModel {
         assigned_to_id: json['assigned_to_id'] ?? 0,
         assigned_to_name: json['assigned_to_name'] ?? '',
         category_id: json['category_id'] ?? 0,
+        plan_id: json['plan_id'] ?? 0,
         category_name: json['category_name'] ?? '',
          task_code:
             json['task_code'] != null && json['task_code'].startsWith('PMTASK')
@@ -100,6 +103,7 @@ class PmTaskListModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "category_id": category_id,
+        "plan_id": plan_id,
         "facility_id": facility_id,
         "category_name": category_name,
         "frequency_id": frequency_id,
