@@ -2666,8 +2666,6 @@ class ConnectHelper {
   Future<ResponseModel> getModuleList({
     required String auth,
     bool? isLoading,
-    int? facilityId,
-    int? type,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'CMMS/GetModuleList',

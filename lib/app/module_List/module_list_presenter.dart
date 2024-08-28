@@ -1,4 +1,3 @@
-
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/modulelist_model.dart';
@@ -15,13 +14,9 @@ class ModuleListPresenter {
         isLoading: isLoading ?? false,
       );
   Future<List<ModuleListModel?>?> getModuleList({
-    int? facilityId,
-    int? type,
     bool? isLoading,
   }) async =>
       await moduleUsecase.getModuleList(
-        facilityId: facilityId ?? 0,
-        type: type,
         isLoading: isLoading ?? false,
       );
   Future<List<FrequencyModel?>?> getFrequencyList({
