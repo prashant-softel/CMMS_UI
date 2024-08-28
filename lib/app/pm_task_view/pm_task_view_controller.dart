@@ -605,8 +605,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     final PdfPage page = document.pages.add();
 
     final Size pageSize = page.getClientSize();
-    var url = "assets/files/HFE Logo.png";
-    // var url = "assets/assets/files/logo.png";
+    var url = "assets/assets/files/HFE Logo.png";
     var response = await get(Uri.parse(url));
     var data = response.bodyBytes;
 
@@ -1299,5 +1298,4 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         bounds: Rect.fromLTWH(pageWidth - (signatureSize.width + margin),
             currentY + 20, signatureSize.width, signatureSize.height))!;
   }
-
 }
