@@ -2250,15 +2250,15 @@ class DataRepository extends DomainRepository {
         updateHealthData: updateHealthData,
         isLoading: isLoading ?? false,
       );
-//updateVisitAndNoticeDetails
- Future<ResponseModel> updateVisitAndNoticeDetails({
+
+  Future<ResponseModel> updateVisitAndNoticeDetails({
     required String auth,
-    updateVisitAndNoticeDetails,
+    updateRegularVisit,
     bool? isLoading,
   }) async =>
       await connectHelper.updateVisitAndNoticeDetails(
         auth: auth,
-        updateVisitAndNoticeDetails: updateVisitAndNoticeDetails,
+        updateRegularVisit: updateRegularVisit,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> createWaterData({

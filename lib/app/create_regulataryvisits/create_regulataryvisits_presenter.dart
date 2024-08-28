@@ -18,23 +18,27 @@ class CreateRegulataryVisitsPresenter {
   //update getVisitAndNoticelist
 
 //updateVisitAndNoticeDetails
- Future<Map<String, dynamic>?> updateVisitAndNoticeDetails({
-    updateVisitAndNoticeDetails,
+
+  Future<Map<String, dynamic>?> updateVisitAndNoticeDetails({
+    updateRegularVisit,
     required bool isLoading,
   }) async {
     return createregulataryvisitsUsecase.updateVisitAndNoticeDetails(
-      updateVisitAndNoticeDetails: updateVisitAndNoticeDetails,
+      updateRegularVisit: updateRegularVisit,
       isLoading: isLoading,
     );
   }
 
-  Future<List<GetVisitAndNoticeList?>?> getVisitsAndNoticesDatalist({int? id, bool? isLoading}) async =>
+  Future<List<GetVisitAndNoticeList?>?> getVisitsAndNoticesDatalist(
+          {int? id, bool? isLoading}) async =>
       await createregulataryvisitsUsecase.getVisitsAndNoticesDatalist(true);
-  
-    void saveValue({String? visitId}) async {
+
+  void saveValue({String? visitId}) async {
     return createregulataryvisitsUsecase.saveValue(visitId: visitId);
   }
-      Future<String?> getValue() async => await createregulataryvisitsUsecase.getValue();
 
-      void clearValue() async => createregulataryvisitsUsecase.clearValue();
+  Future<String?> getValue() async =>
+      await createregulataryvisitsUsecase.getValue();
+
+  void clearValue() async => createregulataryvisitsUsecase.clearValue();
 }
