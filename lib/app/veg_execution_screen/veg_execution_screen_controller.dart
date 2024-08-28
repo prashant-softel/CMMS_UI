@@ -546,7 +546,7 @@ class VegExecutionController extends GetxController {
 
       final Size pageSize = page.getClientSize();
 
-      var url = "assets/assets/files/HFE Logo.png";
+      var url = "assets/assets/files/HFELogo.png";
       var response = await get(Uri.parse(url));
       if (response.statusCode == 200) {
         var data = response.bodyBytes;
