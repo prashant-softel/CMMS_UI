@@ -556,14 +556,22 @@ class VisitandNoticeDataListSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
-                              controller.clearStoreData();
-                              // int goId = VisitAndNoticeDetails?.id ?? 0;
-                              // if (goId != 0) {
-                              //   Get.toNamed(
-                              //       Routes
-                              //           .updateGoodsOrdersDetailsScreen,
-                              //       arguments: {"goId": goId});
-                              // }
+                              // controller.clearStoreData();
+                                    controller.selectedItem =
+                                controller.visitandnoticeList.firstWhere(
+                              (element) =>
+                                  "${element.id}" ==
+                                  VisitAndNoticeDetails?.id.toString(),
+                            );
+                            int VisitId = VisitAndNoticeDetails?.id ?? 0;
+
+                            if (VisitId != 0) {
+                              Get.toNamed(Routes.createRegulataryVisitsScreen,
+                                  arguments: {
+                                    "selectedItem": controller.selectedItem
+                                  });
+                            }
+
                             },
                           )
                         : Dimens.box0,

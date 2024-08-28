@@ -117,6 +117,7 @@ abstract class LocalKeys {
   static const enddate = 'enddate';
   static const oHid = 'oHid';
   static const healthId = 'healthId';
+  static const visitId = 'visitId';
 
 
 }
