@@ -11,6 +11,7 @@ import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/update_vegetation_execution_model.dart';
@@ -45,6 +46,7 @@ class VegExecutionController extends GetxController {
   RxList<int> scheduleId = <int>[].obs;
   RxInt scheduledId = 0.obs;
   Map<String, dynamic> data = {};
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   final TextEditingController commentTextFieldCtrlr = TextEditingController();
   final TextEditingController scheduleExecutionTextFieldCtrlr =
       TextEditingController();
@@ -79,6 +81,7 @@ class VegExecutionController extends GetxController {
             facilityId: facilityId.value,
             isLoading: true);
         await getAssignedToList();
+        getHistory(facilityId.value);
       });
     } catch (e) {
       print(e);
@@ -107,6 +110,19 @@ class VegExecutionController extends GetxController {
     } catch (e) {
       Utility.showDialog(e.toString(), 'vegid');
     }
+  }
+
+  Future<void> getHistory(int facilityId) async {
+    int moduleType = 311;
+
+    historyList?.value = await vegExecutionPresenter.getHistory(
+          moduleType,
+          vegexe.value,
+          facilityId,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   Future<void> getVegExecutionDetail({
@@ -530,7 +546,7 @@ class VegExecutionController extends GetxController {
 
       final Size pageSize = page.getClientSize();
 
-      var url = "assets/files/HFE Logo.png";
+      var url = "assets/assets/files/HFE Logo.png";
       var response = await get(Uri.parse(url));
       if (response.statusCode == 200) {
         var data = response.bodyBytes;
@@ -616,7 +632,7 @@ class VegExecutionController extends GetxController {
     double valueX = labelX + labelWidth + 5;
 
     List<String> mcInfoLabelsLeft = [
-      'MC Plan ID',
+      'Plan ID',
       'Task ID',
       'Plan Title',
       'Frequency',
@@ -687,13 +703,13 @@ class VegExecutionController extends GetxController {
     double totalColWidth = pageWidth - 2 * margin;
     double colWidthSchId = totalColWidth * 0.06;
     double colWidthDays = totalColWidth * 0.06;
-    double colWidthScheduled = totalColWidth * 0.10;
+    double colWidthScheduled = totalColWidth * 0.12;
     double colWidthCleaned = totalColWidth * 0.10;
-    double colWidthAbandoned = totalColWidth * 0.10;
+    double colWidthAbandoned = totalColWidth * 0.12;
     double colWidthPending = totalColWidth * 0.10;
-    double colWidthWaterUsed = totalColWidth * 0.08;
-    double colWidthPermitID = totalColWidth * 0.10;
-    double colWidthPermitStatus = totalColWidth * 0.15;
+    double colWidthWaterUsed = totalColWidth * 0.00;
+    double colWidthPermitID = totalColWidth * 0.12;
+    double colWidthPermitStatus = totalColWidth * 0.12;
     double colWidthStatus = totalColWidth * 0.15;
 
     // Draw table header
@@ -754,21 +770,8 @@ class VegExecutionController extends GetxController {
         format: PdfStringFormat(
             alignment: PdfTextAlignment.center,
             lineAlignment: PdfVerticalAlignment.middle));
-    page.graphics.drawString('Water Used', headerFont,
-        bounds: Rect.fromLTWH(
-            margin +
-                colWidthSchId +
-                colWidthDays +
-                colWidthScheduled +
-                colWidthCleaned +
-                colWidthAbandoned +
-                colWidthPending,
-            currentY,
-            colWidthWaterUsed,
-            25),
-        format: PdfStringFormat(
-            alignment: PdfTextAlignment.center,
-            lineAlignment: PdfVerticalAlignment.middle));
+
+    ;
     page.graphics.drawString('Permit ID', headerFont,
         bounds: Rect.fromLTWH(
             margin +
@@ -881,21 +884,7 @@ class VegExecutionController extends GetxController {
           format: PdfStringFormat(
               alignment: PdfTextAlignment.center,
               lineAlignment: PdfVerticalAlignment.middle));
-      page.graphics.drawString('${schedule.waterUsed}', contentFont,
-          bounds: Rect.fromLTWH(
-              margin +
-                  colWidthSchId +
-                  colWidthDays +
-                  colWidthScheduled +
-                  colWidthCleaned +
-                  colWidthAbandoned +
-                  colWidthPending,
-              currentY,
-              colWidthWaterUsed,
-              25),
-          format: PdfStringFormat(
-              alignment: PdfTextAlignment.center,
-              lineAlignment: PdfVerticalAlignment.middle));
+
       page.graphics.drawString(
           'PTW${schedule.permit_id}', contentFont, // New Permit ID column
           bounds: Rect.fromLTWH(
@@ -980,60 +969,60 @@ class VegExecutionController extends GetxController {
 
     currentY += rowHeight;
 
-    // for (var history in historyList!.value) {
-    //   // Check if we need to add a new page
-    //   if (currentY + rowHeight > pageHeight - margin) {
-    //     // Add a new page and reset the currentY
-    //     page = document.pages.add();
-    //     currentY = margin; // Reset Y position for the new page
+    for (var history in historyList!.value) {
+      // Check if we need to add a new page
+      if (currentY + rowHeight > pageHeight - margin) {
+        // Add a new page and reset the currentY
+        page = document.pages.add();
+        currentY = margin; // Reset Y position for the new page
 
-    //     // Re-draw the "PM History" header on the new page
-    //     page.graphics.drawRectangle(
-    //         pen: borderPen,
-    //         brush: backgroundBrush,
-    //         bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
-    //     page.graphics.drawString('MC History', headerFont,
-    //         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
-    //     currentY += sectionHeight;
+        // Re-draw the "PM History" header on the new page
+        page.graphics.drawRectangle(
+            pen: borderPen,
+            brush: backgroundBrush,
+            bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+        page.graphics.drawString('MC History', headerFont,
+            bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+        currentY += sectionHeight;
 
-    //     // Draw column headers for "PM History"
-    //     for (int i = 0; i < historyHeaders.length; i++) {
-    //       page.graphics.drawString(historyHeaders[i], contentFont,
-    //           bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
-    //               columnWidth, rowHeight));
-    //     }
+        // Draw column headers for "PM History"
+        for (int i = 0; i < historyHeaders.length; i++) {
+          page.graphics.drawString(historyHeaders[i], contentFont,
+              bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
+                  columnWidth, rowHeight));
+        }
 
-    //     currentY += rowHeight; // Move down after drawing headers
-    //   }
+        currentY += rowHeight; // Move down after drawing headers
+      }
 
-    //   // Render the history items
-    //   if (history != null) {
-    //     String timeStamp = history.createdAt?.result != null
-    //         ? history.createdAt!.result
-    //             .toString()
-    //             .substring(0, 16)
-    //             .replaceFirst('T', ' ')
-    //         : 'N/A';
-    //     String postedBy = history.createdByName ?? 'Unknown';
-    //     String comments = history.comment ?? 'No comments';
-    //     String status = history.status_name ?? 'Unknown status';
+      // Render the history items
+      if (history != null) {
+        String timeStamp = history.createdAt?.result != null
+            ? history.createdAt!.result
+                .toString()
+                .substring(0, 16)
+                .replaceFirst('T', ' ')
+            : 'N/A';
+        String postedBy = history.createdByName ?? 'Unknown';
+        String comments = history.comment ?? 'No comments';
+        String status = history.status_name ?? 'Unknown status';
 
-    //     page.graphics.drawString(timeStamp, contentFont,
-    //         bounds:
-    //             Rect.fromLTWH(margin, currentY + 5, columnWidth, rowHeight));
-    //     page.graphics.drawString(postedBy, contentFont,
-    //         bounds: Rect.fromLTWH(
-    //             margin + columnWidth, currentY + 5, columnWidth, rowHeight));
-    //     page.graphics.drawString(comments, contentFont,
-    //         bounds: Rect.fromLTWH(margin + 2 * columnWidth, currentY + 5,
-    //             columnWidth, rowHeight));
-    //     page.graphics.drawString(status, contentFont,
-    //         bounds: Rect.fromLTWH(margin + 3 * columnWidth, currentY + 5,
-    //             columnWidth, rowHeight));
+        page.graphics.drawString(timeStamp, contentFont,
+            bounds:
+                Rect.fromLTWH(margin, currentY + 5, columnWidth, rowHeight));
+        page.graphics.drawString(postedBy, contentFont,
+            bounds: Rect.fromLTWH(
+                margin + columnWidth, currentY + 5, columnWidth, rowHeight));
+        page.graphics.drawString(comments, contentFont,
+            bounds: Rect.fromLTWH(margin + 2 * columnWidth, currentY + 5,
+                columnWidth, rowHeight));
+        page.graphics.drawString(status, contentFont,
+            bounds: Rect.fromLTWH(margin + 3 * columnWidth, currentY + 5,
+                columnWidth, rowHeight));
 
-    //     currentY += rowHeight;
-    //   }
-    // }
+        currentY += rowHeight;
+      }
+    }
 
     final String signatureText = 'Signature';
     final Size signatureSize = contentFont.measureString(signatureText);

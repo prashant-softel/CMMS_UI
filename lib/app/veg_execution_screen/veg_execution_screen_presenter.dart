@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:cmms/domain/usecases/veg_execution_screen_usecase.dart';
@@ -54,6 +55,18 @@ class VegExecutionPresenter {
     );
   }
 
+  Future<List<HistoryModel>?> getHistory(
+    moduleType,
+    id,
+    facilityId,
+    isLoading,
+  ) async =>
+      await vegExecutionUsecase.getHistory(
+        moduleType: moduleType,
+        id: id,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
   Future<List<VegTaskEquipmentList?>> getVegTaskEquipmentList({
     required bool isLoading,
     required int facilityId,
