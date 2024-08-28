@@ -3087,7 +3087,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                     ],
                                                   ),
                                                   // Dimens.boxWidth20,
-                                                  SizedBox(width: 20),
+                                                  SizedBox(width: 5),
                                                   Container(
                                                       // padding: EdgeInsets.only(
                                                       //     top: 30,
@@ -3097,7 +3097,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                           CircularPercentIndicator(
                                                     //circular progress indicator
                                                     radius:
-                                                        50.0, //radius for circle
+                                                        45.0, //radius for circle
                                                     lineWidth:
                                                         10.0, //width of circle line
                                                     animation:
@@ -3479,14 +3479,15 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                       int pointIndex,
                                                       int seriesIndex) {
                                                     var entry = controller
-                                                        .categoryMapSmAvailableDouble
+                                                        .mcTypeMapMcDouble
                                                         .entries
                                                         .toList()[pointIndex];
-                                                    double totalValue = controller
-                                                        .categoryMapSmAvailableDouble
-                                                        .values
-                                                        .reduce(
-                                                            (a, b) => a + b);
+                                                    double totalValue =
+                                                        controller
+                                                            .mcTypeMapMcDouble
+                                                            .values
+                                                            .reduce((a, b) =>
+                                                                a + b);
                                                     double percentage =
                                                         (entry.value /
                                                                 totalValue) *
@@ -3528,7 +3529,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                     strokeWidth: 15,
                                                     innerRadius: '80%',
                                                     dataSource: controller
-                                                        .categoryMapSmAvailableDouble
+                                                        .mcTypeMapMcDouble
                                                         .entries
                                                         .toList(),
                                                     xValueMapper: (MapEntry<
@@ -3547,10 +3548,11 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                 String, double>
                                                             data,
                                                         _) {
-                                                      var entriesList = controller
-                                                          .categoryMapSmAvailableDouble
-                                                          .entries
-                                                          .toList();
+                                                      var entriesList =
+                                                          controller
+                                                              .mcTypeMapMcDouble
+                                                              .entries
+                                                              .toList();
                                                       int index = entriesList
                                                           .indexWhere((entry) =>
                                                               entry.key ==
@@ -3608,14 +3610,14 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                       int pointIndex,
                                                       int seriesIndex) {
                                                     var entry = controller
-                                                        .categoryMapSmAvailableDouble
-                                                        .entries
+                                                        .waterUsedDouble.entries
                                                         .toList()[pointIndex];
-                                                    double totalValue = controller
-                                                        .categoryMapSmAvailableDouble
-                                                        .values
-                                                        .reduce(
-                                                            (a, b) => a + b);
+                                                    double totalValue =
+                                                        controller
+                                                            .waterUsedDouble
+                                                            .values
+                                                            .reduce((a, b) =>
+                                                                a + b);
                                                     double percentage =
                                                         (entry.value /
                                                                 totalValue) *
@@ -3657,8 +3659,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                     strokeWidth: 15,
                                                     innerRadius: '80%',
                                                     dataSource: controller
-                                                        .categoryMapSmAvailableDouble
-                                                        .entries
+                                                        .waterUsedDouble.entries
                                                         .toList(),
                                                     xValueMapper: (MapEntry<
                                                                     String,
@@ -3676,10 +3677,11 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                 String, double>
                                                             data,
                                                         _) {
-                                                      var entriesList = controller
-                                                          .categoryMapSmAvailableDouble
-                                                          .entries
-                                                          .toList();
+                                                      var entriesList =
+                                                          controller
+                                                              .waterUsedDouble
+                                                              .entries
+                                                              .toList();
                                                       int index = entriesList
                                                           .indexWhere((entry) =>
                                                               entry.key ==
@@ -3811,7 +3813,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 150,
+                                                fixedWidth: 120,
                                                 label: Text(
                                                   'MC Type',
                                                   style: Styles.blackBold14,
@@ -3819,7 +3821,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 150,
                                                 label: Text(
                                                   'Water Used',
                                                   style: Styles.blackBold14,
@@ -3827,7 +3829,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 200,
                                                 label: Text(
                                                   '% of module cleaned',
                                                   style: Styles.blackBold14,
@@ -3896,23 +3898,58 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .asset_category ??
+                                                        .mC_Type
+                                                        .toString() ??
                                                     '')),
                                                 DataCell(Text(controller
                                                         .dashboardMcList
                                                         .value
                                                         ?.cmDashboadDetails
                                                         ?.item_list?[index]
-                                                        .asset_name ??
+                                                        .totalWaterUsed
+                                                        .toString() ??
                                                     '')),
-                                                DataCell(Text(
-                                                    // controller
-                                                    //       .dashboardMcList
-                                                    //       .value
-                                                    //       ?.cmDashboadDetails
-                                                    //       ?.item_list?[index]
-                                                    //       .status_long ??
-                                                    '')),
+                                                DataCell(
+                                                  Text(() {
+                                                    final item = controller
+                                                        .dashboardMcList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index];
+
+                                                    // Print the entire item for inspection
+                                                    // print("Item: $item");
+
+                                                    if (item == null ||
+                                                        item.no_of_cleaned ==
+                                                            null ||
+                                                        item.scheduled ==
+                                                            null) {
+                                                      return "N/A";
+                                                    }
+
+                                                    final noOfCleaned =
+                                                        item.no_of_cleaned!;
+                                                    final scheduled =
+                                                        item.scheduled!;
+
+                                                    // Check for division by zero
+                                                    if (scheduled == 0 ||
+                                                        scheduled == null) {
+                                                      return "N/A";
+                                                    }
+
+                                                    // Perform the division and calculate the percentage
+                                                    final percentage =
+                                                        (noOfCleaned * 100) /
+                                                            scheduled;
+
+                                                    return percentage
+                                                            .toStringAsFixed(
+                                                                2) +
+                                                        "%";
+                                                  }()),
+                                                ),
                                                 DataCell(
                                                   Text(controller
                                                               .dashboardMcList

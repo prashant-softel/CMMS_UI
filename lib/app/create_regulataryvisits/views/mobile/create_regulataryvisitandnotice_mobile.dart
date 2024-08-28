@@ -1,6 +1,5 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/create_kaizens/create_kaizens_controller.dart';
-import 'package:cmms/app/create_plantationdata/create_plantationdata_controller.dart';
+import 'package:cmms/app/create_regulataryvisits/create_regulataryvisits_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -10,21 +9,21 @@ import 'package:cmms/app/widgets/custom_textFieldMobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CreatePlantationMobile extends StatefulWidget {
-  CreatePlantationMobile({
+class CreateVisitAndNodticeMobile extends StatefulWidget {
+  CreateVisitAndNodticeMobile({
     Key? key,
   }) : super(key: key);
   // final FileUploadController dropzoneController =
   //     Get.put(FileUploadController());
 @override
-  State<CreatePlantationMobile> createState() =>
-      _CreatePlantationMobileState();
+  State<CreateVisitAndNodticeMobile> createState() =>
+      _CreateVisitAndNodticeMobileState();
 }
 
-class _CreatePlantationMobileState extends State<CreatePlantationMobile> {
+class _CreateVisitAndNodticeMobileState extends State<CreateVisitAndNodticeMobile> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CreatePlantationDataController>(
+    return GetBuilder<CreateRegulataryVisitsController>(
       id: 'stock_Mangement',
       builder: (controller) {
         return SelectionArea(
@@ -41,7 +40,7 @@ class _CreatePlantationMobileState extends State<CreatePlantationMobile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Create Plantation",
+                          "Create Visit And Notice",
                           style: Styles.blackBold18,
                         ),
                       ],
@@ -62,63 +61,124 @@ class _CreatePlantationMobileState extends State<CreatePlantationMobile> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomRichTextMobile(
-                              title: "Total No of saplings planted: ",
+                              title: "No. of Govt. authorities visited the site: ",
                             ),
                             Dimens.boxHeight2,
                             CustomTextfieldMobile(
                               width: MediaQuery.of(context).size.width / 1.1,
                               keyboardType: TextInputType.number,
-                              textController: controller.SaplingsPlantedCtrl,
-                              // errorController: controller.isSaplingsPlantedCtrlInvalid.value
+                              textController: controller.govtauthvisitsCtrl,
+                              // errorController: controller.isDieselConsumedForVehiclesInvalid.value
                               //     ? "Required field"
                               //     : null,
                               onChanged: (value) {
                                 if (value.trim().length > 0) {
-                                  controller.isSaplingsPlantedCtrlInvalid.value = false;
+                                  controller.isGovtAuthVisitsInvalid.value = false;
                                 } else {
-                                  controller.isSaplingsPlantedCtrlInvalid.value = true;
+                                  controller.isGovtAuthVisitsInvalid.value = true;
                                 }
                               },
                             ),
                             Dimens.boxHeight15,
 
                             CustomRichTextMobile(
-                              title: "Total No of Saplings survived: ",
+                              title: "No. of Penalties/fines received by third parties:",
                             ),
                             Dimens.boxHeight2,
                             CustomTextfieldMobile(
                               width: MediaQuery.of(context).size.width / 1.1,
                               keyboardType: TextInputType.number,
                               textController:
-                                  controller.SaplingsSurvivedCtrl,
-                              // errorController: controller.isSaplingsSurvivedCtrlInvalid.value
+                                  controller.noOffinebythirdpartyCtrl,
+                              // errorController: controller.isPetrolConsumedForVehiclesInvalid.value
                               //     ? "Required field"
                               //     : null,
                               onChanged: (value) {
                                 if (value.trim().length > 0) {
-                                  controller.isSaplingsSurvivedCtrlInvalid.value = false;
+                                  controller.isNoOfFineByThirdPartyInvalid.value = false;
                                 } else {
-                                  controller.isSaplingsSurvivedCtrlInvalid.value = true;
+                                  controller.isNoOfFineByThirdPartyInvalid.value = true;
                                 }
                               },
                             ),
                             Dimens.boxHeight15,
                             CustomRichTextMobile(
-                              title: "Total No of Saplings died:",
+                              title: "No. of Show cause notices received by third parties:",
                             ),
                             Dimens.boxHeight2,
                             CustomTextfieldMobile(
                               width: MediaQuery.of(context).size.width / 1.1,
                               keyboardType: TextInputType.number,
-                              textController: controller.SaplingsDiedCtrl,
-                              // errorController: controller.isSaplingsDiedCtrlInvalid.value
+                              textController: controller.noofshowcausenoticesbythirdpartyCtrl,
+                              // errorController: controller.isPetrolConsumedForGrassCuttingAndMoversInvalid.value
                               //     ? "Required field"
                               //     : null,
                               onChanged: (value) {
                                 if (value.trim().length > 0) {
-                                  controller.isSaplingsDiedCtrlInvalid.value = false;
+                                  controller.isNoOfShowCauseNoticesInvalid.value = false;
                                 } else {
-                                  controller.isSaplingsDiedCtrlInvalid.value = true;
+                                  controller.isNoOfShowCauseNoticesInvalid.value = true;
+                                }
+                              },
+                            ),
+                            Dimens.boxHeight15,
+                            CustomRichTextMobile(
+                              title: "No of warning or Non conformity notices issued by HFE to contractor:",
+                            ),
+                            Dimens.boxHeight2,
+                            CustomTextfieldMobile(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              keyboardType: TextInputType.number,
+                              textController:
+                                  controller.noticestocontractorCtrl,
+                              // errorController: controller.isNoticesToContractorInvalid.value
+                              //     ? "Required field"
+                              //     : null,
+                              onChanged: (value) {
+                                if (value.trim().length > 0) {
+                                  controller.isNoticesToContractorInvalid.value = false;
+                                } else {
+                                  controller.isNoticesToContractorInvalid.value = true;
+                                }
+                              },
+                            ),
+                            Dimens.boxHeight15,
+                            CustomRichTextMobile(
+                              title: "Penalties imposed to the contractor by HFE in Amount:",
+                            ),
+                            Dimens.boxHeight2,
+                            CustomTextfieldMobile(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              keyboardType: TextInputType.number,
+                              textController: controller.amountofpenaltiestocontractorsCtrl,
+                              // errorController: controller.isPetrolConsumedAtSiteInvalid.value
+                              //     ? "Required field"
+                              //     : null,
+                              onChanged: (value) {
+                                if (value.trim().length > 0) {
+                                  controller.isAmountOfPenaltiesToContractorsInvalid.value = false;
+                                } else {
+                                  controller.isAmountOfPenaltiesToContractorsInvalid.value = true;
+                                }
+                              },
+                            ),
+                            Dimens.boxHeight15,
+                             CustomRichTextMobile(
+                              title: "Any other:",
+                            ),
+                            Dimens.boxHeight2,
+                            CustomTextfieldMobile(
+                              width: MediaQuery.of(context).size.width / 1.1,
+                              keyboardType: TextInputType.number,
+                              textController: controller.anyotherCtrl,
+                              // errorController: controller.isPetrolConsumedAtSiteInvalid.value
+                              //     ? "Required field"
+                              //     : null,
+                              onChanged: (value) {
+                                if (value.trim().length > 0) {
+                                  controller.isAnyOtherInvalid.value = false;
+                                } else {
+                                  controller.isAnyOtherInvalid.value = true;
                                 }
                               },
                             ),
@@ -156,7 +216,7 @@ class _CreatePlantationMobileState extends State<CreatePlantationMobile> {
                                   text: 'Submit',
                                   onPressed: () {
                                     // controller.isFormInvalid.value = false;
-                                    controller.createplantationdata();
+                                    controller.createvisitsandnotices();
                                   },
                                 ),
                               )

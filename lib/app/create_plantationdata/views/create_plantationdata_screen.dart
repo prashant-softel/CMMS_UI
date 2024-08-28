@@ -1,4 +1,5 @@
 import 'package:cmms/app/create_observation/views/mobile/create_observation_mobile.dart';
+import 'package:cmms/app/create_plantationdata/views/mobile/create_plantationdata_mobile.dart';
 import 'package:cmms/app/create_plantationdata/views/web/create_plantationdata_web.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
@@ -50,7 +51,7 @@ class PlantationDataScreen extends GetView<CreatePlantationDataController> {
                       children: [
                         if (Responsive.isMobile(context))
                           Expanded(
-                            child: CreateObservationMobile(),
+                            child: CreatePlantationMobile(),
                           ),
                         if (Responsive.isDesktop(context))
                           Expanded(

@@ -211,7 +211,7 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                                             children: [
                                                               CustomRichText(
                                                                   title:
-                                                                      'No. of Penalties/fines received by third parties '),
+                                                                      'No. of Penalties/fines received by third parties'),
                                                               Dimens.boxWidth3,
                                                               LoginCustomTextfield(
                                                                   width: (MediaQuery.of(
@@ -464,7 +464,7 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                             backgroundColor: ColorValues.cancelColor,
                             text: 'Cancel',
                             onPressed: () {
-                              Get.toNamed(Routes.complianceScreen);
+                              Get.toNamed(Routes.misDashboard);
                             },
                           ),
                         ),

@@ -1,3 +1,4 @@
+import 'package:cmms/app/create_kaizens/views/mobile/create_kaizens_mobile.dart';
 import 'package:cmms/app/create_observation/views/mobile/create_observation_mobile.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
@@ -50,7 +51,7 @@ class KaizensScreen extends GetView<CreateKaizensDataController> {
                       children: [
                         if (Responsive.isMobile(context))
                           Expanded(
-                            child: CreateObservationMobile(),
+                            child: CreateKaizensMobile(),
                           ),
                         if (Responsive.isDesktop(context))
                           Expanded(

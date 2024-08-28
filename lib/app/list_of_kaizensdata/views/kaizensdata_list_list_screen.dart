@@ -1,9 +1,8 @@
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
-import 'package:cmms/app/list_of_fueldata/views/web/fueldata_list_list_web.dart';
+import 'package:cmms/app/list_of_kaizensdata/views/mobile/kaizensdata_list_mobile.dart';
 import 'package:cmms/app/list_of_kaizensdata/views/web/kaizensdata_list_list_web.dart';
-import 'package:cmms/app/mis_list_of_observation/views/mobile/observation_list_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
@@ -22,7 +21,7 @@ class KaizensListScreen extends GetView<KaizensDataListController> {
       appBar: Responsive.isMobile(context)
           ? AppBar(
               title: HeadingProfileAppBar(
-                title: "List Of Fuel Data",
+                title: "List Of Kaizen Data",
               ),
             )
           : null,
@@ -49,7 +48,7 @@ class KaizensListScreen extends GetView<KaizensDataListController> {
                     child: Column(
                       children: [
                         if (Responsive.isMobile(context))
-                          Expanded(child: ObservationListMobile()),
+                          Expanded(child: KaizensListMobile()),
                         if (Responsive.isDesktop(context))
                           Expanded(
                             child: KaizensdataListWeb(),

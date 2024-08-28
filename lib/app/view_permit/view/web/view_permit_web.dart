@@ -632,12 +632,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                 ?.jobId);
                                                       },
                                                       child: Text(
-                                                        controller
-                                                                .listAssociatedJobs?[
-                                                                    index]
-                                                                ?.jobId
-                                                                .toString() ??
-                                                            '',
+                                                        'JOB${controller.listAssociatedJobs?[index]?.jobId?.toString() ?? ''}',
                                                         style: TextStyle(
                                                           decoration:
                                                               TextDecoration
@@ -3771,29 +3766,27 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
 
                 /// Permit Cancel By approver & Permit Request
                 (varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kPermitFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0 ||
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kPermitFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
-                                    0) &&
-                            (controller
-                                    .viewPermitDetailsModel.value?.ptwStatus !=
-                                PermitStatusConstants
-                                    .PTW_CANCEL_REQUEST_APPROVED) &&
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPermitFeatureId &&
+                                        e.approve ==
+                                            UserAccessConstants
+                                                .kHaveApproveAccess)
+                                    .length >
+                                0 ||
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPermitFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0) &&
+                        (controller.viewPermitDetailsModel.value?.ptwStatus !=
+                            PermitStatusConstants
+                                .PTW_CANCEL_REQUEST_APPROVED) &&
                         (controller.viewPermitDetailsModel.value?.ptwStatus !=
                             PermitStatusConstants
                                 .PTW_EXTEND_REQUEST_REJECTED) &&

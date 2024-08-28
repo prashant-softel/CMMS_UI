@@ -506,6 +506,8 @@ class OccupationalDataListSource extends DataTableSource {
 
     controller.occupationId.value = OccupationallistDetails?.id ?? 0;
     var cellsBuffer = [
+
+      'OH${OccupationallistDetails?.id ?? ''}',
       '${OccupationallistDetails?.noOfHealthExamsOfNewJoiner ?? ''}',
       '${OccupationallistDetails?.occupationalIllnesses ?? ''}',
       '${OccupationallistDetails?.periodicTests ?? ''}',

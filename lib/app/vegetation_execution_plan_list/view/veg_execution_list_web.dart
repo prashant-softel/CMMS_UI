@@ -129,7 +129,7 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                                                     ['stock_Mangement_Date']);
                                               },
                                               hintText:
-                                                  '${controller.formattedFromdate} - ${controller.formattedTodate}',
+                                                  '${controller.formattedFromdate} To ${controller.formattedTodate}',
                                             ),
                                           ],
                                         ),
