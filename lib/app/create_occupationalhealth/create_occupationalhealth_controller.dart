@@ -1,5 +1,8 @@
 // ignore: unused_import
 
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/create_occupationalhealth/create_occupationalhealth_presenter.dart';
 import 'package:cmms/domain/models/create_occupationalhealth_model.dart';
@@ -20,28 +23,58 @@ class CreateOccupationalhealthController extends GetxController {
  var noofhealthexamsofnewjoinerCtrl = TextEditingController();
  var periodictestsCtrl = TextEditingController();
  var occupationalillnessesCtrl = TextEditingController();
+ StreamSubscription<int>? facilityIdStreamSubscription;
  RxList<GetOccupationalList?> occupationalType = <GetOccupationalList>[].obs;
  Rx<int> healthId = 0.obs;
  Rx<bool> isLoading = true.obs;
  Rx<bool> isHeathExamInvalid = false.obs;
  Rx<bool> isPeriodictestInvalid = false.obs;
  Rx<bool> isOccupationalIllnessesInvalid = false.obs;
+  GetOccupationalList? selectedItem;
+  Rx<String> selecteddocumentNameType = ''.obs;
 // varUserAccessModel
+
+  @override
+  void onInit() async {
+    try {
+      await setOHId();
+
+      facilityIdStreamSubscription = homeController.facilityId$.listen(
+        (event) async {
+          // facilityId = event;
+          await getHealthDatalist();
+        },
+      );
+
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
+  }
 
   Future<void> setOHId() async {
     try {
-      final _grievanceId = await createOccupationalhealthPresenter.getValue();
-      if (_grievanceId == null ||
-          _grievanceId == '' ||
-          _grievanceId == "null") {
+     GetOccupationalList? selectedItemhea;
+      final _selectedItem = await createOccupationalhealthPresenter.getValue();
+        if (_selectedItem!.isNotEmpty) {
+        final jobdetaildata = jsonDecode(_selectedItem.toString());
+        selectedItemhea = GetOccupationalList.fromJson(jobdetaildata);
+      }
+       if (_selectedItem == null ||
+          _selectedItem == '' ||
+          _selectedItem == "null") {
         var dataFromPreviousScreen = Get.arguments;
+        selectedItem = dataFromPreviousScreen['selectedItem'];
+      }
+      else {
+        selectedItem = selectedItemhea;
+      }
+        if (selectedItem != null) {
 
-        healthId.value = dataFromPreviousScreen['grievanceId'];
-        print("gri: ${healthId}");
-        createOccupationalhealthPresenter.saveValue(
-            healthId: healthId.value.toString());
-      } else {
-        healthId.value = int.tryParse(_grievanceId) ?? 0;
+       noofhealthexamsofnewjoinerCtrl.text = selectedItem!.noOfHealthExamsOfNewJoiner.toString();
+       periodictestsCtrl.text = selectedItem!.periodicTests.toString();
+       occupationalillnessesCtrl.text = selectedItem!.occupationalIllnesses.toString();
+        
       }
     } catch (e) {
       print(e.toString() + 'healthId');
@@ -106,7 +139,8 @@ void updateOccupationalDetails() async {
       int _noofhealthexamsofnewjoinerCtrl = int.tryParse(noofhealthexamsofnewjoinerCtrl.text.trim())?? 0;
        int _periodictestsCtrl = int.tryParse(periodictestsCtrl.text.trim())?? 0;
        int _occupationalillnessesCtrl = int.tryParse(occupationalillnessesCtrl.text.trim())?? 0;
-var ms='';
+
+
       CreateOccupationalModel createoccupationalModel = CreateOccupationalModel(
         id:_id,
         NoOfHealthExamsOfNewJoiner: _noofhealthexamsofnewjoinerCtrl,

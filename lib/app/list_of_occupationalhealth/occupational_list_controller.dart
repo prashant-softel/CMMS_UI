@@ -35,6 +35,7 @@ class OccupationalDataListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+  GetOccupationalList? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> occupationId = 0.obs;
