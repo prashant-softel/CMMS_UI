@@ -824,25 +824,34 @@ class AddModuleCleaningExecutionController extends GetxController {
   }
 
   Future<void> generateInvoice() async {
-    final PdfDocument document = PdfDocument();
+    try {
+      final PdfDocument document = PdfDocument();
 
-    final PdfPage page = document.pages.add();
+      final PdfPage page = document.pages.add();
 
-    final Size pageSize = page.getClientSize();
+      final Size pageSize = page.getClientSize();
 
-    var url = "assets/files/HFE Logo.png";
-    var response = await get(Uri.parse(url));
-    var data = response.bodyBytes;
+      var url = "assets/files/HFE Logo.png";
+      var response = await get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        var data = response.bodyBytes;
 
-    PdfBitmap image = PdfBitmap(data);
+        PdfBitmap image = PdfBitmap(data);
 
-    final PdfLayoutResult result = drawHeader(page, pageSize, document, image);
+        final PdfLayoutResult result =
+            drawHeader(page, pageSize, document, image);
 
-    final List<int> bytes = await document.save();
+        final List<int> bytes = await document.save();
 
-    document.dispose();
+        document.dispose();
 
-    await saveAndLaunchFile(bytes, 'MC Task Report');
+        await saveAndLaunchFile(bytes, 'MC Task Report');
+      } else {
+        print("Error fetching the image: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error generating invoice: $e");
+    }
   }
 
   PdfLayoutResult drawHeader(
@@ -975,19 +984,18 @@ class AddModuleCleaningExecutionController extends GetxController {
 
     currentY += sectionHeight;
 
-    // Define column widths
-    double colWidthSchId = 30;
-    double colWidthDays = 30;
-    double colWidthScheduled = 60;
-    double colWidthCleaned = 50;
-    double colWidthAbandoned = 60;
-    double colWidthPending = 60;
-    double colWidthWaterUsed = 55;
-    double colWidthPermitStatus = 100;
-    double colWidthStatus = 60;
-
-    // Adjust table width to ensure it matches the page width
-    tableWidth = pageWidth;
+    // Calculate column widths proportionally
+    double totalColWidth = pageWidth - 2 * margin;
+    double colWidthSchId = totalColWidth * 0.06;
+    double colWidthDays = totalColWidth * 0.06;
+    double colWidthScheduled = totalColWidth * 0.10;
+    double colWidthCleaned = totalColWidth * 0.10;
+    double colWidthAbandoned = totalColWidth * 0.10;
+    double colWidthPending = totalColWidth * 0.10;
+    double colWidthWaterUsed = totalColWidth * 0.08;
+    double colWidthPermitID = totalColWidth * 0.10;
+    double colWidthPermitStatus = totalColWidth * 0.15;
+    double colWidthStatus = totalColWidth * 0.15;
 
     // Draw table header
     page.graphics.drawRectangle(
@@ -1062,7 +1070,7 @@ class AddModuleCleaningExecutionController extends GetxController {
         format: PdfStringFormat(
             alignment: PdfTextAlignment.center,
             lineAlignment: PdfVerticalAlignment.middle));
-    page.graphics.drawString('Permit Status', headerFont,
+    page.graphics.drawString('Permit ID', headerFont,
         bounds: Rect.fromLTWH(
             margin +
                 colWidthSchId +
@@ -1072,6 +1080,23 @@ class AddModuleCleaningExecutionController extends GetxController {
                 colWidthAbandoned +
                 colWidthPending +
                 colWidthWaterUsed,
+            currentY,
+            colWidthPermitID,
+            25),
+        format: PdfStringFormat(
+            alignment: PdfTextAlignment.center,
+            lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('Permit Status', headerFont,
+        bounds: Rect.fromLTWH(
+            margin +
+                colWidthSchId +
+                colWidthDays +
+                colWidthScheduled +
+                colWidthCleaned +
+                colWidthAbandoned +
+                colWidthPending +
+                colWidthWaterUsed +
+                colWidthPermitID,
             currentY,
             colWidthPermitStatus,
             25),
@@ -1088,6 +1113,7 @@ class AddModuleCleaningExecutionController extends GetxController {
                 colWidthAbandoned +
                 colWidthPending +
                 colWidthWaterUsed +
+                colWidthPermitID +
                 colWidthPermitStatus,
             currentY,
             colWidthStatus,
@@ -1171,7 +1197,8 @@ class AddModuleCleaningExecutionController extends GetxController {
           format: PdfStringFormat(
               alignment: PdfTextAlignment.center,
               lineAlignment: PdfVerticalAlignment.middle));
-      page.graphics.drawString('${schedule.status_short_ptw}', contentFont,
+      page.graphics.drawString(
+          '${schedule.permit_id}', contentFont, // New Permit ID column
           bounds: Rect.fromLTWH(
               margin +
                   colWidthSchId +
@@ -1181,6 +1208,23 @@ class AddModuleCleaningExecutionController extends GetxController {
                   colWidthAbandoned +
                   colWidthPending +
                   colWidthWaterUsed,
+              currentY,
+              colWidthPermitID,
+              25),
+          format: PdfStringFormat(
+              alignment: PdfTextAlignment.center,
+              lineAlignment: PdfVerticalAlignment.middle));
+      page.graphics.drawString('${schedule.status_short_ptw}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin +
+                  colWidthSchId +
+                  colWidthDays +
+                  colWidthScheduled +
+                  colWidthCleaned +
+                  colWidthAbandoned +
+                  colWidthPending +
+                  colWidthWaterUsed +
+                  colWidthPermitID,
               currentY,
               colWidthPermitStatus,
               25),
@@ -1197,6 +1241,7 @@ class AddModuleCleaningExecutionController extends GetxController {
                   colWidthAbandoned +
                   colWidthPending +
                   colWidthWaterUsed +
+                  colWidthPermitID +
                   colWidthPermitStatus,
               currentY,
               colWidthStatus,
