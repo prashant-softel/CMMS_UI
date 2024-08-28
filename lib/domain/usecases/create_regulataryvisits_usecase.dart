@@ -6,7 +6,7 @@ class CreateRegulataryVisitsUsecase {
   CreateRegulataryVisitsUsecase(this.repository);
   Repository repository;
 
-Future<Map<String, dynamic>> createvisitsandnotices({
+  Future<Map<String, dynamic>> createvisitsandnotices({
     createvisitsandnotices,
     bool? isLoading,
   }) async =>
@@ -17,22 +17,21 @@ Future<Map<String, dynamic>> createvisitsandnotices({
 
   // update Api getVisitAndNoticelist
 
-  //updateVisitAndNoticeDetails
-    Future<Map<String, dynamic>> updateVisitAndNoticeDetails({
-    updateVisitAndNoticeDetails,
+  Future<Map<String, dynamic>> updateVisitAndNoticeDetails({
+    updateRegularVisit,
     bool? isLoading,
   }) async =>
       await repository.updateVisitAndNoticeDetails(
-        updateVisitAndNoticeDetails,
+        updateRegularVisit,
         isLoading,
       );
-
-   Future<List<GetVisitAndNoticeList?>?> getVisitsAndNoticesDatalist(isLoading) async =>
+  Future<List<GetVisitAndNoticeList?>?> getVisitsAndNoticesDatalist(
+          isLoading) async =>
       await repository.getVisitsAndNoticesDatalist(isLoading: isLoading);
-              void saveValue({String? visitId}) async =>
+  void saveValue({String? visitId}) async =>
       repository.saveValue(LocalKeys.visitId, visitId);
-              Future<String?> getValue() async =>
+  Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.visitId);
 
-        void clearValue() async => repository.clearData(LocalKeys.healthId);
+  void clearValue() async => repository.clearData(LocalKeys.healthId);
 }

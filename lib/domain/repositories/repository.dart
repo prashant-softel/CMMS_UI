@@ -1129,6 +1129,41 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> updateVisitAndNoticeDetails(
+    updateRegularVisit,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateVisitAndNoticeDetails(
+        auth: auth,
+        updateRegularVisit: updateRegularVisit,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Regular Visit  update Successfully...",
+            fontSize: 16.0);
+
+        Get.offAllNamed(
+          Routes.regulataryDataListScreen,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateRegulatary');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
 // createfuledata
   Future<Map<String, dynamic>> createfuledata(
       createfuledata, bool? isLoading) async {
@@ -1266,39 +1301,6 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Update Health Data  Successfully...", fontSize: 16.0);
-        // Get.offAllNamed(
-        //   Routes.viewWaterData,
-        // );
-      } else {
-        Utility.showDialog(res.errorCode.toString(), 'update Water Data');
-        //return '';
-      }
-      return Map();
-    } catch (error) {
-      print(error.toString());
-      return Map();
-    }
-  }
-  //updateVisitAndNoticeDetails
-  Future<Map<String, dynamic>> updateVisitAndNoticeDetails(
-    updateVisitAndNoticeDetails,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateVisitAndNoticeDetails(
-        auth: auth,
-        updateVisitAndNoticeDetails: updateVisitAndNoticeDetails,
-        isLoading: isLoading ?? false,
-      );
-
-      var resourceData = res.data;
-
-      print('Response Create Visit And Notice Data : ${resourceData}');
-
-      if (!res.hasError) {
-        Fluttertoast.showToast(
-            msg: "Update Visit Data  Successfully...", fontSize: 16.0);
         // Get.offAllNamed(
         //   Routes.viewWaterData,
         // );

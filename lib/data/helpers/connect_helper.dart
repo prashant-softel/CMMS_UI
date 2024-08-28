@@ -3914,16 +3914,16 @@ class ConnectHelper {
     print(parsedJson);
     return responseModel;
   }
-  //updateVisitAndNoticeDetails
-   Future<ResponseModel> updateVisitAndNoticeDetails({
+
+  Future<ResponseModel> updateVisitAndNoticeDetails({
     required String auth,
-    updateVisitAndNoticeDetails,
+    updateRegularVisit,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/UpdateVisitsAndNotices',
       Request.post,
-      jsonEncode(updateVisitAndNoticeDetails),
+      updateRegularVisit,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -3931,10 +3931,10 @@ class ConnectHelper {
       },
     );
 
-    print('Submit Occupational  Response:${responseModel.data}');
+    print(' UpdateVisitsAndNotices Response:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    print(parsedJson);
+
     return responseModel;
   }
 
