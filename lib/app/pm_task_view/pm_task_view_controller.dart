@@ -605,7 +605,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     final PdfPage page = document.pages.add();
 
     final Size pageSize = page.getClientSize();
-    var url = "assets/assets/files/HFE Logo.png";
+    var url = "assets/assets/files/HFELogo.png";
     var response = await get(Uri.parse(url));
     var data = response.bodyBytes;
 
