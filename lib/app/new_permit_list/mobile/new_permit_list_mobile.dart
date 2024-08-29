@@ -267,6 +267,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                             ],
                                           ),
                                           Wrap(
+                                            spacing: 2,
                                             children: [
                                               controller.newPermitList
                                                           .firstWhere(
@@ -287,8 +288,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                           const Color.fromRGBO(
                                                               134, 196, 102, 1),
                                                       icon: Icons.check,
-                                                      text:
-                                                          "Approve/Reject Extend",
+                                                      text: "",
                                                       onPressed: () {
                                                         controller.viewNewPermitList(
                                                             permitId:
@@ -297,6 +297,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                       },
                                                     )
                                                   : Dimens.box0,
+
                                               varUserAccessModel.value
                                                               .access_list!
                                                               .where((e) =>
@@ -326,8 +327,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                           const Color.fromRGBO(
                                                               134, 196, 102, 1),
                                                       icon: Icons.check,
-                                                      text:
-                                                          'Approve/Reject Permit',
+                                                      text: '',
                                                       onPressed: () {
                                                         controller.viewNewPermitList(
                                                             permitId:
@@ -379,7 +379,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                           ColorValues
                                                               .appYellowColor,
                                                       icon: Icons.edit,
-                                                      text: 'Edit Permit',
+                                                      text: '',
                                                       onPressed: () {
                                                         // controller.viewNewPermitList(
                                                         //     permitId:
@@ -395,6 +395,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                       },
                                                     )
                                                   : Dimens.box0,
+
                                               controller.newPermitList
                                                               .firstWhere(
                                                                 (e) =>
@@ -451,7 +452,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                           Color.fromARGB(136,
                                                               107, 152, 211),
                                                       icon: Icons.golf_course,
-                                                      text: 'GO For TBT',
+                                                      text: '',
                                                       onPressed: () {
                                                         // controller.viewNewPermitList(
                                                         //     permitId:
@@ -467,6 +468,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                       },
                                                     )
                                                   : Dimens.box0,
+
                                               controller.newPermitList
                                                               .firstWhere(
                                                                 (e) =>
@@ -511,7 +513,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                           Color.fromARGB(255,
                                                               116, 78, 130),
                                                       icon: Icons.ads_click,
-                                                      text: 'Re-Submit Permit',
+                                                      text: '',
                                                       onPressed: () {
                                                         controller.editNewPermit(
                                                             permitId:
@@ -627,7 +629,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                               .appDarkBlueColor,
                                                       icon:
                                                           Icons.expand_outlined,
-                                                      text: 'Extend Permit',
+                                                      text: '',
                                                       onPressed: () {
                                                         // Get.dialog(PermitExtendDialog(
                                                         //     permitId: newPermitListModel?.permitId
@@ -687,7 +689,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                           ColorValues
                                                               .appcloseRedColor,
                                                       icon: Icons.close,
-                                                      text: 'Close Permit',
+                                                      text: '',
                                                       onPressed: () {
                                                         // Get.dialog(PermitCloseDialog(
                                                         //     permitId: newPermitListModel?.permitId
@@ -815,7 +817,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                           ColorValues
                                                               .appRedColor,
                                                       icon: Icons.close,
-                                                      text: 'Cancel Permit',
+                                                      text: '',
                                                       onPressed: () {
                                                         controller.cancelPermitList(
                                                             permitId:
@@ -858,7 +860,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                               113, 15, 149),
                                                       icon: Icons
                                                           .approval_rounded,
-                                                      text: ' Approve Cancel',
+                                                      text: '',
                                                       onPressed: () {
                                                         controller.viewNewPermitList(
                                                             permitId:
@@ -866,7 +868,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                                     ?.permitId);
                                                       },
                                                     )
-                                                  : Dimens.box0
+                                                  : Dimens.box0,
                                             ],
                                           ),
                                         ],
