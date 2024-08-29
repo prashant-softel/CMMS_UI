@@ -1,3 +1,4 @@
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -12,8 +13,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class ModuleCleaningPlanMobile extends StatefulWidget {
-  const ModuleCleaningPlanMobile({Key? key}) : super(key: key);
-
+  ModuleCleaningPlanMobile({Key? key}) : super(key: key);
+  final homeController = Get.find<HomeController>();
   @override
   _ModuleCleaningPlanMobileState createState() =>
       _ModuleCleaningPlanMobileState();

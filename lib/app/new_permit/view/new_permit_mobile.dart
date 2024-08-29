@@ -38,13 +38,20 @@ class NewPermitMobile extends GetView<NewPermitController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Request a Permit to Work",
-                      style: Styles.blackBold18,
-                    ),
+                    controller.mcExecutionDetailsModel?.executionId != null
+                        ? Text(
+                            'Request a Permit to MC',
+                            style: Styles.blackBold15,
+                          )
+                        : Text(
+                            "Request a Permit to Work",
+                            style: Styles.blackBold15,
+                          ),
                   ],
                 ),
               ),
+             
+
               Card(
                 color: Colors.lightBlue.shade50,
                 elevation: 10,
@@ -59,6 +66,67 @@ class NewPermitMobile extends GetView<NewPermitController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        controller.mcExecutionDetailsModel?.executionId != null
+                            ? Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        controller.viewMCTDetails();
+                                      },
+                                      child: Text(
+                                        'Task Id: MCT${int.tryParse('${controller.mcExecutionDetailsModel?.executionId ?? 0}')}',
+                                        style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          decorationStyle:
+                                              TextDecorationStyle.solid,
+                                          color:
+                                              Color.fromARGB(255, 5, 92, 163),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      'Plan Title: ${controller.mcExecutionDetailsModel!.title ?? ""}',
+                                      style: TextStyle(
+                                          overflow: TextOverflow.ellipsis),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      'Frequency: ${controller.mcExecutionDetailsModel!.frequency ?? ""}',
+                                      style: TextStyle(
+                                          overflow: TextOverflow.ellipsis),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      'Planned By: ${controller.mcExecutionDetailsModel!.plannedBy ?? ""}',
+                                      style: TextStyle(
+                                          overflow: TextOverflow.ellipsis),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      'Start Date Time: ${controller.mcExecutionDetailsModel!.startDate ?? ""}',
+                                      style: TextStyle(
+                                          overflow: TextOverflow.ellipsis),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      'Planning Date Time: ${controller.mcExecutionDetailsModel!.plannedAt ?? ""}',
+                                      style: TextStyle(
+                                          overflow: TextOverflow.ellipsis),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Dimens.box0,
+                            
+                        Dimens.boxHeight15,
                         CustomRichTextMobile(
                           title: "Block / Plot: ",
                         ),

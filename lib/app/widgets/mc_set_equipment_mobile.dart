@@ -20,7 +20,7 @@ class MCSetEquipmentMobile extends GetView<ModuleCleaningPlanningController> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0)),
           ),
-          insetPadding: Dimens.edgeInsets0_0_10_0,
+          insetPadding: EdgeInsets.only(left: 9, right: 9),
           title: Row(
             children: [
               Text(
