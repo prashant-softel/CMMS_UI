@@ -422,8 +422,8 @@ class _ViewFuelDataWebState extends State<FuelDataWeb> {
                           ),
                         ),
                         Dimens.boxWidth15,
-                        // controller.obsId == 0
-                            // ? 
+                        controller.selectedItem?.id == 0
+                            ? 
                             Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -436,20 +436,21 @@ class _ViewFuelDataWebState extends State<FuelDataWeb> {
                                   },
                                 ),
                               )
-                            // : Container(
-                            //     height: 40,
-                            //     child: CustomElevatedButton(
-                            //       backgroundColor: ColorValues.submitColor,
-                            //       text: 'Update',
-                            //       onPressed: () {
-                            //         controller.isFormInvalid.value = false;
-                            //         controller.createObs(
-                            //             position: 0,
-                            //             fileIds: dropzoneController.fileIds);
-                            //       },
-                            //     ),
-                            //   ),
-                            ,
+                            : Container(
+                                height: 40,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.submitColor,
+                                  text: 'Update',
+                                  onPressed: () {
+                                    // controller.isFormInvalid.value = false;
+                                    controller.updateFuelConsumption(
+                                        // position: 0,
+                                        // fileIds: dropzoneController.fileIds
+                                        );
+                                  },
+                                ),
+                              ),
+                            
                         Spacer(),
                       ],
                     )

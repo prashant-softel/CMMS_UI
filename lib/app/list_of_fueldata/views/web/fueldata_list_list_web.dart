@@ -580,14 +580,21 @@ class FuelDataListSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
-                              controller.clearStoreData();
-                              // int goId = OccupationallistDetails?.id ?? 0;
-                              // if (goId != 0) {
-                              //   Get.toNamed(
-                              //       Routes
-                              //           .updateGoodsOrdersDetailsScreen,
-                              //       arguments: {"goId": goId});
-                              // }
+                              // controller.clearStoreData();
+                                                    controller.selectedItem =
+                                controller.fueldataList.firstWhere(
+                              (element) =>
+                                  "${element.id}" ==
+                                  FuelDataDetails?.id.toString(),
+                            );
+                            int FuelId = FuelDataDetails?.id ?? 0;
+
+                            if (FuelId != 0) {
+                              Get.toNamed(Routes.createFuelDataScreen,
+                                  arguments: {
+                                    "selectedItem": controller.selectedItem
+                                  });
+                            }
                             },
                           )
                         : Dimens.box0,

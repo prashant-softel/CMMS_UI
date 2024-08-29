@@ -1,4 +1,5 @@
 // ignore: unused_import
+import 'package:cmms/domain/models/get_fueldata_list_model.dart';
 import 'package:cmms/domain/usecases/create_fueldata_usecase.dart';
 
 class CreateFuelDataPresenter {
@@ -14,5 +15,29 @@ class CreateFuelDataPresenter {
       isLoading: isLoading,
     );
   }
+  //update updateFuelConsumption
+
+  Future<Map<String, dynamic>?> updateFuelConsumption({
+    updateFueldata,
+    required bool isLoading,
+  }) async {
+    return createfueldataUsecase.updateFuelConsumption(
+      updateFueldata: updateFueldata,
+      isLoading: isLoading,
+    );
   
+  }
+
+  Future<List<GetFuelDataList?>?> getFuelConsumption(
+          {int? id, bool? isLoading}) async =>
+      await createfueldataUsecase.getFuelConsumption(true);
+
+  void saveValue({String? fuelId}) async {
+    return createfueldataUsecase.saveValue(fuelId: fuelId);
+  }
+
+  Future<String?> getValue() async =>
+      await createfueldataUsecase.getValue();
+
+  void clearValue() async => createfueldataUsecase.clearValue();
 }

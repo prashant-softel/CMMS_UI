@@ -1163,7 +1163,41 @@ class Repository {
       return Map();
     }
   }
+// updateFuelConsumption
+Future<Map<String, dynamic>> updateFuelConsumption(
+    updateFueldata,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateFuelConsumption(
+        auth: auth,
+        updateFueldata: updateFueldata,
+        isLoading: isLoading ?? false,
+      );
 
+      var resourceData = res.data;
+
+      print('Response  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Fuel Dsts  update Successfully...",
+            fontSize: 16.0);
+
+        Get.offAllNamed(
+          Routes.fueldataListScreen,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateFuel');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
 // createfuledata
   Future<Map<String, dynamic>> createfuledata(
       createfuledata, bool? isLoading) async {
