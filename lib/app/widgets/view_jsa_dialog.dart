@@ -151,6 +151,7 @@ class ViewJSADialog extends GetView {
                                     ? true
                                     : false,
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Checkbox(
                                       value: _controller.permitId.value > 0
@@ -160,6 +161,9 @@ class ViewJSADialog extends GetView {
                                       onChanged: (bool? value) {
                                         _controller.jSAtoggleCheckbox();
                                       },
+                                    ),
+                                    SizedBox(
+                                      width: 5,
                                     ),
                                     Text(
                                       'I have read and accept\nterms and conditions',

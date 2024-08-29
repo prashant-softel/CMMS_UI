@@ -162,6 +162,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                           () => Row(
                             children: [
                               CustomRichTextMobile(
+                                  includeAsterisk: false,
                                   title: 'Electrical Isolation Required '),
                               Switch(
                                 value: controller.isToggleOn.value,
@@ -183,6 +184,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomRichTextMobile(
+                                        includeAsterisk: false,
                                         title: 'Equipment Isolation '),
                                     Dimens.boxHeight2,
                                     SizedBox(
@@ -226,6 +228,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CustomRichTextMobile(
+                                        includeAsterisk: false,
                                         title: "Select Loto Equipment List".tr,
                                       ),
                                       Dimens.boxHeight10,
@@ -255,34 +258,60 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                               'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
                                         },
                                       ),
-                                      // Dimens.boxHeight10,
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: SizedBox(
-                                          width: Get.width,
-                                          child: Container(
-                                            constraints:
-                                                BoxConstraints(minHeight: 150),
-                                            height: ((controller
-                                                    .filteredEquipmentNameList
-                                                    .length) *
-                                                60),
-                                            // 90,
-                                            child: DataTable2(
-                                              columns: [
-                                                DataColumn2(
-                                                    fixedWidth: 160,
-                                                    label: Text(
-                                                        "Loto Applied On")),
-                                                DataColumn2(
-                                                    fixedWidth: 100,
-                                                    label:
-                                                        Text("Serial Number")),
-                                                DataColumn2(
-                                                    fixedWidth: 100,
-                                                    label: Text("Action")),
-                                              ],
-                                              rows: List<DataRow>.generate(
+                                      Dimens.boxHeight10,
+                                      SizedBox(
+                                        width: Get.width,
+                                        child: Container(
+                                          child: Column(
+                                            children: [
+                                              // Header Row
+                                              Container(
+                                                color: Colors.grey[300],
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 8,
+                                                    horizontal: 16),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 3,
+                                                      child: Text(
+                                                        'Loto Applied On',
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 14,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Text(
+                                                        'Serial Number',
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 14,
+                                                          color: Colors.black,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.right,
+                                                      ),
+                                                    ),
+                                                    Icon(
+                                                      Icons
+                                                          .info, // Placeholder icon for the "Action" header
+                                                      color: Colors
+                                                          .transparent, // Make it invisible for header alignment
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              // Data Rows
+                                              ...List<Widget>.generate(
                                                 controller
                                                     .filteredEquipmentNameList
                                                     .length,
@@ -297,41 +326,65 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                                           0;
                                                   print(
                                                       'Equipment Isss5:${controller.id.value}');
-                                                  return DataRow(
-                                                    cells: [
-                                                      DataCell(
-                                                        Text(
-                                                            '${inventoryEquipmentName?.name ?? ''}'),
-                                                      ),
-                                                      DataCell(
-                                                        Text(
-                                                            '${inventoryEquipmentName?.serialNumber ?? ''}'),
-                                                      ),
-                                                      DataCell(
-                                                        Wrap(
-                                                          children: [
-                                                            TableActionButton(
-                                                              color: Colors.red,
-                                                              icon: Icons
-                                                                  .delete_outline,
-                                                              message: 'Remove',
-                                                              onPress: () {
-                                                                controller
-                                                                    .removeItem(
-                                                                        index);
-                                                              },
+                                                  return Container(
+                                                    color: index.isEven
+                                                        ? Colors.grey[200]
+                                                        : Colors.white,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 8,
+                                                            horizontal: 16),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Text(
+                                                            '${inventoryEquipmentName?.name ?? ''}',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .grey[700],
+                                                              fontSize: 14,
                                                             ),
-                                                          ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Text(
+                                                            '${inventoryEquipmentName?.serialNumber ?? ''}',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .grey[700],
+                                                              fontSize: 14,
+                                                            ),
+                                                            textAlign:
+                                                                TextAlign.right,
+                                                          ),
+                                                        ),
+                                                        IconButton(
+                                                          icon: Icon(
+                                                              Icons
+                                                                  .delete_outline,
+                                                              color:
+                                                                  Colors.red),
+                                                          onPressed: () {
+                                                            controller
+                                                                .removeItem(
+                                                                    index);
+                                                          },
+                                                        ),
+                                                      ],
+                                                    ),
                                                   );
                                                 },
                                               ),
-                                            ),
+                                            ],
                                           ),
                                         ),
                                       ),
+                                      Dimens.boxHeight20,
                                     ],
                                   ),
                                 )
@@ -1357,7 +1410,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
 
   Widget _buildPermitDescriptionField_mobile(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      CustomRichTextMobile(title: 'Permit Description: '),
+      CustomRichTextMobile(title: 'Title : '),
       Dimens.boxHeight2,
       Container(
         decoration: BoxDecoration(
