@@ -2261,6 +2261,17 @@ class DataRepository extends DomainRepository {
         updateRegularVisit: updateRegularVisit,
         isLoading: isLoading ?? false,
       );
+      //updateKaizenDetails
+        Future<ResponseModel> updateKaizenDetails({
+    required String auth,
+    updateKaizen,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateKaizenDetails(
+        auth: auth,
+        updateKaizen: updateKaizen,
+        isLoading: isLoading ?? false,
+      );
       //updatePlantationDetails
        Future<ResponseModel> updatePlantationDetails({
     required String auth,

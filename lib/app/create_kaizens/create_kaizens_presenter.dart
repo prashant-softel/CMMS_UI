@@ -1,4 +1,5 @@
 // ignore: unused_import
+import 'package:cmms/domain/models/get_kaizensdata_list_model.dart';
 import 'package:cmms/domain/usecases/create_kaizens_usecase.dart';
 
 class CreateKaizensdataPresenter {
@@ -14,5 +15,28 @@ class CreateKaizensdataPresenter {
       isLoading: isLoading,
     );
   }
-  
+  //updateVisitAndNoticeDetails
+
+  Future<Map<String, dynamic>?> updateKaizenDetails({
+    updateKaizen,
+    required bool isLoading,
+  }) async {
+    return createkaizensdataUsecase.updateKaizenDetails(
+      updateKaizen: updateKaizen,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<List<GetKaizensDataList?>?> getkaizensdata(
+          {int? id, bool? isLoading}) async =>
+      await createkaizensdataUsecase.getkaizensdata(true);
+
+  void saveValue({String? kaizenId}) async {
+    return createkaizensdataUsecase.saveValue(kaizenId: kaizenId);
+  }
+
+  Future<String?> getValue() async =>
+      await createkaizensdataUsecase.getValue();
+
+  void clearValue() async => createkaizensdataUsecase.clearValue();
 }

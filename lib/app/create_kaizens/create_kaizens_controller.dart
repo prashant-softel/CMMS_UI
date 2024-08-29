@@ -1,8 +1,12 @@
 // ignore: unused_import
-import 'package:cmms/app/create_fueldata/create_fueldata_presenter.dart';
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:cmms/app/create_kaizens/create_kaizens_presenter.dart';
 import 'package:cmms/domain/models/create_fueldata_model.dart';
 import 'package:cmms/domain/models/create_kaizens_model.dart';
+import 'package:cmms/domain/models/get_kaizensdata_list_model.dart';
+import 'package:cmms/domain/models/get_kaizensdata_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
@@ -13,6 +17,10 @@ class CreateKaizensDataController extends GetxController {
   );
   CreateKaizensdataPresenter createkaizensdataPresenter;
   final HomeController homeController = Get.find();
+   StreamSubscription<int>? facilityIdStreamSubscription;
+   RxList<GetKaizensDataList?> kaizendataType =
+      <GetKaizensDataList>[].obs;
+   GetKaizensDataList? selectedItem;
   //createkaizensdata
   var KaizensImplementedCtrl = TextEditingController();
  var CostForImplementationCtrl = TextEditingController();
@@ -61,4 +69,97 @@ void createkaizensdata({ List<dynamic>? fileIds}) async {
       print(e);
     }
  }
+  // update API
+  @override
+  void onInit() async {
+    try {
+      await setKDId();
+
+      facilityIdStreamSubscription = homeController.facilityId$.listen(
+        (event) async {
+          // facilityId = event;
+          await getkaizensdata();
+        },
+      );
+
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
+  }
+  Future<void> setKDId() async {
+    try {
+      GetKaizensDataList? selectedItemhea;
+      final _selectedItem = await createkaizensdataPresenter.getValue();
+      if (_selectedItem!.isNotEmpty) {
+        final jobdetaildata = jsonDecode(_selectedItem.toString());
+        selectedItemhea = GetKaizensDataList.fromJson(jobdetaildata);
+      }
+      if (_selectedItem == null ||
+          _selectedItem == '' ||
+          _selectedItem == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+        selectedItem = dataFromPreviousScreen['selectedItem'];
+      } else {
+        selectedItem = selectedItemhea;
+      }
+      if (selectedItem != null) {
+KaizensImplementedCtrl.text=selectedItem!.kaizensImplemented.toString();
+CostForImplementationCtrl.text=selectedItem!.costForImplementation.toString();
+CostSavedFromImplementationCtrl.text=selectedItem!.costSavedFromImplementation.toString();
+      }
+    } catch (e) {
+      print(e.toString() + 'KaizenId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
+  }
+   Future<void> getkaizensdata() async {
+    final _kaizensdataType =
+        await createkaizensdataPresenter.getkaizensdata();
+
+    if (_kaizensdataType != null) {
+      _kaizensdataType != [];
+      for (var kaizendata in _kaizensdataType) {
+        kaizendataType.add(kaizendata);
+      }
+      // selectedTypePermit.value = grievanceType[0]?.name ?? '';
+    }
+  }
+    void clearStoreData() {
+    KaizensImplementedCtrl.clear();
+    CostForImplementationCtrl.clear();
+    CostSavedFromImplementationCtrl.clear();
+  }
+  void updateKaizenDetails() async {
+    int _id = selectedItem?.id ?? 0;
+
+    int _KaizensImplementedCtrl = int.tryParse(KaizensImplementedCtrl.text.trim()) ?? 0;
+    int _CostForImplementationCtrl =
+        int.tryParse(CostForImplementationCtrl.text.trim()) ?? 0;
+    int _CostSavedFromImplementationCtrl =
+        int.tryParse(CostSavedFromImplementationCtrl.text.trim()) ?? 0;
+
+
+    CreateKaizensModel createkaizensdataModel = CreateKaizensModel(
+      id: _id,
+              KaizensImplemented: _KaizensImplementedCtrl,
+        CostForImplementation: _CostForImplementationCtrl,
+        CostSavedFromImplementation: _CostSavedFromImplementationCtrl,
+      // date: "2024-08-18",
+    );
+
+    var updateKaizensModelJsonString =
+        createkaizensdataModel.toJson();
+
+    Map<String, dynamic>? responseCreateGoModel =
+        await createkaizensdataPresenter.updateKaizenDetails(
+      updateKaizen: updateKaizensModelJsonString,
+      isLoading: true,
+    );
+
+    if (responseCreateGoModel == null) {
+      print("data fail ");
+    }
+  }
 }
+

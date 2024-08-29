@@ -17,6 +17,7 @@ class KaizensDataListController extends GetxController {
   final HomeController homecontroller = Get.find();
   RxList<GetKaizensDataList> kaizensdataList = <GetKaizensDataList>[].obs;
   RxList<GetKaizensDataList> filteredData = <GetKaizensDataList>[].obs;
+    GetKaizensDataList? selectedItem;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
 

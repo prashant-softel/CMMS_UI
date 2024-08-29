@@ -3938,6 +3938,29 @@ class ConnectHelper {
 
     return responseModel;
   }
+  // updateKaizenDetails
+    Future<ResponseModel> updateKaizenDetails({
+    required String auth,
+    updateKaizen,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateKaizensData',
+      Request.post,
+      updateKaizen,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print(' UpdateVisitsAndNotices Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
   //updatePlantationDetails
    Future<ResponseModel> updatePlantationDetails({
     required String auth,
