@@ -46,7 +46,7 @@ class ViewEscalationMatrixContentWeb
                       Get.offNamed(Routes.home);
                     },
                     child: Text(
-                      "Dashboard".toUpperCase(),
+                      "DASHBOARD",
                       style: Styles.greyLight14,
                     ),
                   ),
@@ -56,12 +56,12 @@ class ViewEscalationMatrixContentWeb
                       Get.offNamed(Routes.escalationMatrixListWeb);
                     },
                     child: Text(
-                      " / Escalation Matrix List".toUpperCase(),
+                      " / ESCALATION MATRIX LIST",
                       style: Styles.greyLight14,
                     ),
                   ),
                   Text(
-                    " / View Escalation Matrix".toUpperCase(),
+                    " / VIEW ESCALATION MATRIX",
                     style: Styles.greyLight14,
                   )
                 ],
@@ -97,8 +97,9 @@ class ViewEscalationMatrixContentWeb
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CustomRichText(title: 'Module: '),
-                          Dimens.boxWidth5,
+                          CustomRichText(
+                              title: 'Module: ', includeAsterisk: false),
+                          Dimens.boxWidth2,
                           Text(
                             '${controller.escalation_details.value?.module_name}',
                             style: TextStyle(
@@ -107,8 +108,9 @@ class ViewEscalationMatrixContentWeb
                             ),
                           ),
                           Dimens.boxWidth30,
-                          CustomRichText(title: 'Status: '),
-                          Dimens.boxWidth5,
+                          CustomRichText(
+                              title: 'Status: ', includeAsterisk: false),
+                          Dimens.boxWidth2,
                           Text(
                             '${controller.status_escalation.value.status_name}',
                             style: TextStyle(
