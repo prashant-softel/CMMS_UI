@@ -770,6 +770,7 @@ class NewPermitController extends GetxController {
 
     employee_map[emp_id] = selectedEmployeeNameIdList;
   }
+
   void employeeNameSelectedoftbt(_selectedEmployeeNameIds) {
     selectedEmployeeNameIdList.value = <int>[];
     filteredEmployeeNameList.value = <EmployeeListModel>[];
@@ -873,6 +874,7 @@ class NewPermitController extends GetxController {
     );
     update(['permit_employee_list']);
   }
+
   Future<void> getEmployeePermitListoftbt() async {
     employeeNameListt.value = <EmployeeListModel>[];
     final _employeeNameList = await permitPresenter.getEmployeePermitListoftbt(

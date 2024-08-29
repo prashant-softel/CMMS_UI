@@ -315,8 +315,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                 )
                               : Dimens.box0,
                           controller.jobModel?.id != null
-                              ?
-                               Container(
+                              ? Container(
                                   // alignment: Alignment.centerLeft,
                                   width: Get.width * .9,
                                   height: Get.height * .2,
@@ -464,7 +463,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     ],
                                   ),
                                 )
-                             
                               : Dimens.box0,
 
                           // hgvbjn,
@@ -570,6 +568,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ),
                                 )
                               : Dimens.box0,
+                         
                           controller.vegExecutionDetailsModel?.executionId !=
                                   null
                               ? Container(
