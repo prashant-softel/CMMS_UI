@@ -241,23 +241,20 @@ class NewPermitListController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.requestByName
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.requestByName?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.approvedByName
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.description
+            (item?.description?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.current_status_short
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.current_status_short
-                    ?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
             (item?.requestDatetime?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false))
         .toList();
 

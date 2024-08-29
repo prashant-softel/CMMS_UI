@@ -50,8 +50,6 @@ class NewPermitMobile extends GetView<NewPermitController> {
                   ],
                 ),
               ),
-             
-
               Card(
                 color: Colors.lightBlue.shade50,
                 elevation: 10,
@@ -125,7 +123,6 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                 ),
                               )
                             : Dimens.box0,
-                            
                         Dimens.boxHeight15,
                         CustomRichTextMobile(
                           title: "Block / Plot: ",
@@ -581,110 +578,154 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                 controller.newPermitDetailsModel.value!
                                         .file_list!.length >
                                     0
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: DataTable2(
-                                      border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234),
-                                      ),
-                                      dataRowHeight: 40,
-                                      columns: [
-                                        DataColumn2(
-                                          fixedWidth: Get.width * .6,
-                                          label: Text(
-                                            "File Description",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        DataColumn2(
-                                          fixedWidth: Get.width * .2,
-                                          label: Text(
-                                            "Action",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                      rows: List<DataRow>.generate(
-                                        controller.file_list?.length ?? 0,
-                                        (index) => DataRow(
-                                          cells: [
-                                            DataCell(
-                                              Text(
-                                                controller.file_list![index]
-                                                        ?.description
-                                                        .toString() ??
-                                                    '',
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white, // Background color
+                                  borderRadius: BorderRadius.circular(
+                                      10.0), // Rounded corners
+                                  border: Border.all(
+                                    color: Color.fromARGB(
+                                        255, 206, 229, 234), // Border color
+                                    width: 1.0,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: Get.width * .6,
+                                            child: Text(
+                                              "File Description",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            DataCell(
-                                              Wrap(
+                                          ),
+                                          Container(
+                                            width: Get.width * .2,
+                                            child: Text(
+                                              "Action",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SingleChildScrollView(
+                                      child: Column(
+                                        children: List.generate(
+                                          controller.file_list?.length ?? 0,
+                                          (index) => Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 4.0, horizontal: 8.0),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 229, 234),
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              child: Row(
                                                 children: [
-                                                  TableActionButton(
-                                                    color: ColorValues
-                                                        .appDarkBlueColor,
-                                                    icon: Icons.visibility,
-                                                    message: 'view',
-                                                    onPress: () async {
-                                                      // String baseUrl =
-                                                      //     "http://65.0.20.19/CMMS_API/";
-                                                      String baseUrl =
-                                                          'http://172.20.43.9:83/';
-                                                      String fileName =
-                                                          controller
-                                                                  .file_list![
-                                                                      index]
-                                                                  ?.fileName ??
-                                                              "";
-                                                      String fullUrl =
-                                                          baseUrl + fileName;
-                                                      if (await canLaunch(
-                                                          fullUrl)) {
-                                                        await launch(fullUrl);
-                                                      } else {
-                                                        throw 'Could not launch $fullUrl';
-                                                      }
-                                                      // String baseUrl = 'http://172.20.43.9:83/';
-                                                    },
+                                                  Container(
+                                                    width: Get.width * .6,
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Text(
+                                                      controller
+                                                              .file_list![index]
+                                                              ?.description
+                                                              .toString() ??
+                                                          '',
+                                                      style: TextStyle(
+                                                          fontSize: 14),
+                                                    ),
                                                   ),
-                                                  controller.newPermitDetailsModel
-                                                              .value!.ptwStatus ==
-                                                          125
-                                                      ? Dimens.box0
-                                                      : TableActionButton(
+                                                  Container(
+                                                    width: Get.width * .2,
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Wrap(
+                                                      children: [
+                                                        IconButton(
+                                                          icon: Icon(
+                                                              Icons.visibility),
                                                           color: ColorValues
-                                                              .deleteColor,
-                                                          icon: Icons
-                                                              .delete_outline_outlined,
-                                                          message: 'remove',
-                                                          onPress: () {
-                                                            controller.removeImage(
-                                                                controller
+                                                              .appDarkBlueColor,
+                                                          onPressed: () async {
+                                                            String baseUrl =
+                                                                'http://172.20.43.9:83/';
+                                                            String fileName = controller
                                                                     .file_list![
                                                                         index]
-                                                                    ?.id,
-                                                                index);
+                                                                    ?.fileName ??
+                                                                "";
+                                                            String fullUrl =
+                                                                baseUrl +
+                                                                    fileName;
+                                                            if (await canLaunch(
+                                                                fullUrl)) {
+                                                              await launch(
+                                                                  fullUrl);
+                                                            } else {
+                                                              throw 'Could not launch $fullUrl';
+                                                            }
                                                           },
                                                         ),
+                                                        if (controller
+                                                                .newPermitDetailsModel
+                                                                .value!
+                                                                .ptwStatus !=
+                                                            125)
+                                                          IconButton(
+                                                            icon: Icon(Icons
+                                                                .delete_outline_outlined),
+                                                            color: ColorValues
+                                                                .deleteColor,
+                                                            onPressed: () {
+                                                              controller.removeImage(
+                                                                  controller
+                                                                      .file_list![
+                                                                          index]
+                                                                      ?.id,
+                                                                  index);
+                                                            },
+                                                          ),
+                                                      ],
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
                                             ),
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               )
                             : Dimens.box0,
+                        Dimens.boxHeight15,
                         controller.newPermitDetailsModel.value?.ptwStatus ==
                                     125 &&
                                 controller.newPermitDetailsModel.value
@@ -1015,173 +1056,166 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                                   ),
                                                 ),
                                               )
-                                            : Center(
-                                                child: Row(
-                                                  children: [
-                                                    Spacer(),
-                                                    controller
-                                                                .newPermitDetailsModel
-                                                                .value
-                                                                ?.ptwStatus ==
-                                                            121
-                                                        ? Center(
-                                                            child: Container(
-                                                              height: 45,
-                                                              child:
-                                                                  CustomElevatedButton(
-                                                                backgroundColor:
-                                                                    ColorValues
-                                                                        .appDarkBlueColor,
-                                                                text: "Update",
-                                                                onPressed: () {
-                                                                  controller.updateNewPermit(
-                                                                      fileIds:
-                                                                          dropzoneController
-                                                                              .fileIds);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : Dimens.box0,
-                                                    Spacer(),
-                                                    controller.newPermitDetailsModel.value
-                                                                    ?.ptwStatus ==
-                                                                125 &&
-                                                            controller
-                                                                    .newPermitDetailsModel
-                                                                    .value
-                                                                    ?.is_TBT_Expire ==
-                                                                false &&
-                                                            controller
-                                                                    .newPermitDetailsModel
-                                                                    .value
-                                                                    ?.tbT_Done_Check ==
-                                                                0
-                                                        ? Center(
-                                                            child: Container(
-                                                              height: 45,
-                                                              child:
-                                                                  CustomElevatedButton(
-                                                                backgroundColor:
-                                                                    ColorValues
-                                                                        .appDarkBlueColor,
-                                                                text:
-                                                                    "Update TBT",
-                                                                onPressed: () {
-                                                                  if (controller
-                                                                              .tbtDateTimeCtrlrBuffer ==
-                                                                          null ||
-                                                                      controller
-                                                                              .selectedTbtConductedId ==
-                                                                          0 ||
-                                                                      controller
-                                                                          .tbtDateTimeCtrlrBuffer
-                                                                          .isEmpty ||
-                                                                      controller
-                                                                              .tbtDateTimeCtrlrBuffer ==
-                                                                          "") {
-                                                                    showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (BuildContext
-                                                                              context) {
-                                                                        return AlertDialog(
-                                                                          title:
-                                                                              Text("Select Time"),
-                                                                          content: controller.selectedTbtConductedId == 0
-                                                                              ? Text("Select TBT Conducted By")
-                                                                              : Text("Can't do TBT without entering the time."),
-                                                                          actions: <Widget>[
-                                                                            TextButton(
-                                                                              onPressed: () {
-                                                                                Navigator.of(context).pop();
-                                                                              },
-                                                                              child: Text("OK"),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      },
-                                                                    );
-                                                                    return null;
-                                                                  }
-                                                                  controller.updateNewPermit(
-                                                                      fileIds:
-                                                                          dropzoneController
-                                                                              .fileIds);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : Dimens.box0,
-                                                    Spacer(),
-                                                    controller
-                                                                .newPermitDetailsModel
-                                                                .value
-                                                                ?.ptwStatus ==
-                                                            124
-                                                        ? Center(
-                                                            child: Container(
-                                                              height: 45,
-                                                              child:
-                                                                  CustomElevatedButton(
-                                                                backgroundColor:
-                                                                    Color.fromARGB(
-                                                                        255,
-                                                                        116,
-                                                                        78,
-                                                                        130),
-                                                                text:
-                                                                    "Re submit Permit",
-                                                                onPressed: () {
-                                                                  controller.resubmitPermit(
-                                                                      fileIds:
-                                                                          dropzoneController
-                                                                              .fileIds);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : Dimens.box0,
-                                                    Spacer(),
-                                                    controller.newPermitDetailsModel.value
-                                                                    ?.ptwStatus ==
-                                                                125 &&
-                                                            controller
-                                                                    .newPermitDetailsModel
-                                                                    .value
-                                                                    ?.is_TBT_Expire ==
-                                                                true
-                                                        ? Container(
+                                            : Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  controller.newPermitDetailsModel
+                                                              .value?.ptwStatus ==
+                                                          121
+                                                      ? Container(
+                                                          height: 45,
+                                                          child:
+                                                              CustomElevatedButton(
+                                                            backgroundColor:
+                                                                ColorValues
+                                                                    .appDarkBlueColor,
+                                                            text: "Update",
+                                                            onPressed: () {
+                                                              controller.updateNewPermit(
+                                                                  fileIds:
+                                                                      dropzoneController
+                                                                          .fileIds);
+                                                            },
+                                                          ),
+                                                        )
+                                                      : Dimens.box0,
+                                                  controller.newPermitDetailsModel.value
+                                                                  ?.ptwStatus ==
+                                                              125 &&
+                                                          controller
+                                                                  .newPermitDetailsModel
+                                                                  .value
+                                                                  ?.is_TBT_Expire ==
+                                                              false &&
+                                                          controller
+                                                                  .newPermitDetailsModel
+                                                                  .value
+                                                                  ?.tbT_Done_Check ==
+                                                              0
+                                                      ? Center(
+                                                          child: Container(
                                                             height: 45,
                                                             child:
                                                                 CustomElevatedButton(
                                                               backgroundColor:
                                                                   ColorValues
-                                                                      .appRedColor,
+                                                                      .appDarkBlueColor,
                                                               text:
-                                                                  "Cancel Permit",
-                                                              icon: Icons.close,
+                                                                  "Update TBT",
                                                               onPressed: () {
-                                                                Get.dialog(
-                                                                  PermitCancelReQuestDialog(
-                                                                    permitId:
-                                                                        '${controller.permitId.value}',
-                                                                    jobId: controller
-                                                                        .jobModel!
-                                                                        .id,
-                                                                  ),
-                                                                );
-                                                                print(
-                                                                    "Permit ID TO Cancel: ${controller.permitId.value}");
-                                                                print(
-                                                                    "JobId To cancel: ${controller.jobModel!.id}");
+                                                                if (controller
+                                                                            .tbtDateTimeCtrlrBuffer ==
+                                                                        null ||
+                                                                    controller
+                                                                            .selectedTbtConductedId ==
+                                                                        0 ||
+                                                                    controller
+                                                                        .tbtDateTimeCtrlrBuffer
+                                                                        .isEmpty ||
+                                                                    controller
+                                                                            .tbtDateTimeCtrlrBuffer ==
+                                                                        "") {
+                                                                  showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (BuildContext
+                                                                            context) {
+                                                                      return AlertDialog(
+                                                                        title: Text(
+                                                                            "Select Time"),
+                                                                        content: controller.selectedTbtConductedId ==
+                                                                                0
+                                                                            ? Text("Select TBT Conducted By")
+                                                                            : Text("Can't do TBT without entering the time."),
+                                                                        actions: <Widget>[
+                                                                          TextButton(
+                                                                            onPressed:
+                                                                                () {
+                                                                              Navigator.of(context).pop();
+                                                                            },
+                                                                            child:
+                                                                                Text("OK"),
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                  return null;
+                                                                }
+                                                                controller.updateNewPermit(
+                                                                    fileIds:
+                                                                        dropzoneController
+                                                                            .fileIds);
                                                               },
-                                                            ))
-                                                        : Dimens.box0,
-                                                    Spacer(),
-                                                  ],
-                                                ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      : Dimens.box0,
+                                                  controller.newPermitDetailsModel
+                                                              .value?.ptwStatus ==
+                                                          124
+                                                      ? Center(
+                                                          child: Container(
+                                                            height: 45,
+                                                            child:
+                                                                CustomElevatedButton(
+                                                              backgroundColor:
+                                                                  Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          116,
+                                                                          78,
+                                                                          130),
+                                                              text:
+                                                                  "Re submit Permit",
+                                                              onPressed: () {
+                                                                controller.resubmitPermit(
+                                                                    fileIds:
+                                                                        dropzoneController
+                                                                            .fileIds);
+                                                              },
+                                                            ),
+                                                          ),
+                                                        )
+                                                      : Dimens.box0,
+                                                  controller.newPermitDetailsModel.value
+                                                                  ?.ptwStatus ==
+                                                              125 &&
+                                                          controller
+                                                                  .newPermitDetailsModel
+                                                                  .value
+                                                                  ?.is_TBT_Expire ==
+                                                              true
+                                                      ? Container(
+                                                          height: 45,
+                                                          child:
+                                                              CustomElevatedButton(
+                                                            backgroundColor:
+                                                                ColorValues
+                                                                    .appRedColor,
+                                                            text:
+                                                                "Cancel Permit",
+                                                            icon: Icons.close,
+                                                            onPressed: () {
+                                                              Get.dialog(
+                                                                PermitCancelReQuestDialog(
+                                                                  permitId:
+                                                                      '${controller.permitId.value}',
+                                                                  jobId: controller
+                                                                      .jobModel!
+                                                                      .id,
+                                                                ),
+                                                              );
+                                                              print(
+                                                                  "Permit ID TO Cancel: ${controller.permitId.value}");
+                                                              print(
+                                                                  "JobId To cancel: ${controller.jobModel!.id}");
+                                                            },
+                                                          ))
+                                                      : Dimens.box0,
+                                                ],
                                               ),
                       ],
                     ),
