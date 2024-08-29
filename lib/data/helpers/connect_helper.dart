@@ -3900,7 +3900,8 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/UpdateHealthData',
       Request.post,
-      jsonEncode(updateHealthData),
+      updateHealthData,
+      // jsonEncode(updateHealthData),
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -3908,7 +3909,7 @@ class ConnectHelper {
       },
     );
 
-    print('Submit Occupational  Response:${responseModel.data}');
+    print('Submit updateHealthData  Response:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     print(parsedJson);
@@ -3937,7 +3938,29 @@ class ConnectHelper {
 
     return responseModel;
   }
+//updateFuelConsumption
+  Future<ResponseModel> updateFuelConsumption({
+    required String auth,
+    updateFueldata,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateFuelConsumption',
+      Request.post,
+      updateFueldata,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
+    print(' Update Fuel Data Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
   Future<ResponseModel> createWaterData({
     required String auth,
     createWaterData,

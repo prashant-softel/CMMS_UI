@@ -108,7 +108,7 @@ class CreateOccupationalhealthController extends GetxController {
         NoOfHealthExamsOfNewJoiner: _noofhealthexamsofnewjoinerCtrl,
         PeriodicTests: _periodictestsCtrl,
         OccupationalIllnesses: _occupationalillnessesCtrl,
-        CreatedBy: varUserAccessModel.value.user_id,
+        // CreatedBy: varUserAccessModel.value.user_id,
         id:0,
         date:"2024-08-18",
       );
@@ -134,8 +134,8 @@ class CreateOccupationalhealthController extends GetxController {
     }
  }
 void updateOccupationalDetails() async {
-    try {
-      int _id=healthId.value;
+   
+      int _id=selectedItem?.id??0;
       int _noofhealthexamsofnewjoinerCtrl = int.tryParse(noofhealthexamsofnewjoinerCtrl.text.trim())?? 0;
        int _periodictestsCtrl = int.tryParse(periodictestsCtrl.text.trim())?? 0;
        int _occupationalillnessesCtrl = int.tryParse(occupationalillnessesCtrl.text.trim())?? 0;
@@ -146,33 +146,24 @@ void updateOccupationalDetails() async {
         NoOfHealthExamsOfNewJoiner: _noofhealthexamsofnewjoinerCtrl,
         PeriodicTests: _periodictestsCtrl,
         OccupationalIllnesses: _occupationalillnessesCtrl,
-        CreatedBy: varUserAccessModel.value.user_id,
         date:"2024-08-18",
       );
 
    // Convert the createoccupationalModel instance to JSON
       var createoccupationalModelJsonString = createoccupationalModel.toJson();
-      print(createoccupationalModelJsonString);
-      // Call the createoccupational function from stockManagementAddGoodsOrdersPresenter
+
       Map<String, dynamic>? responseoccupationalupdate =
-          await createOccupationalhealthPresenter.createoccupational(
-        createoccupational: createoccupationalModelJsonString,
+          await createOccupationalhealthPresenter.updateHealthData(
+        updateHealthData: createoccupationalModelJsonString,
         isLoading: true,
       );
 
-      // var _healthId = 0;
-      // var _message = '';
-      // if (responseoccupationalupdate["Health type"] != null &&
-      //     responseoccupationalupdate["Health type"].isNotEmpty) {
-      //   // _grievanceId = responsecreateoccupationalModel["grievanceType"][0];
-      // }
-      // if (responseoccupationalupdate["message"] != null) {
-      //   _message = responseoccupationalupdate["message"];
-      // }
-     
-        } catch (e) {
-      print(e.toString());
+    if (responseoccupationalupdate == null) {
+      print("data fail ");
     }
+ 
+     
+     
   }
    void clearStoreData() {
     noofhealthexamsofnewjoinerCtrl.clear();

@@ -336,7 +336,7 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                             ),
                           ),
                           Dimens.boxWidth10,
-                          controller.healthId == 0
+                          controller.selectedItem?.id==0
                               ? 
                               Container(
                                   height: 40,
