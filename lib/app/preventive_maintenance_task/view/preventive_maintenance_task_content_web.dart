@@ -36,7 +36,7 @@ class _PreventiveMaintenanceTaskContentWebState
         id: 'PreventiveMaintenanceTask',
         builder: (controller) {
           return Obx(() {
-            final dataSource = PmTaskDataSource(controller);
+            // final dataSource = PmTaskDataSource(controller);
 
             return SelectionArea(
               child: Column(
@@ -640,17 +640,30 @@ class PmTaskDataSource extends DataTableSource {
                                                     ? ColorValues
                                                         .approveStatusColor
                                                     : controller.pmTaskList
-                                                                .firstWhere(
-                                                                  (e) =>
-                                                                      e?.id ==
-                                                                      pmTaskDetails
-                                                                          ?.id,
-                                                                  orElse: () =>
-                                                                      PmTaskListModel(
-                                                                          id: 00),
-                                                                )
-                                                                ?.status ==
-                                                            168
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          e?.id ==
+                                                                          pmTaskDetails
+                                                                              ?.id,
+                                                                      orElse: () =>
+                                                                          PmTaskListModel(
+                                                                              id: 00),
+                                                                    )
+                                                                    ?.status ==
+                                                                168 ||
+                                                            controller
+                                                                    .pmTaskList
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          e?.id ==
+                                                                          pmTaskDetails
+                                                                              ?.id,
+                                                                      orElse: () =>
+                                                                          PmTaskListModel(
+                                                                              id: 00),
+                                                                    )
+                                                                    ?.status ==
+                                                                170
                                                         ? ColorValues
                                                             .rejectedStatusColor
                                                         : ColorValues

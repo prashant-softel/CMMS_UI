@@ -62,6 +62,20 @@ class PreventiveMaintenanceExecutionPresenter {
     );
   }
 
+  Future<bool> CancelPMTask({
+    CancelPMTaskJsonString,
+    closePtwJsonString,
+    required bool isLoading,
+    required bool shouldClosePermit,
+  }) async {
+    return preventiveMaintenanceExecutionUsecase.CancelPMTask(
+      CancelPMTaskJsonString: CancelPMTaskJsonString,
+      closePtwJsonString: closePtwJsonString,
+      shouldClosePermit: shouldClosePermit,
+      isLoading: isLoading,
+    );
+  }
+
   Future<bool> UpdatePMTaskExecution({
     updatePMTaskExecutionJsonString,
     required bool isLoading,

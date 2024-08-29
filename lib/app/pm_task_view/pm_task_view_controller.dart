@@ -64,6 +64,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   HomeController homeController = Get.find<HomeController>();
   int facilityId = 0;
   Rx<bool> isFacilitySelected = true.obs;
+  Rx<int> permitIdclose = 0.obs;
 
   var dueToDateTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedDueTime = DateTime.now().obs;
@@ -479,6 +480,36 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       );
       if (response == true) {
         Get.offAllNamed(Routes.pmTask);
+      }
+    }
+  }
+
+  CancelPMTask() async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel =
+          CommentModel(id: scheduleId.value, comment: _comment);
+      ClosePermitModel ptwClose = ClosePermitModel(
+          id: pmtaskViewModel.value?.permit_id ?? 0,
+          comment: _comment,
+          conditionIds: [1, 2, 3, 4],
+          fileIds: []);
+
+      var CancelPMTaskJsonString = commentModel.toJson();
+      var closePtwJsonString = ptwClose.toJson();
+
+      final permitId = pmtaskViewModel.value!.permit_id;
+      bool shouldClosePermit = permitId! > 0;
+      final response =
+          await preventiveMaintenanceTaskViewPresenter.CancelPMTask(
+        CancelPMTaskJsonString: CancelPMTaskJsonString,
+        closePtwJsonString: closePtwJsonString,
+        shouldClosePermit: shouldClosePermit,
+        isLoading: true,
+      );
+      if (response == true) {
+        // Get.offAllNamed(Routes.pmTask);
       }
     }
   }

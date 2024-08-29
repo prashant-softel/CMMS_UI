@@ -82,6 +82,7 @@ import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
@@ -2232,20 +2233,35 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     closetype == 2
-        ? Get.offAllNamed(Routes.pmTask)
+        ? Get.defaultDialog(
+            radius: 5,
+            title: 'Alert',
+            middleText: 'PTW linked to Task has been closed!',
+            textConfirm: 'OK',
+            onConfirm: () {
+              // Get.back(); // Close the dialog
+              Get.offAllNamed(Routes.pmTask);
+            },
+            buttonColor: ColorValues.appGreenColor,
+            confirmTextColor: Colors.white,
+            barrierDismissible: false)
         : closetype == 1
             ? Get.offAllNamed(Routes.jobCard)
             : closetype == 3
                 ? Get.offAllNamed(Routes.auditTask)
                 : closetype == 4
-                    ? Get.dialog<void>(EndMCScheduleExecutionMessageDialog(
-                        data: parsedJson['message'],
-                        endMCId: parsedJson['id'],
-                      ))
+                    ? Get.dialog<void>(
+                        EndMCScheduleExecutionMessageDialog(
+                          data: parsedJson['message'],
+                          endMCId: parsedJson['id'],
+                        ),
+                        barrierDismissible: false)
                     : closetype == 5
                         ? Get.offAllNamed(Routes.vegExecutionScreen)
-                        : Get.dialog<void>(PermitMessageCloseDialog(
-                            data: parsedJson['message'], jobId: jobId));
+                        : Get.dialog<void>(
+                        PermitMessageCloseDialog(
+                            data: parsedJson['message'], jobId: jobId),
+                        barrierDismissible: false);
 
     return responseModel;
   }
@@ -8685,6 +8701,30 @@ class ConnectHelper {
       Request.put,
       // {'comment': "$comment", 'id': id},
       approvetoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> CancelPMTask({
+    required String auth,
+    CancelPMTaskJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/CancelPMTask',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      CancelPMTaskJsonString,
       isLoading ?? true,
       {
         'Content-Type': 'application/json',

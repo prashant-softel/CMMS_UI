@@ -74,6 +74,20 @@ class PreventiveMaintenanceTaskViewPresenter {
     );
   }
 
+  Future<bool> CancelPMTask({
+    CancelPMTaskJsonString,
+    closePtwJsonString,
+    required bool isLoading,
+    required bool shouldClosePermit,
+  }) async {
+    return preventiveMaintenanceTaskViewUsecase.CancelPMTask(
+      CancelPMTaskJsonString: CancelPMTaskJsonString,
+      closePtwJsonString: closePtwJsonString,
+      shouldClosePermit:shouldClosePermit,
+      isLoading: isLoading,
+    );
+  }
+
   Future<bool> rejectPmTaskExecution({
     rejecttoJsonString,
     required bool isLoading,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
+import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/add_material_popup.dart';
 import 'package:cmms/app/widgets/attendance_popup.dart';
 import 'package:cmms/app/widgets/audit_task_msg_receive_dialog.dart';
@@ -138,6 +139,7 @@ import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/services/export_to_excel_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../../app/navigators/app_pages.dart';
@@ -978,6 +980,45 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(msg: "Approved Successfully!", fontSize: 45.0);
 
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+  Future<bool> CancelPMTask(
+      {bool? isLoading, CancelPMTaskJsonString,closePtwJsonString,
+    required bool shouldClosePermit,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.CancelPMTask(
+          auth: auth,
+          isLoading: isLoading,
+          CancelPMTaskJsonString: json.encode(CancelPMTaskJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: "PM Task Cancelled Successfully!", fontSize: 45.0);
+        Get.defaultDialog(
+          radius: 5,
+          title: 'Alert',
+          middleText: 'Task Cancelled!',
+          textConfirm: 'OK',
+          onConfirm: () {
+            Get.offNamed(Routes.pmTask); // Close the dialog
+          },
+          buttonColor: ColorValues.appGreenColor,
+          confirmTextColor: Colors.white,
+        );
+         // Check if permit should be closed
+      if (shouldClosePermit) {
+        permitCloseButton(closePtwJsonString, isLoading, 0, 2);
+      }
         return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
