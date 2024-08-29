@@ -106,6 +106,11 @@ class BreakdownMaintenanceController extends GetxController {
   }
 
   Future<void> additionalPermit() async {
+      clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
     Get.toNamed(
       Routes.createPermit,
     );
@@ -115,5 +120,24 @@ class BreakdownMaintenanceController extends GetxController {
     Get.toNamed(
       Routes.goToJobCardList,
     );
+  }
+  void clearStoreData() {
+    breakdownMaintenancePresenter.clearValue();
+  }
+
+  void clearTypeStoreData() {
+    breakdownMaintenancePresenter.clearTypeValue();
+  }
+
+  void clearisCheckedtoreData() {
+    breakdownMaintenancePresenter.clearisCheckedValue();
+  }
+
+  void clearjobmodelValue() {
+    breakdownMaintenancePresenter.clearjobmodelValue();
+  }
+
+  void clearpmTaskValue() {
+    breakdownMaintenancePresenter.clearpmTaskValue();
   }
 }

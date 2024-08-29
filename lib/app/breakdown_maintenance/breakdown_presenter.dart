@@ -7,4 +7,12 @@ class BreakdownMaintenancePresenter {
 
   Future<List<FacilityModel?>?> getFacilityList(bool isLoading) async =>
       await breakdownMaintenanceUsecase.getFacilityList(isLoading);
+
+  void clearValue() async => breakdownMaintenanceUsecase.clearValue();
+  void clearTypeValue() async => breakdownMaintenanceUsecase.clearTypeValue();
+  void clearisCheckedValue() async =>
+      breakdownMaintenanceUsecase.clearisCheckedValue();
+  void clearjobmodelValue() async => breakdownMaintenanceUsecase.clearjobmodelValue();
+  void clearpmTaskValue() async => breakdownMaintenanceUsecase.clearpmTaskValue();
 }
+

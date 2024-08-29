@@ -185,10 +185,12 @@ class NewPermitListController extends GetxController {
     //homePresenter.generateToken();
     facilityIdStreamSubscription = controller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
-            false, false, false);
-      });
+      if (facilityId > 0) {
+        Future.delayed(Duration(seconds: 1), () {
+          getNewPermitList(facilityId, userId, formattedFromdate,
+              formattedTodate, false, false, false);
+        });
+      }
     });
 
     // Future.delayed(Duration(seconds: 1), () {
