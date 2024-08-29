@@ -38,7 +38,7 @@ class RegulataryDataListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> VisitAndNoticeId = 0.obs;
-
+GetVisitAndNoticeList? selectedItem;
   RxString idFilterText = ''.obs;
   RxString monthnameFilterText = ''.obs;
   RxString govtAuthVisitsFilterText = ''.obs;

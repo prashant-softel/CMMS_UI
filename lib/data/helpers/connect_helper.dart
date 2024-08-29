@@ -3915,6 +3915,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateVisitAndNoticeDetails({
+    required String auth,
+    updateRegularVisit,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateVisitsAndNotices',
+      Request.post,
+      updateRegularVisit,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print(' UpdateVisitsAndNotices Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
   Future<ResponseModel> createWaterData({
     required String auth,
     createWaterData,
