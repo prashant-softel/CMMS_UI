@@ -1482,6 +1482,8 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                       : Dimens.box0,
                 ],
               ),
+
+              Dimens.boxHeight10
             ],
           ),
         ),
