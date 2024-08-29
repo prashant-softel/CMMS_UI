@@ -1301,9 +1301,9 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Update Health Data  Successfully...", fontSize: 16.0);
-        // Get.offAllNamed(
-        //   Routes.viewWaterData,
-        // );
+        Get.offAllNamed(
+          Routes.occupationalDataListScreen,
+        );
       } else {
         Utility.showDialog(res.errorCode.toString(), 'update Water Data');
         //return '';

@@ -87,7 +87,7 @@ class CreateRegulataryVisitsController extends GetxController {
   @override
   void onInit() async {
     try {
-      await setOHId();
+      await setVHId();
 
       facilityIdStreamSubscription = homeController.facilityId$.listen(
         (event) async {
@@ -102,7 +102,7 @@ class CreateRegulataryVisitsController extends GetxController {
     }
   }
 
-  Future<void> setOHId() async {
+  Future<void> setVHId() async {
     try {
       GetVisitAndNoticeList? selectedItemhea;
       final _selectedItem = await createregulataryvisitsPresenter.getValue();
