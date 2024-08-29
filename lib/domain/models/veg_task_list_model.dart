@@ -12,6 +12,13 @@ String VegTaskListModelToJson(List<VegTaskListModel> data) =>
 class VegTaskListModel {
   int? id;
   int? planId;
+  int? scheduled_Qnty;
+  int? actual_Qnty;
+  int? deviation;
+  int? time_taken;
+  String? remark;
+  String? abondend;
+  String? sitename;
   String? responsibility;
   String? frequency;
   int? noOfDays;
@@ -28,6 +35,13 @@ class VegTaskListModel {
     this.id,
     this.planId,
     this.responsibility,
+    this.scheduled_Qnty,
+    this.actual_Qnty,
+    this.deviation,
+    this.remark,
+    this.time_taken,
+    this.sitename,
+    this.abondend,
     this.frequency,
     this.noOfDays,
     this.startDate,
@@ -45,23 +59,42 @@ class VegTaskListModel {
         id: json['executionId'],
         planId: json['planId'],
         responsibility: json['responsibility'] ?? '',
+        sitename: json['sitename'] ?? '',
+        abondend: json['abondend'] ?? '',
+        remark: json['remark'] ?? '',
         frequency: json['frequency'],
         noOfDays: json['noOfDays'],
-        water_used: json['water_used'],
+        water_used: json['water_used'] ?? 0,
+        scheduled_Qnty: json['scheduled_Qnty'] ?? 0,
+        actual_Qnty: json['actual_Qnty'] ?? 0,
+        deviation: json['deviation'] ?? 0,
+        time_taken: json['time_taken'] ?? 0,
         startDate: Utility.getFormatedyearMonthDay(json['startDate']),
-        doneDate: Utility.getFormatedyearMonthDay(json['doneDate']),
-        lastDoneDate: Utility.getFormatedyearMonthDay(json['lastDoneDate']),
+        doneDate: json['doneDate'] == "0001-01-01T05:30:00"
+            ? ''
+            : Utility.getFormatedyearMonthDay(json['doneDate']),
+        lastDoneDate: json['lastDoneDate'] == "0001-01-01T05:30:00"
+            ? ''
+            : Utility.getFormatedyearMonthDay(json['lastDoneDate']),
         status: json['status'],
         status_short: json['status_short'],
         title: json['title'],
-        abondond_done_date:
-            Utility.getFormatedyearMonthDay(json['abondond_done_date']),
+        abondond_done_date: json['abondond_done_date'] == "0001-01-01T05:30:00"
+            ? ''
+            : Utility.getFormatedyearMonthDay(json['abondond_done_date']),
       );
 
   Map<String, dynamic> toJson() => {
         "executionId": id,
         "planId": planId,
         "responsibility": responsibility,
+        "deviation": deviation,
+        "time_taken": time_taken,
+        "actual_Qnty": actual_Qnty,
+        "scheduled_Qnty": scheduled_Qnty,
+        "sitename": sitename,
+        "remark": remark,
+        "abondend": abondend,
         "frequency": frequency,
         "noOfDays": noOfDays,
         "water_used": water_used,
