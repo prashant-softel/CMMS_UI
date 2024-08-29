@@ -1,7 +1,11 @@
 // ignore: unused_import
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:cmms/app/create_occupationalhealth/create_occupationalhealth_presenter.dart';
 import 'package:cmms/app/create_plantationdata/create_plantationdata_presenter.dart';
 import 'package:cmms/domain/models/create_plantationdata_model.dart';
+import 'package:cmms/domain/models/get_plantation_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
@@ -12,6 +16,10 @@ class CreatePlantationDataController extends GetxController {
   );
   CreatePlantationDataPresenter createplantationdataPresenter;
   final HomeController homeController = Get.find();
+   StreamSubscription<int>? facilityIdStreamSubscription;
+     GetPlantationList? selectedItem;
+      RxList<GetPlantationList?> plantationType =
+      <GetPlantationList>[].obs;
   //createplantationdata
    var SaplingsPlantedCtrl = TextEditingController();
  var SaplingsSurvivedCtrl = TextEditingController();
@@ -26,11 +34,6 @@ void createplantationdata({ List<dynamic>? fileIds}) async {
        int _SaplingsPlantedCtrl = int.tryParse(SaplingsPlantedCtrl.text.trim())?? 0;
        int _SaplingsSurvivedCtrl = int.tryParse(SaplingsSurvivedCtrl.text.trim())?? 0;
        int _SaplingsDiedCtrl = int.tryParse(SaplingsDiedCtrl.text.trim())?? 0;
-
-
-
-
-
       CreatePlantationDataModel createplantationdataModel = CreatePlantationDataModel(
         SaplingsPlanted: _SaplingsPlantedCtrl,
         SaplingsSurvived: _SaplingsSurvivedCtrl,
@@ -60,5 +63,98 @@ void createplantationdata({ List<dynamic>? fileIds}) async {
       print(e);
     }
  }
- 
+  // update API
+  @override
+  void onInit() async {
+    try {
+      await setPDId();
+
+      facilityIdStreamSubscription = homeController.facilityId$.listen(
+        (event) async {
+          // facilityId = event;
+          await getplantationdata();
+        },
+      );
+
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
+  }
+Future<void> setPDId() async {
+    try {
+      GetPlantationList? selectedItemhea;
+      final _selectedItem = await createplantationdataPresenter.getValue();
+      if (_selectedItem!.isNotEmpty) {
+        final jobdetaildata = jsonDecode(_selectedItem.toString());
+        selectedItemhea = GetPlantationList.fromJson(jobdetaildata);
+      }
+      if (_selectedItem == null ||
+          _selectedItem == '' ||
+          _selectedItem == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+        selectedItem = dataFromPreviousScreen['selectedItem'];
+      } else {
+        selectedItem = selectedItemhea;
+      }
+      if (selectedItem != null) {
+SaplingsPlantedCtrl.text=selectedItem!.saplingsPlanted.toString();
+SaplingsSurvivedCtrl.text=selectedItem!.saplingsSurvived.toString();
+SaplingsDiedCtrl.text=selectedItem!.saplingsDied.toString();
+
+      }
+    } catch (e) {
+      print(e.toString() + 'PlantationId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
+  }
+    Future<void> getplantationdata() async {
+    final _plantationType =
+        await createplantationdataPresenter.getplantationdata();
+
+    if (_plantationType != null) {
+      _plantationType != [];
+      for (var plantation in _plantationType) {
+        plantationType.add(plantation);
+      }
+      // selectedTypePermit.value = grievanceType[0]?.name ?? '';
+    }
+  }
+   void clearStoreData() {
+    SaplingsPlantedCtrl.clear();
+    SaplingsSurvivedCtrl.clear();
+    SaplingsDiedCtrl.clear();   
+  
+  }
+void updatePlantationDetails() async {
+    int _id = selectedItem?.id ?? 0;
+
+    int _SaplingsPlantedCtrl = int.tryParse(SaplingsPlantedCtrl.text.trim()) ?? 0;
+    int _SaplingsSurvivedCtrl =
+        int.tryParse(SaplingsSurvivedCtrl.text.trim()) ?? 0;
+    int _SaplingsDiedCtrl =
+        int.tryParse(SaplingsDiedCtrl.text.trim()) ?? 0;
+    
+
+    CreatePlantationDataModel createplantationdataModel = CreatePlantationDataModel(
+      id: _id,
+      SaplingsPlanted: _SaplingsPlantedCtrl,
+        SaplingsSurvived: _SaplingsSurvivedCtrl,
+        SaplingsDied: _SaplingsDiedCtrl,
+      // date: "2024-08-18",
+    );
+     var updatePlantationModelJsonString =
+        createplantationdataModel.toJson();
+
+    Map<String, dynamic>? responseCreateGoModel =
+        await createplantationdataPresenter.updatePlantationDetails(
+      updatePlantation: updatePlantationModelJsonString,
+      isLoading: true,
+    );
+
+    if (responseCreateGoModel == null) {
+      print("data fail ");
+    }
+}
+
 }

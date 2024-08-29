@@ -27,7 +27,7 @@ class PlantationListController extends GetxController {
   String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
-
+ GetPlantationList? selectedItem;
   GetPlantationList? getplantationlist;
   RxList<String> plantationListListTableColumns = <String>[].obs;
   bool openFromDateToStartDatePicker = false;

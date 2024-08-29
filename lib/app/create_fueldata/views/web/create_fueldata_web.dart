@@ -417,7 +417,7 @@ class _ViewFuelDataWebState extends State<FuelDataWeb> {
                             backgroundColor: ColorValues.cancelColor,
                             text: 'Cancel',
                             onPressed: () {
-                              Get.toNamed(Routes.complianceScreen);
+                              Get.toNamed(Routes.misDashboard);
                             },
                           ),
                         ),
