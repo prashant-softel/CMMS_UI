@@ -27,9 +27,6 @@ class CreateKaizensdataPresenter {
     );
   }
 
-  Future<List<GetKaizensDataList?>?> getkaizensdata(
-          {int? id, bool? isLoading}) async =>
-      await createkaizensdataUsecase.getkaizensdata(true);
 
   void saveValue({String? kaizenId}) async {
     return createkaizensdataUsecase.saveValue(kaizenId: kaizenId);
