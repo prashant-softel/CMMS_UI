@@ -2087,6 +2087,10 @@ class NewPermitController extends GetxController {
     Get.toNamed(Routes.addModuleCleaningExecutionContentWeb);
   }
 
+  Future<void> viewVegTDetails() async {
+    Get.toNamed(Routes.vegExecutionScreen);
+  }
+
   browseFiles({Uint8List? fileBytes}) async {
     await permitPresenter.browseFiles(
         fileBytes, fileName.value, type, true, facilityId);

@@ -2,6 +2,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/responsive.dart';
 import 'package:cmms/app/veg_execution_screen/veg_execution_screen_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -68,42 +69,86 @@ class AssignToVegDialog extends GetView {
               builder: (controller) {
                 return Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        CustomRichText(title: 'Assign To  '),
-                        SizedBox(width: 10),
-                        SizedBox(
-                          height: 30,
-                          width: MediaQuery.of(context).size.width / 7,
-                          child: DropdownWebWidget(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: const Offset(
-                                  5.0,
-                                  5.0,
+                    Responsive.isDesktop(context)
+                        ? Row(
+                            children: [
+                              CustomRichText(title: 'Assign To  '),
+                              SizedBox(width: 10),
+                              SizedBox(
+                                height: 30,
+                                width: MediaQuery.of(context).size.width / 7,
+                                child: DropdownWebWidget(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: const Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                    ),
+                                    BoxShadow(
+                                      color: ColorValues.whiteColor,
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                  ],
+                                  controller: controller,
+                                  dropdownList: controller.assignedToList,
+                                  isValueSelected:
+                                      controller.isAssignedToSelected.value,
+                                  selectedValue:
+                                      controller.selectedAssignedTo.value,
+                                  onValueChanged: controller.onValueChanged,
                                 ),
-                                blurRadius: 5.0,
-                                spreadRadius: 1.0,
-                              ),
-                              BoxShadow(
-                                color: ColorValues.whiteColor,
-                                offset: const Offset(0.0, 0.0),
-                                blurRadius: 0.0,
-                                spreadRadius: 0.0,
                               ),
                             ],
-                            controller: controller,
-                            dropdownList: controller.assignedToList,
-                            isValueSelected:
-                                controller.isAssignedToSelected.value,
-                            selectedValue: controller.selectedAssignedTo.value,
-                            onValueChanged: controller.onValueChanged,
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomRichText(title: 'Assign To'),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.7,
+                                  child: DropdownWebWidget(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        offset: const Offset(
+                                          5.0,
+                                          5.0,
+                                        ),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 1.0,
+                                      ),
+                                      BoxShadow(
+                                        color: ColorValues.whiteColor,
+                                        offset: const Offset(0.0, 0.0),
+                                        blurRadius: 0.0,
+                                        spreadRadius: 0.0,
+                                      ),
+                                    ],
+                                    controller: controller,
+                                    dropdownList: controller.assignedToList,
+                                    isValueSelected:
+                                        controller.isAssignedToSelected.value,
+                                    selectedValue:
+                                        controller.selectedAssignedTo.value,
+                                    onValueChanged: controller.onValueChanged,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
                     Spacer(),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(
