@@ -13,6 +13,7 @@ class AddModuleCleaningExecutionMobileDialog extends GetView {
   final int? cleaningDay;
   final int? waterUsed;
   final int? is_view;
+  bool expandAll = false;
 
   AddModuleCleaningExecutionMobileDialog({
     required this.scheduleId,
@@ -414,20 +415,61 @@ class AddModuleCleaningExecutionMobileDialog extends GetView {
           actions: [
             is_view == 1
                 ? Center(
-                    child: Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.redColor,
-                        text: "Cancel",
-                        onPressed: () {
-                          Get.back();
-                        },
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.redColor,
+                            text: "Cancel",
+                            onPressed: () {
+                              Get.back();
+                            },
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            backgroundColor:
+                                const Color.fromARGB(255, 86, 116, 205),
+                            text: expandAll ? 'Collapse' : 'Expand',
+                            onPressed: () {
+                              setState(() {
+                                expandAll = !expandAll;
+                                for (var item
+                                    in controller.equipmenTasktList.value) {
+                                  item!.isExpanded = expandAll;
+                                }
+                              });
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          backgroundColor:
+                              const Color.fromARGB(255, 86, 116, 205),
+                          text: expandAll ? 'Collapse' : 'Expand',
+                          onPressed: () {
+                            setState(() {
+                              expandAll = !expandAll;
+                              for (var item
+                                  in controller.equipmenTasktList.value) {
+                                item!.isExpanded = expandAll;
+                              }
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 20),
                       Container(
                         height: 35,
                         child: CustomElevatedButton(
@@ -445,19 +487,32 @@ class AddModuleCleaningExecutionMobileDialog extends GetView {
                           backgroundColor: ColorValues.greenColor,
                           text: 'Submit',
                           onPressed: () {
-                            controller.updateMCScheduleExecution(
-                              scheduleId: scheduleId,
-                              cleaningDay: cleaningDay,
-                              waterUsed: int.tryParse(
-                                  controller.waterUsedCtrlrWeb.text),
-                              remark: controller.remarkCtrlrWeb.text,
-                            );
-                            Get.back();
+                            if (controller.waterUsedCtrlrWeb.text.isEmpty) {
+                              Get.defaultDialog(
+                                title: 'Validation Error',
+                                content: Text('Please enter water used.'),
+                                confirm: CustomElevatedButton(
+                                  backgroundColor: ColorValues.greenColor,
+                                  text: 'OK',
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                ),
+                              );
+                            } else {
+                              controller.updateMCScheduleExecution(
+                                  scheduleId: scheduleId,
+                                  cleaningDay: cleaningDay,
+                                  waterUsed: int.tryParse(
+                                      controller.waterUsedCtrlrWeb.text),
+                                  remark: controller.remarkCtrlrWeb.text);
+                              Get.back();
+                            }
                           },
                         ),
                       ),
                     ],
-                  ),
+                  )
           ],
         );
       },
