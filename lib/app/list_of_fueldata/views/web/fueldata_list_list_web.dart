@@ -154,7 +154,7 @@ class _FueldataListWebState extends State<FueldataListWeb> {
                                                 onPressed: () {
                                                   controller.clearStoreData();
 
-                                                  Get.offNamed(Routes
+                                                  Get.offAllNamed(Routes
                                                       .createFuelDataScreen);
                                                 },
                                                 color: ColorValues.addNewColor,

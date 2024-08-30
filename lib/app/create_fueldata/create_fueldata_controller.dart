@@ -66,13 +66,7 @@ void createfuledata({ List<dynamic>? fileIds}) async {
         createfuledata: CreateFuelDataModelFromJson,
         isLoading: true,
       );
-      
 
-      // Handle the response
-      if (responsecreateoccupationalModel == null) {
-        // CreateNewPermitDialog();
-        // showAlertDialog();
-      }
       print('Create  create Visits and Notices data: $CreateFuelDataModelFromJson');
     } catch (e) {
       print(e);
@@ -83,14 +77,6 @@ void createfuledata({ List<dynamic>? fileIds}) async {
   void onInit() async {
     try {
       await setFDId();
-
-      facilityIdStreamSubscription = homeController.facilityId$.listen(
-        (event) async {
-          // facilityId = event;
-          await getFuelConsumption();
-        },
-      );
-
       super.onInit();
     } catch (e) {
       print(e);
@@ -98,6 +84,12 @@ void createfuledata({ List<dynamic>? fileIds}) async {
   }
   Future<void> setFDId() async {
     try {
+        if (Get.arguments != null) {
+      var dataFromPreviousScreen = Get.arguments;
+      selectedItem = dataFromPreviousScreen['selectedItem'];
+    } else {
+      selectedItem = GetFuelDataList(id: 0, dieselConsumedForVehicles: 0, petrolConsumedForVehicles: 0, petrolConsumedForGrassCuttingAndMovers: 0,dieselConsumedAtSite:0,petrolConsumedAtSite:0);
+    }
       GetFuelDataList? selectedItemhea;
       final _selectedItem = await createfueldataPresenter.getValue();
       if (_selectedItem!.isNotEmpty) {
@@ -124,18 +116,7 @@ void createfuledata({ List<dynamic>? fileIds}) async {
       //  Utility.showDialog(e.toString() + 'userId');
     }
   }
-  Future<void> getFuelConsumption() async {
-    final _fueldataType =
-        await createfueldataPresenter.getFuelConsumption();
 
-    if (_fueldataType != null) {
-      _fueldataType != [];
-      for (var fueldata in _fueldataType) {
-        fueldataType.add(fueldata);
-      }
-      // selectedTypePermit.value = grievanceType[0]?.name ?? '';
-    }
-  }
    void clearStoreData() {
     dieselConsumedforvehiclesCtrl.clear();
     petrolconsumedforvehiclesCtrl.clear();

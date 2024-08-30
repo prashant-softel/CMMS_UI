@@ -26,9 +26,6 @@ Future<Map<String, dynamic>> createfuledata({
         updateFueldata,
         isLoading,
       );
-  Future<List<GetFuelDataList?>?> getFuelConsumption(
-          isLoading) async =>
-      await repository.getFuelConsumption(isLoading: isLoading);
   void saveValue({String? fuelId}) async =>
       repository.saveValue(LocalKeys.fuelId, fuelId);
   Future<String?> getValue() async =>

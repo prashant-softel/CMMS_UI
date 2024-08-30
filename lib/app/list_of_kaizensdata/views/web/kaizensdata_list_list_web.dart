@@ -154,7 +154,7 @@ class _KaizensdataListWebState extends State<KaizensdataListWeb> {
                                                 onPressed: () {
                                                   controller.clearStoreData();
 
-                                                  Get.offNamed(Routes
+                                                  Get.offAllNamed(Routes
                                                       .createkaizensScreen  );
                                                 },
                                                 color: ColorValues.addNewColor,
@@ -578,7 +578,7 @@ class KaizensDataListSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
-                              // controller.clearStoreData();
+                              controller.clearStoreData();
                                              controller.selectedItem =
                                 controller.kaizensdataList.firstWhere(
                               (element) =>

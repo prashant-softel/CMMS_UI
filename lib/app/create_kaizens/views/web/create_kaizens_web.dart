@@ -325,7 +325,7 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                             backgroundColor: ColorValues.cancelColor,
                             text: 'Cancel',
                             onPressed: () {
-                              Get.toNamed(Routes.misDashboard);
+                              Get.offAllNamed(Routes.misDashboard);
                             },
                           ),
                         ),
