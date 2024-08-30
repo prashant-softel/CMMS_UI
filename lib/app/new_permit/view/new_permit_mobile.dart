@@ -725,6 +725,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                 ),
                               )
                             : Dimens.box0,
+                            
                         Dimens.boxHeight15,
                         controller.newPermitDetailsModel.value?.ptwStatus ==
                                     125 &&
