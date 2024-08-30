@@ -141,6 +141,10 @@ class AttendanceWeb extends GetView<AttendanceController> {
                                         dataRowHeight: 50.0,
                                         columns: const [
                                           DataColumn2(
+                                            label: Text('Sr. No'),
+                                            fixedWidth: 70,
+                                          ),
+                                          DataColumn2(
                                             label: Text('Employee ID'),
                                             size: ColumnSize.S,
                                           ),
@@ -163,12 +167,16 @@ class AttendanceWeb extends GetView<AttendanceController> {
                                         ],
                                         rows: List<DataRow>.generate(
                                           controller.attendanceModel.length,
-                                          // 1,
                                           (index) {
                                             final employee = controller
                                                 .attendanceModel[index];
                                             return DataRow(
                                               cells: [
+                                                DataCell(
+                                                  Text(
+                                                    "${index + 1}",
+                                                  ),
+                                                ),
                                                 DataCell(
                                                   Text(
                                                     "EMP ${employee?.id}",

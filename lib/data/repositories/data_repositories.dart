@@ -2284,8 +2284,8 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-      //updateFuelConsumption
-        Future<ResponseModel> updateFuelConsumption({
+  //updateFuelConsumption
+  Future<ResponseModel> updateFuelConsumption({
     required String auth,
     updateFueldata,
     bool? isLoading,
@@ -5909,6 +5909,7 @@ class DataRepository extends DomainRepository {
     List<int>? selectedState,
     List<int>? selectedSpv,
     List<int>? selectedSite,
+    List<int>? selectedDSMType,
     bool? isLoading,
   }) async =>
       await connectHelper.getDSMData(
@@ -5918,8 +5919,19 @@ class DataRepository extends DomainRepository {
         selectedState: selectedState,
         selectedSpv: selectedSpv,
         selectedSite: selectedSite,
+        selectedDSMType: selectedDSMType,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getdsmType({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getdsmType(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
 
   //Material category
   Future<ResponseModel> getMaterialList({
