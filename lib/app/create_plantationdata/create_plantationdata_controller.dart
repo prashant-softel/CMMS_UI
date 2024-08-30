@@ -69,13 +69,6 @@ void createplantationdata({ List<dynamic>? fileIds}) async {
     try {
       await setPDId();
 
-      facilityIdStreamSubscription = homeController.facilityId$.listen(
-        (event) async {
-          // facilityId = event;
-          await getplantationdata();
-        },
-      );
-
       super.onInit();
     } catch (e) {
       print(e);
@@ -83,6 +76,12 @@ void createplantationdata({ List<dynamic>? fileIds}) async {
   }
 Future<void> setPDId() async {
     try {
+       if (Get.arguments != null) {
+      var dataFromPreviousScreen = Get.arguments;
+      selectedItem = dataFromPreviousScreen['selectedItem'];
+    } else {
+      selectedItem = GetPlantationList(id: 0, saplingsPlanted: 0, saplingsSurvived: 0, saplingsDied: 0,);
+    }
       GetPlantationList? selectedItemhea;
       final _selectedItem = await createplantationdataPresenter.getValue();
       if (_selectedItem!.isNotEmpty) {
@@ -108,18 +107,7 @@ SaplingsDiedCtrl.text=selectedItem!.saplingsDied.toString();
       //  Utility.showDialog(e.toString() + 'userId');
     }
   }
-    Future<void> getplantationdata() async {
-    final _plantationType =
-        await createplantationdataPresenter.getplantationdata();
-
-    if (_plantationType != null) {
-      _plantationType != [];
-      for (var plantation in _plantationType) {
-        plantationType.add(plantation);
-      }
-      // selectedTypePermit.value = grievanceType[0]?.name ?? '';
-    }
-  }
+ 
    void clearStoreData() {
     SaplingsPlantedCtrl.clear();
     SaplingsSurvivedCtrl.clear();

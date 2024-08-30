@@ -154,7 +154,7 @@ class _VisitandNoticeListWebState extends State<VisitandNoticeListWeb> {
                                                 onPressed: () {
                                                   controller.clearStoreData();
 
-                                                  Get.offNamed(Routes
+                                                  Get.offAllNamed(Routes
                                                       .createRegulataryVisitsScreen);
                                                 },
                                                 color: ColorValues.addNewColor,

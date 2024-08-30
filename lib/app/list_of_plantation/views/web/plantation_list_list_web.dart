@@ -154,7 +154,7 @@ class _PlantationListWebState extends State<PlantationListWeb> {
                                                 onPressed: () {
                                                   controller.clearStoreData();
 
-                                                  Get.offNamed(Routes
+                                                  Get.offAllNamed(Routes
                                                       .createplantationdataScreen);
                                                 },
                                                 color: ColorValues.addNewColor,

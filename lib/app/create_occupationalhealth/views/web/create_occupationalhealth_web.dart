@@ -331,7 +331,7 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                               backgroundColor: ColorValues.cancelColor,
                               text: 'Cancel',
                               onPressed: () {
-                                Get.toNamed(Routes.misDashboard);
+                                Get.offAllNamed(Routes.misDashboard);
                               },
                             ),
                           ),

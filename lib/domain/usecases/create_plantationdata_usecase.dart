@@ -25,9 +25,6 @@ Future<Map<String, dynamic>> createplantationdata({
         updatePlantation,
         isLoading,
       );
-  Future<List<GetPlantationList?>?> getplantationdata(
-          isLoading) async =>
-      await repository.getplantationdata(isLoading: isLoading);
   void saveValue({String? plantationId}) async =>
       repository.saveValue(LocalKeys.plantationId, plantationId);
   Future<String?> getValue() async =>
