@@ -462,6 +462,164 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                         ),
                                       ],
                                     ),
+                              controller.lstAssociatedMc!.isEmpty
+                                  ? Dimens.box0
+                                  : Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "MC Task Linked To The Permit",
+                                          style: Styles.blue700,
+                                        ),
+                                        ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: controller
+                                              .lstAssociatedMc?.length,
+                                          itemBuilder: (context, index) {
+                                            return Card(
+                                              color: Colors.lightBlue.shade50,
+                                              elevation: 10,
+                                              shadowColor: Colors.black87,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.all(10),
+                                                child: Column(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Task Id: ",
+                                                            style: Styles
+                                                                .appDarkGrey12,
+                                                          ),
+                                                        ),
+                                                        Dimens.boxWidth5,
+                                                        Expanded(
+                                                          child: Text(
+                                                            "MCT${controller.lstAssociatedMc?[index]?.executionId ?? ""}",
+                                                            style: Styles
+                                                                .appDarkBlue12,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Task Title: ",
+                                                            style: Styles
+                                                                .appDarkGrey12,
+                                                          ),
+                                                        ),
+                                                        Dimens.boxWidth5,
+                                                        Expanded(
+                                                          child: Text(
+                                                            "${controller.lstAssociatedMc?[index]?.title}",
+                                                            style: Styles
+                                                                .appDarkBlue12,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Equipment Category: ",
+                                                            style: Styles
+                                                                .appDarkGrey12,
+                                                          ),
+                                                        ),
+                                                        Dimens.boxWidth5,
+                                                        Expanded(
+                                                          child: Text(controller
+                                                                  .lstAssociatedMc?[
+                                                                      index]
+                                                                  ?.equipmentCat
+                                                                  .toString() ??
+                                                              ''),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Equipment: ",
+                                                            style: Styles
+                                                                .appDarkGrey12,
+                                                          ),
+                                                        ),
+                                                        Dimens.boxWidth5,
+                                                        Expanded(
+                                                          child: Text(
+                                                            controller
+                                                                    .lstAssociatedMc?[
+                                                                        index]
+                                                                    ?.equipment
+                                                                    .toString() ??
+                                                                '',
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Start Date: ",
+                                                            style: Styles
+                                                                .appDarkGrey12,
+                                                          ),
+                                                        ),
+                                                        Dimens.boxWidth5,
+                                                        Expanded(
+                                                          child: Text(controller
+                                                                  .lstAssociatedMc?[
+                                                                      index]
+                                                                  ?.startDate
+                                                                  .toString() ??
+                                                              ''),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Assigned To: ",
+                                                            style: Styles
+                                                                .appDarkGrey12,
+                                                          ),
+                                                        ),
+                                                        Dimens.boxWidth5,
+                                                        Expanded(
+                                                          child: Text(controller
+                                                                  .lstAssociatedMc?[
+                                                                      index]
+                                                                  ?.assignedTo
+                                                                  .toString() ??
+                                                              ''),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                            ///veg data
                               Dimens.boxHeight5,
                               Row(
                                 children: [
