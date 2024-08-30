@@ -179,6 +179,112 @@ class NewPermitMobile extends GetView<NewPermitController> {
                               ),
                             )
                           : Dimens.box0,
+//bm link
+                      controller.jobModel?.id != null
+                          ? Container(
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 9, vertical: 10),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      controller.viewVegTDetails();
+                                    },
+                                    child: Text(
+                                      'Job ID: ${int.tryParse('${controller.jobModel?.id ?? 0}')}',
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        decorationStyle:
+                                            TextDecorationStyle.solid,
+                                        color: Color.fromARGB(255, 5, 92, 163),
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Job Title: ${controller.titleTextCtrlr.text ?? ""}',
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Column(
+                                    children:
+                                        controller.jobModel!.equipmentCatList!
+                                            .map((element) => Column(
+                                                  // mainAxisAlignment:
+                                                  //     MainAxisAlignment
+                                                  //         .start,
+                                                  // crossAxisAlignment:
+                                                  //     CrossAxisAlignment
+                                                  //         .start,
+                                                  children: [
+                                                    SizedBox(
+                                                      child: Text(
+                                                        "Equipment Category: ${element?.name}",
+                                                        maxLines: 3,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ))
+                                            .toList(),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Block: ${controller.selectedBlock ?? ""}',
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Column(
+                                    children:
+                                        controller.jobModel!.workingAreaList!
+                                            .map(
+                                              (element) => Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    child: Text(
+                                                      "Equipment Name: ${element?.name}",
+                                                      maxLines: 3,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                            .toList(),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Breakdown Time: ${controller.jobModel?.breakdownTime ?? ""}',
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Assigned To: ${controller.jobModel?.assignedName
+                                     ?? ""}',
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Dimens.box0,
 
                       //pm task link
                       controller.pmtaskViewModel?.id != null

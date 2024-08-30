@@ -427,7 +427,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         ),
                                         DataCell(
                                           SizedBox(
-                                            child: Column(
+                                            child: 
+                                            Column(
                                               children: controller
                                                   .jobModel!.workingAreaList!
                                                   .map(
@@ -466,6 +467,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     ],
                                   ),
                                 )
+                             
                               : Dimens.box0,
 
                           // hgvbjn,
