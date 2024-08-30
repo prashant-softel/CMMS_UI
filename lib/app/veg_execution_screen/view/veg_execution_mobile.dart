@@ -2,10 +2,13 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/job_details/views/widgets/job_detail_field.dart';
 import 'package:cmms/app/veg_execution_screen/veg_execution_screen_controller.dart';
 import 'package:cmms/app/veg_execution_screen/view/widgets/confirmation_dialog.dart';
+import 'package:cmms/app/veg_execution_screen/view/widgets/reassign_veg_dialog.dart';
 import 'package:cmms/app/veg_execution_screen/view/widgets/tbt_veg_dialog.dart';
 import 'package:cmms/app/veg_execution_screen/view/widgets/veg_schedule_approve_dialog.dart';
+import 'package:cmms/app/widgets/abandon_veg_execution.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/veg_excution_mobile_dialog.dart';
+import 'package:cmms/app/widgets/vegetation_cleaning_execution_dialog.dart';
 import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -311,11 +314,7 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                                         : Dimens.box0,
 
                                                     controller.listSchedules!
-                                                                    .firstWhere(
-                                                                        (e) =>
-                                                                            "${e?.scheduleId}" ==
-                                                                            record[0][
-                                                                                'value'],
+                                                                    .firstWhere((e) => "${e?.scheduleId}" == record[0]['value'],
                                                                         orElse: () => VegSchedules(
                                                                             status:
                                                                                 -1))
@@ -328,10 +327,20 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                                                             "${e?.scheduleId}" ==
                                                                             record[0][
                                                                                 'value'],
-                                                                        orElse: () =>
-                                                                            VegSchedules(status: -1))
+                                                                        orElse: () => VegSchedules(
+                                                                            status:
+                                                                                -1))
                                                                     ?.status ==
-                                                                384
+                                                                384 ||
+                                                            controller
+                                                                    .listSchedules!
+                                                                    .firstWhere(
+                                                                        (e) =>
+                                                                            "${e?.scheduleId}" ==
+                                                                            record[0]['value'],
+                                                                        orElse: () => VegSchedules(status: -1))
+                                                                    ?.status ==
+                                                                732
                                                         ? TableActionButton(
                                                             onPress: () {
                                                               var filterdData = controller
@@ -341,7 +350,7 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                                                       record[0][
                                                                           'value']);
                                                               Get.dialog(
-                                                                VegExecutionMobileDialog(
+                                                                VegetationExecutionDialog(
                                                                   scheduleId:
                                                                       filterdData!
                                                                           .scheduleId,
@@ -360,11 +369,7 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                                           )
                                                         : Dimens.box0,
                                                     controller.listSchedules!
-                                                                    .firstWhere(
-                                                                        (e) =>
-                                                                            "${e?.scheduleId}" ==
-                                                                            record[0][
-                                                                                'value'],
+                                                                    .firstWhere((e) => "${e?.scheduleId}" == record[0]['value'],
                                                                         orElse: () => VegSchedules(
                                                                             status:
                                                                                 -1))
@@ -377,10 +382,20 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                                                             "${e?.scheduleId}" ==
                                                                             record[0][
                                                                                 'value'],
-                                                                        orElse: () =>
-                                                                            VegSchedules(status: -1))
+                                                                        orElse: () => VegSchedules(
+                                                                            status:
+                                                                                -1))
                                                                     ?.status ==
-                                                                384
+                                                                384 ||
+                                                            controller
+                                                                    .listSchedules!
+                                                                    .firstWhere(
+                                                                        (e) =>
+                                                                            "${e?.scheduleId}" ==
+                                                                            record[0]['value'],
+                                                                        orElse: () => VegSchedules(status: -1))
+                                                                    ?.status ==
+                                                                732
                                                         ? TableActionButton(
                                                             // label: 'Start',
                                                             onPress: () {
@@ -498,7 +513,7 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                                                       "${e?.scheduleId}" ==
                                                                       record[0][
                                                                           'value']);
-                                                              Get.dialog(VegExecutionMobileDialog(
+                                                              Get.dialog(VegetationExecutionDialog(
                                                                   scheduleId:
                                                                       filterdData!
                                                                           .scheduleId,
@@ -632,15 +647,15 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                           ),
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Spacer(),
                             controller.vegExecutionDetailsModel.value?.status ==
                                         387 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
                                                 e.feature_id ==
                                                     UserAccessConstants
-                                                        .kModuleCleaningexeFeatureId &&
+                                                        .kVegetationControlFeatureId &&
                                                 e.edit ==
                                                     UserAccessConstants
                                                         .kHaveAddAccess)
@@ -652,70 +667,65 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                       backgroundColor: ColorValues.blueColor,
                                       text: "Re-assign",
                                       onPressed: () {
-                                        Get.dialog<void>(AssignToMcDialog(
-                                          id: controller
-                                                  .vegExecutionDetailsModel
-                                                  .value
-                                                  ?.executionId ??
-                                              0,
-                                        ));
-
-                                        // controller
-                                        //     .startMCExecutionButton();
+                                        Get.dialog<void>(
+                                          AssignToVegDialog(
+                                            id: controller
+                                                    .vegExecutionDetailsModel
+                                                    .value
+                                                    ?.executionId ??
+                                                0,
+                                          ),
+                                        );
                                       },
                                     ),
                                   )
                                 : Dimens.box0,
-
                             controller.vegExecutionDetailsModel.value?.status ==
-                                        360 &&
+                                        721 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
                                                 e.feature_id ==
                                                     UserAccessConstants
-                                                        .kModuleCleaningexeFeatureId &&
+                                                        .kVegetationControlFeatureId &&
                                                 e.edit ==
                                                     UserAccessConstants
                                                         .kHaveEditAccess)
                                             .length >
                                         0
                                 ? Container(
-                                    height: 28,
+                                    height: 30,
                                     child: CustomElevatedButton(
                                       backgroundColor: ColorValues.addNewColor,
                                       text: "Start",
                                       onPressed: () {
                                         Get.dialog<void>(
-                                            CustomCalibrationDialog(
-                                          id: controller
-                                                  .vegExecutionDetailsModel
-                                                  .value
-                                                  ?.executionId ??
-                                              0,
-                                          title: controller
-                                                  .vegExecutionDetailsModel
-                                                  .value
-                                                  ?.title ??
-                                              "",
-                                        ));
-
-                                        // controller
-                                        //     .startMCExecutionButton();
+                                          CustomVegetationDialog(
+                                            id: controller
+                                                    .vegExecutionDetailsModel
+                                                    .value
+                                                    ?.executionId ??
+                                                0,
+                                            title: controller
+                                                    .vegExecutionDetailsModel
+                                                    .value
+                                                    ?.title ??
+                                                "",
+                                          ),
+                                        );
                                       },
                                     ),
                                   )
                                 : Dimens.box0,
-                            // : Container(),
-
+                            Dimens.boxWidth10,
                             controller.vegExecutionDetailsModel.value
                                                 ?.status ==
-                                            361 &&
-                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kModuleCleaningexeFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length >
+                                            722 &&
+                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kVegetationControlFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length >
                                             0 ||
                                     controller.vegExecutionDetailsModel.value?.status == 382 &&
                                         varUserAccessModel.value.access_list!
                                                 .where((e) =>
-                                                    e.feature_id == UserAccessConstants.kModuleCleaningexeFeatureId &&
+                                                    e.feature_id == UserAccessConstants.kVegetationControlFeatureId &&
                                                     e.edit ==
                                                         UserAccessConstants
                                                             .kHaveEditAccess)
@@ -725,12 +735,12 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                         varUserAccessModel.value.access_list!
                                                 .where((e) =>
                                                     e.feature_id ==
-                                                        UserAccessConstants.kModuleCleaningexeFeatureId &&
+                                                        UserAccessConstants.kVegetationControlFeatureId &&
                                                     e.edit == UserAccessConstants.kHaveEditAccess)
                                                 .length >
                                             0
                                 ? Container(
-                                    height: 28,
+                                    height: 30,
                                     child: CustomElevatedButton(
                                       backgroundColor: ColorValues.cancelColor,
                                       text: "Close",
@@ -741,7 +751,7 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                                 radius: 5,
                                                 title: 'Alert',
                                                 middleText:
-                                                    'Please complete the all schedules',
+                                                    'Please complete all the schedules',
                                                 textConfirm: 'OK',
                                                 onConfirm: () {
                                                   Get.back(); // Close the dialog
@@ -750,41 +760,40 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                                     ColorValues.appGreenColor,
                                                 confirmTextColor: Colors.white,
                                               )
-                                            : Get.dialog<void>(CustomCalibrationDialog(
-                                                id: controller
-                                                        .vegExecutionDetailsModel
-                                                        .value
-                                                        ?.executionId ??
-                                                    0,
-                                                title: controller
-                                                        .vegExecutionDetailsModel
-                                                        .value
-                                                        ?.title ??
-                                                    "",
-                                                starttype: 3));
-
-                                        // Get.dialog(EndMCExecutionDialog());
+                                            : Get.dialog<void>(
+                                                CustomVegetationDialog(
+                                                  id: controller
+                                                          .vegExecutionDetailsModel
+                                                          .value
+                                                          ?.executionId ??
+                                                      0,
+                                                  title: controller
+                                                          .vegExecutionDetailsModel
+                                                          .value
+                                                          ?.title ??
+                                                      "",
+                                                  starttype: 3,
+                                                ),
+                                              );
                                       },
                                     ),
                                   )
                                 : Dimens.box0,
-
-                            // SizedBox(
-                            //   width: 10,
-                            // ),
-
+                            Dimens.boxWidth10,
                             controller.vegExecutionDetailsModel.value?.status ==
-                                            361 &&
+                                            722 &&
                                         varUserAccessModel.value.access_list!
                                                 .where((e) =>
                                                     e.feature_id ==
                                                         UserAccessConstants
-                                                            .kModuleCleaningexeFeatureId &&
+                                                            .kVegetationControlFeatureId &&
                                                     e.edit ==
                                                         UserAccessConstants
                                                             .kHaveEditAccess)
                                                 .length >
-                                            0 ||
+                                            0 &&
+                                        controller.allScheduleTrue.value ==
+                                            false ||
                                     controller.vegExecutionDetailsModel.value
                                                 ?.status ==
                                             368 &&
@@ -792,132 +801,146 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                                 .where((e) =>
                                                     e.feature_id ==
                                                         UserAccessConstants
-                                                            .kModuleCleaningexeFeatureId &&
+                                                            .kVegetationControlFeatureId &&
                                                     e.edit ==
                                                         UserAccessConstants
                                                             .kHaveEditAccess)
                                                 .length >
-                                            0
+                                            0 &&
+                                        controller.allScheduleTrue.value ==
+                                            false
                                 ? Container(
-                                    height: 28,
+                                    height: 30,
                                     child: CustomElevatedButton(
                                       backgroundColor:
                                           Color.fromARGB(255, 244, 116, 248),
                                       text: "Abandoned All",
                                       onPressed: () {
-                                        Get.dialog(AbandonAllDialog(
-                                            id: controller
-                                                .vegExecutionDetailsModel
-                                                .value
-                                                ?.executionId));
-
-                                        // controller
-                                        //     .createEscalationMatrix();
+                                        Get.dialog(
+                                          AbandonVegExecutionDialog(
+                                            id: controller.vegexe.value,
+                                          ),
+                                        );
                                       },
                                     ),
                                   )
                                 : Dimens.box0,
-
+                            Dimens.boxWidth5,
+                            Container(
+                              height: 28,
+                              child: CustomElevatedButton(
+                                icon: Icons.print,
+                                backgroundColor: ColorValues.linktopermitColor,
+                                text: "Print",
+                                onPressed: () {
+                                  controller.generateInvoice();
+                                },
+                              ),
+                            ),
+                            Dimens.boxWidth5,
                             controller.vegExecutionDetailsModel.value?.status ==
-                                        363 &&
+                                        724 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
                                                 e.feature_id ==
                                                     UserAccessConstants
-                                                        .kModuleCleaningexeFeatureId &&
+                                                        .kVegetationControlFeatureId &&
                                                 e.edit ==
                                                     UserAccessConstants
                                                         .kHaveEditAccess)
                                             .length >
                                         0
                                 ? Container(
-                                    height: 28,
+                                    height: 30,
                                     child: CustomElevatedButton(
                                       backgroundColor: ColorValues.approveColor,
                                       text: "Approve",
                                       onPressed: () {
-                                        Get.dialog(CustonApproveRejectDialog(
-                                          text: "Execution Approve",
-                                          controller: controller,
-                                          buttonText: "Approve",
-                                          style:
-                                              Styles.greenElevatedButtonStyle,
-                                          onPressed: () {
-                                            controller.endApproveExecution(
+                                        Get.dialog(
+                                          CustomScheduleApproveRejectDialog(
+                                            text: "Execution Approve",
+                                            controller: controller,
+                                            buttonText: "Approve",
+                                            style:
+                                                Styles.greenElevatedButtonStyle,
+                                            onPressed: () {
+                                              controller.endApproveExecution(
                                                 controller
                                                         .vegExecutionDetailsModel
                                                         .value
                                                         ?.executionId ??
-                                                    0);
-                                            Get.back();
-                                          },
-                                        ));
-
-                                        // Get.dialog(EndMCExecutionDialog());
+                                                    0,
+                                              );
+                                              Get.back();
+                                            },
+                                          ),
+                                        );
                                       },
                                     ),
                                   )
                                 : Dimens.box0,
-
+                            Dimens.boxWidth10,
                             controller.vegExecutionDetailsModel.value?.status ==
-                                        363 &&
+                                        724 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
                                                 e.feature_id ==
                                                     UserAccessConstants
-                                                        .kModuleCleaningexeFeatureId &&
+                                                        .kVegetationControlFeatureId &&
                                                 e.edit ==
                                                     UserAccessConstants
                                                         .kHaveEditAccess)
                                             .length >
                                         0
                                 ? Container(
-                                    height: 28,
+                                    height: 30,
                                     child: CustomElevatedButton(
                                       backgroundColor: ColorValues.cancelColor,
                                       text: "Reject",
                                       onPressed: () {
-                                        Get.dialog(CustonApproveRejectDialog(
-                                          text: "Execution Reject",
-                                          controller: controller,
-                                          buttonText: "Reject",
-                                          style:
-                                              Styles.darkRedElevatedButtonStyle,
-                                          onPressed: () {
-                                            controller.endRejectExecution(
+                                        Get.dialog(
+                                          CustomScheduleApproveRejectDialog(
+                                            text: "Execution Reject",
+                                            controller: controller,
+                                            buttonText: "Reject",
+                                            style: Styles
+                                                .darkRedElevatedButtonStyle,
+                                            onPressed: () {
+                                              controller.endRejectExecution(
                                                 controller
                                                         .vegExecutionDetailsModel
                                                         .value
                                                         ?.executionId ??
-                                                    0);
-                                            Get.back();
-                                          },
-                                        ));
-
-                                        // Get.dialog(EndMCExecutionDialog());
+                                                    0,
+                                              );
+                                              Get.back();
+                                            },
+                                          ),
+                                        );
                                       },
                                     ),
                                   )
                                 : Dimens.box0,
                             controller.vegExecutionDetailsModel.value?.status ==
-                                        364 &&
+                                        725 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
                                                 e.feature_id ==
                                                     UserAccessConstants
-                                                        .kModuleCleaningexeFeatureId &&
+                                                        .kVegetationControlFeatureId &&
                                                 e.edit ==
                                                     UserAccessConstants
                                                         .kHaveEditAccess)
                                             .length >
                                         0
                                 ? Container(
-                                    height: 28,
+                                    height: 30,
                                     child: CustomElevatedButton(
                                       backgroundColor: ColorValues.approveColor,
                                       text: "Approve",
                                       onPressed: () {
-                                        Get.dialog(CustonApproveRejectDialog(
+                                        Get.dialog(
+                                            CustomScheduleApproveRejectDialog(
                                           text: "Abandoned Approve",
                                           controller: controller,
                                           buttonText: "Approve",
@@ -939,26 +962,27 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                     ),
                                   )
                                 : Dimens.box0,
-
+                            Dimens.boxWidth10,
                             controller.vegExecutionDetailsModel.value?.status ==
-                                        364 &&
+                                        725 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
                                                 e.feature_id ==
                                                     UserAccessConstants
-                                                        .kModuleCleaningexeFeatureId &&
+                                                        .kVegetationControlFeatureId &&
                                                 e.edit ==
                                                     UserAccessConstants
                                                         .kHaveEditAccess)
                                             .length >
                                         0
                                 ? Container(
-                                    height: 28,
+                                    height: 30,
                                     child: CustomElevatedButton(
                                       backgroundColor: ColorValues.cancelColor,
                                       text: "Reject",
                                       onPressed: () {
-                                        Get.dialog(CustonApproveRejectDialog(
+                                        Get.dialog(
+                                            CustomScheduleApproveRejectDialog(
                                           text: "Abandoned Reject",
                                           controller: controller,
                                           buttonText: "Reject",
@@ -980,28 +1004,7 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                     ),
                                   )
                                 : Dimens.box0,
-
-                            //           varUserAccessModel.value.access_list!
-                            // .where((e) => e.feature_id == 3 && e.edit == 1)
-                            // .length > 0
-                            // &&
-                            // controller.incidentReportDetailsModel
-                            //             .value?.id !=
-                            //         null
-                            //     ? CustomElevatedButton(
-                            //         icon: Icons.edit,
-                            //         backgroundColor: Colors.green,
-                            //         onPressed: () {
-                            //           // controller.saveAsDraft();
-                            //           controller.editIncidentReport(
-                            //               id: controller
-                            //                   .incidentReportDetailsModel
-                            //                   .value
-                            //                   ?.id);
-                            //         },
-                            //         text: 'Edit',
-                            //       )
-                            //     : Container()
+                            Spacer(),
                           ],
                         ),
                       ],

@@ -202,7 +202,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                           ),
                           // Edit from here for pm task
                           controller.pmtaskViewModel?.id != null
-                              ? Row(
+                              ? 
+                              Row(
                                   children: [
                                     Expanded(
                                       child: Container(
@@ -313,7 +314,9 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     ),
                                   ],
                                 )
+                             
                               : Dimens.box0,
+                        
                           controller.jobModel?.id != null
                               ? Container(
                                   // alignment: Alignment.centerLeft,
@@ -568,6 +571,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ),
                                 )
                               : Dimens.box0,
+
 
                           controller.vegExecutionDetailsModel?.executionId !=
                                   null
