@@ -1163,6 +1163,76 @@ class Repository {
       return Map();
     }
   }
+  // updateKaizenDetails
+  Future<Map<String, dynamic>> updateKaizenDetails(
+    updateKaizen,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateKaizenDetails(
+        auth: auth,
+        updateKaizen: updateKaizen,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Kiazen  update Successfully...",
+            fontSize: 16.0);
+
+        Get.offAllNamed(
+          Routes.kaizensListScreen,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateRegulatary');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+  // updatePlantationDetails
+  Future<Map<String, dynamic>> updatePlantationDetails(
+    updatePlantation,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updatePlantationDetails(
+        auth: auth,
+        updatePlantation: updatePlantation,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Plantation  update Successfully...",
+            fontSize: 16.0);
+
+        Get.offAllNamed(
+          Routes.plantationlistScreen,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateRegulatary');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
 // updateFuelConsumption
 Future<Map<String, dynamic>> updateFuelConsumption(
     updateFueldata,

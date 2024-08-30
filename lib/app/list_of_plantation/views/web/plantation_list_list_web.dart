@@ -579,14 +579,20 @@ class PlantationListSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
-                              controller.clearStoreData();
-                              // int goId = OccupationallistDetails?.id ?? 0;
-                              // if (goId != 0) {
-                              //   Get.toNamed(
-                              //       Routes
-                              //           .updateGoodsOrdersDetailsScreen,
-                              //       arguments: {"goId": goId});
-                              // }
+                              // controller.clearStoreData();
+                              controller.selectedItem= controller.plantationList.firstWhere(
+(element) =>
+                                  "${element.id}" ==
+                                  PlantationDataDetails?.id.toString(),
+                              );
+                             int PlantationId = PlantationDataDetails?.id ?? 0;
+
+                            if (PlantationId != 0) {
+                              Get.toNamed(Routes.createplantationdataScreen,
+                                  arguments: {
+                                    "selectedItem": controller.selectedItem
+                                  });
+                            }
                             },
                           )
                         : Dimens.box0,

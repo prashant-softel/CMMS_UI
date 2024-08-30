@@ -119,6 +119,8 @@ abstract class LocalKeys {
   static const healthId = 'healthId';
   static const visitId = 'visitId';
   static const fuelId = 'fuelId';
+  static const plantationId = 'plantationId';
+  static const kaizenId = 'kaizenId';
 
 
 }

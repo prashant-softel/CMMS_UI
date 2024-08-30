@@ -578,14 +578,21 @@ class KaizensDataListSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
-                              controller.clearStoreData();
-                              // int goId = OccupationallistDetails?.id ?? 0;
-                              // if (goId != 0) {
-                              //   Get.toNamed(
-                              //       Routes
-                              //           .updateGoodsOrdersDetailsScreen,
-                              //       arguments: {"goId": goId});
-                              // }
+                              // controller.clearStoreData();
+                                             controller.selectedItem =
+                                controller.kaizensdataList.firstWhere(
+                              (element) =>
+                                  "${element.id}" ==
+                                  KaizensDataDetails?.id.toString(),
+                            );
+                            int VisitId = KaizensDataDetails?.id ?? 0;
+
+                            if (VisitId != 0) {
+                              Get.toNamed(Routes.createkaizensScreen,
+                                  arguments: {
+                                    "selectedItem": controller.selectedItem
+                                  });
+                            }
                             },
                           )
                         : Dimens.box0,

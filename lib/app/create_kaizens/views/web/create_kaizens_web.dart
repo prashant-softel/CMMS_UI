@@ -1,6 +1,4 @@
-import 'package:cmms/app/create_fueldata/create_fueldata_controller.dart';
 import 'package:cmms/app/create_kaizens/create_kaizens_controller.dart';
-import 'package:cmms/app/create_regulataryvisits/create_regulataryvisits_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -330,8 +328,8 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                           ),
                         ),
                         Dimens.boxWidth15,
-                        // controller.obsId == 0
-                            // ? 
+                        controller.selectedItem?.id == 0
+                            ? 
                             Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -344,20 +342,21 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                   },
                                 ),
                               )
-                            // : Container(
-                            //     height: 40,
-                            //     child: CustomElevatedButton(
-                            //       backgroundColor: ColorValues.submitColor,
-                            //       text: 'Update',
-                            //       onPressed: () {
-                            //         controller.isFormInvalid.value = false;
-                            //         controller.createObs(
-                            //             position: 0,
-                            //             fileIds: dropzoneController.fileIds);
-                            //       },
-                            //     ),
-                            //   ),
-                            ,
+                            : Container(
+                                height: 40,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.submitColor,
+                                  text: 'Update',
+                                  onPressed: () {
+                                    // controller.isFormInvalid.value = false;
+                                    controller.updateKaizenDetails(
+                                        // position: 0,
+                                        // fileIds: dropzoneController.fileIds
+                                        );
+                                  },
+                                ),
+                              ),
+                            
                         Spacer(),
                       ],
                     )
