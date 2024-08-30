@@ -75,12 +75,7 @@ void createkaizensdata({ List<dynamic>? fileIds}) async {
     try {
       await setKDId();
 
-      facilityIdStreamSubscription = homeController.facilityId$.listen(
-        (event) async {
-          // facilityId = event;
-          await getkaizensdata();
-        },
-      );
+     
 
       super.onInit();
     } catch (e) {
@@ -89,6 +84,12 @@ void createkaizensdata({ List<dynamic>? fileIds}) async {
   }
   Future<void> setKDId() async {
     try {
+       if (Get.arguments != null) {
+      var dataFromPreviousScreen = Get.arguments;
+      selectedItem = dataFromPreviousScreen['selectedItem'];
+    } else {
+      selectedItem = GetKaizensDataList(id: 0, kaizensImplemented: 0, costForImplementation: 0, costSavedFromImplementation: 0);
+    }
       GetKaizensDataList? selectedItemhea;
       final _selectedItem = await createkaizensdataPresenter.getValue();
       if (_selectedItem!.isNotEmpty) {
@@ -113,18 +114,7 @@ CostSavedFromImplementationCtrl.text=selectedItem!.costSavedFromImplementation.t
       //  Utility.showDialog(e.toString() + 'userId');
     }
   }
-   Future<void> getkaizensdata() async {
-    final _kaizensdataType =
-        await createkaizensdataPresenter.getkaizensdata();
 
-    if (_kaizensdataType != null) {
-      _kaizensdataType != [];
-      for (var kaizendata in _kaizensdataType) {
-        kaizendataType.add(kaizendata);
-      }
-      // selectedTypePermit.value = grievanceType[0]?.name ?? '';
-    }
-  }
     void clearStoreData() {
     KaizensImplementedCtrl.clear();
     CostForImplementationCtrl.clear();

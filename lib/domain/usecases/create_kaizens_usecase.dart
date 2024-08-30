@@ -26,9 +26,7 @@ Future<Map<String, dynamic>> createkaizensdata({
         updateKaizen,
         isLoading,
       );
-  Future<List<GetKaizensDataList?>?> getkaizensdata(
-          isLoading) async =>
-      await repository.getkaizensdata(isLoading: isLoading);
+
   void saveValue({String? kaizenId}) async =>
       repository.saveValue(LocalKeys.kaizenId, kaizenId);
   Future<String?> getValue() async =>

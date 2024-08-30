@@ -20,6 +20,6 @@ class KaizensDataListUsecase {
     
     );
   }
-  void clearValue() async => repository.clearData(LocalKeys.oHid);
+  void clearValue() async => repository.clearData(LocalKeys.selectedItem);
 
 }

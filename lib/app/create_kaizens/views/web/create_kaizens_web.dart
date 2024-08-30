@@ -28,290 +28,292 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
       builder: (controller) {
         return SelectionArea(
           child: Scaffold(
-            body: Container(
-                color: Color.fromARGB(255, 234, 236, 238),
-                width: Get.width,
-                height: Get.height,
-                child: Column(
-                  children: [
-                    HeaderWidget(),
-                    Container(
-                      height: 45,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Color.fromARGB(255, 227, 224, 224),
-                          width: 1,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 236, 234, 234)
-                                .withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 2),
+            body: Obx (
+             ()=> Container(
+                  color: Color.fromARGB(255, 234, 236, 238),
+                  width: Get.width,
+                  height: Get.height,
+                  child: Column(
+                    children: [
+                      HeaderWidget(),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromARGB(255, 227, 224, 224),
+                            width: 1,
                           ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.home,
-                            color: ColorValues.greyLightColor,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.offNamed(Routes.home);
-                            },
-                            child: Text(
-                              "DASHBOARD",
-                              style: Styles.greyLight14,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.offNamed(Routes.misDashboard);
-                            },
-                            child: Text(" / MIS", style: Styles.greyLight14),
-                          ),
-                          Text(" / KAIZENS DATA",
-                              style: Styles.greyLight14),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Stack(
-                          children: [
-                            Container(
-                              margin:
-                                  EdgeInsets.only(left: 10, top: 10, right: 10),
-                              child: Column(
-                                children: [
-                                  Card(
-                                    color: Color.fromARGB(255, 245, 248, 250),
-                                    elevation: 10,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              right: 20,
-                                              top: 5,
-                                              bottom: 5,
-                                              left: 20),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                "Kaizens Data",
-                                                style: Styles.blackBold16,
-                                              ),
-                                              Spacer(),
-                                                    Padding(
-                                            padding: EdgeInsets.only(
-                                              top: 20,
-                                              right: 20,
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                Text('Month:'),
-                                                Dimens.boxWidth10,
-                                                CustomTextFieldForStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      8,
-                                                  numberTextField: true,
-                                                  onTap: () {
-                                                    _showMonthPicker(
-                                                        context, controller);
-                                                  },
-                                                  // textController:
-                                                  //     controller.waterDateTc,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                            ],
-                                          ),
-                                        ),
-                                        Divider(
-                                          color: ColorValues.greyLightColour,
-                                        ),
-                                        Container(
-                                          color: Color.fromARGB(
-                                              255, 245, 248, 250),
-                                          width: Get.width,
-                                          height: Get.height,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16),
-                                            child: Container(
-                                              margin: Dimens.edgeInsets20,
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Spacer(),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'No. of kaizens implemented'),
-                                                              Dimens.boxWidth3,
-                                                              LoginCustomTextfield(
-                                                                  width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      .2),
-                                                                  keyboardType:
-                                                                      TextInputType
-                                                                          .number,
-                                                                  textController:
-                                                                      controller
-                                                                          .KaizensImplementedCtrl,
-                                                                //  validate
-                                                                  errorController: controller
-                                                                          .isKaizensImplementedInvalid
-                                                                          .value
-                                                                      ? "Required field"
-                                                                      : null,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    if (value
-                                                                            .trim()
-                                                                            .length >
-                                                                        0) {
-                                                                      controller
-                                                                          .isKaizensImplementedInvalid
-                                                                          .value = false;
-                                                                    } else {
-                                                                      controller
-                                                                          .isKaizensImplementedInvalid
-                                                                          .value = true;
-                                                                    }
-                                                                  }
-                                                                  ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Cost inquired for implementation of Kaizens'),
-                                                              Dimens.boxWidth3,
-                                                              LoginCustomTextfield(
-                                                                  width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      .2),
-                                                                  textController:
-                                                                      controller
-                                                                          .CostForImplementationCtrl,
-                                                                  //validate
-                                                                  errorController: controller
-                                                                          .isCostForImplementationInvalid
-                                                                          .value
-                                                                      ? "Required field"
-                                                                      : null,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    if (value
-                                                                            .trim()
-                                                                            .length >
-                                                                        0) {
-                                                                      controller
-                                                                          .isCostForImplementationInvalid
-                                                                          .value = false;
-                                                                    } else {
-                                                                      controller
-                                                                          .isCostForImplementationInvalid
-                                                                          .value = true;
-                                                                    }
-                                                                  }
-                                                                  ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Cost saved from the Implementation of Kaizens'),
-                                                              Dimens.boxWidth3,
-                                                              LoginCustomTextfield(
-                                                                  width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      .2),
-                                                                  textController:
-                                                                      controller
-                                                                          .CostSavedFromImplementationCtrl,
-                                                                  //validate
-                                                                  errorController: controller
-                                                                          .isCostSavedFromImplementationInvalid
-                                                                          .value
-                                                                      ? "Required field"
-                                                                      : null,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    if (value
-                                                                            .trim()
-                                                                            .length >
-                                                                        0) {
-                                                                      controller
-                                                                          .isCostSavedFromImplementationInvalid
-                                                                          .value = false;
-                                                                    } else {
-                                                                      controller
-                                                                          .isCostSavedFromImplementationInvalid
-                                                                          .value = true;
-                                                                    }
-                                                                  }
-                                                                  ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          
-                                                        ],
-                                                      ),
-                                                      Spacer(),
-                                                    ],
-                                                  ),
-                                                  Dimens.boxHeight15,
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
                             ),
                           ],
                         ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.home,
+                              color: ColorValues.greyLightColor,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.misDashboard);
+                              },
+                              child: Text(" / MIS", style: Styles.greyLight14),
+                            ),
+                            Text(" / KAIZENS DATA",
+                                style: Styles.greyLight14),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Stack(
+                            children: [
+                              Container(
+                                margin:
+                                    EdgeInsets.only(left: 10, top: 10, right: 10),
+                                child: Column(
+                                  children: [
+                                    Card(
+                                      color: Color.fromARGB(255, 245, 248, 250),
+                                      elevation: 10,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                right: 20,
+                                                top: 5,
+                                                bottom: 5,
+                                                left: 20),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "Kaizens Data",
+                                                  style: Styles.blackBold16,
+                                                ),
+                                                Spacer(),
+                                                      Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
+                                                right: 20,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Text('Month:'),
+                                                  Dimens.boxWidth10,
+                                                  CustomTextFieldForStock(
+                                                    width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        8,
+                                                    numberTextField: true,
+                                                    onTap: () {
+                                                      _showMonthPicker(
+                                                          context, controller);
+                                                    },
+                                                    // textController:
+                                                    //     controller.waterDateTc,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                              ],
+                                            ),
+                                          ),
+                                          Divider(
+                                            color: ColorValues.greyLightColour,
+                                          ),
+                                          Container(
+                                            color: Color.fromARGB(
+                                                255, 245, 248, 250),
+                                            width: Get.width,
+                                            height: Get.height,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(16),
+                                              child: Container(
+                                                margin: Dimens.edgeInsets20,
+                                                child: Column(
+                                                  children: [
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Spacer(),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                CustomRichText(
+                                                                    title:
+                                                                        'No. of kaizens implemented'),
+                                                                Dimens.boxWidth3,
+                                                                LoginCustomTextfield(
+                                                                    width: (MediaQuery.of(
+                                                                                context)
+                                                                            .size
+                                                                            .width *
+                                                                        .2),
+                                                                    keyboardType:
+                                                                        TextInputType
+                                                                            .number,
+                                                                    textController:
+                                                                        controller
+                                                                            .KaizensImplementedCtrl,
+                                                                  //  validate
+                                                                    errorController: controller
+                                                                            .isKaizensImplementedInvalid
+                                                                            .value
+                                                                        ? "Required field"
+                                                                        : null,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      if (value
+                                                                              .trim()
+                                                                              .length >
+                                                                          0) {
+                                                                        controller
+                                                                            .isKaizensImplementedInvalid
+                                                                            .value = false;
+                                                                      } else {
+                                                                        controller
+                                                                            .isKaizensImplementedInvalid
+                                                                            .value = true;
+                                                                      }
+                                                                    }
+                                                                    ),
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                CustomRichText(
+                                                                    title:
+                                                                        'Cost inquired for implementation of Kaizens'),
+                                                                Dimens.boxWidth3,
+                                                                LoginCustomTextfield(
+                                                                    width: (MediaQuery.of(
+                                                                                context)
+                                                                            .size
+                                                                            .width *
+                                                                        .2),
+                                                                    textController:
+                                                                        controller
+                                                                            .CostForImplementationCtrl,
+                                                                    //validate
+                                                                    errorController: controller
+                                                                            .isCostForImplementationInvalid
+                                                                            .value
+                                                                        ? "Required field"
+                                                                        : null,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      if (value
+                                                                              .trim()
+                                                                              .length >
+                                                                          0) {
+                                                                        controller
+                                                                            .isCostForImplementationInvalid
+                                                                            .value = false;
+                                                                      } else {
+                                                                        controller
+                                                                            .isCostForImplementationInvalid
+                                                                            .value = true;
+                                                                      }
+                                                                    }
+                                                                    ),
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                CustomRichText(
+                                                                    title:
+                                                                        'Cost saved from the Implementation of Kaizens'),
+                                                                Dimens.boxWidth3,
+                                                                LoginCustomTextfield(
+                                                                    width: (MediaQuery.of(
+                                                                                context)
+                                                                            .size
+                                                                            .width *
+                                                                        .2),
+                                                                    textController:
+                                                                        controller
+                                                                            .CostSavedFromImplementationCtrl,
+                                                                    //validate
+                                                                    errorController: controller
+                                                                            .isCostSavedFromImplementationInvalid
+                                                                            .value
+                                                                        ? "Required field"
+                                                                        : null,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      if (value
+                                                                              .trim()
+                                                                              .length >
+                                                                          0) {
+                                                                        controller
+                                                                            .isCostSavedFromImplementationInvalid
+                                                                            .value = false;
+                                                                      } else {
+                                                                        controller
+                                                                            .isCostSavedFromImplementationInvalid
+                                                                            .value = true;
+                                                                      }
+                                                                    }
+                                                                    ),
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            
+                                                          ],
+                                                        ),
+                                                        Spacer(),
+                                                      ],
+                                                    ),
+                                                    Dimens.boxHeight15,
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+            ),
             
             floatingActionButton: 
                     Row(
