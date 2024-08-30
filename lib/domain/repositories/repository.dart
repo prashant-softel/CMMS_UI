@@ -1163,7 +1163,111 @@ class Repository {
       return Map();
     }
   }
+  // updateKaizenDetails
+  Future<Map<String, dynamic>> updateKaizenDetails(
+    updateKaizen,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateKaizenDetails(
+        auth: auth,
+        updateKaizen: updateKaizen,
+        isLoading: isLoading ?? false,
+      );
 
+      var resourceData = res.data;
+
+      print('Response  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Kiazen  update Successfully...",
+            fontSize: 16.0);
+
+        Get.offAllNamed(
+          Routes.kaizensListScreen,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateRegulatary');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+  // updatePlantationDetails
+  Future<Map<String, dynamic>> updatePlantationDetails(
+    updatePlantation,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updatePlantationDetails(
+        auth: auth,
+        updatePlantation: updatePlantation,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Plantation  update Successfully...",
+            fontSize: 16.0);
+
+        Get.offAllNamed(
+          Routes.plantationlistScreen,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateRegulatary');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+// updateFuelConsumption
+Future<Map<String, dynamic>> updateFuelConsumption(
+    updateFueldata,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateFuelConsumption(
+        auth: auth,
+        updateFueldata: updateFueldata,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Fuel Dsts  update Successfully...",
+            fontSize: 16.0);
+
+        Get.offAllNamed(
+          Routes.fueldataListScreen,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateFuel');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
 // createfuledata
   Future<Map<String, dynamic>> createfuledata(
       createfuledata, bool? isLoading) async {
@@ -1301,9 +1405,9 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Update Health Data  Successfully...", fontSize: 16.0);
-        // Get.offAllNamed(
-        //   Routes.viewWaterData,
-        // );
+        Get.offAllNamed(
+          Routes.occupationalDataListScreen,
+        );
       } else {
         Utility.showDialog(res.errorCode.toString(), 'update Water Data');
         //return '';
@@ -5745,6 +5849,7 @@ class Repository {
               'Remark',
               'Start Date',
               'Done Date',
+              'Abandoned Date',
               'Status',
             ],
             ...jsonDataList
@@ -5765,6 +5870,7 @@ class Repository {
                       mctaskjson['remark'],
                       mctaskjson['startDate'],
                       mctaskjson['doneDate'],
+                      mctaskjson['abondond_done_date'],
                       mctaskjson['status_short'],
                     ])
                 .toList(),
@@ -14658,24 +14764,40 @@ class Repository {
           List<dynamic> jsonDataList = jsonDecode(jsonData);
           List<List<dynamic>> data = [
             [
-              'id',
-              'title',
-              'plan_id',
-              'frequency',
-              'no_of_days',
-              'start_date',
-              'done_date',
-              'short_status',
+              'Site Name',
+              'Execution ID',
+              'Frequency',
+              'No Of Days',
+              'Title',
+              'Plan ID',
+              'Scheduled Qty',
+              'Actual Qty',
+              'Deviation',
+              'Abandoned?',
+              'Time Taken',
+              'Remarks',
+              'Start Date',
+              'Done Date',
+              'Abandoned Date',
+              'Status',
             ],
             ...jsonDataList
                 .map((vegexejson) => [
-                      vegexejson['id'],
-                      vegexejson['title'],
-                      vegexejson['planId'],
+                      vegexejson['sitename'],
+                      'VE${vegexejson['executionId']}',
                       vegexejson['frequency'],
                       vegexejson['noOfDays'],
+                      vegexejson['title'],
+                      'VC${vegexejson['planId']}',
+                      vegexejson['scheduled_Qnty'],
+                      vegexejson['actual_Qnty'],
+                      vegexejson['deviation'],
+                      vegexejson['abondend'],
+                      vegexejson['time_taken'],
+                      vegexejson['remark'],
                       vegexejson['startDate'],
                       vegexejson['doneDate'],
+                      vegexejson['abondond_done_date'],
                       vegexejson['status_short'],
                     ])
                 .toList(),

@@ -2,8 +2,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/create_occupationalhealth/create_occupationalhealth_presenter.dart';
 import 'package:cmms/app/create_regulataryvisits/create_regulataryvisits_presenter.dart';
 import 'package:cmms/domain/models/create_regulataryvisits_model.dart';
 import 'package:cmms/domain/models/get_visitandnotice_list_model.dart';
@@ -87,7 +85,7 @@ class CreateRegulataryVisitsController extends GetxController {
   @override
   void onInit() async {
     try {
-      await setOHId();
+      await setVHId();
 
       facilityIdStreamSubscription = homeController.facilityId$.listen(
         (event) async {
@@ -102,7 +100,7 @@ class CreateRegulataryVisitsController extends GetxController {
     }
   }
 
-  Future<void> setOHId() async {
+  Future<void> setVHId() async {
     try {
       GetVisitAndNoticeList? selectedItemhea;
       final _selectedItem = await createregulataryvisitsPresenter.getValue();
@@ -148,7 +146,6 @@ class CreateRegulataryVisitsController extends GetxController {
       // selectedTypePermit.value = grievanceType[0]?.name ?? '';
     }
   }
-
   void clearStoreData() {
     govtauthvisitsCtrl.clear();
     noOffinebythirdpartyCtrl.clear();

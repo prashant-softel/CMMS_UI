@@ -18,7 +18,7 @@ class FuelDataListController extends GetxController {
   RxList<GetFuelDataList> filteredData = <GetFuelDataList>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
-
+GetFuelDataList? selectedItem;
   String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
   String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);

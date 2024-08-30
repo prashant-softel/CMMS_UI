@@ -9,7 +9,7 @@ class CreateOccupationalModel {
   int? NoOfHealthExamsOfNewJoiner;
   int? PeriodicTests;
   int? OccupationalIllnesses;
-  int? CreatedBy;
+  // int? CreatedBy;
 
   
 
@@ -18,7 +18,7 @@ class CreateOccupationalModel {
     this.NoOfHealthExamsOfNewJoiner,
     this.PeriodicTests,
     this.OccupationalIllnesses,
-    this.CreatedBy,
+    // this.CreatedBy,
     this.date,
   
   });
@@ -29,7 +29,7 @@ class CreateOccupationalModel {
       NoOfHealthExamsOfNewJoiner: json['NoOfHealthExamsOfNewJoiner'],
       PeriodicTests: json['PeriodicTests'],
       OccupationalIllnesses: json['OccupationalIllnesses'],
-      CreatedBy: json['CreatedBy'],
+      // CreatedBy: json['CreatedBy'],
       id: json['id'],
       date: json['Date'],
     );
@@ -38,7 +38,7 @@ class CreateOccupationalModel {
         "NoOfHealthExamsOfNewJoiner": NoOfHealthExamsOfNewJoiner,
         "PeriodicTests": PeriodicTests,
         "OccupationalIllnesses": OccupationalIllnesses,
-        "CreatedBy": CreatedBy,
+        // "CreatedBy": CreatedBy,
         "id": id,
         "Date": date,
       };
