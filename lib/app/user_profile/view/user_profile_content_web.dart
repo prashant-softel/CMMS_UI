@@ -137,6 +137,10 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                         style: Styles.black17,
                                       ),
                                       Text(
+                                        'Date of Joining: ',
+                                        style: Styles.black17,
+                                      ),
+                                      Text(
                                         'Gender: ',
                                         style: Styles.black17,
                                       ),
@@ -172,6 +176,11 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                       Text(
                                           controller.userDetailModel.value
                                                   ?.first_name ??
+                                              "",
+                                          style: Styles.blue17),
+                                      Text(
+                                          controller.userDetailModel.value
+                                                  ?.joiningDate ??
                                               "",
                                           style: Styles.blue17),
                                       Text(
@@ -225,6 +234,10 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                         'Role: ',
                                         style: Styles.black17,
                                       ),
+                                      Text(
+                                        'Designation: ',
+                                        style: Styles.black17,
+                                      ),
                                     ],
                                   ),
                                   // Dimens.boxWidth15,
@@ -267,6 +280,11 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                       Text(
                                           controller.userDetailModel.value
                                                   ?.role_name ??
+                                              "",
+                                          style: Styles.blue17),
+                                      Text(
+                                          controller.userDetailModel.value
+                                                  ?.designation_name ??
                                               "",
                                           style: Styles.blue17),
                                     ],
