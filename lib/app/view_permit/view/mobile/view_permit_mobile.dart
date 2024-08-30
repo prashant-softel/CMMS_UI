@@ -876,12 +876,15 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                               Dimens.boxHeight10,
                               controller.viewPermitDetailsModel.value
                                           ?.ptwStatus ==
-                                      125
-                                  ? Column(
+                                      121
+                                  ? Dimens.box0
+                                  : Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Dimens.boxHeight10,
+                                        SizedBox(
+                                            height:
+                                                10), // Replacing Dimens.boxHeight10 for simplicity
                                         Text(
                                           "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
                                           style: TextStyle(
@@ -890,7 +893,9 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                             fontSize: Dimens.fourteen,
                                           ),
                                         ),
-                                        Dimens.boxHeight2,
+                                        SizedBox(
+                                            height:
+                                                2), // Replacing Dimens.boxHeight2 for simplicity
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 5),
@@ -900,9 +905,13 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                                 'Conducted At Job-Site By: ',
                                                 style: Styles.blackBold12,
                                               ),
-                                              Text(
-                                                '${controller.viewPermitDetailsModel.value?.tbT_Done_By}',
-                                                style: Styles.black12,
+                                              Expanded(
+                                                child: Text(
+                                                  '${controller.viewPermitDetailsModel.value?.tbT_Done_By}',
+                                                  style: Styles.black12,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -916,14 +925,20 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                                 'Date & Time: ',
                                                 style: Styles.blackBold12,
                                               ),
-                                              Text(
-                                                '${controller.viewPermitDetailsModel.value?.tbT_Done_At}',
-                                                style: Styles.black12,
+                                              Expanded(
+                                                child: Text(
+                                                  '${controller.viewPermitDetailsModel.value?.tbT_Done_At}',
+                                                  style: Styles.black12,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        Dimens.boxHeight8,
+                                        SizedBox(
+                                            height:
+                                                8), // Replacing Dimens.boxHeight8 for simplicity
                                         Text(
                                           "Employees",
                                           style: TextStyle(
@@ -935,48 +950,86 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                         ListView.builder(
                                           shrinkWrap: true,
                                           itemCount: controller
-                                              .viewPermitDetailsModel
-                                              .value
-                                              ?.employee_list
-                                              ?.length,
+                                                  .viewPermitDetailsModel
+                                                  .value
+                                                  ?.employee_list
+                                                  ?.length ??
+                                              0,
                                           itemBuilder: (context, index) {
+                                            var employee =
+                                                controller.listEmployee?[index];
                                             return Card(
                                               color: Colors.lightBlue.shade50,
-                                              elevation: 10,
-                                              shadowColor: Colors.black87,
+                                              elevation: 4,
+                                              shadowColor: Colors.black54,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(5.0),
+                                                    BorderRadius.circular(12.0),
                                               ),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 6, horizontal: 8),
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(8.0),
+                                                    const EdgeInsets.all(12.0),
                                                 child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
                                                       children: [
                                                         Expanded(
                                                           child: Text(
                                                             "Employee Name",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontSize: 14,
+                                                              color: Colors
+                                                                  .black87,
+                                                            ),
                                                           ),
                                                         ),
                                                         Expanded(
                                                           child: Text(
-                                                            "${controller.listEmployee?[index]?.empName}",
+                                                            "${employee?.empName ?? ''}",
+                                                            style: TextStyle(
+                                                              fontSize: 14,
+                                                              color: Colors
+                                                                  .black54,
+                                                            ),
+                                                            textAlign:
+                                                                TextAlign.right,
                                                           ),
                                                         ),
                                                       ],
                                                     ),
+                                                    SizedBox(height: 8),
                                                     Row(
                                                       children: [
                                                         Expanded(
                                                           child: Text(
                                                             "Responsibility",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontSize: 14,
+                                                              color: Colors
+                                                                  .black87,
+                                                            ),
                                                           ),
                                                         ),
                                                         Expanded(
                                                           child: Text(
-                                                            "${controller.listEmployee?[index]?.resp}",
+                                                            "${employee?.resp ?? ''}",
+                                                            style: TextStyle(
+                                                              fontSize: 14,
+                                                              color: Colors
+                                                                  .black54,
+                                                            ),
+                                                            textAlign:
+                                                                TextAlign.right,
                                                           ),
                                                         ),
                                                       ],
@@ -988,8 +1041,7 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                           },
                                         ),
                                       ],
-                                    )
-                                  : Dimens.box0,
+                                    ),
                               Dimens.boxHeight15,
                               controller.historyList!.isEmpty
                                   ? Dimens.box0
@@ -1218,17 +1270,30 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                 spacing: 2,
                 runSpacing: 2,
                 children: [
+                  // SizedBox(
+                  //   width: MediaQuery.of(context).size.width * 0.19,
+                  // ),
+
                   // controller.viewPermitDetailsModel.value?.ptwStatus ==
-                  //         PermitStatusConstants.PTW_APPROVE
-                  //     ? CustomElevatedButton(
-                  //         icon: Icons.print_outlined,
-                  //         backgroundColor: ColorValues.appDarkBlueColor,
-                  //         text: "Print",
-                  //         onPressed: () {
-                  //           controller.generateInvoice();
-                  //         },
+                  //         PermitStatusConstants.PTW_APPROVE //125
+                  //     ///Printing functionality
+                  //     ? Padding(
+                  //         padding: const EdgeInsets.only(left: 5),
+                  //         child: Container(
+                  //           height: 45,
+                  //           child: CustomElevatedButton(
+                  //             icon: Icons.print_outlined,
+                  //             backgroundColor: ColorValues.appDarkBlueColor,
+                  //             text: "Print",
+                  //             onPressed: () {
+                  //               controller.generateInvoice();
+                  //             },
+                  //           ),
+                  //         ),
                   //       )
                   //     : Dimens.box0,
+
+                  ///Approve Button
                   varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
@@ -1240,24 +1305,35 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_CREATED
-                      ? CustomElevatedButton(
-                          backgroundColor: ColorValues.appGreenColor,
-                          text: "Approve",
-                          icon: Icons.check,
-                          onPressed: () {
-                            // controller
-                            //     .createNewPermit();
-                            Get.dialog(PermitApprovedDialog(
-                                permitId: controller
-                                    .viewPermitDetailsModel.value?.permitNo,
-                                ptwStatus:
-                                    '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                                jobId: controller.jobId.value,
-                                type: controller.type.value));
-                          },
+                              PermitStatusConstants.PTW_CREATED //121
+                      // ||
+                      // controller.viewPermitDetailsModel.value?.ptwStatus ==
+                      //     PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                text: "Approve Permit",
+                                icon: Icons.check,
+                                onPressed: () {
+                                  // controller
+                                  //     .createNewPermit();
+                                  Get.dialog(PermitApprovedDialog(
+                                      permitId: controller
+                                          .viewPermitDetailsModel
+                                          .value
+                                          ?.permitNo,
+                                      ptwStatus:
+                                          '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                                      jobId: controller.jobId.value,
+                                      type: controller.type.value));
+                                },
+                              )),
                         )
                       : Dimens.box0,
+
                   varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
@@ -1269,22 +1345,32 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_EXTEND_REQUESTED
-                      ? CustomElevatedButton(
-                          backgroundColor: ColorValues.appGreenColor,
-                          text: "Extend Approve",
-                          icon: Icons.check,
-                          onPressed: () {
-                            Get.dialog(PermitApprovedDialog(
-                              permitId: controller
-                                  .viewPermitDetailsModel.value?.permitNo,
-                              ptwStatus:
-                                  '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                              jobId: controller.jobId.value,
-                            ));
-                          },
+                              PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                text: "Extend Approve",
+                                icon: Icons.check,
+                                onPressed: () {
+                                  // controller
+                                  //     .createNewPermit();
+                                  Get.dialog(PermitApprovedDialog(
+                                    permitId: controller
+                                        .viewPermitDetailsModel.value?.permitNo,
+                                    ptwStatus:
+                                        '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                                    jobId: controller.jobId.value,
+                                  ));
+                                },
+                              )),
                         )
                       : Dimens.box0,
+
+                  // Dimens.boxWidth5,
+
                   varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
@@ -1296,58 +1382,76 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_EXTEND_REQUESTED
-                      ? CustomElevatedButton(
-                          backgroundColor: ColorValues.appRedColor,
-                          text: "Extend Reject",
-                          icon: Icons.close,
-                          onPressed: () {
-                            // controller
-                            //     .createNewPermit();
-                            Get.dialog(PermitRejectDialog(
-                              permitId: controller
-                                  .viewPermitDetailsModel.value?.permitNo,
-                              ptwStatus:
-                                  '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                              jobId: controller.jobId.value,
-                            ));
-                          },
+                              PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appRedColor,
+                                text: "Extend Reject",
+                                icon: Icons.close,
+                                onPressed: () {
+                                  // controller
+                                  //     .createNewPermit();
+                                  Get.dialog(PermitRejectDialog(
+                                    permitId: controller
+                                        .viewPermitDetailsModel.value?.permitNo,
+                                    ptwStatus:
+                                        '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                                    jobId: controller.jobId.value,
+                                  ));
+                                },
+                              )),
                         )
                       : Dimens.box0,
-                  controller.viewPermitDetailsModel.value?.isExpired == 1 ||
-                          controller.viewPermitDetailsModel.value
-                                      ?.requester_id ==
-                                  varUserAccessModel.value.user_id &&
-                              controller.viewPermitDetailsModel.value
-                                      ?.ptwStatus ==
-                                  PermitStatusConstants.PTW_APPROVE &&
-                              varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kPermitFeatureId &&
-                                          e.edit ==
-                                              UserAccessConstants
-                                                  .kHaveEditAccess)
-                                      .length >
-                                  0 &&
-                              controller.isOneHour(
-                                      controller.validTillTimeCtrlr.text) ==
-                                  true
-                      ? CustomElevatedButton(
-                          backgroundColor: ColorValues.appDarkBlueColor,
-                          text: "Extend",
-                          icon: Icons.expand_outlined,
-                          onPressed: () {
-                            // controller
-                            Get.dialog(PermitExtendDialog(
-                              permitId:
-                                  '${controller.viewPermitDetailsModel.value?.permitNo}',
-                              jobId: controller.jobId.value,
-                            ));
-                          },
+
+                  // Dimens.boxWidth5,
+
+                  ///Extend Permit Button
+
+                  // controller.viewPermitDetailsModel.value?.isExpired == 1 ||
+                  controller.viewPermitDetailsModel.value!.tbT_Done_Check ==
+                              1 &&
+                          controller
+                                  .viewPermitDetailsModel.value?.requester_id ==
+                              varUserAccessModel.value.user_id &&
+                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                              PermitStatusConstants.PTW_APPROVE &&
+                          varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kPermitFeatureId &&
+                                      e.edit ==
+                                          UserAccessConstants.kHaveEditAccess)
+                                  .length >
+                              0 &&
+                          controller.isOneHour(
+                                  controller.validTillTimeCtrlr.text) ==
+                              true
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appDarkBlueColor,
+                                text: "Extend Permit",
+                                icon: Icons.expand_outlined,
+                                onPressed: () {
+                                  Get.dialog(PermitExtendDialog(
+                                    permitId:
+                                        '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                    jobId: controller.jobId.value,
+                                  ));
+                                },
+                              )),
                         )
                       : Dimens.box0,
+
+                  // Dimens.boxWidth5,
+
+                  ///Close Permit Request
                   varUserAccessModel.value.access_list!
                                       .where((e) =>
                                           e.feature_id ==
@@ -1368,19 +1472,28 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                           ||
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
                               PermitStatusConstants.PTW_EXTEND_REQUEST_REJECTED
-                      ? CustomElevatedButton(
-                          backgroundColor: ColorValues.appcloseRedColor,
-                          text: "Close",
-                          icon: Icons.close,
-                          onPressed: () {
-                            Get.dialog(PermitCloseDialog(
-                              permitId:
-                                  '${controller.viewPermitDetailsModel.value?.permitNo}',
-                              jobId: controller.jobId.value,
-                            ));
-                          },
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appcloseRedColor,
+                                text: "Close Permit",
+                                icon: Icons.close,
+                                onPressed: () {
+                                  Get.dialog(PermitCloseDialog(
+                                    permitId:
+                                        '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                    jobId: controller.jobId.value,
+                                  ));
+                                },
+                              )),
                         )
                       : Dimens.box0,
+
+                  // Dimens.boxWidth5,
+
+                  ///Reject Button
                   varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
@@ -1392,71 +1505,83 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_CREATED
-                      ? CustomElevatedButton(
-                          backgroundColor: ColorValues.appRedColor,
-                          text: "Reject",
-                          icon: Icons.close,
-                          onPressed: () {
-                            // controller
-                            //     .createNewPermit();
-                            Get.dialog(PermitRejectDialog(
-                              permitId: controller
-                                  .viewPermitDetailsModel.value?.permitNo,
-                              ptwStatus:
-                                  '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                              jobId: controller.jobId.value,
-                            ));
-                          },
+                              PermitStatusConstants.PTW_CREATED //121
+
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appRedColor,
+                                text: "Reject Permit",
+                                icon: Icons.close,
+                                onPressed: () {
+                                  // controller
+                                  //     .createNewPermit();
+                                  Get.dialog(PermitRejectDialog(
+                                    permitId: controller
+                                        .viewPermitDetailsModel.value?.permitNo,
+                                    ptwStatus:
+                                        '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                                    jobId: controller.jobId.value,
+                                  ));
+                                },
+                              )),
                         )
                       : Dimens.box0,
-                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kPermitFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess).length > 0 &&
+
+                  (varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants
+                                                  .kPermitFeatureId &&
+                                          e.approve ==
+                                              UserAccessConstants
+                                                  .kHaveApproveAccess)
+                                      .length >
+                                  0 ||
                               varUserAccessModel.value.access_list!
                                       .where((e) =>
                                           e.feature_id ==
                                               UserAccessConstants
                                                   .kPermitFeatureId &&
-                                          e.edit ==
+                                          e.add ==
                                               UserAccessConstants
-                                                  .kHaveEditAccess)
+                                                  .kHaveAddAccess)
                                       .length >
-                                  0 ||
-                          varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kPermitFeatureId &&
-                                          e.edit ==
-                                              UserAccessConstants
-                                                  .kHaveEditAccess)
-                                      .length >
-                                  0 &&
-                              controller.viewPermitDetailsModel.value?.ptwStatus ==
-                                  PermitStatusConstants.PTW_APPROVE //125
-                          ||
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_CREATED //121
-                          ||
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                                  0) &&
+                          (controller.viewPermitDetailsModel.value?.ptwStatus !=
                               PermitStatusConstants
-                                  .PTW_EXTEND_REQUEST_REJECTED ||
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_CANCEL_REQUEST_REJECTED
-                      ? CustomElevatedButton(
-                          backgroundColor: ColorValues.appRedColor,
-                          text: "Cancel",
-                          icon: Icons.close,
-                          onPressed: () {
-                            Get.dialog(
-                              PermitCancelReQuestDialog(
-                                permitId:
-                                    '${controller.viewPermitDetailsModel.value?.permitNo}',
-                                jobId: controller.jobId.value,
-                              ),
-                            );
-                          },
+                                  .PTW_CANCEL_REQUEST_APPROVED) &&
+                          (controller.viewPermitDetailsModel.value?.ptwStatus !=
+                              PermitStatusConstants
+                                  .PTW_EXTEND_REQUEST_REJECTED) &&
+                          (controller.viewPermitDetailsModel.value?.ptwStatus !=
+                              PermitStatusConstants.PTW_CLOSED)
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appRedColor,
+                                text: "Cancel Permit",
+                                icon: Icons.close,
+                                onPressed: () {
+                                  Get.dialog(
+                                    PermitCancelReQuestDialog(
+                                      permitId:
+                                          '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                      jobId: controller.jobId.value,
+                                    ),
+                                  );
+                                },
+                              )),
                         )
                       : Dimens.box0,
+
+                  // Dimens.boxWidth5,
+
+                  /// Edit Button
                   varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
@@ -1467,17 +1592,25 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_CREATED
-                      ? CustomElevatedButton(
-                          backgroundColor: ColorValues.appYellowColor,
-                          text: "Edit",
-                          icon: Icons.close,
-                          onPressed: () {
-                            controller.editNewPermit(
-                                permitId: controller
-                                    .viewPermitDetailsModel.value?.permitNo,
-                                isChecked: controller.isChecked.value);
-                          },
+                              PermitStatusConstants.PTW_CREATED //121
+
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appYellowColor,
+                                text: "Edit Permit",
+                                icon: Icons.edit,
+                                onPressed: () {
+                                  controller.editNewPermit(
+                                      permitId: controller
+                                          .viewPermitDetailsModel
+                                          .value
+                                          ?.permitNo,
+                                      isChecked: controller.isChecked.value);
+                                },
+                              )),
                         )
                       : Dimens.box0,
                 ],
