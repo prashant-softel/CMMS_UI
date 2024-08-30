@@ -737,7 +737,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                             style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                           )
                                                                                                         : (mapData['key'] == "Actions")
-                                                                                                            ? Wrap(
+                                                                                                            ? 
+                                                                                                            Wrap(
                                                                                                                 children: [
                                                                                                                   controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.permit_id == 0 && controller.mcExecutionDetailsModel.value?.status == 361
                                                                                                                       ? TableActionButton(
@@ -958,6 +959,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                       : Dimens.box0,
                                                                                                                 ],
                                                                                                               )
+                                                                                                        
                                                                                                             : Text(mapData['key'] ?? ''),
                                                       );
                                                     }).toList(),

@@ -167,40 +167,107 @@ class NewPermitMobile extends GetView<NewPermitController> {
                           title: "Equipment Categories: ",
                         ),
                         Dimens.boxHeight2,
-                        IgnorePointer(
-                          ignoring: controller.pmtaskViewModel?.id != null ||
-                                  controller.jobModel?.id != null
-                              ? true
-                              : false,
-                          child: Obx(
-                            () => SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.1,
-                              child: CustomMultiSelectDialogField(
-                                title: 'Please Select',
-                                buttonText: 'Equipment Category',
-                                initialValue: (controller
-                                        .selectedEquipmentCategoryIdList
-                                        .isNotEmpty)
-                                    ? controller.selectedEquipmentCategoryIdList
-                                    : [],
-                                items: controller.equipmentCategoryList
-                                    .map(
-                                      (equipmentCategory) => MultiSelectItem(
-                                        equipmentCategory?.id,
-                                        equipmentCategory?.name ?? '',
+                        controller.pmtaskViewModel?.id != null ||
+                                controller.jobModel?.id != null
+                            ? IgnorePointer(
+                                child: Obx(
+                                  () => SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.1,
+                                    child: CustomMultiSelectDialogField(
+                                      title: 'Select Equipment Category',
+                                      // buttonText:
+                                      //     'Equipment Category',
+                                      initialValue: ((controller
+                                              .selectedEquipmentCategoryIdList
+                                              .isNotEmpty)
+                                          ? controller
+                                              .selectedEquipmentCategoryIdList
+                                          : []),
+                                      items: controller.equipmentCategoryList
+                                          .map(
+                                            (equipmentCategory) =>
+                                                MultiSelectItem(
+                                              equipmentCategory?.id,
+                                              equipmentCategory?.name ?? '',
+                                            ),
+                                          )
+                                          .toList(),
+                                      onConfirm: (selectedOptionsList) => {
+                                        controller.equipmentCategoriesSelected(
+                                            selectedOptionsList),
+                                        print(
+                                            'Equipment list ${controller.selectedEquipmentCategoryIdList}')
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : SizedBox(
+                                width: MediaQuery.of(context).size.width / 1.1,
+                                child: Obx(
+                                  () {
+                                    if (controller
+                                        .equipmentCategoryList.isEmpty) {
+                                      return CustomMultiSelectDialogField(
+                                        onConfirm: (selectedOptionsList) {},
+                                        buttonText: "",
+                                        initialValue: [],
+                                        items: [],
+                                        title: "",
+                                      );
+                                    }
+
+                                    final initialValue = controller.typee ==
+                                                4 ||
+                                            controller.typee == 5
+                                        ? controller.equipmentCategoryList
+                                                ?.where((category) =>
+                                                    category?.name ==
+                                                    'Inverter')
+                                                ?.map(
+                                                    (category) => category?.id)
+                                                ?.toList() ??
+                                            []
+                                        : (controller
+                                                .selectedEquipmentCategoryIdList
+                                                .isNotEmpty
+                                            ? controller
+                                                .selectedEquipmentCategoryIdList
+                                            : []);
+
+                                    print('Initial Value: $initialValue');
+
+                                    return IgnorePointer(
+                                      ignoring: controller.typee == 4,
+                                      child: CustomMultiSelectDialogField(
+                                        title: 'Please Select',
+                                        buttonText: 'Equipment Category',
+                                        initialValue: initialValue,
+                                        items: controller.equipmentCategoryList
+                                                ?.map(
+                                                  (equipmentCategory) =>
+                                                      MultiSelectItem(
+                                                    equipmentCategory!.id,
+                                                    equipmentCategory.name,
+                                                  ),
+                                                )
+                                                ?.toList() ??
+                                            [],
+                                        onConfirm: (selectedOptionsList) {
+                                          controller
+                                              .equipmentCategoriesSelected(
+                                                  selectedOptionsList);
+                                          print(
+                                              'Selected Equipment Categories: $selectedOptionsList');
+                                          print(
+                                              'Updated Selected Categories in Controller: ${controller.selectedEquipmentCategoryIdList}');
+                                        },
                                       ),
-                                    )
-                                    .toList(),
-                                onConfirm: (selectedOptionsList) => {
-                                  controller.equipmentCategoriesSelected(
-                                      selectedOptionsList),
-                                  print(
-                                      'Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
-                                },
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
                         Dimens.boxHeight15,
                         CustomRichTextMobile(title: 'Start Date: '),
                         Dimens.boxHeight2,
@@ -725,7 +792,6 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                 ),
                               )
                             : Dimens.box0,
-                            
                         Dimens.boxHeight15,
                         controller.newPermitDetailsModel.value?.ptwStatus ==
                                     125 &&
@@ -743,13 +809,14 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                 ),
                               )
                             : Dimens.box0,
+                        //issue
                         controller.newPermitDetailsModel.value?.ptwStatus ==
                                     125 &&
                                 controller.newPermitDetailsModel.value
                                         ?.is_TBT_Expire ==
                                     false
                             ? Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomRichTextMobile(
                                       title: 'Conducted At Job-Site By: '),
@@ -804,77 +871,101 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                       },
                                     ),
                                   ),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 2,
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Container(
-                                        width: Get.width * 2,
-                                        constraints:
-                                            BoxConstraints(minHeight: 100),
-                                        height: ((controller
-                                                .filteredEquipmentNameList
-                                                .length) *
-                                            60),
-                                        // 90,
-                                        child: DataTable2(
-                                          columns: [
-                                            DataColumn2(
-                                                label: Text("Employee Name")),
-                                            DataColumn2(
-                                                label: Text("Contact No")),
-                                            DataColumn2(
-                                                label: Text("Responsibility")),
-                                            DataColumn2(
-                                                label: Text("Responsibility")),
-                                          ],
-                                          rows: List<DataRow>.generate(
-                                            controller.filteredEmployeeNameList
-                                                .length,
-                                            (index) {
-                                              var employeeNameDetails = controller
-                                                      .filteredEmployeeNameList[
-                                                  index];
-                                              return DataRow(cells: [
-                                                DataCell(Text(
-                                                    '${employeeNameDetails?.name ?? ''}')),
-                                                DataCell(Text(
-                                                    '${employeeNameDetails?.mobileNumber ?? ''}')),
-                                                DataCell(Text(
-                                                    '${employeeNameDetails?.responsibility?.map((e) => e.name) ?? ''}')),
-                                                DataCell(
-                                                  Wrap(
-                                                    children: [
-                                                      TableActionButton(
-                                                        color: Colors.red,
-                                                        icon: Icons
-                                                            .delete_outline,
-                                                        message: 'Remove',
-                                                        onPress: () {
-                                                          // Call the removeItem method of the controller
-                                                          _removeRow(index);
-                                                          print("index");
-                                                        },
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              ]);
-                                            },
-                                          ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Column(
+                                      children: [
+                                        SizedBox(height: 10),
+                                        ...List<Widget>.generate(
+                                          controller
+                                              .filteredEmployeeNameList.length,
+                                          (index) {
+                                            var employeeNameDetails = controller
+                                                    .filteredEmployeeNameList[
+                                                index];
+                                            return Card(
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 5),
+                                              elevation: 2,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  border: Border.all(
+                                                      color: Colors.grey[300]!,
+                                                      width: 1),
+                                                ),
+                                                padding: EdgeInsets.all(16),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Employee Name: ${employeeNameDetails?.name ?? ''}',
+                                                      style: TextStyle(
+                                                        color: Colors.grey[700],
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 8),
+                                                    Text(
+                                                      'Contact Number: ${employeeNameDetails?.mobileNumber ?? ''}',
+                                                      style: TextStyle(
+                                                        color: Colors.grey[700],
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 8),
+                                                    Text(
+                                                      'Designation: ${employeeNameDetails?.designation ?? 'NO Designation'}',
+                                                      style: TextStyle(
+                                                        color: Colors.grey[700],
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 8),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        IconButton(
+                                                          icon: Icon(
+                                                              Icons
+                                                                  .delete_outline,
+                                                              color:
+                                                                  Colors.red),
+                                                          onPressed: () {
+                                                            _removeRow(index);
+                                                          },
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ),
                                   Dimens.boxHeight15,
                                 ],
                               )
                             : Dimens.box0,
+
                         CustomRichTextMobile(title: "Comments: "),
                         Dimens.boxHeight2,
                         _buildPermitCommentField_mobile(context),
                         Dimens.boxHeight20,
+                        //issue
                         controller.jobModel?.id != null
                             ? Center(
                                 child: Container(
@@ -1181,41 +1272,41 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                                           ),
                                                         )
                                                       : Dimens.box0,
-                                                  controller.newPermitDetailsModel.value
-                                                                  ?.ptwStatus ==
-                                                              125 &&
-                                                          controller
-                                                                  .newPermitDetailsModel
-                                                                  .value
-                                                                  ?.is_TBT_Expire ==
-                                                              true
-                                                      ? Container(
-                                                          height: 45,
-                                                          child:
-                                                              CustomElevatedButton(
-                                                            backgroundColor:
-                                                                ColorValues
-                                                                    .appRedColor,
-                                                            text:
-                                                                "Cancel Permit",
-                                                            icon: Icons.close,
-                                                            onPressed: () {
-                                                              Get.dialog(
-                                                                PermitCancelReQuestDialog(
-                                                                  permitId:
-                                                                      '${controller.permitId.value}',
-                                                                  jobId: controller
-                                                                      .jobModel!
-                                                                      .id,
-                                                                ),
-                                                              );
-                                                              print(
-                                                                  "Permit ID TO Cancel: ${controller.permitId.value}");
-                                                              print(
-                                                                  "JobId To cancel: ${controller.jobModel!.id}");
-                                                            },
-                                                          ))
-                                                      : Dimens.box0,
+                                                  // controller.newPermitDetailsModel.value
+                                                  //                 ?.ptwStatus ==
+                                                  //             125 &&
+                                                  //         controller
+                                                  //                 .newPermitDetailsModel
+                                                  //                 .value
+                                                  //                 ?.is_TBT_Expire ==
+                                                  //             true
+                                                  //     ? Container(
+                                                  //         height: 45,
+                                                  //         child:
+                                                  //             CustomElevatedButton(
+                                                  //           backgroundColor:
+                                                  //               ColorValues
+                                                  //                   .appRedColor,
+                                                  //           text:
+                                                  //               "Cancel Permit",
+                                                  //           icon: Icons.close,
+                                                  //           onPressed: () {
+                                                  //             Get.dialog(
+                                                  //               PermitCancelReQuestDialog(
+                                                  //                 permitId:
+                                                  //                     '${controller.permitId.value}',
+                                                  //                 jobId: controller
+                                                  //                     .jobModel!
+                                                  //                     .id,
+                                                  //               ),
+                                                  //             );
+                                                  //             print(
+                                                  //                 "Permit ID TO Cancel: ${controller.permitId.value}");
+                                                  //             print(
+                                                  //                 "JobId To cancel: ${controller.jobModel!.id}");
+                                                  //           },
+                                                  //         ))
+                                                  //     : Dimens.box0,
                                                 ],
                                               ),
                       ],
@@ -1829,9 +1920,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
   Widget _buildDateTimeField_mobile(
     BuildContext context,
   ) {
-    return Column(//
-        children: [
-      Dimens.boxHeight5,
+    return Column(children: [
       Container(
         width: MediaQuery.of(context).size.width / 1.1,
         decoration: BoxDecoration(
@@ -1876,7 +1965,6 @@ class NewPermitMobile extends GetView<NewPermitController> {
           onChanged: (value) {},
         ),
       ),
-      Dimens.boxHeight20,
     ]);
   }
 
