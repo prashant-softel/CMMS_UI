@@ -1015,7 +1015,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title: 'Title: '),
+                                                    title: 'Permit Description: '),
                                                 Expanded(
                                                   child:
                                                       _buildPermitDescriptionField_web(
