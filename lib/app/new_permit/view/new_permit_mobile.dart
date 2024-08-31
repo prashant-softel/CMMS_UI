@@ -275,8 +275,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                   ),
                                   SizedBox(height: 5),
                                   Text(
-                                    'Assigned To: ${controller.jobModel?.assignedName
-                                     ?? ""}',
+                                    'Assigned To: ${controller.jobModel?.assignedName ?? ""}',
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -1806,7 +1805,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
 
   Widget _buildPermitDescriptionField_mobile(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      CustomRichTextMobile(title: 'Title : '),
+      CustomRichTextMobile(title: 'Permit Description : '),
       Dimens.boxHeight2,
       Container(
         decoration: BoxDecoration(
