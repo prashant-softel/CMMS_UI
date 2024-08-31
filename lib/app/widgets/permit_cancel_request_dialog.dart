@@ -290,26 +290,30 @@ class PermitCancelReQuestDialog extends GetView {
   List<Widget> _buildActions(BuildContext context) {
     return Responsive.isDesktop(context)
         ? [
-            Dimens.boxWidth10,
-            ElevatedButton(
-              style: Styles.darkRedElevatedButtonStyle,
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('Cancel'),
-            ),
-            Dimens.boxWidth20,
-            ElevatedButton(
-              style: Styles.greenElevatedButtonStyle,
-              onPressed: () {
-                controller.permitCancelRequestButton(
-                    permitId: permitId,
-                    fileIds: dropzoneController.fileIds,
-                    jobId: jobId);
-                Get.back();
-              },
-              child: const Text('Cancel Permit'),
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: Styles.darkRedElevatedButtonStyle,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text('Cancel'),
+                ),
+                Dimens.boxWidth10,
+                ElevatedButton(
+                  style: Styles.greenElevatedButtonStyle,
+                  onPressed: () {
+                    controller.permitCancelRequestButton(
+                        permitId: permitId,
+                        fileIds: dropzoneController.fileIds,
+                        jobId: jobId);
+                    Get.back();
+                  },
+                  child: const Text('Cancel Permit'),
+                ),
+              ],
+            )
           ]
         : [
             SizedBox(height: 20),
