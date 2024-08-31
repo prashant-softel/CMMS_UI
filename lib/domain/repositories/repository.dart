@@ -6210,7 +6210,44 @@ Future<Map<String, dynamic>> updateFuelConsumption(
       print(error.toString());
     }
   }
+//deleteKaizen
+Future<void> deleteKaizen({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteKaizen(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
 
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+  //deletePlantation
+  Future<void> deletePlantation({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deletePlantation(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
   Future<bool> createGrievanceType({bool? isLoading, grievanceJson}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);

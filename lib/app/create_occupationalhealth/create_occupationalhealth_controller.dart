@@ -19,7 +19,7 @@ class CreateOccupationalhealthController extends GetxController {
   final HomeController homeController = Get.find();
 
   
-
+Rx<bool> isFormInvalid = false.obs;
  var noofhealthexamsofnewjoinerCtrl = TextEditingController();
  var periodictestsCtrl = TextEditingController();
  var occupationalillnessesCtrl = TextEditingController();
@@ -177,5 +177,19 @@ void updateOccupationalDetails() async {
     occupationalillnessesCtrl.clear();
     createOccupationalhealthPresenter.clearValue();
   }
+ void checkForm(){
+  if(noofhealthexamsofnewjoinerCtrl.text.trim()==''){
+isFormInvalid.value = true;
+isHeathExamInvalid.value=true;
+  }
+  if(periodictestsCtrl.text.trim()==''){
+isFormInvalid.value = true;
+isPeriodictestInvalid.value=true;
+  }
+  if(occupationalillnessesCtrl.text.trim()==''){
+isFormInvalid.value = true;
+isOccupationalIllnessesInvalid.value=true;
+  }
+ }
  
 }

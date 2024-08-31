@@ -18,4 +18,14 @@ class KaizensDataListPresenter {
     );
   }
    void clearValue() async => kaizensdataListUsecase.clearValue();
+   //deleteKaizen
+
+   deleteKaizen({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await kaizensdataListUsecase.deleteKaizen(
+        Id: Id,
+        isLoading: isLoading,
+      );
 }

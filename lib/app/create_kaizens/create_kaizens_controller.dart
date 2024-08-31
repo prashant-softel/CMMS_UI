@@ -17,34 +17,38 @@ class CreateKaizensDataController extends GetxController {
   );
   CreateKaizensdataPresenter createkaizensdataPresenter;
   final HomeController homeController = Get.find();
-   StreamSubscription<int>? facilityIdStreamSubscription;
-   RxList<GetKaizensDataList?> kaizendataType =
-      <GetKaizensDataList>[].obs;
-   GetKaizensDataList? selectedItem;
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  RxList<GetKaizensDataList?> kaizendataType = <GetKaizensDataList>[].obs;
+  GetKaizensDataList? selectedItem;
+  Rx<bool> isFormInvalid = false.obs;
   //createkaizensdata
   var KaizensImplementedCtrl = TextEditingController();
- var CostForImplementationCtrl = TextEditingController();
- var CostSavedFromImplementationCtrl = TextEditingController();
+  var CostForImplementationCtrl = TextEditingController();
+  var CostSavedFromImplementationCtrl = TextEditingController();
 
+  Rx<bool> isKaizensImplementedInvalid = false.obs;
+  Rx<bool> isCostForImplementationInvalid = false.obs;
+  Rx<bool> isCostSavedFromImplementationInvalid = false.obs;
 
- Rx<bool> isKaizensImplementedInvalid = false.obs;
- Rx<bool> isCostForImplementationInvalid = false.obs;
- Rx<bool> isCostSavedFromImplementationInvalid = false.obs;
+  void createkaizensdata({List<dynamic>? fileIds}) async {
+    try {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
 
-
-
-void createkaizensdata({ List<dynamic>? fileIds}) async {
-     try {
-     
-       int _KaizensImplementedCtrl = int.tryParse(KaizensImplementedCtrl.text.trim())?? 0;
-       int _CostForImplementationCtrl = int.tryParse(CostForImplementationCtrl.text.trim())?? 0;
-       int _CostSavedFromImplementationCtrl = int.tryParse(CostSavedFromImplementationCtrl.text.trim())?? 0;
+      int _KaizensImplementedCtrl =
+          int.tryParse(KaizensImplementedCtrl.text.trim()) ?? 0;
+      int _CostForImplementationCtrl =
+          int.tryParse(CostForImplementationCtrl.text.trim()) ?? 0;
+      int _CostSavedFromImplementationCtrl =
+          int.tryParse(CostSavedFromImplementationCtrl.text.trim()) ?? 0;
 
       CreateKaizensModel createkaizensdataModel = CreateKaizensModel(
         KaizensImplemented: _KaizensImplementedCtrl,
         CostForImplementation: _CostForImplementationCtrl,
         CostSavedFromImplementation: _CostSavedFromImplementationCtrl,
-        id:0,
+        id: 0,
         // date:"2024-08-18",
       );
 
@@ -57,7 +61,6 @@ void createkaizensdata({ List<dynamic>? fileIds}) async {
         createkaizensdata: CreateKaizenDataModelFromJson,
         isLoading: true,
       );
-      
 
       // Handle the response
       if (responsecreateoccupationalModel == null) {
@@ -68,7 +71,8 @@ void createkaizensdata({ List<dynamic>? fileIds}) async {
     } catch (e) {
       print(e);
     }
- }
+  }
+
   // update API
   @override
   void onInit() async {
@@ -80,14 +84,19 @@ void createkaizensdata({ List<dynamic>? fileIds}) async {
       print(e);
     }
   }
+
   Future<void> setKDId() async {
     try {
-       if (Get.arguments != null) {
-      var dataFromPreviousScreen = Get.arguments;
-      selectedItem = dataFromPreviousScreen['selectedItem'];
-    } else {
-      selectedItem = GetKaizensDataList(id: 0, kaizensImplemented: 0, costForImplementation: 0, costSavedFromImplementation: 0);
-    }
+      if (Get.arguments != null) {
+        var dataFromPreviousScreen = Get.arguments;
+        selectedItem = dataFromPreviousScreen['selectedItem'];
+      } else {
+        selectedItem = GetKaizensDataList(
+            id: 0,
+            kaizensImplemented: 0,
+            costForImplementation: 0,
+            costSavedFromImplementation: 0);
+      }
       GetKaizensDataList? selectedItemhea;
       final _selectedItem = await createkaizensdataPresenter.getValue();
       if (_selectedItem!.isNotEmpty) {
@@ -103,40 +112,44 @@ void createkaizensdata({ List<dynamic>? fileIds}) async {
         selectedItem = selectedItemhea;
       }
       if (selectedItem != null) {
-KaizensImplementedCtrl.text=selectedItem!.kaizensImplemented.toString();
-CostForImplementationCtrl.text=selectedItem!.costForImplementation.toString();
-CostSavedFromImplementationCtrl.text=selectedItem!.costSavedFromImplementation.toString();
+        KaizensImplementedCtrl.text =
+            selectedItem!.kaizensImplemented.toString();
+        CostForImplementationCtrl.text =
+            selectedItem!.costForImplementation.toString();
+        CostSavedFromImplementationCtrl.text =
+            selectedItem!.costSavedFromImplementation.toString();
       }
     } catch (e) {
       print(e.toString() + 'KaizenId');
       //  Utility.showDialog(e.toString() + 'userId');
     }
   }
-    void clearStoreData() {
+
+  void clearStoreData() {
     KaizensImplementedCtrl.clear();
     CostForImplementationCtrl.clear();
     CostSavedFromImplementationCtrl.clear();
   }
+
   void updateKaizenDetails() async {
     int _id = selectedItem?.id ?? 0;
 
-    int _KaizensImplementedCtrl = int.tryParse(KaizensImplementedCtrl.text.trim()) ?? 0;
+    int _KaizensImplementedCtrl =
+        int.tryParse(KaizensImplementedCtrl.text.trim()) ?? 0;
     int _CostForImplementationCtrl =
         int.tryParse(CostForImplementationCtrl.text.trim()) ?? 0;
     int _CostSavedFromImplementationCtrl =
         int.tryParse(CostSavedFromImplementationCtrl.text.trim()) ?? 0;
 
-
     CreateKaizensModel createkaizensdataModel = CreateKaizensModel(
       id: _id,
-              KaizensImplemented: _KaizensImplementedCtrl,
-        CostForImplementation: _CostForImplementationCtrl,
-        CostSavedFromImplementation: _CostSavedFromImplementationCtrl,
+      KaizensImplemented: _KaizensImplementedCtrl,
+      CostForImplementation: _CostForImplementationCtrl,
+      CostSavedFromImplementation: _CostSavedFromImplementationCtrl,
       // date: "2024-08-18",
     );
 
-    var updateKaizensModelJsonString =
-        createkaizensdataModel.toJson();
+    var updateKaizensModelJsonString = createkaizensdataModel.toJson();
 
     Map<String, dynamic>? responseCreateGoModel =
         await createkaizensdataPresenter.updateKaizenDetails(
@@ -148,5 +161,19 @@ CostSavedFromImplementationCtrl.text=selectedItem!.costSavedFromImplementation.t
       print("data fail ");
     }
   }
-}
 
+  void checkForm() {
+    if (KaizensImplementedCtrl.text.trim() == '') {
+      isKaizensImplementedInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (CostForImplementationCtrl.text.trim() == '') {
+      isCostForImplementationInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (CostSavedFromImplementationCtrl.text.trim() == '') {
+      isCostSavedFromImplementationInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+  }
+}

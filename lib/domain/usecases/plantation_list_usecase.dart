@@ -21,5 +21,14 @@ class PlantationListUsecase {
     );
   }
   void clearValue() async => repository.clearData(LocalKeys.oHid);
+  //deletePlantation
 
+Future<void> deletePlantation({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await repository.deletePlantation(
+        Id: Id,
+        isLoading: isLoading,
+      );
 }

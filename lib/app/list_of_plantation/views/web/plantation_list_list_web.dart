@@ -596,6 +596,27 @@ class PlantationListSource extends DataTableSource {
                             },
                           )
                         : Dimens.box0,
+                         varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants
+                                            .kPMchecklistFeatureId &&
+                                    e.delete ==
+                                        UserAccessConstants.kHaveDeleteAccess)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.deleteColor,
+                            icon: Icons.delete,
+                            message: 'Delete',
+                            onPress: () {
+                              int? id = PlantationDataDetails?.id;
+                              controller.deletePlantation(PlantaionId: id);
+
+                              // controller.isContainerVisible.value = true;
+                            },
+                          )
+                        : Dimens.box0
                   ])
                 : Text(value.toString()),
           ),

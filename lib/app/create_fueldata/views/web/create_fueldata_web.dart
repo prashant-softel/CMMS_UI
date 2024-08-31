@@ -430,7 +430,8 @@ class _ViewFuelDataWebState extends State<FuelDataWeb> {
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Submit',
                                   onPressed: () {
-                                    // controller.isFormInvalid.value = false;
+                                    controller.isFormInvalid.value = false;
+                                    controller.checkForm();
                                     controller.createfuledata();
 
                                   },
@@ -442,7 +443,7 @@ class _ViewFuelDataWebState extends State<FuelDataWeb> {
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Update',
                                   onPressed: () {
-                                    // controller.isFormInvalid.value = false;
+                                    controller.isFormInvalid.value = false;
                                     controller.updateFuelConsumption(
                                         // position: 0,
                                         // fileIds: dropzoneController.fileIds

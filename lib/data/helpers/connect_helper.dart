@@ -9063,7 +9063,42 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
+  //deleteKaizen
+   Future<ResponseModel> deleteKaizen({
+    required String auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteKaizensData?id=$Id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+//deletePlantation
+  Future<ResponseModel> deletePlantation({
+    required String auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeletePlantationData?id=$Id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
   Future<ResponseModel> saveGrievance({
     required String auth,
     grievance,

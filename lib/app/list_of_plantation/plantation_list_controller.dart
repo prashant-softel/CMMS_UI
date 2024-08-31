@@ -155,6 +155,14 @@ class PlantationListController extends GetxController {
   void clearStoreData() {
     plantationlistPresenter.clearValue();
   }
-
+Future<void> deletePlantation({int? PlantaionId}) async {
+    {
+      await plantationlistPresenter.deletePlantation(
+        Id: PlantaionId,
+        isLoading: true,
+      );
+    }
+  getplantationdata(false);
+}
   
 }

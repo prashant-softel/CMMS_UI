@@ -16,44 +16,49 @@ class CreateFuelDataController extends GetxController {
   CreateFuelDataPresenter createfueldataPresenter;
   final HomeController homeController = Get.find();
   StreamSubscription<int>? facilityIdStreamSubscription;
-   GetFuelDataList? selectedItem;
-    RxList<GetFuelDataList?> fueldataType =
-      <GetFuelDataList>[].obs;
+  GetFuelDataList? selectedItem;
+  RxList<GetFuelDataList?> fueldataType = <GetFuelDataList>[].obs;
   //createfuledata
   var dieselConsumedforvehiclesCtrl = TextEditingController();
- var petrolconsumedforvehiclesCtrl = TextEditingController();
- var petrolconsumedforgrasscuttingandmoversCtrl = TextEditingController();
- var dieselconsumedatsiteCtrl = TextEditingController();
- var petrolconsumedatsiteCtrl = TextEditingController();
+  var petrolconsumedforvehiclesCtrl = TextEditingController();
+  var petrolconsumedforgrasscuttingandmoversCtrl = TextEditingController();
+  var dieselconsumedatsiteCtrl = TextEditingController();
+  var petrolconsumedatsiteCtrl = TextEditingController();
+  Rx<bool> isFormInvalid = false.obs;
 
+  Rx<bool> isDieselConsumedForVehiclesInvalid = false.obs;
+  Rx<bool> isPetrolConsumedForVehiclesInvalid = false.obs;
+  Rx<bool> isPetrolConsumedForGrassCuttingAndMoversInvalid = false.obs;
+  Rx<bool> isDieselConsumedAtSiteInvalid = false.obs;
+  Rx<bool> isPetrolConsumedAtSiteInvalid = false.obs;
 
- Rx<bool> isDieselConsumedForVehiclesInvalid = false.obs;
- Rx<bool> isPetrolConsumedForVehiclesInvalid = false.obs;
- Rx<bool> isPetrolConsumedForGrassCuttingAndMoversInvalid = false.obs;
- Rx<bool> isDieselConsumedAtSiteInvalid = false.obs;
- Rx<bool> isPetrolConsumedAtSiteInvalid = false.obs;
-
-
-void createfuledata({ List<dynamic>? fileIds}) async {
-     try {
-     
-       int _dieselConsumedforvehiclesCtrl = int.tryParse(dieselConsumedforvehiclesCtrl.text.trim())?? 0;
-       int _petrolconsumedforvehiclesCtrl = int.tryParse(petrolconsumedforvehiclesCtrl.text.trim())?? 0;
-       int _petrolconsumedforgrasscuttingandmoversCtrl = int.tryParse(petrolconsumedforgrasscuttingandmoversCtrl.text.trim())?? 0;
-       int _dieselconsumedatsiteCtrl = int.tryParse(dieselconsumedatsiteCtrl.text.trim())?? 0;
-       int _petrolconsumedatsiteCtrl = int.tryParse(petrolconsumedatsiteCtrl.text.trim())?? 0;
-
-
-
+  void createfuledata({List<dynamic>? fileIds}) async {
+    try {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
+      int _dieselConsumedforvehiclesCtrl =
+          int.tryParse(dieselConsumedforvehiclesCtrl.text.trim()) ?? 0;
+      int _petrolconsumedforvehiclesCtrl =
+          int.tryParse(petrolconsumedforvehiclesCtrl.text.trim()) ?? 0;
+      int _petrolconsumedforgrasscuttingandmoversCtrl = int.tryParse(
+              petrolconsumedforgrasscuttingandmoversCtrl.text.trim()) ??
+          0;
+      int _dieselconsumedatsiteCtrl =
+          int.tryParse(dieselconsumedatsiteCtrl.text.trim()) ?? 0;
+      int _petrolconsumedatsiteCtrl =
+          int.tryParse(petrolconsumedatsiteCtrl.text.trim()) ?? 0;
 
       CreateFuelDataModel createfueldataModel = CreateFuelDataModel(
         DieselConsumedForVehicles: _dieselConsumedforvehiclesCtrl,
         PetrolConsumedForVehicles: _petrolconsumedforvehiclesCtrl,
-        PetrolConsumedForGrassCuttingAndMovers: _petrolconsumedforgrasscuttingandmoversCtrl,
+        PetrolConsumedForGrassCuttingAndMovers:
+            _petrolconsumedforgrasscuttingandmoversCtrl,
         DieselConsumedAtSite: _dieselconsumedatsiteCtrl,
         PetrolConsumedAtSite: _petrolconsumedatsiteCtrl,
 
-        id:0,
+        id: 0,
         // date:"2024-08-18",
       );
 
@@ -67,13 +72,15 @@ void createfuledata({ List<dynamic>? fileIds}) async {
         isLoading: true,
       );
 
-      print('Create  create Visits and Notices data: $CreateFuelDataModelFromJson');
+      print(
+          'Create  create Visits and Notices data: $CreateFuelDataModelFromJson');
     } catch (e) {
       print(e);
     }
- }
- // update API
-   @override
+  }
+
+  // update API
+  @override
   void onInit() async {
     try {
       await setFDId();
@@ -82,14 +89,21 @@ void createfuledata({ List<dynamic>? fileIds}) async {
       print(e);
     }
   }
+
   Future<void> setFDId() async {
     try {
-        if (Get.arguments != null) {
-      var dataFromPreviousScreen = Get.arguments;
-      selectedItem = dataFromPreviousScreen['selectedItem'];
-    } else {
-      selectedItem = GetFuelDataList(id: 0, dieselConsumedForVehicles: 0, petrolConsumedForVehicles: 0, petrolConsumedForGrassCuttingAndMovers: 0,dieselConsumedAtSite:0,petrolConsumedAtSite:0);
-    }
+      if (Get.arguments != null) {
+        var dataFromPreviousScreen = Get.arguments;
+        selectedItem = dataFromPreviousScreen['selectedItem'];
+      } else {
+        selectedItem = GetFuelDataList(
+            id: 0,
+            dieselConsumedForVehicles: 0,
+            petrolConsumedForVehicles: 0,
+            petrolConsumedForGrassCuttingAndMovers: 0,
+            dieselConsumedAtSite: 0,
+            petrolConsumedAtSite: 0);
+      }
       GetFuelDataList? selectedItemhea;
       final _selectedItem = await createfueldataPresenter.getValue();
       if (_selectedItem!.isNotEmpty) {
@@ -105,11 +119,16 @@ void createfuledata({ List<dynamic>? fileIds}) async {
         selectedItem = selectedItemhea;
       }
       if (selectedItem != null) {
-        dieselConsumedforvehiclesCtrl.text=selectedItem!.dieselConsumedForVehicles.toString();
-       petrolconsumedforvehiclesCtrl.text=selectedItem!.petrolConsumedForVehicles.toString();
-       petrolconsumedforgrasscuttingandmoversCtrl.text=selectedItem!.petrolConsumedForGrassCuttingAndMovers.toString();
-       dieselconsumedatsiteCtrl.text=selectedItem!.dieselConsumedAtSite.toString();
-       petrolconsumedatsiteCtrl.text=selectedItem!.petrolConsumedAtSite.toString();
+        dieselConsumedforvehiclesCtrl.text =
+            selectedItem!.dieselConsumedForVehicles.toString();
+        petrolconsumedforvehiclesCtrl.text =
+            selectedItem!.petrolConsumedForVehicles.toString();
+        petrolconsumedforgrasscuttingandmoversCtrl.text =
+            selectedItem!.petrolConsumedForGrassCuttingAndMovers.toString();
+        dieselconsumedatsiteCtrl.text =
+            selectedItem!.dieselConsumedAtSite.toString();
+        petrolconsumedatsiteCtrl.text =
+            selectedItem!.petrolConsumedAtSite.toString();
       }
     } catch (e) {
       print(e.toString() + 'FuelDataId');
@@ -117,42 +136,42 @@ void createfuledata({ List<dynamic>? fileIds}) async {
     }
   }
 
-   void clearStoreData() {
+  void clearStoreData() {
     dieselConsumedforvehiclesCtrl.clear();
     petrolconsumedforvehiclesCtrl.clear();
     petrolconsumedforgrasscuttingandmoversCtrl.clear();
     dieselconsumedatsiteCtrl.clear();
     petrolconsumedatsiteCtrl.clear();
   }
+
   void updateFuelConsumption() async {
     int _id = selectedItem?.id ?? 0;
 
-    int _dieselConsumedforvehiclesCtrl = int.tryParse(dieselConsumedforvehiclesCtrl.text.trim()) ?? 0;
+    int _dieselConsumedforvehiclesCtrl =
+        int.tryParse(dieselConsumedforvehiclesCtrl.text.trim()) ?? 0;
     int _petrolconsumedforvehiclesCtrl =
         int.tryParse(petrolconsumedforvehiclesCtrl.text.trim()) ?? 0;
     int _petrolconsumedforgrasscuttingandmoversCtrl =
-        int.tryParse(petrolconsumedforgrasscuttingandmoversCtrl.text.trim()) ?? 0;
+        int.tryParse(petrolconsumedforgrasscuttingandmoversCtrl.text.trim()) ??
+            0;
     int _dieselconsumedatsiteCtrl =
         int.tryParse(dieselconsumedatsiteCtrl.text.trim()) ?? 0;
     int _petrolconsumedatsiteCtrl =
         int.tryParse(petrolconsumedatsiteCtrl.text.trim()) ?? 0;
 
+    CreateFuelDataModel createfueldataModel = CreateFuelDataModel(
+      id: _id,
+      DieselConsumedForVehicles: _dieselConsumedforvehiclesCtrl,
+      PetrolConsumedForVehicles: _petrolconsumedforvehiclesCtrl,
+      PetrolConsumedForGrassCuttingAndMovers:
+          _petrolconsumedforgrasscuttingandmoversCtrl,
+      DieselConsumedAtSite: _dieselconsumedatsiteCtrl,
+      PetrolConsumedAtSite: _petrolconsumedatsiteCtrl,
 
-      CreateFuelDataModel createfueldataModel = CreateFuelDataModel(
-        id: _id,
-        DieselConsumedForVehicles: _dieselConsumedforvehiclesCtrl,
-        PetrolConsumedForVehicles: _petrolconsumedforvehiclesCtrl,
-        PetrolConsumedForGrassCuttingAndMovers: _petrolconsumedforgrasscuttingandmoversCtrl,
-        DieselConsumedAtSite: _dieselconsumedatsiteCtrl,
-        PetrolConsumedAtSite: _petrolconsumedatsiteCtrl,
-
-
-        // date:"2024-08-18",
-      
+      // date:"2024-08-18",
     );
 
-    var updatefueldataModelJsonString =
-        createfueldataModel.toJson();
+    var updatefueldataModelJsonString = createfueldataModel.toJson();
 
     Map<String, dynamic>? responseCreateGoModel =
         await createfueldataPresenter.updateFuelConsumption(
@@ -165,4 +184,26 @@ void createfuledata({ List<dynamic>? fileIds}) async {
     }
   }
 
+  void checkForm() {
+    if (dieselConsumedforvehiclesCtrl.text.trim().length < 3) {
+      isFormInvalid.value = true;
+      isDieselConsumedForVehiclesInvalid.value = true;
+    }
+    if (petrolconsumedforvehiclesCtrl.text.trim() == '') {
+      isFormInvalid.value = true;
+      isPetrolConsumedForVehiclesInvalid.value = true;
+    }
+    if (petrolconsumedforgrasscuttingandmoversCtrl.text.trim() == '') {
+      isFormInvalid.value = true;
+      isPetrolConsumedForGrassCuttingAndMoversInvalid.value = true;
+    }
+    if (dieselconsumedatsiteCtrl.text.trim() == '') {
+      isFormInvalid.value = true;
+      isDieselConsumedAtSiteInvalid.value = true;
+    }
+    if (petrolconsumedatsiteCtrl.text.trim() == '') {
+      isPetrolConsumedAtSiteInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+  }
 }

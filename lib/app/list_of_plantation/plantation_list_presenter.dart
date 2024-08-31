@@ -17,4 +17,13 @@ class PlantationListPresenter {
     );
   }
    void clearValue() async => plantationlistUsecase.clearValue();
+   //deletePlantation
+    deletePlantation({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await plantationlistUsecase.deletePlantation(
+        Id: Id,
+        isLoading: isLoading,
+      );
 }

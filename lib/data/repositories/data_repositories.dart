@@ -5094,7 +5094,32 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
-
+  //deleteKaizen
+    Future<ResponseModel> deleteKaizen({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteKaizen(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+//deletePlantation
+    Future<ResponseModel> deletePlantation({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deletePlantation(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
   Future<ResponseModel> getGrievanceType({
     String? auth,
     bool? isLoading,
