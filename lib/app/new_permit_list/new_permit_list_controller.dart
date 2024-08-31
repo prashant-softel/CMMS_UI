@@ -272,6 +272,12 @@ class NewPermitListController extends GetxController {
   Future<void> getNewPermitList(int facilityId, int userId, dynamic startDate,
       dynamic endDate, bool self_view, bool non_expired, bool isExport) async {
     newPermitList.value = <NewPermitModel>[];
+    bool selfview = varUserAccessModel.value.access_list!
+            .where((e) =>
+                e.feature_id == UserAccessConstants.kPermitFeatureId &&
+                e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+            .length >
+        0;
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
         facilityId: facilityId,
         isLoading: isLoading.value,
@@ -279,14 +285,7 @@ class NewPermitListController extends GetxController {
         end_date: endDate,
         userId: userId,
         isExport: isExport,
-        self_view: varUserAccessModel.value.access_list!
-                    .where((e) =>
-                        e.feature_id == UserAccessConstants.kPermitFeatureId &&
-                        e.selfView == UserAccessConstants.kHaveSelfViewAccess)
-                    .length >
-                0
-            ? true
-            : false,
+        self_view: selfview,
         non_expired: false);
 
     if (_newPermitList != null) {
