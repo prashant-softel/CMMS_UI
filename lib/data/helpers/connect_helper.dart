@@ -3938,8 +3938,9 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   // updateKaizenDetails
-    Future<ResponseModel> updateKaizenDetails({
+  Future<ResponseModel> updateKaizenDetails({
     required String auth,
     updateKaizen,
     bool? isLoading,
@@ -3961,8 +3962,9 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   //updatePlantationDetails
-   Future<ResponseModel> updatePlantationDetails({
+  Future<ResponseModel> updatePlantationDetails({
     required String auth,
     updatePlantation,
     bool? isLoading,
@@ -3984,6 +3986,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
 //updateFuelConsumption
   Future<ResponseModel> updateFuelConsumption({
     required String auth,
@@ -4007,6 +4010,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> createWaterData({
     required String auth,
     createWaterData,
@@ -6057,6 +6061,22 @@ class ConnectHelper {
   }) async =>
       await apiWrapper.makeRequest(
         'RoleAccess/GetRoleList',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+  Future<ResponseModel> getCumulativeReportList({
+    String? auth,
+    bool? isLoading,
+    required selectedFacilityIdList,
+    required module_id,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'MISMaster/Cumulativereport?facility_id=$selectedFacilityIdList&module_id=$module_id',
         Request.get,
         null,
         true,

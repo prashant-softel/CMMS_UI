@@ -6,6 +6,7 @@ import 'package:cmms/app/role_access/rele_access_controller.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -211,188 +212,211 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                     ],
                                   ),
                                   child: controller.accesslevel.length > 0
-                                      ? ScrollableTableView(
+                                      ? DataTable2(
                                           columns: [
-                                            "Module Name",
-                                            "Add",
-                                            "Edit",
-                                            "Delete",
-                                            "View",
-                                            "Self View",
-                                            "Issue",
-                                            "Approve"
-                                          ].map((column) {
-                                            return TableViewColumn(
-                                              label: column,
-                                              // Set the width of the column to 100
-
-                                              minWidth: Get.width * 0.11,
-                                            );
-                                          }).toList(),
+                                              DataColumn2(
+                                                  fixedWidth: 200,
+                                                  label: Text(
+                                                    "Module Name",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  label: Text(
+                                                "Add",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  label: Text(
+                                                "Edit",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  label: Text(
+                                                "Delete",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  label: Text(
+                                                "View",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  label: Text(
+                                                "Self View",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  label: Text(
+                                                "Issue",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  label: Text(
+                                                "Approve",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                            ],
                                           rows: controller.accesslevel
                                               .map((getAccesslevelDetails) =>
-                                                  TableViewRow(
-                                                      height: 35,
-                                                      cells: [
-                                                        TableViewCell(
-                                                          child: Obx(() {
-                                                            return Row(
-                                                              children: [
-                                                                // Checkbox(
-                                                                //     value: controller
-                                                                //         .isCheckedmodule
-                                                                //         .value,
-                                                                //     checkColor:
-                                                                //         Colors.white,
-                                                                //     activeColor:
-                                                                //         ColorValues
-                                                                //             .blackColor,
-                                                                //     shape:
-                                                                //         RoundedRectangleBorder(
-                                                                //       borderRadius:
-                                                                //           BorderRadius
-                                                                //               .circular(
-                                                                //                   2.0),
-                                                                //     ),
-                                                                //     side:
-                                                                //         MaterialStateBorderSide
-                                                                //             .resolveWith(
-                                                                //       (states) =>
-                                                                //           BorderSide(
-                                                                //         width: 1.0,
-                                                                //         color: ColorValues
-                                                                //             .blackColor,
-                                                                //       ),
-                                                                //     ),
-                                                                //     onChanged: (val) {
-                                                                //       controller
-                                                                //           .accesslevel
-                                                                //           .firstWhere((e) =>
-                                                                //               e?.feature_name ==
-                                                                //               getAccesslevelDetails
-                                                                //                   ?.feature_name);
-                                                                //       controller
-                                                                //           .isCheckedmodule
-                                                                //           .value = val!;
+                                                  DataRow(cells: [
+                                                    DataCell(
+                                                      Obx(() {
+                                                        return Row(
+                                                          children: [
+                                                            // Checkbox(
+                                                            //     value: controller
+                                                            //         .isCheckedmodule
+                                                            //         .value,
+                                                            //     checkColor:
+                                                            //         Colors.white,
+                                                            //     activeColor:
+                                                            //         ColorValues
+                                                            //             .blackColor,
+                                                            //     shape:
+                                                            //         RoundedRectangleBorder(
+                                                            //       borderRadius:
+                                                            //           BorderRadius
+                                                            //               .circular(
+                                                            //                   2.0),
+                                                            //     ),
+                                                            //     side:
+                                                            //         MaterialStateBorderSide
+                                                            //             .resolveWith(
+                                                            //       (states) =>
+                                                            //           BorderSide(
+                                                            //         width: 1.0,
+                                                            //         color: ColorValues
+                                                            //             .blackColor,
+                                                            //       ),
+                                                            //     ),
+                                                            //     onChanged: (val) {
+                                                            //       controller
+                                                            //           .accesslevel
+                                                            //           .firstWhere((e) =>
+                                                            //               e?.feature_name ==
+                                                            //               getAccesslevelDetails
+                                                            //                   ?.feature_name);
+                                                            //       controller
+                                                            //           .isCheckedmodule
+                                                            //           .value = val!;
 
-                                                                //       controller
-                                                                //           .update();
-                                                                //     }),
+                                                            //       controller
+                                                            //           .update();
+                                                            //     }),
 
-                                                                Dimens
-                                                                    .boxWidth5,
-                                                                Expanded(
-                                                                    child: Text(
-                                                                        "${getAccesslevelDetails?.feature_name}"))
-                                                              ],
-                                                            );
-                                                          }),
-                                                        ),
-                                                        TableViewCell(
-                                                          child: Obx(() {
-                                                            return _rowItem(
-                                                                getAccesslevelDetails
-                                                                    ?.add.value,
-                                                                onCheck: (val) {
-                                                              getAccesslevelDetails
-                                                                      ?.add
-                                                                      .value =
-                                                                  val == true
-                                                                      ? 1
-                                                                      : 0;
-                                                            });
-                                                          }),
-                                                        ),
-                                                        TableViewCell(
-                                                          child: Obx(() {
-                                                            return _rowItem(
-                                                                getAccesslevelDetails
-                                                                    ?.edit
-                                                                    .value,
-                                                                onCheck: (val) {
-                                                              getAccesslevelDetails
-                                                                      ?.edit
-                                                                      .value =
-                                                                  val == true
-                                                                      ? 1
-                                                                      : 0;
-                                                            });
-                                                          }),
-                                                        ),
-                                                        TableViewCell(
-                                                            child: Obx(() {
-                                                          return _rowItem(
-                                                              getAccesslevelDetails
-                                                                  ?.delete
-                                                                  .value,
-                                                              onCheck: (val) {
+                                                            Dimens.boxWidth5,
+                                                            Expanded(
+                                                                child: Text(
+                                                                    "${getAccesslevelDetails?.feature_name}"))
+                                                          ],
+                                                        );
+                                                      }),
+                                                    ),
+                                                    DataCell(
+                                                      Obx(() {
+                                                        return _rowItem(
                                                             getAccesslevelDetails
-                                                                    ?.delete
-                                                                    .value =
-                                                                val == true
-                                                                    ? 1
-                                                                    : 0;
-                                                          });
-                                                        })),
-                                                        TableViewCell(
-                                                            child: Obx(() {
-                                                          return _rowItem(
-                                                              getAccesslevelDetails
-                                                                  ?.view.value,
-                                                              onCheck: (val) {
+                                                                ?.add.value,
+                                                            onCheck: (val) {
+                                                          getAccesslevelDetails
+                                                                  ?.add.value =
+                                                              val == true
+                                                                  ? 1
+                                                                  : 0;
+                                                        });
+                                                      }),
+                                                    ),
+                                                    DataCell(
+                                                      Obx(() {
+                                                        return _rowItem(
                                                             getAccesslevelDetails
-                                                                    ?.view
-                                                                    .value =
-                                                                val == true
-                                                                    ? 1
-                                                                    : 0;
-                                                          });
-                                                        })),
-                                                        TableViewCell(
-                                                            child: Obx(() {
-                                                          return _rowItem(
-                                                              getAccesslevelDetails
-                                                                  ?.selfView
-                                                                  .value,
-                                                              onCheck: (val) {
-                                                            getAccesslevelDetails
-                                                                    ?.selfView
-                                                                    .value =
-                                                                val == true
-                                                                    ? 1
-                                                                    : 0;
-                                                          });
-                                                        })),
-                                                        TableViewCell(
-                                                            child: Obx(() {
-                                                          return _rowItem(
-                                                              getAccesslevelDetails
-                                                                  ?.issue.value,
-                                                              onCheck: (val) {
-                                                            getAccesslevelDetails
-                                                                    ?.issue
-                                                                    .value =
-                                                                val == true
-                                                                    ? 1
-                                                                    : 0;
-                                                          });
-                                                        })),
-                                                        TableViewCell(
-                                                            child: Obx(() {
-                                                          return _rowItem(
-                                                              getAccesslevelDetails
-                                                                  ?.approve
-                                                                  .value,
-                                                              onCheck: (val) {
-                                                            getAccesslevelDetails
-                                                                    ?.approve
-                                                                    .value =
-                                                                val == true
-                                                                    ? 1
-                                                                    : 0;
-                                                          });
-                                                        })),
-                                                      ]))
+                                                                ?.edit.value,
+                                                            onCheck: (val) {
+                                                          getAccesslevelDetails
+                                                                  ?.edit.value =
+                                                              val == true
+                                                                  ? 1
+                                                                  : 0;
+                                                        });
+                                                      }),
+                                                    ),
+                                                    DataCell(Obx(() {
+                                                      return _rowItem(
+                                                          getAccesslevelDetails
+                                                              ?.delete.value,
+                                                          onCheck: (val) {
+                                                        getAccesslevelDetails
+                                                                ?.delete.value =
+                                                            val == true ? 1 : 0;
+                                                      });
+                                                    })),
+                                                    DataCell(Obx(() {
+                                                      return _rowItem(
+                                                          getAccesslevelDetails
+                                                              ?.view.value,
+                                                          onCheck: (val) {
+                                                        getAccesslevelDetails
+                                                                ?.view.value =
+                                                            val == true ? 1 : 0;
+                                                      });
+                                                    })),
+                                                    DataCell(Obx(() {
+                                                      return _rowItem(
+                                                          getAccesslevelDetails
+                                                              ?.selfView.value,
+                                                          onCheck: (val) {
+                                                        getAccesslevelDetails
+                                                                ?.selfView
+                                                                .value =
+                                                            val == true ? 1 : 0;
+                                                      });
+                                                    })),
+                                                    DataCell(Obx(() {
+                                                      return _rowItem(
+                                                          getAccesslevelDetails
+                                                              ?.issue.value,
+                                                          onCheck: (val) {
+                                                        getAccesslevelDetails
+                                                                ?.issue.value =
+                                                            val == true ? 1 : 0;
+                                                      });
+                                                    })),
+                                                    DataCell(Obx(() {
+                                                      return _rowItem(
+                                                          getAccesslevelDetails
+                                                              ?.approve.value,
+                                                          onCheck: (val) {
+                                                        getAccesslevelDetails
+                                                                ?.approve
+                                                                .value =
+                                                            val == true ? 1 : 0;
+                                                      });
+                                                    })),
+                                                  ]))
                                               .toList())
                                       : Dimens.box0),
                               Container(
