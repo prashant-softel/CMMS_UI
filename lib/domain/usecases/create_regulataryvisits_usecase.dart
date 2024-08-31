@@ -25,9 +25,6 @@ class CreateRegulataryVisitsUsecase {
         updateRegularVisit,
         isLoading,
       );
-  Future<List<GetVisitAndNoticeList?>?> getVisitsAndNoticesDatalist(
-          isLoading) async =>
-      await repository.getVisitsAndNoticesDatalist(isLoading: isLoading);
   void saveValue({String? visitId}) async =>
       repository.saveValue(LocalKeys.visitId, visitId);
   Future<String?> getValue() async =>

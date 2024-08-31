@@ -26,11 +26,6 @@ class CreatePlantationDataPresenter {
       isLoading: isLoading,
     );
   }
-
-  Future<List<GetPlantationList?>?> getplantationdata(
-          {int? id, bool? isLoading}) async =>
-      await createplantationdataUsecase.getplantationdata(true);
-
   void saveValue({String? plantationId}) async {
     return createplantationdataUsecase.saveValue(plantationId: plantationId);
   }

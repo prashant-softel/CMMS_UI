@@ -154,7 +154,7 @@ class _OccupationalListWebState extends State<OccupationalListWeb> {
                                                 onPressed: () {
                                                   controller.clearStoreData();
 
-                                                  Get.offNamed(Routes
+                                                  Get.offAllNamed(Routes
                                                       .createOccupationalScreen);
                                                 },
                                                 color: ColorValues.addNewColor,

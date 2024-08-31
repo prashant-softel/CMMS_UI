@@ -75,8 +75,6 @@ void createkaizensdata({ List<dynamic>? fileIds}) async {
     try {
       await setKDId();
 
-     
-
       super.onInit();
     } catch (e) {
       print(e);
@@ -114,7 +112,6 @@ CostSavedFromImplementationCtrl.text=selectedItem!.costSavedFromImplementation.t
       //  Utility.showDialog(e.toString() + 'userId');
     }
   }
-
     void clearStoreData() {
     KaizensImplementedCtrl.clear();
     CostForImplementationCtrl.clear();

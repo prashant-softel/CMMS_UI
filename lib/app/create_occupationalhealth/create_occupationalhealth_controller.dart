@@ -54,6 +54,12 @@ class CreateOccupationalhealthController extends GetxController {
 
   Future<void> setOHId() async {
     try {
+       if (Get.arguments != null) {
+      var dataFromPreviousScreen = Get.arguments;
+      selectedItem = dataFromPreviousScreen['selectedItem'];
+    } else {
+      selectedItem = GetOccupationalList(id: 0, noOfHealthExamsOfNewJoiner: 0, periodicTests: 0, occupationalIllnesses: 0,);
+    }
      GetOccupationalList? selectedItemhea;
       final _selectedItem = await createOccupationalhealthPresenter.getValue();
         if (_selectedItem!.isNotEmpty) {

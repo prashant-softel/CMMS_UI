@@ -28,11 +28,6 @@ class CreateRegulataryVisitsPresenter {
       isLoading: isLoading,
     );
   }
-
-  Future<List<GetVisitAndNoticeList?>?> getVisitsAndNoticesDatalist(
-          {int? id, bool? isLoading}) async =>
-      await createregulataryvisitsUsecase.getVisitsAndNoticesDatalist(true);
-
   void saveValue({String? visitId}) async {
     return createregulataryvisitsUsecase.saveValue(visitId: visitId);
   }

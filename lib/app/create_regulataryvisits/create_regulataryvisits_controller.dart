@@ -87,13 +87,6 @@ class CreateRegulataryVisitsController extends GetxController {
     try {
       await setVHId();
 
-      facilityIdStreamSubscription = homeController.facilityId$.listen(
-        (event) async {
-          // facilityId = event;
-          await getVisitsAndNoticesDatalist();
-        },
-      );
-
       super.onInit();
     } catch (e) {
       print(e);
@@ -102,6 +95,12 @@ class CreateRegulataryVisitsController extends GetxController {
 
   Future<void> setVHId() async {
     try {
+        if (Get.arguments != null) {
+      var dataFromPreviousScreen = Get.arguments;
+      selectedItem = dataFromPreviousScreen['selectedItem'];
+    } else {
+      selectedItem = GetVisitAndNoticeList(id: 0, govtAuthVisits: 0, noOfFineByThirdParty: 0, noOfShowCauseNoticesByThirdParty: 0,noticesToContractor:0,amountOfPenaltiesToContractors:0,anyOther:0);
+    }
       GetVisitAndNoticeList? selectedItemhea;
       final _selectedItem = await createregulataryvisitsPresenter.getValue();
       if (_selectedItem!.isNotEmpty) {
@@ -134,18 +133,6 @@ class CreateRegulataryVisitsController extends GetxController {
     }
   }
 
-  Future<void> getVisitsAndNoticesDatalist() async {
-    final _visitandnoticeType =
-        await createregulataryvisitsPresenter.getVisitsAndNoticesDatalist();
-
-    if (_visitandnoticeType != null) {
-      _visitandnoticeType != [];
-      for (var visitandnotice in _visitandnoticeType) {
-        visitandnoticeType.add(visitandnotice);
-      }
-      // selectedTypePermit.value = grievanceType[0]?.name ?? '';
-    }
-  }
   void clearStoreData() {
     govtauthvisitsCtrl.clear();
     noOffinebythirdpartyCtrl.clear();

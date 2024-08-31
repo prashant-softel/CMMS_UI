@@ -28,10 +28,6 @@ class CreateFuelDataPresenter {
   
   }
 
-  Future<List<GetFuelDataList?>?> getFuelConsumption(
-          {int? id, bool? isLoading}) async =>
-      await createfueldataUsecase.getFuelConsumption(true);
-
   void saveValue({String? fuelId}) async {
     return createfueldataUsecase.saveValue(fuelId: fuelId);
   }
