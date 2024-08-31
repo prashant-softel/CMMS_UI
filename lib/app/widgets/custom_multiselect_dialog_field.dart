@@ -8,14 +8,14 @@ class CustomMultiSelectDialogField extends StatefulWidget {
   final String? title;
   final String? buttonText;
   final Function(dynamic selectedOptionsList) onConfirm;
-
-  CustomMultiSelectDialogField({
-    this.initialValue,
-    this.items,
-    this.title,
-    this.buttonText,
-    required this.onConfirm,
-  });
+  double? height;
+  CustomMultiSelectDialogField(
+      {this.initialValue,
+      this.items,
+      this.title,
+      this.buttonText,
+      required this.onConfirm,
+      this.height});
 
   @override
   _CustomMultiSelectDialogFieldState createState() =>
@@ -79,7 +79,7 @@ class _CustomMultiSelectDialogFieldState
               }
             },
             child: Container(
-              height: 40,
+              height: widget.height == null ? 40 : widget.height,
               child: ListTile(
                 title: widget.initialValue == []
                     ? Text(

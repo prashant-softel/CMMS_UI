@@ -12,6 +12,7 @@ import 'package:cmms/domain/models/attendance_month_model.dart';
 import 'package:cmms/domain/models/check_list_inspection_model.dart';
 import 'package:cmms/domain/models/complicance_history_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
+import 'package:cmms/domain/models/cumulative_report_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/doc_upload_list_model.dart';
 import 'package:cmms/domain/models/documentmaster_model.dart';
@@ -1164,6 +1165,7 @@ class Repository {
       return Map();
     }
   }
+
   // updateKaizenDetails
   Future<Map<String, dynamic>> updateKaizenDetails(
     updateKaizen,
@@ -1183,8 +1185,7 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: "Update Kiazen  update Successfully...",
-            fontSize: 16.0);
+            msg: "Update Kiazen  update Successfully...", fontSize: 16.0);
 
         Get.offAllNamed(
           Routes.kaizensListScreen,
@@ -1199,6 +1200,7 @@ class Repository {
       return Map();
     }
   }
+
   // updatePlantationDetails
   Future<Map<String, dynamic>> updatePlantationDetails(
     updatePlantation,
@@ -1218,8 +1220,7 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: "Update Plantation  update Successfully...",
-            fontSize: 16.0);
+            msg: "Update Plantation  update Successfully...", fontSize: 16.0);
 
         Get.offAllNamed(
           Routes.plantationlistScreen,
@@ -1234,8 +1235,9 @@ class Repository {
       return Map();
     }
   }
+
 // updateFuelConsumption
-Future<Map<String, dynamic>> updateFuelConsumption(
+  Future<Map<String, dynamic>> updateFuelConsumption(
     updateFueldata,
     bool? isLoading,
   ) async {
@@ -1253,8 +1255,7 @@ Future<Map<String, dynamic>> updateFuelConsumption(
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: "Update Fuel Dsts  update Successfully...",
-            fontSize: 16.0);
+            msg: "Update Fuel Dsts  update Successfully...", fontSize: 16.0);
 
         Get.offAllNamed(
           Routes.fueldataListScreen,
@@ -1269,6 +1270,7 @@ Future<Map<String, dynamic>> updateFuelConsumption(
       return Map();
     }
   }
+
 // createfuledata
   Future<Map<String, dynamic>> createfuledata(
       createfuledata, bool? isLoading) async {
@@ -10262,6 +10264,41 @@ Future<Map<String, dynamic>> updateFuelConsumption(
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getRoleList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<Cumulativereport?>?> getCumulativeReportList(
+    bool? isLoading,
+    selectedFacilityIdList,
+    module_id,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getCumulativeReportList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+          selectedFacilityIdList: selectedFacilityIdList,
+          module_id: module_id);
+
+      if (!res.hasError) {
+        final jsonCumulativereports = jsonDecode(res.data);
+        final List<Cumulativereport> _CumulativereportList =
+            jsonCumulativereports
+                .map<Cumulativereport>(
+                  (m) =>
+                      Cumulativereport.fromJson(Map<String, dynamic>.from(m)),
+                )
+                .toList();
+
+        return _CumulativereportList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getCumulativeReportList');
         return null;
       }
     } catch (error) {

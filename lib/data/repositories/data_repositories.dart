@@ -2261,8 +2261,8 @@ class DataRepository extends DomainRepository {
         updateRegularVisit: updateRegularVisit,
         isLoading: isLoading ?? false,
       );
-      //updateKaizenDetails
-        Future<ResponseModel> updateKaizenDetails({
+  //updateKaizenDetails
+  Future<ResponseModel> updateKaizenDetails({
     required String auth,
     updateKaizen,
     bool? isLoading,
@@ -2272,8 +2272,8 @@ class DataRepository extends DomainRepository {
         updateKaizen: updateKaizen,
         isLoading: isLoading ?? false,
       );
-      //updatePlantationDetails
-       Future<ResponseModel> updatePlantationDetails({
+  //updatePlantationDetails
+  Future<ResponseModel> updatePlantationDetails({
     required String auth,
     updatePlantation,
     bool? isLoading,
@@ -3417,6 +3417,19 @@ class DataRepository extends DomainRepository {
       auth: auth,
       isLoading: isLoading,
     );
+  }
+
+  Future<ResponseModel> getCumulativeReportList({
+    required String auth,
+    bool? isLoading,
+    required selectedFacilityIdList,
+    required module_id,
+  }) async {
+    return await connectHelper.getCumulativeReportList(
+        auth: auth,
+        isLoading: isLoading,
+        selectedFacilityIdList: selectedFacilityIdList,
+        module_id: module_id);
   }
 
   Future<ResponseModel> getUserList({
