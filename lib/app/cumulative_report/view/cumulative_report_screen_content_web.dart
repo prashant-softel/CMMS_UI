@@ -144,6 +144,7 @@ class _CumulativeReportContentWebState
                                     ),
                                     Dimens.boxWidth2,
                                     DropdownWebWidget(
+                                      height: 40,
                                       width:
                                           MediaQuery.of(context).size.width / 5,
                                       dropdownList: controller.moduleList,
@@ -193,144 +194,148 @@ class _CumulativeReportContentWebState
                             ],
                           ),
                         ),
-                        Dimens.boxHeight10,
-                        Container(
-                          color: Color.fromARGB(255, 245, 248, 250),
-                          width: Get.width,
-                          height: 400,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: DataTable2(
-                              headingRowHeight: 50,
-                              columnSpacing: 12,
-                              horizontalMargin: 12,
-                              minWidth: 1500,
-                              columns: [
-                                DataColumn2(
-                                  fixedWidth: 200,
-                                  label: Text(
-                                    'Site name',
-                                    style: Styles.blackBold14,
+                        controller.cumulativereport.length > 0
+                            ? Container(
+                                margin: EdgeInsets.all(20),
+                                color: Color.fromARGB(255, 245, 248, 250),
+                                width: Get.width,
+                                height: ((controller.cumulativereport.length) *
+                                        40) +
+                                    100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: DataTable2(
+                                    headingRowHeight: 50,
+                                    columnSpacing: 12,
+                                    horizontalMargin: 12,
+                                    minWidth: 1500,
+                                    columns: [
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Site name',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Job created',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Jobs closed',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Jobs cancelled',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 140,
+                                        label: Text(
+                                          'Job not started',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Job ongoing',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Job closed on time',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 190,
+                                        label: Text(
+                                          'Jobs closed with extension',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 170,
+                                        label: Text(
+                                          'Job closed on time %',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                    ],
+                                    rows: List<DataRow>.generate(
+                                        controller.cumulativereport.length,
+                                        (index) => DataRow(
+                                              cells: [
+                                                DataCell(Text(controller
+                                                    .cumulativereport[index]
+                                                    ?.site_name)),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.Created
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.Closed
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.Cancelled
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.NotStarted
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.Ongoing
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.ClosedOnTime
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.ClosedWithExtension
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.ClosedOnTimeCreate
+                                                        .toString() ??
+                                                    "")),
+                                              ],
+                                            )),
                                   ),
-                                  // size: ColumnSize.L,
                                 ),
-                                DataColumn2(
-                                  fixedWidth: 120,
-                                  label: Text(
-                                    'Job created',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 120,
-                                  label: Text(
-                                    'Jobs closed',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 120,
-                                  label: Text(
-                                    'Jobs cancelled',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 140,
-                                  label: Text(
-                                    'Job not started',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 120,
-                                  label: Text(
-                                    'Job ongoing',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 150,
-                                  label: Text(
-                                    'Job closed on time',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 190,
-                                  label: Text(
-                                    'Jobs closed with extension',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                                DataColumn2(
-                                  fixedWidth: 170,
-                                  label: Text(
-                                    'Job closed on time %',
-                                    style: Styles.blackBold14,
-                                  ),
-                                  // size: ColumnSize.L,
-                                ),
-                              ],
-                              rows: List<DataRow>.generate(
-                                  controller.cumulativereport.length,
-                                  (index) => DataRow(
-                                        cells: [
-                                          DataCell(Text(controller
-                                              .cumulativereport[index]
-                                              ?.site_name)),
-                                          DataCell(Text(controller
-                                                  .cumulativereport[index]
-                                                  ?.Created
-                                                  .toString() ??
-                                              "")),
-                                          DataCell(Text(controller
-                                                  .cumulativereport[index]
-                                                  ?.Closed
-                                                  .toString() ??
-                                              "")),
-                                          DataCell(Text(controller
-                                                  .cumulativereport[index]
-                                                  ?.Cancelled
-                                                  .toString() ??
-                                              "")),
-                                          DataCell(Text(controller
-                                                  .cumulativereport[index]
-                                                  ?.NotStarted
-                                                  .toString() ??
-                                              "")),
-                                          DataCell(Text(controller
-                                                  .cumulativereport[index]
-                                                  ?.Ongoing
-                                                  .toString() ??
-                                              "")),
-                                          DataCell(Text(controller
-                                                  .cumulativereport[index]
-                                                  ?.ClosedOnTime
-                                                  .toString() ??
-                                              "")),
-                                          DataCell(Text(controller
-                                                  .cumulativereport[index]
-                                                  ?.ClosedWithExtension
-                                                  .toString() ??
-                                              "")),
-                                          DataCell(Text(controller
-                                                  .cumulativereport[index]
-                                                  ?.ClosedOnTimeCreate
-                                                  .toString() ??
-                                              "")),
-                                        ],
-                                      )),
-                            ),
-                          ),
-                        ),
+                              )
+                            : Dimens.box0
                       ],
                     ),
                   ),

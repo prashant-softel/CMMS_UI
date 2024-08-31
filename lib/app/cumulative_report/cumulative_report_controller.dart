@@ -58,11 +58,22 @@ class CumulativeReportController extends GetxController {
 
   Future<void> getModuleList() async {
     moduleList.value = <ModuleModel>[];
+
+    // Fetch the complete module list
     final _moduleList =
         await cumulativeReportPresenter.getModuleList(isLoading: true);
 
+    // Check if the list is not null
     if (_moduleList != null) {
-      moduleList.value = _moduleList;
+      // Filter the modules to include only the specified items
+      final filteredModules = _moduleList.where((module) {
+        return module?.id == 2 ||
+            module?.id == 10 ||
+            module?.id == 32 ||
+            module?.id == 33;
+      }).toList();
+
+      moduleList.value = filteredModules;
     }
   }
 
