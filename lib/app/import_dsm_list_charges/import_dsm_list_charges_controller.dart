@@ -28,11 +28,13 @@ class ImportDsmListChargesListController extends GetxController {
   RxList<int> selectedFacilities = <int>[].obs;
   RxList<int> selectedSpv = <int>[].obs;
   RxList<int> selectedState = <int>[].obs;
+  RxList<int> selectedDSMType = <int>[].obs;
   RxList<DSMData?> dsmDataList = <DSMData?>[].obs;
   RxList<DSMData?>? filteredDSMList = <DSMData?>[].obs;
   DSMData? filteredDSM = DSMData();
   RxBool isChecked = false.obs;
   RxString ActionFilterText = ''.obs;
+  RxList<StatusModel?> dsmTypes = <StatusModel>[].obs;
 
   RxList<GenderModel> month = <GenderModel>[
     GenderModel(name: 'Jan', id: 1),
@@ -58,10 +60,10 @@ class ImportDsmListChargesListController extends GetxController {
     "Site": true,
     "DSM Type": true,
     "ForeCasterName": true,
-    "Category": true,
+    // "Category": true,
     "DSM Penalty": true,
-    "Schedule KWH": true,
     "Actual KWH": true,
+    "Schedule KWH": true,
     "DSM Percentage": true,
   });
 
@@ -73,10 +75,10 @@ class ImportDsmListChargesListController extends GetxController {
     "Site": 130,
     "DSM Type": 150,
     "ForeCasterName": 200,
-    "Category": 150,
+    // "Category": 150,
     "DSM Penalty": 155,
-    "Schedule KWH": 170,
     "Actual KWH": 150,
+    "Schedule KWH": 170,
     "DSM Percentage": 160,
   };
 
@@ -111,10 +113,10 @@ class ImportDsmListChargesListController extends GetxController {
       "Site": site,
       "DSM Type": dsmType,
       "ForeCasterName": forcasterName,
-      "Category": category,
+      // "Category": category,
       "DSM Penalty": dsmPenalty,
-      "Schedule KWH": scheduleKwh,
       "Actual KWH": actualKwh,
+      "Schedule KWH": scheduleKwh,
       "DSM Percentage": dsmPer,
     };
     try {
@@ -123,6 +125,7 @@ class ImportDsmListChargesListController extends GetxController {
         getSpvList();
         getStateList(101);
         generateFinancialYears(20);
+        getdsmType();
         getDSMDataList();
       });
     } catch (e) {
@@ -207,6 +210,19 @@ class ImportDsmListChargesListController extends GetxController {
     }
   }
 
+  Future<void> getdsmType() async {
+    dsmTypes?.clear();
+    final dsmType = await importDsmListDsmChargesListPresenter.getdsmType(
+      isLoading: isLoading.value,
+    );
+    if (dsmType != null) {
+      isLoading.value = false;
+      for (var _spvList in dsmType) {
+        dsmTypes?.add(_spvList);
+      }
+    }
+  }
+
   List<String> generateFinancialYears(int numberOfYears) {
     int currentYear = DateTime.now().year;
     for (int i = 0; i < numberOfYears; i++) {
@@ -265,6 +281,14 @@ class ImportDsmListChargesListController extends GetxController {
     print("${selectedState}");
   }
 
+  void selectedDSMTypes(dsmType) {
+    selectedDSMType.value = <int>[];
+    for (var _selectedDSMType in dsmType) {
+      selectedDSMType.add(_selectedDSMType);
+    }
+    print("${selectedState}");
+  }
+
   PaginationController dsmPaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -280,6 +304,7 @@ class ImportDsmListChargesListController extends GetxController {
       selectedSite: selectedFacilities,
       selectedSpv: selectedSpv,
       selectedState: selectedState,
+      selectedDSMType: selectedDSMType,
       isLoading: isLoading.value,
     );
 

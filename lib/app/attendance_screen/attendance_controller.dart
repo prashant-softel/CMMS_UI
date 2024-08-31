@@ -39,7 +39,9 @@ class AttendanceController extends GetxController {
       facilityIdStreamSubscription = homeController.facilityId$.listen(
         (event) async {
           facilityId.value = event;
-          await getAttendanceData(date: dateController.text);
+          if (facilityId.value != 0) {
+            await getAttendanceData(date: dateController.text);
+          }
         },
       );
       focusPurpose.addListener(() {

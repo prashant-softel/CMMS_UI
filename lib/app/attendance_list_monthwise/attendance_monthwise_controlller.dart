@@ -67,7 +67,6 @@ class AttendanceListMonthController extends GetxController {
       isLoading.value = false;
       List<String> uniqueDates = [];
       attendanceMonthModel.value.attendance?.forEach((employee) {
-        print('Processing employee: ${employee.employeeName}');
         employee.details?.forEach((data) {
           if (data.date != null && data.date!.isNotEmpty) {
             uniqueDates.add(data.date!);

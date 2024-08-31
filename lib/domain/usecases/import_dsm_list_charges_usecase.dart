@@ -2,6 +2,7 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/SPV_list_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 
 class ImportDsmListChargesListUsecase {
   ImportDsmListChargesListUsecase(this.repository);
@@ -29,6 +30,13 @@ class ImportDsmListChargesListUsecase {
       await repository.getSPVList(
         isLoading: isLoading,
       );
+      
+  Future<List<StatusModel?>?> getdsmType({
+    bool isLoading = true,
+  }) async =>
+      await repository.getdsmType(
+        isLoading: isLoading,
+      );
 
   Future<List<DSMData?>?> getDSMData({
     List<String>? selectedYear,
@@ -36,6 +44,7 @@ class ImportDsmListChargesListUsecase {
     List<int>? selectedState,
     List<int>? selectedSpv,
     List<int>? selectedSite,
+    List<int>? selectedDSMType,
     bool isLoading = true,
   }) async =>
       await repository.getDSMData(
@@ -44,6 +53,7 @@ class ImportDsmListChargesListUsecase {
         selectedState: selectedState,
         selectedSpv: selectedSpv,
         selectedSite: selectedSite,
+        selectedDSMType: selectedDSMType,
         isLoading: isLoading,
       );
 

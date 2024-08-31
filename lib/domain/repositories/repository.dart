@@ -113,6 +113,7 @@ import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:cmms/domain/models/training_summary_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_waste_model.dart';
 import 'package:cmms/domain/models/type_of_water_model.dart';
@@ -16057,6 +16058,7 @@ Future<Map<String, dynamic>> updateFuelConsumption(
     List<int>? selectedState,
     List<int>? selectedSpv,
     List<int>? selectedSite,
+    List<int>? selectedDSMType,
     required bool isLoading,
   }) async {
     try {
@@ -16068,6 +16070,7 @@ Future<Map<String, dynamic>> updateFuelConsumption(
         selectedState: selectedState,
         selectedSpv: selectedSpv,
         selectedSite: selectedSite,
+        selectedDSMType: selectedDSMType,
         isLoading: isLoading,
       );
       if (!res.hasError) {
@@ -16079,6 +16082,27 @@ Future<Map<String, dynamic>> updateFuelConsumption(
       }
     } catch (error) {
       print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<StatusModel>> getdsmType({
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getdsmType(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var dsmTypeList = StatusModelFromJson(res.data);
+        return dsmTypeList.reversed.toList();
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
       return [];
     }
   }

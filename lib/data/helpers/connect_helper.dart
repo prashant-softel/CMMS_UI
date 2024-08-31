@@ -3984,6 +3984,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
 //updateFuelConsumption
   Future<ResponseModel> updateFuelConsumption({
     required String auth,
@@ -4007,6 +4008,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> createWaterData({
     required String auth,
     createWaterData,
@@ -10446,6 +10448,7 @@ class ConnectHelper {
     List<int>? selectedState,
     List<int>? selectedSpv,
     List<int>? selectedSite,
+    List<int>? selectedDSMType,
     bool? isLoading,
   }) async {
     final queryParams = <String>[];
@@ -10464,6 +10467,9 @@ class ConnectHelper {
     if (selectedSite != null || selectedSite?.length != 0) {
       queryParams.add('siteId=${selectedSite?.join(',')}');
     }
+    if (selectedDSMType != null || selectedDSMType?.length != 0) {
+      queryParams.add('dsmtype=${selectedDSMType?.join(',')}');
+    }
     final queryString = queryParams.join('&');
     final endpoint = 'DSM/getDSMData?$queryString';
     var responseModel = await apiWrapper.makeRequest(
@@ -10477,6 +10483,22 @@ class ConnectHelper {
     );
     print('NewPermitResponse: ${responseModel.data}');
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> getdsmType({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'DSM/getDSMType',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 

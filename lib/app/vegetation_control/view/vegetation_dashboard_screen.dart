@@ -160,7 +160,7 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                                         ? _vegetationList(
                                             tittle: "Add Plan",
                                             ontap: () {
-                                              Get.offNamed(
+                                              Get.toNamed(
                                                 Routes.addVegetationPlanScreen,
                                               );
                                             },

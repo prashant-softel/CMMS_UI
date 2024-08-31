@@ -104,7 +104,6 @@ class ImportDsmListChargesListContentWeb
                                   Spacer(),
                                   PopupMenuButton<Widget>(
                                     constraints: BoxConstraints(minWidth: 460),
-                                    tooltip: "",
                                     elevation: 25.0,
                                     child: Container(
                                       height: 35,
@@ -157,8 +156,7 @@ class ImportDsmListChargesListContentWeb
                                     child: CustomElevatedButton(
                                       backgroundColor: ColorValues.approveColor,
                                       onPressed: () {
-                                        controller
-                                            .goToImportDsmChargesScreen();
+                                        controller.goToImportDsmChargesScreen();
                                       },
                                       text: '+ Upload Report ',
                                     ),
@@ -498,6 +496,30 @@ class ImportDsmListChargesListContentWeb
                     ],
                   ),
                   Dimens.boxHeight10,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Select DSM Type: "),
+                      SizedBox(
+                        width: Get.width * .17,
+                        child: CustomMultiSelectDialogField(
+                          initialValue: controller.selectedDSMType,
+                          items: controller.dsmTypes
+                              .map(
+                                (dsmtype) => MultiSelectItem(
+                                  dsmtype?.id ?? 0,
+                                  dsmtype?.name ?? "",
+                                ),
+                              )
+                              .toList(),
+                          onConfirm: (selectedOptionsList) => {
+                            controller.selectedDSMTypes(selectedOptionsList),
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Dimens.boxHeight10,
                   Container(
                     height: 35,
                     child: CustomElevatedButton(
@@ -756,21 +778,21 @@ class DSMDataSource extends DataTableSource {
           (dsm?.forcasterName ?? '')
               .toLowerCase()
               .contains(controller.forcasterName.value.toLowerCase()) &&
-          (dsm?.category ?? '')
-              .toLowerCase()
-              .contains(controller.category.value.toLowerCase()) &&
+          // (dsm?.category ?? '')
+          //     .toLowerCase()
+          //     .contains(controller.category.value.toLowerCase()) &&
           (dsm?.dsmPenalty ?? '')
               .toString()
               .toLowerCase()
               .contains(controller.dsmPenalty.value.toLowerCase()) &&
-          (dsm?.scheduleKwh ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.scheduleKwh.value.toLowerCase()) &&
           (dsm?.actualKwh ?? '')
               .toString()
               .toLowerCase()
               .contains(controller.actualKwh.value.toLowerCase()) &&
+          (dsm?.scheduleKwh ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.scheduleKwh.value.toLowerCase()) &&
           (dsm?.dsmPer ?? '')
               .toString()
               .toLowerCase()
@@ -781,6 +803,10 @@ class DSMDataSource extends DataTableSource {
   @override
   DataRow? getRow(int index) {
     final dsmDetails = filteredDSMData[index];
+    double dsmper = 0.0;
+    if (dsmDetails?.dsmPer != null && dsmDetails?.dsmPer != 0.0) {
+      dsmper = (dsmDetails!.dsmPer! / 10000);
+    }
 
     var cellsBuffer = [
       '${dsmDetails?.fy ?? ''}',
@@ -790,11 +816,12 @@ class DSMDataSource extends DataTableSource {
       '${dsmDetails?.site ?? ''}',
       '${dsmDetails?.dsmType ?? ''}',
       '${dsmDetails?.forcasterName ?? ''}',
-      '${dsmDetails?.category ?? ''}',
-      '${dsmDetails?.dsmPenalty ?? ''}',
-      '${dsmDetails?.scheduleKwh ?? ''}',
+      // '${dsmDetails?.category ?? ''}',
+      // '${dsmDetails?.dsmPenalty ?? ''}',
+      "dsmPenalty",
       '${dsmDetails?.actualKwh ?? ''}',
-      '${dsmDetails?.dsmPer ?? ''}',
+      '${dsmDetails?.scheduleKwh ?? ''}',
+      '${dsmper.toString().substring(0, 5)}%',
     ];
     var cells = [];
     int i = 0;
@@ -813,9 +840,20 @@ class DSMDataSource extends DataTableSource {
       index: index,
       cells: cells.map((value) {
         return DataCell(
-          Text(
-            value.toString(),
-          ),
+          value == "dsmPenalty"
+              ? Text(
+                  "${dsmDetails?.dsmPenalty}",
+                  style: TextStyle(
+                    color: dsmDetails?.category == "Actual"
+                        ? Colors.green
+                        : dsmDetails?.category == "Provision"
+                            ? Colors.red
+                            : Colors.black,
+                  ),
+                )
+              : Text(
+                  value.toString(),
+                ),
         );
       }).toList(),
     );
@@ -830,69 +868,3 @@ class DSMDataSource extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 }
-
-final List<Map<String, dynamic>> statutoryData = [
-  {
-    "Year": "2023",
-    'Month': 'May',
-    'Site Name': 'Alote',
-    'Actual Gen': '15.00 ',
-    'Forecosting Gen': '15.00',
-    'Devaition': '15%',
-    'DSM Penalty': '15.00',
-  },
-  {
-    "Year": "2023",
-    'Month': 'May',
-    'Site Name': 'Alote',
-    'Actual Gen': '15.00 ',
-    'Forecosting Gen': '15.00',
-    'Devaition': '15%',
-    'DSM Penalty': '15.00',
-  },
-  {
-    "Year": "2023",
-    'Month': 'May',
-    'Site Name': 'Alote',
-    'Actual Gen': '15.00 ',
-    'Forecosting Gen': '15.00',
-    'Devaition': '15%',
-    'DSM Penalty': '15.00',
-  },
-  {
-    "Year": "2023",
-    'Month': 'May',
-    'Site Name': 'Alote',
-    'Actual Gen': '15.00 ',
-    'Forecosting Gen': '15.00',
-    'Devaition': '15%',
-    'DSM Penalty': '15.00',
-  },
-  {
-    "Year": "2023",
-    'Month': 'May',
-    'Site Name': 'Alote',
-    'Actual Gen': '15.00 ',
-    'Forecosting Gen': '15.00',
-    'Devaition': '15%',
-    'DSM Penalty': '15.00',
-  },
-  {
-    "Year": "2023",
-    'Month': 'May',
-    'Site Name': 'Alote',
-    'Actual Gen': '15.00 ',
-    'Forecosting Gen': '15.00',
-    'Devaition': '15%',
-    'DSM Penalty': '15.00',
-  },
-  {
-    "Year": "2023",
-    'Month': 'May',
-    'Site Name': 'Alote',
-    'Actual Gen': '15.00 ',
-    'Forecosting Gen': '15.00',
-    'Devaition': '15%',
-    'DSM Penalty': '15.00',
-  },
-];
