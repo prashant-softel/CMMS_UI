@@ -31,28 +31,28 @@ class Cumulativereport {
   factory Cumulativereport.fromJson(Map<String, dynamic> json) =>
       Cumulativereport(
         site_name: json["site_name"] == null ? "" : json["site_name"],
-        Created: json["Created"] == null ? 0 : json["Created"],
-        Closed: json["Closed"] == null ? 0 : json["Closed"],
-        Cancelled: json["Cancelled"] == null ? 0 : json["Cancelled"],
-        NotStarted: json["NotStarted"] == null ? 0 : json["NotStarted"],
-        Ongoing: json["Ongoing"] == null ? 0 : json["Ongoing"],
-        ClosedOnTime: json["ClosedOnTime"] == null ? 0 : json["ClosedOnTime"],
-        ClosedWithExtension: json["ClosedWithExtension"] == null
+        Created: json["created"] == null ? 0 : json["created"],
+        Closed: json["closed"] == null ? 0 : json["closed"],
+        Cancelled: json["cancelled"] == null ? 0 : json["cancelled"],
+        NotStarted: json["notStarted"] == null ? 0 : json["notStarted"],
+        Ongoing: json["ongoing"] == null ? 0 : json["ongoing"],
+        ClosedOnTime: json["closedOnTime"] == null ? 0 : json["closedOnTime"],
+        ClosedWithExtension: json["closedWithExtension"] == null
             ? 0
-            : json["ClosedWithExtension"],
-        ClosedOnTimeCreate: json["ClosedOnTimeCreate"] == null
+            : json["closedWithExtension"],
+        ClosedOnTimeCreate: json["closedOnTimeCreate"] == null
             ? ""
-            : json["ClosedOnTimeCreate"],
+            : json["closedOnTimeCreate"],
       );
   Map<String, dynamic> toJson() => {
         'site_name': site_name,
-        'Created': Created,
-        'Closed': Closed,
-        'Cancelled': Cancelled,
-        'NotStarted': NotStarted,
-        'Ongoing': Ongoing,
-        'ClosedOnTime': ClosedOnTime,
-        'ClosedWithExtension': ClosedWithExtension,
-        'ClosedOnTimeCreate': ClosedOnTimeCreate,
+        'created': Created,
+        'closed': Closed,
+        'cancelled': Cancelled,
+        'notStarted': NotStarted,
+        'ongoing': Ongoing,
+        'closedOnTime': ClosedOnTime,
+        'closedWithExtension': ClosedWithExtension,
+        'closedOnTimeCreate': ClosedOnTimeCreate,
       };
 }

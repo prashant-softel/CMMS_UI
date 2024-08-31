@@ -18,7 +18,8 @@ class DropdownWebWidget extends StatelessWidget {
       this.focusNode,
       this.width,
       this.margin,
-      this.boxShadow});
+      this.boxShadow,
+      this.height});
 
   String? selectedValue;
   bool? isValueSelected;
@@ -30,6 +31,7 @@ class DropdownWebWidget extends StatelessWidget {
   double? width;
   EdgeInsetsGeometry? margin;
   List<BoxShadow>? boxShadow;
+  double? height;
 
   ///
   @override
@@ -39,7 +41,9 @@ class DropdownWebWidget extends StatelessWidget {
 
         Obx(
       () => Container(
-        height: MediaQuery.of(context).size.height * 0.040,
+        height: height == null
+            ? MediaQuery.of(context).size.height * 0.040
+            : height,
         width: width,
         margin: margin,
         decoration: BoxDecoration(
