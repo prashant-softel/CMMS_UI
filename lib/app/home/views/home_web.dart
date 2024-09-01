@@ -223,34 +223,135 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                               if (Responsive.isDesktop(context))
                                 Icon(Icons.notifications_active,
                                     color: ColorValues.greyLightColor),
-                              Card(
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                ),
-                                color: ColorValues.blueMediumColor,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Row(
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 15,
-                                        backgroundColor:
-                                            Color.fromARGB(255, 206, 200, 200),
-                                        child: Icon(Icons.person,
-                                            color: ColorValues.blueMediumColor),
-                                      ), // icon
-                                      if (Responsive.isDesktop(context))
-                                        SizedBox(
-                                            width:
-                                                5), // space between icon and text
-                                      if (Responsive.isDesktop(context))
-                                        GestureDetector(
-                                          onTap: () {
-                                            print(
-                                                "${varUserAccessModel.value.user_name ?? ""}");
-                                          },
-                                          child: Text(
+                              InkWell(
+                                onTap: () {
+                                  Get.dialog(
+                                    Stack(children: [
+                                      Positioned(
+                                        right: 1,
+                                        top: 70,
+                                        child: Container(
+                                          width: 200,
+                                          child: AlertDialog(
+                                            insetPadding: EdgeInsets.symmetric(
+                                                horizontal: 5.w),
+                                            contentPadding: EdgeInsets.all(20),
+                                            backgroundColor:
+                                                ColorValues.appDarkBlueColor,
+                                            content: Column(
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    controller.clearStoreData();
+                                                    Get.toNamed(Routes.profile,
+                                                        arguments: {
+                                                          'userId':
+                                                              varUserAccessModel
+                                                                  .value
+                                                                  .user_id,
+                                                        });
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons.person,
+                                                          color: Color(
+                                                              0xffD2D0D0)),
+                                                      SizedBox(width: 10),
+                                                      Text(
+                                                        "Profile",
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xffD2D0D0),
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Divider(
+                                                    color: Color(0xffD2D0D0)),
+                                                InkWell(
+                                                  onTap: () {
+                                                    Get.toNamed(Routes.setting);
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons.settings,
+                                                          color: Color(
+                                                              0xffD2D0D0)),
+                                                      SizedBox(width: 10),
+                                                      Text(
+                                                        "Settings",
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xffD2D0D0),
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Divider(
+                                                    color: Color(0xffD2D0D0)),
+                                                InkWell(
+                                                  onTap: () {
+                                                    _isDeleteDialog();
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons.logout,
+                                                          color: Color(
+                                                              0xffD2D0D0)),
+                                                      SizedBox(width: 10),
+                                                      Text(
+                                                        "Log Out",
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xffD2D0D0),
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                                  );
+                                },
+                                child: Card(
+                                  elevation: 5,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                  ),
+                                  color: ColorValues.blueMediumColor,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 15,
+                                          backgroundColor: Color.fromARGB(
+                                              255, 206, 200, 200),
+                                          child: Icon(Icons.person,
+                                              color:
+                                                  ColorValues.blueMediumColor),
+                                        ), // icon
+                                        if (Responsive.isDesktop(context))
+                                          SizedBox(
+                                              width:
+                                                  5), // space between icon and text
+                                        if (Responsive.isDesktop(context))
+                                          Text(
                                             "${varUserAccessModel.value.user_name}",
                                             style: TextStyle(
                                               color: Colors.black, // text color
@@ -259,147 +360,14 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                   .w500, // text weight
                                             ),
                                           ),
-                                        ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          Get.dialog(
-                                            Stack(children: [
-                                              Positioned(
-                                                right: 1,
-                                                top: 70,
-                                                child: Container(
-                                                  width: 200,
-                                                  child: AlertDialog(
-                                                    insetPadding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 5.w),
-                                                    contentPadding:
-                                                        EdgeInsets.all(20),
-                                                    backgroundColor: ColorValues
-                                                        .appDarkBlueColor,
-                                                    content: Column(
-                                                        // mainAxisSize: MainAxisSize.min,
-                                                        children: [
-                                                          GestureDetector(
-                                                            onTap: () {
-                                                              controller
-                                                                  .clearStoreData();
-
-                                                              Get.toNamed(
-                                                                  Routes
-                                                                      .profile,
-                                                                  arguments: {
-                                                                    'userId': varUserAccessModel
-                                                                        .value
-                                                                        .user_id,
-                                                                  });
-                                                            },
-                                                            child: Row(
-                                                              children: [
-                                                                Icon(
-                                                                  Icons.person,
-                                                                  color: Color(
-                                                                      0xffD2D0D0),
-                                                                ),
-                                                                SizedBox(
-                                                                  width: 10,
-                                                                ),
-                                                                Text("Profile",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Color(
-                                                                          0xffD2D0D0),
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                    )),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Divider(
-                                                            color: Color(
-                                                                0xffD2D0D0),
-                                                          ),
-                                                          GestureDetector(
-                                                            onTap: () {
-                                                              Get.toNamed(
-                                                                Routes.setting,
-                                                              );
-                                                            },
-                                                            child: Row(
-                                                              children: [
-                                                                Icon(
-                                                                  Icons
-                                                                      .settings,
-                                                                  color: Color(
-                                                                      0xffD2D0D0),
-                                                                ),
-                                                                SizedBox(
-                                                                  width: 10,
-                                                                ),
-                                                                Text("Settings",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Color(
-                                                                          0xffD2D0D0),
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                    )),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Divider(
-                                                            color: Color(
-                                                                0xffD2D0D0),
-                                                          ),
-                                                          GestureDetector(
-                                                            onTap: () {
-                                                              _isDeleteDialog();
-                                                            },
-                                                            child: Row(
-                                                              children: [
-                                                                Icon(
-                                                                  Icons.logout,
-                                                                  color: Color(
-                                                                      0xffD2D0D0),
-                                                                ),
-                                                                SizedBox(
-                                                                  width: 10,
-                                                                ),
-                                                                Text("Log Out",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Color(
-                                                                          0xffD2D0D0),
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                    )),
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ]),
-                                                  ),
-                                                ),
-                                              ),
-                                            ]),
-                                          );
-                                        },
-                                        child: Icon(
-                                            Icons.keyboard_arrow_down_outlined,
+                                        Icon(Icons.keyboard_arrow_down_outlined,
                                             color: ColorValues.blackColor),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
+
                               // Dimens.boxWidth10,
                               SizedBox(width: 10),
                             ],
