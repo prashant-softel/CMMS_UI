@@ -95,7 +95,7 @@ class ImportDsmListChargesListContentWeb
                             Obx(() {
                               return AnimatedContainer(
                                 duration: Duration(milliseconds: 300),
-                                height: controller.isExpanded.value ? 200 : 35,
+                                height: controller.isExpanded.value ? 210 : 35,
                                 width: double.infinity,
                                 child: Stack(
                                   children: [
@@ -129,302 +129,320 @@ class ImportDsmListChargesListContentWeb
                                         ),
                                         if (controller.isExpanded.value)
                                           Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10.0,
-                                                left: 10.0,
-                                                right: 10.0),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10.0,
+                                                vertical: 10.0),
                                             child: Column(
                                               children: [
                                                 Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
-                                                    Row(
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
-                                                        CustomRichText(
-                                                          title:
-                                                              "Select Years : ",
-                                                          includeAsterisk:
-                                                              false,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                              title:
+                                                                  "Select Years : ",
+                                                              includeAsterisk:
+                                                                  false,
+                                                            ),
+                                                            SizedBox(
+                                                              width: Get.width *
+                                                                  .17, // Fixed width for dropdown
+                                                              child:
+                                                                  CustomMultiDropdown(
+                                                                title:
+                                                                    'Select Years',
+                                                                buttonText:
+                                                                    'Select Years',
+                                                                initialValue:
+                                                                    controller
+                                                                        .selectedYears,
+                                                                items: controller
+                                                                        .year
+                                                                        ?.map(
+                                                                          (years) =>
+                                                                              DropdownItem<Object>(
+                                                                            label:
+                                                                                years.name,
+                                                                            value:
+                                                                                years.name,
+                                                                          ),
+                                                                        )
+                                                                        .toList() ??
+                                                                    [],
+                                                                onConfirm:
+                                                                    (selectedOptionsList) {
+                                                                  controller
+                                                                      .yearsSelected(
+                                                                          selectedOptionsList);
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        // Text("Select Years: "),
-                                                        SizedBox(
-                                                          width:
-                                                              Get.width * .17,
-                                                          child:
-                                                              CustomMultiDropdown(
-                                                            title:
-                                                                'Select Years',
-                                                            buttonText:
-                                                                'Select Years',
-                                                            initialValue:
-                                                                controller
-                                                                    .selectedYears,
-                                                            items: controller
-                                                                    .year
-                                                                    ?.map(
-                                                                      (years) =>
-                                                                          DropdownItem<
-                                                                              Object>(
-                                                                        label: years
-                                                                            .name,
-                                                                        value: years
-                                                                            .name,
-                                                                      ),
-                                                                    )
-                                                                    .toList() ??
-                                                                [],
-                                                            onConfirm:
-                                                                (selectedOptionsList) {
-                                                              controller
-                                                                  .yearsSelected(
-                                                                      selectedOptionsList);
-                                                            },
-                                                          ),
+                                                        Dimens.boxHeight10,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                              title:
+                                                                  "Select SPV : ",
+                                                              includeAsterisk:
+                                                                  false,
+                                                            ),
+                                                            SizedBox(
+                                                              width: Get.width *
+                                                                  .17, // Fixed width for dropdown
+                                                              child:
+                                                                  CustomMultiDropdown(
+                                                                title:
+                                                                    'Select SPV',
+                                                                buttonText:
+                                                                    'Select SPV',
+                                                                initialValue:
+                                                                    controller
+                                                                        .selectedSpv,
+                                                                items: controller
+                                                                        .spvList
+                                                                        ?.map(
+                                                                          (spv) =>
+                                                                              DropdownItem<Object>(
+                                                                            label:
+                                                                                spv?.name ?? "",
+                                                                            value:
+                                                                                spv?.id ?? 0,
+                                                                          ),
+                                                                        )
+                                                                        .toList() ??
+                                                                    [],
+                                                                onConfirm:
+                                                                    (selectedOptionsList) {
+                                                                  controller
+                                                                      .spvSelected(
+                                                                          selectedOptionsList);
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ],
                                                     ),
-                                                    Dimens.boxWidth5,
-                                                    Row(
+                                                    SizedBox(width: 10),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
-                                                        CustomRichText(
-                                                          title:
-                                                              "Select Months : ",
-                                                          includeAsterisk:
-                                                              false,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                              title:
+                                                                  "Select Months : ",
+                                                              includeAsterisk:
+                                                                  false,
+                                                            ),
+                                                            SizedBox(
+                                                              width: Get.width *
+                                                                  .17, // Fixed width for dropdown
+                                                              child:
+                                                                  CustomMultiDropdown(
+                                                                title:
+                                                                    'Select Months',
+                                                                buttonText:
+                                                                    'Select Months',
+                                                                initialValue:
+                                                                    controller
+                                                                        .selectedMonths,
+                                                                items: controller
+                                                                        .month
+                                                                        ?.map(
+                                                                          (months) =>
+                                                                              DropdownItem<Object>(
+                                                                            label:
+                                                                                months.name,
+                                                                            value:
+                                                                                months.name,
+                                                                          ),
+                                                                        )
+                                                                        .toList() ??
+                                                                    [],
+                                                                onConfirm:
+                                                                    (selectedOptionsList) {
+                                                                  controller
+                                                                      .monthsSelected(
+                                                                          selectedOptionsList);
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        SizedBox(
-                                                          width:
-                                                              Get.width * .17,
-                                                          child:
-                                                              CustomMultiDropdown(
-                                                            title:
-                                                                'Select Months',
-                                                            buttonText:
-                                                                'Select Months',
-                                                            initialValue: controller
-                                                                .selectedMonths,
-                                                            items: controller
-                                                                    .month
-                                                                    ?.map(
-                                                                      (months) =>
-                                                                          DropdownItem<
-                                                                              Object>(
-                                                                        label: months
-                                                                            .name,
-                                                                        value: months
-                                                                            .name,
-                                                                      ),
-                                                                    )
-                                                                    .toList() ??
-                                                                [],
-                                                            onConfirm:
-                                                                (selectedOptionsList) {
-                                                              controller
-                                                                  .monthsSelected(
-                                                                      selectedOptionsList);
-                                                            },
-                                                          ),
+                                                        Dimens.boxHeight10,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                              title:
+                                                                  "Select States : ",
+                                                              includeAsterisk:
+                                                                  false,
+                                                            ),
+                                                            SizedBox(
+                                                              width: Get.width *
+                                                                  .17, // Fixed width for dropdown
+                                                              child:
+                                                                  CustomMultiDropdown(
+                                                                title:
+                                                                    'Select States',
+                                                                buttonText:
+                                                                    'Select States',
+                                                                initialValue:
+                                                                    controller
+                                                                        .selectedState,
+                                                                items: controller
+                                                                        .stateList
+                                                                        ?.map(
+                                                                          (state) =>
+                                                                              DropdownItem<Object>(
+                                                                            label:
+                                                                                state?.name ?? "",
+                                                                            value:
+                                                                                state?.id ?? 0,
+                                                                          ),
+                                                                        )
+                                                                        .toList() ??
+                                                                    [],
+                                                                onConfirm:
+                                                                    (selectedOptionsList) {
+                                                                  controller
+                                                                      .stateSelected(
+                                                                          selectedOptionsList);
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ],
                                                     ),
-                                                    Dimens.boxWidth5,
-                                                    Row(
+                                                    SizedBox(width: 10),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
-                                                        CustomRichText(
-                                                          title:
-                                                              "Select Facilities : ",
-                                                          includeAsterisk:
-                                                              false,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                              title:
+                                                                  "Select Facilities : ",
+                                                              includeAsterisk:
+                                                                  false,
+                                                            ),
+                                                            SizedBox(
+                                                              width: Get.width *
+                                                                  .17, // Fixed width for dropdown
+                                                              child:
+                                                                  CustomMultiDropdown(
+                                                                title:
+                                                                    'Select Facilities',
+                                                                buttonText:
+                                                                    'Select Facilities',
+                                                                initialValue:
+                                                                    controller
+                                                                        .selectedFacilities,
+                                                                items: controller
+                                                                        .facilityNameList
+                                                                        ?.map(
+                                                                          (facility) =>
+                                                                              DropdownItem<Object>(
+                                                                            label:
+                                                                                facility?.name ?? "",
+                                                                            value:
+                                                                                facility?.id ?? 0,
+                                                                          ),
+                                                                        )
+                                                                        .toList() ??
+                                                                    [],
+                                                                onConfirm:
+                                                                    (selectedOptionsList) {
+                                                                  controller
+                                                                      .facilitySelected(
+                                                                          selectedOptionsList);
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        SizedBox(
-                                                          width:
-                                                              Get.width * .17,
-                                                          child:
-                                                              CustomMultiDropdown(
-                                                            title:
-                                                                'Select Facilities',
-                                                            buttonText:
-                                                                'Select Facilities',
-                                                            initialValue: controller
-                                                                .selectedFacilities,
-                                                            items: controller
-                                                                    .facilityNameList
-                                                                    ?.map(
-                                                                      (facility) =>
-                                                                          DropdownItem<
-                                                                              Object>(
-                                                                        label: facility?.name ??
-                                                                            "",
-                                                                        value:
-                                                                            facility?.id ??
-                                                                                0,
-                                                                      ),
-                                                                    )
-                                                                    .toList() ??
-                                                                [],
-                                                            onConfirm:
-                                                                (selectedOptionsList) {
-                                                              controller
-                                                                  .facilitySelected(
-                                                                      selectedOptionsList);
-                                                            },
-                                                          ),
+                                                        Dimens.boxHeight10,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                              title:
+                                                                  "Select DSM Type : ",
+                                                              includeAsterisk:
+                                                                  false,
+                                                            ),
+                                                            SizedBox(
+                                                              width: Get.width *
+                                                                  .17, // Fixed width for dropdown
+                                                              child:
+                                                                  CustomMultiDropdown(
+                                                                title:
+                                                                    'Select DSM Type',
+                                                                buttonText:
+                                                                    'Select DSM Type',
+                                                                initialValue:
+                                                                    controller
+                                                                        .selectedDSMType,
+                                                                items: controller
+                                                                        .dsmTypes
+                                                                        ?.map(
+                                                                          (dsmtype) =>
+                                                                              DropdownItem<Object>(
+                                                                            label:
+                                                                                dsmtype?.name ?? "",
+                                                                            value:
+                                                                                dsmtype?.id ?? 0,
+                                                                          ),
+                                                                        )
+                                                                        .toList() ??
+                                                                    [],
+                                                                onConfirm:
+                                                                    (selectedOptionsList) {
+                                                                  controller
+                                                                      .selectedDSMTypes(
+                                                                          selectedOptionsList);
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ],
                                                     ),
                                                   ],
                                                 ),
                                                 Dimens.boxHeight10,
-                                                Row(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                          title:
-                                                              "Select SPV : ",
-                                                          includeAsterisk:
-                                                              false,
-                                                        ),
-                                                        SizedBox(
-                                                          width:
-                                                              Get.width * .17,
-                                                          child:
-                                                              CustomMultiDropdown(
-                                                            title: 'Select SPV',
-                                                            buttonText:
-                                                                'Select SPV',
-                                                            initialValue:
-                                                                controller
-                                                                    .selectedSpv,
-                                                            items: controller
-                                                                    .spvList
-                                                                    ?.map(
-                                                                      (spv) =>
-                                                                          DropdownItem<
-                                                                              Object>(
-                                                                        label: spv?.name ??
-                                                                            "",
-                                                                        value:
-                                                                            spv?.id ??
-                                                                                0,
-                                                                      ),
-                                                                    )
-                                                                    .toList() ??
-                                                                [],
-                                                            onConfirm:
-                                                                (selectedOptionsList) {
-                                                              controller
-                                                                  .spvSelected(
-                                                                      selectedOptionsList);
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
+                                                Align(
+                                                  alignment: Alignment.center,
+                                                  child: Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .navyBlueColor,
+                                                      text: "Apply",
+                                                      onPressed: () {
+                                                        controller
+                                                            .getDSMDataList();
+                                                        Get.back();
+                                                      },
                                                     ),
-                                                    Dimens.boxWidth5,
-                                                    Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                          title:
-                                                              "Select States : ",
-                                                          includeAsterisk:
-                                                              false,
-                                                        ),
-                                                        SizedBox(
-                                                          width:
-                                                              Get.width * .17,
-                                                          child:
-                                                              CustomMultiDropdown(
-                                                            title:
-                                                                'Select States',
-                                                            buttonText:
-                                                                'Select States',
-                                                            initialValue:
-                                                                controller
-                                                                    .selectedState,
-                                                            items: controller
-                                                                    .stateList
-                                                                    ?.map(
-                                                                      (state) =>
-                                                                          DropdownItem<
-                                                                              Object>(
-                                                                        label: state?.name ??
-                                                                            "",
-                                                                        value:
-                                                                            state?.id ??
-                                                                                0,
-                                                                      ),
-                                                                    )
-                                                                    .toList() ??
-                                                                [],
-                                                            onConfirm:
-                                                                (selectedOptionsList) {
-                                                              controller
-                                                                  .stateSelected(
-                                                                      selectedOptionsList);
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxWidth5,
-                                                    Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                          title:
-                                                              "Select DSM Type : ",
-                                                          includeAsterisk:
-                                                              false,
-                                                        ),
-                                                        SizedBox(
-                                                          width:
-                                                              Get.width * .17,
-                                                          child:
-                                                              CustomMultiDropdown(
-                                                            title:
-                                                                'Select DSM Type',
-                                                            buttonText:
-                                                                'Select DSM Type',
-                                                            initialValue: controller
-                                                                .selectedDSMType,
-                                                            items: controller
-                                                                    .dsmTypes
-                                                                    ?.map(
-                                                                      (dsmtype) =>
-                                                                          DropdownItem<
-                                                                              Object>(
-                                                                        label: dsmtype?.name ??
-                                                                            "",
-                                                                        value:
-                                                                            dsmtype?.id ??
-                                                                                0,
-                                                                      ),
-                                                                    )
-                                                                    .toList() ??
-                                                                [],
-                                                            onConfirm:
-                                                                (selectedOptionsList) {
-                                                              controller
-                                                                  .selectedDSMTypes(
-                                                                      selectedOptionsList);
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight10,
-                                                Container(
-                                                  height: 35,
-                                                  child: CustomElevatedButton(
-                                                    backgroundColor: ColorValues
-                                                        .navyBlueColor,
-                                                    text: "Apply",
-                                                    onPressed: () {
-                                                      controller
-                                                          .getDSMDataList();
-                                                      Get.back();
-                                                    },
                                                   ),
                                                 ),
                                               ],
