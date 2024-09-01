@@ -4,7 +4,7 @@ import 'package:multi_dropdown/multi_dropdown.dart';
 class CustomMultiDropdown extends StatefulWidget {
   final List<Object>? initialValue;
   final List<DropdownItem<Object>>? items;
-  final String? title;
+  String? title;
   final String? buttonText;
   final Function(List<Object>) onConfirm;
   double? height;
@@ -50,7 +50,7 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
     if (selectedCount > 2) {
       _hintTextNotifier.value = "$selectedCount of $itemCount selected";
     } else if (selectedCount == 0) {
-      _hintTextNotifier.value = widget.title ?? 'Select options';
+      _hintTextNotifier.value = widget.title ?? 'Please Select';
     } else {
       final selectedLabels = selectedValues.map((value) {
         final item = widget.items?.firstWhere(
@@ -90,16 +90,22 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
             controller: _controller,
             enabled: true,
             searchEnabled: true,
+            selectedItemBuilder: (item) {
+              return selectedValues.indexOf(item.value) == 0
+                  ? Text('${hintText}')
+                  : SizedBox(
+                      width: 0,
+                    );
+            },
             chipDecoration: ChipDecoration(
-              backgroundColor: Colors.yellow,
-              wrap: true,
-              runSpacing: 4,
-              spacing: 4,
+              backgroundColor: Colors.transparent,
+              wrap: false,
+              runSpacing: 0,
+              spacing: 0,
             ),
             fieldDecoration: FieldDecoration(
               hintText: hintText,
               hintStyle: const TextStyle(color: Colors.black87),
-              prefixIcon: const Icon(Icons.list),
               showClearIcon: false,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -118,7 +124,7 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
               header: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Text(
-                  widget.title ?? 'Select options from the list',
+                  'Please Select',
                   textAlign: TextAlign.start,
                   style: const TextStyle(
                     fontSize: 16,
@@ -129,7 +135,7 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
             ),
             dropdownItemDecoration: DropdownItemDecoration(
               selectedIcon: const Icon(Icons.check_box, color: Colors.green),
-              disabledIcon: Icon(Icons.lock, color: Colors.grey.shade300),
+              disabledIcon: Icon(Icons.lock, color: Colors.black12),
             ),
             onSelectionChange: (newSelectedItems) {
               setState(() {

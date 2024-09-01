@@ -3,13 +3,13 @@ import 'package:cmms/app/import_dsm_list_charges/import_dsm_list_charges_control
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
+import 'package:cmms/app/widgets/multidropdown.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:multi_dropdown/multi_dropdown.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 
@@ -69,8 +69,7 @@ class ImportDsmListChargesListContentWeb
                       child:
                           Text(" / DSM DASHBOARD", style: Styles.greyLight14),
                     ),
-                    Text(" / IMPORT F&S DSM CHARGES",
-                        style: Styles.greyLight14),
+                    Text(" / IMPORT F&S DSM LIST", style: Styles.greyLight14),
                   ],
                 ),
               ),
@@ -92,78 +91,337 @@ class ImportDsmListChargesListContentWeb
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "IMPORT F&S DSM CHARGES",
-                                    style: Styles.blackBold16,
-                                  ),
-                                  Spacer(),
-                                  PopupMenuButton<Widget>(
-                                    constraints: BoxConstraints(minWidth: 460),
-                                    elevation: 25.0,
-                                    child: Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      padding: EdgeInsets.only(
-                                          top: 4, bottom: 4, right: 8, left: 8),
-                                      decoration: BoxDecoration(
-                                          color: ColorValues.appLightBlueColor,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              offset: const Offset(4.0, 2.0),
-                                              blurRadius: 5.0,
-                                              spreadRadius: 1.0,
+                            Obx(() {
+                              return AnimatedContainer(
+                                duration: Duration(milliseconds: 300),
+                                height: controller.isExpanded.value ? 200 : 35,
+                                width: double.infinity,
+                                child: Stack(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Dimens.boxWidth5,
+                                            Text(
+                                              "F&S DSM CHARGES LIST",
+                                              style: Styles.blackBold16,
                                             ),
-                                          ]),
-                                      child: Text(
-                                        'Filter',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
+                                            Spacer(),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  right: 40, top: 5),
+                                              height: 30,
+                                              child: CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.approveColor,
+                                                onPressed: () {
+                                                  controller
+                                                      .goToImportDsmChargesScreen();
+                                                },
+                                                text: 'Import Report',
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        if (controller.isExpanded.value)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 10.0,
+                                                left: 10.0,
+                                                right: 10.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text("Select Years: "),
+                                                        SizedBox(
+                                                          width:
+                                                              Get.width * .17,
+                                                          child:
+                                                              CustomMultiDropdown(
+                                                            title:
+                                                                'Select Years',
+                                                            buttonText:
+                                                                'Select Years',
+                                                            initialValue:
+                                                                controller
+                                                                    .selectedYears,
+                                                            items: controller
+                                                                    .year
+                                                                    ?.map(
+                                                                      (years) =>
+                                                                          DropdownItem<
+                                                                              Object>(
+                                                                        label: years
+                                                                            .name,
+                                                                        value: years
+                                                                            .name,
+                                                                      ),
+                                                                    )
+                                                                    .toList() ??
+                                                                [],
+                                                            onConfirm:
+                                                                (selectedOptionsList) {
+                                                              controller
+                                                                  .yearsSelected(
+                                                                      selectedOptionsList);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Dimens.boxWidth5,
+                                                    Row(
+                                                      children: [
+                                                        Text("Select Months: "),
+                                                        SizedBox(
+                                                          width:
+                                                              Get.width * .17,
+                                                          child:
+                                                              CustomMultiDropdown(
+                                                            title:
+                                                                'Select Months',
+                                                            buttonText:
+                                                                'Select Months',
+                                                            initialValue: controller
+                                                                .selectedMonths,
+                                                            items: controller
+                                                                    .month
+                                                                    ?.map(
+                                                                      (months) =>
+                                                                          DropdownItem<
+                                                                              Object>(
+                                                                        label: months
+                                                                            .name,
+                                                                        value: months
+                                                                            .name,
+                                                                      ),
+                                                                    )
+                                                                    .toList() ??
+                                                                [],
+                                                            onConfirm:
+                                                                (selectedOptionsList) {
+                                                              controller
+                                                                  .monthsSelected(
+                                                                      selectedOptionsList);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Dimens.boxWidth5,
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                            "Select Facilities: "),
+                                                        SizedBox(
+                                                          width:
+                                                              Get.width * .17,
+                                                          child:
+                                                              CustomMultiDropdown(
+                                                            title:
+                                                                'Select Facilities',
+                                                            buttonText:
+                                                                'Select Facilities',
+                                                            initialValue: controller
+                                                                .selectedFacilities,
+                                                            items: controller
+                                                                    .facilityNameList
+                                                                    ?.map(
+                                                                      (facility) =>
+                                                                          DropdownItem<
+                                                                              Object>(
+                                                                        label: facility?.name ??
+                                                                            "",
+                                                                        value:
+                                                                            facility?.id ??
+                                                                                0,
+                                                                      ),
+                                                                    )
+                                                                    .toList() ??
+                                                                [],
+                                                            onConfirm:
+                                                                (selectedOptionsList) {
+                                                              controller
+                                                                  .facilitySelected(
+                                                                      selectedOptionsList);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Dimens.boxHeight10,
+                                                Row(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text("Select SPV: "),
+                                                        SizedBox(
+                                                          width:
+                                                              Get.width * .17,
+                                                          child:
+                                                              CustomMultiDropdown(
+                                                            title: 'Select SPV',
+                                                            buttonText:
+                                                                'Select SPV',
+                                                            initialValue:
+                                                                controller
+                                                                    .selectedSpv,
+                                                            items: controller
+                                                                    .spvList
+                                                                    ?.map(
+                                                                      (spv) =>
+                                                                          DropdownItem<
+                                                                              Object>(
+                                                                        label: spv?.name ??
+                                                                            "",
+                                                                        value:
+                                                                            spv?.id ??
+                                                                                0,
+                                                                      ),
+                                                                    )
+                                                                    .toList() ??
+                                                                [],
+                                                            onConfirm:
+                                                                (selectedOptionsList) {
+                                                              controller
+                                                                  .spvSelected(
+                                                                      selectedOptionsList);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Dimens.boxWidth5,
+                                                    Row(
+                                                      children: [
+                                                        Text("Select States: "),
+                                                        SizedBox(
+                                                          width:
+                                                              Get.width * .17,
+                                                          child:
+                                                              CustomMultiDropdown(
+                                                            title:
+                                                                'Select States',
+                                                            buttonText:
+                                                                'Select States',
+                                                            initialValue:
+                                                                controller
+                                                                    .selectedState,
+                                                            items: controller
+                                                                    .stateList
+                                                                    ?.map(
+                                                                      (state) =>
+                                                                          DropdownItem<
+                                                                              Object>(
+                                                                        label: state?.name ??
+                                                                            "",
+                                                                        value:
+                                                                            state?.id ??
+                                                                                0,
+                                                                      ),
+                                                                    )
+                                                                    .toList() ??
+                                                                [],
+                                                            onConfirm:
+                                                                (selectedOptionsList) {
+                                                              controller
+                                                                  .stateSelected(
+                                                                      selectedOptionsList);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Dimens.boxWidth5,
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                            "Select DSM Type: "),
+                                                        SizedBox(
+                                                          width:
+                                                              Get.width * .17,
+                                                          child:
+                                                              CustomMultiDropdown(
+                                                            title:
+                                                                'Select DSM Type',
+                                                            buttonText:
+                                                                'Select DSM Type',
+                                                            initialValue: controller
+                                                                .selectedDSMType,
+                                                            items: controller
+                                                                    .dsmTypes
+                                                                    ?.map(
+                                                                      (dsmtype) =>
+                                                                          DropdownItem<
+                                                                              Object>(
+                                                                        label: dsmtype?.name ??
+                                                                            "",
+                                                                        value:
+                                                                            dsmtype?.id ??
+                                                                                0,
+                                                                      ),
+                                                                    )
+                                                                    .toList() ??
+                                                                [],
+                                                            onConfirm:
+                                                                (selectedOptionsList) {
+                                                              controller
+                                                                  .selectedDSMTypes(
+                                                                      selectedOptionsList);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Dimens.boxHeight10,
+                                                Container(
+                                                  height: 35,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor: ColorValues
+                                                        .navyBlueColor,
+                                                    text: "Apply",
+                                                    onPressed: () {
+                                                      controller
+                                                          .getDSMDataList();
+                                                      Get.back();
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                    Positioned(
+                                      top: 5,
+                                      right: 10,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          controller.toggleContainer();
+                                        },
+                                        child: Icon(
+                                          controller.isExpanded.value
+                                              ? Icons.arrow_upward
+                                              : Icons.arrow_downward,
+                                          color: Colors.black,
+                                          size: 30,
                                         ),
                                       ),
                                     ),
-                                    itemBuilder: (BuildContext context) =>
-                                        buildFilterPopupMenu(context),
-                                  ),
-                                  // Container(
-                                  //   margin: EdgeInsets.only(right: 10),
-                                  //   height: 30,
-                                  //   child: CustomElevatedButton(
-                                  //     icon: Icons.filter_alt_outlined,
-                                  //     backgroundColor:
-                                  //         ColorValues.appDarkBlueColor,
-                                  //     text: 'Filter',
-                                  //     onPressed: () {
-                                  //       Get.dialog<void>(
-                                  //         applyFilter(),
-                                  //       );
-                                  //     },
-                                  //   ),
-                                  // ),
-                                  Dimens.boxWidth10,
-                                  Container(
-                                    margin: EdgeInsets.only(right: 10),
-                                    height: 30,
-                                    child: CustomElevatedButton(
-                                      backgroundColor: ColorValues.approveColor,
-                                      onPressed: () {
-                                        controller.goToImportDsmChargesScreen();
-                                      },
-                                      text: '+ Upload Report ',
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                                  ],
+                                ),
+                              );
+                            }),
                             Divider(
                               color: ColorValues.greyLightColour,
                             ),
@@ -235,37 +493,50 @@ class ImportDsmListChargesListContentWeb
                                             },
                                           ),
                                         ),
-                                  onSelected: (String value) {
-                                    // Handle column selection
-                                  },
+                                  onSelected: (String value) {},
                                 ),
-                                // Container(
-                                //   height: 35,
-                                //   margin: EdgeInsets.only(left: 10),
-                                //   child: CustomElevatedButton(
-                                //       backgroundColor:
-                                //           ColorValues.appLightBlueColor,
-                                //       onPressed: () {},
-                                //       text: 'Copy'),
+                                Dimens.boxWidth5,
+                                Container(
+                                  height: 35,
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: CustomElevatedButton(
+                                      backgroundColor:
+                                          ColorValues.appLightBlueColor,
+                                      onPressed: () {},
+                                      text: 'Excel'),
+                                ),
+                                // PopupMenuButton<Widget>(
+                                //   constraints: BoxConstraints(minWidth: 460),
+                                //   elevation: 25.0,
+                                //   child: Container(
+                                //     height: 35,
+                                //     margin: EdgeInsets.only(left: 10),
+                                //     padding: EdgeInsets.only(
+                                //         top: 4, bottom: 4, right: 8, left: 8),
+                                //     decoration: BoxDecoration(
+                                //         color: ColorValues.appLightBlueColor,
+                                //         borderRadius: BorderRadius.circular(5),
+                                //         boxShadow: [
+                                //           BoxShadow(
+                                //             color: Colors.black26,
+                                //             offset: const Offset(4.0, 2.0),
+                                //             blurRadius: 5.0,
+                                //             spreadRadius: 1.0,
+                                //           ),
+                                //         ]),
+                                //     child: Text(
+                                //       'Filter',
+                                //       style: TextStyle(
+                                //         color: Colors.white,
+                                //         fontSize: 16,
+                                //         fontWeight: FontWeight.w400,
+                                //       ),
+                                //     ),
+                                //   ),
+                                //   itemBuilder: (BuildContext context) =>
+                                //       buildFilterPopupMenu(context),
                                 // ),
-                                // Container(
-                                //   height: 35,
-                                //   margin: EdgeInsets.only(left: 10),
-                                //   child: CustomElevatedButton(
-                                //       backgroundColor:
-                                //           ColorValues.appLightBlueColor,
-                                //       onPressed: () {},
-                                //       text: 'Excel'),
-                                // ),
-                                // Container(
-                                //   height: 35,
-                                //   margin: EdgeInsets.only(left: 10),
-                                //   child: CustomElevatedButton(
-                                //       backgroundColor:
-                                //           ColorValues.appLightBlueColor,
-                                //       onPressed: () {},
-                                //       text: 'PDF'),
-                                // ),
+
                                 Spacer(),
                                 Container(
                                   width: 300,
@@ -361,363 +632,200 @@ class ImportDsmListChargesListContentWeb
     );
   }
 
-  List<PopupMenuEntry<Widget>> buildFilterPopupMenu(BuildContext context) {
-    return [
-      PopupMenuItem<Widget>(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 0.8,
-          ),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            height: Get.height * .6,
-            width: 460,
-            constraints: BoxConstraints(maxHeight: 360),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Select Years: "),
-                      SizedBox(
-                        width: Get.width * .17,
-                        child: CustomMultiSelectDialogField(
-                          initialValue: controller.selectedYears,
-                          items: controller.year
-                              .map(
-                                (years) => MultiSelectItem(
-                                  years.name,
-                                  years.name,
-                                ),
-                              )
-                              .toList(),
-                          onConfirm: (selectedOptionsList) => {
-                            controller.yearsSelected(selectedOptionsList),
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Dimens.boxHeight10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Select Months: "),
-                      SizedBox(
-                        width: Get.width * .17,
-                        child: CustomMultiSelectDialogField(
-                          initialValue: controller.selectedMonths,
-                          items: controller.month
-                              .map(
-                                (months) => MultiSelectItem(
-                                  months.name,
-                                  months.name,
-                                ),
-                              )
-                              .toList(),
-                          onConfirm: (selectedOptionsList) => {
-                            controller.monthsSelected(selectedOptionsList),
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Dimens.boxHeight10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Select Facilities: "),
-                      SizedBox(
-                        width: Get.width * .17,
-                        child: CustomMultiSelectDialogField(
-                          initialValue: controller.selectedFacilities,
-                          items: controller.facilityNameList
-                              .map(
-                                (facility) => MultiSelectItem(
-                                  facility?.id ?? 0,
-                                  facility?.name ?? "",
-                                ),
-                              )
-                              .toList(),
-                          onConfirm: (selectedOptionsList) => {
-                            controller.facilitySelected(selectedOptionsList),
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Dimens.boxHeight10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Select SPV: "),
-                      SizedBox(
-                        width: Get.width * .17,
-                        child: CustomMultiSelectDialogField(
-                          initialValue: controller.selectedSpv,
-                          items: controller.spvList
-                              .map(
-                                (spv) => MultiSelectItem(
-                                  spv?.id ?? 0,
-                                  spv?.name ?? "",
-                                ),
-                              )
-                              .toList(),
-                          onConfirm: (selectedOptionsList) => {
-                            controller.spvSelected(selectedOptionsList),
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Dimens.boxHeight10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Select States: "),
-                      SizedBox(
-                        width: Get.width * .17,
-                        child: CustomMultiSelectDialogField(
-                          initialValue: controller.selectedState,
-                          items: controller.stateList
-                              .map(
-                                (state) => MultiSelectItem(
-                                  state?.id ?? 0,
-                                  state?.name ?? "",
-                                ),
-                              )
-                              .toList(),
-                          onConfirm: (selectedOptionsList) => {
-                            controller.stateSelected(selectedOptionsList),
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Dimens.boxHeight10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Select DSM Type: "),
-                      SizedBox(
-                        width: Get.width * .17,
-                        child: CustomMultiSelectDialogField(
-                          initialValue: controller.selectedDSMType,
-                          items: controller.dsmTypes
-                              .map(
-                                (dsmtype) => MultiSelectItem(
-                                  dsmtype?.id ?? 0,
-                                  dsmtype?.name ?? "",
-                                ),
-                              )
-                              .toList(),
-                          onConfirm: (selectedOptionsList) => {
-                            controller.selectedDSMTypes(selectedOptionsList),
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Dimens.boxHeight10,
-                  Container(
-                    height: 35,
-                    child: CustomElevatedButton(
-                      backgroundColor: ColorValues.navyBlueColor,
-                      text: "Apply",
-                      onPressed: () {
-                        controller.getDSMDataList();
-                        Get.back();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    ];
-  }
-
-  // applyFilter() {
-  //   return StatefulBuilder(
-  //     builder: ((context, setState) {
-  //       return AlertDialog(
-  //         shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.all(Radius.circular(15.0)),
+  // List<PopupMenuEntry<Widget>> buildFilterPopupMenu(BuildContext context) {
+  //   return [
+  //     PopupMenuItem<Widget>(
+  //       child: ConstrainedBox(
+  //         constraints: BoxConstraints(
+  //           maxWidth: MediaQuery.of(context).size.width * 0.8,
   //         ),
-  //         insetPadding: Dimens.edgeInsets10_0_10_0,
-  //         contentPadding: EdgeInsets.zero,
-  //         title: Text(
-  //           'Filter',
-  //           textAlign: TextAlign.center,
-  //         ),
-  //         content: Builder(
-  //           builder: (context) {
-  //             return Obx(
-  //               () => Container(
-  //                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-  //                 height: Get.height * .5,
-  //                 width: 460,
-  //                 constraints: BoxConstraints(maxHeight: 360),
-  //                 child: SingleChildScrollView(
-  //                   child: Column(
-  //                     crossAxisAlignment: CrossAxisAlignment.stretch,
-  //                     children: [
-  //                       Divider(
-  //                         color: ColorValues.greyLightColour,
-  //                         thickness: 1,
-  //                       ),
-  //                       SizedBox(
-  //                         height: 25,
-  //                       ),
-  //                       Row(
-  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                         children: [
-  //                           Text("Select Years: "),
-  //                           SizedBox(
-  //                             width: Get.width * .17,
-  //                             child: CustomMultiSelectDialogField(
-  //                               initialValue: controller.selectedYears,
-  //                               items: controller.year
-  //                                   .map(
-  //                                     (years) => MultiSelectItem(
-  //                                       years.name,
-  //                                       years.name,
-  //                                     ),
-  //                                   )
-  //                                   .toList(),
-  //                               onConfirm: (selectedOptionsList) => {
-  //                                 controller.yearsSelected(selectedOptionsList),
-  //                               },
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                       Dimens.boxHeight10,
-  //                       Row(
-  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                         children: [
-  //                           Text("Select Months: "),
-  //                           SizedBox(
-  //                             width: Get.width * .17,
-  //                             child: CustomMultiSelectDialogField(
-  //                               initialValue: controller.selectedMonths,
-  //                               items: controller.month
-  //                                   .map(
-  //                                     (months) => MultiSelectItem(
-  //                                       months.name,
-  //                                       months.name,
-  //                                     ),
-  //                                   )
-  //                                   .toList(),
-  //                               onConfirm: (selectedOptionsList) => {
-  //                                 controller
-  //                                     .monthsSelected(selectedOptionsList),
-  //                               },
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                       Dimens.boxHeight10,
-  //                       Row(
-  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                         children: [
-  //                           Text("Select Facilities: "),
-  //                           SizedBox(
-  //                             width: Get.width * .17,
-  //                             child: CustomMultiSelectDialogField(
-  //                               initialValue: controller.selectedFacilities,
-  //                               items: controller.facilityNameList
-  //                                   .map(
-  //                                     (facility) => MultiSelectItem(
-  //                                       facility?.id ?? 0,
-  //                                       facility?.name ?? "",
-  //                                     ),
-  //                                   )
-  //                                   .toList(),
-  //                               onConfirm: (selectedOptionsList) => {
-  //                                 controller
-  //                                     .facilitySelected(selectedOptionsList),
-  //                               },
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                       Dimens.boxHeight10,
-  //                       Row(
-  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                         children: [
-  //                           Text("Select SPV: "),
-  //                           SizedBox(
-  //                             width: Get.width * .17,
-  //                             child: CustomMultiSelectDialogField(
-  //                               initialValue: controller.selectedSpv,
-  //                               items: controller.spvList
-  //                                   .map(
-  //                                     (spv) => MultiSelectItem(
-  //                                       spv?.id ?? 0,
-  //                                       spv?.name ?? "",
-  //                                     ),
-  //                                   )
-  //                                   .toList(),
-  //                               onConfirm: (selectedOptionsList) => {
-  //                                 controller.spvSelected(selectedOptionsList),
-  //                               },
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                       Dimens.boxHeight10,
-  //                       Row(
-  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                         children: [
-  //                           Text("Select States: "),
-  //                           SizedBox(
-  //                             width: Get.width * .17,
-  //                             child: CustomMultiSelectDialogField(
-  //                               initialValue: controller.selectedState,
-  //                               items: controller.stateList
-  //                                   .map(
-  //                                     (state) => MultiSelectItem(
-  //                                       state?.id ?? 0,
-  //                                       state?.name ?? "",
-  //                                     ),
-  //                                   )
-  //                                   .toList(),
-  //                               onConfirm: (selectedOptionsList) => {
-  //                                 controller.stateSelected(selectedOptionsList),
-  //                               },
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ],
+  //         child: Container(
+  //           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+  //           height: Get.height * .6,
+  //           width: 460,
+  //           constraints: BoxConstraints(maxHeight: 360),
+  //           child: SingleChildScrollView(
+  //               child: Column(
+  //             children: [
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 children: [
+  //                   Text("Select Years: "),
+  //                   SizedBox(
+  //                     width: Get.width * .17,
+  //                     child: CustomMultiDropdown(
+  //                       title: 'Select Years',
+  //                       buttonText: 'Select Years',
+  //                       initialValue: controller.selectedYears,
+  //                       items: controller.year
+  //                               ?.map(
+  //                                 (years) => DropdownItem<Object>(
+  //                                   label: years.name,
+  //                                   value: years.name,
+  //                                 ),
+  //                               )
+  //                               .toList() ??
+  //                           [],
+  //                       onConfirm: (selectedOptionsList) {
+  //                         controller.yearsSelected(selectedOptionsList);
+  //                       },
+  //                     ),
   //                   ),
+  //                 ],
+  //               ),
+  //               Dimens.boxHeight10,
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 children: [
+  //                   Text("Select Months: "),
+  //                   SizedBox(
+  //                     width: Get.width * .17,
+  //                     child: CustomMultiDropdown(
+  //                       title: 'Select Months',
+  //                       buttonText: 'Select Months',
+  //                       initialValue: controller.selectedMonths,
+  //                       items: controller.month
+  //                               ?.map(
+  //                                 (months) => DropdownItem<Object>(
+  //                                   label: months.name,
+  //                                   value: months.name,
+  //                                 ),
+  //                               )
+  //                               .toList() ??
+  //                           [],
+  //                       onConfirm: (selectedOptionsList) {
+  //                         controller.monthsSelected(selectedOptionsList);
+  //                       },
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Dimens.boxHeight10,
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 children: [
+  //                   Text("Select Facilities: "),
+  //                   SizedBox(
+  //                     width: Get.width * .17,
+  //                     child: CustomMultiDropdown(
+  //                       title: 'Select Facilities',
+  //                       buttonText: 'Select Facilities',
+  //                       initialValue: controller.selectedFacilities,
+  //                       items: controller.facilityNameList
+  //                               ?.map(
+  //                                 (facility) => DropdownItem<Object>(
+  //                                   label: facility?.name ?? "",
+  //                                   value: facility?.id ?? 0,
+  //                                 ),
+  //                               )
+  //                               .toList() ??
+  //                           [],
+  //                       onConfirm: (selectedOptionsList) {
+  //                         controller.facilitySelected(selectedOptionsList);
+  //                       },
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Dimens.boxHeight10,
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 children: [
+  //                   Text("Select SPV: "),
+  //                   SizedBox(
+  //                     width: Get.width * .17,
+  //                     child: CustomMultiDropdown(
+  //                       title: 'Select SPV',
+  //                       buttonText: 'Select SPV',
+  //                       initialValue: controller.selectedSpv,
+  //                       items: controller.spvList
+  //                               ?.map(
+  //                                 (spv) => DropdownItem<Object>(
+  //                                   label: spv?.name ?? "",
+  //                                   value: spv?.id ?? 0,
+  //                                 ),
+  //                               )
+  //                               .toList() ??
+  //                           [],
+  //                       onConfirm: (selectedOptionsList) {
+  //                         controller.spvSelected(selectedOptionsList);
+  //                       },
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Dimens.boxHeight10,
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 children: [
+  //                   Text("Select States: "),
+  //                   SizedBox(
+  //                     width: Get.width * .17,
+  //                     child: CustomMultiDropdown(
+  //                       title: 'Select States',
+  //                       buttonText: 'Select States',
+  //                       initialValue: controller.selectedState,
+  //                       items: controller.stateList
+  //                               ?.map(
+  //                                 (state) => DropdownItem<Object>(
+  //                                   label: state?.name ?? "",
+  //                                   value: state?.id ?? 0,
+  //                                 ),
+  //                               )
+  //                               .toList() ??
+  //                           [],
+  //                       onConfirm: (selectedOptionsList) {
+  //                         controller.stateSelected(selectedOptionsList);
+  //                       },
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Dimens.boxHeight10,
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 children: [
+  //                   Text("Select DSM Type: "),
+  //                   SizedBox(
+  //                     width: Get.width * .17,
+  //                     child: CustomMultiDropdown(
+  //                       title: 'Select DSM Type',
+  //                       buttonText: 'Select DSM Type',
+  //                       initialValue: controller.selectedDSMType,
+  //                       items: controller.dsmTypes
+  //                               ?.map(
+  //                                 (dsmtype) => DropdownItem<Object>(
+  //                                   label: dsmtype?.name ?? "",
+  //                                   value: dsmtype?.id ?? 0,
+  //                                 ),
+  //                               )
+  //                               .toList() ??
+  //                           [],
+  //                       onConfirm: (selectedOptionsList) {
+  //                         controller.selectedDSMTypes(selectedOptionsList);
+  //                       },
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Dimens.boxHeight10,
+  //               Container(
+  //                 height: 35,
+  //                 child: CustomElevatedButton(
+  //                   backgroundColor: ColorValues.navyBlueColor,
+  //                   text: "Apply",
+  //                   onPressed: () {
+  //                     controller.getDSMDataList();
+  //                     Get.back();
+  //                   },
   //                 ),
   //               ),
-  //             );
-  //           },
+  //             ],
+  //           )),
   //         ),
-  //         actions: [
-  //           Center(
-  //             child: Container(
-  //               height: 45,
-  //               child: CustomElevatedButton(
-  //                 backgroundColor: ColorValues.navyBlueColor,
-  //                 text: "Apply",
-  //                 onPressed: () {
-  //                   controller.getDSMDataList();
-  //                   Get.back();
-  //                 },
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       );
-  //     }),
-  //   );
+  //       ),
+  //     ),
+  //   ];
   // }
 
   DataColumn2 buildDataColumn(

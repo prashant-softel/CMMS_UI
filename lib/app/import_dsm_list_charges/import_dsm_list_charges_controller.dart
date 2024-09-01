@@ -35,6 +35,7 @@ class ImportDsmListChargesListController extends GetxController {
   RxBool isChecked = false.obs;
   RxString ActionFilterText = ''.obs;
   RxList<StatusModel?> dsmTypes = <StatusModel>[].obs;
+   RxBool isExpanded = false.obs;
 
   RxList<GenderModel> month = <GenderModel>[
     GenderModel(name: 'Jan', id: 1),
@@ -184,6 +185,10 @@ class ImportDsmListChargesListController extends GetxController {
       facilityNameList.add(facility_list);
     }
     update(['facility-list']);
+  }
+
+  void toggleContainer() {
+    isExpanded.value = !isExpanded.value;
   }
 
   Future<void> getStateList(int selectedCountryId) async {
