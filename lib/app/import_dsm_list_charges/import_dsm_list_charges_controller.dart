@@ -35,6 +35,7 @@ class ImportDsmListChargesListController extends GetxController {
   RxBool isChecked = false.obs;
   RxString ActionFilterText = ''.obs;
   RxList<StatusModel?> dsmTypes = <StatusModel>[].obs;
+  RxBool isExpanded = false.obs;
 
   RxList<GenderModel> month = <GenderModel>[
     GenderModel(name: 'Jan', id: 1),
@@ -126,7 +127,7 @@ class ImportDsmListChargesListController extends GetxController {
         getStateList(101);
         generateFinancialYears(20);
         getdsmType();
-        getDSMDataList();
+        getDSMDataList(false);
       });
     } catch (e) {
       print("DSM Error: $e");
@@ -150,7 +151,7 @@ class ImportDsmListChargesListController extends GetxController {
                 false) ||
             (item?.site?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.dsmType?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item?.dsmtype?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.forcasterName
                     ?.toString()
@@ -184,6 +185,10 @@ class ImportDsmListChargesListController extends GetxController {
       facilityNameList.add(facility_list);
     }
     update(['facility-list']);
+  }
+
+  void toggleContainer() {
+    isExpanded.value = !isExpanded.value;
   }
 
   Future<void> getStateList(int selectedCountryId) async {
@@ -295,18 +300,18 @@ class ImportDsmListChargesListController extends GetxController {
   );
   RxList<String> dsmListTableColumns = <String>[].obs;
 
-  Future<void> getDSMDataList() async {
+  Future<void> getDSMDataList(bool? isExport) async {
     dsmDataList.clear();
     filteredDSMList?.clear();
     final dsmList = await importDsmListDsmChargesListPresenter.getDSMData(
-      selectedYear: selectedYears,
-      selectedMonth: selectedMonths,
-      selectedSite: selectedFacilities,
-      selectedSpv: selectedSpv,
-      selectedState: selectedState,
-      selectedDSMType: selectedDSMType,
-      isLoading: isLoading.value,
-    );
+        selectedYear: selectedYears,
+        selectedMonth: selectedMonths,
+        selectedSite: selectedFacilities,
+        selectedSpv: selectedSpv,
+        selectedState: selectedState,
+        selectedDSMType: selectedDSMType,
+        isLoading: isLoading.value,
+        isExport: isExport);
 
     if (dsmList != null) {
       isLoading.value = false;
@@ -341,5 +346,9 @@ class ImportDsmListChargesListController extends GetxController {
 
   void clearStoreData() {
     importDsmListDsmChargesListPresenter.clearValue();
+  }
+
+  void export() {
+    getDSMDataList(true);
   }
 }

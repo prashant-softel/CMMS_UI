@@ -12,7 +12,7 @@ class DSMData {
   String? state;
   String? spv;
   String? site;
-  dynamic dsmType;
+  String? dsmtype;
   String? forcasterName;
   String? category;
   double? dsmPenalty;
@@ -26,7 +26,7 @@ class DSMData {
     this.state,
     this.spv,
     this.site,
-    this.dsmType,
+    this.dsmtype,
     this.forcasterName,
     this.category,
     this.dsmPenalty,
@@ -41,7 +41,7 @@ class DSMData {
         state: json["state"],
         spv: json["spv"],
         site: json["site"],
-        dsmType: json["dsmType"],
+        dsmtype: json["dsmtype"],
         forcasterName: json["forcasterName"],
         category: json["category"],
         dsmPenalty: json["dsmPenalty"],
@@ -56,7 +56,7 @@ class DSMData {
         "state": state,
         "spv": spv,
         "site": site,
-        "dsmType": dsmType,
+        "dsmtype": dsmtype,
         "forcasterName": forcasterName,
         "category": category,
         "dsmPenalty": dsmPenalty,

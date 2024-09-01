@@ -30,7 +30,7 @@ class ImportDsmListChargesListUsecase {
       await repository.getSPVList(
         isLoading: isLoading,
       );
-      
+
   Future<List<StatusModel?>?> getdsmType({
     bool isLoading = true,
   }) async =>
@@ -38,24 +38,24 @@ class ImportDsmListChargesListUsecase {
         isLoading: isLoading,
       );
 
-  Future<List<DSMData?>?> getDSMData({
-    List<String>? selectedYear,
-    List<String>? selectedMonth,
-    List<int>? selectedState,
-    List<int>? selectedSpv,
-    List<int>? selectedSite,
-    List<int>? selectedDSMType,
-    bool isLoading = true,
-  }) async =>
+  Future<List<DSMData?>?> getDSMData(
+          {List<String>? selectedYear,
+          List<String>? selectedMonth,
+          List<int>? selectedState,
+          List<int>? selectedSpv,
+          List<int>? selectedSite,
+          List<int>? selectedDSMType,
+          bool isLoading = true,
+          bool? isExport}) async =>
       await repository.getDSMData(
-        selectedYear: selectedYear,
-        selectedMonth: selectedMonth,
-        selectedState: selectedState,
-        selectedSpv: selectedSpv,
-        selectedSite: selectedSite,
-        selectedDSMType: selectedDSMType,
-        isLoading: isLoading,
-      );
+          selectedYear: selectedYear,
+          selectedMonth: selectedMonth,
+          selectedState: selectedState,
+          selectedSpv: selectedSpv,
+          selectedSite: selectedSite,
+          selectedDSMType: selectedDSMType,
+          isLoading: isLoading,
+          isExport: isExport);
 
   void clearValue() async => repository.clearData(
         LocalKeys.importType,
