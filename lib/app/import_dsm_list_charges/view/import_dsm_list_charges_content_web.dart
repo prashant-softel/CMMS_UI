@@ -3,6 +3,7 @@ import 'package:cmms/app/import_dsm_list_charges/import_dsm_list_charges_control
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/multidropdown.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -138,7 +139,13 @@ class ImportDsmListChargesListContentWeb
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Text("Select Years: "),
+                                                        CustomRichText(
+                                                          title:
+                                                              "Select Years : ",
+                                                          includeAsterisk:
+                                                              false,
+                                                        ),
+                                                        // Text("Select Years: "),
                                                         SizedBox(
                                                           width:
                                                               Get.width * .17,
@@ -178,7 +185,12 @@ class ImportDsmListChargesListContentWeb
                                                     Dimens.boxWidth5,
                                                     Row(
                                                       children: [
-                                                        Text("Select Months: "),
+                                                        CustomRichText(
+                                                          title:
+                                                              "Select Months : ",
+                                                          includeAsterisk:
+                                                              false,
+                                                        ),
                                                         SizedBox(
                                                           width:
                                                               Get.width * .17,
@@ -217,8 +229,12 @@ class ImportDsmListChargesListContentWeb
                                                     Dimens.boxWidth5,
                                                     Row(
                                                       children: [
-                                                        Text(
-                                                            "Select Facilities: "),
+                                                        CustomRichText(
+                                                          title:
+                                                              "Select Facilities : ",
+                                                          includeAsterisk:
+                                                              false,
+                                                        ),
                                                         SizedBox(
                                                           width:
                                                               Get.width * .17,
@@ -262,7 +278,12 @@ class ImportDsmListChargesListContentWeb
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Text("Select SPV: "),
+                                                        CustomRichText(
+                                                          title:
+                                                              "Select SPV : ",
+                                                          includeAsterisk:
+                                                              false,
+                                                        ),
                                                         SizedBox(
                                                           width:
                                                               Get.width * .17,
@@ -302,7 +323,12 @@ class ImportDsmListChargesListContentWeb
                                                     Dimens.boxWidth5,
                                                     Row(
                                                       children: [
-                                                        Text("Select States: "),
+                                                        CustomRichText(
+                                                          title:
+                                                              "Select States : ",
+                                                          includeAsterisk:
+                                                              false,
+                                                        ),
                                                         SizedBox(
                                                           width:
                                                               Get.width * .17,
@@ -343,8 +369,12 @@ class ImportDsmListChargesListContentWeb
                                                     Dimens.boxWidth5,
                                                     Row(
                                                       children: [
-                                                        Text(
-                                                            "Select DSM Type: "),
+                                                        CustomRichText(
+                                                          title:
+                                                              "Select DSM Type : ",
+                                                          includeAsterisk:
+                                                              false,
+                                                        ),
                                                         SizedBox(
                                                           width:
                                                               Get.width * .17,
