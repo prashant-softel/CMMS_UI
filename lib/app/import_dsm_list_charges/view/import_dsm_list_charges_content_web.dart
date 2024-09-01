@@ -96,7 +96,7 @@ class ImportDsmListChargesListContentWeb
                             Obx(() {
                               return AnimatedContainer(
                                 duration: Duration(milliseconds: 300),
-                                height: controller.isExpanded.value ? 210 : 40,
+                                height: controller.isExpanded.value ? 215 : 40,
                                 width: double.infinity,
                                 child: Stack(
                                   children: [
