@@ -2,6 +2,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/import_dsm_list_charges/import_dsm_list_charges_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/multidropdown.dart';
@@ -95,7 +96,7 @@ class ImportDsmListChargesListContentWeb
                             Obx(() {
                               return AnimatedContainer(
                                 duration: Duration(milliseconds: 300),
-                                height: controller.isExpanded.value ? 210 : 35,
+                                height: controller.isExpanded.value ? 210 : 40,
                                 width: double.infinity,
                                 child: Stack(
                                   children: [
@@ -113,18 +114,17 @@ class ImportDsmListChargesListContentWeb
                                             Spacer(),
                                             Container(
                                               margin: EdgeInsets.only(
-                                                  right: 40, top: 5),
-                                              height: 30,
-                                              child: CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.approveColor,
+                                                  right: 10, top: 5),
+                                              child: ActionButton(
+                                                icon: Icons.file_open_outlined,
+                                                label: "Import Report",
                                                 onPressed: () {
                                                   controller
                                                       .goToImportDsmChargesScreen();
                                                 },
-                                                text: 'Import Report',
+                                                color: ColorValues.addNewColor,
                                               ),
-                                            ),
+                                            )
                                           ],
                                         ),
                                         if (controller.isExpanded.value)
@@ -439,7 +439,8 @@ class ImportDsmListChargesListContentWeb
                                                       text: "Apply",
                                                       onPressed: () {
                                                         controller
-                                                            .getDSMDataList();
+                                                            .getDSMDataList(
+                                                                false);
                                                         Get.back();
                                                       },
                                                     ),
@@ -452,15 +453,13 @@ class ImportDsmListChargesListContentWeb
                                     ),
                                     Positioned(
                                       top: 5,
-                                      right: 10,
-                                      child: GestureDetector(
+                                      right: 160,
+                                      child: InkWell(
                                         onTap: () {
                                           controller.toggleContainer();
                                         },
                                         child: Icon(
-                                          controller.isExpanded.value
-                                              ? Icons.arrow_upward
-                                              : Icons.arrow_downward,
+                                          Icons.filter_alt_outlined,
                                           color: Colors.black,
                                           size: 30,
                                         ),
@@ -550,7 +549,9 @@ class ImportDsmListChargesListContentWeb
                                   child: CustomElevatedButton(
                                       backgroundColor:
                                           ColorValues.appLightBlueColor,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        controller.export();
+                                      },
                                       text: 'Excel'),
                                 ),
                                 // PopupMenuButton<Widget>(
@@ -928,7 +929,7 @@ class DSMDataSource extends DataTableSource {
           (dsm?.site ?? '')
               .toLowerCase()
               .contains(controller.site.value.toLowerCase()) &&
-          (dsm?.dsmType ?? '')
+          (dsm?.dsmtype ?? '')
               .toLowerCase()
               .contains(controller.dsmType.value.toLowerCase()) &&
           (dsm?.forcasterName ?? '')
@@ -970,7 +971,7 @@ class DSMDataSource extends DataTableSource {
       '${dsmDetails?.state ?? ''}',
       '${dsmDetails?.spv ?? ''}',
       '${dsmDetails?.site ?? ''}',
-      '${dsmDetails?.dsmType ?? ''}',
+      '${dsmDetails?.dsmtype ?? ''}',
       '${dsmDetails?.forcasterName ?? ''}',
       // '${dsmDetails?.category ?? ''}',
       // '${dsmDetails?.dsmPenalty ?? ''}',

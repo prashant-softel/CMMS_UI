@@ -16089,15 +16089,15 @@ class Repository {
     }
   }
 
-  Future<List<DSMData>> getDSMData({
-    List<String>? selectedYear,
-    List<String>? selectedMonth,
-    List<int>? selectedState,
-    List<int>? selectedSpv,
-    List<int>? selectedSite,
-    List<int>? selectedDSMType,
-    required bool isLoading,
-  }) async {
+  Future<List<DSMData>> getDSMData(
+      {List<String>? selectedYear,
+      List<String>? selectedMonth,
+      List<int>? selectedState,
+      List<int>? selectedSpv,
+      List<int>? selectedSite,
+      List<int>? selectedDSMType,
+      required bool isLoading,
+      bool? isExport}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getDSMData(
@@ -16111,8 +16111,52 @@ class Repository {
         isLoading: isLoading,
       );
       if (!res.hasError) {
-        var dsmDataList = dsmDataFromJson(res.data);
-        return dsmDataList;
+        final jsonDSMDataModels = jsonDecode(res.data);
+
+        final List<DSMData> _DSMDataList = jsonDSMDataModels
+            .map<DSMData>((m) => DSMData.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        String jsonData = dsmDataToJson(_DSMDataList);
+
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'Financial Year',
+              'Month',
+              'State',
+              'SPV',
+              'Site',
+              'DSM Type',
+              'ForeCasterName',
+              'DSM Penalty',
+              'Actual KWH',
+              'Schedule KWH',
+              'DSM Percentage',
+            ],
+            ...jsonDataList
+                .map((dsmListJson) => [
+                      dsmListJson['fy'],
+                      dsmListJson['month'],
+                      dsmListJson['state'],
+                      dsmListJson['spv'],
+                      dsmListJson['site'],
+                      dsmListJson['dsmType'],
+                      dsmListJson['forcasterName'],
+                      dsmListJson['dsmPenalty'],
+                      dsmListJson['scheduleKwh'],
+                      dsmListJson['actualKwh'],
+                      dsmListJson['dsmPer'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> checklistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(checklistData, "dsmList.xlsx");
+        }
+        return _DSMDataList;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getdsmDataList');
         return [];
