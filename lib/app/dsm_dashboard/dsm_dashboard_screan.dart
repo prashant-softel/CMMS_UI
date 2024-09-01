@@ -61,12 +61,28 @@ class DsmDashboard extends GetView<DsmDashboardController> {
                             HeaderWidgetAllDash(),
                           Container(
                             margin: EdgeInsets.only(left: 20),
-                            child: Text(
-                              "DSM Charges",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "DSM Charges",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 159, 156, 156),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width:
+                                        10), // Add some space between the text and the line
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors
+                                        .grey, // Customize the color of the line if needed
+                                    height:
+                                        1, // Adjust the height of the line if needed
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           SizedBox(
