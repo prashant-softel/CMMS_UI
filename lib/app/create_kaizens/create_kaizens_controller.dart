@@ -21,6 +21,11 @@ class CreateKaizensDataController extends GetxController {
   RxList<GetKaizensDataList?> kaizendataType = <GetKaizensDataList>[].obs;
   GetKaizensDataList? selectedItem;
   Rx<bool> isFormInvalid = false.obs;
+  var KaizensDateTc =
+      TextEditingController(text: DateTime.now().year.toString());
+  int selectedYear = 2024;
+  int selectedMonth = 4;
+  String month = 'April';
   //createkaizensdata
   var KaizensImplementedCtrl = TextEditingController();
   var CostForImplementationCtrl = TextEditingController();

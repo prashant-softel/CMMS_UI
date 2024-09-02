@@ -17,6 +17,11 @@ class CreateFuelDataController extends GetxController {
   final HomeController homeController = Get.find();
   StreamSubscription<int>? facilityIdStreamSubscription;
   GetFuelDataList? selectedItem;
+    var FuelDateTc =
+      TextEditingController(text: DateTime.now().year.toString());
+  int selectedYear = 2024;
+  int selectedMonth = 4;
+  String month = 'April';
   RxList<GetFuelDataList?> fueldataType = <GetFuelDataList>[].obs;
   //createfuledata
   var dieselConsumedforvehiclesCtrl = TextEditingController();

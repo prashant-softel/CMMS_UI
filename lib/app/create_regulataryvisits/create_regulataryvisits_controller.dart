@@ -19,6 +19,11 @@ class CreateRegulataryVisitsController extends GetxController {
   GetVisitAndNoticeList? selectedItem;
   RxList<GetVisitAndNoticeList?> visitandnoticeType =
       <GetVisitAndNoticeList>[].obs;
+  var VisitNoticeDateTc =
+      TextEditingController(text: DateTime.now().year.toString());
+  int selectedYear = 2024;
+  int selectedMonth = 4;
+  String month = 'April';
   var govtauthvisitsCtrl = TextEditingController();
   var noOffinebythirdpartyCtrl = TextEditingController();
   var noofshowcausenoticesbythirdpartyCtrl = TextEditingController();
@@ -35,8 +40,8 @@ class CreateRegulataryVisitsController extends GetxController {
   Rx<int> visitId = 0.obs;
   void createvisitsandnotices({List<dynamic>? fileIds}) async {
     try {
-         checkForm();
-      if(isFormInvalid.value){
+      checkForm();
+      if (isFormInvalid.value) {
         return;
       }
       int _govtauthvisitsCtrl =
