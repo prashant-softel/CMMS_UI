@@ -397,6 +397,7 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                         controller.detailsOfOtherInjuredPersonList!.isEmpty
                             ? Dimens.box0
                             : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     "Details Of Other Injured Person ",
@@ -805,98 +806,196 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                         controller.whyWhyAnalysisList!.isEmpty
                             ? Dimens.box0
                             :
-                           // some data of the why why 
-                             controller.historyList!.isEmpty
-                                ? Dimens.box0
-                                : ListView.builder(
-                                    //physics: const NeverScrollableScrollPhysics(),
+                             Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Why Why Analysis",
+                                    style: Styles.blue700,
+                                  ),
+                                  ListView.builder(
                                     shrinkWrap: true,
-                                    itemCount: controller.historyList! != null
-                                        ? controller.historyList!.length
-                                        : 0,
+                                    physics:
+                                        NeverScrollableScrollPhysics(), // Prevents the list from scrolling independently
+                                    itemCount:
+                                        controller.whyWhyAnalysisList?.length ??
+                                            0,
                                     itemBuilder: (context, index) {
-                                      final pmTaskHistoryModel =
-                                          (controller.historyList! != null)
-                                              ? controller.historyList![index]
-                                              : HistoryModel();
+                                      final analysisItem =
+                                          controller.whyWhyAnalysisList?[index];
                                       return Card(
                                         color: Colors.lightBlue.shade50,
-                                        elevation: 10,
-                                        shadowColor: Colors.black87,
+                                        elevation: 3,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(5.0),
                                         ),
                                         child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
+                                          padding: const EdgeInsets.all(12.0),
                                           child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(children: [
-                                                  Text('Time Stamp: ',
-                                                      style:
-                                                          Styles.appDarkGrey12),
-                                                  SizedBox(
-                                                    width: 5,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize
+                                                .min, // Ensure the Column takes up only the necessary space
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Why: ",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color:
+                                                          Colors.grey.shade800,
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Text(
-                                                        '${pmTaskHistoryModel?.createdAt?.result}'
-                                                        '',
-                                                        style: Styles
-                                                            .appDarkBlue12),
+                                                      analysisItem?.why ?? '',
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: Colors
+                                                            .grey.shade800,
+                                                      ),
+                                                    ),
                                                   ),
-                                                ]),
-                                                Row(//
-                                                    children: [
-                                                  Text('Posted By: ',
-                                                      style:
-                                                          Styles.appDarkGrey12),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                        pmTaskHistoryModel
-                                                                ?.createdByName ??
-                                                            '',
-                                                        style: Styles
-                                                            .appDarkBlue12),
-                                                  )
-                                                ]),
-                                                Row(children: [
-                                                  Text('Comments: ',
-                                                      style:
-                                                          Styles.appDarkGrey12),
-                                                  SizedBox(
-                                                    width: 5,
+                                                ],
+                                              ),
+                                              SizedBox(height: 8),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Cause: ",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color:
+                                                          Colors.grey.shade800,
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Text(
-                                                        "${pmTaskHistoryModel?.comment ?? ''}",
-                                                        style: Styles
-                                                            .appDarkBlue12),
-                                                  )
-                                                ]),
-                                                Row(children: [
-                                                  Text('Status: ',
-                                                      style:
-                                                          Styles.appDarkGrey12),
-                                                  SizedBox(
-                                                    width: 5,
+                                                      analysisItem?.cause ?? '',
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: Colors
+                                                            .grey.shade800,
+                                                      ),
+                                                    ),
                                                   ),
-                                                  Expanded(
-                                                    child: Text(
-                                                        "${pmTaskHistoryModel?.status_name ?? ''}",
-                                                        style: Styles
-                                                            .appDarkBlue12),
-                                                  )
-                                                ]),
-                                              ]),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       );
-                                    }),
+                                    },
+                                  ),
+                                ],
+                              ),
+                        
+                        // some data of the why why
+                        controller.historyList!.isEmpty
+                            ? Dimens.box0
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "IR History",
+                                    style: Styles.blue700,
+                                  ),
+                                  ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: controller.historyList! != null
+                                          ? controller.historyList!.length
+                                          : 0,
+                                      itemBuilder: (context, index) {
+                                        final pmTaskHistoryModel =
+                                            (controller.historyList! != null)
+                                                ? controller.historyList![index]
+                                                : HistoryModel();
+                                        return Card(
+                                          color: Colors.lightBlue.shade50,
+                                          elevation: 10,
+                                          shadowColor: Colors.black87,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(children: [
+                                                    Text('Time Stamp: ',
+                                                        style: Styles
+                                                            .appDarkGrey12),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                          '${pmTaskHistoryModel?.createdAt?.result}'
+                                                          '',
+                                                          style: Styles
+                                                              .appDarkBlue12),
+                                                    ),
+                                                  ]),
+                                                  Row(//
+                                                      children: [
+                                                    Text('Posted By: ',
+                                                        style: Styles
+                                                            .appDarkGrey12),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                          pmTaskHistoryModel
+                                                                  ?.createdByName ??
+                                                              '',
+                                                          style: Styles
+                                                              .appDarkBlue12),
+                                                    )
+                                                  ]),
+                                                  Row(children: [
+                                                    Text('Comments: ',
+                                                        style: Styles
+                                                            .appDarkGrey12),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                          "${pmTaskHistoryModel?.comment ?? ''}",
+                                                          style: Styles
+                                                              .appDarkBlue12),
+                                                    )
+                                                  ]),
+                                                  Row(children: [
+                                                    Text('Status: ',
+                                                        style: Styles
+                                                            .appDarkGrey12),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                          "${pmTaskHistoryModel?.status_name ?? ''}",
+                                                          style: Styles
+                                                              .appDarkBlue12),
+                                                    )
+                                                  ]),
+                                                ]),
+                                          ),
+                                        );
+                                      }),
+                                ],
+                              ),
                         Dimens.boxHeight10,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
