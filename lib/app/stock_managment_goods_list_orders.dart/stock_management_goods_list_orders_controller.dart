@@ -110,33 +110,36 @@ class StockManagementGoodsOrdersController extends GetxController {
     }
     List<GoodsOrdersListModel> filteredList = filteredData
         .where((item) =>
-            (item.vendor_name
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false) ||
-            (item.challan_no
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false) ||
-            (item.generatedBy
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false) ||
-            (item.purchaseDate
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false) ||
-            (item.cost?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
-                false) ||
-            (item.currency
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false) 
+                (item.vendor_name
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.challan_no
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.generatedBy
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.purchaseDate
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.cost
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.currency
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false)
             // ||
             // (item.status
             //         ?.toString()
@@ -195,9 +198,10 @@ class StockManagementGoodsOrdersController extends GetxController {
     getGoodsOrdersList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
-  Future<void> deleteGoodsOrders(String? id) async {
+  Future<void> deleteGoodsOrders(String? id, int? facility_id) async {
     await stockManagementGoodsOrdersPresenter.deleteFacility(
       id,
+      facility_id,
       isLoading: true,
     );
   }
