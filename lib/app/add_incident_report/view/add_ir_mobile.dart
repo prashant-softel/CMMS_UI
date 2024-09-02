@@ -806,25 +806,24 @@ class IRMobile extends GetView<AddIncidentReportController> {
                                           ],
                                         ),
                                       ),
+                                      Dimens.boxHeight15,
+                                      controller.whyWhyAnalysisValue == true
+                                          ? WhyWhyAnalysis()
+                                          : Dimens.box0,
+                                      Dimens.boxHeight15,
+                                      Text(
+                                        "RCA  Required",
+                                        style: Styles.blackBold14,
+                                      ),
+                                      Dimens.boxHeight15,
+                                      RootCauseAnalysis(),
+                                      Dimens.boxHeight15,
+                                      ImmediateCorrection(),
+                                      Dimens.boxHeight15,
+                                      WidgetAddPrposedAction(),
+                                      Dimens.boxHeight15,
                                     ],
                                   ),
-
-                            Dimens.boxHeight15,
-                            controller.whyWhyAnalysisValue == true
-                                ? WhyWhyAnalysis()
-                                : Dimens.box0,
-                            Dimens.boxHeight15,
-                            Text(
-                              "RCA  Required",
-                              style: Styles.blackBold14,
-                            ),
-                            Dimens.boxHeight15,
-                            RootCauseAnalysis(),
-                            Dimens.boxHeight15,
-                            ImmediateCorrection(),
-                            Dimens.boxHeight15,
-                            WidgetAddPrposedAction(),
-                            Dimens.boxHeight15,
 
                             controller.incidentReportDetailsModel.value
                                             ?.status ==
