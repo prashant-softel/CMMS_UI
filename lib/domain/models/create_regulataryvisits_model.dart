@@ -11,6 +11,7 @@ class CreateRegulataryvisitsModel {
   int? NoticesToContractor;
   int? AmountOfPenaltiesToContractors;
   int? AnyOther;
+  int? month_id;
    String? date;
 
   
@@ -23,6 +24,7 @@ class CreateRegulataryvisitsModel {
     this.NoticesToContractor,
     this.AmountOfPenaltiesToContractors,
     this.AnyOther,
+    this.month_id,
   this.date,
   });
 
@@ -36,6 +38,7 @@ class CreateRegulataryvisitsModel {
       id: json['id'],
       AmountOfPenaltiesToContractors: json['AmountOfPenaltiesToContractors'],
       AnyOther: json['AnyOther'],
+      month_id: json['month_id'],
       date: json['Date'],
     );
   }
@@ -47,5 +50,6 @@ class CreateRegulataryvisitsModel {
         "id": id,
         "AmountOfPenaltiesToContractors": AmountOfPenaltiesToContractors,
         "AnyOther": AnyOther,
+        "month_id": month_id,
       };
 }

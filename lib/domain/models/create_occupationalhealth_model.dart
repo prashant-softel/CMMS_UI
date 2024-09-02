@@ -9,6 +9,7 @@ class CreateOccupationalModel {
   int? NoOfHealthExamsOfNewJoiner;
   int? PeriodicTests;
   int? OccupationalIllnesses;
+  int? month_id;
   // int? CreatedBy;
 
   
@@ -18,6 +19,7 @@ class CreateOccupationalModel {
     this.NoOfHealthExamsOfNewJoiner,
     this.PeriodicTests,
     this.OccupationalIllnesses,
+    this.month_id,
     // this.CreatedBy,
     this.date,
   
@@ -32,6 +34,7 @@ class CreateOccupationalModel {
       // CreatedBy: json['CreatedBy'],
       id: json['id'],
       date: json['Date'],
+      month_id: json['month_id'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -41,5 +44,6 @@ class CreateOccupationalModel {
         // "CreatedBy": CreatedBy,
         "id": id,
         "Date": date,
+        "month_id": month_id,
       };
 }
