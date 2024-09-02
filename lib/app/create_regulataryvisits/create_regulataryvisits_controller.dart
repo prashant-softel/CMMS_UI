@@ -25,6 +25,7 @@ class CreateRegulataryVisitsController extends GetxController {
   var noticestocontractorCtrl = TextEditingController();
   var amountofpenaltiestocontractorsCtrl = TextEditingController();
   var anyotherCtrl = TextEditingController();
+  Rx<bool> isFormInvalid = false.obs;
   Rx<bool> isGovtAuthVisitsInvalid = false.obs;
   Rx<bool> isNoOfFineByThirdPartyInvalid = false.obs;
   Rx<bool> isNoOfShowCauseNoticesInvalid = false.obs;
@@ -34,6 +35,10 @@ class CreateRegulataryVisitsController extends GetxController {
   Rx<int> visitId = 0.obs;
   void createvisitsandnotices({List<dynamic>? fileIds}) async {
     try {
+         checkForm();
+      if(isFormInvalid.value){
+        return;
+      }
       int _govtauthvisitsCtrl =
           int.tryParse(govtauthvisitsCtrl.text.trim()) ?? 0;
       int _noOffinebythirdpartyCtrl =
@@ -95,12 +100,19 @@ class CreateRegulataryVisitsController extends GetxController {
 
   Future<void> setVHId() async {
     try {
-        if (Get.arguments != null) {
-      var dataFromPreviousScreen = Get.arguments;
-      selectedItem = dataFromPreviousScreen['selectedItem'];
-    } else {
-      selectedItem = GetVisitAndNoticeList(id: 0, govtAuthVisits: 0, noOfFineByThirdParty: 0, noOfShowCauseNoticesByThirdParty: 0,noticesToContractor:0,amountOfPenaltiesToContractors:0,anyOther:0);
-    }
+      if (Get.arguments != null) {
+        var dataFromPreviousScreen = Get.arguments;
+        selectedItem = dataFromPreviousScreen['selectedItem'];
+      } else {
+        selectedItem = GetVisitAndNoticeList(
+            id: 0,
+            govtAuthVisits: 0,
+            noOfFineByThirdParty: 0,
+            noOfShowCauseNoticesByThirdParty: 0,
+            noticesToContractor: 0,
+            amountOfPenaltiesToContractors: 0,
+            anyOther: 0);
+      }
       GetVisitAndNoticeList? selectedItemhea;
       final _selectedItem = await createregulataryvisitsPresenter.getValue();
       if (_selectedItem!.isNotEmpty) {
@@ -180,6 +192,33 @@ class CreateRegulataryVisitsController extends GetxController {
 
     if (responseCreateGoModel == null) {
       print("data fail ");
+    }
+  }
+
+  void checkForm() {
+    if (govtauthvisitsCtrl.text.trim() == '') {
+      isGovtAuthVisitsInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (noOffinebythirdpartyCtrl.text.trim() == '') {
+      isNoOfFineByThirdPartyInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (noofshowcausenoticesbythirdpartyCtrl.text.trim() == '') {
+      isNoOfShowCauseNoticesInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (noticestocontractorCtrl.text.trim() == '') {
+      isNoticesToContractorInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (amountofpenaltiestocontractorsCtrl.text.trim() == '') {
+      isAmountOfPenaltiesToContractorsInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (anyotherCtrl.text.trim() == '') {
+      isAnyOtherInvalid.value = true;
+      isFormInvalid.value = true;
     }
   }
 }

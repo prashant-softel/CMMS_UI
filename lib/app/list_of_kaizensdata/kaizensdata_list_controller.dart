@@ -155,6 +155,13 @@ class KaizensDataListController extends GetxController {
   void clearStoreData() {
     kaizensdataListPresenter.clearValue();
   }
-
-  
+Future<void> deleteKaizen({int? KaizenId}) async {
+    {
+      await kaizensdataListPresenter.deleteKaizen(
+        Id: KaizenId,
+        isLoading: true,
+      );
+    }
+  getkaizensdata(false);
+}
 }

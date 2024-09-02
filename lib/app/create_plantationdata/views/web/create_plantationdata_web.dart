@@ -336,7 +336,8 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Submit',
                                   onPressed: () {
-                                    // controller.isFormInvalid.value = false;
+                                    // controller.checkForm();
+                                    controller.isFormInvalid.value = false;
                                     controller.createplantationdata();
 
                                   },
@@ -348,10 +349,8 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Update',
                                   onPressed: () {
-                                    // controller.isFormInvalid.value = false;
+                                    controller.isFormInvalid.value = false;
                                     controller.updatePlantationDetails(
-                                        // position: 0,
-                                        // fileIds: dropzoneController.fileIds
                                         );
                                   },
                                 ),

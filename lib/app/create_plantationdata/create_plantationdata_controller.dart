@@ -20,6 +20,7 @@ class CreatePlantationDataController extends GetxController {
      GetPlantationList? selectedItem;
       RxList<GetPlantationList?> plantationType =
       <GetPlantationList>[].obs;
+         Rx<bool> isFormInvalid = false.obs;
   //createplantationdata
    var SaplingsPlantedCtrl = TextEditingController();
  var SaplingsSurvivedCtrl = TextEditingController();
@@ -30,7 +31,10 @@ class CreatePlantationDataController extends GetxController {
  Rx<bool> isSaplingsDiedCtrlInvalid = false.obs;
 void createplantationdata({ List<dynamic>? fileIds}) async {
      try {
-     
+       checkForm();
+      if(isFormInvalid.value){
+        return;
+      }
        int _SaplingsPlantedCtrl = int.tryParse(SaplingsPlantedCtrl.text.trim())?? 0;
        int _SaplingsSurvivedCtrl = int.tryParse(SaplingsSurvivedCtrl.text.trim())?? 0;
        int _SaplingsDiedCtrl = int.tryParse(SaplingsDiedCtrl.text.trim())?? 0;
@@ -144,6 +148,20 @@ void updatePlantationDetails() async {
     if (responseCreateGoModel == null) {
       print("data fail ");
     }
+}
+void checkForm(){
+  if(SaplingsPlantedCtrl.text.trim()==''){
+  isSaplingsPlantedCtrlInvalid.value=true;
+  isFormInvalid.value = true;
+  }
+  if(SaplingsSurvivedCtrl.text.trim()==''){
+isSaplingsSurvivedCtrlInvalid.value=true;
+isFormInvalid.value = true;
+  }
+  if(SaplingsDiedCtrl.text.trim()==''){
+    isSaplingsDiedCtrlInvalid.value=true;
+    isFormInvalid.value = true;
+  }
 }
 
 }

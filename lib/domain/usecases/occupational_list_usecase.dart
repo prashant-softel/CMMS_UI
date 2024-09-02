@@ -20,5 +20,14 @@ class OccupationalListUsecase {
     );
   }
   void clearValue() async => repository.clearData(LocalKeys.oHid);
+  //deleteHealth
+   Future<void> deleteHealth({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await repository.deleteHealth(
+        Id: Id,
+        isLoading: isLoading,
+      );
 
 }

@@ -338,7 +338,8 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Submit',
                                   onPressed: () {
-                                    // controller.isFormInvalid.value = false;
+                                    controller.isFormInvalid.value = false;
+                                    controller.checkForm();
                                     controller.createkaizensdata();
 
                                   },
@@ -350,10 +351,8 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Update',
                                   onPressed: () {
-                                    // controller.isFormInvalid.value = false;
+                                    controller.isFormInvalid.value = false;
                                     controller.updateKaizenDetails(
-                                        // position: 0,
-                                        // fileIds: dropzoneController.fileIds
                                         );
                                   },
                                 ),

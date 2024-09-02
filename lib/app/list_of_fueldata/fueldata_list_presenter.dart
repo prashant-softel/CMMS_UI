@@ -18,4 +18,13 @@ class FuelDataListPresenter {
     );
   }
    void clearValue() async => fueldatalistUsecase.clearValue();
+   //deleteFuel
+    deleteFuel({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await fueldatalistUsecase.deleteFuel(
+        Id: Id,
+        isLoading: isLoading,
+      );
 }

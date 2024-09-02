@@ -21,5 +21,14 @@ class FuelDataListUsecase {
     );
   }
   void clearValue() async => repository.clearData(LocalKeys.oHid);
-
+//deleteFuel
+ 
+ Future<void> deleteFuel({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await repository.deleteFuel(
+        Id: Id,
+        isLoading: isLoading,
+      );
 }

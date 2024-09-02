@@ -6213,7 +6213,101 @@ class Repository {
       print(error.toString());
     }
   }
+//deleteKaizen
+Future<void> deleteKaizen({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteKaizen(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
 
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+  //deleteHealth
+  Future<void> deleteHealth({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteHealth(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+  //deleteVisitNotice
+  Future<void> deleteVisitNotice({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteVisitNotice(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+  //deleteFuel
+  Future<void> deleteFuel({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteFuel(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+  //deletePlantation
+  Future<void> deletePlantation({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deletePlantation(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
   Future<bool> createGrievanceType({bool? isLoading, grievanceJson}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
