@@ -111,4 +111,31 @@ class PreventiveMaintenanceExecutionPresenter {
       isLoading: isLoading,
     );
   }
+
+  void clearStoreTaskData() {
+    preventiveMaintenanceExecutionUsecase.clearStoreTaskData();
+  }
+
+  void clearStoreDataTaskId() {
+    preventiveMaintenanceExecutionUsecase.clearStoreDataTaskId();
+  }
+
+  void clearStoreTaskActivityData() {
+    preventiveMaintenanceExecutionUsecase.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    preventiveMaintenanceExecutionUsecase.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    preventiveMaintenanceExecutionUsecase.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    preventiveMaintenanceExecutionUsecase.clearStoreTaskWhereUsedData();
+  }
+
+  void clearTypeValue() async =>
+      preventiveMaintenanceExecutionUsecase.clearTypeValue();
 }

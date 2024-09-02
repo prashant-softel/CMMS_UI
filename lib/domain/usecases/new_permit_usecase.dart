@@ -49,6 +49,7 @@ class NewPermitUsecase {
     return repository.getEmployeePermitList(
         isLoading: isLoading, facility_id: facility_id, featureId: featureId);
   }
+
   Future<List<EmployeeListModel>> getEmployeePermitListoftbt(
       {required bool isLoading,
       required int? facility_id,
@@ -236,9 +237,10 @@ class NewPermitUsecase {
           bool? isLoading,
           type,
           vegplanId,
-          vegexid,facilityId}) async =>
-      await repository.createNewPermitForPm(
-          newPermit, pmTaskId, activity, isLoading, type, vegplanId, vegexid,facilityId);
+          vegexid,
+          facilityId}) async =>
+      await repository.createNewPermitForPm(newPermit, pmTaskId, activity,
+          isLoading, type, vegplanId, vegexid, facilityId);
   Future<Map<String, dynamic>> updateNewPermit(
           {int? type,
           newPermit,
@@ -300,4 +302,15 @@ class NewPermitUsecase {
       repository.saveValue(LocalKeys.pmTaskModel, pmtaskModel);
   Future<String> getPmTaskModelValue() async =>
       await repository.getStringValue(LocalKeys.pmTaskModel);
+  void clearStoreTaskData() async => repository.clearData(LocalKeys.pmTaskId);
+  void clearStoreTaskActivityData() async =>
+      repository.clearData(LocalKeys.activity);
+  void clearStoreDataTaskId() async => repository.clearData(LocalKeys.pmTaskId);
+
+  void clearStoreTaskfromActorData() async =>
+      repository.clearData(LocalKeys.fromActorTypeId);
+  void clearStoreTasktoActorData() async =>
+      repository.clearData(LocalKeys.toactortypeid);
+  void clearStoreTaskWhereUsedData() async =>
+      repository.clearData(LocalKeys.whereUsed);
 }

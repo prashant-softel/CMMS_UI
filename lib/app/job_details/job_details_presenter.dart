@@ -101,4 +101,29 @@ class JobDetailsPresenter {
   void clearTypeValue() async => jobDetailsUsecase.clearTypeValue();
   void clearisCheckedValue() async => jobDetailsUsecase.clearisCheckedValue();
   void clearpmTaskValue() async => jobDetailsUsecase.clearpmTaskValue();
+  void clearStoreTaskData() {
+    jobDetailsUsecase.clearStoreTaskData();
+  }
+
+  void clearStoreDataTaskId() {
+    jobDetailsUsecase.clearStoreDataTaskId();
+  }
+
+  void clearStoreTaskActivityData() {
+    jobDetailsUsecase.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    jobDetailsUsecase.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    jobDetailsUsecase.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    jobDetailsUsecase.clearStoreTaskWhereUsedData();
+  }
+
+  void clearStoreDataJobId() async => jobDetailsUsecase.clearStoreDataJobId();
 }

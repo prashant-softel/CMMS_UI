@@ -50,6 +50,7 @@ class NewPermitPresenter {
     return newPermitUsecase.getEmployeePermitList(
         isLoading: isLoading, facility_id: facility_id, featureId: featureId);
   }
+
   Future<List<EmployeeListModel>> getEmployeePermitListoftbt(
       {required bool isLoading,
       required int? facility_id,
@@ -237,7 +238,8 @@ class NewPermitPresenter {
       required bool isLoading,
       int? type,
       int? vegplanId,
-      int? vegexid,int?facilityId}) async {
+      int? vegexid,
+      int? facilityId}) async {
     return newPermitUsecase.createNewPermitForPm(
         newPermit: newPermit,
         pmTaskId: pmTaskId,
@@ -245,7 +247,8 @@ class NewPermitPresenter {
         isLoading: isLoading,
         type: type,
         vegexid: vegexid,
-        vegplanId: vegplanId,facilityId:facilityId);
+        vegplanId: vegplanId,
+        facilityId: facilityId);
   }
 
   Future<Map<String, dynamic>?> updateNewPermit(
@@ -327,4 +330,27 @@ class NewPermitPresenter {
 
   Future<String> getPmtaskModelValue() async =>
       await newPermitUsecase.getPmTaskModelValue();
+  void clearStoreTaskData() {
+    newPermitUsecase.clearStoreTaskData();
+  }
+
+  void clearStoreDataTaskId() {
+    newPermitUsecase.clearStoreDataTaskId();
+  }
+
+  void clearStoreTaskActivityData() {
+    newPermitUsecase.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    newPermitUsecase.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    newPermitUsecase.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    newPermitUsecase.clearStoreTaskWhereUsedData();
+  }
 }

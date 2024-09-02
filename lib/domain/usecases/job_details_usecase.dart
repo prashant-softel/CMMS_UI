@@ -100,4 +100,16 @@ class JobDetailsUsecase {
   void clearTypeValue() async => repository.clearData(LocalKeys.types);
   void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
   void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
+  void clearStoreTaskData() async => repository.clearData(LocalKeys.pmTaskId);
+  void clearStoreTaskActivityData() async =>
+      repository.clearData(LocalKeys.activity);
+  void clearStoreDataTaskId() async => repository.clearData(LocalKeys.pmTaskId);
+
+  void clearStoreTaskfromActorData() async =>
+      repository.clearData(LocalKeys.fromActorTypeId);
+  void clearStoreTasktoActorData() async =>
+      repository.clearData(LocalKeys.toactortypeid);
+  void clearStoreTaskWhereUsedData() async =>
+      repository.clearData(LocalKeys.whereUsed);
+  void clearStoreDataJobId() async => repository.clearData(LocalKeys.jobId);
 }
