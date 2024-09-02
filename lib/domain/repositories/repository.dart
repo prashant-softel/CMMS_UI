@@ -10674,16 +10674,14 @@ class Repository {
   }
 
   Future<List<dynamic>> updatePmExecution(
-    pmExecutionJsonString,
-    bool? isLoading,
-  ) async {
+      pmExecutionJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updatePmExecution(
-        auth: auth,
-        pmExecutionJsonString: pmExecutionJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          pmExecutionJsonString: pmExecutionJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -11482,14 +11480,12 @@ class Repository {
     }
   }
 
-  Future<void> deleteGoodsOrders(Object id, bool isLoading) async {
+  Future<void> deleteGoodsOrders(
+      Object id, bool isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteGoodsOrders(
-        auth: auth,
-        id: id,
-        isLoading: isLoading,
-      );
+          auth: auth, id: id, isLoading: isLoading, facility_id: facility_id);
 
       if (!res.hasError) {
         //get delete response back from API
@@ -12664,7 +12660,10 @@ class Repository {
   }
 
   Future<bool> approveMrs(
-      {bool? isLoading, approvetoJsonString, int? type}) async {
+      {bool? isLoading,
+      approvetoJsonString,
+      int? type,
+      int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -12672,7 +12671,8 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           type: type,
-          approvetoJsonString: approvetoJsonString);
+          approvetoJsonString: approvetoJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
@@ -12713,14 +12713,16 @@ class Repository {
     }
   }
 
-  Future<bool> rejectMrs({bool? isLoading, rejecttoJsonString}) async {
+  Future<bool> rejectMrs(
+      {bool? isLoading, rejecttoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.rejectMrs(
           auth: auth,
           isLoading: isLoading,
-          rejecttoJsonString: rejecttoJsonString);
+          rejecttoJsonString: rejecttoJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -12878,7 +12880,8 @@ class Repository {
     }
   }
 
-  Future<bool> issueMrs({bool? isLoading, int? type, issuetoJsonString}) async {
+  Future<bool> issueMrs(
+      {bool? isLoading, int? type, issuetoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -12886,7 +12889,8 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           type: type,
-          issuetoJsonString: issuetoJsonString);
+          issuetoJsonString: issuetoJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: 'MRS issued!', fontSize: 45.0);
@@ -12903,14 +12907,15 @@ class Repository {
   }
 
   Future<bool> approveIssueMrs(
-      {bool? isLoading, issuemrsapprovetoJsonString}) async {
+      {bool? isLoading, issuemrsapprovetoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.approveIssueMrs(
           auth: auth,
           isLoading: isLoading,
-          issuemrsapprovetoJsonString: issuemrsapprovetoJsonString);
+          issuemrsapprovetoJsonString: issuemrsapprovetoJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
@@ -12927,14 +12932,15 @@ class Repository {
   }
 
   Future<bool> rejectIssueMrs(
-      {bool? isLoading, rejectIssuetoJsonString}) async {
+      {bool? isLoading, rejectIssuetoJsonString, facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.rejectIssueMrs(
           auth: auth,
           isLoading: isLoading,
-          rejectIssuetoJsonString: rejectIssuetoJsonString);
+          rejectIssuetoJsonString: rejectIssuetoJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -13096,16 +13102,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> setPmTask(
-    scheduleId,
-    bool? isLoading,
-  ) async {
+      scheduleId, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.setPmTask(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
@@ -13835,20 +13839,20 @@ class Repository {
     }
   }
 
-  Future<bool> assignToPmTask({
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async {
+  Future<bool> assignToPmTask(
+      {int? assignId,
+      int? taskId,
+      required bool isLoading,
+      int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.assignToPmTask(
-        auth: auth,
-        assignId: assignId,
-        taskId: taskId,
-        isLoading: isLoading,
-      );
+          auth: auth,
+          assignId: assignId,
+          taskId: taskId,
+          isLoading: isLoading,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         return true;
@@ -13863,14 +13867,17 @@ class Repository {
   }
 
   Future<bool> UpdatePMTaskExecution(
-      {bool? isLoading, updatePMTaskExecutionJsonString}) async {
+      {bool? isLoading,
+      updatePMTaskExecutionJsonString,
+      int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.UpdatePMTaskExecution(
           auth: auth,
           isLoading: isLoading,
-          updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString);
+          updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         // Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -13891,7 +13898,8 @@ class Repository {
       required int to_schedule_id,
       required int taskId,
       required int cloneJobs,
-      bool? isloading}) async {
+      bool? isloading,
+      int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -13901,7 +13909,8 @@ class Repository {
           to_schedule_id: to_schedule_id,
           taskId: taskId,
           cloneJobs: cloneJobs,
-          isloading: isloading);
+          isloading: isloading,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         // Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -14705,14 +14714,15 @@ class Repository {
     }
   }
 
-  Future<void> deletePmTask(Object task_id, bool isLoading) async {
+  Future<void> deletePmTask(
+      Object task_id, bool isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deletePmTask(
-        auth: auth,
-        task_id: task_id,
-        isLoading: isLoading,
-      );
+          auth: auth,
+          task_id: task_id,
+          isLoading: isLoading,
+          facility_id: facility_id);
 
       if (!res.hasError) {
         //get delete response back from API

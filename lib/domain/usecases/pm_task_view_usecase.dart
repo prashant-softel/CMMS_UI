@@ -52,14 +52,9 @@ class PreventiveMaintenanceTaskViewUsecase {
         isLoading,
       );
 
-  Future<Map<String, dynamic>?> setPmTask({
-    int? scheduleId,
-    bool? isLoading,
-  }) async =>
-      await repository.setPmTask(
-        scheduleId,
-        isLoading,
-      );
+  Future<Map<String, dynamic>?> setPmTask(
+          {int? scheduleId, bool? isLoading, int? facility_id}) async =>
+      await repository.setPmTask(scheduleId, isLoading, facility_id);
   Future<bool> approvePmTaskExecution({
     approvetoJsonString,
     bool? isLoading,
@@ -81,16 +76,16 @@ class PreventiveMaintenanceTaskViewUsecase {
           closetoJsonString: closetoJsonString,
           closePtwJsonString: closePtwJsonString,
           isLoading: isLoading);
-  Future<bool> assignToPmTask({
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async =>
+  Future<bool> assignToPmTask(
+          {int? assignId,
+          int? taskId,
+          required bool isLoading,
+          int? facility_id}) async =>
       await repository.assignToPmTask(
-        assignId: assignId,
-        taskId: taskId,
-        isLoading: isLoading,
-      );
+          assignId: assignId,
+          taskId: taskId,
+          isLoading: isLoading,
+          facility_id: facility_id);
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,

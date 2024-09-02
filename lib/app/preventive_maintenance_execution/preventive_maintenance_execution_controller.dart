@@ -404,9 +404,9 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     print({"pmExecutionJsonString", pmExecutionJsonString});
     var responsePmScheduleCreated =
         await preventiveMaintenanceExecutionPresenter.updatePmExecution(
-      pmExecutionJsonString: pmExecutionJsonString,
-      isLoading: true,
-    );
+            pmExecutionJsonString: pmExecutionJsonString,
+            isLoading: true,
+            facility_id: facilityId);
     _updatedailog();
   }
 
@@ -634,9 +634,9 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     };
     final response =
         await preventiveMaintenanceExecutionPresenter.UpdatePMTaskExecution(
-      updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
-      isLoading: true,
-    );
+            updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
+            isLoading: true,
+            facility_id: facilityId);
     if (response == true) {
       _updatedailog();
     }
@@ -675,7 +675,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
             to_schedule_id: to_schedule_id,
             taskId: scheduleId.value,
             cloneJobs: cloneJobs,
-            isloading: true);
+            isloading: true,
+            facility_id: facilityId);
     if (response == true) {
       _updatedailog();
     }

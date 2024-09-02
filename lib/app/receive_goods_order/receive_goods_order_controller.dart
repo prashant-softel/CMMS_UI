@@ -473,7 +473,7 @@ class ReceiveGoodsOrdersController extends GetxController {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentGoodsOrderAproveModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var goodsOrderApproveJsonString = commentGoodsOrderAproveModel.toJson();
 
@@ -493,7 +493,7 @@ class ReceiveGoodsOrdersController extends GetxController {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentGoodsOrderAproveModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var goodsOrderApproveJsonString = commentGoodsOrderAproveModel.toJson();
 
@@ -581,7 +581,7 @@ class ReceiveGoodsOrdersController extends GetxController {
       String _comment = closeCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentGoodsOrderCloseModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var goodsOrderCloseJsonString = commentGoodsOrderCloseModel.toJson();
 

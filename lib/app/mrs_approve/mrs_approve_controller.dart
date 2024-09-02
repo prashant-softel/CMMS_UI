@@ -95,6 +95,7 @@ class MrsApproveController extends GetxController {
   void clearStoreData() {
     mrsApprovePresenter.clearValue();
   }
+
   void clearStoreDataa() {
     mrsApprovePresenter.clearValuee();
   }
@@ -112,10 +113,10 @@ class MrsApproveController extends GetxController {
 
       var approvetoJsonString = commentModel.toJson();
       final response = await mrsApprovePresenter.approveMrs(
-        approvetoJsonString: approvetoJsonString,
-        type: type.value,
-        isLoading: true,
-      );
+          approvetoJsonString: approvetoJsonString,
+          type: type.value,
+          isLoading: true,
+          facility_id: facilityId);
       if (response == true) {
         // final _flutterSecureStorage = const FlutterSecureStorage();
 
@@ -138,9 +139,9 @@ class MrsApproveController extends GetxController {
 
       var rejecttoJsonString = commentModel.toJson();
       final response = await mrsApprovePresenter.rejectMrs(
-        rejecttoJsonString: rejecttoJsonString,
-        isLoading: true,
-      );
+          rejecttoJsonString: rejecttoJsonString,
+          isLoading: true,
+          facility_id: facilityId);
       if (response == true) {
         final _flutterSecureStorage = const FlutterSecureStorage();
 
