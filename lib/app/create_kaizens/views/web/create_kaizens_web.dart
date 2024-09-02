@@ -30,8 +30,8 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
       builder: (controller) {
         return SelectionArea(
           child: Scaffold(
-            body: Obx (
-             ()=> Container(
+              body: Obx(
+                () => Container(
                   color: Color.fromARGB(255, 234, 236, 238),
                   width: Get.width,
                   height: Get.height,
@@ -76,8 +76,7 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                               },
                               child: Text(" / MIS", style: Styles.greyLight14),
                             ),
-                            Text(" / KAIZENS DATA",
-                                style: Styles.greyLight14),
+                            Text(" / KAIZENS DATA", style: Styles.greyLight14),
                           ],
                         ),
                       ),
@@ -86,15 +85,16 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                           child: Stack(
                             children: [
                               Container(
-                                margin:
-                                    EdgeInsets.only(left: 10, top: 10, right: 10),
+                                margin: EdgeInsets.only(
+                                    left: 10, top: 10, right: 10),
                                 child: Column(
                                   children: [
                                     Card(
                                       color: Color.fromARGB(255, 245, 248, 250),
                                       elevation: 10,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10.0),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
                                       ),
                                       child: Column(
                                         crossAxisAlignment:
@@ -113,31 +113,34 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                   style: Styles.blackBold16,
                                                 ),
                                                 Spacer(),
-                                                      Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 20,
-                                                right: 20,
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Text('Month:'),
-                                                  Dimens.boxWidth10,
-                                                  CustomTextFieldForStock(
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        8,
-                                                    numberTextField: true,
-                                                    onTap: () {
-                                                      _showMonthPicker(
-                                                          context, controller);
-                                                    },
-                                                    textController:
-                                                        controller.KaizensDateTc,
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                    top: 20,
+                                                    right: 20,
                                                   ),
-                                                ],
-                                              ),
-                                            ),
+                                                  child: Row(
+                                                    children: [
+                                                      Text('Month:'),
+                                                      Dimens.boxWidth10,
+                                                      CustomTextFieldForStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            8,
+                                                        numberTextField: true,
+                                                        onTap: () {
+                                                          _showMonthPicker(
+                                                              context,
+                                                              controller);
+                                                        },
+                                                        textController:
+                                                            controller
+                                                                .KaizensDateTc,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -172,10 +175,10 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                                 CustomRichText(
                                                                     title:
                                                                         'No. of kaizens implemented'),
-                                                                Dimens.boxWidth3,
+                                                                Dimens
+                                                                    .boxWidth3,
                                                                 LoginCustomTextfield(
-                                                                    width: (MediaQuery.of(
-                                                                                context)
+                                                                    width: (MediaQuery.of(context)
                                                                             .size
                                                                             .width *
                                                                         .2),
@@ -185,7 +188,7 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                                     textController:
                                                                         controller
                                                                             .KaizensImplementedCtrl,
-                                                                  //  validate
+                                                                    //  validate
                                                                     errorController: controller
                                                                             .isKaizensImplementedInvalid
                                                                             .value
@@ -205,8 +208,7 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                                             .isKaizensImplementedInvalid
                                                                             .value = true;
                                                                       }
-                                                                    }
-                                                                    ),
+                                                                    }),
                                                               ],
                                                             ),
                                                             Dimens.boxHeight5,
@@ -215,10 +217,10 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                                 CustomRichText(
                                                                     title:
                                                                         'Cost inquired for implementation of Kaizens'),
-                                                                Dimens.boxWidth3,
+                                                                Dimens
+                                                                    .boxWidth3,
                                                                 LoginCustomTextfield(
-                                                                    width: (MediaQuery.of(
-                                                                                context)
+                                                                    width: (MediaQuery.of(context)
                                                                             .size
                                                                             .width *
                                                                         .2),
@@ -245,8 +247,7 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                                             .isCostForImplementationInvalid
                                                                             .value = true;
                                                                       }
-                                                                    }
-                                                                    ),
+                                                                    }),
                                                               ],
                                                             ),
                                                             Dimens.boxHeight5,
@@ -255,10 +256,10 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                                 CustomRichText(
                                                                     title:
                                                                         'Cost saved from the Implementation of Kaizens'),
-                                                                Dimens.boxWidth3,
+                                                                Dimens
+                                                                    .boxWidth3,
                                                                 LoginCustomTextfield(
-                                                                    width: (MediaQuery.of(
-                                                                                context)
+                                                                    width: (MediaQuery.of(context)
                                                                             .size
                                                                             .width *
                                                                         .2),
@@ -285,12 +286,10 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                                             .isCostSavedFromImplementationInvalid
                                                                             .value = true;
                                                                       }
-                                                                    }
-                                                                    ),
+                                                                    }),
                                                               ],
                                                             ),
                                                             Dimens.boxHeight5,
-                                                            
                                                           ],
                                                         ),
                                                         Spacer(),
@@ -315,63 +314,59 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                     ],
                   ),
                 ),
-            ),
-            
-            floatingActionButton: 
-                    Row(
-                      children: [
-                        Spacer(),
-                        Container(
+              ),
+              floatingActionButton: Row(
+                children: [
+                  Spacer(),
+                  Container(
+                    height: 40,
+                    child: CustomElevatedButton(
+                      backgroundColor: ColorValues.cancelColor,
+                      text: 'Cancel',
+                      onPressed: () {
+                        Get.offAllNamed(Routes.misDashboard);
+                      },
+                    ),
+                  ),
+                  Dimens.boxWidth15,
+                  controller.selectedItem?.id == 0
+                      ? Container(
                           height: 40,
                           child: CustomElevatedButton(
-                            backgroundColor: ColorValues.cancelColor,
-                            text: 'Cancel',
+                            backgroundColor: ColorValues.submitColor,
+                            text: 'Submit',
                             onPressed: () {
-                              Get.offAllNamed(Routes.misDashboard);
+                              controller.isFormInvalid.value = false;
+                              controller.checkForm();
+                              controller.createkaizensdata(
+                                  monthId: controller.selectedMonth);
+                            },
+                          ),
+                        )
+                      : Container(
+                          height: 40,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.submitColor,
+                            text: 'Update',
+                            onPressed: () {
+                              controller.isFormInvalid.value = false;
+                              controller.updateKaizenDetails();
                             },
                           ),
                         ),
-                        Dimens.boxWidth15,
-                        controller.selectedItem?.id == 0
-                            ? 
-                            Container(
-                                height: 40,
-                                child: CustomElevatedButton(
-                                  backgroundColor: ColorValues.submitColor,
-                                  text: 'Submit',
-                                  onPressed: () {
-                                    controller.isFormInvalid.value = false;
-                                    controller.checkForm();
-                                    controller.createkaizensdata();
+                  Spacer(),
+                ],
+              )
+              // : Dimens.box0
 
-                                  },
-                                ),
-                              )
-                            : Container(
-                                height: 40,
-                                child: CustomElevatedButton(
-                                  backgroundColor: ColorValues.submitColor,
-                                  text: 'Update',
-                                  onPressed: () {
-                                    controller.isFormInvalid.value = false;
-                                    controller.updateKaizenDetails(
-                                        );
-                                  },
-                                ),
-                              ),
-                            
-                        Spacer(),
-                      ],
-                    )
-                // : Dimens.box0
-              
-          ),
+              ),
         );
         // );
       },
     );
   }
-} 
+}
+
 _showMonthPicker(BuildContext context, CreateKaizensDataController controller) {
   controller.selectedMonth = DateTime.now().month;
 
@@ -398,7 +393,8 @@ _showMonthPicker(BuildContext context, CreateKaizensDataController controller) {
         ),
         actions: <Widget>[
           ActionButton(
-            label: "Cancel", color: ColorValues.appRedColor,
+            label: "Cancel",
+            color: ColorValues.appRedColor,
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -407,8 +403,10 @@ _showMonthPicker(BuildContext context, CreateKaizensDataController controller) {
           ActionButton(
             color: ColorValues.addNewColor,
             onPressed: () {
-              controller.KaizensDateTc.text = DateFormat.MMMM().format(DateTime(0, controller.selectedMonth));
-              // controller.goHealthDataList();
+              controller.KaizensDateTc.text = DateFormat.MMMM()
+                  .format(DateTime(0, controller.selectedMonth));
+              // Pass the selected month ID when creating Kaizens data
+              controller.createkaizensdata(monthId: controller.selectedMonth);
               controller.update(['stock_Mangement']);
               Navigator.of(context).pop();
             },

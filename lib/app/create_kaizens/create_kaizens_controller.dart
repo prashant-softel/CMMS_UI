@@ -23,8 +23,8 @@ class CreateKaizensDataController extends GetxController {
   Rx<bool> isFormInvalid = false.obs;
   var KaizensDateTc =
       TextEditingController(text: DateTime.now().year.toString());
-  int selectedYear = 2024;
-  int selectedMonth = 4;
+
+  int selectedMonth = 0;
   String month = 'April';
   //createkaizensdata
   var KaizensImplementedCtrl = TextEditingController();
@@ -34,8 +34,7 @@ class CreateKaizensDataController extends GetxController {
   Rx<bool> isKaizensImplementedInvalid = false.obs;
   Rx<bool> isCostForImplementationInvalid = false.obs;
   Rx<bool> isCostSavedFromImplementationInvalid = false.obs;
-
-  void createkaizensdata({List<dynamic>? fileIds}) async {
+  void createkaizensdata({List<dynamic>? fileIds, required int monthId}) async {
     try {
       checkForm();
       if (isFormInvalid.value) {
@@ -54,25 +53,25 @@ class CreateKaizensDataController extends GetxController {
         CostForImplementation: _CostForImplementationCtrl,
         CostSavedFromImplementation: _CostSavedFromImplementationCtrl,
         id: 0,
+        month_id: monthId,
         // date:"2024-08-18",
       );
 
-      // Convert the CreateFuelDataModel instance to JSON
-      var CreateKaizenDataModelFromJson = createkaizensdataModel.toJson();
-      print(CreateKaizenDataModelFromJson);
+      // Convert the CreateKaizensModel instance to JSON
+      var createKaizenDataModelFromJson = createkaizensdataModel.toJson();
+      print(createKaizenDataModelFromJson);
       // Call the createkaizensdata function from stockManagementAddGoodsOrdersPresenter
-      Map<String, dynamic>? responsecreateoccupationalModel =
+      Map<String, dynamic>? responseCreateKaizensModel =
           await createkaizensdataPresenter.createkaizensdata(
-        createkaizensdata: CreateKaizenDataModelFromJson,
+        createkaizensdata: createKaizenDataModelFromJson,
         isLoading: true,
       );
 
       // Handle the response
-      if (responsecreateoccupationalModel == null) {
-        // CreateNewPermitDialog();
-        // showAlertDialog();
+      if (responseCreateKaizensModel == null) {
+        // Handle the null response case
       }
-      print('Create  create kaizens data: $CreateFuelDataModelFromJson');
+      print('Create create kaizens data: $createKaizenDataModelFromJson');
     } catch (e) {
       print(e);
     }
