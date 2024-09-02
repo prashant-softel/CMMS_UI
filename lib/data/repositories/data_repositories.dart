@@ -5107,6 +5107,45 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+  //deleteHealth
+      Future<ResponseModel> deleteHealth({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteHealth(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+  //deleteVisitNotice
+   Future<ResponseModel> deleteVisitNotice({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteVisitNotice(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+  //deleteFuel
+      Future<ResponseModel> deleteFuel({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteFuel(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
 //deletePlantation
     Future<ResponseModel> deletePlantation({
     auth,

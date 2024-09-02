@@ -9081,6 +9081,60 @@ class ConnectHelper {
     );
     return responseModel;
   }
+  //deleteHealth
+     Future<ResponseModel> deleteHealth({
+    required String auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteHealthData?id=$Id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  //deleteVisitNotice
+   Future<ResponseModel> deleteVisitNotice({
+    required String auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteVisitsAndNotices?id=$Id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  //deleteFuel
+     Future<ResponseModel> deleteFuel({
+    required String auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteFuelConsumption?id=$Id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 //deletePlantation
   Future<ResponseModel> deletePlantation({
     required String auth,

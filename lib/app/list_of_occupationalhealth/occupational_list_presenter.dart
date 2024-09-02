@@ -16,4 +16,13 @@ class OccupationalListPresenter {
     );
   }
    void clearValue() async => occupationalListUsecase.clearValue();
+   //deleteHealth
+   deleteHealth({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await occupationalListUsecase.deleteHealth(
+        Id: Id,
+        isLoading: isLoading,
+      );
 }

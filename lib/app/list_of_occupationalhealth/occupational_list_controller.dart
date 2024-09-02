@@ -168,5 +168,13 @@ class OccupationalDataListController extends GetxController {
       "healthId": healthId,
     });
   }
-  
+  Future<void> deleteHealth({int? HealthId}) async {
+    {
+      await occupationalListPresenter.deleteHealth(
+        Id: HealthId,
+        isLoading: true,
+      );
+    }
+  getHealthDatalist(false);
+}
 }

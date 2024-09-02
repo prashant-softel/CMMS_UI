@@ -153,4 +153,13 @@ GetFuelDataList? selectedItem;
   void clearStoreData() {
     fueldataListPresenter.clearValue();
   }
+  Future<void> deleteFuel({int? FuelId}) async {
+    {
+      await fueldataListPresenter.deleteFuel(
+        Id: FuelId,
+        isLoading: true,
+      );
+    }
+  getFuelConsumption(false);
+}
 }
