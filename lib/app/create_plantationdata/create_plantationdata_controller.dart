@@ -21,6 +21,11 @@ class CreatePlantationDataController extends GetxController {
       RxList<GetPlantationList?> plantationType =
       <GetPlantationList>[].obs;
          Rx<bool> isFormInvalid = false.obs;
+          var PlantationDateTc =
+      TextEditingController(text: DateTime.now().year.toString());
+  int selectedYear = 2024;
+  int selectedMonth = 4;
+  String month = 'April';
   //createplantationdata
    var SaplingsPlantedCtrl = TextEditingController();
  var SaplingsSurvivedCtrl = TextEditingController();

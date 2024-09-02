@@ -17,8 +17,10 @@ class CreateOccupationalhealthController extends GetxController {
   );
   CreateOccupationalhealthPresenter createOccupationalhealthPresenter;
   final HomeController homeController = Get.find();
-
-  
+ var HealthDate = TextEditingController(text: DateTime.now().year.toString());
+ int selectedYear = 2024;
+  int selectedMonth = 4;
+  String month = 'April'; 
 Rx<bool> isFormInvalid = false.obs;
  var noofhealthexamsofnewjoinerCtrl = TextEditingController();
  var periodictestsCtrl = TextEditingController();
@@ -177,6 +179,9 @@ void updateOccupationalDetails() async {
     occupationalillnessesCtrl.clear();
     createOccupationalhealthPresenter.clearValue();
   }
+  // Void goHealthDataList(){
+
+  // }
  void checkForm(){
   if(noofhealthexamsofnewjoinerCtrl.text.trim()==''){
 isFormInvalid.value = true;

@@ -4,10 +4,12 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
+import 'package:intl/intl.dart';
 
 class PlantationDataWeb extends StatefulWidget {
   PlantationDataWeb({
@@ -367,49 +369,51 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
       },
     );
   }
-}
+} 
 _showMonthPicker(BuildContext context, CreatePlantationDataController controller) {
-  // controller.selectedMonth = DateTime.now().year;
-  // showDialog(
-  //   context: context,
-  //   builder: (BuildContext context) {
-  //     return AlertDialog(
-  //       title: Text("Select Year"),
-  //       content: Container(
-  //         height: 200,
-  //         child: CupertinoPicker(
-  //           itemExtent: 40,
-  //           onSelectedItemChanged: (int index) {
-  //             controller.selectedMonth = DateTime.now().year - index;
-  //           },
-  //           children: List.generate(10, (index) {
-  //             return Center(
-  //               child: Text((DateTime.now().year - index).toString()),
-  //             );
-  //           }),
-  //         ),
-  //       ),
-  //       actions: <Widget>[
-  //         ActionButton(
-  //           label: "Cancel", color: ColorValues.appRedColor,
-  //           onPressed: () {
-  //             Navigator.of(context).pop();
-  //           },
-  //           // child: Text("Cancel"),
-  //         ),
-  //         Dimens.boxHeight10,
-  //         ActionButton(
-  //           color: ColorValues.addNewColor,
-  //           onPressed: () {
-  //             controller.waterDateTc.text = controller.selectedYear.toString();
-  //             controller.goWaterDataList();
-  //             controller.update(['stock_Mangement_Date']);
-  //             Navigator.of(context).pop();
-  //           },
-  //           label: "Select",
-  //         ),
-  //       ],
-  //     );
-  //   },
-  // );
+  controller.selectedMonth = DateTime.now().month;
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Select Month"),
+        content: Container(
+          height: 200,
+          child: CupertinoPicker(
+            itemExtent: 40,
+            onSelectedItemChanged: (int index) {
+              controller.selectedMonth = index + 1;
+            },
+            children: List.generate(12, (index) {
+              return Center(
+                child: Text(
+                  DateFormat.MMMM().format(DateTime(0, index + 1)),
+                ),
+              );
+            }),
+          ),
+        ),
+        actions: <Widget>[
+          ActionButton(
+            label: "Cancel", color: ColorValues.appRedColor,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          Dimens.boxHeight10,
+          ActionButton(
+            color: ColorValues.addNewColor,
+            onPressed: () {
+              controller.PlantationDateTc.text = DateFormat.MMMM().format(DateTime(0, controller.selectedMonth));
+              // controller.goHealthDataList();
+              controller.update(['stock_Mangement_Date']);
+              Navigator.of(context).pop();
+            },
+            label: "Select",
+          ),
+        ],
+      );
+    },
+  );
 }
