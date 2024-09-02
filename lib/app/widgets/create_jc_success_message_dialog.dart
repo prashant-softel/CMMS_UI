@@ -92,7 +92,7 @@ class CreateJobCardDialog extends GetView {
         }),
         actions: [
           // Dimens.boxWidth10,
-           SizedBox(width:10),
+          SizedBox(width: 10),
           Row(
             children: [
               Spacer(),
@@ -107,6 +107,13 @@ class CreateJobCardDialog extends GetView {
               ElevatedButton(
                 style: Styles.greenElevatedButtonStyle,
                 onPressed: () {
+                  _controller.clearTypeStoreData();
+                  _controller.clearStoreTaskData();
+                  _controller.clearStoreTaskActivityData();
+                  _controller.clearStoreTasktoActorData();
+                  _controller.clearStoreTaskWhereUsedData();
+                  _controller.clearStoreTaskfromActorData();
+
                   // _controller.getIncidentReportList(
                   //     _controller.facilityId,
                   //     _controller.formattedTodate,

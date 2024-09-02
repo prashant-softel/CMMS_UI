@@ -1,13 +1,12 @@
 import 'dart:async';
 
 import 'package:cmms/app/create_mrs/create_mrs_presenter.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/create_mrs_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../home/home_controller.dart';
 
 class CreateMrsController extends GetxController {
@@ -50,46 +49,84 @@ class CreateMrsController extends GetxController {
   @override
   void onInit() async {
     try {
-      final arguments = Get.arguments;
-      if (arguments != null) {
-        if (arguments.containsKey('whereUsedId')) {
-          whereUsedTypeId.value = arguments['whereUsedId'];
-        }
-        if (arguments.containsKey('whereUsed')) {
-          whereUsed.value = arguments['whereUsed'];
-        }
-        if (arguments.containsKey('to_actor_type_id')) {
-          to_actor_type_id.value = arguments['to_actor_type_id'];
-        }
-        if (arguments.containsKey('type')) {
-          type.value = arguments['type'];
-        }
-        if (arguments.containsKey('fromActorTypeId')) {
-          fromActorTypeId.value = arguments['fromActorTypeId'];
-        }
-        if (arguments.containsKey('activity')) {
-          activityCtrlr.text = arguments['activity'];
-        }
-        if (whereUsedTypeId != 0) {
-          whereUsedCtrlr.text = whereUsedTypeId.toString();
-        }
-        facilityIdStreamSubscription =
-            homecontroller.facilityId$.listen((event) {
-          facilityId = event;
-          Future.delayed(Duration(seconds: 1), () {
-            if (facilityId > 0) {
-              getEquipmentList(
-                facilityId,
-              );
-            }
-          });
+      await setMrs();
+
+      facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+        facilityId = event;
+        Future.delayed(Duration(seconds: 1), () {
+          if (facilityId > 0) {
+            getEquipmentList(
+              facilityId,
+            );
+          }
         });
-      }
+      });
     } catch (e) {
       print('jobModelError: $e');
     }
 
     super.onInit();
+  }
+
+  Future<void> setMrs() async {
+    try {
+      final _whereUsedTypeId = await createMrsPresenter.getUsedTypeIdValue();
+      final _whereUsed = await createMrsPresenter.getwhereUsedValue();
+      final _to_actor_type_id = await createMrsPresenter.getToActortypeValue();
+      final _type = await createMrsPresenter.getTypeValue();
+      final _fromActorTypeId = await createMrsPresenter.getFromActorIdValue();
+      final _activityCtrlr = await createMrsPresenter.getActivityValue();
+
+      if (_whereUsedTypeId == null ||
+          _whereUsedTypeId == '' ||
+          _whereUsedTypeId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+        if (dataFromPreviousScreen != null) {
+          if (dataFromPreviousScreen.containsKey('whereUsedId')) {
+            whereUsedTypeId.value = dataFromPreviousScreen['whereUsedId'];
+            createMrsPresenter.saveUsedTypeIdValue(
+                whereUsedTypeId: whereUsedTypeId.value.toString());
+
+            whereUsedCtrlr.text = whereUsedTypeId.toString();
+          }
+          if (dataFromPreviousScreen.containsKey('whereUsed')) {
+            whereUsed.value = dataFromPreviousScreen['whereUsed'];
+            createMrsPresenter.savewhereUsedValue(
+                whereUsed: whereUsed.value.toString());
+          }
+          if (dataFromPreviousScreen.containsKey('to_actor_type_id')) {
+            to_actor_type_id.value = dataFromPreviousScreen['to_actor_type_id'];
+            createMrsPresenter.saveToActortypeValue(
+                to_actor_type_id: to_actor_type_id.value.toString());
+          }
+          if (dataFromPreviousScreen.containsKey('type')) {
+            type.value = dataFromPreviousScreen['type'];
+            createMrsPresenter.saveTypeValue(type: type.value.toString());
+          }
+          if (dataFromPreviousScreen.containsKey('fromActorTypeId')) {
+            fromActorTypeId.value = dataFromPreviousScreen['fromActorTypeId'];
+            createMrsPresenter.saveFromActorIdValue(
+                fromActorTypeId: fromActorTypeId.value.toString());
+          }
+          if (dataFromPreviousScreen.containsKey('activity')) {
+            activityCtrlr.text = dataFromPreviousScreen['activity'];
+            createMrsPresenter.saveActivityValue(
+                activityCtrlr: activityCtrlr.text.toString());
+          }
+        }
+      } else {
+        whereUsedTypeId.value = int.tryParse(_whereUsedTypeId) ?? 0;
+        whereUsed.value = int.tryParse(_whereUsed ?? "") ?? 0;
+        to_actor_type_id.value = int.tryParse(_to_actor_type_id ?? "") ?? 0;
+        type.value = int.tryParse(_type ?? "") ?? 0;
+        fromActorTypeId.value = int.tryParse(_fromActorTypeId ?? "") ?? 0;
+        activityCtrlr.text = _activityCtrlr ?? "";
+        whereUsedCtrlr.text = whereUsedTypeId.toString();
+      }
+      //  await _flutterSecureStorage.delete(key: "scheduleId");
+    } catch (e) {
+      Utility.showDialog(e.toString(), 'scheduleId');
+    }
   }
 
   bool validateFields() {

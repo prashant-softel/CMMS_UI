@@ -765,4 +765,27 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       actions: [],
     ));
   }
+
+  void clearStoreTaskData() {
+    preventiveMaintenanceExecutionPresenter.clearStoreTaskData();
+  }
+
+  void clearStoreTaskActivityData() {
+    preventiveMaintenanceExecutionPresenter.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    preventiveMaintenanceExecutionPresenter.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    preventiveMaintenanceExecutionPresenter.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    preventiveMaintenanceExecutionPresenter.clearStoreTaskWhereUsedData();
+  }
+
+  void clearTypeValue() async =>
+      preventiveMaintenanceExecutionPresenter.clearTypeValue();
 }

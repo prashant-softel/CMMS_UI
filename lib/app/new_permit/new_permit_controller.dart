@@ -2160,5 +2160,27 @@ class NewPermitController extends GetxController {
     print("PM Task ID: ${pmtaskViewModel.id}");
   }
 
+  void clearStoreTaskData() {
+    permitPresenter.clearStoreTaskData();
+  }
+
+  void clearStoreTaskActivityData() {
+    permitPresenter.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    permitPresenter.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    permitPresenter.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    permitPresenter.clearStoreTaskWhereUsedData();
+  }
+
+  void clearTypeValue() async => permitPresenter.clearTypeValue();
+
   /// class ends
 }

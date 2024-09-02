@@ -171,6 +171,13 @@ class LinkToPermitDialog extends GetView {
                     : ElevatedButton(
                         style: Styles.yellowElevatedButtonStyle,
                         onPressed: () {
+                          controller.clearStoreData();
+                          controller.clearStoreTaskData();
+                          controller.clearStoreTaskActivityData();
+                          controller.clearStoreTasktoActorData();
+                          controller.clearStoreTaskWhereUsedData();
+                          controller.clearStoreTaskfromActorData();
+
                           // _controller.getIncidentReportList(
                           //     _controller.facilityId,
                           //     _controller.formattedTodate,
@@ -181,7 +188,7 @@ class LinkToPermitDialog extends GetView {
                             "whereUsedId": taskId,
                             "activity": activity,
                             "whereUsed": 27,
-                            "type": 2,
+                            "type": type,
                             "fromActorTypeId": 2,
                             "to_actor_type_id": 3
                           });

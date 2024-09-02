@@ -729,6 +729,18 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                         .addNewColor,
                                                                 onPressed:
                                                                     () async {
+                                                                  controller
+                                                                      .clearStoreTaskData();
+                                                                  controller
+                                                                      .clearStoreTaskActivityData();
+                                                                  controller
+                                                                      .clearStoreTasktoActorData();
+                                                                  controller
+                                                                      .clearStoreTaskWhereUsedData();
+                                                                  controller
+                                                                      .clearStoreTaskfromActorData();
+                                                                  controller
+                                                                      .clearTypeStoreData();
                                                                   Get.offAllNamed(
                                                                       Routes
                                                                           .createMrs,

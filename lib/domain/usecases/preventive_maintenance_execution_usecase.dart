@@ -93,4 +93,16 @@ class PreventiveMaintenanceExecutionUsecase {
         isLoading: isLoading,
         transferItemJsonString: transferItemJsonString,
       );
+  void clearStoreTaskData() async => repository.clearData(LocalKeys.pmTaskId);
+  void clearStoreTaskActivityData() async =>
+      repository.clearData(LocalKeys.activity);
+  void clearStoreDataTaskId() async => repository.clearData(LocalKeys.pmTaskId);
+
+  void clearStoreTaskfromActorData() async =>
+      repository.clearData(LocalKeys.fromActorTypeId);
+  void clearStoreTasktoActorData() async =>
+      repository.clearData(LocalKeys.toactortypeid);
+  void clearStoreTaskWhereUsedData() async =>
+      repository.clearData(LocalKeys.whereUsed);
+  void clearTypeValue() async => repository.clearData(LocalKeys.types);
 }

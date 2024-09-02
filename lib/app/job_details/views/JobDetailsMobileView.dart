@@ -388,6 +388,19 @@ Widget _content(context, controller) {
                                                       message: "Add MRS",
                                                       icon: Icons.assignment,
                                                       onPress: () async {
+                                                        controller
+                                                            .clearTypeStoreData();
+                                                        controller
+                                                            .clearStoreTaskData();
+                                                        controller
+                                                            .clearStoreTaskActivityData();
+                                                        controller
+                                                            .clearStoreTasktoActorData();
+                                                        controller
+                                                            .clearStoreTaskWhereUsedData();
+                                                        controller
+                                                            .clearStoreTaskfromActorData();
+
                                                         Get.offAllNamed(
                                                             Routes.createMrs,
                                                             arguments: {
