@@ -125,7 +125,7 @@ class PurchaseGoodsorderViewController extends GetxController {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentGoodsOrderAproveModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var goodsOrderApproveJsonString = commentGoodsOrderAproveModel.toJson();
 
@@ -186,7 +186,7 @@ class PurchaseGoodsorderViewController extends GetxController {
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentGoodsOrderRejectModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var goodsOrderRejectJsonString = commentGoodsOrderRejectModel.toJson();
 

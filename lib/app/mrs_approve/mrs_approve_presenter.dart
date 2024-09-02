@@ -14,34 +14,34 @@ class MrsApprovePresenter {
         facilityId: facilityId,
         isLoading: isLoading,
       );
-  Future<bool> approveMrs({
-    approvetoJsonString,
-    int? type,
-    required bool isLoading,
-  }) async {
+  Future<bool> approveMrs(
+      {approvetoJsonString,
+      int? type,
+      required bool isLoading,
+      int? facility_id}) async {
     return mrsApproveUsecase.approveMrs(
-      approvetoJsonString: approvetoJsonString,
-      type:type,
-      isLoading: isLoading,
-    );
+        approvetoJsonString: approvetoJsonString,
+        type: type,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
-  Future<bool> rejectMrs({
-    rejecttoJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> rejectMrs(
+      {rejecttoJsonString, required bool isLoading, int? facility_id}) async {
     return mrsApproveUsecase.rejectMrs(
-      rejecttoJsonString: rejecttoJsonString,
-      isLoading: isLoading,
-    );
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   void saveValue({String? mrsId}) async {
     return mrsApproveUsecase.saveValue(mrsId: mrsId);
   }
+
   void clearValue() async {
     return mrsApproveUsecase.clearValue();
   }
+
   void clearValuee() async {
     return mrsApproveUsecase.clearValuee();
   }

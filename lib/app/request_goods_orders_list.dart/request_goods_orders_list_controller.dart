@@ -242,6 +242,7 @@ class PurchaseGoodsorderListController extends GetxController {
   Future<void> deleteGoodsOrders(String? id) async {
     await purchaseGoodsorderListPresenter.deleteFacility(
       id,
+      facilityId,
       isLoading: true,
     );
   }

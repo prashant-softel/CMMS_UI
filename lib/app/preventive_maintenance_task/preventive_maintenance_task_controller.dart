@@ -249,6 +249,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
     {
       await preventiveMaintenanceTaskPresenter.deletePmTask(
         task_id,
+        facilityId,
         isLoading: true,
       );
     }

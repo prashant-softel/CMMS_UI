@@ -215,9 +215,9 @@ class ViewAddGoodsOrdersController extends GetxController {
     }
   }
 
-  Future<void> getBusinessList(ListType,int facilityId) async {
+  Future<void> getBusinessList(ListType, int facilityId) async {
     final list = await viewAddGoodsOrdersPresenter.getBusinessList(
-      facilityId:facilityId,
+      facilityId: facilityId,
       ListType: ListType,
       isLoading: true,
     );
@@ -233,7 +233,7 @@ class ViewAddGoodsOrdersController extends GetxController {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentGoodsOrderAproveModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var goodsOrderApproveJsonString = commentGoodsOrderAproveModel.toJson();
 
@@ -269,7 +269,7 @@ class ViewAddGoodsOrdersController extends GetxController {
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentGoodsOrderRejectModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
 
       var goodsOrderRejectJsonString = commentGoodsOrderRejectModel.toJson();
 

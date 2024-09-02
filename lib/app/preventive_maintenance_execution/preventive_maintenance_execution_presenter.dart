@@ -18,14 +18,14 @@ class PreventiveMaintenanceExecutionPresenter {
   }) async =>
       await preventiveMaintenanceExecutionUsecase.getPmtaskViewList(
           scheduleId: scheduleId, isLoading: isloading, facilityId: facilityId);
-  Future<List<dynamic>> updatePmExecution({
-    pmExecutionJsonString,
-    required bool isLoading,
-  }) async {
+  Future<List<dynamic>> updatePmExecution(
+      {pmExecutionJsonString,
+      required bool isLoading,
+      int? facility_id}) async {
     return preventiveMaintenanceExecutionUsecase.updatePmExecution(
-      pmExecutionJsonString: pmExecutionJsonString,
-      isLoading: isLoading,
-    );
+        pmExecutionJsonString: pmExecutionJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   void clearValue() async => preventiveMaintenanceExecutionUsecase.clearValue();
@@ -62,14 +62,14 @@ class PreventiveMaintenanceExecutionPresenter {
     );
   }
 
-  Future<bool> UpdatePMTaskExecution({
-    updatePMTaskExecutionJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> UpdatePMTaskExecution(
+      {updatePMTaskExecutionJsonString,
+      required bool isLoading,
+      int? facility_id}) async {
     return preventiveMaintenanceExecutionUsecase.UpdatePMTaskExecution(
-      updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
-      isLoading: isLoading,
-    );
+        updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   Future<bool> cloneSchedule(
@@ -77,13 +77,15 @@ class PreventiveMaintenanceExecutionPresenter {
       required int to_schedule_id,
       required int taskId,
       required int cloneJobs,
+      int? facility_id,
       bool? isloading}) async {
     return preventiveMaintenanceExecutionUsecase.cloneSchedule(
         from_schedule_id: from_schedule_id,
         to_schedule_id: to_schedule_id,
         taskId: taskId,
         cloneJobs: cloneJobs,
-        isloading: isloading);
+        isloading: isloading,
+        facility_id: facility_id);
   }
 
   void saveValue({String? pmTaskId}) async {

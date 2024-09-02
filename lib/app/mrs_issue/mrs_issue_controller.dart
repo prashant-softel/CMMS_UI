@@ -114,6 +114,7 @@ class MrsIssueController extends GetxController {
   void clearStoreData() {
     mrsIssuePresenter.clearValue();
   }
+
   void clearStoreDataa() {
     mrsIssuePresenter.clearValuee();
   }
@@ -158,10 +159,10 @@ class MrsIssueController extends GetxController {
           issue_comment: _comment, ID: mrsId.value, cmmrsItems: cmmrsItems);
       var issuetoJsonString = issueMrs.toJson();
       final response = await mrsIssuePresenter.issueMrs(
-        type: type.value,
-        issuetoJsonString: issuetoJsonString,
-        isLoading: true,
-      );
+          type: type.value,
+          issuetoJsonString: issuetoJsonString,
+          isLoading: true,
+          facility_id: facilityId);
       if (response == true) {
         // Get.offAllNamed(Routes.mrsListScreen);
       } else {
