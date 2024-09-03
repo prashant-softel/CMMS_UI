@@ -480,6 +480,7 @@ class InvestigationTeam {
   InvestigationTeam({
     // this.srNumber,
     // this.person_id,
+    this.investigation_item_id,
     this.name,
     this.designation,
     // this.person_type,
@@ -489,6 +490,7 @@ class InvestigationTeam {
   // String? srNumber;
   // String? person_id;
   // int? person_type;
+  int? investigation_item_id;
   String? name;
   String? designation;
   // String? investigation_date;
@@ -499,6 +501,7 @@ class InvestigationTeam {
         // person_id: json['person_id'],
         // person_type: json['person_type'],
         name: json["person_name"],
+        investigation_item_id: json["investigation_item_id"],
         designation: json['designation'],
         // investigation_date: json['investigation_date']
       );
@@ -507,6 +510,7 @@ class InvestigationTeam {
         // "srNumber": srNumber,
         // "person_id": person_id,
         // "person_type": person_type,
+        "investigation_item_id": investigation_item_id,
         "name": name,
         "designation": designation,
         // "investigation_date": investigation_date
