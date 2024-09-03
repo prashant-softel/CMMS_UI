@@ -743,9 +743,6 @@ class IRMobile extends GetView<AddIncidentReportController> {
                                                                 controller
                                                                     .updateInvestigationTeamText(
                                                                   controller
-                                                                      .investigationTeamSrNumberTextFieldController
-                                                                      .text,
-                                                                  controller
                                                                       .investigationTeamNameTextFieldController
                                                                       .text,
                                                                   controller

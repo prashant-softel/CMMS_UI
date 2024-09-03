@@ -1001,12 +1001,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                                 10,
                                                                             left:
                                                                                 10),
-                                                                        child:
-                                                                            Text(
-                                                                          "Investigation Team",
-                                                                          style:
-                                                                              Styles.blue700,
-                                                                        ),
+                                                                        child: Text(
+                                                                            "Investigation Team",
+                                                                            style:
+                                                                                Styles.blue700),
                                                                       ),
                                                                       Dimens
                                                                           .boxHeight10,
@@ -1047,10 +1045,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                             ),
                                                                             SizedBox(width: 20),
                                                                             ElevatedButton(
-                                                                              child: Text(
-                                                                                'Add',
-                                                                                style: TextStyle(color: ColorValues.whiteColor),
-                                                                              ),
+                                                                              child: Text('Add', style: TextStyle(color: ColorValues.whiteColor)),
                                                                               onPressed: () {
                                                                                 if (controller.investigationTeamNameTextFieldController.text.isEmpty || controller.investigationTeamDesignationTextFieldController.text.isEmpty) {
                                                                                   showDialog(
@@ -1072,13 +1067,11 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                                   );
                                                                                 } else {
                                                                                   controller.updateInvestigationTeamText(
-                                                                                    (controller.investigationTeam.length + 1).toString(),
                                                                                     controller.investigationTeamNameTextFieldController.text,
                                                                                     controller.investigationTeamDesignationTextFieldController.text,
                                                                                   );
                                                                                   controller.investigationTeamNameTextFieldController.clear();
                                                                                   controller.investigationTeamDesignationTextFieldController.clear();
-                                                                                  print('Investigation Data${controller.investigationTeam.length}');
                                                                                 }
                                                                               },
                                                                             ),
