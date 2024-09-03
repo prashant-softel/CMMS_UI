@@ -1781,9 +1781,7 @@ class AddIncidentReportController extends GetxController {
 
       investigationTeam.forEach((e) {
         investigation_team_list.add(InvestigationTeam(
-          name: "",
-          designation: "",
-        ));
+            name: "", designation: "", investigation_item_id: 0));
       });
 
       CreateIncidentReportModel createIncidentReportModel =
@@ -1896,9 +1894,7 @@ class AddIncidentReportController extends GetxController {
 
     investigationTeam.forEach((e) {
       investigation_team_list.add(InvestigationTeam(
-        name: e.name,
-        designation: e.designation,
-      ));
+          name: e.name, designation: e.designation, investigation_item_id: 0));
     });
 
     // Creating the model for incident report
@@ -2082,6 +2078,7 @@ class AddIncidentReportController extends GetxController {
         investigation_team_list.add(InvestigationTeam(
           name: e.name,
           designation: e.designation,
+          investigation_item_id: 0,
         ));
       });
 
