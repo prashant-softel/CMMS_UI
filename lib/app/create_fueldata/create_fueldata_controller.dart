@@ -18,10 +18,11 @@ class CreateFuelDataController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   GetFuelDataList? selectedItem;
     var FuelDateTc =
-      TextEditingController(text: DateTime.now().year.toString());
-  int selectedYear = 2024;
-  int selectedMonth = 4;
+      TextEditingController();
+  int selectedMonth = 0;
+  int selectedYear=0;
   String month = 'April';
+  String year ='2000';
   RxList<GetFuelDataList?> fueldataType = <GetFuelDataList>[].obs;
   //createfuledata
   var dieselConsumedforvehiclesCtrl = TextEditingController();
@@ -37,7 +38,7 @@ class CreateFuelDataController extends GetxController {
   Rx<bool> isDieselConsumedAtSiteInvalid = false.obs;
   Rx<bool> isPetrolConsumedAtSiteInvalid = false.obs;
 
-  void createfuledata({List<dynamic>? fileIds}) async {
+  void createfuledata({List<dynamic>? fileIds,required int month_id,required int year}) async {
     try {
       checkForm();
       if (isFormInvalid.value) {
@@ -62,6 +63,8 @@ class CreateFuelDataController extends GetxController {
             _petrolconsumedforgrasscuttingandmoversCtrl,
         DieselConsumedAtSite: _dieselconsumedatsiteCtrl,
         PetrolConsumedAtSite: _petrolconsumedatsiteCtrl,
+        month_id:month_id,
+        year:year,
 
         id: 0,
         // date:"2024-08-18",

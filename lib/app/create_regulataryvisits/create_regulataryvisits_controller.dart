@@ -20,10 +20,11 @@ class CreateRegulataryVisitsController extends GetxController {
   RxList<GetVisitAndNoticeList?> visitandnoticeType =
       <GetVisitAndNoticeList>[].obs;
   var VisitNoticeDateTc =
-      TextEditingController(text: DateTime.now().year.toString());
-  int selectedYear = 2024;
-  int selectedMonth = 4;
+      TextEditingController();
+int selectedMonth = 0;
+  int selectedYear=0;
   String month = 'April';
+  String year ='2024';
   var govtauthvisitsCtrl = TextEditingController();
   var noOffinebythirdpartyCtrl = TextEditingController();
   var noofshowcausenoticesbythirdpartyCtrl = TextEditingController();
@@ -38,7 +39,7 @@ class CreateRegulataryVisitsController extends GetxController {
   Rx<bool> isAmountOfPenaltiesToContractorsInvalid = false.obs;
   Rx<bool> isAnyOtherInvalid = false.obs;
   Rx<int> visitId = 0.obs;
-  void createvisitsandnotices({List<dynamic>? fileIds}) async {
+  void createvisitsandnotices({List<dynamic>? fileIds,required int month_id,required int year}) async {
     try {
       checkForm();
       if (isFormInvalid.value) {
@@ -65,7 +66,9 @@ class CreateRegulataryVisitsController extends GetxController {
         AmountOfPenaltiesToContractors: _amountofpenaltiestocontractorsCtrl,
         AnyOther: _anyotherCtrl,
         id: 0,
-        date: "2024-08-18",
+        month_id:month_id,
+        year:year,
+        // date: "2024-08-18",
       );
 
       // Convert the createRegulataryvisitsModel instance to JSON
@@ -183,7 +186,7 @@ class CreateRegulataryVisitsController extends GetxController {
       NoticesToContractor: _noticestocontractorCtrl,
       AmountOfPenaltiesToContractors: _amountofpenaltiestocontractorsCtrl,
       AnyOther: _anyotherCtrl,
-      date: "2024-08-18",
+      // date: "2024-08-18",
     );
 
     var updateVisitAndNoticModelJsonString =

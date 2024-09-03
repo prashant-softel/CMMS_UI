@@ -154,8 +154,8 @@ class _CreateKaizensMobileState extends State<CreateKaizensMobile> {
                     ),
                   ),
                   Dimens.boxWidth15,
-                  // controller.obsId == 0
-                  //     ?
+                 controller.selectedItem?.id == 0
+                      ? 
                   Container(
                     height: 40,
                     child: CustomElevatedButton(
@@ -164,22 +164,23 @@ class _CreateKaizensMobileState extends State<CreateKaizensMobile> {
                       onPressed: () {
                         // controller.isFormInvalid.value = false;
                         controller.createkaizensdata(
-                            monthId: controller.selectedMonth);
+                            monthId: controller.selectedMonth,
+                            year: controller.selectedMonth);
                       },
                     ),
                   )
-                  //     : Container(
-                  //         height: 40,
-                  //         child: CustomElevatedButton(
-                  //           backgroundColor: ColorValues.submitColor,
-                  //           text: 'Update',
-                  //           onPressed: () {
-                  //             controller.isFormInvalid.value = false;
-                  //             controller.createObs(position: 0);
-                  //           },
-                  //         ),
-                  //       ),
-                  ,
+                      : Container(
+                          height: 40,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.submitColor,
+                            text: 'Update',
+                            onPressed: () {
+                              controller.isFormInvalid.value = false;
+                              controller.updateKaizenDetails();
+                            },
+                          ),
+                        ),
+                  
                   Spacer(),
                 ],
               )

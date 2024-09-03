@@ -11,6 +11,7 @@ class CreateFuelDataModel {
   int? DieselConsumedAtSite;
   int? PetrolConsumedAtSite;
   int? month_id;
+  int? year;
 
   CreateFuelDataModel({
     this.id,
@@ -20,6 +21,7 @@ class CreateFuelDataModel {
     this.DieselConsumedAtSite,
     this.PetrolConsumedAtSite,
     this.month_id,
+    this.year,
   
   });
 
@@ -33,6 +35,7 @@ class CreateFuelDataModel {
       id: json['id'],
       PetrolConsumedAtSite: json['PetrolConsumedAtSite'],
       month_id: json['month_id'],
+      year: json['year'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -43,5 +46,6 @@ class CreateFuelDataModel {
         "id": id,
         "PetrolConsumedAtSite": PetrolConsumedAtSite,
         "month_id": month_id,
+        "year": year,
       };
 }

@@ -9,6 +9,8 @@ class CreateKaizensModel {
   int? CostForImplementation;
   int? CostSavedFromImplementation;
   int? month_id;
+  int? year;
+
 
   CreateKaizensModel({
     this.id,
@@ -16,6 +18,7 @@ class CreateKaizensModel {
   this.CostForImplementation,
   this.CostSavedFromImplementation,
   this.month_id,
+  this.year,
 
   });
 
@@ -27,6 +30,7 @@ class CreateKaizensModel {
       CostSavedFromImplementation: json['CostSavedFromImplementation'],
       id: json['id'],
       month_id: json['month_id'],
+      year: json['year'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -35,5 +39,6 @@ class CreateKaizensModel {
         "CostSavedFromImplementation": CostSavedFromImplementation,
         "id": id,
         "month_id": month_id,
+        "year": year,
       };
 }

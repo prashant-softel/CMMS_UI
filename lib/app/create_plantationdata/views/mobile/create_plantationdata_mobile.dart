@@ -147,8 +147,8 @@ class _CreatePlantationMobileState extends State<CreatePlantationMobile> {
                           ),
                         ),
                         Dimens.boxWidth15,
-                        // controller.obsId == 0
-                        //     ? 
+                        controller.selectedItem?.id == 0
+                            ? 
                         Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -156,22 +156,25 @@ class _CreatePlantationMobileState extends State<CreatePlantationMobile> {
                                   text: 'Submit',
                                   onPressed: () {
                                     // controller.isFormInvalid.value = false;
-                                    controller.createplantationdata();
+                                    controller.createplantationdata( monthId: controller.selectedMonth,
+                                    year: controller.selectedYear
+                                    );
                                   },
                                 ),
                               )
-                        //     : Container(
-                        //         height: 40,
-                        //         child: CustomElevatedButton(
-                        //           backgroundColor: ColorValues.submitColor,
-                        //           text: 'Update',
-                        //           onPressed: () {
-                        //             controller.isFormInvalid.value = false;
-                        //             controller.createObs(position: 0);
-                        //           },
-                        //         ),
-                        //       ),
-                        ,
+                            : Container(
+                                height: 40,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.submitColor,
+                                  text: 'Update',
+                                  onPressed: () {
+                                      controller.isFormInvalid.value = false;
+                                    controller.updatePlantationDetails(
+                                        );
+                                  },
+                                ),
+                              ),
+                        
                         Spacer(),
                       ],
                     )

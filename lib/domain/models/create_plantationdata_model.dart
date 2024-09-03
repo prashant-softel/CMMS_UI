@@ -9,6 +9,7 @@ class CreatePlantationDataModel {
   int? SaplingsSurvived;
   int? SaplingsDied;
   int? month_id;
+  int? year;
 
   CreatePlantationDataModel({
     this.id,
@@ -16,6 +17,7 @@ class CreatePlantationDataModel {
     this.SaplingsSurvived,
     this.SaplingsDied,
     this.month_id,
+    this.year,
   });
 
   factory CreatePlantationDataModel.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class CreatePlantationDataModel {
       SaplingsDied: json['SaplingsDied'],
       id: json['id'],
       month_id: json['month_id'],
+      year: json['year'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -33,5 +36,6 @@ class CreatePlantationDataModel {
         "SaplingsDied": SaplingsDied,
         "id": id,
         "month_id": month_id,
+        "year": year,
       };
 }

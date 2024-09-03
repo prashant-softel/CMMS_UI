@@ -3,9 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cmms/app/create_kaizens/create_kaizens_presenter.dart';
-import 'package:cmms/domain/models/create_fueldata_model.dart';
 import 'package:cmms/domain/models/create_kaizens_model.dart';
-import 'package:cmms/domain/models/get_kaizensdata_list_model.dart';
 import 'package:cmms/domain/models/get_kaizensdata_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,10 +20,12 @@ class CreateKaizensDataController extends GetxController {
   GetKaizensDataList? selectedItem;
   Rx<bool> isFormInvalid = false.obs;
   var KaizensDateTc =
-      TextEditingController(text: DateTime.now().year.toString());
+      TextEditingController();
 
   int selectedMonth = 0;
+  int selectedYear=0;
   String month = 'April';
+  String year ='2024';
   //createkaizensdata
   var KaizensImplementedCtrl = TextEditingController();
   var CostForImplementationCtrl = TextEditingController();
@@ -34,7 +34,7 @@ class CreateKaizensDataController extends GetxController {
   Rx<bool> isKaizensImplementedInvalid = false.obs;
   Rx<bool> isCostForImplementationInvalid = false.obs;
   Rx<bool> isCostSavedFromImplementationInvalid = false.obs;
-  void createkaizensdata({List<dynamic>? fileIds, required int monthId}) async {
+  void createkaizensdata({List<dynamic>? fileIds, required int monthId,required int year}) async {
     try {
       checkForm();
       if (isFormInvalid.value) {
@@ -54,6 +54,7 @@ class CreateKaizensDataController extends GetxController {
         CostSavedFromImplementation: _CostSavedFromImplementationCtrl,
         id: 0,
         month_id: monthId,
+        year:year,
         // date:"2024-08-18",
       );
 

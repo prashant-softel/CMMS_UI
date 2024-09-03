@@ -17,10 +17,11 @@ class CreateOccupationalhealthController extends GetxController {
   );
   CreateOccupationalhealthPresenter createOccupationalhealthPresenter;
   final HomeController homeController = Get.find();
- var HealthDate = TextEditingController(text: DateTime.now().year.toString());
- int selectedYear = 2024;
-  int selectedMonth = 4;
-  String month = 'April'; 
+ var HealthDate = TextEditingController();
+  int selectedMonth = 0;
+  int selectedYear=0;
+  String month = 'April';
+  String year ='2000';
 Rx<bool> isFormInvalid = false.obs;
  var noofhealthexamsofnewjoinerCtrl = TextEditingController();
  var periodictestsCtrl = TextEditingController();
@@ -103,7 +104,7 @@ Rx<bool> isFormInvalid = false.obs;
   }
 
 
- void createoccupational({ List<dynamic>? fileIds}) async {
+ void createoccupational({ List<dynamic>? fileIds,required int month_id,required int year}) async {
      try {
      
       int _noofhealthexamsofnewjoinerCtrl = int.tryParse(noofhealthexamsofnewjoinerCtrl.text.trim())?? 0;
@@ -118,7 +119,9 @@ Rx<bool> isFormInvalid = false.obs;
         OccupationalIllnesses: _occupationalillnessesCtrl,
         // CreatedBy: varUserAccessModel.value.user_id,
         id:0,
-        date:"2024-08-18",
+        month_id: month_id,
+        year:year,
+        // date:"2024-08-18",
       );
 
       // Convert the createoccupationalModel instance to JSON
@@ -154,7 +157,7 @@ void updateOccupationalDetails() async {
         NoOfHealthExamsOfNewJoiner: _noofhealthexamsofnewjoinerCtrl,
         PeriodicTests: _periodictestsCtrl,
         OccupationalIllnesses: _occupationalillnessesCtrl,
-        date:"2024-08-18",
+        // date:"2024-08-18",
       );
 
    // Convert the createoccupationalModel instance to JSON
