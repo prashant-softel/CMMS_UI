@@ -734,131 +734,6 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                                           Row(
                                             children: [
                                               Text(
-                                                'Detail Investigation Required: ',
-                                                style: Styles.blue700,
-                                              ),
-                                              SizedBox(
-                                                width: 3,
-                                              ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                                child: Obx(
-                                                  () => Switch(
-                                                    activeColor: Colors.green,
-                                                    value: controller
-                                                        .detailInvestigationTeamValue
-                                                        .value,
-                                                    onChanged: (value) {
-                                                      controller
-                                                          .detailInvestigationTeamValue
-                                                          .value = value;
-                                                      print(
-                                                          'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              ListView.builder(
-                                                shrinkWrap: true,
-                                                itemCount: controller
-                                                        .investiagtionTeamList
-                                                        ?.length ??
-                                                    0,
-                                                itemBuilder: (context, index) {
-                                                  final teamMember = controller
-                                                          .investiagtionTeamList?[
-                                                      index];
-                                                  return Card(
-                                                    color: Colors
-                                                        .lightBlue.shade50,
-                                                    elevation: 10,
-                                                    shadowColor: Colors.black87,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              10.0),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              Text('Name: ',
-                                                                  style: Styles
-                                                                      .appDarkGrey12),
-                                                              SizedBox(
-                                                                  width: 5),
-                                                              Expanded(
-                                                                child: Text(
-                                                                  teamMember
-                                                                          ?.name ??
-                                                                      '',
-                                                                  style: Styles
-                                                                      .appDarkBlue12,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          SizedBox(height: 8),
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                  'Designation: ',
-                                                                  style: Styles
-                                                                      .appDarkGrey12),
-                                                              SizedBox(
-                                                                  width: 5),
-                                                              Expanded(
-                                                                child: Text(
-                                                                  teamMember
-                                                                          ?.designation ??
-                                                                      '',
-                                                                  style: Styles
-                                                                      .appDarkBlue12,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    IgnorePointer(
-                                      ignoring: controller
-                                                  .incidentReportDetailsModel
-                                                  .value
-                                                  ?.status ==
-                                              181
-                                          ? false
-                                          : true,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
                                                 'Why Why Analysis Required: ',
                                                 style: Styles.blue700,
                                               ),
@@ -1007,7 +882,132 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                                                 ),
                                         ],
                                       ),
-                                    )
+                                    ),
+                                    IgnorePointer(
+                                      ignoring: controller
+                                                  .incidentReportDetailsModel
+                                                  .value
+                                                  ?.status ==
+                                              181
+                                          ? false
+                                          : true,
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Detail Investigation Required: ',
+                                                style: Styles.blue700,
+                                              ),
+                                              SizedBox(
+                                                width: 3,
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                child: Obx(
+                                                  () => Switch(
+                                                    activeColor: Colors.green,
+                                                    value: controller
+                                                        .detailInvestigationTeamValue
+                                                        .value,
+                                                    onChanged: (value) {
+                                                      controller
+                                                          .detailInvestigationTeamValue
+                                                          .value = value;
+                                                      print(
+                                                          'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ListView.builder(
+                                                shrinkWrap: true,
+                                                itemCount: controller
+                                                        .investiagtionTeamList
+                                                        ?.length ??
+                                                    0,
+                                                itemBuilder: (context, index) {
+                                                  final teamMember = controller
+                                                          .investiagtionTeamList?[
+                                                      index];
+                                                  return Card(
+                                                    color: Colors
+                                                        .lightBlue.shade50,
+                                                    elevation: 10,
+                                                    shadowColor: Colors.black87,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text('Name: ',
+                                                                  style: Styles
+                                                                      .appDarkGrey12),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  teamMember
+                                                                          ?.name ??
+                                                                      '',
+                                                                  style: Styles
+                                                                      .appDarkBlue12,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(height: 8),
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                  'Designation: ',
+                                                                  style: Styles
+                                                                      .appDarkGrey12),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  teamMember
+                                                                          ?.designation ??
+                                                                      '',
+                                                                  style: Styles
+                                                                      .appDarkBlue12,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                               )
