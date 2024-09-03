@@ -1219,7 +1219,8 @@ class ViewIncidentReportContentWeb
                                               ///Root Cause Analysis
                                               controller.rootCauseList!.isEmpty
                                                   ? Dimens.box0
-                                                  : Container(
+                                                  : 
+                                                  Container(
                                                       margin:
                                                           Dimens.edgeInsets20,
                                                       height: ((controller

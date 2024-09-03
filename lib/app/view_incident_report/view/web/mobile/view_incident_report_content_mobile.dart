@@ -406,6 +406,7 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                                   Dimens.boxHeight5,
                                   ListView.builder(
                                     shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
                                     itemCount: controller
                                             .detailsOfOtherInjuredPersonList
                                             ?.length ??
@@ -931,6 +932,8 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                                             children: [
                                               ListView.builder(
                                                 shrinkWrap: true,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
                                                 itemCount: controller
                                                         .investiagtionTeamList
                                                         ?.length ??
@@ -1008,12 +1011,287 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                                         ],
                                       ),
                                     ),
+                                    controller.rootCauseList!.isEmpty
+                                        ? SizedBox.shrink()
+                                        : Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Text(
+                                                  "Root Cause Analysis",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ),
+                                              ListView.builder(
+                                                shrinkWrap: true,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                itemCount: controller
+                                                        .rootCauseList
+                                                        ?.length ??
+                                                    0,
+                                                itemBuilder: (context, index) {
+                                                  final rootCause = controller
+                                                      .rootCauseList?[index];
+                                                  return Card(
+                                                    color: Colors
+                                                        .lightBlue.shade50,
+                                                    elevation: 10,
+                                                    shadowColor: Colors.black87,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text('Cause: ',
+                                                                  style: Styles
+                                                                      .appDarkGrey12),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  rootCause
+                                                                          ?.cause ??
+                                                                      '',
+                                                                  style: Styles
+                                                                      .appDarkBlue12,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                    controller.immediateCorrectionList!.isEmpty
+                                        ? SizedBox.shrink()
+                                        : Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Text(
+                                                  "Immediate Correction",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ),
+                                              ListView.builder(
+                                                shrinkWrap: true,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                itemCount: controller
+                                                        .immediateCorrectionList
+                                                        ?.length ??
+                                                    0,
+                                                itemBuilder: (context, index) {
+                                                  final correction = controller
+                                                          .immediateCorrectionList?[
+                                                      index];
+                                                  return Card(
+                                                    color: Colors
+                                                        .lightBlue.shade50,
+                                                    elevation: 10,
+                                                    shadowColor: Colors.black87,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                  'Correction: ',
+                                                                  style: Styles
+                                                                      .appDarkGrey12),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  correction
+                                                                          ?.details ??
+                                                                      '',
+                                                                  style: Styles
+                                                                      .appDarkBlue12,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                    controller.proposedActionPlanList!.isEmpty
+                                        ? SizedBox.shrink()
+                                        : Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Text(
+                                                  "Proposed Action Plan",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ),
+                                              ListView.builder(
+                                                shrinkWrap: true,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                itemCount: controller
+                                                        .proposedActionPlanList
+                                                        ?.length ??
+                                                    0,
+                                                itemBuilder: (context, index) {
+                                                  final actionPlan = controller
+                                                          .proposedActionPlanList?[
+                                                      index];
+                                                  return Card(
+                                                    color: Colors
+                                                        .lightBlue.shade50,
+                                                    elevation: 10,
+                                                    shadowColor: Colors.black87,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                  'Action as per plan: ',
+                                                                  style: Styles
+                                                                      .appDarkGrey12),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  actionPlan
+                                                                          ?.actions_as_per_plan ??
+                                                                      '',
+                                                                  style: Styles
+                                                                      .appDarkBlue12,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(height: 8),
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                  'Responsibility: ',
+                                                                  style: Styles
+                                                                      .appDarkGrey12),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  actionPlan
+                                                                          ?.responsibility ??
+                                                                      '',
+                                                                  style: Styles
+                                                                      .appDarkBlue12,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(height: 8),
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                  'Target date: ',
+                                                                  style: Styles
+                                                                      .appDarkGrey12),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  actionPlan
+                                                                          ?.target_date ??
+                                                                      '',
+                                                                  style: Styles
+                                                                      .appDarkBlue12,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(height: 8),
+                                                          Row(
+                                                            children: [
+                                                              Text('Remark: ',
+                                                                  style: Styles
+                                                                      .appDarkGrey12),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  actionPlan
+                                                                          ?.remarks ??
+                                                                      '',
+                                                                  style: Styles
+                                                                      .appDarkBlue12,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ],
+                                          ),
                                   ],
                                 ),
                               )
                             : Dimens.box0,
 
-                        // some data of the why why
                         controller.historyList!.isEmpty
                             ? Dimens.box0
                             : Column(
@@ -1025,6 +1303,7 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                                   ),
                                   ListView.builder(
                                       shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
                                       itemCount: controller.historyList! != null
                                           ? controller.historyList!.length
                                           : 0,
