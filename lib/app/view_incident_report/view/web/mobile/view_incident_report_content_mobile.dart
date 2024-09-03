@@ -719,7 +719,6 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                                         .length >
                                     0
                             ? Container(
-                                padding: EdgeInsets.only(left: 20),
                                 child: Column(
                                   children: [
                                     IgnorePointer(
@@ -730,34 +729,119 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                                               181
                                           ? false
                                           : true,
-                                      child: Row(
+                                      child: Column(
                                         children: [
-                                          CustomRichText(
-                                              title:
-                                                  'Detail Investigation Required: '),
-                                          SizedBox(
-                                            width: 3,
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Detail Investigation Required: ',
+                                                style: Styles.blue700,
+                                              ),
+                                              SizedBox(
+                                                width: 3,
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                child: Obx(
+                                                  () => Switch(
+                                                    activeColor: Colors.green,
+                                                    value: controller
+                                                        .detailInvestigationTeamValue
+                                                        .value,
+                                                    onChanged: (value) {
+                                                      controller
+                                                          .detailInvestigationTeamValue
+                                                          .value = value;
+                                                      print(
+                                                          'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5,
-                                            child: Obx(
-                                              () => Switch(
-                                                activeColor: Colors.green,
-                                                value: controller
-                                                    .detailInvestigationTeamValue
-                                                    .value,
-                                                onChanged: (value) {
-                                                  controller
-                                                      .detailInvestigationTeamValue
-                                                      .value = value;
-                                                  print(
-                                                      'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ListView.builder(
+                                                shrinkWrap: true,
+                                                itemCount: controller
+                                                        .investiagtionTeamList
+                                                        ?.length ??
+                                                    0,
+                                                itemBuilder: (context, index) {
+                                                  final teamMember = controller
+                                                          .investiagtionTeamList?[
+                                                      index];
+                                                  return Card(
+                                                    color: Colors
+                                                        .lightBlue.shade50,
+                                                    elevation: 10,
+                                                    shadowColor: Colors.black87,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text('Name: ',
+                                                                  style: Styles
+                                                                      .appDarkGrey12),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  teamMember
+                                                                          ?.name ??
+                                                                      '',
+                                                                  style: Styles
+                                                                      .appDarkBlue12,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(height: 8),
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                  'Designation: ',
+                                                                  style: Styles
+                                                                      .appDarkGrey12),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  teamMember
+                                                                          ?.designation ??
+                                                                      '',
+                                                                  style: Styles
+                                                                      .appDarkBlue12,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
                                                 },
                                               ),
-                                            ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -770,32 +854,157 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                                               181
                                           ? false
                                           : true,
-                                      child: Row(
+                                      child: Column(
                                         children: [
-                                          CustomRichText(
-                                              title:
-                                                  'Why Why Analysis Required: '),
-                                          Dimens.boxWidth10,
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5,
-                                            child: Obx(
-                                              () => Switch(
-                                                activeColor: Colors.green,
-                                                value: controller
-                                                    .whyWhyAnalysisValue.value,
-                                                onChanged: (value) {
-                                                  controller.whyWhyAnalysisValue
-                                                      .value = value;
-
-                                                  print(
-                                                      'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                },
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Why Why Analysis Required: ',
+                                                style: Styles.blue700,
                                               ),
-                                            ),
+                                              Dimens.boxWidth10,
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                child: Obx(
+                                                  () => Switch(
+                                                    activeColor: Colors.green,
+                                                    value: controller
+                                                        .whyWhyAnalysisValue
+                                                        .value,
+                                                    onChanged: (value) {
+                                                      controller
+                                                          .whyWhyAnalysisValue
+                                                          .value = value;
+
+                                                      print(
+                                                          'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
+                                          controller.whyWhyAnalysisList!.isEmpty
+                                              ? Dimens.box0
+                                              : Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    ListView.builder(
+                                                      shrinkWrap: true,
+                                                      physics:
+                                                          NeverScrollableScrollPhysics(), // Prevents the list from scrolling independently
+                                                      itemCount: controller
+                                                              .whyWhyAnalysisList
+                                                              ?.length ??
+                                                          0,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        final analysisItem =
+                                                            controller
+                                                                    .whyWhyAnalysisList?[
+                                                                index];
+                                                        return Card(
+                                                          color: Colors
+                                                              .lightBlue
+                                                              .shade50,
+                                                          elevation: 3,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(12.0),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min, // Ensure the Column takes up only the necessary space
+                                                              children: [
+                                                                Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      "Why: ",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .shade800,
+                                                                      ),
+                                                                    ),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        analysisItem?.why ??
+                                                                            '',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              14,
+                                                                          color: Colors
+                                                                              .grey
+                                                                              .shade800,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                SizedBox(
+                                                                    height: 8),
+                                                                Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      "Cause: ",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .shade800,
+                                                                      ),
+                                                                    ),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        analysisItem?.cause ??
+                                                                            '',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              14,
+                                                                          color: Colors
+                                                                              .grey
+                                                                              .shade800,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
                                         ],
                                       ),
                                     )
@@ -803,99 +1012,7 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                                 ),
                               )
                             : Dimens.box0,
-                        controller.whyWhyAnalysisList!.isEmpty
-                            ? Dimens.box0
-                            :
-                             Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Why Why Analysis",
-                                    style: Styles.blue700,
-                                  ),
-                                  ListView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        NeverScrollableScrollPhysics(), // Prevents the list from scrolling independently
-                                    itemCount:
-                                        controller.whyWhyAnalysisList?.length ??
-                                            0,
-                                    itemBuilder: (context, index) {
-                                      final analysisItem =
-                                          controller.whyWhyAnalysisList?[index];
-                                      return Card(
-                                        color: Colors.lightBlue.shade50,
-                                        elevation: 3,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(12.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize
-                                                .min, // Ensure the Column takes up only the necessary space
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "Why: ",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color:
-                                                          Colors.grey.shade800,
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      analysisItem?.why ?? '',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors
-                                                            .grey.shade800,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(height: 8),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "Cause: ",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color:
-                                                          Colors.grey.shade800,
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      analysisItem?.cause ?? '',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors
-                                                            .grey.shade800,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                        
+
                         // some data of the why why
                         controller.historyList!.isEmpty
                             ? Dimens.box0
@@ -996,6 +1113,7 @@ class ViewIncidentReportMobile extends GetView<ViewIncidentReportController> {
                                       }),
                                 ],
                               ),
+
                         Dimens.boxHeight10,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
