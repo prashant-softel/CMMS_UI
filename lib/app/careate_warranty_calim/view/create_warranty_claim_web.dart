@@ -2364,6 +2364,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                 ],
                                                               ),
                                                             ),
+                                                        
                                                           ],
                                                         ),
                                                       ],
