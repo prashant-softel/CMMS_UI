@@ -363,10 +363,8 @@ class AddIncidentReportController extends GetxController {
   var investigationTeam = <InvestigationTeam>[].obs;
   void updateInvestigationTeamText(
       String srNumber, String name, String designation) {
-    investigationTeam.add(InvestigationTeam(
-        srNumber: '${investigationTeam.length + 1}.',
-        name: name,
-        designation: designation));
+    investigationTeam
+        .add(InvestigationTeam(name: name, designation: designation));
   }
 
   void clearTextFields() {
@@ -1789,11 +1787,6 @@ class AddIncidentReportController extends GetxController {
         investigation_team_list.add(InvestigationTeam(
           name: "",
           designation: "",
-          person_id: "",
-          person_type: 1,
-          investigation_date: "",
-          srNumber: "",
-          // is_required: e.is_required
         ));
       });
 
@@ -1859,8 +1852,8 @@ class AddIncidentReportController extends GetxController {
       );
 
       // if (responseCreateIncidentReport == null) {
-        //  CreateNewPermitDialog();
-        // showAlertDialog();
+      //  CreateNewPermitDialog();
+      // showAlertDialog();
       // }
       print('Create Incident Report data: $incidentReportJsonString');
     }
@@ -1973,10 +1966,9 @@ class AddIncidentReportController extends GetxController {
       late List<InvestigationTeam> investigation_team_list = [];
       investigationTeamList!.forEach((e) {
         investigation_team_list.add(InvestigationTeam(
-            designation: e!.designation,
-            person_type: e.person_type,
-            investigation_date:
-                '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${actionTakenDateTimeCtrlr.text}'))}'));
+          designation: e!.designation,
+          name: e!.name,
+        ));
       });
 
       ///Details of Injured Person for update
@@ -2207,10 +2199,8 @@ class AddIncidentReportController extends GetxController {
       late List<InvestigationTeam> investigation_team_list = [];
       investigationTeamList!.forEach((e) {
         investigation_team_list.add(InvestigationTeam(
-            designation: e!.designation,
-            person_type: e.person_type,
-            investigation_date:
-                '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${actionTakenDateTimeCtrlr.text}'))}'));
+          designation: e!.designation,
+        ));
       });
 
       ///Details of Injured Person for update
