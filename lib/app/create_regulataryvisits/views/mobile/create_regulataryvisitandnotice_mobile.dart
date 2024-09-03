@@ -216,7 +216,10 @@ class _CreateVisitAndNodticeMobileState extends State<CreateVisitAndNodticeMobil
                                   text: 'Submit',
                                   onPressed: () {
                                     // controller.isFormInvalid.value = false;
-                                    controller.createvisitsandnotices();
+                                    controller.createvisitsandnotices(
+                                            month_id: controller.selectedMonth,
+                                      year: controller.selectedYear
+                                    );
                                   },
                                 ),
                               )

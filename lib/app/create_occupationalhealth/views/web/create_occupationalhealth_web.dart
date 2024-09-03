@@ -118,25 +118,7 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                                                 top: 20,
                                                 right: 20,
                                               ),
-                                              child: Row(
-                                                children: [
-                                                  Text('Month:'),
-                                                  Dimens.boxWidth10,
-                                                  CustomTextFieldForStock(
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        8,
-                                                    numberTextField: true,
-                                                    onTap: () {
-                                                      _showMonthPicker(
-                                                          context, controller);
-                                                    },
-                                                    // textController:
-                                                    //     controller.waterDateTc,
-                                                  ),
-                                                ],
-                                              ),
+                                              
                                             ),
                                               ],
                                             ),
@@ -169,6 +151,30 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                                                               CrossAxisAlignment
                                                                   .end,
                                                           children: [
+                                                            Dimens.boxHeight5,
+                                                             Row(
+                                                              children: [
+                                                                Text('Select Month:'),
+                                                                Dimens
+                                                                    .boxWidth10,
+                                                                CustomTextFieldForStock(
+                                                                  width: (MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        .2),
+                                                                  numberTextField:
+                                                                      true,
+                                                                  onTap: () {
+                                                                    _showMonthYearPicker(
+                                                                        context,
+                                                                        controller);
+                                                                  },
+                                                                  textController:
+                                                                      controller
+                                                                          .HealthDate,
+                                                                ),
+                                                              ],
+                                                            ),
                                                             Dimens.boxHeight5,
                                                             Row(
                                                               children: [
@@ -296,6 +302,49 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                                                             
                                                             
                                                             Dimens.boxHeight5,
+                                                            //  Row(
+                                                            //   children: [
+                                                            //     CustomRichText(
+                                                            //         title:
+                                                            //             'Submited By'),
+                                                            //     Dimens
+                                                            //         .boxWidth3,
+                                                            //     LoginCustomTextfield(
+                                                            //         width: (MediaQuery.of(context)
+                                                            //                 .size
+                                                            //                 .width *
+                                                            //             .2),
+                                                            //         keyboardType:
+                                                            //             TextInputType
+                                                            //                 .number,
+                                                            //         // textController:
+                                                            //         //     controller
+                                                            //         //         .KaizensImplementedCtrl,
+                                                            //         //  validate
+                                                            //         // errorController: controller
+                                                            //         //         .isKaizensImplementedInvalid
+                                                            //         //         .value
+                                                            //         //     ? "Required field"
+                                                            //         //     : null,
+                                                            //         // onChanged:
+                                                            //         //     (value) {
+                                                            //         //   if (value
+                                                            //         //           .trim()
+                                                            //         //           .length >
+                                                            //         //       0) {
+                                                            //         //     controller
+                                                            //         //         .isKaizensImplementedInvalid
+                                                            //         //         .value = false;
+                                                            //         //   } else {
+                                                            //         //     controller
+                                                            //         //         .isKaizensImplementedInvalid
+                                                            //         //         .value = true;
+                                                            //         //   }
+                                                            //         // }
+                                                            //         ),
+                                                            //   ],
+                                                            // ),
+                                                            // Dimens.boxHeight5,
                                                           ],
                                                         ),
                                                         Spacer(),
@@ -324,53 +373,53 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
               
               floatingActionButton: 
                      
-                      Center(
-                        child: Row(
-                          children: [
-                            Spacer(),
-                            Container(
-                              height: 40,
-                              child: CustomElevatedButton(
-                                backgroundColor: ColorValues.cancelColor,
-                                text: 'Cancel',
-                                onPressed: () {
-                                  Get.offAllNamed(Routes.misDashboard);
-                                },
-                              ),
+                      Row(
+                        children: [
+                          Spacer(),
+                          Container(
+                            height: 40,
+                            child: CustomElevatedButton(
+                              backgroundColor: ColorValues.cancelColor,
+                              text: 'Cancel',
+                              onPressed: () {
+                                Get.offAllNamed(Routes.misDashboard);
+                              },
                             ),
-                            Dimens.boxWidth10,
-                            controller.selectedItem?.id==0
-                                ? 
-                                Container(
-                                    height: 40,
-                                    child: CustomElevatedButton(
-                                      backgroundColor: ColorValues.submitColor,
-                                      text: 'Submit',
-                                      onPressed: () {
-                                        // controller.isFormInvalid.value = false;
-                                        controller.createoccupational();
-                                      },
-                                    ),
-                                  )
-                                : 
-                                Container(
-                                    height: 40,
-                                    child: CustomElevatedButton(
-                                      backgroundColor: ColorValues.submitColor,
-                                      text: 'Update',
-                                      onPressed: () {
-                                        // controller.isFormInvalid.value = false;
-                                        controller.updateOccupationalDetails(
-                                            // position: 0,
-                                            // fileIds: dropzoneController.fileIds
-                                            );
-                                      },
-                                    ),
+                          ),
+                          Dimens.boxWidth10,
+                          controller.selectedItem?.id==0
+                              ? 
+                              Container(
+                                  height: 40,
+                                  child: CustomElevatedButton(
+                                    backgroundColor: ColorValues.submitColor,
+                                    text: 'Submit',
+                                    onPressed: () {
+                                      // controller.isFormInvalid.value = false;
+                                      controller.createoccupational(
+                                          month_id: controller.selectedMonth,
+                                      year: controller.selectedYear
+                                      );
+                                    },
                                   ),
-                            
-                            Spacer(),
-                          ],
-                        ),
+                                )
+                              : 
+                              Container(
+                                  height: 40,
+                                  child: CustomElevatedButton(
+                                    backgroundColor: ColorValues.submitColor,
+                                    text: 'Update',
+                                    onPressed: () {
+                                      // controller.isFormInvalid.value = false;
+                                      controller.updateOccupationalDetails(
+                                      
+                                          );
+                                    },
+                                  ),
+                                ),
+                          
+                          Spacer(),
+                        ],
                       )
                   // : Dimens.box0
                 
@@ -382,79 +431,60 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
     );
   }
 }
-// _showMonthPicker(BuildContext context, CreateOccupationalhealthController controller) {
-//   controller.selectedMonth = DateTime.now().year;
-//   showDialog(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return AlertDialog(
-//         title: Text("Select Year"),
-//         content: Container(
-//           height: 200,
-//           child: CupertinoPicker(
-//             itemExtent: 40,
-//             onSelectedItemChanged: (int index) {
-//               controller.selectedMonth = DateTime.now().year - index;
-//             },
-//             children: List.generate(10, (index) {
-//               return Center(
-//                 child: Text((DateTime.now().year - index).toString()),
-//               );
-//             }),
-//           ),
-//         ),
-//         actions: <Widget>[
-//           ActionButton(
-//             label: "Cancel", color: ColorValues.appRedColor,
-//             onPressed: () {
-//               Navigator.of(context).pop();
-//             },
-//             // child: Text("Cancel"),
-//           ),
-//           Dimens.boxHeight10,
-//           ActionButton(
-//             color: ColorValues.addNewColor,
-//             onPressed: () {
-//               controller.waterDateTc.text = controller.selectedYear.toString();
-//               controller.goWaterDataList();
-//               controller.update(['stock_Mangement_Date']);
-//               Navigator.of(context).pop();
-//             },
-//             label: "Select",
-//           ),
-//         ],
-//       );
-//     },
-//   );
-// }
-
-_showMonthPicker(BuildContext context, CreateOccupationalhealthController controller) {
+_showMonthYearPicker(BuildContext context, CreateOccupationalhealthController controller) {
+  // Set the default selected month and year
   controller.selectedMonth = DateTime.now().month;
+  controller.selectedYear = DateTime.now().year;
 
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("Select Month"),
+        title: Text("Select Month and Year"),
         content: Container(
           height: 200,
-          child: CupertinoPicker(
-            itemExtent: 40,
-            onSelectedItemChanged: (int index) {
-              controller.selectedMonth = index + 1;
-            },
-            children: List.generate(12, (index) {
-              return Center(
-                child: Text(
-                  DateFormat.MMMM().format(DateTime(0, index + 1)),
+          child: Column(
+            children: [
+              // Month Picker
+              Expanded(
+                child: CupertinoPicker(
+                  itemExtent: 40,
+                  onSelectedItemChanged: (int index) {
+                    controller.selectedMonth = index + 1;
+                  },
+                  children: List.generate(12, (index) {
+                    return Center(
+                      child: Text(
+                        DateFormat.MMMM().format(DateTime(0, index + 1)),
+                      ),
+                    );
+                  }),
                 ),
-              );
-            }),
+              ),
+              // Year Picker
+              Expanded(
+                child: CupertinoPicker(
+                  itemExtent: 40,
+                  onSelectedItemChanged: (int index) {
+                    // Adjust the base year (e.g., 2000) as needed
+                    controller.selectedYear = 2000 + index;
+                  },
+                  children: List.generate(100, (index) {
+                    return Center(
+                      child: Text(
+                        (2000 + index).toString(),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ],
           ),
         ),
         actions: <Widget>[
           ActionButton(
-            label: "Cancel", color: ColorValues.appRedColor,
+            label: "Cancel",
+            color: ColorValues.appRedColor,
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -463,9 +493,10 @@ _showMonthPicker(BuildContext context, CreateOccupationalhealthController contro
           ActionButton(
             color: ColorValues.addNewColor,
             onPressed: () {
-              controller.HealthDate.text = DateFormat.MMMM().format(DateTime(0, controller.selectedMonth));
-              // controller.goHealthDataList();
-              controller.update(['stock_Mangement_Date']);
+              controller.HealthDate.text = "${DateFormat.MMMM().format(DateTime(0, controller.selectedMonth))} ${controller.selectedYear}";
+              // Pass the selected month and year ID when creating Kaizens data
+              // controller.createkaizensdata(monthId: controller.selectedMonth, year: controller.selectedYear);
+              controller.update(['stock_Mangement']);
               Navigator.of(context).pop();
             },
             label: "Select",

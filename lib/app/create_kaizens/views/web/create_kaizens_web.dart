@@ -109,7 +109,7 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                             child: Row(
                                               children: [
                                                 Text(
-                                                  "Kaizens Data",
+                                                  "Add Kaizens Data",
                                                   style: Styles.blackBold16,
                                                 ),
                                                 Spacer(),
@@ -117,28 +117,6 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                   padding: EdgeInsets.only(
                                                     top: 20,
                                                     right: 20,
-                                                  ),
-                                                  child: Row(
-                                                    children: [
-                                                      Text('Month:'),
-                                                      Dimens.boxWidth10,
-                                                      CustomTextFieldForStock(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            8,
-                                                        numberTextField: true,
-                                                        onTap: () {
-                                                          _showMonthPicker(
-                                                              context,
-                                                              controller);
-                                                        },
-                                                        textController:
-                                                            controller
-                                                                .KaizensDateTc,
-                                                      ),
-                                                    ],
                                                   ),
                                                 ),
                                               ],
@@ -169,6 +147,30 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                               CrossAxisAlignment
                                                                   .end,
                                                           children: [
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Text('Select Month:'),
+                                                                Dimens
+                                                                    .boxWidth10,
+                                                                CustomTextFieldForStock(
+                                                                  width: (MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        .2),
+                                                                  numberTextField:
+                                                                      true,
+                                                                  onTap: () {
+                                                                    _showMonthYearPicker(
+                                                                        context,
+                                                                        controller);
+                                                                  },
+                                                                  textController:
+                                                                      controller
+                                                                          .KaizensDateTc,
+                                                                ),
+                                                              ],
+                                                            ),
                                                             Dimens.boxHeight5,
                                                             Row(
                                                               children: [
@@ -290,6 +292,49 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                               ],
                                                             ),
                                                             Dimens.boxHeight5,
+                                                            // Row(
+                                                            //   children: [
+                                                            //     CustomRichText(
+                                                            //         title:
+                                                            //             'Submited By'),
+                                                            //     Dimens
+                                                            //         .boxWidth3,
+                                                            //     LoginCustomTextfield(
+                                                            //         width: (MediaQuery.of(context)
+                                                            //                 .size
+                                                            //                 .width *
+                                                            //             .2),
+                                                            //         keyboardType:
+                                                            //             TextInputType
+                                                            //                 .number,
+                                                            //         // textController:
+                                                            //         //     controller
+                                                            //         //         .KaizensImplementedCtrl,
+                                                            //         //  validate
+                                                            //         // errorController: controller
+                                                            //         //         .isKaizensImplementedInvalid
+                                                            //         //         .value
+                                                            //         //     ? "Required field"
+                                                            //         //     : null,
+                                                            //         // onChanged:
+                                                            //         //     (value) {
+                                                            //         //   if (value
+                                                            //         //           .trim()
+                                                            //         //           .length >
+                                                            //         //       0) {
+                                                            //         //     controller
+                                                            //         //         .isKaizensImplementedInvalid
+                                                            //         //         .value = false;
+                                                            //         //   } else {
+                                                            //         //     controller
+                                                            //         //         .isKaizensImplementedInvalid
+                                                            //         //         .value = true;
+                                                            //         //   }
+                                                            //         // }
+                                                            //         ),
+                                                            //   ],
+                                                            // ),
+                                                            // Dimens.boxHeight5,
                                                           ],
                                                         ),
                                                         Spacer(),
@@ -339,7 +384,9 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                               controller.isFormInvalid.value = false;
                               controller.checkForm();
                               controller.createkaizensdata(
-                                  monthId: controller.selectedMonth);
+                                  monthId: controller.selectedMonth,
+                                  year:controller.selectedYear
+                                  );
                             },
                           ),
                         )
@@ -367,28 +414,55 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
   }
 }
 
-_showMonthPicker(BuildContext context, CreateKaizensDataController controller) {
+
+  _showMonthYearPicker(BuildContext context, CreateKaizensDataController controller) {
+  // Set the default selected month and year
   controller.selectedMonth = DateTime.now().month;
+  controller.selectedYear = DateTime.now().year;
 
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("Select Month"),
+        title: Text("Select Month and Year"),
         content: Container(
           height: 200,
-          child: CupertinoPicker(
-            itemExtent: 40,
-            onSelectedItemChanged: (int index) {
-              controller.selectedMonth = index + 1;
-            },
-            children: List.generate(12, (index) {
-              return Center(
-                child: Text(
-                  DateFormat.MMMM().format(DateTime(0, index + 1)),
+          child: Column(
+            children: [
+              // Month Picker
+              Expanded(
+                child: CupertinoPicker(
+                  itemExtent: 40,
+                  onSelectedItemChanged: (int index) {
+                    controller.selectedMonth = index + 1;
+                  },
+                  children: List.generate(12, (index) {
+                    return Center(
+                      child: Text(
+                        DateFormat.MMMM().format(DateTime(0, index + 1)),
+                      ),
+                    );
+                  }),
                 ),
-              );
-            }),
+              ),
+              // Year Picker
+              Expanded(
+                child: CupertinoPicker(
+                  itemExtent: 40,
+                  onSelectedItemChanged: (int index) {
+                    // Adjust the base year (e.g., 2000) as needed
+                    controller.selectedYear = 2000 + index;
+                  },
+                  children: List.generate(100, (index) {
+                    return Center(
+                      child: Text(
+                        (2000 + index).toString(),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ],
           ),
         ),
         actions: <Widget>[
@@ -403,10 +477,9 @@ _showMonthPicker(BuildContext context, CreateKaizensDataController controller) {
           ActionButton(
             color: ColorValues.addNewColor,
             onPressed: () {
-              controller.KaizensDateTc.text = DateFormat.MMMM()
-                  .format(DateTime(0, controller.selectedMonth));
-              // Pass the selected month ID when creating Kaizens data
-              controller.createkaizensdata(monthId: controller.selectedMonth);
+              controller.KaizensDateTc.text = "${DateFormat.MMMM().format(DateTime(0, controller.selectedMonth))} ${controller.selectedYear}";
+              // Pass the selected month and year ID when creating Kaizens data
+              // controller.createkaizensdata(monthId: controller.selectedMonth, year: controller.selectedYear);
               controller.update(['stock_Mangement']);
               Navigator.of(context).pop();
             },

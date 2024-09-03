@@ -22,9 +22,11 @@ class CreatePlantationDataController extends GetxController {
       <GetPlantationList>[].obs;
          Rx<bool> isFormInvalid = false.obs;
           var PlantationDateTc =
-      TextEditingController(text: DateTime.now().year.toString());
-  int selectedYear = 2024;
-  int selectedMonth = 4;
+      TextEditingController();
+
+  int selectedMonth = 0;
+  int selectedYear=0;
+  String year ='2000';
   String month = 'April';
   //createplantationdata
    var SaplingsPlantedCtrl = TextEditingController();
@@ -34,7 +36,7 @@ class CreatePlantationDataController extends GetxController {
  Rx<bool> isSaplingsPlantedCtrlInvalid = false.obs;
  Rx<bool> isSaplingsSurvivedCtrlInvalid = false.obs;
  Rx<bool> isSaplingsDiedCtrlInvalid = false.obs;
-void createplantationdata({ List<dynamic>? fileIds}) async {
+void createplantationdata({ List<dynamic>? fileIds, required int monthId , required int year}) async {
      try {
        checkForm();
       if(isFormInvalid.value){
@@ -48,6 +50,8 @@ void createplantationdata({ List<dynamic>? fileIds}) async {
         SaplingsSurvived: _SaplingsSurvivedCtrl,
         SaplingsDied: _SaplingsDiedCtrl,
         id:0,
+        month_id: monthId,
+        year: year,
         // date:"2024-08-18",
       );
 
