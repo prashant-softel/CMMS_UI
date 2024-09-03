@@ -1809,36 +1809,36 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                       ),
                                                                                     ),
                                                                                     // Dimens.boxHeight30,
-                                                                                    SizedBox(height: 30),
-                                                                                    controller.dropdownMapperData[record[0]['value']]?.asset_type == "Spare"
-                                                                                        ? Container(
-                                                                                            // padding: EdgeInsets.all(value),
-                                                                                            decoration: BoxDecoration(
-                                                                                              boxShadow: [
-                                                                                                BoxShadow(
-                                                                                                  color: Colors.black26,
-                                                                                                  offset: const Offset(
-                                                                                                    5.0,
-                                                                                                    5.0,
-                                                                                                  ),
-                                                                                                  blurRadius: 5.0,
-                                                                                                  spreadRadius: 1.0,
-                                                                                                ),
-                                                                                              ],
-                                                                                              color: ColorValues.whiteColor,
-                                                                                              borderRadius: BorderRadius.circular(5),
-                                                                                            ),
-                                                                                            child: LoginCustomTextfield(
-                                                                                              width: (Get.width * .4),
-                                                                                              enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
-                                                                                              maxLine: 1,
-                                                                                              textController: new TextEditingController(text: mapData["sr_no"] ?? ''),
-                                                                                              onChanged: (txt) {
-                                                                                                mapData["sr_no"] = txt;
-                                                                                              },
-                                                                                            ),
-                                                                                          )
-                                                                                        : Dimens.box0,
+                                                                                    // SizedBox(height: 30),
+                                                                                    // controller.dropdownMapperData[record[0]['value']]?.asset_type == "Spare"
+                                                                                    //     ? Container(
+                                                                                    //         // padding: EdgeInsets.all(value),
+                                                                                    //         decoration: BoxDecoration(
+                                                                                    //           boxShadow: [
+                                                                                    //             BoxShadow(
+                                                                                    //               color: Colors.black26,
+                                                                                    //               offset: const Offset(
+                                                                                    //                 5.0,
+                                                                                    //                 5.0,
+                                                                                    //               ),
+                                                                                    //               blurRadius: 5.0,
+                                                                                    //               spreadRadius: 1.0,
+                                                                                    //             ),
+                                                                                    //           ],
+                                                                                    //           color: ColorValues.whiteColor,
+                                                                                    //           borderRadius: BorderRadius.circular(5),
+                                                                                    //         ),
+                                                                                    //         child: LoginCustomTextfield(
+                                                                                    //           width: (Get.width * .4),
+                                                                                    //           enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
+                                                                                    //           maxLine: 1,
+                                                                                    //           textController: new TextEditingController(text: mapData["sr_no"] ?? ''),
+                                                                                    //           onChanged: (txt) {
+                                                                                    //             mapData["sr_no"] = txt;
+                                                                                    //           },
+                                                                                    //         ),
+                                                                                    //       )
+                                                                                    //     : Dimens.box0,
                                                                                   ],
                                                                                 ),
                                                                               )
