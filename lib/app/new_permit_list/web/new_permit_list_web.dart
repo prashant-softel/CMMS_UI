@@ -12,6 +12,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
@@ -977,22 +978,98 @@ class PermitListDataSource extends DataTableSource {
                                                   )
                                                   ?.requestById ==
                                               varUserAccessModel.value.user_id
-                                      ? TableActionButton(
+                                      ?
+                                      // For date formatting
+
+                                      TableActionButton(
                                           color: Color.fromARGB(
                                               136, 107, 152, 211),
                                           icon: Icons.golf_course,
                                           message: 'GO For TBT',
                                           onPress: () {
-                                            // controller.viewNewPermitList(
-                                            //     permitId:
-                                            //         PermitDetails?.permitId);
-                                            controller.editNewPermit(
+                                            final newPermit = controller
+                                                .newPermitList
+                                                .firstWhere(
+                                              (e) =>
+                                                  "${e?.permitId}" ==
+                                                  "${PermitDetails?.permitId}",
+                                              orElse: () =>
+                                                  NewPermitModel(permitId: 000),
+                                            );
+
+                                            if (newPermit?.tbt_start == 0) {
+                                              // Check if endDate is not null before parsing
+                                              String? startDateString =
+                                                  newPermit?.startDate;
+                                              String formattedStartDate =
+                                                  "Unknown Start Time";
+
+                                              if (startDateString != null) {
+                                                DateTime startDate =
+                                                    DateTime.parse(
+                                                        startDateString);
+                                                formattedStartDate = DateFormat(
+                                                        'yyyy-MM-dd HH:mm')
+                                                    .format(startDate);
+                                              }
+
+                                              Get.defaultDialog(
+                                                title: "Alert",
+                                                middleText:
+                                                    "You can't Start Task before the start time ($formattedStartDate) of the permit",
+                                                confirm: ElevatedButton(
+                                                  onPressed: () => Get.back(),
+                                                  child: Text("OK"),
+                                                ),
+                                              );
+                                            } else {
+                                              // Proceed with the action
+                                              controller.editNewPermit(
                                                 permitId:
                                                     PermitDetails?.permitId,
                                                 isChecked:
-                                                    controller.isChecked.value);
+                                                    controller.isChecked.value,
+                                              );
+                                            }
                                           },
                                         )
+
+                                      //  TableActionButton(
+                                      //     color: Color.fromARGB(
+                                      //         136, 107, 152, 211),
+                                      //     icon: Icons.golf_course,
+                                      //     message: 'GO For TBT',
+                                      //     onPress: () {
+                                      //       final newPermit = controller
+                                      //           .newPermitList
+                                      //           .firstWhere(
+                                      //         (e) =>
+                                      //             "${e?.permitId}" ==
+                                      //             "${PermitDetails?.permitId}",
+                                      //         orElse: () =>
+                                      //             NewPermitModel(permitId: 000),
+                                      //       );
+
+                                      //       if (newPermit?.tbt_start == 1) {
+                                      //         Get.defaultDialog(
+                                      //           title: "Alert",
+                                      //           middleText:
+                                      //               "You can't Start Task before the start time of the permit",
+                                      //           confirm: ElevatedButton(
+                                      //             onPressed: () => Get.back(),
+                                      //             child: Text("OK"),
+                                      //           ),
+                                      //         );
+                                      //       } else {
+                                      //         controller.editNewPermit(
+                                      //           permitId:
+                                      //               PermitDetails?.permitId,
+                                      //           isChecked:
+                                      //               controller.isChecked.value,
+                                      //         );
+                                      //       }
+                                      //     },
+                                      //   )
                                       : Dimens.box0,
                                   controller.newPermitList
                                                   .firstWhere(

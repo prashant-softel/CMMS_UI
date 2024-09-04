@@ -27,7 +27,9 @@ class NewPermitModel {
   String? current_status_short;
   int? isExpired;
   int? tbT_Done_Check;
+  int? tbt_start;
   String? endDate;
+  String? startDate;
   int? jc_id;
   int? jc_status;
 
@@ -53,6 +55,8 @@ class NewPermitModel {
     this.endDate,
     this.jc_id,
     this.jc_status,
+    this.tbt_start,
+    this.startDate,
   });
 
   factory NewPermitModel.fromJson(Map<String, dynamic> json) => NewPermitModel(
@@ -81,6 +85,8 @@ class NewPermitModel {
         endDate: json['endDate'],
         jc_id: json['jc_id'],
         jc_status: json['jc_status'],
+        tbt_start: json['tbt_start'],
+        startDate: json['startDate'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -106,6 +112,8 @@ class NewPermitModel {
         "endDate": endDate,
         'jc_id': jc_id,
         'jc_status': jc_status,
+        'tbt_start': tbt_start,
+        'startDate': startDate,
         // return data;
       };
 }
