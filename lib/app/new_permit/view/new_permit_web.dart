@@ -202,8 +202,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                           ),
                           // Edit from here for pm task
                           controller.pmtaskViewModel?.id != null
-                              ? 
-                              Row(
+                              ? Row(
                                   children: [
                                     Expanded(
                                       child: Container(
@@ -314,9 +313,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     ),
                                   ],
                                 )
-                             
                               : Dimens.box0,
-                        
+
                           controller.jobModel?.id != null
                               ? Container(
                                   // alignment: Alignment.centerLeft,
@@ -427,8 +425,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         ),
                                         DataCell(
                                           SizedBox(
-                                            child: 
-                                            Column(
+                                            child: Column(
                                               children: controller
                                                   .jobModel!.workingAreaList!
                                                   .map(
@@ -467,7 +464,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     ],
                                   ),
                                 )
-                             
                               : Dimens.box0,
 
                           // hgvbjn,
@@ -573,7 +569,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ),
                                 )
                               : Dimens.box0,
-
 
                           controller.vegExecutionDetailsModel?.executionId !=
                                   null
@@ -1015,7 +1010,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title: 'Permit Description: '),
+                                                    title:
+                                                        'Permit Description: '),
                                                 Expanded(
                                                   child:
                                                       _buildPermitDescriptionField_web(
@@ -1717,7 +1713,10 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       125 &&
                                   controller.newPermitDetailsModel.value!
                                           .is_TBT_Expire ==
-                                      false
+                                      false &&
+                                  controller.newPermitDetailsModel.value!
+                                          .tbt_start ==
+                                      1
                               ? Center(
                                   child: Container(
                                     width:
