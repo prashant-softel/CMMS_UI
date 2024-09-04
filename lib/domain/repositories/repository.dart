@@ -1328,9 +1328,9 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Kaizens data Add Successfully...", fontSize: 16.0);
-        Get.offAllNamed(
-          Routes.kaizensListScreen,
-        );
+        // Get.offAllNamed(
+        //   Routes.kaizensListScreen,
+        // );
 
         // if (res.errorCode == 200) {
         //   var responseMap = json.decode(res.data);
