@@ -97,6 +97,8 @@ class PreventiveMaintenanceExecutionUsecase {
   void clearStoreTaskActivityData() async =>
       repository.clearData(LocalKeys.activity);
   void clearStoreDataTaskId() async => repository.clearData(LocalKeys.pmTaskId);
+  void clearMrsIdStoreData() async => repository.clearData(LocalKeys.mrsId);
+  void clearJobIdStoreData() async => repository.clearData(LocalKeys.jobId);
 
   void clearStoreTaskfromActorData() async =>
       repository.clearData(LocalKeys.fromActorTypeId);

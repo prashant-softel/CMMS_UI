@@ -116,6 +116,9 @@ class PreventiveMaintenanceExecutionPresenter {
     preventiveMaintenanceExecutionUsecase.clearStoreTaskData();
   }
 
+  void clearMrsIdStoreData() async =>
+      preventiveMaintenanceExecutionUsecase.clearMrsIdStoreData();
+
   void clearStoreDataTaskId() {
     preventiveMaintenanceExecutionUsecase.clearStoreDataTaskId();
   }
@@ -123,6 +126,9 @@ class PreventiveMaintenanceExecutionPresenter {
   void clearStoreTaskActivityData() {
     preventiveMaintenanceExecutionUsecase.clearStoreTaskActivityData();
   }
+
+  void clearJobIdStoreData() async =>
+      preventiveMaintenanceExecutionUsecase.clearJobIdStoreData();
 
   void clearStoreTaskfromActorData() {
     preventiveMaintenanceExecutionUsecase.clearStoreTaskfromActorData();
