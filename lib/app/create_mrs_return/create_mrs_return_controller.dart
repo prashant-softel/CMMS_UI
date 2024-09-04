@@ -121,6 +121,9 @@ class CreateMrsReturnController extends GetxController {
         if (type.value == 1) {
           jobid.value = dataFromPreviousScreen['jobId'];
         }
+        activityCtrlr.text = activity.value;
+        whereUsedCtrlr.text = whereUsedTypeId.toString();
+
         createmrsReturnPresenter.saveUsedTypeIdValue(
             whereUsedTypeId: whereUsedTypeId.value.toString());
         createmrsReturnPresenter.savewhereUsedValue(
