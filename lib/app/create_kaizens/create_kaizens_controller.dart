@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/create_kaizens_model.dart';
 import 'package:cmms/domain/models/get_kaizensdata_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../home/home_controller.dart';
 
 class CreateKaizensDataController extends GetxController {
@@ -33,8 +34,7 @@ class CreateKaizensDataController extends GetxController {
   Rx<bool> isKaizensImplementedInvalid = false.obs;
   Rx<bool> isCostForImplementationInvalid = false.obs;
   Rx<bool> isCostSavedFromImplementationInvalid = false.obs;
-  void createkaizensdata(
-      {List<dynamic>? fileIds, required int monthId, required int year}) async {
+  void createkaizensdata({required int monthId, required int year}) async {
     try {
       checkForm();
       if (isFormInvalid.value) {
@@ -83,7 +83,8 @@ class CreateKaizensDataController extends GetxController {
   void onInit() async {
     try {
       await setKDId();
-
+      KaizensDateTc.text =
+          "${DateFormat.MMMM().format(DateTime(0, selectedItem!.month_id ?? 0))} ${selectedItem!.year}";
       super.onInit();
     } catch (e) {
       print(e);
@@ -144,6 +145,7 @@ class CreateKaizensDataController extends GetxController {
   void updateKaizenDetails() async {
     int _id = selectedItem?.id ?? 0;
 
+    // Get the entered data from the text fields
     int _KaizensImplementedCtrl =
         int.tryParse(KaizensImplementedCtrl.text.trim()) ?? 0;
     int _CostForImplementationCtrl =
@@ -151,30 +153,40 @@ class CreateKaizensDataController extends GetxController {
     int _CostSavedFromImplementationCtrl =
         int.tryParse(CostSavedFromImplementationCtrl.text.trim()) ?? 0;
 
-    int _selectedMonthnamectrl =
-        int.tryParse(selectedMonthnamectrl.text.trim()) ?? 0;
-    int _selectedYearctrl = int.tryParse(selectedYearctrl.text.trim()) ?? 0;
+    // If the month and year are not changed, fallback to selectedItem's values
+    int _monthId = selectedMonth != (selectedItem?.month_id ?? 0)
+        ? selectedMonth
+        : selectedItem?.month_id ?? 0;
 
+    int _year = selectedYear != (selectedItem?.year ?? 0)
+        ? selectedYear
+        : selectedItem?.year ?? 0;
+
+    // Ensure that the month and year are correctly assigned to their respective fields in the model
     CreateKaizensModel createkaizensdataModel = CreateKaizensModel(
       id: _id,
       KaizensImplemented: _KaizensImplementedCtrl,
       CostForImplementation: _CostForImplementationCtrl,
       CostSavedFromImplementation: _CostSavedFromImplementationCtrl,
-      month_id: _selectedMonthnamectrl,
-      year: _selectedYearctrl,
-      // date: "2024-08-18",
+      month_id: _monthId, // Use the new month or fallback to original
+      year: _year, // Use the new year or fallback to original
     );
 
+    // Converting the model to JSON format
     var updateKaizensModelJsonString = createkaizensdataModel.toJson();
 
+    // Calling the updateKaizenDetails method in the presenter
     Map<String, dynamic>? responseCreateGoModel =
         await createkaizensdataPresenter.updateKaizenDetails(
       updateKaizen: updateKaizensModelJsonString,
       isLoading: true,
     );
 
+    // Handling the response from the API
     if (responseCreateGoModel == null) {
-      print("data fail ");
+      print("Update failed");
+    } else {
+      print("Update successful");
     }
   }
 
