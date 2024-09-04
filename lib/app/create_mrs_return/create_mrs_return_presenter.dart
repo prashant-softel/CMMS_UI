@@ -76,4 +76,62 @@ class CreateMrsReturnPresenter {
 
   Future<String?> getactivityValue() async =>
       await craetemrsReturnUsecase.getactivityValue();
+
+  void saveUsedTypeIdValue({String? whereUsedTypeId}) async {
+    return craetemrsReturnUsecase.saveUsedTypeIdValue(
+        whereUsedTypeId: whereUsedTypeId);
+  }
+
+  Future<String?> getUsedTypeIdValue() async =>
+      await craetemrsReturnUsecase.getUsedTypeIdValue();
+  void savewhereUsedValue({String? whereUsed}) async {
+    return craetemrsReturnUsecase.savewhereUsedValue(whereUsed: whereUsed);
+  }
+
+  Future<String?> getwhereUsedValue() async =>
+      await craetemrsReturnUsecase.getwhereUsedValue();
+  void saveToActortypeValue({String? to_actor_type_id}) async {
+    return craetemrsReturnUsecase.saveToActortypeValue(
+        to_actor_type_id: to_actor_type_id);
+  }
+
+  Future<String?> getToActortypeValue() async =>
+      await craetemrsReturnUsecase.getToActortypeValue();
+  void saveTypeValue({String? type}) async {
+    return craetemrsReturnUsecase.saveTypeValue(type: type);
+  }
+
+  Future<String?> getTypeValue() async =>
+      await craetemrsReturnUsecase.getTypeValue();
+  void saveFromActorIdValue({String? fromActorTypeId}) async {
+    return craetemrsReturnUsecase.saveFromActorIdValue(
+        fromActorTypeId: fromActorTypeId);
+  }
+
+  Future<String?> getFromActorIdValue() async =>
+      await craetemrsReturnUsecase.getFromActorIdValue();
+  void saveActivityValue({String? activityCtrlr}) async {
+    return craetemrsReturnUsecase.saveActivityValue(
+        activityCtrlr: activityCtrlr);
+  }
+
+  Future<String?> getActivityValue() async =>
+      await craetemrsReturnUsecase.getActivityValue(); 
+
+      void saveMrsIdValue({String? mrsId}) async {
+    return craetemrsReturnUsecase.saveMrsIdValue(
+        mrsId: mrsId);
+  }
+
+  Future<String?> getMrsIdValue() async =>
+      await craetemrsReturnUsecase.getMrsIdValue();
+
+
+       void saveJobIdValue({String? jobid}) async {
+    return craetemrsReturnUsecase.saveJobIdValue(
+        jobid: jobid);
+  }
+
+  Future<String?> getJobIdValue() async =>
+      await craetemrsReturnUsecase.getJobIdValue();
 }

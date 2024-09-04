@@ -1831,4 +1831,34 @@ class JobCardDetailsController extends GetxController {
         bounds: Rect.fromLTWH(pageWidth - (signatureSize.width + margin),
             currentY + 20, signatureSize.width, signatureSize.height))!;
   }
+
+  void clearStoreTaskData() {
+    jobCardDetailsPresenter.clearStoreTaskData();
+  }
+
+  void clearMrsIdStoreData() {
+    jobCardDetailsPresenter.clearMrsIdStoreData();
+  }
+
+  void clearJobIdStoreData() {
+    jobCardDetailsPresenter.clearJobIdStoreData();
+  }
+
+  void clearStoreTaskActivityData() {
+    jobCardDetailsPresenter.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    jobCardDetailsPresenter.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    jobCardDetailsPresenter.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    jobCardDetailsPresenter.clearStoreTaskWhereUsedData();
+  }
+
+  void clearTypeValue() async => jobCardDetailsPresenter.clearTypeValue();
 }

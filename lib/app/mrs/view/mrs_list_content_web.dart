@@ -732,6 +732,8 @@ class MrsListDataSource extends DataTableSource {
                                 message: 'Return Mrs',
                                 onPress: () {
                                   controller.clearStoreData();
+                                  controller.clearTypeValue();
+                                  controller.clearJobIdStoreData();
                                   controller.clearStoreTaskData();
                                   controller.clearStoreTaskActivityData();
                                   controller.clearStoreTasktoActorData();
@@ -739,12 +741,22 @@ class MrsListDataSource extends DataTableSource {
                                   controller.clearStoreTaskfromActorData();
                                   Get.toNamed(Routes.mrsReturnScreen,
                                       arguments: {
-                                        "whereUsed": 27,
-                                        "fromActorTypeId": 3,
+                                        "whereUsed":
+                                            MrsDetails?.whereUsedType ==
+                                                    "PMTASK"
+                                                ? 27
+                                                : 4,
+                                        "fromActorTypeId":
+                                            MrsDetails?.whereUsedType ==
+                                                    "PMTASK"
+                                                ? 3
+                                                : 4,
                                         "to_actor_type_id": 2,
                                         "pmTaskId":
                                             MrsDetails?.whereUsedTypeId ?? 0,
-                                        "activity": MrsDetails?.activity ?? ''
+                                        "activity": MrsDetails?.activity ?? '',
+                                        "mrsId": MrsDetails?.id ?? 0,
+                                        "type": 0,
                                       });
                                 },
                               )

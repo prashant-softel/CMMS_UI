@@ -770,6 +770,14 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     preventiveMaintenanceExecutionPresenter.clearStoreTaskData();
   }
 
+  void clearMrsIdStoreData() {
+    preventiveMaintenanceExecutionPresenter.clearMrsIdStoreData();
+  }
+
+  void clearJobIdStoreData() {
+    preventiveMaintenanceExecutionPresenter.clearJobIdStoreData();
+  }
+
   void clearStoreTaskActivityData() {
     preventiveMaintenanceExecutionPresenter.clearStoreTaskActivityData();
   }

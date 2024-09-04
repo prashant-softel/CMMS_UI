@@ -22,6 +22,10 @@ class MrsListPresenter {
     mrsListUsecase.clearStoreTaskData();
   }
 
+  void clearJobIdStoreData() {
+    mrsListUsecase.clearJobIdStoreData();
+  }
+
   void clearStoreTaskActivityData() {
     mrsListUsecase.clearStoreTaskActivityData();
   }
@@ -37,6 +41,8 @@ class MrsListPresenter {
   void clearStoreTaskWhereUsedData() {
     mrsListUsecase.clearStoreTaskWhereUsedData();
   }
+
+  void clearTypeValue() async => mrsListUsecase.clearTypeValue();
 
   void clearStoreDataJobId() async => mrsListUsecase.clearStoreDataJobId();
   void clearPermitStoreData() async => mrsListUsecase.clearPermitStoreData();

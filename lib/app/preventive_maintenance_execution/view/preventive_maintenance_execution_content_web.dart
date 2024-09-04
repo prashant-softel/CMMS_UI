@@ -974,6 +974,22 @@ class PreventiveMaintenanceExecutionContentWeb
                                               text: "Return Mrs",
                                               onPressed: () {
                                                 controller
+                                                    .clearMrsIdStoreData();
+                                                controller
+                                                    .clearJobIdStoreData();
+
+                                                controller.clearTypeValue();
+                                                controller.clearStoreTaskData();
+                                                controller
+                                                    .clearStoreTaskActivityData();
+                                                controller
+                                                    .clearStoreTasktoActorData();
+                                                controller
+                                                    .clearStoreTaskWhereUsedData();
+                                                controller
+                                                    .clearStoreTaskfromActorData();
+
+                                                controller
                                                     .getMrsListByModuleTask(
                                                         taskId: controller
                                                             .scheduleId.value);

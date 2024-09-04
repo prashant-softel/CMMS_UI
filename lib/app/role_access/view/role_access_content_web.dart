@@ -156,21 +156,21 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                     onValueChanged: controller.onValueChanged,
                                   ),
                                 ),
-                                // Spacer(),
-                                // // Dimens.boxWidth15,
-                                // Text(
-                                //   'Apply to Existing User: ',
-                                //   style: Styles.blackBold14,
-                                // ),
-                                // Dimens.boxWidth10,
-                                // Padding(
-                                //   padding: const EdgeInsets.only(top: 8.0),
-                                //   child: CustomSwitchTroggle(
-                                //       value: controller.isExistingusers.value,
-                                //       onChanged: (value) {
-                                //         controller.existingusertoggle();
-                                //       }),
-                                // ),
+                                Spacer(),
+                                // Dimens.boxWidth15,
+                                Text(
+                                  'Apply to Existing User: ',
+                                  style: Styles.blackBold14,
+                                ),
+                                Dimens.boxWidth10,
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: CustomSwitchTroggle(
+                                      value: controller.isExistingusers.value,
+                                      onChanged: (value) {
+                                        controller.existingusertoggle();
+                                      }),
+                                ),
                                 Spacer(),
                                 // Dimens.boxWidth15,
                                 Text(

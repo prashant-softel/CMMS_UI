@@ -67,10 +67,10 @@ class CreateMrsReturnController extends GetxController {
   void onInit() async {
     await setId();
     //   whereUsedTypeId = Get.arguments;
-    if (whereUsedTypeId.value != 0) {
-      whereUsedCtrlr.text = whereUsedTypeId.value.toString();
-      activityCtrlr.text = activity.value;
-    }
+    // if (whereUsedTypeId.value != 0) {
+    //   whereUsedCtrlr.text = whereUsedTypeId.value.toString();
+    //   activityCtrlr.text = activity.value;
+    // }
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       if (mrsId > 0) {
@@ -94,33 +94,59 @@ class CreateMrsReturnController extends GetxController {
 
   Future<void> setId() async {
     try {
-      // final _whereUsedTypeId = await createmrsReturnPresenter.getValue();
-      // final _activity = await createmrsReturnPresenter.getactivityValue();
+      final _whereUsedTypeId =
+          await createmrsReturnPresenter.getUsedTypeIdValue();
+      final _whereUsed = await createmrsReturnPresenter.getwhereUsedValue();
+      final _to_actor_type_id =
+          await createmrsReturnPresenter.getToActortypeValue();
+      final _type = await createmrsReturnPresenter.getTypeValue();
+      final _fromActorTypeId =
+          await createmrsReturnPresenter.getFromActorIdValue();
+      final _activityCtrlr = await createmrsReturnPresenter.getActivityValue();
+      final _mrsId = await createmrsReturnPresenter.getMrsIdValue();
+      final _jobid = await createmrsReturnPresenter.getJobIdValue();
 
-      // if (_whereUsedTypeId == null ||
-      //     _whereUsedTypeId == '' ||
-      //     _whereUsedTypeId == "null") {
-      var dataFromPreviousScreen = Get.arguments;
+      if (_whereUsedTypeId == null ||
+          _whereUsedTypeId == '' ||
+          _whereUsedTypeId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
 
-      activity.value = dataFromPreviousScreen['activity'];
-      type.value = dataFromPreviousScreen['type'];
-      whereUsedTypeId.value = dataFromPreviousScreen['pmTaskId'];
-      whereUsed.value = dataFromPreviousScreen['whereUsed'];
-      fromActorTypeId.value = dataFromPreviousScreen['fromActorTypeId'];
-      to_actor_type_id.value = dataFromPreviousScreen['to_actor_type_id'];
-      mrsId.value = dataFromPreviousScreen['mrsId'];
-      if (type.value == 1) {
-        jobid.value = dataFromPreviousScreen['jobId'];
+        activity.value = dataFromPreviousScreen['activity'];
+        type.value = dataFromPreviousScreen['type'];
+        whereUsedTypeId.value = dataFromPreviousScreen['pmTaskId'];
+        whereUsed.value = dataFromPreviousScreen['whereUsed'];
+        fromActorTypeId.value = dataFromPreviousScreen['fromActorTypeId'];
+        to_actor_type_id.value = dataFromPreviousScreen['to_actor_type_id'];
+        mrsId.value = dataFromPreviousScreen['mrsId'];
+        if (type.value == 1) {
+          jobid.value = dataFromPreviousScreen['jobId'];
+        }
+        createmrsReturnPresenter.saveUsedTypeIdValue(
+            whereUsedTypeId: whereUsedTypeId.value.toString());
+        createmrsReturnPresenter.savewhereUsedValue(
+            whereUsed: whereUsed.value.toString());
+        createmrsReturnPresenter.saveToActortypeValue(
+            to_actor_type_id: to_actor_type_id.value.toString());
+        createmrsReturnPresenter.saveTypeValue(type: type.value.toString());
+        createmrsReturnPresenter.saveMrsIdValue(mrsId: mrsId.value.toString());
+        createmrsReturnPresenter.saveJobIdValue(jobid: jobid.value.toString());
+
+        createmrsReturnPresenter.saveFromActorIdValue(
+            fromActorTypeId: fromActorTypeId.value.toString());
+        createmrsReturnPresenter.saveActivityValue(
+            activityCtrlr: activity.value);
+      } else {
+        whereUsedTypeId.value = int.tryParse(_whereUsedTypeId) ?? 0;
+        whereUsed.value = int.tryParse(_whereUsed ?? "") ?? 0;
+        to_actor_type_id.value = int.tryParse(_to_actor_type_id ?? "") ?? 0;
+        type.value = int.tryParse(_type ?? "") ?? 0;
+        mrsId.value = int.tryParse(_mrsId ?? "") ?? 0;
+        jobid.value = int.tryParse(_jobid ?? "") ?? 0;
+
+        fromActorTypeId.value = int.tryParse(_fromActorTypeId ?? "") ?? 0;
+        activityCtrlr.text = _activityCtrlr ?? "";
+        whereUsedCtrlr.text = whereUsedTypeId.toString();
       }
-      createmrsReturnPresenter.saveValue(
-          whereUsedTypeId: whereUsedTypeId.value.toString());
-      createmrsReturnPresenter.saveValuee(type: type.value.toString());
-      createmrsReturnPresenter.saveactivityValue(
-          activity: activity.value.toString());
-      // } else {
-      //   whereUsedTypeId.value = int.tryParse(_whereUsedTypeId) ?? 0;
-      //   activity.value = _activity ?? "";
-      // }
     } catch (e) {
       print(e.toString() + 'goId');
       //  Utility.showDialog(e.toString() + 'userId');
