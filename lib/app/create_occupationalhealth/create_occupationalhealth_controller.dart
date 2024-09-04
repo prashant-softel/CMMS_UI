@@ -41,15 +41,7 @@ Rx<bool> isFormInvalid = false.obs;
   void onInit() async {
     try {
       await setOHId();
-
-      facilityIdStreamSubscription = homeController.facilityId$.listen(
-        (event) async {
-          // facilityId = event;
-          await getHealthDatalist();
-        },
-      );
-
-      super.onInit();
+    super.onInit();
     } catch (e) {
       print(e);
     }
@@ -88,18 +80,6 @@ Rx<bool> isFormInvalid = false.obs;
     } catch (e) {
       print(e.toString() + 'healthId');
       //  Utility.showDialog(e.toString() + 'userId');
-    }
-  }
-
-  Future<void> getHealthDatalist() async {
-    final _occupationalType = await createOccupationalhealthPresenter.getHealthDatalist();
-
-    if (_occupationalType != null) {
-      _occupationalType != [];
-      for (var  occupational in _occupationalType) {
-        occupationalType.add( occupational);
-      }
-      // selectedTypePermit.value = grievanceType[0]?.name ?? '';
     }
   }
 

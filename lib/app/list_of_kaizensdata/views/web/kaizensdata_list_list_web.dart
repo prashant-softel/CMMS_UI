@@ -509,6 +509,7 @@ class KaizensDataListSource extends DataTableSource {
       '${KaizensDataDetails?.costForImplementation ?? ''}',
       '${KaizensDataDetails?.costSavedFromImplementation ?? ''}',
       '${KaizensDataDetails?.month_name ?? ''}',
+      '${KaizensDataDetails?.year ?? ''}',
       '${KaizensDataDetails?.createdAt ?? ''}',
       'Actions',
     ];

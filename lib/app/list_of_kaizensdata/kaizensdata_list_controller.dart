@@ -45,6 +45,7 @@ class KaizensDataListController extends GetxController {
   RxString costForImplementationFilterText = ''.obs;
   RxString costSavedFromImplementationFilterText = ''.obs;
   RxString monthnameFilterText = ''.obs;
+  RxString yearFilterText = ''.obs;
   RxString createdbyFilterText = ''.obs;
   RxString createdatFilterText = ''.obs;
   RxString actionFilterText = ''.obs;
@@ -58,6 +59,7 @@ class KaizensDataListController extends GetxController {
     "Cost For Implementation": true,
     "Cost Saved From Implementation": true,
     "Month name": true,
+    "Year": true,
     "Created At": true,
   });
   final Map<String, double> columnwidth = {
@@ -66,6 +68,7 @@ class KaizensDataListController extends GetxController {
     "Cost For Implementation": 250,
     "Cost Saved From Implementation": 300,
     "Month name": 150,
+    "Year":100,
     "Created At": 150,
   };
   Map<String, RxString> filterText = {};
@@ -85,6 +88,7 @@ class KaizensDataListController extends GetxController {
     "Cost For Implementation": costForImplementationFilterText,
     "Cost Saved From Implementation": costSavedFromImplementationFilterText,
     "Month name": monthnameFilterText,
+    "Year":yearFilterText,
     "Created At": createdatFilterText,
       "Action": actionFilterText,
       // "Status": statusFilterText,

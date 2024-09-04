@@ -9,7 +9,7 @@ String GetKaizensDataListModelToJson(List<GetKaizensDataList> data) =>
 
 class GetKaizensDataList {
   int? id;
-  String? date;
+  // String? date;
   String? month_name;
   int? month_id;
   int? kaizensImplemented;
@@ -19,10 +19,11 @@ class GetKaizensDataList {
   int? createdBy;
   String? createdAt;
   int? updatedBy;
+  int? year;
   String? updatedAt;
   GetKaizensDataList({
     this.id,
-    this.date,
+    // this.date,
     this.month_name,
     this.month_id,
     this.kaizensImplemented,
@@ -33,12 +34,13 @@ class GetKaizensDataList {
     this.createdAt,
     this.updatedBy,
     this.updatedAt,
+    this.year,
   });
 
   factory GetKaizensDataList.fromJson(Map<String, dynamic> json) {
     return GetKaizensDataList(
       id: json['id'],
-      date: json['date'],
+      // // date: json['date'],
       month_name: json['month_name'],
       month_id: json['month_id'],
       kaizensImplemented: json['kaizensImplemented'],
@@ -49,12 +51,13 @@ class GetKaizensDataList {
       createdAt: json['createdAt'],
       updatedBy: json['updatedBy'],
       updatedAt: json['updatedAt'],
+      year: json['year'],
     );
   }
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'date': date,
+        // // 'date': date,
         'month_name': month_name,
         'month_id': month_id,
         'kaizensImplemented': kaizensImplemented,
@@ -65,5 +68,6 @@ class GetKaizensDataList {
         'createdAt': createdAt,
         'updatedBy': updatedBy,
         'updatedAt': updatedAt,
+        'year': year,
       };
 }

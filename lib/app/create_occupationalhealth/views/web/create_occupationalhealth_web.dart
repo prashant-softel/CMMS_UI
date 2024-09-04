@@ -109,7 +109,7 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                                             child: Row(
                                               children: [
                                                 Text(
-                                                  "CREATE OCCUPATIONAL HEALTH",
+                                                  "Add Occupational Health",
                                                   style: Styles.blackBold16,
                                                 ),
                                                 Spacer(),
@@ -154,7 +154,7 @@ class _ViewOccupationalhealthWebState extends State<CreateOccupationalhealthWeb>
                                                             Dimens.boxHeight5,
                                                              Row(
                                                               children: [
-                                                                Text('Select Month:'),
+                                                                Text('Select Month And Year:'),
                                                                 Dimens
                                                                     .boxWidth10,
                                                                 CustomTextFieldForStock(

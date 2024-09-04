@@ -108,7 +108,7 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                "Regulatary Visits and Notices",
+                                                "Add Regulatary Visits and Notices",
                                                 style: Styles.blackBold16,
                                               ),
                                               Spacer(),
@@ -150,7 +150,7 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                                           Dimens.boxHeight5,
                                                            Row(
                                                               children: [
-                                                                Text('Select Month:'),
+                                                                Text('Select Month And Year:'),
                                                                 Dimens
                                                                     .boxWidth10,
                                                                 CustomTextFieldForStock(

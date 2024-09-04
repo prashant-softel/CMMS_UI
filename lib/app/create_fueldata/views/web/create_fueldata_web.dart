@@ -108,7 +108,7 @@ class _ViewFuelDataWebState extends State<FuelDataWeb> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                "Fuel Data",
+                                                "Add Fuel Data",
                                                 style: Styles.blackBold16,
                                               ),
                                               Spacer(),
@@ -150,7 +150,7 @@ class _ViewFuelDataWebState extends State<FuelDataWeb> {
                                                           Dimens.boxHeight5,
                                                            Row(
                                                               children: [
-                                                                Text('Select Month:'),
+                                                                Text('Select Month And Year:'),
                                                                 Dimens
                                                                     .boxWidth10,
                                                                 CustomTextFieldForStock(
