@@ -19,14 +19,13 @@ class CreateKaizensDataController extends GetxController {
   RxList<GetKaizensDataList?> kaizendataType = <GetKaizensDataList>[].obs;
   GetKaizensDataList? selectedItem;
   Rx<bool> isFormInvalid = false.obs;
-  var KaizensDateTc =
-      TextEditingController();
+  var KaizensDateTc = TextEditingController();
 
   int selectedMonth = 0;
-  int selectedYear=0;
-  String month = 'April';
-  String year ='2024';
+  int selectedYear = 0;
   //createkaizensdata
+  var selectedMonthnamectrl = TextEditingController();
+  var selectedYearctrl = TextEditingController();
   var KaizensImplementedCtrl = TextEditingController();
   var CostForImplementationCtrl = TextEditingController();
   var CostSavedFromImplementationCtrl = TextEditingController();
@@ -34,7 +33,8 @@ class CreateKaizensDataController extends GetxController {
   Rx<bool> isKaizensImplementedInvalid = false.obs;
   Rx<bool> isCostForImplementationInvalid = false.obs;
   Rx<bool> isCostSavedFromImplementationInvalid = false.obs;
-  void createkaizensdata({List<dynamic>? fileIds, required int monthId,required int year}) async {
+  void createkaizensdata(
+      {List<dynamic>? fileIds, required int monthId, required int year}) async {
     try {
       checkForm();
       if (isFormInvalid.value) {
@@ -54,7 +54,7 @@ class CreateKaizensDataController extends GetxController {
         CostSavedFromImplementation: _CostSavedFromImplementationCtrl,
         id: 0,
         month_id: monthId,
-        year:year,
+        year: year,
         // date:"2024-08-18",
       );
 
@@ -97,10 +97,13 @@ class CreateKaizensDataController extends GetxController {
         selectedItem = dataFromPreviousScreen['selectedItem'];
       } else {
         selectedItem = GetKaizensDataList(
-            id: 0,
-            kaizensImplemented: 0,
-            costForImplementation: 0,
-            costSavedFromImplementation: 0);
+          id: 0,
+          kaizensImplemented: 0,
+          costForImplementation: 0,
+          costSavedFromImplementation: 0,
+          month_name: '',
+          year: 0,
+        );
       }
       GetKaizensDataList? selectedItemhea;
       final _selectedItem = await createkaizensdataPresenter.getValue();
@@ -123,6 +126,8 @@ class CreateKaizensDataController extends GetxController {
             selectedItem!.costForImplementation.toString();
         CostSavedFromImplementationCtrl.text =
             selectedItem!.costSavedFromImplementation.toString();
+        selectedMonthnamectrl.text = selectedItem!.month_id.toString();
+        selectedYearctrl.text = selectedItem!.year.toString();
       }
     } catch (e) {
       print(e.toString() + 'KaizenId');
@@ -146,11 +151,17 @@ class CreateKaizensDataController extends GetxController {
     int _CostSavedFromImplementationCtrl =
         int.tryParse(CostSavedFromImplementationCtrl.text.trim()) ?? 0;
 
+    int _selectedMonthnamectrl =
+        int.tryParse(selectedMonthnamectrl.text.trim()) ?? 0;
+    int _selectedYearctrl = int.tryParse(selectedYearctrl.text.trim()) ?? 0;
+
     CreateKaizensModel createkaizensdataModel = CreateKaizensModel(
       id: _id,
       KaizensImplemented: _KaizensImplementedCtrl,
       CostForImplementation: _CostForImplementationCtrl,
       CostSavedFromImplementation: _CostSavedFromImplementationCtrl,
+      month_id: _selectedMonthnamectrl,
+      year: _selectedYearctrl,
       // date: "2024-08-18",
     );
 

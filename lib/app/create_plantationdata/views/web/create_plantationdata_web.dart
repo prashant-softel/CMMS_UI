@@ -108,7 +108,7 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                "Plantation Data",
+                                                "Add Plantation Data",
                                                 style: Styles.blackBold16,
                                               ),
                                               Spacer(),
@@ -150,7 +150,7 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                                                           Dimens.boxHeight5,
                                                            Row(
                                                               children: [
-                                                                Text('Select Month:'),
+                                                                Text('Select Month And Year:'),
                                                                 Dimens
                                                                     .boxWidth10,
                                                                 CustomTextFieldForStock(
