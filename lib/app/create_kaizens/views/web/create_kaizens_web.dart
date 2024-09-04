@@ -150,14 +150,16 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                             Dimens.boxHeight5,
                                                             Row(
                                                               children: [
-                                                                Text('Select Month And Year:'),
+                                                                Text(
+                                                                    'Select Month And Year:'),
                                                                 Dimens
                                                                     .boxWidth10,
                                                                 CustomTextFieldForStock(
-                                                                  width: (MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        .2),
+                                                                  width: (MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      .2),
                                                                   numberTextField:
                                                                       true,
                                                                   onTap: () {
@@ -167,10 +169,11 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                                   },
                                                                   textController:
                                                                       controller
-                                                                          .KaizensDateTc,
+                                                                          .KaizensDateTc, // Ensure this is correctly passed
                                                                 ),
                                                               ],
                                                             ),
+
                                                             Dimens.boxHeight5,
                                                             Row(
                                                               children: [
@@ -385,8 +388,7 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                               controller.checkForm();
                               controller.createkaizensdata(
                                   monthId: controller.selectedMonth,
-                                  year:controller.selectedYear
-                                  );
+                                  year: controller.selectedYear);
                             },
                           ),
                         )
@@ -397,8 +399,7 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                             text: 'Update',
                             onPressed: () {
                               controller.isFormInvalid.value = false;
-                              controller.updateKaizenDetails(
-                              );
+                              controller.updateKaizenDetails();
                             },
                           ),
                         ),
@@ -415,11 +416,15 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
   }
 }
 
+void _showMonthYearPicker(
+    BuildContext context, CreateKaizensDataController controller) {
+  // Set initial values from selectedItem
+  int initialMonth = controller.selectedItem?.month_id ?? DateTime.now().month;
+  int initialYear = controller.selectedItem?.year ?? DateTime.now().year;
 
-  _showMonthYearPicker(BuildContext context, CreateKaizensDataController controller) {
-  // Set the default selected month and year
-  controller.selectedMonth = DateTime.now().month;
-  controller.selectedYear = DateTime.now().year;
+  // Set the controller's selectedMonth and selectedYear to the initial values
+  controller.selectedMonth = initialMonth;
+  controller.selectedYear = initialYear;
 
   showDialog(
     context: context,
@@ -433,9 +438,12 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
               // Month Picker
               Expanded(
                 child: CupertinoPicker(
+                  scrollController: FixedExtentScrollController(
+                    initialItem: controller.selectedMonth - 1,
+                  ),
                   itemExtent: 40,
                   onSelectedItemChanged: (int index) {
-                    controller.selectedMonth = index + 1;
+                    controller.selectedMonth = index + 1; // Month is 1-based
                   },
                   children: List.generate(12, (index) {
                     return Center(
@@ -449,16 +457,16 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
               // Year Picker
               Expanded(
                 child: CupertinoPicker(
+                  scrollController: FixedExtentScrollController(
+                    initialItem: controller.selectedYear - 2000,
+                  ),
                   itemExtent: 40,
                   onSelectedItemChanged: (int index) {
-                    // Adjust the base year (e.g., 2000) as needed
                     controller.selectedYear = 2000 + index;
                   },
                   children: List.generate(100, (index) {
                     return Center(
-                      child: Text(
-                        (2000 + index).toString(),
-                      ),
+                      child: Text((2000 + index).toString()),
                     );
                   }),
                 ),
@@ -478,14 +486,17 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
           ActionButton(
             color: ColorValues.addNewColor,
             onPressed: () {
-              controller.KaizensDateTc.text = "${DateFormat.MMMM().format(DateTime(0, controller.selectedMonth))} ${controller.selectedYear}";
-              // Pass the selected month and year ID when creating Kaizens data
-              // controller.createkaizensdata(monthId: controller.selectedMonth, year: controller.selectedYear);
+              // Update the TextField with the selected month and year
+              controller.KaizensDateTc.text =
+                  "${DateFormat.MMMM().format(DateTime(0, controller.selectedMonth))} ${controller.selectedYear}";
+
+              // Call GetX update to refresh the UI
               controller.update(['stock_Mangement']);
+
               Navigator.of(context).pop();
             },
             label: "Select",
-          ),
+          )
         ],
       );
     },
