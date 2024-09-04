@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cmms/app/create_kaizens/create_kaizens_presenter.dart';
+import 'package:cmms/app/create_kaizens/widgets/kaizen_created_dialog.dart';
 import 'package:cmms/domain/models/create_kaizens_model.dart';
 import 'package:cmms/domain/models/get_kaizensdata_list_model.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class CreateKaizensDataController extends GetxController {
   RxList<GetKaizensDataList?> kaizendataType = <GetKaizensDataList>[].obs;
   GetKaizensDataList? selectedItem;
   Rx<bool> isFormInvalid = false.obs;
+    RxInt type = 0.obs;
   var KaizensDateTc = TextEditingController();
 
   int selectedMonth = 0;
@@ -34,6 +36,16 @@ class CreateKaizensDataController extends GetxController {
   Rx<bool> isKaizensImplementedInvalid = false.obs;
   Rx<bool> isCostForImplementationInvalid = false.obs;
   Rx<bool> isCostSavedFromImplementationInvalid = false.obs;
+
+  static void showAlertDialog({
+    int? kaizenId,
+    String? message,
+    String? title,
+    Function()? onPress,
+  }) async {
+    await Get.dialog<void>(
+        KaizenCreatedDialog(kaizenId: kaizenId, message: message));
+  }
   void createkaizensdata({required int monthId, required int year}) async {
     try {
       checkForm();
@@ -72,19 +84,41 @@ class CreateKaizensDataController extends GetxController {
       if (responseCreateKaizensModel == null) {
         // Handle the null response case
       }
+      //   Map<String, dynamic>? responseMapKaizensCreated =
+      //     await createkaizensdataPresenter.createkaizensdata(
+      //   createkaizensdata: createkaizensdataModel,
+      //   isLoading: true,
+      // );
+      // (responseCreateKaizensModel != null)
+       else {
+        var _kaizenId = 0;
+        var _message = '';
+        if (responseCreateKaizensModel["KaizensType"] != null &&
+            responseCreateKaizensModel["KaizensType"].isNotEmpty) {
+          _kaizenId = responseCreateKaizensModel["KaizensType"][0];
+        }
+        if (responseCreateKaizensModel["message"] != null) {
+          _message = responseCreateKaizensModel["message"];
+        }
+        showAlertDialog(kaizenId: _kaizenId, message: _message);
+      }
+     
       print('Create create kaizens data: $createKaizenDataModelFromJson');
     } catch (e) {
       print(e);
     }
   }
+  
 
   // update API
   @override
   void onInit() async {
     try {
       await setKDId();
-      KaizensDateTc.text =
-          "${DateFormat.MMMM().format(DateTime(0, selectedItem!.month_id ?? 0))} ${selectedItem!.year}";
+      selectedItem!.id == 0
+          ? KaizensDateTc.text = ""
+          : KaizensDateTc.text =
+              "${DateFormat.MMMM().format(DateTime(0, selectedItem!.month_id ?? 0))} ${selectedItem!.year}";
       super.onInit();
     } catch (e) {
       print(e);
@@ -96,6 +130,7 @@ class CreateKaizensDataController extends GetxController {
       if (Get.arguments != null) {
         var dataFromPreviousScreen = Get.arguments;
         selectedItem = dataFromPreviousScreen['selectedItem'];
+        type.value = dataFromPreviousScreen['type'];
       } else {
         selectedItem = GetKaizensDataList(
           id: 0,
@@ -140,6 +175,7 @@ class CreateKaizensDataController extends GetxController {
     KaizensImplementedCtrl.clear();
     CostForImplementationCtrl.clear();
     CostSavedFromImplementationCtrl.clear();
+    createkaizensdataPresenter.clearValue();
   }
 
   void updateKaizenDetails() async {

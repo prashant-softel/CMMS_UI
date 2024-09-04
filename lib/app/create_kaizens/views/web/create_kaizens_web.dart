@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
 import 'package:intl/intl.dart';
@@ -150,26 +151,31 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                             Dimens.boxHeight5,
                                                             Row(
                                                               children: [
-                                                                Text(
-                                                                    'Select Month And Year:'),
+                                                                CustomRichText(
+                                                                  includeAsterisk: controller.type==1?false: true,
+                                                                    title:
+                                                                        'Select Month And Year:'),
                                                                 Dimens
-                                                                    .boxWidth10,
-                                                                CustomTextFieldForStock(
-                                                                  width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      .2),
-                                                                  numberTextField:
-                                                                      true,
-                                                                  onTap: () {
-                                                                    _showMonthYearPicker(
-                                                                        context,
-                                                                        controller);
-                                                                  },
-                                                                  textController:
-                                                                      controller
-                                                                          .KaizensDateTc, // Ensure this is correctly passed
+                                                                    .boxWidth3,
+                                                                IgnorePointer(
+                                                                  ignoring:controller.type==1?true:false,
+                                                                  child: CustomTextFieldForStock(
+                                                                    width: (MediaQuery.of(
+                                                                                context)
+                                                                            .size
+                                                                            .width *
+                                                                        .2),
+                                                                    numberTextField:
+                                                                        true,
+                                                                    onTap: () {
+                                                                      _showMonthYearPicker(
+                                                                          context,
+                                                                          controller);
+                                                                    },
+                                                                    textController:
+                                                                        controller
+                                                                            .KaizensDateTc, // Ensure this is correctly passed
+                                                                  ),
                                                                 ),
                                                               ],
                                                             ),

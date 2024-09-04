@@ -3,6 +3,10 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/list_of_kaizensdata/kaizensdata_list_presenter.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/get_kaizensdata_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -159,7 +163,7 @@ class KaizensDataListController extends GetxController {
   void clearStoreData() {
     kaizensdataListPresenter.clearValue();
   }
-Future<void> deleteKaizen({int? KaizenId}) async {
+Future<void> deleteKaizen( {int? KaizenId}) async {
     {
       await kaizensdataListPresenter.deleteKaizen(
         Id: KaizenId,
@@ -168,4 +172,57 @@ Future<void> deleteKaizen({int? KaizenId}) async {
     }
   getkaizensdata(false);
 }
+void isDeleteDialog({int? KaizenId, String? Kaizenlist}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("Delete Kiaze List", style: Styles.blackBold16),
+              Divider(
+                color: ColorValues.appLightGreyColor,
+              ),
+              Dimens.boxHeight5,
+              RichText(
+                text: TextSpan(
+                    text: 'Are you sure you want to delete the Kaizen Data',
+                    style: Styles.blackBold16,
+                    children: [
+                      TextSpan(
+                        text: Kaizenlist,
+                        style: TextStyle(
+                          color: ColorValues.orangeColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ]),
+              ),
+            ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appRedColor,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  text: 'No'),
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appGreenColor,
+                  onPressed: () {
+                    deleteKaizen(KaizenId:KaizenId).then((value) {
+                      Get.back();
+                      getkaizensdata(false);
+                    });
+                  },
+                  text: 'Yes'),
+            ],
+          ),
+          Dimens.boxHeight5
+        ],
+      ),
+    );
+  }
 }

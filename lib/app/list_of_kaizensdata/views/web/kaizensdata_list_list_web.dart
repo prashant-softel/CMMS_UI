@@ -552,15 +552,14 @@ class KaizensDataListSource extends DataTableSource {
                             message: 'View',
                             onPress: () {
                               controller.clearStoreData();
-                              // int goId =
-                              //     OccupationallistDetails?.id ?? 0;
-                              // if (goId != 0) {
-                              //   Get.toNamed(Routes.viewGoodsOrders,
-                              //       arguments: {
-                              //         'goId': goId,
-                              //         "goType": 1
-                              //       });
-                              // }
+                              int KId = KaizensDataDetails?.id ?? 0;
+                                  if (KId != 0) {
+                                    Get.toNamed(Routes.createkaizensScreen,
+                                        arguments: {
+                                          "selectedItem": controller.selectedItem,
+                                          "type":1,
+                                        });
+                                  }
                             },
                           )
                         : Dimens.box0,
@@ -609,8 +608,14 @@ class KaizensDataListSource extends DataTableSource {
                             icon: Icons.delete,
                             message: 'Delete',
                             onPress: () {
-                              int? id = KaizensDataDetails?.id;
-                              controller.deleteKaizen(KaizenId: id);
+                              controller.isDeleteDialog(
+                                KaizenId:
+                                    controller.kaizensdataList[index].id ?? 0,
+                                // Kaizenlist:controller.kaizensdataList[index]
+
+// int? id = KaizensDataDetails?.id;
+//     controller.deleteKaizen(KaizenId: id);
+                              );
 
                               // controller.isContainerVisible.value = true;
                             },
