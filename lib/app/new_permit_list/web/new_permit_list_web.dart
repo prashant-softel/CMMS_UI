@@ -997,7 +997,17 @@ class PermitListDataSource extends DataTableSource {
                                                   NewPermitModel(permitId: 000),
                                             );
 
-                                            if (newPermit?.tbt_start == 0) {
+                                            if (controller.newPermitList
+                                                    .firstWhere(
+                                                      (e) =>
+                                                          "${e?.permitId}" ==
+                                                          "${PermitDetails?.permitId}",
+                                                      orElse: () =>
+                                                          NewPermitModel(
+                                                              permitId: 000),
+                                                    )
+                                                    ?.tbt_start ==
+                                                0) {
                                               // Check if endDate is not null before parsing
                                               String? startDateString =
                                                   newPermit?.startDate;

@@ -48,6 +48,7 @@ class NewPermitDetailModel {
   String? completedByName;
   DateTime? close_at;
   String? closedByName;
+  int? tbt_start;
   String? cancelRequestByName;
   DateTime? cancel_at;
   String? current_status_short;
@@ -73,6 +74,7 @@ class NewPermitDetailModel {
   int? is_loto_required;
   int? tbT_Done_Check;
   int? is_physical_iso_required;
+
   // int? sop_type_id;
   // int? issuer_id;
   // int? approver_id;
@@ -86,6 +88,7 @@ class NewPermitDetailModel {
     this.insertedId,
     this.ptwStatus,
     this.permitNo,
+    this.tbt_start,
     this.blockId,
     this.sitePermitNo,
     this.permitTypeid,
@@ -149,6 +152,7 @@ class NewPermitDetailModel {
         isExpired: json['isExpired'],
         blockId: json['blockId'],
         insertedId: json["insertedId"],
+        tbt_start: json["tbt_start"],
         is_physical_iso_required: json["is_physical_iso_required"],
         ptwStatus: json["ptwStatus"],
         permitNo: json["permitNo"],
@@ -264,6 +268,7 @@ class NewPermitDetailModel {
         "insertedId": insertedId,
         "ptwStatus": ptwStatus,
         "permitNo": permitNo,
+        "tbt_start": tbt_start,
         "tbT_Done_Check": tbT_Done_Check,
         "sitePermitNo": sitePermitNo,
         "permitTypeid": permitTypeid,
