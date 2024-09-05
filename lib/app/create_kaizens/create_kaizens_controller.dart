@@ -130,7 +130,7 @@ class CreateKaizensDataController extends GetxController {
       if (Get.arguments != null) {
         var dataFromPreviousScreen = Get.arguments;
         selectedItem = dataFromPreviousScreen['selectedItem'];
-        type.value = dataFromPreviousScreen['type'];
+        // type.value = dataFromPreviousScreen['type'];
       } else {
         selectedItem = GetKaizensDataList(
           id: 0,

@@ -152,30 +152,27 @@ class _ViewKaizensDataWebState extends State<KaizensDataWeb> {
                                                             Row(
                                                               children: [
                                                                 CustomRichText(
-                                                                  includeAsterisk: controller.type==1?false: true,
+                                                                  // includeAsterisk: controller.type==1?false: true,
                                                                     title:
                                                                         'Select Month And Year:'),
                                                                 Dimens
                                                                     .boxWidth3,
-                                                                IgnorePointer(
-                                                                  ignoring:controller.type==1?true:false,
-                                                                  child: CustomTextFieldForStock(
-                                                                    width: (MediaQuery.of(
-                                                                                context)
-                                                                            .size
-                                                                            .width *
-                                                                        .2),
-                                                                    numberTextField:
-                                                                        true,
-                                                                    onTap: () {
-                                                                      _showMonthYearPicker(
-                                                                          context,
-                                                                          controller);
-                                                                    },
-                                                                    textController:
-                                                                        controller
-                                                                            .KaizensDateTc, // Ensure this is correctly passed
-                                                                  ),
+                                                                CustomTextFieldForStock(
+                                                                  width: (MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      .2),
+                                                                  numberTextField:
+                                                                      true,
+                                                                  onTap: () {
+                                                                    _showMonthYearPicker(
+                                                                        context,
+                                                                        controller);
+                                                                  },
+                                                                  textController:
+                                                                      controller
+                                                                          .KaizensDateTc, // Ensure this is correctly passed
                                                                 ),
                                                               ],
                                                             ),

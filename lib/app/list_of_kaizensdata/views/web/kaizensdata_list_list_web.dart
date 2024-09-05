@@ -510,6 +510,7 @@ class KaizensDataListSource extends DataTableSource {
       '${KaizensDataDetails?.costSavedFromImplementation ?? ''}',
       '${KaizensDataDetails?.month_name ?? ''}',
       '${KaizensDataDetails?.year ?? ''}',
+      '${KaizensDataDetails?.submited_by ?? ''}',
       '${KaizensDataDetails?.createdAt ?? ''}',
       'Actions',
     ];
@@ -552,14 +553,14 @@ class KaizensDataListSource extends DataTableSource {
                             message: 'View',
                             onPress: () {
                               controller.clearStoreData();
-                              int KId = KaizensDataDetails?.id ?? 0;
-                                  if (KId != 0) {
-                                    Get.toNamed(Routes.createkaizensScreen,
-                                        arguments: {
-                                          "selectedItem": controller.selectedItem,
-                                          "type":1,
-                                        });
-                                  }
+                              // int KId = KaizensDataDetails?.id ?? 0;
+                              //     if (KId != 0) {
+                              //       Get.toNamed(Routes.createkaizensScreen,
+                              //           arguments: {
+                              //             "selectedItem": controller.selectedItem,
+                              //             "type":1,
+                              //           });
+                              //     }
                             },
                           )
                         : Dimens.box0,
