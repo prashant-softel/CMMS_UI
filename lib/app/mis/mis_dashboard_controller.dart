@@ -100,7 +100,8 @@ class MisDashboardController extends GetxController {
   void goToObservationSummary() {
     Get.offNamed(Routes.observationSummary);
   }
-    void goToMisSummary() {
+
+  void goToMisSummary() {
     Get.offNamed(Routes.misSummary);
   }
 
@@ -125,6 +126,7 @@ class MisDashboardController extends GetxController {
     Get.toNamed(Routes.statutory);
   }
 
+ 
   void trainingCourse() {
     Get.toNamed(Routes.trainingCourse);
   }
@@ -141,7 +143,7 @@ class MisDashboardController extends GetxController {
     Get.toNamed(Routes.addGrievance);
   }
 
-    void GrievanceSummaryReport() {
+  void GrievanceSummaryReport() {
     Get.toNamed(Routes.grievanceSummary);
   }
 
@@ -200,42 +202,52 @@ class MisDashboardController extends GetxController {
       Routes.documentManager,
     );
   }
-   void goToCreateOccupationalScreen() {
+
+  void goToCreateOccupationalScreen() {
     Get.toNamed(Routes.createOccupationalScreen);
   }
-   void goToOccupationalDataListScreen() {
+
+  void goToOccupationalDataListScreen() {
     Get.toNamed(Routes.occupationalDataListScreen);
   }
-   void goToRegulataryDataListScreen() {
+
+  void goToRegulataryDataListScreen() {
     Get.toNamed(Routes.regulataryDataListScreen);
   }
-   void goToCreateRegulataryVisitsScreen() {
+
+  void goToCreateRegulataryVisitsScreen() {
     Get.toNamed(Routes.createRegulataryVisitsScreen);
   }
-   void goToCreatePermitsTBTScreen() {
+
+  void goToCreatePermitsTBTScreen() {
     Get.toNamed(Routes.createPermitsTBTScreen);
   }
-   void goToPermitsTBTDataListScreen() {
+
+  void goToPermitsTBTDataListScreen() {
     Get.toNamed(Routes.permitsTBTDataListScreen);
   }
-    void goToCreateFuelDataScreen() {
+
+  void goToCreateFuelDataScreen() {
     Get.toNamed(Routes.createFuelDataScreen);
   }
-    void goToFuelDataListScreen() {
+
+  void goToFuelDataListScreen() {
     Get.toNamed(Routes.fueldataListScreen);
   }
-    void goToCreatePlantationDataScreen() {
+
+  void goToCreatePlantationDataScreen() {
     Get.toNamed(Routes.createplantationdataScreen);
   }
-    void goToPlantationListScreen() {
+
+  void goToPlantationListScreen() {
     Get.toNamed(Routes.plantationlistScreen);
   }
-     void goToCreateKaizensScreen() {
+
+  void goToCreateKaizensScreen() {
     Get.toNamed(Routes.createkaizensScreen);
   }
-     void goToKaizensListScreen() {
+
+  void goToKaizensListScreen() {
     Get.toNamed(Routes.kaizensListScreen);
   }
-
-  
 }

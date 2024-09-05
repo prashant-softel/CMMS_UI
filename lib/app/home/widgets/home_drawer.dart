@@ -204,7 +204,7 @@ class HomeDrawer extends GetView<HomeController> {
                                 width: 40,
                                 height: 16,
                                 color: Color(0xffD2D0D0),
-                                title: "HSE Report",
+                                title: "HSE MIS",
                                 icon: "assets/files/warranty.png",
                                 press: () {
                                   Get.offAllNamed(Routes.misDashboard);

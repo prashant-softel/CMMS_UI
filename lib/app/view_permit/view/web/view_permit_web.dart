@@ -3436,7 +3436,11 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
             ],
           ),
           floatingActionButton: Obx(
-            () => Row(
+            () =>
+                controller.hseMis == 1
+                    ? SizedBox()
+                    :
+                Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -3941,7 +3945,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                 // // )
                 // : Container()
               ],
-           
             ),
           )),
     );
