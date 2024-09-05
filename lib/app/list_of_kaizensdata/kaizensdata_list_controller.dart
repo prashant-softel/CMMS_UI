@@ -183,7 +183,7 @@ void isDeleteDialog({int? KaizenId, String? Kaizenlist}) {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("Delete Kiaze List", style: Styles.blackBold16),
+              Text("Delete Kiazen List", style: Styles.blackBold16),
               Divider(
                 color: ColorValues.appLightGreyColor,
               ),
