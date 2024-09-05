@@ -214,4 +214,33 @@ class JobCardDetailsPresenter {
   }
 
   Future<String?> getValue() async => await jobCardDetailsUsecase.getValue();
+
+  void clearStoreTaskData() {
+    jobCardDetailsUsecase.clearStoreTaskData();
+  }
+
+  void clearMrsIdStoreData() async =>
+      jobCardDetailsUsecase.clearMrsIdStoreData();
+  void clearJobIdStoreData() async =>
+      jobCardDetailsUsecase.clearJobIdStoreData();
+
+  void clearStoreDataTaskId() {
+    jobCardDetailsUsecase.clearStoreDataTaskId();
+  }
+
+  void clearStoreTaskActivityData() {
+    jobCardDetailsUsecase.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    jobCardDetailsUsecase.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    jobCardDetailsUsecase.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    jobCardDetailsUsecase.clearStoreTaskWhereUsedData();
+  }
 }

@@ -20,6 +20,14 @@ class KaizensDataListUsecase {
     
     );
   }
-  void clearValue() async => repository.clearData(LocalKeys.oHid);
-
+  void clearValue() async => repository.clearData(LocalKeys.selectedItem);
+ //deleteKaizen
+ Future<void> deleteKaizen({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await repository.deleteKaizen(
+        Id: Id,
+        isLoading: isLoading,
+      );
 }

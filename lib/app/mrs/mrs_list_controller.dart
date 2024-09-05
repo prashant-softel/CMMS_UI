@@ -83,8 +83,7 @@ class MrsListController extends GetxController {
       facilityId = event;
       if (facilityId > 0) {
         //Future.delayed(Duration(seconds: 1), () {
-        getMrsList(
-            facilityId, formattedTodate1, formattedFromdate1,  false);
+        getMrsList(facilityId, formattedTodate1, formattedFromdate1, false);
         // });
       }
     });
@@ -168,11 +167,15 @@ class MrsListController extends GetxController {
   }
 
   void getMrsListByDate() {
-    getMrsList(facilityId, formattedTodate1, formattedFromdate1,  false);
+    getMrsList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
   void clearStoreData() {
     mrsListPresenter.clearValue();
+  }
+
+  void clearJobIdStoreData() {
+    mrsListPresenter.clearJobIdStoreData();
   }
 
   void clearpmTaskValue() {
@@ -199,7 +202,9 @@ class MrsListController extends GetxController {
     mrsListPresenter.clearStoreTaskWhereUsedData();
   }
 
+  void clearTypeValue() async => mrsListPresenter.clearTypeValue();
+
   void export() {
-    getMrsList(facilityId, formattedTodate1, formattedFromdate1,  true);
+    getMrsList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
 }

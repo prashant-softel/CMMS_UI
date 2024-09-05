@@ -56,14 +56,12 @@ class PreventiveMaintenanceTaskViewPresenter {
   //       permitId: permitId,
   //       isLoading: isLoading,
   //     );
-  Future<Map<String, dynamic>?> setPmTask({
-    int? scheduleId,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>?> setPmTask(
+          {int? scheduleId, bool? isLoading, int? facility_id}) async =>
       await preventiveMaintenanceTaskViewUsecase.setPmTask(
-        scheduleId: scheduleId,
-        isLoading: isLoading,
-      );
+          scheduleId: scheduleId,
+          isLoading: isLoading,
+          facility_id: facility_id);
   Future<bool> approvePmTaskExecution({
     approvetoJsonString,
     required bool isLoading,
@@ -107,16 +105,16 @@ class PreventiveMaintenanceTaskViewPresenter {
     );
   }
 
-  Future<bool> assignToPmTask({
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async {
+  Future<bool> assignToPmTask(
+      {int? assignId,
+      int? taskId,
+      required bool isLoading,
+      int? facility_id}) async {
     return preventiveMaintenanceTaskViewUsecase.assignToPmTask(
-      assignId: assignId,
-      taskId: taskId,
-      isLoading: isLoading,
-    );
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   Future<List<MRSListByJobIdModel>?> getMrsListByModuleTask(

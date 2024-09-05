@@ -13,14 +13,10 @@ class PreventiveMaintenanceExecutionUsecase {
   Future<PmtaskViewModel?> getPmtaskViewList(
           {int? scheduleId, bool? isLoading, required int facilityId}) async =>
       await repository.getPmtaskViewList(scheduleId, isLoading, facilityId);
-  Future<List<dynamic>> updatePmExecution({
-    pmExecutionJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<List<dynamic>> updatePmExecution(
+          {pmExecutionJsonString, bool? isLoading, int? facility_id}) async =>
       await repository.updatePmExecution(
-        pmExecutionJsonString,
-        isLoading,
-      );
+          pmExecutionJsonString, isLoading, facility_id);
   void clearValue() async => repository.clearData(LocalKeys.mrsId);
 
   Future<PmFiles?> browseFiles(
@@ -67,25 +63,28 @@ class PreventiveMaintenanceExecutionUsecase {
           shouldClosePermit: shouldClosePermit,
           isLoading: isLoading);
 
-  Future<bool> UpdatePMTaskExecution({
-    updatePMTaskExecutionJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<bool> UpdatePMTaskExecution(
+          {updatePMTaskExecutionJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await repository.UpdatePMTaskExecution(
           updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
-          isLoading: isLoading);
+          isLoading: isLoading,
+          facility_id: facility_id);
   Future<bool> cloneSchedule(
           {required int from_schedule_id,
           required int to_schedule_id,
           required int taskId,
           required int cloneJobs,
-          bool? isloading}) async =>
+          bool? isloading,
+          int? facility_id}) async =>
       await repository.cloneSchedule(
           from_schedule_id: from_schedule_id,
           to_schedule_id: to_schedule_id,
           taskId: taskId,
           cloneJobs: cloneJobs,
-          isloading: isloading);
+          isloading: isloading,
+          facility_id: facility_id);
   void saveValue({String? pmTaskId}) async =>
       repository.saveValue(LocalKeys.pmTaskId, pmTaskId);
   Future<String?> getValue() async =>
@@ -106,4 +105,18 @@ class PreventiveMaintenanceExecutionUsecase {
         isLoading: isLoading,
         transferItemJsonString: transferItemJsonString,
       );
+  void clearStoreTaskData() async => repository.clearData(LocalKeys.pmTaskId);
+  void clearStoreTaskActivityData() async =>
+      repository.clearData(LocalKeys.activity);
+  void clearStoreDataTaskId() async => repository.clearData(LocalKeys.pmTaskId);
+  void clearMrsIdStoreData() async => repository.clearData(LocalKeys.mrsId);
+  void clearJobIdStoreData() async => repository.clearData(LocalKeys.jobId);
+
+  void clearStoreTaskfromActorData() async =>
+      repository.clearData(LocalKeys.fromActorTypeId);
+  void clearStoreTasktoActorData() async =>
+      repository.clearData(LocalKeys.toactortypeid);
+  void clearStoreTaskWhereUsedData() async =>
+      repository.clearData(LocalKeys.whereUsed);
+  void clearTypeValue() async => repository.clearData(LocalKeys.types);
 }

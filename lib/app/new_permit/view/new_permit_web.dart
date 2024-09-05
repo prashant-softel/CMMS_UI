@@ -314,9 +314,9 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ],
                                 )
                               : Dimens.box0,
+
                           controller.jobModel?.id != null
-                              ?
-                               Container(
+                              ? Container(
                                   // alignment: Alignment.centerLeft,
                                   width: Get.width * .9,
                                   height: Get.height * .2,
@@ -464,7 +464,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     ],
                                   ),
                                 )
-                             
                               : Dimens.box0,
 
                           // hgvbjn,
@@ -570,6 +569,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ),
                                 )
                               : Dimens.box0,
+
                           controller.vegExecutionDetailsModel?.executionId !=
                                   null
                               ? Container(
@@ -1010,7 +1010,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title: 'Title: '),
+                                                    title:
+                                                        'Permit Description: '),
                                                 Expanded(
                                                   child:
                                                       _buildPermitDescriptionField_web(
@@ -1712,7 +1713,10 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       125 &&
                                   controller.newPermitDetailsModel.value!
                                           .is_TBT_Expire ==
-                                      false
+                                      false &&
+                                  controller.newPermitDetailsModel.value!
+                                          .tbt_start ==
+                                      1
                               ? Center(
                                   child: Container(
                                     width:
@@ -2751,43 +2755,43 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                             ),
                                                           )
                                                         : Dimens.box0,
-                                                    Dimens.boxWidth20,
-                                                    controller.newPermitDetailsModel.value
-                                                                    ?.ptwStatus ==
-                                                                125 &&
-                                                            controller
-                                                                    .newPermitDetailsModel
-                                                                    .value
-                                                                    ?.is_TBT_Expire ==
-                                                                true
-                                                        ? Container(
-                                                            height: 45,
-                                                            child:
-                                                                CustomElevatedButton(
-                                                              backgroundColor:
-                                                                  ColorValues
-                                                                      .appRedColor,
-                                                              text:
-                                                                  "Cancel Permit",
-                                                              icon: Icons.close,
-                                                              onPressed: () {
-                                                                Get.dialog(
-                                                                  PermitCancelReQuestDialog(
-                                                                    permitId:
-                                                                        '${controller.permitId.value}',
-                                                                    // jobId: controller
-                                                                    //         .jobModel!
-                                                                    //         .id ??
-                                                                    //     0,
-                                                                  ),
-                                                                );
-                                                                print(
-                                                                    "Permit ID TO Cancel: ${controller.permitId.value}");
-                                                                print(
-                                                                    "JobId To cancel: ${controller.jobModel!.id}");
-                                                              },
-                                                            ))
-                                                        : Dimens.box0,
+                                                    // Dimens.boxWidth20,
+                                                    // controller.newPermitDetailsModel.value
+                                                    //                 ?.ptwStatus ==
+                                                    //             125 &&
+                                                    //         controller
+                                                    //                 .newPermitDetailsModel
+                                                    //                 .value
+                                                    //                 ?.is_TBT_Expire ==
+                                                    //             true
+                                                    //     ? Container(
+                                                    //         height: 45,
+                                                    //         child:
+                                                    //             CustomElevatedButton(
+                                                    //           backgroundColor:
+                                                    //               ColorValues
+                                                    //                   .appRedColor,
+                                                    //           text:
+                                                    //               "Cancel Permit",
+                                                    //           icon: Icons.close,
+                                                    //           onPressed: () {
+                                                    //             Get.dialog(
+                                                    //               PermitCancelReQuestDialog(
+                                                    //                 permitId:
+                                                    //                     '${controller.permitId.value}',
+                                                    //                 // jobId: controller
+                                                    //                 //         .jobModel!
+                                                    //                 //         .id ??
+                                                    //                 //     0,
+                                                    //               ),
+                                                    //             );
+                                                    //             print(
+                                                    //                 "Permit ID TO Cancel: ${controller.permitId.value}");
+                                                    //             print(
+                                                    //                 "JobId To cancel: ${controller.jobModel!.id}");
+                                                    //           },
+                                                    //         ))
+                                                    //     : Dimens.box0,
                                                     Dimens.boxWidth20,
                                                     controller.newPermitDetailsModel.value
                                                                     ?.ptwStatus ==

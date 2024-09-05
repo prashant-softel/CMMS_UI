@@ -59,7 +59,7 @@ class ViewSOPDialog extends GetView {
                                   // final url = '${_controller.jsaData}';
                                   // "https://www.w3.org/1999/xhtml/"
                                   // String baseUrl =
-                                      // 'http://65.0.20.19/CMMS_API/';
+                                  // 'http://65.0.20.19/CMMS_API/';
                                   String baseUrl = 'http://172.20.43.9:83/';
                                   String endpoint = '${_controller.sopData}';
 
@@ -155,6 +155,7 @@ class ViewSOPDialog extends GetView {
                                     ? true
                                     : false,
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Checkbox(
                                       value: _controller.permitId.value > 0
@@ -164,6 +165,9 @@ class ViewSOPDialog extends GetView {
                                       onChanged: (bool? value) {
                                         _controller.soptoggleCheckbox();
                                       },
+                                    ),
+                                    SizedBox(
+                                      width: 5,
                                     ),
                                     Text(
                                       'I have read and accept\nterms and conditions',

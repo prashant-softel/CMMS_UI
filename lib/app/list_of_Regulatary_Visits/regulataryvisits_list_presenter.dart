@@ -16,5 +16,14 @@ class RegulataryListPresenter {
     );
   }
    void clearValue() async => regulataryListUsecase.clearValue();
+   //deleteVisitNotice
 
+    deleteVisitNotice({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await regulataryListUsecase.deleteVisitNotice(
+        Id: Id,
+        isLoading: isLoading,
+      );
 }

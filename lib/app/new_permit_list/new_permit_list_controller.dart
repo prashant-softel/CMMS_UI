@@ -185,10 +185,12 @@ class NewPermitListController extends GetxController {
     //homePresenter.generateToken();
     facilityIdStreamSubscription = controller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
-            false, false, false);
-      });
+      if (facilityId > 0) {
+        Future.delayed(Duration(seconds: 1), () {
+          getNewPermitList(facilityId, userId, formattedFromdate,
+              formattedTodate, false, false, false);
+        });
+      }
     });
 
     // Future.delayed(Duration(seconds: 1), () {
@@ -241,23 +243,20 @@ class NewPermitListController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.requestByName
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.requestByName?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.approvedByName
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.description
+            (item?.description?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.current_status_short
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.current_status_short
-                    ?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
             (item?.requestDatetime?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false))
         .toList();
 
@@ -273,6 +272,12 @@ class NewPermitListController extends GetxController {
   Future<void> getNewPermitList(int facilityId, int userId, dynamic startDate,
       dynamic endDate, bool self_view, bool non_expired, bool isExport) async {
     newPermitList.value = <NewPermitModel>[];
+    bool selfview = varUserAccessModel.value.access_list!
+            .where((e) =>
+                e.feature_id == UserAccessConstants.kPermitFeatureId &&
+                e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+            .length >
+        0;
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
         facilityId: facilityId,
         isLoading: isLoading.value,
@@ -280,14 +285,7 @@ class NewPermitListController extends GetxController {
         end_date: endDate,
         userId: userId,
         isExport: isExport,
-        self_view: varUserAccessModel.value.access_list!
-                    .where((e) =>
-                        e.feature_id == UserAccessConstants.kPermitFeatureId &&
-                        e.selfView == UserAccessConstants.kHaveSelfViewAccess)
-                    .length >
-                0
-            ? true
-            : false,
+        self_view: selfview,
         non_expired: false);
 
     if (_newPermitList != null) {

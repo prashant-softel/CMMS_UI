@@ -38,10 +38,15 @@ class NewPermitMobile extends GetView<NewPermitController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Request a Permit to Work",
-                      style: Styles.blackBold18,
-                    ),
+                    controller.mcExecutionDetailsModel?.executionId != null
+                        ? Text(
+                            'Request a Permit to MC',
+                            style: Styles.blackBold15,
+                          )
+                        : Text(
+                            "Request a Permit to Work",
+                            style: Styles.blackBold15,
+                          ),
                   ],
                 ),
               ),
@@ -54,426 +59,836 @@ class NewPermitMobile extends GetView<NewPermitController> {
                 margin:
                     const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
                 child: Padding(
-                  padding: EdgeInsets.all(15),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomRichTextMobile(
-                          title: "Block / Plot: ",
-                        ),
-                        Dimens.boxHeight2,
-                        IgnorePointer(
-                          ignoring:
-                              controller.jobModel?.id != null ? true : false,
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width / 1.1,
-                            child: Obx(
-                              () => DropdownWebWidget(
-                                dropdownList: controller.blockList,
-                                isValueSelected:
-                                    controller.isBlockSelected.value,
-                                selectedValue: controller.selectedBlock.value,
-                                onValueChanged: controller.onValueChanged,
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      controller.mcExecutionDetailsModel?.executionId != null
+                          ? Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      controller.viewMCTDetails();
+                                    },
+                                    child: Text(
+                                      'Task Id: MCT${int.tryParse('${controller.mcExecutionDetailsModel?.executionId ?? 0}')}',
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        decorationStyle:
+                                            TextDecorationStyle.solid,
+                                        color: Color.fromARGB(255, 5, 92, 163),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Plan Title: ${controller.mcExecutionDetailsModel!.title ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Frequency: ${controller.mcExecutionDetailsModel!.frequency ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Planned By: ${controller.mcExecutionDetailsModel!.plannedBy ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Start Date Time: ${controller.mcExecutionDetailsModel!.startDate ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Planning Date Time: ${controller.mcExecutionDetailsModel!.plannedAt ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ),
-                        ),
-                        Dimens.boxHeight15,
-                        CustomRichTextMobile(
-                          title: "Type of Permit: ",
-                        ),
-                        Dimens.boxHeight2,
-                        SizedBox(
+                            )
+                          : Dimens.box0,
+                      controller.vegExecutionDetailsModel?.executionId != null
+                          ? Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                    // onTap: () {
+                                    //   controller.viewVegTDetails();
+                                    // },
+                                    child: Text(
+                                      'Task Id: VCT${int.tryParse('${controller.vegExecutionDetailsModel?.executionId ?? 0}')}',
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        decorationStyle:
+                                            TextDecorationStyle.solid,
+                                        color: Color.fromARGB(255, 5, 92, 163),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Plan Title: ${controller.vegExecutionDetailsModel!.title ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Frequency: ${controller.vegExecutionDetailsModel!.frequency ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Planned By: ${controller.vegExecutionDetailsModel!.plannedBy ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Start Date Time: ${controller.vegExecutionDetailsModel!.startDate ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Planning Date Time: ${controller.vegExecutionDetailsModel!.plannedAt ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Dimens.box0,
+//bm link
+                      controller.jobModel?.id != null
+                          ? Container(
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 9, vertical: 10),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      controller.viewVegTDetails();
+                                    },
+                                    child: Text(
+                                      'Job ID: ${int.tryParse('${controller.jobModel?.id ?? 0}')}',
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        decorationStyle:
+                                            TextDecorationStyle.solid,
+                                        color: Color.fromARGB(255, 5, 92, 163),
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Job Title: ${controller.titleTextCtrlr.text ?? ""}',
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Column(
+                                    children:
+                                        controller.jobModel!.equipmentCatList!
+                                            .map((element) => Column(
+                                                  // mainAxisAlignment:
+                                                  //     MainAxisAlignment
+                                                  //         .start,
+                                                  // crossAxisAlignment:
+                                                  //     CrossAxisAlignment
+                                                  //         .start,
+                                                  children: [
+                                                    SizedBox(
+                                                      child: Text(
+                                                        "Equipment Category: ${element?.name}",
+                                                        maxLines: 3,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ))
+                                            .toList(),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Block: ${controller.selectedBlock ?? ""}',
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Column(
+                                    children:
+                                        controller.jobModel!.workingAreaList!
+                                            .map(
+                                              (element) => Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    child: Text(
+                                                      "Equipment Name: ${element?.name}",
+                                                      maxLines: 3,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                            .toList(),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Breakdown Time: ${controller.jobModel?.breakdownTime ?? ""}',
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Assigned To: ${controller.jobModel?.assignedName ?? ""}',
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Dimens.box0,
+
+                      //pm task link
+                      controller.pmtaskViewModel?.id != null
+                          ? Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      controller.type == AppConstants.kAudit
+                                          ? controller.viewAudDetails()
+                                          : controller.viewPMTDetails();
+                                    },
+                                    child: Text(
+                                      controller.typee.value ==
+                                              AppConstants.kAudit
+                                          ? 'Task Id: AUD${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}') ?? 0}'
+                                          : 'Task Id: PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}') ?? 0}',
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        decorationStyle:
+                                            TextDecorationStyle.solid,
+                                        color: Color.fromARGB(255, 5, 92, 163),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Plan Title: ${controller.pmtaskViewModel?.plan_title ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Equipment Category: ${controller.typee.value == AppConstants.kAudit ? "NA" : controller.pmtaskViewModel?.category_name ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Checklist Name: ${controller.allChecklistNames}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Frequency: ${controller.pmtaskViewModel?.frequency_name ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Assigned To: ${controller.pmtaskViewModel?.assigned_to_name ?? ""}',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Dimens.box0,
+
+                      Dimens.boxHeight15,
+                      CustomRichTextMobile(
+                        title: "Block / Plot: ",
+                      ),
+                      Dimens.boxHeight2,
+                      IgnorePointer(
+                        ignoring:
+                            controller.jobModel?.id != null ? true : false,
+                        child: SizedBox(
                           width: MediaQuery.of(context).size.width / 1.1,
                           child: Obx(
                             () => DropdownWebWidget(
-                              dropdownList: controller.typePermitList,
-                              isValueSelected:
-                                  controller.isTypePermitSelected.value,
-                              selectedValue:
-                                  controller.selectedTypePermit.value,
+                              dropdownList: controller.blockList,
+                              isValueSelected: controller.isBlockSelected.value,
+                              selectedValue: controller.selectedBlock.value,
                               onValueChanged: controller.onValueChanged,
                             ),
                           ),
                         ),
-                        Dimens.boxHeight15,
-                        CustomRichTextMobile(
-                          title: "Equipment Categories: ",
+                      ),
+                      Dimens.boxHeight15,
+                      CustomRichTextMobile(
+                        title: "Type of Permit: ",
+                      ),
+                      Dimens.boxHeight2,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 1.1,
+                        child: Obx(
+                          () => DropdownWebWidget(
+                            dropdownList: controller.typePermitList,
+                            isValueSelected:
+                                controller.isTypePermitSelected.value,
+                            selectedValue: controller.selectedTypePermit.value,
+                            onValueChanged: controller.onValueChanged,
+                          ),
                         ),
-                        Dimens.boxHeight2,
-                        IgnorePointer(
-                          ignoring: controller.pmtaskViewModel?.id != null ||
-                                  controller.jobModel?.id != null
-                              ? true
-                              : false,
-                          child: Obx(
-                            () => SizedBox(
+                      ),
+                      Dimens.boxHeight15,
+                      CustomRichTextMobile(
+                        title: "Equipment Categories: ",
+                      ),
+                      Dimens.boxHeight2,
+                      controller.pmtaskViewModel?.id != null ||
+                              controller.jobModel?.id != null
+                          ? IgnorePointer(
+                              child: Obx(
+                                () => SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.1,
+                                  child: CustomMultiSelectDialogField(
+                                    title: 'Select Equipment Category',
+                                    // buttonText:
+                                    //     'Equipment Category',
+                                    initialValue: ((controller
+                                            .selectedEquipmentCategoryIdList
+                                            .isNotEmpty)
+                                        ? controller
+                                            .selectedEquipmentCategoryIdList
+                                        : []),
+                                    items: controller.equipmentCategoryList
+                                        .map(
+                                          (equipmentCategory) =>
+                                              MultiSelectItem(
+                                            equipmentCategory?.id,
+                                            equipmentCategory?.name ?? '',
+                                          ),
+                                        )
+                                        .toList(),
+                                    onConfirm: (selectedOptionsList) => {
+                                      controller.equipmentCategoriesSelected(
+                                          selectedOptionsList),
+                                      print(
+                                          'Equipment list ${controller.selectedEquipmentCategoryIdList}')
+                                    },
+                                  ),
+                                ),
+                              ),
+                            )
+                          : SizedBox(
                               width: MediaQuery.of(context).size.width / 1.1,
-                              child: CustomMultiSelectDialogField(
-                                title: 'Please Select',
-                                buttonText: 'Equipment Category',
-                                initialValue: (controller
-                                        .selectedEquipmentCategoryIdList
-                                        .isNotEmpty)
-                                    ? controller.selectedEquipmentCategoryIdList
-                                    : [],
-                                items: controller.equipmentCategoryList
-                                    .map(
-                                      (equipmentCategory) => MultiSelectItem(
-                                        equipmentCategory?.id,
-                                        equipmentCategory?.name ?? '',
-                                      ),
-                                    )
-                                    .toList(),
-                                onConfirm: (selectedOptionsList) => {
-                                  controller.equipmentCategoriesSelected(
-                                      selectedOptionsList),
-                                  print(
-                                      'Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
+                              child: Obx(
+                                () {
+                                  if (controller
+                                      .equipmentCategoryList.isEmpty) {
+                                    return CustomMultiSelectDialogField(
+                                      onConfirm: (selectedOptionsList) {},
+                                      buttonText: "",
+                                      initialValue: [],
+                                      items: [],
+                                      title: "",
+                                    );
+                                  }
+
+                                  final initialValue = controller.typee == 4 ||
+                                          controller.typee == 5
+                                      ? controller.equipmentCategoryList
+                                              ?.where((category) =>
+                                                  category?.name == 'Inverter')
+                                              ?.map((category) => category?.id)
+                                              ?.toList() ??
+                                          []
+                                      : (controller
+                                              .selectedEquipmentCategoryIdList
+                                              .isNotEmpty
+                                          ? controller
+                                              .selectedEquipmentCategoryIdList
+                                          : []);
+
+                                  print('Initial Value: $initialValue');
+
+                                  return IgnorePointer(
+                                    ignoring: controller.typee == 4,
+                                    child: CustomMultiSelectDialogField(
+                                      title: 'Please Select',
+                                      buttonText: 'Equipment Category',
+                                      initialValue: initialValue,
+                                      items: controller.equipmentCategoryList
+                                              ?.map(
+                                                (equipmentCategory) =>
+                                                    MultiSelectItem(
+                                                  equipmentCategory!.id,
+                                                  equipmentCategory.name,
+                                                ),
+                                              )
+                                              ?.toList() ??
+                                          [],
+                                      onConfirm: (selectedOptionsList) {
+                                        controller.equipmentCategoriesSelected(
+                                            selectedOptionsList);
+                                        print(
+                                            'Selected Equipment Categories: $selectedOptionsList');
+                                        print(
+                                            'Updated Selected Categories in Controller: ${controller.selectedEquipmentCategoryIdList}');
+                                      },
+                                    ),
+                                  );
                                 },
                               ),
                             ),
-                          ),
+                      Dimens.boxHeight15,
+                      CustomRichTextMobile(title: 'Start Date: '),
+                      Dimens.boxHeight2,
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
                         ),
-                        Dimens.boxHeight15,
-                        CustomRichTextMobile(title: 'Start Date: '),
-                        Dimens.boxHeight2,
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: _buildStartDateField_mobile(context, 0),
+                        child: _buildStartDateField_mobile(context, 0),
+                      ),
+                      Dimens.boxHeight15,
+                      IgnorePointer(
+                        ignoring: true,
+                        child: CustomRichTextMobile(
+                          title: 'Expiry Date: ',
                         ),
-                        Dimens.boxHeight15,
-                        IgnorePointer(
+                      ),
+                      Dimens.boxHeight2,
+                      IgnorePointer(
                           ignoring: true,
-                          child: CustomRichTextMobile(
-                            title: 'Expiry Date: ',
-                          ),
+                          child: _buildStartDateField_mobile(context, 1)),
+                      Dimens.boxHeight15,
+                      _buildPermitDescriptionField_mobile(context),
+                      Obx(
+                        () => Row(
+                          children: [
+                            CustomRichTextMobile(
+                                includeAsterisk: false,
+                                title: 'Electrical Isolation Required '),
+                            Switch(
+                              value: controller.isToggleOn.value,
+                              onChanged: (value) {
+                                controller.toggle();
+                              },
+                              activeColor: Colors.white,
+                              activeTrackColor: Colors.green,
+                              inactiveThumbColor: Colors.white,
+                              inactiveTrackColor: Colors.red,
+                            ),
+                          ],
                         ),
-                        Dimens.boxHeight2,
-                        IgnorePointer(
-                            ignoring: true,
-                            child: _buildStartDateField_mobile(context, 1)),
-                        Dimens.boxHeight15,
-                        _buildPermitDescriptionField_mobile(context),
-                        Obx(
-                          () => Row(
-                            children: [
-                              CustomRichTextMobile(
-                                  title: 'Electrical Isolation Required '),
-                              Switch(
-                                value: controller.isToggleOn.value,
-                                onChanged: (value) {
-                                  controller.toggle();
-                                },
-                                activeColor: Colors.white,
-                                activeTrackColor: Colors.green,
-                                inactiveThumbColor: Colors.white,
-                                inactiveTrackColor: Colors.red,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Dimens.boxHeight2,
-                        Obx(
-                          () => controller.isToggleOn == true
-                              ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomRichTextMobile(
-                                        title: 'Equipment Isolation '),
-                                    Dimens.boxHeight2,
-                                    SizedBox(
-                                      child: CustomMultiSelectDialogField(
-                                        buttonText:
-                                            'Select Equipment Isolation',
-                                        title: 'Equipment Isolation',
-                                        initialValue: (controller
-                                                .selectedEquipmentIsolationIdList
-                                                .isNotEmpty)
-                                            ? controller
-                                                .selectedEquipmentIsolationIdList
-                                            : [],
-                                        items: controller.equipmentIsolationList
-                                            .map(
-                                              (equipmentIsolation) =>
-                                                  MultiSelectItem(
-                                                equipmentIsolation?.id,
-                                                equipmentIsolation?.name ?? '',
-                                              ),
-                                            )
-                                            .toList(),
-                                        onConfirm: (selectedOptionsList) => {
-                                          controller.equipmentIsolationSelected(
-                                              selectedOptionsList),
-                                          print(
-                                              'Equipment Isolation list5: ${controller.equipmentIsolationList}')
-                                        },
-                                      ),
-                                    ),
-                                    Dimens.boxHeight15
-                                  ],
-                                )
-                              : Dimens.box0,
-                        ),
-                        Obx(
-                          () => controller.isToggleOn == true
-                              ? Container(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      CustomRichTextMobile(
-                                        title: "Select Loto Equipment List".tr,
-                                      ),
-                                      Dimens.boxHeight10,
-                                      CustomMultiSelectDialogField(
-                                        buttonText: 'Select Equipment Name',
-                                        title: 'Equipment Name',
-                                        initialValue: (controller
-                                                .selectedEquipmentNameList
-                                                .isNotEmpty)
-                                            ? controller
-                                                .selectedEquipmentNameIdList
-                                                .value
-                                            : [],
-                                        items: controller.equipmentNameList
-                                            .map(
-                                              (equipmentName) =>
-                                                  MultiSelectItem(
-                                                equipmentName?.id,
-                                                equipmentName?.name ?? '',
-                                              ),
-                                            )
-                                            .toList(),
-                                        onConfirm: (selectedOptionsList) => {
-                                          controller.equipmentNameSelected(
-                                              selectedOptionsList),
-                                          print(
-                                              'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
-                                        },
-                                      ),
-                                      // Dimens.boxHeight10,
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: SizedBox(
-                                          width: Get.width,
-                                          child: Container(
-                                            constraints:
-                                                BoxConstraints(minHeight: 150),
-                                            height: ((controller
-                                                    .filteredEquipmentNameList
-                                                    .length) *
-                                                60),
-                                            // 90,
-                                            child: DataTable2(
-                                              columns: [
-                                                DataColumn2(
-                                                    fixedWidth: 160,
-                                                    label: Text(
-                                                        "Loto Applied On")),
-                                                DataColumn2(
-                                                    fixedWidth: 100,
-                                                    label:
-                                                        Text("Serial Number")),
-                                                DataColumn2(
-                                                    fixedWidth: 100,
-                                                    label: Text("Action")),
-                                              ],
-                                              rows: List<DataRow>.generate(
-                                                controller
-                                                    .filteredEquipmentNameList
-                                                    .length,
-                                                (index) {
-                                                  var inventoryEquipmentName =
-                                                      controller
-                                                              .filteredEquipmentNameList[
-                                                          index];
-                                                  controller.id.value =
-                                                      inventoryEquipmentName
-                                                              ?.id ??
-                                                          0;
-                                                  print(
-                                                      'Equipment Isss5:${controller.id.value}');
-                                                  return DataRow(
-                                                    cells: [
-                                                      DataCell(
-                                                        Text(
-                                                            '${inventoryEquipmentName?.name ?? ''}'),
-                                                      ),
-                                                      DataCell(
-                                                        Text(
-                                                            '${inventoryEquipmentName?.serialNumber ?? ''}'),
-                                                      ),
-                                                      DataCell(
-                                                        Wrap(
-                                                          children: [
-                                                            TableActionButton(
-                                                              color: Colors.red,
-                                                              icon: Icons
-                                                                  .delete_outline,
-                                                              message: 'Remove',
-                                                              onPress: () {
-                                                                controller
-                                                                    .removeItem(
-                                                                        index);
-                                                              },
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : Dimens.box0,
-                        ),
-                        controller.safetyMeasureList.length > 0
+                      ),
+                      Dimens.boxHeight2,
+                      Obx(
+                        () => controller.isToggleOn == true
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   CustomRichTextMobile(
-                                      title: "Permit Type Checklist"),
+                                      includeAsterisk: false,
+                                      title: 'Equipment Isolation '),
                                   Dimens.boxHeight2,
-                                  GetBuilder<NewPermitController>(
-                                    init: controller,
-                                    builder: (ctrl) {
-                                      return Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children:
-                                            controller.safetyMeasureList.map(
-                                          (element) {
-                                            return Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      checkBoxMethod(
-                                                        element.isChecked ??
-                                                            false,
-                                                        (value) {
-                                                          element.isChecked =
-                                                              value ?? false;
-
-                                                          controller.update();
-                                                        },
-                                                      ),
-                                                      Expanded(
-                                                        child: Text(
-                                                          "${element.name}",
-                                                          maxLines: 5,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        ).toList(),
-                                      );
-                                    },
+                                  SizedBox(
+                                    child: CustomMultiSelectDialogField(
+                                      buttonText: 'Select Equipment Isolation',
+                                      title: 'Equipment Isolation',
+                                      initialValue: (controller
+                                              .selectedEquipmentIsolationIdList
+                                              .isNotEmpty)
+                                          ? controller
+                                              .selectedEquipmentIsolationIdList
+                                          : [],
+                                      items: controller.equipmentIsolationList
+                                          .map(
+                                            (equipmentIsolation) =>
+                                                MultiSelectItem(
+                                              equipmentIsolation?.id,
+                                              equipmentIsolation?.name ?? '',
+                                            ),
+                                          )
+                                          .toList(),
+                                      onConfirm: (selectedOptionsList) => {
+                                        controller.equipmentIsolationSelected(
+                                            selectedOptionsList),
+                                        print(
+                                            'Equipment Isolation list5: ${controller.equipmentIsolationList}')
+                                      },
+                                    ),
                                   ),
-                                  Dimens.boxHeight15,
+                                  Dimens.boxHeight15
                                 ],
                               )
                             : Dimens.box0,
-                        CustomRichTextMobile(title: "Job Type: "),
-                        Dimens.boxHeight2,
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 1.1,
-                          child: Obx(
-                            () => DropdownWebWidget(
-                              dropdownList: controller.jobTypeList,
-                              isValueSelected:
-                                  controller.isJobTypeListSelected.value,
-                              selectedValue: controller.selectedJobType.value,
-                              onValueChanged: controller.onValueChanged,
-                            ),
-                          ),
-                        ),
-                        Dimens.boxHeight15,
-                        CustomRichTextMobile(title: "SOP: "),
-                        Dimens.boxHeight2,
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 1.1,
-                          child: Obx(
-                            () => DropdownWebWidget(
-                              dropdownList: controller.sopPermitList,
-                              isValueSelected:
-                                  controller.isSopPermitListSelected.value,
-                              selectedValue: controller.selectedSopPermit.value,
-                              onValueChanged: controller.onValueChanged,
-                            ),
-                          ),
-                        ),
-                        Dimens.boxHeight15,
-                        Row(
-                          children: [
-                            Spacer(),
-                            CustomElevatedButton(
-                              backgroundColor: ColorValues.navyBlueColor,
-                              text: "Create JSA",
-                              onPressed: () {
-                                Get.dialog<void>(ViewJSADialog());
-                              },
-                            ),
-                            Spacer(),
-                            CustomElevatedButton(
-                              backgroundColor: ColorValues.navyBlueColor,
-                              text: "View SOP",
-                              onPressed: () {
-                                Get.dialog<void>(ViewSOPDialog());
-                              },
-                            ),
-                            Spacer(),
-                          ],
-                        ),
-                        Dimens.boxHeight15,
-                        FileUploadWidgetWithDropzone(),
-                        Dimens.boxHeight15,
-                        FileUploadDetailsWidgetMobile(),
-                        Dimens.boxHeight15,
-                        controller.permitId.value > 0 &&
-                                controller.newPermitDetailsModel.value!
-                                        .file_list!.length >
-                                    0
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: DataTable2(
-                                      border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234),
+                      ),
+                      Obx(
+                        () => controller.isToggleOn == true
+                            ? Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomRichTextMobile(
+                                      includeAsterisk: false,
+                                      title: "Select Loto Equipment List".tr,
+                                    ),
+                                    Dimens.boxHeight10,
+                                    CustomMultiSelectDialogField(
+                                      buttonText: 'Select Equipment Name',
+                                      title: 'Equipment Name',
+                                      initialValue: (controller
+                                              .selectedEquipmentNameList
+                                              .isNotEmpty)
+                                          ? controller
+                                              .selectedEquipmentNameIdList.value
+                                          : [],
+                                      items: controller.equipmentNameList
+                                          .map(
+                                            (equipmentName) => MultiSelectItem(
+                                              equipmentName?.id,
+                                              equipmentName?.name ?? '',
+                                            ),
+                                          )
+                                          .toList(),
+                                      onConfirm: (selectedOptionsList) => {
+                                        controller.equipmentNameSelected(
+                                            selectedOptionsList),
+                                        print(
+                                            'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
+                                      },
+                                    ),
+                                    Dimens.boxHeight10,
+                                    SizedBox(
+                                      width: Get.width,
+                                      child: Container(
+                                        child: Column(
+                                          children: [
+                                            // Header Row
+                                            Container(
+                                              color: Colors.grey[300],
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 8, horizontal: 16),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Expanded(
+                                                    flex: 3,
+                                                    child: Text(
+                                                      'Loto Applied On',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 14,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: Text(
+                                                      'Serial Number',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 14,
+                                                        color: Colors.black,
+                                                      ),
+                                                      textAlign:
+                                                          TextAlign.right,
+                                                    ),
+                                                  ),
+                                                  Icon(
+                                                    Icons
+                                                        .info, // Placeholder icon for the "Action" header
+                                                    color: Colors
+                                                        .transparent, // Make it invisible for header alignment
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            // Data Rows
+                                            ...List<Widget>.generate(
+                                              controller
+                                                  .filteredEquipmentNameList
+                                                  .length,
+                                              (index) {
+                                                var inventoryEquipmentName =
+                                                    controller
+                                                            .filteredEquipmentNameList[
+                                                        index];
+                                                controller.id.value =
+                                                    inventoryEquipmentName
+                                                            ?.id ??
+                                                        0;
+                                                print(
+                                                    'Equipment Isss5:${controller.id.value}');
+                                                return Container(
+                                                  color: index.isEven
+                                                      ? Colors.grey[200]
+                                                      : Colors.white,
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 8,
+                                                      horizontal: 16),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 3,
+                                                        child: Text(
+                                                          '${inventoryEquipmentName?.name ?? ''}',
+                                                          style: TextStyle(
+                                                            color: Colors
+                                                                .grey[700],
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child: Text(
+                                                          '${inventoryEquipmentName?.serialNumber ?? ''}',
+                                                          style: TextStyle(
+                                                            color: Colors
+                                                                .grey[700],
+                                                            fontSize: 14,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.right,
+                                                        ),
+                                                      ),
+                                                      IconButton(
+                                                        icon: Icon(
+                                                            Icons
+                                                                .delete_outline,
+                                                            color: Colors.red),
+                                                        onPressed: () {
+                                                          controller.removeItem(
+                                                              index);
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      dataRowHeight: 40,
-                                      columns: [
-                                        DataColumn2(
-                                          fixedWidth: Get.width * .6,
-                                          label: Text(
+                                    ),
+                                    Dimens.boxHeight20,
+                                  ],
+                                ),
+                              )
+                            : Dimens.box0,
+                      ),
+                      controller.safetyMeasureList.length > 0
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                CustomRichTextMobile(
+                                    title: "Permit Type Checklist"),
+                                Dimens.boxHeight2,
+                                GetBuilder<NewPermitController>(
+                                  init: controller,
+                                  builder: (ctrl) {
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children:
+                                          controller.safetyMeasureList.map(
+                                        (element) {
+                                          return Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    checkBoxMethod(
+                                                      element.isChecked ??
+                                                          false,
+                                                      (value) {
+                                                        element.isChecked =
+                                                            value ?? false;
+
+                                                        controller.update();
+                                                      },
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                        "${element.name}",
+                                                        maxLines: 5,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ).toList(),
+                                    );
+                                  },
+                                ),
+                                Dimens.boxHeight15,
+                              ],
+                            )
+                          : Dimens.box0,
+                      CustomRichTextMobile(title: "Job Type: "),
+                      Dimens.boxHeight2,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 1.1,
+                        child: Obx(
+                          () => DropdownWebWidget(
+                            dropdownList: controller.jobTypeList,
+                            isValueSelected:
+                                controller.isJobTypeListSelected.value,
+                            selectedValue: controller.selectedJobType.value,
+                            onValueChanged: controller.onValueChanged,
+                          ),
+                        ),
+                      ),
+                      Dimens.boxHeight15,
+                      CustomRichTextMobile(title: "SOP: "),
+                      Dimens.boxHeight2,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 1.1,
+                        child: Obx(
+                          () => DropdownWebWidget(
+                            dropdownList: controller.sopPermitList,
+                            isValueSelected:
+                                controller.isSopPermitListSelected.value,
+                            selectedValue: controller.selectedSopPermit.value,
+                            onValueChanged: controller.onValueChanged,
+                          ),
+                        ),
+                      ),
+                      Dimens.boxHeight15,
+                      Row(
+                        children: [
+                          Spacer(),
+                          CustomElevatedButton(
+                            backgroundColor: ColorValues.navyBlueColor,
+                            text: "Create JSA",
+                            onPressed: () {
+                              Get.dialog<void>(ViewJSADialog());
+                            },
+                          ),
+                          Spacer(),
+                          CustomElevatedButton(
+                            backgroundColor: ColorValues.navyBlueColor,
+                            text: "View SOP",
+                            onPressed: () {
+                              Get.dialog<void>(ViewSOPDialog());
+                            },
+                          ),
+                          Spacer(),
+                        ],
+                      ),
+                      Dimens.boxHeight15,
+                      FileUploadWidgetWithDropzone(),
+                      Dimens.boxHeight15,
+                      FileUploadDetailsWidgetMobile(),
+                      Dimens.boxHeight15,
+                      controller.permitId.value > 0 &&
+                              controller.newPermitDetailsModel.value!.file_list!
+                                      .length >
+                                  0
+                          ? Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white, // Background color
+                                borderRadius: BorderRadius.circular(
+                                    10.0), // Rounded corners
+                                border: Border.all(
+                                  color: Color.fromARGB(
+                                      255, 206, 229, 234), // Border color
+                                  width: 1.0,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: Get.width * .6,
+                                          child: Text(
                                             "File Description",
                                             style: TextStyle(
                                               fontSize: 15,
@@ -481,9 +896,9 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                             ),
                                           ),
                                         ),
-                                        DataColumn2(
-                                          fixedWidth: Get.width * .2,
-                                          label: Text(
+                                        Container(
+                                          width: Get.width * .2,
+                                          child: Text(
                                             "Action",
                                             style: TextStyle(
                                               fontSize: 15,
@@ -492,59 +907,80 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                           ),
                                         ),
                                       ],
-                                      rows: List<DataRow>.generate(
+                                    ),
+                                  ),
+                                  SingleChildScrollView(
+                                    child: Column(
+                                      children: List.generate(
                                         controller.file_list?.length ?? 0,
-                                        (index) => DataRow(
-                                          cells: [
-                                            DataCell(
-                                              Text(
-                                                controller.file_list![index]
-                                                        ?.description
-                                                        .toString() ??
-                                                    '',
+                                        (index) => Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 4.0, horizontal: 8.0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234),
                                               ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
                                             ),
-                                            DataCell(
-                                              Wrap(
-                                                children: [
-                                                  TableActionButton(
-                                                    color: ColorValues
-                                                        .appDarkBlueColor,
-                                                    icon: Icons.visibility,
-                                                    message: 'view',
-                                                    onPress: () async {
-                                                      // String baseUrl =
-                                                      //     "http://65.0.20.19/CMMS_API/";
-                                                      String baseUrl =
-                                                          'http://172.20.43.9:83/';
-                                                      String fileName =
-                                                          controller
-                                                                  .file_list![
-                                                                      index]
-                                                                  ?.fileName ??
-                                                              "";
-                                                      String fullUrl =
-                                                          baseUrl + fileName;
-                                                      if (await canLaunch(
-                                                          fullUrl)) {
-                                                        await launch(fullUrl);
-                                                      } else {
-                                                        throw 'Could not launch $fullUrl';
-                                                      }
-                                                      // String baseUrl = 'http://172.20.43.9:83/';
-                                                    },
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  width: Get.width * .6,
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    controller.file_list![index]
+                                                            ?.description
+                                                            .toString() ??
+                                                        '',
+                                                    style:
+                                                        TextStyle(fontSize: 14),
                                                   ),
-                                                  controller.newPermitDetailsModel
-                                                              .value!.ptwStatus ==
-                                                          125
-                                                      ? Dimens.box0
-                                                      : TableActionButton(
+                                                ),
+                                                Container(
+                                                  width: Get.width * .2,
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Wrap(
+                                                    children: [
+                                                      IconButton(
+                                                        icon: Icon(
+                                                            Icons.visibility),
+                                                        color: ColorValues
+                                                            .appDarkBlueColor,
+                                                        onPressed: () async {
+                                                          String baseUrl =
+                                                              'http://172.20.43.9:83/';
+                                                          String fileName =
+                                                              controller
+                                                                      .file_list![
+                                                                          index]
+                                                                      ?.fileName ??
+                                                                  "";
+                                                          String fullUrl =
+                                                              baseUrl +
+                                                                  fileName;
+                                                          if (await canLaunch(
+                                                              fullUrl)) {
+                                                            await launch(
+                                                                fullUrl);
+                                                          } else {
+                                                            throw 'Could not launch $fullUrl';
+                                                          }
+                                                        },
+                                                      ),
+                                                      if (controller
+                                                              .newPermitDetailsModel
+                                                              .value!
+                                                              .ptwStatus !=
+                                                          125)
+                                                        IconButton(
+                                                          icon: Icon(Icons
+                                                              .delete_outline_outlined),
                                                           color: ColorValues
                                                               .deleteColor,
-                                                          icon: Icons
-                                                              .delete_outline_outlined,
-                                                          message: 'remove',
-                                                          onPress: () {
+                                                          onPressed: () {
                                                             controller.removeImage(
                                                                 controller
                                                                     .file_list![
@@ -553,517 +989,529 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                                                 index);
                                                           },
                                                         ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : Dimens.box0,
-                        controller.newPermitDetailsModel.value?.ptwStatus ==
-                                    125 &&
-                                controller.newPermitDetailsModel.value
-                                        ?.is_TBT_Expire ==
-                                    true
-                            ? Container(
-                                decoration: BoxDecoration(
-                                    color: ColorValues.appRedColor,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                height: 25,
-                                child: Text(
-                                  "  Your Time For TBT Taken Is Expire So Please Cancel The Permit  ",
-                                ),
-                              )
-                            : Dimens.box0,
-                        controller.newPermitDetailsModel.value?.ptwStatus ==
-                                    125 &&
-                                controller.newPermitDetailsModel.value
-                                        ?.is_TBT_Expire ==
-                                    false
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  CustomRichTextMobile(
-                                      title: 'Conducted At Job-Site By: '),
-                                  Dimens.boxHeight2,
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.1,
-                                    child: Obx(
-                                      () => DropdownWebWidget(
-                                        dropdownList:
-                                            controller.employeeNameList,
-                                        isValueSelected: controller
-                                            .isemployeeNameListSelected.value,
-                                        selectedValue: controller
-                                            .selectedEmployeeNamesList.value,
-                                        onValueChanged: controller
-                                            .onValueTbtConductedChanged,
-                                      ),
-                                    ),
-                                  ),
-                                  Dimens.boxHeight15,
-                                  CustomRichTextMobile(
-                                      title: 'Date and Time: '),
-                                  Dimens.boxHeight2,
-                                  _buildDateTimeField_mobile(context),
-                                  Dimens.boxHeight15,
-                                  CustomRichTextMobile(title: 'Add Employee'),
-                                  Dimens.boxHeight2,
-                                  Obx(
-                                    () => CustomMultiSelectDialogField(
-                                      buttonText: 'Add Employee',
-                                      title: 'Select Employee',
-                                      initialValue: (controller
-                                              .selectedEmployeeNameList
-                                              .isNotEmpty)
-                                          ? controller
-                                              .selectedEmployeeNameIdList
-                                          : [],
-                                      items: controller.employeeNameList
-                                          .map(
-                                            (employeeName) => MultiSelectItem(
-                                              employeeName?.id,
-                                              employeeName?.name ?? '',
-                                            ),
-                                          )
-                                          .toList(),
-                                      onConfirm: (selectedOptionsList) => {
-                                        controller.employeeNameSelected(
-                                            selectedOptionsList),
-                                        print(
-                                            'Employee Name list50: ${controller.selectedEmployeeNameIdList}')
-                                      },
-                                    ),
-                                  ),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 2,
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Container(
-                                        width: Get.width * 2,
-                                        constraints:
-                                            BoxConstraints(minHeight: 100),
-                                        height: ((controller
-                                                .filteredEquipmentNameList
-                                                .length) *
-                                            60),
-                                        // 90,
-                                        child: DataTable2(
-                                          columns: [
-                                            DataColumn2(
-                                                label: Text("Employee Name")),
-                                            DataColumn2(
-                                                label: Text("Contact No")),
-                                            DataColumn2(
-                                                label: Text("Responsibility")),
-                                            DataColumn2(
-                                                label: Text("Responsibility")),
-                                          ],
-                                          rows: List<DataRow>.generate(
-                                            controller.filteredEmployeeNameList
-                                                .length,
-                                            (index) {
-                                              var employeeNameDetails = controller
-                                                      .filteredEmployeeNameList[
-                                                  index];
-                                              return DataRow(cells: [
-                                                DataCell(Text(
-                                                    '${employeeNameDetails?.name ?? ''}')),
-                                                DataCell(Text(
-                                                    '${employeeNameDetails?.mobileNumber ?? ''}')),
-                                                DataCell(Text(
-                                                    '${employeeNameDetails?.responsibility?.map((e) => e.name) ?? ''}')),
-                                                DataCell(
-                                                  Wrap(
-                                                    children: [
-                                                      TableActionButton(
-                                                        color: Colors.red,
-                                                        icon: Icons
-                                                            .delete_outline,
-                                                        message: 'Remove',
-                                                        onPress: () {
-                                                          // Call the removeItem method of the controller
-                                                          _removeRow(index);
-                                                          print("index");
-                                                        },
-                                                      )
                                                     ],
                                                   ),
-                                                )
-                                              ]);
-                                            },
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Dimens.boxHeight15,
                                 ],
-                              )
-                            : Dimens.box0,
-                        CustomRichTextMobile(title: "Comments: "),
-                        Dimens.boxHeight2,
-                        _buildPermitCommentField_mobile(context),
-                        Dimens.boxHeight20,
-                        controller.jobModel?.id != null
-                            ? Center(
-                                child: Container(
-                                  height: 45,
-                                  child: CustomElevatedButton(
-                                    backgroundColor: ColorValues.appGreenColor,
-                                    text: "Submit For Approval",
-                                    onPressed: () {
-                                      controller.isCheckedJSA.value == true &&
-                                              controller.isCheckedSOP.value ==
-                                                  true
-                                          ? controller.createNewPermitForJob(
-                                              jobId: controller.jobModel?.id,
-                                              fileIds:
-                                                  dropzoneController.fileIds)
-                                          : Get.dialog<void>(
-                                              checkboxAlertBox(),
-                                            );
+                              ),
+                            )
+                          : Dimens.box0,
+                      Dimens.boxHeight15,
+                      controller.newPermitDetailsModel.value?.ptwStatus ==
+                                  125 &&
+                              controller.newPermitDetailsModel.value
+                                      ?.is_TBT_Expire ==
+                                  true
+                          ? Container(
+                              decoration: BoxDecoration(
+                                  color: ColorValues.appRedColor,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              height: 25,
+                              child: Text(
+                                "  Your Time For TBT Taken Is Expire So Please Cancel The Permit  ",
+                              ),
+                            )
+                          : Dimens.box0,
+                      //issue
+                      controller.newPermitDetailsModel.value?.ptwStatus ==
+                                  125 &&
+                              controller.newPermitDetailsModel.value
+                                      ?.is_TBT_Expire ==
+                                  false
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomRichTextMobile(
+                                    title: 'Conducted At Job-Site By: '),
+                                Dimens.boxHeight2,
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.1,
+                                  child: Obx(
+                                    () => DropdownWebWidget(
+                                      dropdownList: controller.employeeNameList,
+                                      isValueSelected: controller
+                                          .isemployeeNameListSelected.value,
+                                      selectedValue: controller
+                                          .selectedEmployeeNamesList.value,
+                                      onValueChanged:
+                                          controller.onValueTbtConductedChanged,
+                                    ),
+                                  ),
+                                ),
+                                Dimens.boxHeight15,
+                                CustomRichTextMobile(title: 'Date and Time: '),
+                                Dimens.boxHeight2,
+                                _buildDateTimeField_mobile(context),
+                                Dimens.boxHeight15,
+                                CustomRichTextMobile(title: 'Add Employee'),
+                                Dimens.boxHeight2,
+                                Obx(
+                                  () => CustomMultiSelectDialogField(
+                                    buttonText: 'Add Employee',
+                                    title: 'Select Employee',
+                                    initialValue: (controller
+                                            .selectedEmployeeNameList
+                                            .isNotEmpty)
+                                        ? controller.selectedEmployeeNameIdList
+                                        : [],
+                                    items: controller.employeeNameList
+                                        .map(
+                                          (employeeName) => MultiSelectItem(
+                                            employeeName?.id,
+                                            employeeName?.name ?? '',
+                                          ),
+                                        )
+                                        .toList(),
+                                    onConfirm: (selectedOptionsList) => {
+                                      controller.employeeNameSelected(
+                                          selectedOptionsList),
+                                      print(
+                                          'Employee Name list50: ${controller.selectedEmployeeNameIdList}')
                                     },
                                   ),
                                 ),
-                              )
-                            : controller.mcExecutionDetailsModel?.id != null &&
-                                    controller.permitId.value == 0
-                                ? Center(
-                                    child: Container(
-                                        height: 45,
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appGreenColor,
-                                          text: "Submit",
-                                          onPressed: () {
-                                            controller.isFormInvalid.value =
-                                                false;
-                                            controller.checkForm() == true &&
-                                                    controller.isCheckedJSA
-                                                            .value ==
-                                                        true &&
-                                                    controller.isCheckedSOP
-                                                            .value ==
-                                                        true
-                                                ? controller
-                                                    .createNewPermitForPm(
-                                                        pmTaskId: controller
-                                                            .scheduleID.value,
-                                                        fileIds:
-                                                            dropzoneController
-                                                                .fileIds)
-                                                : controller.isCheckedJSA
-                                                                .value ==
-                                                            true &&
-                                                        controller.isCheckedSOP
-                                                                .value ==
-                                                            true
-                                                    ? print("condiation failed")
-                                                    : Get.dialog<void>(
-                                                        checkboxAlertBox(),
-                                                      );
-                                            // var jobId = controller.jobModel?.id ?? 0;
-                                            // print('JobId'),
-                                            // controller.isFormInvalid.value =
-                                            //     false;
-                                            // controller.isCheckedJSA.value ==
-                                            //             true &&
-                                            //         controller
-                                            //                 .isCheckedSOP.value ==
-                                            //             true
-                                            //     ? controller
-                                            //         .createNewPermitForJob(
-                                            //             jobId: controller
-                                            //                 .jobModel?.id,
-                                            //             fileIds:
-                                            //                 dropzoneController
-                                            //                     .fileIds)
-                                            //     : Get.dialog<void>(
-                                            //         checkboxAlertBox());
-                                            // controller.linkToPermit(jobId: controller.jobModel?.id);
-                                          },
-                                        )),
-                                  )
-                                : controller.vegExecutionDetailsModel
-                                                ?.executionId !=
-                                            null &&
-                                        controller.permitId.value == 0
-                                    ? Center(
-                                        child: Container(
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 10),
+                                      ...List<Widget>.generate(
+                                        controller
+                                            .filteredEmployeeNameList.length,
+                                        (index) {
+                                          var employeeNameDetails = controller
+                                              .filteredEmployeeNameList[index];
+                                          return Card(
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 5),
+                                            elevation: 2,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                border: Border.all(
+                                                    color: Colors.grey[300]!,
+                                                    width: 1),
+                                              ),
+                                              padding: EdgeInsets.all(16),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Employee Name: ${employeeNameDetails?.name ?? ''}',
+                                                    style: TextStyle(
+                                                      color: Colors.grey[700],
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 8),
+                                                  Text(
+                                                    'Contact Number: ${employeeNameDetails?.mobileNumber ?? ''}',
+                                                    style: TextStyle(
+                                                      color: Colors.grey[700],
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 8),
+                                                  Text(
+                                                    'Designation: ${employeeNameDetails?.designation ?? 'NO Designation'}',
+                                                    style: TextStyle(
+                                                      color: Colors.grey[700],
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 8),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      IconButton(
+                                                        icon: Icon(
+                                                            Icons
+                                                                .delete_outline,
+                                                            color: Colors.red),
+                                                        onPressed: () {
+                                                          _removeRow(index);
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Dimens.boxHeight15,
+                              ],
+                            )
+                          : Dimens.box0,
+
+                      CustomRichTextMobile(title: "Comments: "),
+                      Dimens.boxHeight2,
+                      _buildPermitCommentField_mobile(context),
+                      Dimens.boxHeight20,
+                      //issue
+                      controller.jobModel?.id != null
+                          ? Center(
+                              child: Container(
+                                height: 45,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.appGreenColor,
+                                  text: "Submit For Approval",
+                                  onPressed: () {
+                                    controller.isCheckedJSA.value == true &&
+                                            controller.isCheckedSOP.value ==
+                                                true
+                                        ? controller.createNewPermitForJob(
+                                            jobId: controller.jobModel?.id,
+                                            fileIds: dropzoneController.fileIds)
+                                        : Get.dialog<void>(
+                                            checkboxAlertBox(),
+                                          );
+                                  },
+                                ),
+                              ),
+                            )
+                          : controller.mcExecutionDetailsModel?.id != null &&
+                                  controller.permitId.value == 0
+                              ? Center(
+                                  child: Container(
+                                      height: 45,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appGreenColor,
+                                        text: "Submit",
+                                        onPressed: () {
+                                          controller.isFormInvalid.value =
+                                              false;
+                                          controller.checkForm() == true &&
+                                                  controller
+                                                          .isCheckedJSA.value ==
+                                                      true &&
+                                                  controller
+                                                          .isCheckedSOP.value ==
+                                                      true
+                                              ? controller.createNewPermitForPm(
+                                                  pmTaskId: controller
+                                                      .scheduleID.value,
+                                                  fileIds: dropzoneController
+                                                      .fileIds)
+                                              : controller.isCheckedJSA.value ==
+                                                          true &&
+                                                      controller.isCheckedSOP
+                                                              .value ==
+                                                          true
+                                                  ? print("condiation failed")
+                                                  : Get.dialog<void>(
+                                                      checkboxAlertBox(),
+                                                    );
+                                          // var jobId = controller.jobModel?.id ?? 0;
+                                          // print('JobId'),
+                                          // controller.isFormInvalid.value =
+                                          //     false;
+                                          // controller.isCheckedJSA.value ==
+                                          //             true &&
+                                          //         controller
+                                          //                 .isCheckedSOP.value ==
+                                          //             true
+                                          //     ? controller
+                                          //         .createNewPermitForJob(
+                                          //             jobId: controller
+                                          //                 .jobModel?.id,
+                                          //             fileIds:
+                                          //                 dropzoneController
+                                          //                     .fileIds)
+                                          //     : Get.dialog<void>(
+                                          //         checkboxAlertBox());
+                                          // controller.linkToPermit(jobId: controller.jobModel?.id);
+                                        },
+                                      )),
+                                )
+                              : controller.vegExecutionDetailsModel
+                                              ?.executionId !=
+                                          null &&
+                                      controller.permitId.value == 0
+                                  ? Center(
+                                      child: Container(
+                                          height: 45,
+                                          child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: "Submit",
+                                            onPressed: () {
+                                              controller.isFormInvalid.value =
+                                                  false;
+                                              controller.checkForm() == true &&
+                                                      controller
+                                                              .isCheckedJSA.value ==
+                                                          true &&
+                                                      controller.isCheckedSOP
+                                                              .value ==
+                                                          true
+                                                  ? controller
+                                                      .createNewPermitForPm(
+                                                          pmTaskId: controller
+                                                              .scheduleID.value,
+                                                          fileIds:
+                                                              dropzoneController
+                                                                  .fileIds)
+                                                  : controller.isCheckedJSA
+                                                                  .value ==
+                                                              true &&
+                                                          controller
+                                                                  .isCheckedSOP
+                                                                  .value ==
+                                                              true
+                                                      ? print(
+                                                          "condiation failed")
+                                                      : Get.dialog<void>(
+                                                          checkboxAlertBox(),
+                                                        );
+                                            },
+                                          )),
+                                    )
+                                  : controller.pmtaskViewModel?.id != null
+                                      ? Center(
+                                          child: Container(
                                             height: 45,
                                             child: CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.appGreenColor,
-                                              text: "Submit",
+                                              text: "Submit For Approval",
                                               onPressed: () {
-                                                controller.isFormInvalid.value =
-                                                    false;
-                                                controller.checkForm() ==
-                                                            true &&
-                                                        controller.isCheckedJSA
-                                                                .value ==
+                                                controller.isCheckedJSA.value ==
                                                             true &&
                                                         controller.isCheckedSOP
                                                                 .value ==
                                                             true
                                                     ? controller.createNewPermitForPm(
-                                                        pmTaskId: controller
-                                                            .scheduleID.value,
+                                                        pmTaskId:
+                                                            controller
+                                                                .pmtaskViewModel
+                                                                ?.id,
+                                                        activity: controller
+                                                            .pmtaskViewModel
+                                                            ?.plan_title,
                                                         fileIds:
                                                             dropzoneController
                                                                 .fileIds)
-                                                    : controller.isCheckedJSA
+                                                    : Get.dialog<void>(
+                                                        checkboxAlertBox(),
+                                                      );
+                                              },
+                                            ),
+                                          ),
+                                        )
+                                      : controller.permitId.value <= 0
+                                          ? Center(
+                                              child: Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.appGreenColor,
+                                                  text: "Submit For Approval",
+                                                  onPressed: () {
+                                                    controller.isCheckedJSA
                                                                     .value ==
                                                                 true &&
                                                             controller
                                                                     .isCheckedSOP
                                                                     .value ==
                                                                 true
-                                                        ? print(
-                                                            "condiation failed")
+                                                        ? controller.createNewPermit(
+                                                            fileIds:
+                                                                dropzoneController
+                                                                    .fileIds)
                                                         : Get.dialog<void>(
                                                             checkboxAlertBox(),
                                                           );
-                                              },
-                                            )),
-                                      )
-                                    : controller.pmtaskViewModel?.id != null
-                                        ? Center(
-                                            child: Container(
-                                              height: 45,
-                                              child: CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appGreenColor,
-                                                text: "Submit For Approval",
-                                                onPressed: () {
-                                                  controller.isCheckedJSA.value ==
-                                                              true &&
-                                                          controller
-                                                                  .isCheckedSOP
-                                                                  .value ==
-                                                              true
-                                                      ? controller.createNewPermitForPm(
-                                                          pmTaskId: controller
-                                                              .pmtaskViewModel
-                                                              ?.id,
-                                                          activity: controller
-                                                              .pmtaskViewModel
-                                                              ?.plan_title,
-                                                          fileIds:
-                                                              dropzoneController
-                                                                  .fileIds)
-                                                      : Get.dialog<void>(
-                                                          checkboxAlertBox(),
-                                                        );
-                                                },
-                                              ),
-                                            ),
-                                          )
-                                        : controller.permitId.value <= 0
-                                            ? Center(
-                                                child: Container(
-                                                  height: 45,
-                                                  child: CustomElevatedButton(
-                                                    backgroundColor: ColorValues
-                                                        .appGreenColor,
-                                                    text: "Submit For Approval",
-                                                    onPressed: () {
-                                                      controller.isCheckedJSA
-                                                                      .value ==
-                                                                  true &&
-                                                              controller
-                                                                      .isCheckedSOP
-                                                                      .value ==
-                                                                  true
-                                                          ? controller.createNewPermit(
-                                                              fileIds:
-                                                                  dropzoneController
-                                                                      .fileIds)
-                                                          : Get.dialog<void>(
-                                                              checkboxAlertBox(),
-                                                            );
-                                                    },
-                                                  ),
+                                                  },
                                                 ),
-                                              )
-                                            : Center(
-                                                child: Row(
-                                                  children: [
-                                                    Spacer(),
-                                                    controller
+                                              ),
+                                            )
+                                          : Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                controller.newPermitDetailsModel
+                                                            .value?.ptwStatus ==
+                                                        121
+                                                    ? Container(
+                                                        height: 45,
+                                                        child:
+                                                            CustomElevatedButton(
+                                                          backgroundColor:
+                                                              ColorValues
+                                                                  .appDarkBlueColor,
+                                                          text: "Update",
+                                                          onPressed: () {
+                                                            controller.updateNewPermit(
+                                                                fileIds:
+                                                                    dropzoneController
+                                                                        .fileIds);
+                                                          },
+                                                        ),
+                                                      )
+                                                    : Dimens.box0,
+                                                controller.newPermitDetailsModel
+                                                                .value?.ptwStatus ==
+                                                            125 &&
+                                                        controller
                                                                 .newPermitDetailsModel
                                                                 .value
-                                                                ?.ptwStatus ==
-                                                            121
-                                                        ? Center(
-                                                            child: Container(
-                                                              height: 45,
-                                                              child:
-                                                                  CustomElevatedButton(
-                                                                backgroundColor:
-                                                                    ColorValues
-                                                                        .appDarkBlueColor,
-                                                                text: "Update",
-                                                                onPressed: () {
-                                                                  controller.updateNewPermit(
-                                                                      fileIds:
-                                                                          dropzoneController
-                                                                              .fileIds);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : Dimens.box0,
-                                                    Spacer(),
-                                                    controller.newPermitDetailsModel.value
-                                                                    ?.ptwStatus ==
-                                                                125 &&
-                                                            controller
-                                                                    .newPermitDetailsModel
-                                                                    .value
-                                                                    ?.is_TBT_Expire ==
-                                                                false &&
-                                                            controller
-                                                                    .newPermitDetailsModel
-                                                                    .value
-                                                                    ?.tbT_Done_Check ==
-                                                                0
-                                                        ? Center(
-                                                            child: Container(
-                                                              height: 45,
-                                                              child:
-                                                                  CustomElevatedButton(
-                                                                backgroundColor:
-                                                                    ColorValues
-                                                                        .appDarkBlueColor,
-                                                                text:
-                                                                    "Update TBT",
-                                                                onPressed: () {
-                                                                  if (controller
-                                                                              .tbtDateTimeCtrlrBuffer ==
-                                                                          null ||
-                                                                      controller
-                                                                              .selectedTbtConductedId ==
-                                                                          0 ||
-                                                                      controller
-                                                                          .tbtDateTimeCtrlrBuffer
-                                                                          .isEmpty ||
-                                                                      controller
-                                                                              .tbtDateTimeCtrlrBuffer ==
-                                                                          "") {
-                                                                    showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (BuildContext
-                                                                              context) {
-                                                                        return AlertDialog(
-                                                                          title:
-                                                                              Text("Select Time"),
-                                                                          content: controller.selectedTbtConductedId == 0
-                                                                              ? Text("Select TBT Conducted By")
-                                                                              : Text("Can't do TBT without entering the time."),
-                                                                          actions: <Widget>[
-                                                                            TextButton(
-                                                                              onPressed: () {
-                                                                                Navigator.of(context).pop();
-                                                                              },
-                                                                              child: Text("OK"),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      },
+                                                                ?.is_TBT_Expire ==
+                                                            false &&
+                                                        controller
+                                                                .newPermitDetailsModel
+                                                                .value
+                                                                ?.tbT_Done_Check ==
+                                                            0
+                                                    ? Center(
+                                                        child: Container(
+                                                          height: 45,
+                                                          child:
+                                                              CustomElevatedButton(
+                                                            backgroundColor:
+                                                                ColorValues
+                                                                    .appDarkBlueColor,
+                                                            text: "Update TBT",
+                                                            onPressed: () {
+                                                              if (controller
+                                                                          .tbtDateTimeCtrlrBuffer ==
+                                                                      null ||
+                                                                  controller
+                                                                          .selectedTbtConductedId ==
+                                                                      0 ||
+                                                                  controller
+                                                                      .tbtDateTimeCtrlrBuffer
+                                                                      .isEmpty ||
+                                                                  controller
+                                                                          .tbtDateTimeCtrlrBuffer ==
+                                                                      "") {
+                                                                showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (BuildContext
+                                                                          context) {
+                                                                    return AlertDialog(
+                                                                      title: Text(
+                                                                          "Select Time"),
+                                                                      content: controller.selectedTbtConductedId ==
+                                                                              0
+                                                                          ? Text(
+                                                                              "Select TBT Conducted By")
+                                                                          : Text(
+                                                                              "Can't do TBT without entering the time."),
+                                                                      actions: <Widget>[
+                                                                        TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.of(context).pop();
+                                                                          },
+                                                                          child:
+                                                                              Text("OK"),
+                                                                        ),
+                                                                      ],
                                                                     );
-                                                                    return null;
-                                                                  }
-                                                                  controller.updateNewPermit(
-                                                                      fileIds:
-                                                                          dropzoneController
-                                                                              .fileIds);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : Dimens.box0,
-                                                    Spacer(),
-                                                    controller
-                                                                .newPermitDetailsModel
-                                                                .value
-                                                                ?.ptwStatus ==
-                                                            124
-                                                        ? Center(
-                                                            child: Container(
-                                                              height: 45,
-                                                              child:
-                                                                  CustomElevatedButton(
-                                                                backgroundColor:
-                                                                    Color.fromARGB(
-                                                                        255,
-                                                                        116,
-                                                                        78,
-                                                                        130),
-                                                                text:
-                                                                    "Re submit Permit",
-                                                                onPressed: () {
-                                                                  controller.resubmitPermit(
-                                                                      fileIds:
-                                                                          dropzoneController
-                                                                              .fileIds);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : Dimens.box0,
-                                                    Spacer(),
-                                                    controller.newPermitDetailsModel.value
-                                                                    ?.ptwStatus ==
-                                                                125 &&
-                                                            controller
-                                                                    .newPermitDetailsModel
-                                                                    .value
-                                                                    ?.is_TBT_Expire ==
-                                                                true
-                                                        ? Container(
-                                                            height: 45,
-                                                            child:
-                                                                CustomElevatedButton(
-                                                              backgroundColor:
-                                                                  ColorValues
-                                                                      .appRedColor,
-                                                              text:
-                                                                  "Cancel Permit",
-                                                              icon: Icons.close,
-                                                              onPressed: () {
-                                                                Get.dialog(
-                                                                  PermitCancelReQuestDialog(
-                                                                    permitId:
-                                                                        '${controller.permitId.value}',
-                                                                    jobId: controller
-                                                                        .jobModel!
-                                                                        .id,
-                                                                  ),
+                                                                  },
                                                                 );
-                                                                print(
-                                                                    "Permit ID TO Cancel: ${controller.permitId.value}");
-                                                                print(
-                                                                    "JobId To cancel: ${controller.jobModel!.id}");
-                                                              },
-                                                            ))
-                                                        : Dimens.box0,
-                                                    Spacer(),
-                                                  ],
-                                                ),
-                                              ),
-                      ],
-                    ),
+                                                                return null;
+                                                              }
+                                                              controller.updateNewPermit(
+                                                                  fileIds:
+                                                                      dropzoneController
+                                                                          .fileIds);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : Dimens.box0,
+                                                controller.newPermitDetailsModel
+                                                            .value?.ptwStatus ==
+                                                        124
+                                                    ? Center(
+                                                        child: Container(
+                                                          height: 45,
+                                                          child:
+                                                              CustomElevatedButton(
+                                                            backgroundColor:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    116,
+                                                                    78,
+                                                                    130),
+                                                            text:
+                                                                "Re submit Permit",
+                                                            onPressed: () {
+                                                              controller.resubmitPermit(
+                                                                  fileIds:
+                                                                      dropzoneController
+                                                                          .fileIds);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : Dimens.box0,
+                                                // controller.newPermitDetailsModel.value
+                                                //                 ?.ptwStatus ==
+                                                //             125 &&
+                                                //         controller
+                                                //                 .newPermitDetailsModel
+                                                //                 .value
+                                                //                 ?.is_TBT_Expire ==
+                                                //             true
+                                                //     ? Container(
+                                                //         height: 45,
+                                                //         child:
+                                                //             CustomElevatedButton(
+                                                //           backgroundColor:
+                                                //               ColorValues
+                                                //                   .appRedColor,
+                                                //           text:
+                                                //               "Cancel Permit",
+                                                //           icon: Icons.close,
+                                                //           onPressed: () {
+                                                //             Get.dialog(
+                                                //               PermitCancelReQuestDialog(
+                                                //                 permitId:
+                                                //                     '${controller.permitId.value}',
+                                                //                 jobId: controller
+                                                //                     .jobModel!
+                                                //                     .id,
+                                                //               ),
+                                                //             );
+                                                //             print(
+                                                //                 "Permit ID TO Cancel: ${controller.permitId.value}");
+                                                //             print(
+                                                //                 "JobId To cancel: ${controller.jobModel!.id}");
+                                                //           },
+                                                //         ))
+                                                //     : Dimens.box0,
+                                              ],
+                                            ),
+                    ],
                   ),
                 ),
               ),
@@ -1357,7 +1805,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
 
   Widget _buildPermitDescriptionField_mobile(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      CustomRichTextMobile(title: 'Permit Description: '),
+      CustomRichTextMobile(title: 'Permit Description : '),
       Dimens.boxHeight2,
       Container(
         decoration: BoxDecoration(
@@ -1673,9 +2121,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
   Widget _buildDateTimeField_mobile(
     BuildContext context,
   ) {
-    return Column(//
-        children: [
-      Dimens.boxHeight5,
+    return Column(children: [
       Container(
         width: MediaQuery.of(context).size.width / 1.1,
         decoration: BoxDecoration(
@@ -1720,7 +2166,6 @@ class NewPermitMobile extends GetView<NewPermitController> {
           onChanged: (value) {},
         ),
       ),
-      Dimens.boxHeight20,
     ]);
   }
 

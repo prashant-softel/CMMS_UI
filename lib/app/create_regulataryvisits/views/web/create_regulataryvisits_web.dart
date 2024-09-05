@@ -4,10 +4,12 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
+import 'package:intl/intl.dart';
 
 class RegulataryVisitsWeb extends StatefulWidget {
   RegulataryVisitsWeb({
@@ -106,7 +108,7 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                "Regulatary Visits and Notices",
+                                                "Add Regulatary Visits and Notices",
                                                 style: Styles.blackBold16,
                                               ),
                                               Spacer(),
@@ -115,25 +117,7 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                               top: 20,
                                               right: 20,
                                             ),
-                                            child: Row(
-                                              children: [
-                                                Text('Month:'),
-                                                Dimens.boxWidth10,
-                                                CustomTextFieldForStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      8,
-                                                  numberTextField: true,
-                                                  onTap: () {
-                                                    _showMonthPicker(
-                                                        context, controller);
-                                                  },
-                                                  // textController:
-                                                  //     controller.waterDateTc,
-                                                ),
-                                              ],
-                                            ),
+                                           
                                           ),
                                             ],
                                           ),
@@ -164,6 +148,30 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                                                 .end,
                                                         children: [
                                                           Dimens.boxHeight5,
+                                                           Row(
+                                                              children: [
+                                                                Text('Select Month And Year:'),
+                                                                Dimens
+                                                                    .boxWidth10,
+                                                                CustomTextFieldForStock(
+                                                                  width: (MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        .2),
+                                                                  numberTextField:
+                                                                      true,
+                                                                  onTap: () {
+                                                                    _showMonthYearPicker(
+                                                                        context,
+                                                                        controller);
+                                                                  },
+                                                                  textController:
+                                                                      controller
+                                                                          .VisitNoticeDateTc,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
                                                           Row(
                                                             children: [
                                                               CustomRichText(
@@ -427,7 +435,50 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                                                   ),
                                                             ],
                                                           ),
-                                                          Dimens.boxHeight5,
+                                                          // Dimens.boxHeight5,
+                                                          //  Row(
+                                                          //     children: [
+                                                          //       CustomRichText(
+                                                          //           title:
+                                                          //               'Submited By'),
+                                                          //       Dimens
+                                                          //           .boxWidth3,
+                                                          //       LoginCustomTextfield(
+                                                          //           width: (MediaQuery.of(context)
+                                                          //                   .size
+                                                          //                   .width *
+                                                          //               .2),
+                                                          //           keyboardType:
+                                                          //               TextInputType
+                                                          //                   .number,
+                                                          //           // textController:
+                                                          //           //     controller
+                                                          //           //         .KaizensImplementedCtrl,
+                                                          //           //  validate
+                                                          //           // errorController: controller
+                                                          //           //         .isKaizensImplementedInvalid
+                                                          //           //         .value
+                                                          //           //     ? "Required field"
+                                                          //           //     : null,
+                                                          //           // onChanged:
+                                                          //           //     (value) {
+                                                          //           //   if (value
+                                                          //           //           .trim()
+                                                          //           //           .length >
+                                                          //           //       0) {
+                                                          //           //     controller
+                                                          //           //         .isKaizensImplementedInvalid
+                                                          //           //         .value = false;
+                                                          //           //   } else {
+                                                          //           //     controller
+                                                          //           //         .isKaizensImplementedInvalid
+                                                          //           //         .value = true;
+                                                          //           //   }
+                                                          //           // }
+                                                          //           ),
+                                                          //     ],
+                                                          //   ),
+                                                            Dimens.boxHeight5,
                                                           
                                                         ],
                                                       ),
@@ -464,7 +515,7 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                             backgroundColor: ColorValues.cancelColor,
                             text: 'Cancel',
                             onPressed: () {
-                              Get.toNamed(Routes.misDashboard);
+                              Get.offAllNamed(Routes.misDashboard);
                             },
                           ),
                         ),
@@ -477,8 +528,12 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Submit',
                                   onPressed: () {
-                                    // controller.isFormInvalid.value = false;
-                                    controller.createvisitsandnotices();
+                                    controller.isFormInvalid.value = false;
+                                    controller.checkForm();
+                                    controller.createvisitsandnotices(
+                                      month_id: controller.selectedMonth,
+                                      year: controller.selectedYear
+                                    );
 
                                   },
                                 ),
@@ -489,7 +544,7 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Update',
                                   onPressed: () {
-                                    // controller.isFormInvalid.value = false;
+                                    controller.isFormInvalid.value = false;
                                     controller.updateVisitAndNoticeDetails(
                                         // position: 0,
                                         // fileIds: dropzoneController.fileIds
@@ -510,48 +565,78 @@ class _ViewRegulataryVisitsWebState extends State<RegulataryVisitsWeb> {
     );
   }
 }
-_showMonthPicker(BuildContext context, CreateRegulataryVisitsController controller) {
-  // controller.selectedMonth = DateTime.now().year;
-  // showDialog(
-  //   context: context,
-  //   builder: (BuildContext context) {
-  //     return AlertDialog(
-  //       title: Text("Select Year"),
-  //       content: Container(
-  //         height: 200,
-  //         child: CupertinoPicker(
-  //           itemExtent: 40,
-  //           onSelectedItemChanged: (int index) {
-  //             controller.selectedMonth = DateTime.now().year - index;
-  //           },
-  //           children: List.generate(10, (index) {
-  //             return Center(
-  //               child: Text((DateTime.now().year - index).toString()),
-  //             );
-  //           }),
-  //         ),
-  //       ),
-  //       actions: <Widget>[
-  //         ActionButton(
-  //           label: "Cancel", color: ColorValues.appRedColor,
-  //           onPressed: () {
-  //             Navigator.of(context).pop();
-  //           },
-  //           // child: Text("Cancel"),
-  //         ),
-  //         Dimens.boxHeight10,
-  //         ActionButton(
-  //           color: ColorValues.addNewColor,
-  //           onPressed: () {
-  //             controller.waterDateTc.text = controller.selectedYear.toString();
-  //             controller.goWaterDataList();
-  //             controller.update(['stock_Mangement_Date']);
-  //             Navigator.of(context).pop();
-  //           },
-  //           label: "Select",
-  //         ),
-  //       ],
-  //     );
-  //   },
-  // );
+_showMonthYearPicker(BuildContext context, CreateRegulataryVisitsController controller) {
+  // Set the default selected month and year
+  controller.selectedMonth = DateTime.now().month;
+  controller.selectedYear = DateTime.now().year;
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Select Month and Year"),
+        content: Container(
+          height: 200,
+          child: Column(
+            children: [
+              // Month Picker
+              Expanded(
+                child: CupertinoPicker(
+                  itemExtent: 40,
+                  onSelectedItemChanged: (int index) {
+                    controller.selectedMonth = index + 1;
+                  },
+                  children: List.generate(12, (index) {
+                    return Center(
+                      child: Text(
+                        DateFormat.MMMM().format(DateTime(0, index + 1)),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+              // Year Picker
+              Expanded(
+                child: CupertinoPicker(
+                  itemExtent: 40,
+                  onSelectedItemChanged: (int index) {
+                    // Adjust the base year (e.g., 2000) as needed
+                    controller.selectedYear = 2000 + index;
+                  },
+                  children: List.generate(100, (index) {
+                    return Center(
+                      child: Text(
+                        (2000 + index).toString(),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          ActionButton(
+            label: "Cancel",
+            color: ColorValues.appRedColor,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          Dimens.boxHeight10,
+          ActionButton(
+            color: ColorValues.addNewColor,
+            onPressed: () {
+              controller.VisitNoticeDateTc.text = "${DateFormat.MMMM().format(DateTime(0, controller.selectedMonth))} ${controller.selectedYear}";
+              // Pass the selected month and year ID when creating Kaizens data
+              // controller.createkaizensdata(monthId: controller.selectedMonth, year: controller.selectedYear);
+              controller.update(['stock_Mangement']);
+              Navigator.of(context).pop();
+            },
+            label: "Select",
+          ),
+        ],
+      );
+    },
+  );
 }

@@ -17,9 +17,12 @@ class CreateOccupationalhealthController extends GetxController {
   );
   CreateOccupationalhealthPresenter createOccupationalhealthPresenter;
   final HomeController homeController = Get.find();
-
-  
-
+ var HealthDate = TextEditingController();
+  int selectedMonth = 0;
+  int selectedYear=0;
+  String month = 'April';
+  String year ='2000';
+Rx<bool> isFormInvalid = false.obs;
  var noofhealthexamsofnewjoinerCtrl = TextEditingController();
  var periodictestsCtrl = TextEditingController();
  var occupationalillnessesCtrl = TextEditingController();
@@ -38,15 +41,7 @@ class CreateOccupationalhealthController extends GetxController {
   void onInit() async {
     try {
       await setOHId();
-
-      facilityIdStreamSubscription = homeController.facilityId$.listen(
-        (event) async {
-          // facilityId = event;
-          await getHealthDatalist();
-        },
-      );
-
-      super.onInit();
+    super.onInit();
     } catch (e) {
       print(e);
     }
@@ -54,6 +49,12 @@ class CreateOccupationalhealthController extends GetxController {
 
   Future<void> setOHId() async {
     try {
+       if (Get.arguments != null) {
+      var dataFromPreviousScreen = Get.arguments;
+      selectedItem = dataFromPreviousScreen['selectedItem'];
+    } else {
+      selectedItem = GetOccupationalList(id: 0, noOfHealthExamsOfNewJoiner: 0, periodicTests: 0, occupationalIllnesses: 0,);
+    }
      GetOccupationalList? selectedItemhea;
       final _selectedItem = await createOccupationalhealthPresenter.getValue();
         if (_selectedItem!.isNotEmpty) {
@@ -82,20 +83,8 @@ class CreateOccupationalhealthController extends GetxController {
     }
   }
 
-  Future<void> getHealthDatalist() async {
-    final _occupationalType = await createOccupationalhealthPresenter.getHealthDatalist();
 
-    if (_occupationalType != null) {
-      _occupationalType != [];
-      for (var  occupational in _occupationalType) {
-        occupationalType.add( occupational);
-      }
-      // selectedTypePermit.value = grievanceType[0]?.name ?? '';
-    }
-  }
-
-
- void createoccupational({ List<dynamic>? fileIds}) async {
+ void createoccupational({ List<dynamic>? fileIds,required int month_id,required int year}) async {
      try {
      
       int _noofhealthexamsofnewjoinerCtrl = int.tryParse(noofhealthexamsofnewjoinerCtrl.text.trim())?? 0;
@@ -108,9 +97,11 @@ class CreateOccupationalhealthController extends GetxController {
         NoOfHealthExamsOfNewJoiner: _noofhealthexamsofnewjoinerCtrl,
         PeriodicTests: _periodictestsCtrl,
         OccupationalIllnesses: _occupationalillnessesCtrl,
-        CreatedBy: varUserAccessModel.value.user_id,
+        // CreatedBy: varUserAccessModel.value.user_id,
         id:0,
-        date:"2024-08-18",
+        month_id: month_id,
+        year:year,
+        // date:"2024-08-18",
       );
 
       // Convert the createoccupationalModel instance to JSON
@@ -134,8 +125,8 @@ class CreateOccupationalhealthController extends GetxController {
     }
  }
 void updateOccupationalDetails() async {
-    try {
-      int _id=healthId.value;
+   
+      int _id=selectedItem?.id??0;
       int _noofhealthexamsofnewjoinerCtrl = int.tryParse(noofhealthexamsofnewjoinerCtrl.text.trim())?? 0;
        int _periodictestsCtrl = int.tryParse(periodictestsCtrl.text.trim())?? 0;
        int _occupationalillnessesCtrl = int.tryParse(occupationalillnessesCtrl.text.trim())?? 0;
@@ -146,33 +137,24 @@ void updateOccupationalDetails() async {
         NoOfHealthExamsOfNewJoiner: _noofhealthexamsofnewjoinerCtrl,
         PeriodicTests: _periodictestsCtrl,
         OccupationalIllnesses: _occupationalillnessesCtrl,
-        CreatedBy: varUserAccessModel.value.user_id,
-        date:"2024-08-18",
+        // date:"2024-08-18",
       );
 
    // Convert the createoccupationalModel instance to JSON
       var createoccupationalModelJsonString = createoccupationalModel.toJson();
-      print(createoccupationalModelJsonString);
-      // Call the createoccupational function from stockManagementAddGoodsOrdersPresenter
+
       Map<String, dynamic>? responseoccupationalupdate =
-          await createOccupationalhealthPresenter.createoccupational(
-        createoccupational: createoccupationalModelJsonString,
+          await createOccupationalhealthPresenter.updateHealthData(
+        updateHealthData: createoccupationalModelJsonString,
         isLoading: true,
       );
 
-      // var _healthId = 0;
-      // var _message = '';
-      // if (responseoccupationalupdate["Health type"] != null &&
-      //     responseoccupationalupdate["Health type"].isNotEmpty) {
-      //   // _grievanceId = responsecreateoccupationalModel["grievanceType"][0];
-      // }
-      // if (responseoccupationalupdate["message"] != null) {
-      //   _message = responseoccupationalupdate["message"];
-      // }
-     
-        } catch (e) {
-      print(e.toString());
+    if (responseoccupationalupdate == null) {
+      print("data fail ");
     }
+ 
+     
+     
   }
    void clearStoreData() {
     noofhealthexamsofnewjoinerCtrl.clear();
@@ -180,5 +162,22 @@ void updateOccupationalDetails() async {
     occupationalillnessesCtrl.clear();
     createOccupationalhealthPresenter.clearValue();
   }
+  // Void goHealthDataList(){
+
+  // }
+ void checkForm(){
+  if(noofhealthexamsofnewjoinerCtrl.text.trim()==''){
+isFormInvalid.value = true;
+isHeathExamInvalid.value=true;
+  }
+  if(periodictestsCtrl.text.trim()==''){
+isFormInvalid.value = true;
+isPeriodictestInvalid.value=true;
+  }
+  if(occupationalillnessesCtrl.text.trim()==''){
+isFormInvalid.value = true;
+isOccupationalIllnessesInvalid.value=true;
+  }
+ }
  
 }

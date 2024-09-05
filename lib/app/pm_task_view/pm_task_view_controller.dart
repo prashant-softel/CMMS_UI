@@ -271,9 +271,9 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   void setPmTask() async {
     Map<String, dynamic>? responseMapStart =
         await preventiveMaintenanceTaskViewPresenter.setPmTask(
-      scheduleId: scheduleId.value,
-      isLoading: true,
-    );
+            scheduleId: scheduleId.value,
+            isLoading: true,
+            facility_id: facilityId);
     if (responseMapStart != null && responseMapStart.length > 0) {
       // getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
       startresponseMessage.value = responseMapStart["message"];
@@ -469,8 +469,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     {
       String _comment = commentCtrlr.text.trim();
 
-      CommentModel commentModel =
-          CommentModel(id: scheduleId.value, comment: _comment);
+      CommentModel commentModel = CommentModel(
+          id: scheduleId.value, comment: _comment, facilityId: facilityId);
 
       var approvetoJsonString = commentModel.toJson();
       final response =
@@ -524,7 +524,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
           id: pmtaskViewModel.value?.permit_id ?? 0,
           comment: _comment,
           conditionIds: [1, 2, 3, 4],
-          fileIds: []);
+          fileIds: [],
+          facility_id: facilityId);
       var closetoJsonString = commentModel.toJson();
       var closePtwJsonString = ptwClose.toJson();
 
@@ -543,10 +544,10 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     {
       final response =
           await preventiveMaintenanceTaskViewPresenter.assignToPmTask(
-        assignId: selectedAssignedToId,
-        taskId: id,
-        isLoading: true,
-      );
+              assignId: selectedAssignedToId,
+              taskId: id,
+              isLoading: true,
+              facility_id: facilityId);
     }
   }
 
@@ -554,8 +555,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     {
       String _comment = commentCtrlr.text.trim();
 
-      CommentModel commentModel =
-          CommentModel(id: scheduleId.value, comment: _comment);
+      CommentModel commentModel = CommentModel(
+          id: scheduleId.value, comment: _comment, facilityId: facilityId);
 
       var rejecttoJsonString = commentModel.toJson();
       final response =

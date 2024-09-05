@@ -160,5 +160,14 @@ void search(String keyword) {
  void clearStoreData() {
     regulataryListPresenter.clearValue();
   }
+  Future<void> deleteVisitNotice({int? VisitNoticeId}) async {
+    {
+      await regulataryListPresenter.deleteVisitNotice(
+        Id: VisitNoticeId,
+        isLoading: true,
+      );
+    }
+  getVisitsAndNoticesDatalist(false);
+}
 }
 

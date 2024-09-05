@@ -13,6 +13,7 @@ import 'package:cmms/domain/models/attendance_month_model.dart';
 import 'package:cmms/domain/models/check_list_inspection_model.dart';
 import 'package:cmms/domain/models/complicance_history_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
+import 'package:cmms/domain/models/cumulative_report_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/doc_upload_list_model.dart';
 import 'package:cmms/domain/models/documentmaster_model.dart';
@@ -114,6 +115,7 @@ import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:cmms/domain/models/training_summary_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_waste_model.dart';
 import 'package:cmms/domain/models/type_of_water_model.dart';
@@ -1205,6 +1207,111 @@ class Repository {
     }
   }
 
+  // updateKaizenDetails
+  Future<Map<String, dynamic>> updateKaizenDetails(
+    updateKaizen,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateKaizenDetails(
+        auth: auth,
+        updateKaizen: updateKaizen,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Kiazen  update Successfully...", fontSize: 16.0);
+
+        Get.offAllNamed(
+          Routes.kaizensListScreen,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateRegulatary');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  // updatePlantationDetails
+  Future<Map<String, dynamic>> updatePlantationDetails(
+    updatePlantation,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updatePlantationDetails(
+        auth: auth,
+        updatePlantation: updatePlantation,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Plantation  update Successfully...", fontSize: 16.0);
+
+        Get.offAllNamed(
+          Routes.plantationlistScreen,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateRegulatary');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+// updateFuelConsumption
+  Future<Map<String, dynamic>> updateFuelConsumption(
+    updateFueldata,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateFuelConsumption(
+        auth: auth,
+        updateFueldata: updateFueldata,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Update Fuel Dsts  update Successfully...", fontSize: 16.0);
+
+        Get.offAllNamed(
+          Routes.fueldataListScreen,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateFuel');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
 // createfuledata
   Future<Map<String, dynamic>> createfuledata(
       createfuledata, bool? isLoading) async {
@@ -1262,9 +1369,9 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Kaizens data Add Successfully...", fontSize: 16.0);
-        Get.offAllNamed(
-          Routes.kaizensListScreen,
-        );
+        // Get.offAllNamed(
+        //   Routes.kaizensListScreen,
+        // );
 
         // if (res.errorCode == 200) {
         //   var responseMap = json.decode(res.data);
@@ -1342,9 +1449,9 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Update Health Data  Successfully...", fontSize: 16.0);
-        // Get.offAllNamed(
-        //   Routes.viewWaterData,
-        // );
+        Get.offAllNamed(
+          Routes.occupationalDataListScreen,
+        );
       } else {
         Utility.showDialog(res.errorCode.toString(), 'update Water Data');
         //return '';
@@ -6147,7 +6254,101 @@ class Repository {
       print(error.toString());
     }
   }
+//deleteKaizen
+Future<void> deleteKaizen({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteKaizen(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
 
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+  //deleteHealth
+  Future<void> deleteHealth({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteHealth(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+  //deleteVisitNotice
+  Future<void> deleteVisitNotice({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteVisitNotice(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+  //deleteFuel
+  Future<void> deleteFuel({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteFuel(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+  //deletePlantation
+  Future<void> deletePlantation({int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deletePlantation(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteKaizen');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
   Future<bool> createGrievanceType({bool? isLoading, grievanceJson}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -10206,6 +10407,41 @@ class Repository {
     }
   }
 
+  Future<List<Cumulativereport?>?> getCumulativeReportList(
+    bool? isLoading,
+    selectedFacilityIdList,
+    module_id,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getCumulativeReportList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+          selectedFacilityIdList: selectedFacilityIdList,
+          module_id: module_id);
+
+      if (!res.hasError) {
+        final jsonCumulativereports = jsonDecode(res.data);
+        final List<Cumulativereport> _CumulativereportList =
+            jsonCumulativereports
+                .map<Cumulativereport>(
+                  (m) =>
+                      Cumulativereport.fromJson(Map<String, dynamic>.from(m)),
+                )
+                .toList();
+
+        return _CumulativereportList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getCumulativeReportList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<UserListModel>?> getUserList(
       int? facilityId, bool? isLoading, bool? isExport) async {
     try {
@@ -10574,16 +10810,14 @@ class Repository {
   }
 
   Future<List<dynamic>> updatePmExecution(
-    pmExecutionJsonString,
-    bool? isLoading,
-  ) async {
+      pmExecutionJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updatePmExecution(
-        auth: auth,
-        pmExecutionJsonString: pmExecutionJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          pmExecutionJsonString: pmExecutionJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -11382,14 +11616,12 @@ class Repository {
     }
   }
 
-  Future<void> deleteGoodsOrders(Object id, bool isLoading) async {
+  Future<void> deleteGoodsOrders(
+      Object id, bool isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteGoodsOrders(
-        auth: auth,
-        id: id,
-        isLoading: isLoading,
-      );
+          auth: auth, id: id, isLoading: isLoading, facility_id: facility_id);
 
       if (!res.hasError) {
         //get delete response back from API
@@ -12564,7 +12796,10 @@ class Repository {
   }
 
   Future<bool> approveMrs(
-      {bool? isLoading, approvetoJsonString, int? type}) async {
+      {bool? isLoading,
+      approvetoJsonString,
+      int? type,
+      int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -12572,7 +12807,8 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           type: type,
-          approvetoJsonString: approvetoJsonString);
+          approvetoJsonString: approvetoJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
@@ -12613,14 +12849,16 @@ class Repository {
     }
   }
 
-  Future<bool> rejectMrs({bool? isLoading, rejecttoJsonString}) async {
+  Future<bool> rejectMrs(
+      {bool? isLoading, rejecttoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.rejectMrs(
           auth: auth,
           isLoading: isLoading,
-          rejecttoJsonString: rejecttoJsonString);
+          rejecttoJsonString: rejecttoJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -12778,7 +13016,8 @@ class Repository {
     }
   }
 
-  Future<bool> issueMrs({bool? isLoading, int? type, issuetoJsonString}) async {
+  Future<bool> issueMrs(
+      {bool? isLoading, int? type, issuetoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -12786,7 +13025,8 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           type: type,
-          issuetoJsonString: issuetoJsonString);
+          issuetoJsonString: issuetoJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: 'MRS issued!', fontSize: 45.0);
@@ -12803,14 +13043,15 @@ class Repository {
   }
 
   Future<bool> approveIssueMrs(
-      {bool? isLoading, issuemrsapprovetoJsonString}) async {
+      {bool? isLoading, issuemrsapprovetoJsonString, int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.approveIssueMrs(
           auth: auth,
           isLoading: isLoading,
-          issuemrsapprovetoJsonString: issuemrsapprovetoJsonString);
+          issuemrsapprovetoJsonString: issuemrsapprovetoJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
@@ -12827,14 +13068,15 @@ class Repository {
   }
 
   Future<bool> rejectIssueMrs(
-      {bool? isLoading, rejectIssuetoJsonString}) async {
+      {bool? isLoading, rejectIssuetoJsonString, facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.rejectIssueMrs(
           auth: auth,
           isLoading: isLoading,
-          rejectIssuetoJsonString: rejectIssuetoJsonString);
+          rejectIssuetoJsonString: rejectIssuetoJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -12996,16 +13238,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> setPmTask(
-    scheduleId,
-    bool? isLoading,
-  ) async {
+      scheduleId, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.setPmTask(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
@@ -13735,20 +13975,20 @@ class Repository {
     }
   }
 
-  Future<bool> assignToPmTask({
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async {
+  Future<bool> assignToPmTask(
+      {int? assignId,
+      int? taskId,
+      required bool isLoading,
+      int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.assignToPmTask(
-        auth: auth,
-        assignId: assignId,
-        taskId: taskId,
-        isLoading: isLoading,
-      );
+          auth: auth,
+          assignId: assignId,
+          taskId: taskId,
+          isLoading: isLoading,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         return true;
@@ -13763,14 +14003,17 @@ class Repository {
   }
 
   Future<bool> UpdatePMTaskExecution(
-      {bool? isLoading, updatePMTaskExecutionJsonString}) async {
+      {bool? isLoading,
+      updatePMTaskExecutionJsonString,
+      int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.UpdatePMTaskExecution(
           auth: auth,
           isLoading: isLoading,
-          updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString);
+          updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         // Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -13791,7 +14034,8 @@ class Repository {
       required int to_schedule_id,
       required int taskId,
       required int cloneJobs,
-      bool? isloading}) async {
+      bool? isloading,
+      int? facility_id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -13801,7 +14045,8 @@ class Repository {
           to_schedule_id: to_schedule_id,
           taskId: taskId,
           cloneJobs: cloneJobs,
-          isloading: isloading);
+          isloading: isloading,
+          facility_id: facility_id);
       print({"res.data", res.data});
       if (!res.hasError) {
         // Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -14605,14 +14850,15 @@ class Repository {
     }
   }
 
-  Future<void> deletePmTask(Object task_id, bool isLoading) async {
+  Future<void> deletePmTask(
+      Object task_id, bool isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deletePmTask(
-        auth: auth,
-        task_id: task_id,
-        isLoading: isLoading,
-      );
+          auth: auth,
+          task_id: task_id,
+          isLoading: isLoading,
+          facility_id: facility_id);
 
       if (!res.hasError) {
         //get delete response back from API
@@ -15988,14 +16234,15 @@ class Repository {
     }
   }
 
-  Future<List<DSMData>> getDSMData({
-    List<String>? selectedYear,
-    List<String>? selectedMonth,
-    List<int>? selectedState,
-    List<int>? selectedSpv,
-    List<int>? selectedSite,
-    required bool isLoading,
-  }) async {
+  Future<List<DSMData>> getDSMData(
+      {List<String>? selectedYear,
+      List<String>? selectedMonth,
+      List<int>? selectedState,
+      List<int>? selectedSpv,
+      List<int>? selectedSite,
+      List<int>? selectedDSMType,
+      required bool isLoading,
+      bool? isExport}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getDSMData(
@@ -16005,17 +16252,83 @@ class Repository {
         selectedState: selectedState,
         selectedSpv: selectedSpv,
         selectedSite: selectedSite,
+        selectedDSMType: selectedDSMType,
         isLoading: isLoading,
       );
       if (!res.hasError) {
-        var dsmDataList = dsmDataFromJson(res.data);
-        return dsmDataList;
+        final jsonDSMDataModels = jsonDecode(res.data);
+
+        final List<DSMData> _DSMDataList = jsonDSMDataModels
+            .map<DSMData>((m) => DSMData.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        String jsonData = dsmDataToJson(_DSMDataList);
+
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'Financial Year',
+              'Month',
+              'State',
+              'SPV',
+              'Site',
+              'DSM Type',
+              'ForeCasterName',
+              'DSM Penalty',
+              'Actual KWH',
+              'Schedule KWH',
+              'DSM Percentage',
+            ],
+            ...jsonDataList
+                .map((dsmListJson) => [
+                      dsmListJson['fy'],
+                      dsmListJson['month'],
+                      dsmListJson['state'],
+                      dsmListJson['spv'],
+                      dsmListJson['site'],
+                      dsmListJson['dsmType'],
+                      dsmListJson['forcasterName'],
+                      dsmListJson['dsmPenalty'],
+                      dsmListJson['scheduleKwh'],
+                      dsmListJson['actualKwh'],
+                      dsmListJson['dsmPer'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> checklistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(checklistData, "dsmList.xlsx");
+        }
+        return _DSMDataList;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getdsmDataList');
         return [];
       }
     } catch (error) {
       print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<StatusModel>> getdsmType({
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getdsmType(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var dsmTypeList = StatusModelFromJson(res.data);
+        return dsmTypeList.reversed.toList();
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
       return [];
     }
   }

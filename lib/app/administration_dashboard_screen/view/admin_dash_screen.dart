@@ -102,7 +102,7 @@ class AdminDashboardScreen extends GetView<AdminDashboardController> {
                             createContentTile(
                               title: "Attendance List",
                               onTap: () {
-                                Get.offNamed(Routes.attendanceListMonthwise);
+                                Get.toNamed(Routes.attendanceListMonthwise);
                               },
                             ),
                             createContentTile(
@@ -113,7 +113,7 @@ class AdminDashboardScreen extends GetView<AdminDashboardController> {
                                 String currentDate =
                                     DateFormat("yyyy-MM-dd").format(date);
                                 print("current date : ${currentDate}");
-                                Get.offNamed(Routes.attendanceScreen,
+                                Get.toNamed(Routes.attendanceScreen,
                                     arguments: {"date": currentDate});
                               },
                             ),

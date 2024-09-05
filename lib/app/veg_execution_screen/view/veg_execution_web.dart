@@ -723,6 +723,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                                                                                   : Dimens.box0,
                                                                                                             ],
                                                                                                           )
+                                                                                                     
                                                                                                         : Text(mapData['key'] ?? ''),
                                                           );
                                                         },
@@ -1133,6 +1134,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                             Spacer(),
                                           ],
                                         ),
+                                    
                                         Dimens.boxHeight10
                                       ],
                                     ),

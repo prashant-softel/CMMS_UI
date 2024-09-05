@@ -14,15 +14,15 @@ class MrsIssuePresenter {
         facilityId: facilityId,
         isLoading: isLoading,
       );
-  Future<bool> issueMrs({
-    issuetoJsonString,
-    int? type,
-    required bool isLoading,
-  }) async {
+  Future<bool> issueMrs(
+      {issuetoJsonString,
+      int? type,
+      required bool isLoading,
+      int? facility_id}) async {
     return mrsIssueUsecase.issueMrs(
-      issuetoJsonString: issuetoJsonString,
-      isLoading: isLoading,
-    );
+        issuetoJsonString: issuetoJsonString,
+        isLoading: isLoading,
+        facility_id: facility_id);
   }
 
   void saveValue({String? mrsId}) async {
@@ -36,6 +36,7 @@ class MrsIssuePresenter {
   void clearValue() async {
     return mrsIssueUsecase.clearValue();
   }
+
   void clearValuee() async {
     return mrsIssueUsecase.clearValuee();
   }

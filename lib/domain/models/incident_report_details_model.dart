@@ -525,6 +525,7 @@ class InvestigationTeamUpdate {
     this.designation,
     this.person_type,
     this.investigation_date,
+    this.investigation_item_id,
   });
 
   String? srNumber;
@@ -533,7 +534,7 @@ class InvestigationTeamUpdate {
   String? name;
   String? designation;
   String? investigation_date;
-
+  int? investigation_item_id;
   factory InvestigationTeamUpdate.fromJson(Map<String, dynamic> json) =>
       InvestigationTeamUpdate(
           srNumber: json['srNumber'],
@@ -541,12 +542,14 @@ class InvestigationTeamUpdate {
           person_type: json['person_type'],
           name: json["name"],
           designation: json['designation'],
+          investigation_item_id: json['investigation_item_id'],
           investigation_date: json['investigation_date']);
 
   Map<String, dynamic> toJson() => {
         "srNumber": srNumber,
         "person_id": person_id,
         "person_type": person_type,
+        "investigation_item_id": investigation_item_id,
         "name": name,
         "designation": designation,
         "investigation_date": investigation_date

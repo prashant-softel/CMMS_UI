@@ -27,7 +27,7 @@ class PlantationListController extends GetxController {
   String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
-
+ GetPlantationList? selectedItem;
   GetPlantationList? getplantationlist;
   RxList<String> plantationListListTableColumns = <String>[].obs;
   bool openFromDateToStartDatePicker = false;
@@ -155,6 +155,14 @@ class PlantationListController extends GetxController {
   void clearStoreData() {
     plantationlistPresenter.clearValue();
   }
-
+Future<void> deletePlantation({int? PlantaionId}) async {
+    {
+      await plantationlistPresenter.deletePlantation(
+        Id: PlantaionId,
+        isLoading: true,
+      );
+    }
+  getplantationdata(false);
+}
   
 }

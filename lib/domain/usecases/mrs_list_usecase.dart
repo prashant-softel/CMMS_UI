@@ -11,7 +11,8 @@ class MrsListUsecase {
           bool? isExport,
           dynamic endDate,
           dynamic startDate}) async =>
-      await _repository.getMrsList(facilityId, isLoading, startDate, endDate, isExport);
+      await _repository.getMrsList(
+          facilityId, isLoading, startDate, endDate, isExport);
   void clearValue() async => _repository.clearData(LocalKeys.mrsId);
   void clearpmTaskValue() async => _repository.clearData(LocalKeys.pmTaskModel);
   void clearStoreTaskData() async => _repository.clearData(LocalKeys.pmTaskId);
@@ -26,4 +27,6 @@ class MrsListUsecase {
   void clearStoreDataJobId() async => _repository.clearData(LocalKeys.jobId);
   void clearPermitStoreData() async =>
       _repository.clearData(LocalKeys.permitId);
+  void clearJobIdStoreData() async => _repository.clearData(LocalKeys.jobId);
+  void clearTypeValue() async => _repository.clearData(LocalKeys.types);
 }

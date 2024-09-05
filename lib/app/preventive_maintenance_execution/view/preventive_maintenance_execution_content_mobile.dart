@@ -399,6 +399,12 @@ class PreventiveMaintenanceExecutionContentMobile
                                 ? Dimens.box0
                                 : GestureDetector(
                                     onTap: () async {
+                                      controller.clearStoreTaskData();
+                                      controller.clearStoreTaskActivityData();
+                                      controller.clearStoreTasktoActorData();
+                                      controller.clearStoreTaskWhereUsedData();
+                                      controller.clearStoreTaskfromActorData();
+                                      controller.clearTypeValue();
                                       Get.offAllNamed(Routes.createMrs,
                                           arguments: {
                                             "whereUsedId": controller
@@ -408,6 +414,7 @@ class PreventiveMaintenanceExecutionContentMobile
                                                 .value
                                                 ?.plan_title,
                                             "whereUsed": 27,
+                                            "type": 2,
                                             "fromActorTypeId": 2,
                                             "to_actor_type_id": 3
                                           });
@@ -872,6 +879,18 @@ class PreventiveMaintenanceExecutionContentMobile
                                           ColorValues.linktopermitColor,
                                       text: "Return Mrs",
                                       onPressed: () {
+                                        controller.clearMrsIdStoreData();
+                                        controller.clearJobIdStoreData();
+
+                                        controller.clearTypeValue();
+                                        controller.clearStoreTaskData();
+                                        controller.clearStoreTaskActivityData();
+                                        controller.clearStoreTasktoActorData();
+                                        controller
+                                            .clearStoreTaskWhereUsedData();
+                                        controller
+                                            .clearStoreTaskfromActorData();
+
                                         controller.getMrsListByModuleTask(
                                             taskId:
                                                 controller.scheduleId.value);

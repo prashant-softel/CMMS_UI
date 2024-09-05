@@ -15,21 +15,22 @@ class MrsApproveUsecase {
         facilityId,
         isLoading,
       );
-  Future<bool> approveMrs({
-    approvetoJsonString,
-    int? type,
-    bool? isLoading,
-  }) async =>
+  Future<bool> approveMrs(
+          {approvetoJsonString,
+          int? type,
+          bool? isLoading,
+          int? facility_id}) async =>
       await repository.approveMrs(
           approvetoJsonString: approvetoJsonString,
           type: type,
-          isLoading: isLoading);
-  Future<bool> rejectMrs({
-    rejecttoJsonString,
-    bool? isLoading,
-  }) async =>
+          isLoading: isLoading,
+          facility_id: facility_id);
+  Future<bool> rejectMrs(
+          {rejecttoJsonString, bool? isLoading, int? facility_id}) async =>
       await repository.rejectMrs(
-          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+          rejecttoJsonString: rejecttoJsonString,
+          isLoading: isLoading,
+          facility_id: facility_id);
   void saveValue({String? mrsId}) async =>
       repository.saveValue(LocalKeys.mrsId, mrsId);
   void clearValue() async => repository.clearData(LocalKeys.mrsId);

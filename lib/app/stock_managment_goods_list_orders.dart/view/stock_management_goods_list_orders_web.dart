@@ -108,7 +108,7 @@ class _StockManagementGoodsOrdersWebState
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Row(
-                                      mainAxisAlignment:
+                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(

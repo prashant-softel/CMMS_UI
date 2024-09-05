@@ -154,7 +154,7 @@ class _PlantationListWebState extends State<PlantationListWeb> {
                                                 onPressed: () {
                                                   controller.clearStoreData();
 
-                                                  Get.offNamed(Routes
+                                                  Get.offAllNamed(Routes
                                                       .createplantationdataScreen);
                                                 },
                                                 color: ColorValues.addNewColor,
@@ -579,17 +579,44 @@ class PlantationListSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
-                              controller.clearStoreData();
-                              // int goId = OccupationallistDetails?.id ?? 0;
-                              // if (goId != 0) {
-                              //   Get.toNamed(
-                              //       Routes
-                              //           .updateGoodsOrdersDetailsScreen,
-                              //       arguments: {"goId": goId});
-                              // }
+                              // controller.clearStoreData();
+                              controller.selectedItem= controller.plantationList.firstWhere(
+(element) =>
+                                  "${element.id}" ==
+                                  PlantationDataDetails?.id.toString(),
+                              );
+                             int PlantationId = PlantationDataDetails?.id ?? 0;
+
+                            if (PlantationId != 0) {
+                              Get.toNamed(Routes.createplantationdataScreen,
+                                  arguments: {
+                                    "selectedItem": controller.selectedItem
+                                  });
+                            }
                             },
                           )
                         : Dimens.box0,
+                         varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants
+                                            .kPMchecklistFeatureId &&
+                                    e.delete ==
+                                        UserAccessConstants.kHaveDeleteAccess)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.deleteColor,
+                            icon: Icons.delete,
+                            message: 'Delete',
+                            onPress: () {
+                              int? id = PlantationDataDetails?.id;
+                              controller.deletePlantation(PlantaionId: id);
+
+                              // controller.isContainerVisible.value = true;
+                            },
+                          )
+                        : Dimens.box0
                   ])
                 : Text(value.toString()),
           ),

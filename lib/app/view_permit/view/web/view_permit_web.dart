@@ -496,7 +496,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Title: ',
+                                      'Permit Description: ',
                                       style: Styles.black17,
                                     ),
                                     Dimens.boxHeight5,
@@ -3941,6 +3941,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                 // // )
                 // : Container()
               ],
+           
             ),
           )),
     );

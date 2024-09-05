@@ -19,4 +19,13 @@ class RegulataryListUsecase {
     );
   }
     void clearValue() async => repository.clearData(LocalKeys.oHid);
+    //deleteVisitNotice
+     Future<void> deleteVisitNotice({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await repository.deleteVisitNotice(
+        Id: Id,
+        isLoading: isLoading,
+      );
 }

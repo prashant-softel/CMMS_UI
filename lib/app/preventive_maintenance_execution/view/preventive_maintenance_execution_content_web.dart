@@ -303,8 +303,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                               cells: record.map((mapData) {
                                                 return DataCell(
                                                   (mapData['key'] == "dropdown")
-                                                      ?
-                                                       Row(
+                                                      ? Row(
                                                           children: [
                                                             Container(
                                                               height: 25,
@@ -561,6 +560,18 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                     .addNewColor,
                                                             onPressed:
                                                                 () async {
+                                                              controller
+                                                                  .clearStoreTaskData();
+                                                              controller
+                                                                  .clearStoreTaskActivityData();
+                                                              controller
+                                                                  .clearStoreTasktoActorData();
+                                                              controller
+                                                                  .clearStoreTaskWhereUsedData();
+                                                              controller
+                                                                  .clearStoreTaskfromActorData();
+                                                              controller
+                                                                  .clearTypeValue();
                                                               Get.offAllNamed(
                                                                   Routes
                                                                       .createMrs,
@@ -962,6 +973,22 @@ class PreventiveMaintenanceExecutionContentWeb
                                                   ColorValues.linktopermitColor,
                                               text: "Return Mrs",
                                               onPressed: () {
+                                                controller
+                                                    .clearMrsIdStoreData();
+                                                controller
+                                                    .clearJobIdStoreData();
+
+                                                controller.clearTypeValue();
+                                                controller.clearStoreTaskData();
+                                                controller
+                                                    .clearStoreTaskActivityData();
+                                                controller
+                                                    .clearStoreTasktoActorData();
+                                                controller
+                                                    .clearStoreTaskWhereUsedData();
+                                                controller
+                                                    .clearStoreTaskfromActorData();
+
                                                 controller
                                                     .getMrsListByModuleTask(
                                                         taskId: controller

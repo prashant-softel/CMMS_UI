@@ -500,6 +500,17 @@ class PreventiveTaskViewContentMobile
                                     ? Dimens.box0
                                     : GestureDetector(
                                         onTap: () async {
+                                          controller.clearStoreData();
+                                          controller.clearStoreTaskData();
+                                          controller
+                                              .clearStoreTaskActivityData();
+                                          controller
+                                              .clearStoreTasktoActorData();
+                                          controller
+                                              .clearStoreTaskWhereUsedData();
+                                          controller
+                                              .clearStoreTaskfromActorData();
+                                          controller.clearTypeStoreData();
                                           Get.offAllNamed(Routes.createMrs,
                                               arguments: {
                                                 "whereUsedId": controller
@@ -508,6 +519,7 @@ class PreventiveTaskViewContentMobile
                                                     .pmtaskViewModel
                                                     .value
                                                     ?.plan_title,
+                                                "type": 2,
                                                 "whereUsed": 27,
                                                 "fromActorTypeId": 2,
                                                 "to_actor_type_id": 3
@@ -1129,7 +1141,6 @@ class PreventiveTaskViewContentMobile
                     ),
                   ),
                 ),
-             
               )
             : Dimens.box0;
   }

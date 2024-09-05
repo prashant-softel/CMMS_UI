@@ -3916,7 +3916,8 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/UpdateHealthData',
       Request.post,
-      jsonEncode(updateHealthData),
+      updateHealthData,
+      // jsonEncode(updateHealthData),
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -3924,7 +3925,7 @@ class ConnectHelper {
       },
     );
 
-    print('Submit Occupational  Response:${responseModel.data}');
+    print('Submit updateHealthData  Response:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     print(parsedJson);
@@ -3948,6 +3949,78 @@ class ConnectHelper {
     );
 
     print(' UpdateVisitsAndNotices Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
+  // updateKaizenDetails
+  Future<ResponseModel> updateKaizenDetails({
+    required String auth,
+    updateKaizen,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateKaizensData',
+      Request.post,
+      updateKaizen,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print(' UpdateVisitsAndNotices Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
+  //updatePlantationDetails
+  Future<ResponseModel> updatePlantationDetails({
+    required String auth,
+    updatePlantation,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdatePlantationData',
+      Request.post,
+      updatePlantation,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print(' UpdateVisitsAndNotices Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
+//updateFuelConsumption
+  Future<ResponseModel> updateFuelConsumption({
+    required String auth,
+    updateFueldata,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateFuelConsumption',
+      Request.post,
+      updateFueldata,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print(' Update Fuel Data Response:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
 
@@ -6012,6 +6085,22 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+  Future<ResponseModel> getCumulativeReportList({
+    String? auth,
+    bool? isLoading,
+    required selectedFacilityIdList,
+    required module_id,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'MISMaster/Cumulativereport?facility_id=$selectedFacilityIdList&module_id=$module_id',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
   Future<ResponseModel> getUserList({
     required String auth,
     bool? isLoading,
@@ -6128,13 +6217,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> updatePmExecution({
-    required String auth,
-    pmExecutionJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> updatePmExecution(
+      {required String auth,
+      pmExecutionJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/UpdatePMScheduleExecution',
+      'PMScheduleView/UpdatePMScheduleExecution?facility_id=$facility_id',
       Request.patch,
       pmExecutionJsonString,
       isLoading ?? false,
@@ -6618,13 +6707,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> deleteGoodsOrders({
-    required String auth,
-    bool? isLoading,
-    required id,
-  }) async {
+  Future<ResponseModel> deleteGoodsOrders(
+      {required String auth,
+      bool? isLoading,
+      required id,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/DeleteGO?id=$id',
+      'GO/DeleteGO?id=$id&facility_id=$facility_id',
       Request.delete,
       id,
       isLoading ?? false,
@@ -7567,14 +7656,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> approveMrs({
-    required String auth,
-    bool? isLoading,
-    int? type,
-    required approvetoJsonString,
-  }) async {
+  Future<ResponseModel> approveMrs(
+      {required String auth,
+      bool? isLoading,
+      int? type,
+      required approvetoJsonString,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/mrsApproval',
+      'MRS/mrsApproval?facility_id=$facility_id',
       Request.post,
       approvetoJsonString,
       isLoading ?? false,
@@ -7593,13 +7682,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> rejectMrs({
-    required String auth,
-    bool? isLoading,
-    required rejecttoJsonString,
-  }) async {
+  Future<ResponseModel> rejectMrs(
+      {required String auth,
+      bool? isLoading,
+      required rejecttoJsonString,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/mrsReject',
+      'MRS/mrsReject?facility_id=$facility_id',
       Request.post,
       rejecttoJsonString,
       isLoading ?? false,
@@ -7700,14 +7789,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> issueMrs({
-    required String auth,
-    bool? isLoading,
-    int? type,
-    required issuetoJsonString,
-  }) async {
+  Future<ResponseModel> issueMrs(
+      {required String auth,
+      bool? isLoading,
+      int? type,
+      required issuetoJsonString,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/MRSIssue',
+      'MRS/MRSIssue?facility_id=$facility_id',
       Request.post,
       issuetoJsonString,
       isLoading ?? false,
@@ -7726,13 +7815,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> approveIssueMrs({
-    required String auth,
-    bool? isLoading,
-    required issuemrsapprovetoJsonString,
-  }) async {
+  Future<ResponseModel> approveIssueMrs(
+      {required String auth,
+      bool? isLoading,
+      required issuemrsapprovetoJsonString,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/ApproveMRSIssue',
+      'MRS/ApproveMRSIssue?facility_id=$facility_id',
       Request.post,
       issuemrsapprovetoJsonString,
       isLoading ?? false,
@@ -7745,13 +7834,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> rejectIssueMrs({
-    required String auth,
-    bool? isLoading,
-    required rejectIssuetoJsonString,
-  }) async {
+  Future<ResponseModel> rejectIssueMrs(
+      {required String auth,
+      bool? isLoading,
+      required rejectIssuetoJsonString,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/RejectMRSIssue',
+      'MRS/RejectMRSIssue?facility_id=$facility_id',
       Request.post,
       rejectIssuetoJsonString,
       isLoading ?? false,
@@ -7796,10 +7885,10 @@ class ConnectHelper {
       // 'PMScheduleView/LinkPermitToPMTask?schedule_id=$scheduleId&permit_id=$permitId',
 
       type == 3
-          ? 'AuditPlan/AuditLinkToPermit?audit_id=$scheduleId&ptw_id=$permitId'
+          ? 'AuditPlan/AuditLinkToPermit?audit_id=$scheduleId&ptw_id=$permitId&facility_id=$facilityId'
           : type == 4
               ? 'MC/LinkPermitToModuleCleaning?scheduleId=$scheduleId&permit_id=$permitId&facility_id=$facilityId'
-              : 'PMScheduleView/LinkPermitToPMTask?task_id=$scheduleId&permit_id=$permitId',
+              : 'PMScheduleView/LinkPermitToPMTask?task_id=$scheduleId&permit_id=$permitId&facility_id=$facilityId',
 
       Request.put,
       null,
@@ -7861,15 +7950,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> setPmTask({
-    required String auth,
-    scheduleId,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> setPmTask(
+      {required String auth,
+      scheduleId,
+      bool? isLoading,
+      int? facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
       //  'PMScheduleView/SetPMTask?schedule_id=$scheduleId',
 
-      'PMScheduleView/StartPMTask?task_id=$scheduleId',
+      'PMScheduleView/StartPMTask?task_id=$scheduleId&facility_id:$facility_id',
       Request.post,
       null,
       isLoading ?? false,
@@ -8441,15 +8530,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> assignToPmTask({
-    required String auth,
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async {
+  Future<ResponseModel> assignToPmTask(
+      {required String auth,
+      int? assignId,
+      int? taskId,
+      required bool isLoading,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/AssignPMTask?task_id=$taskId&assign_to=$assignId',
+      'PMScheduleView/AssignPMTask?task_id=$taskId&assign_to=$assignId&facility_id=$facility_id',
       Request.put,
       null,
       isLoading,
@@ -8762,15 +8851,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> UpdatePMTaskExecution({
-    required String auth,
-    updatePMTaskExecutionJsonString,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> UpdatePMTaskExecution(
+      {required String auth,
+      updatePMTaskExecutionJsonString,
+      bool? isLoading,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       //  'PMScheduleView/UpdatePMTaskExecution',
-      'PMScheduleView/UpdatePMTaskExecution',
+      'PMScheduleView/UpdatePMTaskExecution?facility_id=$facility_id',
       Request.patch,
       updatePMTaskExecutionJsonString,
       isLoading ?? true,
@@ -8792,10 +8881,11 @@ class ConnectHelper {
       required int to_schedule_id,
       required int taskId,
       required int cloneJobs,
-      bool? isloading}) async {
+      bool? isloading,
+      int? facility_id}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/cloneSchedule?task_id=${taskId}&from_schedule_id=${to_schedule_id}&to_schedule_id=${from_schedule_id}&cloneJobs=$cloneJobs',
+      'PMScheduleView/cloneSchedule?task_id=${taskId}&from_schedule_id=${to_schedule_id}&to_schedule_id=${from_schedule_id}&cloneJobs=$cloneJobs&facility_id=$facility_id',
       Request.patch,
       null,
       isloading ?? true,
@@ -9034,7 +9124,96 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
+  //deleteKaizen
+   Future<ResponseModel> deleteKaizen({
+    required String auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteKaizensData?id=$Id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  //deleteHealth
+     Future<ResponseModel> deleteHealth({
+    required String auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteHealthData?id=$Id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  //deleteVisitNotice
+   Future<ResponseModel> deleteVisitNotice({
+    required String auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteVisitsAndNotices?id=$Id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  //deleteFuel
+     Future<ResponseModel> deleteFuel({
+    required String auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteFuelConsumption?id=$Id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+//deletePlantation
+  Future<ResponseModel> deletePlantation({
+    required String auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeletePlantationData?id=$Id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
   Future<ResponseModel> saveGrievance({
     required String auth,
     grievance,
@@ -9420,15 +9599,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> deletePmTask({
-    required String auth,
-    bool? isLoading,
-    required task_id,
-  }) async {
+  Future<ResponseModel> deletePmTask(
+      {required String auth,
+      bool? isLoading,
+      required task_id,
+      required facility_id}) async {
     var responseModel = await apiWrapper.makeRequest(
       'PM/DeletePMTask',
       Request.post,
-      {"id": int.tryParse(task_id)},
+      {"id": int.tryParse(task_id), "facility_id": facility_id},
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -10417,6 +10596,7 @@ class ConnectHelper {
     List<int>? selectedState,
     List<int>? selectedSpv,
     List<int>? selectedSite,
+    List<int>? selectedDSMType,
     bool? isLoading,
   }) async {
     final queryParams = <String>[];
@@ -10435,6 +10615,9 @@ class ConnectHelper {
     if (selectedSite != null || selectedSite?.length != 0) {
       queryParams.add('siteId=${selectedSite?.join(',')}');
     }
+    if (selectedDSMType != null || selectedDSMType?.length != 0) {
+      queryParams.add('dsmtype=${selectedDSMType?.join(',')}');
+    }
     final queryString = queryParams.join('&');
     final endpoint = 'DSM/getDSMData?$queryString';
     var responseModel = await apiWrapper.makeRequest(
@@ -10448,6 +10631,22 @@ class ConnectHelper {
     );
     print('NewPermitResponse: ${responseModel.data}');
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> getdsmType({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'DSM/getDSMType',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 

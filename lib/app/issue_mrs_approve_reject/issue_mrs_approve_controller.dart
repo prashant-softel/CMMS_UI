@@ -89,9 +89,9 @@ class IssueMrsApproveController extends GetxController {
 
       var issuemrsapprovetoJsonString = commentModel.toJson();
       final response = await issuemrsApprovePresenter.approveIssueMrs(
-        issuemrsapprovetoJsonString: issuemrsapprovetoJsonString,
-        isLoading: true,
-      );
+          issuemrsapprovetoJsonString: issuemrsapprovetoJsonString,
+          isLoading: true,
+          facility_id: facilityId);
       if (response == true) {
         final _flutterSecureStorage = const FlutterSecureStorage();
 
@@ -110,9 +110,9 @@ class IssueMrsApproveController extends GetxController {
 
       var rejectIssuetoJsonString = commentModel.toJson();
       final response = await issuemrsApprovePresenter.rejectIssueMrs(
-        rejectIssuetoJsonString: rejectIssuetoJsonString,
-        isLoading: true,
-      );
+          rejectIssuetoJsonString: rejectIssuetoJsonString,
+          isLoading: true,
+          facility_id: facilityId);
       if (response == true) {
         final _flutterSecureStorage = const FlutterSecureStorage();
 

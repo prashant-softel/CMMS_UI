@@ -7,32 +7,18 @@ import 'package:get/get.dart';
 import '../../navigators/app_pages.dart';
 
 class HeaderWidgetAllDash extends GetView<HomeController> {
-  HeaderWidgetAllDash({
-    super.key,
-    /////////
-    //Note: Here i have changed the controller from HomeController to NewPermitController
-  });
-  // var controller = Get.find<HomeController>();
+  HeaderWidgetAllDash({super.key});
 
-  ///
   final HomeController controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
-    return //
-        SelectionArea(
+    return SelectionArea(
       child: Obx(
-        () => //
-            Container(
+        () => Container(
           height: 60,
           decoration: BoxDecoration(
             color: ColorValues.whiteColor,
-            // boxShadow: [
-            //   BoxShadow(
-            //     color: Color.fromARGB(255, 240, 237, 237),
-            //     offset: Offset(0.0, 0.0),
-            //   ),
-            // ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -51,151 +37,120 @@ class HeaderWidgetAllDash extends GetView<HomeController> {
               if (Responsive.isDesktop(context))
                 Icon(Icons.notifications_active,
                     color: ColorValues.greyLightColor),
-              Card(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                color: ColorValues.blueMediumColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 15,
-                        backgroundColor: Color.fromARGB(255, 206, 200, 200),
-                        child: Icon(Icons.person,
-                            color: ColorValues.blueMediumColor),
-                      ), // icon
-                      if (Responsive.isDesktop(context))
-                        SizedBox(width: 5), // space between icon and text
-                      if (Responsive.isDesktop(context))
-                        GestureDetector(
-                          onTap: () {
-                            print(
-                                "${varUserAccessModel.value.user_name ?? ""}");
-                          },
-                          child: Text(
-                            "${varUserAccessModel.value.user_name}",
-                            style: TextStyle(
-                              color: Colors.black, // text color
-                              fontSize: 12, // text size
-                              fontWeight: FontWeight.w500, // text weight
+              InkWell(
+                onTap: () {
+                  Get.dialog(
+                    Stack(children: [
+                      Positioned(
+                        right: 1,
+                        top: 70,
+                        child: Container(
+                          width: 200,
+                          child: AlertDialog(
+                            insetPadding: EdgeInsets.symmetric(horizontal: 5.w),
+                            contentPadding: EdgeInsets.all(20),
+                            backgroundColor: ColorValues.appDarkBlueColor,
+                            content: Column(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    controller.clearStoreData();
+
+                                    Get.toNamed(Routes.profile, arguments: {
+                                      'userId':
+                                          varUserAccessModel.value.user_id,
+                                    });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.person,
+                                          color: Color(0xffD2D0D0)),
+                                      SizedBox(width: 10),
+                                      Text("Profile",
+                                          style: TextStyle(
+                                            color: Color(0xffD2D0D0),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                                Divider(color: Color(0xffD2D0D0)),
+                                InkWell(
+                                  onTap: () {
+                                    Get.toNamed(Routes.setting);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.settings,
+                                          color: Color(0xffD2D0D0)),
+                                      SizedBox(width: 10),
+                                      Text("Settings",
+                                          style: TextStyle(
+                                            color: Color(0xffD2D0D0),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                                Divider(color: Color(0xffD2D0D0)),
+                                InkWell(
+                                  onTap: () {
+                                    _isDeleteDialog();
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.logout,
+                                          color: Color(0xffD2D0D0)),
+                                      SizedBox(width: 10),
+                                      Text("Log Out",
+                                          style: TextStyle(
+                                            color: Color(0xffD2D0D0),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.dialog(
-                            Stack(children: [
-                              Positioned(
-                                right: 1,
-                                top: 70,
-                                child: Container(
-                                  width: 200,
-                                  child: AlertDialog(
-                                    insetPadding:
-                                        EdgeInsets.symmetric(horizontal: 5.w),
-                                    contentPadding: EdgeInsets.all(20),
-                                    backgroundColor:
-                                        ColorValues.appDarkBlueColor,
-                                    content: Column(
-                                        // mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              controller.clearStoreData();
-
-                                              Get.toNamed(Routes.profile,
-                                                  arguments: {
-                                                    'userId': varUserAccessModel
-                                                        .value.user_id,
-                                                  });
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.person,
-                                                  color: Color(0xffD2D0D0),
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text("Profile",
-                                                    style: TextStyle(
-                                                      color: Color(0xffD2D0D0),
-                                                      fontSize: 13,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    )),
-                                              ],
-                                            ),
-                                          ),
-                                          Divider(
-                                            color: Color(0xffD2D0D0),
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              Get.toNamed(
-                                                Routes.setting,
-                                              );
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.settings,
-                                                  color: Color(0xffD2D0D0),
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text("Settings",
-                                                    style: TextStyle(
-                                                      color: Color(0xffD2D0D0),
-                                                      fontSize: 13,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    )),
-                                              ],
-                                            ),
-                                          ),
-                                          Divider(
-                                            color: Color(0xffD2D0D0),
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              _isDeleteDialog();
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.logout,
-                                                  color: Color(0xffD2D0D0),
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text("Log Out",
-                                                    style: TextStyle(
-                                                      color: Color(0xffD2D0D0),
-                                                      fontSize: 13,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    )),
-                                              ],
-                                            ),
-                                          )
-                                        ]),
-                                  ),
-                                ),
-                              ),
-                            ]),
-                          );
-                        },
-                        child: Icon(Icons.keyboard_arrow_down_outlined,
-                            color: ColorValues.blackColor),
                       ),
-                    ],
+                    ]),
+                  );
+                },
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  color: ColorValues.blueMediumColor,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 15,
+                          backgroundColor: Color.fromARGB(255, 206, 200, 200),
+                          child: Icon(Icons.person,
+                              color: ColorValues.blueMediumColor),
+                        ),
+                        if (Responsive.isDesktop(context)) SizedBox(width: 5),
+                        if (Responsive.isDesktop(context))
+                          Text(
+                            "${varUserAccessModel.value.user_name}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        Icon(Icons.keyboard_arrow_down_outlined,
+                            color: ColorValues.blackColor),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -213,9 +168,7 @@ class HeaderWidgetAllDash extends GetView<HomeController> {
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.logout_outlined, size: 35, color: ColorValues.redColor),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           Text(
             'Are you sure you want to logout?',
             style: Styles.blackBold14w500,

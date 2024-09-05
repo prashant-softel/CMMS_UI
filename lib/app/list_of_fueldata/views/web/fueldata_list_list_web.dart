@@ -154,7 +154,7 @@ class _FueldataListWebState extends State<FueldataListWeb> {
                                                 onPressed: () {
                                                   controller.clearStoreData();
 
-                                                  Get.offNamed(Routes
+                                                  Get.offAllNamed(Routes
                                                       .createFuelDataScreen);
                                                 },
                                                 color: ColorValues.addNewColor,
@@ -580,17 +580,45 @@ class FuelDataListSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
-                              controller.clearStoreData();
-                              // int goId = OccupationallistDetails?.id ?? 0;
-                              // if (goId != 0) {
-                              //   Get.toNamed(
-                              //       Routes
-                              //           .updateGoodsOrdersDetailsScreen,
-                              //       arguments: {"goId": goId});
-                              // }
+                              // controller.clearStoreData();
+                                                    controller.selectedItem =
+                                controller.fueldataList.firstWhere(
+                              (element) =>
+                                  "${element.id}" ==
+                                  FuelDataDetails?.id.toString(),
+                            );
+                            int FuelId = FuelDataDetails?.id ?? 0;
+
+                            if (FuelId != 0) {
+                              Get.toNamed(Routes.createFuelDataScreen,
+                                  arguments: {
+                                    "selectedItem": controller.selectedItem
+                                  });
+                            }
                             },
                           )
                         : Dimens.box0,
+                         varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants
+                                            .kPMchecklistFeatureId &&
+                                    e.delete ==
+                                        UserAccessConstants.kHaveDeleteAccess)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.deleteColor,
+                            icon: Icons.delete,
+                            message: 'Delete',
+                            onPress: () {
+                              int? id = FuelDataDetails?.id;
+                              controller.deleteFuel(FuelId:id);
+
+                              // controller.isContainerVisible.value = true;
+                            },
+                          )
+                        : Dimens.box0
                   ])
                 : Text(value.toString()),
           ),

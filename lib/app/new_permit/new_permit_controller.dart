@@ -770,6 +770,7 @@ class NewPermitController extends GetxController {
 
     employee_map[emp_id] = selectedEmployeeNameIdList;
   }
+
   void employeeNameSelectedoftbt(_selectedEmployeeNameIds) {
     selectedEmployeeNameIdList.value = <int>[];
     filteredEmployeeNameList.value = <EmployeeListModel>[];
@@ -873,6 +874,7 @@ class NewPermitController extends GetxController {
     );
     update(['permit_employee_list']);
   }
+
   Future<void> getEmployeePermitListoftbt() async {
     employeeNameListt.value = <EmployeeListModel>[];
     final _employeeNameList = await permitPresenter.getEmployeePermitListoftbt(
@@ -2085,6 +2087,10 @@ class NewPermitController extends GetxController {
     Get.toNamed(Routes.addModuleCleaningExecutionContentWeb);
   }
 
+  Future<void> viewVegTDetails() async {
+    Get.toNamed(Routes.vegExecutionScreen);
+  }
+
   browseFiles({Uint8List? fileBytes}) async {
     await permitPresenter.browseFiles(
         fileBytes, fileName.value, type, true, facilityId);
@@ -2153,6 +2159,28 @@ class NewPermitController extends GetxController {
     print("Selected Equipment : ${selectedEquipmentCategoryIdList}");
     print("PM Task ID: ${pmtaskViewModel.id}");
   }
+
+  void clearStoreTaskData() {
+    permitPresenter.clearStoreTaskData();
+  }
+
+  void clearStoreTaskActivityData() {
+    permitPresenter.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    permitPresenter.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    permitPresenter.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    permitPresenter.clearStoreTaskWhereUsedData();
+  }
+
+  void clearTypeValue() async => permitPresenter.clearTypeValue();
 
   /// class ends
 }

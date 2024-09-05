@@ -2,8 +2,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/create_occupationalhealth/create_occupationalhealth_presenter.dart';
 import 'package:cmms/app/create_regulataryvisits/create_regulataryvisits_presenter.dart';
 import 'package:cmms/domain/models/create_regulataryvisits_model.dart';
 import 'package:cmms/domain/models/get_visitandnotice_list_model.dart';
@@ -21,12 +19,19 @@ class CreateRegulataryVisitsController extends GetxController {
   GetVisitAndNoticeList? selectedItem;
   RxList<GetVisitAndNoticeList?> visitandnoticeType =
       <GetVisitAndNoticeList>[].obs;
+  var VisitNoticeDateTc =
+      TextEditingController();
+int selectedMonth = 0;
+  int selectedYear=0;
+  String month = 'April';
+  String year ='2024';
   var govtauthvisitsCtrl = TextEditingController();
   var noOffinebythirdpartyCtrl = TextEditingController();
   var noofshowcausenoticesbythirdpartyCtrl = TextEditingController();
   var noticestocontractorCtrl = TextEditingController();
   var amountofpenaltiestocontractorsCtrl = TextEditingController();
   var anyotherCtrl = TextEditingController();
+  Rx<bool> isFormInvalid = false.obs;
   Rx<bool> isGovtAuthVisitsInvalid = false.obs;
   Rx<bool> isNoOfFineByThirdPartyInvalid = false.obs;
   Rx<bool> isNoOfShowCauseNoticesInvalid = false.obs;
@@ -34,8 +39,12 @@ class CreateRegulataryVisitsController extends GetxController {
   Rx<bool> isAmountOfPenaltiesToContractorsInvalid = false.obs;
   Rx<bool> isAnyOtherInvalid = false.obs;
   Rx<int> visitId = 0.obs;
-  void createvisitsandnotices({List<dynamic>? fileIds}) async {
+  void createvisitsandnotices({List<dynamic>? fileIds,required int month_id,required int year}) async {
     try {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
       int _govtauthvisitsCtrl =
           int.tryParse(govtauthvisitsCtrl.text.trim()) ?? 0;
       int _noOffinebythirdpartyCtrl =
@@ -57,7 +66,9 @@ class CreateRegulataryVisitsController extends GetxController {
         AmountOfPenaltiesToContractors: _amountofpenaltiestocontractorsCtrl,
         AnyOther: _anyotherCtrl,
         id: 0,
-        date: "2024-08-18",
+        month_id:month_id,
+        year:year,
+        // date: "2024-08-18",
       );
 
       // Convert the createRegulataryvisitsModel instance to JSON
@@ -87,14 +98,7 @@ class CreateRegulataryVisitsController extends GetxController {
   @override
   void onInit() async {
     try {
-      await setOHId();
-
-      facilityIdStreamSubscription = homeController.facilityId$.listen(
-        (event) async {
-          // facilityId = event;
-          await getVisitsAndNoticesDatalist();
-        },
-      );
+      await setVHId();
 
       super.onInit();
     } catch (e) {
@@ -102,8 +106,21 @@ class CreateRegulataryVisitsController extends GetxController {
     }
   }
 
-  Future<void> setOHId() async {
+  Future<void> setVHId() async {
     try {
+      if (Get.arguments != null) {
+        var dataFromPreviousScreen = Get.arguments;
+        selectedItem = dataFromPreviousScreen['selectedItem'];
+      } else {
+        selectedItem = GetVisitAndNoticeList(
+            id: 0,
+            govtAuthVisits: 0,
+            noOfFineByThirdParty: 0,
+            noOfShowCauseNoticesByThirdParty: 0,
+            noticesToContractor: 0,
+            amountOfPenaltiesToContractors: 0,
+            anyOther: 0);
+      }
       GetVisitAndNoticeList? selectedItemhea;
       final _selectedItem = await createregulataryvisitsPresenter.getValue();
       if (_selectedItem!.isNotEmpty) {
@@ -133,19 +150,6 @@ class CreateRegulataryVisitsController extends GetxController {
     } catch (e) {
       print(e.toString() + 'VisitNoticeId');
       //  Utility.showDialog(e.toString() + 'userId');
-    }
-  }
-
-  Future<void> getVisitsAndNoticesDatalist() async {
-    final _visitandnoticeType =
-        await createregulataryvisitsPresenter.getVisitsAndNoticesDatalist();
-
-    if (_visitandnoticeType != null) {
-      _visitandnoticeType != [];
-      for (var visitandnotice in _visitandnoticeType) {
-        visitandnoticeType.add(visitandnotice);
-      }
-      // selectedTypePermit.value = grievanceType[0]?.name ?? '';
     }
   }
 
@@ -182,7 +186,7 @@ class CreateRegulataryVisitsController extends GetxController {
       NoticesToContractor: _noticestocontractorCtrl,
       AmountOfPenaltiesToContractors: _amountofpenaltiestocontractorsCtrl,
       AnyOther: _anyotherCtrl,
-      date: "2024-08-18",
+      // date: "2024-08-18",
     );
 
     var updateVisitAndNoticModelJsonString =
@@ -196,6 +200,33 @@ class CreateRegulataryVisitsController extends GetxController {
 
     if (responseCreateGoModel == null) {
       print("data fail ");
+    }
+  }
+
+  void checkForm() {
+    if (govtauthvisitsCtrl.text.trim() == '') {
+      isGovtAuthVisitsInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (noOffinebythirdpartyCtrl.text.trim() == '') {
+      isNoOfFineByThirdPartyInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (noofshowcausenoticesbythirdpartyCtrl.text.trim() == '') {
+      isNoOfShowCauseNoticesInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (noticestocontractorCtrl.text.trim() == '') {
+      isNoticesToContractorInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (amountofpenaltiestocontractorsCtrl.text.trim() == '') {
+      isAmountOfPenaltiesToContractorsInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (anyotherCtrl.text.trim() == '') {
+      isAnyOtherInvalid.value = true;
+      isFormInvalid.value = true;
     }
   }
 }

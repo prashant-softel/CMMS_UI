@@ -186,6 +186,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                     ?.status ==
                                                                 361
                                                         ? TableActionButton(
+                                                            // label: 'Equipments',
                                                             onPress: () {
                                                               var filterdData = controller
                                                                   .listSchedules
@@ -234,7 +235,8 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                       "${e?.scheduleId}" ==
                                                                       record[0][
                                                                           'value']);
-
+                                                              controller
+                                                                  .clearTypeStoreData();
                                                               controller
                                                                   .clearPermitStoreData();
                                                               controller.viewNewPermitList(
@@ -243,11 +245,69 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                           ?.permit_id,
                                                                   jobId: controller
                                                                           .jobDetailsModel
-                                                                          .value
-                                                                          ?.id ??
+                                                                          .value!
+                                                                          .id ??
                                                                       0);
                                                             })
                                                         : Dimens.box0,
+                                                    controller.listSchedules!
+                                                                    .firstWhere(
+                                                                        (e) =>
+                                                                            "${e?.scheduleId}" ==
+                                                                            record[0][
+                                                                                'value'],
+                                                                        orElse: () => Schedules(
+                                                                            status:
+                                                                                -1))
+                                                                    ?.ptw_status ==
+                                                                124 ||
+                                                            controller
+                                                                    .listSchedules!
+                                                                    .firstWhere(
+                                                                        (e) =>
+                                                                            "${e?.scheduleId}" ==
+                                                                            record[0][
+                                                                                'value'],
+                                                                        orElse: () =>
+                                                                            Schedules(status: -1))
+                                                                    ?.ptw_status ==
+                                                                132
+
+                                                        // controller.pmtaskViewModel.value?.ptw_status == 124 || controller.pmtaskViewModel.value?.ptw_status == 132
+                                                        ? TableActionButton(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    116,
+                                                                    78,
+                                                                    130),
+                                                            icon:
+                                                                Icons.ads_click,
+                                                            message:
+                                                                'Re-Submit Permit',
+                                                            onPress: () {
+                                                              var filterdData = controller
+                                                                  .listSchedules
+                                                                  ?.firstWhere((e) =>
+                                                                      "${e?.scheduleId}" ==
+                                                                      record[0][
+                                                                          'value']);
+
+                                                              controller.editNewPermit(
+                                                                  permitId:
+                                                                      filterdData
+                                                                          ?.permit_id,
+                                                                  isChecked:
+                                                                      false
+                                                                  // controller
+                                                                  //     .isChecked
+                                                                  //     .value
+                                                                  );
+                                                            },
+                                                          )
+                                                        : Dimens.box0,
+                                                    //  record[9]['value'] == "Scheduled"
+                                                    // controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.status == 360
                                                     controller.listSchedules!
                                                                     .firstWhere(
                                                                         (e) =>
@@ -271,6 +331,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                     ?.ptw_status ==
                                                                 125
                                                         ? TableActionButton(
+                                                            // label: 'Start',
                                                             onPress: () {
                                                               var filterdData = controller
                                                                   .listSchedules
@@ -278,7 +339,11 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                       "${e?.scheduleId}" ==
                                                                       record[0][
                                                                           'value']);
-                                                              filterdData!.ptw_tbt_done ==
+
+                                                              print(
+                                                                  'filteredData:${filterdData!.scheduleId}');
+                                                              //  selectedData = filterdData;
+                                                              filterdData.ptw_tbt_done ==
                                                                       1
                                                                   ? Get.dialog<void>(CustomCalibrationDialog(
                                                                       id: filterdData
@@ -289,6 +354,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                           .toString(),
                                                                       starttype:
                                                                           1))
+                                                                  //controller.startMCExecutionScheduleButton(scheduleID: filterdData.scheduleId)
                                                                   : Get.dialog<void>(TbtDoneMcDialog(
                                                                       ptw_id:
                                                                           filterdData.permit_id ??
@@ -298,6 +364,10 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                               .value
                                                                               ?.executionId ??
                                                                           0));
+                                                              // print({
+                                                              //   'scheduledata:':
+                                                              //       filterdData.scheduleId
+                                                              // });
                                                             },
                                                             color: ColorValues
                                                                 .startColor,
@@ -305,6 +375,65 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                             message: 'Start',
                                                           )
                                                         : Dimens.box0,
+
+                                                    // controller.listSchedules!
+                                                    //             .firstWhere(
+                                                    //               (e) => "${e?.status_short}" == e?.status_short,
+                                                    //               orElse: () => Schedules(status_short: ""),
+                                                    //             )
+                                                    //             ?.status_short ==
+                                                    //         "Completed"
+                                                    //     ?
+                                                    // TableActionButton(
+                                                    //   onPress: () {
+                                                    //     // Get.dialog(AddModuleCleaningExecutionMobileDialog());
+                                                    //     var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                                    //     controller.updateMCScheduleExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
+                                                    //     // print({"filteredData:${filterdData?.scheduleId}"});
+                                                    //     // print({"filteredData:${filterdData!.cleaningDay}"});
+                                                    //     // print({"filteredData:${filterdData.waterUsed}"});
+                                                    //   },
+                                                    //   color: ColorValues.appLightBlueColor,
+                                                    //   icon: Icons.add,
+                                                    //   message: 'Update',
+                                                    // ),
+                                                    // : Dimens.box0,
+
+                                                    ///Abandon
+                                                    // controller.listSchedules!
+                                                    //             .firstWhere(
+                                                    //               (e) => "${e?.status_short}" == e?.status_short,
+                                                    //               orElse: () => Schedules(status_short: ""),
+                                                    //             )
+                                                    //             ?.status_short ==
+                                                    //         "In Progress"
+                                                    //     ?
+                                                    // controller.mcExecutionDetailsModel.value?.status == 361
+                                                    //     ? TableActionButton(
+                                                    //         // label: 'Abandon',
+                                                    //         onPress: () {
+                                                    //           var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+                                                    //           controller.scheduledId = filterdData?.scheduleId;
+                                                    //           print({'Executiondata:': filterdData?.executionId});
+                                                    //           Get.dialog(AbandoneScheduleExecutionDialog(
+                                                    //             id: filterdData?.executionId,
+                                                    //           ));
+                                                    //         },
+                                                    //         color: Colors.red,
+                                                    //         icon: Icons.close,
+                                                    //         message: 'Abandon',
+                                                    //       )
+                                                    //     : Dimens.box0,
+
+                                                    // controller.listSchedules!
+                                                    //             .firstWhere(
+                                                    //               (e) => "${e?.status_short}" == e?.status_short,
+                                                    //               orElse: () => Schedules(status_short: ""),
+                                                    //             )
+                                                    //             ?.status_short ==
+                                                    //         "In Progress"
+                                                    //     ?
                                                     controller.listSchedules!
                                                                     .firstWhere(
                                                                         (e) =>
@@ -328,6 +457,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                     ?.status ==
                                                                 384
                                                         ? TableActionButton(
+                                                            // label: 'Equipments',
                                                             onPress: () {
                                                               var filterdData = controller
                                                                   .listSchedules
@@ -335,16 +465,19 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                       "${e?.scheduleId}" ==
                                                                       record[0][
                                                                           'value']);
-                                                              Get.dialog(AddModuleCleaningExecutionMobileDialog(
-                                                                  scheduleId:
-                                                                      filterdData!
-                                                                          .scheduleId,
-                                                                  cleaningDay:
-                                                                      filterdData
-                                                                          .cleaningDay,
-                                                                  waterUsed:
-                                                                      filterdData
-                                                                          .waterUsed));
+
+                                                              Get.dialog(
+                                                                  AddModuleCleaningExecutionMobileDialog(
+                                                                scheduleId:
+                                                                    filterdData!
+                                                                        .scheduleId,
+                                                                cleaningDay:
+                                                                    filterdData
+                                                                        .cleaningDay,
+                                                                waterUsed:
+                                                                    filterdData
+                                                                        .waterUsed,
+                                                              ));
                                                             },
                                                             color: ColorValues
                                                                 .appDarkBlueColor,
@@ -377,6 +510,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                     ?.status ==
                                                                 384
                                                         ? TableActionButton(
+                                                            // label: 'Start',
                                                             onPress: () {
                                                               var filterdData = controller
                                                                   .listSchedules
@@ -384,8 +518,12 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                       "${e?.scheduleId}" ==
                                                                       record[0][
                                                                           'value']);
+
+                                                              print(
+                                                                  'filteredData:${filterdData!.scheduleId}');
+                                                              //  selectedData = filterdData;
                                                               Get.dialog<void>(CustomCalibrationDialog(
-                                                                  id: filterdData!
+                                                                  id: filterdData
                                                                           .scheduleId ??
                                                                       0,
                                                                   ptw_id: filterdData
@@ -395,9 +533,13 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                       .toString(),
                                                                   starttype:
                                                                       2));
+                                                              // print({
+                                                              //   'scheduledata:':
+                                                              //       filterdData.scheduleId
+                                                              // });
                                                             },
                                                             color: ColorValues
-                                                                .closeColor,
+                                                                .closeColor, //Color.fromARGB(255, 70, 95, 57),
                                                             icon: Icons.close,
                                                             message: 'Close',
                                                           )
@@ -427,6 +569,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                         ?.status ==
                                                                     364
                                                         ? TableActionButton(
+                                                            // label: 'Equipments',
                                                             onPress: () {
                                                               var filterdData = controller
                                                                   .listSchedules
@@ -434,6 +577,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                       "${e?.scheduleId}" ==
                                                                       record[0][
                                                                           'value']);
+
                                                               Get.dialog(AddModuleCleaningExecutionMobileDialog(
                                                                   scheduleId:
                                                                       filterdData!
@@ -467,6 +611,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                 ?.status ==
                                                             363
                                                         ? TableActionButton(
+                                                            // label: 'Equipments',
                                                             onPress: () {
                                                               var filterdData = controller
                                                                   .listSchedules
@@ -513,6 +658,7 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                                                 ?.status ==
                                                             363
                                                         ? TableActionButton(
+                                                            // label: 'Equipments',
                                                             onPress: () {
                                                               var filterdData = controller
                                                                   .listSchedules

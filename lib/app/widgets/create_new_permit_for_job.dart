@@ -79,10 +79,17 @@ class CreateNewPermitForJobDialog extends GetView {
                           child: const Text('Permit List'),
                         ),
                         // Dimens.boxWidth10,
-                         SizedBox(width:10),
+                        SizedBox(width: 10),
                         ElevatedButton(
                           style: Styles.yellowElevatedButtonStyle,
                           onPressed: () {
+                            controller.clearStoreData();
+                            controller.clearStoreTaskData();
+                            controller.clearStoreTaskActivityData();
+                            controller.clearStoreTasktoActorData();
+                            controller.clearStoreTaskWhereUsedData();
+                            controller.clearStoreTaskfromActorData();
+
                             controller.createJobCard();
 
                             // Get.offAndToNamed(Routes.viewPermitWebScreen);
@@ -91,7 +98,7 @@ class CreateNewPermitForJobDialog extends GetView {
                           child: const Text('Add Mrs'),
                         ),
                         // Dimens.boxWidth10,
-                         SizedBox(width:10),
+                        SizedBox(width: 10),
                         ElevatedButton(
                           style: Styles.blueElevatedButtonStyle,
                           onPressed: () {
@@ -101,7 +108,7 @@ class CreateNewPermitForJobDialog extends GetView {
                           child: const Text('View This Permit'),
                         ),
                         // Dimens.boxWidth10,
-                         SizedBox(width:10),
+                        SizedBox(width: 10),
                         // ElevatedButton(
                         //   style: Styles.redElevatedButtonStyle,
                         //   onPressed: () => Get.offAndToNamed(Routes.addJob),

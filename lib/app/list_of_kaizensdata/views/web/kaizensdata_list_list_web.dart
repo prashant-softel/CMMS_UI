@@ -154,8 +154,8 @@ class _KaizensdataListWebState extends State<KaizensdataListWeb> {
                                                 onPressed: () {
                                                   controller.clearStoreData();
 
-                                                  Get.offNamed(Routes
-                                                      .createkaizensScreen  );
+                                                  Get.offAllNamed(Routes
+                                                      .createkaizensScreen);
                                                 },
                                                 color: ColorValues.addNewColor,
                                               )
@@ -325,8 +325,7 @@ class _KaizensdataListWebState extends State<KaizensdataListWeb> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  controller.kaizensdataList.isEmpty ==
-                                              true &&
+                                  controller.kaizensdataList.isEmpty == true &&
                                           controller.isLoading == false
                                       ? Center(child: Text('No data'))
                                       : controller.isLoading.value == true
@@ -488,8 +487,7 @@ class KaizensDataListSource extends DataTableSource {
   ///
   void filtersOccupationalhealth() {
     filteredGetFuelDataList = <GetKaizensDataList?>[];
-    filteredGetFuelDataList =
-        controller.kaizensdataList.where((Fueldatalist) {
+    filteredGetFuelDataList = controller.kaizensdataList.where((Fueldatalist) {
       return (Fueldatalist.id ?? '')
           .toString()
           .contains(controller.monthnameFilterText.value.toLowerCase());
@@ -506,11 +504,12 @@ class KaizensDataListSource extends DataTableSource {
 
     controller.kaizensId.value = KaizensDataDetails?.id ?? 0;
     var cellsBuffer = [
-            'KD${KaizensDataDetails?.id?? ''}',
-      '${KaizensDataDetails?.kaizensImplemented?? ''}',
+      'KD${KaizensDataDetails?.id ?? ''}',
+      '${KaizensDataDetails?.kaizensImplemented ?? ''}',
       '${KaizensDataDetails?.costForImplementation ?? ''}',
-      '${KaizensDataDetails?.costSavedFromImplementation?? ''}',
+      '${KaizensDataDetails?.costSavedFromImplementation ?? ''}',
       '${KaizensDataDetails?.month_name ?? ''}',
+      '${KaizensDataDetails?.year ?? ''}',
       '${KaizensDataDetails?.createdAt ?? ''}',
       'Actions',
     ];
@@ -553,15 +552,14 @@ class KaizensDataListSource extends DataTableSource {
                             message: 'View',
                             onPress: () {
                               controller.clearStoreData();
-                              // int goId =
-                              //     OccupationallistDetails?.id ?? 0;
-                              // if (goId != 0) {
-                              //   Get.toNamed(Routes.viewGoodsOrders,
-                              //       arguments: {
-                              //         'goId': goId,
-                              //         "goType": 1
-                              //       });
-                              // }
+                              int KId = KaizensDataDetails?.id ?? 0;
+                                  if (KId != 0) {
+                                    Get.toNamed(Routes.createkaizensScreen,
+                                        arguments: {
+                                          "selectedItem": controller.selectedItem,
+                                          "type":1,
+                                        });
+                                  }
                             },
                           )
                         : Dimens.box0,
@@ -579,16 +577,50 @@ class KaizensDataListSource extends DataTableSource {
                             message: 'Edit',
                             onPress: () {
                               controller.clearStoreData();
-                              // int goId = OccupationallistDetails?.id ?? 0;
-                              // if (goId != 0) {
-                              //   Get.toNamed(
-                              //       Routes
-                              //           .updateGoodsOrdersDetailsScreen,
-                              //       arguments: {"goId": goId});
-                              // }
+                              controller.selectedItem =
+                                  controller.kaizensdataList.firstWhere(
+                                (element) =>
+                                    "${element.id}" ==
+                                    KaizensDataDetails?.id.toString(),
+                              );
+                              int VisitId = KaizensDataDetails?.id ?? 0;
+
+                              if (VisitId != 0) {
+                                Get.toNamed(Routes.createkaizensScreen,
+                                    arguments: {
+                                      "selectedItem": controller.selectedItem
+                                    });
+                              }
                             },
                           )
                         : Dimens.box0,
+                    varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants
+                                            .kPMchecklistFeatureId &&
+                                    e.delete ==
+                                        UserAccessConstants.kHaveDeleteAccess)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.deleteColor,
+                            icon: Icons.delete,
+                            message: 'Delete',
+                            onPress: () {
+                              controller.isDeleteDialog(
+                                KaizenId:
+                                    controller.kaizensdataList[index].id ?? 0,
+                                // Kaizenlist:controller.kaizensdataList[index]
+
+// int? id = KaizensDataDetails?.id;
+//     controller.deleteKaizen(KaizenId: id);
+                              );
+
+                              // controller.isContainerVisible.value = true;
+                            },
+                          )
+                        : Dimens.box0
                   ])
                 : Text(value.toString()),
           ),

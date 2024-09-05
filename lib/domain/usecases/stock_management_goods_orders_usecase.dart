@@ -12,11 +12,11 @@ class StockManagementGoodsOrdersUsecase {
     bool? isLoading,
   }) async =>
       await repository.getUserList(facilityId, isLoading, false);
-  deleteGoodsOrders({required Object id, required bool isLoading}) async =>
-      await repository.deleteGoodsOrders(
-        id,
-        isLoading,
-      );
+  deleteGoodsOrders(
+          {required Object id,
+          required bool isLoading,
+          int? facility_id}) async =>
+      await repository.deleteGoodsOrders(id, isLoading, facility_id);
   Future<List<GoodsOrdersListModel>> getGoodsOrdersList({
     required bool isLoading,
     required int? facility_id,
@@ -25,12 +25,11 @@ class StockManagementGoodsOrdersUsecase {
     required String end_date,
   }) async {
     return repository.getGoodsOrdersList(
-      isLoading: isLoading,
-      facility_id: facility_id,
-      start_date: start_date,
-      end_date: end_date,
-      isExport: isExport
-    );
+        isLoading: isLoading,
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isExport: isExport);
   }
 
   void clearValue() async => repository.clearData(LocalKeys.goId);

@@ -188,8 +188,8 @@ class _CreateFuelMobileState extends State<CreateFuelMobile> {
                           ),
                         ),
                         Dimens.boxWidth15,
-                        // controller.obsId == 0
-                        //     ? 
+                        controller.selectedItem?.id == 0
+                            ? 
                         Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -197,22 +197,25 @@ class _CreateFuelMobileState extends State<CreateFuelMobile> {
                                   text: 'Submit',
                                   onPressed: () {
                                     // controller.isFormInvalid.value = false;
-                                    controller.createfuledata();
+                                    controller.createfuledata(
+                                         month_id: controller.selectedMonth,
+                                      year: controller.selectedYear
+                                    );
                                   },
                                 ),
                               )
-                        //     : Container(
-                        //         height: 40,
-                        //         child: CustomElevatedButton(
-                        //           backgroundColor: ColorValues.submitColor,
-                        //           text: 'Update',
-                        //           onPressed: () {
-                        //             controller.isFormInvalid.value = false;
-                        //             controller.createObs(position: 0);
-                        //           },
-                        //         ),
-                        //       ),
-                        ,
+                            : Container(
+                                height: 40,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.submitColor,
+                                  text: 'Update',
+                                  onPressed: () {
+                                    controller.isFormInvalid.value = false;
+                                    controller.updateFuelConsumption();
+                                  },
+                                ),
+                              ),
+                        
                         Spacer(),
                       ],
                     )

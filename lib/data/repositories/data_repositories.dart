@@ -2261,6 +2261,40 @@ class DataRepository extends DomainRepository {
         updateRegularVisit: updateRegularVisit,
         isLoading: isLoading ?? false,
       );
+  //updateKaizenDetails
+  Future<ResponseModel> updateKaizenDetails({
+    required String auth,
+    updateKaizen,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateKaizenDetails(
+        auth: auth,
+        updateKaizen: updateKaizen,
+        isLoading: isLoading ?? false,
+      );
+  //updatePlantationDetails
+  Future<ResponseModel> updatePlantationDetails({
+    required String auth,
+    updatePlantation,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updatePlantationDetails(
+        auth: auth,
+        updatePlantation: updatePlantation,
+        isLoading: isLoading ?? false,
+      );
+
+  //updateFuelConsumption
+  Future<ResponseModel> updateFuelConsumption({
+    required String auth,
+    updateFueldata,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateFuelConsumption(
+        auth: auth,
+        updateFueldata: updateFueldata,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> createWaterData({
     required String auth,
     createWaterData,
@@ -3385,6 +3419,19 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getCumulativeReportList({
+    required String auth,
+    bool? isLoading,
+    required selectedFacilityIdList,
+    required module_id,
+  }) async {
+    return await connectHelper.getCumulativeReportList(
+        auth: auth,
+        isLoading: isLoading,
+        selectedFacilityIdList: selectedFacilityIdList,
+        module_id: module_id);
+  }
+
   Future<ResponseModel> getUserList({
     required String auth,
     int? facilityId,
@@ -3457,16 +3504,16 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> updatePmExecution({
-    required String auth,
-    pmExecutionJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> updatePmExecution(
+          {required String auth,
+          pmExecutionJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.updatePmExecution(
-        auth: auth,
-        pmExecutionJsonString: pmExecutionJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          pmExecutionJsonString: pmExecutionJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
   Future<ResponseModel> updateAuditTaskExecution({
     required String auth,
     auditExecutionJsonString,
@@ -3763,13 +3810,10 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  Future<ResponseModel> deleteGoodsOrders({
-    auth,
-    bool? isLoading,
-    id,
-  }) async {
+  Future<ResponseModel> deleteGoodsOrders(
+      {auth, bool? isLoading, id, facility_id}) async {
     var response = await connectHelper.deleteGoodsOrders(
-        auth: auth, isLoading: isLoading, id: id);
+        auth: auth, isLoading: isLoading, id: id, facility_id: facility_id);
     return response;
   }
 
@@ -4336,29 +4380,28 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  Future<ResponseModel> approveMrs({
-    auth,
-    bool? isLoading,
-    int? type,
-    approvetoJsonString,
-  }) async {
+  Future<ResponseModel> approveMrs(
+      {auth,
+      bool? isLoading,
+      int? type,
+      approvetoJsonString,
+      int? facility_id}) async {
     var response = await connectHelper.approveMrs(
         auth: auth,
         isLoading: isLoading,
         type: type,
-        approvetoJsonString: approvetoJsonString);
+        approvetoJsonString: approvetoJsonString,
+        facility_id: facility_id);
     return response;
   }
 
-  Future<ResponseModel> rejectMrs({
-    auth,
-    bool? isLoading,
-    rejecttoJsonString,
-  }) async {
+  Future<ResponseModel> rejectMrs(
+      {auth, bool? isLoading, rejecttoJsonString, facility_id}) async {
     var response = await connectHelper.rejectMrs(
         auth: auth,
         isLoading: isLoading,
-        rejecttoJsonString: rejecttoJsonString);
+        rejecttoJsonString: rejecttoJsonString,
+        facility_id: facility_id);
     return response;
   }
 
@@ -4421,36 +4464,37 @@ class DataRepository extends DomainRepository {
   }
 
   Future<ResponseModel> issueMrs(
-      {auth, bool? isLoading, issuetoJsonString, int? type}) async {
+      {auth,
+      bool? isLoading,
+      issuetoJsonString,
+      int? type,
+      int? facility_id}) async {
     var response = await connectHelper.issueMrs(
         auth: auth,
         isLoading: isLoading,
         type: type,
-        issuetoJsonString: issuetoJsonString);
+        issuetoJsonString: issuetoJsonString,
+        facility_id: facility_id);
     return response;
   }
 
-  Future<ResponseModel> approveIssueMrs({
-    auth,
-    bool? isLoading,
-    issuemrsapprovetoJsonString,
-  }) async {
+  Future<ResponseModel> approveIssueMrs(
+      {auth, bool? isLoading, issuemrsapprovetoJsonString, facility_id}) async {
     var response = await connectHelper.approveIssueMrs(
         auth: auth,
         isLoading: isLoading,
-        issuemrsapprovetoJsonString: issuemrsapprovetoJsonString);
+        issuemrsapprovetoJsonString: issuemrsapprovetoJsonString,
+        facility_id: facility_id);
     return response;
   }
 
-  Future<ResponseModel> rejectIssueMrs({
-    auth,
-    bool? isLoading,
-    rejectIssuetoJsonString,
-  }) async {
+  Future<ResponseModel> rejectIssueMrs(
+      {auth, bool? isLoading, rejectIssuetoJsonString, facility_id}) async {
     var response = await connectHelper.rejectIssueMrs(
         auth: auth,
         isLoading: isLoading,
-        rejectIssuetoJsonString: rejectIssuetoJsonString);
+        rejectIssuetoJsonString: rejectIssuetoJsonString,
+        facility_id: facility_id);
     return response;
   }
 
@@ -4500,16 +4544,16 @@ class DataRepository extends DomainRepository {
           vegplanId: vegplanId,
           vegexid: vegexid,
           facilityId: facilityId);
-  Future<ResponseModel> setPmTask({
-    required String auth,
-    scheduleId,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> setPmTask(
+          {required String auth,
+          scheduleId,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.setPmTask(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          scheduleId: scheduleId,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
   Future<ResponseModel> startAuditTask({
     required String auth,
     auditTaskId,
@@ -4798,18 +4842,18 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> assignToPmTask({
-    required String auth,
-    int? assignId,
-    int? taskId,
-    required bool isLoading,
-  }) async =>
+  Future<ResponseModel> assignToPmTask(
+          {required String auth,
+          int? assignId,
+          int? taskId,
+          required bool isLoading,
+          int? facility_id}) async =>
       await connectHelper.assignToPmTask(
-        auth: auth,
-        assignId: assignId,
-        taskId: taskId,
-        isLoading: isLoading,
-      );
+          auth: auth,
+          assignId: assignId,
+          taskId: taskId,
+          isLoading: isLoading,
+          facility_id: facility_id);
   Future<ResponseModel> assignAuditTask({
     required String auth,
     int? assignId,
@@ -4846,31 +4890,32 @@ class DataRepository extends DomainRepository {
           taskId: taskId,
           isLoading: isLoading,
           facilityId: facilityId);
-  Future<ResponseModel> UpdatePMTaskExecution({
-    required String auth,
-    updatePMTaskExecutionJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> UpdatePMTaskExecution(
+          {required String auth,
+          updatePMTaskExecutionJsonString,
+          bool? isLoading,
+          int? facility_id}) async =>
       await connectHelper.UpdatePMTaskExecution(
-        auth: auth,
-        updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
+          isLoading: isLoading ?? false,
+          facility_id: facility_id);
   Future<ResponseModel> cloneSchedule(
           {required String auth,
           required int from_schedule_id,
           required int to_schedule_id,
           required int taskId,
           required int cloneJobs,
-          bool? isloading}) async =>
+          bool? isloading,
+          int? facility_id}) async =>
       await connectHelper.cloneSchedule(
-        auth: auth,
-        from_schedule_id: from_schedule_id,
-        to_schedule_id: to_schedule_id,
-        taskId: taskId,
-        cloneJobs: cloneJobs,
-        isloading: isloading ?? false,
-      );
+          auth: auth,
+          from_schedule_id: from_schedule_id,
+          to_schedule_id: to_schedule_id,
+          taskId: taskId,
+          cloneJobs: cloneJobs,
+          isloading: isloading ?? false,
+          facility_id: facility_id);
   Future<ResponseModel> rejectShecduleExecution(
           {required String auth,
           rejecttoJsonString,
@@ -5070,7 +5115,71 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
-
+  //deleteKaizen
+    Future<ResponseModel> deleteKaizen({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteKaizen(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+  //deleteHealth
+      Future<ResponseModel> deleteHealth({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteHealth(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+  //deleteVisitNotice
+   Future<ResponseModel> deleteVisitNotice({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteVisitNotice(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+  //deleteFuel
+      Future<ResponseModel> deleteFuel({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteFuel(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+//deletePlantation
+    Future<ResponseModel> deletePlantation({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deletePlantation(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
   Future<ResponseModel> getGrievanceType({
     String? auth,
     bool? isLoading,
@@ -5287,13 +5396,13 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  Future<ResponseModel> deletePmTask({
-    auth,
-    bool? isLoading,
-    task_id,
-  }) async {
+  Future<ResponseModel> deletePmTask(
+      {auth, bool? isLoading, task_id, facility_id}) async {
     var response = await connectHelper.deletePmTask(
-        auth: auth, isLoading: isLoading, task_id: task_id);
+        auth: auth,
+        isLoading: isLoading,
+        task_id: task_id,
+        facility_id: facility_id);
     return response;
   }
 
@@ -5885,6 +5994,7 @@ class DataRepository extends DomainRepository {
     List<int>? selectedState,
     List<int>? selectedSpv,
     List<int>? selectedSite,
+    List<int>? selectedDSMType,
     bool? isLoading,
   }) async =>
       await connectHelper.getDSMData(
@@ -5894,8 +6004,19 @@ class DataRepository extends DomainRepository {
         selectedState: selectedState,
         selectedSpv: selectedSpv,
         selectedSite: selectedSite,
+        selectedDSMType: selectedDSMType,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getdsmType({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getdsmType(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
 
   //Material category
   Future<ResponseModel> getMaterialList({

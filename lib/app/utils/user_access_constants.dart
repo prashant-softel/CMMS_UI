@@ -116,12 +116,46 @@ abstract class UserAccessConstants {
   /// MASTERS
   static int kMasterFeatureId = 50;
   static String kFeatureMasterName = "Masters";
+
   //Audit Plan
   static int kAuditPlanFeatureId = 18;
   static String kFeatureAuditPlanName = "Audit Plan";
+
   //Audit Execution
   static int kAuditExecutionFeatureId = 21;
   static String kFeatureAuditExecutionName = "Audit Execution";
+
+  //hfe Report
+  static int kHfeMasterFeatureId = 65;
+  static String kFeatureHfeMasterName = "Hfe Master";
+
+  //Warranty
+  static int kWarrantyFeatureId = 64;
+  static String kFeatureWarrantyName = "Warranty";
+
+  ///document manager
+  static int kDocumentManagerFeatureId = 62;
+  static String kFeatureDocumentManagerName = "Document  Manager";
+
+  //Assets
+  static int kAssetsFeatureId = 61;
+  static String kFeatureAssetsName = "Assets";
+
+  //General
+  static int kGeneralFeatureId = 59;
+  static String kFeatureGeneralName = "General";
+
+  //User Management
+  static int kUserManagementFeatureId = 58;
+  static String kFeatureUserManagementName = "User Management";
+
+  //Business
+  static int kBusinessFeatureId = 56;
+  static String kFeatureBusinessName = "Business";
+
+  //Facility
+  static int kFacilityFeatureId = 55;
+  static String kFeatureFacilityName = "Facility";
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;

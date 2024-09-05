@@ -418,4 +418,36 @@ class JobDetailsController extends GetxController {
   void clearpmTaskValue() {
     jobDetailsPresenter.clearpmTaskValue();
   }
+
+  void clearMrsStoreData() {
+    jobDetailsPresenter.clearValue();
+  }
+
+  void clearStoreDataTaskId() {
+    jobDetailsPresenter.clearStoreDataTaskId();
+  }
+
+  void clearStoreTaskData() {
+    jobDetailsPresenter.clearStoreTaskData();
+  }
+
+  void clearStoreTaskActivityData() {
+    jobDetailsPresenter.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    jobDetailsPresenter.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    jobDetailsPresenter.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    jobDetailsPresenter.clearStoreTaskWhereUsedData();
+  }
+
+  void clearStoreDataJobId() {
+    jobDetailsPresenter.clearStoreDataJobId();
+  }
 }

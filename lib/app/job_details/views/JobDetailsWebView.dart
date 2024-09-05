@@ -605,6 +605,19 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                       .assignment,
                                                                   onPress:
                                                                       () async {
+                                                                    controller
+                                                                        .clearTypeStoreData();
+                                                                    controller
+                                                                        .clearStoreTaskData();
+                                                                    controller
+                                                                        .clearStoreTaskActivityData();
+                                                                    controller
+                                                                        .clearStoreTasktoActorData();
+                                                                    controller
+                                                                        .clearStoreTaskWhereUsedData();
+                                                                    controller
+                                                                        .clearStoreTaskfromActorData();
+
                                                                     Get.offAllNamed(
                                                                         Routes
                                                                             .createMrs,

@@ -17,21 +17,21 @@ class IssueMrsApprovePresenter {
       );
   Future<bool> approveIssueMrs({
     issuemrsapprovetoJsonString,
-    required bool isLoading,
+    required bool isLoading,int?facility_id
   }) async {
     return issuemrsApproveUsecase.approveIssueMrs(
       issuemrsapprovetoJsonString: issuemrsapprovetoJsonString,
-      isLoading: isLoading,
+      isLoading: isLoading,facility_id:facility_id
     );
   }
 
   Future<bool> rejectIssueMrs({
     rejectIssuetoJsonString,
-    required bool isLoading,
+    required bool isLoading,int?facility_id
   }) async {
     return issuemrsApproveUsecase.rejectIssueMrs(
       rejectIssuetoJsonString: rejectIssuetoJsonString,
-      isLoading: isLoading,
+      isLoading: isLoading,facility_id:facility_id
     );
   }
 

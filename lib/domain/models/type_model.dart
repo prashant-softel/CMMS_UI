@@ -5,6 +5,8 @@
 //   TypeModel({required this.name, required this.id});
 // }
 
+import 'dart:convert';
+
 class TypeModel {
   final String name;
   final String? id;
@@ -65,6 +67,12 @@ class StatusModel {
     };
   }
 }
+
+List<StatusModel> StatusModelFromJson(String str) => List<StatusModel>.from(
+    json.decode(str).map((x) => StatusModel.fromJson(x)));
+
+String StatusModelToJson(List<StatusModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class MonthModel {
   final String name;

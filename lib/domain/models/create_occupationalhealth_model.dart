@@ -5,11 +5,13 @@ CreateOccupationalModel CreateOccupationalModelFromJson(String str) =>
 
 class CreateOccupationalModel {
   int ? id;
-  String? date;
+  // String? date;
   int? NoOfHealthExamsOfNewJoiner;
   int? PeriodicTests;
   int? OccupationalIllnesses;
-  int? CreatedBy;
+  int? month_id;
+  int? year;
+  // int? CreatedBy;
 
   
 
@@ -18,8 +20,10 @@ class CreateOccupationalModel {
     this.NoOfHealthExamsOfNewJoiner,
     this.PeriodicTests,
     this.OccupationalIllnesses,
-    this.CreatedBy,
-    this.date,
+    this.month_id,
+    this.year,
+    // this.CreatedBy,
+    // this.date,
   
   });
 
@@ -29,17 +33,21 @@ class CreateOccupationalModel {
       NoOfHealthExamsOfNewJoiner: json['NoOfHealthExamsOfNewJoiner'],
       PeriodicTests: json['PeriodicTests'],
       OccupationalIllnesses: json['OccupationalIllnesses'],
-      CreatedBy: json['CreatedBy'],
+      // CreatedBy: json['CreatedBy'],
       id: json['id'],
-      date: json['Date'],
+      // date: json['Date'],
+      month_id: json['month_id'],
+      year: json['year'],
     );
   }
   Map<String, dynamic> toJson() => {
         "NoOfHealthExamsOfNewJoiner": NoOfHealthExamsOfNewJoiner,
         "PeriodicTests": PeriodicTests,
         "OccupationalIllnesses": OccupationalIllnesses,
-        "CreatedBy": CreatedBy,
+        // "CreatedBy": CreatedBy,
         "id": id,
-        "Date": date,
+        // "Date": date,
+        "month_id": month_id,
+        "year": year,
       };
 }

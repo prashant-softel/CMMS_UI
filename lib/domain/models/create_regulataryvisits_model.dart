@@ -11,7 +11,9 @@ class CreateRegulataryvisitsModel {
   int? NoticesToContractor;
   int? AmountOfPenaltiesToContractors;
   int? AnyOther;
-   String? date;
+  int? month_id;
+  int? year;
+  //  String? date;
 
   
 
@@ -23,7 +25,9 @@ class CreateRegulataryvisitsModel {
     this.NoticesToContractor,
     this.AmountOfPenaltiesToContractors,
     this.AnyOther,
-  this.date,
+    this.month_id,
+    this.year,
+  // this.date,
   });
 
   factory CreateRegulataryvisitsModel.fromJson(Map<String, dynamic> json) {
@@ -36,7 +40,9 @@ class CreateRegulataryvisitsModel {
       id: json['id'],
       AmountOfPenaltiesToContractors: json['AmountOfPenaltiesToContractors'],
       AnyOther: json['AnyOther'],
-      date: json['Date'],
+      month_id: json['month_id'],
+      year: json['year'],
+      // date: json['Date'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -47,5 +53,7 @@ class CreateRegulataryvisitsModel {
         "id": id,
         "AmountOfPenaltiesToContractors": AmountOfPenaltiesToContractors,
         "AnyOther": AnyOther,
+        "month_id": month_id,
+        "year": year,
       };
 }

@@ -73,7 +73,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
   Rx<int> pmTaskId = 0.obs;
 
   final Map<String, double> columnwidth = {
-    "PM Task Id": 150,
+    "PM Task Id": 200,
     "PM Task Title": 300,
     "Last Done Date": 200,
     "Due Date": 200,
@@ -170,11 +170,11 @@ class PreventiveMaintenanceTaskController extends GetxController {
     pmTaskList.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
     final _pmTaskList = await preventiveMaintenanceTaskPresenter.getPmTaskList(
-        facilityId: facilityId,
-        isLoading: isLoading.value,
-        startDate: startDate,
-        endDate: endDate,
-        isExport: isExport,
+      facilityId: facilityId,
+      isLoading: isLoading.value,
+      startDate: startDate,
+      endDate: endDate,
+      isExport: isExport,
     );
     if (_pmTaskList != null) {
       pmTaskList.value = _pmTaskList;
@@ -249,6 +249,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
     {
       await preventiveMaintenanceTaskPresenter.deletePmTask(
         task_id,
+        facilityId,
         isLoading: true,
       );
     }

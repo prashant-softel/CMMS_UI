@@ -3,6 +3,10 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/list_of_kaizensdata/kaizensdata_list_presenter.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/get_kaizensdata_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +21,7 @@ class KaizensDataListController extends GetxController {
   final HomeController homecontroller = Get.find();
   RxList<GetKaizensDataList> kaizensdataList = <GetKaizensDataList>[].obs;
   RxList<GetKaizensDataList> filteredData = <GetKaizensDataList>[].obs;
+    GetKaizensDataList? selectedItem;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
 
@@ -44,6 +49,7 @@ class KaizensDataListController extends GetxController {
   RxString costForImplementationFilterText = ''.obs;
   RxString costSavedFromImplementationFilterText = ''.obs;
   RxString monthnameFilterText = ''.obs;
+  RxString yearFilterText = ''.obs;
   RxString createdbyFilterText = ''.obs;
   RxString createdatFilterText = ''.obs;
   RxString actionFilterText = ''.obs;
@@ -57,6 +63,7 @@ class KaizensDataListController extends GetxController {
     "Cost For Implementation": true,
     "Cost Saved From Implementation": true,
     "Month name": true,
+    "Year": true,
     "Created At": true,
   });
   final Map<String, double> columnwidth = {
@@ -65,6 +72,7 @@ class KaizensDataListController extends GetxController {
     "Cost For Implementation": 250,
     "Cost Saved From Implementation": 300,
     "Month name": 150,
+    "Year":100,
     "Created At": 150,
   };
   Map<String, RxString> filterText = {};
@@ -84,6 +92,7 @@ class KaizensDataListController extends GetxController {
     "Cost For Implementation": costForImplementationFilterText,
     "Cost Saved From Implementation": costSavedFromImplementationFilterText,
     "Month name": monthnameFilterText,
+    "Year":yearFilterText,
     "Created At": createdatFilterText,
       "Action": actionFilterText,
       // "Status": statusFilterText,
@@ -154,6 +163,66 @@ class KaizensDataListController extends GetxController {
   void clearStoreData() {
     kaizensdataListPresenter.clearValue();
   }
-
-  
+Future<void> deleteKaizen( {int? KaizenId}) async {
+    {
+      await kaizensdataListPresenter.deleteKaizen(
+        Id: KaizenId,
+        isLoading: true,
+      );
+    }
+  getkaizensdata(false);
+}
+void isDeleteDialog({int? KaizenId, String? Kaizenlist}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("Delete Kiaze List", style: Styles.blackBold16),
+              Divider(
+                color: ColorValues.appLightGreyColor,
+              ),
+              Dimens.boxHeight5,
+              RichText(
+                text: TextSpan(
+                    text: 'Are you sure you want to delete the Kaizen Data',
+                    style: Styles.blackBold16,
+                    children: [
+                      TextSpan(
+                        text: Kaizenlist,
+                        style: TextStyle(
+                          color: ColorValues.orangeColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ]),
+              ),
+            ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appRedColor,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  text: 'No'),
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appGreenColor,
+                  onPressed: () {
+                    deleteKaizen(KaizenId:KaizenId).then((value) {
+                      Get.back();
+                      getkaizensdata(false);
+                    });
+                  },
+                  text: 'Yes'),
+            ],
+          ),
+          Dimens.boxHeight5
+        ],
+      ),
+    );
+  }
 }

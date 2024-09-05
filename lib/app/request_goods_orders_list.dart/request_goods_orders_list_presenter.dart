@@ -14,11 +14,10 @@ class PurchaseGoodsorderListPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  deleteFacility(String? id, {required bool isLoading}) async =>
+  deleteFacility(String? id, int? facility_id,
+          {required bool isLoading}) async =>
       await purchaseGoodsorderListUsecase.deleteGoodsOrders(
-        id: id ?? 0,
-        isLoading: isLoading,
-      );
+          id: id ?? 0, isLoading: isLoading, facility_id: facility_id);
   Future<List<GetRequestOrderListModel>> getRequestOrderList({
     required bool isLoading,
     bool? isExport,
@@ -27,12 +26,11 @@ class PurchaseGoodsorderListPresenter {
     required String end_date,
   }) async {
     return purchaseGoodsorderListUsecase.getRequestOrderList(
-      isLoading: isLoading,
-      facility_id: facility_id,
-      start_date: start_date,
-      end_date: end_date,
-      isExport: isExport
-    );
+        isLoading: isLoading,
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isExport: isExport);
   }
 
   void clearValue() async => purchaseGoodsorderListUsecase.clearValue();

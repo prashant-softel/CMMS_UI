@@ -42,6 +42,7 @@ abstract class LocalKeys {
   static const pmPlanId = 'pmPlanId';
   static const auditTaskId = 'auditTaskId';
   static const calibrationId = 'calibrationId';
+  static const whereUsedId = 'whereUsedId';
 
   static const activity = 'activity';
   static const fromActorTypeId = 'fromActorTypeId';
@@ -118,6 +119,7 @@ abstract class LocalKeys {
   static const oHid = 'oHid';
   static const healthId = 'healthId';
   static const visitId = 'visitId';
-
-
+  static const fuelId = 'fuelId';
+  static const plantationId = 'plantationId';
+  static const kaizenId = 'kaizenId';
 }

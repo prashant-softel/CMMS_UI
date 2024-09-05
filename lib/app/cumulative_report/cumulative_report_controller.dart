@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:cmms/app/cumulative_report/cumulative_report_presenter.dart';
+import 'package:cmms/domain/models/cumulative_report_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
 import 'package:get/get.dart';
@@ -29,6 +30,7 @@ class CumulativeReportController extends GetxController {
   Rx<bool> isModuleListSelected = true.obs;
   Rx<String> selectedModuleList = ''.obs;
   RxInt module_id = 0.obs;
+  RxList<Cumulativereport?> cumulativereport = <Cumulativereport>[].obs;
 
   @override
   void onInit() async {
@@ -56,11 +58,22 @@ class CumulativeReportController extends GetxController {
 
   Future<void> getModuleList() async {
     moduleList.value = <ModuleModel>[];
+
+    // Fetch the complete module list
     final _moduleList =
         await cumulativeReportPresenter.getModuleList(isLoading: true);
 
+    // Check if the list is not null
     if (_moduleList != null) {
-      moduleList.value = _moduleList;
+      // Filter the modules to include only the specified items
+      final filteredModules = _moduleList.where((module) {
+        return module?.id == 2 ||
+            module?.id == 10 ||
+            module?.id == 32 ||
+            module?.id == 33;
+      }).toList();
+
+      moduleList.value = filteredModules;
     }
   }
 
@@ -84,6 +97,19 @@ class CumulativeReportController extends GetxController {
           //statements;
         }
         break;
+    }
+  }
+
+  Future<void> getCumulativeReportList() async {
+    String lststrFacilityIds = selectedFacilityIdList.join(',');
+
+    final list = await cumulativeReportPresenter.getCumulativeReportList(
+        selectedFacilityIdList: lststrFacilityIds, module_id: module_id.value);
+
+    if (list != null) {
+      for (var _cumulativereport in list) {
+        cumulativereport.add(_cumulativereport);
+      }
     }
   }
 }

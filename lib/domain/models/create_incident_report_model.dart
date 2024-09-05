@@ -478,36 +478,41 @@ class ImmediateCorrection {
 
 class InvestigationTeam {
   InvestigationTeam({
-    this.srNumber,
-    this.person_id,
+    // this.srNumber,
+    // this.person_id,
+    this.investigation_item_id,
     this.name,
     this.designation,
-    this.person_type,
-    this.investigation_date,
+    // this.person_type,
+    // this.investigation_date,
   });
 
-  String? srNumber;
-  String? person_id;
-  int? person_type;
+  // String? srNumber;
+  // String? person_id;
+  // int? person_type;
+  int? investigation_item_id;
   String? name;
   String? designation;
-  String? investigation_date;
+  // String? investigation_date;
 
   factory InvestigationTeam.fromJson(Map<String, dynamic> json) =>
       InvestigationTeam(
-          srNumber: json['srNumber'],
-          person_id: json['person_id'],
-          person_type: json['person_type'],
-          name: json["person_name"],
-          designation: json['designation'],
-          investigation_date: json['investigation_date']);
+        // srNumber: json['srNumber'],
+        // person_id: json['person_id'],
+        // person_type: json['person_type'],
+        name: json["person_name"],
+        investigation_item_id: json["investigation_item_id"],
+        designation: json['designation'],
+        // investigation_date: json['investigation_date']
+      );
 
   Map<String, dynamic> toJson() => {
-        "srNumber": srNumber,
-        "person_id": person_id,
-        "person_type": person_type,
+        // "srNumber": srNumber,
+        // "person_id": person_id,
+        // "person_type": person_type,
+        "investigation_item_id": investigation_item_id,
         "name": name,
         "designation": designation,
-        "investigation_date": investigation_date
+        // "investigation_date": investigation_date
       };
 }
