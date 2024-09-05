@@ -53,6 +53,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   RxList<WorkingAreaList?>? materialUsedAssets = <WorkingAreaList?>[].obs;
 
   var commentCtrlr = TextEditingController();
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+  Rx<bool> isFormInvalid = false.obs;
   var updatecommentCtrlr = TextEditingController();
   Map<String, CmmrsItems> dropdownMapperData = {};
 
@@ -134,6 +136,14 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       {'key': "Consumed_Qty", "value": ''},
       // {'key': "Action ", "value": ''},
     ]);
+  }
+
+  void commentcheck() {
+    if (approveCommentTextFieldCtrlr.text == '') {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
   }
 
   Future<void> getMrsListByModuleTask({required int taskId}) async {
@@ -524,6 +534,35 @@ class PreventiveMaintenanceExecutionController extends GetxController {
               closePtwJsonString: closePtwJsonString,
               isLoading: true,
               closetype: 1);
+    }
+  }
+
+  CancelPMTask() async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel =
+          CommentModel(id: scheduleId.value, comment: _comment);
+      ClosePermitModel ptwClose = ClosePermitModel(
+          id: pmtaskViewModel.value?.permit_id ?? 0,
+          comment: _comment,
+          conditionIds: [1, 2, 3, 4],
+          fileIds: []);
+
+      var CancelPMTaskJsonString = commentModel.toJson();
+      var closePtwJsonString = ptwClose.toJson();
+      final permitId = pmtaskViewModel.value!.permit_id;
+      bool shouldClosePermit =  permitId! > 0;
+      final response =
+          await preventiveMaintenanceExecutionPresenter.CancelPMTask(
+        CancelPMTaskJsonString: CancelPMTaskJsonString,
+        closePtwJsonString: closePtwJsonString,
+        shouldClosePermit: shouldClosePermit,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.pmTask);
+      }
     }
   }
 

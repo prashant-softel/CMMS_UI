@@ -144,10 +144,15 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                           ? ColorValues
                                                               .approveStatusColor
                                                           : controller
-                                                                      .pmtaskViewModel
-                                                                      .value
-                                                                      ?.status ==
-                                                                  168
+                                                                          .pmtaskViewModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      168 ||
+                                                                  controller
+                                                                          .pmtaskViewModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      170
                                                               ? ColorValues
                                                                   .rejectedStatusColor
                                                               : ColorValues
@@ -420,7 +425,12 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                       .pmtaskViewModel
                                                                       .value
                                                                       ?.status ==
-                                                                  162 // assigned
+                                                                  162 || // assigned
+                                                              controller
+                                                                      .pmtaskViewModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  161 // resheduled
                                                           ? Dimens.box0
                                                           : TableActionButton(
                                                               color: ColorValues
@@ -717,9 +727,13 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         style: Styles.blue700,
                                                       ),
                                                       Spacer(),
-                                                      controller
-                                                              .listMrsByTaskId!
-                                                              .isEmpty
+                                                      controller.listMrsByTaskId!
+                                                                  .isEmpty &&
+                                                              controller
+                                                                      .pmtaskViewModel
+                                                                      .value
+                                                                      ?.status !=
+                                                                  170
                                                           ? Container(
                                                               height: 30,
                                                               child:
@@ -902,7 +916,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                           }),
                                                                       // controller.pmtaskViewModel.value?.status != 169 &&
                                                                       controller.listMrsByTaskId?[index]?.status == 323 ||
-                                                                              controller.listMrsByTaskId?[index]?.status == 321 ||
+                                                                              // controller.listMrsByTaskId?[index]?.status == 321 ||
                                                                               controller.listMrsByTaskId?[index]?.status == 324
                                                                           ? Dimens.box0
                                                                           : varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kMrsFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length > 0
@@ -1145,6 +1159,51 @@ class PreventiveMaintenanceTaskViewContentWeb
                               text: "Create New Permit",
                               onPressed: () {
                                 controller.createNewPermit();
+                              },
+                            ),
+                          )
+                        : Dimens.box0,
+                    Dimens.boxWidth10,
+                    (controller.pmtaskViewModel.value?.status == 162 ||
+                                controller.pmtaskViewModel.value?.status ==
+                                    161 ||
+                                controller.pmtaskViewModel.value?.status ==
+                                    163) &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPmTaskFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0
+                        ? Container(
+                            height: 35,
+                            child: CustomElevatedButton(
+                              // icon: Icons.link,
+                              backgroundColor: ColorValues.redColor,
+                              text: "Cancel Task",
+                              onPressed: () {
+                                // controller.CancelPMTask();
+                                Get.defaultDialog(
+                                    radius: 5,
+                                    title: 'Confirm',
+                                    middleText:
+                                        'Are you sure you want to cancel the task?',
+                                    textCancel: 'No',
+                                    textConfirm: 'Yes',
+                                    onCancel: () {
+                                      Get.back(); // Close the dialog
+                                    },
+                                    onConfirm: () {
+                                      Get.back(); // Close the dialog
+                                      controller
+                                          .CancelPMTask(); // Call cancel task method
+                                    },
+                                    buttonColor: ColorValues.appRedColor,
+                                    confirmTextColor: Colors.white,
+                                    cancelTextColor: Colors.black);
                               },
                             ),
                           )

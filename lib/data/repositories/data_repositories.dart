@@ -4831,6 +4831,16 @@ class DataRepository extends DomainRepository {
         approvetoJsonString: approvetoJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> CancelPMTask({
+    required String auth,
+    CancelPMTaskJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.CancelPMTask(
+        auth: auth,
+        CancelPMTaskJsonString: CancelPMTaskJsonString,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> assignToPmTask(
           {required String auth,

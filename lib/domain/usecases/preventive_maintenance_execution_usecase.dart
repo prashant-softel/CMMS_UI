@@ -51,6 +51,18 @@ class PreventiveMaintenanceExecutionUsecase {
         closePtwJsonString: closePtwJsonString,
         isLoading: isLoading,
       );
+  Future<bool> CancelPMTask({
+    CancelPMTaskJsonString,
+    closePtwJsonString,
+    bool? isLoading,
+    required bool shouldClosePermit,
+  }) async =>
+      await repository.CancelPMTask(
+          CancelPMTaskJsonString: CancelPMTaskJsonString,
+          closePtwJsonString: closePtwJsonString,
+          shouldClosePermit: shouldClosePermit,
+          isLoading: isLoading);
+
   Future<bool> UpdatePMTaskExecution(
           {updatePMTaskExecutionJsonString,
           bool? isLoading,
