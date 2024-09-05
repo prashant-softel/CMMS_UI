@@ -96,7 +96,7 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                 onPressed: () {
                                   Get.offNamed(Routes.userList);
                                 },
-                                color: ColorValues.greenlightColor,
+                                color: ColorValues.addNewColor,
                               ),
                             ],
                           ),

@@ -1049,10 +1049,10 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                                 'type': 1
                                                                               })
                                                                         : Get.toNamed(
-                                                                            Routes
-                                                                                .editReturnMrs,
-                                                                            arguments:
-                                                                                int.tryParse(rmrsId));
+                                                                            Routes.editReturnMrs,
+                                                                            arguments: {
+                                                                                'mrsId': int.tryParse(rmrsId)
+                                                                              });
                                                                     ;
                                                                   })
                                                         ],
