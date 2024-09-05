@@ -21,6 +21,7 @@ class GetKaizensDataList {
   int? updatedBy;
   int? year;
   String? updatedAt;
+  String? submited_by;
   GetKaizensDataList({
     this.id,
     // this.date,
@@ -35,6 +36,7 @@ class GetKaizensDataList {
     this.updatedBy,
     this.updatedAt,
     this.year,
+    this.submited_by,
   });
 
   factory GetKaizensDataList.fromJson(Map<String, dynamic> json) {
@@ -52,6 +54,7 @@ class GetKaizensDataList {
       updatedBy: json['updatedBy'],
       updatedAt: json['updatedAt'],
       year: json['year'],
+      submited_by: json['submited_by'],
     );
   }
 
@@ -69,5 +72,6 @@ class GetKaizensDataList {
         'updatedBy': updatedBy,
         'updatedAt': updatedAt,
         'year': year,
+        'submited_by': submited_by,
       };
 }
