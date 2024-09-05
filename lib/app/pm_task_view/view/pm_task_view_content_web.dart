@@ -938,7 +938,9 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                                             'mrsId': int.tryParse("$mrsId"),
                                                                                             'type': 2
                                                                                           })
-                                                                                        : Get.toNamed(Routes.editReturnMrs, arguments: int.tryParse(rmrsId));
+                                                                                        : Get.toNamed(Routes.editReturnMrs, arguments: {
+                                                                                            'mrsId': int.tryParse(rmrsId)
+                                                                                          });
                                                                                     ;
                                                                                   })
                                                                               : Dimens.box0
