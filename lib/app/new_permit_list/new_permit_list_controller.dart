@@ -171,7 +171,7 @@ class NewPermitListController extends GetxController {
   Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
-    await setId();
+     setId();
     this.filterText = {
       "Permit Id": PermitIdFilterText,
       "Title": DescriptionFilterText,
@@ -201,7 +201,7 @@ class NewPermitListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> setId() async {
+  void setId() async {
     {
       var dataFromPrevioursScreen = Get.arguments;
       misPermit.value = dataFromPrevioursScreen['misPermit'];
@@ -392,6 +392,16 @@ class NewPermitListController extends GetxController {
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    Get.toNamed(Routes.viewPermitScreen, arguments: {
+      "permitId": permitId,
+      "type": 0,
+      
+    });
+  }
+   Future<void> viewMisPermitList({int? permitId}) async {
     clearStoreData();
     clearTypeStoreData();
     clearisCheckedtoreData();

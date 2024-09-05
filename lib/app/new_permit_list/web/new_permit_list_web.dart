@@ -756,12 +756,11 @@ class PermitListDataSource extends DataTableSource {
                         ? TableActionButton(
                             color: ColorValues.appDarkBlueColor,
                             icon: Icons.visibility,
-                            message: 'View Permit',
+                            message: 'View',
                             onPress: () {
                               int? permitId =
                                   controller.newPermitList[index]?.permitId;
-                              controller.viewNewPermitList(permitId: permitId);
-                              
+                              controller.viewMisPermitList(permitId: permitId);
                             },
                           )
                         : Wrap(
