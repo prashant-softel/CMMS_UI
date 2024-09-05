@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:cmms/app/mis/mis_dashboard_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -119,10 +120,9 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 controller.goToObservationSummary();
                               },
                             ),
-
                           ],
                         ),
-                         GridView.count(
+                        GridView.count(
                           shrinkWrap: true,
                           primary: false,
                           padding: Dimens.edgeInsets15,
@@ -133,7 +133,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                               ? (itemWidth / itemHeight)
                               : 5,
                           children: <Widget>[
-                             createContentTile(
+                            createContentTile(
                                 title: "MIS Checklist",
                                 onTap: () {
                                   controller.createChecklist();
@@ -147,7 +147,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                   // );
                                   controller.checkPoint();
                                 }),
-                                   createContentTile(
+                            createContentTile(
                                 title: "MIS Summary",
                                 onTap: () {
                                   // Get.toNamed(
@@ -186,6 +186,66 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                             ),
                           ],
                         ),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Permit",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 159, 156, 156),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              SizedBox(
+                                  width:
+                                      10), // Add some space between the text and the line
+                              Expanded(
+                                child: Divider(
+                                  color: Colors
+                                      .grey, // Customize the color of the line if needed
+                                  height:
+                                      1, // Adjust the height of the line if needed
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        GridView.count(
+                          shrinkWrap: true,
+                          primary: false,
+                          padding: Dimens.edgeInsets15,
+                          crossAxisSpacing: 70,
+                          mainAxisSpacing: 6,
+                          crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                          childAspectRatio: Responsive.isMobile(context)
+                              ? (itemWidth / itemHeight)
+                              : 5,
+                          children: <Widget>[
+                            // createContentTile(
+                            //   title: 'CheckList Inspection',
+                            //   onTap: () {
+                            //     controller.goToCheckListOfObservation();
+                            //   },
+                            // ),
+                            // createContentTile(
+                            //     title: 'Statutory List',
+                            //     onTap: () {
+                            //       // controller.goToWasteDataScreen();
+                            //     }),
+                            createContentTile(
+                              title: 'Permit List',
+                              onTap: () {
+                                // controller.clearStoreData();
+
+                                Get.toNamed(Routes.newPermitList,
+                                    arguments: {"misPermit": 1});
+                              },
+                            ),
+                          ],
+                        ),
+
                         Container(
                           margin: EdgeInsets.only(left: 20),
                           child: Row(
@@ -289,7 +349,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 onTap: () {
                                   controller.addGrievance();
                                 }),
-                                createContentTile(
+                            createContentTile(
                                 title: "Grievance Summary \nReport",
                                 onTap: () {
                                   controller.GrievanceSummaryReport();
@@ -511,14 +571,14 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 onTap: () {
                                   controller.goToCreateOccupationalScreen();
                                 }),
-                                  createContentTile(
+                            createContentTile(
                                 title: 'List Of Occupational',
                                 onTap: () {
                                   controller.goToOccupationalDataListScreen();
                                 }),
                           ],
                         ),
-                         Container(
+                        Container(
                           margin: EdgeInsets.only(left: 20),
                           child: Row(
                             children: [
@@ -560,7 +620,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 onTap: () {
                                   controller.goToCreateRegulataryVisitsScreen();
                                 }),
-                                  createContentTile(
+                            createContentTile(
                                 title: 'List Of Regulatary',
                                 onTap: () {
                                   controller.goToRegulataryDataListScreen();
@@ -609,7 +669,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 onTap: () {
                                   controller.goToCreatePermitsTBTScreen();
                                 }),
-                                  createContentTile(
+                            createContentTile(
                                 title: 'List Of Permits & TBT',
                                 onTap: () {
                                   controller.goToPermitsTBTDataListScreen();
@@ -658,7 +718,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 onTap: () {
                                   controller.goToCreateFuelDataScreen();
                                 }),
-                                  createContentTile(
+                            createContentTile(
                                 title: 'List Of Fuel Data',
                                 onTap: () {
                                   controller.goToFuelDataListScreen();
@@ -707,7 +767,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 onTap: () {
                                   controller.goToCreatePlantationDataScreen();
                                 }),
-                                  createContentTile(
+                            createContentTile(
                                 title: 'List Of Plantation Data',
                                 onTap: () {
                                   controller.goToPlantationListScreen();
@@ -756,7 +816,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 onTap: () {
                                   controller.goToCreateKaizensScreen();
                                 }),
-                                  createContentTile(
+                            createContentTile(
                                 title: 'List Of Kaizens',
                                 onTap: () {
                                   controller.goToKaizensListScreen();

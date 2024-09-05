@@ -166,6 +166,8 @@ class ViewPermitController extends GetxController {
   var startDateTimeCtrlr = TextEditingController();
   var validTillTimeCtrlr = TextEditingController();
   Rx<int> type = 0.obs;
+  Rx<int> hseMis = 0.obs;
+
   bool isOneHour(String validTill) {
     DateTime current = DateTime.now();
     DateTime expiryTime = DateTime.parse(validTill);
@@ -517,6 +519,8 @@ class ViewPermitController extends GetxController {
         var dataFromPreviousScreen = Get.arguments;
         permitId.value = dataFromPreviousScreen['permitId'];
         type.value = dataFromPreviousScreen['type'];
+        hseMis.value = dataFromPreviousScreen['hseMis'];
+
         // jobId.value = dataFromPreviousScreen['jobId'];
         viewPermitPresenter.saveValue(permitId: permitId.value.toString());
         viewPermitPresenter.saveTypeValue(type: type.value.toString());

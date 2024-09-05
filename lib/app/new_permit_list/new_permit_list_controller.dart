@@ -92,7 +92,7 @@ class NewPermitListController extends GetxController {
   String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
-
+  Rx<int> misPermit = 0.obs;
   RxList<NewPermitModel?> newPermitList = <NewPermitModel?>[].obs;
   RxList<NewPermitModel?> filteredData = <NewPermitModel>[].obs;
 
@@ -171,6 +171,7 @@ class NewPermitListController extends GetxController {
   Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
+    await setId();
     this.filterText = {
       "Permit Id": PermitIdFilterText,
       "Title": DescriptionFilterText,
@@ -198,6 +199,13 @@ class NewPermitListController extends GetxController {
     // });
 
     super.onInit();
+  }
+
+  Future<void> setId() async {
+    {
+      var dataFromPrevioursScreen = Get.arguments;
+      misPermit.value = dataFromPrevioursScreen['misPermit'];
+    }
   }
 
   void switchFacility(String? facilityName) {
@@ -387,8 +395,11 @@ class NewPermitListController extends GetxController {
     clearStoreData();
     clearTypeStoreData();
     clearisCheckedtoreData();
-    Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "type": 0});
+    Get.toNamed(Routes.viewPermitScreen, arguments: {
+      "permitId": permitId,
+      "type": 0,
+      'hseMis': 1,
+    });
   }
 
   Future<void> cancelPermitList({int? permitId}) async {

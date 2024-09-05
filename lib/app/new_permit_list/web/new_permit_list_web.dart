@@ -77,14 +77,23 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                 style: Styles.greyLight14,
                               ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                // Get.back();
-                                Get.offAllNamed(Routes.breakdown);
-                              },
-                              child: Text(" / BREAKDOWN MAINTAINANCE",
-                                  style: Styles.greyLight14),
-                            ),
+                            controller.misPermit == 1
+                                ? InkWell(
+                                    onTap: () {
+                                      // Get.back();
+                                      Get.offAllNamed(Routes.misDashboard);
+                                    },
+                                    child: Text(" / HSE MIS",
+                                        style: Styles.greyLight14),
+                                  )
+                                : InkWell(
+                                    onTap: () {
+                                      // Get.back();
+                                      Get.offAllNamed(Routes.breakdown);
+                                    },
+                                    child: Text(" / BREAKDOWN MAINTAINANCE",
+                                        style: Styles.greyLight14),
+                                  ),
                             Text(" / PERMIT LIST", style: Styles.greyLight14),
                           ],
                         ),
@@ -743,602 +752,33 @@ class PermitListDataSource extends DataTableSource {
                     ],
                   )
                 : (value == 'Actions')
-                    ? Wrap(
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                    ? controller.misPermit == 1
+                        ? TableActionButton(
+                            color: ColorValues.appDarkBlueColor,
+                            icon: Icons.visibility,
+                            message: 'View Permit',
+                            onPress: () {
+                              int? permitId =
+                                  controller.newPermitList[index]?.permitId;
+                              controller.viewNewPermitList(permitId: permitId);
+                              
+                            },
+                          )
+                        : Wrap(
                             children: [
-                              Wrap(
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.view ==
-                                                          UserAccessConstants
-                                                              .kHaveViewAccess)
-                                                  .length >
-                                              0 ||
-                                          controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.ptwStatus ==
-                                              PermitStatusConstants.PTW_CLOSED
-                                      ? TableActionButton(
-                                          color: ColorValues.appDarkBlueColor,
-                                          icon: Icons.visibility,
-                                          message: 'View Permit',
-                                          onPress: () {
-                                            int? permitId = controller
-                                                .newPermitList[index]?.permitId;
-                                            controller.viewNewPermitList(
-                                                permitId: permitId);
-                                          },
-                                        )
-                                      : Container(),
-
-                                  varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.approve ==
-                                                          UserAccessConstants
-                                                              .kHaveApproveAccess)
-                                                  .length >
-                                              0 &&
-                                          // controller.newPermitList
-                                          //         .firstWhere(
-                                          //           (e) =>
-                                          //               "${e?.permitId}" ==
-                                          //               "${PermitDetails?.permitId}",
-                                          //           orElse: () =>
-                                          //               NewPermitModel(
-                                          //                   permitId: 000),
-                                          //         )
-                                          //         ?.ptwStatus !=
-                                          //     PermitStatusConstants
-                                          //         .PTW_REJECTED_BY_APPROVER //124
-                                          // ||
-                                          // controller.newPermitList
-                                          //             .firstWhere(
-                                          //               (e) =>
-                                          //                   "${e?.permitId}" ==
-                                          //                   "${PermitDetails?.permitId}",
-                                          //               orElse: () =>
-                                          //                   NewPermitModel(
-                                          //                       permitId: 000),
-                                          //             )
-                                          //             ?.ptwStatus ==
-                                          //         PermitStatusConstants
-                                          //             .PTW_CREATED
-                                          //121
-                                          // AppConstants.kPermitStatusCreated ///121
-                                          // &&
-                                          controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.ptwStatus ==
-                                              PermitStatusConstants
-                                                  .PTW_EXTEND_REQUESTED //133
-
-                                      ? TableActionButton(
-                                          color: const Color.fromRGBO(
-                                              134, 196, 102, 1),
-                                          icon: Icons.check,
-                                          message: "Approve/Reject Extend",
-                                          onPress: () {
-                                            controller.viewNewPermitList(
-                                                permitId:
-                                                    PermitDetails?.permitId);
-                                          },
-                                        )
-                                      : Dimens.box0,
-                                  varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.approve ==
-                                                          UserAccessConstants
-                                                              .kHaveApproveAccess)
-                                                  .length >
-                                              0 &&
-                                          controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.ptwStatus ==
-                                              PermitStatusConstants.PTW_CREATED
-                                      ? TableActionButton(
-                                          color: const Color.fromRGBO(
-                                              134, 196, 102, 1),
-                                          icon: Icons.check,
-                                          message: 'Approve/Reject Permit',
-                                          onPress: () {
-                                            controller.viewNewPermitList(
-                                                permitId:
-                                                    PermitDetails?.permitId);
-                                          },
-                                        )
-                                      : Dimens.box0,
-
-                                  ///Permit Edit button
-                                  varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.edit ==
-                                                          UserAccessConstants
-                                                              .kHaveEditAccess)
-                                                  .length >
-                                              0 &&
-                                          controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.ptwStatus ==
-                                              PermitStatusConstants
-                                                  .PTW_CREATED //121
-                                      // ||
-                                      // controller.newPermitList
-                                      //         .firstWhere(
-                                      //           (e) =>
-                                      //               "${e?.permitId}" ==
-                                      //               "${PermitDetails?.permitId}",
-                                      //           orElse: () =>
-                                      //               NewPermitModel(
-                                      //                   permitId: 000),
-                                      //         )
-                                      //         ?.ptwStatus ==
-                                      //     124
-                                      ? TableActionButton(
-                                          color: ColorValues.appYellowColor,
-                                          icon: Icons.edit,
-                                          message: 'Edit Permit',
-                                          onPress: () {
-                                            // controller.viewNewPermitList(
-                                            //     permitId:
-                                            //         PermitDetails?.permitId);
-                                            controller.editNewPermit(
-                                                permitId:
-                                                    PermitDetails?.permitId,
-                                                isChecked:
-                                                    controller.isChecked.value);
-                                          },
-                                        )
-                                      : Dimens.box0,
-                                  controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.ptwStatus ==
-                                              PermitStatusConstants
-                                                  .PTW_APPROVE //125
-
-                                          &&
-                                          varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.add ==
-                                                          UserAccessConstants
-                                                              .kHaveAddAccess)
-                                                  .length >
-                                              0 &&
-                                          controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.tbT_Done_Check ==
-                                              0 &&
-                                          controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.requestById ==
-                                              varUserAccessModel.value.user_id
-                                      ?
-                                      // For date formatting
-
-                                      TableActionButton(
-                                          color: Color.fromARGB(
-                                              136, 107, 152, 211),
-                                          icon: Icons.golf_course,
-                                          message: 'GO For TBT',
-                                          onPress: () {
-                                            final newPermit = controller
-                                                .newPermitList
-                                                .firstWhere(
-                                              (e) =>
-                                                  "${e?.permitId}" ==
-                                                  "${PermitDetails?.permitId}",
-                                              orElse: () =>
-                                                  NewPermitModel(permitId: 000),
-                                            );
-
-                                            if (controller.newPermitList
-                                                    .firstWhere(
-                                                      (e) =>
-                                                          "${e?.permitId}" ==
-                                                          "${PermitDetails?.permitId}",
-                                                      orElse: () =>
-                                                          NewPermitModel(
-                                                              permitId: 000),
-                                                    )
-                                                    ?.tbt_start ==
-                                                0) {
-                                              // Check if endDate is not null before parsing
-                                              String? startDateString =
-                                                  newPermit?.startDate;
-                                              String formattedStartDate =
-                                                  "Unknown Start Time";
-
-                                              if (startDateString != null) {
-                                                DateTime startDate =
-                                                    DateTime.parse(
-                                                        startDateString);
-                                                formattedStartDate = DateFormat(
-                                                        'yyyy-MM-dd HH:mm')
-                                                    .format(startDate);
-                                              }
-
-                                              Get.defaultDialog(
-                                                title: "Alert",
-                                                middleText:
-                                                    "You can't Start Task before the start time ($formattedStartDate) of the permit",
-                                                confirm: ElevatedButton(
-                                                  onPressed: () => Get.back(),
-                                                  child: Text("OK"),
-                                                ),
-                                              );
-                                            } else {
-                                              // Proceed with the action
-                                              controller.editNewPermit(
-                                                permitId:
-                                                    PermitDetails?.permitId,
-                                                isChecked:
-                                                    controller.isChecked.value,
-                                              );
-                                            }
-                                          },
-                                        )
-
-                                      //  TableActionButton(
-                                      //     color: Color.fromARGB(
-                                      //         136, 107, 152, 211),
-                                      //     icon: Icons.golf_course,
-                                      //     message: 'GO For TBT',
-                                      //     onPress: () {
-                                      //       final newPermit = controller
-                                      //           .newPermitList
-                                      //           .firstWhere(
-                                      //         (e) =>
-                                      //             "${e?.permitId}" ==
-                                      //             "${PermitDetails?.permitId}",
-                                      //         orElse: () =>
-                                      //             NewPermitModel(permitId: 000),
-                                      //       );
-
-                                      //       if (newPermit?.tbt_start == 1) {
-                                      //         Get.defaultDialog(
-                                      //           title: "Alert",
-                                      //           middleText:
-                                      //               "You can't Start Task before the start time of the permit",
-                                      //           confirm: ElevatedButton(
-                                      //             onPressed: () => Get.back(),
-                                      //             child: Text("OK"),
-                                      //           ),
-                                      //         );
-                                      //       } else {
-                                      //         controller.editNewPermit(
-                                      //           permitId:
-                                      //               PermitDetails?.permitId,
-                                      //           isChecked:
-                                      //               controller.isChecked.value,
-                                      //         );
-                                      //       }
-                                      //     },
-                                      //   )
-                                      : Dimens.box0,
-                                  controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.ptwStatus ==
-                                              PermitStatusConstants
-                                                  .PTW_REJECTED_BY_APPROVER //124
-                                          ||
-                                          controller.newPermitList
-                                                      .firstWhere(
-                                                        (e) =>
-                                                            "${e?.permitId}" ==
-                                                            "${PermitDetails?.permitId}",
-                                                        orElse: () =>
-                                                            NewPermitModel(
-                                                                permitId: 000),
-                                                      )
-                                                      ?.ptwStatus ==
-                                                  PermitStatusConstants
-                                                      .PTW_CANCEL_REQUEST_APPROVED &&
-                                              varUserAccessModel
-                                                      .value.access_list!
+                                  Wrap(
+                                    children: [
+                                      varUserAccessModel.value.access_list!
                                                       .where((e) =>
                                                           e.feature_id ==
                                                               UserAccessConstants
                                                                   .kPermitFeatureId &&
-                                                          e.add ==
+                                                          e.view ==
                                                               UserAccessConstants
-                                                                  .kHaveAddAccess)
-                                                      .length >
-                                                  0
-                                      ? TableActionButton(
-                                          color:
-                                              Color.fromARGB(255, 116, 78, 130),
-                                          icon: Icons.ads_click,
-                                          message: 'Re-Submit Permit',
-                                          onPress: () {
-                                            controller.editNewPermit(
-                                                permitId:
-                                                    PermitDetails?.permitId,
-                                                isChecked:
-                                                    controller.isChecked.value);
-                                          },
-                                        )
-                                      : Dimens.box0,
-
-                                  ///Extend Button
-                                  varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kPermitFeatureId &&
-                                                          e.edit ==
-                                                              UserAccessConstants
-                                                                  .kHaveEditAccess)
-                                                      .length >
-                                                  0 &&
-                                              controller.newPermitList
-                                                      .firstWhereOrNull(
-                                                        (e) =>
-                                                            "${e?.permitId}" ==
-                                                            "${PermitDetails?.permitId}",
-                                                      )
-                                                      ?.jc_status !=
-                                                  158 &&
-                                              controller.newPermitList
-                                                      .firstWhere(
-                                                        (e) =>
-                                                            "${e?.permitId}" ==
-                                                            "${PermitDetails?.permitId}",
-                                                        orElse: () =>
-                                                            NewPermitModel(
-                                                                permitId: 000),
-                                                      )
-                                                      ?.isExpired ==
-                                                  1 ||
-                                          controller.newPermitList
-                                                      .firstWhere(
-                                                        (e) =>
-                                                            "${e?.permitId}" ==
-                                                            "${PermitDetails?.permitId}",
-                                                        orElse: () =>
-                                                            NewPermitModel(
-                                                                permitId: 000),
-                                                      )
-                                                      ?.requestById ==
-                                                  varUserAccessModel
-                                                      .value.user_id &&
-                                              (controller.newPermitList
-                                                          .firstWhere(
-                                                            (e) =>
-                                                                "${e?.permitId}" ==
-                                                                "${PermitDetails?.permitId}",
-                                                            orElse: () =>
-                                                                NewPermitModel(
-                                                                    permitId:
-                                                                        000),
-                                                          )
-                                                          ?.ptwStatus ==
-                                                      PermitStatusConstants
-                                                          .PTW_APPROVE //125
-                                                  &&
-                                                  controller.newPermitList
-                                                          .firstWhere(
-                                                            (e) =>
-                                                                "${e?.permitId}" ==
-                                                                "${PermitDetails?.permitId}",
-                                                            orElse: () =>
-                                                                NewPermitModel(
-                                                                    permitId:
-                                                                        000),
-                                                          )
-                                                          ?.tbT_Done_Check ==
-                                                      1 &&
-                                                  controller.isOneHour(
-                                                          controller
-                                                                  .newPermitList
-                                                                  .firstWhere(
-                                                                    (e) =>
-                                                                        "${e?.permitId}" ==
-                                                                        "${PermitDetails?.permitId}",
-                                                                  )
-                                                                  ?.endDate ??
-                                                              "") ==
-                                                      true
-                                              //||
-                                              // controller.newPermitList
-                                              //         .firstWhere(
-                                              //           (e) =>
-                                              //               "${e?.permitId}" ==
-                                              //               "${PermitDetails?.permitId}",
-                                              //           orElse: () =>
-                                              //               NewPermitModel(
-                                              //                   permitId:
-                                              //                       000),
-                                              //         )
-                                              //         ?.ptwStatus ==
-                                              //     135
-                                              )
-                                      ? TableActionButton(
-                                          color: ColorValues.appDarkBlueColor,
-                                          icon: Icons.expand_outlined,
-                                          message: 'Extend Permit',
-                                          onPress: () {
-                                            // Get.dialog(PermitExtendDialog(
-                                            //     permitId: PermitDetails?.permitId
-                                            //         .toString()));
-                                            controller.extendPermitList(
-                                                permitId:
-                                                    PermitDetails?.permitId);
-                                          },
-                                        )
-                                      : Container(),
-
-                                  ////Approve button
-
-                                  ///Close Permit
-                                  varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kPermitFeatureId &&
-                                                          e.add ==
-                                                              UserAccessConstants
-                                                                  .kHaveAddAccess)
-                                                      .length >
-                                                  0 &&
-                                              controller.newPermitList
-                                                      .firstWhere(
-                                                        (e) =>
-                                                            "${e?.permitId}" ==
-                                                            "${PermitDetails?.permitId}",
-                                                        orElse: () =>
-                                                            NewPermitModel(
-                                                                permitId: 000),
-                                                      )
-                                                      ?.ptwStatus ==
-                                                  PermitStatusConstants
-                                                      .PTW_CANCEL_REQUEST_REJECTED //121
-                                          ||
-                                          controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.ptwStatus ==
-                                              PermitStatusConstants
-                                                  .PTW_EXTEND_REQUEST_REJECTED
-                                      ? TableActionButton(
-                                          color: ColorValues.appcloseRedColor,
-                                          icon: Icons.close,
-                                          message: 'Close Permit',
-                                          onPress: () {
-                                            // Get.dialog(PermitCloseDialog(
-                                            //     permitId: PermitDetails?.permitId
-                                            //         .toString()));
-                                            controller.closePermitRequestList(
-                                                permitId:
-                                                    PermitDetails?.permitId);
-                                          },
-                                        )
-                                      : Container(),
-
-                                  ////Permit Cancel By Approver / Cancel Permit Request
-                                  (controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.ptwStatus !=
-                                              PermitStatusConstants
-                                                  .PTW_CANCEL_REQUEST_APPROVED) &&
-                                          controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.ptwStatus !=
-                                              PermitStatusConstants
-                                                  .PTW_CLOSED &&
-                                          (varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kPermitFeatureId &&
-                                                          e.approve ==
-                                                              UserAccessConstants
-                                                                  .kHaveApproveAccess)
-                                                      .length >
-                                                  0
-                                              //126
-                                              ||
-                                              varUserAccessModel
-                                                      .value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kPermitFeatureId &&
-                                                          e.edit ==
-                                                              UserAccessConstants
-                                                                  .kHaveEditAccess)
+                                                                  .kHaveViewAccess)
                                                       .length >
                                                   0 ||
                                               controller.newPermitList
@@ -1352,8 +792,131 @@ class PermitListDataSource extends DataTableSource {
                                                       )
                                                       ?.ptwStatus ==
                                                   PermitStatusConstants
-                                                      .PTW_APPROVE //125
-                                              ||
+                                                      .PTW_CLOSED
+                                          ? TableActionButton(
+                                              color:
+                                                  ColorValues.appDarkBlueColor,
+                                              icon: Icons.visibility,
+                                              message: 'View Permit',
+                                              onPress: () {
+                                                int? permitId = controller
+                                                    .newPermitList[index]
+                                                    ?.permitId;
+                                                controller.viewNewPermitList(
+                                                    permitId: permitId);
+                                              },
+                                            )
+                                          : Container(),
+
+                                      varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kPermitFeatureId &&
+                                                          e.approve ==
+                                                              UserAccessConstants
+                                                                  .kHaveApproveAccess)
+                                                      .length >
+                                                  0 &&
+                                              // controller.newPermitList
+                                              //         .firstWhere(
+                                              //           (e) =>
+                                              //               "${e?.permitId}" ==
+                                              //               "${PermitDetails?.permitId}",
+                                              //           orElse: () =>
+                                              //               NewPermitModel(
+                                              //                   permitId: 000),
+                                              //         )
+                                              //         ?.ptwStatus !=
+                                              //     PermitStatusConstants
+                                              //         .PTW_REJECTED_BY_APPROVER //124
+                                              // ||
+                                              // controller.newPermitList
+                                              //             .firstWhere(
+                                              //               (e) =>
+                                              //                   "${e?.permitId}" ==
+                                              //                   "${PermitDetails?.permitId}",
+                                              //               orElse: () =>
+                                              //                   NewPermitModel(
+                                              //                       permitId: 000),
+                                              //             )
+                                              //             ?.ptwStatus ==
+                                              //         PermitStatusConstants
+                                              //             .PTW_CREATED
+                                              //121
+                                              // AppConstants.kPermitStatusCreated ///121
+                                              // &&
+                                              controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus ==
+                                                  PermitStatusConstants
+                                                      .PTW_EXTEND_REQUESTED //133
+
+                                          ? TableActionButton(
+                                              color: const Color.fromRGBO(
+                                                  134, 196, 102, 1),
+                                              icon: Icons.check,
+                                              message: "Approve/Reject Extend",
+                                              onPress: () {
+                                                controller.viewNewPermitList(
+                                                    permitId: PermitDetails
+                                                        ?.permitId);
+                                              },
+                                            )
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kPermitFeatureId &&
+                                                          e.approve ==
+                                                              UserAccessConstants
+                                                                  .kHaveApproveAccess)
+                                                      .length >
+                                                  0 &&
+                                              controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus ==
+                                                  PermitStatusConstants
+                                                      .PTW_CREATED
+                                          ? TableActionButton(
+                                              color: const Color.fromRGBO(
+                                                  134, 196, 102, 1),
+                                              icon: Icons.check,
+                                              message: 'Approve/Reject Permit',
+                                              onPress: () {
+                                                controller.viewNewPermitList(
+                                                    permitId: PermitDetails
+                                                        ?.permitId);
+                                              },
+                                            )
+                                          : Dimens.box0,
+
+                                      ///Permit Edit button
+                                      varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kPermitFeatureId &&
+                                                          e.edit ==
+                                                              UserAccessConstants
+                                                                  .kHaveEditAccess)
+                                                      .length >
+                                                  0 &&
                                               controller.newPermitList
                                                       .firstWhere(
                                                         (e) =>
@@ -1366,6 +929,376 @@ class PermitListDataSource extends DataTableSource {
                                                       ?.ptwStatus ==
                                                   PermitStatusConstants
                                                       .PTW_CREATED //121
+                                          // ||
+                                          // controller.newPermitList
+                                          //         .firstWhere(
+                                          //           (e) =>
+                                          //               "${e?.permitId}" ==
+                                          //               "${PermitDetails?.permitId}",
+                                          //           orElse: () =>
+                                          //               NewPermitModel(
+                                          //                   permitId: 000),
+                                          //         )
+                                          //         ?.ptwStatus ==
+                                          //     124
+                                          ? TableActionButton(
+                                              color: ColorValues.appYellowColor,
+                                              icon: Icons.edit,
+                                              message: 'Edit Permit',
+                                              onPress: () {
+                                                // controller.viewNewPermitList(
+                                                //     permitId:
+                                                //         PermitDetails?.permitId);
+                                                controller.editNewPermit(
+                                                    permitId:
+                                                        PermitDetails?.permitId,
+                                                    isChecked: controller
+                                                        .isChecked.value);
+                                              },
+                                            )
+                                          : Dimens.box0,
+                                      controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus ==
+                                                  PermitStatusConstants
+                                                      .PTW_APPROVE //125
+
+                                              &&
+                                              varUserAccessModel
+                                                      .value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kPermitFeatureId &&
+                                                          e.add ==
+                                                              UserAccessConstants
+                                                                  .kHaveAddAccess)
+                                                      .length >
+                                                  0 &&
+                                              controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.tbT_Done_Check ==
+                                                  0 &&
+                                              controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.requestById ==
+                                                  varUserAccessModel
+                                                      .value.user_id
+                                          ?
+                                          // For date formatting
+
+                                          TableActionButton(
+                                              color: Color.fromARGB(
+                                                  136, 107, 152, 211),
+                                              icon: Icons.golf_course,
+                                              message: 'GO For TBT',
+                                              onPress: () {
+                                                final newPermit = controller
+                                                    .newPermitList
+                                                    .firstWhere(
+                                                  (e) =>
+                                                      "${e?.permitId}" ==
+                                                      "${PermitDetails?.permitId}",
+                                                  orElse: () => NewPermitModel(
+                                                      permitId: 000),
+                                                );
+
+                                                if (controller.newPermitList
+                                                        .firstWhere(
+                                                          (e) =>
+                                                              "${e?.permitId}" ==
+                                                              "${PermitDetails?.permitId}",
+                                                          orElse: () =>
+                                                              NewPermitModel(
+                                                                  permitId:
+                                                                      000),
+                                                        )
+                                                        ?.tbt_start ==
+                                                    0) {
+                                                  // Check if endDate is not null before parsing
+                                                  String? startDateString =
+                                                      newPermit?.startDate;
+                                                  String formattedStartDate =
+                                                      "Unknown Start Time";
+
+                                                  if (startDateString != null) {
+                                                    DateTime startDate =
+                                                        DateTime.parse(
+                                                            startDateString);
+                                                    formattedStartDate =
+                                                        DateFormat(
+                                                                'yyyy-MM-dd HH:mm')
+                                                            .format(startDate);
+                                                  }
+
+                                                  Get.defaultDialog(
+                                                    title: "Alert",
+                                                    middleText:
+                                                        "You can't Start Task before the start time ($formattedStartDate) of the permit",
+                                                    confirm: ElevatedButton(
+                                                      onPressed: () =>
+                                                          Get.back(),
+                                                      child: Text("OK"),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  // Proceed with the action
+                                                  controller.editNewPermit(
+                                                    permitId:
+                                                        PermitDetails?.permitId,
+                                                    isChecked: controller
+                                                        .isChecked.value,
+                                                  );
+                                                }
+                                              },
+                                            )
+
+                                          //  TableActionButton(
+                                          //     color: Color.fromARGB(
+                                          //         136, 107, 152, 211),
+                                          //     icon: Icons.golf_course,
+                                          //     message: 'GO For TBT',
+                                          //     onPress: () {
+                                          //       final newPermit = controller
+                                          //           .newPermitList
+                                          //           .firstWhere(
+                                          //         (e) =>
+                                          //             "${e?.permitId}" ==
+                                          //             "${PermitDetails?.permitId}",
+                                          //         orElse: () =>
+                                          //             NewPermitModel(permitId: 000),
+                                          //       );
+
+                                          //       if (newPermit?.tbt_start == 1) {
+                                          //         Get.defaultDialog(
+                                          //           title: "Alert",
+                                          //           middleText:
+                                          //               "You can't Start Task before the start time of the permit",
+                                          //           confirm: ElevatedButton(
+                                          //             onPressed: () => Get.back(),
+                                          //             child: Text("OK"),
+                                          //           ),
+                                          //         );
+                                          //       } else {
+                                          //         controller.editNewPermit(
+                                          //           permitId:
+                                          //               PermitDetails?.permitId,
+                                          //           isChecked:
+                                          //               controller.isChecked.value,
+                                          //         );
+                                          //       }
+                                          //     },
+                                          //   )
+                                          : Dimens.box0,
+                                      controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus ==
+                                                  PermitStatusConstants
+                                                      .PTW_REJECTED_BY_APPROVER //124
+                                              ||
+                                              controller.newPermitList
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.ptwStatus ==
+                                                      PermitStatusConstants
+                                                          .PTW_CANCEL_REQUEST_APPROVED &&
+                                                  varUserAccessModel
+                                                          .value.access_list!
+                                                          .where((e) =>
+                                                              e.feature_id ==
+                                                                  UserAccessConstants
+                                                                      .kPermitFeatureId &&
+                                                              e.add ==
+                                                                  UserAccessConstants
+                                                                      .kHaveAddAccess)
+                                                          .length >
+                                                      0
+                                          ? TableActionButton(
+                                              color: Color.fromARGB(
+                                                  255, 116, 78, 130),
+                                              icon: Icons.ads_click,
+                                              message: 'Re-Submit Permit',
+                                              onPress: () {
+                                                controller.editNewPermit(
+                                                    permitId:
+                                                        PermitDetails?.permitId,
+                                                    isChecked: controller
+                                                        .isChecked.value);
+                                              },
+                                            )
+                                          : Dimens.box0,
+
+                                      ///Extend Button
+                                      varUserAccessModel.value.access_list!
+                                                          .where((e) =>
+                                                              e.feature_id ==
+                                                                  UserAccessConstants
+                                                                      .kPermitFeatureId &&
+                                                              e.edit ==
+                                                                  UserAccessConstants
+                                                                      .kHaveEditAccess)
+                                                          .length >
+                                                      0 &&
+                                                  controller.newPermitList
+                                                          .firstWhereOrNull(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                          )
+                                                          ?.jc_status !=
+                                                      158 &&
+                                                  controller.newPermitList
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.isExpired ==
+                                                      1 ||
+                                              controller.newPermitList
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.requestById ==
+                                                      varUserAccessModel
+                                                          .value.user_id &&
+                                                  (controller.newPermitList
+                                                              .firstWhere(
+                                                                (e) =>
+                                                                    "${e?.permitId}" ==
+                                                                    "${PermitDetails?.permitId}",
+                                                                orElse: () =>
+                                                                    NewPermitModel(
+                                                                        permitId:
+                                                                            000),
+                                                              )
+                                                              ?.ptwStatus ==
+                                                          PermitStatusConstants
+                                                              .PTW_APPROVE //125
+                                                      &&
+                                                      controller.newPermitList
+                                                              .firstWhere(
+                                                                (e) =>
+                                                                    "${e?.permitId}" ==
+                                                                    "${PermitDetails?.permitId}",
+                                                                orElse: () =>
+                                                                    NewPermitModel(
+                                                                        permitId:
+                                                                            000),
+                                                              )
+                                                              ?.tbT_Done_Check ==
+                                                          1 &&
+                                                      controller.isOneHour(controller
+                                                                  .newPermitList
+                                                                  .firstWhere(
+                                                                    (e) =>
+                                                                        "${e?.permitId}" ==
+                                                                        "${PermitDetails?.permitId}",
+                                                                  )
+                                                                  ?.endDate ??
+                                                              "") ==
+                                                          true
+                                                  //||
+                                                  // controller.newPermitList
+                                                  //         .firstWhere(
+                                                  //           (e) =>
+                                                  //               "${e?.permitId}" ==
+                                                  //               "${PermitDetails?.permitId}",
+                                                  //           orElse: () =>
+                                                  //               NewPermitModel(
+                                                  //                   permitId:
+                                                  //                       000),
+                                                  //         )
+                                                  //         ?.ptwStatus ==
+                                                  //     135
+                                                  )
+                                          ? TableActionButton(
+                                              color:
+                                                  ColorValues.appDarkBlueColor,
+                                              icon: Icons.expand_outlined,
+                                              message: 'Extend Permit',
+                                              onPress: () {
+                                                // Get.dialog(PermitExtendDialog(
+                                                //     permitId: PermitDetails?.permitId
+                                                //         .toString()));
+                                                controller.extendPermitList(
+                                                    permitId: PermitDetails
+                                                        ?.permitId);
+                                              },
+                                            )
+                                          : Container(),
+
+                                      ////Approve button
+
+                                      ///Close Permit
+                                      varUserAccessModel.value.access_list!
+                                                          .where((e) =>
+                                                              e.feature_id ==
+                                                                  UserAccessConstants
+                                                                      .kPermitFeatureId &&
+                                                              e.add ==
+                                                                  UserAccessConstants
+                                                                      .kHaveAddAccess)
+                                                          .length >
+                                                      0 &&
+                                                  controller.newPermitList
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.ptwStatus ==
+                                                      PermitStatusConstants
+                                                          .PTW_CANCEL_REQUEST_REJECTED //121
                                               ||
                                               controller.newPermitList
                                                       .firstWhere(
@@ -1378,7 +1311,152 @@ class PermitListDataSource extends DataTableSource {
                                                       )
                                                       ?.ptwStatus ==
                                                   PermitStatusConstants
-                                                      .PTW_EXTEND_REQUEST_REJECTED ||
+                                                      .PTW_EXTEND_REQUEST_REJECTED
+                                          ? TableActionButton(
+                                              color:
+                                                  ColorValues.appcloseRedColor,
+                                              icon: Icons.close,
+                                              message: 'Close Permit',
+                                              onPress: () {
+                                                // Get.dialog(PermitCloseDialog(
+                                                //     permitId: PermitDetails?.permitId
+                                                //         .toString()));
+                                                controller
+                                                    .closePermitRequestList(
+                                                        permitId: PermitDetails
+                                                            ?.permitId);
+                                              },
+                                            )
+                                          : Container(),
+
+                                      ////Permit Cancel By Approver / Cancel Permit Request
+                                      (controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus !=
+                                                  PermitStatusConstants
+                                                      .PTW_CANCEL_REQUEST_APPROVED) &&
+                                              controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus !=
+                                                  PermitStatusConstants
+                                                      .PTW_CLOSED &&
+                                              (varUserAccessModel
+                                                          .value.access_list!
+                                                          .where((e) =>
+                                                              e.feature_id ==
+                                                                  UserAccessConstants
+                                                                      .kPermitFeatureId &&
+                                                              e.approve ==
+                                                                  UserAccessConstants
+                                                                      .kHaveApproveAccess)
+                                                          .length >
+                                                      0
+                                                  //126
+                                                  ||
+                                                  varUserAccessModel
+                                                          .value.access_list!
+                                                          .where((e) =>
+                                                              e.feature_id ==
+                                                                  UserAccessConstants
+                                                                      .kPermitFeatureId &&
+                                                              e.edit ==
+                                                                  UserAccessConstants
+                                                                      .kHaveEditAccess)
+                                                          .length >
+                                                      0 ||
+                                                  controller.newPermitList
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.ptwStatus ==
+                                                      PermitStatusConstants
+                                                          .PTW_APPROVE //125
+                                                  ||
+                                                  controller.newPermitList
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.ptwStatus ==
+                                                      PermitStatusConstants
+                                                          .PTW_CREATED //121
+                                                  ||
+                                                  controller.newPermitList
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.ptwStatus ==
+                                                      PermitStatusConstants
+                                                          .PTW_EXTEND_REQUEST_REJECTED ||
+                                                  controller.newPermitList
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.ptwStatus ==
+                                                      PermitStatusConstants
+                                                          .PTW_CANCEL_REQUEST_REJECTED)
+                                          ? TableActionButton(
+                                              color: ColorValues.appRedColor,
+                                              icon: Icons.close,
+                                              message: 'Cancel Permit',
+                                              onPress: () {
+                                                controller.cancelPermitList(
+                                                    permitId: PermitDetails
+                                                        ?.permitId);
+                                                // Get.dialog(PermitCancelReQuestDialog(
+                                                //     permitId: PermitDetails?.permitId
+                                                //         .toString()));
+                                              },
+                                            )
+                                          : Dimens.box0,
+
+                                      varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kPermitFeatureId &&
+                                                          e.approve ==
+                                                              UserAccessConstants
+                                                                  .kHaveApproveAccess)
+                                                      .length >
+                                                  0 &&
                                               controller.newPermitList
                                                       .firstWhere(
                                                         (e) =>
@@ -1390,62 +1468,25 @@ class PermitListDataSource extends DataTableSource {
                                                       )
                                                       ?.ptwStatus ==
                                                   PermitStatusConstants
-                                                      .PTW_CANCEL_REQUEST_REJECTED)
-                                      ? TableActionButton(
-                                          color: ColorValues.appRedColor,
-                                          icon: Icons.close,
-                                          message: 'Cancel Permit',
-                                          onPress: () {
-                                            controller.cancelPermitList(
-                                                permitId:
-                                                    PermitDetails?.permitId);
-                                            // Get.dialog(PermitCancelReQuestDialog(
-                                            //     permitId: PermitDetails?.permitId
-                                            //         .toString()));
-                                          },
-                                        )
-                                      : Dimens.box0,
-
-                                  varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.approve ==
-                                                          UserAccessConstants
-                                                              .kHaveApproveAccess)
-                                                  .length >
-                                              0 &&
-                                          controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.ptwStatus ==
-                                              PermitStatusConstants
-                                                  .PTW_CANCEL_REQUESTED //130
-                                      ? TableActionButton(
-                                          color:
-                                              Color.fromARGB(255, 113, 15, 149),
-                                          icon: Icons.approval_rounded,
-                                          message: ' Approve Cancel',
-                                          onPress: () {
-                                            controller.viewNewPermitList(
-                                                permitId:
-                                                    PermitDetails?.permitId);
-                                          },
-                                        )
-                                      : Dimens.box0
+                                                      .PTW_CANCEL_REQUESTED //130
+                                          ? TableActionButton(
+                                              color: Color.fromARGB(
+                                                  255, 113, 15, 149),
+                                              icon: Icons.approval_rounded,
+                                              message: ' Approve Cancel',
+                                              onPress: () {
+                                                controller.viewNewPermitList(
+                                                    permitId: PermitDetails
+                                                        ?.permitId);
+                                              },
+                                            )
+                                          : Dimens.box0
+                                    ],
+                                  ),
                                 ],
                               ),
                             ],
-                          ),
-                        ],
-                      )
+                          )
                     : Text(value.toString()),
           ),
         );
