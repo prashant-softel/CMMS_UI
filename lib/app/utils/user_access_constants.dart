@@ -145,10 +145,6 @@ abstract class UserAccessConstants {
   static int kGeneralFeatureId = 59;
   static String kFeatureGeneralName = "General";
 
-  //User Management
-  static int kUserManagementFeatureId = 58;
-  static String kFeatureUserManagementName = "User Management";
-
   //Business
   static int kBusinessFeatureId = 56;
   static String kFeatureBusinessName = "Business";

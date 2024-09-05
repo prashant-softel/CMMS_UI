@@ -440,7 +440,7 @@ class MastersDashboard extends GetView<MastersController> {
                                               .where((e) =>
                                                   e.feature_id ==
                                                       UserAccessConstants
-                                                          .kUserManagementFeatureId &&
+                                                          .kUserFeatureId &&
                                                   e.view ==
                                                       UserAccessConstants
                                                           .kHaveViewAccess)
@@ -478,7 +478,7 @@ class MastersDashboard extends GetView<MastersController> {
                                               .where((e) =>
                                                   e.feature_id ==
                                                       UserAccessConstants
-                                                          .kUserManagementFeatureId &&
+                                                          .kUserFeatureId &&
                                                   e.view ==
                                                       UserAccessConstants
                                                           .kHaveViewAccess)
@@ -504,7 +504,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kUserManagementFeatureId &&
+                                                                    .kUserFeatureId &&
                                                             e.view ==
                                                                 UserAccessConstants
                                                                     .kHaveViewAccess)
@@ -525,7 +525,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kUserManagementFeatureId &&
+                                                                    .kUserFeatureId &&
                                                             e.add ==
                                                                 UserAccessConstants
                                                                     .kHaveAddAccess)
@@ -549,7 +549,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kUserManagementFeatureId &&
+                                                                    .kUserFeatureId &&
                                                             e.add ==
                                                                 UserAccessConstants
                                                                     .kHaveAddAccess)
@@ -570,7 +570,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kUserManagementFeatureId &&
+                                                                    .kUserFeatureId &&
                                                             e.view ==
                                                                 UserAccessConstants
                                                                     .kHaveViewAccess)
@@ -616,7 +616,7 @@ class MastersDashboard extends GetView<MastersController> {
                                               .where((e) =>
                                                   e.feature_id ==
                                                       UserAccessConstants
-                                                          .kUserManagementFeatureId &&
+                                                          .kUserFeatureId &&
                                                   e.view ==
                                                       UserAccessConstants
                                                           .kHaveViewAccess)
@@ -642,7 +642,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kUserManagementFeatureId &&
+                                                                    .kUserFeatureId &&
                                                             e.view ==
                                                                 UserAccessConstants
                                                                     .kHaveViewAccess)
@@ -664,7 +664,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kUserManagementFeatureId &&
+                                                                    .kUserFeatureId &&
                                                             e.view ==
                                                                 UserAccessConstants
                                                                     .kHaveViewAccess)
@@ -685,7 +685,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kUserManagementFeatureId &&
+                                                                    .kUserFeatureId &&
                                                             e.view ==
                                                                 UserAccessConstants
                                                                     .kHaveViewAccess)
@@ -706,7 +706,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kUserManagementFeatureId &&
+                                                                    .kUserFeatureId &&
                                                             e.view ==
                                                                 UserAccessConstants
                                                                     .kHaveViewAccess)
@@ -730,7 +730,7 @@ class MastersDashboard extends GetView<MastersController> {
                                               .where((e) =>
                                                   e.feature_id ==
                                                       UserAccessConstants
-                                                          .kUserManagementFeatureId &&
+                                                          .kUserFeatureId &&
                                                   e.view ==
                                                       UserAccessConstants
                                                           .kHaveViewAccess)
@@ -756,7 +756,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kUserManagementFeatureId &&
+                                                                    .kUserFeatureId &&
                                                             e.view ==
                                                                 UserAccessConstants
                                                                     .kHaveViewAccess)
@@ -777,7 +777,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kUserManagementFeatureId &&
+                                                                    .kUserFeatureId &&
                                                             e.view ==
                                                                 UserAccessConstants
                                                                     .kHaveViewAccess)
@@ -798,7 +798,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kUserManagementFeatureId &&
+                                                                    .kUserFeatureId &&
                                                             e.view ==
                                                                 UserAccessConstants
                                                                     .kHaveViewAccess)
