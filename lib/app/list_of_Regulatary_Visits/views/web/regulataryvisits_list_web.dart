@@ -487,6 +487,8 @@ class VisitandNoticeDataListSource extends DataTableSource {
       '${VisitAndNoticeDetails?.amountOfPenaltiesToContractors?? ''}',
       '${VisitAndNoticeDetails?.anyOther?? ''}',
       '${VisitAndNoticeDetails?.month_name?? ''}',
+      '${VisitAndNoticeDetails?.year?? ''}',
+      '${VisitAndNoticeDetails?.submited_by?? ''}',
       '${VisitAndNoticeDetails?.createdAt?? ''}',
       'Actions',
 
@@ -589,8 +591,11 @@ class VisitandNoticeDataListSource extends DataTableSource {
                             icon: Icons.delete,
                             message: 'Delete',
                             onPress: () {
-                              int? id = VisitAndNoticeDetails?.id;
-                              controller.deleteVisitNotice(VisitNoticeId: id);
+                              // int? id = VisitAndNoticeDetails?.id;
+                              // controller.deleteVisitNotice(VisitNoticeId: id);
+                              controller.isDeleteDialog(
+                                VisitNoticeId:controller.visitandnoticeList[index].id??0,
+                              );
 
                               // controller.isContainerVisible.value = true;
                             },

@@ -2,12 +2,12 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:cmms/app/create_occupationalhealth/create_occupationalhealth_presenter.dart';
 import 'package:cmms/app/create_plantationdata/create_plantationdata_presenter.dart';
 import 'package:cmms/domain/models/create_plantationdata_model.dart';
 import 'package:cmms/domain/models/get_plantation_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../home/home_controller.dart';
 
 class CreatePlantationDataController extends GetxController {
@@ -26,9 +26,9 @@ class CreatePlantationDataController extends GetxController {
 
   int selectedMonth = 0;
   int selectedYear=0;
-  String year ='2000';
-  String month = 'April';
   //createplantationdata
+    var selectedMonthnamectrl = TextEditingController();
+  var selectedYearctrl = TextEditingController();
    var SaplingsPlantedCtrl = TextEditingController();
  var SaplingsSurvivedCtrl = TextEditingController();
  var SaplingsDiedCtrl = TextEditingController();
@@ -81,6 +81,10 @@ void createplantationdata({ List<dynamic>? fileIds, required int monthId , requi
   void onInit() async {
     try {
       await setPDId();
+      selectedItem!.id == 0
+          ? PlantationDateTc.text = ""
+          : PlantationDateTc.text =
+              "${DateFormat.MMMM().format(DateTime(0, selectedItem!.month_id ?? 0))} ${selectedItem!.year}";
 
       super.onInit();
     } catch (e) {
@@ -93,7 +97,8 @@ Future<void> setPDId() async {
       var dataFromPreviousScreen = Get.arguments;
       selectedItem = dataFromPreviousScreen['selectedItem'];
     } else {
-      selectedItem = GetPlantationList(id: 0, saplingsPlanted: 0, saplingsSurvived: 0, saplingsDied: 0,);
+      selectedItem = GetPlantationList(id: 0, saplingsPlanted: 0, saplingsSurvived: 0, saplingsDied: 0,    month_name: '',
+          year: 0,);
     }
       GetPlantationList? selectedItemhea;
       final _selectedItem = await createplantationdataPresenter.getValue();
@@ -113,6 +118,8 @@ Future<void> setPDId() async {
 SaplingsPlantedCtrl.text=selectedItem!.saplingsPlanted.toString();
 SaplingsSurvivedCtrl.text=selectedItem!.saplingsSurvived.toString();
 SaplingsDiedCtrl.text=selectedItem!.saplingsDied.toString();
+selectedMonthnamectrl.text = selectedItem!.month_id.toString();
+        selectedYearctrl.text = selectedItem!.year.toString();
 
       }
     } catch (e) {
@@ -125,6 +132,7 @@ SaplingsDiedCtrl.text=selectedItem!.saplingsDied.toString();
     SaplingsPlantedCtrl.clear();
     SaplingsSurvivedCtrl.clear();
     SaplingsDiedCtrl.clear();   
+    createplantationdataPresenter.clearValue();
   
   }
 void updatePlantationDetails() async {
@@ -137,12 +145,23 @@ void updatePlantationDetails() async {
     int _SaplingsDiedCtrl =
         int.tryParse(SaplingsDiedCtrl.text.trim()) ?? 0;
     
+      // If the month and year are not changed, fallback to selectedItem's values
+    int _monthId = selectedMonth != (selectedItem?.month_id ?? 0)
+        ? selectedMonth
+        : selectedItem?.month_id ?? 0;
+
+       int _year = selectedYear != (selectedItem?.year ?? 0)
+        ? selectedYear
+        : selectedItem?.year ?? 0;
+
 
     CreatePlantationDataModel createplantationdataModel = CreatePlantationDataModel(
       id: _id,
       SaplingsPlanted: _SaplingsPlantedCtrl,
         SaplingsSurvived: _SaplingsSurvivedCtrl,
         SaplingsDied: _SaplingsDiedCtrl,
+           month_id: _monthId, // Use the new month or fallback to original
+      year: _year,
       // date: "2024-08-18",
     );
      var updatePlantationModelJsonString =
@@ -155,7 +174,9 @@ void updatePlantationDetails() async {
     );
 
     if (responseCreateGoModel == null) {
-      print("data fail ");
+      print("update fail ");
+    } else {
+      print("Update successful");
     }
 }
 void checkForm(){

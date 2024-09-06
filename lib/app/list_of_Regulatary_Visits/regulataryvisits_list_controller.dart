@@ -45,6 +45,8 @@ class RegulataryDataListController extends GetxController {
 GetVisitAndNoticeList? selectedItem;
   RxString idFilterText = ''.obs;
   RxString monthnameFilterText = ''.obs;
+  RxString yearFilterText = ''.obs;
+  RxString submitedFilterText = ''.obs;
   RxString govtAuthVisitsFilterText = ''.obs;
   RxString noOfFineByThirdPartyFilterText = ''.obs;
   RxString noOfShowCauseNoticesFilterText = ''.obs;
@@ -65,18 +67,22 @@ GetVisitAndNoticeList? selectedItem;
     "Notices issued by HFE to contractor": true,
     "Penalties contractor by HFE in Amount": true,
     "Any other": true,
-    "Month name": true,
+    "Month": true,
+    "Year": true,
+    "Submited by": true,
     "Created At": true,
   });
     final Map<String, double> columnwidth = {
-      "Id":100,
+      "Id":70,
     "Govt. authorities visited":100,
     "Penalties third parties": 200,
     "Cause notices third parties": 200,
     "Notices issued by HFE to contractor": 200,
     "Penalties contractor by HFE in Amount": 200,
     "Any other": 100,
-    "Month name": 100,
+    "Month": 100,
+        "Year": 100,
+    "Submited by": 150,
     "Created At": 100,
   };
    Map<String, RxString> filterText = {};
@@ -97,7 +103,9 @@ GetVisitAndNoticeList? selectedItem;
     "Notices issued by HFE to contractor": noticesToContractorFilterText,
     "Penalties contractor by HFE in Amount": amountOfPenaltiesFilterText,
     "Any other": anyOtherFilterText,
-    "Month name": monthnameFilterText,
+    "Month": monthnameFilterText,
+    "Year":yearFilterText,
+    "Submited by":submitedFilterText,
     "Created At": createdAtFilterText,
     "Action":actionFilterText
     };

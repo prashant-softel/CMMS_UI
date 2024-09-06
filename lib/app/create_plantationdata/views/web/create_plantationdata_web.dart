@@ -30,7 +30,7 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
       builder: (controller) {
         return SelectionArea(
           child: Scaffold(
-            body: Container(
+              body: Container(
                 color: Color.fromARGB(255, 234, 236, 238),
                 width: Get.width,
                 height: Get.height,
@@ -75,8 +75,7 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                             },
                             child: Text(" / MIS", style: Styles.greyLight14),
                           ),
-                          Text(" / PLANTATION DATA",
-                              style: Styles.greyLight14),
+                          Text(" / PLANTATION DATA", style: Styles.greyLight14),
                         ],
                       ),
                     ),
@@ -112,13 +111,12 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                                                 style: Styles.blackBold16,
                                               ),
                                               Spacer(),
-                                                    Padding(
-                                            padding: EdgeInsets.only(
-                                              top: 20,
-                                              right: 20,
-                                            ),
-                                           
-                                          ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: 20,
+                                                  right: 20,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -148,30 +146,31 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                                                                 .end,
                                                         children: [
                                                           Dimens.boxHeight5,
-                                                           Row(
-                                                              children: [
-                                                                Text('Select Month And Year:'),
-                                                                Dimens
-                                                                    .boxWidth10,
-                                                                CustomTextFieldForStock(
-                                                                  width: (MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        .2),
-                                                                  numberTextField:
-                                                                      true,
-                                                                  onTap: () {
-                                                                    _showMonthYearPicker(
-                                                                        context,
-                                                                        controller);
-                                                                  },
-                                                                  textController:
-                                                                      controller
-                                                                          .PlantationDateTc,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                  'Select Month And Year:'),
+                                                              Dimens.boxWidth10,
+                                                              CustomTextFieldForStock(
+                                                                width: (MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    .2),
+                                                                numberTextField:
+                                                                    true,
+                                                                onTap: () {
+                                                                  _showMonthYearPicker(
+                                                                      context,
+                                                                      controller);
+                                                                },
+                                                                textController:
+                                                                    controller
+                                                                        .PlantationDateTc,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
                                                           Row(
                                                             children: [
                                                               CustomRichText(
@@ -190,7 +189,7 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                                                                   textController:
                                                                       controller
                                                                           .SaplingsPlantedCtrl,
-                                                                //  validate
+                                                                  //  validate
                                                                   errorController: controller
                                                                           .isSaplingsPlantedCtrlInvalid
                                                                           .value
@@ -210,8 +209,7 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                                                                           .isSaplingsPlantedCtrlInvalid
                                                                           .value = true;
                                                                     }
-                                                                  }
-                                                                  ),
+                                                                  }),
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
@@ -250,8 +248,7 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                                                                           .isSaplingsSurvivedCtrlInvalid
                                                                           .value = true;
                                                                     }
-                                                                  }
-                                                                  ),
+                                                                  }),
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
@@ -290,8 +287,7 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                                                                           .isSaplingsDiedCtrlInvalid
                                                                           .value = true;
                                                                     }
-                                                                  }
-                                                                  ),
+                                                                  }),
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
@@ -338,7 +334,6 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                                                           //     ],
                                                           //   ),
                                                           //   Dimens.boxHeight5,
-                                                          
                                                         ],
                                                       ),
                                                       Spacer(),
@@ -363,70 +358,68 @@ class _ViewPlantationDataWebState extends State<PlantationDataWeb> {
                   ],
                 ),
               ),
-            
-            floatingActionButton: 
-                    Row(
-                      children: [
-                        Spacer(),
-                        Container(
+              floatingActionButton: Row(
+                children: [
+                  Spacer(),
+                  Container(
+                    height: 40,
+                    child: CustomElevatedButton(
+                      backgroundColor: ColorValues.cancelColor,
+                      text: 'Cancel',
+                      onPressed: () {
+                        Get.offAllNamed(Routes.misDashboard);
+                      },
+                    ),
+                  ),
+                  Dimens.boxWidth15,
+                  controller.selectedItem?.id == 0
+                      ? Container(
                           height: 40,
                           child: CustomElevatedButton(
-                            backgroundColor: ColorValues.cancelColor,
-                            text: 'Cancel',
+                            backgroundColor: ColorValues.submitColor,
+                            text: 'Submit',
                             onPressed: () {
-                              Get.offAllNamed(Routes.misDashboard);
+                              // controller.checkForm();
+                              controller.isFormInvalid.value = false;
+                              controller.createplantationdata(
+                                  monthId: controller.selectedMonth,
+                                  year: controller.selectedYear);
+                            },
+                          ),
+                        )
+                      : Container(
+                          height: 40,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.submitColor,
+                            text: 'Update',
+                            onPressed: () {
+                              controller.isFormInvalid.value = false;
+                              controller.updatePlantationDetails();
                             },
                           ),
                         ),
-                        Dimens.boxWidth15,
-                        controller.selectedItem?.id == 0
-                            ? 
-                            Container(
-                                height: 40,
-                                child: CustomElevatedButton(
-                                  backgroundColor: ColorValues.submitColor,
-                                  text: 'Submit',
-                                  onPressed: () {
-                                    // controller.checkForm();
-                                    controller.isFormInvalid.value = false;
-                                    controller.createplantationdata(
-                                      monthId: controller.selectedMonth,
-                                      year:controller.selectedYear
-                                    );
+                  Spacer(),
+                ],
+              )
+              // : Dimens.box0
 
-                                  },
-                                ),
-                              )
-                            : Container(
-                                height: 40,
-                                child: CustomElevatedButton(
-                                  backgroundColor: ColorValues.submitColor,
-                                  text: 'Update',
-                                  onPressed: () {
-                                    controller.isFormInvalid.value = false;
-                                    controller.updatePlantationDetails(
-                                        );
-                                  },
-                                ),
-                              ),
-                            
-                        Spacer(),
-                      ],
-                    )
-                // : Dimens.box0
-              
-          ),
+              ),
         );
         // );
       },
     );
   }
-} 
+}
 
-_showMonthYearPicker(BuildContext context, CreatePlantationDataController controller) {
+_showMonthYearPicker(
+    BuildContext context, CreatePlantationDataController controller) {
   // Set the default selected month and year
-  controller.selectedMonth = DateTime.now().month;
-  controller.selectedYear = DateTime.now().year;
+  int initialMonth = controller.selectedItem?.month_id ?? DateTime.now().month;
+  int initialYear = controller.selectedItem?.year ?? DateTime.now().year;
+
+  // Set the controller's selectedMonth and selectedYear to the initial values
+  controller.selectedMonth = initialMonth;
+  controller.selectedYear = initialYear;
 
   showDialog(
     context: context,
@@ -440,9 +433,12 @@ _showMonthYearPicker(BuildContext context, CreatePlantationDataController contro
               // Month Picker
               Expanded(
                 child: CupertinoPicker(
+                  scrollController: FixedExtentScrollController(
+                    initialItem: controller.selectedMonth - 1,
+                  ),
                   itemExtent: 40,
                   onSelectedItemChanged: (int index) {
-                    controller.selectedMonth = index + 1;
+                    controller.selectedMonth = index + 1; // Month is 1-based
                   },
                   children: List.generate(12, (index) {
                     return Center(
@@ -456,16 +452,16 @@ _showMonthYearPicker(BuildContext context, CreatePlantationDataController contro
               // Year Picker
               Expanded(
                 child: CupertinoPicker(
+                  scrollController: FixedExtentScrollController(
+                    initialItem: controller.selectedYear - 2000,
+                  ),
                   itemExtent: 40,
                   onSelectedItemChanged: (int index) {
-                    // Adjust the base year (e.g., 2000) as needed
                     controller.selectedYear = 2000 + index;
                   },
                   children: List.generate(100, (index) {
                     return Center(
-                      child: Text(
-                        (2000 + index).toString(),
-                      ),
+                      child: Text((2000 + index).toString()),
                     );
                   }),
                 ),
@@ -482,17 +478,20 @@ _showMonthYearPicker(BuildContext context, CreatePlantationDataController contro
             },
           ),
           Dimens.boxHeight10,
-          ActionButton(
+         ActionButton(
             color: ColorValues.addNewColor,
             onPressed: () {
-              controller.PlantationDateTc.text = "${DateFormat.MMMM().format(DateTime(0, controller.selectedMonth))} ${controller.selectedYear}";
-              // Pass the selected month and year ID when creating Kaizens data
-              // controller.createkaizensdata(monthId: controller.selectedMonth, year: controller.selectedYear);
+              // Update the TextField with the selected month and year
+              controller.PlantationDateTc.text =
+                  "${DateFormat.MMMM().format(DateTime(0, controller.selectedMonth))} ${controller.selectedYear}";
+
+              // Call GetX update to refresh the UI
               controller.update(['stock_Mangement']);
+
               Navigator.of(context).pop();
             },
             label: "Select",
-          ),
+          )
         ],
       );
     },

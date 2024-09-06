@@ -325,8 +325,7 @@ class _FueldataListWebState extends State<FueldataListWeb> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  controller.fueldataList.isEmpty ==
-                                              true &&
+                                  controller.fueldataList.isEmpty == true &&
                                           controller.isLoading == false
                                       ? Center(child: Text('No data'))
                                       : controller.isLoading.value == true
@@ -488,8 +487,7 @@ class FuelDataListSource extends DataTableSource {
   ///
   void filtersOccupationalhealth() {
     filteredGetFuelDataList = <GetFuelDataList?>[];
-    filteredGetFuelDataList =
-        controller.fueldataList.where((Fueldatalist) {
+    filteredGetFuelDataList = controller.fueldataList.where((Fueldatalist) {
       return (Fueldatalist.id ?? '')
           .toString()
           .contains(controller.monthFilterText.value.toLowerCase());
@@ -513,6 +511,8 @@ class FuelDataListSource extends DataTableSource {
       '${FuelDataDetails?.dieselConsumedAtSite ?? ''}',
       '${FuelDataDetails?.petrolConsumedAtSite ?? ''}',
       '${FuelDataDetails?.month_name ?? ''}',
+      '${FuelDataDetails?.year ?? ''}',
+      '${FuelDataDetails?.submited_by ?? ''}',
       '${FuelDataDetails?.createdAt ?? ''}',
       'Actions',
     ];
@@ -581,24 +581,24 @@ class FuelDataListSource extends DataTableSource {
                             message: 'Edit',
                             onPress: () {
                               // controller.clearStoreData();
-                                                    controller.selectedItem =
-                                controller.fueldataList.firstWhere(
-                              (element) =>
-                                  "${element.id}" ==
-                                  FuelDataDetails?.id.toString(),
-                            );
-                            int FuelId = FuelDataDetails?.id ?? 0;
+                              controller.selectedItem =
+                                  controller.fueldataList.firstWhere(
+                                (element) =>
+                                    "${element.id}" ==
+                                    FuelDataDetails?.id.toString(),
+                              );
+                              int FuelId = FuelDataDetails?.id ?? 0;
 
-                            if (FuelId != 0) {
-                              Get.toNamed(Routes.createFuelDataScreen,
-                                  arguments: {
-                                    "selectedItem": controller.selectedItem
-                                  });
-                            }
+                              if (FuelId != 0) {
+                                Get.toNamed(Routes.createFuelDataScreen,
+                                    arguments: {
+                                      "selectedItem": controller.selectedItem
+                                    });
+                              }
                             },
                           )
                         : Dimens.box0,
-                         varUserAccessModel.value.access_list!
+                    varUserAccessModel.value.access_list!
                                 .where((e) =>
                                     e.feature_id ==
                                         UserAccessConstants
@@ -614,9 +614,9 @@ class FuelDataListSource extends DataTableSource {
                             onPress: () {
                               // int? id = FuelDataDetails?.id;
                               // controller.deleteFuel(FuelId:id);
-controller.isDeleteDialog(
-FuelId: controller.fueldataList[index].id??0,
-);
+                              controller.isDeleteDialog(
+                                FuelId: controller.fueldataList[index].id ?? 0,
+                              );
                               // controller.isContainerVisible.value = true;
                             },
                           )

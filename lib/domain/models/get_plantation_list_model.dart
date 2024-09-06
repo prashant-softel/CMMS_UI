@@ -20,6 +20,8 @@ class GetPlantationList {
   String? createdAt;
   int? updatedBy;
   String? updatedAt;
+  int? year;
+  String? submited_by;
 
   int? upsaplingsSurviveddBy;
   GetPlantationList({
@@ -35,6 +37,8 @@ class GetPlantationList {
     this.createdAt,
     this.updatedBy,
     this.updatedAt,
+    this.year,
+    this.submited_by,
   });
 
   factory GetPlantationList.fromJson(Map<String, dynamic> json) {
@@ -51,6 +55,8 @@ class GetPlantationList {
       createdAt: json['createdAt'],
       updatedBy: json['updatedBy'],
       updatedAt: json['updatedAt'],
+      submited_by: json['submited_by'],
+      year: json['year'],
     );
   }
 
@@ -67,5 +73,7 @@ class GetPlantationList {
         'createdAt': createdAt,
         'updatedBy': updatedBy,
         'updatedAt': updatedAt,
+        'submited_by': submited_by,
+        'year': year,
       };
 }
