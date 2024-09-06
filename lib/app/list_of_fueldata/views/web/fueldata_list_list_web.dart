@@ -612,9 +612,11 @@ class FuelDataListSource extends DataTableSource {
                             icon: Icons.delete,
                             message: 'Delete',
                             onPress: () {
-                              int? id = FuelDataDetails?.id;
-                              controller.deleteFuel(FuelId:id);
-
+                              // int? id = FuelDataDetails?.id;
+                              // controller.deleteFuel(FuelId:id);
+controller.isDeleteDialog(
+FuelId: controller.fueldataList[index].id??0,
+);
                               // controller.isContainerVisible.value = true;
                             },
                           )

@@ -325,8 +325,7 @@ class _PlantationListWebState extends State<PlantationListWeb> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  controller.plantationList.isEmpty ==
-                                              true &&
+                                  controller.plantationList.isEmpty == true &&
                                           controller.isLoading == false
                                       ? Center(child: Text('No data'))
                                       : controller.isLoading.value == true
@@ -506,7 +505,6 @@ class PlantationListSource extends DataTableSource {
 
     controller.planatationId.value = PlantationDataDetails?.id ?? 0;
     var cellsBuffer = [
-      
       'PD${PlantationDataDetails?.id ?? ''}',
       '${PlantationDataDetails?.saplingsPlanted ?? ''}',
       '${PlantationDataDetails?.saplingsSurvived ?? ''}',
@@ -580,23 +578,24 @@ class PlantationListSource extends DataTableSource {
                             message: 'Edit',
                             onPress: () {
                               // controller.clearStoreData();
-                              controller.selectedItem= controller.plantationList.firstWhere(
-(element) =>
-                                  "${element.id}" ==
-                                  PlantationDataDetails?.id.toString(),
+                              controller.selectedItem =
+                                  controller.plantationList.firstWhere(
+                                (element) =>
+                                    "${element.id}" ==
+                                    PlantationDataDetails?.id.toString(),
                               );
-                             int PlantationId = PlantationDataDetails?.id ?? 0;
+                              int PlantationId = PlantationDataDetails?.id ?? 0;
 
-                            if (PlantationId != 0) {
-                              Get.toNamed(Routes.createplantationdataScreen,
-                                  arguments: {
-                                    "selectedItem": controller.selectedItem
-                                  });
-                            }
+                              if (PlantationId != 0) {
+                                Get.toNamed(Routes.createplantationdataScreen,
+                                    arguments: {
+                                      "selectedItem": controller.selectedItem
+                                    });
+                              }
                             },
                           )
                         : Dimens.box0,
-                         varUserAccessModel.value.access_list!
+                    varUserAccessModel.value.access_list!
                                 .where((e) =>
                                     e.feature_id ==
                                         UserAccessConstants
@@ -610,9 +609,12 @@ class PlantationListSource extends DataTableSource {
                             icon: Icons.delete,
                             message: 'Delete',
                             onPress: () {
-                              int? id = PlantationDataDetails?.id;
-                              controller.deletePlantation(PlantaionId: id);
-
+                              // int? id = PlantationDataDetails?.id;
+                              // controller.deletePlantation(PlantaionId: id);
+                              controller.isDeleteDialog(
+                                PlantaionId:
+                                    controller.plantationList[index].id ?? 0,
+                              );
                               // controller.isContainerVisible.value = true;
                             },
                           )
