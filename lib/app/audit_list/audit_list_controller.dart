@@ -104,10 +104,19 @@ class AuditListScreenController extends GetxController {
     super.onInit();
   }
 
+  void export() {
+    getAuditPlanList(
+        facilityId, formattedTodate1, formattedFromdate1, true, type.value,
+        isExportOnly: true);
+  }
+
   Future<void> getAuditPlanList(int facilityId, dynamic startDate,
-      dynamic endDate, bool? isExport, int type) async {
-    auditPlanList.value = <AuditPlanListModel>[];
-    // pmPlanList?.clear();
+      dynamic endDate, bool? isExport, int type,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      auditPlanList.value = <AuditPlanListModel>[];
+    }
+
     final _auditPlanList = await auditListPresenter.getAuditPlanList(
         facilityId: facilityId,
         isLoading: isLoading.value,
@@ -115,7 +124,8 @@ class AuditListScreenController extends GetxController {
         startDate: startDate,
         endDate: endDate,
         type: type);
-    if (_auditPlanList != null) {
+
+    if (_auditPlanList != null && !isExportOnly) {
       auditPlanList.value = _auditPlanList;
       isLoading.value = false;
     }
@@ -152,11 +162,6 @@ class AuditListScreenController extends GetxController {
 
   void clearStoreIdData() {
     auditListPresenter.clearStoreIdData();
-  }
-
-  void export() {
-    getAuditPlanList(
-        facilityId, formattedTodate1, formattedFromdate1, true, type.value);
   }
 
   void isDeleteDialog({String? planId, String? planName}) {

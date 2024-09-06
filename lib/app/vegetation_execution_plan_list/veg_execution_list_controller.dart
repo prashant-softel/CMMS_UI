@@ -173,38 +173,50 @@ class VegExecutionListController extends GetxController {
   //   // print('abandon id Button Data:${id}');
   // }
 
+  void export() {
+    getVegTaskList(facilityId, formattedFromdate1, formattedTodate1, true,
+        isExportOnly: true);
+  }
+
   Future<void> getVegTaskList(
-      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
-    vegTaskList.value = <VegTaskListModel>[];
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      vegTaskList.value = <VegTaskListModel>[];
+    }
 
     final list = await vegExecutionListPresenter.getVegTaskList(
         isLoading: isLoading.value,
-        startDate: startDate, //// "2020-01-01",
+        startDate: startDate,
         endDate: endDate,
         facility_id: facilityId,
         isExport: isExport);
 
-    for (var veg_task_list in list) {
-      vegTaskList.add(veg_task_list);
-    }
-
-    vegTaskList.value = list;
-    filteredData.value = vegTaskList.value;
-    isLoading.value = false;
-    paginationController = PaginationController(
-      rowCount: vegTaskList.length,
-      rowsPerPage: 10,
-    );
-    if (filteredData.isNotEmpty) {
-      vegTaskListModel = filteredData[0];
-      var vegTaskListJson = vegTaskListModel?.toJson();
-      vegTaskListTableColumns.value = <String>[];
-      for (var key in vegTaskListJson?.keys.toList() ?? []) {
-        vegTaskListTableColumns.add(key);
+    if (!isExportOnly) {
+      for (var veg_task_list in list) {
+        vegTaskList.add(veg_task_list);
       }
+
+      vegTaskList.value = list;
+      filteredData.value = vegTaskList.value;
       isLoading.value = false;
+
+      paginationController = PaginationController(
+        rowCount: vegTaskList.length,
+        rowsPerPage: 10,
+      );
+
+      if (filteredData.isNotEmpty) {
+        vegTaskListModel = filteredData[0];
+        var vegTaskListJson = vegTaskListModel?.toJson();
+        vegTaskListTableColumns.value = <String>[];
+        for (var key in vegTaskListJson?.keys.toList() ?? []) {
+          vegTaskListTableColumns.add(key);
+        }
+      }
     }
 
+    isLoading.value = false;
     update(['veg_task_list']);
   }
 
@@ -215,10 +227,6 @@ class VegExecutionListController extends GetxController {
   void clearStoreData() {
     vegExecutionListPresenter.clearExecutionId();
     vegExecutionListPresenter.clearPlanId();
-  }
-
-  void export() {
-    getVegTaskList(facilityId, formattedFromdate1, formattedTodate1, true);
   }
 
   void viewVegetation(int executionId, int planId) {

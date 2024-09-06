@@ -54,7 +54,6 @@ class PlantStockReportController extends GetxController {
   RxString outwardFilterText = ''.obs;
   RxString balanceFilterText = ''.obs;
   RxString actionFilterText = ''.obs;
-  
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Assets Name": true,
@@ -74,7 +73,7 @@ class PlantStockReportController extends GetxController {
     "Inward": 150,
     "Outward": 150,
     "Balance": 150,
-    "Action":100,
+    "Action": 100,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -141,7 +140,7 @@ class PlantStockReportController extends GetxController {
       "Inward": inwardFilterText,
       "Outward": outwardFilterText,
       "Balance": balanceFilterText,
-      "Action":actionFilterText,
+      "Action": actionFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -170,15 +169,21 @@ class PlantStockReportController extends GetxController {
     }
   }
 
-  Future<void> getPlantStockList(
-      int facilityId,
-      dynamic startDate,
-      dynamic endDate,
-      bool? isExport,
-      List<int>? selectedAssetsNameIdList) async {
-    plantStockList!.clear();
-    plantStockList?.value = <PlantStockListModel>[];
-    StockDetailsList.value = <StockDetails>[];
+  void export() {
+    
+    getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, true,
+        selectedAssetsNameIdList.value,
+        isExportOnly: true);
+  }
+
+  Future<void> getPlantStockList(int facilityId, dynamic startDate,
+      dynamic endDate, bool? isExport, List<int>? selectedAssetsNameIdList,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      plantStockList!.clear();
+      plantStockList?.value = <PlantStockListModel>[];
+      StockDetailsList.value = <StockDetails>[];
+    }
 
     final _plantStockList = await pantStockReportPresenter.getPlantStockList(
         facilityId: facilityId,
@@ -188,14 +193,16 @@ class PlantStockReportController extends GetxController {
         endDate: endDate,
         selectedAssetsNameIdList: selectedAssetsNameIdList);
 
-    if (_plantStockList != null) {
+    if (_plantStockList != null && !isExportOnly) {
       plantStockList?.value = _plantStockList;
       isLoading.value = false;
+
       for (var facility in _plantStockList) {
         for (var stockDetail in facility!.stockDetails) {
           StockDetailsList.add(stockDetail);
         }
       }
+
       filteredData.value = StockDetailsList.toList();
 
       paginationController = PaginationController(
@@ -241,18 +248,15 @@ class PlantStockReportController extends GetxController {
     // print({"selectedfrequency": selectedfrequency});
   }
 
-
-  void export() {
-    getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, true,
-        selectedAssetsNameIdList.value);
-  }
-   void clearStoreData() {
+  void clearStoreData() {
     pantStockReportPresenter.clearValue();
   }
-   void clearStorestartData() {
+
+  void clearStorestartData() {
     pantStockReportPresenter.clearstartValue();
   }
-   void clearStoreendData() {
+
+  void clearStoreendData() {
     pantStockReportPresenter.clearendValue();
   }
 }

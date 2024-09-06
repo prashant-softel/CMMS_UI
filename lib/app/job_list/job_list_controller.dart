@@ -163,15 +163,22 @@ class JobListController extends GetxController {
     jobList.value = filteredList;
   }
 
+  void export() {
+    getJobList(userId, true, formattedTodate1, formattedFromdate1, true, true,
+        isExportOnly: true);
+  }
+
   Future<void> getJobList(int userId, bool self_view, formattedTodate1,
-      formattedFromdate1, bool isLoading, bool isExport) async {
-    jobList.value = <JobModel>[];
-    filteredData.value = <JobModel>[];
+      formattedFromdate1, bool isLoading, bool isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      jobList.value = <JobModel>[];
+      filteredData.value = <JobModel>[];
+    }
 
     if (facilityId > 0) {
       final _jobList = await jobListPresenter.getJobList(
           facilityId: facilityId,
-          // userId: userId,
           self_view: varUserAccessModel.value.access_list!
                       .where((e) =>
                           e.feature_id == UserAccessConstants.kJobFeatureId &&
@@ -183,7 +190,7 @@ class JobListController extends GetxController {
           isLoading: isLoading,
           isExport: isExport);
 
-      if (_jobList != null && _jobList.isNotEmpty) {
+      if (_jobList != null && _jobList.isNotEmpty && !isExportOnly) {
         filteredData.value = _jobList;
 
         jobList.value = _jobList;
@@ -382,10 +389,6 @@ class JobListController extends GetxController {
 
   void clearStoreDataType() {
     jobListPresenter.clearTypeValue();
-  }
-
-  void export() {
-    getJobList(userId, true, formattedTodate1, formattedFromdate1, true, true);
   }
 
   ///

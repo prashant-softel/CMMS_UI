@@ -94,18 +94,27 @@ class PurchaseGoodsorderListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getRequestOrderList(
-      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
+ void export() {
+  
+  getRequestOrderList(facilityId, formattedTodate1, formattedFromdate1, true, isExportOnly: true);
+}
+
+Future<void> getRequestOrderList(int facilityId, dynamic startDate, dynamic endDate, bool isExport, {bool isExportOnly = false}) async {
+ 
+  if (!isExportOnly) {
     goodsOrdersList.value = <GetRequestOrderListModel>[];
     filteredData.value = <GetRequestOrderListModel>[];
+  }
 
-    final _goodsordersList =
-        await purchaseGoodsorderListPresenter.getRequestOrderList(
-            isLoading: isLoading.value,
-            start_date: startDate,
-            end_date: endDate,
-            facility_id: facilityId,
-            isExport: isExport);
+  final _goodsordersList = await purchaseGoodsorderListPresenter.getRequestOrderList(
+      isLoading: isLoading.value,
+      start_date: startDate,
+      end_date: endDate,
+      facility_id: facilityId,
+      isExport: isExport);
+
+ 
+  if (!isExportOnly) {
     goodsOrdersList.value = _goodsordersList;
     isLoading.value = false;
     paginationController = PaginationController(
@@ -114,10 +123,9 @@ class PurchaseGoodsorderListController extends GetxController {
     );
 
     if (goodsOrdersList.isNotEmpty) {
-      // Check for multiple currencies
+     
       for (var order in goodsOrdersList.value) {
-        var currencies =
-            order.requestOrderItems!.map((item) => item.currency).toSet();
+        var currencies = order.requestOrderItems!.map((item) => item.currency).toSet();
 
         if (currencies.length > 1) {
           order.displayCurrency = "Multiple currency";
@@ -136,6 +144,8 @@ class PurchaseGoodsorderListController extends GetxController {
       }
     }
   }
+}
+
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {}
@@ -255,7 +265,5 @@ class PurchaseGoodsorderListController extends GetxController {
     purchaseGoodsorderListPresenter.clearTypeValue();
   }
 
-  void export() {
-    getRequestOrderList(facilityId, formattedTodate1, formattedFromdate1, true);
-  }
+  
 }
