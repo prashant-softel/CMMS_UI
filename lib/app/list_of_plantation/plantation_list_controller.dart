@@ -4,6 +4,10 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/list_of_plantation/plantation_list_presenter.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/get_plantation_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -164,5 +168,58 @@ Future<void> deletePlantation({int? PlantaionId}) async {
     }
   getplantationdata(false);
 }
+void isDeleteDialog({int? PlantaionId, String? Plantationlist}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("Delete Plantaion List", style: Styles.blackBold16),
+              Divider(
+                color: ColorValues.appLightGreyColor,
+              ),
+              Dimens.boxHeight5,
+              RichText(
+                text: TextSpan(
+                    text: 'Are you sure you want to delete the Plantation Data',
+                    style: Styles.blackBold16,
+                    children: [
+                      TextSpan(
+                        text: Plantationlist,
+                        style: TextStyle(
+                          color: ColorValues.orangeColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ]),
+              ),
+            ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appRedColor,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  text: 'No'),
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appGreenColor,
+                  onPressed: () {
+                    deletePlantation(PlantaionId:PlantaionId).then((value) {
+                      Get.back();
+                      getplantationdata(false);
+                    });
+                  },
+                  text: 'Yes'),
+            ],
+          ),
+          Dimens.boxHeight5
+        ],
+      ),
+    );
+  }
   
 }
