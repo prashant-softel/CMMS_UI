@@ -33,7 +33,7 @@ class TbtDoneBMDialog extends GetView {
                 fontSize: 15,
               ),
             ),
-            Dimens.boxWidth10,
+            Dimens.boxWidth2,
             Text(
               "JC${id}",
               style:
