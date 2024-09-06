@@ -322,16 +322,15 @@ class GoodsOrdersReqDetailController extends GetxController {
     List<SubmitItems> items = [];
     rowItem.forEach((element) {
       SubmitItems item = SubmitItems(
-          itemID: int.tryParse('${element[0]["itemID"]}') ?? 0,
-          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
-          currencyId: unitCurrencydropdownMapperData[element[1]["value"]]?.id,
-          cost: int.tryParse(element[2]["value"] ?? '0'),
-          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-          comment: element[4]["value"] ?? '0');
+        itemID: int.tryParse('${element[0]["itemID"]}') ?? 0,
+        assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
+        currencyId: unitCurrencydropdownMapperData[element[1]["value"]]?.id,
+        cost: int.tryParse(element[2]["value"] ?? '0'),
+        ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+        comment: element[4]["value"] ?? '0',
+      );
 
       items.add(item);
-
-      print('update req  order  data: $item');
     });
 
     CreateRequestOrderDataModel createRequestOrderDataModel =
