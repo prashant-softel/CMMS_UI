@@ -48,6 +48,8 @@ class PlantationListController extends GetxController {
   RxString saplingsSurvivedFilterText = ''.obs;
   RxString saplingsDiedFilterText = ''.obs;
   RxString monthnameFilterText = ''.obs;
+  RxString yearFilterText = ''.obs;
+  RxString submitedbyFilterText = ''.obs;
   RxString createdbyFilterText = ''.obs;
   RxString createdatFilterText = ''.obs;
   RxString actionFilterText = ''.obs;
@@ -61,6 +63,8 @@ class PlantationListController extends GetxController {
     "Saplings Survived": true,
     "Saplings Died": true,
     "Month name": true,
+    "Year": true,
+    "Submited by": true,
     "Created At": true,
   });
   final Map<String, double> columnwidth = {
@@ -69,6 +73,8 @@ class PlantationListController extends GetxController {
     "Saplings Survived": 250,
     "Saplings Died": 250,
     "Month name": 200,
+    "Year": 100,
+    "Submited by": 150,
     "Created At": 200,
   };
   Map<String, RxString> filterText = {};
@@ -88,6 +94,8 @@ class PlantationListController extends GetxController {
     "Saplings Survived": saplingsSurvivedFilterText,
     "Saplings Died": saplingsDiedFilterText,
     "Month name": monthnameFilterText,
+    "Year":yearFilterText,
+    "Submited by":submitedbyFilterText,
     "Created At": createdatFilterText,
 
       "Action": actionFilterText,

@@ -20,6 +20,8 @@ class GetOccupationalList {
   int? updatedBy;
   int? month_id;
   String? month_name;
+    int? year;
+  String? submited_by;
 
   GetOccupationalList({
     this.id,
@@ -33,6 +35,8 @@ class GetOccupationalList {
     this.updatedBy,
     this.month_id,
     this.month_name,
+   this.year,
+   this.submited_by,
   });
 
   factory GetOccupationalList.fromJson(Map<String, dynamic> json) {
@@ -48,6 +52,8 @@ class GetOccupationalList {
       updatedBy: json['updatedBy'],
       month_id: json['month_id'],
       month_name: json['month_name'],
+      year: json['year'],
+      submited_by: json['submited_by'],
     );
   }
 
@@ -63,5 +69,7 @@ class GetOccupationalList {
         'updatedBy': updatedBy,
         'month_id': month_id,
         'month_name': month_name,
+        'year': year,
+        'submited_by': submited_by,
       };
 }

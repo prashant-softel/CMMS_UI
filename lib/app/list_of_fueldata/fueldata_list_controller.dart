@@ -22,7 +22,7 @@ class FuelDataListController extends GetxController {
   RxList<GetFuelDataList> filteredData = <GetFuelDataList>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
-GetFuelDataList? selectedItem;
+  GetFuelDataList? selectedItem;
   String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
   String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
@@ -48,6 +48,8 @@ GetFuelDataList? selectedItem;
   RxString dieselConsumedAtSiteFilterText = ''.obs;
   RxString petrolConsumedAtSiteFilterText = ''.obs;
   RxString monthFilterText = ''.obs;
+  RxString yearFilterText = ''.obs;
+  RxString submitedFilterText = ''.obs;
   RxString createdbyFilterText = ''.obs;
   RxString createdatFilterText = ''.obs;
   RxString actionFilterText = ''.obs;
@@ -62,6 +64,8 @@ GetFuelDataList? selectedItem;
     "Diesel At Site": true,
     "Petrol At Site": true,
     "Month": true,
+    "Year": true,
+    "Submited by": true,
     "Created At": true,
   });
   final Map<String, double> columnwidth = {
@@ -72,6 +76,8 @@ GetFuelDataList? selectedItem;
     "Diesel At Site": 150,
     "Petrol At Site": 150,
     "Month": 100,
+    "Year": 100,
+    "Submited by": 150,
     "Created At": 100,
   };
   Map<String, RxString> filterText = {};
@@ -93,6 +99,8 @@ GetFuelDataList? selectedItem;
       "Diesel At Site": dieselConsumedAtSiteFilterText,
       "Petrol At Site": petrolConsumedAtSiteFilterText,
       "Month": monthFilterText,
+      "Year": yearFilterText,
+      "Submited by": submitedFilterText,
       "Created At": createdatFilterText,
 
       "Action": actionFilterText,
@@ -157,6 +165,7 @@ GetFuelDataList? selectedItem;
   void clearStoreData() {
     fueldataListPresenter.clearValue();
   }
+
   Future<void> deleteFuel({int? FuelId}) async {
     {
       await fueldataListPresenter.deleteFuel(
@@ -164,9 +173,10 @@ GetFuelDataList? selectedItem;
         isLoading: true,
       );
     }
-  getFuelConsumption(false);
-}
-void isDeleteDialog({int? FuelId, String? Fuellist}) {
+    getFuelConsumption(false);
+  }
+
+  void isDeleteDialog({int? FuelId, String? Fuellist}) {
     Get.dialog(
       AlertDialog(
         content: Column(
@@ -206,7 +216,7 @@ void isDeleteDialog({int? FuelId, String? Fuellist}) {
               CustomElevatedButton(
                   backgroundColor: ColorValues.appGreenColor,
                   onPressed: () {
-                    deleteFuel(FuelId:FuelId).then((value) {
+                    deleteFuel(FuelId: FuelId).then((value) {
                       Get.back();
                       getFuelConsumption(false);
                     });

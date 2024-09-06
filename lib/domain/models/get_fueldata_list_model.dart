@@ -21,7 +21,9 @@ class GetFuelDataList {
   int? petrolConsumedAtSite;
   int? month_id;
   String? month_name;
-int? updatedBy;
+  int? updatedBy;
+  int? year;
+  String? submited_by;
   GetFuelDataList({
     this.id,
     this.dieselConsumedForVehicles,
@@ -36,6 +38,8 @@ int? updatedBy;
     this.month_id,
     this.month_name,
     this.updatedBy,
+    this.year,
+  this.submited_by,
   });
 
   factory GetFuelDataList.fromJson(Map<String, dynamic> json) {
@@ -53,6 +57,8 @@ int? updatedBy;
       month_id: json['month_id'],
       month_name: json['month_name'],
       updatedBy: json['updatedBy'],
+      year: json['year'],
+      submited_by: json['submited_by'],
     );
   }
 
@@ -70,5 +76,7 @@ int? updatedBy;
         'month_id': month_id,
         'month_name': month_name,
         'updatedBy': updatedBy,
+        'year': year,
+        'submited_by': submited_by,
       };
 }

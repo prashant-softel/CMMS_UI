@@ -512,6 +512,8 @@ class OccupationalDataListSource extends DataTableSource {
       '${OccupationallistDetails?.occupationalIllnesses ?? ''}',
       '${OccupationallistDetails?.periodicTests ?? ''}',
       '${OccupationallistDetails?.month_name ?? ''}',
+      '${OccupationallistDetails?.year ?? ''}',
+      '${OccupationallistDetails?.submited_by ?? ''}',
       '${OccupationallistDetails?.createdAt ?? ''}',
       'Actions',
     ];
@@ -617,9 +619,11 @@ class OccupationalDataListSource extends DataTableSource {
                             icon: Icons.delete,
                             message: 'Delete',
                             onPress: () {
-                              int? id = OccupationallistDetails?.id;
-                              controller.deleteHealth(HealthId: id);
-
+                              // int? id = OccupationallistDetails?.id;
+                              // controller.deleteHealth(HealthId: id);
+                              controller.isDeleteDialog(
+                                HealthId: controller.occupationalhealthList[index].id??0,
+                              );
                               // controller.isContainerVisible.value = true;
                             },
                           )

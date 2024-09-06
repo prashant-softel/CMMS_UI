@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
@@ -21,7 +20,7 @@ class KaizensDataListController extends GetxController {
   final HomeController homecontroller = Get.find();
   RxList<GetKaizensDataList> kaizensdataList = <GetKaizensDataList>[].obs;
   RxList<GetKaizensDataList> filteredData = <GetKaizensDataList>[].obs;
-    GetKaizensDataList? selectedItem;
+  GetKaizensDataList? selectedItem;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
 
@@ -44,8 +43,8 @@ class KaizensDataListController extends GetxController {
   int facilityId = 0;
   Rx<int> kaizensId = 0.obs;
 
-   RxString idFilterText = ''.obs;
-   RxString kaizensImplementedFilterText = ''.obs;
+  RxString idFilterText = ''.obs;
+  RxString kaizensImplementedFilterText = ''.obs;
   RxString costForImplementationFilterText = ''.obs;
   RxString costSavedFromImplementationFilterText = ''.obs;
   RxString monthnameFilterText = ''.obs;
@@ -55,27 +54,26 @@ class KaizensDataListController extends GetxController {
   RxString createdatFilterText = ''.obs;
   RxString actionFilterText = ''.obs;
 
-
   RxString userDateFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    "Id":true,
+    "Id": true,
     "Kaizens Implemented": true,
     "Cost For Implementation": true,
     "Cost Saved From Implementation": true,
     "Month name": true,
     "Year": true,
-   "Submited by": true,
+    "Submited by": true,
     "Created At": true,
   });
   final Map<String, double> columnwidth = {
-    "Id":100,
-   "Kaizens Implemented": 250,
+    "Id": 100,
+    "Kaizens Implemented": 250,
     "Cost For Implementation": 250,
     "Cost Saved From Implementation": 300,
     "Month name": 150,
-    "Year":100,
-    "Submited by":150,
+    "Year": 100,
+    "Submited by": 150,
     "Created At": 150,
   };
   Map<String, RxString> filterText = {};
@@ -90,14 +88,14 @@ class KaizensDataListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
-      "Id":idFilterText,
-     "Kaizens Implemented": kaizensImplementedFilterText,
-    "Cost For Implementation": costForImplementationFilterText,
-    "Cost Saved From Implementation": costSavedFromImplementationFilterText,
-    "Month name": monthnameFilterText,
-    "Year":yearFilterText,
-    "Submited by":submitedFilterText,
-    "Created At": createdatFilterText,
+      "Id": idFilterText,
+      "Kaizens Implemented": kaizensImplementedFilterText,
+      "Cost For Implementation": costForImplementationFilterText,
+      "Cost Saved From Implementation": costSavedFromImplementationFilterText,
+      "Month name": monthnameFilterText,
+      "Year": yearFilterText,
+      "Submited by": submitedFilterText,
+      "Created At": createdatFilterText,
       "Action": actionFilterText,
       // "Status": statusFilterText,
     };
@@ -117,30 +115,25 @@ class KaizensDataListController extends GetxController {
       return;
     }
     List<GetKaizensDataList> filteredList = filteredData
-        .where((item) =>
-            (item.costForImplementation
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false) 
-       
-            )
+        .where((item) => (item.costForImplementation
+                ?.toString()
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ??
+            false))
         .toList();
     kaizensdataList.value = filteredList;
   }
 
-  Future<void> getkaizensdata(
-     bool isExport) async {
+  Future<void> getkaizensdata(bool isExport) async {
     kaizensdataList.value = <GetKaizensDataList>[];
     filteredData.value = <GetKaizensDataList>[];
 
-    final _goodsordersList =
-        await kaizensdataListPresenter.getkaizensdata(
-            isLoading: isLoading.value,
-            // start_date: startDate,
-            // end_date: endDate,
-            // facility_id: facilityId,
-            isExport: isExport);
+    final _goodsordersList = await kaizensdataListPresenter.getkaizensdata(
+        isLoading: isLoading.value,
+        // start_date: startDate,
+        // end_date: endDate,
+        // facility_id: facilityId,
+        isExport: isExport);
     kaizensdataList.value = _goodsordersList;
     isLoading.value = false;
     paginationController = PaginationController(
@@ -162,21 +155,21 @@ class KaizensDataListController extends GetxController {
     switch (list.runtimeType) {}
   }
 
-
-
   void clearStoreData() {
     kaizensdataListPresenter.clearValue();
   }
-Future<void> deleteKaizen( {int? KaizenId}) async {
+
+  Future<void> deleteKaizen({int? KaizenId}) async {
     {
       await kaizensdataListPresenter.deleteKaizen(
         Id: KaizenId,
         isLoading: true,
       );
     }
-  getkaizensdata(false);
-}
-void isDeleteDialog({int? KaizenId, String? Kaizenlist}) {
+    getkaizensdata(false);
+  }
+
+  void isDeleteDialog({int? KaizenId, String? Kaizenlist}) {
     Get.dialog(
       AlertDialog(
         content: Column(
@@ -216,7 +209,7 @@ void isDeleteDialog({int? KaizenId, String? Kaizenlist}) {
               CustomElevatedButton(
                   backgroundColor: ColorValues.appGreenColor,
                   onPressed: () {
-                    deleteKaizen(KaizenId:KaizenId).then((value) {
+                    deleteKaizen(KaizenId: KaizenId).then((value) {
                       Get.back();
                       getkaizensdata(false);
                     });

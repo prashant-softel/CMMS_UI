@@ -2,6 +2,10 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -44,6 +48,8 @@ class OccupationalDataListController extends GetxController {
   RxString periodictestsFilterText = ''.obs;
   RxString illnessesFilterText = ''.obs;
   RxString monthFilterText = ''.obs;
+    RxString yearFilterText = ''.obs;
+  RxString submitedFilterText = ''.obs;
   RxString createdbyFilterText = ''.obs;
   RxString createdatFilterText = ''.obs;
   RxString actionFilterText = ''.obs;
@@ -56,8 +62,10 @@ class OccupationalDataListController extends GetxController {
     "No Of Health Exams Of New Joiner": true,
     "Periodic Tests": true,
     "Occupational Illnesses": true,
-    "Month name": true,
+    "Month": true,
     // "Created By": true,
+       "Year": true,
+    "Submited by": true,
     "Created At": true,
     // "Status": true,
 
@@ -65,10 +73,12 @@ class OccupationalDataListController extends GetxController {
   });
   final Map<String, double> columnwidth = {
     "Id": 100,
-   "No Of Health Exams Of New Joiner": 380,
+   "No Of Health Exams Of New Joiner": 350,
     "Periodic Tests": 220,
-    "Occupational Illnesses": 250,
-    "Month name": 200,
+    "Occupational Illnesses": 230,
+    "Month": 150,
+        "Year": 100,
+    "Submited by": 150,
     // "Created By": 150,
     "Created At": 150,
     // "Status": 100
@@ -89,7 +99,9 @@ class OccupationalDataListController extends GetxController {
       "No Of Health Exams Of New Joiner": healthexamsFilterText,
       "Periodic Tests": periodictestsFilterText,
       "Occupational Illnesses": illnessesFilterText,
-      "Month name": monthFilterText,
+      "Month": monthFilterText,
+          "Year": yearFilterText,
+      "Submited by": submitedFilterText,
       // "Created By": createdbyFilterText,
       "Created At": createdatFilterText,
       "Action": actionFilterText,
@@ -177,4 +189,57 @@ class OccupationalDataListController extends GetxController {
     }
   getHealthDatalist(false);
 }
+void isDeleteDialog({int? HealthId, String? Healthlist}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("Delete Health List", style: Styles.blackBold16),
+              Divider(
+                color: ColorValues.appLightGreyColor,
+              ),
+              Dimens.boxHeight5,
+              RichText(
+                text: TextSpan(
+                    text: 'Are you sure you want to delete the Health Data',
+                    style: Styles.blackBold16,
+                    children: [
+                      TextSpan(
+                        text: Healthlist,
+                        style: TextStyle(
+                          color: ColorValues.orangeColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ]),
+              ),
+            ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appRedColor,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  text: 'No'),
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appGreenColor,
+                  onPressed: () {
+                    deleteHealth(HealthId: HealthId).then((value) {
+                      Get.back();
+                      getHealthDatalist(false);
+                    });
+                  },
+                  text: 'Yes'),
+            ],
+          ),
+          Dimens.boxHeight5
+        ],
+      ),
+    );
+  }
 }
