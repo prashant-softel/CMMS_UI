@@ -151,10 +151,18 @@ class StockManagementGoodsOrdersController extends GetxController {
     goodsOrdersList.value = filteredList;
   }
 
+  void export() {
+    getGoodsOrdersList(facilityId, formattedTodate1, formattedFromdate1, true,
+        isExportOnly: true);
+  }
+
   Future<void> getGoodsOrdersList(
-      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
-    goodsOrdersList.value = <GoodsOrdersListModel>[];
-    filteredData.value = <GoodsOrdersListModel>[];
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      goodsOrdersList.value = <GoodsOrdersListModel>[];
+      filteredData.value = <GoodsOrdersListModel>[];
+    }
 
     final _goodsordersList =
         await stockManagementGoodsOrdersPresenter.getGoodsOrdersList(
@@ -163,19 +171,24 @@ class StockManagementGoodsOrdersController extends GetxController {
             end_date: endDate,
             facility_id: facilityId,
             isExport: isExport);
-    goodsOrdersList.value = _goodsordersList;
-    isLoading.value = false;
-    paginationController = PaginationController(
-      rowCount: goodsOrdersList.length,
-      rowsPerPage: 10,
-    );
-    if (goodsOrdersList.isNotEmpty) {
-      filteredData.value = goodsOrdersList.value;
-      goodsOrdersListModel = goodsOrdersList[0];
-      var newPermitListJson = goodsOrdersListModel?.toJson();
-      goodsOrdersListTableColumns.value = <String>[];
-      for (var key in newPermitListJson?.keys.toList() ?? []) {
-        goodsOrdersListTableColumns.add(key);
+
+    if (!isExportOnly) {
+      goodsOrdersList.value = _goodsordersList;
+      isLoading.value = false;
+
+      paginationController = PaginationController(
+        rowCount: goodsOrdersList.length,
+        rowsPerPage: 10,
+      );
+
+      if (goodsOrdersList.isNotEmpty) {
+        filteredData.value = goodsOrdersList.value;
+        goodsOrdersListModel = goodsOrdersList[0];
+        var newPermitListJson = goodsOrdersListModel?.toJson();
+        goodsOrdersListTableColumns.value = <String>[];
+        for (var key in newPermitListJson?.keys.toList() ?? []) {
+          goodsOrdersListTableColumns.add(key);
+        }
       }
     }
   }
@@ -212,9 +225,5 @@ class StockManagementGoodsOrdersController extends GetxController {
 
   void clearTypeStoreData() {
     stockManagementGoodsOrdersPresenter.clearTypeValue();
-  }
-
-  void export() {
-    getGoodsOrdersList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
 }

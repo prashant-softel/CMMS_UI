@@ -77,25 +77,39 @@ class ReturnMrsListController extends GetxController {
       facilityId = event;
       if (facilityId > 0) {
         Future.delayed(Duration(seconds: 2), () {
-          getReturnMrsList(facilityId, formattedTodate, formattedFromdate, false);
+          getReturnMrsList(
+              facilityId, formattedTodate, formattedFromdate, false);
         });
       }
     });
     super.onInit();
   }
-   void getReturnMrsListByDate() {
+
+  void getReturnMrsListByDate() {
     getReturnMrsList(facilityId, formattedTodate, formattedFromdate, false);
   }
 
-  Future<void> getReturnMrsList(int facilityId, dynamic startDate, dynamic endDate,bool isExport) async {
-    mrsList.value = <ReturnMrsListModel>[];
+  void export() {
+    getReturnMrsList(facilityId, formattedTodate, formattedFromdate, true,
+        isExportOnly: true);
+  }
+
+  Future<void> getReturnMrsList(
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      mrsList.value = <ReturnMrsListModel>[];
+      filteredData.value = <ReturnMrsListModel>[];
+    }
+
     final _mrsList = await returnmrsListPresenter.getReturnMrsList(
         facilityId: facilityId, isLoading: isLoading.value, isExport: isExport);
 
-    if (_mrsList != null) {
+    if (_mrsList != null && !isExportOnly) {
       mrsList.value = _mrsList;
       filteredData.value = _mrsList;
       isLoading.value = false;
+
       paginationController = PaginationController(
         rowCount: mrsList.length ?? 0,
         rowsPerPage: 10,
@@ -158,9 +172,5 @@ class ReturnMrsListController extends GetxController {
 
   void clearStoreData() {
     returnmrsListPresenter.clearValue();
-  }
-
-  void export() {
-    getReturnMrsList(facilityId, formattedTodate, formattedFromdate, true);
   }
 }

@@ -140,33 +140,41 @@ class InventoryListController extends GetxController {
     inventoryList.value = filteredList;
   }
 
-  Future<void> getInventoryAssetsList(int facilityId, bool isExport) async {
-    inventoryList.value = <InventoryModel>[];
-    filteredData.value = <InventoryModel>[];
+  void export() {
+    getInventoryAssetsList(facilityId, true, isExportOnly: true);
+  }
+
+  Future<void> getInventoryAssetsList(int facilityId, bool isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      inventoryList.value = <InventoryModel>[];
+      filteredData.value = <InventoryModel>[];
+    }
+
     final _inventoryList = await inventoryListPresenter.getInventoryAssetsList(
         isLoading: isLoading.value,
         facility_id: facilityId,
         isExport: isExport);
-    inventoryList.value = _inventoryList;
-    filteredData.value = inventoryList.value;
-    isLoading.value = false;
-    paginationController = PaginationController(
-      rowCount: inventoryList.length,
-      rowsPerPage: 10,
-    );
 
-    if (inventoryList.isNotEmpty) {
-      inventoryListModel = inventoryList[0];
-      var inventoryListJson = inventoryListModel?.toJson();
-      inventoryListTableColumns.value = <String>[];
-      for (var key in inventoryListJson?.keys.toList() ?? []) {
-        inventoryListTableColumns.add(key);
+    if (!isExportOnly) {
+      inventoryList.value = _inventoryList;
+      filteredData.value = inventoryList.value;
+      isLoading.value = false;
+
+      paginationController = PaginationController(
+        rowCount: inventoryList.length,
+        rowsPerPage: 10,
+      );
+
+      if (inventoryList.isNotEmpty) {
+        inventoryListModel = inventoryList[0];
+        var inventoryListJson = inventoryListModel?.toJson();
+        inventoryListTableColumns.value = <String>[];
+        for (var key in inventoryListJson?.keys.toList() ?? []) {
+          inventoryListTableColumns.add(key);
+        }
       }
     }
-  }
-
-  void export() {
-    getInventoryAssetsList(facilityId, true);
   }
 
   void onValueChanged(dynamic list, dynamic value) {

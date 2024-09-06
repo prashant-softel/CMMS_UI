@@ -88,9 +88,16 @@ class VegetationPlanListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getVegetationPlanList(int facilityId, bool isExport) async {
-    vegetationPlanList.value = <VegetationPlanListModel>[];
-    filteredData.value = <VegetationPlanListModel>[];
+  void export() {
+    getVegetationPlanList(facilityId, true, isExportOnly: true);
+  }
+
+  Future<void> getVegetationPlanList(int facilityId, bool isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      vegetationPlanList.value = <VegetationPlanListModel>[];
+      filteredData.value = <VegetationPlanListModel>[];
+    }
 
     final _vegetationPlanList =
         await vegetationPlanListPresenter.getVegetationPlanList(
@@ -98,22 +105,23 @@ class VegetationPlanListController extends GetxController {
             facility_id: facilityId,
             isExport: isExport);
 
-    vegetationPlanList.value = _vegetationPlanList;
-    isLoading.value = false;
-    vegetationPlanList.value = _vegetationPlanList;
-    if (vegetationPlanList.isNotEmpty) {
-      filteredData.value = vegetationPlanList.value;
-      vegetationPlanListModel = vegetationPlanList[0];
-      var newPermitListJson = vegetationPlanListModel?.toJson();
-      vegetationPlanListTableColumns.value = <String>[];
-      for (var key in newPermitListJson?.keys.toList() ?? []) {
-        vegetationPlanListTableColumns.add(key);
+    if (!isExportOnly) {
+      vegetationPlanList.value = _vegetationPlanList;
+      isLoading.value = false;
+      if (vegetationPlanList.isNotEmpty) {
+        filteredData.value = vegetationPlanList.value;
+        vegetationPlanListModel = vegetationPlanList[0];
+        var vegetationPlanListJson = vegetationPlanListModel?.toJson();
+        vegetationPlanListTableColumns.value = <String>[];
+        for (var key in vegetationPlanListJson?.keys.toList() ?? []) {
+          vegetationPlanListTableColumns.add(key);
+        }
       }
+      paginationController = PaginationController(
+        rowCount: vegetationPlanList.length,
+        rowsPerPage: 10,
+      );
     }
-    paginationController = PaginationController(
-      rowCount: vegetationPlanList.length,
-      rowsPerPage: 10,
-    );
   }
 
   void clearStoreData() {
@@ -164,10 +172,6 @@ class VegetationPlanListController extends GetxController {
                 false))
         .toList();
     vegetationPlanList.value = filteredList;
-  }
-
-  void export() {
-    getVegetationPlanList(facilityId, true);
   }
 
   Future<void> deleteVegPlan(int? planId) async {

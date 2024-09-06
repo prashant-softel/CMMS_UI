@@ -133,10 +133,18 @@ class MrsListController extends GetxController {
     mrsList.value = filteredList;
   }
 
-  Future<void> getMrsList(int facilityId, dynamic startDate, dynamic endDate,
-      bool? isExport) async {
-    mrsList.value = <MrsListModel>[];
-    filteredData.value = <MrsListModel>[];
+  void export() {
+    getMrsList(facilityId, formattedTodate1, formattedFromdate1, true,
+        isExportOnly: true);
+  }
+
+  Future<void> getMrsList(
+      int facilityId, dynamic startDate, dynamic endDate, bool? isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      mrsList.value = <MrsListModel>[];
+      filteredData.value = <MrsListModel>[];
+    }
 
     final _mrsList = await mrsListPresenter.getMrsList(
         facilityId: facilityId,
@@ -145,17 +153,17 @@ class MrsListController extends GetxController {
         startDate: startDate,
         endDate: endDate);
 
-    if (_mrsList != null) {
+    if (_mrsList != null && !isExportOnly) {
       mrsList.value = _mrsList;
       filteredData.value = _mrsList;
       isLoading.value = false;
+
       paginationController = PaginationController(
         rowCount: mrsList.length,
         rowsPerPage: 10,
       );
 
       if (mrsList.isNotEmpty) {
-        //  filteredData.value = mrsList!.value;
         mrsListModel = mrsList[0];
         var mrsListJson = mrsListModel?.toJson();
         mrsTableColumns.value = <String>[];
@@ -203,8 +211,4 @@ class MrsListController extends GetxController {
   }
 
   void clearTypeValue() async => mrsListPresenter.clearTypeValue();
-
-  void export() {
-    getMrsList(facilityId, formattedTodate1, formattedFromdate1, true);
-  }
 }

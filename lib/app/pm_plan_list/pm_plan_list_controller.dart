@@ -156,20 +156,31 @@ class PmPlanListController extends GetxController {
     pmPlanList.value = filteredList;
   }
 
-  Future<void> getPmPlanList(int facilityId, dynamic startDate, dynamic endDate,
-      bool? isExport) async {
-    pmPlanList.value = <PmPlanListModel>[];
-    filteredData.value = <PmPlanListModel>[];
+  void export() {
+    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, true,
+        isExportOnly: true);
+  }
+
+  Future<void> getPmPlanList(
+      int facilityId, dynamic startDate, dynamic endDate, bool? isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      pmPlanList.value = <PmPlanListModel>[];
+      filteredData.value = <PmPlanListModel>[];
+    }
+
     final _pmPlanList = await pmPlanListPresenter.getPmPlanList(
         facilityId: facilityId,
         isLoading: isLoading.value,
         startDate: startDate,
         endDate: endDate,
         isExport: isExport);
-    if (_pmPlanList != null) {
+
+    if (_pmPlanList != null && !isExportOnly) {
       pmPlanList.value = _pmPlanList;
       filteredData.value = pmPlanList.value;
       isLoading.value = false;
+
       paginationController = PaginationController(
         rowCount: filteredData.length,
         rowsPerPage: 10,
@@ -184,6 +195,7 @@ class PmPlanListController extends GetxController {
         }
       }
     }
+
     update(['pmPlan_list']);
   }
 
@@ -256,9 +268,5 @@ class PmPlanListController extends GetxController {
 
   void clearStoreData() {
     pmPlanListPresenter.clearValue();
-  }
-
-  void export() {
-    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
 }

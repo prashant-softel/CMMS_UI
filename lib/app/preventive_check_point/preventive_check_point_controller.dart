@@ -334,13 +334,26 @@ class PreventiveCheckPointController extends GetxController {
     return false;
   }
 
+  void export() {
+    getCheckPointlist(
+      selectedchecklistId: 0.toString(),
+      facilityId: facilityId,
+      isExport: true,
+      type: type?.value,
+      isExportOnly: true,
+    );
+  }
+
   Future<void> getCheckPointlist(
       {required String selectedchecklistId,
       required int facilityId,
       bool? isExport,
-      int? type}) async {
-    preventiveCheckpoint?.value = <CheckPointModel>[];
-    BufferPreventiveCheckPoint?.value = <CheckPointModel>[];
+      int? type,
+      bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      preventiveCheckpoint?.value = <CheckPointModel>[];
+      BufferPreventiveCheckPoint?.value = <CheckPointModel>[];
+    }
 
     final _preventiveCheckpoint =
         await preventiveCheckPointPresenter.getCheckPointlist(
@@ -352,16 +365,18 @@ class PreventiveCheckPointController extends GetxController {
             isExport: isExport,
             type: type);
 
-    if (_preventiveCheckpoint != null) {
+    if (_preventiveCheckpoint != null && !isExportOnly) {
       preventiveCheckpoint!.value = _preventiveCheckpoint;
       BufferPreventiveCheckPoint!.value = preventiveCheckpoint!.value;
       isLoading.value = false;
 
+      // Uncomment and configure pagination logic if necessary
       // paginationController = PaginationController(
       //   rowCount: preventiveCheckpoint!.length,
       //   rowsPerPage: 10,
       // );
 
+      // Optional: Add column generation logic if necessary
       // if (preventiveCheckpoint != null && preventiveCheckpoint!.isNotEmpty) {
       //   preventiveCheckpointmodel = preventiveCheckpoint![0];
       //   var preventiveCheckListJson = preventiveCheckpointmodel?.toJson();
@@ -599,14 +614,6 @@ class PreventiveCheckPointController extends GetxController {
       isLoading: true,
     );
     return true;
-  }
-
-  void export() {
-    getCheckPointlist(
-        selectedchecklistId: 0.toString(),
-        facilityId: facilityId,
-        isExport: true,
-        type: type.value);
   }
 
   void checkFormCheck() {

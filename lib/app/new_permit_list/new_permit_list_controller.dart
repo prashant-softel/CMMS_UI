@@ -171,7 +171,7 @@ class NewPermitListController extends GetxController {
   Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
-     setId();
+    setId();
     this.filterText = {
       "Permit Id": PermitIdFilterText,
       "Title": DescriptionFilterText,
@@ -277,32 +277,43 @@ class NewPermitListController extends GetxController {
     // update(['permit_list']);
   }
 
+  void export() {
+    getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
+        false, false, true,
+        isExportOnly: true);
+  }
+
   Future<void> getNewPermitList(int facilityId, int userId, dynamic startDate,
-      dynamic endDate, bool self_view, bool non_expired, bool isExport) async {
-    newPermitList.value = <NewPermitModel>[];
+      dynamic endDate, bool self_view, bool non_expired, bool isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      newPermitList.value = <NewPermitModel>[];
+    }
+
     bool selfview = varUserAccessModel.value.access_list!
             .where((e) =>
                 e.feature_id == UserAccessConstants.kPermitFeatureId &&
                 e.selfView == UserAccessConstants.kHaveSelfViewAccess)
             .length >
         0;
+
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
         facilityId: facilityId,
         isLoading: isLoading.value,
-        start_date: startDate, //// "2020-01-01",
+        start_date: startDate,
         end_date: endDate,
         userId: userId,
         isExport: isExport,
         self_view: selfview,
         non_expired: false);
 
-    if (_newPermitList != null) {
+    if (_newPermitList != null && !isExportOnly) {
       newPermitList.value = _newPermitList;
       filteredData.value = newPermitList.value;
       isLoading.value = false;
+
       if (newPermitList.isNotEmpty) {
         NewPermitModel? newPermitListModel = newPermitList[0];
-
         newPermitListModel = filteredData[0];
         var newPermitListJson = newPermitListModel?.toJson();
         newPermitListTableColumns.value = <String>[];
@@ -310,11 +321,12 @@ class NewPermitListController extends GetxController {
           newPermitListTableColumns.add(key);
         }
       }
+
+      newPermitPaginationController = PaginationController(
+        rowCount: newPermitList.length,
+        rowsPerPage: 10,
+      );
     }
-    newPermitPaginationController = PaginationController(
-      rowCount: newPermitList.length,
-      rowsPerPage: 10,
-    );
 
     update(['permit_list']);
   }
@@ -398,10 +410,10 @@ class NewPermitListController extends GetxController {
     Get.toNamed(Routes.viewPermitScreen, arguments: {
       "permitId": permitId,
       "type": 0,
-      
     });
   }
-   Future<void> viewMisPermitList({int? permitId}) async {
+
+  Future<void> viewMisPermitList({int? permitId}) async {
     clearStoreData();
     clearTypeStoreData();
     clearisCheckedtoreData();
@@ -471,11 +483,6 @@ class NewPermitListController extends GetxController {
 
   void clearpmTaskValue() {
     newPermitListPresenter.clearpmTaskValue();
-  }
-
-  void export() {
-    getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
-        false, false, true);
   }
 
   bool isOneHour(String validTill) {

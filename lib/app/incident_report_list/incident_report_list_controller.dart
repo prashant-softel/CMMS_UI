@@ -269,36 +269,47 @@ class IncidentReportListController extends GetxController {
     update(['incident_report_list']);
   }
 
-  Future<void> getIncidentReportList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isExport) async {
-    incidentReportList.value = <IncidentReportListModel>[];
+  void export() {
+    // Call the export logic without clearing the existing data
+    getIncidentReportList(facilityId, formattedFromdate, formattedTodate, true,
+        isExportOnly: true);
+  }
+
+  Future<void> getIncidentReportList(
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      incidentReportList.value = <IncidentReportListModel>[];
+    }
 
     final list = await incidentReportPresenter.getIncidentReportList(
         isLoading: isLoading.value,
         isExport: isExport,
-        start_date: formattedFromdate1, //startDate,
-        end_date: formattedTodate1, //endDate,
+        start_date: formattedFromdate1,
+        end_date: formattedTodate1,
         facility_id: facilityId);
-    // print('incidentReportFacilityId$facilityId');
-    // print('Incident Report List:$list');
-    for (var incident_list in list) {
-      incidentReportList.add(incident_list);
-    }
 
-    incidentReportList.value = list;
-    filteredData.value = incidentReportList.value;
-    isLoading.value = false;
-    // print('Filtered data:${filteredData.value}');
-    paginationIncidentReportController = PaginationController(
-      rowCount: incidentReportList.length,
-      rowsPerPage: 10,
-    );
-    if (filteredData.isNotEmpty) {
-      incidentReportModelList = filteredData[0];
-      var incidentListJson = incidentReportModelList?.toJson();
-      incidentListTableColumns.value = <String>[];
-      for (var key in incidentListJson?.keys.toList() ?? []) {
-        incidentListTableColumns.add(key);
+    if (!isExportOnly) {
+      for (var incident_list in list) {
+        incidentReportList.add(incident_list);
+      }
+
+      incidentReportList.value = list;
+      filteredData.value = incidentReportList.value;
+      isLoading.value = false;
+
+      paginationIncidentReportController = PaginationController(
+        rowCount: incidentReportList.length,
+        rowsPerPage: 10,
+      );
+
+      if (filteredData.isNotEmpty) {
+        incidentReportModelList = filteredData[0];
+        var incidentListJson = incidentReportModelList?.toJson();
+        incidentListTableColumns.value = <String>[];
+        for (var key in incidentListJson?.keys.toList() ?? []) {
+          incidentListTableColumns.add(key);
+        }
       }
     }
 
@@ -341,10 +352,5 @@ class IncidentReportListController extends GetxController {
   Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
     print('Argument$id');
-  }
-
-  void export() {
-    getIncidentReportList(
-        facilityId, formattedFromdate, formattedTodate, true);
   }
 }
