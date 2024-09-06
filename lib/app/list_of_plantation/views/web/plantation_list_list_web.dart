@@ -510,6 +510,8 @@ class PlantationListSource extends DataTableSource {
       '${PlantationDataDetails?.saplingsSurvived ?? ''}',
       '${PlantationDataDetails?.saplingsDied ?? ''}',
       '${PlantationDataDetails?.month_name ?? ''}',
+      '${PlantationDataDetails?.year ?? ''}',
+      '${PlantationDataDetails?.submited_by ?? ''}',
       '${PlantationDataDetails?.createdAt ?? ''}',
       'Actions',
     ];
