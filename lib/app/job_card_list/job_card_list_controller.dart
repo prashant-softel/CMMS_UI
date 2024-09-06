@@ -134,16 +134,26 @@ class JobCardListController extends GetxController {
     jobCardList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
+  void export() {
+    jobCardList(facilityId, formattedTodate1, formattedFromdate1, true,
+        isExportOnly: true);
+  }
+
   Future<void> jobCardList(
-      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
-    jobList.value = <JobCardModel>[];
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      jobList.value = <JobCardModel>[];
+    }
+
     final _jobList = await jobCardPresenter.jobCardList(
         facilityId: facilityId, isLoading: isLoading.value, isExport: isExport);
 
-    if (_jobList != null) {
+    if (_jobList != null && !isExportOnly) {
       jobList.value = _jobList;
       filteredData.value = jobList.value;
       isLoading.value = false;
+
       paginationController = PaginationController(
         rowCount: jobList.length,
         rowsPerPage: 10,
@@ -158,14 +168,11 @@ class JobCardListController extends GetxController {
         }
       }
     }
+
     update(['job_list']);
   }
 
   void clearStoreData() {
     jobCardPresenter.clearValue();
-  }
-
-  void export() {
-    jobCardList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
 }

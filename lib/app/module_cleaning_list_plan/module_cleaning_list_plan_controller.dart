@@ -94,33 +94,45 @@ class ModuleCleaningListPlanController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getModuleCleaningListPlan(int facilityId, bool isExport) async {
-    moduleCleaningListPlan.value = <ModuleCleaningListPlanModel>[];
-    filteredData.value = <ModuleCleaningListPlanModel>[];
+  void export() {
+   
+    getModuleCleaningListPlan(facilityId, true, isExportOnly: true);
+  }
+
+  Future<void> getModuleCleaningListPlan(int facilityId, bool isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      moduleCleaningListPlan.value = <ModuleCleaningListPlanModel>[];
+      filteredData.value = <ModuleCleaningListPlanModel>[];
+    }
 
     final _moduleCleaningListPlan =
         await moduleCleaningListPlanPresenter.getModuleCleaningListPlan(
             isLoading: isLoading.value,
             facility_id: facilityId,
             isExport: isExport);
-    moduleCleaningListPlan.value = _moduleCleaningListPlan;
-    isLoading.value = false; 
-  paginationController = PaginationController(
-    rowCount: moduleCleaningListPlan.length,
-    rowsPerPage: 10,
-  );
 
-  if (moduleCleaningListPlan.isNotEmpty) {
-    filteredData.value = moduleCleaningListPlan.value;
+    if (!isExportOnly) {
+      moduleCleaningListPlan.value = _moduleCleaningListPlan;
+      isLoading.value = false;
 
-    moduleCleaningListModel = moduleCleaningListPlan[0];
-    var newPermitListJson = moduleCleaningListModel?.toJson();
-    moduleCleaningListTableColumns.value = <String>[];
-    for (var key in newPermitListJson?.keys.toList() ?? []) {
-      moduleCleaningListTableColumns.add(key);
+      paginationController = PaginationController(
+        rowCount: moduleCleaningListPlan.length,
+        rowsPerPage: 10,
+      );
+
+      if (moduleCleaningListPlan.isNotEmpty) {
+        filteredData.value = moduleCleaningListPlan.value;
+
+        moduleCleaningListModel = moduleCleaningListPlan[0];
+        var newPermitListJson = moduleCleaningListModel?.toJson();
+        moduleCleaningListTableColumns.value = <String>[];
+        for (var key in newPermitListJson?.keys.toList() ?? []) {
+          moduleCleaningListTableColumns.add(key);
+        }
+      }
     }
   }
-    }
 
   void mcPlanListByDate() {
     getModuleCleaningListPlan(facilityId, false);
@@ -178,9 +190,5 @@ class ModuleCleaningListPlanController extends GetxController {
   void clearStoreData() {
     clearStoreDataMcid();
     clearStoreDataPlanid();
-  }
-
-  void export() {
-    getModuleCleaningListPlan(facilityId, true);
   }
 }

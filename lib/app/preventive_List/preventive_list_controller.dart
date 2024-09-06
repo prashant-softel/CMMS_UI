@@ -213,10 +213,16 @@ class PreventiveListController extends GetxController {
     preventiveCheckList!.value = filteredList;
   }
 
-  Future<void> getPreventiveCheckList(
-      int facilityId, int type, bool isExport) async {
-    preventiveCheckList?.value = <PreventiveCheckListModel>[];
-    BufferPreventiveCheckList?.value = <PreventiveCheckListModel>[];
+  void export() {
+    getPreventiveCheckList(facilityId, type.value, true, isExportOnly: true);
+  }
+
+  Future<void> getPreventiveCheckList(int facilityId, int type, bool isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      preventiveCheckList?.value = <PreventiveCheckListModel>[];
+      BufferPreventiveCheckList?.value = <PreventiveCheckListModel>[];
+    }
 
     final _preventiveCheckList =
         await preventiveListPresenter.getPreventiveCheckList(
@@ -225,15 +231,18 @@ class PreventiveListController extends GetxController {
             isLoading: isLoading.value,
             isExport: isExport);
 
-    if (_preventiveCheckList != null) {
+    if (_preventiveCheckList != null && !isExportOnly) {
       preventiveCheckList!.value = _preventiveCheckList;
       BufferPreventiveCheckList!.value = preventiveCheckList!.value;
       isLoading.value = false;
+
+      // Uncomment and configure pagination logic if necessary
       // paginationController = PaginationController(
       //   rowCount: preventiveCheckList?.length ?? 0,
       //   rowsPerPage: 10,
       // );
 
+      // Optional: Add column generation logic if necessary
       // if (preventiveCheckList != null && preventiveCheckList!.isNotEmpty) {
       //   preventiveCheckListModel = preventiveCheckList![0];
       //   var preventiveCheckListJson = preventiveCheckListModel?.toJson();
@@ -448,10 +457,6 @@ class PreventiveListController extends GetxController {
       isLoading: true,
     );
     return true;
-  }
-
-  void export() {
-    getPreventiveCheckList(facilityId, type.value, true);
   }
 
   void checkFormCheckList() {

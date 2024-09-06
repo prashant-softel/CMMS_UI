@@ -300,9 +300,17 @@ class ImportDsmListChargesListController extends GetxController {
   );
   RxList<String> dsmListTableColumns = <String>[].obs;
 
-  Future<void> getDSMDataList(bool? isExport) async {
-    dsmDataList.clear();
-    filteredDSMList?.clear();
+  void export() {
+    getDSMDataList(true, isExportOnly: true);
+  }
+
+  Future<void> getDSMDataList(bool? isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      dsmDataList.clear();
+      filteredDSMList?.clear();
+    }
+
     final dsmList = await importDsmListDsmChargesListPresenter.getDSMData(
         selectedYear: selectedYears,
         selectedMonth: selectedMonths,
@@ -313,25 +321,19 @@ class ImportDsmListChargesListController extends GetxController {
         isLoading: isLoading.value,
         isExport: isExport);
 
-    if (dsmList != null) {
+    if (dsmList != null && !isExportOnly) {
       isLoading.value = false;
-      // for (var _dsmList in dsmList) {
-      //   dsmDataList.add(_dsmList!);
-      // }
       dsmDataList.value = dsmList;
       filteredDSMList?.value = dsmDataList.value;
+
       dsmPaginationController = PaginationController(
         rowCount: dsmDataList.length,
         rowsPerPage: 10,
       );
 
       filteredDSM = dsmDataList[0];
-      // var jobJson = filteredDSM?.toJson();
-      // dsmListTableColumns.value = <String>[];
-      // for (var key in jobJson?.keys.toList() ?? []) {
-      //   dsmListTableColumns.add(key);
-      // }
     }
+
     update(["dsm-list"]);
     print("${dsmDataList.length}");
   }
@@ -346,9 +348,5 @@ class ImportDsmListChargesListController extends GetxController {
 
   void clearStoreData() {
     importDsmListDsmChargesListPresenter.clearValue();
-  }
-
-  void export() {
-    getDSMDataList(true);
   }
 }

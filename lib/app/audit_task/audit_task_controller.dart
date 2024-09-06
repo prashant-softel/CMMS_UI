@@ -152,10 +152,19 @@ class AuditTaskController extends GetxController {
     //     .toList();
   }
 
+  void export() {
+    getAuditTaskList(
+        facilityId, formattedTodate1, formattedFromdate1, true, type.value,
+        isExportOnly: true);
+  }
+
   Future<void> getAuditTaskList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isExport, int? type) async {
-    pmTaskList.value = <PmTaskListModel>[];
-    // pmTaskList?.clear();
+      dynamic endDate, bool isExport, int? type,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      pmTaskList.value = <PmTaskListModel>[];
+    }
+
     final _pmTaskList = await auditTaskPresenter.getAuditTaskList(
         facilityId: facilityId,
         isLoading: isLoading.value,
@@ -163,7 +172,8 @@ class AuditTaskController extends GetxController {
         startDate: startDate,
         endDate: endDate,
         type: type);
-    if (_pmTaskList != null) {
+
+    if (_pmTaskList != null && !isExportOnly) {
       pmTaskList.value = _pmTaskList;
       filteredData.value = pmTaskList.value;
       isLoading.value = false;
@@ -180,9 +190,4 @@ class AuditTaskController extends GetxController {
   }
 
   void clearTypeValue() async => auditTaskPresenter.clearTypeValue();
-
-  void export() {
-    getAuditTaskList(
-        facilityId, formattedTodate1, formattedFromdate1, true, type.value);
-  }
 }

@@ -178,26 +178,28 @@ class AssetMasterController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getAssetMasterList(
-      int facilityId, int type, bool? isExport) async {
-    moduleList?.value = <AssetMasterModel>[];
+  void export() {
+    getAssetMasterList(facilityId, type, true, isExportOnly: true);
+  }
+
+  Future<void> getAssetMasterList(int facilityId, int type, bool? isExport,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      moduleList?.value = <AssetMasterModel>[];
+      buffermodulelist.value = <AssetMasterModel>[];
+    }
+
     final _moduleList = await moduleListPresenter.getAssetMasterList(
         facilityId: facilityId,
         type: type,
         isLoading: isLoading.value,
         isExport: isExport);
-    buffermodulelist.value = <AssetMasterModel>[];
-    // moduleList!.value = _moduleList ?? <AssetMasterModel>[];
-    buffermodulelist.value =
-        _moduleList?.whereType<AssetMasterModel>().toList() ??
-            <AssetMasterModel>[];
 
-    if (_moduleList != null) {
+    if (_moduleList != null && !isExportOnly) {
       moduleList!.value = _moduleList;
       buffermodulelist.value =
           _moduleList.whereType<AssetMasterModel>().toList() ??
               <AssetMasterModel>[];
-
       isLoading.value = false;
     }
   }
@@ -434,9 +436,5 @@ class AssetMasterController extends GetxController {
 
   void clearStoreTaskWhereUsedData() {
     moduleListPresenter.clearStoreTaskWhereUsedData();
-  }
-
-  void export() {
-    getAssetMasterList(facilityId, type, true);
   }
 }
