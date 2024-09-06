@@ -37,7 +37,7 @@ class UpdateNewPermitDialog extends GetView {
             ? Text("Permit Updation !!",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black))
-            : Text('Permit Re-Submission !!',
+            : Text('TBT Update',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black)),
         // Text(
