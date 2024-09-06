@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/list_of_Regulatary_Visits/regulataryvisits_list_presenter.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/get_visitandnotice_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -169,5 +173,58 @@ void search(String keyword) {
     }
   getVisitsAndNoticesDatalist(false);
 }
+void isDeleteDialog({int? VisitNoticeId, String? VisitNoticelist}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("Delete VisitsAndNotices  List", style: Styles.blackBold16),
+              Divider(
+                color: ColorValues.appLightGreyColor,
+              ),
+              Dimens.boxHeight5,
+              RichText(
+                text: TextSpan(
+                    text: 'Are you sure you want to delete the VisitsAndNotices Data',
+                    style: Styles.blackBold16,
+                    children: [
+                      TextSpan(
+                        text: VisitNoticelist,
+                        style: TextStyle(
+                          color: ColorValues.orangeColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ]),
+              ),
+            ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appRedColor,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  text: 'No'),
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appGreenColor,
+                  onPressed: () {
+                    deleteVisitNotice(VisitNoticeId:VisitNoticeId).then((value) {
+                      Get.back();
+                      getVisitsAndNoticesDatalist(false);
+                    });
+                  },
+                  text: 'Yes'),
+            ],
+          ),
+          Dimens.boxHeight5
+        ],
+      ),
+    );
+  }
 }
 
