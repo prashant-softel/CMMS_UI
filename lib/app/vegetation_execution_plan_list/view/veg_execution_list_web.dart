@@ -322,7 +322,7 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
 
                                                     return PaginatedDataTable2(
                                                       columnSpacing: 10,
-                                                      dataRowHeight: 55,
+                                                      dataRowHeight: 60,
                                                       source:
                                                           dataSource, // Custom DataSource class
                                                       /// headingRowHeight:

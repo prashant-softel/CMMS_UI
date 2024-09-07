@@ -11,6 +11,7 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
   final int? scheduleId;
   final int? cleaningDay;
   final int? is_view;
+  bool expandAll = false;
 
   VegetationExecutionDialog({
     required this.scheduleId,
@@ -402,20 +403,60 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
           actions: [
             is_view == 1
                 ? Center(
-                    child: Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.redColor,
-                        text: "Cancel",
-                        onPressed: () {
-                          Get.back();
-                        },
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.redColor,
+                            text: "Cancel",
+                            onPressed: () {
+                              Get.back();
+                            },
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Container(
+                          height: 35,
+                          child: CustomElevatedButton(
+                            backgroundColor:
+                                const Color.fromARGB(255, 86, 116, 205),
+                            text: expandAll ? 'Collapse' : 'Expand',
+                            onPressed: () {
+                              setState(() {
+                                expandAll = !expandAll;
+                                for (var item
+                                    in controller.vegTaskEquipment.value) {
+                                  item!.isExpanded = expandAll;
+                                }
+                              });
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          backgroundColor:
+                              const Color.fromARGB(255, 86, 116, 205),
+                          text: expandAll ? 'Collapse' : 'Expand',
+                          onPressed: () {
+                            setState(() {
+                              expandAll = !expandAll;
+                              for (var item
+                                  in controller.vegTaskEquipment.value) {
+                                item!.isExpanded = expandAll;
+                              }
+                            });
+                          },
+                        ),
+                      ),
                       Container(
                         height: 35,
                         child: CustomElevatedButton(
