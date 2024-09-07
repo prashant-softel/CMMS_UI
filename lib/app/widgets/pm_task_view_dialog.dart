@@ -12,13 +12,14 @@ class PmTaskViewDialog extends GetView {
   String? approveIncidentReportData;
   String? data;
   int? taskId;
+  int? type;
 
-  PmTaskViewDialog({
-    super.key,
-    this.approveIncidentReportData,
-    this.data,
-    this.taskId,
-  });
+  PmTaskViewDialog(
+      {super.key,
+      this.approveIncidentReportData,
+      this.data,
+      this.taskId,
+      this.type});
   final PreventiveMaintenanceTaskViewController controller = Get.find();
 
   @override
@@ -31,7 +32,17 @@ class PmTaskViewDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Task Assigned Successfully....',
+          type == 1
+              ? "Task Canceled Successfully...."
+              : type == 2
+                  ? "Task Canceled Rejected Successfully...."
+                  : type == 3
+                      ? "Task Canceled Approved Successfully...."
+                      : type == 4
+                          ? "Task PM Task Rejected Successfully...."
+                          : type == 5
+                              ? "Task PM Task Approved Successfully...."
+                              : 'Task Assigned Successfully....',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),

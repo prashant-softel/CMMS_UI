@@ -636,7 +636,7 @@ class PmTaskDataSource extends DataTableSource {
                                                                       id: 00),
                                                             )
                                                             ?.status ==
-                                                        169
+                                                        170
                                                     ? ColorValues
                                                         .approveStatusColor
                                                     : controller.pmTaskList
@@ -663,7 +663,20 @@ class PmTaskDataSource extends DataTableSource {
                                                                               id: 00),
                                                                     )
                                                                     ?.status ==
-                                                                170
+                                                                169 ||
+                                                            controller
+                                                                    .pmTaskList
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          e?.id ==
+                                                                          pmTaskDetails
+                                                                              ?.id,
+                                                                      orElse: () =>
+                                                                          PmTaskListModel(
+                                                                              id: 00),
+                                                                    )
+                                                                    ?.status ==
+                                                                166
                                                         ? ColorValues
                                                             .rejectedStatusColor
                                                         : ColorValues
@@ -708,22 +721,41 @@ class PmTaskDataSource extends DataTableSource {
                               )
                             : Dimens.box0,
                         varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kPmTaskFeatureId &&
-                                            e.delete ==
-                                                UserAccessConstants
-                                                    .kHaveDeleteAccess)
-                                        .length >
-                                    0 &&
-                                controller.pmTaskList
-                                        .firstWhere(
-                                          (e) => e?.id == pmTaskDetails?.id,
-                                          orElse: () => PmTaskListModel(id: 00),
-                                        )
-                                        ?.status !=
-                                    169
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kPmTaskFeatureId &&
+                                                e.delete ==
+                                                    UserAccessConstants
+                                                        .kHaveDeleteAccess)
+                                            .length >
+                                        0 &&
+                                    controller.pmTaskList
+                                            .firstWhere(
+                                              (e) => e?.id == pmTaskDetails?.id,
+                                              orElse: () =>
+                                                  PmTaskListModel(id: 00),
+                                            )
+                                            ?.status ==
+                                        161 ||
+                                varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kPmTaskFeatureId &&
+                                                e.delete ==
+                                                    UserAccessConstants
+                                                        .kHaveDeleteAccess)
+                                            .length >
+                                        0 &&
+                                    controller.pmTaskList
+                                            .firstWhere(
+                                              (e) => e?.id == pmTaskDetails?.id,
+                                              orElse: () =>
+                                                  PmTaskListModel(id: 00),
+                                            )
+                                            ?.status ==
+                                        162
                             ? TableActionButton(
                                 color: ColorValues.deleteColor,
                                 icon: Icons.delete,

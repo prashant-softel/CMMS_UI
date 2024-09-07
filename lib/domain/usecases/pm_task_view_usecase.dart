@@ -61,6 +61,14 @@ class PreventiveMaintenanceTaskViewUsecase {
   }) async =>
       await repository.approvePmTaskExecution(
           approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> approveCancelPmTaskExecution({
+    approveCanceltoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.approveCancelPmTaskExecution(
+          approveCanceltoJsonString: approveCanceltoJsonString,
+          isLoading: isLoading);
+
   Future<bool> CancelPMTask({
     CancelPMTaskJsonString,
     closePtwJsonString,
@@ -72,12 +80,20 @@ class PreventiveMaintenanceTaskViewUsecase {
           closePtwJsonString: closePtwJsonString,
           shouldClosePermit: shouldClosePermit,
           isLoading: isLoading);
+  Future<bool> rejectCancelPmTaskExecution({
+    rejectCanceltoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.rejectCancelPmTaskExecution(
+          rejectCanceltoJsonString: rejectCanceltoJsonString,
+          isLoading: isLoading);
   Future<bool> rejectPmTaskExecution({
     rejecttoJsonString,
     bool? isLoading,
   }) async =>
       await repository.rejectPmTaskExecution(
           rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+
   Future<bool> closePmTaskExecution({
     closetoJsonString,
     closePtwJsonString,

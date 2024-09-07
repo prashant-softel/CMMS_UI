@@ -4821,6 +4821,16 @@ class DataRepository extends DomainRepository {
         rejecttoJsonString: rejecttoJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> rejectCancelPmTaskExecution({
+    required String auth,
+    rejectCanceltoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.rejectCancelPmTaskExecution(
+        auth: auth,
+        rejectCanceltoJsonString: rejectCanceltoJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> approvePmTaskExecution({
     required String auth,
     approvetoJsonString,
@@ -4829,6 +4839,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.approvePmTaskExecution(
         auth: auth,
         approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> approveCancelPmTaskExecution({
+    required String auth,
+    approveCanceltoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.approveCancelPmTaskExecution(
+        auth: auth,
+        approveCanceltoJsonString: approveCanceltoJsonString,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> CancelPMTask({
@@ -5115,8 +5135,9 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   //deleteKaizen
-    Future<ResponseModel> deleteKaizen({
+  Future<ResponseModel> deleteKaizen({
     auth,
     int? Id,
     bool? isLoading,
@@ -5128,8 +5149,9 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   //deleteHealth
-      Future<ResponseModel> deleteHealth({
+  Future<ResponseModel> deleteHealth({
     auth,
     int? Id,
     bool? isLoading,
@@ -5141,8 +5163,9 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   //deleteVisitNotice
-   Future<ResponseModel> deleteVisitNotice({
+  Future<ResponseModel> deleteVisitNotice({
     auth,
     int? Id,
     bool? isLoading,
@@ -5154,8 +5177,9 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   //deleteFuel
-      Future<ResponseModel> deleteFuel({
+  Future<ResponseModel> deleteFuel({
     auth,
     int? Id,
     bool? isLoading,
@@ -5167,8 +5191,9 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
 //deletePlantation
-    Future<ResponseModel> deletePlantation({
+  Future<ResponseModel> deletePlantation({
     auth,
     int? Id,
     bool? isLoading,
@@ -5180,6 +5205,7 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   Future<ResponseModel> getGrievanceType({
     String? auth,
     bool? isLoading,
